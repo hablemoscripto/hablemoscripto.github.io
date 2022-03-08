@@ -35,7 +35,7 @@ $(document).ready(function(){
 
     // typing text animation script
     var typed = new Typed(".typing", {
-        strings: ["Criptomonedas.", "Iversiones.", "Trading.", "NFTs."],
+        strings: ["Criptomonedas.", "Inversiones.", "Trading.", "NFTs."],
         typeSpeed: 100,
         backSpeed: 60,
         loop: true
