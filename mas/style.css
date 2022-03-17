@@ -302,10 +302,6 @@ section .title::after{
 }
 
 /* skills section styling */
-
-.skills .title::after{
-    content: "que sé";
-}
 .skills .skills-content .column{
     width: calc(50% - 30px);
 }
