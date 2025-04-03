@@ -1,0 +1,510 @@
+/* Additional styles for mas.html page */
+
+/* General section padding */
+.section-padding {
+    padding: var(--section-spacing) 0;
+  }
+  
+  /* Section heading style */
+  .section-heading {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+  }
+  
+  .section-heading span {
+    color: var(--primary-color);
+  }
+  
+  /* Dark mode adjustments */
+  .dark-mode .section-heading {
+    color: var(--text-light);
+  }
+  
+  /* Education Section */
+  .education-section {
+    background-color: var(--light-bg);
+  }
+  
+  .education-content {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  
+  .education-intro {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .education-levels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
+  }
+  
+  .education-level {
+    background-color: #fff;
+    border-radius: var(--radius-md);
+    padding: 30px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .dark-mode .education-level {
+    background-color: var(--dark-bg);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .education-level:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .level-icon {
+    font-size: 32px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    background-color: rgba(55, 114, 255, 0.1);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+  }
+  
+  .education-level h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: var(--text-dark);
+  }
+  
+  .dark-mode .education-level h3 {
+    color: var(--text-light);
+  }
+  
+  .education-topics {
+    list-style: none;
+    margin-bottom: 25px;
+  }
+  
+  .education-topics li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    padding-left: 20px;
+  }
+  
+  .dark-mode .education-topics li {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .education-topics li:before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+  }
+  
+  .level-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    transition: var(--transition-normal);
+    gap: 8px;
+  }
+  
+  .level-link i {
+    transition: transform 0.2s ease;
+  }
+  
+  .level-link:hover {
+    background-color: #2761e6;
+  }
+  
+  .level-link:hover i {
+    transform: translateX(4px);
+  }
+  
+  .education-cta {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Market Section */
+  .market-section {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+  }
+  
+  .market-section .section-title {
+    color: var(--text-light);
+  }
+  
+  .market-section .section-title::before {
+    background: var(--text-light);
+  }
+  
+  .market-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .market-description {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .market-description p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .market-reports {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 20px 0;
+  }
+  
+  .report-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition-normal);
+  }
+  
+  .report-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .report-icon {
+    font-size: 28px;
+    color: var(--primary-color);
+  }
+  
+  .report-date {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  
+  .report-card h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: var(--text-light);
+  }
+  
+  .report-card p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+  }
+  
+  .report-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: var(--transition-normal);
+  }
+  
+  .report-link:hover {
+    color: #5b8bff;
+  }
+  
+  .market-disclaimer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(255, 126, 103, 0.2);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin: 10px 0;
+  }
+  
+  .disclaimer-icon {
+    font-size: 24px;
+    color: var(--accent-color);
+    flex-shrink: 0;
+  }
+  
+  .market-disclaimer p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+    font-size: 14px;
+  }
+  
+  .market-cta {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Community Section */
+  .community-section {
+    background-color: var(--light-bg);
+  }
+  
+  .community-content {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 50px;
+    align-items: center;
+  }
+  
+  .community-text {
+    padding-right: 20px;
+  }
+  
+  .community-text p {
+    margin-bottom: 15px;
+  }
+  
+  .discord-preview {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .discord-card {
+    background: linear-gradient(135deg, #7289da, #5865f2);
+    border-radius: var(--radius-md);
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+    color: white;
+  }
+  
+  .discord-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .discord-logo {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .discord-header h3 {
+    font-size: 24px;
+    margin: 0;
+    color: white;
+  }
+  
+  .discord-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+  
+  .discord-stats .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .discord-stats .stat i {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .discord-stats .stat span {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  
+  .discord-channels {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .channel {
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 5px;
+    transition: var(--transition-fast);
+    font-size: 14px;
+  }
+  
+  .channel:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+  }
+  
+  .channel i {
+    margin-right: 8px;
+    opacity: 0.7;
+  }
+  
+  .discord-join {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    background-color: #ffffff;
+    color: #5865f2;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: var(--transition-normal);
+    gap: 8px;
+  }
+  
+  .discord-join:hover {
+    background-color: #f2f2f2;
+    transform: translateY(-3px);
+  }
+  
+  /* NFT Section */
+  .nft-section {
+    background-color: #fff;
+  }
+  
+  .dark-mode .nft-section {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+  }
+  
+  .dark-mode .nft-section .section-title {
+    color: var(--text-light);
+  }
+  
+  .nft-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .nft-intro {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .nft-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 20px 0;
+  }
+  
+  .nft-category {
+    background-color: var(--light-bg);
+    border-radius: var(--radius-md);
+    padding: 30px;
+    text-align: center;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .dark-mode .nft-category {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .nft-category:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .category-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-color), #2761e6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+    font-size: 28px;
+  }
+  
+  .nft-category h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+  }
+  
+  .dark-mode .nft-category h3 {
+    color: var(--text-light);
+  }
+  
+  .nft-category p {
+    font-size: 15px;
+    color: var(--text-medium);
+  }
+  
+  .dark-mode .nft-category p {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .nft-guide-cta {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 991px) {
+    .community-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .community-text {
+      padding-right: 0;
+    }
+    
+    .discord-preview {
+      margin-top: 30px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .section-heading {
+      font-size: 22px;
+    }
+    
+    .market-reports,
+    .nft-categories {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .education-level,
+    .report-card,
+    .nft-category {
+      padding: 20px;
+    }
+    
+    .discord-stats {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+  }
