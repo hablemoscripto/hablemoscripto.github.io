@@ -375,6 +375,65 @@ p {
   bottom: 9px;
 }
 
+/* Crypto ticker */
+.crypto-ticker {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  width: 100%;
+  background-color: rgba(36, 39, 49, 0.85);
+  backdrop-filter: blur(5px);
+  z-index: 998;
+  padding: 10px 0;
+  display: none;
+}
+
+.ticker-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-light);
+}
+
+.ticker-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.ticker-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ticker-price {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.ticker-change {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.ticker-change.positive {
+  background-color: rgba(69, 179, 107, 0.2);
+  color: var(--secondary-color);
+}
+
+.ticker-change.negative {
+  background-color: rgba(255, 126, 103, 0.2);
+  color: var(--accent-color);
+}
+
 /* Home section */
 .home {
   position: relative;
@@ -1366,4 +1425,36 @@ input:checked + .slider:before {
 
 .dark-mode footer {
   background-color: #121519;
+}
+
+.section-description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.resource-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.preview-item {
+    background: rgba(var(--primary-rgb), 0.1);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary);
+}
+
+.preview-item i {
+    margin-right: 5px;
+}
+
+.resources-cta {
+    margin-top: 40px;
+    text-align: center;
 }

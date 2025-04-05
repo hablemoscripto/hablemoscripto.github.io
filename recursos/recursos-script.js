@@ -1,4 +1,4 @@
-// Additional JavaScript for mas.html page
+// Additional JavaScript for recursos.html page
 document.addEventListener('DOMContentLoaded', function() {
     // Override typing animation strings for this page
     if (typeof Typed !== 'undefined') {
