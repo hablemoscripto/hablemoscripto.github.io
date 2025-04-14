@@ -27,11 +27,11 @@
         <i class="fas fa-angle-up"></i>
     </div>
 
-    <!-- Navigation -->
+    <!-- Navigation improved -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <a href="https://hablemoscripto.io/#home">
+                <a href="#home">
                     Hablemos<span>Cripto</span>
                     <div class="logo-icon"><i class="fab fa-bitcoin"></i></div>
                 </a>
@@ -44,15 +44,28 @@
             </div>
             
             <ul class="menu">
+                <!-- Elementos principales de navegación -->
                 <li><a href="#home" class="menu-btn">Inicio</a></li>
-                <li><a href="#about" class="menu-btn">Sobre mi</a></li>
+                <li><a href="#about" class="menu-btn">Por Qué HC</a></li>
                 <li><a href="#services" class="menu-btn">Servicios</a></li>
-                <li><a href="#skills" class="menu-btn">Conocimiento</a></li>
                 <li><a href="#resources" class="menu-btn">Recursos</a></li>
-                <li><a href="#contact" class="menu-btn">Contacto</a></li>
-                <li class="language-switch">
-                    <a href="/eng/" class="menu-btn">
-                        <i class="fas fa-globe"></i> ESP
+                
+                <!-- Elementos secundarios en menú desplegable -->
+                <li class="dropdown">
+                    <a href="#" class="menu-btn dropdown-toggle">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="mas/sobremi.html">Sobre mí</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="mas/contacto.html">Contacto</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Botón de conversión -->
+                <li class="nav-cta">
+                    <a href="https://discord.gg/W8haa7dDV3" class="menu-btn cta-btn" target="_blank">
+                        <i class="fab fa-discord"></i> Unirse
                     </a>
                 </li>
             </ul>
@@ -66,7 +79,7 @@
             <div class="home-content">
                 <div class="text-1">Bienvenido a</div>
                 <div class="text-2">Hablemos Cripto</div>
-                <div class="text-3">Nos encanta hablar de <span class="typing"></span></div>
+                <div class="text-3">Nos encanta hablar sobre <span class="typing"></span></div>
                 
                 <div class="cta-buttons">
                     <a href="/recursos/recursos.html" class="primary-btn">
@@ -98,157 +111,149 @@
     <!-- About section -->
     <section class="about" id="about">
         <div class="container">
-            <h2 class="section-title">Sobre mi</h2>
+            <h2 class="section-title">¿Por qué aprender con Hablemos Cripto?</h2>
+            
+            <!-- Brief introduction paragraph centered -->
+            <div class="about-intro">
+                <p>He creado el recurso cripto que me hubiera gustado tener cuando comencé en 2017: información clara, estrategias que funcionan, y una comunidad real confiable.</p>
+            </div>
+            
             <div class="about-content">
-                <div class="column left">
-                    <div class="about-img-container">
-                        <img src="images/MadLad.jpg" alt="CBas">
-                        <div class="social-links">
-                            <a href="https://twitter.com/Crypto_CBas" target="_blank" class="social-link">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="https://discord.gg/W8haa7dDV3" target="_blank" class="social-link">
-                                <i class="fab fa-discord"></i>
-                            </a>
-                            <a href="https://www.youtube.com/@hablemoscripto" target="_blank" class="social-link">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                        </div>
+                <!-- Enhanced image column with shadow effect and animation -->
+                <div class="column left nft-showcase">
+                    <div class="nft-frame">
+                        <img src="images/MadLad.jpg" alt="CBas - Fundador de Hablemos Cripto">
+                        <div class="nft-glow"></div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://twitter.com/Crypto_CBas" target="_blank" class="social-link" title="Sígueme en Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://discord.gg/W8haa7dDV3" target="_blank" class="social-link" title="Únete a Discord">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@hablemoscripto" target="_blank" class="social-link" title="Canal de YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
                     </div>
                 </div>
+                
+                <!-- Restructured value proposition with more concise text -->
                 <div class="column right">
-                    <div class="text">Mi nombre es CBas, y soy <span class="typing-2"></span></div>
-                    <p>Hola! Me llamo Sebastian y soy amante de las criptomonedas desde el 2017. Le he dedicado bastante tiempo al blockchain y las criptos, me fascinan y no me paran de impresionar con todas las maneras en la que posiblemente puedan cambiar el mundo.</p>
-                    
-                    <p>Al comienzo fue solo el lado de la tecnologia que me atrajo a Bitcoin pero luego me gusto el tema del trading de criptos e inversiones a largo plazo. Tambien siempre buscando buenas opciones de ingresos pasivos sin caer en scams. Los NFTs tambien son un tema que me gusta mucho.</p>
-                    
-                    <p>Una de las cosas que hubiera deseado cuando entré en el tema de criptomonedas es tener acceso a un grupo como Hablemos Cripto. Un lugar en el que todo el que esta ahi es porque le interesa el tema.</p>
-                    
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h3>2017</h3>
-                                <p>Comencé mi viaje en cripto</p>
+                    <div class="value-grid">
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
+                            <div class="value-content">
+                                <h3>Experiencia Real</h3>
+                                <p>+7 años navegando mercados cripto, superando ciclos alcistas y bajistas.</p>
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h3>2020</h3>
-                                <p>Lancé Hablemos Cripto</p>
+                        
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="value-content">
+                                <h3>Sin Tecnicismos</h3>
+                                <p>Explicaciones claras que simplifican lo complejo y evitan jerga innecesaria.</p>
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h3>2022</h3>
-                                <p>Crecimiento de comunidad</p>
+                        
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fas fa-users"></i></div>
+                            <div class="value-content">
+                                <h3>Comunidad Activa</h3>
+                                <p>Un grupo positivo enfocado en crecer juntos, sin toxicidad ni promociones engañosas.</p>
                             </div>
                         </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fas fa-compass"></i></div>
+                            <div class="value-content">
+                                <h3>Enfoque Práctico</h3>
+                                <p>Estrategias aplicables para invertir, analizar y evitar estafas comunes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Call-to-action buttons -->
+                    <div class="cta-section">
+                        <a href="https://discord.gg/W8haa7dDV3" class="primary-btn">
+                            <i class="fab fa-discord"></i> Únete a la Comunidad
+                        </a>
+                        <a href="#resources" class="secondary-btn about-secondary-btn">
+                            <i class="fas fa-book-open"></i> Explorar Recursos
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services section -->
+    <!-- Services section with 2x2 grid -->
     <section class="services" id="services">
         <div class="container">
             <h2 class="section-title">Servicios</h2>
             <div class="serv-content">
-                <div class="card">
-                    <div class="box">
-                        <div class="icon-wrapper">
-                            <i class="fab fa-bitcoin"></i>
+                <!-- First row -->
+                <div class="services-row">
+                    <!-- Education Card -->
+                    <div class="card">
+                        <div class="box">
+                            <div class="icon-wrapper">
+                                <i class="fab fa-bitcoin"></i>
+                            </div>
+                            <div class="text">Educación Cripto</div>
+                            <p>Educate sobre el tema de criptomonedas y lleva tu conocimiento mucho mas alla de lo basico. Desde que es un blockchain y como hay distintas criptomonedas como Bitcoin y Ethereum.</p>
+                            <a href="/educacion/educacion.html" class="card-link">Explorar <i class="fas fa-arrow-right"></i></a>
                         </div>
-                        <div class="text">Educación Cripto</div>
-                        <p>Educate sobre el tema de criptomonedas y lleva tu conocimiento mucho mas alla de lo basico. Desde que es un blockchain y como hay distintas criptomonedas como Bitcoin y Ethereum.</p>
-                        <a href="/educacion/educacion.html" class="card-link">Explorar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <!-- Trading Analysis Card -->
+                    <div class="card">
+                        <div class="box">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="text">Análisis de Trading</div>
+                            <p>Actualizaciones semanales sobre los mercados. Enfoque en criptos principales como BTC, ETH y SOL. Siempre buscando buenas oportunidades para hacer $.</p>
+                            <a href="/trading/trading.html" class="card-link">Explorar <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="card">
-                    <div class="box">
-                        <div class="icon-wrapper">
-                            <i class="fas fa-chart-line"></i>
+                <!-- Second row -->
+                <div class="services-row">
+                    <!-- Discord Community Card -->
+                    <div class="card">
+                        <div class="box">
+                            <div class="icon-wrapper">
+                                <i class="fab fa-discord"></i>
+                            </div>
+                            <div class="text">Comunidad Discord</div>
+                            <p>La oportunidad de entrar a una comunidad de personas que tienen los mismos intereses de aprender y de prosperar en los mercados de criptomonedas.</p>
+                            <a href="https://discord.gg/W8haa7dDV3" class="card-link">Unirse <i class="fas fa-arrow-right"></i></a>
                         </div>
-                        <div class="text">Análisis de Trading</div>
-                        <p>Actualizaciones semanales sobre los mercados. Enfoque en criptos principales como BTC, ETH y SOL. Siempre buscando buenas oportunidades para hacer $.</p>
-                        <a href="/trading/trading.html" class="card-link">Explorar <i class="fas fa-arrow-right"></i></a>
                     </div>
-                </div>
-                
-                <div class="card">
-                    <div class="box">
-                        <div class="icon-wrapper">
-                            <i class="fab fa-discord"></i>
-                        </div>
-                        <div class="text">Comunidad Discord</div>
-                        <p>La oportunidad de entrar a una comunidad de personas que tienen los mismos intereses de aprender y de prosperar en los mercados de criptomonedas.</p>
-                        <a href="https://discord.gg/W8haa7dDV3" class="card-link">Unirse <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills section -->
-    <section class="skills" id="skills">
-        <div class="container">
-            <h2 class="section-title">Conocimientos</h2>
-            <div class="skills-content">
-                <div class="column left">
-                    <div class="text">Mis conocimientos y experiencias.</div>
-                    <p>Escuché por primera vez el tema de Bitcoin en el 2015, tristemente no le puse mucho cuidado. Me metí mucho mas en mi ultimo año de la universidad en 2017.</p>
                     
-                    <p>Volví a escuchar del tema pero esta vez si me causo demasiada curiosidad que me leí el whitepaper de Bitcoin y porfín entendí porque el tema del blockchain puede cambiar el mundo eliminando servicios centralizados.</p>
-                    
-                    <p>Caí en mas de un scam, pero asi es que se aprende gente. Perdí como 70% de la cuenta en el drop del 2017 creyendo que todo solo sube lo que me llevo a querer aprender sobre trading.</p>
-                    
-                    <p>He aprendido mucho a traves de los años en el mercado y nunca paro de aprender. Me interesan todos los temas, desde innovar en diferentes aspectos con la teconologia del blockchain, el aspecto del trading, de inversiones y como aprovechar oportunidades en el mercado de los NFTs.</p>
-                </div>
-                <div class="column right">
-                    <!-- Updated skills visualization with animation -->
-                    <div class="skills-bars">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>NFTs</span>
-                                <span>80%</span>
+                    <!-- Newsletter Card -->
+                    <!-- Newsletter Card with inline subscription form -->
+                    <div class="card">
+                        <div class="box">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-envelope-open-text"></i>
                             </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress nft-progress"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>Trading Cripto</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress trading-progress"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>Creando Educación</span>
-                                <span>60%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress education-progress"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span>Aprendiendo</span>
-                                <span>60%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress learning-progress"></div>
-                            </div>
+                            <div class="text">Newsletter Semanal</div>
+                            <p>Recibe análisis exclusivos de mercado, oportunidades de inversión y alertas directamente en tu correo cada semana. Información de alto valor completamente gratis.</p>
+                            
+                            <!-- Inline Subscription Form -->
+                            <form class="inline-subscribe-form" id="inlineNewsletterForm" action="https://formspree.io/f/your-form-id" method="POST">
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="Tu correo electrónico" required>
+                                    <button type="submit" class="inline-subscribe-btn">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                                <div class="form-privacy">Nunca compartiremos tu correo.</div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -261,7 +266,7 @@
         <div class="container">
             <h2 class="section-title">Recursos</h2>
             <div class="section-description">
-                <p>Explora nuestros recursos educativos, análisis de mercado, herramientas y guías para profundizar en el mundo crypto.</p>
+                <p>Explora nuestros recursos educativos, análisis de mercado, herramientas y guías para profundizar en el mundo cripto.</p>
             </div>
             
             <div class="resources-content">
@@ -336,99 +341,29 @@
         </div>
     </section>
 
-    <!-- Newsletter Section (New) -->
+    <!-- Newsletter Section -->
     <section class="newsletter">
         <div class="container">
             <div class="newsletter-content">
                 <div class="newsletter-text">
-                    <h2>Mantente actualizado</h2>
-                    <p>Suscríbete a nuestro newsletter para recibir actualizaciones sobre el mundo cripto, análisis exclusivos y recursos educativos.</p>
+                    <h2>Obtén análisis semanales exclusivos</h2>
+                    <p>Únete a +500 inversionistas que reciben nuestros insights sobre Bitcoin, Ethereum, Solana y oportunidades emergentes en el mercado cripto.</p>
+                    <ul class="newsletter-benefits">
+                        <li><i class="fas fa-chart-line"></i> Análisis técnico semanal</li>
+                        <li><i class="fas fa-bell"></i> Alertas de oportunidades</li>
+                        <li><i class="fas fa-shield-alt"></i> Advertencias de riesgos y estafas</li>
+                    </ul>
                 </div>
                 <div class="newsletter-form">
-                    <form id="newsletterForm">
-                        <input type="email" placeholder="Tu correo electrónico" required>
-                        <button type="submit" class="newsletter-btn">Suscribirse</button>
+                    <form id="newsletterForm" action="https://formspree.io/f/your-form-id" method="POST">
+                        <input type="email" name="email" placeholder="Tu correo electrónico" required>
+                        <button type="submit" class="newsletter-btn">Recibir Análisis Semanal</button>
                     </form>
+                    <p class="form-privacy">Respetamos tu privacidad. Nunca compartiremos tu correo.</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Contact section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Contacto</h2>
-            <div class="contact-content">
-                <div class="column left">
-                    <div class="text">Hablemos</div>
-                    <p>Si tienes alguna inquietud sobre el tema de las criptomonedas no lo pienses dos veces antes de hablarme! Si te interesa una respuesta mas rapida, seguro la vas a tener en el grupo de Discord!</p>
-                    
-                    <div class="contact-info">
-                        <div class="info-item">
-                            <i class="fas fa-user"></i>
-                            <div>
-                                <h3>Nombre</h3>
-                                <p>CBas</p>
-                            </div>
-                        </div>
-                        
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h3>Correo</h3>
-                                <p>hablemoscrypto.es@gmail.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="info-item">
-                            <i class="fab fa-discord"></i>
-                            <div>
-                                <h3>Discord</h3>
-                                <p>Únete a nuestra comunidad</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="social-media">
-                        <a href="https://x.com/crypto_cbas" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="https://www.youtube.com/@hablemoscripto"><i class="fab fa-youtube"></i></a>
-                        <a href="https://discord.gg/W8haa7dDV3" class="social-icon"><i class="fab fa-discord"></i></a>
-                    </div>
-                </div>
-                
-                <div class="column right">
-                    <div class="contact-form-wrapper">
-                        <form id="contactForm">
-                            <div class="form-row">
-                                <div class="input-group">
-                                    <label for="name">Nombre</label>
-                                    <input type="text" id="name" placeholder="Tu nombre">
-                                </div>
-                                
-                                <div class="input-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" placeholder="Tu correo">
-                                </div>
-                            </div>
-                            
-                            <div class="input-group">
-                                <label for="subject">Asunto</label>
-                                <input type="text" id="subject" placeholder="Asunto del mensaje">
-                            </div>
-                            
-                            <div class="input-group">
-                                <label for="message">Mensaje</label>
-                                <textarea id="message" placeholder="Tu mensaje"></textarea>
-                            </div>
-                            
-                            <button type="submit" class="submit-btn">Enviar mensaje</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer>
         <div class="container">

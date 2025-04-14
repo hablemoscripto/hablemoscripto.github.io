@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hablemos Cripto | Contacto</title>
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="../style.css">
+    
+    <!-- Contact-specific stylesheet -->
+    <link rel="stylesheet" href="contact.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+</head>
+<body>
+    <!-- Progress bar indicator -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Back to top button -->
+    <div class="scroll-up-btn">
+        <i class="fas fa-angle-up"></i>
+    </div>
+
+    <!-- Navigation improved - copied from sobremi.html -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html#home">
+                    Hablemos<span>Cripto</span>
+                    <div class="logo-icon"><i class="fab fa-bitcoin"></i></div>
+                </a>
+            </div>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="menu">
+                <!-- Elementos principales de navegación -->
+                <li><a href="../index.html#home" class="menu-btn">Inicio</a></li>
+                <li><a href="../index.html#about" class="menu-btn">Por Qué HC</a></li>
+                <li><a href="../index.html#resources" class="menu-btn">Recursos</a></li>
+                <li><a href="../index.html#podcast" class="menu-btn">Podcast</a></li>
+                
+                <!-- Elementos secundarios en menú desplegable -->
+                <li class="dropdown">
+                    <a href="#" class="menu-btn dropdown-toggle">
+                        Más <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="sobremi.html">Sobre mí</a></li>
+                        <li><a href="../index.html#testimonios">Testimonios</a></li>
+                        <li><a href="contacto.html" class="active">Contacto</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Botón de conversión -->
+                <li class="nav-cta">
+                    <a href="https://discord.gg/W8haa7dDV3" class="menu-btn cta-btn" target="_blank">
+                        <i class="fab fa-discord"></i> Unirse
+                    </a>
+                </li>                
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contact section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contact-content">
+                <div class="column left">
+                    <div class="text">Hablemos</div>
+                    <p>Si tienes alguna inquietud sobre el tema de las criptomonedas no lo pienses dos veces antes de hablarme! Si te interesa una respuesta mas rapida, seguro la vas a tener en el grupo de Discord!</p>
+                    
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-user"></i>
+                            <div>
+                                <h3>Nombre</h3>
+                                <p>CBas</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3>Correo</h3>
+                                <p>hablemoscrypto.es@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fab fa-discord"></i>
+                            <div>
+                                <h3>Discord</h3>
+                                <p>Únete a nuestra comunidad</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-media">
+                        <a href="https://x.com/crypto_cbas" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.youtube.com/@hablemoscripto" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://discord.gg/W8haa7dDV3" class="social-icon" target="_blank"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="column right">
+                    <div class="contact-form-wrapper">
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label for="name">Nombre</label>
+                                    <input type="text" id="name" placeholder="Tu nombre">
+                                </div>
+                                
+                                <div class="input-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" placeholder="Tu correo">
+                                </div>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="subject">Asunto</label>
+                                <input type="text" id="subject" placeholder="Asunto del mensaje">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="message">Mensaje</label>
+                                <textarea id="message" placeholder="Tu mensaje"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">Enviar mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer copied from sobremi.html -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="../index.html">Hablemos<span>Cripto</span></a>
+                    <p>Educación y comunidad cripto desde 2022</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Navegación</h3>
+                        <ul>
+                            <li><a href="../index.html#home">Inicio</a></li>
+                            <li><a href="../index.html#about">Por Qué HC</a></li>
+                            <li><a href="../index.html#resources">Recursos</a></li>
+                            <li><a href="../index.html#podcast">Podcast</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Recursos</h3>
+                        <ul>
+                            <li><a href="../educacion/educacion.html">Guías</a></li>
+                            <li><a href="../trading/trading.html">Análisis</a></li>
+                            <li><a href="../NFTs/nft-guide.html">NFTs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="#">Términos</a></li>
+                            <li><a href="#">Privacidad</a></li>
+                            <li><a href="#">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>© 2025 Hablemos Cripto. Todos los derechos reservados.</p>
+                </div>
+                
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="theme-mode">Modo oscuro</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="../script.js"></script>
+</body>
+</html>
