@@ -1,6 +1,6 @@
-import { 
+import {
   Shield, BookOpen, Rocket, Users, Eye, Lock, Coins, BarChart3, Search, Briefcase, Layers, Gem,
-  Zap, Globe, Cpu, Key, Smartphone, AlertTriangle, RefreshCw, Link, Target, MousePointer, Anchor,
+  Zap, Globe, Cpu, Key, Smartphone, AlertTriangle, RefreshCw, Link, Target, MousePointer,
   CheckCircle, ArrowRight, Clock, TrendingUp, Activity, PieChart, Scale, Network, Server
 } from 'lucide-react';
 
@@ -1261,16 +1261,569 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: { questions: [ { id: 'q1', question: '¿Cuál es el Golden Pocket?', options: [{id:'a',text:'0.5'},{id:'b',text:'Entre 0.618 y 0.65'},{id:'c',text:'1.0'}], correctAnswer: 'b', explanation: 'Es la zona de mayor probabilidad de reversión.' } ] }
   },
-  24: { id: 24, title: 'Estrategias de Trading', level: 'Intermedio', number: '6 de 16', duration: '32 min', type: 'Video + Práctica', description: 'Cómo entrar y salir del mercado. Setup, Stop Loss y Take Profit.', sections: [], quiz: { questions: [] } },
-  25: { id: 25, title: 'Fundamentos de Análisis On-Chain', level: 'Intermedio', number: '7 de 16', duration: '28 min', type: 'Video + Herramientas', description: 'Mirando "bajo el capó" de la blockchain. Datos que no mienten.', sections: [], quiz: { questions: [] } },
-  26: { id: 26, title: 'Evaluación de Altcoins', level: 'Intermedio', number: '8 de 16', duration: '35 min', type: 'Video + Casos Prácticos', description: 'DYOR: Cómo investigar un proyecto antes de invertir un centavo.', sections: [], quiz: { questions: [] } },
-  27: { id: 27, title: 'Ciclos de Mercado', level: 'Intermedio', number: '9 de 16', duration: '26 min', type: 'Video + Análisis', description: 'El Halving de Bitcoin y la psicología de los ciclos de 4 años.', sections: [], quiz: { questions: [] } },
-  28: { id: 28, title: 'Tokenomics Avanzados', level: 'Intermedio', number: '10 de 16', duration: '30 min', type: 'Video + Herramientas', description: 'Inflación, Deflación, Vesting schedules y distribución de tokens.', sections: [], quiz: { questions: [] } },
-  29: { id: 29, title: 'Noticias y Eventos de Mercado', level: 'Intermedio', number: '11 de 16', duration: '24 min', type: 'Video + Recursos', description: 'Buy the rumor, sell the news. Cómo operar eventos.', sections: [], quiz: { questions: [] } },
-  30: { id: 30, title: 'Diversificación Estratégica', level: 'Intermedio', number: '12 de 16', duration: '32 min', type: 'Tutorial Práctico', description: 'No pongas todos los huevos en la misma canasta. Correlación de activos.', sections: [], quiz: { questions: [] } },
-  31: { id: 31, title: 'Gestión de Riesgo', level: 'Intermedio', number: '13 de 16', duration: '28 min', type: 'Tutorial Práctico', description: 'La habilidad #1 del trader rentable: Proteger el capital.', sections: [], quiz: { questions: [] } },
-  32: { id: 32, title: 'Rebalanceo de Portfolio', level: 'Intermedio', number: '14 de 16', duration: '25 min', type: 'Tutorial Práctico', description: 'Cuándo tomar ganancias y rotar capital.', sections: [], quiz: { questions: [] } },
-  33: { id: 33, title: 'Herramientas y Tracking', level: 'Intermedio', number: '15 de 16', duration: '20 min', type: 'Herramientas', description: 'Apps para llevar el control de tus inversiones.', sections: [], quiz: { questions: [] } },
+  24: {
+    id: 24,
+    title: 'Estrategias de Trading',
+    level: 'Intermedio',
+    number: '6 de 16',
+    duration: '32 min',
+    type: 'Video + Práctica',
+    description: 'Cómo entrar y salir del mercado. Setup, Stop Loss y Take Profit.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Arte de la Ejecución',
+        content: 'Tener razón sobre la dirección del mercado no sirve de nada si no sabes **cuándo entrar, dónde poner tu stop loss y cuándo tomar ganancias**. Una buena estrategia de trading convierte tu análisis en resultados concretos.',
+        highlight: { title: 'Regla de Oro', text: 'Nunca entres a una operación sin saber exactamente dónde saldrás si te equivocas (Stop Loss) y dónde tomarás ganancias (Take Profit).' }
+      },
+      {
+        type: 'main',
+        title: 'Anatomía de un Trade',
+        content: 'Todo trade profesional tiene estos componentes definidos ANTES de ejecutar:',
+        features: [
+          { icon: Target, title: 'Entry Point', text: 'El precio exacto donde entras. Debe basarse en tu análisis técnico (soporte, resistencia, patrón).' },
+          { icon: Shield, title: 'Stop Loss (SL)', text: 'El precio donde aceptas que tu análisis estaba mal. Limita tu pérdida máxima. Nunca lo muevas para "dar más espacio".' },
+          { icon: TrendingUp, title: 'Take Profit (TP)', text: 'El precio objetivo donde tomas ganancias. Puede ser parcial (50% en TP1, 50% en TP2).' },
+          { icon: Scale, title: 'Risk/Reward Ratio', text: 'La relación entre lo que arriesgas y lo que puedes ganar. Mínimo recomendado: 1:2 (arriesgar $100 para ganar $200).' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Estilos de Trading',
+        content: 'Elige el estilo que se adapte a tu personalidad y disponibilidad de tiempo:',
+        table: [
+          { aspect: 'Scalping', trad: 'Segundos a minutos', btc: 'Muchas operaciones pequeñas. Requiere dedicación total y bajas comisiones.' },
+          { aspect: 'Day Trading', trad: 'Horas (mismo día)', btc: 'Cierras todas las posiciones antes de dormir. Sin riesgo overnight.' },
+          { aspect: 'Swing Trading', trad: 'Días a semanas', btc: 'Capturas movimientos más grandes. Ideal para quienes tienen trabajo.' },
+          { aspect: 'Position Trading', trad: 'Semanas a meses', btc: 'Similar a inversión. Basado en fundamentos y ciclos macro.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Checklist Pre-Trade',
+        items: [
+          '¿Cuál es mi Entry, Stop Loss y Take Profit?',
+          '¿El Risk/Reward es al menos 1:2?',
+          '¿Estoy arriesgando máximo 1-2% de mi capital?',
+          '¿El mercado está en tendencia o en rango?',
+          '¿Hay noticias importantes que puedan afectar?'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Qué es el Risk/Reward Ratio?', options: [{id:'a',text:'Tu ganancia total del mes'},{id:'b',text:'La relación entre pérdida potencial y ganancia potencial'},{id:'c',text:'El precio de Bitcoin'}], correctAnswer: 'b', explanation: 'Un R:R de 1:3 significa que arriesgas $1 para potencialmente ganar $3.' },
+        { id: 'q2', question: '¿Cuándo debes definir tu Stop Loss?', options: [{id:'a',text:'Después de entrar si el precio baja'},{id:'b',text:'ANTES de entrar al trade'},{id:'c',text:'No es necesario usar Stop Loss'}], correctAnswer: 'b', explanation: 'El SL debe ser parte de tu plan ANTES de ejecutar. Definirlo después es trading emocional.' },
+        { id: 'q3', question: '¿Qué estilo es mejor para alguien con trabajo de tiempo completo?', options: [{id:'a',text:'Scalping'},{id:'b',text:'Day Trading'},{id:'c',text:'Swing Trading'}], correctAnswer: 'c', explanation: 'Swing Trading permite analizar gráficos unas pocas veces al día, ideal para quienes no pueden estar frente a la pantalla constantemente.' }
+      ]
+    }
+  },
+  25: {
+    id: 25,
+    title: 'Fundamentos de Análisis On-Chain',
+    level: 'Intermedio',
+    number: '7 de 16',
+    duration: '28 min',
+    type: 'Video + Herramientas',
+    description: 'Mirando "bajo el capó" de la blockchain. Datos que no mienten.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'La Ventaja de la Transparencia',
+        content: 'A diferencia de los mercados tradicionales donde los datos son opacos, **la blockchain es completamente pública**. Podemos ver exactamente cuántos BTC tienen las ballenas, cuándo se mueven y hacia dónde. El análisis on-chain te da información que el precio no muestra.',
+        highlight: { title: 'Concepto Clave', text: 'El precio puede ser manipulado temporalmente, pero los datos on-chain revelan el comportamiento real de los participantes del mercado.' }
+      },
+      {
+        type: 'main',
+        title: 'Métricas Fundamentales',
+        content: 'Estas son las métricas que los profesionales usan para anticipar movimientos:',
+        features: [
+          { icon: Users, title: 'Exchange Inflows/Outflows', text: 'Cuando BTC entra a exchanges, la gente quiere vender (bearish). Cuando sale, van a HODL (bullish).' },
+          { icon: Coins, title: 'MVRV Ratio', text: 'Market Value vs Realized Value. Si MVRV > 3.5, el mercado está sobrevalorado. Si MVRV < 1, está infravalorado.' },
+          { icon: Activity, title: 'NUPL (Net Unrealized Profit/Loss)', text: 'Mide si los holders están en ganancia o pérdida. Cuando NUPL > 0.75, hay euforia (vender). Cuando NUPL < 0, hay capitulación (comprar).' },
+          { icon: TrendingUp, title: 'Accumulation Trends', text: 'Rastrea si las ballenas (>1000 BTC) están acumulando o distribuyendo.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Herramientas Gratuitas',
+        items: [
+          'Glassnode (glassnode.com) - El estándar de la industria',
+          'CryptoQuant (cryptoquant.com) - Excelente para flujos de exchanges',
+          'LookIntoBitcoin (lookintobitcoin.com) - Gráficos de ciclos',
+          'Santiment (santiment.net) - Sentimiento y actividad social'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: 'Si hay grandes inflows de BTC a exchanges, ¿qué significa?', options: [{id:'a',text:'Los holders van a vender (bearish)'},{id:'b',text:'Los holders van a holdear más'},{id:'c',text:'Es irrelevante'}], correctAnswer: 'a', explanation: 'La gente envía crypto a exchanges cuando quiere vender. Grandes inflows anticipan presión vendedora.' },
+        { id: 'q2', question: '¿Qué indica un MVRV menor a 1?', options: [{id:'a',text:'El mercado está sobrevalorado'},{id:'b',text:'El mercado está infravalorado (zona de compra)'},{id:'c',text:'Es momento de vender'}], correctAnswer: 'b', explanation: 'MVRV < 1 significa que el precio de mercado está por debajo del precio promedio de compra. Históricamente, estas son las mejores zonas de acumulación.' },
+        { id: 'q3', question: '¿Qué ventaja tiene el análisis on-chain sobre el técnico?', options: [{id:'a',text:'Es más fácil'},{id:'b',text:'Muestra el comportamiento real, no solo el precio'},{id:'c',text:'Predice el futuro con 100% de certeza'}], correctAnswer: 'b', explanation: 'El análisis on-chain revela lo que los participantes realmente están haciendo con sus monedas, no solo patrones de precio.' }
+      ]
+    }
+  },
+  26: {
+    id: 26,
+    title: 'Evaluación de Altcoins',
+    level: 'Intermedio',
+    number: '8 de 16',
+    duration: '35 min',
+    type: 'Video + Casos Prácticos',
+    description: 'DYOR: Cómo investigar un proyecto antes de invertir un centavo.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'DYOR: Do Your Own Research',
+        content: 'El 95% de las altcoins eventualmente van a cero. La diferencia entre perder todo y encontrar una joya está en tu capacidad de investigación. **Nunca inviertas en algo que no entiendes completamente.**',
+        highlight: { title: 'Advertencia', text: 'Si alguien te recomienda una moneda y no puedes explicar qué problema resuelve en 30 segundos, no la compres.' }
+      },
+      {
+        type: 'main',
+        title: 'Framework de Evaluación',
+        content: 'Analiza cada proyecto con estos criterios antes de invertir:',
+        features: [
+          { icon: Search, title: 'El Problema', text: '¿Qué problema real resuelve? Si no hay problema claro, no hay necesidad del token.' },
+          { icon: Users, title: 'El Equipo', text: '¿Quiénes son? ¿Tienen experiencia? ¿Son públicos o anónimos? LinkedIn, GitHub, historial.' },
+          { icon: Coins, title: 'Tokenomics', text: '¿Cuántos tokens existen? ¿Cuántos tiene el equipo? ¿Hay vesting o pueden vender todo mañana?' },
+          { icon: Globe, title: 'Comunidad', text: '¿Hay desarrollo activo en GitHub? ¿La comunidad es real o bots? Discord, Twitter, Telegram.' },
+          { icon: BarChart3, title: 'Competencia', text: '¿Hay otros proyectos resolviendo lo mismo? ¿Por qué este sería mejor?' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Red Flags vs Green Flags',
+        content: 'Aprende a identificar proyectos legítimos de estafas:',
+        table: [
+          { aspect: 'Promesas', trad: '🚩 "Ganancias garantizadas", "100x seguro"', btc: '✅ Roadmap realista con hitos medibles' },
+          { aspect: 'Equipo', trad: '🚩 Anónimos o sin historial verificable', btc: '✅ Equipo público con experiencia demostrable' },
+          { aspect: 'Código', trad: '🚩 Sin repositorio público o sin actividad', btc: '✅ GitHub activo con commits frecuentes' },
+          { aspect: 'Tokenomics', trad: '🚩 Equipo tiene >30% de supply, sin vesting', btc: '✅ Distribución justa, vesting largo para equipo' },
+          { aspect: 'Marketing', trad: '🚩 Solo hype y memes, sin producto', btc: '✅ Producto funcional o testnet activa' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Checklist de Investigación',
+        items: [
+          'Lee el Whitepaper completo (no solo el resumen)',
+          'Verifica el equipo en LinkedIn y su historial',
+          'Revisa la actividad de GitHub (commits, issues, contributors)',
+          'Analiza la distribución de tokens en Etherscan/exploradores',
+          'Busca auditorías de seguridad del smart contract',
+          'Evalúa si realmente necesitan un token o es innecesario'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: 'Un proyecto promete "retornos garantizados del 50% mensual". Esto es:', options: [{id:'a',text:'Una gran oportunidad'},{id:'b',text:'Probablemente una estafa (Ponzi)'},{id:'c',text:'Normal en crypto'}], correctAnswer: 'b', explanation: 'Ningún retorno está garantizado en crypto. Las promesas de ganancias fijas son la red flag más grande de esquemas Ponzi.' },
+        { id: 'q2', question: '¿Por qué es importante que el equipo tenga tokens en vesting?', options: [{id:'a',text:'Para que no puedan vender todo de golpe'},{id:'b',text:'No es importante'},{id:'c',text:'Para que ganen más'}], correctAnswer: 'a', explanation: 'El vesting asegura que el equipo está comprometido a largo plazo y no puede hacer "rug pull" vendiendo sus tokens inmediatamente.' },
+        { id: 'q3', question: '¿Qué indica un GitHub sin actividad reciente?', options: [{id:'a',text:'El proyecto está terminado'},{id:'b',text:'El proyecto posiblemente está abandonado'},{id:'c',text:'Es muy estable'}], correctAnswer: 'b', explanation: 'Los proyectos legítimos tienen desarrollo continuo. Falta de commits por meses es señal de abandono o proyecto muerto.' }
+      ]
+    }
+  },
+  27: {
+    id: 27,
+    title: 'Ciclos de Mercado',
+    level: 'Intermedio',
+    number: '9 de 16',
+    duration: '26 min',
+    type: 'Video + Análisis',
+    description: 'El Halving de Bitcoin y la psicología de los ciclos de 4 años.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Ritmo de Bitcoin',
+        content: 'Bitcoin opera en ciclos de aproximadamente **4 años**, marcados por el Halving. Entender estos ciclos te permite posicionarte estratégicamente y no entrar en pánico durante las correcciones.',
+        highlight: { title: 'El Halving', text: 'Cada ~4 años, la recompensa por minar Bitcoin se reduce a la mitad. Esto reduce la nueva oferta y históricamente ha precedido grandes bull runs.' }
+      },
+      {
+        type: 'main',
+        title: 'Las 4 Fases del Ciclo',
+        content: 'Cada ciclo de Bitcoin pasa por fases predecibles de psicología de mercado:',
+        features: [
+          { icon: TrendingUp, title: '1. Acumulación', text: 'Después del crash. El mercado está "aburrido". Smart money compra. Sentimiento: Miedo, incredulidad.' },
+          { icon: Rocket, title: '2. Bull Market', text: 'El precio rompe ATH. Medios hablan de Bitcoin. FOMO masivo. Sentimiento: Optimismo, codicia, euforia.' },
+          { icon: AlertTriangle, title: '3. Distribución', text: 'El smart money vende a los novatos. El precio hace máximos pero con divergencias. Sentimiento: "Esta vez es diferente".' },
+          { icon: Activity, title: '4. Bear Market', text: 'Caída del 70-85%. Los débiles venden con pérdida. El ciclo se reinicia. Sentimiento: Negación, pánico, capitulación.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Historial de Halvings',
+        content: 'Patrón histórico de Bitcoin post-halving:',
+        table: [
+          { aspect: 'Halving 2012', trad: 'Recompensa: 50→25 BTC', btc: 'Precio pasó de ~$12 a ~$1,100 (+9,000%)' },
+          { aspect: 'Halving 2016', trad: 'Recompensa: 25→12.5 BTC', btc: 'Precio pasó de ~$650 a ~$20,000 (+3,000%)' },
+          { aspect: 'Halving 2020', trad: 'Recompensa: 12.5→6.25 BTC', btc: 'Precio pasó de ~$8,500 a ~$69,000 (+700%)' },
+          { aspect: 'Halving 2024', trad: 'Recompensa: 6.25→3.125 BTC', btc: 'Ciclo en progreso...' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Lecciones de los Ciclos',
+        items: [
+          'El mejor momento para comprar es durante el Bear Market (cuando nadie quiere)',
+          'El mejor momento para vender es durante la euforia (cuando todos quieren)',
+          'Los retornos % disminuyen cada ciclo, pero siguen siendo significativos',
+          'Nunca inviertas más de lo que puedas aguantar perder durante 2-3 años de Bear Market'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Qué es el Halving de Bitcoin?', options: [{id:'a',text:'Cuando el precio se divide a la mitad'},{id:'b',text:'Cuando la recompensa de minería se reduce 50%'},{id:'c',text:'Cuando venden la mitad de los Bitcoin'}], correctAnswer: 'b', explanation: 'El Halving reduce la emisión de nuevos BTC a la mitad, disminuyendo la oferta y creando escasez programada.' },
+        { id: 'q2', question: '¿Cuándo es el mejor momento para acumular Bitcoin?', options: [{id:'a',text:'Cuando todos están comprando (FOMO)'},{id:'b',text:'Durante el Bear Market cuando hay miedo'},{id:'c',text:'Justo después del ATH'}], correctAnswer: 'b', explanation: '"Be fearful when others are greedy, and greedy when others are fearful" - Warren Buffett. El Bear Market es la fase de acumulación.' },
+        { id: 'q3', question: '¿Cada cuánto ocurre un Halving?', options: [{id:'a',text:'Cada año'},{id:'b',text:'Aproximadamente cada 4 años (210,000 bloques)'},{id:'c',text:'Cuando el precio llega a cierto nivel'}], correctAnswer: 'b', explanation: 'El Halving está programado cada 210,000 bloques, lo que equivale aproximadamente a 4 años.' }
+      ]
+    }
+  },
+  28: {
+    id: 28,
+    title: 'Tokenomics Avanzados',
+    level: 'Intermedio',
+    number: '10 de 16',
+    duration: '30 min',
+    type: 'Video + Herramientas',
+    description: 'Inflación, Deflación, Vesting schedules y distribución de tokens.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'La Economía del Token',
+        content: 'Tokenomics (Token + Economics) es el estudio de cómo funciona la economía de un criptoactivo. **Un proyecto con mala tokenomics está condenado a fracasar**, sin importar qué tan buena sea la tecnología.',
+        highlight: { title: 'Regla Fundamental', text: 'Si la oferta aumenta más rápido que la demanda, el precio baja. Busca tokens con emisión controlada y mecanismos de quema.' }
+      },
+      {
+        type: 'main',
+        title: 'Métricas Clave',
+        content: 'Estos son los números que debes analizar antes de invertir:',
+        features: [
+          { icon: Coins, title: 'Supply Metrics', text: 'Circulating Supply (en circulación), Total Supply (total emitido), Max Supply (máximo posible). Bitcoin: 21M max.' },
+          { icon: PieChart, title: 'Distribución', text: '¿Cuánto tiene el equipo? ¿Inversores? ¿Comunidad? Si el equipo tiene >20%, hay riesgo de dump.' },
+          { icon: Clock, title: 'Vesting Schedule', text: 'Calendario de desbloqueo de tokens. Los "cliff" y "unlock" de inversores causan presión vendedora.' },
+          { icon: Activity, title: 'Inflación/Deflación', text: 'Tasa de emisión anual. Ethereum post-merge es deflacionario. Muchas altcoins tienen inflación del 10-50% anual.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Buenos vs Malos Tokenomics',
+        content: 'Aprende a identificar tokenomics saludables:',
+        table: [
+          { aspect: 'Oferta', trad: '🚩 Sin límite máximo, alta inflación', btc: '✅ Supply fijo o deflacionario' },
+          { aspect: 'Distribución', trad: '🚩 Equipo/VCs tienen >40%', btc: '✅ Mayoría en comunidad, equipo <15%' },
+          { aspect: 'Vesting', trad: '🚩 Sin vesting o muy corto (<1 año)', btc: '✅ Vesting de 3-4 años con cliff de 1 año' },
+          { aspect: 'Utilidad', trad: '🚩 Token sin uso real en el ecosistema', btc: '✅ Token necesario para fees, governance, staking' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Dónde Investigar Tokenomics',
+        items: [
+          'CoinGecko/CoinMarketCap: Supply metrics básicas',
+          'Token Unlocks (tokenunlocks.app): Calendario de desbloqueos',
+          'Messari: Informes detallados de proyectos',
+          'El Whitepaper del proyecto: Sección de tokenomics',
+          'Etherscan/exploradores: Distribución real de holders'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: 'Un token tiene inflación del 100% anual. Esto significa:', options: [{id:'a',text:'El precio subirá 100%'},{id:'b',text:'La oferta se duplica cada año, diluyendo tu inversión'},{id:'c',text:'Es muy rentable'}], correctAnswer: 'b', explanation: 'Alta inflación significa que se crean muchos tokens nuevos. Si la demanda no crece igual de rápido, el precio baja.' },
+        { id: 'q2', question: '¿Qué es un "cliff" en vesting?', options: [{id:'a',text:'Cuando el precio cae fuerte'},{id:'b',text:'Periodo inicial donde no se desbloquean tokens'},{id:'c',text:'Un tipo de análisis técnico'}], correctAnswer: 'b', explanation: 'El cliff es el periodo (ej: 1 año) donde los tokens del equipo/inversores están completamente bloqueados antes de empezar a liberarse gradualmente.' },
+        { id: 'q3', question: '¿Por qué es mala señal que el equipo tenga muchos tokens sin vesting?', options: [{id:'a',text:'Pueden vender todo y abandonar el proyecto'},{id:'b',text:'Tendrán mucho dinero'},{id:'c',text:'No es mala señal'}], correctAnswer: 'a', explanation: 'Sin vesting, el equipo puede hacer "rug pull" vendiendo todos sus tokens de golpe, crasheando el precio y abandonando el proyecto.' }
+      ]
+    }
+  },
+  29: {
+    id: 29,
+    title: 'Noticias y Eventos de Mercado',
+    level: 'Intermedio',
+    number: '11 de 16',
+    duration: '24 min',
+    type: 'Video + Recursos',
+    description: 'Buy the rumor, sell the news. Cómo operar eventos.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Mercado Descuenta Todo',
+        content: 'En crypto, las noticias mueven mercados. Pero aquí está el secreto: **el precio ya refleja las expectativas antes del evento**. Los profesionales compran el rumor y venden cuando sale la noticia.',
+        highlight: { title: 'Buy the Rumor, Sell the News', text: 'Cuando un evento positivo esperado finalmente ocurre, el precio suele caer porque los que compraron anticipándose ahora venden para tomar ganancias.' }
+      },
+      {
+        type: 'main',
+        title: 'Tipos de Eventos',
+        content: 'Aprende a categorizar y anticipar el impacto de diferentes eventos:',
+        features: [
+          { icon: Rocket, title: 'Eventos Programados', text: 'Halvings, upgrades de red, lanzamientos de mainnet. Fechas conocidas = ya está en el precio.' },
+          { icon: AlertTriangle, title: 'Eventos Sorpresa', text: 'Hacks, bancarrotas, regulaciones inesperadas. Alto impacto porque nadie los anticipó.' },
+          { icon: BarChart3, title: 'Datos Macro', text: 'Decisiones de la FED sobre tasas, inflación CPI, reportes de empleo. Crypto está correlacionado con mercados tradicionales.' },
+          { icon: Globe, title: 'Adopción Institucional', text: 'ETFs aprobados, empresas comprando BTC, países adoptando crypto. Generalmente bullish a largo plazo.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Estrategias por Tipo de Noticia',
+        content: 'Cómo posicionarte según el evento:',
+        table: [
+          { aspect: 'Upgrade de red esperado', trad: 'Comprar semanas antes', btc: 'Vender justo antes o durante el evento' },
+          { aspect: 'Hack/Exploit', trad: 'No atrapar el cuchillo cayendo', btc: 'Esperar estabilización, puede ser oportunidad' },
+          { aspect: 'Regulación positiva', trad: 'Comprar inmediatamente si es sorpresa', btc: 'Si era esperada, probablemente ya está en precio' },
+          { aspect: 'Bancarrota de exchange', trad: 'Vender todo en ese exchange', btc: 'Mover fondos a self-custody SIEMPRE' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Fuentes de Información',
+        items: [
+          'Twitter/X Crypto: La información más rápida (pero verifica siempre)',
+          'CoinDesk, The Block, Decrypt: Noticias verificadas',
+          'Calendario económico (investing.com): Datos macro',
+          'Feeds oficiales de proyectos: Discord, Telegram',
+          'NUNCA operes basándote solo en un tweet'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Qué significa "Buy the rumor, sell the news"?', options: [{id:'a',text:'Comprar cuando salen las noticias'},{id:'b',text:'Comprar anticipando el evento y vender cuando ocurre'},{id:'c',text:'Solo comprar rumores'}], correctAnswer: 'b', explanation: 'Los traders experimentados se posicionan antes del evento y venden cuando los novatos entran al escuchar la noticia.' },
+        { id: 'q2', question: 'Sale la noticia de que el ETF de Bitcoin fue aprobado. El precio:', options: [{id:'a',text:'Siempre sube'},{id:'b',text:'Puede bajar si ya estaba "priced in"'},{id:'c',text:'No se ve afectado'}], correctAnswer: 'b', explanation: 'Si el mercado ya esperaba la aprobación, muchos compraron antes. Cuando sale la noticia, venden para tomar ganancias, causando caída temporal.' },
+        { id: 'q3', question: 'Hay un hack en un protocolo DeFi. ¿Qué hacer?', options: [{id:'a',text:'Comprar la caída inmediatamente'},{id:'b',text:'Esperar a que se estabilice y evaluar el daño real'},{id:'c',text:'Ignorarlo'}], correctAnswer: 'b', explanation: 'Nunca "atrapes un cuchillo cayendo". Espera a entender la magnitud del daño. A veces el protocolo se recupera, a veces muere.' }
+      ]
+    }
+  },
+  30: {
+    id: 30,
+    title: 'Diversificación Estratégica',
+    level: 'Intermedio',
+    number: '12 de 16',
+    duration: '32 min',
+    type: 'Tutorial Práctico',
+    description: 'No pongas todos los huevos en la misma canasta. Correlación de activos.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Único Almuerzo Gratis',
+        content: 'Harry Markowitz, Nobel de Economía, dijo que la diversificación es **"el único almuerzo gratis en finanzas"**. En crypto, donde la volatilidad es extrema, diversificar correctamente puede ser la diferencia entre sobrevivir y quebrar.',
+        highlight: { title: 'Advertencia', text: 'Diversificación NO significa comprar 50 shitcoins. Significa distribuir riesgo estratégicamente entre activos que no se mueven igual.' }
+      },
+      {
+        type: 'main',
+        title: 'Principios de Diversificación',
+        content: 'Construye un portfolio resiliente siguiendo estos principios:',
+        features: [
+          { icon: Shield, title: 'Core Holdings (60-80%)', text: 'Bitcoin y Ethereum. Los más seguros y probados. La base de tu portfolio.' },
+          { icon: TrendingUp, title: 'Growth (15-30%)', text: 'Altcoins de alta capitalización con fundamentales sólidos (SOL, AVAX, etc.).' },
+          { icon: Zap, title: 'Speculative (5-10%)', text: 'Proyectos de alto riesgo/alta recompensa. Solo lo que puedas perder completamente.' },
+          { icon: Coins, title: 'Stablecoins (10-20%)', text: 'Reserva para comprar en caídas. "Dry powder" para oportunidades.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Correlación de Activos',
+        content: 'No todos los cryptos se mueven igual:',
+        table: [
+          { aspect: 'BTC + ETH', trad: 'Alta correlación (~0.8)', btc: 'Se mueven similar. Diversificación limitada entre ellos.' },
+          { aspect: 'BTC + Stablecoins', trad: 'Correlación 0', btc: 'Perfecta cobertura. Stables no pierden valor en crashes.' },
+          { aspect: 'Altcoins entre sí', trad: 'Muy alta correlación', btc: 'Cuando BTC cae, casi todo cae. No diversifica.' },
+          { aspect: 'Crypto + Oro', trad: 'Baja correlación', btc: 'Oro puede subir cuando crypto baja. Verdadera diversificación.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Errores Comunes',
+        items: [
+          'Tener 20 altcoins NO es diversificación (todas caen juntas)',
+          'No tener stablecoins significa no poder comprar las caídas',
+          '100% en una sola moneda es apuesta, no inversión',
+          'Diversificar también significa usar múltiples wallets/exchanges',
+          'Considera activos fuera de crypto (acciones, bonos, inmuebles)'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: 'Tener 10 altcoins diferentes es buena diversificación:', options: [{id:'a',text:'Verdadero'},{id:'b',text:'Falso, todas tienen alta correlación'},{id:'c',text:'Depende del precio'}], correctAnswer: 'b', explanation: 'Las altcoins tienen alta correlación entre sí. Cuando BTC cae, casi todas caen. No es verdadera diversificación.' },
+        { id: 'q2', question: '¿Por qué mantener stablecoins en el portfolio?', options: [{id:'a',text:'Para ganar intereses'},{id:'b',text:'Para tener liquidez y comprar en caídas'},{id:'c',text:'No tiene sentido, no suben de precio'}], correctAnswer: 'b', explanation: 'Tener "dry powder" (stables) te permite aprovechar caídas del mercado comprando a precios bajos.' },
+        { id: 'q3', question: '¿Qué porcentaje máximo debería ir a especulación de alto riesgo?', options: [{id:'a',text:'50%'},{id:'b',text:'5-10%'},{id:'c',text:'100% para maximizar ganancias'}], correctAnswer: 'b', explanation: 'Solo invierte en especulación lo que puedas perder completamente sin afectar tu vida. 5-10% es una guía conservadora.' }
+      ]
+    }
+  },
+  31: {
+    id: 31,
+    title: 'Gestión de Riesgo',
+    level: 'Intermedio',
+    number: '13 de 16',
+    duration: '28 min',
+    type: 'Tutorial Práctico',
+    description: 'La habilidad #1 del trader rentable: Proteger el capital.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'La Habilidad Más Importante',
+        content: 'Puedes tener razón el 70% de las veces y aún así perder dinero si no gestionas el riesgo. **Los mejores traders no son los que más ganan, sino los que mejor controlan sus pérdidas.** El objetivo #1 es sobrevivir para poder seguir operando.',
+        highlight: { title: 'Regla de Oro', text: 'Nunca arriesgues más del 1-2% de tu capital total en una sola operación. Así, necesitarías 50+ trades perdedores seguidos para quebrar.' }
+      },
+      {
+        type: 'main',
+        title: 'Pilares de la Gestión de Riesgo',
+        content: 'Domina estos conceptos para proteger tu capital:',
+        features: [
+          { icon: Shield, title: 'Position Sizing', text: 'Calcula el tamaño de cada posición basándote en tu stop loss, no en cuánto "crees" que subirá.' },
+          { icon: Target, title: 'Regla del 1-2%', text: 'Si tu cuenta es $10,000, máximo riesgo por trade = $100-200. Ajusta el tamaño según la distancia al stop.' },
+          { icon: AlertTriangle, title: 'Drawdown Máximo', text: 'Define cuánto puedes perder antes de pausar. 20% drawdown = parar y revisar estrategia.' },
+          { icon: Scale, title: 'Risk/Reward', text: 'Solo toma trades donde puedes ganar 2-3x lo que arriesgas. Esto te permite equivocarte el 50% y aún ganar.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Cálculo de Position Size',
+        content: 'Ejemplo práctico con cuenta de $10,000:',
+        table: [
+          { aspect: 'Capital', trad: '$10,000', btc: 'Tu cuenta total' },
+          { aspect: 'Riesgo por trade', trad: '2% = $200', btc: 'Máximo que puedes perder' },
+          { aspect: 'Entry', trad: 'BTC a $50,000', btc: 'Precio de entrada' },
+          { aspect: 'Stop Loss', trad: 'BTC a $48,000 (4% abajo)', btc: 'Donde aceptas pérdida' },
+          { aspect: 'Position Size', trad: '$200 / 4% = $5,000', btc: 'Tamaño máximo de posición' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Reglas Inquebrantables',
+        items: [
+          'SIEMPRE usa Stop Loss. Sin excepciones.',
+          'Nunca promedies a la baja ("averaging down") en trades perdedores',
+          'No muevas tu stop loss para "dar más espacio"',
+          'Después de 3 pérdidas seguidas, para y analiza',
+          'El mercado siempre estará mañana. Tu capital quizás no.'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: 'Tu cuenta es $5,000. Siguiendo la regla del 2%, ¿cuánto puedes arriesgar por trade?', options: [{id:'a',text:'$500'},{id:'b',text:'$100'},{id:'c',text:'$1,000'}], correctAnswer: 'b', explanation: '$5,000 x 2% = $100 de riesgo máximo por operación.' },
+        { id: 'q2', question: 'Tu trade va en contra. ¿Deberías mover el stop loss para evitar la pérdida?', options: [{id:'a',text:'Sí, para darle más espacio'},{id:'b',text:'No, respeta tu plan original'},{id:'c',text:'Depende de cómo te sientas'}], correctAnswer: 'b', explanation: 'Mover el stop loss es trading emocional. Tu análisis original definió dónde estabas equivocado. Respétalo.' },
+        { id: 'q3', question: '¿Por qué es importante el Risk/Reward ratio?', options: [{id:'a',text:'Para presumir'},{id:'b',text:'Permite ser rentable incluso acertando menos del 50%'},{id:'c',text:'No es importante'}], correctAnswer: 'b', explanation: 'Con R:R de 1:3, puedes equivocarte 70% de las veces y aún ganar dinero. La matemática te protege.' }
+      ]
+    }
+  },
+  32: {
+    id: 32,
+    title: 'Rebalanceo de Portfolio',
+    level: 'Intermedio',
+    number: '14 de 16',
+    duration: '25 min',
+    type: 'Tutorial Práctico',
+    description: 'Cuándo tomar ganancias y rotar capital.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Arte de Tomar Ganancias',
+        content: 'Un viejo dicho de Wall Street: **"Nadie quebró tomando ganancias"**. El rebalanceo es ajustar tu portfolio para mantener tu estrategia original y cristalizar beneficios. La mayoría pierde dinero no por malas entradas, sino por no saber cuándo salir.',
+        highlight: { title: 'Realidad', text: 'Una ganancia del 100% no es real hasta que vendes. Las "ganancias en papel" pueden desaparecer en horas durante un crash.' }
+      },
+      {
+        type: 'main',
+        title: 'Estrategias de Rebalanceo',
+        content: 'Diferentes enfoques para ajustar tu portfolio:',
+        features: [
+          { icon: Clock, title: 'Rebalanceo Temporal', text: 'Cada mes o trimestre, ajusta para volver a tus porcentajes objetivo (ej: 70% BTC, 30% ETH).' },
+          { icon: TrendingUp, title: 'Rebalanceo por Umbral', text: 'Cuando un activo se desvía más de X% de su peso objetivo (ej: BTC pasa de 70% a 80%), rebalancea.' },
+          { icon: Target, title: 'Toma de Ganancias Escalonada', text: 'Vende 25% cuando dupliques, otro 25% en +200%, etc. Asegura ganancias pero mantiene exposición.' },
+          { icon: Activity, title: 'Rotación Sectorial', text: 'Mueve capital de sectores sobrevalorados a infravalorados (ej: de memecoins a DeFi blue chips).' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Ejemplo de Toma de Ganancias',
+        content: 'Estrategia escalonada con inversión inicial de $1,000:',
+        table: [
+          { aspect: 'Inversión inicial', trad: '$1,000 en SOL a $20', btc: '50 SOL' },
+          { aspect: 'Precio llega a $40 (+100%)', trad: 'Vendo 25% (12.5 SOL = $500)', btc: 'Recuperé 50% de inversión' },
+          { aspect: 'Precio llega a $80 (+300%)', trad: 'Vendo otro 25% (12.5 SOL = $1,000)', btc: 'Ya tengo 1.5x mi inversión en bolsillo' },
+          { aspect: 'Precio llega a $160 (+700%)', trad: 'Vendo 25% más (12.5 SOL = $2,000)', btc: 'Total extraído: $3,500. Aún tengo 12.5 SOL' },
+          { aspect: 'Si el precio colapsa a $10', trad: 'Mis 12.5 SOL restantes = $125', btc: 'Pero ya aseguré $3,500. Ganancia total: +250%' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Reglas de Rebalanceo',
+        items: [
+          'Define tu estrategia de salida ANTES de entrar',
+          'Las ganancias no son reales hasta que vendes',
+          'Nunca vendas todo; mantén exposición por si sigue subiendo',
+          'Considera impuestos al tomar ganancias (en muchos países aplica)',
+          'Rebalancear hacia stables en euforia, hacia crypto en pánico'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: 'Tu inversión subió 500%. ¿Qué deberías hacer?', options: [{id:'a',text:'Esperar a que suba más'},{id:'b',text:'Tomar ganancias parciales para asegurar beneficios'},{id:'c',text:'Invertir más'}], correctAnswer: 'b', explanation: 'Tomar ganancias parciales te permite asegurar beneficios mientras mantienes exposición si sigue subiendo.' },
+        { id: 'q2', question: 'Tu BTC pasó de 70% a 85% del portfolio por la subida de precio. ¿Qué haces?', options: [{id:'a',text:'Nada, está bien'},{id:'b',text:'Vendo algo de BTC para volver a 70%'},{id:'c',text:'Compro más BTC'}], correctAnswer: 'b', explanation: 'Rebalancear significa vender lo que subió mucho (BTC) para comprar lo que subió menos, manteniendo tu estrategia original.' },
+        { id: 'q3', question: '¿Por qué vender en escalones en lugar de todo de golpe?', options: [{id:'a',text:'Por impuestos'},{id:'b',text:'Porque no sabemos cuánto más puede subir'},{id:'c',text:'No hay razón'}], correctAnswer: 'b', explanation: 'Nadie sabe el tope del mercado. Vendiendo en escalones aseguras ganancias pero mantienes exposición si sigue subiendo.' }
+      ]
+    }
+  },
+  33: {
+    id: 33,
+    title: 'Herramientas y Tracking',
+    level: 'Intermedio',
+    number: '15 de 16',
+    duration: '20 min',
+    type: 'Herramientas',
+    description: 'Apps para llevar el control de tus inversiones.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'Las Herramientas del Inversor Profesional',
+        content: 'Los mejores inversores no operan a ciegas. Usan herramientas para **rastrear su portfolio, analizar el mercado y automatizar alertas**. La diferencia entre un amateur y un profesional muchas veces está en sus herramientas.',
+        highlight: { title: 'Consejo Pro', text: 'Conecta todas tus wallets y exchanges a un tracker. Saber tu ganancia/pérdida real (incluyendo fees) es fundamental para mejorar.' }
+      },
+      {
+        type: 'main',
+        title: 'Categorías de Herramientas',
+        content: 'Estas son las herramientas esenciales que todo inversor debe usar:',
+        features: [
+          { icon: PieChart, title: 'Portfolio Trackers', text: 'CoinGecko Portfolio, Zapper, DeBank. Conecta wallets y ve todo en un solo lugar.' },
+          { icon: BarChart3, title: 'Análisis Técnico', text: 'TradingView (gratis y pro). El estándar de la industria para gráficos.' },
+          { icon: Activity, title: 'On-Chain Analytics', text: 'Glassnode, Nansen, Dune. Datos avanzados del comportamiento de la blockchain.' },
+          { icon: AlertTriangle, title: 'Alertas de Precio', text: 'TradingView alerts, CoinGecko alerts. Nunca pierdas un movimiento importante.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Herramientas Recomendadas',
+        content: 'Las mejores opciones por categoría:',
+        table: [
+          { aspect: 'Portfolio Tracking', trad: 'Gratis: CoinGecko, Zapper', btc: 'Pro: Koinly (impuestos), CoinTracker' },
+          { aspect: 'Gráficos', trad: 'TradingView (versión gratis)', btc: 'Pro: TradingView Premium ($15/mes)' },
+          { aspect: 'On-Chain', trad: 'Gratis: DefiLlama, LookIntoBitcoin', btc: 'Pro: Glassnode, Nansen ($100+/mes)' },
+          { aspect: 'Noticias', trad: 'Twitter/X, CoinDesk', btc: 'Pro: The Block Research, Messari' },
+          { aspect: 'DeFi Tracking', trad: 'DeBank, Zapper', btc: 'Rastrea todas tus posiciones DeFi' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Setup Mínimo Recomendado',
+        items: [
+          'TradingView: Para análisis técnico y alertas de precio',
+          'CoinGecko/CoinMarketCap: Para research y seguimiento general',
+          'Zapper o DeBank: Para rastrear wallets y posiciones DeFi',
+          'Spreadsheet personal: Para registrar tus trades y calcular P&L',
+          'Twitter listas: Crea listas de cuentas cripto confiables'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Por qué es importante usar un portfolio tracker?', options: [{id:'a',text:'Para presumir'},{id:'b',text:'Para saber tu ganancia/pérdida real y tomar mejores decisiones'},{id:'c',text:'No es importante'}], correctAnswer: 'b', explanation: 'Sin tracking preciso, no sabes si realmente estás ganando o perdiendo. Muchos creen estar en ganancia cuando incluyen fees están en pérdida.' },
+        { id: 'q2', question: '¿Cuál es la mejor herramienta gratuita para análisis técnico?', options: [{id:'a',text:'Excel'},{id:'b',text:'TradingView'},{id:'c',text:'Instagram'}], correctAnswer: 'b', explanation: 'TradingView es el estándar de la industria. La versión gratuita es suficiente para la mayoría de traders.' },
+        { id: 'q3', question: '¿Qué herramienta usarías para ver todas tus posiciones DeFi en diferentes protocolos?', options: [{id:'a',text:'CoinGecko'},{id:'b',text:'Zapper o DeBank'},{id:'c',text:'TradingView'}], correctAnswer: 'b', explanation: 'Zapper y DeBank escanean tu wallet y muestran todas tus posiciones DeFi (staking, LP, lending) en una sola interfaz.' }
+      ]
+    }
+  },
   34: {
     id: 34,
     title: 'Preparación para Nivel Avanzado',
@@ -1377,8 +1930,121 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: { questions: [ { id: 'q1', question: '¿Qué ocurre si tu Health Factor cae debajo de 1.0?', options: [{id:'a',text:'Te cobran una multa pequeña'},{id:'b',text:'Eres liquidado (pierdes colateral)'},{id:'c',text:'Nada'}], correctAnswer: 'b', explanation: 'El protocolo protege a los prestamistas liquidando posiciones riesgosas automáticamente.' } ] }
   },
-  38: { id: 38, title: 'Yield Farming Avanzado', level: 'Avanzado', number: '4 de 14', duration: '45 min', type: 'Estrategias', description: 'Maximiza retornos "cultivando" rendimientos en múltiples protocolos.', sections: [ { type: 'intro', title: 'La Agricultura de Rendimiento', content: 'Consiste en mover capital entre diferentes protocolos para maximizar el retorno (APY). Estrategia común: Proveer liquidez -> Recibir LP Tokens -> Stakear LP Tokens en una "Farm" para ganar el token de gobernanza del protocolo.' } ], quiz: { questions: [ { id: 'q1', question: '¿Cuál es el riesgo principal de farms con APY de 10,000%?', options: [{id:'a',text:'Que el token de recompensa se vaya a cero'},{id:'b',text:'Demasiadas ganancias'},{id:'c',text:'No hay riesgo'}], correctAnswer: 'a', explanation: 'La inflación del token suele ser masiva, devaluando el precio rápidamente.' } ] } },
-  39: { id: 39, title: 'Riesgos y Seguridad en DeFi', level: 'Avanzado', number: '5 de 14', duration: '32 min', type: 'Seguridad', description: 'Cómo evitar perderlo todo por hacks, exploits o errores de usuario.', sections: [ { type: 'main', title: 'Vectores de Ataque', features: [ { icon: Lock, title: 'Smart Contract Risk', text: 'Bugs en el código que hackers explotan.' }, { icon: Key, title: 'Infinite Approval', text: 'Dar permiso ilimitado a un contrato malicioso para gastar tus tokens.' }, { icon: AlertTriangle, title: 'Rug Pull', text: 'Los desarrolladores retiran toda la liquidez y huyen.' } ] } ], quiz: { questions: [ { id: 'q1', question: '¿Cómo revocar permisos de contratos?', options: [{id:'a',text:'No se puede'},{id:'b',text:'Usando herramientas como Revoke.cash'},{id:'c',text:'Borrando la wallet'}], correctAnswer: 'b', explanation: 'Es vital revisar y revocar permisos antiguos regularmente.' } ] } },
+  38: {
+    id: 38,
+    title: 'Yield Farming Avanzado',
+    level: 'Avanzado',
+    number: '4 de 14',
+    duration: '45 min',
+    type: 'Estrategias',
+    description: 'Maximiza retornos "cultivando" rendimientos en múltiples protocolos.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'La Agricultura de Rendimiento',
+        content: 'Yield Farming es mover capital entre protocolos DeFi para maximizar retornos. Es como ser un agricultor digital: **siembras capital, cosechas tokens**. Pero cuidado: los campos más fértiles suelen ser los más peligrosos.',
+        highlight: { title: 'Advertencia', text: 'APYs de 1,000%+ son insostenibles. Generalmente significan que el token de recompensa se está inflando masivamente y su precio colapsará.' }
+      },
+      {
+        type: 'main',
+        title: 'Estrategias de Farming',
+        content: 'Las formas más comunes de generar yield:',
+        features: [
+          { icon: Coins, title: 'Liquidity Mining', text: 'Provee liquidez a un DEX y gana fees + tokens de recompensa del protocolo.' },
+          { icon: Layers, title: 'Staking Compuesto', text: 'Stakea tus LP tokens en "farms" para ganar tokens adicionales. Luego stakea esos tokens.' },
+          { icon: RefreshCw, title: 'Looping', text: 'Deposita colateral → Pide prestado → Deposita lo prestado → Repite. Amplifica yield pero también riesgo.' },
+          { icon: Briefcase, title: 'Yield Aggregators', text: 'Protocolos como Yearn o Beefy automatizan las estrategias y auto-compound.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Riesgos del Yield Farming',
+        content: 'Entiende los peligros antes de farmear:',
+        table: [
+          { aspect: 'Impermanent Loss', trad: 'Pérdida por divergencia de precios', btc: 'Puedes terminar con menos valor que si solo holdearas' },
+          { aspect: 'Smart Contract Risk', trad: 'Bugs o exploits en el código', btc: 'Puedes perder todo tu capital' },
+          { aspect: 'Token Inflation', trad: 'Emisión masiva del token reward', btc: 'El APY alto se compensa con caída del precio' },
+          { aspect: 'Rug Pull', trad: 'Devs retiran la liquidez', btc: 'Común en farms nuevas sin auditoría' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Reglas de Seguridad',
+        items: [
+          'Solo farmea en protocolos auditados con TVL alto',
+          'Desconfía de APYs mayores a 100% en stables',
+          'Vende las recompensas regularmente (no acumules tokens especulativos)',
+          'Calcula si el yield real supera el Impermanent Loss',
+          'Nunca pongas más del 10-20% de tu portfolio en farming'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Cuál es el riesgo principal de farms con APY de 10,000%?', options: [{id:'a',text:'Que el token de recompensa se vaya a cero'},{id:'b',text:'Demasiadas ganancias'},{id:'c',text:'No hay riesgo'}], correctAnswer: 'a', explanation: 'La inflación del token suele ser masiva, devaluando el precio rápidamente.' },
+        { id: 'q2', question: '¿Qué hace un Yield Aggregator como Yearn?', options: [{id:'a',text:'Te presta dinero'},{id:'b',text:'Automatiza estrategias de farming y auto-compounds'},{id:'c',text:'Crea nuevos tokens'}], correctAnswer: 'b', explanation: 'Los aggregators optimizan y automatizan el proceso de farming, ahorrándote gas y tiempo.' },
+        { id: 'q3', question: '¿Qué es "looping" en DeFi?', options: [{id:'a',text:'Depositar y pedir prestado repetidamente para amplificar yield'},{id:'b',text:'Un tipo de NFT'},{id:'c',text:'Un error del sistema'}], correctAnswer: 'a', explanation: 'Looping amplifica tanto las ganancias como el riesgo de liquidación. Es una estrategia avanzada y peligrosa.' }
+      ]
+    }
+  },
+  39: {
+    id: 39,
+    title: 'Riesgos y Seguridad en DeFi',
+    level: 'Avanzado',
+    number: '5 de 14',
+    duration: '32 min',
+    type: 'Seguridad',
+    description: 'Cómo evitar perderlo todo por hacks, exploits o errores de usuario.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Bosque Oscuro',
+        content: 'DeFi es territorio salvaje. **Billones de dólares han sido robados** en hacks, exploits y scams. La diferencia entre sobrevivir y perderlo todo está en tu conocimiento de seguridad. No hay soporte al cliente que te devuelva tus fondos.',
+        highlight: { title: 'Realidad', text: 'En 2022-2023, más de $3 billones fueron robados en hacks DeFi. La mayoría eran evitables con prácticas básicas de seguridad.' }
+      },
+      {
+        type: 'main',
+        title: 'Vectores de Ataque',
+        content: 'Conoce las formas más comunes de perder dinero:',
+        features: [
+          { icon: Lock, title: 'Smart Contract Exploits', text: 'Bugs en el código que hackers explotan. Flash loan attacks, reentrancy, oracle manipulation.' },
+          { icon: Key, title: 'Infinite Approval', text: 'Al interactuar con DApps, das permiso para gastar tokens. Permisos ilimitados + contrato malicioso = robo total.' },
+          { icon: AlertTriangle, title: 'Rug Pull', text: 'Los desarrolladores retiran toda la liquidez y desaparecen. Común en tokens nuevos sin vesting.' },
+          { icon: Globe, title: 'Phishing', text: 'Sitios falsos que imitan protocolos reales. Un clic en "Connect Wallet" + firmar = fondos drenados.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Checklist de Seguridad DeFi',
+        content: 'Antes de interactuar con cualquier protocolo:',
+        table: [
+          { aspect: 'Auditorías', trad: '¿Tiene auditorías de firmas respetadas?', btc: 'OpenZeppelin, Trail of Bits, Certik' },
+          { aspect: 'TVL', trad: '¿Cuánto valor está depositado?', btc: 'Más TVL = más ojos revisando = más seguro' },
+          { aspect: 'Tiempo', trad: '¿Cuánto tiempo lleva funcionando?', btc: 'Lindy effect: más tiempo sin hack = más confiable' },
+          { aspect: 'Código', trad: '¿El código es open source?', btc: 'Si no puedes verificar, no confíes' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Prácticas de Seguridad',
+        items: [
+          'Usa Revoke.cash regularmente para revocar permisos antiguos',
+          'Verifica URLs manualmente (no uses Google, usa bookmarks)',
+          'Usa una wallet separada para DeFi experimental',
+          'Nunca firmes transacciones que no entiendas completamente',
+          'Hardware wallet para holdings principales',
+          'Si parece demasiado bueno para ser verdad, es scam'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Cómo revocar permisos de contratos?', options: [{id:'a',text:'No se puede'},{id:'b',text:'Usando herramientas como Revoke.cash'},{id:'c',text:'Borrando la wallet'}], correctAnswer: 'b', explanation: 'Es vital revisar y revocar permisos antiguos regularmente.' },
+        { id: 'q2', question: 'Recibes un link de "Uniswap" por DM ofreciendo un airdrop. ¿Qué haces?', options: [{id:'a',text:'Conectar wallet rápido para no perder el airdrop'},{id:'b',text:'Ignorar, es 100% scam'},{id:'c',text:'Compartirlo con amigos'}], correctAnswer: 'b', explanation: 'Los protocolos NUNCA contactan por DM. Todo mensaje directo ofreciendo dinero es scam.' },
+        { id: 'q3', question: '¿Por qué usar una wallet separada para DeFi experimental?', options: [{id:'a',text:'Para organizar mejor'},{id:'b',text:'Porque si la comprometen, no pierdes tus holdings principales'},{id:'c',text:'No es necesario'}], correctAnswer: 'b', explanation: 'Aislar riesgo. Si firmas algo malicioso, solo pierdes lo que hay en esa wallet.' }
+      ]
+    }
+  },
   40: {
     id: 40,
     title: 'Ethereum Layer 2: Polygon y Arbitrum',
@@ -1397,8 +2063,120 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: { questions: [ { id: 'q1', question: '¿Qué heredan los Rollups de Ethereum L1?', options: [{id:'a',text:'Velocidad'},{id:'b',text:'Seguridad'},{id:'c',text:'Nada'}], correctAnswer: 'b', explanation: 'Los Rollups publican sus datos en L1, heredando su seguridad.' } ] }
   },
-  41: { id: 41, title: 'Solana y Ecosistemas Alternativos', level: 'Avanzado', number: '7 de 14', duration: '35 min', type: 'Ecosistemas', description: 'Blockchains monolíticas vs modulares. Proof of History y la velocidad de Solana.', sections: [ { type: 'intro', title: 'Alta Velocidad', content: 'Solana usa Proof of History (PoH) para ordenar transacciones antes de incluirlas en bloques, permitiendo miles de TPS y costos de fracción de centavo, ideal para trading de alta frecuencia y gaming.' } ], quiz: { questions: [ { id: 'q1', question: '¿Qué lenguaje usa Solana?', options: [{id:'a',text:'Solidity'},{id:'b',text:'Rust'},{id:'c',text:'Python'}], correctAnswer: 'b', explanation: 'Rust permite mayor rendimiento y seguridad de memoria.' } ] } },
-  42: { id: 42, title: 'Cross-Chain y Bridges', level: 'Avanzado', number: '8 de 14', duration: '37 min', type: 'Tutorial Avanzado', description: 'Moviendo activos entre cadenas. Riesgos de los puentes.', sections: [ { type: 'intro', title: 'El Eslabón Débil', content: 'Los Bridges suelen ser el punto más atacado. Funcionan bloqueando activos en la cadena A y emitiendo una versión "envuelta" (Wrapped) en la cadena B.' } ], quiz: { questions: [ { id: 'q1', question: '¿Qué es WBTC?', options: [{id:'a',text:'Bitcoin real'},{id:'b',text:'Un token en Ethereum respaldado 1:1 por Bitcoin'},{id:'c',text:'Una copia pirata'}], correctAnswer: 'b', explanation: 'Es Wrapped Bitcoin, permitiendo usar valor de BTC en DeFi de Ethereum.' } ] } },
+  41: {
+    id: 41,
+    title: 'Solana y Ecosistemas Alternativos',
+    level: 'Avanzado',
+    number: '7 de 14',
+    duration: '35 min',
+    type: 'Ecosistemas',
+    description: 'Blockchains monolíticas vs modulares. Proof of History y la velocidad de Solana.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'Más Allá de Ethereum',
+        content: 'Ethereum no es la única opción. Existen blockchains alternativas (L1s) con diferentes trade-offs. **Solana** prioriza velocidad, **Avalanche** subnets personalizables, **Cosmos** interoperabilidad. Conocerlas te abre oportunidades que no existen en ETH.',
+        highlight: { title: 'Concepto', text: 'Cada blockchain hace trade-offs entre descentralización, seguridad y escalabilidad. No hay "mejor" blockchain, solo diferentes herramientas para diferentes usos.' }
+      },
+      {
+        type: 'main',
+        title: 'Ecosistemas Principales',
+        content: 'Las alternativas más relevantes a Ethereum:',
+        features: [
+          { icon: Zap, title: 'Solana', text: 'Ultra rápida (65k TPS teóricas), fees de fracción de centavo. Usa Proof of History + Proof of Stake. Ideal para trading y gaming.' },
+          { icon: Layers, title: 'Avalanche', text: 'Subnets personalizables, compatibilidad EVM. 3 cadenas: X (activos), C (contratos), P (plataforma).' },
+          { icon: Network, title: 'Cosmos', text: 'Internet of Blockchains. Cada app puede tener su propia blockchain conectada via IBC protocol.' },
+          { icon: Globe, title: 'Polkadot', text: 'Parachains especializadas conectadas a una relay chain central. Governance on-chain avanzada.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Comparativa de Ecosistemas',
+        content: 'Características principales:',
+        table: [
+          { aspect: 'Solana', trad: 'Monolítica, Rust, ultra rápida', btc: 'Riesgo: outages históricos, centralización de validadores' },
+          { aspect: 'Avalanche', trad: 'Subnets, EVM compatible', btc: 'Flexible pero ecosistema más pequeño' },
+          { aspect: 'Cosmos', trad: 'IBC, chains soberanas', btc: 'Gran interoperabilidad, fragmentación de liquidez' },
+          { aspect: 'Ethereum', trad: 'La más descentralizada', btc: 'Referencia de seguridad, pero más cara y lenta' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Consideraciones Prácticas',
+        items: [
+          'Cada ecosistema tiene su propia wallet (Phantom para Solana, Keplr para Cosmos)',
+          'Los tokens NO son intercambiables directamente entre chains',
+          'La liquidez está fragmentada - más oportunidades pero más riesgo',
+          'Aprende un ecosistema bien antes de saltar a otro',
+          'Diversificar entre ecosistemas es una forma de hedge'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Qué lenguaje usa Solana?', options: [{id:'a',text:'Solidity'},{id:'b',text:'Rust'},{id:'c',text:'Python'}], correctAnswer: 'b', explanation: 'Rust permite mayor rendimiento y seguridad de memoria que Solidity.' },
+        { id: 'q2', question: '¿Qué es el protocolo IBC de Cosmos?', options: [{id:'a',text:'Un exchange'},{id:'b',text:'Protocolo para comunicar diferentes blockchains'},{id:'c',text:'Una criptomoneda'}], correctAnswer: 'b', explanation: 'Inter-Blockchain Communication permite transferir tokens y datos entre chains del ecosistema Cosmos.' },
+        { id: 'q3', question: '¿Cuál es el principal trade-off de Solana?', options: [{id:'a',text:'Es muy cara'},{id:'b',text:'Velocidad a costa de descentralización'},{id:'c',text:'No tiene smart contracts'}], correctAnswer: 'b', explanation: 'Solana es muy rápida pero tiene menos validadores y ha sufrido outages, lo que indica menor descentralización.' }
+      ]
+    }
+  },
+  42: {
+    id: 42,
+    title: 'Cross-Chain y Bridges',
+    level: 'Avanzado',
+    number: '8 de 14',
+    duration: '37 min',
+    type: 'Tutorial Avanzado',
+    description: 'Moviendo activos entre cadenas. Riesgos de los puentes.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Eslabón Débil',
+        content: 'Los bridges conectan diferentes blockchains, pero son **el punto más vulnerable** del ecosistema. Más de $2 billones han sido robados de bridges. Funcionan bloqueando activos en la cadena A y emitiendo una versión "envuelta" (Wrapped) en la cadena B.',
+        highlight: { title: 'Advertencia', text: 'Los bridges son targets de alto valor para hackers. Wormhole ($320M), Ronin ($625M), Nomad ($190M) - todos fueron explotados.' }
+      },
+      {
+        type: 'main',
+        title: 'Tipos de Bridges',
+        content: 'No todos los bridges funcionan igual:',
+        features: [
+          { icon: Lock, title: 'Lock & Mint', text: 'Bloquea tokens originales en cadena A, emite versión wrapped en cadena B. El más común pero centralizado.' },
+          { icon: RefreshCw, title: 'Burn & Mint', text: 'Quema en cadena A, emite en cadena B. Usado en bridges nativos como IBC de Cosmos.' },
+          { icon: Layers, title: 'Liquidity Networks', text: 'Pools de liquidez en ambas cadenas (Hop, Stargate). Más descentralizado pero con slippage.' },
+          { icon: Zap, title: 'Atomic Swaps', text: 'Intercambio directo sin intermediarios usando HTLCs. El más seguro pero limitado.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Bridges Populares',
+        content: 'Opciones según tu caso de uso:',
+        table: [
+          { aspect: 'Ethereum ↔ L2s', trad: 'Bridge nativo de cada L2', btc: 'El más seguro pero 7 días de retiro en Optimistic Rollups' },
+          { aspect: 'Multi-chain', trad: 'LayerZero, Wormhole, Axelar', btc: 'Convenientes pero más riesgo de exploit' },
+          { aspect: 'Stables', trad: 'Circle CCTP (USDC nativo)', btc: 'USDC nativo en múltiples chains sin wrapping' },
+          { aspect: 'Agregadores', trad: 'LI.FI, Socket, Jumper', btc: 'Encuentran la mejor ruta automáticamente' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Seguridad en Bridges',
+        items: [
+          'Usa bridges oficiales/nativos cuando sea posible',
+          'Nunca bridges más de lo que puedas perder',
+          'Verifica que el bridge tenga auditorías y TVL significativo',
+          'Divide grandes cantidades en múltiples transacciones',
+          'Prefiere USDC nativo via CCTP sobre wrapped tokens'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Qué es WBTC?', options: [{id:'a',text:'Bitcoin real'},{id:'b',text:'Un token en Ethereum respaldado 1:1 por Bitcoin'},{id:'c',text:'Una copia pirata'}], correctAnswer: 'b', explanation: 'Es Wrapped Bitcoin, permitiendo usar valor de BTC en DeFi de Ethereum.' },
+        { id: 'q2', question: '¿Por qué los bridges son targets de hackers?', options: [{id:'a',text:'Son fáciles de usar'},{id:'b',text:'Tienen grandes cantidades de fondos bloqueados'},{id:'c',text:'No tienen código'}], correctAnswer: 'b', explanation: 'Los bridges custodian millones/billones en activos bloqueados, haciéndolos objetivos muy atractivos.' },
+        { id: 'q3', question: '¿Qué es más seguro para mover USDC entre chains?', options: [{id:'a',text:'Cualquier bridge random'},{id:'b',text:'Circle CCTP (USDC nativo)'},{id:'c',text:'Da igual'}], correctAnswer: 'b', explanation: 'CCTP de Circle emite USDC nativo en cada chain, eliminando el riesgo de wrapped tokens respaldados por bridges.' }
+      ]
+    }
+  },
   43: {
     id: 43,
     title: 'MEV y Trading Avanzado',
@@ -1417,8 +2195,120 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: { questions: [ { id: 'q1', question: '¿Qué hace un Sandwich Attack?', options: [{id:'a',text:'Te invita a comer'},{id:'b',text:'Manipula el precio comprando antes y vendiendo después de ti'},{id:'c',text:'Cancela tu transacción'}], correctAnswer: 'b', explanation: 'Extrae valor a costa de darte un peor precio de ejecución.' } ] }
   },
-  44: { id: 44, title: 'NFTs Más Allá del Arte', level: 'Avanzado', number: '10 de 14', duration: '38 min', type: 'Casos de Uso', description: 'Utility NFTs, Token Gating y Real World Assets (RWA).', sections: [ { type: 'main', title: 'Utilidad Real', content: 'Los NFTs son certificados de propiedad digital únicos. Usos: Entradas a eventos, identidad digital, títulos de propiedad inmobiliaria tokenizados (RWA) y membresías exclusivas.' } ], quiz: { questions: [ { id: 'q1', question: '¿Qué estándar usa Ethereum para NFTs únicos?', options: [{id:'a',text:'ERC-20'},{id:'b',text:'ERC-721'},{id:'c',text:'ERC-404'}], correctAnswer: 'b', explanation: 'ERC-721 es el estándar para Non-Fungible Tokens.' } ] } },
-  45: { id: 45, title: 'DAOs y Governance', level: 'Avanzado', number: '11 de 14', duration: '33 min', type: 'Governance', description: 'Organizaciones Autónomas Descentralizadas. El futuro de las empresas.', sections: [ { type: 'intro', title: 'Coordinación Global', content: 'Una DAO es una organización gestionada por código y propiedad de sus miembros. Las decisiones se toman mediante votaciones on-chain usando tokens de gobernanza.' } ], quiz: { questions: [ { id: 'q1', question: '¿Qué necesitas para votar en una DAO?', options: [{id:'a',text:'Ser empleado'},{id:'b',text:'Tener el Governance Token'},{id:'c',text:'Pagar una suscripción'}], correctAnswer: 'b', explanation: 'El poder de voto suele ser proporcional a la cantidad de tokens.' } ] } },
+  44: {
+    id: 44,
+    title: 'NFTs Más Allá del Arte',
+    level: 'Avanzado',
+    number: '10 de 14',
+    duration: '38 min',
+    type: 'Casos de Uso',
+    description: 'Utility NFTs, Token Gating y Real World Assets (RWA).',
+    sections: [
+      {
+        type: 'intro',
+        title: 'Más Que JPEGs',
+        content: 'Los NFTs no son solo arte digital especulativo. Son **certificados de propiedad únicos verificables en blockchain**. Esta tecnología permite propiedad digital de cualquier cosa: entradas, membresías, identidades, documentos legales, incluso propiedades inmobiliarias.',
+        highlight: { title: 'El Verdadero Valor', text: 'El arte fue solo la primera aplicación. El potencial real está en tokenizar activos del mundo real (RWA) y crear nuevos modelos de membresía y acceso.' }
+      },
+      {
+        type: 'main',
+        title: 'Casos de Uso Reales',
+        content: 'Aplicaciones prácticas más allá de la especulación:',
+        features: [
+          { icon: Key, title: 'Token Gating', text: 'Acceso exclusivo a contenido, comunidades o productos solo para holders de ciertos NFTs.' },
+          { icon: Briefcase, title: 'Real World Assets (RWA)', text: 'Propiedades inmobiliarias, bonos, acciones tokenizadas. Propiedad fraccionada de activos caros.' },
+          { icon: Users, title: 'Identidad Digital', text: 'ENS domains, credenciales verificables, reputación on-chain. Tu identidad portátil entre apps.' },
+          { icon: Gem, title: 'Membresías', text: 'NFTs como pase de acceso perpetuo. Puedes venderlo cuando quieras (vs suscripción tradicional).' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Estándares de NFT',
+        content: 'Diferentes estándares para diferentes usos:',
+        table: [
+          { aspect: 'ERC-721', trad: 'El estándar original', btc: 'Cada token es único. Ideal para arte, coleccionables.' },
+          { aspect: 'ERC-1155', trad: 'Multi-token standard', btc: 'Permite NFTs y fungibles en un contrato. Gaming, tickets.' },
+          { aspect: 'ERC-6551', trad: 'Token Bound Accounts', btc: 'NFTs que pueden tener su propia wallet. Inventarios de juegos.' },
+          { aspect: 'Soulbound (SBT)', trad: 'Non-transferable', btc: 'Credenciales, diplomas, reputación. No se pueden vender.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'El Futuro de los NFTs',
+        items: [
+          'RWA será un mercado de trillones (real estate, bonos, commodities)',
+          'Token gating reemplazará muchos modelos de suscripción',
+          'La identidad digital será fundamental en Web3',
+          'Los NFTs de gaming permitirán economías interoperables',
+          'Soulbound tokens revolucionarán credenciales y reputación'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Qué estándar usa Ethereum para NFTs únicos?', options: [{id:'a',text:'ERC-20'},{id:'b',text:'ERC-721'},{id:'c',text:'ERC-404'}], correctAnswer: 'b', explanation: 'ERC-721 es el estándar para Non-Fungible Tokens.' },
+        { id: 'q2', question: '¿Qué es Token Gating?', options: [{id:'a',text:'Poner candado a tu wallet'},{id:'b',text:'Restringir acceso a contenido solo para holders de NFTs específicos'},{id:'c',text:'Un tipo de trading'}], correctAnswer: 'b', explanation: 'Token Gating permite crear accesos exclusivos verificados por propiedad de NFTs.' },
+        { id: 'q3', question: '¿Qué son los Soulbound Tokens (SBTs)?', options: [{id:'a',text:'NFTs muy caros'},{id:'b',text:'NFTs no transferibles usados para credenciales'},{id:'c',text:'Tokens de videojuegos'}], correctAnswer: 'b', explanation: 'Los SBTs no se pueden vender ni transferir, ideales para diplomas, certificaciones y reputación.' }
+      ]
+    }
+  },
+  45: {
+    id: 45,
+    title: 'DAOs y Governance',
+    level: 'Avanzado',
+    number: '11 de 14',
+    duration: '33 min',
+    type: 'Governance',
+    description: 'Organizaciones Autónomas Descentralizadas. El futuro de las empresas.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Futuro de las Organizaciones',
+        content: 'Las DAOs (Decentralized Autonomous Organizations) son **organizaciones gobernadas por código y propiedad colectiva de sus miembros**. Sin CEO, sin junta directiva tradicional. Las decisiones se toman por votación on-chain, y las reglas están en smart contracts.',
+        highlight: { title: 'Revolución Organizacional', text: 'Imagina una empresa donde los usuarios son dueños y votan cada decisión importante. Eso es una DAO.' }
+      },
+      {
+        type: 'main',
+        title: 'Cómo Funcionan las DAOs',
+        content: 'Componentes esenciales de una DAO:',
+        features: [
+          { icon: Coins, title: 'Governance Tokens', text: 'Tokens que otorgan poder de voto. Más tokens = más influencia en decisiones.' },
+          { icon: BookOpen, title: 'Propuestas', text: 'Cualquier miembro puede crear propuestas. Se discuten en foros y luego van a votación.' },
+          { icon: CheckCircle, title: 'Votación On-Chain', text: 'Votos registrados en blockchain. Transparentes e inmutables. Plataformas: Snapshot, Tally.' },
+          { icon: Briefcase, title: 'Treasury', text: 'Fondos comunes controlados por smart contracts. Solo se gastan con aprobación de votación.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Tipos de DAOs',
+        content: 'Las DAOs se especializan en diferentes propósitos:',
+        table: [
+          { aspect: 'Protocol DAOs', trad: 'Gobiernan protocolos DeFi', btc: 'Uniswap, Aave, MakerDAO - votan fees, upgrades' },
+          { aspect: 'Investment DAOs', trad: 'Inversión colectiva', btc: 'The LAO, MetaCartel - pooling de capital para invertir' },
+          { aspect: 'Social DAOs', trad: 'Comunidades con membresía', btc: 'Friends With Benefits - networking, eventos exclusivos' },
+          { aspect: 'Service DAOs', trad: 'Freelancers organizados', btc: 'Raid Guild - equipos descentralizados de desarrollo' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Participar en DAOs',
+        items: [
+          'Compra governance tokens para tener voz y voto',
+          'Participa en foros de discusión (Discord, Discourse)',
+          'Delega tu voto si no tienes tiempo de investigar cada propuesta',
+          'Las DAOs activas pagan contribuidores por trabajo',
+          'Cuidado con DAOs sin actividad real - pueden ser cash grabs'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Qué necesitas para votar en una DAO?', options: [{id:'a',text:'Ser empleado'},{id:'b',text:'Tener el Governance Token'},{id:'c',text:'Pagar una suscripción'}], correctAnswer: 'b', explanation: 'El poder de voto suele ser proporcional a la cantidad de tokens.' },
+        { id: 'q2', question: '¿Qué es el Treasury de una DAO?', options: [{id:'a',text:'El CEO'},{id:'b',text:'Fondos colectivos controlados por smart contracts'},{id:'c',text:'Una wallet personal'}], correctAnswer: 'b', explanation: 'El treasury contiene los fondos de la DAO y solo puede gastarse mediante propuestas aprobadas por votación.' },
+        { id: 'q3', question: '¿Qué es "delegación" en governance?', options: [{id:'a',text:'Vender tus tokens'},{id:'b',text:'Dar tu poder de voto a alguien más experto'},{id:'c',text:'Crear propuestas'}], correctAnswer: 'b', explanation: 'Puedes delegar tu voto a personas de confianza que investiguen y voten en tu nombre.' }
+      ]
+    }
+  },
   46: {
     id: 46,
     title: 'GameFi y Play-to-Earn',
@@ -1437,7 +2327,63 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: { questions: [ { id: 'q1', question: '¿Qué diferencia a GameFi de juegos normales?', options: [{id:'a',text:'Mejores gráficos'},{id:'b',text:'Propiedad real de activos (NFTs) y ganancias'},{id:'c',text:'Son más fáciles'}], correctAnswer: 'b', explanation: 'La propiedad digital y la posibilidad de monetizar el tiempo son fundamentales.' } ] }
   },
-  47: { id: 47, title: 'Web3 Social y Identity', level: 'Avanzado', number: '13 de 14', duration: '30 min', type: 'Identity', description: 'Ser dueño de tu grafo social. ENS, Lens Protocol y Farcaster.', sections: [ { type: 'intro', title: 'Tu Identidad es Tuya', content: 'En Web2 (Twitter/FB), la plataforma es dueña de tus datos. En Web3, tú eres dueño de tu perfil y seguidores, y puedes llevarlos de una app a otra.' } ], quiz: { questions: [ { id: 'q1', question: '¿Qué es ENS?', options: [{id:'a',text:'Un banco'},{id:'b',text:'Ethereum Name Service (.eth)'},{id:'c',text:'Una moneda'}], correctAnswer: 'b', explanation: 'Convierte direcciones complejas (0x...) en nombres legibles.' } ] } },
+  47: {
+    id: 47,
+    title: 'Web3 Social y Identity',
+    level: 'Avanzado',
+    number: '13 de 14',
+    duration: '30 min',
+    type: 'Identity',
+    description: 'Ser dueño de tu grafo social. ENS, Lens Protocol y Farcaster.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'Tu Identidad, Tus Reglas',
+        content: 'En Web2, las plataformas son dueñas de tu identidad y contenido. Si Twitter te banea, pierdes todo. En Web3, **tú eres dueño de tu perfil, seguidores y contenido**. Puedes llevarlo de una app a otra sin pedir permiso.',
+        highlight: { title: 'El Cambio de Paradigma', text: 'Imagina que tus seguidores de Twitter te siguen automáticamente en Instagram, YouTube y cualquier red nueva. Eso es Web3 Social.' }
+      },
+      {
+        type: 'main',
+        title: 'Componentes de Identidad Web3',
+        content: 'Las piezas que forman tu identidad descentralizada:',
+        features: [
+          { icon: Globe, title: 'ENS (.eth)', text: 'Tu nombre legible en Ethereum. vitalik.eth en vez de 0x123...abc. Funciona como username universal.' },
+          { icon: Users, title: 'Lens Protocol', text: 'Red social descentralizada en Polygon. Tu perfil es un NFT. Tus seguidores te pertenecen.' },
+          { icon: Zap, title: 'Farcaster', text: 'Protocolo social suficientemente descentralizado. Clientes como Warpcast. Comunidad crypto-native activa.' },
+          { icon: Key, title: 'Sign-In with Ethereum', text: 'Login con tu wallet en vez de email/password. Un login para todas las apps Web3.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Web2 vs Web3 Social',
+        content: 'La diferencia fundamental:',
+        table: [
+          { aspect: 'Propiedad de datos', trad: 'Web2: La plataforma', btc: 'Web3: El usuario' },
+          { aspect: 'Portabilidad', trad: 'Web2: Encerrado en cada app', btc: 'Web3: Llevas seguidores entre apps' },
+          { aspect: 'Censura', trad: 'Web2: Te pueden banear', btc: 'Web3: Tu contenido está en blockchain' },
+          { aspect: 'Monetización', trad: 'Web2: La plataforma se queda con todo', btc: 'Web3: Monetización directa creator→fan' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Cómo Empezar',
+        items: [
+          'Registra tu nombre ENS (nombretuyo.eth) como tu identidad base',
+          'Crea un perfil en Lens (lens.xyz) o Farcaster (warpcast.com)',
+          'Usa Sign-In with Ethereum en apps que lo soporten',
+          'Tu reputación on-chain (NFTs, participación en DAOs) es tu CV Web3',
+          'La identidad Web3 será crucial para trabajo, acceso y credibilidad'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Qué es ENS?', options: [{id:'a',text:'Un banco'},{id:'b',text:'Ethereum Name Service (.eth)'},{id:'c',text:'Una moneda'}], correctAnswer: 'b', explanation: 'Convierte direcciones complejas (0x...) en nombres legibles.' },
+        { id: 'q2', question: '¿Qué ventaja tiene Web3 Social sobre Twitter?', options: [{id:'a',text:'Es más rápido'},{id:'b',text:'Eres dueño de tu perfil y seguidores'},{id:'c',text:'Tiene más usuarios'}], correctAnswer: 'b', explanation: 'En Web3, tu grafo social te pertenece y puedes llevarlo a cualquier aplicación.' },
+        { id: 'q3', question: '¿Qué es "Sign-In with Ethereum"?', options: [{id:'a',text:'Una criptomoneda'},{id:'b',text:'Login usando tu wallet en vez de email/password'},{id:'c',text:'Un exchange'}], correctAnswer: 'b', explanation: 'Permite autenticarte con tu wallet, creando un login universal para todas las apps Web3.' }
+      ]
+    }
+  },
   48: {
     id: 48,
     title: 'El Futuro de Web3',
