@@ -4,7 +4,7 @@ import { Users, BookOpen, Award, Shield, Zap } from 'lucide-react';
 import ParticlesBackground from './ParticlesBackground';
 
 // Constants moved outside component to prevent re-creation
-const WORDS = ["Bitcoin", "Ethereum", "Trading", "Blockchain", "DeFi"];
+const WORDS = ["Bitcoin", "Solana", "Trading", "Web3", "Cripto"];
 const TYPING_SPEED = 100;
 const DELETING_SPEED = 50;
 const PAUSE_TIME = 2000;
