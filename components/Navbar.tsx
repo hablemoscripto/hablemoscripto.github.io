@@ -118,8 +118,13 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 bg-slate-950 z-40 transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden pt-24 px-6`}>
-        <ul className="flex flex-col gap-6 text-center">
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-[100] md:hidden"
+          style={{ backgroundColor: '#020617' }}
+        >
+          <div className="flex flex-col items-center justify-center h-full px-6 pt-20">
+          <ul className="flex flex-col gap-8 text-center w-full max-w-sm">
           {navLinks.map((link) => (
             <li key={link.name}>
               <a 
@@ -167,7 +172,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
             )}
           </li>
         </ul>
-      </div>
+          </div>
+        </div>
+      )}
 
       {/* Auth Modal */}
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
