@@ -1,21 +1,34 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import Features from './Features';
 import Courses from './Courses';
 import Footer from './Footer';
+import AuthModal from './AuthModal';
+import { useAuth } from '../contexts/AuthContext';
 
 interface LandingPageProps {
   onNavigate: () => void;
 }
 
 const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const { user } = useAuth();
+
+  const handleNavigateToEducation = () => {
+    if (user) {
+      onNavigate();
+    } else {
+      setIsAuthModalOpen(true);
+    }
+  };
+
   return (
     <>
-      <Navbar onNavigateEducation={onNavigate} />
+      <Navbar onNavigateEducation={handleNavigateToEducation} />
       <main>
-        <Hero onStartLearning={onNavigate} />
+        <Hero onStartLearning={handleNavigateToEducation} />
         <Features />
         <Courses />
         {/* Resources / Newsletter Section */}
@@ -38,7 +51,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
           </div>
         </section>
       </main>
-      <Footer onNavigateEducation={onNavigate} />
+      <Footer onNavigateEducation={handleNavigateToEducation} />
+
+      {/* Auth Modal for protected navigation */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onLoginSuccess={onNavigate}
+      />
     </>
   );
 };

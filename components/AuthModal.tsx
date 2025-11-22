@@ -5,9 +5,10 @@ import { useAuth } from '../contexts/AuthContext';
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onLoginSuccess?: () => void;
 }
 
-export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
+export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModalProps) {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -47,6 +48,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           }
         } else {
           onClose();
+          if (onLoginSuccess) {
+            onLoginSuccess();
+          }
         }
       } else {
         const { error } = await signUp(email, password);
