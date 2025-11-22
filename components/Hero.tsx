@@ -72,14 +72,6 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
       <div className="container max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
             
-            {/* Badge */}
-            <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 mb-8">
-                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-bold uppercase tracking-widest backdrop-blur-md shadow-[0_0_15px_rgba(255,193,7,0.1)] hover:bg-brand-500/20 transition-colors">
-                    <Zap size={14} className="text-brand-500" />
-                    <span>Educación 100% Gratuita</span>
-                  </div>
-            </div>
-
             {/* Main Heading */}
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-white leading-[1.1] tracking-tight mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
               De Cero a Experto en <br />
