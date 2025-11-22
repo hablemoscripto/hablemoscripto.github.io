@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Bitcoin, ExternalLink } from 'lucide-react';
+import { Menu, X, Bitcoin, ExternalLink, User, LogOut } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import AuthModal from './AuthModal';
 
 interface NavbarProps {
   onNavigateEducation: () => void;
@@ -9,6 +11,8 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,15 +73,39 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
             ))}
           </ul>
           
-          <a 
-            href="https://discord.gg/W8haa7dDV3" 
-            target="_blank" 
+          <a
+            href="https://discord.gg/W8haa7dDV3"
+            target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full font-medium text-sm transition-all transform hover:scale-105 shadow-lg shadow-indigo-500/25"
           >
             <ExternalLink size={16} />
             Unirse a Discord
           </a>
+
+          {/* Auth Button */}
+          {user ? (
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-slate-300 hidden lg:block">
+                {user.email?.split('@')[0]}
+              </span>
+              <button
+                onClick={() => signOut()}
+                className="flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-full font-medium text-sm transition-all"
+              >
+                <LogOut size={16} />
+                Salir
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setIsAuthModalOpen(true)}
+              className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-5 py-2 rounded-full font-medium text-sm transition-all transform hover:scale-105 shadow-lg shadow-orange-500/25"
+            >
+              <User size={16} />
+              Iniciar Sesion
+            </button>
+          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -107,16 +135,42 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
             </li>
           ))}
           <li className="mt-8">
-            <a 
-              href="https://discord.gg/W8haa7dDV3" 
+            <a
+              href="https://discord.gg/W8haa7dDV3"
               target="_blank"
               className="inline-block w-full bg-brand-500 text-slate-900 font-bold py-4 rounded-xl"
             >
               Unirse a la Comunidad
             </a>
           </li>
+          <li className="mt-4">
+            {user ? (
+              <button
+                onClick={() => {
+                  signOut();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="inline-block w-full bg-slate-700 text-white font-bold py-4 rounded-xl"
+              >
+                Cerrar Sesion ({user.email?.split('@')[0]})
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setIsAuthModalOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="inline-block w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold py-4 rounded-xl"
+              >
+                Iniciar Sesion
+              </button>
+            )}
+          </li>
         </ul>
       </div>
+
+      {/* Auth Modal */}
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </nav>
   );
 };

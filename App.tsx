@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import LandingPage from './components/LandingPage';
 import EducationPage from './components/EducationPage';
 import ChatWidget from './components/ChatWidget';
+import { AuthProvider } from './contexts/AuthContext';
 
 export type ViewState = 'landing' | 'education';
 
@@ -38,15 +39,17 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
-      {currentView === 'landing' ? (
-        <LandingPage onNavigate={() => navigateTo('education')} />
-      ) : (
-        <EducationPage onNavigateHome={() => navigateTo('landing')} />
-      )}
-      
-      <ChatWidget />
-    </div>
+    <AuthProvider>
+      <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
+        {currentView === 'landing' ? (
+          <LandingPage onNavigate={() => navigateTo('education')} />
+        ) : (
+          <EducationPage onNavigateHome={() => navigateTo('landing')} />
+        )}
+
+        <ChatWidget />
+      </div>
+    </AuthProvider>
   );
 }
 
