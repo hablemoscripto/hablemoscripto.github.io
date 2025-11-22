@@ -117,64 +117,93 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-[100] md:hidden"
-          style={{ backgroundColor: '#020617' }}
-        >
-          <div className="flex flex-col items-center justify-center h-full px-6 pt-20">
-          <ul className="flex flex-col gap-8 text-center w-full max-w-sm">
-          {navLinks.map((link) => (
-            <li key={link.name}>
-              <a 
-                href={link.href}
-                onClick={(e) => {
+      {/* Mobile Menu Overlay - Full screen takeover */}
+      <div
+        className={`fixed top-0 left-0 w-full h-full md:hidden transition-all duration-300 ${
+          isMobileMenuOpen
+            ? 'opacity-100 visible'
+            : 'opacity-0 invisible pointer-events-none'
+        }`}
+        style={{
+          backgroundColor: '#020617',
+          zIndex: 9999,
+        }}
+      >
+        {/* Close button in menu */}
+        <div className="absolute top-5 right-6">
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-slate-300 hover:text-white p-2"
+          >
+            <X size={28} />
+          </button>
+        </div>
+
+        {/* Logo in menu */}
+        <div className="absolute top-5 left-6">
+          <a href="#home" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
+            <div className="bg-gradient-to-br from-brand-400 to-brand-600 p-2 rounded-lg">
+              <Bitcoin className="text-white h-6 w-6" />
+            </div>
+            <span className="text-xl font-heading font-bold text-white tracking-tight">
+              Hablemos<span className="text-brand-500">Cripto</span>
+            </span>
+          </a>
+        </div>
+
+        {/* Menu content centered */}
+        <div className="flex flex-col items-center justify-center h-full px-8">
+          <ul className="flex flex-col gap-6 text-center w-full max-w-xs">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <a
+                  href={link.href}
+                  onClick={(e) => {
                     if (link.action) link.action(e);
                     else setIsMobileMenuOpen(false);
-                }}
-                className="text-2xl font-heading font-medium text-white hover:text-brand-500"
+                  }}
+                  className="text-2xl font-heading font-medium text-white hover:text-brand-500 block py-2"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+            <li className="mt-6">
+              <a
+                href="https://discord.gg/W8haa7dDV3"
+                target="_blank"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block w-full bg-brand-500 text-slate-900 font-bold py-4 rounded-xl"
               >
-                {link.name}
+                Unirse a la Comunidad
               </a>
             </li>
-          ))}
-          <li className="mt-8">
-            <a
-              href="https://discord.gg/W8haa7dDV3"
-              target="_blank"
-              className="inline-block w-full bg-brand-500 text-slate-900 font-bold py-4 rounded-xl"
-            >
-              Unirse a la Comunidad
-            </a>
-          </li>
-          <li className="mt-4">
-            {user ? (
-              <button
-                onClick={() => {
-                  signOut();
-                  setIsMobileMenuOpen(false);
-                }}
-                className="inline-block w-full bg-slate-700 text-white font-bold py-4 rounded-xl"
-              >
-                Cerrar Sesion ({user.email?.split('@')[0]})
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  setIsAuthModalOpen(true);
-                  setIsMobileMenuOpen(false);
-                }}
-                className="inline-block w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold py-4 rounded-xl"
-              >
-                Iniciar Sesion
-              </button>
-            )}
-          </li>
-        </ul>
-          </div>
+            <li className="mt-3">
+              {user ? (
+                <button
+                  onClick={() => {
+                    signOut();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full bg-slate-800 text-white font-bold py-4 rounded-xl border border-slate-700"
+                >
+                  Cerrar Sesion ({user.email?.split('@')[0]})
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsAuthModalOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold py-4 rounded-xl"
+                >
+                  Iniciar Sesion
+                </button>
+              )}
+            </li>
+          </ul>
         </div>
-      )}
+      </div>
 
       {/* Auth Modal */}
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
