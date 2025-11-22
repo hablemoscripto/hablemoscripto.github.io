@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { PlayCircle, CheckCircle, ArrowLeft, Lock, AlertCircle, Award, ArrowRight, BookOpen, Clock, Video } from 'lucide-react';
 import { LESSONS_DATA } from '../data/courseData';
+import { useProgress } from '../contexts/ProgressContext';
 
 interface LessonViewProps {
   lessonId: number;
@@ -15,6 +16,7 @@ const LessonView: React.FC<LessonViewProps> = ({ lessonId, completedLessons, onC
   // Fetch data dynamically based on lessonId
   const data = LESSONS_DATA[lessonId];
   const isCompleted = completedLessons.includes(lessonId);
+  const { markLessonComplete, isLessonCompleted } = useProgress();
   
   const [scrollProgress, setScrollProgress] = useState(0);
   const [quizState, setQuizState] = useState<{ [key: string]: string }>({});
@@ -74,6 +76,8 @@ const LessonView: React.FC<LessonViewProps> = ({ lessonId, completedLessons, onC
     // Auto complete if passed
     if (score >= Math.ceil(questions.length * 0.7)) {
         onComplete(lessonId);
+        // Save progress to Supabase
+        markLessonComplete(lessonId, score);
     }
   };
 

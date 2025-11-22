@@ -4,6 +4,7 @@ import LandingPage from './components/LandingPage';
 import EducationPage from './components/EducationPage';
 import ChatWidget from './components/ChatWidget';
 import { AuthProvider } from './contexts/AuthContext';
+import { ProgressProvider } from './contexts/ProgressContext';
 
 export type ViewState = 'landing' | 'education';
 
@@ -40,15 +41,17 @@ function App() {
 
   return (
     <AuthProvider>
-      <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
-        {currentView === 'landing' ? (
-          <LandingPage onNavigate={() => navigateTo('education')} />
-        ) : (
-          <EducationPage onNavigateHome={() => navigateTo('landing')} />
-        )}
+      <ProgressProvider>
+        <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
+          {currentView === 'landing' ? (
+            <LandingPage onNavigate={() => navigateTo('education')} />
+          ) : (
+            <EducationPage onNavigateHome={() => navigateTo('landing')} />
+          )}
 
-        <ChatWidget />
-      </div>
+          <ChatWidget />
+        </div>
+      </ProgressProvider>
     </AuthProvider>
   );
 }
