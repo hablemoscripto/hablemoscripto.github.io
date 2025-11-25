@@ -1,18 +1,20 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Bitcoin, ExternalLink, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 interface NavbarProps {
-  onNavigateEducation: () => void;
+  onNavigateEducation?: () => void; // Optional now, kept for backward compat if needed
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
+const Navbar: React.FC<NavbarProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { user, signOut } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,30 +24,38 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleEducationClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleScrollToSection = (sectionId: string) => {
     setIsMobileMenuOpen(false);
-    onNavigateEducation();
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const navLinks = [
-    { name: 'Inicio', href: '#home', action: null },
-    { name: 'Por Qué HC', href: '#about', action: null },
-    { name: 'Cursos', href: '#education', action: handleEducationClick },
-    { name: 'Recursos', href: '#resources', action: null },
+    { name: 'Inicio', action: () => handleScrollToSection('home') },
+    { name: 'Por Qué HC', action: () => handleScrollToSection('about') }, // Assuming 'about' section exists or will exist
+    { name: 'Cursos', path: '/education' },
+    { name: 'Recursos', action: () => handleScrollToSection('resources') },
   ];
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled || isMobileMenuOpen
-            ? 'bg-slate-950/90 backdrop-blur-md border-b border-white/10 shadow-lg py-3'
-            : 'bg-transparent py-5'
+          ? 'bg-slate-950/90 backdrop-blur-md border-b border-white/10 shadow-lg py-3'
+          : 'bg-transparent py-5'
           }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
-          <a href="#home" className="group flex items-center gap-2 z-50">
+          <Link to="/" className="group flex items-center gap-2 z-50">
             <div className="bg-gradient-to-br from-brand-400 to-brand-600 p-2 rounded-lg group-hover:rotate-12 transition-transform duration-300">
               <Bitcoin className="text-white h-6 w-6" />
             </div>
@@ -54,21 +64,30 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
                 Hablemos<span className="text-brand-500">Cripto</span>
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             <ul className="flex gap-8">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={link.action ? link.action : undefined}
-                    className="text-sm font-medium text-slate-300 hover:text-brand-400 transition-colors relative group"
-                  >
-                    {link.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full"></span>
-                  </a>
+                  {link.path ? (
+                    <Link
+                      to={link.path}
+                      className="text-sm font-medium text-slate-300 hover:text-brand-400 transition-colors relative group"
+                    >
+                      {link.name}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full"></span>
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={link.action}
+                      className="text-sm font-medium text-slate-300 hover:text-brand-400 transition-colors relative group"
+                    >
+                      {link.name}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full"></span>
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
@@ -138,8 +157,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
           >
             {/* Header with logo and close */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
-              <a
-                href="#home"
+              <Link
+                to="/"
                 className="flex items-center gap-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -149,7 +168,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
                 <span className="text-lg font-heading font-bold text-white">
                   Hablemos<span className="text-brand-500">Cripto</span>
                 </span>
-              </a>
+              </Link>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-2 text-slate-400 hover:text-white"
@@ -163,16 +182,22 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateEducation }) => {
               <ul className="space-y-2">
                 {navLinks.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
-                      onClick={(e) => {
-                        if (link.action) link.action(e);
-                        else setIsMobileMenuOpen(false);
-                      }}
-                      className="block py-3 px-4 text-lg font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
-                    >
-                      {link.name}
-                    </a>
+                    {link.path ? (
+                      <Link
+                        to={link.path}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block py-3 px-4 text-lg font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                      >
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <button
+                        onClick={link.action}
+                        className="block w-full text-left py-3 px-4 text-lg font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                      >
+                        {link.name}
+                      </button>
+                    )}
                   </li>
                 ))}
               </ul>

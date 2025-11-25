@@ -1,58 +1,30 @@
-
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { AnimatePresence } from 'framer-motion';
 import LandingPage from './components/LandingPage';
 import EducationPage from './components/EducationPage';
-import ChatWidget from './components/ChatWidget';
+import LessonView from './components/LessonView';
+import LevelDetail from './components/LevelDetail';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProgressProvider } from './contexts/ProgressContext';
-
-export type ViewState = 'landing' | 'education';
+import ChatWidget from './components/ChatWidget';
+import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from './data/courseData';
 
 function App() {
-  const [currentView, setCurrentView] = useState<ViewState>('landing');
-
-  // Simple hash-based routing handler
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash === '#education') {
-        setCurrentView('education');
-      } else {
-        setCurrentView('landing');
-      }
-    };
-
-    // Check initial hash
-    handleHashChange();
-
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
-
-  const navigateTo = (view: ViewState) => {
-    if (view === 'education') {
-      window.location.hash = 'education';
-    } else {
-      window.location.hash = ''; // or home
-    }
-    setCurrentView(view);
-    window.scrollTo(0, 0);
-  };
-
   return (
-    <AuthProvider>
-      <ProgressProvider>
-        <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
-          {currentView === 'landing' ? (
-            <LandingPage onNavigate={() => navigateTo('education')} />
-          ) : (
-            <EducationPage onNavigateHome={() => navigateTo('landing')} />
-          )}
-
-          <ChatWidget />
-        </div>
-      </ProgressProvider>
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <ProgressProvider>
+          <Router>
+            <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
+              <AnimatedRoutes />
+              <ChatWidget />
+            </div>
+          </Router>
+        </ProgressProvider>
+      </AuthProvider>
+    </HelmetProvider>
   );
 }
 
