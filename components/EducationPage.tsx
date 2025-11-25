@@ -5,6 +5,7 @@ import LessonView from './LessonView';
 import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from '../data/courseData';
 import { BookOpen, Lock, Trophy, PlayCircle, CheckCircle, ChevronRight, Star, TrendingUp, Shield } from 'lucide-react';
 import { useProgress } from '../contexts/ProgressContext';
+import { useAuth } from '../contexts/AuthContext';
 
 interface EducationPageProps {
   onNavigateHome: () => void;
@@ -29,7 +30,8 @@ const EducationPage: React.FC<EducationPageProps> = ({ onNavigateHome }) => {
   const [currentLessonId, setCurrentLessonId] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
 
-  // Use Supabase progress context
+  // Use Supabase progress context and auth
+  const { user } = useAuth();
   const { progress: supabaseProgress, isLessonCompleted, loading: progressLoading } = useProgress();
 
   // Convert Supabase progress to local format for backward compatibility
@@ -41,13 +43,15 @@ const EducationPage: React.FC<EducationPageProps> = ({ onNavigateHome }) => {
 
   // Sync Supabase progress to local state
   useEffect(() => {
-    if (supabaseProgress.length > 0) {
+    // If user is logged in, ALWAYS use Supabase data (even if empty - new user with 0 lessons)
+    if (user) {
       const newProgress: ProgressData = {
         beginner: [],
         intermediate: [],
         advanced: []
       };
 
+      // Convert Supabase progress to local format
       supabaseProgress.forEach((p) => {
         if (p.completed) {
           if (p.lessonId <= 18) {
@@ -61,16 +65,16 @@ const EducationPage: React.FC<EducationPageProps> = ({ onNavigateHome }) => {
       });
 
       setProgress(newProgress);
-      // Also update localStorage for offline/guest use
+      // Sync to localStorage as backup
       localStorage.setItem('hablemos-progress', JSON.stringify(newProgress));
     } else {
-      // Fallback to localStorage if no Supabase progress
+      // Only use localStorage if user is NOT logged in (guest mode)
       const savedProgress = localStorage.getItem('hablemos-progress');
       if (savedProgress) {
         setProgress(JSON.parse(savedProgress));
       }
     }
-  }, [supabaseProgress]);
+  }, [user, supabaseProgress]);
 
   const getLevelProgress = (level: keyof typeof TOTAL_LESSONS) => {
     const completed = progress[level].length;
