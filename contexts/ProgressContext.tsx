@@ -126,9 +126,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     return progress.filter((p) => p.completed).length;
   };
 
-  // Total lessons across all levels (adjust this number based on your courseData)
+  // Total lessons across all levels: Beginner (18) + Intermediate (16) + Advanced (14) = 48
   const getTotalLessons = (): number => {
-    return 50; // Update this to match your actual total lessons
+    return 48;
   };
 
   const getProgressPercentage = (): number => {
