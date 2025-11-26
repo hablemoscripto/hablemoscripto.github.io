@@ -70,36 +70,53 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                             </h3>
 
                             <div className="grid gap-4">
-                                {module.lessons.map((lesson) => {
+                                {module.lessons.map((lesson, lessonIdx) => {
                                     const isCompleted = isLessonCompleted(lesson.id);
-                                    // Logic to lock lessons could go here (e.g. if previous not completed)
-                                    // For now, we leave them open or strictly sequential? 
-                                    // Let's keep them open for exploration but visual indication of order.
+
+                                    // Check if previous lesson is completed (sequential locking)
+                                    // First lesson (id === 1) is always unlocked
+                                    const isPreviousCompleted = lesson.id === 1 || isLessonCompleted(lesson.id - 1);
+                                    const isLocked = !isPreviousCompleted;
 
                                     return (
                                         <button
                                             key={lesson.id}
-                                            onClick={() => navigate(`/education/lesson/${lesson.id}`)}
-                                            className="group flex items-center gap-4 p-4 bg-slate-900/50 hover:bg-slate-900 border border-slate-800 hover:border-brand-500/30 rounded-xl transition-all text-left"
+                                            onClick={() => !isLocked && navigate(`/education/lesson/${lesson.id}`)}
+                                            disabled={isLocked}
+                                            className={`group flex items-center gap-4 p-4 bg-slate-900/50 border border-slate-800 rounded-xl transition-all text-left ${
+                                                isLocked
+                                                    ? 'opacity-50 cursor-not-allowed'
+                                                    : 'hover:bg-slate-900 hover:border-brand-500/30'
+                                            }`}
                                         >
-                                            <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-colors ${isCompleted
+                                            <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                                                isCompleted
                                                     ? 'bg-green-500/10 text-green-500'
+                                                    : isLocked
+                                                    ? 'bg-slate-800 text-slate-600'
                                                     : 'bg-slate-800 text-slate-400 group-hover:bg-brand-500/10 group-hover:text-brand-500'
                                                 }`}>
-                                                {isCompleted ? <CheckCircle size={20} /> : <PlayCircle size={20} />}
+                                                {isCompleted ? <CheckCircle size={20} /> : isLocked ? <Lock size={20} /> : <PlayCircle size={20} />}
                                             </div>
 
                                             <div className="flex-1">
-                                                <h4 className={`font-bold mb-1 transition-colors ${isCompleted ? 'text-slate-300' : 'text-white group-hover:text-brand-400'}`}>
+                                                <h4 className={`font-bold mb-1 transition-colors ${
+                                                    isCompleted
+                                                        ? 'text-slate-300'
+                                                        : isLocked
+                                                        ? 'text-slate-600'
+                                                        : 'text-white group-hover:text-brand-400'
+                                                }`}>
                                                     {lesson.title}
                                                 </h4>
-                                                <div className="flex items-center gap-4 text-xs text-slate-500">
+                                                <div className={`flex items-center gap-4 text-xs ${isLocked ? 'text-slate-700' : 'text-slate-500'}`}>
                                                     <span className="flex items-center gap-1"><Clock size={12} /> {lesson.duration}</span>
                                                     <span>Lección {lesson.id}</span>
+                                                    {isLocked && <span className="flex items-center gap-1 text-slate-600"><Lock size={12} /> Bloqueada</span>}
                                                 </div>
                                             </div>
 
-                                            <div className="opacity-0 group-hover:opacity-100 transition-opacity text-brand-500">
+                                            <div className={`transition-opacity ${isLocked ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'} text-brand-500`}>
                                                 <PlayCircle size={24} />
                                             </div>
                                         </button>
