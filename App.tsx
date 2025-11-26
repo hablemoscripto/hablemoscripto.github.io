@@ -11,6 +11,22 @@ import { ProgressProvider } from './contexts/ProgressContext';
 import ChatWidget from './components/ChatWidget';
 import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from './data/courseData';
 
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/education" element={<EducationPage />} />
+        <Route path="/education/lesson/:lessonId" element={<LessonView />} />
+        <Route path="/education/level/:levelId" element={<LevelDetail />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
+
 function App() {
   return (
     <HelmetProvider>
