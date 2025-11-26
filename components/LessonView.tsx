@@ -146,17 +146,17 @@ const LessonView: React.FC = () => {
 
                         {/* Content Sections */}
                         <div className="prose prose-invert prose-lg max-w-none">
-                            {lesson.content.map((section, idx) => (
+                            {lesson.sections.map((section, idx) => (
                                 <div key={idx} className="mb-8">
                                     {section.type === 'intro' && (
                                         <div className="text-lg text-slate-300 leading-relaxed font-medium border-l-4 border-brand-500 pl-4">
-                                            <ReactMarkdown>{section.text}</ReactMarkdown>
+                                            <ReactMarkdown>{section.content}</ReactMarkdown>
                                         </div>
                                     )}
 
                                     {section.type === 'main' && (
                                         <div className="text-slate-300 leading-relaxed">
-                                            <ReactMarkdown>{section.text}</ReactMarkdown>
+                                            <ReactMarkdown>{section.content}</ReactMarkdown>
                                         </div>
                                     )}
 
