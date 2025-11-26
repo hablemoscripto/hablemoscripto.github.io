@@ -19,8 +19,10 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<LandingPage />} />
         <Route path="/education" element={<EducationPage />} />
+        <Route path="/education/beginner" element={<LevelDetail levelData={BEGINNER_LEVEL} />} />
+        <Route path="/education/intermediate" element={<LevelDetail levelData={INTERMEDIATE_LEVEL} />} />
+        <Route path="/education/advanced" element={<LevelDetail levelData={ADVANCED_LEVEL} />} />
         <Route path="/education/lesson/:lessonId" element={<LessonView />} />
-        <Route path="/education/level/:levelId" element={<LevelDetail />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AnimatePresence>
