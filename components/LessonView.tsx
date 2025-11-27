@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, Share2, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, Award, ArrowRight, ArrowLeft } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, Award, ArrowRight, ArrowLeft } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { LESSONS_DATA } from '../data/courseData';
 import { useProgress } from '../contexts/ProgressContext';
@@ -98,17 +98,12 @@ const LessonView: React.FC = () => {
                             {id}. {lesson.title}
                         </span>
 
-                        <div className="flex items-center gap-2">
-                            {isCompleted && (
-                                <span className="flex items-center gap-1 text-green-500 text-sm font-medium mr-2">
-                                    <CheckCircle size={16} />
-                                    <span className="hidden sm:inline">Completado</span>
-                                </span>
-                            )}
-                            <button className="p-2 text-slate-400 hover:text-brand-500 transition-colors">
-                                <Share2 size={20} />
-                            </button>
-                        </div>
+                        {isCompleted && (
+                            <span className="flex items-center gap-1 text-green-500 text-sm font-medium">
+                                <CheckCircle size={16} />
+                                <span className="hidden sm:inline">Completado</span>
+                            </span>
+                        )}
                     </div>
                 </div>
 
