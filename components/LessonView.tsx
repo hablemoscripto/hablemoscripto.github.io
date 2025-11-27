@@ -208,7 +208,13 @@ const LessonView: React.FC = () => {
                             ) : (
                                 <>
                                     <Quiz
-                                        questions={lesson.quiz || []}
+                                        questions={lesson.quiz?.questions?.map((q: any) => ({
+                                            id: q.id,
+                                            question: q.question,
+                                            options: q.options.map((opt: any) => opt.text),
+                                            correctAnswer: q.options.findIndex((opt: any) => opt.id === q.correctAnswer),
+                                            explanation: q.explanation
+                                        })) || []}
                                         onComplete={handleQuizComplete}
                                     />
 
