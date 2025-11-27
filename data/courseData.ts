@@ -2,7 +2,7 @@ import {
   Shield, BookOpen, Rocket, Users, Eye, Lock, Coins, BarChart3, Search, Briefcase, Layers, Gem,
   Zap, Globe, Cpu, Key, Smartphone, AlertTriangle, RefreshCw, Link, Target, MousePointer,
   CheckCircle, ArrowRight, Clock, TrendingUp, Activity, PieChart, Scale, Network, Server,
-  Banknote, Landmark, TrendingDown, Percent, Wallet
+  Banknote, Landmark, TrendingDown, Percent, Wallet, Anchor, Scissors
 } from 'lucide-react';
 
 export interface Lesson {
