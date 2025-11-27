@@ -10,7 +10,7 @@ import Quiz from './education/Quiz';
 const LessonView: React.FC = () => {
     const { lessonId } = useParams<{ lessonId: string }>();
     const navigate = useNavigate();
-    const { isLessonCompleted, completeLesson } = useProgress();
+    const { isLessonCompleted, markLessonComplete } = useProgress();
 
     const id = parseInt(lessonId || '1');
     const lesson = LESSONS_DATA[id];
@@ -58,8 +58,8 @@ const LessonView: React.FC = () => {
     const nextLessonId = id + 1;
     const hasNextLesson = !!LESSONS_DATA[nextLessonId];
 
-    const handleQuizComplete = (score: number) => {
-        completeLesson(id);
+    const handleQuizComplete = async (score: number) => {
+        await markLessonComplete(id, score);
         setQuizPassed(true);
     };
 
