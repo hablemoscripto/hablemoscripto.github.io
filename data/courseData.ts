@@ -36,53 +36,46 @@ export interface LevelData {
 export const BEGINNER_LEVEL: LevelData = {
   id: 'beginner',
   title: 'Nivel Principiante',
-  subtitle: 'Fundamentos esenciales del mundo cripto',
-  description: 'Construye una base sólida de conocimiento sobre Bitcoin, blockchain y el ecosistema cripto. Aprende los conceptos fundamentales que necesitas para navegar este mundo con confianza.',
+  subtitle: 'Entiende el dinero y tu primera wallet',
+  description: 'Olvida lo que sabes sobre el dinero. Aprende por qué la inflación te empobrece, cómo Bitcoin arregla la reserva de valor y cómo Solana democratiza las finanzas.',
   stats: {
-    lessons: 18,
-    duration: '~6h'
+    lessons: 20, // Increased count
+    duration: '~7h'
   },
   modules: [
     {
       id: 1,
-      title: 'Fundamentos',
-      description: 'Comprende qué son las criptomonedas y cómo funcionan',
-      icon: BookOpen,
+      title: 'El Dinero Está Roto', // NEW MODULE
+      description: 'La historia oculta de la banca, la inflación y la impresión de dinero',
+      icon: Banknote, // You might need to import 'Banknote' or 'Landmark' from lucide-react
       lessons: [
-        { id: 1, title: '¿Qué es Bitcoin?', description: 'Introducción al primer sistema de dinero digital.', duration: '15 min', type: 'Video + Texto' },
-        { id: 2, title: '¿Qué es Blockchain?', description: 'La tecnología detrás de todo.', duration: '20 min', type: 'Video + Texto' },
-        { id: 3, title: 'Minería y Validación', description: 'Cómo se crean los bitcoins.', duration: '18 min', type: 'Video + Texto' },
-        { id: 4, title: 'Descentralización', description: 'Por qué importa que nadie lo controle.', duration: '12 min', type: 'Video + Texto' },
-        { id: 5, title: 'Ventajas y Desventajas', description: 'Análisis objetivo.', duration: '16 min', type: 'Video + Texto' },
-        { id: 6, title: 'Historia y Evolución', description: 'De 2009 a la actualidad.', duration: '22 min', type: 'Video + Texto' },
+        { id: 1, title: 'Breve Historia del Dinero', description: 'Del trueque al patrón oro y al dinero Fiat.', duration: '15 min', type: 'Video + Historia' },
+        { id: 2, title: 'La Trampa de la Inflación', description: 'Cómo la impresión de dinero roba tu tiempo y trabajo.', duration: '20 min', type: 'Video + Gráficos' },
+        { id: 3, title: 'El Efecto Cantillon', description: '¿Quién se beneficia realmente cuando imprimen billetes?', duration: '15 min', type: 'Concepto Clave' },
+        { id: 4, title: 'Bitcoin: La Salida', description: 'La primera solución matemática a la corrupción monetaria.', duration: '18 min', type: 'Video + Texto' },
       ]
     },
     {
       id: 2,
-      title: 'Wallets y Seguridad',
-      description: 'Aprende a guardar y proteger tus criptomonedas',
-      icon: Shield,
+      title: 'Fundamentos Blockchain',
+      description: 'La tecnología detrás de la revolución',
+      icon: BookOpen,
       lessons: [
-        { id: 7, title: '¿Qué es una Wallet?', description: 'Tipos de billeteras digitales.', duration: '18 min', type: 'Video + Texto' },
-        { id: 8, title: 'Llaves Públicas y Privadas', description: 'Criptografía básica.', duration: '25 min', type: 'Video + Texto' },
-        { id: 9, title: 'Configurar tu Primera Wallet', description: 'Guía paso a paso.', duration: '30 min', type: 'Tutorial' },
-        { id: 10, title: 'Respaldo y Recuperación', description: 'Seed phrases y seguridad.', duration: '20 min', type: 'Video + Texto' },
-        { id: 11, title: 'Buenas Prácticas', description: 'Reglas de oro de seguridad.', duration: '22 min', type: 'Video + Texto' },
-        { id: 12, title: 'Evitar Estafas', description: 'Identifica riesgos comunes.', duration: '28 min', type: 'Video + Texto' },
+        { id: 5, title: '¿Qué es Blockchain?', description: 'El libro contable que nadie puede manipular.', duration: '20 min', type: 'Video + Texto' },
+        { id: 6, title: 'Descentralización vs Centralización', description: 'Por qué importa que nadie tenga el control.', duration: '12 min', type: 'Video + Texto' },
+        // Moved Mining to later or simplified it
       ]
     },
     {
       id: 3,
-      title: 'Primeros Pasos',
-      description: 'Tu primera compra, transacción y gestión',
-      icon: Rocket,
+      title: 'Tu Banco en el Bolsillo',
+      description: 'Configura tu wallet y entiende las redes (Solana vs ETH)',
+      icon: Wallet,
       lessons: [
-        { id: 13, title: 'Exchanges: Dónde Comprar', description: 'Elegir plataforma segura.', duration: '35 min', type: 'Tutorial' },
-        { id: 14, title: 'Tu Primera Transacción', description: 'Enviar y recibir.', duration: '25 min', type: 'Tutorial' },
-        { id: 15, title: 'Fees y Confirmaciones', description: 'Costos de red explicados.', duration: '18 min', type: 'Video + Texto' },
-        { id: 16, title: 'Block Explorers', description: 'Rastrear transacciones.', duration: '15 min', type: 'Tutorial' },
-        { id: 17, title: 'Diversificación Básica', description: 'Más allá de Bitcoin.', duration: '30 min', type: 'Video + Texto' },
-        { id: 18, title: '¿Qué Sigue?', description: 'Preparación para nivel intermedio.', duration: '12 min', type: 'Video + Texto' },
+        { id: 7, title: 'Wallets: Tu Llave, Tu Dinero', description: 'Hot vs Cold wallets y la importancia de la custodia.', duration: '18 min', type: 'Video + Texto' },
+        { id: 8, title: 'La Frase Semilla (Seed Phrase)', description: 'Las 12 palabras que valen millones. Seguridad extrema.', duration: '25 min', type: 'Video + Práctica' },
+        { id: 9, title: 'Instalando Phantom Wallet', description: 'Tu puerta de entrada al ecosistema Solana.', duration: '30 min', type: 'Tutorial Práctico' },
+        { id: 10, title: 'Redes y Fees: La Ventaja de Solana', description: 'Por qué usamos Solana: Velocidad, costos y comunidad.', duration: '20 min', type: 'Comparativa' },
       ]
     }
   ]
