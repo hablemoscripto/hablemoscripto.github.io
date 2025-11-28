@@ -1,25 +1,6 @@
-import {
-  Shield, BookOpen, Rocket, Users, Eye, Lock, Coins, BarChart3, Search, Briefcase, Layers, Gem,
-  Zap, Globe, Cpu, Key, Smartphone, AlertTriangle, RefreshCw, Link, Target, MousePointer,
-  CheckCircle, ArrowRight, Clock, TrendingUp, Activity, PieChart, Scale, Network, Server,
-  Banknote, Landmark, TrendingDown, Percent, Wallet, Anchor, Scissors
-} from 'lucide-react';
-
-export interface Lesson {
-  id: number;
-  title: string;
-  description: string;
-  duration: string;
-  type: string;
-  isLocked?: boolean;
-}
-
-export interface Module {
-  id: number;
-  title: string;
-  description: string;
-  icon: any;
-  lessons: Lesson[];
+description: string;
+icon: any;
+lessons: Lesson[];
 }
 
 export interface LevelData {
@@ -77,6 +58,8 @@ export const BEGINNER_LEVEL: LevelData = {
         { id: 8, title: 'La Frase Semilla (Seed Phrase)', description: 'Las 12 palabras que valen millones. Seguridad extrema.', duration: '25 min', type: 'Video + Práctica' },
         { id: 9, title: 'Instalando Phantom Wallet', description: 'Tu puerta de entrada al ecosistema Solana.', duration: '30 min', type: 'Tutorial Práctico' },
         { id: 10, title: 'Redes y Fees: La Ventaja de Solana', description: 'Por qué usamos Solana: Velocidad, costos y comunidad.', duration: '20 min', type: 'Comparativa' },
+        { id: 35, title: 'Obteniendo tus Primeros SOL', description: 'Cómo convertir tu dinero local a Cripto usando Exchanges.', duration: '25 min', type: 'Tutorial' },
+        { id: 39, title: 'Gasta tus Cripto', description: 'Usa tus ganancias en el mundo real con tarjetas cripto.', duration: '20 min', type: 'Herramientas' },
       ]
     }
   ]
@@ -517,6 +500,14 @@ export const LESSONS_DATA: Record<number, any> = {
     duration: '25 minutos',
     type: 'Tutorial',
     description: 'Cómo convertir tu dinero local (Pesos, Dólares) a Cripto (USDC/SOL) usando Exchanges.',
+    referrals: [
+      {
+        title: 'Backpack Exchange',
+        description: 'El exchange más seguro y regulado para comprar cripto. Obtén descuentos en fees usando este link.',
+        link: 'https://backpack.exchange/join/cbas',
+        buttonText: 'Crear Cuenta en Backpack'
+      }
+    ],
     sections: [
       {
         type: 'intro',
@@ -977,6 +968,43 @@ export const LESSONS_DATA: Record<number, any> = {
     quiz: {
       questions: [
         { id: 'q1', question: '¿Para qué usar una "Burner Wallet"?', options: [{ id: 'a', text: 'Para quemar dinero' }, { id: 'b', text: 'Para interactuar con sitios de riesgo sin exponer tus ahorros principales' }, { id: 'c', text: 'Es ilegal' }], correctAnswer: 'b', explanation: 'Aísla el riesgo. Si la burner es hackeada, solo pierdes lo que tenía esa wallet, no tu patrimonio.' }
+      ]
+    }
+  },
+  39: {
+    id: 39,
+    title: 'Gasta tus Cripto',
+    level: 'Principiante',
+    number: '15 de 20',
+    duration: '20 min',
+    type: 'Herramientas',
+    description: 'No necesitas vender a tu banco para gastar. Usa tarjetas cripto directamente.',
+    referrals: [
+      {
+        title: 'Kast',
+        description: 'Tarjeta virtual y física para gastar tus stablecoins (USDC/USDT) en cualquier lugar.',
+        link: 'https://go.kast.xyz/VqVO/NGUCNBNA',
+        buttonText: 'Solicitar Tarjeta Kast'
+      },
+      {
+        title: 'Avici',
+        description: 'Tarjeta cripto premium. Obtén 10% de descuento en la compra de tu tarjeta.',
+        link: 'https://avici.app',
+        buttonText: 'Ir a Avici',
+        code: '9EULQP'
+      }
+    ],
+    sections: [
+      {
+        type: 'intro',
+        title: 'Viviendo en Cripto',
+        content: 'La meta final es no tener que volver al sistema bancario tradicional. Hoy en día existen tarjetas Visa/Mastercard que se recargan con Cripto.',
+        highlight: { title: 'Ventaja', text: 'Evitas la burocracia de los bancos y usas tu dinero libremente.' }
+      }
+    ],
+    quiz: {
+      questions: [
+        { id: 'q1', question: '¿Qué ventaja tiene una tarjeta cripto?', options: [{ id: 'a', text: 'Es de metal' }, { id: 'b', text: 'Permite gastar tus activos sin pasar por un banco tradicional' }, { id: 'c', text: 'Es gratis' }], correctAnswer: 'b', explanation: 'Conectan el mundo DeFi con el sistema de pagos tradicional Visa/Mastercard.' }
       ]
     }
   }

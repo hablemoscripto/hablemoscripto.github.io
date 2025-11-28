@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, Award, ArrowRight, ArrowLeft } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { LESSONS_DATA } from '../data/courseData';
 import { useProgress } from '../contexts/ProgressContext';
@@ -138,6 +138,42 @@ const LessonView: React.FC = () => {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Referral Section */}
+                        {lesson.referrals && lesson.referrals.length > 0 && (
+                            <div className="grid gap-4 my-8">
+                                {lesson.referrals.map((ref, idx) => (
+                                    <div key={idx} className="bg-gradient-to-r from-slate-900 to-slate-800 border border-brand-500/30 rounded-xl p-6 relative overflow-hidden group hover:border-brand-500/50 transition-all">
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-brand-500/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-brand-500/20 transition-all"></div>
+
+                                        <div className="relative z-10 flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span className="px-2 py-1 bg-brand-500/20 text-brand-400 text-xs font-bold rounded uppercase tracking-wider">Recomendado</span>
+                                                    <h3 className="text-xl font-bold text-white">{ref.title}</h3>
+                                                </div>
+                                                <p className="text-slate-300 mb-4">{ref.description}</p>
+                                                {ref.code && (
+                                                    <div className="inline-flex items-center gap-2 bg-slate-950/50 px-3 py-1 rounded-lg border border-slate-700 text-sm text-slate-300 mb-4">
+                                                        <span>Código:</span>
+                                                        <code className="text-brand-400 font-mono font-bold">{ref.code}</code>
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <a
+                                                href={ref.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="px-6 py-3 bg-brand-500 hover:bg-brand-400 text-slate-900 font-bold rounded-xl transition-all shadow-lg shadow-brand-500/20 hover:scale-105 flex items-center gap-2 whitespace-nowrap"
+                                            >
+                                                {ref.buttonText}
+                                                <ExternalLink size={18} />
+                                            </a>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
 
                         {/* Content Sections */}
                         <div className="prose prose-invert prose-lg max-w-none">
