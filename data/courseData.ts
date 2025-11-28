@@ -1,6 +1,57 @@
-description: string;
-icon: any;
-lessons: Lesson[];
+import {
+  Banknote,
+  BookOpen,
+  Wallet,
+  BarChart3,
+  Search,
+  Briefcase,
+  Zap,
+  Gem,
+  Cpu,
+  Anchor,
+  Scissors,
+  Landmark,
+  Percent,
+  TrendingDown,
+  Users,
+  Server,
+  Network,
+  Smartphone,
+  Shield,
+  Globe,
+  CheckCircle,
+  AlertTriangle,
+  Link,
+  Activity,
+  Clock,
+  Layers,
+  RefreshCw
+} from 'lucide-react';
+
+export interface Referral {
+  title: string;
+  description: string;
+  link: string;
+  buttonText: string;
+  code?: string;
+}
+
+export interface Lesson {
+  id: number;
+  title: string;
+  description: string;
+  duration: string;
+  type: string;
+  isLocked?: boolean;
+  referrals?: Referral[];
+}
+
+export interface Module {
+  id: number;
+  title: string;
+  description: string;
+  icon: any;
+  lessons: Lesson[];
 }
 
 export interface LevelData {
