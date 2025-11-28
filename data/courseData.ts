@@ -240,7 +240,42 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Qué respalda al dólar hoy en día?', options: [{ id: 'a', text: 'Oro en Fort Knox' }, { id: 'b', text: 'Nada, es Fiat (confianza)' }, { id: 'c', text: 'Petróleo' }], correctAnswer: 'b', explanation: 'Desde 1971, el dinero es Fiat, respaldado únicamente por la confianza en el gobierno emisor.' }
+        {
+          id: 'q1',
+          question: '¿Por qué el oro fue dinero durante miles de años y el papel no lo fue hasta hace muy poco?',
+          options: [
+            { id: 'a', text: 'Porque los gobiernos lo obligaron' },
+            { id: 'b', text: 'Porque el oro es escaso, divisible, durable, portable y difícil de falsificar' },
+            { id: 'c', text: 'Porque brilla más' },
+            { id: 'd', text: 'Porque los bancos no existían' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El oro cumple las 5–6 propiedades del buen dinero. El papel solo las cumple cuando está respaldado por algo escaso (oro, petróleo, confianza militar…).'
+        },
+        {
+          id: 'q2',
+          question: '¿Qué pasó exactamente el 15 de agosto de 1971?',
+          options: [
+            { id: 'a', text: 'Se creó Bitcoin' },
+            { id: 'b', text: 'Nixon cerró la ventanilla del oro: los dólares ya no se podían cambiar por oro físico' },
+            { id: 'c', text: 'Empezó la inflación del 8 % anual' },
+            { id: 'd', text: 'Se inventó el petro-dólar' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Ese día nació el dinero fiat 100 % puro. Desde entonces, la oferta monetaria depende solo de decisiones políticas.'
+        },
+        {
+          id: 'q3',
+          question: 'Si mañana Argentina imprime 10× más pesos, ¿quién sale ganando primero?',
+          options: [
+            { id: 'a', text: 'Los jubilados y asalariados' },
+            { id: 'b', text: 'Los que reciben el dinero recién impreso (gobierno, bancos y amigos del poder)' },
+            { id: 'c', text: 'Los ahorristas en pesos' },
+            { id: 'd', text: 'Nadie, la inflación es neutral' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Efecto Cantillon: el dinero nuevo entra al sistema por puntos concretos y pierde valor conforme se expande.'
+        }
       ]
     }
   },
@@ -287,8 +322,30 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Qué respalda al dólar o al peso hoy en día?', options: [{ id: 'a', text: 'Oro en bóvedas' }, { id: 'b', text: 'Nada, solo la confianza (Fiat)' }, { id: 'c', text: 'Petróleo' }], correctAnswer: 'b', explanation: 'Desde 1971, el dinero no tiene respaldo físico. Es dinero por decreto (Fiat).' },
-        { id: 'q2', question: '¿Quién se beneficia primero de la impresión de dinero?', options: [{ id: 'a', text: 'Los trabajadores' }, { id: 'b', text: 'Los jubilados' }, { id: 'c', text: 'El gobierno y los grandes bancos (Efecto Cantillon)' }], correctAnswer: 'c', explanation: 'El dinero nuevo entra por la cima de la pirámide, inflando activos antes de llegar a los salarios.' }
+        {
+          id: 'q1',
+          question: 'Tienes 100 000 $ ahorrados en el banco y la inflación anual es del 60 % (como Argentina 2024–2025). ¿Cuánto poder adquisitivo te queda después de 2 años sin tocar el dinero?',
+          options: [
+            { id: 'a', text: 'Más o menos lo mismo' },
+            { id: 'b', text: 'Alrededor de 27 000 $ de poder de compra real' },
+            { id: 'c', text: '100 000 $ porque el número no cambia' },
+            { id: 'd', text: 'Más, porque el banco me paga intereses' }
+          ],
+          correctAnswer: 'b',
+          explanation: '100 000 / 1.6 / 1.6 ≈ 39 062 $ al final del año 2 → en 2 años pierdes ≈73 % del poder adquisitivo.'
+        },
+        {
+          id: 'q2',
+          question: '¿Cuál es la única forma garantizada de protegerte 100 % de la inflación monetaria a largo plazo?',
+          options: [
+            { id: 'a', text: 'Tener plata en plazo fijo' },
+            { id: 'b', text: 'Poseer activos de oferta fija o que no puedan ser inflados (Bitcoin, oro, tierra)' },
+            { id: 'c', text: 'Gastar todo rápido' },
+            { id: 'd', text: 'Confiar en el gobierno' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Bitcoin tiene 21 millones de suministro máximo grabado en piedra. Nadie puede imprimirlo.'
+        }
       ]
     }
   },
@@ -323,7 +380,10 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Qué es el Efecto Cantillon?', options: [{ id: 'a', text: 'Una marca de vino' }, { id: 'b', text: 'El beneficio de recibir dinero nuevo primero' }, { id: 'c', text: 'Una criptomoneda' }], correctAnswer: 'b', explanation: 'Richard Cantillon describió cómo el dinero entra en la economía de forma desigual.' }
+        { id: 'q1', question: 'El gobierno imprime 1 trillón de pesos para pagar deuda. ¿Quién compra casas y autos a precios bajos?', options: [{ id: 'a', text: 'Los asalariados' }, { id: 'b', text: 'Los bancos y empresarios cercanos al gobierno' }, { id: 'c', text: 'Los jubilados' }], correctAnswer: 'b', explanation: 'Ellos reciben el dinero nuevo primero y compran activos antes de que suban los precios.' },
+        { id: 'q2', question: '¿Quién paga la inflación?', options: [{ id: 'a', text: 'Los ricos' }, { id: 'b', text: 'Los que tienen su riqueza en efectivo o salario' }, { id: 'c', text: 'Nadie' }], correctAnswer: 'b', explanation: 'La inflación es un impuesto oculto que castiga más a quien tiene efectivo y menos activos.' },
+        { id: 'q3', question: '¿Por qué los ricos se vuelven más ricos en períodos de alta inflación?', options: [{ id: 'a', text: 'Porque trabajan más' }, { id: 'b', text: 'Porque tienen deuda y activos que suben de precio' }, { id: 'c', text: 'Porque ahorran más' }], correctAnswer: 'b', explanation: 'La deuda se licúa y los activos (casas, acciones, Bitcoin) suben más que la inflación.' },
+        { id: 'q4', question: '¿Qué activo histórico ha ganado siempre contra el Efecto Cantillon a largo plazo?', options: [{ id: 'a', text: 'Plazo fijo' }, { id: 'b', text: 'Bitcoin' }, { id: 'c', text: 'Dólar blue' }], correctAnswer: 'b', explanation: 'Escasez absoluta + adopción global = la única salida demostrada contra la impresión ilimitada.' }
       ]
     }
   },
@@ -345,7 +405,9 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Cuál es el límite de suministro de Bitcoin?', options: [{ id: 'a', text: 'Infinito' }, { id: 'b', text: '21 Millones' }, { id: 'c', text: '100 Millones' }], correctAnswer: 'b', explanation: 'La escasez fija es lo que protege a Bitcoin de la inflación.' }
+        { id: 'q1', question: '¿Por qué Bitcoin es "dinero duro" y el dólar es "dinero blando"?', options: [{ id: 'a', text: 'Porque es más difícil de usar' }, { id: 'b', text: 'Porque su oferta es fija (21M) y predecible' }, { id: 'c', text: 'Porque pesa más' }], correctAnswer: 'b', explanation: 'La dureza del dinero se mide por lo difícil que es inflar su oferta.' },
+        { id: 'q2', question: '¿Quién controla la emisión de nuevos bitcoins después del halving de 2140?', options: [{ id: 'a', text: 'La Fed' }, { id: 'b', text: 'Nadie — se acaba la emisión' }, { id: 'c', text: 'Los mineros votan' }], correctAnswer: 'b', explanation: 'Habrá exactamente 21 000 000 BTC. Nunca más.' },
+        { id: 'q3', question: '¿Qué pasaría si mañana todos los gobiernos prohibieran Bitcoin?', options: [{ id: 'a', text: 'Desaparecería' }, { id: 'b', text: 'Seguiría funcionando porque es descentralizado y nadie puede apagarlo' }, { id: 'c', text: 'Bajaría 10%' }], correctAnswer: 'b', explanation: 'No hay un botón de apagado. Lo intentaron en China y hoy tiene más hashrate que nunca.' }
       ]
     }
   },
@@ -370,7 +432,9 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Se puede borrar una transacción de la Blockchain?', options: [{ id: 'a', text: 'Sí, el banco puede' }, { id: 'b', text: 'No, es inmutable' }, { id: 'c', text: 'Solo si pagas' }], correctAnswer: 'b', explanation: 'La inmutabilidad es la característica clave que genera confianza sin intermediarios.' }
+        { id: 'q1', question: '¿Por qué nadie puede modificar una transacción ya confirmada en Bitcoin?', options: [{ id: 'a', text: 'Porque el banco no deja' }, { id: 'b', text: 'Porque requiere cambiar todos los bloques siguientes y ganar una guerra de hashrate' }, { id: 'c', text: 'Porque es ilegal' }], correctAnswer: 'b', explanation: 'La inmutabilidad cuesta energía real. Eso la hace creíble.' },
+        { id: 'q2', question: '¿Qué pasa si el 51% de los mineros se ponen de acuerdo para reescribir la historia?', options: [{ id: 'a', text: 'Pueden robar todos los bitcoins' }, { id: 'b', text: 'Pueden censurar transacciones o hacer double-spend, pero no robar wallets privadas' }, { id: 'c', text: 'Nada' }], correctAnswer: 'b', explanation: 'Ataque del 51% es caro y detectable. Nunca ha ocurrido en Bitcoin.' },
+        { id: 'q3', question: '¿Por qué decimos que la blockchain es "confianza minimizada"?', options: [{ id: 'a', text: 'Porque confías en Satoshi' }, { id: 'b', text: 'Porque no necesitas confiar en nadie — solo en matemáticas y reglas públicas' }], correctAnswer: 'b', explanation: 'Don\'t trust, verify.' }
       ]
     }
   },
@@ -400,7 +464,40 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Quién controla Bitcoin?', options: [{ id: 'a', text: 'El CEO de Bitcoin' }, { id: 'b', text: 'Nadie (es descentralizado)' }, { id: 'c', text: 'El gobierno' }], correctAnswer: 'b', explanation: 'No hay autoridad central.' }
+        {
+          id: 'q1',
+          question: '¿Quién controla Bitcoin?',
+          options: [
+            { id: 'a', text: 'El CEO de Bitcoin' },
+            { id: 'b', text: 'Nadie (es descentralizado)' },
+            { id: 'c', text: 'El gobierno' },
+            { id: 'd', text: 'Los mineros' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Bitcoin no tiene CEO, ni servidor central, ni autoridad que pueda censurarte. Esa es su ventaja estratégica.'
+        },
+        {
+          id: 'q2',
+          question: 'Tu banco te congela la cuenta "por sospecha de lavado". ¿Podría pasar lo mismo con una wallet descentralizada?',
+          options: [
+            { id: 'a', text: 'Sí, Phantom puede congelar tu wallet' },
+            { id: 'b', text: 'No, nadie puede congelar una wallet no-custodial' },
+            { id: 'c', text: 'Solo si lo pide la policía' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'En una wallet descentralizada (Phantom, Ledger), solo TÚ tienes las llaves. Nadie puede congelar ni confiscar tus fondos.'
+        },
+        {
+          id: 'q3',
+          question: '¿Cuál es el trade-off real de la descentralización?',
+          options: [
+            { id: 'a', text: 'Es más lenta y más cara que un sistema central (a veces)' },
+            { id: 'b', text: 'No tiene ninguna desventaja' },
+            { id: 'c', text: 'Es ilegal en la mayoría de países' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Coordinar miles de nodos es más costoso que un servidor. Bitcoin tarda 10 min en confirmar. Pero a cambio, nadie puede censurarte.'
+        }
       ]
     }
   },
@@ -431,7 +528,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Qué pasa si dejas tu dinero en un exchange y este quiebra?', options: [{ id: 'a', text: 'El gobierno te lo devuelve' }, { id: 'b', text: 'Probablemente lo pierdas' }, { id: 'c', text: 'No pasa nada' }], correctAnswer: 'b', explanation: 'En un exchange, eres un acreedor no garantizado. La autocustodia es vital.' }
+        {
+          id: 'q1',
+          question: '¿Qué pasa si dejas tu dinero en un exchange y este quiebra?',
+          options: [
+            { id: 'a', text: 'El gobierno te lo devuelve' },
+            { id: 'b', text: 'Probablemente lo pierdas' },
+            { id: 'c', text: 'No pasa nada' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'En un exchange, eres un acreedor no garantizado. La autocustodia es vital.'
+        },
+        {
+          id: 'q2',
+          question: 'Tienes 10 000 $ en SOL. ¿Dónde lo guardas?',
+          options: [
+            { id: 'a', text: 'Todo en Binance (fácil de vender)' },
+            { id: 'b', text: 'Todo en Phantom (hot wallet)' },
+            { id: 'c', text: 'La mayor parte en Ledger (cold wallet) + algo en Phantom para operar' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Para montos grandes: cold wallet. Para DeFi y operativa diaria: hot wallet. Exchanges solo para trading activo.'
+        },
+        {
+          id: 'q3',
+          question: 'Un amigo perdió su teléfono con Phantom instalado. ¿Perdió sus fondos?',
+          options: [
+            { id: 'a', text: 'Sí, el dinero estaba en el teléfono' },
+            { id: 'b', text: 'No, si tiene su frase semilla guardada' },
+            { id: 'c', text: 'Depende si tenía Touch ID activado' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La wallet es solo una interfaz. El verdadero acceso lo da la seed phrase. Sin ella, adiós fondos.'
+        }
       ]
     }
   },
@@ -453,7 +582,41 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Dónde es seguro guardar tu frase semilla?', options: [{ id: 'a', text: 'En Google Drive' }, { id: 'b', text: 'Escrita en papel en un lugar seguro' }, { id: 'c', text: 'En una foto en el celular' }], correctAnswer: 'b', explanation: 'Cualquier medio digital puede ser hackeado. El papel ("air-gapped") es lo más seguro para empezar.' }
+        {
+          id: 'q1',
+          question: 'Tu frase semilla de 12 palabras está escrita en un papel y guardada en tu casa. Un ladrón entra y la roba. ¿Qué puede hacer?',
+          options: [
+            { id: 'a', text: 'Nada, necesita tu contraseña también' },
+            { id: 'b', text: 'Vaciar todas tus wallets al instante' },
+            { id: 'c', text: 'Solo ver el saldo' },
+            { id: 'd', text: 'Solo si también tiene tu celular' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La frase semilla = llave maestra total. Quien la tenga controla el 100 % de los fondos para siempre.'
+        },
+        {
+          id: 'q2',
+          question: '¿Cuál de estas opciones es la forma MÁS segura de guardar tu seed phrase en 2025?',
+          options: [
+            { id: 'a', text: 'Foto en el celular encriptada' },
+            { id: 'b', text: 'Google Drive con 2FA' },
+            { id: 'c', text: 'Placa de acero grabada guardada en caja de seguridad + otra parte con familiar de confianza (Shamir Secret Sharing)' },
+            { id: 'd', text: 'Memorizarla y no escribirla' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Nunca confíes tu futuro financiero a una empresa o a tu memoria. Metal + distribución física es el estándar de los whales.'
+        },
+        {
+          id: 'q3',
+          question: 'Te llega un mail de "Phantom Support" diciendo que tu wallet está en riesgo y te pide confirmar tu frase semilla. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Contesto rápido para no perder todo' },
+            { id: 'b', text: 'Ignoro y marco como spam. Phantom NUNCA pide la seed phrase' },
+            { id: 'c', text: 'Le mando solo las últimas 4 palabras "por seguridad"' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Regla de oro: quien te pida la seed phrase = 100 % estafa. Siempre.'
+        }
       ]
     }
   },
@@ -484,7 +647,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿De dónde debes descargar Phantom?', options: [{ id: 'a', text: 'Cualquier link de Google' }, { id: 'b', text: 'Sitio oficial phantom.app o App Stores oficiales' }, { id: 'c', text: 'Un archivo que te mandaron por Telegram' }], correctAnswer: 'b', explanation: 'Siempre verifica la fuente oficial para evitar versiones falsas que roban fondos.' }
+        {
+          id: 'q1',
+          question: '¿De dónde debes descargar Phantom?',
+          options: [
+            { id: 'a', text: 'Cualquier link de Google' },
+            { id: 'b', text: 'Sitio oficial phantom.app o App Stores oficiales' },
+            { id: 'c', text: 'Un archivo que te mandaron por Telegram' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Siempre verifica la fuente oficial para evitar versiones falsas que roban fondos.'
+        },
+        {
+          id: 'q2',
+          question: 'Instalaste Phantom. ¿Qué es lo PRIMERO que debes hacer antes de depositar fondos?',
+          options: [
+            { id: 'a', text: 'Conectarla a cualquier dApp para probar' },
+            { id: 'b', text: 'Guardar la frase semilla de forma segura (papel/metal)' },
+            { id: 'c', text: 'Mandarle SOL para probar' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Sin backup de tu seed phrase, un formateo del celular = pérdida total.'
+        },
+        {
+          id: 'q3',
+          question: 'Un sitio web te pide "Conectar Wallet". ¿Qué significa eso?',
+          options: [
+            { id: 'a', text: 'Le estás dando permiso para ver tu dirección pública (solo lectura)' },
+            { id: 'b', text: 'Le estás dando tu frase semilla' },
+            { id: 'c', text: 'Le estás dando permiso para vaciar tu wallet' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Conectar wallet ≠ aprobar transacción. Solo muestra tu dirección pública. Siempre debes aprobar cada firma.'
+        }
       ]
     }
   },
@@ -537,8 +732,50 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Cuál es la principal ventaja de usuario de Solana sobre ETH?', options: [{ id: 'a', text: 'Es más viejo' }, { id: 'b', text: 'Costos de fracción de centavo y velocidad instantánea' }, { id: 'c', text: 'Es más difícil de usar' }], correctAnswer: 'b', explanation: 'La usabilidad (bajos costos + velocidad) hace que Solana sea viable para el uso diario masivo.' },
-        { id: 'q2', question: '¿Qué herramienta de Solana reemplaza a Uniswap con mejores funciones?', options: [{ id: 'a', text: 'Jupiter (JUP)' }, { id: 'b', text: 'Pancakeswap' }, { id: 'c', text: 'Curve' }], correctAnswer: 'a', explanation: 'Jupiter es el agregador líder en Solana, ofreciendo DCA, órdenes límite y swaps con la mejor ruta.' }
+        {
+          id: 'q1',
+          question: '¿Cuál es la principal ventaja de usuario de Solana sobre ETH?',
+          options: [
+            { id: 'a', text: 'Es más viejo' },
+            { id: 'b', text: 'Costos de fracción de centavo y velocidad instantánea' },
+            { id: 'c', text: 'Es más difícil de usar' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La usabilidad (bajos costos + velocidad) hace que Solana sea viable para el uso diario masivo.'
+        },
+        {
+          id: 'q2',
+          question: '¿Qué herramienta de Solana reemplaza a Uniswap con mejores funciones?',
+          options: [
+            { id: 'a', text: 'Jupiter (JUP)' },
+            { id: 'b', text: 'Pancakeswap' },
+            { id: 'c', text: 'Curve' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Jupiter es el agregador líder en Solana, ofreciendo DCA, órdenes límite y swaps con la mejor ruta.'
+        },
+        {
+          id: 'q3',
+          question: 'Quieres usar DeFi con 100 $ para aprender. ¿Qué blockchain te permite hacerlo sin gastar 30 $ en gas?',
+          options: [
+            { id: 'a', text: 'Ethereum Layer 1' },
+            { id: 'b', text: 'Solana (transacciones cuestan $0.0002)' },
+            { id: 'c', text: 'Bitcoin' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'En Ethereum L1, podrías gastar 30 % de tu capital solo en fees. Solana te permite experimentar con riesgo mínimo.'
+        },
+        {
+          id: 'q4',
+          question: '¿Qué significa que Solana sea "monolítica" (no modular como Ethereum + L2s)?',
+          options: [
+            { id: 'a', text: 'Es más lenta' },
+            { id: 'b', text: 'Todo ocurre en una sola capa (no necesitas bridges ni fragmentación)' },
+            { id: 'c', text: 'Es más cara' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Solana pone toda la ejecución, consenso y data availability en L1. No necesitas L2s, evitando complejidad y riesgos de bridges.'
+        }
       ]
     }
   },
@@ -569,7 +806,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: 'Al retirar SOL de Binance a Phantom, ¿qué red eliges?', options: [{ id: 'a', text: 'Ethereum (ERC20)' }, { id: 'b', text: 'Solana (SOL)' }, { id: 'c', text: 'Bitcoin' }], correctAnswer: 'b', explanation: 'Debes usar la red nativa de la wallet destino. Phantom es una wallet de Solana.' }
+        {
+          id: 'q1',
+          question: 'Al retirar SOL de Binance a Phantom, ¿qué red eliges?',
+          options: [
+            { id: 'a', text: 'Ethereum (ERC20)' },
+            { id: 'b', text: 'Solana (SOL)' },
+            { id: 'c', text: 'Bitcoin' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Debes usar la red nativa de la wallet destino. Phantom es una wallet de Solana.'
+        },
+        {
+          id: 'q2',
+          question: 'Compras 100 $ de SOL en Binance. ¿Dónde deberías guardarlos a largo plazo?',
+          options: [
+            { id: 'a', text: 'Dejarlos en Binance (es más fácil)' },
+            { id: 'b', text: 'Retirarlos a tu Phantom wallet (autocustodia)' },
+            { id: 'c', text: 'Mandárselos a un amigo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Not your keys, not your coins. Los exchanges son para comprar/vender, NO para custodiar.'
+        },
+        {
+          id: 'q3',
+          question: 'Vas a retirar de Kraken a tu Phantom. Te cobran 0.01 SOL de fee. ¿Por qué?',
+          options: [
+            { id: 'a', text: 'Es el fee de la red blockchain' },
+            { id: 'b', text: 'Es el fee del exchange (no de Solana)' },
+            { id: 'c', text: 'Te están estafando' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los exchanges cobran fees de retiro (son ellos). El fee real de Solana es <$0.001.'
+        }
       ]
     }
   },
@@ -591,7 +860,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Qué debes hacer antes de enviar una cantidad grande?', options: [{ id: 'a', text: 'Rezar' }, { id: 'b', text: 'Enviar una transacción de prueba pequeña' }, { id: 'c', text: 'Enviar todo rápido' }], correctAnswer: 'b', explanation: 'Siempre prueba la dirección con un monto mínimo para asegurar que todo esté correcto.' }
+        {
+          id: 'q1',
+          question: '¿Qué debes hacer antes de enviar una cantidad grande?',
+          options: [
+            { id: 'a', text: 'Rezar' },
+            { id: 'b', text: 'Enviar una transacción de prueba pequeña' },
+            { id: 'c', text: 'Enviar todo rápido' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Siempre prueba la dirección con un monto mínimo para asegurar que todo esté correcto.'
+        },
+        {
+          id: 'q2',
+          question: 'Vas a enviar 5 SOL a un amigo. ¿Qué datos te debe dar?',
+          options: [
+            { id: 'a', text: 'Su dirección pública de Solana (empieza con letras/números)' },
+            { id: 'b', text: 'Su frase semilla' },
+            { id: 'c', text: 'Su contraseña de Phantom' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Solo necesitas su dirección pública. Nunca pidas ni compartas seed phrases o contraseñas.'
+        },
+        {
+          id: 'q3',
+          question: 'Enviaste SOL pero te equivocaste en la dirección. ¿Puedes cancelar?',
+          options: [
+            { id: 'a', text: 'Sí, llamas a soporte de Solana' },
+            { id: 'b', text: 'No. Las transacciones en blockchain son irreversibles' },
+            { id: 'c', text: 'Sí, Phantom puede revertirla' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Por eso es VITAL verificar la dirección 2-3 veces antes de enviar.'
+        }
       ]
     }
   },
@@ -616,7 +917,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Para qué sirve Solscan?', options: [{ id: 'a', text: 'Para minar' }, { id: 'b', text: 'Para verificar transacciones y cuentas en la blockchain' }, { id: 'c', text: 'Para chatear' }], correctAnswer: 'b', explanation: 'Es el explorador de bloques de Solana, la fuente de verdad de la red.' }
+        {
+          id: 'q1',
+          question: '¿Para qué sirve Solscan?',
+          options: [
+            { id: 'a', text: 'Para minar' },
+            { id: 'b', text: 'Para verificar transacciones y cuentas en la blockchain' },
+            { id: 'c', text: 'Para chatear' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Es el explorador de bloques de Solana, la fuente de verdad de la red.'
+        },
+        {
+          id: 'q2',
+          question: 'Enviaste SOL hace 5 minutos y tu amigo dice que no llegó. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Reenviar' },
+            { id: 'b', text: 'Copiar el Signature (TX ID) y buscarlo en Solscan para verificar el estado' },
+            { id: 'c', text: 'Llamar al CEO de Solana' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La blockchain es la fuente de verdad. Si Solscan dice "Success", el dinero llegó.'
+        },
+        {
+          id: 'q3',
+          question: 'Quieres saber si una wallet tiene mucho SOL antes de hacer un trade P2P. ¿Cómo lo verificas?',
+          options: [
+            { id: 'a', text: 'Le pides una captura de pantalla' },
+            { id: 'b', text: 'Pegas su dirección pública en Solscan y ves su balance en tiempo real' },
+            { id: 'c', text: 'Confías en su palabra' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Todas las wallets son públicas. Solscan te muestra el balance y el historial completo.'
+        }
       ]
     }
   },
@@ -642,7 +975,50 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: 'Recibes un NFT gratis desconocido en tu wallet que dice "Visita esta web para reclamar $1000". ¿Qué haces?', options: [{ id: 'a', text: 'Visito la web rápido' }, { id: 'b', text: 'Lo ignoro y lo quemo/oculto (Es Scam)' }, { id: 'c', text: 'Se lo mando a un amigo' }], correctAnswer: 'b', explanation: 'Es una estafa común. Si interactúas con la web, drenarán tu wallet.' }
+        {
+          id: 'q1',
+          question: 'Recibes un NFT gratis desconocido en tu wallet que dice "Visita esta web para reclamar $1000". ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Visito la web rápido' },
+            { id: 'b', text: 'Lo ignoro y lo quemo/oculto (Es Scam)' },
+            { id: 'c', text: 'Se lo mando a un amigo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Es una estafa común. Si interactúas con la web, drenarán tu wallet.'
+        },
+        {
+          id: 'q2',
+          question: 'Un "admin" de Discord te escribe diciendo que tu wallet está en peligro y te pide tu seed phrase para "protegerla". ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Se la doy rápido para no perder todo' },
+            { id: 'b', text: 'Bloqueo y reporto. Ningún admin legítimo NUNCA te pedirá la seed phrase' },
+            { id: 'c', text: 'Le doy solo 6 palabras para confirmar' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Regla de oro: quien te pida la seed phrase = estafador. Siempre.'
+        },
+        {
+          id: 'q3',
+          question: 'Ves un anuncio en Google de "phantom-app-secure.com" que ofrece una versión "mejorada" de Phantom. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Lo descargo (suena mejor)' },
+            { id: 'b', text: 'Ignoro. El sitio oficial SOLO es phantom.app' },
+            { id: 'c', text: 'Lo pruebo en una wallet secundaria' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los scammers compran ads en Google con URLs muy similares. SIEMPRE verifica la URL exacta.'
+        },
+        {
+          id: 'q4',
+          question: 'Quieres comprar el token BONK. Hay 5 tokens con ese nombre en Jupiter. ¿Cómo sabes cuál es el real?',
+          options: [
+            { id: 'a', text: 'El que tiene más holders' },
+            { id: 'b', text: 'Verifico el Contract Address (CA) oficial en CoinGecko o el sitio web del proyecto' },
+            { id: 'c', text: 'El primero que aparece' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Cualquiera puede crear un token falso con el mismo nombre. Solo el CA es único e irrefutable.'
+        }
       ]
     }
   },
@@ -658,7 +1034,50 @@ export const LESSONS_DATA: Record<number, any> = {
       { type: 'intro', title: 'Lectura de Precio', content: 'Las velas nos cuentan la historia de la batalla entre compradores (Toros) y vendedores (Osos).' },
       { type: 'main', title: 'Componentes', features: [{ icon: BarChart3, title: 'Cuerpo', text: 'Rango entre apertura y cierre.' }, { icon: Activity, title: 'Mechas', text: 'Precios máximos y mínimos alcanzados (rechazos).' }] }
     ],
-    quiz: { questions: [{ id: 'q1', question: '¿Qué indica una mecha larga superior?', options: [{ id: 'a', text: 'Fuerza compradora' }, { id: 'b', text: 'Rechazo de precios altos (presión vendedora)' }, { id: 'c', text: 'Indecisión' }], correctAnswer: 'b', explanation: 'Los vendedores empujaron el precio hacia abajo desde el máximo.' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: 'Una vela roja con cuerpo muy grande y mechas casi inexistentes después de una subida fuerte indica...',
+          options: [
+            { id: 'a', text: 'Acumulación silenciosa' },
+            { id: 'b', text: 'Distribución agresiva — posible techo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los grandes jugadores vendieron todo el día y cerraron cerca del mínimo.'
+        },
+        {
+          id: 'q2',
+          question: '¿Qué patrón de 3 velas es el más fiable para reversión bajista?',
+          options: [
+            { id: 'a', text: 'Tres soldados blancos' },
+            { id: 'b', text: 'Evening Star (estrella vespertina)' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Evening Star muestra pérdida de momentum alcista y toma de control bajista.'
+        },
+        {
+          id: 'q3',
+          question: 'Una mecha inferior muy larga en soporte + volumen alto =',
+          options: [
+            { id: 'a', text: 'Trampa de osos' },
+            { id: 'b', text: 'Hammer real — posible suelo fuerte' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El volumen alto confirma que hay compradores defendiendo la zona con convicción.'
+        },
+        {
+          id: 'q4',
+          question: '¿En qué timeframe son más fiables las velas japonesas?',
+          options: [
+            { id: 'a', text: '1 minuto' },
+            { id: 'b', text: '4h y diario' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Ruido en timeframes bajos mata la señal.'
+        }
+      ]
+    }
   },
   14: {
     id: 14,
@@ -669,7 +1088,50 @@ export const LESSONS_DATA: Record<number, any> = {
     type: 'Video + Práctica',
     description: 'Identifica las zonas donde el precio rebota. Pisos y techos del mercado.',
     sections: [{ type: 'intro', title: 'Memoria del Mercado', content: 'El precio tiene memoria. Donde rebotó antes, es probable que rebote de nuevo.' }],
-    quiz: { questions: [{ id: 'q1', question: '¿Qué pasa cuando una resistencia se rompe?', options: [{ id: 'a', text: 'Desaparece' }, { id: 'b', text: 'Suele convertirse en soporte' }, { id: 'c', text: 'El precio cae' }], correctAnswer: 'b', explanation: 'Flip S/R: El techo roto se convierte en el nuevo piso.' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: 'El precio rompe una resistencia con volumen 5× superior al promedio y cierra fuerte. ¿Qué ocurre con esa resistencia rota?',
+          options: [
+            { id: 'a', text: 'Desaparece' },
+            { id: 'b', text: 'Se convierte en soporte (role reversal)' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Flip S/R: El techo roto se convierte en el nuevo piso cuando hay confirmación con volumen.'
+        },
+        {
+          id: 'q2',
+          question: '¿Dónde colocas tu stop loss en una compra en soporte?',
+          options: [
+            { id: 'a', text: 'Justo encima del soporte' },
+            { id: 'b', text: 'Debajo del mínimo más reciente + filtro' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Si rompe el soporte, tu tesis falló. El stop debe estar donde invalida tu idea.'
+        },
+        {
+          id: 'q3',
+          question: 'El precio lleva 4 toques exactos en 150$. ¿Qué es más probable?',
+          options: [
+            { id: 'a', text: 'Quinto toque y rompe' },
+            { id: 'b', text: 'Cuanto más toca, más débil se vuelve — ruptura inminente' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Cada toque gasta órdenes → la quinta suele romper.'
+        },
+        {
+          id: 'q4',
+          question: '¿Qué es una "fakeout" o trampa?',
+          options: [
+            { id: 'a', text: 'Rompe y vuelve rápido adentro' },
+            { id: 'b', text: 'No rompe nunca' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Los market makers barren stops y luego revierten. Por eso esperamos confirmación.'
+        }
+      ]
+    }
   },
   15: {
     id: 15,
@@ -680,7 +1142,50 @@ export const LESSONS_DATA: Record<number, any> = {
     type: 'Video + Práctica',
     description: 'Usa matemáticas para confirmar tu intuición. RSI para sobrecompra/venta y Medias Móviles para tendencia.',
     sections: [{ type: 'intro', title: 'Ayudas Visuales', content: 'No operes solo por indicadores, úsalos para confirmar lo que ves en el precio.' }],
-    quiz: { questions: [{ id: 'q1', question: 'Un RSI arriba de 70 indica...', options: [{ id: 'a', text: 'Sobreventa (barato)' }, { id: 'b', text: 'Sobrecompra (posible corrección)' }, { id: 'c', text: 'Tendencia lateral' }], correctAnswer: 'b', explanation: 'El precio ha subido muy rápido y podría necesitar un descanso.' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: 'RSI 14 en 78 + precio haciendo nuevos highs. ¿Qué indica?',
+          options: [
+            { id: 'a', text: 'Fuerte tendencia alcista' },
+            { id: 'b', text: 'Divergencia bajista oculta — posible corrección' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'RSI extremo mientras precio sube puede indicar debilidad interna próxima.'
+        },
+        {
+          id: 'q2',
+          question: '¿Cuál es la EMA más usada por instituciones en cripto?',
+          options: [
+            { id: 'a', text: 'EMA 21' },
+            { id: 'b', text: 'EMA 200' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La EMA 200 diario es la línea entre bull y bear market.'
+        },
+        {
+          id: 'q3',
+          question: 'Precio cruza de abajo hacia arriba la EMA 55 en gráfico diario con volumen creciente. ¿Qué operación tomas?',
+          options: [
+            { id: 'a', text: 'Short' },
+            { id: 'b', text: 'Long con stop bajo la EMA' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Cruce alcista de EMA con volumen es señal de continuación alcista.'
+        },
+        {
+          id: 'q4',
+          question: 'RSI <30 + precio en soporte histórico =',
+          options: [
+            { id: 'a', text: 'Vender más' },
+            { id: 'b', text: 'Zona de posible suelo — entrada agresiva' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'RSI sobreventa en soporte fuerte = confluencia de señales alcistas.'
+        }
+      ]
+    }
   },
   16: {
     id: 16,
@@ -691,7 +1196,50 @@ export const LESSONS_DATA: Record<number, any> = {
     type: 'Video + Práctica',
     description: 'La habilidad más importante: Saber si estamos subiendo, bajando o laterales.',
     sections: [{ type: 'main', title: 'Tendencia Alcista', content: 'Se define por Altos más Altos (HH) y Bajos más Altos (HL).' }],
-    quiz: { questions: [{ id: 'q1', question: '¿Qué rompe una tendencia alcista?', options: [{ id: 'a', text: 'Un nuevo alto' }, { id: 'b', text: 'Hacer un bajo más bajo que el anterior (Lower Low)' }, { id: 'c', text: 'Una vela roja' }], correctAnswer: 'b', explanation: 'El cambio de estructura (Market Structure Break) señala posible reversión.' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: '¿Cómo se define una tendencia alcista limpia?',
+          options: [
+            { id: 'a', text: 'Velas verdes' },
+            { id: 'b', text: 'Higher Highs + Higher Lows' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La estructura de HH + HL define tendencia alcista objetivamente.'
+        },
+        {
+          id: 'q2',
+          question: 'El precio hace un Lower Low por primera vez después de meses alcistas. ¿Qué acaba de pasar?',
+          options: [
+            { id: 'a', text: 'Nada importante' },
+            { id: 'b', text: 'Break of Market Structure — posible cambio de tendencia' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El primer LL rompe la estructura alcista y señala debilidad.'
+        },
+        {
+          id: 'q3',
+          question: 'Estás largo y el precio rompe el último Higher Low. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'HODL' },
+            { id: 'b', text: 'Sales o reduces inmediatamente' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La ruptura de estructura invalida tu tesis alcista.'
+        },
+        {
+          id: 'q4',
+          question: '¿Qué es un "Change of Character" (CHOCH)?',
+          options: [
+            { id: 'a', text: 'Cambio de color' },
+            { id: 'b', text: 'Cuando la estructura cambia de alcista a bajista (o viceversa) rompiendo estructura previa' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'CHOCH marca el momento donde el control del mercado cambia de manos.'
+        }
+      ]
+    }
   },
   17: {
     id: 17,
@@ -705,7 +1253,50 @@ export const LESSONS_DATA: Record<number, any> = {
       { type: 'intro', title: 'La Economía del Token', content: 'Si un token tiene inflación infinita, su precio tenderá a cero. Analiza el Supply Circulante vs Total.' },
       { type: 'comparison', title: 'Red Flags', table: [{ aspect: 'Vesting', trad: 'Corto o inexistente', btc: 'Largo plazo para el equipo' }, { aspect: 'Distribución', trad: '50% para el equipo', btc: 'Mayoría para la comunidad' }] }
     ],
-    quiz: { questions: [{ id: 'q1', question: '¿Qué significa un "Unlock" de tokens grande?', options: [{ id: 'a', text: 'El precio subirá' }, { id: 'b', text: 'Posible presión de venta (inflación repentina)' }, { id: 'c', text: 'Nada' }], correctAnswer: 'b', explanation: 'Más oferta en el mercado sin más demanda suele bajar el precio.' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: 'Un token tiene 1 billón de supply total y solo 10 millones circulantes. ¿Qué pasará cuando desbloqueen el 90% restante?',
+          options: [
+            { id: 'a', text: 'Sube x100' },
+            { id: 'b', text: 'Presión de venta brutal' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Aumentar el supply circulante 100× diluye brutalmente el valor por token.'
+        },
+        {
+          id: 'q2',
+          question: '¿Qué es peor red flag en tokenomics?',
+          options: [
+            { id: 'a', text: '10% team con 4 años vesting' },
+            { id: 'b', text: '50%+ al equipo sin vesting o con cliff de 3 meses' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El equipo puede dumpearlo todo inmediatamente = exit scam probable.'
+        },
+        {
+          id: 'q3',
+          question: '¿Cómo sabes si un token es inflacionario?',
+          options: [
+            { id: 'a', text: 'Tiene muchos holders' },
+            { id: 'b', text: 'Emisión nueva > tokens quemados cada mes' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Inflación neta positiva = supply aumenta = presión bajista constante.'
+        },
+        {
+          id: 'q4',
+          question: 'El mejor tokenomics visto en Solana 2024–2025:',
+          options: [
+            { id: 'a', text: '1 trillón supply' },
+            { id: 'b', text: 'Supply fijo + quema agresiva (como JUP, WIF, BONK post-lanzamiento)' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Supply decreciente + demanda creciente = presión alcista sostenida.'
+        }
+      ]
+    }
   },
   18: {
     id: 18,
@@ -716,7 +1307,40 @@ export const LESSONS_DATA: Record<number, any> = {
     type: 'Análisis',
     description: 'Todo en cripto se mueve al ritmo de Bitcoin. Entiende los ciclos de 4 años.',
     sections: [{ type: 'intro', title: 'El Director de Orquesta', content: 'Bitcoin dirige el mercado. Cuando BTC estornuda, las Altcoins se resfrían. Entiende el flujo de dinero: BTC -> ETH -> Alts (Solana).' }],
-    quiz: { questions: [{ id: 'q1', question: '¿Qué es una "Altcoin Season"?', options: [{ id: 'a', text: 'Cuando BTC sube solo' }, { id: 'b', text: 'Cuando el capital rota de BTC a monedas más pequeñas (como SOL)' }, { id: 'c', text: 'Invierno' }], correctAnswer: 'b', explanation: 'Ocurre cuando los inversores buscan mayor riesgo/retorno después de que BTC ha subido.' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: '¿En qué fase del ciclo estamos en noviembre 2025?',
+          options: [
+            { id: 'a', text: 'Bear market' },
+            { id: 'b', text: 'Post-halving bull market — fase de euforia temprana' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Halving fue abril 2024 → pico esperado 2025.'
+        },
+        {
+          id: 'q2',
+          question: 'Históricamente, ¿cuántos meses después del halving ocurre el pico de precio de Bitcoin?',
+          options: [
+            { id: 'a', text: '3–6 meses' },
+            { id: 'b', text: '12–18 meses' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los ciclos previos muestran que el pico llega 12-18 meses post-halving.'
+        },
+        {
+          id: 'q3',
+          question: '¿Cuándo empieza normalmente la "altseason"?',
+          options: [
+            { id: 'a', text: 'Justo después del halving' },
+            { id: 'b', text: 'Cuando Bitcoin domina <55% del market cap' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Altseason comienza cuando el capital rota de BTC hacia alts buscando mayor retorno.'
+        }
+      ]
+    }
   },
   19: {
     id: 19,
@@ -727,7 +1351,50 @@ export const LESSONS_DATA: Record<number, any> = {
     type: 'Casos Prácticos',
     description: 'DYOR (Do Your Own Research). Cómo investigar antes de invertir tu dinero.',
     sections: [{ type: 'main', title: 'Herramientas', content: 'Usa DefiLlama para ver TVL, Token Terminal para ver ganancias reales, y Twitter para sentimiento.' }],
-    quiz: { questions: [{ id: 'q1', question: '¿Qué indica un TVL (Total Value Locked) creciente?', options: [{ id: 'a', text: 'Nadie usa el protocolo' }, { id: 'b', text: 'Confianza y uso creciente del protocolo' }, { id: 'c', text: 'Es una estafa' }], correctAnswer: 'b', explanation: 'Más dinero depositado suele indicar salud en un protocolo DeFi.' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: '¿Cuál es la herramienta número 1 para ver salud real de un protocolo DeFi?',
+          options: [
+            { id: 'a', text: 'Twitter' },
+            { id: 'b', text: 'DefiLlama → TVL + Fees + Revenue' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'DefiLlama muestra métricas objetivas on-chain, no promesas de marketing.'
+        },
+        {
+          id: 'q2',
+          question: 'Un proyecto tiene 3 meses de vida tiene 300M TVL pero solo 20k revenue mensual. ¿Qué opinas?',
+          options: [
+            { id: 'a', text: 'Está infravalorado' },
+            { id: 'b', text: 'Ponzi o farming de puntos — no sostenible' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Alto TVL sin revenue = incentivos artificiales, no demanda real.'
+        },
+        {
+          id: 'q3',
+          question: '¿Dónde ves los unlocks futuros?',
+          options: [
+            { id: 'a', text: 'TokenUnlocks.app' },
+            { id: 'b', text: 'CoinMarketCap' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'TokenUnlocks.app te muestra calendario exacto de desbloqueos de supply.'
+        },
+        {
+          id: 'q4',
+          question: '¿Qué porcentaje del supply debería tener el equipo como máximo?',
+          options: [
+            { id: 'a', text: '30%+' },
+            { id: 'b', text: '10–20% con vesting largo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Más de 20% al equipo = control centralizado y riesgo de dump.'
+        }
+      ]
+    }
   },
   20: {
     id: 20,
@@ -738,7 +1405,40 @@ export const LESSONS_DATA: Record<number, any> = {
     type: 'Estrategia',
     description: 'El mercado se mueve por atención. Identifica la narrativa caliente (IA, Gaming, Meme) temprano.',
     sections: [{ type: 'intro', title: 'La Economía de la Atención', content: 'En cripto, la tecnología importa, pero la atención importa más a corto plazo. Sigue la narrativa, no te cases con tus bolsas.' }],
-    quiz: { questions: [{ id: 'q1', question: '¿Qué debes hacer cuando una narrativa está en todos los medios masivos?', options: [{ id: 'a', text: 'Comprar todo' }, { id: 'b', text: 'Considerar vender (ya es tarde)' }, { id: 'c', text: 'Esperar' }], correctAnswer: 'b', explanation: 'Cuando llega a las noticias generales, usualmente el movimiento explosivo ya pasó.' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: 'En 2025 la narrativa más caliente es IA + agentes. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Apeo todo lo que diga "AI"' },
+            { id: 'b', text: 'Busco proyectos con producto real y bajo market cap' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Las narrativas calientes son reales, pero debes filtrar vapor de proyectos serios.'
+        },
+        {
+          id: 'q2',
+          question: '¿Cuándo es el mejor momento para entrar en una narrativa?',
+          options: [
+            { id: 'a', text: 'Cuando está en todos los diarios' },
+            { id: 'b', text: 'Cuando solo los degenerados de CT hablan de ella' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Crypto Twitter (CT) ve las narrativas meses antes que los medios mainstream.'
+        },
+        {
+          id: 'q3',
+          question: '¿Qué narrativa dominó 2024 y sigue fuerte 2025?',
+          options: [
+            { id: 'a', text: 'Metaverso' },
+            { id: 'b', text: 'Memecoins + atención retail' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los memes capturan atención y liquidez retail de forma única en Solana.'
+        }
+      ]
+    }
   },
   21: {
     id: 21,
@@ -749,7 +1449,40 @@ export const LESSONS_DATA: Record<number, any> = {
     type: 'Estrategia',
     description: 'Construye un portafolio que sobreviva a cualquier caída. Barbell Strategy.',
     sections: [{ type: 'main', title: 'Estructura Sólida', content: 'Base segura (BTC/SOL) + Apuestas asimétricas (Memes/Low caps) + Liquidez (USDC para comprar caídas).' }],
-    quiz: { questions: [{ id: 'q1', question: '¿Por qué tener USDC en el portafolio?', options: [{ id: 'a', text: 'Para no ganar nada' }, { id: 'b', text: 'Para comprar oportunidades cuando el mercado cae' }, { id: 'c', text: 'Es obligatorio' }], correctAnswer: 'b', explanation: 'La liquidez ("pólvora seca") te permite aprovechar correcciones.' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: 'Tienes 10 000 USD. ¿Cuál es la asignación más inteligente 2025?',
+          options: [
+            { id: 'a', text: '100% en una memecoin' },
+            { id: 'b', text: '60% BTC/ETH/SOL — 30% narrativas — 10% USDC' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Base sólida + apuestas asimétricas + liquidez para oportunidades = balance óptimo.'
+        },
+        {
+          id: 'q2',
+          question: '¿Cuántas posiciones máximo posiciones deberías tener?',
+          options: [
+            { id: 'a', text: '50+' },
+            { id: 'b', text: '8–12 máximo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Más = imposible seguir bien.'
+        },
+        {
+          id: 'q3',
+          question: '¿Por qué tener 10–20% en USDC es obligatorio?',
+          options: [
+            { id: 'a', text: 'Porque es seguro' },
+            { id: 'b', text: 'Para comprar la próxima caída del 50% con descuento' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Cash is a position. Liquidez = optionalidad para aprovechar pánico del mercado.'
+        }
+      ]
+    }
   },
   22: {
     id: 22,
@@ -760,7 +1493,40 @@ export const LESSONS_DATA: Record<number, any> = {
     type: 'Tutorial Práctico',
     description: 'Sobrevivir es lo primero. Aprende a cortar las pérdidas rápido.',
     sections: [{ type: 'intro', title: 'Tu Seguro de Vida', content: 'Un Stop Loss no es una pérdida, es el costo de hacer negocios. Te protege de la ruina total.' }],
-    quiz: { questions: [{ id: 'q1', question: '¿Cuándo defines tu Stop Loss?', options: [{ id: 'a', text: 'Cuando vas perdiendo mucho' }, { id: 'b', text: 'ANTES de entrar a la operación' }, { id: 'c', text: 'Nunca' }], correctAnswer: 'b', explanation: 'Debe ser parte de tu plan inicial, sin emociones involucradas.' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: '¿Cuál es la regla de oro del stop loss?',
+          options: [
+            { id: 'a', text: 'Ponerlo cuando ya perdiste 20%' },
+            { id: 'b', text: 'Definirlo ANTES de entrar y nunca moverlo hacia abajo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El stop es no-negociable. Moverlo hacia abajo = muerte lenta garantizada.'
+        },
+        {
+          id: 'q2',
+          question: 'Compras SOL a 180$ con stop en 162$. ¿Cuánto arriesgas por operación si tu cuenta es 10k USD?',
+          options: [
+            { id: 'a', text: 'Todo' },
+            { id: 'b', text: 'Máximo 100–200 USD (1–2%)' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Riesgo máximo 1-2% por trade = puedes perder 50 veces seguidas y sobrevivir.'
+        },
+        {
+          id: 'q3',
+          question: 'El precio toca tu stop y rebota fuerte. ¿Qué hiciste bien?',
+          options: [
+            { id: 'a', text: 'Nada, perdí' },
+            { id: 'b', text: 'Protegí mi capital — puedo volver a entrar más barato' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Sobrevivir > tener razón.'
+        }
+      ]
+    }
   },
   23: {
     id: 23,
@@ -771,7 +1537,40 @@ export const LESSONS_DATA: Record<number, any> = {
     type: 'Tutorial Práctico',
     description: 'Las ganancias no son reales hasta que vendes. Aprende a vender escalonadamente.',
     sections: [{ type: 'intro', title: 'Vende en la Euforia', content: 'Cuando estés tomando capturas de pantalla de tus ganancias para presumir, es momento de vender.' }],
-    quiz: { questions: [{ id: 'q1', question: '¿Qué es vender escalonadamente?', options: [{ id: 'a', text: 'Vender todo de golpe' }, { id: 'b', text: 'Vender porcentajes (25%, 50%) a medida que el precio sube' }, { id: 'c', text: 'Vender cuando baja' }], correctAnswer: 'b', explanation: 'Aseguras ganancias pero dejas una parte por si sigue subiendo ("Moonbag").' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: 'Tu posición está +300% en 3 días. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'HODL hasta la luna' },
+            { id: 'b', text: 'Vendo 50–70% y dejo el resto con stop en break-even' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Tomas ganancias reales y dejas correr el resto sin riesgo. Best of both worlds.'
+        },
+        {
+          id: 'q2',
+          question: '¿Cuál es la estrategia de salida más usada por traders rentables?',
+          options: [
+            { id: 'a', text: 'Vender todo cuando llegue a target' },
+            { id: 'b', text: 'Escalada: 30% en +50%, 30% en +100%, 20% en +200%, 20% moonbag' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Scaling out asegura ganancias en cada nivel mientras mantienes upside ilimitado.'
+        },
+        {
+          id: 'q3',
+          question: '¿Por qué nunca debes mover tu take profit hacia arriba después de entrar?',
+          options: [
+            { id: 'a', text: 'Porque no pasa nada' },
+            { id: 'b', text: 'Porque te vuelve emocional y reduces tu ratio riesgo/beneficio' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Plan definido pre-trade = decisiones objetivas. Cambiarlo mid-trade = emociones.'
+        }
+      ]
+    }
   },
   24: {
     id: 24,
@@ -782,7 +1581,50 @@ export const LESSONS_DATA: Record<number, any> = {
     type: 'Psicología',
     description: 'Tú eres tu peor enemigo. Controla el FOMO, la avaricia y el miedo.',
     sections: [{ type: 'intro', title: 'Psicología > Técnica', content: 'Puedes tener la mejor estrategia, pero si no tienes disciplina, perderás dinero.' }],
-    quiz: { questions: [{ id: 'q1', question: 'Ves una moneda subiendo verticalmente 100% en una hora. ¿Qué haces?', options: [{ id: 'a', text: 'Compro ya (FOMO)' }, { id: 'b', text: 'Espero un retroceso o busco otra oportunidad' }, { id: 'c', text: 'Pido un préstamo' }], correctAnswer: 'b', explanation: 'Nunca persigas velas verdes. El riesgo de comprar en el pico es máximo.' }] }
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: 'Pierdes 5 trades seguidos respetando tu plan. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Aumento el tamaño' },
+            { id: 'b', text: 'Sigo exactamente igual — la racha negativa es normal' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Incluso con 60% win rate, 5 pérdidas seguidas pasa. No cambies el sistema por varianza.'
+        },
+        {
+          id: 'q2',
+          question: 'La mejor forma de controlar el FOMO es:',
+          options: [
+            { id: 'a', text: 'No mirar precios' },
+            { id: 'b', text: 'Tener un plan escrito y seguirlo aunque duela' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Un plan claro te ancla cuando las emociones gritan "¡compra ahora!"'
+        },
+        {
+          id: 'q3',
+          question: '¿Cuál es la frase que más dinero ha perdido en cripto?',
+          options: [
+            { id: 'a', text: 'Buy the dip' },
+            { id: 'b', text: 'This time is different' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los ciclos se repiten. La codicia hace que la gente crea que "esta vez sí" en el pico.'
+        },
+        {
+          id: 'q4',
+          question: '¿Cuántos trades necesitas para evaluar si tu estrategia funciona?',
+          options: [
+            { id: 'a', text: '10' },
+            { id: 'b', text: 'Mínimo 100–200 trades' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Menos = pura suerte o mala suerte.'
+        }
+      ]
+    }
   },
   25: {
     id: 25,
@@ -811,7 +1653,28 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Qué ventaja tiene Jupiter sobre un DEX simple?', options: [{ id: 'a', text: 'Ninguna' }, { id: 'b', text: 'Busca la mejor ruta de precio entre todos los DEXs (Agregador)' }, { id: 'c', text: 'Es más caro' }], correctAnswer: 'b', explanation: 'Al agregar liquidez de todos lados, minimiza el impacto en el precio (Slippage).' }
+        {
+          id: 'q1',
+          question: 'Quieres cambiar 500 USDC → SOL con el menor slippage posible. ¿Qué opción eliges en Jupiter?',
+          options: [
+            { id: 'a', text: 'Fast (default)' },
+            { id: 'b', text: 'Jito Tips + Exact Out + Limit Order' },
+            { id: 'c', text: 'Cualquier ruta, da igual' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'En 2025 el modo "Exact Out" + Jito Tips te da el mejor precio real del mercado (frente a bots).'
+        },
+        {
+          id: 'q2',
+          question: 'Estás haciendo DCA diario de 50 $ en SOL. ¿Cuál es la forma más eficiente en Jupiter?',
+          options: [
+            { id: 'a', text: 'Hacer el swap manual todos los días' },
+            { id: 'b', text: 'Crear un DCA automático en Jupiter (0 comisiones extra)' },
+            { id: 'c', text: 'Usar un bot externo de Telegram' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Jupiter tiene DCA nativo gratuito y sin riesgo de custodia.'
+        }
       ]
     }
   },
@@ -833,7 +1696,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿De dónde salen los rendimientos (Yield) reales?', options: [{ id: 'a', text: 'Magia' }, { id: 'b', text: 'De las comisiones que pagan los traders por intercambiar tokens' }, { id: 'c', text: 'Del gobierno' }], correctAnswer: 'b', explanation: 'El "Real Yield" proviene de actividad económica real (fees), no de impresión de tokens.' }
+        {
+          id: 'q1',
+          question: 'Proporcionas 10 000 $ en el pool SOL-USDC. SOL sube 100 %. ¿Cuánto tienes al final (aprox) si no hay fees?',
+          options: [
+            { id: 'a', text: '20 000 $' },
+            { id: 'b', text: '13 400 $ (pérdida impermanente)' },
+            { id: 'c', text: '10 000 $' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Fórmula aproximada: √2 × valor inicial ≈ 1.41 → pierdes ≈27 % vs HODL cuando un activo sube 100 %.'
+        },
+        {
+          id: 'q2',
+          question: '¿En qué caso sí vale la pena proveer liquidez aunque haya impermanent loss?',
+          options: [
+            { id: 'a', text: 'Nunca' },
+            { id: 'b', text: 'Cuando los fees generados superan la IL (pools estables o pools de memecoins volátiles)' },
+            { id: 'c', text: 'Solo en bear markets' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Ejemplo real: pool PENGU-USDC en Raydium genera 300–1000 % APY en fees durante hype.'
+        },
+        {
+          id: 'q3',
+          question: 'Estás en un pool concentrado (Meteora DLMM). El precio sale de tu rango. ¿Qué pasa?',
+          options: [
+            { id: 'a', text: 'Pierdes todo' },
+            { id: 'b', text: 'Tu posición se convierte 100 % al stable side y dejas de ganar fees' },
+            { id: 'c', text: 'El protocolo te liquida' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Eso es exactamente lo que hace DLMM: fuera de rango = 100 % USDC y cero fees.'
+        }
       ]
     }
   },
@@ -855,7 +1750,28 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Para qué sirve depositar colateral?', options: [{ id: 'a', text: 'Para guardarlo' }, { id: 'b', text: 'Para pedir un préstamo sobre él sin venderlo' }, { id: 'c', text: 'Para regalarlo' }], correctAnswer: 'b', explanation: 'Es la base de las finanzas descentralizadas y el apalancamiento.' }
+        {
+          id: 'q1',
+          question: 'Depositas 10 SOL como colateral en Kamino y pides prestado 500 USDC. SOL cae 40 %. ¿Qué pasa con más probabilidad?',
+          options: [
+            { id: 'a', text: 'Nada, todo bien' },
+            { id: 'b', text: 'Te liquidan y pierdes parte o todo tu SOL' },
+            { id: 'c', text: 'Kamino te regala más SOL' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Health rate < 1 = liquidación automática. Nunca pidas prestado más del 50–60 % LTV en activos volátiles.'
+        },
+        {
+          id: 'q2',
+          question: '¿Cuál es la estrategia más usada por whales en Solana 2025 para hacer yield sin vender?',
+          options: [
+            { id: 'a', text: 'Borrow USDC → Swap a SOL → Depositar más SOL → Loop (hasta 3–4x)' },
+            { id: 'b', text: 'Solo HODL' },
+            { id: 'c', text: 'Stakear en Marinade' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Se llama "leverage looping" o "points farming con apalancamiento". Jito + Kamino/Marginfi = 30–70 % APY real + puntos.'
+        }
       ]
     }
   },
@@ -877,7 +1793,28 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: 'Si SOL se dispara un 100% mientras estás en un pool SOL-USDC, ¿qué pasa?', options: [{ id: 'a', text: 'Ganas más que holdeando' }, { id: 'b', text: 'Tienes menos SOL que al inicio (Impermanent Loss)' }, { id: 'c', text: 'Nada' }], correctAnswer: 'b', explanation: 'El AMM rebalancea vendiendo el activo ganador. Es el costo de oportunidad de ser LP.' }
+        {
+          id: 'q1',
+          question: '¿En qué tipo de pool la Impermanent Loss es casi cero aunque un token suba 10x?',
+          options: [
+            { id: 'a', text: 'Pool SOL-USDC' },
+            { id: 'b', text: 'Pool USDC-USDT (stable)' },
+            { id: 'c', text: 'Pool BONK-SOL' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'En pools de stablecoins la IL es prácticamente nula porque el precio relativo no cambia.'
+        },
+        {
+          id: 'q2',
+          question: 'Estás en un pool concentrado (DLMM) y el precio se va a la mierda. ¿Qué estrategia minimiza pérdidas?',
+          options: [
+            { id: 'a', text: 'No hacer nada' },
+            { id: 'b', text: 'Retirar liquidez y volver a poner en nuevo rango' },
+            { id: 'c', text: 'Añadir más liquidez' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Rebalancing manual o automático es obligatorio en pools concentrados.'
+        }
       ]
     }
   },
@@ -902,7 +1839,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Qué permite la tecnología de compresión de Solana (cNFTs)?', options: [{ id: 'a', text: 'Imágenes borrosas' }, { id: 'b', text: 'Crear millones de NFTs a costo casi cero' }, { id: 'c', text: 'Nada nuevo' }], correctAnswer: 'b', explanation: 'Esto habilita casos de uso masivos como tickets, recibos y gaming que antes eran muy caros.' }
+        {
+          id: 'q1',
+          question: '¿Qué permite la tecnología de compresión de Solana (cNFTs)?',
+          options: [
+            { id: 'a', text: 'Imágenes borrosas' },
+            { id: 'b', text: 'Crear millones de NFTs a costo casi cero' },
+            { id: 'c', text: 'Nada nuevo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Esto habilita casos de uso masivos como tickets, recibos y gaming que antes eran muy caros.'
+        },
+        {
+          id: 'q2',
+          question: 'Quieres comprar un NFT en Solana. ¿Cuál es el marketplace más usado en 2025?',
+          options: [
+            { id: 'a', text: 'OpenSea (Ethereum)' },
+            { id: 'b', text: 'Tensor o Magic Eden' },
+            { id: 'c', text: 'Amazon' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Tensor es el exchange profesional de NFTs en Solana. Magic Eden es el más mainstream.'
+        },
+        {
+          id: 'q3',
+          question: '¿Por qué los NFTs de Solana son más baratos de mintear que en Ethereum?',
+          options: [
+            { id: 'a', text: 'Porque valen menos' },
+            { id: 'b', text: 'Porque los fees de Solana son <$0.001 vs $30-$100 en Ethereum' },
+            { id: 'c', text: 'Son igual de caros' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Esto permite experimentación masiva en gaming, arte generativo y utilidad on-chain.'
+        }
       ]
     }
   },
@@ -924,7 +1893,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Cuál es la mejor forma de calificar para airdrops?', options: [{ id: 'a', text: 'Crear 1000 wallets con $1' }, { id: 'b', text: 'Ser un usuario real, constante y con volumen orgánico' }, { id: 'c', text: 'Pedir al dev por DM' }], correctAnswer: 'b', explanation: 'Los protocolos filtran a los bots. El uso orgánico y real es lo que más se premia.' }
+        {
+          id: 'q1',
+          question: '¿Cuál es la mejor forma de calificar para airdrops?',
+          options: [
+            { id: 'a', text: 'Crear 1000 wallets con $1' },
+            { id: 'b', text: 'Ser un usuario real, constante y con volumen orgánico' },
+            { id: 'c', text: 'Pedir al dev por DM' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los protocolos filtran a los bots. El uso orgánico y real es lo que más se premia.'
+        },
+        {
+          id: 'q2',
+          question: 'Usaste Jupiter y Kamino desde hace 1 año. Ambos anuncian airdrop. ¿Qué esperas recibir?',
+          options: [
+            { id: 'a', text: 'Nada, fue suerte' },
+            { id: 'b', text: 'Tokens (JUP, KMNO) proporcionales a tu uso histórico del protocolo' },
+            { id: 'c', text: 'Un NFT' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los airdrops recompensan a los early adopters y usuarios fieles con tokens de gobernanza.'
+        },
+        {
+          id: 'q3',
+          question: '¿Qué es "sybil farming"?',
+          options: [
+            { id: 'a', text: 'Agricultura tradicional' },
+            { id: 'b', text: 'Crear muchas wallets falsas para manipular airdrops (está penalizado)' },
+            { id: 'c', text: 'Un tipo de staking' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los protocolos usan análisis on-chain para detectar y excluir a los sybils. No vale la pena.'
+        }
       ]
     }
   },
@@ -946,7 +1947,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Qué es DePIN?', options: [{ id: 'a', text: 'Un memecoin' }, { id: 'b', text: 'Redes de infraestructura física descentralizada' }, { id: 'c', text: 'Un exchange' }], correctAnswer: 'b', explanation: 'Es el uso de crypto para coordinar construcción de infraestructura real (mapas, telecomunicaciones, etc).' }
+        {
+          id: 'q1',
+          question: '¿Qué es DePIN?',
+          options: [
+            { id: 'a', text: 'Un memecoin' },
+            { id: 'b', text: 'Redes de infraestructura física descentralizada' },
+            { id: 'c', text: 'Un exchange' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Es el uso de crypto para coordinar construcción de infraestructura real (mapas, telecomunicaciones, etc).'
+        },
+        {
+          id: 'q2',
+          question: 'Instalas una cámara dashcam de Hivemapper en tu auto. ¿Qué obtienes?',
+          options: [
+            { id: 'a', text: 'Nada' },
+            { id: 'b', text: 'Tokens HONEY por cada kilómetro que mapeas (contribuyes a Google Maps descentralizado)' },
+            { id: 'c', text: 'Un NFT' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'DePIN recompensa a la gente por construir infraestructura con tokens. Hivemapper mapea el mundo real.'
+        },
+        {
+          id: 'q3',
+          question: '¿Por qué Solana es la blockchain favorita para DePIN?',
+          options: [
+            { id: 'a', text: 'Porque es amarilla' },
+            { id: 'b', text: 'Porque puede procesar millones de micro-transacciones de sensores IoT a costo casi cero' },
+            { id: 'c', text: 'Porque es la más cara' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Proyectos como Helium migraron a Solana porque Ethereum L1 no puede manejar ese volumen.'
+        }
       ]
     }
   },
@@ -971,7 +2004,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Cuál es la ventaja de una chain Monolítica como Solana?', options: [{ id: 'a', text: 'Es más lenta' }, { id: 'b', text: 'Toda la liquidez y apps están en el mismo lugar (Componibilidad sincrónica)' }, { id: 'c', text: 'Es más cara' }], correctAnswer: 'b', explanation: 'Elimina la necesidad de bridges complejos y fragmentación que sufren los ecosistemas modulares.' }
+        {
+          id: 'q1',
+          question: '¿Cuál es la ventaja de una chain Monolítica como Solana?',
+          options: [
+            { id: 'a', text: 'Es más lenta' },
+            { id: 'b', text: 'Toda la liquidez y apps están en el mismo lugar (Componibilidad sincrónica)' },
+            { id: 'c', text: 'Es más cara' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Elimina la necesidad de bridges complejos y fragmentación que sufren los ecosistemas modulares.'
+        },
+        {
+          id: 'q2',
+          question: 'Ethereum usa L2s (Arbitrum, Base, Optimism). ¿Qué problema crea esto?',
+          options: [
+            { id: 'a', text: 'Fragmenta la liquidez y complica mover dinero entre capas (bridges)' },
+            { id: 'b', text: 'Ninguno, es perfecto' },
+            { id: 'c', text: 'Es más barato' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Cada L2 es una isla con su propia liquidez. Necesitas bridges (riesgosos y lentos) para moverte entre ellas.'
+        },
+        {
+          id: 'q3',
+          question: 'Quieres hacer un swap y luego depositar en un lending protocol. En Solana:',
+          options: [
+            { id: 'a', text: 'Necesitas cambiar de red (bridge)' },
+            { id: 'b', text: 'Todo ocurre en la misma transacción atómica en L1' },
+            { id: 'c', text: 'Necesitas esperar 1 hora' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Componibilidad sincrónica = todas las apps hablan entre sí instantáneamente en una sola transacción.'
+        }
       ]
     }
   },
@@ -993,7 +2058,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Qué es Firedancer?', options: [{ id: 'a', text: 'Un nuevo token' }, { id: 'b', text: 'Un nuevo cliente de software para hacer Solana más rápida y segura' }, { id: 'c', text: 'Un juego' }], correctAnswer: 'b', explanation: 'Es una reescritura completa del código base de Solana optimizada para rendimiento extremo.' }
+        {
+          id: 'q1',
+          question: '¿Qué es Firedancer?',
+          options: [
+            { id: 'a', text: 'Un nuevo token' },
+            { id: 'b', text: 'Un nuevo cliente de software para hacer Solana más rápida y segura' },
+            { id: 'c', text: 'Un juego' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Es una reescritura completa del código base de Solana optimizada para rendimiento extremo.'
+        },
+        {
+          id: 'q2',
+          question: '¿Quién está construyendo Firedancer?',
+          options: [
+            { id: 'a', text: 'Jump Crypto (expertos en trading de alta frecuencia)' },
+            { id: 'b', text: 'Ethereum Foundation' },
+            { id: 'c', text: 'Un developer anónimo' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Jump Crypto construye infraestructura de trading que procesa millones de órdenes por segundo. Están aplicando esa expertise a Solana.'
+        },
+        {
+          id: 'q3',
+          question: '¿Por qué es importante tener un segundo cliente (Firedancer + Labs client)?',
+          options: [
+            { id: 'a', text: 'No importa' },
+            { id: 'b', text: 'Diversidad de clientes = menos riesgo. Si un cliente tiene un bug, la red sigue funcionando' },
+            { id: 'c', text: 'Para competir' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Ethereum aprendió esto. Un bug en el cliente mayoritario puede tumbar toda la red. Dos clientes = resiliencia.'
+        }
       ]
     }
   },
@@ -1018,7 +2115,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Para qué usar una "Burner Wallet"?', options: [{ id: 'a', text: 'Para quemar dinero' }, { id: 'b', text: 'Para interactuar con sitios de riesgo sin exponer tus ahorros principales' }, { id: 'c', text: 'Es ilegal' }], correctAnswer: 'b', explanation: 'Aísla el riesgo. Si la burner es hackeada, solo pierdes lo que tenía esa wallet, no tu patrimonio.' }
+        {
+          id: 'q1',
+          question: '¿Para qué usar una "Burner Wallet"?',
+          options: [
+            { id: 'a', text: 'Para quemar dinero' },
+            { id: 'b', text: 'Para interactuar con sitios de riesgo sin exponer tus ahorros principales' },
+            { id: 'c', text: 'Es ilegal' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Aísla el riesgo. Si la burner es hackeada, solo pierdes lo que tenía esa wallet, no tu patrimonio.'
+        },
+        {
+          id: 'q2',
+          question: 'Tienes 50 000 $ en cripto. ¿Cuál es la mejor estrategia de seguridad?',
+          options: [
+            { id: 'a', text: 'Todo en una sola hot wallet (Phantom en tu celular)' },
+            { id: 'b', text: 'La mayor parte en Ledger (cold wallet) + algo en Phantom para operar + burner wallet para dApps nuevas' },
+            { id: 'c', text: 'Todo en Binance' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Separación de fondos: Cold (ahorro), Hot (operativa), Burner (experimentación). Nunca pongas todos los huevos en una canasta.'
+        },
+        {
+          id: 'q3',
+          question: 'Conectaste tu wallet a 15 dApps el año pasado. ¿Qué debes hacer?',
+          options: [
+            { id: 'a', text: 'Nada, es automático' },
+            { id: 'b', text: 'Usar revoke.cash (Ethereum) o similar para revocar permisos antiguos' },
+            { id: 'c', text: 'Crear una wallet nueva' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Algunos contratos maliciosos pueden tener permisos de "gasto infinito". Revoca lo que no uses activamente.'
+        }
       ]
     }
   },
@@ -1055,7 +2184,39 @@ export const LESSONS_DATA: Record<number, any> = {
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Qué ventaja tiene una tarjeta cripto?', options: [{ id: 'a', text: 'Es de metal' }, { id: 'b', text: 'Permite gastar tus activos sin pasar por un banco tradicional' }, { id: 'c', text: 'Es gratis' }], correctAnswer: 'b', explanation: 'Conectan el mundo DeFi con el sistema de pagos tradicional Visa/Mastercard.' }
+        {
+          id: 'q1',
+          question: '¿Qué ventaja tiene una tarjeta cripto?',
+          options: [
+            { id: 'a', text: 'Es de metal' },
+            { id: 'b', text: 'Permite gastar tus activos sin pasar por un banco tradicional' },
+            { id: 'c', text: 'Es gratis' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Conectan el mundo DeFi con el sistema de pagos tradicional Visa/Mastercard.'
+        },
+        {
+          id: 'q2',
+          question: 'Tienes 1000 USDC en tu Phantom. ¿Puedes comprar en Amazon directamente?',
+          options: [
+            { id: 'a', text: 'Sí, Amazon acepta USDC' },
+            { id: 'b', text: 'No, necesitas transferir USDC a una tarjeta cripto (Kast, Avici) que convierte a fiat al momento del pago' },
+            { id: 'c', text: 'Solo si compras NFTs' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Las tarjetas cripto actúan de puente: tú pagas en cripto, el comercio recibe fiat.'
+        },
+        {
+          id: 'q3',
+          question: '¿Por qué muchos prefieren gastar USDC en vez de SOL?',
+          options: [
+            { id: 'a', text: 'USDC es más rápido' },
+            { id: 'b', text: 'USDC es estable (= $1 siempre). Gastar SOL es gastar un activo que puede subir de precio' },
+            { id: 'c', text: 'SOL no se puede gastar' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Gastar SOL cuando vale $100 y verlo subir a $200 duele. Los stablecoins son mejores para gastos diarios.'
+        }
       ]
     }
   }

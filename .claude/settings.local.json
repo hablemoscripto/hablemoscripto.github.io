@@ -14,7 +14,10 @@
       "Bash(git commit:*)",
       "Bash(git -C /c/Users/Sebastian/Desktop/HablemosCriptoMainGithub/hablemoscripto.github.io log --oneline -20)",
       "Bash(npm view:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(timeout 10 npm run dev:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node -e \"require(''./data/courseData.ts'')\")"
     ],
     "deny": [],
     "ask": []
