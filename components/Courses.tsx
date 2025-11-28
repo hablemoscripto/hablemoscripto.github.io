@@ -1,5 +1,7 @@
 import React from 'react';
 import { Book, TrendingUp, Rocket, CheckCircle2, Lock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const CourseCard: React.FC<{
   title: string;
@@ -9,7 +11,8 @@ const CourseCard: React.FC<{
   icon: React.ElementType;
   delay: string;
   isLocked?: boolean;
-}> = ({ title, level, description, features, icon: Icon, delay, isLocked = false }) => (
+  onStartLevel: () => void;
+}> = ({ title, level, description, features, icon: Icon, delay, isLocked = false, onStartLevel }) => (
   <div className={`group relative bg-slate-900 rounded-2xl border border-slate-800 p-8 ${!isLocked ? 'hover:border-brand-500/50 hover:-translate-y-2' : 'opacity-75'} transition-all duration-500 overflow-hidden ${delay}`}>
     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
@@ -36,6 +39,7 @@ const CourseCard: React.FC<{
     </ul>
 
     <button
+      onClick={onStartLevel}
       disabled={isLocked}
       className={`w-full py-3 rounded-lg border font-medium transition-all flex items-center justify-center gap-2 ${
         isLocked
@@ -56,6 +60,18 @@ const CourseCard: React.FC<{
 );
 
 const Courses: React.FC = () => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handleStartLevel = () => {
+    if (user) {
+      navigate('/education');
+    } else {
+      // Scroll to top and the parent LandingPage will handle the auth modal
+      navigate('/?showAuth=true');
+    }
+  };
+
   const courses = [
     {
       title: "Bases Sólidas",
@@ -104,7 +120,7 @@ const Courses: React.FC = () => {
 
         <div className="grid md:grid-cols-3 gap-8">
           {courses.map((course, index) => (
-            <CourseCard key={index} {...course} />
+            <CourseCard key={index} {...course} onStartLevel={handleStartLevel} />
           ))}
         </div>
       </div>
