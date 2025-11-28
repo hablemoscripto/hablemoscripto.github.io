@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import Features from './Features';
@@ -6,7 +6,7 @@ import Courses from './Courses';
 import Footer from './Footer';
 import AuthModal from './AuthModal';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 interface LandingPageProps {
@@ -17,12 +17,34 @@ const LandingPage: React.FC<LandingPageProps> = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Check if redirected from protected route
+  useEffect(() => {
+    if (searchParams.get('showAuth') === 'true') {
+      setIsAuthModalOpen(true);
+      // Clean up the URL parameter
+      searchParams.delete('showAuth');
+      setSearchParams(searchParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   const handleNavigateToEducation = () => {
     if (user) {
       navigate('/education');
     } else {
       setIsAuthModalOpen(true);
+    }
+  };
+
+  const handleLoginSuccess = () => {
+    // Check if there's a redirect URL stored
+    const redirectPath = sessionStorage.getItem('redirectAfterLogin');
+    if (redirectPath) {
+      sessionStorage.removeItem('redirectAfterLogin');
+      navigate(redirectPath);
+    } else {
+      navigate('/education');
     }
   };
 
@@ -64,7 +86,7 @@ const LandingPage: React.FC<LandingPageProps> = () => {
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
-        onLoginSuccess={() => navigate('/education')}
+        onLoginSuccess={handleLoginSuccess}
       />
     </motion.div>
   );

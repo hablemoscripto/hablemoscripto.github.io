@@ -245,7 +245,19 @@ const Navbar: React.FC<NavbarProps> = () => {
       )}
 
       {/* Auth Modal */}
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onLoginSuccess={() => {
+          // Check if there's a redirect URL stored
+          const redirectPath = sessionStorage.getItem('redirectAfterLogin');
+          if (redirectPath) {
+            sessionStorage.removeItem('redirectAfterLogin');
+            navigate(redirectPath);
+          }
+          setIsAuthModalOpen(false);
+        }}
+      />
     </>
   );
 };

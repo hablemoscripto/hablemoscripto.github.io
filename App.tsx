@@ -6,6 +6,7 @@ import LandingPage from './components/LandingPage';
 import EducationPage from './components/EducationPage';
 import LessonView from './components/LessonView';
 import LevelDetail from './components/LevelDetail';
+import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProgressProvider } from './contexts/ProgressContext';
 import ChatWidget from './components/ChatWidget';
@@ -18,11 +19,46 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/education" element={<EducationPage />} />
-        <Route path="/education/beginner" element={<LevelDetail levelData={BEGINNER_LEVEL} />} />
-        <Route path="/education/intermediate" element={<LevelDetail levelData={INTERMEDIATE_LEVEL} />} />
-        <Route path="/education/advanced" element={<LevelDetail levelData={ADVANCED_LEVEL} />} />
-        <Route path="/education/lesson/:lessonId" element={<LessonView />} />
+        <Route
+          path="/education"
+          element={
+            <ProtectedRoute>
+              <EducationPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/education/beginner"
+          element={
+            <ProtectedRoute>
+              <LevelDetail levelData={BEGINNER_LEVEL} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/education/intermediate"
+          element={
+            <ProtectedRoute>
+              <LevelDetail levelData={INTERMEDIATE_LEVEL} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/education/advanced"
+          element={
+            <ProtectedRoute>
+              <LevelDetail levelData={ADVANCED_LEVEL} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/education/lesson/:lessonId"
+          element={
+            <ProtectedRoute>
+              <LessonView />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AnimatePresence>
