@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import { Download, Mail, Users, Trash2, RefreshCw } from 'lucide-react';
+import { Download, Mail, Users, Trash2, RefreshCw, Send, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,6 +15,11 @@ const NewsletterAdmin: React.FC = () => {
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [showEmailComposer, setShowEmailComposer] = useState(false);
+  const [emailSubject, setEmailSubject] = useState('');
+  const [emailContent, setEmailContent] = useState('');
+  const [sending, setSending] = useState(false);
+  const [sendStatus, setSendStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -76,6 +81,69 @@ const NewsletterAdmin: React.FC = () => {
     alert('Emails copiados al portapapeles!');
   };
 
+  const handleSendNewsletter = async () => {
+    if (!emailSubject.trim() || !emailContent.trim()) {
+      setSendStatus({ type: 'error', message: 'Por favor completa todos los campos' });
+      return;
+    }
+
+    const activeEmails = subscribers
+      .filter(sub => sub.is_active)
+      .map(sub => sub.email);
+
+    if (activeEmails.length === 0) {
+      setSendStatus({ type: 'error', message: 'No hay suscriptores activos' });
+      return;
+    }
+
+    setSending(true);
+    setSendStatus(null);
+
+    try {
+      const response = await fetch('/api/send-newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          subject: emailSubject,
+          content: emailContent,
+          emails: activeEmails,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Error al enviar');
+      }
+
+      setSendStatus({
+        type: 'success',
+        message: `¡Newsletter enviado exitosamente a ${activeEmails.length} suscriptores!`
+      });
+
+      // Reset form
+      setEmailSubject('');
+      setEmailContent('');
+
+      // Close composer after 3 seconds
+      setTimeout(() => {
+        setShowEmailComposer(false);
+        setSendStatus(null);
+      }, 3000);
+
+    } catch (error: any) {
+      console.error('Send newsletter error:', error);
+      setSendStatus({
+        type: 'error',
+        message: error.message || 'Error al enviar el newsletter'
+      });
+    } finally {
+      setSending(false);
+    }
+  };
+
   const activeSubscribers = subscribers.filter(sub => sub.is_active);
 
   if (loading) {
@@ -133,6 +201,15 @@ const NewsletterAdmin: React.FC = () => {
 
         {/* Actions */}
         <div className="flex flex-wrap gap-4 mb-8">
+          <button
+            onClick={() => setShowEmailComposer(true)}
+            disabled={activeSubscribers.length === 0}
+            className="flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-600/20"
+          >
+            <Send size={20} />
+            Enviar Newsletter
+          </button>
+
           <button
             onClick={exportToCSV}
             className="flex items-center gap-2 px-6 py-3 bg-brand-500 hover:bg-brand-400 text-slate-900 font-bold rounded-xl transition-colors"
@@ -211,33 +288,114 @@ const NewsletterAdmin: React.FC = () => {
           </div>
         </div>
 
-        {/* Email Campaign Info */}
-        <div className="mt-8 bg-slate-900/50 border border-brand-500/20 rounded-xl p-6">
-          <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
-            <Mail className="text-brand-500" />
-            Cómo Enviar Emails Masivos
-          </h3>
-          <ol className="space-y-2 text-slate-300">
-            <li>1. Haz clic en "Copiar Emails" o "Exportar CSV" arriba</li>
-            <li>2. Usa una plataforma de email marketing:</li>
-            <ul className="ml-6 mt-2 space-y-1 text-sm">
-              <li>• <strong>Resend</strong> (recomendado) - 100 emails/día gratis, $20/mes para 50k</li>
-              <li>• <strong>Mailchimp</strong> - 500 contactos gratis</li>
-              <li>• <strong>Brevo (Sendinblue)</strong> - 300 emails/día gratis</li>
-              <li>• <strong>ConvertKit</strong> - 1,000 suscriptores gratis</li>
-            </ul>
-            <li className="mt-3">3. Importa los emails y crea tu campaña</li>
-          </ol>
+      </div>
 
-          <div className="mt-4 p-4 bg-slate-950/50 rounded-lg">
-            <p className="text-sm text-slate-400 mb-2"><strong>Tip:</strong> Para automatizar con Resend:</p>
-            <code className="text-xs text-brand-400">
-              npm install resend<br/>
-              // Luego crea un endpoint en /api/send-newsletter
-            </code>
+      {/* Email Composer Modal */}
+      {showEmailComposer && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-slate-900 border border-slate-700 w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col">
+            {/* Header */}
+            <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-800/50">
+              <h3 className="font-heading font-bold text-white text-xl flex items-center gap-2">
+                <Send className="text-green-500" size={24} />
+                Enviar Newsletter
+              </h3>
+              <button
+                onClick={() => {
+                  setShowEmailComposer(false);
+                  setSendStatus(null);
+                }}
+                className="text-slate-400 hover:text-white transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 space-y-6 overflow-y-auto flex-1">
+              {/* Recipient Info */}
+              <div className="bg-slate-950/50 border border-slate-800 rounded-xl p-4">
+                <p className="text-sm text-slate-300">
+                  <strong>Destinatarios:</strong> {activeSubscribers.length} suscriptores activos
+                </p>
+              </div>
+
+              {/* Subject */}
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  Asunto del Email
+                </label>
+                <input
+                  type="text"
+                  value={emailSubject}
+                  onChange={(e) => setEmailSubject(e.target.value)}
+                  placeholder="Ej: Nueva actualización de Hablemos Cripto"
+                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-brand-500 focus:outline-none transition-colors"
+                />
+              </div>
+
+              {/* Content */}
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  Contenido (HTML soportado)
+                </label>
+                <textarea
+                  value={emailContent}
+                  onChange={(e) => setEmailContent(e.target.value)}
+                  placeholder="Escribe tu mensaje aquí... Puedes usar HTML: <h2>, <p>, <strong>, <a href=''>, etc."
+                  rows={12}
+                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-brand-500 focus:outline-none transition-colors resize-none font-mono text-sm"
+                />
+                <p className="text-xs text-slate-500 mt-2">
+                  Tip: Tu email se enviará con el template de Hablemos Cripto (header, footer, etc.)
+                </p>
+              </div>
+
+              {/* Status Message */}
+              {sendStatus && (
+                <div className={`p-4 rounded-xl border ${
+                  sendStatus.type === 'success'
+                    ? 'bg-green-500/10 border-green-500/20 text-green-400'
+                    : 'bg-red-500/10 border-red-500/20 text-red-400'
+                }`}>
+                  {sendStatus.message}
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="p-6 border-t border-slate-800 flex justify-end gap-4 bg-slate-800/50">
+              <button
+                onClick={() => {
+                  setShowEmailComposer(false);
+                  setSendStatus(null);
+                }}
+                disabled={sending}
+                className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl transition-colors disabled:opacity-50"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleSendNewsletter}
+                disabled={sending || !emailSubject.trim() || !emailContent.trim()}
+                className="px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              >
+                {sending ? (
+                  <>
+                    <RefreshCw size={20} className="animate-spin" />
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    <Send size={20} />
+                    Enviar Newsletter
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
