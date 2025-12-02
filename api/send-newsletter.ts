@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { createClient } from '@supabase/supabase-js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -6,6 +7,26 @@ export default async function handler(req: any, res: any) {
   // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Verify authentication
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Unauthorized - No token provided' });
+  }
+
+  const token = authHeader.replace('Bearer ', '');
+
+  // Verify token with Supabase
+  const supabase = createClient(
+    process.env.VITE_SUPABASE_URL || '',
+    process.env.VITE_SUPABASE_ANON_KEY || ''
+  );
+
+  const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+
+  if (authError || !user) {
+    return res.status(401).json({ error: 'Unauthorized - Invalid token' });
   }
 
   try {

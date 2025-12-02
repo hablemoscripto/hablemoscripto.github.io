@@ -100,10 +100,18 @@ const NewsletterAdmin: React.FC = () => {
     setSendStatus(null);
 
     try {
+      // Get auth token from Supabase session
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session) {
+        throw new Error('No hay sesión activa');
+      }
+
       const response = await fetch('/api/send-newsletter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`,
         },
         body: JSON.stringify({
           subject: emailSubject,
