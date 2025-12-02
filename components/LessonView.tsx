@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
-import { LESSONS_DATA } from '../data/courseData';
 import { useProgress } from '../contexts/ProgressContext';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Quiz from './education/Quiz';
 import { getPreviousLessonId } from '../utils/courseUtils';
+import { fetchLessonById, LessonData } from '../services/lessonService';
 
 const LessonView: React.FC = () => {
     const { lessonId } = useParams<{ lessonId: string }>();
@@ -14,13 +14,25 @@ const LessonView: React.FC = () => {
     const { isLessonCompleted, markLessonComplete, loading } = useProgress();
 
     const id = parseInt(lessonId || '1');
-    const lesson = LESSONS_DATA[id];
+    const [lesson, setLesson] = useState<LessonData | null>(null);
+    const [lessonLoading, setLessonLoading] = useState(true);
 
     const [activeSection, setActiveSection] = useState(0);
     const [showQuiz, setShowQuiz] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
     const [quizPassed, setQuizPassed] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
+
+    // Fetch lesson data from database
+    useEffect(() => {
+        async function loadLesson() {
+            setLessonLoading(true);
+            const lessonData = await fetchLessonById(id);
+            setLesson(lessonData);
+            setLessonLoading(false);
+        }
+        loadLesson();
+    }, [id]);
 
     // Access Control Logic
     useEffect(() => {
@@ -69,6 +81,17 @@ const LessonView: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    if (lessonLoading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center text-white bg-slate-950">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-500 mx-auto mb-4"></div>
+                    <p className="text-slate-400">Cargando lección...</p>
+                </div>
+            </div>
+        );
+    }
+
     if (!lesson) {
         return (
             <div className="min-h-screen flex items-center justify-center text-white bg-slate-950">
@@ -115,7 +138,8 @@ const LessonView: React.FC = () => {
 
     const isCompleted = isLessonCompleted(id);
     const nextLessonId = id + 1;
-    const hasNextLesson = !!LESSONS_DATA[nextLessonId];
+    // For now, assume next lesson exists - we'll improve this later
+    const hasNextLesson = true;
 
     const handleQuizComplete = async (score: number) => {
         await markLessonComplete(id, score);
