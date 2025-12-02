@@ -17,7 +17,13 @@
       "Bash(find:*)",
       "Bash(timeout 10 npm run dev:*)",
       "Bash(npx tsc:*)",
-      "Bash(node -e \"require(''./data/courseData.ts'')\")"
+      "Bash(node -e \"require(''./data/courseData.ts'')\")",
+      "Bash(git -C /home/cbas/Documents/Programming/hablemoscripto.github.io log --oneline -20)",
+      "Bash(git -C /home/cbas/Documents/Programming/hablemoscripto.github.io diff package.json)",
+      "Bash(git config:*)",
+      "Bash(test:*)",
+      "Bash(npm run db:seed:*)",
+      "Bash(npx vite-node:*)"
     ],
     "deny": [],
     "ask": []
