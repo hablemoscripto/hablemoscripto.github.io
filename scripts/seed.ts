@@ -125,7 +125,7 @@ async function seed() {
     ADVANCED_LEVEL,
   ];
 
-  for (const level of levelsToSeed) {
+  for (const [levelIndex, level] of levelsToSeed.entries()) {
     // Determine icon and color based on level id
     let iconName = 'Shield';
     let color = 'brand';
@@ -146,6 +146,7 @@ async function seed() {
       duration: level.stats.duration,
       icon_name: iconName,
       color: color,
+      order: levelIndex,
     });
     if (levelError) {
       console.error('Error seeding level:', levelError);

@@ -44,7 +44,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
       const { data, error } = await supabase
         .from('levels')
         .select('*')
-        .order('id', { ascending: true });
+        .order('order', { ascending: true });
       if (error) {
         console.error('Error fetching levels:', error);
       } else {
