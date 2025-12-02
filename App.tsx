@@ -6,6 +6,7 @@ import LandingPage from './components/LandingPage';
 import EducationPage from './components/EducationPage';
 import LessonView from './components/LessonView';
 import LevelDetail from './components/LevelDetail';
+import NewsletterAdmin from './components/NewsletterAdmin';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProgressProvider } from './contexts/ProgressContext';
@@ -56,6 +57,14 @@ function AnimatedRoutes() {
           element={
             <ProtectedRoute>
               <LessonView />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/newsletter"
+          element={
+            <ProtectedRoute>
+              <NewsletterAdmin />
             </ProtectedRoute>
           }
         />
