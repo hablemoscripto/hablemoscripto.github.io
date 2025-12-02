@@ -29,6 +29,17 @@ export default async function handler(req: any, res: any) {
     return res.status(401).json({ error: 'Unauthorized - Invalid token' });
   }
 
+  // Check if user is admin
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('is_admin')
+    .eq('id', user.id)
+    .single();
+
+  if (profileError || !profile?.is_admin) {
+    return res.status(403).json({ error: 'Forbidden - Admin access required' });
+  }
+
   try {
     const { subject, content, emails } = req.body;
 

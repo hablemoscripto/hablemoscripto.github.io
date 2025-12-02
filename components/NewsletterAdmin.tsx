@@ -20,6 +20,8 @@ const NewsletterAdmin: React.FC = () => {
   const [emailContent, setEmailContent] = useState('');
   const [sending, setSending] = useState(false);
   const [sendStatus, setSendStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [checkingAdmin, setCheckingAdmin] = useState(true);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -28,8 +30,36 @@ const NewsletterAdmin: React.FC = () => {
       navigate('/');
       return;
     }
-    fetchSubscribers();
+    checkAdminStatus();
   }, [user, navigate]);
+
+  const checkAdminStatus = async () => {
+    setCheckingAdmin(true);
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('is_admin')
+        .eq('id', user?.id)
+        .single();
+
+      if (error) throw error;
+
+      if (!data?.is_admin) {
+        setError('Acceso denegado. Solo administradores pueden acceder a esta página.');
+        setTimeout(() => navigate('/education'), 3000);
+        return;
+      }
+
+      setIsAdmin(true);
+      fetchSubscribers();
+    } catch (err: any) {
+      console.error('Error checking admin status:', err);
+      setError('Error verificando permisos de administrador');
+      setTimeout(() => navigate('/education'), 3000);
+    } finally {
+      setCheckingAdmin(false);
+    }
+  };
 
   const fetchSubscribers = async () => {
     setLoading(true);
@@ -154,12 +184,24 @@ const NewsletterAdmin: React.FC = () => {
 
   const activeSubscribers = subscribers.filter(sub => sub.is_active);
 
-  if (loading) {
+  if (checkingAdmin || (loading && isAdmin)) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-white text-center">
           <RefreshCw className="animate-spin mx-auto mb-4" size={32} />
-          <p>Cargando suscriptores...</p>
+          <p>{checkingAdmin ? 'Verificando permisos...' : 'Cargando suscriptores...'}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error and redirect if not admin
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-8 max-w-md text-center">
+          <p className="text-red-400 mb-4">{error || 'Acceso denegado'}</p>
+          <p className="text-slate-400 text-sm">Redirigiendo...</p>
         </div>
       </div>
     );
