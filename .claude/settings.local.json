@@ -23,7 +23,9 @@
       "Bash(git config:*)",
       "Bash(test:*)",
       "Bash(npm run db:seed:*)",
-      "Bash(npx vite-node:*)"
+      "Bash(npx vite-node:*)",
+      "Bash(dig:*)",
+      "Bash(nslookup:*)"
     ],
     "deny": [],
     "ask": []
