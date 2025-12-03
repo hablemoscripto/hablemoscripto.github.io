@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
+import { useGamification } from './GamificationContext';
 
 interface LessonProgress {
   lessonId: number;
@@ -26,6 +27,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState<LessonProgress[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
+  const { addXp } = useGamification();
 
   // Load progress when user changes
   useEffect(() => {
@@ -107,6 +109,10 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
               : p
           );
         }
+
+        // If it's a new completion, award XP
+        // We need to access addXp here. Since we can't easily use the hook inside the setState callback,
+        // we'll do it outside.
         return [
           ...prev,
           {
@@ -117,8 +123,25 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
           },
         ];
       });
+
+      // Award XP if this is a new completion (or we just want to reward re-completion? No, usually just once)
+      // We check if it was already completed in the state before this update
+      const wasAlreadyCompleted = progress.some(p => p.lessonId === lessonId && p.completed);
+      if (!wasAlreadyCompleted) {
+        // We need to access the context. 
+        // Since ProgressProvider is a component, we can use the hook at the top level.
+        // But we need to make sure we imported it.
+        // We will assume 'addXp' is available from props or context.
+        // Wait, we need to use useGamification() inside ProgressProvider.
+      }
     } catch (error) {
       console.error('Error saving progress:', error);
+    }
+
+    // Award XP if it wasn't already completed
+    const wasAlreadyCompleted = progress.some(p => p.lessonId === lessonId && p.completed);
+    if (!wasAlreadyCompleted) {
+      addXp(100);
     }
   };
 

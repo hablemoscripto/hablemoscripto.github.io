@@ -47,19 +47,55 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
         if (!user) return;
 
         try {
-            // Fetch XP and Streak from profiles table (assuming columns exist or we use a separate table)
-            // For now, we'll mock it or try to fetch from a 'user_stats' table if it existed.
-            // Since we can't easily migrate DB, we will use localStorage for demo purposes if DB fails,
-            // or try to use a 'profiles' table if it has a jsonb column for metadata.
+            // 1. Fetch completed lessons count to calculate XP
+            const { count, error: progressError } = await supabase
+                .from('user_progress')
+                .select('*', { count: 'exact', head: true })
+                .eq('user_id', user.id)
+                .eq('completed', true);
 
-            // Let's assume we use localStorage for this demo to ensure it works without DB migration
+            if (progressError) {
+                console.error('Error fetching progress for gamification:', progressError);
+            }
+
+            // Calculate XP based on completed lessons (100 XP per lesson)
+            // This ensures we sync with existing progress even if gamification is new
+            const calculatedXp = (count || 0) * 100;
+            setXp(calculatedXp);
+
+            // 2. Fetch Streak (mock logic for now, or fetch from a future 'streaks' table)
+            // For now, we'll check the most recent completed_at date
+            const { data: lastLesson } = await supabase
+                .from('user_progress')
+                .select('completed_at')
+                .eq('user_id', user.id)
+                .eq('completed', true)
+                .order('completed_at', { ascending: false })
+                .limit(1)
+                .single();
+
+            if (lastLesson && lastLesson.completed_at) {
+                // Simple logic: if last lesson was today or yesterday, streak is active.
+                // This is a simplification. A real streak system needs a separate table.
+                // We'll set a default streak of 1 if they have been active recently.
+                const lastDate = new Date(lastLesson.completed_at);
+                const now = new Date();
+                const diffDays = Math.floor((now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+
+                if (diffDays <= 1) {
+                    setStreak(prev => Math.max(prev, 1));
+                }
+            }
+
+            // 3. Load other stats from localStorage as a fallback/cache
             const localStats = localStorage.getItem(`gamification_${user.id}`);
             if (localStats) {
                 const stats = JSON.parse(localStats);
-                setXp(stats.xp || 0);
-                setStreak(stats.streak || 0);
+                // We prefer the calculated XP, but might want to merge other data
+                if (stats.streak > 1) setStreak(stats.streak);
                 setAchievements(stats.achievements || []);
             }
+
         } catch (error) {
             console.error('Error fetching gamification stats:', error);
         } finally {
