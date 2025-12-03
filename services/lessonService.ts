@@ -8,6 +8,7 @@ export interface LessonData {
   duration: string;
   type: string;
   description: string;
+  videoId?: string; // Added videoId
   sections: any[];
   quiz?: {
     questions: any[];
@@ -89,6 +90,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
       duration: lesson.duration,
       type: lesson.type,
       description: details?.description || lesson.description,
+      videoId: details?.video_id || lesson.video_id, // Map from DB
       sections: details?.sections || [],
       referrals: referrals?.map((ref: any) => ({
         title: ref.title,

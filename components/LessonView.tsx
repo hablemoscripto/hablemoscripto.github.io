@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import VideoPlayer from './ui/VideoPlayer';
 import { useProgress } from '../contexts/ProgressContext';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -210,17 +211,10 @@ const LessonView: React.FC = () => {
                     {/* Main Content */}
                     <div className="lg:col-span-8 space-y-8">
                         {/* Video Section */}
-                        <div className="aspect-video bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 relative group">
-                            {/* Placeholder for video */}
-                            <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
-                                <div className="text-center">
-                                    <div className="w-16 h-16 rounded-full bg-brand-500/20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                                        <PlayCircle size={32} className="text-brand-500" />
-                                    </div>
-                                    <p className="text-slate-500 font-medium">Video próximamente</p>
-                                </div>
-                            </div>
-                        </div>
+                        <VideoPlayer
+                            title={lesson.title}
+                            videoId={lesson.videoId} // We'll need to add this to the data type later
+                        />
 
                         {/* Referral Section */}
                         {lesson.referrals && lesson.referrals.length > 0 && (

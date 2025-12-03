@@ -10,8 +10,10 @@ import NewsletterAdmin from './components/NewsletterAdmin';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProgressProvider } from './contexts/ProgressContext';
+import { GamificationProvider } from './contexts/GamificationContext';
 import ChatWidget from './components/ChatWidget';
 import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from './data/courseData';
+import PageTransition from './components/ui/PageTransition';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -19,12 +21,12 @@ function AnimatedRoutes() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<PageTransition><LandingPage /></PageTransition>} />
         <Route
           path="/education"
           element={
             <ProtectedRoute>
-              <EducationPage />
+              <PageTransition><EducationPage /></PageTransition>
             </ProtectedRoute>
           }
         />
@@ -32,7 +34,7 @@ function AnimatedRoutes() {
           path="/education/beginner"
           element={
             <ProtectedRoute>
-              <LevelDetail levelData={BEGINNER_LEVEL} />
+              <PageTransition><LevelDetail levelData={BEGINNER_LEVEL} /></PageTransition>
             </ProtectedRoute>
           }
         />
@@ -40,7 +42,7 @@ function AnimatedRoutes() {
           path="/education/intermediate"
           element={
             <ProtectedRoute>
-              <LevelDetail levelData={INTERMEDIATE_LEVEL} />
+              <PageTransition><LevelDetail levelData={INTERMEDIATE_LEVEL} /></PageTransition>
             </ProtectedRoute>
           }
         />
@@ -48,7 +50,7 @@ function AnimatedRoutes() {
           path="/education/advanced"
           element={
             <ProtectedRoute>
-              <LevelDetail levelData={ADVANCED_LEVEL} />
+              <PageTransition><LevelDetail levelData={ADVANCED_LEVEL} /></PageTransition>
             </ProtectedRoute>
           }
         />
@@ -56,7 +58,7 @@ function AnimatedRoutes() {
           path="/education/lesson/:lessonId"
           element={
             <ProtectedRoute>
-              <LessonView />
+              <PageTransition><LessonView /></PageTransition>
             </ProtectedRoute>
           }
         />
@@ -64,7 +66,7 @@ function AnimatedRoutes() {
           path="/admin/newsletter"
           element={
             <ProtectedRoute>
-              <NewsletterAdmin />
+              <PageTransition><NewsletterAdmin /></PageTransition>
             </ProtectedRoute>
           }
         />
@@ -78,14 +80,16 @@ function App() {
   return (
     <HelmetProvider>
       <AuthProvider>
-        <ProgressProvider>
-          <Router>
-            <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
-              <AnimatedRoutes />
-              <ChatWidget />
-            </div>
-          </Router>
-        </ProgressProvider>
+        <GamificationProvider>
+          <ProgressProvider>
+            <Router>
+              <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
+                <AnimatedRoutes />
+                <ChatWidget />
+              </div>
+            </Router>
+          </ProgressProvider>
+        </GamificationProvider>
       </AuthProvider>
     </HelmetProvider>
   );

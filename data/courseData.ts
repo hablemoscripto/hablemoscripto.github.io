@@ -44,6 +44,7 @@ export interface Lesson {
   duration: string;
   type: string;
   isLocked?: boolean;
+  videoId?: string;
   referrals?: Referral[];
 }
 
