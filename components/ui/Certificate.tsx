@@ -7,15 +7,47 @@ interface CertificateProps {
     courseName: string;
     level: string;
     date: string;
+    variant?: 'beginner' | 'intermediate' | 'advanced';
     onClose: () => void;
 }
 
-const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, level, date, onClose }) => {
+const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, level, date, variant = 'beginner', onClose }) => {
     const certificateRef = useRef<HTMLDivElement>(null);
 
     const handlePrint = () => {
         window.print();
     };
+
+    const getVariantStyles = () => {
+        switch (variant) {
+            case 'intermediate':
+                return {
+                    border: 'border-slate-400',
+                    accent: 'text-slate-500',
+                    bgPattern: 'https://www.transparenttextures.com/patterns/cubes.png', // Keep same pattern for now, maybe change later
+                    badgeColor: 'text-slate-400',
+                    titleColor: 'text-slate-700'
+                };
+            case 'advanced':
+                return {
+                    border: 'border-yellow-600',
+                    accent: 'text-yellow-600',
+                    bgPattern: 'https://www.transparenttextures.com/patterns/cubes.png',
+                    badgeColor: 'text-yellow-500',
+                    titleColor: 'text-yellow-800'
+                };
+            default: // beginner
+                return {
+                    border: 'border-orange-700', // Bronze-ish
+                    accent: 'text-orange-700',
+                    bgPattern: 'https://www.transparenttextures.com/patterns/cubes.png',
+                    badgeColor: 'text-orange-600',
+                    titleColor: 'text-slate-800'
+                };
+        }
+    };
+
+    const styles = getVariantStyles();
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md overflow-y-auto">
@@ -41,15 +73,15 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                 </div>
 
                 {/* Certificate Border */}
-                <div ref={certificateRef} className="border-[10px] border-double border-slate-900 p-8 md:p-12 h-full min-h-[600px] flex flex-col items-center justify-center text-center bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+                <div ref={certificateRef} className={`border-[10px] border-double ${styles.border} p-8 md:p-12 h-full min-h-[600px] flex flex-col items-center justify-center text-center bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]`}>
 
                     {/* Header */}
                     <div className="mb-8">
                         <div className="flex items-center justify-center gap-3 mb-4">
-                            <Bitcoin size={48} className="text-brand-500" />
-                            <h1 className="text-3xl font-bold text-slate-900 tracking-wider uppercase">HablemosCripto</h1>
+                            <Bitcoin size={48} className={styles.accent} />
+                            <h1 className={`text-3xl font-bold ${styles.titleColor} tracking-wider uppercase`}>HablemosCripto</h1>
                         </div>
-                        <div className="h-1 w-32 bg-brand-500 mx-auto"></div>
+                        <div className={`h-1 w-32 ${styles.border.replace('border-', 'bg-')} mx-auto`}></div>
                     </div>
 
                     {/* Title */}
@@ -58,12 +90,12 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
 
                     {/* Student Name */}
                     <div className="border-b-2 border-slate-300 px-12 py-2 mb-8 min-w-[300px]">
-                        <h3 className="text-3xl md:text-5xl font-handwriting font-bold text-brand-600">{studentName}</h3>
+                        <h3 className={`text-3xl md:text-5xl font-handwriting font-bold ${styles.accent}`}>{studentName}</h3>
                     </div>
 
                     {/* Description */}
                     <p className="text-xl text-slate-600 mb-2">ha completado satisfactoriamente el nivel</p>
-                    <h4 className="text-2xl md:text-3xl font-bold text-slate-800 uppercase tracking-widest mb-6">{level}</h4>
+                    <h4 className={`text-2xl md:text-3xl font-bold ${styles.titleColor} uppercase tracking-widest mb-6`}>{level}</h4>
                     <p className="text-lg text-slate-600 mb-12">del curso <span className="font-bold">{courseName}</span></p>
 
                     {/* Footer */}
@@ -77,7 +109,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
 
                         <div className="relative">
                             <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
-                                <Award size={64} className="text-brand-500 opacity-80" />
+                                <Award size={64} className={`${styles.badgeColor} opacity-80`} />
                             </div>
                             <div className="text-center mt-4">
                                 <div className="border-t border-slate-400 w-48 pt-2">

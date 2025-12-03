@@ -6,6 +6,7 @@ import LevelCard from './ui/LevelCard';
 import Certificate from './ui/Certificate';
 import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabase'; // Import supabase client
+import { useAuth } from '../contexts/AuthContext';
 
 interface EducationPageProps {
   onNavigateHome?: () => void; // Optional for backward compat
@@ -34,7 +35,8 @@ const ICONS: Record<string, LucideIcon> = {
 const EducationPage: React.FC<EducationPageProps> = () => {
   const [showModal, setShowModal] = useState(false);
   const [levels, setLevels] = useState<Level[]>([]);
-  const [activeCertificate, setActiveCertificate] = useState<{ level: string, title: string } | null>(null);
+  const { user } = useAuth();
+  const [activeCertificate, setActiveCertificate] = useState<{ level: string, title: string, variant: 'beginner' | 'intermediate' | 'advanced' } | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -135,7 +137,13 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   };
 
   const handleClaimCertificate = (levelId: string, levelTitle: string) => {
-    setActiveCertificate({ level: levelTitle, title: 'Curso de Criptomonedas' });
+    // Map levelId to variant
+    const variant = levelId as 'beginner' | 'intermediate' | 'advanced';
+    setActiveCertificate({
+      level: levelTitle,
+      title: 'Curso de Criptomonedas',
+      variant: variant
+    });
   };
 
   const isDashboard = location.pathname === '/education';
@@ -174,10 +182,11 @@ const EducationPage: React.FC<EducationPageProps> = () => {
       {/* Certificate Modal */}
       {activeCertificate && (
         <Certificate
-          studentName="Estudiante" // Ideally fetch from user profile
+          studentName={user?.user_metadata?.full_name || user?.email?.split('@')[0] || "Estudiante"}
           courseName={activeCertificate.title}
           level={activeCertificate.level}
           date={new Date().toLocaleDateString()}
+          variant={activeCertificate.variant}
           onClose={() => setActiveCertificate(null)}
         />
       )}
@@ -193,15 +202,6 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                 Domina las criptomonedas con nuestro plan de estudios estructurado.
                 Desde conceptos básicos hasta estrategias avanzadas. Tu progreso se guarda automáticamente.
               </p>
-
-              {/* Temporary Preview Button */}
-              <button
-                onClick={() => handleClaimCertificate('preview', 'Nivel de Prueba')}
-                className="mb-8 px-4 py-2 bg-slate-800/50 border border-slate-700 text-slate-300 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-all flex items-center gap-2"
-              >
-                <Award size={16} />
-                Ver Ejemplo de Certificado
-              </button>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-8 mt-8">
