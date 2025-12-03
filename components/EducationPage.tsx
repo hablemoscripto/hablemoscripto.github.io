@@ -56,29 +56,57 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   }, []);
 
   useEffect(() => {
-    if (supabaseProgress.length > 0) {
+    const fetchProgressByLevel = async () => {
+      if (levels.length === 0) return;
+
       const newProgress: ProgressData = {};
       levels.forEach(level => {
         newProgress[level.id] = [];
       });
 
-      supabaseProgress.forEach((p) => {
-        if (p.completed) {
-          const levelId = p.lesson_id.split('-')[0];
-          if(newProgress[levelId]) {
-            newProgress[levelId].push(parseInt(p.lesson_id.split('-')[1]));
-          }
-        }
-      });
+      if (supabaseProgress.length > 0) {
+        // Fetch lessons with their level associations
+        const { data: lessonsData, error } = await supabase
+          .from('lessons')
+          .select(`
+            id,
+            modules!inner(
+              level_id
+            )
+          `);
 
-      setProgress(newProgress);
-      localStorage.setItem('hablemos-progress', JSON.stringify(newProgress));
-    } else {
-      const savedProgress = localStorage.getItem('hablemos-progress');
-      if (savedProgress) {
-        setProgress(JSON.parse(savedProgress));
+        if (error) {
+          console.error('Error fetching lessons for progress:', error);
+          return;
+        }
+
+        // Create a map of lesson ID to level ID
+        const lessonToLevel: Record<number, string> = {};
+        lessonsData?.forEach((lesson: any) => {
+          lessonToLevel[lesson.id] = lesson.modules.level_id;
+        });
+
+        // Map completed lessons to their levels
+        supabaseProgress.forEach((p) => {
+          if (p.completed && p.lessonId) {
+            const levelId = lessonToLevel[p.lessonId];
+            if (levelId && newProgress[levelId]) {
+              newProgress[levelId].push(p.lessonId);
+            }
+          }
+        });
+
+        setProgress(newProgress);
+        localStorage.setItem('hablemos-progress', JSON.stringify(newProgress));
+      } else {
+        const savedProgress = localStorage.getItem('hablemos-progress');
+        if (savedProgress) {
+          setProgress(JSON.parse(savedProgress));
+        }
       }
-    }
+    };
+
+    fetchProgressByLevel();
   }, [supabaseProgress, levels]);
 
   const getLevelProgress = (levelId: string) => {
