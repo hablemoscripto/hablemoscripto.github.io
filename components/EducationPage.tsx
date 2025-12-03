@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import EducationNavbar from './EducationNavbar';
-import { Trophy, Shield, TrendingUp, Star, ChevronRight, LucideIcon } from 'lucide-react';
+import { Trophy, Shield, TrendingUp, Star, ChevronRight, LucideIcon, Award } from 'lucide-react';
 import { useProgress } from '../contexts/ProgressContext';
 import LevelCard from './ui/LevelCard';
+import Certificate from './ui/Certificate';
 import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabase'; // Import supabase client
 
@@ -33,6 +34,7 @@ const ICONS: Record<string, LucideIcon> = {
 const EducationPage: React.FC<EducationPageProps> = () => {
   const [showModal, setShowModal] = useState(false);
   const [levels, setLevels] = useState<Level[]>([]);
+  const [activeCertificate, setActiveCertificate] = useState<{ level: string, title: string } | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -132,9 +134,13 @@ const EducationPage: React.FC<EducationPageProps> = () => {
     navigate(`/education/${levelId}`);
   };
 
+  const handleClaimCertificate = (levelId: string, levelTitle: string) => {
+    setActiveCertificate({ level: levelTitle, title: 'Curso de Criptomonedas' });
+  };
+
   const isDashboard = location.pathname === '/education';
 
-  const levelColors: { [key: string]: string } = {
+  const levelColors: { [key: string]: 'brand' | 'indigo' | 'rose' } = {
     beginner: 'brand',
     intermediate: 'indigo',
     advanced: 'rose',
@@ -165,6 +171,17 @@ const EducationPage: React.FC<EducationPageProps> = () => {
         </div>
       </div>
 
+      {/* Certificate Modal */}
+      {activeCertificate && (
+        <Certificate
+          studentName="Estudiante" // Ideally fetch from user profile
+          courseName={activeCertificate.title}
+          level={activeCertificate.level}
+          date={new Date().toLocaleDateString()}
+          onClose={() => setActiveCertificate(null)}
+        />
+      )}
+
       {isDashboard ? (
         <>
           <div className="container max-w-7xl mx-auto px-6 pt-12 pb-16">
@@ -176,26 +193,51 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                 Domina las criptomonedas con nuestro plan de estudios estructurado.
                 Desde conceptos básicos hasta estrategias avanzadas. Tu progreso se guarda automáticamente.
               </p>
+
+              {/* Temporary Preview Button */}
+              <button
+                onClick={() => handleClaimCertificate('preview', 'Nivel de Prueba')}
+                className="mb-8 px-4 py-2 bg-slate-800/50 border border-slate-700 text-slate-300 text-sm rounded-lg hover:bg-slate-800 hover:text-white transition-all flex items-center gap-2"
+              >
+                <Award size={16} />
+                Ver Ejemplo de Certificado
+              </button>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-8 mt-8">
-              {levels.map((level, index) => (
-                <LevelCard
-                  key={level.id}
-                  levelNumber={`0${index + 1}`}
-                  title={level.title}
-                  subtitle={level.subtitle}
-                  description={level.description}
-                  tags={[]} // Tags can be added to the database later
-                  lessonCount={level.lessons_count}
-                  completedCount={progress[level.id]?.length || 0}
-                  progress={getLevelProgress(level.id)}
-                  color={levelColors[level.id]}
-                  icon={ICONS[level.icon_name] || Shield}
-                  isLocked={isLevelLocked(level.id)}
-                  onAction={() => !isLevelLocked(level.id) && handleLevelSelect(level.id)}
-                />
-              ))}
+              {levels.map((level, index) => {
+                const isCompleted = getLevelProgress(level.id) === 100;
+                return (
+                  <div key={level.id} className="relative">
+                    <LevelCard
+                      levelNumber={`0${index + 1}`}
+                      title={level.title}
+                      subtitle={level.subtitle}
+                      description={level.description}
+                      tags={[]} // Tags can be added to the database later
+                      lessonCount={level.lessons_count}
+                      completedCount={progress[level.id]?.length || 0}
+                      progress={getLevelProgress(level.id)}
+                      color={levelColors[level.id]}
+                      icon={ICONS[level.icon_name] || Shield}
+                      isLocked={isLevelLocked(level.id)}
+                      onAction={() => !isLevelLocked(level.id) && handleLevelSelect(level.id)}
+                    />
+
+                    {isCompleted && (
+                      <div className="mt-4 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <button
+                          onClick={() => handleClaimCertificate(level.id, level.title)}
+                          className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-slate-900 font-bold rounded-xl shadow-lg hover:shadow-yellow-500/20 hover:scale-105 transition-all"
+                        >
+                          <Award size={20} />
+                          Reclamar Certificado
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -250,11 +292,11 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
               <div className="space-y-4">
                 {levels.map(level => (
-                  <ProgressRow 
+                  <ProgressRow
                     key={level.id}
-                    label={level.title} 
-                    current={progress[level.id]?.length || 0} 
-                    total={level.lessons_count} 
+                    label={level.title}
+                    current={progress[level.id]?.length || 0}
+                    total={level.lessons_count}
                     color={`bg-${levelColors[level.id]}-500`}
                   />
                 ))}
