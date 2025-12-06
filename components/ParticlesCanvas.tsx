@@ -17,7 +17,7 @@ const LINK_COLOR = 'rgba(255, 255, 255, 0.15)';
 const ParticlesCanvas: React.FC = memo(() => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {

@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useMemo, useCallback, useRef, memo } from 'react';
+import React, { useEffect, useState, useCallback, memo } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
 import type { Container, ISourceOptions } from '@tsparticles/engine';
 
-// Particle options defined outside component
+// Crypto-themed particle configuration with golden accents
 const PARTICLES_OPTIONS: ISourceOptions = {
   fullScreen: { enable: false },
   background: {
@@ -11,9 +11,8 @@ const PARTICLES_OPTIONS: ISourceOptions = {
       value: 'transparent',
     },
   },
-  fpsLimit: 120,
+  fpsLimit: 60,
   interactivity: {
-    detectsOn: 'canvas',
     events: {
       onHover: {
         enable: true,
@@ -23,30 +22,38 @@ const PARTICLES_OPTIONS: ISourceOptions = {
         enable: true,
         mode: 'push',
       },
-      resize: { enable: true },
     },
     modes: {
       grab: {
-        distance: 140,
+        distance: 180,
         links: {
-          opacity: 1,
+          opacity: 0.8,
+          color: '#ffc107',
         },
       },
       push: {
-        quantity: 4,
+        quantity: 3,
+      },
+      repulse: {
+        distance: 100,
+        duration: 0.4,
       },
     },
   },
   particles: {
     color: {
-      value: '#ffffff',
+      value: ['#ffc107', '#ffffff', '#6366f1'],
     },
     links: {
       color: '#ffffff',
       distance: 150,
       enable: true,
-      opacity: 0.4,
+      opacity: 0.15,
       width: 1,
+      triangles: {
+        enable: true,
+        opacity: 0.03,
+      },
     },
     move: {
       direction: 'none',
@@ -54,25 +61,44 @@ const PARTICLES_OPTIONS: ISourceOptions = {
       outModes: {
         default: 'out',
       },
-      random: false,
-      speed: 2,
+      random: true,
+      speed: 1,
       straight: false,
+      attract: {
+        enable: true,
+        rotate: {
+          x: 600,
+          y: 1200,
+        },
+      },
     },
     number: {
       density: {
         enable: true,
-        area: 800,
       },
-      value: 80,
+      value: 60,
     },
     opacity: {
-      value: 0.5,
+      value: {
+        min: 0.1,
+        max: 0.6,
+      },
+      animation: {
+        enable: true,
+        speed: 0.5,
+        sync: false,
+      },
     },
     shape: {
-      type: 'circle',
+      type: ['circle', 'triangle'],
     },
     size: {
-      value: { min: 1, max: 3 },
+      value: { min: 1, max: 4 },
+      animation: {
+        enable: true,
+        speed: 2,
+        sync: false,
+      },
     },
   },
   detectRetina: true,
@@ -101,7 +127,10 @@ const ParticlesBackground: React.FC = memo(() => {
   }, []);
 
   const particlesLoaded = useCallback(async (container?: Container) => {
-    // Particles loaded
+    // Particles loaded successfully
+    if (container) {
+      console.debug('Particles container loaded');
+    }
   }, []);
 
   if (!init) return null;
@@ -111,7 +140,7 @@ const ParticlesBackground: React.FC = memo(() => {
       id="tsparticles-hero"
       particlesLoaded={particlesLoaded}
       options={PARTICLES_OPTIONS}
-      className="absolute inset-0 z-0"
+      className="absolute inset-0 z-0 pointer-events-auto"
     />
   );
 });
