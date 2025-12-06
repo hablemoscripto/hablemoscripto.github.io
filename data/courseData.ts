@@ -26,7 +26,9 @@ import {
   Clock,
   Layers,
   RefreshCw,
-  Lock
+  Lock,
+  PiggyBank,
+  Award
 } from 'lucide-react';
 
 export interface Referral {
@@ -187,6 +189,7 @@ export const ADVANCED_LEVEL: LevelData = {
       icon: Zap,
       lessons: [
         { id: 25, title: 'Jupiter: El Rey de los DEXs', description: 'Swaps, Limit Orders y DCA en el mejor agregador del mundo.', duration: '35 min', type: 'Tutorial Práctico' },
+        { id: 40, title: 'Staking SOL: Gana por Asegurar la Red', description: 'Entiende validadores, epochs y cómo ganar ~7% anual delegando.', duration: '30 min', type: 'Tutorial + Concepto' },
         { id: 26, title: 'Liquidez y Yield Farming', description: 'Raydium, Orca y Meteora. Gana fees con tus activos.', duration: '42 min', type: 'Estrategias' },
         { id: 27, title: 'Lending & Borrowing', description: 'Kamino y MarginFi. Usa tus activos como colateral.', duration: '38 min', type: 'Tutorial Práctico' },
         { id: 28, title: 'Riesgos de DeFi (Impermanent Loss)', description: 'Entiende los peligros matemáticos antes de invertir.', duration: '32 min', type: 'Seguridad' },
@@ -229,17 +232,32 @@ export const LESSONS_DATA: Record<number, any> = {
     sections: [
       {
         type: 'intro',
-        title: 'Del Trueque a la Deuda',
-        content: 'El dinero no es riqueza; es una **tecnología** para transportar valor a través del tiempo y el espacio. Comenzamos con el trueque (ineficiente), pasamos a metales preciosos (difíciles de dividir) y llegamos al papel moneda.',
-        highlight: { title: 'Concepto Clave', text: 'El dinero debe ser escaso, divisible, durable, portable y fungible. El oro cumplía esto. El papel moneda solo cumple algunos.' }
+        title: 'El Invento Más Importante de la Humanidad',
+        content: 'Antes del dinero, un pescador que quería pan tenía que encontrar un panadero que quisiera pescado. Esta "doble coincidencia de deseos" frenaba el comercio. El dinero resolvió esto: es una **tecnología para almacenar y transferir valor** a través del tiempo y el espacio. Es tan importante como la rueda o el lenguaje escrito.',
+        highlight: { title: 'Reflexión Profunda', text: 'El dinero es tiempo humano cristalizado. Cuando alguien devalúa tu dinero, te está robando horas de tu vida que ya trabajaste.' }
       },
       {
         type: 'main',
-        title: 'La Ruptura de 1971',
-        content: 'Hasta 1971, el dólar estaba respaldado por oro. Richard Nixon rompió esta promesa temporalmente (para siempre). Desde entonces, vivimos en un experimento de **Dinero Fiat**: dinero por decreto, respaldado solo por la confianza en los políticos.',
+        title: 'Las 5 Propiedades del Dinero Perfecto',
+        content: 'Durante 5,000 años, la humanidad descubrió que el buen dinero debe ser: **Escaso** (difícil de crear), **Divisible** (puedes pagar cantidades pequeñas), **Durable** (no se pudre), **Portable** (fácil de mover), y **Fungible** (cada unidad es igual a otra). El oro cumplía todo esto naturalmente.',
         features: [
-          { icon: Anchor, title: 'Patrón Oro', text: 'El gobierno no podía imprimir más billetes si no tenía más oro.' },
-          { icon: Scissors, title: 'Dinero Fiat', text: 'Se puede crear infinitamente con un botón. Su valor depende de que la gente confíe en él.' }
+          { icon: Shield, title: 'Conchas, Sal, Ganado', text: 'Fallaron como dinero porque no eran suficientemente escasos o durables.' },
+          { icon: Anchor, title: 'Oro y Plata', text: 'Dominaron 5,000 años porque cumplen todas las propiedades. Nadie puede "imprimir" más oro.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'La Ruptura de 1971: El Día que Cambió Todo',
+        content: 'Hasta 1971, cada dólar representaba oro real en Fort Knox. Podías ir al banco y cambiar tu papel por metal. Pero el 15 de agosto de 1971, Nixon rompió esta promesa "temporalmente" (para siempre). Desde entonces, vivimos en un experimento de **Dinero Fiat**: dinero por decreto, respaldado solo por la confianza en los políticos.',
+        highlight: { title: 'El Resultado', text: 'Desde 1971, el dólar ha perdido 98% de su poder adquisitivo. Una casa que costaba $25,000 ahora cuesta $400,000. Tu dinero se derrite.' }
+      },
+      {
+        type: 'takeaways',
+        title: 'Por qué Esto Importa para Crypto',
+        items: [
+          'Bitcoin es el primer dinero en la historia que cumple TODAS las propiedades del dinero perfecto, incluyendo escasez absoluta (21 millones máximo).',
+          'Por primera vez, la humanidad tiene dinero que ningún gobierno puede devaluar.',
+          'No es solo tecnología: es una revolución monetaria comparable a la invención del papel moneda.'
         ]
       }
     ],
@@ -271,15 +289,27 @@ export const LESSONS_DATA: Record<number, any> = {
         },
         {
           id: 'q3',
-          question: 'Si mañana Argentina imprime 10× más pesos, ¿quién sale ganando primero?',
+          question: 'Un trabajador en Venezuela ahorró 10 años para comprar una casa. En 2018, sus ahorros valían $50,000. En 2020 valían $50. ¿Qué pasó?',
           options: [
-            { id: 'a', text: 'Los jubilados y asalariados' },
-            { id: 'b', text: 'Los que reciben el dinero recién impreso (gobierno, bancos y amigos del poder)' },
-            { id: 'c', text: 'Los ahorristas en pesos' },
-            { id: 'd', text: 'Nadie, la inflación es neutral' }
+            { id: 'a', text: 'Mala suerte' },
+            { id: 'b', text: 'El gobierno imprimió tanto dinero que destruyó el valor de sus ahorros (hiperinflación)' },
+            { id: 'c', text: 'El banco le robó' },
+            { id: 'd', text: 'Los precios de las casas bajaron' }
           ],
           correctAnswer: 'b',
-          explanation: 'Efecto Cantillon: el dinero nuevo entra al sistema por puntos concretos y pierde valor conforme se expande.'
+          explanation: 'La hiperinflación de Venezuela destruyó el trabajo de millones de personas. Esto es lo que pasa cuando el dinero no es escaso.'
+        },
+        {
+          id: 'q4',
+          question: 'Si el dinero es "tiempo humano cristalizado", ¿qué significa que un gobierno imprima dinero?',
+          options: [
+            { id: 'a', text: 'Crea riqueza para todos' },
+            { id: 'b', text: 'Roba tiempo de vida a los ahorradores para dárselo a los primeros en recibir el dinero nuevo' },
+            { id: 'c', text: 'No afecta a nadie' },
+            { id: 'd', text: 'Solo afecta a los ricos' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Imprimir dinero es un impuesto oculto. Diluye el valor de tu trabajo pasado para financiar el gasto presente del gobierno.'
         }
       ]
     }
@@ -295,33 +325,48 @@ export const LESSONS_DATA: Record<number, any> = {
     sections: [
       {
         type: 'intro',
-        title: 'El Impuesto Invisible',
-        content: '¿Alguna vez te has preguntado por qué todo es más caro cada año? No es que las cosas valgan más, es que **tu dinero vale menos**. La inflación no es un accidente; es una característica del sistema fiat diseñada para incentivar el gasto y la deuda.',
-        highlight: { title: 'Dato Real', text: 'El dólar ha perdido más del 96% de su poder adquisitivo desde la creación de la Reserva Federal en 1913.' }
+        title: 'El Robo Silencioso',
+        content: 'Tu abuela podía comprar una casa con el sueldo de 3 años. Hoy necesitas 15 años. ¿La gente trabaja menos? No. **Tu dinero vale menos**. La inflación no es un accidente natural: es una política deliberada que transfiere riqueza de los que ahorran a los que imprimen.',
+        highlight: { title: 'Dato Escalofriante', text: 'En 1971, un salario mínimo en USA compraba 5 onzas de oro. Hoy compra 0.15 onzas. Mismas horas de trabajo, 97% menos poder adquisitivo.' }
       },
       {
         type: 'main',
-        title: '¿Cómo se Crea el Dinero?',
-        content: 'La mayoría de la gente cree que el gobierno imprime dinero basado en oro. Falso. El dinero se crea de la nada (Dinero Fiat) principalmente a través de deuda.',
+        title: 'La Máquina de Crear Dinero',
+        content: 'La mayoría cree que el dinero está respaldado por algo. Falso. Desde 1971, el dinero se crea de la nada, principalmente cuando alguien pide un préstamo. Sí, leíste bien: **tu banco crea dinero de la nada cuando te da un crédito**.',
         features: [
-          { icon: Landmark, title: 'Bancos Centrales', text: 'Pueden "imprimir" trillones con un clic para comprar deuda del gobierno o rescatar bancos.' },
-          { icon: Percent, title: 'Reserva Fraccionaria', text: 'Tu banco no tiene tu dinero. Por cada $100 que depositas, ellos prestan $90 a otros. Si todos retiran a la vez, el banco quiebra.' },
-          { icon: TrendingDown, title: 'Oferta y Demanda', text: 'Al inundar el mercado con nuevos billetes, cada billete individual vale menos. Tus ahorros se diluyen.' }
+          { icon: Landmark, title: 'Bancos Centrales', text: 'En 2020, la Fed "imprimió" $4 trillones en meses. Ese dinero no existía. Ahora tus dólares valen menos.' },
+          { icon: Percent, title: 'Reserva Fraccionaria', text: 'Por cada $100 que depositas, el banco presta $90 a otros (creando $90 nuevos). El dinero se multiplica de la nada.' },
+          { icon: TrendingDown, title: 'Dilución Perpetua', text: 'Más dólares persiguiendo los mismos bienes = precios más altos. Tu sueldo sube 3%, los precios suben 8%. Cada año eres más pobre.' }
         ]
       },
       {
         type: 'main',
-        title: 'El Efecto Cantillon: ¿Quién Gana?',
-        content: 'Cuando se imprime dinero nuevo, no se distribuye equitativamente. Los primeros en recibirlo (Grandes Bancos, Gobierno, Corporaciones cercanas) compran activos a precios viejos. Para cuando el dinero llega a ti (salarios), los precios ya subieron.',
-        highlight: { title: 'La Injusticia', text: 'La impresión de dinero es una transferencia de riqueza de los ahorradores pobres a los dueños de activos ricos.' }
+        title: 'El Juego Amañado: ¿Quién Gana y Quién Pierde?',
+        content: 'Cuando el banco central "imprime" dinero, no te llega a ti primero. Llega a los bancos, que lo prestan a corporaciones, que compran activos. Para cuando los precios suben y tú pides un aumento, ya perdiste.',
+        features: [
+          { icon: Users, title: 'Los Ganadores', text: 'Bancos, fondos de inversión, gobiernos, y dueños de activos (acciones, casas, Bitcoin). El dinero nuevo les llega PRIMERO.' },
+          { icon: TrendingDown, title: 'Los Perdedores', text: 'Asalariados, pensionados, y cualquiera que ahorre en efectivo. Reciben el dinero ÚLTIMO, cuando ya perdió valor.' }
+        ],
+        highlight: { title: 'Efecto Cantillon', text: 'Este fenómeno tiene 300 años de historia. Los más cercanos a la "impresora" siempre ganan. Los más lejanos siempre pierden.' }
+      },
+      {
+        type: 'main',
+        title: 'Casos Reales: Cuando la Inflación Destruye Vidas',
+        content: 'Esto no es teoría. Ha pasado docenas de veces en la historia, y sigue pasando HOY:',
+        features: [
+          { icon: AlertTriangle, title: 'Venezuela 2018', text: 'Inflación de 1,000,000%. El trabajo de toda una vida se volvió papel sin valor en meses.' },
+          { icon: AlertTriangle, title: 'Argentina 2023', text: '140% de inflación anual. Los abuelos ven sus pensiones evaporarse mientras los políticos viven en lujo.' },
+          { icon: AlertTriangle, title: 'Turquía 2022', text: 'La lira perdió 80% de su valor en 2 años. La clase media se convirtió en clase pobre.' }
+        ]
       },
       {
         type: 'takeaways',
-        title: 'Por qué Crypto es Diferente',
+        title: 'La Salida: Por qué Bitcoin Existe',
         items: [
-          'Bitcoin tiene un suministro fijo (21M). Nadie puede imprimir más.',
-          'Solana permite mover valor globalmente sin permiso de bancos.',
-          'Crypto es la salida pacífica de un sistema diseñado para devaluar tu trabajo.'
+          'Bitcoin tiene exactamente 21 millones de unidades. Nunca habrá más. Nadie puede "imprimir" Bitcoin para rescatar bancos.',
+          'Por primera vez en la historia, existe dinero que NINGÚN gobierno, banco o corporación puede devaluar.',
+          'No es inversión especulativa: es protección contra un sistema diseñado para empobrecerte lentamente.',
+          'Cada día que mantienes tu riqueza en pesos o dólares, estás perdiendo contra la inflación. Es matemática, no opinión.'
         ]
       }
     ],
@@ -329,27 +374,51 @@ export const LESSONS_DATA: Record<number, any> = {
       questions: [
         {
           id: 'q1',
-          question: 'Tienes 100 000 $ ahorrados en el banco y la inflación anual es del 60 % (como Argentina 2024–2025). ¿Cuánto poder adquisitivo te queda después de 2 años sin tocar el dinero?',
+          question: 'Tu abuela compró su casa en 1970 con el equivalente a 3 años de sueldo. Hoy la misma casa cuesta 15 años de sueldo. ¿Qué pasó?',
           options: [
-            { id: 'a', text: 'Más o menos lo mismo' },
-            { id: 'b', text: 'Alrededor de 27 000 $ de poder de compra real' },
-            { id: 'c', text: '100 000 $ porque el número no cambia' },
-            { id: 'd', text: 'Más, porque el banco me paga intereses' }
+            { id: 'a', text: 'Las casas son mejores ahora' },
+            { id: 'b', text: 'El dinero perdió 80%+ de su poder adquisitivo por la impresión monetaria' },
+            { id: 'c', text: 'La gente gana menos' },
+            { id: 'd', text: 'Es coincidencia' }
           ],
           correctAnswer: 'b',
-          explanation: '100 000 / 1.6 / 1.6 ≈ 39 062 $ al final del año 2 → en 2 años pierdes ≈73 % del poder adquisitivo.'
+          explanation: 'Desde que abandonamos el patrón oro, los gobiernos han diluido el valor del dinero constantemente. Tu sueldo nominal sube, pero tu poder real de compra baja.'
         },
         {
           id: 'q2',
-          question: '¿Cuál es la única forma garantizada de protegerte 100 % de la inflación monetaria a largo plazo?',
+          question: 'Tienes $100,000 ahorrados en Argentina con 60% de inflación anual. ¿Cuánto poder de compra te queda después de 3 años?',
           options: [
-            { id: 'a', text: 'Tener plata en plazo fijo' },
-            { id: 'b', text: 'Poseer activos de oferta fija o que no puedan ser inflados (Bitcoin, oro, tierra)' },
-            { id: 'c', text: 'Gastar todo rápido' },
-            { id: 'd', text: 'Confiar en el gobierno' }
+            { id: 'a', text: '$100,000 (el número no cambia)' },
+            { id: 'b', text: 'Aproximadamente $24,000 de poder de compra real' },
+            { id: 'c', text: '$70,000' },
+            { id: 'd', text: 'Más, porque el banco paga intereses' }
           ],
           correctAnswer: 'b',
-          explanation: 'Bitcoin tiene 21 millones de suministro máximo grabado en piedra. Nadie puede imprimirlo.'
+          explanation: '$100,000 / 1.6 / 1.6 / 1.6 = ~$24,400. En 3 años pierdes 76% del poder adquisitivo. Los intereses bancarios NUNCA compensan inflación alta.'
+        },
+        {
+          id: 'q3',
+          question: 'En 2020, la Reserva Federal de USA "imprimió" $4 trillones. ¿De dónde salió ese dinero?',
+          options: [
+            { id: 'a', text: 'De los impuestos que pagaste' },
+            { id: 'b', text: 'De reservas de oro' },
+            { id: 'c', text: 'De la nada, literalmente creado con teclas de computadora' },
+            { id: 'd', text: 'De préstamos de China' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'El dinero fiat se crea de la nada. La Fed aumenta un número en una computadora y ese "dinero" existe. Pero el efecto es real: tu dinero ahora vale menos.'
+        },
+        {
+          id: 'q4',
+          question: '¿Por qué los ricos se vuelven MÁS ricos durante períodos de alta inflación?',
+          options: [
+            { id: 'a', text: 'Porque trabajan más duro' },
+            { id: 'b', text: 'Porque tienen activos (casas, acciones, Bitcoin) que suben de precio, mientras sus deudas se devalúan' },
+            { id: 'c', text: 'Porque ahorran más' },
+            { id: 'd', text: 'Porque pagan menos impuestos' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La inflación es un impuesto oculto que castiga a los ahorradores y premia a los deudores con activos. Los ricos tienen activos y deuda. Los pobres tienen efectivo.'
         }
       ]
     }
@@ -397,22 +466,122 @@ export const LESSONS_DATA: Record<number, any> = {
     title: 'Bitcoin: La Salida',
     level: 'Principiante',
     number: '4 de 20',
-    duration: '18 minutos',
+    duration: '25 minutos',
     type: 'Video + Texto',
     description: 'Ante la corrupción del dinero Fiat, surge una solución matemática, descentralizada e inmutable.',
     sections: [
       {
         type: 'intro',
-        title: 'Oro Digital',
-        content: 'En 2008, durante la crisis financiera, Satoshi Nakamoto lanzó Bitcoin. No es una empresa, no tiene CEO. Es un protocolo matemático que garantiza **escasez digital**. Solo existirán 21 millones.',
-        highlight: { title: 'La Solución', text: 'Bitcoin es la separación del dinero y el estado. Nadie puede imprimir más Bitcoin para pagar deudas políticas.' }
+        title: 'El Momento Génesis',
+        content: 'El 3 de enero de 2009, mientras el mundo se desmoronaba por la crisis financiera causada por bancos irresponsables, alguien bajo el seudónimo **Satoshi Nakamoto** minó el primer bloque de Bitcoin. En ese bloque grabó para siempre: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks". Un mensaje eterno: los bancos causan crisis, los gobiernos los rescatan con TU dinero, y tú pagas la factura.',
+        highlight: { title: 'No fue Coincidencia', text: 'Bitcoin nació exactamente cuando el sistema financiero demostró su corrupción. No es tecnología random: es una respuesta directa al robo institucionalizado.' }
+      },
+      {
+        type: 'main',
+        title: 'Las 4 Innovaciones que Cambian Todo',
+        content: 'Bitcoin no es solo "dinero digital". Es la primera vez en 5,000 años que alguien resuelve 4 problemas que parecían imposibles:',
+        features: [
+          { icon: Lock, title: 'Escasez Digital Absoluta', text: 'Solo existirán 21 millones de BTC. NUNCA. JAMÁS. Nadie puede crear más, ni Satoshi, ni los mineros, ni ningún gobierno. Es la primera vez que existe algo digitalmente escaso.' },
+          { icon: Network, title: 'Descentralización Real', text: 'No hay CEO, no hay servidor central, no hay empresa. Miles de computadoras en todo el mundo mantienen la red. Para "apagar" Bitcoin tendrías que apagar el internet global.' },
+          { icon: Shield, title: 'Inmutabilidad', text: 'Una vez que una transacción se confirma, es permanente. Nadie puede revertirla, censurarla o confiscarla. Tu dinero es TUYO.' },
+          { icon: Globe, title: 'Sin Fronteras ni Permisos', text: 'Puedes enviar $1 millón a cualquier país del mundo en 10 minutos, sin pedir permiso a nadie. Domingos, festivos, a las 3am. No importa.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Bitcoin vs Oro vs Dólar',
+        content: 'Comparemos las propiedades del dinero perfecto:',
+        features: [
+          { icon: Anchor, title: 'Oro', text: 'Escaso pero difícil de dividir, transportar y verificar. No puedes mandar oro por internet. Confiscable (USA lo hizo en 1933).' },
+          { icon: Landmark, title: 'Dólar', text: 'Fácil de usar pero infinitamente inflable. Los políticos SIEMPRE imprimen más. Pierde 96% de valor cada 50 años.' },
+          { icon: Zap, title: 'Bitcoin', text: 'Escaso como el oro, portable como el dólar, verificable instantáneamente, divisible hasta 8 decimales, imposible de confiscar si guardas bien tus llaves.' }
+        ],
+        highlight: { title: 'El Upgrade Monetario', text: 'Bitcoin es lo que el oro siempre quiso ser: dinero perfecto para la era digital.' }
+      },
+      {
+        type: 'main',
+        title: 'Por qué los Gobiernos NO Pueden Detenerlo',
+        content: 'China prohibió Bitcoin en 2013, 2017, 2019 y 2021. Hoy hay más actividad Bitcoin en China que nunca. India lo prohibió y revirtió. Nigeria lo prohibió y es el país #2 en adopción per cápita. ¿Por qué no funciona prohibirlo?',
+        features: [
+          { icon: Network, title: 'No hay Servidor que Cerrar', text: 'Bitcoin corre en miles de computadoras en 100+ países. No hay "sede central" que allanar.' },
+          { icon: Shield, title: 'Encriptación Militar', text: 'Tus bitcoins están protegidos por la misma matemática que protege secretos nucleares. Sin tu clave, nadie accede.' },
+          { icon: Globe, title: 'Internet es Global', text: 'Mientras exista internet (o radio, o satélites), Bitcoin funciona. No puedes cerrar internet sin destruir tu economía.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Lo que Bitcoin Significa para Ti',
+        items: [
+          'Por primera vez en tu vida, puedes tener un activo que NINGÚN gobierno puede devaluar, confiscar o censurar.',
+          'No necesitas permiso de bancos, políticos ni empresas para guardar y mover TU dinero.',
+          'El halving reduce la emisión de Bitcoin a la mitad cada 4 años. En 2024 fue el 4to halving. Para 2140, no habrá más emisión.',
+          'Mientras los bancos centrales imprimen trillones, Bitcoin sigue su código predecible. Es la única certeza monetaria en un mundo de manipulación.',
+          'No es "hacerse rico rápido": es proteger tu trabajo de toda una vida de la corrosión del dinero fiat.'
+        ]
       }
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Por qué Bitcoin es "dinero duro" y el dólar es "dinero blando"?', options: [{ id: 'a', text: 'Porque es más difícil de usar' }, { id: 'b', text: 'Porque su oferta es fija (21M) y predecible' }, { id: 'c', text: 'Porque pesa más' }], correctAnswer: 'b', explanation: 'La dureza del dinero se mide por lo difícil que es inflar su oferta.' },
-        { id: 'q2', question: '¿Quién controla la emisión de nuevos bitcoins después del halving de 2140?', options: [{ id: 'a', text: 'La Fed' }, { id: 'b', text: 'Nadie — se acaba la emisión' }, { id: 'c', text: 'Los mineros votan' }], correctAnswer: 'b', explanation: 'Habrá exactamente 21 000 000 BTC. Nunca más.' },
-        { id: 'q3', question: '¿Qué pasaría si mañana todos los gobiernos prohibieran Bitcoin?', options: [{ id: 'a', text: 'Desaparecería' }, { id: 'b', text: 'Seguiría funcionando porque es descentralizado y nadie puede apagarlo' }, { id: 'c', text: 'Bajaría 10%' }], correctAnswer: 'b', explanation: 'No hay un botón de apagado. Lo intentaron en China y hoy tiene más hashrate que nunca.' }
+        {
+          id: 'q1',
+          question: '¿Qué mensaje grabó Satoshi en el primer bloque de Bitcoin y por qué es significativo?',
+          options: [
+            { id: 'a', text: '"Hello World" - porque es tradición de programadores' },
+            { id: 'b', text: 'Un titular sobre bancos siendo rescatados - para marcar que Bitcoin es una respuesta a la corrupción financiera' },
+            { id: 'c', text: 'Su nombre real' },
+            { id: 'd', text: 'Nada, el primer bloque estaba vacío' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Satoshi grabó "Chancellor on brink of second bailout for banks" para que quede claro: Bitcoin existe porque el sistema actual está corrupto.'
+        },
+        {
+          id: 'q2',
+          question: '¿Por qué decimos que Bitcoin tiene "escasez digital absoluta"?',
+          options: [
+            { id: 'a', text: 'Porque es difícil de comprar' },
+            { id: 'b', text: 'Porque el código garantiza matemáticamente que solo existirán 21 millones, y nadie puede cambiar eso' },
+            { id: 'c', text: 'Porque Satoshi lo decidió así y puede cambiarlo' },
+            { id: 'd', text: 'Porque los mineros votan cada año' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El límite de 21 millones está grabado en el código y verificado por miles de nodos. Cambiarlo requeriría convencer al 100% de la red - matemáticamente imposible.'
+        },
+        {
+          id: 'q3',
+          question: 'China ha prohibido Bitcoin múltiples veces (2013, 2017, 2019, 2021). ¿Qué pasó?',
+          options: [
+            { id: 'a', text: 'Bitcoin desapareció en China' },
+            { id: 'b', text: 'Bitcoin siguió funcionando y China sigue siendo un mercado activo' },
+            { id: 'c', text: 'El precio cayó a cero' },
+            { id: 'd', text: 'Los mineros chinos entregaron sus máquinas al gobierno' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'No puedes prohibir matemáticas. Bitcoin es un protocolo descentralizado sin servidor central. Mientras exista internet, Bitcoin existe.'
+        },
+        {
+          id: 'q4',
+          question: '¿Qué es el "halving" de Bitcoin y por qué importa?',
+          options: [
+            { id: 'a', text: 'Cuando el precio baja 50%' },
+            { id: 'b', text: 'Cada 4 años la emisión de nuevos BTC se reduce a la mitad, haciendo a Bitcoin más escaso con el tiempo' },
+            { id: 'c', text: 'Cuando se dividen los bitcoins en partes más pequeñas' },
+            { id: 'd', text: 'Un bug en el código' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El halving es deflación programada. Mientras la Fed imprime más dólares cada año, Bitcoin produce MENOS cada 4 años. Para 2140, no habrá emisión nueva.'
+        },
+        {
+          id: 'q5',
+          question: 'Un dictador quiere confiscar tus bitcoins. ¿Qué necesita?',
+          options: [
+            { id: 'a', text: 'Una orden judicial' },
+            { id: 'b', text: 'Acceso a tu frase semilla de 12-24 palabras (que puede estar solo en tu memoria)' },
+            { id: 'c', text: 'Contactar a Satoshi' },
+            { id: 'd', text: 'Llamar al banco de Bitcoin' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Tus bitcoins están protegidos por encriptación militar. Sin tu clave privada, ni toda la fuerza militar del mundo puede acceder a ellos. Puedes cruzar fronteras con tu riqueza en la memoria.'
+        }
       ]
     }
   },
@@ -1262,43 +1431,58 @@ export const LESSONS_DATA: Record<number, any> = {
       questions: [
         {
           id: 'q1',
-          question: 'Un token tiene 1 billón de supply total y solo 10 millones circulantes. ¿Qué pasará cuando desbloqueen el 90% restante?',
+          question: 'Escenario: Encuentras un token a $0.01. Supply circulante: 10M. Supply total: 10B. Fully Diluted Valuation (FDV): $100M. ¿Cuál es el market cap real?',
           options: [
-            { id: 'a', text: 'Sube x100' },
-            { id: 'b', text: 'Presión de venta brutal' }
+            { id: 'a', text: '$100M (el FDV)' },
+            { id: 'b', text: '$100K — Solo 10M tokens están en el mercado × $0.01' },
+            { id: 'c', text: 'No se puede calcular' }
           ],
           correctAnswer: 'b',
-          explanation: 'Aumentar el supply circulante 100× diluye brutalmente el valor por token.'
+          explanation: 'Market cap = supply circulante × precio. El FDV es lo que valdría si todo el supply existiera. Aquí hay 1000× diferencia — el 99.9% aún no se ha desbloqueado.'
         },
         {
           id: 'q2',
-          question: '¿Qué es peor red flag en tokenomics?',
+          question: 'Escenario: Proyecto A tiene 15% para el equipo con 4 años de vesting. Proyecto B tiene 30% para el equipo con 6 meses cliff. Ambos tienen tecnología similar. ¿Cuál compras?',
           options: [
-            { id: 'a', text: '10% team con 4 años vesting' },
-            { id: 'b', text: '50%+ al equipo sin vesting o con cliff de 3 meses' }
+            { id: 'a', text: 'Proyecto B porque el equipo tiene más skin in the game' },
+            { id: 'b', text: 'Proyecto A — menos tokens para insiders y vesting largo = más alineado con holders' },
+            { id: 'c', text: 'Ninguno, el % del equipo no importa' }
           ],
           correctAnswer: 'b',
-          explanation: 'El equipo puede dumpearlo todo inmediatamente = exit scam probable.'
+          explanation: 'Vesting largo alinea incentivos del equipo con el éxito a largo plazo. 6 meses cliff = pueden dumpearte en menos de un año.'
         },
         {
           id: 'q3',
-          question: '¿Cómo sabes si un token es inflacionario?',
+          question: 'Escenario: Un protocolo emite 5% de nuevo supply anualmente pero quema 3% en fees. ¿Es inflacionario o deflacionario?',
           options: [
-            { id: 'a', text: 'Tiene muchos holders' },
-            { id: 'b', text: 'Emisión nueva > tokens quemados cada mes' }
+            { id: 'a', text: 'Deflacionario porque quema tokens' },
+            { id: 'b', text: 'Inflacionario al 2% neto (5% emisión - 3% quema)' },
+            { id: 'c', text: 'Neutral' }
           ],
           correctAnswer: 'b',
-          explanation: 'Inflación neta positiva = supply aumenta = presión bajista constante.'
+          explanation: 'Lo que importa es la inflación NETA. Si se crean más tokens de los que se destruyen, el supply crece = presión bajista.'
         },
         {
           id: 'q4',
-          question: 'El mejor tokenomics visto en Solana 2024–2025:',
+          question: 'Escenario: Dos memecoins. $DOGE tiene supply infinito (sigue emitiendo). $BONK quemó el 50% de su supply. ¿Cuál tiene mejor tokenomics para apreciación de precio?',
           options: [
-            { id: 'a', text: '1 trillón supply' },
-            { id: 'b', text: 'Supply fijo + quema agresiva (como JUP, WIF, BONK post-lanzamiento)' }
+            { id: 'a', text: '$DOGE porque es más conocido' },
+            { id: 'b', text: '$BONK — supply decreciente con demanda estable = precio sube' },
+            { id: 'c', text: 'Ambos iguales, son memecoins' }
           ],
           correctAnswer: 'b',
-          explanation: 'Supply decreciente + demanda creciente = presión alcista sostenida.'
+          explanation: 'La fama no supera las matemáticas. Supply infinito diluye holders eternamente. Supply que decrece crea escasez artificial.'
+        },
+        {
+          id: 'q5',
+          question: 'Escenario: Ves un airdrop farming. El protocolo dará tokens gratis a usuarios. ¿Qué pasa normalmente con el precio post-airdrop?',
+          options: [
+            { id: 'a', text: 'Sube porque más gente tiene el token' },
+            { id: 'b', text: 'Cae fuerte — los farmers venden inmediatamente su airdrop gratis' },
+            { id: 'c', text: 'Se mantiene estable' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los airdrops crean presión de venta masiva. Los farmers no tienen convicción, solo quieren cash. Espera el dump post-airdrop para comprar.'
         }
       ]
     }
@@ -1308,95 +1492,220 @@ export const LESSONS_DATA: Record<number, any> = {
     title: 'Ciclos de Mercado (Halving)',
     level: 'Intermedio',
     number: '6 de 12',
-    duration: '26 min',
-    type: 'Análisis',
-    description: 'Todo en cripto se mueve al ritmo de Bitcoin. Entiende los ciclos de 4 años.',
-    sections: [{ type: 'intro', title: 'El Director de Orquesta', content: 'Bitcoin dirige el mercado. Cuando BTC estornuda, las Altcoins se resfrían. Entiende el flujo de dinero: BTC -> ETH -> Alts (Solana).' }],
+    duration: '30 min',
+    type: 'Análisis + Estrategia',
+    description: 'Todo en cripto se mueve al ritmo de Bitcoin. Entiende los ciclos de 4 años y cómo posicionarte.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Director de Orquesta',
+        content: 'Bitcoin dirige el mercado. Cuando BTC estornuda, las Altcoins se resfrían. Entiende el flujo de dinero: **BTC → ETH → Large Caps → Mid Caps → Memecoins**. El ciclo de 4 años existe porque el halving reduce la emisión de nuevos BTC a la mitad, creando un shock de oferta predecible.',
+        highlight: {
+          title: 'El Patrón Que Se Repite',
+          text: 'Desde 2012, cada halving ha sido seguido por un bull market 12-18 meses después. No es coincidencia. Es matemáticas.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Las 4 Fases del Ciclo',
+        features: [
+          { icon: TrendingDown, title: '1. Bear Market', text: '-70% a -85% desde ATH. Duración: 12-18 meses. El momento de acumular.' },
+          { icon: Activity, title: '2. Acumulación', text: 'Precio lateral. Volumen bajo. Los informados compran, los retail ignoran.' },
+          { icon: Zap, title: '3. Bull Market', text: 'Halving ocurre → precio rompe ATH → euforia crece → altseason explota.' },
+          { icon: AlertTriangle, title: '4. Distribución', text: 'Pico de euforia. Taxi drivers hablan de crypto. Es hora de vender.' }
+        ]
+      }
+    ],
     quiz: {
       questions: [
         {
           id: 'q1',
-          question: '¿En qué fase del ciclo estamos en noviembre 2025?',
+          question: 'Escenario: Estamos en diciembre 2025. El halving fue en abril 2024. Bitcoin superó su ATH. ¿En qué fase estamos?',
           options: [
-            { id: 'a', text: 'Bear market' },
-            { id: 'b', text: 'Post-halving bull market — fase de euforia temprana' }
+            { id: 'a', text: 'Acumulación — todavía es temprano' },
+            { id: 'b', text: 'Bull market maduro — probablemente en la segunda mitad del ciclo alcista' },
+            { id: 'c', text: 'Bear market — mejor esperar' }
           ],
           correctAnswer: 'b',
-          explanation: 'Halving fue abril 2024 → pico esperado 2025.'
+          explanation: 'Abril 2024 + 18 meses = Octubre 2025. Para diciembre 2025 estamos en fase avanzada del bull. Históricamente, el pico llega 12-18 meses post-halving.'
         },
         {
           id: 'q2',
-          question: 'Históricamente, ¿cuántos meses después del halving ocurre el pico de precio de Bitcoin?',
+          question: 'Escenario: Bitcoin dominancia está en 60%. Tu amigo te dice que compres altcoins. ¿Qué le dices?',
           options: [
-            { id: 'a', text: '3–6 meses' },
-            { id: 'b', text: '12–18 meses' }
+            { id: 'a', text: '¡Vamos! Las alts van a explotar' },
+            { id: 'b', text: 'Todavía temprano para alts. BTC domina. Espera dominancia <55% para rotar fuerte a alts' },
+            { id: 'c', text: 'Las alts nunca superan a BTC' }
           ],
           correctAnswer: 'b',
-          explanation: 'Los ciclos previos muestran que el pico llega 12-18 meses post-halving.'
+          explanation: 'Altseason histórica comienza cuando Bitcoin dominancia cae bajo ~55%. Con 60%, el capital aún fluye hacia BTC. Paciencia.'
         },
         {
           id: 'q3',
-          question: '¿Cuándo empieza normalmente la "altseason"?',
+          question: 'Escenario: Tu tía que nunca habló de inversiones te pregunta cómo comprar Dogecoin porque lo vio en TikTok. ¿Qué significa esto?',
           options: [
-            { id: 'a', text: 'Justo después del halving' },
-            { id: 'b', text: 'Cuando Bitcoin domina <55% del market cap' }
+            { id: 'a', text: 'Es hora de comprar más — el retail está entrando' },
+            { id: 'b', text: 'Señal de techo cercano — cuando el mainstream entra masivamente, los informados venden' },
+            { id: 'c', text: 'No significa nada' }
           ],
           correctAnswer: 'b',
-          explanation: 'Altseason comienza cuando el capital rota de BTC hacia alts buscando mayor retorno.'
+          explanation: 'El indicador de la "tía/taxista/peluquero" es real. Cuando gente sin conocimiento financiero quiere entrar, significa que estamos cerca del pico de euforia.'
+        },
+        {
+          id: 'q4',
+          question: 'Escenario: Bitcoin cae 35% en una semana durante un bull market confirmado. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Vendo todo, el bear market comenzó' },
+            { id: 'b', text: 'Corrección normal en bull market. Evalúo comprar más si tengo liquidez' },
+            { id: 'c', text: 'Espero a que recupere el ATH para comprar' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Correcciones del 30-40% son NORMALES en bull markets. El ciclo 2017 tuvo 6 correcciones de +30%. El ciclo 2021 igual. No confundas corrección con cambio de tendencia.'
+        },
+        {
+          id: 'q5',
+          question: 'Escenario: Compraste SOL a $20 y ahora está en $200 (10x). Bitcoin está en ATH. ¿Cuál es la jugada inteligente?',
+          options: [
+            { id: 'a', text: 'HODL forever, nunca vender' },
+            { id: 'b', text: 'Tomar ganancias parciales (ej: sacar la inversión inicial + algo de profit) y dejar el resto correr' },
+            { id: 'c', text: 'Vender todo y esperar el bear' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Nadie quebró tomando ganancias. Sacar tu inversión inicial te deja jugando con "dinero gratis". El resto puede correr sin estrés.'
         }
       ]
     }
   },
   19: {
     id: 19,
-    title: 'Investigación de Proyectos',
+    title: 'Investigación On-Chain y DYOR',
     level: 'Intermedio',
     number: '7 de 12',
-    duration: '30 min',
-    type: 'Casos Prácticos',
-    description: 'DYOR (Do Your Own Research). Cómo investigar antes de invertir tu dinero.',
-    sections: [{ type: 'main', title: 'Herramientas', content: 'Usa DefiLlama para ver TVL, Token Terminal para ver ganancias reales, y Twitter para sentimiento.' }],
+    duration: '35 min',
+    type: 'Casos Prácticos + Herramientas',
+    description: 'DYOR (Do Your Own Research). Aprende a leer la blockchain como los profesionales.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Superpoder de las Blockchains Públicas',
+        content: 'A diferencia de los mercados tradicionales donde los grandes jugadores operan en la oscuridad, en crypto **todo queda registrado en la blockchain**. Puedes ver exactamente qué hacen las ballenas, cuánto dinero entra a un protocolo, y dónde está la liquidez. Los que dominan el análisis on-chain tienen ventaja sobre los que solo miran gráficos.',
+        highlight: {
+          title: 'La Verdad en los Datos',
+          text: 'El precio puede mentir (manipulación), Twitter puede mentir (marketing), pero la blockchain no miente. Aprende a leerla.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Arsenal de Herramientas On-Chain',
+        content: 'Estas son las herramientas que usan los traders profesionales y fondos de inversión:',
+        features: [
+          { icon: Search, title: 'DefiLlama', text: 'TVL, fees, revenue de cada protocolo. Si un protocolo genera fees, tiene demanda real.' },
+          { icon: Activity, title: 'Dune Analytics', text: 'Dashboards con datos on-chain. Busca dashboards de proyectos específicos.' },
+          { icon: Users, title: 'Arkham / Nansen', text: 'Rastrea wallets de VCs, fondos y ballenas. Ve qué están comprando los que saben.' },
+          { icon: Clock, title: 'TokenUnlocks.app', text: 'Calendario de desbloqueos. Saber cuándo entra más supply al mercado es crítico.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Métricas On-Chain que Importan',
+        content: 'No te ahogues en datos. Enfócate en estas métricas clave:',
+        features: [
+          { icon: Landmark, title: 'TVL (Total Value Locked)', text: 'Dinero depositado en el protocolo. TVL subiendo = confianza. TVL cayendo = alarma.' },
+          { icon: Zap, title: 'Fees / Revenue', text: 'Los fees son demanda real pagada por usuarios. Revenue = Fees que van al protocolo/holders.' },
+          { icon: Users, title: 'Active Wallets', text: 'Usuarios únicos interactuando. Más usuarios = más actividad orgánica.' },
+          { icon: TrendingDown, title: 'Whale Accumulation', text: 'Cuando las ballenas acumulan en silencio, suele preceder subidas.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Señales On-Chain: Bullish vs Bearish',
+        leftSide: {
+          title: 'Bullish (Comprar)',
+          points: [
+            'TVL creciendo mientras precio baja (acumulación)',
+            'Whales comprando post-caída',
+            'Fees creciendo mes a mes',
+            'Exchange outflows (sacan de exchanges = HODL)'
+          ]
+        },
+        rightSide: {
+          title: 'Bearish (Precaución)',
+          points: [
+            'TVL cayendo mientras precio sube (distribución)',
+            'Insiders moviendo tokens a exchanges',
+            'Unlock grande próximo (presión de venta)',
+            'Exchange inflows masivos (preparan para vender)'
+          ]
+        }
+      },
+      {
+        type: 'takeaways',
+        title: 'Checklist de Investigación',
+        items: [
+          '1. DefiLlama: ¿El protocolo genera revenue real?',
+          '2. TokenUnlocks: ¿Hay un unlock grande próximo?',
+          '3. Arkham/Nansen: ¿Qué hacen las wallets de insiders?',
+          '4. Dune: ¿Los usuarios activos crecen o caen?',
+          '5. Twitter/Discord: ¿La comunidad está viva o muerta?'
+        ]
+      }
+    ],
     quiz: {
       questions: [
         {
           id: 'q1',
-          question: '¿Cuál es la herramienta número 1 para ver salud real de un protocolo DeFi?',
+          question: 'Escenario: Encontraste un token nuevo. En DefiLlama ves que genera $2M en fees mensuales con solo $50M de market cap. ¿Qué significa esto?',
           options: [
-            { id: 'a', text: 'Twitter' },
-            { id: 'b', text: 'DefiLlama → TVL + Fees + Revenue' }
+            { id: 'a', text: 'Está sobrevalorado, debería valer menos' },
+            { id: 'b', text: 'Posiblemente infravalorado — genera ingresos reales con baja valoración' },
+            { id: 'c', text: 'Los fees no importan para valorar proyectos' }
           ],
           correctAnswer: 'b',
-          explanation: 'DefiLlama muestra métricas objetivas on-chain, no promesas de marketing.'
+          explanation: 'Un protocolo que genera $24M anuales en fees con $50M market cap tiene múltiplos muy atractivos. Compara con competidores.'
         },
         {
           id: 'q2',
-          question: 'Un proyecto tiene 3 meses de vida tiene 300M TVL pero solo 20k revenue mensual. ¿Qué opinas?',
+          question: 'Escenario: Ves en Arkham que 5 wallets de VCs conocidos movieron sus tokens a Binance ayer. El precio aún no cayó. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Está infravalorado' },
-            { id: 'b', text: 'Ponzi o farming de puntos — no sostenible' }
+            { id: 'a', text: 'Compro el dip antes de que suban' },
+            { id: 'b', text: 'Alerta roja: se preparan para vender. Reduzco exposición o pongo stop loss ajustado' },
+            { id: 'c', text: 'Es información irrelevante' }
           ],
           correctAnswer: 'b',
-          explanation: 'Alto TVL sin revenue = incentivos artificiales, no demanda real.'
+          explanation: 'Mover tokens a exchanges es paso previo a vender. Los VCs tienen info privilegiada. Actúa antes de que el precio refleje la venta.'
         },
         {
           id: 'q3',
-          question: '¿Dónde ves los unlocks futuros?',
+          question: 'Escenario: TokenUnlocks muestra que en 2 semanas se desbloquea el 15% del supply total. El precio ha subido 40% este mes. ¿Qué opinas?',
           options: [
-            { id: 'a', text: 'TokenUnlocks.app' },
-            { id: 'b', text: 'CoinMarketCap' }
+            { id: 'a', text: 'Perfecto timing para comprar más' },
+            { id: 'b', text: 'Pump antes del unlock = distribución. Los insiders están vendiendo a los retails que compran el hype' },
+            { id: 'c', text: 'Los unlocks no afectan el precio' }
           ],
-          correctAnswer: 'a',
-          explanation: 'TokenUnlocks.app te muestra calendario exacto de desbloqueos de supply.'
+          correctAnswer: 'b',
+          explanation: 'Patrón clásico: el precio sube antes del unlock para dar liquidez de salida a los insiders. Post-unlock suele corregir fuerte.'
         },
         {
           id: 'q4',
-          question: '¿Qué porcentaje del supply debería tener el equipo como máximo?',
+          question: 'Escenario: Un nuevo DEX en Solana tiene $500M TVL pero en Dune ves que solo 200 wallets generan el 95% del volumen. ¿Qué significa?',
           options: [
-            { id: 'a', text: '30%+' },
-            { id: 'b', text: '10–20% con vesting largo' }
+            { id: 'a', text: 'Usuarios muy comprometidos' },
+            { id: 'b', text: 'Wash trading o farming de puntos. No hay usuarios orgánicos reales' },
+            { id: 'c', text: 'Es normal en DeFi' }
           ],
           correctAnswer: 'b',
-          explanation: 'Más de 20% al equipo = control centralizado y riesgo de dump.'
+          explanation: 'Concentración extrema de actividad = bots/insiders inflando métricas. Un protocolo sano tiene miles de usuarios activos.'
+        },
+        {
+          id: 'q5',
+          question: 'Escenario: El precio de un token cae 30% pero en DefiLlama ves que el TVL sube 20% en la misma semana. ¿Qué está pasando?',
+          options: [
+            { id: 'a', text: 'El proyecto está muriendo' },
+            { id: 'b', text: 'Divergencia bullish: las ballenas están acumulando mientras el retail vende en pánico' },
+            { id: 'c', text: 'El TVL es irrelevante' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Cuando el precio cae pero el capital depositado sube, alguien con convicción está comprando. Es señal de acumulación institucional.'
         }
       ]
     }
@@ -2221,6 +2530,147 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'b',
           explanation: 'Gastar SOL cuando vale $100 y verlo subir a $200 duele. Los stablecoins son mejores para gastos diarios.'
+        }
+      ]
+    }
+  },
+  40: {
+    id: 40,
+    title: 'Staking SOL: Gana por Asegurar la Red',
+    level: 'Avanzado',
+    number: '11 de 11',
+    duration: '30 min',
+    type: 'Tutorial + Concepto',
+    description: 'Entiende validadores, epochs y cómo ganar ~7% anual delegando tu SOL.',
+    sections: [
+      {
+        type: 'intro',
+        title: '¿Por Qué Te Pagan por Hacer Staking?',
+        content: 'Bitcoin tiene mineros que gastan electricidad para asegurar la red. Solana tiene **validadores** que ponen SOL como garantía. Si hacen trampa, pierden su dinero. **Proof of Stake** reemplaza energía por capital en riesgo. Cuando haces staking, estás diciendo: "Confío en este validador para que sea honesto". A cambio, recibes parte de las recompensas que la red paga por procesar transacciones.',
+        highlight: {
+          title: 'La Magia del Staking',
+          text: 'Mientras tu banco te da 0.1% anual, tu SOL en staking genera ~7% APY. Y lo mejor: nunca pierdes la custodia de tus tokens.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Cómo Funciona: Epochs y Delegación',
+        content: 'Solana divide el tiempo en **epochs** (~2-3 días). Al final de cada epoch, se distribuyen las recompensas. **Delegar** significa asignar tu SOL a un validador sin enviárselo. Tu SOL nunca sale de tu wallet, solo le das "peso de voto" al validador.',
+        features: [
+          { icon: RefreshCw, title: 'Epochs', text: 'Periodos de ~2 días donde se procesan transacciones y se calculan recompensas.' },
+          { icon: Shield, title: 'Slashing (Corte)', text: 'Si un validador hace trampa, pierde parte de su stake. Solana aún no tiene slashing activo, pero está en el roadmap.' },
+          { icon: Award, title: 'Comisión del Validador', text: 'Los validadores cobran 0-10% de las recompensas. Busca validadores con <5% comisión.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Cómo Elegir un Buen Validador',
+        content: 'No todos los validadores son iguales. Un mal validador puede tener alto downtime (no procesa transacciones) o cobrar comisiones abusivas. Usa **StakeWiz** o **Solana Beach** para analizar validadores.',
+        features: [
+          { icon: Zap, title: 'Uptime', text: 'Busca >98% uptime. Si el validador está offline, no ganas recompensas.' },
+          { icon: Users, title: 'Stake Concentración', text: 'Delegar a validadores pequeños ayuda a descentralizar la red. Evita los top 10 gigantes.' },
+          { icon: PiggyBank, title: 'APY Estimado', text: 'Varía entre 6-8% dependiendo del validador y las condiciones de la red.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Staking Nativo vs Liquid Staking',
+        leftSide: {
+          title: 'Staking Nativo (Phantom/Solflare)',
+          points: [
+            'Delegas directamente a un validador',
+            'Tu SOL está "bloqueado" hasta que lo retires',
+            'Retiro toma ~2-3 días (período de cooldown)',
+            'Control total, sin intermediarios'
+          ]
+        },
+        rightSide: {
+          title: 'Liquid Staking (Marinade, Jito)',
+          points: [
+            'Recibes un token (mSOL, jitoSOL) que representa tu stake',
+            'Puedes usar ese token en DeFi mientras ganas staking rewards',
+            'Liquidez instantánea (puedes vender el token)',
+            'Riesgo adicional del protocolo de liquid staking'
+          ]
+        }
+      },
+      {
+        type: 'main',
+        title: 'Tutorial: Hacer Staking en Phantom',
+        content: '1. Abre Phantom → Tu saldo de SOL → "Start Earning SOL"\n2. Explora la lista de validadores (revisa comisión y uptime)\n3. Selecciona un validador y elige la cantidad de SOL\n4. Confirma la transacción (~0.000005 SOL de fee)\n5. ¡Listo! Tus recompensas empiezan a acumularse cada epoch.',
+        highlight: {
+          title: 'Tip Importante',
+          text: 'Siempre deja 0.1-0.5 SOL sin stakear para pagar fees de transacciones futuras.'
+        }
+      },
+      {
+        type: 'takeaways',
+        title: 'Lo Que Debes Recordar',
+        items: [
+          'Staking = poner tu SOL a trabajar asegurando la red',
+          'Tu SOL nunca sale de tu wallet al delegar',
+          'Busca validadores con <5% comisión y >98% uptime',
+          'Liquid staking (mSOL, jitoSOL) te da flexibilidad pero añade riesgo',
+          'Siempre deja algo de SOL líquido para fees'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: '¿Por qué Solana te paga por hacer staking?',
+          options: [
+            { id: 'a', text: 'Es un regalo de la Solana Foundation' },
+            { id: 'b', text: 'Porque estás ayudando a asegurar la red con tu capital como garantía' },
+            { id: 'c', text: 'Porque minaste bloques' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'En Proof of Stake, los validadores (y sus delegadores) ponen capital en riesgo. Las recompensas compensan ese riesgo y el servicio de procesar transacciones.'
+        },
+        {
+          id: 'q2',
+          question: '¿Qué pasa con tu SOL cuando lo delegas a un validador?',
+          options: [
+            { id: 'a', text: 'Se lo envías al validador y confías en que te lo devuelva' },
+            { id: 'b', text: 'Nunca sale de tu wallet. Solo le das poder de voto al validador' },
+            { id: 'c', text: 'Lo quema la red' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Delegación ≠ envío. Tu SOL sigue siendo tuyo, solo está "comprometido" con ese validador. Puedes retirarlo cuando quieras (después del cooldown).'
+        },
+        {
+          id: 'q3',
+          question: 'Un validador tiene 2% comisión y 99.5% uptime. Otro tiene 8% comisión y 95% uptime. ¿Cuál eliges?',
+          options: [
+            { id: 'a', text: 'El de 8% comisión porque gana más dinero' },
+            { id: 'b', text: 'El de 2% comisión y 99.5% uptime porque maximiza mis recompensas' },
+            { id: 'c', text: 'Da igual, todos pagan lo mismo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Menor comisión = más recompensas para ti. Mayor uptime = el validador está activo más tiempo procesando transacciones (genera más rewards).'
+        },
+        {
+          id: 'q4',
+          question: 'Tienes 100 SOL y quieres usar DeFi mientras haces staking. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Staking nativo en Phantom' },
+            { id: 'b', text: 'Liquid staking en Marinade (recibes mSOL que puedes usar en DeFi)' },
+            { id: 'c', text: 'No se puede hacer las dos cosas' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Liquid staking te da un token derivado (mSOL, jitoSOL) que representa tu stake. Puedes depositar ese token en protocolos DeFi mientras sigues ganando staking rewards.'
+        },
+        {
+          id: 'q5',
+          question: '¿Qué es un "epoch" en Solana?',
+          options: [
+            { id: 'a', text: 'Un periodo de ~2-3 días donde se procesan transacciones y se distribuyen recompensas de staking' },
+            { id: 'b', text: 'El nombre de un token' },
+            { id: 'c', text: 'Una actualización de software' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Solana divide el tiempo en epochs. Al final de cada epoch, los validadores reciben sus recompensas proporcionales al stake delegado.'
         }
       ]
     }
