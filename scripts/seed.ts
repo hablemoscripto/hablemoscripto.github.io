@@ -29,6 +29,8 @@ import {
   Layers,
   RefreshCw,
   Lock,
+  PiggyBank,
+  Award,
 } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
 import * as dotenv from 'dotenv';
@@ -82,6 +84,8 @@ const ICONS: Record<string, LucideIcon> = {
   Layers,
   RefreshCw,
   Lock,
+  PiggyBank,
+  Award,
 };
 
 function getIconName(icon: LucideIcon): string | null {

@@ -9,12 +9,12 @@ const Features: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center gap-16">
           
           {/* Image/Profile Side */}
-          <div className="lg:w-1/2 relative">
-            <div className="relative rounded-2xl overflow-hidden border-2 border-white/5 shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-500">
-              <img 
-                src="/images/MadLad.jpg" 
-                alt="CBas Founder" 
-                className="w-full max-w-md mx-auto filter grayscale hover:grayscale-0 transition-all duration-500"
+          <div className="lg:w-1/2 relative flex justify-center lg:justify-start">
+            <div className="relative rounded-2xl overflow-hidden border-2 border-white/5 shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-500 inline-block">
+              <img
+                src="/images/MadLad.jpg"
+                alt="CBas Founder"
+                className="w-auto max-w-full h-auto max-h-[600px] block group-hover:grayscale-0 grayscale hover:grayscale-0 transition-all duration-500"
               />
               <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-950 to-transparent p-8">
                 <p className="text-brand-500 font-bold text-lg">CBas</p>
