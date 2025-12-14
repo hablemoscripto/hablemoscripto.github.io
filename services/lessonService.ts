@@ -100,7 +100,8 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
       console.error('Error fetching referrals:', referralsError);
     }
 
-    // Fetch quiz with enhanced question fields
+    // Fetch quiz - use basic fields that exist in current schema
+    // Enhanced fields (question_type, hint, difficulty, etc.) are optional
     const { data: quiz, error: quizError } = await supabase
       .from('quizzes')
       .select(`
@@ -108,19 +109,9 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
         quiz_questions (
           id,
           question,
-          question_type,
           options,
           correct_answer,
-          correct_answers,
-          items,
-          correct_order,
-          text_before,
-          text_after,
-          acceptable_answers,
           explanation,
-          hint,
-          difficulty,
-          points,
           order
         )
       `)
@@ -131,28 +122,34 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
       console.error('Error fetching quiz:', quizError);
     }
 
-    // Fetch checkpoint quizzes
-    const { data: checkpoints, error: checkpointsError } = await supabase
-      .from('checkpoint_quizzes')
-      .select(`
-        id,
-        title,
-        section_index,
-        checkpoint_questions (
+    // Checkpoint quizzes are optional - only fetch if table exists
+    let checkpoints: any[] | null = null;
+    try {
+      const { data, error } = await supabase
+        .from('checkpoint_quizzes')
+        .select(`
           id,
-          question,
-          options,
-          correct_answer,
-          explanation,
-          hint,
-          order
-        )
-      `)
-      .eq('lesson_id', lessonId)
-      .order('order');
+          title,
+          section_index,
+          checkpoint_questions (
+            id,
+            question,
+            options,
+            correct_answer,
+            explanation,
+            hint,
+            order
+          )
+        `)
+        .eq('lesson_id', lessonId)
+        .order('order');
 
-    if (checkpointsError && checkpointsError.code !== 'PGRST116') {
-      console.error('Error fetching checkpoint quizzes:', checkpointsError);
+      if (!error) {
+        checkpoints = data;
+      }
+      // Silently ignore if table doesn't exist (PGRST205)
+    } catch {
+      // Table doesn't exist yet - that's fine
     }
 
     // Format the data to match the existing structure
@@ -175,67 +172,37 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
       })),
     };
 
-    // Add quiz if exists with enhanced question format
+    // Add quiz if exists - map to QuizQuestion format
     if (quiz && quiz.quiz_questions) {
       lessonData.quiz = {
         questions: quiz.quiz_questions
-          .sort((a: any, b: any) => a.order - b.order)
+          .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
           .map((q: any): QuizQuestion => {
-            const questionType = q.question_type || 'multiple-choice';
+            // Parse options - handle both string arrays and object arrays
+            const options = q.options?.map((opt: any) =>
+              typeof opt === 'string' ? opt : opt.text
+            ) || [];
 
-            const baseQuestion = {
-              id: q.id.toString(),
-              type: questionType as QuestionType,
-              question: q.question,
-              explanation: q.explanation || '',
-              hint: q.hint,
-              difficulty: q.difficulty,
-              points: q.points,
-            };
-
-            switch (questionType) {
-              case 'true-false':
-                return {
-                  ...baseQuestion,
-                  correctAnswer: q.correct_answer === 'true' || q.correct_answer === true,
-                };
-
-              case 'multiple-select':
-                return {
-                  ...baseQuestion,
-                  options: q.options?.map((opt: any) => typeof opt === 'string' ? opt : opt.text) || [],
-                  correctAnswers: q.correct_answers || [],
-                };
-
-              case 'ordering':
-                return {
-                  ...baseQuestion,
-                  items: q.items || [],
-                  correctOrder: q.correct_order || [],
-                };
-
-              case 'fill-blank':
-                return {
-                  ...baseQuestion,
-                  textBefore: q.text_before || '',
-                  textAfter: q.text_after || '',
-                  correctAnswer: q.correct_answer,
-                  acceptableAnswers: q.acceptable_answers || [],
-                };
-
-              case 'multiple-choice':
-              default:
-                return {
-                  ...baseQuestion,
-                  type: 'multiple-choice',
-                  options: q.options?.map((opt: any) => typeof opt === 'string' ? opt : opt.text) || [],
-                  correctAnswer: typeof q.correct_answer === 'number'
-                    ? q.correct_answer
-                    : q.options?.findIndex((opt: any) =>
-                        (typeof opt === 'string' ? opt : opt.id) === q.correct_answer
-                      ) ?? 0,
-                };
+            // Determine correct answer index
+            let correctAnswer: number;
+            if (typeof q.correct_answer === 'number') {
+              correctAnswer = q.correct_answer;
+            } else {
+              // Find index by matching option id or text
+              const idx = q.options?.findIndex((opt: any) =>
+                (typeof opt === 'string' ? opt : opt.id) === q.correct_answer
+              );
+              correctAnswer = idx >= 0 ? idx : 0;
             }
+
+            return {
+              id: q.id.toString(),
+              type: 'multiple-choice' as QuestionType,
+              question: q.question,
+              options,
+              correctAnswer,
+              explanation: q.explanation || '',
+            };
           }),
       };
     }
