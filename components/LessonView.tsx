@@ -6,6 +6,7 @@ import { useProgress } from '../contexts/ProgressContext';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Quiz from './education/Quiz';
+import CheckpointQuiz from './education/CheckpointQuiz';
 import { getPreviousLessonId } from '../utils/courseUtils';
 import { fetchLessonById, LessonData } from '../services/lessonService';
 
@@ -252,53 +253,73 @@ const LessonView: React.FC = () => {
                             </div>
                         )}
 
-                        {/* Content Sections */}
+                        {/* Content Sections with Checkpoint Quizzes */}
                         <div className="prose prose-invert prose-lg max-w-none">
-                            {lesson.sections.map((section, idx) => (
-                                <div key={idx} className="mb-8">
-                                    {section.type === 'intro' && (
-                                        <div className="text-lg text-slate-300 leading-relaxed font-medium border-l-4 border-brand-500 pl-4">
-                                            <ReactMarkdown>{section.content}</ReactMarkdown>
-                                        </div>
-                                    )}
+                            {lesson.sections.map((section, idx) => {
+                                // Find any checkpoint quiz that should appear after this section
+                                const checkpointAfterSection = lesson.checkpointQuizzes?.find(
+                                    cp => cp.sectionIndex === idx
+                                );
 
-                                    {section.type === 'main' && (
-                                        <div className="text-slate-300 leading-relaxed">
-                                            <ReactMarkdown>{section.content}</ReactMarkdown>
-                                        </div>
-                                    )}
+                                return (
+                                    <div key={idx}>
+                                        <div className="mb-8">
+                                            {section.type === 'intro' && (
+                                                <div className="text-lg text-slate-300 leading-relaxed font-medium border-l-4 border-brand-500 pl-4">
+                                                    <ReactMarkdown>{section.content}</ReactMarkdown>
+                                                </div>
+                                            )}
 
-                                    {section.type === 'comparison' && (
-                                        <div className="grid md:grid-cols-2 gap-4 my-6 not-prose">
-                                            <div className="bg-slate-900/50 p-6 rounded-xl border border-red-500/20">
-                                                <h4 className="font-bold text-red-400 mb-2">Antes (Fiat)</h4>
-                                                <p className="text-sm text-slate-400">Centralizado, inflacionario, lento, costoso.</p>
+                                            {section.type === 'main' && (
+                                                <div className="text-slate-300 leading-relaxed">
+                                                    <ReactMarkdown>{section.content}</ReactMarkdown>
+                                                </div>
+                                            )}
+
+                                            {section.type === 'comparison' && (
+                                                <div className="grid md:grid-cols-2 gap-4 my-6 not-prose">
+                                                    <div className="bg-slate-900/50 p-6 rounded-xl border border-red-500/20">
+                                                        <h4 className="font-bold text-red-400 mb-2">Antes (Fiat)</h4>
+                                                        <p className="text-sm text-slate-400">Centralizado, inflacionario, lento, costoso.</p>
+                                                    </div>
+                                                    <div className="bg-slate-900/50 p-6 rounded-xl border border-green-500/20">
+                                                        <h4 className="font-bold text-green-400 mb-2">Ahora (Cripto)</h4>
+                                                        <p className="text-sm text-slate-400">Descentralizado, deflacionario, instantáneo, barato.</p>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {section.type === 'takeaways' && (
+                                                <div className="bg-brand-500/10 border border-brand-500/20 rounded-xl p-6 my-8 not-prose">
+                                                    <h3 className="flex items-center gap-2 text-xl font-bold text-brand-400 mb-4">
+                                                        <BookOpen size={24} />
+                                                        Puntos Clave
+                                                    </h3>
+                                                    <ul className="space-y-2">
+                                                        {section.items?.map((item, i) => (
+                                                            <li key={i} className="flex items-start gap-2 text-slate-300">
+                                                                <CheckCircle size={18} className="text-brand-500 mt-1 shrink-0" />
+                                                                <span>{item}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {/* Checkpoint Quiz after this section */}
+                                        {checkpointAfterSection && (
+                                            <div className="not-prose">
+                                                <CheckpointQuiz
+                                                    id={`checkpoint-${checkpointAfterSection.id}`}
+                                                    title={checkpointAfterSection.title}
+                                                    questions={checkpointAfterSection.questions}
+                                                />
                                             </div>
-                                            <div className="bg-slate-900/50 p-6 rounded-xl border border-green-500/20">
-                                                <h4 className="font-bold text-green-400 mb-2">Ahora (Cripto)</h4>
-                                                <p className="text-sm text-slate-400">Descentralizado, deflacionario, instantáneo, barato.</p>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {section.type === 'takeaways' && (
-                                        <div className="bg-brand-500/10 border border-brand-500/20 rounded-xl p-6 my-8 not-prose">
-                                            <h3 className="flex items-center gap-2 text-xl font-bold text-brand-400 mb-4">
-                                                <BookOpen size={24} />
-                                                Puntos Clave
-                                            </h3>
-                                            <ul className="space-y-2">
-                                                {section.items?.map((item, i) => (
-                                                    <li key={i} className="flex items-start gap-2 text-slate-300">
-                                                        <CheckCircle size={18} className="text-brand-500 mt-1 shrink-0" />
-                                                        <span>{item}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
+                                        )}
+                                    </div>
+                                );
+                            })}
                         </div>
 
                         {/* Quiz Section */}
@@ -316,13 +337,7 @@ const LessonView: React.FC = () => {
                             ) : (
                                 <>
                                     <Quiz
-                                        questions={lesson.quiz?.questions?.map((q: any) => ({
-                                            id: q.id,
-                                            question: q.question,
-                                            options: q.options.map((opt: any) => opt.text),
-                                            correctAnswer: q.options.findIndex((opt: any) => opt.id === q.correctAnswer),
-                                            explanation: q.explanation
-                                        })) || []}
+                                        questions={lesson.quiz?.questions || []}
                                         onComplete={handleQuizComplete}
                                     />
 

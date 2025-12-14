@@ -25,7 +25,8 @@
       "Bash(npm run db:seed:*)",
       "Bash(npx vite-node:*)",
       "Bash(dig:*)",
-      "Bash(nslookup:*)"
+      "Bash(nslookup:*)",
+      "Bash(wc:*)"
     ],
     "deny": [],
     "ask": []
