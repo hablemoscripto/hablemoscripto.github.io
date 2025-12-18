@@ -326,12 +326,14 @@ const LessonView: React.FC = () => {
                                             {section.type === 'comparison' && (
                                                 <div className="grid md:grid-cols-2 gap-4 my-6 not-prose">
                                                     <div className="bg-slate-900/50 p-6 rounded-xl border border-red-500/20">
-                                                        <h4 className="font-bold text-red-400 mb-3">{section.leftTitle || 'Antes (Fiat)'}</h4>
-                                                        {section.leftSide ? (
+                                                        <h4 className="font-bold text-red-400 mb-3">
+                                                            {section.leftSide?.title || section.leftTitle || 'Antes (Fiat)'}
+                                                        </h4>
+                                                        {section.leftSide?.points ? (
                                                             <ul className="space-y-2">
-                                                                {section.leftSide.map((item: string, i: number) => (
+                                                                {section.leftSide.points.map((item: string, i: number) => (
                                                                     <li key={i} className="flex items-start gap-2 text-sm text-slate-400">
-                                                                        <span className="text-red-400 mt-0.5">✗</span>
+                                                                        <span className="text-red-400 mt-0.5">•</span>
                                                                         <span>{item}</span>
                                                                     </li>
                                                                 ))}
@@ -341,12 +343,14 @@ const LessonView: React.FC = () => {
                                                         )}
                                                     </div>
                                                     <div className="bg-slate-900/50 p-6 rounded-xl border border-green-500/20">
-                                                        <h4 className="font-bold text-green-400 mb-3">{section.rightTitle || 'Ahora (Cripto)'}</h4>
-                                                        {section.rightSide ? (
+                                                        <h4 className="font-bold text-green-400 mb-3">
+                                                            {section.rightSide?.title || section.rightTitle || 'Ahora (Cripto)'}
+                                                        </h4>
+                                                        {section.rightSide?.points ? (
                                                             <ul className="space-y-2">
-                                                                {section.rightSide.map((item: string, i: number) => (
+                                                                {section.rightSide.points.map((item: string, i: number) => (
                                                                     <li key={i} className="flex items-start gap-2 text-sm text-slate-400">
-                                                                        <span className="text-green-400 mt-0.5">✓</span>
+                                                                        <span className="text-green-400 mt-0.5">•</span>
                                                                         <span>{item}</span>
                                                                     </li>
                                                                 ))}
