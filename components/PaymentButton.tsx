@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Loader2, Crown, CheckCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { createPaymentRecord, Product, PRODUCTS, getUserPremiumStatus } from '../services/paymentService';
+import { createPaymentWithSignature, Product, PRODUCTS, getUserPremiumStatus } from '../services/paymentService';
 
 declare global {
   interface Window {
@@ -14,6 +14,7 @@ interface WompiWidgetConfig {
   amountInCents: number;
   reference: string;
   publicKey: string;
+  signature?: { integrity: string };
   redirectUrl?: string;
   customerData?: {
     email: string;
@@ -121,21 +122,21 @@ export default function PaymentButton({
     setLoading(true);
 
     try {
-      // Create payment record in database
-      const { reference } = await createPaymentRecord(
+      // Create payment record and get signature from Edge Function
+      const paymentData = await createPaymentWithSignature(
         product,
-        user.id,
         user.email || '',
         user.user_metadata?.full_name || user.user_metadata?.name
       );
 
-      // Open Wompi widget
+      // Open Wompi widget with signature
       const checkout = new window.WidgetCheckout({
-        currency: 'COP',
-        amountInCents: product.priceInCents,
-        reference: reference,
+        currency: paymentData.currency,
+        amountInCents: paymentData.amountInCents,
+        reference: paymentData.reference,
         publicKey: publicKey,
-        redirectUrl: `${window.location.origin}/pago-completado?ref=${reference}`,
+        signature: { integrity: paymentData.signature },
+        redirectUrl: `${window.location.origin}/pago-completado?ref=${paymentData.reference}`,
         customerData: {
           email: user.email || '',
           fullName: user.user_metadata?.full_name || user.user_metadata?.name || '',

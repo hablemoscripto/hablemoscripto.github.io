@@ -18,42 +18,48 @@ export const PRODUCTS: Record<string, Product> = {
   },
 };
 
-function generateReference(): string {
-  const timestamp = Date.now();
-  const random = Math.random().toString(36).substring(2, 8);
-  return `HC-${timestamp}-${random}`;
+export interface PaymentData {
+  reference: string;
+  amountInCents: number;
+  currency: string;
+  signature: string;
 }
 
-export async function createPaymentRecord(
+export async function createPaymentWithSignature(
   product: Product,
-  userId: string | null,
   customerEmail: string,
   customerName?: string
-) {
-  const reference = generateReference();
+): Promise<PaymentData> {
+  const { data: sessionData } = await supabase.auth.getSession();
+  const accessToken = sessionData?.session?.access_token;
 
-  const { data, error } = await supabase
-    .from('payments')
-    .insert({
-      user_id: userId,
-      wompi_reference: reference,
-      amount_in_cents: product.priceInCents,
-      currency: 'COP',
-      status: 'PENDING',
-      product_type: product.type,
-      product_name: product.name,
-      customer_email: customerEmail,
-      customer_name: customerName,
-    })
-    .select()
-    .single();
-
-  if (error) {
-    console.error('Error creating payment record:', error);
-    throw error;
+  if (!accessToken) {
+    throw new Error('No authenticated session');
   }
 
-  return { payment: data, reference };
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+
+  const response = await fetch(`${supabaseUrl}/functions/v1/create-payment`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      productType: product.type,
+      productName: product.name,
+      amountInCents: product.priceInCents,
+      customerEmail,
+      customerName,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error || 'Failed to create payment');
+  }
+
+  return response.json();
 }
 
 export async function getPaymentByReference(reference: string) {
