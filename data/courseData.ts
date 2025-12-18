@@ -13,6 +13,7 @@ import {
   Landmark,
   Percent,
   TrendingDown,
+  TrendingUp,
   Users,
   Server,
   Network,
@@ -226,38 +227,108 @@ export const LESSONS_DATA: Record<number, any> = {
     title: 'Breve Historia del Dinero',
     level: 'Principiante',
     number: '1 de 20',
-    duration: '15 minutos',
+    duration: '18 minutos',
     type: 'Video + Historia',
-    description: 'Para entender el futuro (Crypto), primero debemos entender el pasado. ¿Por qué usamos papel pintado como valor?',
+    description: 'Para entender por qué Bitcoin existe, primero debemos entender qué es el dinero, por qué lo inventamos, y cómo los gobiernos lo corrompieron. Esta es la historia que no te enseñaron en la escuela.',
     sections: [
       {
         type: 'intro',
         title: 'El Invento Más Importante de la Humanidad',
-        content: 'Antes del dinero, un pescador que quería pan tenía que encontrar un panadero que quisiera pescado. Esta "doble coincidencia de deseos" frenaba el comercio. El dinero resolvió esto: es una **tecnología para almacenar y transferir valor** a través del tiempo y el espacio. Es tan importante como la rueda o el lenguaje escrito.',
-        highlight: { title: 'Reflexión Profunda', text: 'El dinero es tiempo humano cristalizado. Cuando alguien devalúa tu dinero, te está robando horas de tu vida que ya trabajaste.' }
+        content: 'Imagina que eres un pescador en el año 3000 a.C. Tienes pescado fresco, pero necesitas sandalias. Vas donde el zapatero, pero él no quiere pescado—quiere trigo. Entonces buscas al agricultor, pero él quiere leña. Pasas el día entero buscando a alguien que quiera exactamente lo que tienes y tenga exactamente lo que necesitas. Este problema se llama la **"doble coincidencia de deseos"**, y frenó el progreso humano durante milenios. El dinero lo resolvió. No es solo "algo para comprar cosas". El dinero es una **tecnología para almacenar y transferir valor** a través del tiempo y el espacio. Es tan revolucionario como la rueda, la escritura o el internet.',
+        highlight: {
+          title: 'Reflexión Fundamental',
+          text: 'El dinero es tiempo humano cristalizado. Cada billete representa horas de trabajo de alguien. Cuando un gobierno devalúa el dinero, literalmente te está robando horas de vida que ya trabajaste y que nunca recuperarás.'
+        }
       },
       {
         type: 'main',
-        title: 'Las 5 Propiedades del Dinero Perfecto',
-        content: 'Durante 5,000 años, la humanidad descubrió que el buen dinero debe ser: **Escaso** (difícil de crear), **Divisible** (puedes pagar cantidades pequeñas), **Durable** (no se pudre), **Portable** (fácil de mover), y **Fungible** (cada unidad es igual a otra). El oro cumplía todo esto naturalmente.',
+        title: 'Las 6 Propiedades del Dinero Perfecto',
+        content: 'Durante 5,000 años de prueba y error, la humanidad descubrió que el buen dinero debe cumplir 6 propiedades fundamentales. Cualquier cosa que usemos como dinero será tan buena como su capacidad de cumplir estas características:',
         features: [
-          { icon: Shield, title: 'Conchas, Sal, Ganado', text: 'Fallaron como dinero porque no eran suficientemente escasos o durables.' },
-          { icon: Anchor, title: 'Oro y Plata', text: 'Dominaron 5,000 años porque cumplen todas las propiedades. Nadie puede "imprimir" más oro.' }
+          { icon: Lock, title: '1. Escasez', text: 'Debe ser difícil de crear o encontrar. Si cualquiera puede producirlo fácilmente, pierde valor. Las conchas de mar funcionaron como dinero hasta que la gente descubrió playas llenas de ellas.' },
+          { icon: Scissors, title: '2. Divisibilidad', text: 'Debe poder dividirse en partes pequeñas para transacciones menores. No puedes pagar un café con una vaca.' },
+          { icon: Shield, title: '3. Durabilidad', text: 'No puede pudrirse, oxidarse o destruirse fácilmente. El pescado no funciona como dinero porque en una semana es basura.' },
+          { icon: Zap, title: '4. Portabilidad', text: 'Debe ser fácil de transportar. Las piedras gigantes de la isla Yap eran dinero, pero ¿cómo las llevas al mercado?' },
+          { icon: RefreshCw, title: '5. Fungibilidad', text: 'Cada unidad debe ser idéntica e intercambiable. Un gramo de oro puro es igual a cualquier otro gramo de oro puro.' },
+          { icon: CheckCircle, title: '6. Verificabilidad', text: 'Debe ser fácil confirmar que es auténtico. El oro se puede morder (es blando), pesar y medir. El dinero falso es un problema de verificabilidad.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'El Experimento de 5,000 Años: Del Trueque al Oro',
+        content: 'La humanidad probó de todo antes de encontrar el oro:',
+        features: [
+          { icon: AlertTriangle, title: 'Conchas Cowrie (África, Asia)', text: 'Funcionaron por siglos hasta que los europeos llegaron con barcos llenos de conchas de otras costas. La oferta se multiplicó y las conchas perdieron todo valor. Primera lección: el dinero debe ser REALMENTE escaso.' },
+          { icon: AlertTriangle, title: 'Sal (Salario viene de "sal")', text: 'Portable y divisible, pero se disuelve en la lluvia y cualquiera puede evaporar agua de mar para crearla. No es durable ni suficientemente escasa.' },
+          { icon: AlertTriangle, title: 'Ganado', text: 'Útil pero imposible de dividir (no puedes pagar un pan con media vaca viva) y requiere alimentación constante. Falla en divisibilidad y portabilidad.' },
+          { icon: Award, title: 'Oro y Plata', text: 'Después de milenios de experimentación, el oro emergió como ganador. Es escaso (toda la minería de la historia cabe en 3 piscinas olímpicas), no se oxida, se puede dividir, es reconocible universalmente, y nadie puede "imprimir" más.' }
+        ],
+        highlight: {
+          title: 'La Razón del Oro',
+          text: 'El oro no se convirtió en dinero porque brilla bonito o porque los gobiernos lo decretaron. Se convirtió en dinero porque NATURALMENTE cumple las 6 propiedades mejor que cualquier otra cosa en la naturaleza. El mercado lo eligió durante 5,000 años.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'El Papel Moneda: Una Promesa de Oro',
+        content: 'Cargar oro era peligroso y poco práctico. En China (siglo VII) y luego en Europa, surgió una solución elegante: los **certificados de depósito**. Depositabas tu oro en un banco seguro y recibías un papel que decía "Este papel es canjeable por X gramos de oro". El papel era más fácil de cargar, pero su valor dependía de una PROMESA: que el banco realmente tenía el oro. Este sistema funcionó durante siglos... hasta que los bancos descubrieron que podían imprimir más papeles de los que tenían oro para respaldar.',
+        features: [
+          { icon: Landmark, title: 'El Patrón Oro', text: 'Hasta 1971, el dólar estadounidense estaba respaldado por oro en Fort Knox. Cada dólar era un certificado que podías canjear por oro real.' },
+          { icon: Globe, title: 'Bretton Woods (1944)', text: 'Después de la Segunda Guerra Mundial, el mundo acordó usar el dólar como moneda de reserva mundial, porque el dólar estaba respaldado por oro. Otras monedas se anclaban al dólar.' }
         ]
       },
       {
         type: 'main',
         title: 'La Ruptura de 1971: El Día que Cambió Todo',
-        content: 'Hasta 1971, cada dólar representaba oro real en Fort Knox. Podías ir al banco y cambiar tu papel por metal. Pero el 15 de agosto de 1971, Nixon rompió esta promesa "temporalmente" (para siempre). Desde entonces, vivimos en un experimento de **Dinero Fiat**: dinero por decreto, respaldado solo por la confianza en los políticos.',
-        highlight: { title: 'El Resultado', text: 'Desde 1971, el dólar ha perdido 98% de su poder adquisitivo. Una casa que costaba $25,000 ahora cuesta $400,000. Tu dinero se derrite.' }
+        content: 'El 15 de agosto de 1971, el presidente Richard Nixon apareció en televisión y anunció que Estados Unidos "temporalmente" suspendía la convertibilidad del dólar en oro. Francia y otros países estaban exigiendo su oro (sabían que USA había impreso más dólares de los que podía respaldar), y las reservas de Fort Knox se vaciaban. Nixon rompió la promesa "temporalmente". 54 años después, sigue rota. Desde ese día, el dólar—y por extensión todas las monedas del mundo—no están respaldadas por nada tangible. Solo por la "confianza" en el gobierno emisor.',
+        highlight: {
+          title: 'El Resultado Matemático',
+          text: 'Desde 1971, el dólar ha perdido el 98% de su poder adquisitivo. Una casa que costaba $25,000 en 1971 hoy cuesta $400,000+. Un auto que costaba $3,500 hoy cuesta $48,000. No es que las cosas sean mejores—es que tu dinero vale menos.'
+        }
+      },
+      {
+        type: 'comparison',
+        title: 'Antes vs Después de 1971',
+        leftSide: {
+          title: 'Antes de 1971 (Patrón Oro)',
+          points: [
+            'Cada dólar representaba oro real',
+            'Los gobiernos no podían imprimir dinero a voluntad',
+            'Un salario mínimo compraba 5+ onzas de oro',
+            'Una familia vivía con un solo sueldo',
+            'Los precios eran estables por décadas'
+          ]
+        },
+        rightSide: {
+          title: 'Después de 1971 (Dinero Fiat)',
+          points: [
+            'El dólar es un papel sin respaldo tangible',
+            'Los gobiernos imprimen trillones cuando quieren',
+            'Un salario mínimo compra 0.15 onzas de oro',
+            'Ambos padres trabajan y apenas alcanzan',
+            'Los precios suben cada año sin excepción'
+          ]
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Qué es el Dinero Fiat?',
+        content: '"Fiat" viene del latín y significa "hágase" o "por decreto". El dinero fiat es dinero que vale porque un gobierno DICE que vale, no porque esté respaldado por algo escaso. Tu billete de 50,000 pesos colombianos no representa oro, plata, ni nada tangible. Es un papel (o número digital) que tiene valor solo porque el gobierno obliga a aceptarlo y porque todos acordamos creer en él. Es un acto de fe colectiva.',
+        features: [
+          { icon: AlertTriangle, title: 'El Problema Fundamental', text: 'Si el valor del dinero depende de la "confianza" en los políticos, ¿qué pasa cuando los políticos imprimen para ganar elecciones, rescatar amigos, o financiar guerras? La historia tiene la respuesta: SIEMPRE lo hacen, y SIEMPRE destruyen el valor del dinero eventualmente.' },
+          { icon: TrendingDown, title: 'Dato Histórico', text: 'De las 775 monedas fiat que han existido en la historia, NINGUNA ha sobrevivido a largo plazo. El promedio de vida de una moneda fiat es 27 años. El dólar actual tiene 54 años desde 1971.' }
+        ]
       },
       {
         type: 'takeaways',
-        title: 'Por qué Esto Importa para Crypto',
+        title: 'Por qué Esta Historia Importa para Bitcoin',
         items: [
-          'Bitcoin es el primer dinero en la historia que cumple TODAS las propiedades del dinero perfecto, incluyendo escasez absoluta (21 millones máximo).',
-          'Por primera vez, la humanidad tiene dinero que ningún gobierno puede devaluar.',
-          'No es solo tecnología: es una revolución monetaria comparable a la invención del papel moneda.'
+          'El dinero no es un invento del gobierno—es una tecnología que el mercado desarrolló durante milenios para resolver el problema del intercambio de valor.',
+          'El buen dinero debe cumplir 6 propiedades: escasez, divisibilidad, durabilidad, portabilidad, fungibilidad y verificabilidad.',
+          'El oro dominó 5,000 años porque cumple estas propiedades naturalmente. Nadie puede "imprimir" más oro.',
+          'En 1971, los gobiernos rompieron la última conexión del dinero con algo escaso. Desde entonces, vivimos en un experimento de dinero por decreto (fiat).',
+          'Bitcoin es el primer dinero en la historia que cumple las 6 propiedades del dinero perfecto de forma DIGITAL, con escasez ABSOLUTA (21 millones máximo), y que NADIE puede manipular.',
+          'No es solo tecnología—es una revolución monetaria comparable a la invención del papel moneda o del propio concepto de dinero.'
         ]
       }
     ],
@@ -265,51 +336,63 @@ export const LESSONS_DATA: Record<number, any> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Por qué el oro fue dinero durante miles de años y el papel no lo fue hasta hace muy poco?',
+          question: 'Un pescador necesita sandalias. El zapatero no quiere pescado. ¿Cómo se llama este problema que el dinero resolvió?',
           options: [
-            { id: 'a', text: 'Porque los gobiernos lo obligaron' },
-            { id: 'b', text: 'Porque el oro es escaso, divisible, durable, portable y difícil de falsificar' },
-            { id: 'c', text: 'Porque brilla más' },
-            { id: 'd', text: 'Porque los bancos no existían' }
+            { id: 'a', text: 'El problema del trueque' },
+            { id: 'b', text: 'La doble coincidencia de deseos' },
+            { id: 'c', text: 'La escasez de bienes' },
+            { id: 'd', text: 'El problema de portabilidad' }
           ],
           correctAnswer: 'b',
-          explanation: 'El oro cumple las 5–6 propiedades del buen dinero. El papel solo las cumple cuando está respaldado por algo escaso (oro, petróleo, confianza militar…).'
+          explanation: 'La "doble coincidencia de deseos" requiere que dos personas quieran exactamente lo que la otra tiene. El dinero elimina este problema al servir como medio de intercambio universal.'
         },
         {
           id: 'q2',
-          question: '¿Qué pasó exactamente el 15 de agosto de 1971?',
+          question: '¿Por qué el oro se convirtió en dinero durante 5,000 años mientras las conchas de mar dejaron de funcionar?',
           options: [
-            { id: 'a', text: 'Se creó Bitcoin' },
-            { id: 'b', text: 'Nixon cerró la ventanilla del oro: los dólares ya no se podían cambiar por oro físico' },
-            { id: 'c', text: 'Empezó la inflación del 8 % anual' },
-            { id: 'd', text: 'Se inventó el petro-dólar' }
+            { id: 'a', text: 'Porque los gobiernos lo decretaron' },
+            { id: 'b', text: 'Porque el oro es más bonito' },
+            { id: 'c', text: 'Porque el oro es genuinamente escaso y nadie puede "imprimir" más, mientras las conchas podían recolectarse en masa' },
+            { id: 'd', text: 'Porque el oro es más fácil de encontrar' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Ese día nació el dinero fiat 100 % puro. Desde entonces, la oferta monetaria depende solo de decisiones políticas.'
+          correctAnswer: 'c',
+          explanation: 'El mercado, no los gobiernos, eligió el oro durante milenios porque cumple naturalmente las 6 propiedades del buen dinero, especialmente la escasez. Las conchas fallaron cuando se descubrieron nuevas fuentes.'
         },
         {
           id: 'q3',
-          question: 'Un trabajador en Venezuela ahorró 10 años para comprar una casa. En 2018, sus ahorros valían $50,000. En 2020 valían $50. ¿Qué pasó?',
+          question: '¿Qué pasó exactamente el 15 de agosto de 1971?',
           options: [
-            { id: 'a', text: 'Mala suerte' },
-            { id: 'b', text: 'El gobierno imprimió tanto dinero que destruyó el valor de sus ahorros (hiperinflación)' },
-            { id: 'c', text: 'El banco le robó' },
-            { id: 'd', text: 'Los precios de las casas bajaron' }
+            { id: 'a', text: 'Se creó Bitcoin' },
+            { id: 'b', text: 'Nixon rompió la promesa de canjear dólares por oro, creando el sistema de dinero fiat actual' },
+            { id: 'c', text: 'Empezó la Gran Depresión' },
+            { id: 'd', text: 'Se fundó la Reserva Federal' }
           ],
           correctAnswer: 'b',
-          explanation: 'La hiperinflación de Venezuela destruyó el trabajo de millones de personas. Esto es lo que pasa cuando el dinero no es escaso.'
+          explanation: 'Ese día nació el dinero fiat puro. Nixon cerró la "ventanilla del oro" porque USA había impreso más dólares de los que podía respaldar. Desde entonces, el dinero no está respaldado por nada tangible.'
         },
         {
           id: 'q4',
-          question: 'Si el dinero es "tiempo humano cristalizado", ¿qué significa que un gobierno imprima dinero?',
+          question: 'Un trabajador en Venezuela ahorró durante 10 años. En 2018 sus ahorros valían $50,000. En 2020 valían $50. ¿Qué propiedad del dinero falló catastróficamente?',
+          options: [
+            { id: 'a', text: 'Divisibilidad' },
+            { id: 'b', text: 'Portabilidad' },
+            { id: 'c', text: 'Escasez (el gobierno imprimió tanto que destruyó el valor)' },
+            { id: 'd', text: 'Verificabilidad' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'La hiperinflación de Venezuela ocurrió porque el gobierno imprimió dinero sin límite. Cuando el dinero no es escaso, pierde su capacidad de almacenar valor. El trabajo de toda una vida se evaporó.'
+        },
+        {
+          id: 'q5',
+          question: 'Si el dinero es "tiempo humano cristalizado", ¿qué significa cuando un gobierno imprime trillones de la nada?',
           options: [
             { id: 'a', text: 'Crea riqueza para todos' },
-            { id: 'b', text: 'Roba tiempo de vida a los ahorradores para dárselo a los primeros en recibir el dinero nuevo' },
-            { id: 'c', text: 'No afecta a nadie' },
+            { id: 'b', text: 'No afecta a nadie porque es solo un número' },
+            { id: 'c', text: 'Roba silenciosamente horas de vida a todos los que ahorraron en esa moneda' },
             { id: 'd', text: 'Solo afecta a los ricos' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Imprimir dinero es un impuesto oculto. Diluye el valor de tu trabajo pasado para financiar el gasto presente del gobierno.'
+          correctAnswer: 'c',
+          explanation: 'Imprimir dinero diluye el valor de todo el dinero existente. Es un impuesto oculto que roba el tiempo de trabajo que la gente ya invirtió. Por eso Bitcoin tiene un límite de 21 millones: nadie puede "imprimir" más.'
         }
       ]
     }
@@ -319,54 +402,101 @@ export const LESSONS_DATA: Record<number, any> = {
     title: 'La Trampa de la Inflación',
     level: 'Principiante',
     number: '2 de 20',
-    duration: '20 minutos',
+    duration: '22 minutos',
     type: 'Video + Gráficos',
-    description: 'Descubre cómo funciona realmente el sistema bancario moderno y por qué tus ahorros pierden valor cada año.',
+    description: 'Te han enseñado que la inflación es "natural" y "necesaria". Es mentira. La inflación es una política deliberada que transfiere tu riqueza a otros mientras duermes. Aprende cómo funciona realmente la máquina de crear dinero.',
     sections: [
       {
         type: 'intro',
-        title: 'El Robo Silencioso',
-        content: 'Tu abuela podía comprar una casa con el sueldo de 3 años. Hoy necesitas 15 años. ¿La gente trabaja menos? No. **Tu dinero vale menos**. La inflación no es un accidente natural: es una política deliberada que transfiere riqueza de los que ahorran a los que imprimen.',
-        highlight: { title: 'Dato Escalofriante', text: 'En 1971, un salario mínimo en USA compraba 5 onzas de oro. Hoy compra 0.15 onzas. Mismas horas de trabajo, 97% menos poder adquisitivo.' }
+        title: 'El Robo Silencioso que Nadie Te Explicó',
+        content: 'Tu abuela podía comprar una casa con el sueldo de 3 años. Hoy necesitas 15 años o más. ¿La gente de antes trabajaba más duro? ¿Las casas de hoy son 5 veces mejores? No. La diferencia es simple: **tu dinero vale menos cada año**. La inflación no es un fenómeno natural como el clima. No es inevitable. Es una **política deliberada** de los gobiernos que, año tras año, transfiere riqueza silenciosamente de los que ahorran a los que imprimen y a los que reciben el dinero nuevo primero.',
+        highlight: {
+          title: 'El Dato que Deberías Tatuarte',
+          text: 'En 1971, un salario mínimo en Estados Unidos compraba 5 onzas de oro. Hoy, ese mismo salario mínimo compra 0.15 onzas de oro. Mismas horas de trabajo, 97% MENOS poder adquisitivo. No trabajamos menos—nos pagan en dinero que vale menos.'
+        }
       },
       {
         type: 'main',
-        title: 'La Máquina de Crear Dinero',
-        content: 'La mayoría cree que el dinero está respaldado por algo. Falso. Desde 1971, el dinero se crea de la nada, principalmente cuando alguien pide un préstamo. Sí, leíste bien: **tu banco crea dinero de la nada cuando te da un crédito**.',
+        title: 'La Gran Mentira: "El Dinero Está Respaldado"',
+        content: 'Pregúntale a cualquier persona en la calle: "¿Por qué el dinero tiene valor?" Casi todos responderán algo como "porque está respaldado por el gobierno" o "porque hay oro en algún banco". **Ambas respuestas son incorrectas.** Desde 1971, tu dinero no está respaldado por absolutamente nada tangible. Es un número en una computadora (o un papel pintado) que tiene valor únicamente porque: 1) El gobierno te obliga a aceptarlo para pagar impuestos, y 2) Todos acordamos creer en él colectivamente.',
         features: [
-          { icon: Landmark, title: 'Bancos Centrales', text: 'En 2020, la Fed "imprimió" $4 trillones en meses. Ese dinero no existía. Ahora tus dólares valen menos.' },
-          { icon: Percent, title: 'Reserva Fraccionaria', text: 'Por cada $100 que depositas, el banco presta $90 a otros (creando $90 nuevos). El dinero se multiplica de la nada.' },
-          { icon: TrendingDown, title: 'Dilución Perpetua', text: 'Más dólares persiguiendo los mismos bienes = precios más altos. Tu sueldo sube 3%, los precios suben 8%. Cada año eres más pobre.' }
+          { icon: Landmark, title: 'El Mito del Respaldo', text: 'No hay oro en Fort Knox respaldando tu dinero. No hay petróleo. No hay nada. El "respaldo" es la promesa de un político de no abusar del poder de imprimir. ¿Confías en esa promesa?' },
+          { icon: AlertTriangle, title: 'La Prueba', text: 'Si el dinero estuviera respaldado por algo, los gobiernos no podrían crear trillones de la nada en semanas como hicieron en 2020. Simplemente NO TENDRÍAN ese "algo" para respaldar el dinero nuevo.' }
         ]
       },
       {
         type: 'main',
-        title: 'El Juego Amañado: ¿Quién Gana y Quién Pierde?',
-        content: 'Cuando el banco central "imprime" dinero, no te llega a ti primero. Llega a los bancos, que lo prestan a corporaciones, que compran activos. Para cuando los precios suben y tú pides un aumento, ya perdiste.',
+        title: 'La Máquina de Crear Dinero (Cómo Funciona Realmente)',
+        content: 'Aquí es donde la mayoría se pierde, porque el sistema está diseñado para ser confuso. Vamos a simplificarlo. El dinero se crea principalmente de DOS formas:',
         features: [
-          { icon: Users, title: 'Los Ganadores', text: 'Bancos, fondos de inversión, gobiernos, y dueños de activos (acciones, casas, Bitcoin). El dinero nuevo les llega PRIMERO.' },
-          { icon: TrendingDown, title: 'Los Perdedores', text: 'Asalariados, pensionados, y cualquiera que ahorre en efectivo. Reciben el dinero ÚLTIMO, cuando ya perdió valor.' }
+          { icon: Landmark, title: '1. El Banco Central Imprime', text: 'Cuando la Reserva Federal (USA), el Banco de la República (Colombia), o cualquier banco central decide que "la economía necesita estímulo", literalmente teclea números en una computadora y ese dinero EXISTE. No viene de ningún lado. En 2020, la Fed creó $4.5 TRILLONES en meses. ¿De dónde? De la nada.' },
+          { icon: Percent, title: '2. Los Bancos Multiplican (Reserva Fraccionaria)', text: 'Cuando depositas $100 en tu banco, el banco NO guarda esos $100 esperándote. Por ley, solo debe guardar una "reserva" (digamos 10%). Los otros $90 los presta a otra persona. Esa persona deposita los $90 en otro banco, que guarda $9 y presta $81. Y así sucesivamente. Tus $100 originales se convierten en $900+ de "dinero" en el sistema. Es multiplicación mágica de deuda.' },
+          { icon: TrendingDown, title: 'El Resultado Matemático', text: 'Cada año hay más unidades de dinero persiguiendo aproximadamente la misma cantidad de bienes y servicios. Más dinero + mismos bienes = precios más altos. Tu sueldo sube 3%, pero los precios suben 8%. Cada año eres más pobre en términos reales, aunque tu cuenta bancaria muestre un número mayor.' }
         ],
-        highlight: { title: 'Efecto Cantillon', text: 'Este fenómeno tiene 300 años de historia. Los más cercanos a la "impresora" siempre ganan. Los más lejanos siempre pierden.' }
+        highlight: {
+          title: 'La Ilusión del Aumento de Sueldo',
+          text: 'Si te aumentan el sueldo 5% pero la inflación es 10%, en realidad te BAJARON el sueldo 5%. El número en tu cuenta es más grande, pero compra menos cosas. Es matemáticas, no opinión.'
+        }
       },
       {
         type: 'main',
-        title: 'Casos Reales: Cuando la Inflación Destruye Vidas',
-        content: 'Esto no es teoría. Ha pasado docenas de veces en la historia, y sigue pasando HOY:',
+        title: 'Por Qué los Gobiernos AMAN la Inflación',
+        content: 'La inflación no es un error—es una política deliberada. Los gobiernos tienen incentivos muy claros para mantener inflación moderada (y a veces no tan moderada):',
         features: [
-          { icon: AlertTriangle, title: 'Venezuela 2018', text: 'Inflación de 1,000,000%. El trabajo de toda una vida se volvió papel sin valor en meses.' },
-          { icon: AlertTriangle, title: 'Argentina 2023', text: '140% de inflación anual. Los abuelos ven sus pensiones evaporarse mientras los políticos viven en lujo.' },
-          { icon: AlertTriangle, title: 'Turquía 2022', text: 'La lira perdió 80% de su valor en 2 años. La clase media se convirtió en clase pobre.' }
+          { icon: Landmark, title: 'Licuar la Deuda', text: 'Si el gobierno debe $1 trillón, puede imprimirlo y pagar. Técnicamente "pagó" su deuda, pero el dinero ahora vale menos. Transfirió su deuda a todos los que tienen esa moneda.' },
+          { icon: Users, title: 'Financiar Sin Impuestos Visibles', text: 'Subir impuestos es impopular. Pero imprimir dinero es invisible para la mayoría. Es un "impuesto oculto" que la gente no entiende y no protesta.' },
+          { icon: TrendingDown, title: 'Manipular las Estadísticas', text: '¿Sabías que los gobiernos cambian constantemente cómo calculan la inflación? Cuando la inflación "oficial" es 4%, la inflación REAL (lo que tú sientes en el supermercado) suele ser el doble o más.' }
         ]
+      },
+      {
+        type: 'main',
+        title: 'La Inflación Real vs La Inflación Oficial',
+        content: 'Los gobiernos tienen trucos para hacer que la inflación "oficial" parezca más baja de lo que realmente es:',
+        features: [
+          { icon: AlertTriangle, title: 'Sustitución', text: 'Si el bistec sube 30%, asumen que "la gente comprará pollo". Así no cuentan la subida completa del bistec. Pero tú querías bistec, no pollo.' },
+          { icon: AlertTriangle, title: 'Ajuste Hedónico', text: 'Si tu computadora nueva cuesta lo mismo que la de hace 5 años pero es más rápida, dicen que "en realidad bajó de precio". Pero tu billetera pagó lo mismo.' },
+          { icon: AlertTriangle, title: 'Exclusiones Convenientes', text: 'Muchos índices excluyen comida y energía por ser "muy volátiles". Pero... ¿no son exactamente las cosas que más compras?' }
+        ],
+        highlight: {
+          title: 'El Test del Supermercado',
+          text: 'La próxima vez que el gobierno diga "inflación 4%", ve al supermercado y compara los precios con hace un año. Compara el alquiler. La gasolina. La electricidad. Tu experiencia personal es más honesta que cualquier estadística oficial.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Casos Reales: Cuando la Inflación Destruye Países',
+        content: 'Esto no es teoría. No es algo que "podría pasar". Ha pasado decenas de veces en la historia y está pasando AHORA MISMO mientras lees esto:',
+        features: [
+          { icon: AlertTriangle, title: 'Venezuela (2016-2020)', text: 'Inflación de 1,000,000% anual. El salario mínimo mensual no alcanzaba para comprar un kilo de carne. La clase media se volvió mendiga en meses. Doctores y abogados huyeron del país con lo puesto. Todo porque el gobierno decidió "imprimir su camino fuera de los problemas".' },
+          { icon: AlertTriangle, title: 'Argentina (2023-2024)', text: '140%+ de inflación anual. Los abuelos ven sus pensiones de toda una vida evaporarse en meses. La gente corre a comprar cualquier cosa el día de cobro porque mañana estará más caro. Los supermercados cambian precios DURANTE el día.' },
+          { icon: AlertTriangle, title: 'Turquía (2021-2023)', text: 'La lira perdió 80% de su valor en 2 años. La clase media turca, que había construido vidas estables, se encontró de pronto sin poder pagar la renta. Todo por políticas monetarias del gobierno.' },
+          { icon: AlertTriangle, title: 'Líbano (2020-2023)', text: 'El sistema bancario colapsó. La gente no podía sacar su propio dinero de los bancos. La libra libanesa perdió 98% de su valor. Familias de clase media alta se volvieron pobres literalmente de la noche a la mañana.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: '¿Y Colombia? ¿Y México? ¿Y España?',
+        content: 'Quizás pienses: "Eso pasa en países con gobiernos locos, aquí no pasará." Pero mira los datos:',
+        features: [
+          { icon: TrendingDown, title: 'Colombia', text: 'El peso colombiano ha perdido 85%+ de su valor contra el dólar desde el año 2000. Y el dólar TAMBIÉN pierde valor. Estás perdiendo contra una moneda que está perdiendo.' },
+          { icon: TrendingDown, title: 'México', text: 'El peso mexicano valía 12 por dólar en 2008. Llegó a 24 en 2020. Aunque ha recuperado algo, la tendencia histórica es clara: devaluación constante.' },
+          { icon: TrendingDown, title: 'El Dólar Mismo', text: 'El "rey" de las monedas ha perdido 96% de su poder adquisitivo desde 1913 (cuando se creó la Reserva Federal). Si el dólar se devalúa, ¿qué crees que pasa con las monedas ancladas a él?' }
+        ],
+        highlight: {
+          title: 'La Pregunta Incómoda',
+          text: '¿Por qué las generaciones de tus abuelos podían comprar casa, carro, educar hijos y ahorrar con UN solo sueldo... y hoy dos personas trabajando apenas llegan a fin de mes? ¿Es que antes trabajaban más? ¿O es que les pagaban en dinero que valía algo?'
+        }
       },
       {
         type: 'takeaways',
-        title: 'La Salida: Por qué Bitcoin Existe',
+        title: 'La Verdad Incómoda y La Salida',
         items: [
-          'Bitcoin tiene exactamente 21 millones de unidades. Nunca habrá más. Nadie puede "imprimir" Bitcoin para rescatar bancos.',
-          'Por primera vez en la historia, existe dinero que NINGÚN gobierno, banco o corporación puede devaluar.',
-          'No es inversión especulativa: es protección contra un sistema diseñado para empobrecerte lentamente.',
-          'Cada día que mantienes tu riqueza en pesos o dólares, estás perdiendo contra la inflación. Es matemática, no opinión.'
+          'La inflación no es natural ni inevitable—es una política deliberada que transfiere riqueza de ahorradores a deudores y de ciudadanos a gobiernos.',
+          'El dinero que tienes en el banco está perdiendo valor cada día. Los intereses bancarios NUNCA compensan la inflación real.',
+          'Desde 1971, NO existe ninguna moneda nacional respaldada por algo tangible. Todas dependen de promesas de políticos.',
+          'El historial es claro: TODOS los gobiernos eventualmente abusan del poder de imprimir. Es solo cuestión de tiempo y grado.',
+          'Bitcoin fue creado específicamente para resolver este problema: solo existirán 21 millones. Nadie—ni Satoshi, ni los mineros, ni ningún gobierno—puede crear más.',
+          'No se trata de "invertir para hacerse rico". Se trata de PROTEGER el valor de tu trabajo de un sistema diseñado para devaluarlo.'
         ]
       }
     ],
@@ -374,51 +504,63 @@ export const LESSONS_DATA: Record<number, any> = {
       questions: [
         {
           id: 'q1',
-          question: 'Tu abuela compró su casa en 1970 con el equivalente a 3 años de sueldo. Hoy la misma casa cuesta 15 años de sueldo. ¿Qué pasó?',
+          question: 'Tu abuela compró su casa en 1975 con 3 años de sueldo. Hoy la misma casa cuesta 15+ años de sueldo. ¿Cuál es la explicación REAL?',
           options: [
-            { id: 'a', text: 'Las casas son mejores ahora' },
-            { id: 'b', text: 'El dinero perdió 80%+ de su poder adquisitivo por la impresión monetaria' },
-            { id: 'c', text: 'La gente gana menos' },
-            { id: 'd', text: 'Es coincidencia' }
+            { id: 'a', text: 'Las casas de hoy son 5 veces mejores' },
+            { id: 'b', text: 'La gente de antes trabajaba más duro' },
+            { id: 'c', text: 'El dinero ha perdido 80%+ de su poder adquisitivo por la creación constante de dinero nuevo' },
+            { id: 'd', text: 'Es una coincidencia económica' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Desde que abandonamos el patrón oro, los gobiernos han diluido el valor del dinero constantemente. Tu sueldo nominal sube, pero tu poder real de compra baja.'
+          correctAnswer: 'c',
+          explanation: 'Las casas no son 5x mejores. La gente no trabaja menos. Simplemente, desde 1971 los gobiernos han diluido el valor del dinero constantemente. Tu sueldo nominal sube, pero tu poder real de compra baja.'
         },
         {
           id: 'q2',
-          question: 'Tienes $100,000 ahorrados en Argentina con 60% de inflación anual. ¿Cuánto poder de compra te queda después de 3 años?',
+          question: 'Tienes $100,000 pesos ahorrados en un país con 50% de inflación anual. Los dejas en el banco que te paga 10% de interés. Después de 1 año, ¿cuánto PODER DE COMPRA tienes realmente?',
           options: [
-            { id: 'a', text: '$100,000 (el número no cambia)' },
-            { id: 'b', text: 'Aproximadamente $24,000 de poder de compra real' },
-            { id: 'c', text: '$70,000' },
-            { id: 'd', text: 'Más, porque el banco paga intereses' }
+            { id: 'a', text: '$110,000 (ganaste 10% de interés)' },
+            { id: 'b', text: '$100,000 (quedaste igual)' },
+            { id: 'c', text: 'Aproximadamente $73,000 de poder de compra real (perdiste 27%)' },
+            { id: 'd', text: '$150,000 (la inflación te ayuda)' }
           ],
-          correctAnswer: 'b',
-          explanation: '$100,000 / 1.6 / 1.6 / 1.6 = ~$24,400. En 3 años pierdes 76% del poder adquisitivo. Los intereses bancarios NUNCA compensan inflación alta.'
+          correctAnswer: 'c',
+          explanation: 'Tienes $110,000 nominales, pero los precios subieron 50%. $110,000/1.5 = $73,333 de poder de compra real. Ganaste 10% pero perdiste 50% = -27% neto. Los intereses bancarios NUNCA compensan inflación alta.'
         },
         {
           id: 'q3',
-          question: 'En 2020, la Reserva Federal de USA "imprimió" $4 trillones. ¿De dónde salió ese dinero?',
+          question: 'En 2020, la Reserva Federal de USA creó $4.5 trillones. ¿De dónde salió ese dinero?',
           options: [
-            { id: 'a', text: 'De los impuestos que pagaste' },
-            { id: 'b', text: 'De reservas de oro' },
-            { id: 'c', text: 'De la nada, literalmente creado con teclas de computadora' },
-            { id: 'd', text: 'De préstamos de China' }
+            { id: 'a', text: 'De los impuestos de los ciudadanos' },
+            { id: 'b', text: 'De reservas de oro en Fort Knox' },
+            { id: 'c', text: 'De préstamos de China' },
+            { id: 'd', text: 'De la nada—literalmente teclearon números en una computadora' }
           ],
-          correctAnswer: 'c',
-          explanation: 'El dinero fiat se crea de la nada. La Fed aumenta un número en una computadora y ese "dinero" existe. Pero el efecto es real: tu dinero ahora vale menos.'
+          correctAnswer: 'd',
+          explanation: 'El dinero fiat se crea de la nada. La Fed aumenta un número en una base de datos y ese "dinero" existe. No hay oro, no hay impuestos, no hay nada respaldándolo. Pero el efecto es muy real: tu dinero existente ahora vale menos.'
         },
         {
           id: 'q4',
-          question: '¿Por qué los ricos se vuelven MÁS ricos durante períodos de alta inflación?',
+          question: '¿Por qué los gobiernos "aman" la inflación moderada y nunca la eliminan completamente?',
           options: [
-            { id: 'a', text: 'Porque trabajan más duro' },
-            { id: 'b', text: 'Porque tienen activos (casas, acciones, Bitcoin) que suben de precio, mientras sus deudas se devalúan' },
-            { id: 'c', text: 'Porque ahorran más' },
-            { id: 'd', text: 'Porque pagan menos impuestos' }
+            { id: 'a', text: 'Porque beneficia a todos los ciudadanos' },
+            { id: 'b', text: 'Porque es un fenómeno natural imposible de controlar' },
+            { id: 'c', text: 'Porque licúa la deuda pública, permite gastar sin subir impuestos, y la mayoría de ciudadanos no entiende que los está empobreciendo' },
+            { id: 'd', text: 'Porque los bancos centrales son incompetentes' }
           ],
-          correctAnswer: 'b',
-          explanation: 'La inflación es un impuesto oculto que castiga a los ahorradores y premia a los deudores con activos. Los ricos tienen activos y deuda. Los pobres tienen efectivo.'
+          correctAnswer: 'c',
+          explanation: 'La inflación es un "impuesto invisible". Permite a los gobiernos gastar más de lo que recaudan, pagar deudas con dinero devaluado, y transferir riqueza silenciosamente. Es política deliberada, no error.'
+        },
+        {
+          id: 'q5',
+          question: 'En Venezuela, Argentina, Turquía y Líbano, la clase media fue destruida por la inflación. ¿Qué tienen en común todos estos casos?',
+          options: [
+            { id: 'a', text: 'Guerras civiles' },
+            { id: 'b', text: 'Desastres naturales' },
+            { id: 'c', text: 'Gobiernos que imprimieron dinero masivamente para financiar sus gastos' },
+            { id: 'd', text: 'Sanciones internacionales únicamente' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'El patrón es siempre el mismo: gobierno gasta más de lo que tiene → imprime para cubrir el déficit → el dinero pierde valor → los ciudadanos pierden sus ahorros. Es la historia de TODAS las monedas fiat eventualmente.'
         }
       ]
     }
@@ -428,36 +570,210 @@ export const LESSONS_DATA: Record<number, any> = {
     title: 'El Efecto Cantillon',
     level: 'Principiante',
     number: '3 de 20',
-    duration: '15 min',
+    duration: '20 minutos',
     type: 'Concepto Clave',
-    description: '¿Quién se beneficia realmente cuando imprimen billetes?',
+    description: 'El secreto mejor guardado de la economía moderna: cuando se imprime dinero, no llega a todos al mismo tiempo. Los primeros en recibirlo se enriquecen. Los últimos se empobrecen. Aprende dónde estás tú en esta cadena.',
     sections: [
       {
         type: 'intro',
-        title: 'El Dinero no es Neutral',
-        content: 'Cuando el banco central imprime dinero, no llega a todos al mismo tiempo. Los primeros en recibirlo (bancos, gobierno) compran activos a precios bajos. Los últimos (tú) pagan precios altos.'
+        title: 'El Secreto de 300 Años que Explica la Desigualdad Moderna',
+        content: 'En 1730, un economista irlandés-francés llamado **Richard Cantillon** descubrió algo que los gobiernos prefieren que no sepas: **el dinero nuevo no es neutral**. Cuando un banco central "imprime" dinero, ese dinero no aparece mágicamente en los bolsillos de todos al mismo tiempo. Alguien lo recibe PRIMERO. Y ese "alguien" tiene una ventaja enorme: puede comprar activos a precios VIEJOS antes de que los precios suban. Para cuando el dinero llega a ti (si es que llega), los precios ya subieron. Compraste tarde. Pagaste más. Perdiste.',
+        highlight: {
+          title: 'La Metáfora del Río',
+          text: 'Imagina que el dinero nuevo es un río. Los que están cerca de la naciente (bancos, gobierno, grandes corporaciones) beben agua limpia y abundante. Para cuando el agua llega río abajo (trabajadores, pensionados, ahorradores), está sucia y hay menos. Tú estás río abajo.'
+        }
       },
       {
         type: 'main',
-        title: 'La Transferencia de Riqueza',
-        content: 'La inflación es una transferencia de riqueza de los pobres (que tienen efectivo) a los ricos (que tienen activos y deuda).'
-      },
-      {
-        type: 'main',
-        title: 'Ejemplo Práctico',
-        content: 'Si el gobierno imprime 1 trillón para rescatar bancos, los bancos reciben ese dinero y compran acciones. Las acciones suben. Tú no recibiste nada, pero ahora la comida es más cara porque hay más dinero persiguiendo los mismos bienes.',
+        title: 'Cómo Funciona: El Camino del Dinero Nuevo',
+        content: 'Vamos a rastrear exactamente qué pasa cuando un banco central "crea" $1 trillón de la nada. Este es el camino real que recorre ese dinero:',
         features: [
-          { icon: Landmark, title: 'Los Ganadores', text: 'Bancos, Gobierno, Grandes Corporaciones.' },
-          { icon: TrendingDown, title: 'Los Perdedores', text: 'Asalariados, Pensionados, Ahorradores.' }
+          { icon: Landmark, title: 'Paso 1: El Banco Central', text: 'La Reserva Federal (o el banco central de tu país) crea dinero digitalmente. Compra bonos del gobierno o activos de bancos privados. El dinero nuevo ahora está en los bancos comerciales.' },
+          { icon: Briefcase, title: 'Paso 2: Los Bancos Grandes', text: 'JP Morgan, Goldman Sachs, y los grandes bancos reciben el dinero fresco. ¿Qué hacen? Lo prestan a sus mejores clientes (grandes corporaciones, fondos de inversión) a tasas bajas. O lo usan ellos mismos para comprar activos.' },
+          { icon: TrendingUp, title: 'Paso 3: Corporaciones y Fondos', text: 'Las corporaciones usan el dinero barato para recomprar sus propias acciones (subiendo el precio), adquirir otras empresas, o comprar bienes raíces. Los precios de estos activos SUBEN. Los ricos (que ya tenían estos activos) se vuelven más ricos.' },
+          { icon: Users, title: 'Paso 4: El Efecto Goteo (Meses/Años Después)', text: 'Eventualmente, algo de ese dinero llega a la economía "real" en forma de salarios ligeramente más altos o más empleos. Pero para entonces...' },
+          { icon: TrendingDown, title: 'Paso 5: Tú (Último en la Fila)', text: 'Para cuando recibes un aumento del 5%, los precios de las casas subieron 30%, la bolsa subió 40%, y la comida subió 15%. Tu "aumento" en realidad es una REDUCCIÓN de tu poder de compra relativo.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Los Ganadores vs Los Perdedores',
+        leftSide: {
+          title: 'Quienes Ganan (Cerca de la Impresora)',
+          points: [
+            'Bancos centrales y comerciales',
+            'Gobierno (puede gastar el dinero nuevo primero)',
+            'Grandes corporaciones con acceso a crédito barato',
+            'Fondos de inversión y hedge funds',
+            'Dueños de activos: acciones, bienes raíces, Bitcoin',
+            'Personas con DEUDAS grandes (la deuda se licúa)',
+            'Los muy ricos que tienen asesores para anticipar la inflación'
+          ]
+        },
+        rightSide: {
+          title: 'Quienes Pierden (Lejos de la Impresora)',
+          points: [
+            'Trabajadores asalariados (tu sueldo se ajusta último)',
+            'Pensionados y jubilados (ingresos fijos)',
+            'Ahorradores en efectivo o cuentas bancarias',
+            'Clase media sin activos significativos',
+            'Jóvenes tratando de comprar su primera casa',
+            'Cualquiera que guarde dinero "para el futuro"',
+            'Pequeños negocios sin acceso a crédito barato'
+          ]
+        }
+      },
+      {
+        type: 'main',
+        title: 'Ejemplo Concreto: La Pandemia 2020-2022',
+        content: 'El Efecto Cantillon no es teoría abstracta. Lo vivimos en tiempo real durante la pandemia:',
+        features: [
+          { icon: Landmark, title: 'Marzo 2020', text: 'La Fed anuncia que imprimirá trillones para "salvar la economía". Los mercados, que habían caído 30%, empiezan a subir ESE MISMO DÍA. Los que tenían efectivo para comprar acciones en el fondo multiplicaron su dinero.' },
+          { icon: TrendingUp, title: '2020-2021', text: 'El S&P 500 sube 100%. Las casas en USA suben 30-40%. Bitcoin sube de $5,000 a $69,000. Los que ya tenían estos activos vieron su riqueza explotar.' },
+          { icon: Users, title: 'Mientras Tanto...', text: 'Millones perdieron empleos. Los "cheques de estímulo" ($1,200-$3,200) ayudaron a sobrevivir pero no a comprar activos. La clase media usó ese dinero para pagar renta y comida.' },
+          { icon: TrendingDown, title: '2022-2023', text: 'La inflación llega al 9%+. Los precios de todo explotan. Los salarios suben 3-5%. Los que vivían de sueldo ahora no llegan a fin de mes. El "estímulo" que los ayudó a sobrevivir ahora los empobrece.' }
+        ],
+        highlight: {
+          title: 'El Resultado Final',
+          text: 'Entre 2020-2022, los billonarios del mundo aumentaron su riqueza en $5 TRILLONES. La clase media vio sus ahorros evaporarse por la inflación. El dinero no llegó a todos igual. Los primeros en la fila ganaron. Los últimos perdieron.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'El Mapa de Cantillon: ¿Dónde Estás Tú?',
+        content: 'Vamos a ser honestos sobre tu posición en este sistema. Responde mentalmente:',
+        features: [
+          { icon: CheckCircle, title: '¿Tienes acceso a crédito institucional a tasas bajas?', text: 'Si no eres corporación o ultra-rico, probablemente no. Tú pagas 15-30% en tu tarjeta de crédito. BlackRock paga 2%.' },
+          { icon: CheckCircle, title: '¿Puedes comprar activos ANTES de que el dinero nuevo llegue al mercado?', text: 'Los fondos de inversión tienen traders que actúan en SEGUNDOS cuando la Fed anuncia algo. Tú te enteras días después.' },
+          { icon: CheckCircle, title: '¿Tu ingreso se ajusta automáticamente con la inflación?', text: 'Probablemente no. Tienes que PEDIR aumento y esperar que te lo den. Los precios no esperan.' },
+          { icon: CheckCircle, title: '¿La mayor parte de tu riqueza está en activos que suben con la inflación?', text: 'Si tu "riqueza" está en una cuenta de ahorros, estás perdiendo cada día. Si está en casa propia, acciones o Bitcoin, estás parcialmente protegido.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Por Qué la Brecha de Riqueza Crece y Crece',
+        content: 'Desde 1971 (fin del patrón oro), la desigualdad de riqueza ha explotado en TODO el mundo. ¿Coincidencia? No. Es el Efecto Cantillon acumulándose década tras década:',
+        features: [
+          { icon: TrendingUp, title: 'Los Activos Suben Más que los Salarios', text: 'Desde 1971, el S&P 500 ha subido 3,000%+. Los salarios reales han subido menos de 20%. Si tenías acciones, te hiciste rico. Si solo tenías tu sueldo, te quedaste atrás.' },
+          { icon: Landmark, title: 'La Vivienda se Volvió Imposible', text: 'En 1970, una casa promedio costaba 2-3 años de salario mediano. Hoy cuesta 7-10 años. El dinero nuevo fluyó hacia bienes raíces, haciendo imposible comprar para las nuevas generaciones.' },
+          { icon: Users, title: 'Los Ricos Tienen Asesores', text: 'Cuando se anuncia impresión de dinero, los ultra-ricos llaman a sus banqueros y mueven su capital a activos que se beneficiarán. Tú te enteras en las noticias semanas después.' }
+        ],
+        highlight: {
+          title: 'La Verdad Incómoda',
+          text: 'No es que los ricos "trabajen más duro". Es que están posicionados cerca de la fuente del dinero nuevo. Cada ronda de impresión los hace MÁS ricos y a ti te hace MÁS pobre en términos relativos. El juego está estructuralmente amañado.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Latinoamérica: Efecto Cantillon en Esteroides',
+        content: 'En LATAM, el Efecto Cantillon es aún más brutal porque nuestras monedas se devalúan contra el dólar, que a su vez se devalúa contra activos reales:',
+        features: [
+          { icon: AlertTriangle, title: 'Colombia', text: 'El peso se devalúa → los que tienen dólares o activos dolarizados preservan riqueza → los que tienen pesos pierden. ¿Quién tiene acceso a comprar dólares fácilmente? Los ricos, los bancos, las empresas grandes.' },
+          { icon: AlertTriangle, title: 'Argentina', text: 'Caso extremo: los que pueden comprar dólar blue preservan algo. Los que dependen del peso oficial ven sus ahorros evaporarse. El acceso al dólar ES un privilegio de clase.' },
+          { icon: AlertTriangle, title: 'Venezuela', text: 'Los conectados al gobierno recibieron dólares preferenciales y se enriquecieron obscenamente. La clase media y baja recibió bolívares que se volvieron papel higiénico.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Bitcoin: La Primera Salida del Sistema Cantillon',
+        content: 'Ahora entiendes por qué Bitcoin existe y por qué importa:',
+        features: [
+          { icon: Lock, title: 'Nadie Está "Cerca de la Impresora"', text: 'No hay banco central de Bitcoin. No hay "dinero nuevo" que fluya primero a los privilegiados. Los 21 millones de BTC se emiten según reglas matemáticas predecibles que nadie puede cambiar.' },
+          { icon: Users, title: 'Acceso Igualitario', text: 'Cualquier persona con internet puede comprar Bitcoin. No necesitas ser cliente VIP de un banco. No necesitas conexiones políticas. No necesitas estar en el primer mundo.' },
+          { icon: Shield, title: 'Protección Contra la Devaluación', text: 'Cuando los gobiernos imprimen dinero fiat, Bitcoin no se diluye. Su escasez es absoluta. Por eso, históricamente, ha subido cuando los bancos centrales imprimen.' }
+        ],
+        highlight: {
+          title: 'El Cambio de Paradigma',
+          text: 'Por primera vez en la historia, existe un activo monetario donde NADIE tiene ventaja de acceso privilegiado. No hay "insiders" de Bitcoin. No hay Cantillon en Bitcoin. Es el primer dinero verdaderamente justo de la historia.'
+        }
+      },
+      {
+        type: 'takeaways',
+        title: 'Lo Que Debes Recordar',
+        items: [
+          'El Efecto Cantillon explica por qué la desigualdad crece cuando se imprime dinero: los primeros en recibirlo ganan, los últimos pierden.',
+          'Tú estás al FINAL de la cadena. Para cuando el dinero nuevo llega a tu sueldo, los precios ya subieron.',
+          'Los ganadores del sistema actual: bancos, gobiernos, corporaciones, dueños de activos, ultra-ricos con acceso a crédito barato.',
+          'Los perdedores: asalariados, pensionados, ahorradores en efectivo, jóvenes sin activos, clase media latinoamericana.',
+          'La brecha de riqueza no es coincidencia—es el resultado matemático de 50+ años de impresión monetaria beneficiando siempre a los mismos.',
+          'Bitcoin es el primer sistema monetario donde NO existe el Efecto Cantillon. No hay privilegiados. No hay "cerca de la impresora". Escasez absoluta para todos por igual.'
         ]
       }
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: 'El gobierno imprime 1 trillón de pesos para pagar deuda. ¿Quién compra casas y autos a precios bajos?', options: [{ id: 'a', text: 'Los asalariados' }, { id: 'b', text: 'Los bancos y empresarios cercanos al gobierno' }, { id: 'c', text: 'Los jubilados' }], correctAnswer: 'b', explanation: 'Ellos reciben el dinero nuevo primero y compran activos antes de que suban los precios.' },
-        { id: 'q2', question: '¿Quién paga la inflación?', options: [{ id: 'a', text: 'Los ricos' }, { id: 'b', text: 'Los que tienen su riqueza en efectivo o salario' }, { id: 'c', text: 'Nadie' }], correctAnswer: 'b', explanation: 'La inflación es un impuesto oculto que castiga más a quien tiene efectivo y menos activos.' },
-        { id: 'q3', question: '¿Por qué los ricos se vuelven más ricos en períodos de alta inflación?', options: [{ id: 'a', text: 'Porque trabajan más' }, { id: 'b', text: 'Porque tienen deuda y activos que suben de precio' }, { id: 'c', text: 'Porque ahorran más' }], correctAnswer: 'b', explanation: 'La deuda se licúa y los activos (casas, acciones, Bitcoin) suben más que la inflación.' },
-        { id: 'q4', question: '¿Qué activo histórico ha ganado siempre contra el Efecto Cantillon a largo plazo?', options: [{ id: 'a', text: 'Plazo fijo' }, { id: 'b', text: 'Bitcoin' }, { id: 'c', text: 'Dólar blue' }], correctAnswer: 'b', explanation: 'Escasez absoluta + adopción global = la única salida demostrada contra la impresión ilimitada.' }
+        {
+          id: 'q1',
+          question: 'El banco central imprime $1 trillón para "estimular la economía". ¿Quién recibe ese dinero PRIMERO?',
+          options: [
+            { id: 'a', text: 'Los trabajadores asalariados' },
+            { id: 'b', text: 'Los pensionados' },
+            { id: 'c', text: 'Los bancos comerciales y grandes instituciones financieras' },
+            { id: 'd', text: 'Se reparte equitativamente entre todos los ciudadanos' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'El Efecto Cantillon: el dinero nuevo fluye primero a bancos e instituciones cercanas al banco central. Ellos compran activos a precios viejos. Para cuando llega al ciudadano común, los precios ya subieron.'
+        },
+        {
+          id: 'q2',
+          question: 'En 2020, la Fed imprimió trillones. El S&P 500 subió 100%, las casas subieron 30-40%. Los salarios subieron 5%. ¿Quién ganó y quién perdió?',
+          options: [
+            { id: 'a', text: 'Todos ganaron por igual' },
+            { id: 'b', text: 'Los dueños de activos (acciones, casas) ganaron. Los que solo tenían sueldo perdieron poder de compra relativo' },
+            { id: 'c', text: 'Los trabajadores ganaron más porque recibieron estímulos' },
+            { id: 'd', text: 'Nadie ganó, fue una crisis' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Ejemplo perfecto del Efecto Cantillon en tiempo real. Los que tenían activos vieron su riqueza explotar. Los que dependían de salarios vieron su poder de compra erosionarse. Los billonarios ganaron $5 trillones mientras la clase media recibía cheques de $1,200.'
+        },
+        {
+          id: 'q3',
+          question: 'Un joven de 25 años en Colombia quiere comprar su primera casa. Desde que nació, el peso se ha devaluado 85%+ y las casas han subido de precio mucho más que los salarios. ¿Por qué le es casi imposible comprar?',
+          options: [
+            { id: 'a', text: 'Porque no trabaja suficiente' },
+            { id: 'b', text: 'Porque las casas de hoy son mucho mejores' },
+            { id: 'c', text: 'Porque el Efecto Cantillon ha inflado los precios de activos mucho más rápido que los salarios durante décadas' },
+            { id: 'd', text: 'Porque los constructores son codiciosos' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Cada vez que se imprime dinero, fluye hacia activos (casas, acciones) antes que hacia salarios. Después de décadas de esto, los activos están fuera del alcance de quienes empiezan desde cero. No es falta de trabajo—es posición en el sistema.'
+        },
+        {
+          id: 'q4',
+          question: 'Un banco grande puede pedir prestado al 2% de interés. Tú pagas 25% en tu tarjeta de crédito. ¿Qué ventaja tiene el banco?',
+          options: [
+            { id: 'a', text: 'Ninguna, es el mismo dinero' },
+            { id: 'b', text: 'El banco está más cerca de la "impresora" y accede a dinero nuevo a tasas privilegiadas, mientras tú pagas el precio de mercado retail' },
+            { id: 'c', text: 'El banco trabaja más duro' },
+            { id: 'd', text: 'Es solo porque tiene más dinero' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Esto ES el Efecto Cantillon en acción. Los cercanos a la fuente del dinero (bancos) acceden a crédito casi gratis. Lo prestan a ti al 25%. La diferencia es ganancia para ellos, costo para ti. El acceso privilegiado al dinero nuevo es la ventaja.'
+        },
+        {
+          id: 'q5',
+          question: '¿Por qué Bitcoin es considerado una "salida" del Efecto Cantillon?',
+          options: [
+            { id: 'a', text: 'Porque Satoshi recibe Bitcoin nuevo primero' },
+            { id: 'b', text: 'Porque los mineros tienen ventaja sobre los demás' },
+            { id: 'c', text: 'Porque NO HAY impresión privilegiada—los 21 millones de BTC se emiten según reglas matemáticas predecibles que nadie puede cambiar, sin "cercanos a la impresora"' },
+            { id: 'd', text: 'Porque Bitcoin siempre sube' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Bitcoin es el primer dinero donde nadie tiene acceso privilegiado a la emisión. No hay banco central que imprima para amigos. Las reglas son iguales para todos. Cualquier persona con internet puede participar en igualdad de condiciones.'
+        },
+        {
+          id: 'q6',
+          question: 'Desde 1971, la brecha entre ricos y pobres ha crecido dramáticamente en casi todos los países. Según el Efecto Cantillon, ¿cuál es la causa estructural?',
+          options: [
+            { id: 'a', text: 'Los pobres se volvieron más perezosos' },
+            { id: 'b', text: 'La tecnología eliminó empleos' },
+            { id: 'c', text: 'Décadas de impresión monetaria han inflado activos (que poseen los ricos) mucho más que salarios (de los que dependen los demás)' },
+            { id: 'd', text: 'Los impuestos bajaron para los ricos' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'El S&P 500 subió 3000%+ desde 1971. Los salarios reales subieron menos de 20%. Si tenías activos, multiplicaste tu riqueza. Si dependías de tu sueldo, te quedaste atrás. No es coincidencia—es el Efecto Cantillon acumulándose durante 50 años.'
+        }
       ]
     }
   },
@@ -466,57 +782,129 @@ export const LESSONS_DATA: Record<number, any> = {
     title: 'Bitcoin: La Salida',
     level: 'Principiante',
     number: '4 de 20',
-    duration: '25 minutos',
+    duration: '28 minutos',
     type: 'Video + Texto',
-    description: 'Ante la corrupción del dinero Fiat, surge una solución matemática, descentralizada e inmutable.',
+    description: 'Después de entender cómo el sistema monetario te empobrece silenciosamente, es hora de conocer la solución. Bitcoin no es una "inversión especulativa"—es la primera alternativa real al dinero corrupto en 5,000 años de historia.',
     sections: [
       {
         type: 'intro',
-        title: 'El Momento Génesis',
-        content: 'El 3 de enero de 2009, mientras el mundo se desmoronaba por la crisis financiera causada por bancos irresponsables, alguien bajo el seudónimo **Satoshi Nakamoto** minó el primer bloque de Bitcoin. En ese bloque grabó para siempre: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks". Un mensaje eterno: los bancos causan crisis, los gobiernos los rescatan con TU dinero, y tú pagas la factura.',
-        highlight: { title: 'No fue Coincidencia', text: 'Bitcoin nació exactamente cuando el sistema financiero demostró su corrupción. No es tecnología random: es una respuesta directa al robo institucionalizado.' }
+        title: 'El Momento Génesis: 3 de Enero de 2009',
+        content: 'El mundo se desmoronaba. La crisis financiera de 2008 había expuesto la corrupción del sistema bancario: préstamos irresponsables, derivados tóxicos, codicia institucional. Los gobiernos respondieron rescatando a los bancos culpables con TRILLONES de dólares del contribuyente. Los ejecutivos que causaron la crisis recibieron bonos millonarios mientras millones perdían sus casas. En medio de este caos, el 3 de enero de 2009, alguien bajo el seudónimo **Satoshi Nakamoto** minó el primer bloque de Bitcoin. En ese bloque, grabó para siempre un mensaje: **"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"** (Canciller al borde de un segundo rescate para los bancos). No era coincidencia. Era una declaración de intenciones.',
+        highlight: {
+          title: 'El Mensaje Eterno',
+          text: 'Ese titular del Times está grabado PARA SIEMPRE en la blockchain de Bitcoin. Nadie puede borrarlo. Cada vez que alguien mina el bloque génesis, lee ese mensaje: los bancos causan crisis, los gobiernos los rescatan con TU dinero, y la gente común paga la factura. Bitcoin nació como respuesta directa a esa injusticia.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'No es Solo Tecnología: Es Una Revolución Monetaria',
+        content: 'Muchos piensan que Bitcoin es "solo tecnología" o "una inversión". Es mucho más profundo que eso. Por primera vez en 5,000 años, alguien resolvió un problema que parecía imposible: crear dinero que nadie pudiera corromper. Para entender por qué esto importa, recuerda las lecciones anteriores:',
+        features: [
+          { icon: AlertTriangle, title: 'El Problema del Dinero Fiat', text: 'Depende de promesas de políticos. TODOS los gobiernos eventualmente abusan del poder de imprimir. 100% de las monedas fiat en la historia han fracasado o se han devaluado masivamente.' },
+          { icon: AlertTriangle, title: 'El Problema del Oro', text: 'Es difícil de transportar, dividir, verificar, y almacenar de forma segura. Los gobiernos lo han confiscado históricamente (USA en 1933). No funciona para la era digital.' },
+          { icon: Zap, title: 'La Solución Bitcoin', text: 'Escasez absoluta como el oro (o mejor), pero completamente digital. Transportable a cualquier lugar del mundo en minutos. Imposible de confiscar si guardas bien tus llaves.' }
+        ]
       },
       {
         type: 'main',
         title: 'Las 4 Innovaciones que Cambian Todo',
-        content: 'Bitcoin no es solo "dinero digital". Es la primera vez en 5,000 años que alguien resuelve 4 problemas que parecían imposibles:',
+        content: 'Bitcoin combina varias innovaciones que, juntas, crean algo que nunca antes existió:',
         features: [
-          { icon: Lock, title: 'Escasez Digital Absoluta', text: 'Solo existirán 21 millones de BTC. NUNCA. JAMÁS. Nadie puede crear más, ni Satoshi, ni los mineros, ni ningún gobierno. Es la primera vez que existe algo digitalmente escaso.' },
-          { icon: Network, title: 'Descentralización Real', text: 'No hay CEO, no hay servidor central, no hay empresa. Miles de computadoras en todo el mundo mantienen la red. Para "apagar" Bitcoin tendrías que apagar el internet global.' },
-          { icon: Shield, title: 'Inmutabilidad', text: 'Una vez que una transacción se confirma, es permanente. Nadie puede revertirla, censurarla o confiscarla. Tu dinero es TUYO.' },
-          { icon: Globe, title: 'Sin Fronteras ni Permisos', text: 'Puedes enviar $1 millón a cualquier país del mundo en 10 minutos, sin pedir permiso a nadie. Domingos, festivos, a las 3am. No importa.' }
+          { icon: Lock, title: '1. Escasez Digital Absoluta', text: 'Solo existirán **21 millones de Bitcoin**. NUNCA. JAMÁS. Esta cantidad está grabada en el código y nadie puede cambiarla—ni Satoshi, ni los mineros, ni ningún gobierno. Es la primera vez en la historia que existe algo verdaderamente escaso en el mundo digital. Antes de Bitcoin, todo lo digital podía copiarse infinitamente.' },
+          { icon: Network, title: '2. Descentralización Real', text: 'No hay CEO de Bitcoin. No hay servidor central. No hay empresa que demandar o presionar. Miles de computadoras en más de 100 países mantienen la red simultáneamente. Para "apagar" Bitcoin, tendrías que apagar todas estas computadoras al mismo tiempo en todo el mundo—y otras nuevas aparecerían.' },
+          { icon: Shield, title: '3. Inmutabilidad', text: 'Una vez que una transacción se confirma en la blockchain, es PERMANENTE. Nadie puede revertirla, censurarla, o modificarla. Ni Satoshi. Ni los mineros. Ni ningún gobierno. El historial de Bitcoin es matemáticamente inalterable.' },
+          { icon: Globe, title: '4. Sin Fronteras ni Permisos', text: 'Puedes enviar $1 o $1 billón a cualquier país del mundo, 24/7, sin pedir permiso a nadie. No hay bancos que aprobar tu transacción. No hay límites arbitrarios. No hay "horario bancario". El dinero llega en minutos, no días.' }
         ]
       },
       {
         type: 'main',
-        title: 'Bitcoin vs Oro vs Dólar',
-        content: 'Comparemos las propiedades del dinero perfecto:',
+        title: 'Entendiendo la Escasez: ¿Por Qué Solo 21 Millones?',
+        content: 'La escasez de Bitcoin no es arbitraria—está matemáticamente garantizada por el código y el proceso de emisión:',
         features: [
-          { icon: Anchor, title: 'Oro', text: 'Escaso pero difícil de dividir, transportar y verificar. No puedes mandar oro por internet. Confiscable (USA lo hizo en 1933).' },
-          { icon: Landmark, title: 'Dólar', text: 'Fácil de usar pero infinitamente inflable. Los políticos SIEMPRE imprimen más. Pierde 96% de valor cada 50 años.' },
-          { icon: Zap, title: 'Bitcoin', text: 'Escaso como el oro, portable como el dólar, verificable instantáneamente, divisible hasta 8 decimales, imposible de confiscar si guardas bien tus llaves.' }
+          { icon: Clock, title: 'El Halving (Reducción a la Mitad)', text: 'Aproximadamente cada 4 años, la cantidad de Bitcoin nuevo que se crea se reduce A LA MITAD. En 2009, se creaban 50 BTC cada 10 minutos. Hoy (después de 4 halvings), se crean solo 3.125 BTC cada 10 minutos. En 2140, no se creará ninguno más.' },
+          { icon: TrendingDown, title: 'Emisión Decreciente', text: 'A diferencia del dinero fiat (que se imprime cada vez MÁS), Bitcoin se emite cada vez MENOS. Es deflación programada vs inflación garantizada. Mientras los bancos centrales crean trillones, la emisión de Bitcoin se reduce matemáticamente.' },
+          { icon: Lock, title: 'Verificación Distribuida', text: 'Miles de computadoras (nodos) en todo el mundo verifican constantemente que las reglas se cumplan. Si alguien intentara crear más de 21 millones, su versión sería rechazada por toda la red instantáneamente.' }
         ],
-        highlight: { title: 'El Upgrade Monetario', text: 'Bitcoin es lo que el oro siempre quiso ser: dinero perfecto para la era digital.' }
+        highlight: {
+          title: 'La Matemática de la Escasez',
+          text: 'Solo 21 millones de Bitcoin para 8 mil millones de personas. Si cada millonario del mundo quisiera 1 BTC, no habría suficientes. Y cada 4 años, se vuelven más difíciles de obtener. Es la primera vez que la humanidad tiene acceso a escasez absoluta y verificable.'
+        }
+      },
+      {
+        type: 'comparison',
+        title: 'Bitcoin vs Oro vs Dólar: La Comparación Definitiva',
+        leftSide: {
+          title: 'Oro (5,000 años de historia)',
+          points: [
+            'Escaso pero no absolutamente (se sigue minando)',
+            'Difícil de dividir (no puedes pagar café con pepitas)',
+            'Costoso de almacenar y asegurar',
+            'Imposible de enviar por internet',
+            'Confiscable (USA lo hizo en 1933)',
+            'Difícil de verificar autenticidad',
+            'Pesado y poco portable'
+          ]
+        },
+        rightSide: {
+          title: 'Bitcoin (Dinero del Siglo XXI)',
+          points: [
+            'Escasez ABSOLUTA (21 millones máximo, verificable)',
+            'Divisible hasta 8 decimales (satoshis)',
+            'Almacenable gratis en tu memoria (frase semilla)',
+            'Enviable a cualquier lugar en minutos',
+            'Imposible de confiscar sin tu clave',
+            'Verificación instantánea y gratuita',
+            'Cabe en tu bolsillo (o tu cabeza)'
+          ]
+        }
       },
       {
         type: 'main',
-        title: 'Por qué los Gobiernos NO Pueden Detenerlo',
-        content: 'China prohibió Bitcoin en 2013, 2017, 2019 y 2021. Hoy hay más actividad Bitcoin en China que nunca. India lo prohibió y revirtió. Nigeria lo prohibió y es el país #2 en adopción per cápita. ¿Por qué no funciona prohibirlo?',
+        title: 'Por Qué los Gobiernos NO Pueden Detener Bitcoin',
+        content: 'China prohibió Bitcoin en 2013, 2017, 2019 y 2021. India lo prohibió y revirtió. Nigeria lo prohibió y es el país #2 en adopción per cápita. Turquía intentó restringirlo mientras su moneda colapsaba. ¿Por qué NINGUNA prohibición funciona?',
         features: [
-          { icon: Network, title: 'No hay Servidor que Cerrar', text: 'Bitcoin corre en miles de computadoras en 100+ países. No hay "sede central" que allanar.' },
-          { icon: Shield, title: 'Encriptación Militar', text: 'Tus bitcoins están protegidos por la misma matemática que protege secretos nucleares. Sin tu clave, nadie accede.' },
-          { icon: Globe, title: 'Internet es Global', text: 'Mientras exista internet (o radio, o satélites), Bitcoin funciona. No puedes cerrar internet sin destruir tu economía.' }
+          { icon: Network, title: 'No Hay Servidor que Cerrar', text: 'Bitcoin corre en más de 15,000 nodos en 100+ países. No hay "sede central", no hay CEO, no hay empresa. Para apagar Bitcoin tendrías que apagar internet en TODO el mundo simultáneamente.' },
+          { icon: Shield, title: 'Criptografía de Grado Militar', text: 'Tus bitcoins están protegidos por la misma matemática que protege secretos nucleares. Romper una clave privada de Bitcoin tomaría más energía de la que produce el sol en toda su vida. No es exageración—es matemática.' },
+          { icon: Users, title: 'Efecto de Red Imparable', text: 'Cada nuevo usuario hace a Bitcoin más valioso y más resistente. Ya hay más de 100 millones de usuarios globales. Prohibirlo es como prohibir el email en 1995—solo te quedas atrás mientras el mundo avanza.' },
+          { icon: Globe, title: 'Internet es Global', text: 'Mientras exista internet, Bitcoin existe. Y si cierran internet, también cierran la economía moderna. Ningún gobierno puede permitirse eso.' }
+        ],
+        highlight: {
+          title: 'El Precedente de China',
+          text: 'China ha "prohibido" Bitcoin más de 10 veces desde 2013. Resultado: Bitcoin sigue funcionando perfectamente, ahora vale 100x más que en 2013, y millones de chinos siguen usándolo a través de VPNs. No puedes prohibir matemáticas.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Bitcoin en Tiempos de Crisis: Casos Reales',
+        content: 'Bitcoin no es teoría—está salvando vidas y fortunas ahora mismo:',
+        features: [
+          { icon: AlertTriangle, title: 'Venezuela', text: 'Mientras el bolívar perdía 99.99% de su valor, los venezolanos que tenían Bitcoin preservaron su riqueza. Muchos pudieron emigrar llevando su dinero en una frase de 12 palabras memorizada—imposible de confiscar en la frontera.' },
+          { icon: AlertTriangle, title: 'Ucrania 2022', text: 'Cuando Rusia invadió y los bancos cerraron, el gobierno ucraniano recibió $100+ millones en donaciones de Bitcoin en DÍAS. Dinero que llegó directo, sin intermediarios, sin demoras burocráticas.' },
+          { icon: AlertTriangle, title: 'Líbano', text: 'Los bancos congelaron los ahorros de todos. La gente literalmente no podía acceder a SU dinero. Los que tenían Bitcoin seguían teniendo control total de sus fondos.' },
+          { icon: AlertTriangle, title: 'Argentina', text: 'Con 140%+ de inflación, muchos argentinos convierten sus pesos a Bitcoin el mismo día de cobro. Es la única forma de que su salario no pierda valor mientras duermen.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Lo Que Bitcoin NO Es',
+        content: 'Es importante despejar mitos que impiden entender Bitcoin correctamente:',
+        features: [
+          { icon: AlertTriangle, title: 'NO es un "esquema para hacerse rico rápido"', text: 'Bitcoin es volátil a corto plazo. Puede subir 50% o bajar 50% en meses. NO es para el dinero que necesitas mañana. Es para proteger el valor de tu trabajo a LARGO PLAZO (5-10+ años).' },
+          { icon: AlertTriangle, title: 'NO es "dinero de criminales"', text: 'Menos del 1% de transacciones de Bitcoin son ilícitas (vs 2-5% del sistema bancario tradicional). Y la blockchain es PÚBLICA—cada transacción queda registrada para siempre. Es el peor dinero posible para criminales.' },
+          { icon: AlertTriangle, title: 'NO es "una burbuja"', text: 'Ha sido declarado "muerto" más de 450 veces desde 2010. Cada vez vuelve más fuerte. Las burbujas no sobreviven 15+ años, no son adoptadas por países como moneda legal, ni son compradas por fondos de inversión institucionales.' },
+          { icon: AlertTriangle, title: 'NO necesitas comprar un Bitcoin entero', text: 'Bitcoin es divisible hasta 8 decimales. Puedes empezar con $10, $50, $100. Cada satoshi (0.00000001 BTC) es tuyo.' }
         ]
       },
       {
         type: 'takeaways',
-        title: 'Lo que Bitcoin Significa para Ti',
+        title: 'Por Qué Bitcoin Importa Para TU Vida',
         items: [
-          'Por primera vez en tu vida, puedes tener un activo que NINGÚN gobierno puede devaluar, confiscar o censurar.',
-          'No necesitas permiso de bancos, políticos ni empresas para guardar y mover TU dinero.',
-          'El halving reduce la emisión de Bitcoin a la mitad cada 4 años. En 2024 fue el 4to halving. Para 2140, no habrá más emisión.',
-          'Mientras los bancos centrales imprimen trillones, Bitcoin sigue su código predecible. Es la única certeza monetaria en un mundo de manipulación.',
-          'No es "hacerse rico rápido": es proteger tu trabajo de toda una vida de la corrosión del dinero fiat.'
+          'Por primera vez en la historia, existe dinero que NINGÚN gobierno, banco o corporación puede devaluar, confiscar o censurar.',
+          'No necesitas permiso de nadie para guardar y mover TU dinero. Tu banco puede cerrar. Tu gobierno puede colapsar. Tu Bitcoin sigue siendo tuyo.',
+          'El halving reduce la emisión a la mitad cada 4 años. En abril 2024 fue el 4to halving. Cada vez hay menos Bitcoin nuevo, mientras la demanda crece.',
+          'No es "inversión especulativa"—es protección contra un sistema monetario diseñado para empobrecerte lentamente a través de la inflación.',
+          'La pregunta no es "¿debería comprar Bitcoin?" sino "¿cuánto de mi trabajo quiero proteger del sistema fiat que ya demostró que me está robando?"',
+          'Empezar es más fácil de lo que crees. En las próximas lecciones aprenderás exactamente cómo hacerlo de forma segura.'
         ]
       }
     ],
@@ -524,63 +912,75 @@ export const LESSONS_DATA: Record<number, any> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Qué mensaje grabó Satoshi en el primer bloque de Bitcoin y por qué es significativo?',
+          question: '¿Qué mensaje grabó Satoshi Nakamoto en el primer bloque de Bitcoin y por qué es significativo?',
           options: [
-            { id: 'a', text: '"Hello World" - porque es tradición de programadores' },
-            { id: 'b', text: 'Un titular sobre bancos siendo rescatados - para marcar que Bitcoin es una respuesta a la corrupción financiera' },
-            { id: 'c', text: 'Su nombre real' },
+            { id: 'a', text: '"Hello World" - es tradición de programadores' },
+            { id: 'b', text: 'Un titular sobre bancos siendo rescatados con dinero público - marcando que Bitcoin es una respuesta a la corrupción del sistema financiero' },
+            { id: 'c', text: 'Su nombre real y dirección' },
             { id: 'd', text: 'Nada, el primer bloque estaba vacío' }
           ],
           correctAnswer: 'b',
-          explanation: 'Satoshi grabó "Chancellor on brink of second bailout for banks" para que quede claro: Bitcoin existe porque el sistema actual está corrupto.'
+          explanation: 'Satoshi grabó "Chancellor on brink of second bailout for banks" del Times del 3 de enero de 2009. Este mensaje permanece para siempre en la blockchain, declarando que Bitcoin nació como respuesta directa al rescate de bancos corruptos con dinero de los contribuyentes.'
         },
         {
           id: 'q2',
-          question: '¿Por qué decimos que Bitcoin tiene "escasez digital absoluta"?',
+          question: '¿Por qué decimos que Bitcoin tiene "escasez digital absoluta" y por qué esto importa?',
           options: [
             { id: 'a', text: 'Porque es difícil de comprar' },
-            { id: 'b', text: 'Porque el código garantiza matemáticamente que solo existirán 21 millones, y nadie puede cambiar eso' },
-            { id: 'c', text: 'Porque Satoshi lo decidió así y puede cambiarlo' },
-            { id: 'd', text: 'Porque los mineros votan cada año' }
+            { id: 'b', text: 'Porque el código garantiza matemáticamente que solo existirán 21 millones, verificado por miles de nodos, y nadie puede cambiar eso—a diferencia del dinero fiat que se imprime infinitamente' },
+            { id: 'c', text: 'Porque Satoshi decidió ese número arbitrariamente y puede cambiarlo' },
+            { id: 'd', text: 'Porque los mineros votan cada año sobre el límite' }
           ],
           correctAnswer: 'b',
-          explanation: 'El límite de 21 millones está grabado en el código y verificado por miles de nodos. Cambiarlo requeriría convencer al 100% de la red - matemáticamente imposible.'
+          explanation: 'El límite de 21 millones está grabado en el código y verificado por más de 15,000 nodos globalmente. Cambiarlo requeriría que TODOS aceptaran—matemáticamente imposible. Es la primera vez que existe escasez absoluta en el mundo digital.'
         },
         {
           id: 'q3',
-          question: 'China ha prohibido Bitcoin múltiples veces (2013, 2017, 2019, 2021). ¿Qué pasó?',
+          question: '¿Qué es el "halving" de Bitcoin y por qué es importante para el valor a largo plazo?',
           options: [
-            { id: 'a', text: 'Bitcoin desapareció en China' },
-            { id: 'b', text: 'Bitcoin siguió funcionando y China sigue siendo un mercado activo' },
-            { id: 'c', text: 'El precio cayó a cero' },
-            { id: 'd', text: 'Los mineros chinos entregaron sus máquinas al gobierno' }
+            { id: 'a', text: 'Cuando el precio baja 50%' },
+            { id: 'b', text: 'Cada 4 años la emisión de nuevos BTC se reduce a la mitad, creando deflación programada mientras el dinero fiat tiene inflación garantizada' },
+            { id: 'c', text: 'Cuando los mineros dividen sus ganancias' },
+            { id: 'd', text: 'Un error en el código que ocurre cada 4 años' }
           ],
           correctAnswer: 'b',
-          explanation: 'No puedes prohibir matemáticas. Bitcoin es un protocolo descentralizado sin servidor central. Mientras exista internet, Bitcoin existe.'
+          explanation: 'El halving es deflación programada. En 2009 se creaban 50 BTC cada 10 min, ahora solo 3.125 BTC. Mientras los bancos centrales imprimen más cada año, Bitcoin produce MENOS. Para 2140, no habrá emisión nueva.'
         },
         {
           id: 'q4',
-          question: '¿Qué es el "halving" de Bitcoin y por qué importa?',
+          question: 'China ha prohibido Bitcoin múltiples veces (2013, 2017, 2019, 2021). ¿Cuál fue el resultado?',
           options: [
-            { id: 'a', text: 'Cuando el precio baja 50%' },
-            { id: 'b', text: 'Cada 4 años la emisión de nuevos BTC se reduce a la mitad, haciendo a Bitcoin más escaso con el tiempo' },
-            { id: 'c', text: 'Cuando se dividen los bitcoins en partes más pequeñas' },
-            { id: 'd', text: 'Un bug en el código' }
+            { id: 'a', text: 'Bitcoin desapareció en China y el precio colapsó' },
+            { id: 'b', text: 'Bitcoin siguió funcionando perfectamente, vale 100x más que en 2013, y millones de chinos lo siguen usando con VPNs' },
+            { id: 'c', text: 'Los mineros entregaron sus máquinas al gobierno' },
+            { id: 'd', text: 'Se creó una versión china de Bitcoin controlada por el gobierno' }
           ],
           correctAnswer: 'b',
-          explanation: 'El halving es deflación programada. Mientras la Fed imprime más dólares cada año, Bitcoin produce MENOS cada 4 años. Para 2140, no habrá emisión nueva.'
+          explanation: 'No puedes prohibir matemáticas. Bitcoin no tiene servidor central que cerrar, corre en 100+ países. Cada prohibición china solo demostró que Bitcoin es imparable. El precio hoy es 100x mayor que en la primera prohibición.'
         },
         {
           id: 'q5',
-          question: 'Un dictador quiere confiscar tus bitcoins. ¿Qué necesita?',
+          question: 'Un refugiado venezolano necesita cruzar la frontera con sus ahorros de toda la vida. ¿Cuál es la forma más segura?',
           options: [
-            { id: 'a', text: 'Una orden judicial' },
-            { id: 'b', text: 'Acceso a tu frase semilla de 12-24 palabras (que puede estar solo en tu memoria)' },
-            { id: 'c', text: 'Contactar a Satoshi' },
-            { id: 'd', text: 'Llamar al banco de Bitcoin' }
+            { id: 'a', text: 'Efectivo escondido en la ropa' },
+            { id: 'b', text: 'Transferencia bancaria' },
+            { id: 'c', text: 'Una frase semilla de 12 palabras memorizada que representa sus Bitcoin—imposible de confiscar porque existe solo en su mente' },
+            { id: 'd', text: 'Joyas de oro' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Miles de venezolanos han cruzado fronteras con su riqueza en Bitcoin, memorizada como 12-24 palabras. El efectivo se puede confiscar, las transferencias se pueden bloquear, el oro se puede detectar. Pero nadie puede quitarte lo que está en tu memoria.'
+        },
+        {
+          id: 'q6',
+          question: 'Si Bitcoin es tan bueno, ¿por qué el precio es tan volátil?',
+          options: [
+            { id: 'a', text: 'Porque es una estafa que eventualmente colapsará' },
+            { id: 'b', text: 'Porque está en fase de adopción temprana—como cualquier tecnología nueva, el precio fluctúa mientras el mercado descubre su valor real a largo plazo' },
+            { id: 'c', text: 'Porque los creadores manipulan el precio' },
+            { id: 'd', text: 'Porque no tiene valor real' }
           ],
           correctAnswer: 'b',
-          explanation: 'Tus bitcoins están protegidos por encriptación militar. Sin tu clave privada, ni toda la fuerza militar del mundo puede acceder a ellos. Puedes cruzar fronteras con tu riqueza en la memoria.'
+          explanation: 'Bitcoin está en fase de "price discovery". Como internet en los 90s, el mercado aún está descubriendo su valor real. La volatilidad es el precio de la adopción temprana. A largo plazo (5-10 años), la tendencia histórica ha sido consistentemente alcista.'
         }
       ]
     }
