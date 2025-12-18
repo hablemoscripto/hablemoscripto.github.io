@@ -990,25 +990,235 @@ export const LESSONS_DATA: Record<number, any> = {
     title: '¿Qué es Blockchain?',
     level: 'Principiante',
     number: '5 de 20',
-    duration: '20 minutos',
+    duration: '25 minutos',
     type: 'Video + Texto',
-    description: 'La tecnología que hace posible la confianza sin intermediarios.',
+    description: 'La blockchain es la tecnología que hace posible Bitcoin, pero ¿cómo funciona realmente? Aprende cómo miles de computadoras mantienen un registro que nadie puede falsificar, sin necesidad de confiar en ninguna autoridad central.',
     sections: [
       {
         type: 'intro',
-        title: 'El Libro Contable Universal',
-        content: 'Imagina un libro de contabilidad compartido por millones de computadoras. Cada página es un "bloque". Una vez escrita una página, es matemáticamente imposible borrarla o modificarla. Eso es Blockchain.',
+        title: 'El Problema que Nadie Había Resuelto',
+        content: 'Antes de la blockchain, había un problema fundamental en el mundo digital: **¿cómo pruebas que algo es tuyo si todo se puede copiar?** Si te mando una foto por email, yo sigo teniendo la foto y tú también la tienes. No puedo "enviarte" la foto de forma que yo deje de tenerla. Esto es un problema para el dinero digital. Si te "envío" un dólar digital, ¿cómo sabes que no me lo quedé también? ¿Cómo sabes que no se lo envié a otras 10 personas? Este es el famoso **"problema del doble gasto"** (double spending). Antes de Bitcoin, la única solución era un intermediario de confianza (un banco, PayPal, Visa) que lleva el registro de quién tiene qué. La blockchain resuelve esto sin intermediarios.',
+        highlight: {
+          title: 'El Avance Histórico',
+          text: 'Satoshi Nakamoto resolvió un problema que científicos informáticos habían intentado resolver durante 30 años: crear escasez digital verificable sin necesidad de confiar en nadie. La blockchain es esa solución.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'La Analogía del Libro Contable Mágico',
+        content: 'Imagina un libro de contabilidad con propiedades mágicas:',
         features: [
-          { icon: Users, title: 'Distribuido', text: 'No está en un servidor de Google. Está en miles de nodos alrededor del mundo.' },
-          { icon: Lock, title: 'Inmutable', text: 'Lo que pasa en la blockchain, se queda en la blockchain para siempre.' }
+          { icon: Users, title: 'Miles de Copias Idénticas', text: 'Este libro no existe en un solo lugar. Existen miles de copias exactamente iguales, cada una en una computadora diferente en todo el mundo. Cuando escribes algo en una, automáticamente aparece en TODAS las demás.' },
+          { icon: Lock, title: 'Tinta Indeleble', text: 'Una vez que escribes algo en este libro, es IMPOSIBLE borrarlo o modificarlo. La tinta se vuelve permanente después de unos minutos. Ni siquiera el creador del libro puede cambiar lo escrito.' },
+          { icon: Link, title: 'Páginas Encadenadas', text: 'Cada página está matemáticamente conectada a la anterior. Si alguien intenta cambiar algo en la página 50, todas las páginas siguientes (51, 52, 53...) quedarían "rotas" y todos notarían la manipulación inmediatamente.' },
+          { icon: Globe, title: 'Público y Transparente', text: 'Cualquier persona en el mundo puede ver el libro completo, verificar cualquier entrada, y confirmar que todo está en orden. No hay secretos.' }
+        ],
+        highlight: {
+          title: '¿Ves el Poder?',
+          text: 'Acabas de describir un sistema donde nadie puede mentir, nadie puede robar, y nadie puede censurar—porque TODOS tienen el mismo libro y TODOS pueden verificar. Eso es blockchain.'
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Qué es un "Bloque" y qué es la "Cadena"?',
+        content: 'Vamos a descomponer el nombre "blockchain" (cadena de bloques):',
+        features: [
+          { icon: Layers, title: '¿Qué es un Bloque?', text: 'Un bloque es como una página del libro. Contiene un grupo de transacciones (por ejemplo: "Ana envió 0.5 BTC a Carlos", "Pedro envió 1 BTC a María"). En Bitcoin, un nuevo bloque se crea aproximadamente cada 10 minutos. En Solana, cada 400 milisegundos.' },
+          { icon: Link, title: '¿Qué es la Cadena?', text: 'Cada bloque contiene una "huella digital" (hash) del bloque anterior. Esto los conecta en una CADENA. El bloque 100 contiene el hash del bloque 99, que contiene el hash del 98, y así hasta el bloque génesis (el primero).' },
+          { icon: Shield, title: '¿Por Qué Esto Importa?', text: 'Si alguien intenta cambiar una transacción en el bloque 50, el hash de ese bloque cambia. Pero el bloque 51 tiene el hash VIEJO del bloque 50, así que ya no coincide. Tendrías que cambiar TODOS los bloques desde el 50 hasta el actual. Y hacerlo más rápido que toda la red. Prácticamente imposible.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'El Hash: La Huella Digital Matemática',
+        content: 'El **hash** es el concepto más importante para entender por qué la blockchain es segura. Es una función matemática que convierte CUALQUIER cantidad de datos en un código de longitud fija.',
+        features: [
+          { icon: Zap, title: 'Ejemplo de Hash', text: 'Si escribes "Hola" y lo pasas por el algoritmo SHA-256 (el que usa Bitcoin), obtienes: "185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969". Ese código ES el hash de "Hola".' },
+          { icon: AlertTriangle, title: 'Cambio Mínimo = Hash Totalmente Diferente', text: 'Si cambias "Hola" por "hola" (solo la mayúscula), el hash es completamente diferente: "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824". Ni un solo carácter igual.' },
+          { icon: Lock, title: 'Irreversible', text: 'Es matemáticamente imposible reconstruir el dato original a partir del hash. Solo puedes ir de "Hola" → hash, nunca de hash → "Hola". Es una función de un solo sentido.' }
+        ],
+        highlight: {
+          title: 'Aplicación en Blockchain',
+          text: 'Cada bloque contiene el hash del bloque anterior. Esto significa que cada bloque está matemáticamente conectado a TODA la historia anterior. Cambiar algo del pasado requeriría recalcular TODOS los hashes de TODOS los bloques siguientes. Es computacionalmente imposible en la práctica.'
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Cómo se Agrega un Nuevo Bloque? (Consenso)',
+        content: 'Si miles de computadoras tienen el libro, ¿quién decide qué se escribe en la siguiente página? Aquí es donde entra el **mecanismo de consenso**—las reglas para que miles de desconocidos se pongan de acuerdo sin confiar entre sí.',
+        features: [
+          { icon: Cpu, title: 'Proof of Work (Bitcoin)', text: 'Los "mineros" compiten resolviendo un acertijo matemático extremadamente difícil. El primero en resolverlo gana el derecho de escribir el siguiente bloque (y recibir la recompensa). Esto requiere gastar electricidad real—es el "costo" de escribir en el libro.' },
+          { icon: Lock, title: 'Proof of Stake (Solana, Ethereum)', text: 'En vez de gastar electricidad, los "validadores" ponen sus propias monedas como garantía. Si intentan hacer trampa, pierden su dinero. Es como un depósito de seguridad: "Apuesto mi dinero a que esta transacción es legítima".' },
+          { icon: CheckCircle, title: 'El Resultado', text: 'Ambos sistemas logran lo mismo: un acuerdo entre desconocidos sin necesidad de confiar en nadie. Las reglas matemáticas reemplazan la confianza humana.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Proof of Work vs Proof of Stake',
+        leftSide: {
+          title: 'Proof of Work (Bitcoin)',
+          points: [
+            'Seguridad respaldada por energía física real',
+            'Más probado en el tiempo (15+ años)',
+            'Cualquiera puede minar (descentralizado)',
+            'Alto consumo energético',
+            'Bloques cada ~10 minutos',
+            'Usado por: Bitcoin, Litecoin, Dogecoin'
+          ]
+        },
+        rightSide: {
+          title: 'Proof of Stake (Solana)',
+          points: [
+            'Seguridad respaldada por capital en riesgo',
+            'Más eficiente energéticamente (99%+ menos)',
+            'Necesitas tokens para validar',
+            'Mucho más rápido',
+            'Bloques cada ~400 milisegundos en Solana',
+            'Usado por: Solana, Ethereum, Cardano'
+          ]
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Por Qué es Prácticamente Imposible Hackear?',
+        content: 'Vamos a entender por qué atacar una blockchain como Bitcoin es económicamente absurdo:',
+        features: [
+          { icon: Shield, title: 'El Ataque del 51%', text: 'El único ataque teórico viable es controlar más del 50% del poder de cómputo (en PoW) o del stake (en PoS). Así podrías escribir bloques fraudulentos más rápido que el resto de la red.' },
+          { icon: TrendingDown, title: 'El Costo es Absurdo', text: 'Para atacar Bitcoin necesitarías más poder de cómputo que todos los mineros del mundo combinados. Hoy eso costaría decenas de MILES DE MILLONES de dólares en hardware y electricidad. Y solo podrías hacer "double spend" de tus propias monedas, no robar las de otros.' },
+          { icon: AlertTriangle, title: 'El Incentivo No Existe', text: 'Si gastas billones para atacar Bitcoin, el ataque se detectaría inmediatamente, el precio colapsaría, y tu botín valdría nada. Es más rentable usar ese poder de cómputo para minar honestamente.' }
+        ],
+        highlight: {
+          title: 'La Genialidad del Diseño',
+          text: 'Satoshi diseñó un sistema donde el comportamiento honesto siempre es más rentable que el comportamiento deshonesto. Los incentivos económicos protegen la red—no la confianza en la buena voluntad de nadie.'
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Qué es un Nodo?',
+        content: 'Un **nodo** es simplemente una computadora que tiene una copia completa de la blockchain y verifica que todo esté correcto.',
+        features: [
+          { icon: Server, title: 'Full Node', text: 'Tiene toda la historia de la blockchain desde el bloque génesis. Verifica CADA transacción y CADA bloque. No confía en nadie más—verifica todo por sí mismo. Cualquiera puede correr un full node en su casa.' },
+          { icon: Cpu, title: 'Nodo Minero/Validador', text: 'Además de verificar, también CREA nuevos bloques. Estos son los que compiten para agregar la siguiente página al libro. Reciben recompensas por su trabajo.' },
+          { icon: Smartphone, title: 'Light Node', text: 'No tiene toda la blockchain—solo los headers de los bloques. Confía en otros nodos para verificaciones detalladas. Es lo que usa tu wallet móvil.' }
+        ],
+        highlight: {
+          title: '¿Por Qué Importan los Nodos?',
+          text: 'Mientras más nodos independientes existan, más descentralizada y resistente es la red. Bitcoin tiene ~15,000+ nodos. Ethereum tiene ~10,000+. Solana tiene ~3,000+. Cada nodo es un "voto" que valida las reglas.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Lo Que La Blockchain PUEDE y NO PUEDE Hacer',
+        content: 'Es importante entender los límites de esta tecnología:',
+        features: [
+          { icon: CheckCircle, title: 'PUEDE: Probar Propiedad Digital', text: 'La blockchain puede probar irrefutablemente que ciertos tokens están en cierta dirección. Es un registro de propiedad incorruptible.' },
+          { icon: CheckCircle, title: 'PUEDE: Ejecutar Reglas Automáticamente', text: 'Los "smart contracts" son programas que se ejecutan en la blockchain. Si pasa X, automáticamente ocurre Y. Sin intermediarios que puedan decir "no".' },
+          { icon: AlertTriangle, title: 'NO PUEDE: Garantizar Verdad del Mundo Real', text: 'La blockchain sabe que "Ana tiene 1 BTC". No sabe si "Ana dice la verdad sobre su producto". Si alguien mete datos falsos, la blockchain los guardará fielmente (garbage in, garbage out).' },
+          { icon: AlertTriangle, title: 'NO PUEDE: Ser Perfectamente Rápida Y Descentralizada', text: 'Hay un "trilema": puedes tener máximo 2 de 3 entre Seguridad, Descentralización, y Escalabilidad. Bitcoin elige seguridad y descentralización (lento). Solana elige escalabilidad y seguridad (menos descentralizado que Bitcoin).' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'El Trilema de la Blockchain',
+        content: 'Vitalik Buterin (creador de Ethereum) describió el **trilema de la blockchain**: ninguna blockchain puede maximizar simultáneamente las tres propiedades:',
+        features: [
+          { icon: Shield, title: 'Seguridad', text: '¿Qué tan difícil es atacar la red? Bitcoin es extremadamente seguro—tiene 15 años sin un ataque exitoso.' },
+          { icon: Network, title: 'Descentralización', text: '¿Cuántos nodos independientes mantienen la red? ¿Qué tan distribuido está el poder?' },
+          { icon: Zap, title: 'Escalabilidad', text: '¿Cuántas transacciones por segundo puede procesar? ¿Qué tan barato es usarla?' }
+        ],
+        highlight: {
+          title: 'Las Elecciones',
+          text: 'Bitcoin maximiza seguridad y descentralización, sacrificando velocidad (~7 TPS). Solana maximiza escalabilidad y seguridad, requiriendo hardware más potente para los validadores (menos descentralizado). No hay solución perfecta—solo trade-offs.'
+        }
+      },
+      {
+        type: 'takeaways',
+        title: 'Lo Que Debes Recordar',
+        items: [
+          'La blockchain resuelve el problema del doble gasto: permite probar propiedad digital sin intermediarios de confianza.',
+          'Es un libro contable distribuido en miles de computadoras, donde cada "página" (bloque) está matemáticamente conectada a la anterior.',
+          'El hash es la "huella digital" que conecta los bloques. Cambiar algo del pasado requeriría recalcular TODOS los hashes siguientes.',
+          'Los mecanismos de consenso (Proof of Work, Proof of Stake) permiten que desconocidos se pongan de acuerdo sin confiar entre sí.',
+          'El ataque del 51% es teóricamente posible pero económicamente absurdo—es más rentable ser honesto.',
+          'Los nodos son las computadoras que verifican todo. Más nodos = más descentralización = más resistencia a censura.',
+          'Existe un "trilema": ninguna blockchain puede ser máxima en seguridad, descentralización y escalabilidad simultáneamente.'
         ]
       }
     ],
     quiz: {
       questions: [
-        { id: 'q1', question: '¿Por qué nadie puede modificar una transacción ya confirmada en Bitcoin?', options: [{ id: 'a', text: 'Porque el banco no deja' }, { id: 'b', text: 'Porque requiere cambiar todos los bloques siguientes y ganar una guerra de hashrate' }, { id: 'c', text: 'Porque es ilegal' }], correctAnswer: 'b', explanation: 'La inmutabilidad cuesta energía real. Eso la hace creíble.' },
-        { id: 'q2', question: '¿Qué pasa si el 51% de los mineros se ponen de acuerdo para reescribir la historia?', options: [{ id: 'a', text: 'Pueden robar todos los bitcoins' }, { id: 'b', text: 'Pueden censurar transacciones o hacer double-spend, pero no robar wallets privadas' }, { id: 'c', text: 'Nada' }], correctAnswer: 'b', explanation: 'Ataque del 51% es caro y detectable. Nunca ha ocurrido en Bitcoin.' },
-        { id: 'q3', question: '¿Por qué decimos que la blockchain es "confianza minimizada"?', options: [{ id: 'a', text: 'Porque confías en Satoshi' }, { id: 'b', text: 'Porque no necesitas confiar en nadie — solo en matemáticas y reglas públicas' }], correctAnswer: 'b', explanation: 'Don\'t trust, verify.' }
+        {
+          id: 'q1',
+          question: 'Antes de Bitcoin, ¿cuál era el único método conocido para evitar que alguien "gastara dos veces" el mismo dinero digital?',
+          options: [
+            { id: 'a', text: 'No existía dinero digital' },
+            { id: 'b', text: 'Un intermediario de confianza (banco, PayPal) que lleva el registro de quién tiene qué' },
+            { id: 'c', text: 'La policía' },
+            { id: 'd', text: 'Contraseñas muy seguras' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El "problema del doble gasto" requería un intermediario central de confianza. La blockchain de Bitcoin fue la primera solución descentralizada: miles de nodos verifican independientemente que nadie gaste lo que no tiene.'
+        },
+        {
+          id: 'q2',
+          question: 'El hash del texto "Hola" es completamente diferente al hash de "hola". ¿Por qué esto es crucial para la seguridad de la blockchain?',
+          options: [
+            { id: 'a', text: 'No es importante, es solo un detalle técnico' },
+            { id: 'b', text: 'Porque cualquier cambio mínimo en un bloque cambia su hash, rompiendo la conexión con todos los bloques siguientes y haciendo el fraude detectable inmediatamente' },
+            { id: 'c', text: 'Porque hace que los hashes sean más largos' },
+            { id: 'd', text: 'Para que nadie pueda leerlos' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La sensibilidad extrema del hash significa que cualquier manipulación—por pequeña que sea—es inmediatamente visible. Un solo bit cambiado produce un hash completamente diferente, alertando a toda la red.'
+        },
+        {
+          id: 'q3',
+          question: 'Un hacker quiere modificar una transacción que ocurrió hace 100 bloques en Bitcoin. ¿Qué tendría que hacer?',
+          options: [
+            { id: 'a', text: 'Hackear la computadora de Satoshi' },
+            { id: 'b', text: 'Cambiar ese bloque y luego recalcular y reescribir los 100 bloques siguientes, más rápido que toda la red mundial de mineros combinada' },
+            { id: 'c', text: 'Pedirle permiso a los mineros' },
+            { id: 'd', text: 'Simplemente editar la transacción en la base de datos' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Cada bloque contiene el hash del anterior. Cambiar un bloque antiguo requiere recalcular TODOS los bloques siguientes y hacerlo más rápido que el resto de la red. Con el hashrate actual de Bitcoin, esto es físicamente imposible.'
+        },
+        {
+          id: 'q4',
+          question: 'Bitcoin usa Proof of Work, Solana usa Proof of Stake. ¿Cuál es la diferencia fundamental?',
+          options: [
+            { id: 'a', text: 'No hay diferencia, son lo mismo' },
+            { id: 'b', text: 'PoW gasta energía real para crear bloques; PoS pone dinero (tokens) como garantía' },
+            { id: 'c', text: 'PoW es legal y PoS es ilegal' },
+            { id: 'd', text: 'PoW es nuevo y PoS es viejo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Ambos son mecanismos para que desconocidos se pongan de acuerdo sin confianza. PoW "prueba" honestidad con electricidad gastada. PoS "prueba" honestidad con capital en riesgo. Diferentes trade-offs, mismo objetivo.'
+        },
+        {
+          id: 'q5',
+          question: '¿Por qué no tiene sentido económico ejecutar un ataque del 51% contra Bitcoin?',
+          options: [
+            { id: 'a', text: 'Porque es ilegal' },
+            { id: 'b', text: 'Porque costaría decenas de billones de dólares, sería detectado inmediatamente, el precio colapsaría, y tu botín valdría nada' },
+            { id: 'c', text: 'Porque Satoshi lo impediría' },
+            { id: 'd', text: 'Porque los mineros son muy amigables' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Satoshi diseñó un sistema donde la honestidad siempre es más rentable. Si gastas billones en atacar, el ataque se detecta, el precio colapsa, y pierdes todo. Es más rentable usar ese poder de cómputo para minar honestamente.'
+        },
+        {
+          id: 'q6',
+          question: '¿Qué es el "trilema de la blockchain"?',
+          options: [
+            { id: 'a', text: 'Un problema de programación' },
+            { id: 'b', text: 'Que ninguna blockchain puede maximizar simultáneamente seguridad, descentralización y escalabilidad—debe sacrificar al menos una' },
+            { id: 'c', text: 'Un tipo de ataque' },
+            { id: 'd', text: 'Una criptomoneda nueva' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Bitcoin elige seguridad y descentralización (lento, 7 TPS). Solana elige seguridad y escalabilidad (menos nodos, pero 65,000 TPS). No hay blockchain perfecta—solo diferentes trade-offs para diferentes usos.'
+        }
       ]
     }
   },
@@ -1017,22 +1227,165 @@ export const LESSONS_DATA: Record<number, any> = {
     title: 'Descentralización vs Centralización',
     level: 'Principiante',
     number: '6 de 20',
-    duration: '12 min',
+    duration: '22 minutos',
     type: 'Video + Texto',
-    description: 'Por qué importa que nadie tenga el control.',
+    description: '¿Por qué importa que nadie tenga el control? La descentralización no es solo un buzzword técnico—es la diferencia entre libertad y permiso, entre propiedad real y acceso revocable. Entiende los trade-offs reales.',
     sections: [
       {
         type: 'intro',
-        title: 'El Problema del Intermediario',
-        content: 'En un sistema centralizado (Banco, Facebook), una sola entidad controla tus datos y tu dinero. Pueden censurarte o congelar tu cuenta.'
+        title: 'La Pregunta Fundamental: ¿Quién Tiene el Poder?',
+        content: 'Cada sistema que usas para manejar tu dinero o tus datos tiene una arquitectura de poder. Alguien, en algún lugar, puede presionar un botón y cambiar las reglas. La pregunta es: **¿quién tiene ese botón?** En los sistemas tradicionales (tu banco, tu red social, tu gobierno), ese botón lo tiene una entidad central. Pueden congelar tu cuenta, censurar tu contenido, o cambiar las reglas sin tu permiso. En los sistemas descentralizados (Bitcoin, Solana), ese botón está distribuido entre miles de participantes. Nadie individualmente puede presionarlo. Esa distribución del poder es lo que llamamos **descentralización**.',
+        highlight: {
+          title: 'No es Teoría—Es Tu Realidad',
+          text: 'En 2022, Canadá congeló las cuentas bancarias de personas que donaron $50 a protestas de camioneros. Sin juicio, sin apelación. Un burócrata decidió. Si esas donaciones hubieran sido en Bitcoin, nadie podría haberlas congelado. Esa es la diferencia práctica.'
+        }
       },
       {
         type: 'main',
-        title: 'La Solución Descentralizada',
-        content: 'En una red descentralizada (Bitcoin, Solana), nadie tiene el control absoluto. Son miles de computadoras poniéndose de acuerdo. Es incensurable.',
+        title: '¿Qué Significa Realmente "Centralizado"?',
+        content: 'Un sistema centralizado tiene un único punto de control. Una autoridad que puede tomar decisiones unilaterales sobre todos los participantes.',
         features: [
-          { icon: Server, title: 'Centralizado', text: 'Un punto de fallo. Si el servidor cae, todo cae.' },
-          { icon: Network, title: 'Descentralizado', text: 'Resiliente. Si un nodo cae, los demás siguen funcionando.' }
+          { icon: Landmark, title: 'Tu Banco', text: 'El banco puede congelar tu cuenta, rechazar transferencias, reportarte a las autoridades, cobrarte comisiones arbitrarias, o simplemente cerrar tu cuenta "por política interna". No necesitan tu permiso.' },
+          { icon: Server, title: 'Facebook/Instagram', text: 'Meta puede borrar tu cuenta con 10 años de fotos, censurarte sin explicación, cambiar el algoritmo para que nadie vea tu contenido, o vender tus datos. Aceptaste los "términos y condiciones".' },
+          { icon: Globe, title: 'Tu Gobierno', text: 'Puede devaluar tu moneda imprimiendo más, confiscar tus activos "por el bien común", impedirte sacar tu dinero del país, o cambiar las leyes retroactivamente.' },
+          { icon: Smartphone, title: 'Apple/Google', text: 'Pueden eliminar apps de sus tiendas (y de tu teléfono), bloquearte de sus servicios, o cambiar las reglas de un día para otro.' }
+        ],
+        highlight: {
+          title: 'El Patrón Común',
+          text: 'En todos estos casos, TÚ eres un usuario con acceso REVOCABLE. Ellos son los dueños con control TOTAL. Tu relación con tu dinero/datos depende de su buena voluntad. No tienes derechos—tienes permisos.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Casos Reales de Abuso Centralizado',
+        content: 'Esto no es paranoia ni teoría conspirativa. Son eventos documentados que ya ocurrieron:',
+        features: [
+          { icon: AlertTriangle, title: 'Canadá 2022', text: 'El gobierno invocó la Ley de Emergencias y ordenó a los bancos congelar cuentas de personas que donaron a protestas. Sin orden judicial. Sin proceso legal. Miles de ciudadanos perdieron acceso a su dinero por decisión ejecutiva.' },
+          { icon: AlertTriangle, title: 'Grecia 2015', text: 'El gobierno impuso un "corralito": límite de €60/día en retiros. La gente hacía filas para sacar migajas de su propio dinero. Las cuentas estaban congeladas "temporalmente" durante semanas.' },
+          { icon: AlertTriangle, title: 'Chipre 2013', text: 'El gobierno confiscó hasta 47.5% de los depósitos mayores a €100,000 para "rescatar" a los bancos. Un día tenías €200,000, al siguiente tenías €105,000. Así de simple.' },
+          { icon: AlertTriangle, title: 'China (continuo)', text: 'El "social credit score" afecta acceso a servicios financieros. Si el gobierno no aprueba tu comportamiento, puedes perder acceso a crédito, viajes, o incluso tu cuenta bancaria.' },
+          { icon: AlertTriangle, title: 'Nigeria 2021', text: 'El banco central prohibió a los bancos procesar transacciones cripto. De un día para otro, millones perdieron acceso a una industria completa. Por decreto.' },
+          { icon: AlertTriangle, title: 'PayPal (frecuente)', text: 'Congela cuentas por "actividad sospechosa" y retiene fondos durante meses. No hay recurso efectivo—estás a su merced.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: '¿Qué Significa Realmente "Descentralizado"?',
+        content: 'Un sistema descentralizado distribuye el poder entre muchos participantes independientes. Ninguno individualmente puede controlar el sistema o cambiar las reglas unilateralmente.',
+        features: [
+          { icon: Network, title: 'Miles de Nodos', text: 'Bitcoin tiene ~15,000 nodos en todo el mundo. Cada uno verifica independientemente TODAS las transacciones. Para "hackear" Bitcoin, necesitarías comprometer miles de computadoras en decenas de países simultáneamente.' },
+          { icon: Users, title: 'Nadie es "El Jefe"', text: 'No hay CEO de Bitcoin. No hay sede central. No hay servidor principal. Satoshi desapareció hace años y la red sigue funcionando perfectamente. El sistema no depende de ninguna persona o empresa.' },
+          { icon: Lock, title: 'Reglas Inmutables', text: 'Las reglas de Bitcoin (21 millones máximo, halving cada 4 años, etc.) están grabadas en el código que ejecutan TODOS los nodos. Cambiarlas requeriría que todos se pongan de acuerdo—algo que no pasa.' },
+          { icon: Shield, title: 'Resistencia a Censura', text: 'Si el gobierno de USA ordena censurar ciertas transacciones, los nodos en Japón, Brasil, Nigeria y otros 100 países las procesarán igual. No hay jurisdicción única que pueda censurar Bitcoin.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Centralizado vs Descentralizado: Comparación Directa',
+        leftSide: {
+          title: 'Sistema Centralizado (Tu Banco)',
+          points: [
+            'Una entidad controla todo',
+            'Puede congelar tu cuenta sin tu permiso',
+            'Puede cambiar las reglas unilateralmente',
+            'Único punto de fallo: si el servidor cae, todo cae',
+            'Eficiente y rápido',
+            'Requiere confiar en la entidad central',
+            'Tu "propiedad" es realmente un permiso revocable'
+          ]
+        },
+        rightSide: {
+          title: 'Sistema Descentralizado (Bitcoin)',
+          points: [
+            'Miles de participantes independientes',
+            'NADIE puede congelar tu wallet',
+            'Cambiar reglas requiere consenso casi imposible',
+            'Sin punto único de fallo: si un nodo cae, hay 14,999 más',
+            'Puede ser más lento (pero mejorando)',
+            'No necesitas confiar en nadie específico',
+            'Tu propiedad es TUYA si controlas tus llaves'
+          ]
+        }
+      },
+      {
+        type: 'main',
+        title: 'El Espectro de la Descentralización',
+        content: 'La descentralización no es binaria—es un espectro. Diferentes proyectos hacen diferentes trade-offs:',
+        features: [
+          { icon: Lock, title: 'Bitcoin: Máxima Descentralización', text: '~15,000 nodos. Cualquiera con $300 en hardware puede correr uno. Cambios de protocolo requieren años de debate y consenso casi unánime. Inmunidad casi total a censura y captura.' },
+          { icon: Zap, title: 'Solana: Descentralización Pragmática', text: '~3,000 validadores. Requiere hardware más potente (~$5,000+). Más fácil de coordinar cambios. Trade-off consciente: menos descentralización a cambio de 65,000+ TPS y fees de centavos.' },
+          { icon: Server, title: 'Ethereum: Término Medio', text: '~10,000 nodos. Hardware moderado. Transición a Proof of Stake completada. Balance entre descentralización y escalabilidad.' },
+          { icon: AlertTriangle, title: 'Binance Smart Chain: Más Centralizada', text: '21 validadores aprobados por Binance. Muy eficiente pero dependiente de una empresa. Si Binance quiere censurar algo, puede hacerlo.' }
+        ],
+        highlight: {
+          title: 'No Hay Respuesta "Correcta"',
+          text: 'Bitcoin prioriza descentralización absoluta para ser "oro digital" inconfiscable. Solana prioriza velocidad para aplicaciones de consumo masivo. Ethereum intenta un balance. Cada uno tiene su lugar.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'El Coeficiente de Nakamoto',
+        content: 'Para medir descentralización de forma objetiva, existe el **Coeficiente de Nakamoto**: el número mínimo de entidades que necesitarían coordinarse para comprometer el sistema.',
+        features: [
+          { icon: Landmark, title: 'Tu Banco: Coeficiente = 1', text: 'Una sola entidad (el banco, o el gobierno que lo regula) puede hacer lo que quiera con tu cuenta.' },
+          { icon: Network, title: 'Bitcoin: Coeficiente = Muy Alto', text: 'Para controlar 51% del hashrate necesitarías coordinación de los 4-5 pools de minería más grandes, ubicados en diferentes países con diferentes jurisdicciones e incentivos.' },
+          { icon: Zap, title: 'Solana: Coeficiente = ~19-31', text: 'Se necesitarían ~31 validadores coordinándose para controlar 33% del stake (suficiente para detener la red). Es menor que Bitcoin, pero sigue siendo resistente.' },
+          { icon: AlertTriangle, title: 'BSC: Coeficiente = ~7', text: 'Solo ~7 de los 21 validadores necesitarían coordinarse. Y todos están aprobados por Binance. Mucho más centralizado.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Los Trade-offs Honestos de la Descentralización',
+        content: 'Sería deshonesto decir que la descentralización no tiene costos. Tiene trade-offs reales que debes entender:',
+        features: [
+          { icon: TrendingDown, title: 'Puede Ser Más Lenta', text: 'Coordinar miles de nodos toma más tiempo que un servidor central. Bitcoin confirma cada 10 minutos. Tu banco confirma en segundos. Aunque Solana resuelve esto (400ms), sigue siendo un trade-off arquitectónico.' },
+          { icon: TrendingDown, title: 'Puede Ser Más Cara', text: 'En momentos de congestión, las fees de Ethereum han llegado a $50-100 por transacción. La descentralización tiene costo de coordinación.' },
+          { icon: TrendingDown, title: 'No Hay "Soporte al Cliente"', text: 'Si pierdes tus llaves, nadie puede ayudarte. No hay "recuperar contraseña". La auto-soberanía implica auto-responsabilidad.' },
+          { icon: TrendingDown, title: 'La Gobernanza es Lenta', text: 'Cambios en Bitcoin toman años de debate. No hay CEO que diga "esto se hace así". Puede ser frustrante cuando se necesitan mejoras urgentes.' }
+        ],
+        highlight: {
+          title: 'La Pregunta Correcta',
+          text: '¿Estás dispuesto a aceptar estos trade-offs a cambio de propiedad real, resistencia a censura, y libertad de permiso? Para muchos, la respuesta es sí. Para otros, no. Ambas respuestas son válidas—lo importante es entender qué estás eligiendo.'
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Solana es "Suficientemente" Descentralizada?',
+        content: 'Esta es una pregunta frecuente y legítima. Vamos a analizarla honestamente:',
+        features: [
+          { icon: AlertTriangle, title: 'Las Críticas Válidas', text: 'Solana ha tenido varias "caídas" donde la red se detuvo y requirió reinicio coordinado de validadores. Esto sugiere cierta centralización operativa. El hardware requerido para validar es costoso, lo que limita quién puede participar.' },
+          { icon: CheckCircle, title: 'La Defensa Válida', text: 'Solana tiene ~3,000 validadores en múltiples países y jurisdicciones. Ninguna entidad única controla la red. Las caídas fueron bugs técnicos, no censura deliberada. La red sigue siendo permissionless: cualquiera puede transaccionar.' },
+          { icon: Zap, title: 'El Trade-off Consciente', text: 'Solana prioriza escalabilidad para aplicaciones de consumo masivo. Si quieres la descentralización máxima de Bitcoin, usa Bitcoin. Si quieres 65,000 TPS y fees de centavos para DeFi y pagos, usa Solana.' }
+        ],
+        highlight: {
+          title: 'La Perspectiva Correcta',
+          text: 'Solana no pretende ser Bitcoin. Pretende ser la blockchain donde corren las aplicaciones del futuro. Es significativamente más descentralizada que cualquier alternativa de Web2 (Visa, AWS, etc.). Para sus casos de uso, el trade-off es razonable.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Custodial vs No-Custodial: Donde La Descentralización Te Afecta',
+        content: 'La descentralización de una red no importa si TÚ no controlas tus llaves. Aquí es donde esto se vuelve personal:',
+        features: [
+          { icon: AlertTriangle, title: 'Exchange Centralizado (Binance, Coinbase)', text: 'Aunque Bitcoin sea descentralizado, si tienes tu BTC en Binance, Binance tiene las llaves. Pueden congelarte, quebrar, o ser hackeados. El colapso de FTX demostró esto: millones perdieron todo.' },
+          { icon: CheckCircle, title: 'Wallet No-Custodial (Phantom, Ledger)', text: 'TÚ tienes las llaves. Nadie puede congelar tu wallet. Nadie puede confiscar tus fondos. Si Phantom (la empresa) desaparece mañana, tus fondos siguen ahí—solo necesitas otra wallet compatible.' }
+        ],
+        highlight: {
+          title: 'La Regla de Oro',
+          text: '"Not your keys, not your coins" (No son tus llaves, no son tus monedas). La descentralización solo te protege si EJERCES esa descentralización teniendo tus propias llaves. Si las tiene un exchange, estás en un sistema centralizado con piel de cripto.'
+        }
+      },
+      {
+        type: 'takeaways',
+        title: 'Lo Que Debes Recordar',
+        items: [
+          'Centralización significa que alguien tiene el poder de cambiarte las reglas sin tu permiso. En tu banco, en tus redes sociales, en tu gobierno.',
+          'Descentralización distribuye ese poder entre muchos participantes independientes. Nadie individualmente puede controlarte o censurarte.',
+          'Los abusos de sistemas centralizados son reales y frecuentes: Canadá 2022, Grecia 2015, Chipre 2013, China hoy, PayPal constantemente.',
+          'La descentralización es un espectro: Bitcoin es máximo, Solana es pragmático, BSC es mínimo. Diferentes trade-offs para diferentes usos.',
+          'Los costos de la descentralización son reales: puede ser más lenta, más cara, sin "soporte al cliente". Es el precio de la libertad.',
+          'Solana hace un trade-off consciente: menos descentralización que Bitcoin a cambio de velocidad y escalabilidad. Para sus casos de uso, es razonable.',
+          '"Not your keys, not your coins": la descentralización de la red no te protege si tus llaves están en un exchange centralizado.'
         ]
       }
     ],
@@ -1040,37 +1393,75 @@ export const LESSONS_DATA: Record<number, any> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Quién controla Bitcoin?',
+          question: 'En 2022, Canadá congeló cuentas bancarias de personas que donaron a protestas. ¿Por qué esto NO podría pasar con Bitcoin en una wallet no-custodial?',
           options: [
-            { id: 'a', text: 'El CEO de Bitcoin' },
-            { id: 'b', text: 'Nadie (es descentralizado)' },
-            { id: 'c', text: 'El gobierno' },
-            { id: 'd', text: 'Los mineros' }
+            { id: 'a', text: 'Porque Bitcoin es ilegal en Canadá' },
+            { id: 'b', text: 'Porque no hay entidad central que pueda ejecutar la orden—miles de nodos en 100+ países seguirían procesando transacciones' },
+            { id: 'c', text: 'Porque Satoshi lo impediría' },
+            { id: 'd', text: 'Porque Canadá no sabe de Bitcoin' }
           ],
           correctAnswer: 'b',
-          explanation: 'Bitcoin no tiene CEO, ni servidor central, ni autoridad que pueda censurarte. Esa es su ventaja estratégica.'
+          explanation: 'Un sistema descentralizado no tiene "el botón" que un gobierno pueda presionar. Los nodos en Japón, Brasil, y otros 100 países no obedecen al gobierno canadiense. Esa es resistencia a censura.'
         },
         {
           id: 'q2',
-          question: 'Tu banco te congela la cuenta "por sospecha de lavado". ¿Podría pasar lo mismo con una wallet descentralizada?',
+          question: 'Tienes 10,000 USD en Bitcoin. ¿Dónde estás MÁS protegido por la descentralización?',
           options: [
-            { id: 'a', text: 'Sí, Phantom puede congelar tu wallet' },
-            { id: 'b', text: 'No, nadie puede congelar una wallet no-custodial' },
-            { id: 'c', text: 'Solo si lo pide la policía' }
+            { id: 'a', text: 'En tu cuenta de Binance' },
+            { id: 'b', text: 'En tu cuenta de Coinbase' },
+            { id: 'c', text: 'En una wallet hardware (Ledger) donde TÚ controlas las llaves privadas' },
+            { id: 'd', text: 'En cualquier exchange—todos son iguales' }
           ],
-          correctAnswer: 'b',
-          explanation: 'En una wallet descentralizada (Phantom, Ledger), solo TÚ tienes las llaves. Nadie puede congelar ni confiscar tus fondos.'
+          correctAnswer: 'c',
+          explanation: '"Not your keys, not your coins". En Binance o Coinbase, ELLOS tienen las llaves. Pueden congelarte, quebrar, o ser hackeados. En un Ledger, TÚ tienes las llaves. Nadie más puede tocar tus fondos.'
         },
         {
           id: 'q3',
-          question: '¿Cuál es el trade-off real de la descentralización?',
+          question: '¿Por qué Solana tiene "solo" ~3,000 validadores mientras Bitcoin tiene ~15,000 nodos?',
           options: [
-            { id: 'a', text: 'Es más lenta y más cara que un sistema central (a veces)' },
-            { id: 'b', text: 'No tiene ninguna desventaja' },
-            { id: 'c', text: 'Es ilegal en la mayoría de países' }
+            { id: 'a', text: 'Porque Solana es una estafa' },
+            { id: 'b', text: 'Porque nadie quiere validar Solana' },
+            { id: 'c', text: 'Porque validar Solana requiere hardware más potente ($5,000+), un trade-off consciente para lograr mayor velocidad' },
+            { id: 'd', text: 'Porque Solana es nueva' }
           ],
-          correctAnswer: 'a',
-          explanation: 'Coordinar miles de nodos es más costoso que un servidor. Bitcoin tarda 10 min en confirmar. Pero a cambio, nadie puede censurarte.'
+          correctAnswer: 'c',
+          explanation: 'Solana prioriza escalabilidad (65,000 TPS, fees de centavos). Para lograrlo, requiere hardware potente que menos personas pueden costear. Es un trade-off explícito, no un defecto. Bitcoin hace el trade-off opuesto: cualquiera con $300 puede correr un nodo.'
+        },
+        {
+          id: 'q4',
+          question: '¿Qué es el Coeficiente de Nakamoto?',
+          options: [
+            { id: 'a', text: 'El precio de Bitcoin' },
+            { id: 'b', text: 'El número mínimo de entidades que necesitarían coordinarse para comprometer un sistema' },
+            { id: 'c', text: 'La cantidad de Bitcoin que tiene Satoshi' },
+            { id: 'd', text: 'Una medida de velocidad' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El Coeficiente de Nakamoto mide descentralización objetivamente. Tu banco = 1 (una entidad decide todo). Bitcoin = muy alto (necesitarías coordinar múltiples pools de minería en diferentes países). Mayor número = más descentralizado.'
+        },
+        {
+          id: 'q5',
+          question: 'Un crítico dice: "La descentralización es ineficiente, los sistemas centralizados son mejores". ¿Cuál es la respuesta más honesta?',
+          options: [
+            { id: 'a', text: 'Es falso, la descentralización es siempre mejor' },
+            { id: 'b', text: 'Es parcialmente cierto: la descentralización TIENE costos (velocidad, complejidad), pero a cambio obtienes propiedad real y resistencia a censura. Es un trade-off, no superioridad absoluta.' },
+            { id: 'c', text: 'La descentralización es solo para criminales' },
+            { id: 'd', text: 'Los sistemas centralizados nunca fallan' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La honestidad requiere reconocer los trade-offs. La descentralización puede ser más lenta, más cara, y sin "soporte al cliente". El beneficio es que NADIE puede quitarte lo tuyo o censurarte. Cada persona decide si el trade-off vale la pena para su situación.'
+        },
+        {
+          id: 'q6',
+          question: 'FTX era un exchange "cripto" que colapsó en 2022 y millones perdieron sus fondos. ¿Qué lección demuestra esto sobre la descentralización?',
+          options: [
+            { id: 'a', text: 'Que las criptomonedas son una estafa' },
+            { id: 'b', text: 'Que la descentralización de Bitcoin/Solana no te protege si TÚ usas un intermediario centralizado (exchange) que tiene tus llaves' },
+            { id: 'c', text: 'Que debes usar exchanges más grandes' },
+            { id: 'd', text: 'Que el gobierno debería regular más' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'FTX no era descentralizado—era un intermediario centralizado con el MISMO modelo de tu banco: ellos controlan las llaves, tú confías en ellos. La blockchain de Bitcoin siguió funcionando perfectamente. Los que perdieron fueron los que dejaron sus fondos en FTX en vez de en wallets propias.'
         }
       ]
     }
