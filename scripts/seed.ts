@@ -15,6 +15,7 @@ import {
   Landmark,
   Percent,
   TrendingDown,
+  TrendingUp,
   Users,
   Server,
   Network,
@@ -70,6 +71,7 @@ const ICONS: Record<string, LucideIcon> = {
   Landmark,
   Percent,
   TrendingDown,
+  TrendingUp,
   Users,
   Server,
   Network,
@@ -95,6 +97,23 @@ function getIconName(icon: LucideIcon): string | null {
     }
   }
   return null;
+}
+
+// Convert sections to database-friendly format (icons as strings)
+function serializeSections(sections: any[]): any[] {
+  return sections.map(section => {
+    const serialized: any = { ...section };
+
+    // Convert features icons to string names
+    if (section.features) {
+      serialized.features = section.features.map((feature: any) => ({
+        ...feature,
+        icon: typeof feature.icon === 'function' ? getIconName(feature.icon) : feature.icon
+      }));
+    }
+
+    return serialized;
+  });
 }
 
 async function seed() {
@@ -224,7 +243,7 @@ async function seed() {
         level: lessonData.level,
         number: lessonData.number,
         description: lessonData.description,
-        sections: lessonData.sections,
+        sections: serializeSections(lessonData.sections),
       });
     if (detailError) {
       console.error(`Error seeding details for lesson ${lessonId}:`, detailError);

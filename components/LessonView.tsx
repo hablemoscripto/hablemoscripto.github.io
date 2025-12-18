@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock, Users, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, LucideIcon } from 'lucide-react';
+
+// Icon map for dynamic icon rendering from database
+const ICON_MAP: Record<string, LucideIcon> = {
+  Users, Lock, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone,
+  Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase,
+  Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, AlertCircle,
+  CheckCircle, Clock, BookOpen, Award
+};
 import ReactMarkdown from 'react-markdown';
 import VideoPlayer from './ui/VideoPlayer';
 import { useProgress } from '../contexts/ProgressContext';
@@ -264,6 +272,11 @@ const LessonView: React.FC = () => {
                                 return (
                                     <div key={idx}>
                                         <div className="mb-8">
+                                            {/* Section Title */}
+                                            {section.title && (
+                                                <h2 className="text-2xl font-bold text-white mb-4">{section.title}</h2>
+                                            )}
+
                                             {section.type === 'intro' && (
                                                 <div className="text-lg text-slate-300 leading-relaxed font-medium border-l-4 border-brand-500 pl-4">
                                                     <ReactMarkdown>{section.content}</ReactMarkdown>
@@ -276,15 +289,71 @@ const LessonView: React.FC = () => {
                                                 </div>
                                             )}
 
+                                            {/* Features Grid */}
+                                            {section.features && section.features.length > 0 && (
+                                                <div className="grid gap-4 my-6 not-prose">
+                                                    {section.features.map((feature: any, i: number) => {
+                                                        const IconComponent = typeof feature.icon === 'string'
+                                                            ? ICON_MAP[feature.icon]
+                                                            : null;
+                                                        return (
+                                                            <div key={i} className="bg-slate-900/50 p-5 rounded-xl border border-slate-700/50 hover:border-brand-500/30 transition-colors">
+                                                                <div className="flex items-start gap-4">
+                                                                    {IconComponent && (
+                                                                        <div className="p-2 bg-brand-500/10 rounded-lg shrink-0">
+                                                                            <IconComponent size={24} className="text-brand-500" />
+                                                                        </div>
+                                                                    )}
+                                                                    <div>
+                                                                        <h4 className="font-bold text-white mb-2">{feature.title}</h4>
+                                                                        <p className="text-slate-400 text-sm leading-relaxed">{feature.text}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                            )}
+
+                                            {/* Highlight Box */}
+                                            {section.highlight && (
+                                                <div className="bg-brand-500/10 border border-brand-500/30 rounded-xl p-5 my-6 not-prose">
+                                                    <h4 className="font-bold text-brand-400 mb-2">{section.highlight.title}</h4>
+                                                    <p className="text-slate-300 text-sm leading-relaxed">{section.highlight.text}</p>
+                                                </div>
+                                            )}
+
                                             {section.type === 'comparison' && (
                                                 <div className="grid md:grid-cols-2 gap-4 my-6 not-prose">
                                                     <div className="bg-slate-900/50 p-6 rounded-xl border border-red-500/20">
-                                                        <h4 className="font-bold text-red-400 mb-2">Antes (Fiat)</h4>
-                                                        <p className="text-sm text-slate-400">Centralizado, inflacionario, lento, costoso.</p>
+                                                        <h4 className="font-bold text-red-400 mb-3">{section.leftTitle || 'Antes (Fiat)'}</h4>
+                                                        {section.leftSide ? (
+                                                            <ul className="space-y-2">
+                                                                {section.leftSide.map((item: string, i: number) => (
+                                                                    <li key={i} className="flex items-start gap-2 text-sm text-slate-400">
+                                                                        <span className="text-red-400 mt-0.5">✗</span>
+                                                                        <span>{item}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        ) : (
+                                                            <p className="text-sm text-slate-400">Centralizado, inflacionario, lento, costoso.</p>
+                                                        )}
                                                     </div>
                                                     <div className="bg-slate-900/50 p-6 rounded-xl border border-green-500/20">
-                                                        <h4 className="font-bold text-green-400 mb-2">Ahora (Cripto)</h4>
-                                                        <p className="text-sm text-slate-400">Descentralizado, deflacionario, instantáneo, barato.</p>
+                                                        <h4 className="font-bold text-green-400 mb-3">{section.rightTitle || 'Ahora (Cripto)'}</h4>
+                                                        {section.rightSide ? (
+                                                            <ul className="space-y-2">
+                                                                {section.rightSide.map((item: string, i: number) => (
+                                                                    <li key={i} className="flex items-start gap-2 text-sm text-slate-400">
+                                                                        <span className="text-green-400 mt-0.5">✓</span>
+                                                                        <span>{item}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        ) : (
+                                                            <p className="text-sm text-slate-400">Descentralizado, deflacionario, instantáneo, barato.</p>
+                                                        )}
                                                     </div>
                                                 </div>
                                             )}
@@ -293,10 +362,10 @@ const LessonView: React.FC = () => {
                                                 <div className="bg-brand-500/10 border border-brand-500/20 rounded-xl p-6 my-8 not-prose">
                                                     <h3 className="flex items-center gap-2 text-xl font-bold text-brand-400 mb-4">
                                                         <BookOpen size={24} />
-                                                        Puntos Clave
+                                                        {section.title || 'Puntos Clave'}
                                                     </h3>
                                                     <ul className="space-y-2">
-                                                        {section.items?.map((item, i) => (
+                                                        {section.items?.map((item: string, i: number) => (
                                                             <li key={i} className="flex items-start gap-2 text-slate-300">
                                                                 <CheckCircle size={18} className="text-brand-500 mt-1 shrink-0" />
                                                                 <span>{item}</span>
