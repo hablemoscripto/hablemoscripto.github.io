@@ -7,6 +7,7 @@ import EducationPage from './components/EducationPage';
 import LessonView from './components/LessonView';
 import LevelDetail from './components/LevelDetail';
 import NewsletterAdmin from './components/NewsletterAdmin';
+import PaymentSuccess from './components/PaymentSuccess';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProgressProvider } from './contexts/ProgressContext';
@@ -69,6 +70,10 @@ function AnimatedRoutes() {
               <PageTransition><NewsletterAdmin /></PageTransition>
             </ProtectedRoute>
           }
+        />
+        <Route
+          path="/pago-completado"
+          element={<PageTransition><PaymentSuccess /></PageTransition>}
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
