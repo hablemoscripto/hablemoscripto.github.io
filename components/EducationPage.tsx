@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import EducationNavbar from './EducationNavbar';
-import { Trophy, Shield, TrendingUp, Star, ChevronRight, LucideIcon, Award } from 'lucide-react';
+import { Trophy, Shield, TrendingUp, Star, ChevronRight, LucideIcon, Award, Crown } from 'lucide-react';
 import { useProgress } from '../contexts/ProgressContext';
 import LevelCard from './ui/LevelCard';
 import Certificate from './ui/Certificate';
+import PaymentButton from './PaymentButton';
 import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabase'; // Import supabase client
 import { useAuth } from '../contexts/AuthContext';
@@ -238,6 +239,24 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                   </div>
                 );
               })}
+            </div>
+          </div>
+
+          {/* Premium Section - Temporary for testing */}
+          <div className="container max-w-7xl mx-auto px-6 mt-12">
+            <div className="bg-gradient-to-br from-slate-900 to-slate-800 border border-amber-500/20 rounded-2xl p-8 text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Crown size={32} className="text-white" />
+              </div>
+              <h2 className="text-2xl font-bold text-white mb-2">Obtener Premium</h2>
+              <p className="text-slate-400 mb-6 max-w-md mx-auto">
+                Accede a contenido exclusivo, lecciones avanzadas y recursos adicionales para dominar el mundo cripto.
+              </p>
+              <PaymentButton
+                onSuccess={() => alert('Pago exitoso! Ya eres premium.')}
+                onError={(error) => alert(error)}
+                className="mx-auto"
+              />
             </div>
           </div>
 
