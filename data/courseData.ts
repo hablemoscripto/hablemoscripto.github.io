@@ -569,10 +569,8 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'intro',
         title: 'El Secreto de 300 Años que Explica la Desigualdad Moderna',
         content: 'En 1730, un economista irlandés-francés llamado **Richard Cantillon** descubrió algo que los gobiernos prefieren que no sepas: **el dinero nuevo no es neutral**. Cuando un banco central "imprime" dinero, ese dinero no aparece mágicamente en los bolsillos de todos al mismo tiempo. Alguien lo recibe PRIMERO. Y ese "alguien" tiene una ventaja enorme: puede comprar activos a precios VIEJOS antes de que los precios suban. Para cuando el dinero llega a ti (si es que llega), los precios ya subieron. Compraste tarde. Pagaste más. Perdiste.',
-        highlight: {
-          title: 'La Metáfora del Río',
-          text: 'Imagina que el dinero nuevo es un río. Los que están cerca de la naciente (bancos, gobierno, grandes corporaciones) beben agua limpia y abundante. Para cuando el agua llega río abajo (trabajadores, pensionados, ahorradores), está sucia y hay menos. Tú estás río abajo.'
-        }
+        image: '/images/lessons/lesson-3/lesson3-1.webp',
+        imageAlt: 'La Metáfora del Río: El dinero nuevo fluye primero a bancos y corporaciones, y llega último a trabajadores y ahorradores'
       },
       {
         type: 'main',
@@ -649,10 +647,8 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: Landmark, title: 'La Vivienda se Volvió Imposible', text: 'En 1970, una casa promedio costaba 2-3 años de salario mediano. Hoy cuesta 7-10 años. El dinero nuevo fluyó hacia bienes raíces, haciendo imposible comprar para las nuevas generaciones.' },
           { icon: Users, title: 'Los Ricos Tienen Asesores', text: 'Cuando se anuncia impresión de dinero, los ultra-ricos llaman a sus banqueros y mueven su capital a activos que se beneficiarán. Tú te enteras en las noticias semanas después.' }
         ],
-        highlight: {
-          title: 'La Verdad Incómoda',
-          text: 'No es que los ricos "trabajen más duro". Es que están posicionados cerca de la fuente del dinero nuevo. Cada ronda de impresión los hace MÁS ricos y a ti te hace MÁS pobre en términos relativos. El juego está estructuralmente amañado.'
-        }
+        image: '/images/lessons/lesson-3/lesson3-3.webp',
+        imageAlt: 'La Verdad Incómoda: Los ricos están posicionados cerca de la fuente del dinero nuevo, el juego está estructuralmente amañado'
       },
       {
         type: 'main',
@@ -667,16 +663,8 @@ export const LESSONS_DATA: Record<number, any> = {
       {
         type: 'main',
         title: 'Bitcoin: La Primera Salida del Sistema Cantillon',
-        content: 'Ahora entiendes por qué Bitcoin existe y por qué importa:',
-        features: [
-          { icon: Lock, title: 'Nadie Está "Cerca de la Impresora"', text: 'No hay banco central de Bitcoin. No hay "dinero nuevo" que fluya primero a los privilegiados. Los 21 millones de BTC se emiten según reglas matemáticas predecibles que nadie puede cambiar.' },
-          { icon: Users, title: 'Acceso Igualitario', text: 'Cualquier persona con internet puede comprar Bitcoin. No necesitas ser cliente VIP de un banco. No necesitas conexiones políticas. No necesitas estar en el primer mundo.' },
-          { icon: Shield, title: 'Protección Contra la Devaluación', text: 'Cuando los gobiernos imprimen dinero fiat, Bitcoin no se diluye. Su escasez es absoluta. Por eso, históricamente, ha subido cuando los bancos centrales imprimen.' }
-        ],
-        highlight: {
-          title: 'El Cambio de Paradigma',
-          text: 'Por primera vez en la historia, existe un activo monetario donde NADIE tiene ventaja de acceso privilegiado. No hay "insiders" de Bitcoin. No hay Cantillon en Bitcoin. Es el primer dinero verdaderamente justo de la historia.'
-        }
+        image: '/images/lessons/lesson-3/lesson3-4.webp',
+        imageAlt: 'Bitcoin: La Primera Salida del Sistema Cantillon - Sin banco central, acceso igualitario, protección contra devaluación, el primer dinero verdaderamente justo'
       },
       {
         type: 'takeaways',
