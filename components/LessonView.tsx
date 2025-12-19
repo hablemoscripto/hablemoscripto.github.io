@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock, Users, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, LucideIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock, Users, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, LucideIcon, X, ZoomIn, ZoomOut, Move } from 'lucide-react';
 
 // Icon map for dynamic icon rendering from database
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -32,6 +32,14 @@ const LessonView: React.FC = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
     const [quizPassed, setQuizPassed] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
+
+    // Image lightbox state
+    const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
+    const [zoomLevel, setZoomLevel] = useState(1);
+    const [panPosition, setPanPosition] = useState({ x: 0, y: 0 });
+    const [isDragging, setIsDragging] = useState(false);
+    const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+    const lightboxRef = useRef<HTMLDivElement>(null);
 
     // Fetch lesson data from database
     useEffect(() => {
@@ -90,6 +98,23 @@ const LessonView: React.FC = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Keyboard handler for lightbox (ESC to close)
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (lightboxImage) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === '+' || e.key === '=') {
+                    handleZoomIn();
+                } else if (e.key === '-') {
+                    handleZoomOut();
+                }
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [lightboxImage]);
 
     if (lessonLoading) {
         return (
@@ -164,11 +189,140 @@ const LessonView: React.FC = () => {
         }
     };
 
+    // Lightbox functions
+    const openLightbox = (src: string, alt: string) => {
+        setLightboxImage({ src, alt });
+        setZoomLevel(1);
+        setPanPosition({ x: 0, y: 0 });
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+        setLightboxImage(null);
+        setZoomLevel(1);
+        setPanPosition({ x: 0, y: 0 });
+        document.body.style.overflow = '';
+    };
+
+    const handleZoomIn = () => {
+        setZoomLevel(prev => Math.min(prev + 0.5, 4));
+    };
+
+    const handleZoomOut = () => {
+        setZoomLevel(prev => {
+            const newZoom = Math.max(prev - 0.5, 1);
+            if (newZoom === 1) {
+                setPanPosition({ x: 0, y: 0 });
+            }
+            return newZoom;
+        });
+    };
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+        if (zoomLevel > 1) {
+            setIsDragging(true);
+            setDragStart({ x: e.clientX - panPosition.x, y: e.clientY - panPosition.y });
+        }
+    };
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (isDragging && zoomLevel > 1) {
+            setPanPosition({
+                x: e.clientX - dragStart.x,
+                y: e.clientY - dragStart.y
+            });
+        }
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    const handleWheel = (e: React.WheelEvent) => {
+        e.preventDefault();
+        if (e.deltaY < 0) {
+            handleZoomIn();
+        } else {
+            handleZoomOut();
+        }
+    };
+
     return (
         <>
             <Helmet>
                 <title>{lesson.title} | Hablemos Cripto</title>
             </Helmet>
+
+            {/* Image Lightbox Modal */}
+            {lightboxImage && (
+                <div
+                    className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
+                    onClick={closeLightbox}
+                >
+                    {/* Controls */}
+                    <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
+                        <div className="bg-slate-800/80 backdrop-blur-sm rounded-lg px-3 py-1.5 text-sm text-slate-300 flex items-center gap-2">
+                            <Move size={14} />
+                            <span>{Math.round(zoomLevel * 100)}%</span>
+                        </div>
+                        <button
+                            onClick={(e) => { e.stopPropagation(); handleZoomOut(); }}
+                            disabled={zoomLevel <= 1}
+                            className="p-2 bg-slate-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            title="Alejar"
+                        >
+                            <ZoomOut size={20} />
+                        </button>
+                        <button
+                            onClick={(e) => { e.stopPropagation(); handleZoomIn(); }}
+                            disabled={zoomLevel >= 4}
+                            className="p-2 bg-slate-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            title="Acercar"
+                        >
+                            <ZoomIn size={20} />
+                        </button>
+                        <button
+                            onClick={closeLightbox}
+                            className="p-2 bg-slate-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-red-500 transition-colors"
+                            title="Cerrar"
+                        >
+                            <X size={20} />
+                        </button>
+                    </div>
+
+                    {/* Instructions */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-800/80 backdrop-blur-sm rounded-lg px-4 py-2 text-sm text-slate-400 flex items-center gap-4">
+                        <span>🖱️ Scroll para zoom</span>
+                        <span>✋ Arrastra para mover</span>
+                        <span>ESC para cerrar</span>
+                    </div>
+
+                    {/* Image Container */}
+                    <div
+                        ref={lightboxRef}
+                        className={`overflow-hidden max-w-[90vw] max-h-[85vh] ${zoomLevel > 1 ? 'cursor-grab' : 'cursor-zoom-in'} ${isDragging ? 'cursor-grabbing' : ''}`}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            if (zoomLevel === 1) handleZoomIn();
+                        }}
+                        onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}
+                        onMouseUp={handleMouseUp}
+                        onMouseLeave={handleMouseUp}
+                        onWheel={handleWheel}
+                    >
+                        <img
+                            src={lightboxImage.src}
+                            alt={lightboxImage.alt}
+                            className="max-w-full max-h-[85vh] object-contain select-none transition-transform duration-200"
+                            style={{
+                                transform: `scale(${zoomLevel}) translate(${panPosition.x / zoomLevel}px, ${panPosition.y / zoomLevel}px)`,
+                            }}
+                            draggable={false}
+                        />
+                    </div>
+                </div>
+            )}
 
             <div className="min-h-screen bg-slate-950 pb-20">
                 {/* Progress Bar Fixed Top */}
@@ -286,11 +440,23 @@ const LessonView: React.FC = () => {
                                             {/* Section Image - appears before content when present */}
                                             {section.image && (
                                                 <div className="my-6 not-prose">
-                                                    <img
-                                                        src={section.image}
-                                                        alt={section.imageAlt || section.title || 'Infographic'}
-                                                        className="w-full rounded-xl border border-slate-700/50 shadow-lg"
-                                                    />
+                                                    <div
+                                                        className="relative group cursor-pointer"
+                                                        onClick={() => openLightbox(section.image, section.imageAlt || section.title || 'Infographic')}
+                                                    >
+                                                        <img
+                                                            src={section.image}
+                                                            alt={section.imageAlt || section.title || 'Infographic'}
+                                                            className="w-full rounded-xl border border-slate-700/50 shadow-lg transition-all duration-300 group-hover:border-brand-500/50 group-hover:shadow-brand-500/20"
+                                                        />
+                                                        {/* Hover overlay */}
+                                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 rounded-xl transition-all duration-300 flex items-center justify-center">
+                                                            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-900/80 backdrop-blur-sm px-4 py-2 rounded-lg flex items-center gap-2 text-white text-sm font-medium">
+                                                                <ZoomIn size={18} />
+                                                                <span>Click para ampliar</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     {section.imageCaption && (
                                                         <p className="text-sm text-slate-500 text-center mt-2 italic">{section.imageCaption}</p>
                                                     )}
