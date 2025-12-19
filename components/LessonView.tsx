@@ -283,13 +283,7 @@ const LessonView: React.FC = () => {
                                                 </div>
                                             )}
 
-                                            {section.type === 'main' && (
-                                                <div className="text-slate-300 leading-relaxed">
-                                                    <ReactMarkdown>{section.content}</ReactMarkdown>
-                                                </div>
-                                            )}
-
-                                            {/* Section Image */}
+                                            {/* Section Image - appears before content when present */}
                                             {section.image && (
                                                 <div className="my-6 not-prose">
                                                     <img
@@ -300,6 +294,12 @@ const LessonView: React.FC = () => {
                                                     {section.imageCaption && (
                                                         <p className="text-sm text-slate-500 text-center mt-2 italic">{section.imageCaption}</p>
                                                     )}
+                                                </div>
+                                            )}
+
+                                            {section.type === 'main' && (
+                                                <div className="text-slate-300 leading-relaxed">
+                                                    <ReactMarkdown>{section.content}</ReactMarkdown>
                                                 </div>
                                             )}
 

@@ -244,27 +244,8 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'main',
         title: 'Las 6 Propiedades del Dinero Perfecto',
         content: 'Durante 5,000 años de prueba y error, la humanidad descubrió que el buen dinero debe cumplir 6 propiedades fundamentales. Cualquier cosa que usemos como dinero será tan buena como su capacidad de cumplir estas características:',
-        features: [
-          { icon: Lock, title: '1. Escasez', text: 'Debe ser difícil de crear o encontrar. Si cualquiera puede producirlo fácilmente, pierde valor. Las conchas de mar funcionaron como dinero hasta que la gente descubrió playas llenas de ellas.' },
-          { icon: Scissors, title: '2. Divisibilidad', text: 'Debe poder dividirse en partes pequeñas para transacciones menores. No puedes pagar un café con una vaca.' },
-          { icon: Shield, title: '3. Durabilidad', text: 'No puede pudrirse, oxidarse o destruirse fácilmente. El pescado no funciona como dinero porque en una semana es basura.' },
-          { icon: Zap, title: '4. Portabilidad', text: 'Debe ser fácil de transportar. Las piedras gigantes de la isla Yap eran dinero, pero ¿cómo las llevas al mercado?' },
-          { icon: RefreshCw, title: '5. Fungibilidad', text: 'Cada unidad debe ser idéntica e intercambiable. Un gramo de oro puro es igual a cualquier otro gramo de oro puro.' },
-          { icon: CheckCircle, title: '6. Verificabilidad', text: 'Debe ser fácil confirmar que es auténtico. El oro se puede morder (es blando), pesar y medir. El dinero falso es un problema de verificabilidad.' }
-        ]
-      },
-      {
-        type: 'main',
-        title: 'El Experimento de 5,000 Años: Del Trueque al Oro',
-        content: 'La humanidad probó de todo antes de encontrar el oro:',
         image: '/images/lessons/lesson-1/lesson1-1.png',
-        imageAlt: 'Evolución del dinero: del trueque al oro',
-        features: [
-          { icon: AlertTriangle, title: 'Conchas Cowrie (África, Asia)', text: 'Funcionaron por siglos hasta que los europeos llegaron con barcos llenos de conchas de otras costas. La oferta se multiplicó y las conchas perdieron todo valor. Primera lección: el dinero debe ser REALMENTE escaso.' },
-          { icon: AlertTriangle, title: 'Sal (Salario viene de "sal")', text: 'Portable y divisible, pero se disuelve en la lluvia y cualquiera puede evaporar agua de mar para crearla. No es durable ni suficientemente escasa.' },
-          { icon: AlertTriangle, title: 'Ganado', text: 'Útil pero imposible de dividir (no puedes pagar un pan con media vaca viva) y requiere alimentación constante. Falla en divisibilidad y portabilidad.' },
-          { icon: Award, title: 'Oro y Plata', text: 'Después de milenios de experimentación, el oro emergió como ganador. Es escaso (toda la minería de la historia cabe en 3 piscinas olímpicas), no se oxida, se puede dividir, es reconocible universalmente, y nadie puede "imprimir" más.' }
-        ],
+        imageAlt: 'Las 6 propiedades del dinero perfecto: escasez, divisibilidad, durabilidad, portabilidad, fungibilidad y verificabilidad',
         highlight: {
           title: 'La Razón del Oro',
           text: 'El oro no se convirtió en dinero porque brilla bonito o porque los gobiernos lo decretaron. Se convirtió en dinero porque NATURALMENTE cumple las 6 propiedades mejor que cualquier otra cosa en la naturaleza. El mercado lo eligió durante 5,000 años.'
