@@ -413,16 +413,31 @@ export const LESSONS_DATA: Record<number, any> = {
       {
         type: 'main',
         title: 'La Máquina de Crear Dinero (Cómo Funciona Realmente)',
-        content: 'Aquí es donde la mayoría se pierde, porque el sistema está diseñado para ser confuso. Vamos a simplificarlo. El dinero se crea principalmente de DOS formas:',
-        features: [
-          { icon: Landmark, title: '1. El Banco Central Imprime', text: 'Cuando la Reserva Federal (USA), el Banco de la República (Colombia), o cualquier banco central decide que "la economía necesita estímulo", literalmente teclea números en una computadora y ese dinero EXISTE. No viene de ningún lado. En 2020, la Fed creó $4.5 TRILLONES en meses. ¿De dónde? De la nada.' },
-          { icon: Percent, title: '2. Los Bancos Multiplican (Reserva Fraccionaria)', text: 'Cuando depositas $100 en tu banco, el banco NO guarda esos $100 esperándote. Por ley, solo debe guardar una "reserva" (digamos 10%). Los otros $90 los presta a otra persona. Esa persona deposita los $90 en otro banco, que guarda $9 y presta $81. Y así sucesivamente. Tus $100 originales se convierten en $900+ de "dinero" en el sistema. Es multiplicación mágica de deuda.' },
-          { icon: TrendingDown, title: 'El Resultado Matemático', text: 'Cada año hay más unidades de dinero persiguiendo aproximadamente la misma cantidad de bienes y servicios. Más dinero + mismos bienes = precios más altos. Tu sueldo sube 3%, pero los precios suben 8%. Cada año eres más pobre en términos reales, aunque tu cuenta bancaria muestre un número mayor.' }
-        ],
-        highlight: {
-          title: 'La Ilusión del Aumento de Sueldo',
-          text: 'Si te aumentan el sueldo 5% pero la inflación es 10%, en realidad te BAJARON el sueldo 5%. El número en tu cuenta es más grande, pero compra menos cosas. Es matemáticas, no opinión.'
-        }
+        content: 'Aquí es donde la mayoría se pierde, porque el sistema está diseñado para ser confuso. Vamos a simplificarlo. El dinero se crea principalmente de DOS formas:'
+      },
+      {
+        type: 'main',
+        title: '1. El Banco Central Imprime',
+        image: '/images/lessons/lesson-2/lesson2-1.png',
+        imageAlt: 'Cómo el banco central crea dinero de la nada'
+      },
+      {
+        type: 'main',
+        title: '2. Los Bancos Multiplican (Reserva Fraccionaria)',
+        image: '/images/lessons/lesson-2/lesson2-2.png',
+        imageAlt: 'Sistema de reserva fraccionaria y multiplicación del dinero'
+      },
+      {
+        type: 'main',
+        title: '3. El Resultado Matemático',
+        image: '/images/lessons/lesson-2/lesson2-3.png',
+        imageAlt: 'El resultado matemático de la creación de dinero'
+      },
+      {
+        type: 'main',
+        title: 'La Ilusión del Aumento de Sueldo',
+        image: '/images/lessons/lesson-2/lesson2-4.png',
+        imageAlt: 'La ilusión del aumento de sueldo vs la inflación real'
       },
       {
         type: 'main',
