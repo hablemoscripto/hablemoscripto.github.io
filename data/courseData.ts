@@ -257,6 +257,8 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'main',
         title: 'El Experimento de 5,000 Años: Del Trueque al Oro',
         content: 'La humanidad probó de todo antes de encontrar el oro:',
+        image: '/images/lessons/lesson-1/lesson1-1.png',
+        imageAlt: 'Evolución del dinero: del trueque al oro',
         features: [
           { icon: AlertTriangle, title: 'Conchas Cowrie (África, Asia)', text: 'Funcionaron por siglos hasta que los europeos llegaron con barcos llenos de conchas de otras costas. La oferta se multiplicó y las conchas perdieron todo valor. Primera lección: el dinero debe ser REALMENTE escaso.' },
           { icon: AlertTriangle, title: 'Sal (Salario viene de "sal")', text: 'Portable y divisible, pero se disuelve en la lluvia y cualquiera puede evaporar agua de mar para crearla. No es durable ni suficientemente escasa.' },

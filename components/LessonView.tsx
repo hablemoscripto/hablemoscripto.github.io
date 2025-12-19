@@ -289,6 +289,20 @@ const LessonView: React.FC = () => {
                                                 </div>
                                             )}
 
+                                            {/* Section Image */}
+                                            {section.image && (
+                                                <div className="my-6 not-prose">
+                                                    <img
+                                                        src={section.image}
+                                                        alt={section.imageAlt || section.title || 'Infographic'}
+                                                        className="w-full rounded-xl border border-slate-700/50 shadow-lg"
+                                                    />
+                                                    {section.imageCaption && (
+                                                        <p className="text-sm text-slate-500 text-center mt-2 italic">{section.imageCaption}</p>
+                                                    )}
+                                                </div>
+                                            )}
+
                                             {/* Features Grid */}
                                             {section.features && section.features.length > 0 && (
                                                 <div className="grid gap-4 my-6 not-prose">
