@@ -450,16 +450,8 @@ export const LESSONS_DATA: Record<number, any> = {
       {
         type: 'main',
         title: 'La Inflación Real vs La Inflación Oficial',
-        content: 'Los gobiernos tienen trucos para hacer que la inflación "oficial" parezca más baja de lo que realmente es:',
-        features: [
-          { icon: AlertTriangle, title: 'Sustitución', text: 'Si el bistec sube 30%, asumen que "la gente comprará pollo". Así no cuentan la subida completa del bistec. Pero tú querías bistec, no pollo.' },
-          { icon: AlertTriangle, title: 'Ajuste Hedónico', text: 'Si tu computadora nueva cuesta lo mismo que la de hace 5 años pero es más rápida, dicen que "en realidad bajó de precio". Pero tu billetera pagó lo mismo.' },
-          { icon: AlertTriangle, title: 'Exclusiones Convenientes', text: 'Muchos índices excluyen comida y energía por ser "muy volátiles". Pero... ¿no son exactamente las cosas que más compras?' }
-        ],
-        highlight: {
-          title: 'El Test del Supermercado',
-          text: 'La próxima vez que el gobierno diga "inflación 4%", ve al supermercado y compara los precios con hace un año. Compara el alquiler. La gasolina. La electricidad. Tu experiencia personal es más honesta que cualquier estadística oficial.'
-        }
+        image: '/images/lessons/lesson-2/lesson2-6.webp',
+        imageAlt: 'La Inflación Real vs La Inflación Oficial: Trucos como sustitución, ajuste hedónico y exclusiones convenientes que usan los gobiernos para ocultar la inflación real'
       },
       {
         type: 'main',
