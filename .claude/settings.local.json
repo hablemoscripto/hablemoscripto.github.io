@@ -26,7 +26,12 @@
       "Bash(npx vite-node:*)",
       "Bash(dig:*)",
       "Bash(nslookup:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(du:*)",
+      "Bash(xargs:*)",
+      "Bash(file:*)",
+      "Bash(ls:*)",
+      "Bash(identify:*)"
     ],
     "deny": [],
     "ask": []

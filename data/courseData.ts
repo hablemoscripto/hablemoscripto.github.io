@@ -244,7 +244,7 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'main',
         title: 'Las 6 Propiedades del Dinero Perfecto',
         content: 'Durante 5,000 años de prueba y error, la humanidad descubrió que el buen dinero debe cumplir 6 propiedades fundamentales. Cualquier cosa que usemos como dinero será tan buena como su capacidad de cumplir estas características:',
-        image: '/images/lessons/lesson-1/lesson1-1.png',
+        image: '/images/lessons/lesson-1/lesson1-1.webp',
         imageAlt: 'Las 6 propiedades del dinero perfecto: escasez, divisibilidad, durabilidad, portabilidad, fungibilidad y verificabilidad'
       },
       {
