@@ -251,16 +251,8 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'main',
         title: 'El Experimento de 5,000 Años: Del Trueque al Oro',
         content: 'La humanidad probó de todo antes de encontrar el oro:',
-        features: [
-          { icon: AlertTriangle, title: 'Conchas Cowrie (África, Asia)', text: 'Funcionaron por siglos hasta que los europeos llegaron con barcos llenos de conchas de otras costas. La oferta se multiplicó y las conchas perdieron todo valor. Primera lección: el dinero debe ser REALMENTE escaso.' },
-          { icon: AlertTriangle, title: 'Sal (Salario viene de "sal")', text: 'Portable y divisible, pero se disuelve en la lluvia y cualquiera puede evaporar agua de mar para crearla. No es durable ni suficientemente escasa.' },
-          { icon: AlertTriangle, title: 'Ganado', text: 'Útil pero imposible de dividir (no puedes pagar un pan con media vaca viva) y requiere alimentación constante. Falla en divisibilidad y portabilidad.' },
-          { icon: Award, title: 'Oro y Plata', text: 'Después de milenios de experimentación, el oro emergió como ganador. Es escaso (toda la minería de la historia cabe en 3 piscinas olímpicas), no se oxida, se puede dividir, es reconocible universalmente, y nadie puede "imprimir" más.' }
-        ],
-        highlight: {
-          title: 'La Razón del Oro',
-          text: 'El oro no se convirtió en dinero porque brilla bonito o porque los gobiernos lo decretaron. Se convirtió en dinero porque NATURALMENTE cumple las 6 propiedades mejor que cualquier otra cosa en la naturaleza. El mercado lo eligió durante 5,000 años.'
-        }
+        image: '/images/lessons/lesson-1/lesson1-2.png',
+        imageAlt: 'El experimento de 5,000 años: del trueque al oro - conchas, sal, ganado y oro'
       },
       {
         type: 'main',
