@@ -251,7 +251,7 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'main',
         title: 'El Experimento de 5,000 Años: Del Trueque al Oro',
         content: 'La humanidad probó de todo antes de encontrar el oro:',
-        image: '/images/lessons/lesson-1/lesson1-2.png',
+        image: '/images/lessons/lesson-1/lesson1-2.webp',
         imageAlt: 'El experimento de 5,000 años: del trueque al oro - conchas, sal, ganado y oro'
       },
       {
@@ -418,25 +418,25 @@ export const LESSONS_DATA: Record<number, any> = {
       {
         type: 'main',
         title: '1. El Banco Central Imprime',
-        image: '/images/lessons/lesson-2/lesson2-1.png',
+        image: '/images/lessons/lesson-2/lesson2-1.webp',
         imageAlt: 'Cómo el banco central crea dinero de la nada'
       },
       {
         type: 'main',
         title: '2. Los Bancos Multiplican (Reserva Fraccionaria)',
-        image: '/images/lessons/lesson-2/lesson2-2.png',
+        image: '/images/lessons/lesson-2/lesson2-2.webp',
         imageAlt: 'Sistema de reserva fraccionaria y multiplicación del dinero'
       },
       {
         type: 'main',
         title: '3. El Resultado Matemático',
-        image: '/images/lessons/lesson-2/lesson2-3.png',
+        image: '/images/lessons/lesson-2/lesson2-3.webp',
         imageAlt: 'El resultado matemático de la creación de dinero'
       },
       {
         type: 'main',
         title: '4. La Ilusión del Aumento de Sueldo',
-        image: '/images/lessons/lesson-2/lesson2-4.png',
+        image: '/images/lessons/lesson-2/lesson2-4.webp',
         imageAlt: 'La ilusión del aumento de sueldo vs la inflación real'
       },
       {
