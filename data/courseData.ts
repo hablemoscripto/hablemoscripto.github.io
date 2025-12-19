@@ -435,7 +435,7 @@ export const LESSONS_DATA: Record<number, any> = {
       },
       {
         type: 'main',
-        title: 'La Ilusión del Aumento de Sueldo',
+        title: '4. La Ilusión del Aumento de Sueldo',
         image: '/images/lessons/lesson-2/lesson2-4.png',
         imageAlt: 'La ilusión del aumento de sueldo vs la inflación real'
       },
