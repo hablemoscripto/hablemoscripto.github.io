@@ -396,10 +396,8 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'intro',
         title: 'El Robo Silencioso que Nadie Te Explicó',
         content: 'Tu abuela podía comprar una casa con el sueldo de 3 años. Hoy necesitas 15 años o más. ¿La gente de antes trabajaba más duro? ¿Las casas de hoy son 5 veces mejores? No. La diferencia es simple: **tu dinero vale menos cada año**. La inflación no es un fenómeno natural como el clima. No es inevitable. Es una **política deliberada** de los gobiernos que, año tras año, transfiere riqueza silenciosamente de los que ahorran a los que imprimen y a los que reciben el dinero nuevo primero.',
-        highlight: {
-          title: 'El Dato que Deberías Tatuarte',
-          text: 'En 1971, un salario mínimo en Estados Unidos compraba 5 onzas de oro. Hoy, ese mismo salario mínimo compra 0.15 onzas de oro. Mismas horas de trabajo, 97% MENOS poder adquisitivo. No trabajamos menos—nos pagan en dinero que vale menos.'
-        }
+        image: '/images/lessons/lesson-2/lesson2-5.webp',
+        imageAlt: 'El Dato que Deberías Tatuarte: En 1971 un salario mínimo compraba 5 onzas de oro, hoy compra 0.15 onzas - 97% menos poder adquisitivo'
       },
       {
         type: 'main',
