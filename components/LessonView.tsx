@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock, Users, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, LucideIcon, X, ZoomIn, ZoomOut, Move } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, AlertTriangle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock, Users, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, LucideIcon, X, ZoomIn, ZoomOut, Move } from 'lucide-react';
 
 // Icon map for dynamic icon rendering from database
 const ICON_MAP: Record<string, LucideIcon> = {
