@@ -245,14 +245,16 @@ export const LESSONS_DATA: Record<number, any> = {
         title: 'Las 6 Propiedades del Dinero Perfecto',
         content: 'Durante 5,000 años de prueba y error, la humanidad descubrió que el buen dinero debe cumplir 6 propiedades fundamentales. Cualquier cosa que usemos como dinero será tan buena como su capacidad de cumplir estas características:',
         image: '/images/lessons/lesson-1/lesson1-1.png',
-        imageAlt: 'Las 6 propiedades del dinero perfecto: escasez, divisibilidad, durabilidad, portabilidad, fungibilidad y verificabilidad'
+        imageAlt: 'Las 6 propiedades del dinero perfecto: escasez, divisibilidad, durabilidad, portabilidad, fungibilidad y verificabilidad',
+        imageSummary: 'Si no es escaso, pierde valor. Si no es divisible, no sirve para compras pequeñas. Si no es durable, desaparece. Si no es portable, no puedes usarlo. Si no es fungible, cada unidad vale distinto. Si no es verificable, pueden engañarte. El oro cumplió estas 6 por milenios. El dinero fiat falla en la primera.'
       },
       {
         type: 'main',
         title: 'El Experimento de 5,000 Años: Del Trueque al Oro',
         content: 'La humanidad probó de todo antes de encontrar el oro:',
         image: '/images/lessons/lesson-1/lesson1-2.png',
-        imageAlt: 'El experimento de 5,000 años: del trueque al oro - conchas, sal, ganado y oro'
+        imageAlt: 'El experimento de 5,000 años: del trueque al oro - conchas, sal, ganado y oro',
+        imageSummary: 'Conchas, sal, ganado—todos fallaron por la misma razón: alguien encontró la forma de crear más. El oro ganó porque nadie puede imprimirlo. No fue decreto de ningún rey. Fue selección natural del mercado durante 5,000 años.'
       },
       {
         type: 'main',
@@ -419,25 +421,29 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'main',
         title: '1. El Banco Central Imprime',
         image: '/images/lessons/lesson-2/lesson2-1.png',
-        imageAlt: 'Cómo el banco central crea dinero de la nada'
+        imageAlt: 'Cómo el banco central crea dinero de la nada',
+        imageSummary: 'No hay caja fuerte. No hay oro. Solo un funcionario, un teclado, y la autoridad para agregar ceros. En 2020, la Fed creó $4.5 TRILLONES así—dinero que no existía el día anterior. Ese "dinero" ahora compite con el tuyo por los mismos bienes.'
       },
       {
         type: 'main',
         title: '2. Los Bancos Multiplican (Reserva Fraccionaria)',
         image: '/images/lessons/lesson-2/lesson2-2.png',
-        imageAlt: 'Sistema de reserva fraccionaria y multiplicación del dinero'
+        imageAlt: 'Sistema de reserva fraccionaria y multiplicación del dinero',
+        imageSummary: 'Depositas $100. El banco guarda $10 y presta $90. Ese préstamo se deposita en otro banco, que guarda $9 y presta $81. Y así sucesivamente. Tus $100 "seguros" se convierten en $900+ de deuda circulando. Si todos fueran a retirar su dinero mañana, no existe.'
       },
       {
         type: 'main',
         title: '3. El Resultado Matemático',
         image: '/images/lessons/lesson-2/lesson2-3.png',
-        imageAlt: 'El resultado matemático de la creación de dinero'
+        imageAlt: 'El resultado matemático de la creación de dinero',
+        imageSummary: 'La inflación no es un fenómeno misterioso. Es aritmética: más dinero persiguiendo los mismos bienes = precios más altos. El ladrón no entra por tu ventana—entra por la impresora del banco central y te roba mientras duermes, año tras año.'
       },
       {
         type: 'main',
         title: '4. La Ilusión del Aumento de Sueldo',
         image: '/images/lessons/lesson-2/lesson2-4.png',
-        imageAlt: 'La ilusión del aumento de sueldo vs la inflación real'
+        imageAlt: 'La ilusión del aumento de sueldo vs la inflación real',
+        imageSummary: 'Te suben el sueldo 5% y te sientes bien. Pero si la inflación es 10%, tu poder de compra BAJÓ 5%. Es matemáticas, no opinión: aumento - inflación = cambio real. Esos $105,000 en tu cuenta solo compran lo que $94,500 compraban antes. Te hiciste más pobre con "más dinero".'
       },
       {
         type: 'main',

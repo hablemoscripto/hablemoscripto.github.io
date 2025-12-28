@@ -460,6 +460,19 @@ const LessonView: React.FC = () => {
                                                     {section.imageCaption && (
                                                         <p className="text-sm text-slate-500 text-center mt-2 italic">{section.imageCaption}</p>
                                                     )}
+                                                    {section.imageSummary && (
+                                                        <div className="mt-4 bg-gradient-to-r from-brand-500/10 to-amber-500/5 border border-brand-500/30 rounded-xl p-4">
+                                                            <div className="flex items-start gap-3">
+                                                                <div className="shrink-0 w-8 h-8 bg-brand-500/20 rounded-lg flex items-center justify-center">
+                                                                    <span className="text-brand-400 text-lg">💡</span>
+                                                                </div>
+                                                                <div>
+                                                                    <p className="text-xs font-semibold text-brand-400 uppercase tracking-wider mb-1">Lo Esencial</p>
+                                                                    <p className="text-slate-300 text-sm leading-relaxed">{section.imageSummary}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             )}
 
