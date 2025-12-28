@@ -518,39 +518,53 @@ const LessonView: React.FC = () => {
                                             )}
 
                                             {section.type === 'comparison' && (
-                                                <div className="grid md:grid-cols-2 gap-4 my-6 not-prose">
-                                                    <div className="bg-slate-900/50 p-6 rounded-xl border border-red-500/20">
-                                                        <h4 className="font-bold text-red-400 mb-3">
-                                                            {section.leftSide?.title || section.leftTitle || 'Antes (Fiat)'}
+                                                <div className="relative grid md:grid-cols-2 gap-4 my-6 not-prose">
+                                                    {/* VS Badge - centered between columns */}
+                                                    <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                                                        <div className="bg-slate-800 border-2 border-slate-600 rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                                                            <span className="text-xs font-bold text-slate-300">VS</span>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Left Side - Positive/Good (green) */}
+                                                    <div className="bg-gradient-to-br from-green-500/10 to-green-500/5 p-6 rounded-xl border border-green-500/30 relative overflow-hidden">
+                                                        <div className="absolute top-0 right-0 w-20 h-20 bg-green-500/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                                                        <h4 className="font-bold text-green-400 mb-4 flex items-center gap-2">
+                                                            <CheckCircle size={20} className="text-green-500" />
+                                                            {section.leftSide?.title || section.leftTitle || 'Antes'}
                                                         </h4>
                                                         {section.leftSide?.points ? (
-                                                            <ul className="space-y-2">
+                                                            <ul className="space-y-3">
                                                                 {section.leftSide.points.map((item: string, i: number) => (
-                                                                    <li key={i} className="flex items-start gap-2 text-sm text-slate-400">
-                                                                        <span className="text-red-400 mt-0.5">•</span>
-                                                                        <span>{item}</span>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        ) : (
-                                                            <p className="text-sm text-slate-400">Centralizado, inflacionario, lento, costoso.</p>
-                                                        )}
-                                                    </div>
-                                                    <div className="bg-slate-900/50 p-6 rounded-xl border border-green-500/20">
-                                                        <h4 className="font-bold text-green-400 mb-3">
-                                                            {section.rightSide?.title || section.rightTitle || 'Ahora (Cripto)'}
-                                                        </h4>
-                                                        {section.rightSide?.points ? (
-                                                            <ul className="space-y-2">
-                                                                {section.rightSide.points.map((item: string, i: number) => (
-                                                                    <li key={i} className="flex items-start gap-2 text-sm text-slate-400">
-                                                                        <span className="text-green-400 mt-0.5">•</span>
+                                                                    <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
+                                                                        <span className="text-green-500 mt-0.5 shrink-0">✓</span>
                                                                         <span>{item}</span>
                                                                     </li>
                                                                 ))}
                                                             </ul>
                                                         ) : (
                                                             <p className="text-sm text-slate-400">Descentralizado, deflacionario, instantáneo, barato.</p>
+                                                        )}
+                                                    </div>
+
+                                                    {/* Right Side - Negative/Bad (red) */}
+                                                    <div className="bg-gradient-to-br from-red-500/10 to-red-500/5 p-6 rounded-xl border border-red-500/30 relative overflow-hidden">
+                                                        <div className="absolute top-0 right-0 w-20 h-20 bg-red-500/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                                                        <h4 className="font-bold text-red-400 mb-4 flex items-center gap-2">
+                                                            <AlertTriangle size={20} className="text-red-500" />
+                                                            {section.rightSide?.title || section.rightTitle || 'Después'}
+                                                        </h4>
+                                                        {section.rightSide?.points ? (
+                                                            <ul className="space-y-3">
+                                                                {section.rightSide.points.map((item: string, i: number) => (
+                                                                    <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
+                                                                        <span className="text-red-500 mt-0.5 shrink-0">✗</span>
+                                                                        <span>{item}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        ) : (
+                                                            <p className="text-sm text-slate-400">Centralizado, inflacionario, lento, costoso.</p>
                                                         )}
                                                     </div>
                                                 </div>
