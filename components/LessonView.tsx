@@ -370,9 +370,9 @@ const LessonView: React.FC = () => {
                     </div>
                 </section>
 
-                <div className="max-w-5xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
                     {/* Main Content */}
-                    <div className="lg:col-span-8 space-y-8">
+                    <div className="lg:col-span-9 space-y-8">
                         {/* Video Section */}
                         <VideoPlayer
                             title={lesson.title}
@@ -625,7 +625,7 @@ const LessonView: React.FC = () => {
                     </div>
 
                     {/* Sidebar */}
-                    <div className="lg:col-span-4 space-y-6">
+                    <div className="lg:col-span-3 space-y-6">
                         <div className="sticky top-24">
                             {/* Progress Card */}
                             <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6 mb-6">
