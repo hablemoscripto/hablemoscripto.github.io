@@ -27,7 +27,12 @@
       "Bash(dig:*)",
       "Bash(nslookup:*)",
       "Bash(wc:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(du:*)",
+      "Bash(xargs:*)",
+      "Bash(file:*)",
+      "Bash(ls:*)",
+      "Bash(identify:*)"
     ],
     "deny": [],
     "ask": []

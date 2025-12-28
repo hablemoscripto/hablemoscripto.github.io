@@ -244,7 +244,7 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'main',
         title: 'Las 6 Propiedades del Dinero Perfecto',
         content: 'Durante 5,000 años de prueba y error, la humanidad descubrió que el buen dinero debe cumplir 6 propiedades fundamentales. Cualquier cosa que usemos como dinero será tan buena como su capacidad de cumplir estas características:',
-        image: '/images/lessons/lesson-1/lesson1-1.png',
+        image: '/images/lessons/lesson-1/lesson1-1.webp',
         imageAlt: 'Las 6 propiedades del dinero perfecto: escasez, divisibilidad, durabilidad, portabilidad, fungibilidad y verificabilidad',
         imageSummary: 'Si no es escaso, pierde valor. Si no es divisible, no sirve para compras pequeñas. Si no es durable, desaparece. Si no es portable, no puedes usarlo. Si no es fungible, cada unidad vale distinto. Si no es verificable, pueden engañarte. El oro cumplió estas 6 por milenios. El dinero fiat falla en la primera.'
       },
@@ -252,7 +252,7 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'main',
         title: 'El Experimento de 5,000 Años: Del Trueque al Oro',
         content: 'La humanidad probó de todo antes de encontrar el oro:',
-        image: '/images/lessons/lesson-1/lesson1-2.png',
+        image: '/images/lessons/lesson-1/lesson1-2.webp',
         imageAlt: 'El experimento de 5,000 años: del trueque al oro - conchas, sal, ganado y oro',
         imageSummary: 'Conchas, sal, ganado—todos fallaron por la misma razón: alguien encontró la forma de crear más. El oro ganó porque nadie puede imprimirlo. No fue decreto de ningún rey. Fue selección natural del mercado durante 5,000 años.'
       },
@@ -398,10 +398,9 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'intro',
         title: 'El Robo Silencioso que Nadie Te Explicó',
         content: 'Tu abuela podía comprar una casa con el sueldo de 3 años. Hoy necesitas 15 años o más. ¿La gente de antes trabajaba más duro? ¿Las casas de hoy son 5 veces mejores? No. La diferencia es simple: **tu dinero vale menos cada año**. La inflación no es un fenómeno natural como el clima. No es inevitable. Es una **política deliberada** de los gobiernos que, año tras año, transfiere riqueza silenciosamente de los que ahorran a los que imprimen y a los que reciben el dinero nuevo primero.',
-        highlight: {
-          title: 'El Dato que Deberías Tatuarte',
-          text: 'En 1971, un salario mínimo en Estados Unidos compraba 5 onzas de oro. Hoy, ese mismo salario mínimo compra 0.15 onzas de oro. Mismas horas de trabajo, 97% MENOS poder adquisitivo. No trabajamos menos—nos pagan en dinero que vale menos.'
-        }
+        image: '/images/lessons/lesson-2/lesson2-5.webp',
+        imageAlt: 'El Dato que Deberías Tatuarte: En 1971 un salario mínimo compraba 5 onzas de oro, hoy compra 0.15 onzas - 97% menos poder adquisitivo',
+        imageSummary: 'En 1971: $1.60/hora compraba 5 onzas de oro. Hoy: $7.25/hora compra 0.15 onzas. El sueldo subió 4.5x en números, pero tu poder REAL cayó 97%. No trabajamos menos—nos pagan en dinero que vale menos. Este es el robo silencioso de la inflación.'
       },
       {
         type: 'main',
@@ -420,28 +419,28 @@ export const LESSONS_DATA: Record<number, any> = {
       {
         type: 'main',
         title: '1. El Banco Central Imprime',
-        image: '/images/lessons/lesson-2/lesson2-1.png',
+        image: '/images/lessons/lesson-2/lesson2-1.webp',
         imageAlt: 'Cómo el banco central crea dinero de la nada',
         imageSummary: 'No hay caja fuerte. No hay oro. Solo un funcionario, un teclado, y la autoridad para agregar ceros. En 2020, la Fed creó $4.5 TRILLONES así—dinero que no existía el día anterior. Ese "dinero" ahora compite con el tuyo por los mismos bienes.'
       },
       {
         type: 'main',
         title: '2. Los Bancos Multiplican (Reserva Fraccionaria)',
-        image: '/images/lessons/lesson-2/lesson2-2.png',
+        image: '/images/lessons/lesson-2/lesson2-2.webp',
         imageAlt: 'Sistema de reserva fraccionaria y multiplicación del dinero',
         imageSummary: 'Depositas $100. El banco guarda $10 y presta $90. Ese préstamo se deposita en otro banco, que guarda $9 y presta $81. Y así sucesivamente. Tus $100 "seguros" se convierten en $900+ de deuda circulando. Si todos fueran a retirar su dinero mañana, no existe.'
       },
       {
         type: 'main',
         title: '3. El Resultado Matemático',
-        image: '/images/lessons/lesson-2/lesson2-3.png',
+        image: '/images/lessons/lesson-2/lesson2-3.webp',
         imageAlt: 'El resultado matemático de la creación de dinero',
         imageSummary: 'La inflación no es un fenómeno misterioso. Es aritmética: más dinero persiguiendo los mismos bienes = precios más altos. El ladrón no entra por tu ventana—entra por la impresora del banco central y te roba mientras duermes, año tras año.'
       },
       {
         type: 'main',
         title: '4. La Ilusión del Aumento de Sueldo',
-        image: '/images/lessons/lesson-2/lesson2-4.png',
+        image: '/images/lessons/lesson-2/lesson2-4.webp',
         imageAlt: 'La ilusión del aumento de sueldo vs la inflación real',
         imageSummary: 'Te suben el sueldo 5% y te sientes bien. Pero si la inflación es 10%, tu poder de compra BAJÓ 5%. Es matemáticas, no opinión: aumento - inflación = cambio real. Esos $105,000 en tu cuenta solo compran lo que $94,500 compraban antes. Te hiciste más pobre con "más dinero".'
       },
@@ -458,16 +457,9 @@ export const LESSONS_DATA: Record<number, any> = {
       {
         type: 'main',
         title: 'La Inflación Real vs La Inflación Oficial',
-        content: 'Los gobiernos tienen trucos para hacer que la inflación "oficial" parezca más baja de lo que realmente es:',
-        features: [
-          { icon: AlertTriangle, title: 'Sustitución', text: 'Si el bistec sube 30%, asumen que "la gente comprará pollo". Así no cuentan la subida completa del bistec. Pero tú querías bistec, no pollo.' },
-          { icon: AlertTriangle, title: 'Ajuste Hedónico', text: 'Si tu computadora nueva cuesta lo mismo que la de hace 5 años pero es más rápida, dicen que "en realidad bajó de precio". Pero tu billetera pagó lo mismo.' },
-          { icon: AlertTriangle, title: 'Exclusiones Convenientes', text: 'Muchos índices excluyen comida y energía por ser "muy volátiles". Pero... ¿no son exactamente las cosas que más compras?' }
-        ],
-        highlight: {
-          title: 'El Test del Supermercado',
-          text: 'La próxima vez que el gobierno diga "inflación 4%", ve al supermercado y compara los precios con hace un año. Compara el alquiler. La gasolina. La electricidad. Tu experiencia personal es más honesta que cualquier estadística oficial.'
-        }
+        image: '/images/lessons/lesson-2/lesson2-6.webp',
+        imageAlt: 'La Inflación Real vs La Inflación Oficial: Trucos como sustitución, ajuste hedónico y exclusiones convenientes que usan los gobiernos para ocultar la inflación real',
+        imageSummary: 'Los gobiernos manipulan las cifras: si el bistec sube, dicen que "compraste pollo". Si la computadora es más rápida, dicen que "bajó de precio". Y excluyen comida y energía por ser "volátiles"—justo lo que más compras. Tu supermercado no miente. Las estadísticas oficiales sí.'
       },
       {
         type: 'main',
@@ -585,22 +577,17 @@ export const LESSONS_DATA: Record<number, any> = {
         type: 'intro',
         title: 'El Secreto de 300 Años que Explica la Desigualdad Moderna',
         content: 'En 1730, un economista irlandés-francés llamado **Richard Cantillon** descubrió algo que los gobiernos prefieren que no sepas: **el dinero nuevo no es neutral**. Cuando un banco central "imprime" dinero, ese dinero no aparece mágicamente en los bolsillos de todos al mismo tiempo. Alguien lo recibe PRIMERO. Y ese "alguien" tiene una ventaja enorme: puede comprar activos a precios VIEJOS antes de que los precios suban. Para cuando el dinero llega a ti (si es que llega), los precios ya subieron. Compraste tarde. Pagaste más. Perdiste.',
-        highlight: {
-          title: 'La Metáfora del Río',
-          text: 'Imagina que el dinero nuevo es un río. Los que están cerca de la naciente (bancos, gobierno, grandes corporaciones) beben agua limpia y abundante. Para cuando el agua llega río abajo (trabajadores, pensionados, ahorradores), está sucia y hay menos. Tú estás río abajo.'
-        }
+        image: '/images/lessons/lesson-3/lesson3-1.webp',
+        imageAlt: 'La Metáfora del Río: El dinero nuevo fluye primero a bancos y corporaciones, y llega último a trabajadores y ahorradores',
+        imageSummary: 'El dinero nuevo es como un río. Los que están cerca de la naciente (bancos, gobierno, corporaciones) beben agua limpia y abundante. Para cuando llega río abajo (trabajadores, pensionados, ahorradores), está sucia y escasa. Mira la imagen: "Tú estás aquí"—al final, recibiendo las sobras.'
       },
       {
         type: 'main',
         title: 'Cómo Funciona: El Camino del Dinero Nuevo',
         content: 'Vamos a rastrear exactamente qué pasa cuando un banco central "crea" $1 trillón de la nada. Este es el camino real que recorre ese dinero:',
-        features: [
-          { icon: Landmark, title: 'Paso 1: El Banco Central', text: 'La Reserva Federal (o el banco central de tu país) crea dinero digitalmente. Compra bonos del gobierno o activos de bancos privados. El dinero nuevo ahora está en los bancos comerciales.' },
-          { icon: Briefcase, title: 'Paso 2: Los Bancos Grandes', text: 'JP Morgan, Goldman Sachs, y los grandes bancos reciben el dinero fresco. ¿Qué hacen? Lo prestan a sus mejores clientes (grandes corporaciones, fondos de inversión) a tasas bajas. O lo usan ellos mismos para comprar activos.' },
-          { icon: TrendingUp, title: 'Paso 3: Corporaciones y Fondos', text: 'Las corporaciones usan el dinero barato para recomprar sus propias acciones (subiendo el precio), adquirir otras empresas, o comprar bienes raíces. Los precios de estos activos SUBEN. Los ricos (que ya tenían estos activos) se vuelven más ricos.' },
-          { icon: Users, title: 'Paso 4: El Efecto Goteo (Meses/Años Después)', text: 'Eventualmente, algo de ese dinero llega a la economía "real" en forma de salarios ligeramente más altos o más empleos. Pero para entonces...' },
-          { icon: TrendingDown, title: 'Paso 5: Tú (Último en la Fila)', text: 'Para cuando recibes un aumento del 5%, los precios de las casas subieron 30%, la bolsa subió 40%, y la comida subió 15%. Tu "aumento" en realidad es una REDUCCIÓN de tu poder de compra relativo.' }
-        ]
+        image: '/images/lessons/lesson-3/lesson3-2.webp',
+        imageAlt: 'El Camino del Dinero Nuevo: De la creación a tu bolsillo en 5 pasos - Banco Central, Bancos Grandes, Corporaciones, Efecto Goteo, y finalmente Tú',
+        imageSummary: 'Paso 1: El banco central crea dinero digital. Paso 2: JP Morgan y Goldman Sachs lo reciben primero. Paso 3: Corporaciones compran activos (los precios SUBEN). Paso 4: Meses después, algo "gotea" a la economía real. Paso 5: Tú recibes un "aumento" del 5%... pero los precios ya subieron 30%. Tu aumento es una reducción disfrazada.'
       },
       {
         type: 'comparison',
@@ -665,10 +652,9 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: Landmark, title: 'La Vivienda se Volvió Imposible', text: 'En 1970, una casa promedio costaba 2-3 años de salario mediano. Hoy cuesta 7-10 años. El dinero nuevo fluyó hacia bienes raíces, haciendo imposible comprar para las nuevas generaciones.' },
           { icon: Users, title: 'Los Ricos Tienen Asesores', text: 'Cuando se anuncia impresión de dinero, los ultra-ricos llaman a sus banqueros y mueven su capital a activos que se beneficiarán. Tú te enteras en las noticias semanas después.' }
         ],
-        highlight: {
-          title: 'La Verdad Incómoda',
-          text: 'No es que los ricos "trabajen más duro". Es que están posicionados cerca de la fuente del dinero nuevo. Cada ronda de impresión los hace MÁS ricos y a ti te hace MÁS pobre en términos relativos. El juego está estructuralmente amañado.'
-        }
+        image: '/images/lessons/lesson-3/lesson3-3.webp',
+        imageAlt: 'La Verdad Incómoda: Los ricos están posicionados cerca de la fuente del dinero nuevo, el juego está estructuralmente amañado',
+        imageSummary: 'Mira el contraste: los ricos nadan en dinero fresco directo de la impresora, celebrando cada ronda de "estímulo". Mientras tanto, tú recibes un goteo de agua sucia cuando el dinero ya perdió valor. No es que trabajen más duro—están posicionados en el lugar correcto del sistema. El juego está estructuralmente amañado.'
       },
       {
         type: 'main',
@@ -683,16 +669,9 @@ export const LESSONS_DATA: Record<number, any> = {
       {
         type: 'main',
         title: 'Bitcoin: La Primera Salida del Sistema Cantillon',
-        content: 'Ahora entiendes por qué Bitcoin existe y por qué importa:',
-        features: [
-          { icon: Lock, title: 'Nadie Está "Cerca de la Impresora"', text: 'No hay banco central de Bitcoin. No hay "dinero nuevo" que fluya primero a los privilegiados. Los 21 millones de BTC se emiten según reglas matemáticas predecibles que nadie puede cambiar.' },
-          { icon: Users, title: 'Acceso Igualitario', text: 'Cualquier persona con internet puede comprar Bitcoin. No necesitas ser cliente VIP de un banco. No necesitas conexiones políticas. No necesitas estar en el primer mundo.' },
-          { icon: Shield, title: 'Protección Contra la Devaluación', text: 'Cuando los gobiernos imprimen dinero fiat, Bitcoin no se diluye. Su escasez es absoluta. Por eso, históricamente, ha subido cuando los bancos centrales imprimen.' }
-        ],
-        highlight: {
-          title: 'El Cambio de Paradigma',
-          text: 'Por primera vez en la historia, existe un activo monetario donde NADIE tiene ventaja de acceso privilegiado. No hay "insiders" de Bitcoin. No hay Cantillon en Bitcoin. Es el primer dinero verdaderamente justo de la historia.'
-        }
+        image: '/images/lessons/lesson-3/lesson3-4.webp',
+        imageAlt: 'Bitcoin: La Primera Salida del Sistema Cantillon - Sin banco central, acceso igualitario, protección contra devaluación, el primer dinero verdaderamente justo',
+        imageSummary: 'Bitcoin rompe el sistema Cantillon con 3 pilares: 1) NO hay banco central que imprima para los privilegiados—21 millones máximo, para siempre. 2) Acceso igualitario—cualquiera con internet puede participar, sin ser cliente VIP. 3) Protección contra devaluación—cuando imprimen fiat, Bitcoin no se diluye. Por primera vez, el dinero es justo.'
       },
       {
         type: 'takeaways',
