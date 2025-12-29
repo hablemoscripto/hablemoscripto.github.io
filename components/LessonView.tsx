@@ -372,56 +372,63 @@ const LessonView: React.FC = () => {
                 {/* Top Navigation Bar */}
                 <div className="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-white/10">
                     <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-                        {/* Left side: Previous lesson + Back */}
-                        <div className="flex items-center gap-1 sm:gap-2">
-                            {prevLesson && (
+                        {/* Left: Back button */}
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="flex items-center gap-1 px-2 sm:px-3 py-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                        >
+                            <ChevronLeft size={18} />
+                            <span className="hidden sm:inline text-sm">Volver</span>
+                        </button>
+
+                        {/* Center: Previous + Title + Next */}
+                        <div className="flex items-center gap-2 sm:gap-4">
+                            {/* Previous lesson arrow */}
+                            {prevLesson ? (
                                 <button
                                     onClick={() => navigate(`/education/lesson/${prevLesson.id}`)}
-                                    className="flex items-center gap-1 px-2 sm:px-3 py-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors group"
-                                    title={prevLesson.title}
+                                    className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                                    title={`Anterior: ${prevLesson.title}`}
                                 >
-                                    <ArrowLeft size={16} />
-                                    <span className="hidden sm:inline text-sm">Anterior</span>
+                                    <ChevronLeft size={20} />
                                 </button>
+                            ) : (
+                                <div className="w-9"></div>
                             )}
-                            <button
-                                onClick={() => navigate(-1)}
-                                className="flex items-center gap-1 px-2 sm:px-3 py-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
-                            >
-                                <ChevronLeft size={18} />
-                                <span className="hidden sm:inline text-sm">Volver</span>
-                            </button>
-                        </div>
 
-                        {/* Center: Lesson title */}
-                        <span className="font-medium text-slate-200 truncate max-w-[120px] sm:max-w-md text-sm sm:text-base">
-                            {id}. {lesson.title}
-                        </span>
+                            {/* Lesson title */}
+                            <span className="font-medium text-slate-200 truncate max-w-[140px] sm:max-w-md text-sm sm:text-base">
+                                {id}. {lesson.title}
+                            </span>
 
-                        {/* Right side: Completion status + Next lesson */}
-                        <div className="flex items-center gap-1 sm:gap-2">
-                            {isCompleted && (
-                                <span className="flex items-center gap-1 text-green-500 text-sm font-medium px-2">
-                                    <CheckCircle size={16} />
-                                    <span className="hidden sm:inline">Completado</span>
-                                </span>
-                            )}
-                            {nextLesson && (
+                            {/* Next lesson arrow */}
+                            {nextLesson ? (
                                 <button
                                     onClick={() => canGoNext && navigate(`/education/lesson/${nextLesson.id}`)}
                                     disabled={!canGoNext}
-                                    className={`flex items-center gap-1 px-2 sm:px-3 py-1.5 rounded-lg transition-colors ${
+                                    className={`p-2 rounded-lg transition-colors ${
                                         canGoNext
                                             ? 'text-slate-400 hover:text-white hover:bg-slate-800'
                                             : 'text-slate-600 cursor-not-allowed'
                                     }`}
-                                    title={canGoNext ? nextLesson.title : 'Completa esta lección para continuar'}
+                                    title={canGoNext ? `Siguiente: ${nextLesson.title}` : 'Completa esta lección para continuar'}
                                 >
-                                    <span className="hidden sm:inline text-sm">Siguiente</span>
-                                    {canGoNext ? <ArrowRight size={16} /> : <Lock size={14} />}
+                                    {canGoNext ? <ChevronRight size={20} /> : <Lock size={16} />}
                                 </button>
+                            ) : (
+                                <div className="w-9"></div>
                             )}
                         </div>
+
+                        {/* Right: Completion status */}
+                        {isCompleted ? (
+                            <span className="flex items-center gap-1 text-green-500 text-sm font-medium">
+                                <CheckCircle size={16} />
+                                <span className="hidden sm:inline">Completado</span>
+                            </span>
+                        ) : (
+                            <div className="w-20 sm:w-28"></div>
+                        )}
                     </div>
                 </div>
 
