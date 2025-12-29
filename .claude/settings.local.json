@@ -32,7 +32,8 @@
       "Bash(xargs:*)",
       "Bash(file:*)",
       "Bash(ls:*)",
-      "Bash(identify:*)"
+      "Bash(identify:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

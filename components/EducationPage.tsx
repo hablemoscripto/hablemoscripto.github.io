@@ -129,6 +129,30 @@ const EducationPage: React.FC<EducationPageProps> = () => {
     return false;
   };
 
+  const getPrerequisiteInfo = (levelId: string) => {
+    const prerequisiteMap: Record<string, string> = {
+      'intermediate': 'beginner',
+      'advanced': 'intermediate'
+    };
+
+    const prereqId = prerequisiteMap[levelId];
+    if (!prereqId) return null;
+
+    const prereqLevel = levels.find(l => l.id === prereqId);
+    if (!prereqLevel) return null;
+
+    const completedCount = progress[prereqId]?.length || 0;
+    const totalLessons = prereqLevel.lessons_count;
+    const prereqProgress = getLevelProgress(prereqId);
+    const lessonsRemaining = totalLessons - completedCount;
+
+    return {
+      title: prereqLevel.title,
+      progress: prereqProgress,
+      lessonsRemaining
+    };
+  };
+
   const totalCompletedLessons = Object.values(progress).reduce((acc, val) => acc + val.length, 0);
   const totalLessons = levels.reduce((acc, level) => acc + level.lessons_count, 0);
   const globalPercentage = totalLessons > 0 ? Math.round((totalCompletedLessons / totalLessons) * 100) : 0;
@@ -208,6 +232,8 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             <div className="grid lg:grid-cols-3 gap-8 mt-8">
               {levels.map((level, index) => {
                 const isCompleted = getLevelProgress(level.id) === 100;
+                const isLocked = isLevelLocked(level.id);
+                const prereqInfo = isLocked ? getPrerequisiteInfo(level.id) : null;
                 return (
                   <div key={level.id} className="relative">
                     <LevelCard
@@ -221,8 +247,11 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                       progress={getLevelProgress(level.id)}
                       color={levelColors[level.id]}
                       icon={ICONS[level.icon_name] || Shield}
-                      isLocked={isLevelLocked(level.id)}
-                      onAction={() => !isLevelLocked(level.id) && handleLevelSelect(level.id)}
+                      isLocked={isLocked}
+                      onAction={() => !isLocked && handleLevelSelect(level.id)}
+                      prerequisiteTitle={prereqInfo?.title}
+                      prerequisiteProgress={prereqInfo?.progress}
+                      prerequisiteLessonsRemaining={prereqInfo?.lessonsRemaining}
                     />
 
                     {isCompleted && (

@@ -17,6 +17,10 @@ interface LevelCardProps {
     isLocked: boolean;
     onAction: () => void;
     className?: string;
+    // Prerequisite info for locked levels
+    prerequisiteTitle?: string;
+    prerequisiteProgress?: number;
+    prerequisiteLessonsRemaining?: number;
 }
 
 export function cn(...inputs: (string | undefined | null | false)[]) {
@@ -24,7 +28,8 @@ export function cn(...inputs: (string | undefined | null | false)[]) {
 }
 
 const LevelCard: React.FC<LevelCardProps> = ({
-    levelNumber, title, subtitle, description, tags, lessonCount, completedCount, progress, color, icon: Icon, isLocked, onAction, className
+    levelNumber, title, subtitle, description, tags, lessonCount, completedCount, progress, color, icon: Icon, isLocked, onAction, className,
+    prerequisiteTitle, prerequisiteProgress, prerequisiteLessonsRemaining
 }) => {
 
     const colorClasses = {
@@ -100,36 +105,64 @@ const LevelCard: React.FC<LevelCardProps> = ({
                     </div>
                 </div>
 
-                <button
-                    onClick={onAction}
-                    disabled={isLocked}
-                    className={cn(
-                        "w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all",
-                        isLocked
-                            ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
-                            : progress === 100
-                                ? 'bg-green-500 text-white'
-                                : btnColors[color]
-                    )}
-                >
-                    {isLocked ? (
-                        <>
-                            <Lock size={16} /> Bloqueado
-                        </>
-                    ) : progress === 100 ? (
-                        <>
-                            <CheckCircle size={16} /> Completado
-                        </>
-                    ) : progress > 0 ? (
-                        <>
-                            <PlayCircle size={16} /> Continuar
-                        </>
-                    ) : (
-                        <>
-                            <PlayCircle size={16} /> Empezar Nivel
-                        </>
-                    )}
-                </button>
+                {isLocked && prerequisiteTitle ? (
+                    <div className="space-y-3">
+                        <div className="flex items-center gap-2 text-slate-400 text-sm">
+                            <Lock size={14} className="text-slate-500" />
+                            <span>
+                                Completa <span className="text-brand-400 font-medium">{prerequisiteTitle}</span> para desbloquear
+                            </span>
+                        </div>
+
+                        {prerequisiteProgress !== undefined && (
+                            <div className="space-y-1.5">
+                                <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                    <div
+                                        className="h-full bg-brand-500 rounded-full transition-all duration-500"
+                                        style={{ width: `${prerequisiteProgress}%` }}
+                                    />
+                                </div>
+                                <div className="flex justify-between text-xs text-slate-500">
+                                    <span>{prerequisiteProgress}% completado</span>
+                                    {prerequisiteLessonsRemaining !== undefined && (
+                                        <span>{prerequisiteLessonsRemaining} lecciones restantes</span>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <button
+                        onClick={onAction}
+                        disabled={isLocked}
+                        className={cn(
+                            "w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all",
+                            isLocked
+                                ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                                : progress === 100
+                                    ? 'bg-green-500 text-white'
+                                    : btnColors[color]
+                        )}
+                    >
+                        {isLocked ? (
+                            <>
+                                <Lock size={16} /> Bloqueado
+                            </>
+                        ) : progress === 100 ? (
+                            <>
+                                <CheckCircle size={16} /> Completado
+                            </>
+                        ) : progress > 0 ? (
+                            <>
+                                <PlayCircle size={16} /> Continuar
+                            </>
+                        ) : (
+                            <>
+                                <PlayCircle size={16} /> Empezar Nivel
+                            </>
+                        )}
+                    </button>
+                )}
             </div>
         </div>
     );
