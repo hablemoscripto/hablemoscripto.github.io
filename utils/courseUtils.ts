@@ -36,3 +36,21 @@ export const getNextLessonId = (currentLessonId: number): number | null => {
 
     return allLessons[currentIndex + 1].id;
 };
+
+export const getLevelForLesson = (lessonId: number): string => {
+    const levels = [
+        { data: BEGINNER_LEVEL, route: 'beginner' },
+        { data: INTERMEDIATE_LEVEL, route: 'intermediate' },
+        { data: ADVANCED_LEVEL, route: 'advanced' },
+    ];
+
+    for (const level of levels) {
+        for (const module of level.data.modules) {
+            if (module.lessons.some((l) => l.id === lessonId)) {
+                return level.route;
+            }
+        }
+    }
+
+    return 'beginner'; // Default fallback
+};

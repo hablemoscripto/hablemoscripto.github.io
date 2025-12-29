@@ -15,7 +15,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Quiz from './education/Quiz';
 import CheckpointQuiz from './education/CheckpointQuiz';
-import { getPreviousLessonId, getNextLessonId, getAllLessonsOrdered } from '../utils/courseUtils';
+import { getPreviousLessonId, getNextLessonId, getAllLessonsOrdered, getLevelForLesson } from '../utils/courseUtils';
 import { fetchLessonById, LessonData } from '../services/lessonService';
 
 const LessonView: React.FC = () => {
@@ -372,9 +372,9 @@ const LessonView: React.FC = () => {
                 {/* Top Navigation Bar */}
                 <div className="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-white/10">
                     <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-                        {/* Left: Back button */}
+                        {/* Left: Back to level dashboard */}
                         <button
-                            onClick={() => navigate(-1)}
+                            onClick={() => navigate(`/education/${getLevelForLesson(id)}`)}
                             className="flex items-center gap-1 px-2 sm:px-3 py-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
                         >
                             <ChevronLeft size={18} />
