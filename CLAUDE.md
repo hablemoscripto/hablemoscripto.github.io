@@ -1,237 +1,97 @@
-# CLAUDE.md - Hablemos Cripto Project Guide
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-**Hablemos Cripto** is a Spanish-language cryptocurrency education platform targeting Latin American audiences. The platform teaches Bitcoin and crypto fundamentals through structured courses with gamification, AI assistance, and premium content.
+**Hablemos Cripto** is a Spanish-language cryptocurrency education platform for Latin American audiences. Teaches Bitcoin and crypto fundamentals through structured courses with gamification, AI assistance, and premium content.
 
-### Core Mission
-Democratize Bitcoin/crypto education for Spanish speakers by explaining complex economic and technical concepts in accessible, engaging ways. The content challenges mainstream financial narratives (inflation, fiat money, central banking) and presents Bitcoin as a solution.
+All user-facing content is in **Spanish**.
 
-### Target Audience
-- Spanish-speaking individuals in Latin America
-- People new to cryptocurrency
-- Those seeking to understand money, inflation, and economic systems
-- Ages 18-45, varying technical backgrounds
+## Commands
 
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| **Frontend** | React 19 + TypeScript + Vite 6 |
-| **Styling** | Tailwind CSS 4 + custom design system |
-| **Routing** | React Router DOM 7 |
-| **Animation** | Framer Motion + tsparticles |
-| **Backend** | Supabase (PostgreSQL + Auth + Edge Functions) |
-| **AI Chat** | Google Gemini API (CBas AI assistant) |
-| **Payments** | Wompi (Colombian payment gateway) |
-| **Email** | Resend |
-| **Hosting** | GitHub Pages |
-| **Runtime** | Deno (for Supabase Edge Functions) |
-
----
-
-## Directory Structure
-
-```
-/
-├── components/           # React components
-│   ├── education/        # Quiz, checkpoint components
-│   ├── ui/               # Reusable UI (Certificate, VideoPlayer, etc.)
-│   ├── LessonView.tsx    # Main lesson display (CRITICAL FILE)
-│   ├── EducationPage.tsx # Course overview
-│   └── ...
-├── contexts/             # React Context providers
-│   ├── AuthContext.tsx   # Supabase authentication
-│   ├── ProgressContext.tsx # Lesson completion tracking
-│   └── GamificationContext.tsx # XP, levels, achievements
-├── data/
-│   └── courseData.ts     # ALL LESSON CONTENT (CRITICAL FILE)
-├── services/             # External API integrations
-│   ├── geminiService.ts  # AI chat
-│   ├── lessonService.ts  # Fetch lessons from Supabase
-│   └── paymentService.ts # Wompi payments
-├── supabase/
-│   ├── functions/        # Edge functions (Deno)
-│   │   ├── create-payment/
-│   │   └── wompi-webhook/
-│   └── *.sql             # Database schemas
-├── scripts/
-│   └── seed.ts           # Seeds courseData.ts → Supabase
-├── lib/
-│   └── supabase.ts       # Supabase client
-├── utils/
-│   └── courseUtils.ts    # Navigation helpers
-└── public/
-    └── images/lessons/   # Lesson infographics (.webp)
+```bash
+npm run dev          # Vite dev server on port 3000
+npm run build        # Build to dist/
+npm run db:seed      # Push courseData.ts to Supabase (REQUIRED after content changes)
 ```
 
----
+## Architecture
 
-## Critical Workflows
+### Data Flow
+```
+courseData.ts (source of truth) → npm run db:seed → Supabase DB → lessonService.ts → LessonView.tsx
+```
 
-### Updating Lesson Content
-1. Edit `data/courseData.ts` with new content
-2. Run `npm run db:seed` to push changes to Supabase
-3. Refresh the browser to see changes
+**Critical**: Changes to `data/courseData.ts` are NOT reflected until seeded to the database with `npm run db:seed`.
 
-**IMPORTANT**: Changes to courseData.ts are NOT reflected until seeded to the database.
+### Tech Stack
+- **Frontend**: React 19 + TypeScript + Vite 6 + Tailwind CSS 4
+- **Backend**: Supabase (PostgreSQL + Auth + Edge Functions with Deno)
+- **AI Chat**: Google Gemini API (CBas AI assistant)
+- **Payments**: Wompi (Colombian gateway)
+- **Hosting**: GitHub Pages (push to `main` triggers deploy)
 
-### Adding New Images
-1. Place images in `public/images/lessons/lesson-X/`
-2. Use `.webp` format for optimization
-3. Reference in courseData.ts: `/images/lessons/lesson-X/filename.webp`
-4. Add `imageSummary` field for "Lo Esencial" boxes
-5. Run `npm run db:seed`
-
-### Deploying
-- Push to `main` branch triggers GitHub Actions deployment
-- Build output goes to `dist/` folder
-- Hosted on GitHub Pages
-
----
-
-## Code Patterns & Conventions
+### Key Files
+| File | Purpose |
+|------|---------|
+| `data/courseData.ts` | ALL lesson content - levels, modules, lessons, quizzes |
+| `components/LessonView.tsx` | Renders all lesson content |
+| `scripts/seed.ts` | Seeds courseData.ts → Supabase (defines available Lucide icons) |
+| `services/lessonService.ts` | Fetches lessons from Supabase |
+| `contexts/*.tsx` | Auth, Progress, Gamification state management |
 
 ### State Management
-- Use React Context for global state (Auth, Progress, Gamification)
-- Local state for component-specific UI
+- React Context for global state (AuthContext, ProgressContext, GamificationContext)
 - Supabase for persistence
+- Local state for component-specific UI
 
-### Component Structure
+## Lesson Content Structure
+
+### Section Types
 ```typescript
-// Preferred pattern for lesson content sections
 {
   type: 'main' | 'intro' | 'comparison' | 'takeaways' | 'highlight',
   title: string,
   content?: string,           // Markdown supported
-  image?: string,             // Path to image
+  image?: string,             // Path: /images/lessons/lesson-X/filename.webp
   imageAlt?: string,
-  imageSummary?: string,      // "Lo Esencial" box content
+  imageSummary?: string,      // "Lo Esencial" box content (appears after images)
   features?: Feature[],       // Icon + title + text items
   leftSide?: ComparisonSide,  // For comparison type
   rightSide?: ComparisonSide,
 }
 ```
 
-### Styling Conventions
-- Dark theme: `bg-slate-900`, `bg-slate-800`, `text-slate-300`
-- Brand color: `brand-500` (amber/gold #ffc107)
-- Accent colors: `green-500` (positive), `red-500` (negative)
-- Use Tailwind utilities, avoid custom CSS
-- Glass effect: `bg-slate-900/50 backdrop-blur-sm border border-white/10`
+### Adding New Images
+1. Place in `public/images/lessons/lesson-X/` as `.webp`
+2. Reference in courseData.ts: `/images/lessons/lesson-X/filename.webp`
+3. Add `imageSummary` field for "Lo Esencial" boxes
+4. Run `npm run db:seed`
 
 ### Icon Usage
-- Use Lucide React icons
-- Import in courseData.ts, convert to string names in seed.ts
-- Available icons defined in `scripts/seed.ts` ICONS object
+Icons are Lucide React components in courseData.ts, converted to string names by seed.ts. Available icons are defined in the `ICONS` object in `scripts/seed.ts`.
 
----
+## Styling Conventions
 
-## Design Principles
+- Dark theme: `bg-slate-900`, `bg-slate-800`, `text-slate-300`
+- Brand color: `brand-500` (amber/gold #ffc107)
+- Accent: `green-500` (positive), `red-500` (negative)
+- Glass effect: `bg-slate-900/50 backdrop-blur-sm border border-white/10`
+- Layout: Wide content (75%), slim sidebar (25%)
 
-### Educational Content
-1. **Narrative arc**: Problem → Deeper Problem → Root Cause → Solution
-2. **Emotional hooks**: Connect abstract concepts to lived experience
-3. **Visual learning**: Infographics do heavy pedagogical lifting
-4. **"Lo Esencial" summaries**: Reinforce key takeaways after each image
-5. **Spaced retrieval**: Quizzes and checkpoints throughout lessons
+## Course Structure
 
-### UI/UX Guidelines
-- Content-first: Wide content area (75%), slim sidebar (25%)
-- Responsive: Mobile stacks, desktop side-by-side
-- Breathing room: Generous spacing, don't cram
-- Visual hierarchy: Clear section titles, callout boxes for key insights
-- Accessibility: Alt text on images, readable contrast
+- **Principiante** (Beginner): 20 lessons - Money fundamentals, inflation, Cantillon effect, Bitcoin intro
+- **Intermedio** (Intermediate): 16 lessons - Blockchain, wallets, security, DeFi basics
+- **Avanzado** (Advanced): 14 lessons - Technical deep dives, trading, advanced DeFi
 
-### Brand Voice
-- Conversational but authoritative
-- Challenge mainstream narratives respectfully
-- Use concrete examples (Venezuela, Argentina, etc.)
-- Avoid hype ("get rich quick") - focus on education
-- Spanish language, Latin American context
+## Environment Variables
 
----
-
-## Content Structure
-
-### Course Levels
-1. **Principiante** (Beginner): "El Dinero Está Roto" - 20 lessons
-   - Money fundamentals, inflation, Cantillon effect, Bitcoin intro
-2. **Intermedio** (Intermediate): 16 lessons
-   - Blockchain, wallets, security, DeFi basics
-3. **Avanzado** (Advanced): 14 lessons
-   - Technical deep dives, trading, advanced DeFi
-
-### Lesson Anatomy
-- Video (optional)
-- Intro section with hook
-- Multiple content sections with images
-- "Lo Esencial" boxes after infographics
-- Comparison sections (before/after, pros/cons)
-- Takeaways summary
-- End-of-lesson quiz
-
----
-
-## Common Tasks Reference
-
-### Start Development
-```bash
-npm run dev          # Vite dev server on port 3000
-```
-
-### Build for Production
-```bash
-npm run build        # Output to dist/
-```
-
-### Seed Database
-```bash
-npm run db:seed      # Push courseData.ts to Supabase
-```
-
-### Environment Variables Required
 ```
 VITE_SUPABASE_URL
 VITE_SUPABASE_ANON_KEY
-VITE_SUPABASE_SERVICE_KEY  # For seeding
+VITE_SUPABASE_SERVICE_KEY  # Required for seeding
 VITE_GEMINI_API_KEY
 VITE_WOMPI_PUBLIC_KEY
 ```
-
----
-
-## Important Notes for Claude
-
-1. **Always read before editing**: Use Read tool on files before making changes
-2. **courseData.ts is large**: Contains all lesson content, read in chunks if needed
-3. **Images are educational**: They're not decorative - they teach core concepts
-4. **Spanish content**: All user-facing text should be in Spanish
-5. **Test builds**: Run `npm run build` to verify changes compile
-6. **Seed after content changes**: Remind user to run `npm run db:seed`
-7. **Respect the narrative**: Lessons build on each other, maintain consistency
-
----
-
-## File Importance Ranking
-
-| Priority | Files | Reason |
-|----------|-------|--------|
-| Critical | `data/courseData.ts` | All educational content |
-| Critical | `components/LessonView.tsx` | Renders all lesson content |
-| High | `contexts/*.tsx` | State management |
-| High | `components/education/*.tsx` | Quiz system |
-| Medium | `services/*.ts` | API integrations |
-| Medium | `supabase/functions/` | Payment processing |
-| Low | `scripts/seed.ts` | Usually doesn't need changes |
-
----
-
-## Recent Improvements (Session Context)
-
-- Added `imageSummary` field for "Lo Esencial" boxes after infographics
-- Improved lesson layout: wider content (75%), slimmer sidebar (25%)
-- Responsive container: `max-w-6xl` on lg, `max-w-7xl` on xl screens
-- Enhanced comparison sections with gradients, icons, and VS badge

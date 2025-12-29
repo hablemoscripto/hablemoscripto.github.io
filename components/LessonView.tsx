@@ -15,7 +15,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Quiz from './education/Quiz';
 import CheckpointQuiz from './education/CheckpointQuiz';
-import { getPreviousLessonId } from '../utils/courseUtils';
+import { getPreviousLessonId, getNextLessonId, getAllLessonsOrdered } from '../utils/courseUtils';
 import { fetchLessonById, LessonData } from '../services/lessonService';
 
 const LessonView: React.FC = () => {
@@ -32,6 +32,11 @@ const LessonView: React.FC = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
     const [quizPassed, setQuizPassed] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
+
+    // Navigation state
+    const [prevLesson, setPrevLesson] = useState<{ id: number; title: string } | null>(null);
+    const [nextLesson, setNextLesson] = useState<{ id: number; title: string } | null>(null);
+    const [canGoNext, setCanGoNext] = useState(false);
 
     // Image lightbox state
     const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
@@ -78,6 +83,40 @@ const LessonView: React.FC = () => {
 
         checkAccess();
     }, [id, loading, isLessonCompleted]);
+
+    // Compute navigation info (previous/next lessons)
+    useEffect(() => {
+        const allLessons = getAllLessonsOrdered();
+
+        const prevId = getPreviousLessonId(id);
+        const nextId = getNextLessonId(id);
+
+        if (prevId !== null) {
+            const prevLessonData = allLessons.find(l => l.id === prevId);
+            setPrevLesson(prevLessonData ? { id: prevId, title: prevLessonData.title } : null);
+        } else {
+            setPrevLesson(null);
+        }
+
+        if (nextId !== null) {
+            const nextLessonData = allLessons.find(l => l.id === nextId);
+            setNextLesson(nextLessonData ? { id: nextId, title: nextLessonData.title } : null);
+        } else {
+            setNextLesson(null);
+        }
+    }, [id]);
+
+    // Check if user can navigate to next lesson
+    useEffect(() => {
+        if (loading || !nextLesson) {
+            setCanGoNext(false);
+            return;
+        }
+        // Can go next if current lesson is completed OR next lesson is already completed
+        const currentCompleted = isLessonCompleted(id);
+        const nextCompleted = isLessonCompleted(nextLesson.id);
+        setCanGoNext(currentCompleted || nextCompleted);
+    }, [id, nextLesson, loading, isLessonCompleted]);
 
     // Scroll to top on lesson change
     useEffect(() => {
@@ -333,24 +372,56 @@ const LessonView: React.FC = () => {
                 {/* Top Navigation Bar */}
                 <div className="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-white/10">
                     <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-                        <button
-                            onClick={() => navigate(-1)}
-                            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
-                        >
-                            <ChevronLeft size={20} />
-                            <span className="hidden sm:inline">Volver</span>
-                        </button>
+                        {/* Left side: Previous lesson + Back */}
+                        <div className="flex items-center gap-1 sm:gap-2">
+                            {prevLesson && (
+                                <button
+                                    onClick={() => navigate(`/education/lesson/${prevLesson.id}`)}
+                                    className="flex items-center gap-1 px-2 sm:px-3 py-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors group"
+                                    title={prevLesson.title}
+                                >
+                                    <ArrowLeft size={16} />
+                                    <span className="hidden sm:inline text-sm">Anterior</span>
+                                </button>
+                            )}
+                            <button
+                                onClick={() => navigate(-1)}
+                                className="flex items-center gap-1 px-2 sm:px-3 py-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                            >
+                                <ChevronLeft size={18} />
+                                <span className="hidden sm:inline text-sm">Volver</span>
+                            </button>
+                        </div>
 
-                        <span className="font-medium text-slate-200 truncate max-w-[200px] sm:max-w-md">
+                        {/* Center: Lesson title */}
+                        <span className="font-medium text-slate-200 truncate max-w-[120px] sm:max-w-md text-sm sm:text-base">
                             {id}. {lesson.title}
                         </span>
 
-                        {isCompleted && (
-                            <span className="flex items-center gap-1 text-green-500 text-sm font-medium">
-                                <CheckCircle size={16} />
-                                <span className="hidden sm:inline">Completado</span>
-                            </span>
-                        )}
+                        {/* Right side: Completion status + Next lesson */}
+                        <div className="flex items-center gap-1 sm:gap-2">
+                            {isCompleted && (
+                                <span className="flex items-center gap-1 text-green-500 text-sm font-medium px-2">
+                                    <CheckCircle size={16} />
+                                    <span className="hidden sm:inline">Completado</span>
+                                </span>
+                            )}
+                            {nextLesson && (
+                                <button
+                                    onClick={() => canGoNext && navigate(`/education/lesson/${nextLesson.id}`)}
+                                    disabled={!canGoNext}
+                                    className={`flex items-center gap-1 px-2 sm:px-3 py-1.5 rounded-lg transition-colors ${
+                                        canGoNext
+                                            ? 'text-slate-400 hover:text-white hover:bg-slate-800'
+                                            : 'text-slate-600 cursor-not-allowed'
+                                    }`}
+                                    title={canGoNext ? nextLesson.title : 'Completa esta lección para continuar'}
+                                >
+                                    <span className="hidden sm:inline text-sm">Siguiente</span>
+                                    {canGoNext ? <ArrowRight size={16} /> : <Lock size={14} />}
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </div>
 
@@ -634,6 +705,62 @@ const LessonView: React.FC = () => {
                                     )}
                                 </>
                             )}
+                        </div>
+
+                        {/* Bottom Lesson Navigation */}
+                        <div className="mt-12 pt-8 border-t border-white/10">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {/* Previous Lesson Card */}
+                                {prevLesson ? (
+                                    <button
+                                        onClick={() => navigate(`/education/lesson/${prevLesson.id}`)}
+                                        className="group flex items-center gap-4 p-4 bg-slate-900/50 hover:bg-slate-800/50 border border-slate-700/50 hover:border-slate-600 rounded-xl transition-all text-left"
+                                    >
+                                        <div className="shrink-0 w-10 h-10 bg-slate-800 group-hover:bg-slate-700 rounded-lg flex items-center justify-center transition-colors">
+                                            <ArrowLeft size={20} className="text-slate-400 group-hover:text-white transition-colors" />
+                                        </div>
+                                        <div className="min-w-0">
+                                            <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Anterior</p>
+                                            <p className="text-sm text-slate-300 group-hover:text-white truncate transition-colors">{prevLesson.title}</p>
+                                        </div>
+                                    </button>
+                                ) : (
+                                    <div></div>
+                                )}
+
+                                {/* Next Lesson Card */}
+                                {nextLesson && (
+                                    <button
+                                        onClick={() => canGoNext && navigate(`/education/lesson/${nextLesson.id}`)}
+                                        disabled={!canGoNext}
+                                        className={`group flex items-center justify-end gap-4 p-4 border rounded-xl transition-all text-right ${
+                                            canGoNext
+                                                ? 'bg-brand-500/10 hover:bg-brand-500/20 border-brand-500/30 hover:border-brand-500/50'
+                                                : 'bg-slate-900/30 border-slate-700/30 cursor-not-allowed'
+                                        }`}
+                                    >
+                                        <div className="min-w-0">
+                                            <p className={`text-xs uppercase tracking-wider mb-1 ${canGoNext ? 'text-brand-400' : 'text-slate-600'}`}>
+                                                {canGoNext ? 'Siguiente' : 'Bloqueado'}
+                                            </p>
+                                            <p className={`text-sm truncate transition-colors ${
+                                                canGoNext ? 'text-slate-300 group-hover:text-white' : 'text-slate-600'
+                                            }`}>{nextLesson.title}</p>
+                                        </div>
+                                        <div className={`shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
+                                            canGoNext
+                                                ? 'bg-brand-500/20 group-hover:bg-brand-500/30'
+                                                : 'bg-slate-800/50'
+                                        }`}>
+                                            {canGoNext ? (
+                                                <ArrowRight size={20} className="text-brand-400 group-hover:text-brand-300 transition-colors" />
+                                            ) : (
+                                                <Lock size={18} className="text-slate-600" />
+                                            )}
+                                        </div>
+                                    </button>
+                                )}
+                            </div>
                         </div>
 
                     </div>

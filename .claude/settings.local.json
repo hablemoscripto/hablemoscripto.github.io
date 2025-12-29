@@ -33,7 +33,8 @@
       "Bash(file:*)",
       "Bash(ls:*)",
       "Bash(identify:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(npx vite:*)"
     ],
     "deny": [],
     "ask": []
