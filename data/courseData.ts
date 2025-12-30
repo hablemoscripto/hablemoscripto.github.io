@@ -818,7 +818,7 @@ export const LESSONS_DATA: Record<number, any> = {
       },
       {
         type: 'comparison',
-        title: 'Bitcoin vs Oro vs Dólar: La Comparación Definitiva',
+        title: 'Bitcoin vs Oro vs Dólar',
         leftSide: {
           title: 'Oro (5,000 años de historia)',
           points: [
