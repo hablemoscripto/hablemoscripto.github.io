@@ -14,6 +14,7 @@ All user-facing content is in **Spanish**.
 npm run dev          # Vite dev server on port 3000
 npm run build        # Build to dist/
 npm run db:seed      # Push courseData.ts to Supabase (REQUIRED after content changes)
+npx tsc              # Type-check without emitting
 ```
 
 ## Architecture
@@ -28,23 +29,26 @@ courseData.ts (source of truth) → npm run db:seed → Supabase DB → lessonSe
 ### Tech Stack
 - **Frontend**: React 19 + TypeScript + Vite 6 + Tailwind CSS 4
 - **Backend**: Supabase (PostgreSQL + Auth + Edge Functions with Deno)
-- **AI Chat**: Google Gemini API (CBas AI assistant)
+- **AI Chat**: Google Gemini API (CBas assistant)
 - **Payments**: Wompi (Colombian gateway)
 - **Hosting**: GitHub Pages (push to `main` triggers deploy)
+
+### Project Structure
+Root-level entry points (`App.tsx`, `index.tsx`, `index.css`) - no `src/` folder. Path alias `@/` maps to project root.
 
 ### Key Files
 | File | Purpose |
 |------|---------|
 | `data/courseData.ts` | ALL lesson content - levels, modules, lessons, quizzes |
-| `components/LessonView.tsx` | Renders all lesson content |
+| `components/LessonView.tsx` | Renders lesson content sections |
 | `scripts/seed.ts` | Seeds courseData.ts → Supabase (defines available Lucide icons) |
 | `services/lessonService.ts` | Fetches lessons from Supabase |
 | `contexts/*.tsx` | Auth, Progress, Gamification state management |
+| `supabase/functions/` | Edge Functions (Deno): payment creation, webhooks |
 
 ### State Management
 - React Context for global state (AuthContext, ProgressContext, GamificationContext)
 - Supabase for persistence
-- Local state for component-specific UI
 
 ## Lesson Content Structure
 
@@ -78,7 +82,6 @@ Icons are Lucide React components in courseData.ts, converted to string names by
 - Brand color: `brand-500` (amber/gold #ffc107)
 - Accent: `green-500` (positive), `red-500` (negative)
 - Glass effect: `bg-slate-900/50 backdrop-blur-sm border border-white/10`
-- Layout: Wide content (75%), slim sidebar (25%)
 
 ## Course Structure
 

@@ -1457,23 +1457,90 @@ export const LESSONS_DATA: Record<number, any> = {
     title: 'Wallets: Tu Llave, Tu Dinero',
     level: 'Principiante',
     number: '7 de 20',
-    duration: '18 minutos',
+    duration: '25 minutos',
     type: 'Video + Texto',
-    description: 'Entiende la diferencia crítica entre tener cripto en un exchange y tenerlo en tu propia wallet.',
+    description: 'Entiende la diferencia crítica entre tener cripto en un exchange y tenerlo en tu propia wallet. Este conocimiento puede ser la diferencia entre conservar tu riqueza o perderlo todo.',
     sections: [
       {
         type: 'intro',
         title: 'Not Your Keys, Not Your Coins',
-        content: 'Si compras Bitcoin en Binance o Coinbase, ellos tienen el dinero, no tú. Si ellos quiebran (como FTX), pierdes todo. Una **Wallet** te da la custodia real. Tú eres tu propio banco.',
-        highlight: { title: 'Regla de Oro', text: 'Los exchanges son para comprar y vender, NO para ahorrar a largo plazo.' }
+        content: 'En noviembre de 2022, FTX—el segundo exchange más grande del mundo—colapsó de la noche a la mañana. Millones de personas descubrieron que sus "ahorros" en cripto habían desaparecido. No era un hackeo. Era algo peor: **nunca fueron realmente dueños de su dinero**. Cuando compras Bitcoin en Binance, Coinbase o cualquier exchange, lo que tienes es una PROMESA de que ellos tienen tu cripto. Es como tener un recibo de un banco—si el banco quiebra, tu recibo no vale nada. Una **Wallet** cambia esto completamente. Con una wallet propia, TÚ controlas las llaves criptográficas. Nadie puede congelar tu cuenta. Nadie puede negar tu retiro. Nadie puede "prestarse" tu dinero sin permiso. Eres tu propio banco.',
+        highlight: {
+          title: 'La Lección de FTX',
+          text: 'Más de $8 MIL MILLONES de dólares de clientes desaparecieron cuando FTX colapsó. Muchos perdieron los ahorros de toda su vida. ¿Los que tenían su cripto en wallets propias? No perdieron absolutamente nada. La autocustodia no es paranoia—es sentido común.'
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Qué es Realmente una Wallet?',
+        content: 'Aquí hay una confusión común: tu wallet NO "guarda" tus criptomonedas. Tus cripto siempre viven en la blockchain—nunca salen de ahí. Lo que tu wallet guarda son las **llaves privadas**: códigos criptográficos que DEMUESTRAN que eres el dueño de ciertos fondos y te permiten moverlos. Piénsalo así: la blockchain es como un libro contable público gigante que dice "la dirección ABC123 tiene 5 SOL". Tu wallet tiene la llave que demuestra que TÚ controlas la dirección ABC123.',
+        features: [
+          { icon: Lock, title: 'Llave Privada', text: 'Un código secreto que NUNCA debes compartir. Quien tenga tu llave privada controla tus fondos. Es como la combinación de una caja fuerte—pero para siempre y sin recuperación.' },
+          { icon: Globe, title: 'Dirección Pública', text: 'Un código que puedes compartir libremente para recibir pagos. Es como tu número de cuenta bancaria—otros pueden enviarte dinero, pero no pueden sacar nada.' },
+          { icon: Shield, title: 'Frase Semilla', text: '12 o 24 palabras que generan TODAS tus llaves privadas. Es el backup maestro. Si pierdes el celular pero tienes la frase, recuperas todo. Si pierdes la frase, pierdes todo para siempre.' }
+        ]
       },
       {
         type: 'comparison',
-        title: 'Tipos de Custodia',
-        table: [
-          { aspect: 'Exchange (Binance)', trad: 'Fácil, recuperable', btc: 'Riesgo de hackeo/corralito. No es tuyo.' },
-          { aspect: 'Hot Wallet (Phantom)', trad: 'En tu celular/PC', btc: 'Control total. Conveniente. Riesgo medio.' },
-          { aspect: 'Cold Wallet (Ledger)', trad: 'Desconectado', btc: 'Máxima seguridad. Para ahorros de vida.' }
+        title: 'Exchange vs Wallet Propia: La Diferencia que Importa',
+        leftSide: {
+          title: 'Tu Cripto en un Exchange',
+          points: [
+            'El exchange tiene las llaves, no tú',
+            'Pueden congelar tu cuenta sin explicación',
+            'Pueden "pausar retiros" cuando quieran',
+            'Si quiebran, haces fila con otros acreedores',
+            'Pueden prestar TU cripto a otros (muchos lo hacen)',
+            'Dependes de su seguridad—si los hackean, pierdes',
+            'KYC: saben exactamente cuánto tienes y qué haces'
+          ]
+        },
+        rightSide: {
+          title: 'Tu Cripto en Tu Wallet',
+          points: [
+            'TÚ tienes las llaves, nadie más',
+            'Nadie puede congelar ni censurar tu cuenta',
+            'Retiras cuando quieras, 24/7, sin permiso',
+            'Si Phantom quiebra, tus fondos siguen intactos',
+            'Tu cripto es TUYO—nadie lo toca sin tu firma',
+            'Tu seguridad depende de ti (responsabilidad)',
+            'Privacidad: solo tú sabes lo que tienes'
+          ]
+        }
+      },
+      {
+        type: 'main',
+        title: 'Los 3 Tipos de Wallets: Elige Según tu Necesidad',
+        content: 'No todas las wallets son iguales. Cada tipo tiene un balance diferente entre conveniencia y seguridad:',
+        features: [
+          { icon: Landmark, title: 'Exchange (Custodia de Terceros)', text: 'Binance, Coinbase, Kraken guardan tus llaves por ti. Conveniente para trading activo. NUNCA para ahorros. Úsalo solo para comprar/vender y retira inmediatamente. Si tienes más de $500 en un exchange por más de una semana, estás jugando con fuego.' },
+          { icon: Smartphone, title: 'Hot Wallet (Conectada a Internet)', text: 'Phantom, MetaMask, Trust Wallet. Las llaves están en tu celular o navegador. Perfecta para uso diario, DeFi, NFTs. Riesgo: si hackean tu dispositivo o firmas una transacción maliciosa, pierdes fondos. Ideal para montos que usas activamente.' },
+          { icon: Shield, title: 'Cold Wallet (Hardware/Offline)', text: 'Ledger, Trezor. Las llaves NUNCA tocan internet. Solo se conectan para firmar. Máxima seguridad para ahorros de largo plazo. Si tienes más de $5,000-10,000 en cripto, necesitas una. Es una inversión de $70-150 que puede salvarte miles.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Estrategia de Custodia: Cómo Organizar tus Fondos',
+        content: 'Los profesionales no ponen todos los huevos en una canasta. Así se estructura un portafolio cripto seguro:',
+        features: [
+          { icon: PiggyBank, title: 'Ahorros de Largo Plazo (80-90%)', text: 'En cold wallet (Ledger/Trezor). Este dinero no lo tocas por meses o años. Es tu "bóveda". Aquí va la mayoría de tu BTC, ETH, SOL de largo plazo.' },
+          { icon: Zap, title: 'Capital Operativo (10-20%)', text: 'En hot wallet (Phantom). Para DeFi, staking, NFTs, pagos. Solo lo que planeas usar activamente. Si pierdes esta wallet por un scam, duele pero no te arruina.' },
+          { icon: Activity, title: 'Trading Activo (0-10%)', text: 'En exchange. SOLO si haces trading diario. Retira ganancias regularmente a tu hot o cold wallet. Nunca dejes dinero "descansando" en un exchange.' }
+        ],
+        highlight: {
+          title: 'Regla del Sueño Tranquilo',
+          text: 'Pregúntate: "Si mañana Binance/Coinbase pausa retiros por 6 meses, ¿pierdo mis ahorros de vida?" Si la respuesta es sí, tienes demasiado en exchanges. Muévelo a autocustodia HOY.'
+        }
+      },
+      {
+        type: 'takeaways',
+        title: 'Lo Que Debes Recordar',
+        items: [
+          'Una wallet no "guarda" cripto—guarda las LLAVES que prueban que eres dueño de fondos en la blockchain.',
+          'Si no tienes las llaves, no tienes el cripto. Los exchanges son custodios, no bancos con seguro gubernamental.',
+          'FTX, Mt. Gox, Celsius, BlockFi, Voyager—la lista de exchanges que colapsaron llevándose fondos de usuarios es LARGA y sigue creciendo.',
+          'Hot wallets (Phantom, MetaMask) son para uso diario. Cold wallets (Ledger, Trezor) son para ahorros serios.',
+          'La autocustodia es una responsabilidad: si pierdes tu frase semilla, nadie puede ayudarte. Pero esa responsabilidad es el precio de la verdadera propiedad.'
         ]
       }
     ],
@@ -1481,36 +1548,63 @@ export const LESSONS_DATA: Record<number, any> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Qué pasa si dejas tu dinero en un exchange y este quiebra?',
+          question: 'FTX, el segundo exchange más grande del mundo, colapsó en 2022. ¿Qué pasó con los fondos de los usuarios que tenían cripto ahí?',
           options: [
-            { id: 'a', text: 'El gobierno te lo devuelve' },
-            { id: 'b', text: 'Probablemente lo pierdas' },
-            { id: 'c', text: 'No pasa nada' }
+            { id: 'a', text: 'El gobierno los protegió como depósitos bancarios' },
+            { id: 'b', text: 'Perdieron acceso y entraron en proceso de bancarrota como acreedores no garantizados' },
+            { id: 'c', text: 'FTX les devolvió todo en 24 horas' },
+            { id: 'd', text: 'Sus fondos estaban seguros porque estaban en blockchain' }
           ],
           correctAnswer: 'b',
-          explanation: 'En un exchange, eres un acreedor no garantizado. La autocustodia es vital.'
+          explanation: 'Más de $8 mil millones desaparecieron. Los usuarios con fondos en FTX tuvieron que esperar AÑOS en procesos legales para recuperar centavos por dólar. Los que tenían autocustodia no perdieron nada.'
         },
         {
           id: 'q2',
-          question: 'Tienes 10 000 $ en SOL. ¿Dónde lo guardas?',
+          question: '¿Qué guarda realmente una wallet de criptomonedas?',
           options: [
-            { id: 'a', text: 'Todo en Binance (fácil de vender)' },
-            { id: 'b', text: 'Todo en Phantom (hot wallet)' },
-            { id: 'c', text: 'La mayor parte en Ledger (cold wallet) + algo en Phantom para operar' }
+            { id: 'a', text: 'Las monedas digitales dentro del dispositivo' },
+            { id: 'b', text: 'Una copia de la blockchain' },
+            { id: 'c', text: 'Las llaves privadas que prueban propiedad de fondos en la blockchain' },
+            { id: 'd', text: 'Tokens físicos codificados' }
           ],
           correctAnswer: 'c',
-          explanation: 'Para montos grandes: cold wallet. Para DeFi y operativa diaria: hot wallet. Exchanges solo para trading activo.'
+          explanation: 'Las criptos SIEMPRE viven en la blockchain. Tu wallet solo guarda las llaves criptográficas que demuestran que ciertos fondos son tuyos y te permiten moverlos.'
         },
         {
           id: 'q3',
+          question: 'Tienes $15,000 en SOL. ¿Cuál es la estrategia de custodia más segura?',
+          options: [
+            { id: 'a', text: 'Todo en Binance para vender rápido si el mercado cae' },
+            { id: 'b', text: 'Todo en Phantom para tener control total' },
+            { id: 'c', text: '$12,000-13,000 en Ledger (cold wallet), $2,000-3,000 en Phantom para operar, $0 en exchanges' },
+            { id: 'd', text: 'Dividir entre 5 exchanges diferentes para "diversificar"' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'La mayor parte en cold wallet (máxima seguridad), una porción operativa en hot wallet, y exchanges solo para comprar/vender momentáneamente. Diversificar entre exchanges no te protege de colapsos sistémicos.'
+        },
+        {
+          id: 'q4',
           question: 'Un amigo perdió su teléfono con Phantom instalado. ¿Perdió sus fondos?',
           options: [
-            { id: 'a', text: 'Sí, el dinero estaba en el teléfono' },
-            { id: 'b', text: 'No, si tiene su frase semilla guardada' },
-            { id: 'c', text: 'Depende si tenía Touch ID activado' }
+            { id: 'a', text: 'Sí, el dinero estaba guardado en el teléfono' },
+            { id: 'b', text: 'Sí, a menos que contacte a soporte de Phantom' },
+            { id: 'c', text: 'No, si tiene su frase semilla guardada puede recuperar todo en otro dispositivo' },
+            { id: 'd', text: 'Depende de si tenía Face ID activado' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'La wallet es solo una INTERFAZ para acceder a la blockchain. El verdadero control viene de la frase semilla. Con ella, puedes recuperar tus fondos en cualquier dispositivo, en cualquier momento. Sin ella, pierdes acceso para siempre.'
+        },
+        {
+          id: 'q5',
+          question: '¿Cuál es la diferencia fundamental entre una hot wallet y una cold wallet?',
+          options: [
+            { id: 'a', text: 'Las cold wallets son más caras' },
+            { id: 'b', text: 'Las hot wallets están conectadas a internet (más convenientes, menos seguras), las cold wallets mantienen las llaves OFFLINE (menos convenientes, máxima seguridad)' },
+            { id: 'c', text: 'Las cold wallets solo sirven para Bitcoin' },
+            { id: 'd', text: 'Las hot wallets son gratuitas y las cold no' }
           ],
           correctAnswer: 'b',
-          explanation: 'La wallet es solo una interfaz. El verdadero acceso lo da la seed phrase. Sin ella, adiós fondos.'
+          explanation: 'La conexión a internet es el punto crítico. Una hot wallet puede ser comprometida por malware o phishing. Una cold wallet mantiene tus llaves en un dispositivo que NUNCA se conecta directamente a internet, eliminando ese vector de ataque.'
         }
       ]
     }
@@ -1520,15 +1614,86 @@ export const LESSONS_DATA: Record<number, any> = {
     title: 'La Frase Semilla (Seed Phrase)',
     level: 'Principiante',
     number: '8 de 20',
-    duration: '25 minutos',
+    duration: '28 minutos',
     type: 'Práctica Obligatoria',
-    description: 'El secreto más importante de tu vida financiera digital. Cómo guardarla y protegerla.',
+    description: 'El secreto más importante de tu vida financiera digital. Estas 12-24 palabras pueden valer millones o cero—todo depende de cómo las protejas.',
     sections: [
       {
         type: 'intro',
-        title: '12 Palabras para Gobernarlos a Todos',
-        content: 'Tu wallet generará 12 o 24 palabras. Estas palabras SON tu dinero. Quien las tenga, tiene acceso total. Si pierdes el celular, con estas palabras recuperas todo. Si pierdes las palabras, pierdes todo.',
-        highlight: { title: 'Protocolo de Seguridad', text: 'NUNCA escribas la frase semilla en digital (notas, foto, email). SOLO papel o metal.' }
+        title: '12 Palabras que Controlan Todo',
+        content: 'Cuando creas una wallet, se genera algo extraordinario: una secuencia de 12 o 24 palabras en inglés aparentemente aleatorias. "apple river mountain dog..."—parece un poema sin sentido, pero es la llave maestra de toda tu riqueza cripto. Estas palabras, llamadas **frase semilla** o **seed phrase**, son una representación legible de tu llave privada. A partir de ellas se derivan TODAS las direcciones y llaves de tu wallet. Quien tenga estas palabras tiene CONTROL TOTAL de tus fondos—puede vaciarlos en segundos desde cualquier parte del mundo. No necesita tu celular. No necesita tu contraseña. No necesita nada más.',
+        highlight: {
+          title: 'La Realidad Matemática',
+          text: 'Una frase de 12 palabras tiene 2^128 combinaciones posibles. Es un número tan grande que si todas las computadoras del planeta intentaran adivinarlo, tardarían más tiempo que la edad del universo. Tu frase es prácticamente imposible de adivinar—pero trivial de robar si la expones.'
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Por Qué 12 Palabras en Vez de una Contraseña Normal?',
+        content: 'Las contraseñas tradicionales tienen problemas: son difíciles de recordar, fáciles de hackear, y dependen de un servidor. La frase semilla resuelve todo esto:',
+        features: [
+          { icon: Lock, title: 'Estándar Universal (BIP-39)', text: 'Todas las wallets serias usan el mismo estándar de 2048 palabras en inglés. Tu frase de Phantom funciona en Ledger, MetaMask, Trust Wallet, o cualquier otra. No dependes de una empresa.' },
+          { icon: Shield, title: 'Backup Perfecto', text: 'Si tu celular explota, tu computadora se incendia, o la empresa de tu wallet desaparece, tus fondos siguen existiendo en la blockchain. Con tu frase semilla, los recuperas en minutos desde cualquier dispositivo nuevo.' },
+          { icon: Network, title: 'Genera Infinitas Direcciones', text: 'De una sola frase semilla se derivan matemáticamente miles de direcciones. Puedes tener direcciones para SOL, ETH, BTC, y más—todo desde las mismas 12 palabras.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Cómo Guardar tu Frase Semilla: Nivel Básico',
+        content: 'La regla de oro es simple: **tu frase semilla NUNCA debe existir en formato digital**. El momento en que la escribes en tu computadora, la tomas en foto, o la guardas en la nube, estás exponiendo tu riqueza.',
+        features: [
+          { icon: CheckCircle, title: 'Papel (Mínimo Aceptable)', text: 'Escríbela a mano en papel. Usa letra clara. Verifica 3 veces que cada palabra esté correcta. Guarda el papel en un lugar seguro: caja fuerte, caja de seguridad bancaria, o escondite que solo tú conozcas.' },
+          { icon: AlertTriangle, title: 'NUNCA en Digital', text: 'No en fotos. No en capturas de pantalla. No en notas del celular. No en Google Docs. No en emails. No en WhatsApp. No "encriptado" en la nube. Los hackers buscan activamente estas cosas.' },
+          { icon: AlertTriangle, title: 'NUNCA la Digas en Voz Alta', text: 'Si hay un micrófono cerca (Alexa, Siri, tu celular), asume que puede estar grabando. Suena paranoico hasta que pierdes todo.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Cómo Guardar tu Frase Semilla: Nivel Avanzado',
+        content: 'Si tienes más de $5,000 en cripto, necesitas seguridad seria. Así lo hacen los que tienen millones:',
+        features: [
+          { icon: Shield, title: 'Placa de Metal', text: 'El papel se quema, se moja, se descompone. Productos como Cryptosteel o Billfodl te permiten grabar tu frase en acero inoxidable. Sobrevive incendios, inundaciones, y décadas de tiempo. Cuesta $50-100, protege fortunas.' },
+          { icon: Layers, title: 'Copias en Múltiples Ubicaciones', text: 'Una sola copia es un punto único de fallo. Guarda 2-3 copias en ubicaciones diferentes: tu casa, casa de un familiar de confianza, caja de seguridad bancaria. Si un lugar se destruye, tienes respaldo.' },
+          { icon: Lock, title: 'Passphrase Adicional (Palabra 25)', text: 'Algunas wallets permiten agregar una palabra extra personalizada. Tu frase de 12 palabras + "tu_palabra_secreta" genera wallets DIFERENTES. Incluso si roban tu frase, sin la palabra 25 no pueden acceder.' }
+        ],
+        highlight: {
+          title: 'Shamir Secret Sharing',
+          text: 'Para el máximo nivel de seguridad, puedes dividir tu frase en partes que requieren combinarse. Ejemplo: divides en 3 partes, necesitas 2 para recuperar. Guardas una en tu casa, otra con tu hermano, otra en el banco. Ninguna ubicación por sí sola es suficiente para robar.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Los Errores que Han Costado Millones',
+        content: 'Aprende de las tragedias de otros. Estos son errores REALES que han destruido fortunas:',
+        features: [
+          { icon: AlertTriangle, title: 'La Foto en iCloud', text: 'Un usuario tomó foto de su frase "para no perderla". Su cuenta de iCloud fue hackeada. Perdió $300,000 en minutos. Las fotos se sincronizan automáticamente a la nube.' },
+          { icon: AlertTriangle, title: 'El Archivo en Google Drive', text: '"Está encriptado, es seguro". Un empleado de Google con acceso comprometió su cuenta. El "archivo encriptado" fue descifrado. $2.4 millones perdidos.' },
+          { icon: AlertTriangle, title: 'El Mensaje a Sí Mismo', text: 'Se envió la frase por WhatsApp "para tenerla en el celular". Su cuenta de WhatsApp Web quedó abierta en una computadora pública. Adiós $50,000.' },
+          { icon: AlertTriangle, title: 'El Único Papel', text: 'Guardó su frase en un papel en casa. Hubo un incendio. El papel se quemó. $180,000 en Bitcoin perdidos para siempre—los fondos siguen en la blockchain, pero nadie puede accederlos nunca más.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Anatomía de una Estafa de Seed Phrase',
+        content: 'El 99% de los robos de cripto no son "hackeos sofisticados"—son ingeniería social donde TÚ entregas tu frase. Así operan:',
+        features: [
+          { icon: AlertTriangle, title: 'El Falso Soporte Técnico', text: '"Hola, soy de Phantom Support. Detectamos actividad sospechosa en tu cuenta. Para proteger tus fondos, necesitamos verificar tu frase semilla." MENTIRA. Phantom NUNCA te contactará primero. NUNCA te pedirá tu frase. NADIE legítimo lo hará.' },
+          { icon: AlertTriangle, title: 'El Sitio Falso', text: 'Buscas "Phantom wallet" en Google. El primer resultado es un anuncio de "phantomm-wallet.com" (con dos M). El sitio se ve idéntico. Te pide "importar wallet" y escribes tu frase. La roban en tiempo real.' },
+          { icon: AlertTriangle, title: 'El Airdrop Gratis', text: '"Has sido seleccionado para recibir 500 SOL gratis. Conecta tu wallet y verifica tu seed phrase para reclamar." Nadie regala $50,000. Es estafa.' },
+          { icon: AlertTriangle, title: 'El DM del Influencer', text: '"Hola, soy [YouTuber famoso]. Estoy haciendo un giveaway privado. Solo necesito verificar que eres holder real—envíame tu seed phrase." Los influencers reales NUNCA hacen esto.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Las Reglas de Oro de la Seed Phrase',
+        items: [
+          'Tu frase semilla ES tu dinero. No es una contraseña que puedes resetear. Si la pierdes o la roban, tu dinero desaparece PARA SIEMPRE.',
+          'NUNCA existe una razón legítima para que ALGUIEN te pida tu seed phrase. Ni soporte técnico, ni airdrops, ni verificaciones, ni "actualizaciones de seguridad". NADIE. NUNCA.',
+          'NUNCA la guardes en formato digital: no fotos, no archivos, no notas, no emails, no mensajes, no "encriptado" en la nube.',
+          'Escríbela en papel como MÍNIMO. Mejor en metal. Guarda múltiples copias en ubicaciones separadas.',
+          'Verifica 3 veces que la escribiste correctamente. Un error de una sola letra puede hacer irrecuperables tus fondos.',
+          'Si alguien te pide la frase semilla, es estafa. El 100% de las veces. Sin excepciones.'
+        ]
       }
     ],
     quiz: {
@@ -1537,36 +1702,73 @@ export const LESSONS_DATA: Record<number, any> = {
           id: 'q1',
           question: 'Tu frase semilla de 12 palabras está escrita en un papel y guardada en tu casa. Un ladrón entra y la roba. ¿Qué puede hacer?',
           options: [
-            { id: 'a', text: 'Nada, necesita tu contraseña también' },
-            { id: 'b', text: 'Vaciar todas tus wallets al instante' },
-            { id: 'c', text: 'Solo ver el saldo' },
-            { id: 'd', text: 'Solo si también tiene tu celular' }
+            { id: 'a', text: 'Nada, porque necesita también tu contraseña de Phantom' },
+            { id: 'b', text: 'Vaciar absolutamente TODOS tus fondos en segundos, desde cualquier dispositivo en el mundo' },
+            { id: 'c', text: 'Solo puede ver tu saldo pero no mover fondos' },
+            { id: 'd', text: 'Necesita también tu celular físico' }
           ],
           correctAnswer: 'b',
-          explanation: 'La frase semilla = llave maestra total. Quien la tenga controla el 100 % de los fondos para siempre.'
+          explanation: 'La frase semilla es la LLAVE MAESTRA TOTAL. Quien la tenga puede importarla en cualquier wallet y tener control absoluto de tus fondos. No necesita nada más. Por eso la protección física de tu frase es tan crítica.'
         },
         {
           id: 'q2',
-          question: '¿Cuál de estas opciones es la forma MÁS segura de guardar tu seed phrase en 2025?',
+          question: '¿Por qué NUNCA debes guardar tu seed phrase en una foto, archivo de texto, o en la nube?',
           options: [
-            { id: 'a', text: 'Foto en el celular encriptada' },
-            { id: 'b', text: 'Google Drive con 2FA' },
-            { id: 'c', text: 'Placa de acero grabada guardada en caja de seguridad + otra parte con familiar de confianza (Shamir Secret Sharing)' },
-            { id: 'd', text: 'Memorizarla y no escribirla' }
+            { id: 'a', text: 'Porque ocupa mucho espacio de almacenamiento' },
+            { id: 'b', text: 'Porque los hackers buscan activamente estos archivos, y las sincronizaciones automáticas (iCloud, Google Photos) pueden exponerla sin que lo sepas' },
+            { id: 'c', text: 'Porque es difícil de leer en pantalla' },
+            { id: 'd', text: 'Porque las wallets no aceptan frases de fotos' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Nunca confíes tu futuro financiero a una empresa o a tu memoria. Metal + distribución física es el estándar de los whales.'
+          correctAnswer: 'b',
+          explanation: 'Malware, hackeos de cuentas cloud, y sincronizaciones automáticas han costado MILLONES a usuarios que pensaron "está seguro en mi celular/nube". Si existe en formato digital, puede ser robado remotamente.'
         },
         {
           id: 'q3',
-          question: 'Te llega un mail de "Phantom Support" diciendo que tu wallet está en riesgo y te pide confirmar tu frase semilla. ¿Qué haces?',
+          question: 'Te llega un mensaje de "Phantom Support" diciendo que tu wallet está en riesgo y necesitan verificar tu frase semilla. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Contesto rápido para no perder todo' },
-            { id: 'b', text: 'Ignoro y marco como spam. Phantom NUNCA pide la seed phrase' },
-            { id: 'c', text: 'Le mando solo las últimas 4 palabras "por seguridad"' }
+            { id: 'a', text: 'Les envío la frase rápido para proteger mis fondos' },
+            { id: 'b', text: 'Les envío solo las primeras 6 palabras para "verificación parcial"' },
+            { id: 'c', text: 'Ignoro, bloqueo y reporto. Phantom NUNCA contacta usuarios ni pide seed phrases. Es 100% estafa.' },
+            { id: 'd', text: 'Les pido que me llamen para verificar que son reales' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'NINGUNA empresa legítima te pedirá NUNCA tu frase semilla. No hay excepciones. No hay "verificaciones". No hay "protección de cuenta". El 100% de las veces que alguien pide tu seed phrase, es estafa.'
+        },
+        {
+          id: 'q4',
+          question: '¿Cuál es la forma MÁS segura de almacenar una seed phrase para $50,000+ en cripto?',
+          options: [
+            { id: 'a', text: 'Memorizarla y no escribirla en ningún lado' },
+            { id: 'b', text: 'Archivo encriptado en Google Drive con contraseña fuerte' },
+            { id: 'c', text: 'Grabada en placa de metal, con copias en 2-3 ubicaciones físicas diferentes (casa, familiar de confianza, caja de seguridad bancaria)' },
+            { id: 'd', text: 'Papel en la billetera física que siempre llevas contigo' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Metal resiste fuego e inundaciones. Múltiples ubicaciones eliminan puntos únicos de fallo. La memoria humana falla. Los archivos digitales pueden ser hackeados. Llevarla encima te expone a robo físico.'
+        },
+        {
+          id: 'q5',
+          question: 'Un usuario guardó su única copia de la seed phrase en papel en su casa. Hubo un incendio y el papel se destruyó. ¿Qué pasa con sus fondos?',
+          options: [
+            { id: 'a', text: 'Contacta a soporte de su wallet y la recuperan' },
+            { id: 'b', text: 'Puede usar reconocimiento facial para acceder' },
+            { id: 'c', text: 'Los fondos están PERDIDOS PARA SIEMPRE. Siguen existiendo en la blockchain, pero nadie puede accederlos nunca más.' },
+            { id: 'd', text: 'El gobierno puede ayudarle a recuperarlos' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Esta es la realidad brutal de la autocustodia: no hay "Olvidé mi contraseña". No hay soporte que te ayude. Los fondos siguen en la blockchain por toda la eternidad, pero sin la seed phrase, son inaccesibles para siempre. Por eso DEBES tener múltiples copias en ubicaciones separadas.'
+        },
+        {
+          id: 'q6',
+          question: '¿Qué es una passphrase adicional (palabra 25) y por qué es útil?',
+          options: [
+            { id: 'a', text: 'Es una palabra de recuperación extra que te da Phantom' },
+            { id: 'b', text: 'Es una palabra personalizada que añades a tu seed phrase, generando wallets COMPLETAMENTE diferentes. Incluso si roban tu seed de 12 palabras, sin la passphrase no pueden acceder.' },
+            { id: 'c', text: 'Es tu contraseña de desbloqueo del celular' },
+            { id: 'd', text: 'Es obligatoria para todas las wallets' }
           ],
           correctAnswer: 'b',
-          explanation: 'Regla de oro: quien te pida la seed phrase = 100 % estafa. Siempre.'
+          explanation: 'La passphrase es una capa extra de seguridad. Tu seed phrase de 12 palabras + "tu_palabra_secreta" genera direcciones completamente diferentes a la misma seed phrase sola. Esto te protege incluso si alguien obtiene tu seed: sin la passphrase, verán una wallet vacía o diferente.'
         }
       ]
     }
@@ -1578,21 +1780,85 @@ export const LESSONS_DATA: Record<number, any> = {
     number: '9 de 20',
     duration: '30 minutos',
     type: 'Tutorial Práctico',
-    description: 'Entra al mundo de Solana con la mejor wallet del mercado. UX superior y seguridad integrada.',
+    description: 'Tu puerta de entrada al ecosistema Solana. Instalación paso a paso de la wallet más usada, con todas las precauciones de seguridad que necesitas saber.',
     sections: [
       {
         type: 'intro',
-        title: 'Por qué Phantom',
-        content: 'Para usar Solana, recomendamos **Phantom**. Es intuitiva, rápida y tiene características de seguridad que te avisan antes de firmar transacciones peligrosas. Es el estándar de oro en Solana.',
-        highlight: { title: 'Paso 1', text: 'Ve a phantom.app (Verifica siempre la URL). Instala la extensión de navegador o la app móvil.' }
+        title: '¿Por Qué Phantom es la Wallet Recomendada?',
+        content: 'En el mundo de las wallets de Solana, Phantom se ha ganado la corona. No es solo una interfaz bonita—es una herramienta diseñada pensando en la seguridad Y la usabilidad. Millones de usuarios la usan diariamente, tiene el mejor historial de seguridad del ecosistema, y su equipo responde rápidamente ante cualquier vulnerabilidad. MetaMask domina Ethereum. Phantom domina Solana. Si estás empezando en cripto, Phantom es tu mejor aliado.',
+        features: [
+          { icon: Shield, title: 'Alertas de Seguridad Integradas', text: 'Phantom analiza cada transacción ANTES de que la firmes. Si detecta un contrato malicioso conocido, te advierte. Si un sitio intenta drenar tu wallet, te alerta. Es como tener un guardaespaldas digital.' },
+          { icon: Zap, title: 'Velocidad de Solana', text: 'Transacciones confirmadas en menos de 1 segundo. Fees de fracción de centavo. La experiencia es tan fluida que parece magia comparado con Ethereum.' },
+          { icon: Smartphone, title: 'Multi-Plataforma Sincronizado', text: 'Úsala en navegador (Chrome, Firefox, Brave, Edge) y en móvil (iOS, Android). Misma wallet, mismos fondos, sincronización perfecta.' }
+        ]
       },
       {
         type: 'main',
-        title: 'Configuración',
-        content: 'Sigue los pasos para crear nueva wallet. Anota la frase semilla en papel. Verifica. ¡Listo! Ahora tienes una dirección de Solana que empieza por letras y números.',
+        title: 'Paso 1: Descarga SOLO desde Fuentes Oficiales',
+        content: 'Este paso parece obvio pero es donde MUCHOS pierden todo su dinero. Los estafadores crean sitios falsos que lucen idénticos a Phantom pero roban tu seed phrase en el momento que la ingresas.',
         features: [
-          { icon: Smartphone, title: 'Móvil y Desktop', text: 'Sincronizados perfectamente.' },
-          { icon: Shield, title: 'Detector de Scams', text: 'Phantom te alerta si intentas conectarte a un sitio web malicioso conocido.' }
+          { icon: CheckCircle, title: 'Sitio Oficial', text: 'El ÚNICO sitio oficial es **phantom.app** (sin guiones, sin números, sin variaciones). Escríbelo tú mismo en la barra de direcciones. NO hagas clic en anuncios de Google—los estafadores compran ads para aparecer primero.' },
+          { icon: CheckCircle, title: 'Extensión de Navegador', text: 'Ve a phantom.app → haz clic en "Download" → elige tu navegador. Te llevará a la Chrome Web Store, Firefox Add-ons, etc. Verifica que el desarrollador sea "Phantom Technologies Incorporated".' },
+          { icon: CheckCircle, title: 'App Móvil', text: 'Descarga SOLO desde App Store (iOS) o Google Play (Android). Busca "Phantom" y verifica el desarrollador oficial. Hay apps falsas con nombres similares.' }
+        ],
+        highlight: {
+          title: 'Lista de URLs Falsas Comunes',
+          text: 'phantom-app.com, phantomwallet.io, phantom-wallet.app, phantomm.app, phantom.finance—TODAS son estafas. El sitio real es ÚNICAMENTE phantom.app. Guárdalo en favoritos después de verificar.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Paso 2: Crear una Nueva Wallet',
+        content: 'Una vez instalada la extensión o app, Phantom te dará dos opciones: crear una nueva wallet o importar una existente. Si es tu primera wallet, selecciona **"Create a new wallet"**.',
+        features: [
+          { icon: Lock, title: 'Contraseña de Desbloqueo', text: 'Phantom te pedirá crear una contraseña. Esta contraseña desbloquea la app en TU dispositivo—NO es tu seed phrase. Si olvidas esta contraseña, puedes reinstalar Phantom e importar tu wallet con la seed phrase.' },
+          { icon: Shield, title: 'Generación de Seed Phrase', text: 'Phantom generará 12 palabras aleatorias. DETENTE AQUÍ. No hagas clic en "siguiente" hasta que hayas escrito estas palabras en PAPEL. No las copies al portapapeles. No las escribas en notas digitales.' },
+          { icon: CheckCircle, title: 'Verificación', text: 'Phantom te pedirá confirmar algunas palabras para asegurar que las guardaste correctamente. Si fallas, vuelve a empezar. Este paso existe porque MILES de personas pierden fondos por errores de escritura.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Paso 3: Entendiendo la Interfaz de Phantom',
+        content: 'Ya tienes tu wallet creada. Ahora entiende qué estás viendo:',
+        features: [
+          { icon: Wallet, title: 'Tu Dirección Pública', text: 'En la parte superior verás algo como "ABC12...XYZ". Esta es tu dirección de Solana—como un número de cuenta. Puedes compartirla libremente para recibir pagos. Haz clic para copiarla.' },
+          { icon: Activity, title: 'Balance y Tokens', text: 'Verás tu saldo de SOL y cualquier otro token que recibas. Phantom muestra el valor en USD automáticamente y detecta la mayoría de los tokens legítimos.' },
+          { icon: Globe, title: 'Historial de Transacciones', text: 'Cada envío, recepción, o interacción con una dApp queda registrada. Puedes hacer clic en cualquier transacción para ver detalles en Solscan (el explorador de bloques).' },
+          { icon: Network, title: 'Conexiones de Apps', text: 'En "Settings" → "Connected Apps" verás qué sitios tienen permiso para conectarse a tu wallet. Revisa periódicamente y desconecta los que no uses.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Funciones de Seguridad que Debes Conocer',
+        content: 'Phantom incluye varias capas de protección. Conócelas para usarlas a tu favor:',
+        features: [
+          { icon: Shield, title: 'Simulación de Transacciones', text: 'Antes de firmar, Phantom simula qué pasaría si confirmas. Te muestra "Vas a recibir X" o "Vas a enviar Y". Si un contrato malicioso intenta drenar tu wallet, verás una advertencia en ROJO.' },
+          { icon: AlertTriangle, title: 'Lista Negra de Sitios', text: 'Phantom mantiene una base de datos de sitios de phishing conocidos. Si intentas conectarte a uno, te bloqueará o advertirá. NO significa que todos los sitios no-bloqueados son seguros—solo que los conocidos están marcados.' },
+          { icon: Lock, title: 'Bloqueo Automático', text: 'La wallet se bloquea automáticamente después de cierto tiempo de inactividad. Puedes configurar este tiempo en Settings. Menor tiempo = más seguro pero menos conveniente.' },
+          { icon: Smartphone, title: 'Biometría en Móvil', text: 'Activa Face ID o huella digital para desbloquear. Añade una capa extra de seguridad si alguien obtiene tu teléfono desbloqueado.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Conectar vs Aprobar: La Diferencia Crítica',
+        content: 'Muchos usuarios nuevos no entienden la diferencia entre "conectar" una wallet y "aprobar" una transacción. Esta confusión puede costarte caro:',
+        features: [
+          { icon: Link, title: 'Conectar Wallet', text: 'Cuando un sitio pide "Connect Wallet", solo le estás dando permiso para VER tu dirección pública y balance. Es como mostrar tu número de cuenta—pueden ver, pero NO pueden sacar dinero. Es relativamente seguro.' },
+          { icon: AlertTriangle, title: 'Aprobar Transacción', text: 'Después de conectar, si el sitio quiere hacer algo con tus fondos (swap, mint, transfer), Phantom te pedirá APROBAR la transacción específica. AQUÍ es donde debes prestar atención. Lee qué estás firmando.' },
+          { icon: Shield, title: 'La Regla de Oro', text: 'Antes de aprobar, pregúntate: "¿Esto tiene sentido para lo que estoy intentando hacer?" Si estás haciendo un swap de $100 y la transacción dice "Aprobar acceso ilimitado a todos tus tokens"—RECHAZA. Algo está mal.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Checklist Post-Instalación',
+        items: [
+          'Descargaste Phantom ÚNICAMENTE desde phantom.app, App Store, o Google Play (verificando el desarrollador oficial).',
+          'Escribiste tu seed phrase de 12 palabras en PAPEL (no digital) y la guardaste en lugar seguro.',
+          'Verificaste la seed phrase correctamente en el proceso de Phantom.',
+          'Creaste una contraseña de desbloqueo fuerte (diferente a otras contraseñas).',
+          'Entiendes la diferencia entre tu dirección pública (seguro compartir) y tu seed phrase (NUNCA compartir).',
+          'Sabes que "Conectar" solo muestra tu dirección, pero "Aprobar" firma transacciones con tus fondos.',
+          'Antes de depositar fondos grandes, haz una prueba pequeña para confirmar que todo funciona.'
         ]
       }
     ],
@@ -1600,36 +1866,63 @@ export const LESSONS_DATA: Record<number, any> = {
       questions: [
         {
           id: 'q1',
-          question: '¿De dónde debes descargar Phantom?',
+          question: 'Buscas "Phantom wallet" en Google. El primer resultado es un anuncio de "phantom-app.com". ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Cualquier link de Google' },
-            { id: 'b', text: 'Sitio oficial phantom.app o App Stores oficiales' },
-            { id: 'c', text: 'Un archivo que te mandaron por Telegram' }
+            { id: 'a', text: 'Hago clic porque apareció primero en Google' },
+            { id: 'b', text: 'Ignoro el anuncio y escribo manualmente phantom.app en la barra de direcciones' },
+            { id: 'c', text: 'Descargo de cualquiera de los dos, son iguales' },
+            { id: 'd', text: 'Busco en otro buscador' }
           ],
           correctAnswer: 'b',
-          explanation: 'Siempre verifica la fuente oficial para evitar versiones falsas que roban fondos.'
+          explanation: 'Los estafadores PAGAN para aparecer como anuncios en Google con URLs falsas. phantom-app.com NO es el sitio oficial. El ÚNICO sitio real es phantom.app (sin guiones). Siempre escríbelo manualmente.'
         },
         {
           id: 'q2',
-          question: 'Instalaste Phantom. ¿Qué es lo PRIMERO que debes hacer antes de depositar fondos?',
+          question: 'Instalaste Phantom y te muestra 12 palabras. ¿Cuál es el paso correcto ANTES de continuar?',
           options: [
-            { id: 'a', text: 'Conectarla a cualquier dApp para probar' },
-            { id: 'b', text: 'Guardar la frase semilla de forma segura (papel/metal)' },
-            { id: 'c', text: 'Mandarle SOL para probar' }
+            { id: 'a', text: 'Tomar una captura de pantalla para tenerlas guardadas' },
+            { id: 'b', text: 'Copiarlas al portapapeles y pegarlas en una nota del celular' },
+            { id: 'c', text: 'Escribirlas en PAPEL físico, verificar que están correctas, y guardar el papel en lugar seguro' },
+            { id: 'd', text: 'Hacer clic en "siguiente" rápido y anotarlas después' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Sin backup de tu seed phrase, un formateo del celular = pérdida total.'
+          correctAnswer: 'c',
+          explanation: 'Capturas de pantalla se sincronizan a la nube. El portapapeles puede ser leído por malware. Solo PAPEL físico es seguro. Y debes hacerlo ANTES de continuar—después no podrás ver la frase de nuevo en Phantom.'
         },
         {
           id: 'q3',
-          question: 'Un sitio web te pide "Conectar Wallet". ¿Qué significa eso?',
+          question: 'Un sitio web te pide "Connect Wallet". ¿Qué estás autorizando exactamente?',
           options: [
-            { id: 'a', text: 'Le estás dando permiso para ver tu dirección pública (solo lectura)' },
-            { id: 'b', text: 'Le estás dando tu frase semilla' },
-            { id: 'c', text: 'Le estás dando permiso para vaciar tu wallet' }
+            { id: 'a', text: 'Le estás dando acceso total a mover tus fondos' },
+            { id: 'b', text: 'Le estás compartiendo tu frase semilla' },
+            { id: 'c', text: 'Le estás permitiendo VER tu dirección pública y balance, pero NO mover fondos sin aprobación adicional' },
+            { id: 'd', text: 'Nada, es solo un popup informativo' }
           ],
-          correctAnswer: 'a',
-          explanation: 'Conectar wallet ≠ aprobar transacción. Solo muestra tu dirección pública. Siempre debes aprobar cada firma.'
+          correctAnswer: 'c',
+          explanation: 'Conectar wallet es relativamente seguro—solo comparte información pública (como mostrar tu número de cuenta). El peligro real viene cuando te piden APROBAR transacciones después de conectar. Siempre lee qué estás firmando.'
+        },
+        {
+          id: 'q4',
+          question: 'Phantom te muestra una transacción para aprobar. En la simulación dice en ROJO: "This transaction may be malicious". ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Apruebo de todos modos, probablemente es un bug' },
+            { id: 'b', text: 'RECHAZO inmediatamente y cierro el sitio. La advertencia de Phantom significa que detectó patrones de estafa conocidos.' },
+            { id: 'c', text: 'Apruebo pero con un monto pequeño para probar' },
+            { id: 'd', text: 'Contacto al "soporte" del sitio para preguntar' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Phantom invierte recursos significativos en detectar contratos maliciosos. Si te muestra una advertencia en ROJO, es porque el contrato tiene patrones de drainer/estafa conocidos. NUNCA ignores estas advertencias.'
+        },
+        {
+          id: 'q5',
+          question: '¿Cuál es la diferencia entre la contraseña de Phantom y tu frase semilla?',
+          options: [
+            { id: 'a', text: 'Son lo mismo, dos nombres para la misma cosa' },
+            { id: 'b', text: 'La contraseña desbloquea la app en TU dispositivo; la seed phrase es la llave maestra que recupera tu wallet desde CUALQUIER dispositivo' },
+            { id: 'c', text: 'La contraseña es más importante que la seed phrase' },
+            { id: 'd', text: 'Solo necesitas recordar la contraseña, la seed phrase es opcional' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Si olvidas tu contraseña de Phantom, reinstala la app e importa tu wallet con la seed phrase. Si pierdes tu seed phrase, pierdes TODO para siempre—sin importar qué contraseña tengas. La seed phrase es infinitamente más importante.'
         }
       ]
     }
@@ -1641,43 +1934,110 @@ export const LESSONS_DATA: Record<number, any> = {
     number: '10 de 20',
     duration: '35 min',
     type: 'Comparativa',
-    description: 'Por qué somos "Solana Bulls". Velocidad, costos y la mejor experiencia de usuario en crypto.',
+    description: 'Por qué enseñamos Solana primero. Velocidad, costos, y la mejor experiencia de usuario en crypto—todo lo que necesitas saber para entender el debate L1.',
     sections: [
       {
         type: 'intro',
-        title: 'El Problema de Ethereum',
-        content: 'Ethereum es revolucionario, pero tiene un problema fatal para el usuario común: **es lento y caro**. Pagar $50 dólares para enviar $20 es absurdo. Para que crypto sea global, debe ser rápido y barato. Aquí entra Solana.',
-        highlight: { title: 'La Visión', text: 'Solana no quiere ser solo una "capa de liquidación". Quiere ser la blockchain donde ocurra toda la actividad financiera del mundo a la velocidad de la luz (Nasdaq on-chain).' }
+        title: '¿Por Qué Existe Esta "Guerra"?',
+        content: 'Ethereum fue la primera blockchain programable. Inventó los smart contracts, DeFi, NFTs—todo lo que hoy conocemos como Web3 nació ahí. Es el "abuelo respetado" del espacio. Pero tiene un problema fundamental: **no escala para uso masivo**. Cuando mucha gente quiere usarlo, se congestiona. Los fees suben a $50, $100, incluso $500 por transacción en momentos de alta demanda. Para una persona en Latinoamérica que quiere probar DeFi con $100, esto es prohibitivo. Solana nació en 2020 con una pregunta: ¿y si construimos una blockchain desde cero, optimizada para velocidad y bajo costo? El resultado es una red donde las transacciones cuestan menos de un centavo y se confirman en menos de un segundo.',
+        highlight: {
+          title: 'La Metáfora',
+          text: 'Ethereum es como un Mercedes clásico de 1990: revolucionario en su época, confiable, prestigioso—pero lento y caro de mantener. Solana es como un Tesla: diseñado para el mundo moderno, rápido, eficiente, y construido pensando en el futuro.'
+        }
       },
       {
         type: 'comparison',
-        title: 'David vs Goliat',
-        table: [
-          { aspect: 'Transacciones por Segundo', trad: 'Ethereum: ~15-30 TPS', btc: 'Solana: ~3,000 - 65,000 TPS' },
-          { aspect: 'Costo por Transacción', trad: 'Ethereum: $2.00 - $100.00+', btc: 'Solana: $0.00025 (Menos de un centavo)' },
-          { aspect: 'Tiempo de Bloque', trad: 'Ethereum: 12 segundos', btc: 'Solana: 400 milisegundos (Casi instantáneo)' },
-          { aspect: 'Experiencia de Usuario', trad: 'Lenta, costosa, compleja (L2s)', btc: 'Fluida, rápida, todo en una capa (L1)' }
+        title: 'Los Números que Importan',
+        leftSide: {
+          title: 'Ethereum (L1)',
+          points: [
+            'Transacciones por segundo: ~15-30 TPS',
+            'Costo por transacción: $2-$100+ (varía con congestión)',
+            'Tiempo de confirmación: ~12-15 segundos',
+            'Para usar DeFi barato: necesitas L2s (Arbitrum, Optimism)',
+            'Fragmentación de liquidez entre L1 y múltiples L2s',
+            'Bridges para mover entre capas (riesgo de hackeos)',
+            'Experiencia confusa para nuevos usuarios'
+          ]
+        },
+        rightSide: {
+          title: 'Solana (L1)',
+          points: [
+            'Transacciones por segundo: ~3,000-65,000 TPS',
+            'Costo por transacción: ~$0.00025 (fracción de centavo)',
+            'Tiempo de confirmación: ~400 milisegundos',
+            'Todo ocurre en una sola capa (sin L2s necesarios)',
+            'Toda la liquidez unificada en un solo lugar',
+            'Sin bridges entre capas (menos riesgo)',
+            'Experiencia fluida, como usar una app normal'
+          ]
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Qué Significa "Monolítico" vs "Modular"?',
+        content: 'Este es un debate técnico fundamental que afecta tu experiencia como usuario:',
+        features: [
+          { icon: Layers, title: 'Ethereum: Modular', text: 'Ethereum decidió dividirse en capas. L1 es la "capa de seguridad" (cara y lenta). L2s son "capas de ejecución" (más baratas y rápidas). El problema: tienes que mover fondos entre capas usando bridges. Esto crea fricción, riesgos de hackeo, y fragmenta la liquidez.' },
+          { icon: Zap, title: 'Solana: Monolítico', text: 'Solana pone TODO en una sola capa: ejecución, consenso, y disponibilidad de datos. No hay bridges. No hay L2s. No hay fragmentación. Todo está en un solo lugar, componible e interoperable. Más simple para el usuario, menos puntos de fallo.' },
+          { icon: AlertTriangle, title: 'El Trade-off', text: 'Modular = más descentralización teórica pero peor UX. Monolítico = mejor UX pero requiere hardware más potente para validadores. Solana eligió optimizar para el usuario final.' }
         ]
       },
       {
         type: 'main',
-        title: 'El Superpoder de Solana: Su Comunidad y DApps',
-        content: 'La tecnología es genial, pero la comunidad es lo que gana. El ecosistema de Solana tiene las aplicaciones más fáciles de usar:',
+        title: 'Caso Real: Hacer un Swap de $50',
+        content: 'Veamos qué pasa en la práctica cuando quieres intercambiar $50 de USDC por otro token:',
         features: [
-          { icon: Zap, title: 'Jupiter (JUP)', text: 'El mejor agregador de DEX del mundo. Te da siempre el mejor precio, tiene Limit Orders y DCA integrado. UX superior a Uniswap.' },
-          { icon: Wallet, title: 'Phantom Wallet', text: 'La wallet más amigable. Te avisa si una transacción parece estafa antes de firmar. Mucho mejor UX que MetaMask.' },
-          { icon: Users, title: 'La Comunidad', text: 'Developers hambrientos, hackathons constantes y una vibra de "construir a pesar del ruido". Superteam y DRiP están cambiando el juego.' },
-          { icon: Globe, title: 'DePIN', text: 'Redes de infraestructura física (Helium, Hivemapper) eligen Solana porque es la única chain que aguanta su volumen.' }
+          { icon: TrendingDown, title: 'En Ethereum L1', text: 'Abres Uniswap. El swap te costaría $15-40 en gas. Para $50, perderías 30-80% solo en fees. No tiene sentido económico. Te dicen "usa un L2".' },
+          { icon: Network, title: 'En Ethereum L2 (Arbitrum)', text: 'Primero debes bridgear fondos de L1 a L2 ($10-20 de gas + espera). Luego haces el swap ($0.50 de gas). Si quieres volver a L1, otro bridge ($10-20). El proceso toma minutos/horas y múltiples transacciones.' },
+          { icon: Zap, title: 'En Solana', text: 'Abres Jupiter. Haces el swap. Pagas $0.0002 de fee. Tarda 1 segundo. Listo. No hay capas. No hay bridges. No hay esperas. Tu experiencia es idéntica si swapeas $50 o $50,000.' }
+        ],
+        highlight: {
+          title: 'Por Esto Enseñamos Solana Primero',
+          text: 'Si estás aprendiendo cripto, queremos que experimentes. Que pruebes cosas. Que cometas errores pequeños sin perder todo en fees. Solana te permite equivocarte 100 veces y pagar menos de $0.03 en total. En Ethereum L1, un solo error podría costarte $50.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'El Ecosistema de Solana: Las Apps que Usarás',
+        content: 'La tecnología importa, pero lo que realmente usarás son las aplicaciones. Solana tiene las mejores:',
+        features: [
+          { icon: Zap, title: 'Jupiter', text: 'El mejor agregador DEX del mundo. Te encuentra el mejor precio entre todos los exchanges descentralizados. Tiene DCA (compra automática), órdenes límite, y perpetuos. Es el "Uniswap de Solana" pero con superpoderes.' },
+          { icon: Wallet, title: 'Phantom', text: 'Ya la conoces. La wallet más usada de Solana. Pero vale repetir: la experiencia de Phantom vs MetaMask es día y noche. MetaMask se siente como software de 2017.' },
+          { icon: Globe, title: 'Magic Eden / Tensor', text: 'Los marketplaces de NFTs en Solana. Puedes comprar y vender NFTs por menos de $0.01 en fees. En OpenSea (Ethereum), los fees pueden ser $20-50.' },
+          { icon: Activity, title: 'Marinade / Jito', text: 'Plataformas de liquid staking. Pones tu SOL a trabajar ganando ~7-8% anual mientras sigue siendo líquido. En Ethereum, hacer liquid staking cuesta $20+ en gas.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Seamos Honestos: Los Riesgos de Solana',
+        content: 'No queremos darte solo la versión positiva. Estos son los argumentos en contra que escucharás:',
+        features: [
+          { icon: AlertTriangle, title: 'Centralización Relativa', text: 'Solana requiere hardware más potente para correr un validador. Esto significa menos validadores que Ethereum. Críticos dicen que es "menos descentralizada". Counter-argument: ¿de qué sirve una red "descentralizada" que nadie puede pagar usar?' },
+          { icon: AlertTriangle, title: 'Outages Históricos', text: 'Solana tuvo varios "apagones" en 2022-2023 donde la red se detuvo. Esto generó dudas sobre su estabilidad. Sin embargo, desde 2024 ha funcionado sin problemas y las mejoras técnicas han resuelto estos issues.' },
+          { icon: AlertTriangle, title: 'Ecosistema Más Joven', text: 'Ethereum tiene 8+ años. Solana tiene 4. El ecosistema de Ethereum es más grande y tiene más liquidez total. Algunos protocolos "blue chip" solo existen en Ethereum.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'El Futuro: Firedancer y Más Allá',
+        content: 'Solana no se queda quieta. Estas son las mejoras que vienen:',
+        features: [
+          { icon: Cpu, title: 'Firedancer', text: 'Jump Trading (uno de los traders más grandes del mundo) está construyendo un nuevo cliente de validador desde cero. Se espera que aumente la velocidad 10-100x y elimine los riesgos de "un solo cliente". Es el upgrade más importante en la historia de Solana.' },
+          { icon: Smartphone, title: 'Saga/Seeker (Mobile)', text: 'Solana tiene su propio teléfono móvil con wallet integrada. La visión es hacer que interactuar con cripto sea tan fácil como usar cualquier app. El futuro es móvil.' },
+          { icon: Globe, title: 'Blinks', text: 'Acciones de blockchain que funcionan directamente en Twitter, Discord, y otras apps. Compra un NFT desde un tweet. Haz un swap desde un mensaje. Web3 sin salir de Web2.' }
         ]
       },
       {
         type: 'takeaways',
-        title: '¿Por qué somos Bullish en Solana?',
+        title: 'Solana vs Ethereum: El Veredicto',
         items: [
-          'Es la única chain monolítica capaz de escalar a millones de usuarios hoy.',
-          'Firedancer (el nuevo cliente) la hará aún más rápida y segura.',
-          'La experiencia móvil en Solana está años luz por delante.',
-          'Es usable para micropagos, juegos y pagos reales, no solo para ballenas.'
+          'Ethereum fue el pionero y tiene el ecosistema más grande. Merece respeto por todo lo que inventó.',
+          'Pero para un usuario nuevo, Ethereum L1 es prácticamente inusable por los costos. Te empujan a L2s que añaden complejidad.',
+          'Solana fue diseñada pensando en el usuario final: barata, rápida, simple. Una sola capa, sin fragmentación.',
+          'Para aprender y experimentar con cripto, Solana es objetivamente mejor. Puedes probar 100 cosas por menos de $1.',
+          'Esto no significa que Ethereum sea "malo"—pero sí que Solana es mejor para empezar y para uso diario.',
+          'El futuro probablemente tendrá espacio para ambas, pero Solana está mejor posicionada para adopción masiva.'
         ]
       }
     ],
@@ -1685,47 +2045,63 @@ export const LESSONS_DATA: Record<number, any> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Cuál es la principal ventaja de usuario de Solana sobre ETH?',
+          question: 'Quieres hacer un swap de $50 USDC por SOL. ¿Cuánto pagarías aproximadamente en fees en Ethereum L1 vs Solana?',
           options: [
-            { id: 'a', text: 'Es más viejo' },
-            { id: 'b', text: 'Costos de fracción de centavo y velocidad instantánea' },
-            { id: 'c', text: 'Es más difícil de usar' }
+            { id: 'a', text: 'Ethereum: $0.50, Solana: $0.50 (igual)' },
+            { id: 'b', text: 'Ethereum: $15-40, Solana: $0.0002' },
+            { id: 'c', text: 'Ethereum: $0.01, Solana: $5' },
+            { id: 'd', text: 'Ambos son gratis' }
           ],
           correctAnswer: 'b',
-          explanation: 'La usabilidad (bajos costos + velocidad) hace que Solana sea viable para el uso diario masivo.'
+          explanation: 'Esta es la diferencia práctica más importante. En Ethereum L1, un swap simple puede costar $15-40 en gas. En Solana, cuesta menos de un centavo. Para montos pequeños, Ethereum L1 es económicamente inviable.'
         },
         {
           id: 'q2',
-          question: '¿Qué herramienta de Solana reemplaza a Uniswap con mejores funciones?',
+          question: '¿Qué significa que Solana sea "monolítica" vs Ethereum siendo "modular"?',
           options: [
-            { id: 'a', text: 'Jupiter (JUP)' },
-            { id: 'b', text: 'Pancakeswap' },
-            { id: 'c', text: 'Curve' }
+            { id: 'a', text: 'Solana es más lenta porque tiene una sola capa' },
+            { id: 'b', text: 'Solana pone todo (ejecución, consenso, datos) en L1, sin necesidad de L2s ni bridges. Ethereum divide en capas que requieren bridges para mover fondos.' },
+            { id: 'c', text: 'Modular significa más rápido' },
+            { id: 'd', text: 'No hay diferencia práctica' }
           ],
-          correctAnswer: 'a',
-          explanation: 'Jupiter es el agregador líder en Solana, ofreciendo DCA, órdenes límite y swaps con la mejor ruta.'
+          correctAnswer: 'b',
+          explanation: 'En Ethereum, necesitas mover fondos entre L1 y L2s usando bridges (costoso, lento, riesgoso). En Solana, todo está en un lugar: sin fragmentación, sin bridges, sin complejidad adicional.'
         },
         {
           id: 'q3',
-          question: 'Quieres usar DeFi con 100 $ para aprender. ¿Qué blockchain te permite hacerlo sin gastar 30 $ en gas?',
+          question: '¿Cuál es el principal argumento CONTRA Solana que mencionan los críticos?',
           options: [
-            { id: 'a', text: 'Ethereum Layer 1' },
-            { id: 'b', text: 'Solana (transacciones cuestan $0.0002)' },
-            { id: 'c', text: 'Bitcoin' }
+            { id: 'a', text: 'Es demasiado barata' },
+            { id: 'b', text: 'Requiere hardware más potente para validadores, lo que significa menos validadores que Ethereum (menor descentralización relativa)' },
+            { id: 'c', text: 'No tiene smart contracts' },
+            { id: 'd', text: 'Solo funciona en algunos países' }
           ],
           correctAnswer: 'b',
-          explanation: 'En Ethereum L1, podrías gastar 30 % de tu capital solo en fees. Solana te permite experimentar con riesgo mínimo.'
+          explanation: 'Es un trade-off real: Solana prioriza velocidad y bajo costo, pero esto requiere computadoras más potentes para validadores. Tiene menos validadores que Ethereum. El debate es si eso importa más que la usabilidad.'
         },
         {
           id: 'q4',
-          question: '¿Qué significa que Solana sea "monolítica" (no modular como Ethereum + L2s)?',
+          question: '¿Qué es Jupiter en el ecosistema de Solana?',
           options: [
-            { id: 'a', text: 'Es más lenta' },
-            { id: 'b', text: 'Todo ocurre en una sola capa (no necesitas bridges ni fragmentación)' },
-            { id: 'c', text: 'Es más cara' }
+            { id: 'a', text: 'Una wallet como Phantom' },
+            { id: 'b', text: 'El mejor agregador DEX—te encuentra el mejor precio entre todos los exchanges, con DCA y órdenes límite incluidos' },
+            { id: 'c', text: 'Un marketplace de NFTs' },
+            { id: 'd', text: 'El token nativo de Solana' }
           ],
           correctAnswer: 'b',
-          explanation: 'Solana pone toda la ejecución, consenso y data availability en L1. No necesitas L2s, evitando complejidad y riesgos de bridges.'
+          explanation: 'Jupiter es para Solana lo que Uniswap es para Ethereum, pero con más funciones. Agrega liquidez de todos los DEXs para darte el mejor precio, y tiene features como DCA (compra programada) y órdenes límite.'
+        },
+        {
+          id: 'q5',
+          question: '¿Qué es Firedancer y por qué importa?',
+          options: [
+            { id: 'a', text: 'Un nuevo token de Solana' },
+            { id: 'b', text: 'Una wallet alternativa a Phantom' },
+            { id: 'c', text: 'Un nuevo cliente de validador construido por Jump Trading que aumentará la velocidad 10-100x y eliminará el riesgo de "un solo cliente"' },
+            { id: 'd', text: 'Un juego en Solana' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Firedancer es el upgrade más importante en la historia de Solana. Jump Trading (traders profesionales) lo están construyendo desde cero. Hará la red mucho más rápida y resistente al tener múltiples clientes independientes.'
         }
       ]
     }
@@ -1738,7 +2114,7 @@ export const LESSONS_DATA: Record<number, any> = {
     number: '11 de 20',
     duration: '25 minutos',
     type: 'Tutorial',
-    description: 'Cómo convertir tu dinero local (Pesos, Dólares) a Cripto (USDC/SOL) usando Exchanges.',
+    description: 'El puente entre el mundo tradicional y cripto. Cómo convertir pesos, dólares o tu moneda local a SOL y llevarlo a tu wallet.',
     referrals: [
       {
         title: 'Backpack Exchange',
@@ -1750,45 +2126,145 @@ export const LESSONS_DATA: Record<number, any> = {
     sections: [
       {
         type: 'intro',
-        title: 'El Puente Fiat-Cripto',
-        content: 'Necesitas un Exchange Centralizado (CEX) como Binance, Coinbase o Kraken para tu primera compra. Haces una transferencia bancaria o usas tarjeta, compras SOL, y lo RETIRAS a tu Phantom Wallet.',
-        highlight: { title: 'Paso Crítico', text: 'Al retirar, asegúrate de seleccionar la red **SOLANA**. Si eliges otra red, tus fondos no llegarán a Phantom.' }
+        title: 'El Puente Fiat → Cripto',
+        content: 'Ya tienes tu wallet Phantom lista. Ahora necesitas llenarla. El problema: tu banco no te vende SOL directamente. Necesitas un intermediario—un **Exchange Centralizado (CEX)**—que acepte tu dinero tradicional (fiat) y te dé criptomonedas a cambio. Piensa en el exchange como una casa de cambio: entras con pesos colombianos, sales con dólares... pero en este caso, entras con pesos y sales con SOL. La diferencia clave: los exchanges también custodian tu cripto mientras está ahí. Por eso, una vez que compras, debes **retirar a tu wallet propia**.',
+        highlight: {
+          title: 'El Flujo Completo',
+          text: '1) Creas cuenta en exchange → 2) Depositas fiat (transferencia/tarjeta) → 3) Compras SOL → 4) Retiras a tu Phantom. El paso 4 es CRÍTICO: no dejes tu cripto en el exchange más tiempo del necesario.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Eligiendo tu Exchange: Opciones para Latinoamérica',
+        content: 'No todos los exchanges operan en todos los países ni aceptan todas las monedas. Estas son las opciones más confiables para la región:',
+        features: [
+          { icon: Landmark, title: 'Binance', text: 'El exchange más grande del mundo. Acepta transferencias bancarias locales en muchos países LATAM (Colombia, Argentina, México, Perú). Tiene P2P para comprar con pesos directamente a otros usuarios. Fees bajos.' },
+          { icon: Shield, title: 'Backpack Exchange', text: 'Creado por el equipo detrás de Mad Lads (NFT top de Solana). Especializado en Solana. Regulado en Dubai. Excelente si tu foco es el ecosistema Solana. Interfaz moderna y fees competitivos.' },
+          { icon: Globe, title: 'Coinbase', text: 'El exchange más regulado y "tradicional". Ideal si valoras la seguridad institucional sobre todo. Más caro que otros, pero muy confiable. Bueno para USA y algunos países LATAM.' },
+          { icon: Activity, title: 'Kraken', text: 'Excelente reputación de seguridad. Nunca ha sido hackeado en 10+ años. Acepta muchas monedas fiat. Buena opción si priorizas track record de seguridad.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'El Proceso Paso a Paso',
+        content: 'Vamos a recorrer el proceso completo. Usaremos Binance como ejemplo porque es el más común en LATAM, pero el flujo es similar en todos:',
+        features: [
+          { icon: Users, title: 'Paso 1: Crear Cuenta y KYC', text: 'Regístrate con email. Te pedirán verificar identidad (KYC): foto de documento, selfie, a veces comprobante de domicilio. Esto es obligatorio por regulaciones anti-lavado. Tarda 10 minutos a 24 horas.' },
+          { icon: Landmark, title: 'Paso 2: Depositar Fiat', text: 'Una vez verificado, deposita dinero. Opciones: transferencia bancaria (más barata, tarda horas/días), tarjeta de crédito/débito (instantáneo pero 2-4% de fee), P2P (compras a otros usuarios directamente).' },
+          { icon: Activity, title: 'Paso 3: Comprar SOL', text: 'Con fondos en el exchange, ve a "Trading" o "Comprar Cripto". Busca el par SOL/USD o SOL/tu-moneda. Puedes usar "Market Order" (compra al precio actual) o "Limit Order" (defines el precio que quieres pagar).' },
+          { icon: Wallet, title: 'Paso 4: Retirar a Phantom', text: 'Ve a "Wallet" → "Retiro" → busca SOL. Pega tu dirección de Phantom (la que copiaste de la app). IMPORTANTE: Selecciona la red SOLANA. Confirma y espera 1-10 minutos.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'El Error que Destruye Fondos: Red Incorrecta',
+        content: 'Este es el error más común y más caro para principiantes. Cuando retiras, el exchange te pregunta a QUÉ RED enviar. Para SOL, SIEMPRE debes elegir la red **Solana (SOL)**. Si eliges otra red (como ERC20 o BEP20), tus fondos irán a una dirección de Ethereum o BNB Chain que NO existe en tu Phantom. El dinero se pierde para siempre.',
+        features: [
+          { icon: CheckCircle, title: 'Red Correcta', text: 'Solana (SOL) o "Solana Network" o simplemente "SOL". La dirección de Phantom empieza con caracteres como "5xB7..." o similar.' },
+          { icon: AlertTriangle, title: 'Redes Incorrectas', text: 'ERC20 (Ethereum), BEP20 (BNB Chain), TRC20 (Tron). Si ves estas opciones y las eliges, tus fondos van a una blockchain diferente donde Phantom NO puede accederlos.' },
+          { icon: Shield, title: 'Verificación Triple', text: 'Antes de confirmar: 1) ¿La red dice "Solana"? 2) ¿La dirección es la de mi Phantom? 3) ¿Verifiqué los primeros y últimos 4 caracteres? Si todo está bien, procede.' }
+        ],
+        highlight: {
+          title: 'Historia Real',
+          text: 'Un usuario envió $5,000 en SOL eligiendo la red ERC20 por error. Los fondos llegaron a una dirección de Ethereum que nadie controla. No hay forma de recuperarlos. Están perdidos para siempre en la blockchain de Ethereum. 30 segundos de verificación habrían salvado todo.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Fees: Lo Que Realmente Pagas',
+        content: 'Hay varios fees en el proceso. Entiéndelos para no llevarte sorpresas:',
+        features: [
+          { icon: Percent, title: 'Fee de Depósito', text: 'Transferencia bancaria: usualmente gratis. Tarjeta de crédito: 2-4% (evítalo si puedes). P2P: varía según el vendedor.' },
+          { icon: Percent, title: 'Fee de Trading', text: 'Cuando compras SOL, el exchange cobra 0.1-0.5% del monto. En $100, pagarías $0.10-$0.50. Pequeño.' },
+          { icon: Percent, title: 'Fee de Retiro', text: 'El exchange cobra un fee FIJO por retirar, independiente del monto. Binance cobra ~0.01 SOL (~$2-3). Este fee es del EXCHANGE, no de Solana. El fee real de la red Solana es $0.0002.' },
+          { icon: CheckCircle, title: 'Estrategia Óptima', text: 'Deposita por transferencia bancaria (gratis), compra en lotes grandes para minimizar fees de retiro proporcionales, y retira inmediatamente a tu wallet.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Alternativa: Compra P2P (Peer-to-Peer)',
+        content: 'Si tu banco no puede transferir a exchanges o quieres más privacidad, el P2P es una opción:',
+        features: [
+          { icon: Users, title: 'Cómo Funciona', text: 'Dentro del exchange (Binance P2P, por ejemplo), compras directamente a OTRO usuario. Tú le transfieres pesos por Nequi/Bancolombia/etc, y él te envía USDT o SOL a tu cuenta del exchange. El exchange actúa como escrow.' },
+          { icon: CheckCircle, title: 'Ventajas', text: 'Más métodos de pago (Nequi, Daviplata, efectivo), a veces mejores tasas, útil si tu banco bloquea transferencias a exchanges.' },
+          { icon: AlertTriangle, title: 'Riesgos', text: 'Vendedores con poca reputación pueden ser estafadores. SOLO usa vendedores con 95%+ de calificación positiva y muchas transacciones completadas. Nunca liberes el cripto antes de confirmar que recibiste el pago.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Checklist para tu Primera Compra',
+        items: [
+          'Creaste cuenta en un exchange confiable (Binance, Backpack, Coinbase, Kraken) y completaste la verificación KYC.',
+          'Depositaste fiat usando el método más barato disponible (transferencia > tarjeta).',
+          'Compraste SOL usando una orden de mercado simple.',
+          'Al retirar, seleccionaste la red SOLANA (no ERC20, no BEP20).',
+          'Verificaste la dirección de tu Phantom: primeros 4 caracteres + últimos 4 caracteres.',
+          'Esperaste la confirmación y verificaste que llegó a tu Phantom.',
+          'NO dejaste fondos en el exchange. Todo está en tu wallet propia.'
+        ]
       }
     ],
     quiz: {
       questions: [
         {
           id: 'q1',
-          question: 'Al retirar SOL de Binance a Phantom, ¿qué red eliges?',
+          question: 'Al retirar SOL de Binance a Phantom, el exchange te muestra 3 opciones de red: SOL, ERC20, BEP20. ¿Cuál eliges?',
           options: [
-            { id: 'a', text: 'Ethereum (ERC20)' },
-            { id: 'b', text: 'Solana (SOL)' },
-            { id: 'c', text: 'Bitcoin' }
+            { id: 'a', text: 'ERC20 porque es la más popular' },
+            { id: 'b', text: 'SOL (Solana Network) porque Phantom es una wallet de Solana' },
+            { id: 'c', text: 'BEP20 porque tiene fees más bajos' },
+            { id: 'd', text: 'Cualquiera, todas llegan al mismo lugar' }
           ],
           correctAnswer: 'b',
-          explanation: 'Debes usar la red nativa de la wallet destino. Phantom es una wallet de Solana.'
+          explanation: 'SIEMPRE debes elegir la red nativa del activo y la wallet destino. Phantom es una wallet de Solana, así que debes enviar por la red Solana. Elegir otra red significa perder los fondos PARA SIEMPRE.'
         },
         {
           id: 'q2',
-          question: 'Compras 100 $ de SOL en Binance. ¿Dónde deberías guardarlos a largo plazo?',
+          question: 'Compraste $200 de SOL en un exchange. ¿Qué debes hacer después?',
           options: [
-            { id: 'a', text: 'Dejarlos en Binance (es más fácil)' },
-            { id: 'b', text: 'Retirarlos a tu Phantom wallet (autocustodia)' },
-            { id: 'c', text: 'Mandárselos a un amigo' }
+            { id: 'a', text: 'Dejarlo en el exchange porque es más seguro' },
+            { id: 'b', text: 'Retirar inmediatamente a tu Phantom wallet (autocustodia)' },
+            { id: 'c', text: 'Esperar a que suba de precio antes de moverlo' },
+            { id: 'd', text: 'Transferirlo a otro exchange para diversificar' }
           ],
           correctAnswer: 'b',
-          explanation: 'Not your keys, not your coins. Los exchanges son para comprar/vender, NO para custodiar.'
+          explanation: 'Not your keys, not your coins. Los exchanges pueden congelar tu cuenta, ser hackeados, o quebrar (como FTX). Siempre retira a tu wallet propia lo antes posible.'
         },
         {
           id: 'q3',
-          question: 'Vas a retirar de Kraken a tu Phantom. Te cobran 0.01 SOL de fee. ¿Por qué?',
+          question: 'El exchange cobra 0.01 SOL (~$2) por retirar a tu wallet. El fee real de la red Solana es $0.0002. ¿Por qué la diferencia?',
           options: [
-            { id: 'a', text: 'Es el fee de la red blockchain' },
-            { id: 'b', text: 'Es el fee del exchange (no de Solana)' },
-            { id: 'c', text: 'Te están estafando' }
+            { id: 'a', text: 'Solana subió sus fees' },
+            { id: 'b', text: 'El exchange está cobrando su propio fee de servicio, muy por encima del costo real de la red' },
+            { id: 'c', text: 'Es un error del exchange' },
+            { id: 'd', text: 'Los fees varían según la hora del día' }
           ],
           correctAnswer: 'b',
-          explanation: 'Los exchanges cobran fees de retiro (son ellos). El fee real de Solana es <$0.001.'
+          explanation: 'Los exchanges cobran fees de retiro como negocio, no porque la red lo exija. El fee real de Solana es fracción de centavo. La diferencia es ganancia del exchange. Por eso conviene retirar en montos grandes para minimizar el impacto proporcional.'
+        },
+        {
+          id: 'q4',
+          question: 'Vas a usar Binance P2P para comprar SOL con pesos colombianos. El vendedor tiene 98% de calificación positiva y 500 órdenes completadas. ¿Es seguro?',
+          options: [
+            { id: 'a', text: 'No, P2P siempre es estafa' },
+            { id: 'b', text: 'Sí, un vendedor con alta reputación y muchas órdenes es generalmente confiable. Además, el exchange actúa como escrow.' },
+            { id: 'c', text: 'Solo si le envío mi seed phrase para verificar' },
+            { id: 'd', text: 'No, solo debo usar vendedores con 100%' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'En P2P, la reputación es clave. 98% con 500+ órdenes indica un vendedor confiable. El exchange retiene el cripto del vendedor hasta que confirmas el pago. Nunca compartas seed phrase con nadie.'
+        },
+        {
+          id: 'q5',
+          question: 'Quieres depositar $500 al exchange. ¿Cuál es el método MÁS económico?',
+          options: [
+            { id: 'a', text: 'Tarjeta de crédito (instantáneo)' },
+            { id: 'b', text: 'Transferencia bancaria local (tarda más pero usualmente gratis)' },
+            { id: 'c', text: 'PayPal' },
+            { id: 'd', text: 'Todos cuestan lo mismo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Tarjetas de crédito cobran 2-4% de fee ($10-20 en $500). Transferencias bancarias suelen ser gratuitas o muy baratas. Si puedes esperar unas horas, la transferencia es siempre mejor opción.'
         }
       ]
     }
@@ -1800,49 +2276,138 @@ export const LESSONS_DATA: Record<number, any> = {
     number: '12 de 20',
     duration: '20 minutos',
     type: 'Práctica',
-    description: 'Envía valor a través del mundo en segundos. Experimenta la magia de la blockchain.',
+    description: 'Envía valor a través del mundo en segundos, sin bancos ni intermediarios. Este momento cambiará tu perspectiva del dinero.',
     sections: [
       {
         type: 'intro',
-        title: 'Enviando Valor',
-        content: 'Vamos a hacer una prueba. Envía una pequeña cantidad de SOL a un amigo o a una segunda wallet tuya. Verás que en Solana es casi instantáneo y casi gratis.',
-        highlight: { title: 'Checklist', text: '1. Copia la dirección destino. 2. Verifica los primeros y últimos 4 caracteres. 3. Envía una prueba pequeña primero.' }
+        title: 'El Momento Mágico',
+        content: 'Hay un antes y un después de tu primera transacción cripto. Cuando envías valor a alguien del otro lado del mundo, en segundos, sin pedir permiso a nadie, y pagando menos de un centavo—algo hace "clic" en tu cabeza. Entiendes visceralmente por qué esto es revolucionario. Ya tienes SOL en tu Phantom. Ahora vamos a moverlo. Puedes enviar a un amigo, a una segunda wallet tuya, o incluso hacer un swap. Lo importante es que experimentes el proceso completo.',
+        highlight: {
+          title: 'Lo Que Estás a Punto de Experimentar',
+          text: 'En el sistema bancario, una transferencia internacional tarda 3-5 días y cuesta $25-50. En Solana, tarda menos de 1 segundo y cuesta menos de $0.001. Misma función, 1000x más eficiente. Esto no es exageración—es la realidad que vas a vivir en los próximos 2 minutos.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Anatomía de una Transacción en Solana',
+        content: 'Antes de hacerlo, entiende qué está pasando bajo la superficie cuando envías cripto:',
+        features: [
+          { icon: Lock, title: 'Firmas Criptográficas', text: 'Cuando presionas "Enviar", tu wallet usa tu llave privada para "firmar" la transacción matemáticamente. Esta firma prueba que TÚ autorizaste el movimiento, sin revelar tu llave privada.' },
+          { icon: Network, title: 'Propagación a la Red', text: 'Tu transacción firmada se envía a los validadores de Solana. En milisegundos, miles de computadoras en todo el mundo la verifican y la agregan al siguiente bloque.' },
+          { icon: CheckCircle, title: 'Confirmación', text: 'Una vez incluida en un bloque, la transacción es PERMANENTE. Queda grabada para siempre en la blockchain. Nadie puede revertirla, censurarla, o negarla.' },
+          { icon: Globe, title: 'Actualización del Estado', text: 'La blockchain actualiza los balances: tu cuenta tiene menos SOL, la cuenta destino tiene más. Todo esto pasa en ~400 milisegundos.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Paso a Paso: Enviar SOL desde Phantom',
+        content: 'Vamos a hacerlo. Sigue estos pasos exactamente:',
+        features: [
+          { icon: Wallet, title: 'Paso 1: Abre Phantom', text: 'En la pantalla principal verás tu balance de SOL. Haz clic en el token SOL para ver opciones.' },
+          { icon: Zap, title: 'Paso 2: Haz clic en "Send"', text: 'Verás un campo para ingresar la dirección destino y el monto a enviar.' },
+          { icon: Shield, title: 'Paso 3: Pega la Dirección Destino', text: 'Pide a tu amigo que te envíe su dirección de Solana (algo como "7xK9p..."). Pégala en el campo. VERIFICA los primeros y últimos 4 caracteres manualmente.' },
+          { icon: Activity, title: 'Paso 4: Ingresa el Monto', text: 'Para la primera prueba, envía algo pequeño ($1-5 en SOL). Siempre deja algo de SOL para fees futuros (~0.01 SOL mínimo).' },
+          { icon: CheckCircle, title: 'Paso 5: Confirma y Observa', text: 'Revisa el resumen, confirma. En 1-2 segundos verás "Confirmed". Pide a tu amigo que revise—ya debería ver los fondos.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'El Protocolo de Seguridad: Nunca Saltártelo',
+        content: 'Las transacciones blockchain son IRREVERSIBLES. No hay "Ctrl+Z". No hay soporte técnico que las cancele. Estas precauciones son obligatorias:',
+        features: [
+          { icon: AlertTriangle, title: 'Verifica la Dirección', text: 'SIEMPRE compara los primeros 4 y últimos 4 caracteres de la dirección con el original. Los clipboard hijackers pueden cambiar la dirección cuando la copias. Una letra diferente = fondos perdidos para siempre.' },
+          { icon: Shield, title: 'Transacción de Prueba', text: 'Si vas a enviar $1,000+, SIEMPRE envía primero una prueba de $1-5. Espera a que llegue. SOLO ENTONCES envía el resto. Los segundos que "pierdes" pueden salvarte miles.' },
+          { icon: Lock, title: 'Confirma el Contexto', text: 'Si alguien "te urge" a enviar rápido, es red flag. Los estafadores crean presión artificial. Las transacciones legítimas pueden esperar 2 minutos de verificación.' }
+        ],
+        highlight: {
+          title: 'Historia de Horror',
+          text: 'Un usuario copiaba direcciones de un chat de Discord. Un malware cambió silenciosamente la dirección en su portapapeles. Envió $15,000 a la wallet del atacante. Irreversible. Irrecuperable. Si hubiera verificado visualmente, habría visto que los caracteres no coincidían.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Recibir Cripto: La Otra Mitad',
+        content: 'Recibir es más simple que enviar, pero hay cosas que saber:',
+        features: [
+          { icon: Wallet, title: 'Tu Dirección Pública', text: 'En Phantom, haz clic en tu dirección (arriba) para copiarla. Esta dirección es SEGURA de compartir. Otros pueden ver tu balance, pero no pueden sacar fondos.' },
+          { icon: Globe, title: 'Cualquiera Puede Enviarte', text: 'No necesitas "aceptar" transacciones. Si alguien tiene tu dirección, puede enviarte tokens. Por eso a veces recibirás tokens spam/estafa—ignóralos.' },
+          { icon: CheckCircle, title: 'Verifica en Phantom', text: 'Los fondos aparecen automáticamente en tu balance segundos después de que la transacción se confirma. No necesitas "reclamar" nada.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Lo Que Acabas de Lograr',
+        items: [
+          'Enviaste valor a través del mundo sin pedir permiso a ningún banco, gobierno, o intermediario.',
+          'Pagaste menos de $0.001 en fees—comparado con $25-50 en el sistema tradicional.',
+          'La transacción tardó ~1 segundo—comparado con 3-5 días bancarios.',
+          'Quedó grabada permanentemente en la blockchain—verificable por cualquiera, para siempre.',
+          'Entiendes por qué las direcciones deben verificarse: las transacciones son IRREVERSIBLES.',
+          'Tienes el poder de mover TU dinero, cuando TÚ quieras, donde TÚ quieras. Esto es libertad financiera.'
+        ]
       }
     ],
     quiz: {
       questions: [
         {
           id: 'q1',
-          question: '¿Qué debes hacer antes de enviar una cantidad grande?',
+          question: 'Vas a enviar $5,000 en SOL a un amigo. ¿Cuál es el protocolo correcto?',
           options: [
-            { id: 'a', text: 'Rezar' },
-            { id: 'b', text: 'Enviar una transacción de prueba pequeña' },
-            { id: 'c', text: 'Enviar todo rápido' }
+            { id: 'a', text: 'Enviar todo de una vez para ahorrar tiempo' },
+            { id: 'b', text: 'Enviar primero $5 de prueba, verificar que llegue, y LUEGO enviar el resto' },
+            { id: 'c', text: 'Pedirle a tu amigo que te envíe su seed phrase para verificar' },
+            { id: 'd', text: 'Usar la función "envío rápido" sin revisar' }
           ],
           correctAnswer: 'b',
-          explanation: 'Siempre prueba la dirección con un monto mínimo para asegurar que todo esté correcto.'
+          explanation: 'SIEMPRE haz una transacción de prueba pequeña para montos grandes. Los segundos que "pierdes" pueden salvarte miles. Una dirección incorrecta significa pérdida total irreversible.'
         },
         {
           id: 'q2',
-          question: 'Vas a enviar 5 SOL a un amigo. ¿Qué datos te debe dar?',
+          question: 'Copiaste una dirección de Solana y la pegaste en Phantom. Antes de enviar, ¿qué debes verificar?',
           options: [
-            { id: 'a', text: 'Su dirección pública de Solana (empieza con letras/números)' },
-            { id: 'b', text: 'Su frase semilla' },
-            { id: 'c', text: 'Su contraseña de Phantom' }
+            { id: 'a', text: 'Que la persona que te la dio sea simpática' },
+            { id: 'b', text: 'Los primeros 4 y últimos 4 caracteres de la dirección coinciden con el original (protección contra clipboard hijackers)' },
+            { id: 'c', text: 'Nada, confío en el copy-paste' },
+            { id: 'd', text: 'Solo el primer carácter' }
           ],
-          correctAnswer: 'a',
-          explanation: 'Solo necesitas su dirección pública. Nunca pidas ni compartas seed phrases o contraseñas.'
+          correctAnswer: 'b',
+          explanation: 'El malware llamado "clipboard hijacker" puede reemplazar silenciosamente la dirección que copias por una del atacante. Verificar visualmente los caracteres es tu última línea de defensa.'
         },
         {
           id: 'q3',
-          question: 'Enviaste SOL pero te equivocaste en la dirección. ¿Puedes cancelar?',
+          question: 'Tu amigo te quiere enviar SOL. ¿Qué información le das?',
           options: [
-            { id: 'a', text: 'Sí, llamas a soporte de Solana' },
-            { id: 'b', text: 'No. Las transacciones en blockchain son irreversibles' },
-            { id: 'c', text: 'Sí, Phantom puede revertirla' }
+            { id: 'a', text: 'Tu frase semilla para que pueda acceder a tu wallet' },
+            { id: 'b', text: 'Tu contraseña de Phantom' },
+            { id: 'c', text: 'Tu dirección pública de Solana (seguro de compartir)' },
+            { id: 'd', text: 'El nombre de tu wallet' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Tu dirección pública es como un número de cuenta: otros pueden ver y depositar, pero NO pueden retirar. NUNCA compartas tu seed phrase con nadie, ni siquiera para recibir.'
+        },
+        {
+          id: 'q4',
+          question: 'Enviaste SOL a una dirección incorrecta. El dinero ya fue confirmado en la blockchain. ¿Qué puedes hacer?',
+          options: [
+            { id: 'a', text: 'Llamar a soporte de Solana para revertir' },
+            { id: 'b', text: 'Pedir a Phantom que cancele la transacción' },
+            { id: 'c', text: 'Nada. Las transacciones blockchain son irreversibles. Los fondos están perdidos a menos que contactes al dueño de esa dirección.' },
+            { id: 'd', text: 'Esperar 24 horas para que se revierta automáticamente' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'No hay "soporte de Solana". No hay reversiones. Si enviaste a una dirección que no controlas, esos fondos están perdidos para siempre. Por esto la verificación previa es CRÍTICA.'
+        },
+        {
+          id: 'q5',
+          question: '¿Cuánto cuesta aproximadamente una transacción en Solana?',
+          options: [
+            { id: 'a', text: '$5-10, similar a una transferencia bancaria' },
+            { id: 'b', text: '$0.0002 aproximadamente (fracción de centavo)' },
+            { id: 'c', text: '1% del monto enviado' },
+            { id: 'd', text: 'Es gratis completamente' }
           ],
           correctAnswer: 'b',
-          explanation: 'Por eso es VITAL verificar la dirección 2-3 veces antes de enviar.'
+          explanation: 'Una transacción típica en Solana cuesta alrededor de 5,000 lamports (~$0.0002). Es tan barato que puedes hacer cientos de transacciones por menos de $1. Esto es lo que hace a Solana práctica para uso diario.'
         }
       ]
     }
@@ -1852,17 +2417,76 @@ export const LESSONS_DATA: Record<number, any> = {
     title: 'Exploradores de Bloques (Solscan)',
     level: 'Principiante',
     number: '13 de 20',
-    duration: '15 minutos',
+    duration: '18 minutos',
     type: 'Herramienta',
-    description: 'Aprende a verificar la verdad. No confíes, verifica.',
+    description: '"Don\'t Trust, Verify" — La filosofía central de cripto. Aprende a usar la herramienta que te permite verificar cualquier cosa en la blockchain.',
     sections: [
       {
         type: 'intro',
-        title: 'Solscan.io',
-        content: 'Si Phantom dice "Enviado" pero tu amigo dice "No llegó", ¿quién miente? La Blockchain nunca miente. Copia el ID de transacción (Signature) en Solscan.io y verás el estado real.',
+        title: '¿Qué es un Explorador de Bloques?',
+        content: 'La blockchain es un libro contable público. Cada transacción, cada balance, cada contrato—todo está ahí, visible para quien quiera verlo. Pero leer datos crudos de blockchain es imposible para humanos normales. Un **explorador de bloques** es una herramienta que traduce esos datos a formato legible. Para Solana, el explorador más usado es **Solscan.io**. Piénsalo como el "Google de Solana"—puedes buscar cualquier dirección, cualquier transacción, cualquier token, y ver toda su historia.',
+        highlight: {
+          title: 'Don\'t Trust, Verify',
+          text: 'Esta frase resume la filosofía cripto. ¿Tu amigo dice que envió el pago? Verifica en Solscan. ¿Un proyecto dice que tiene 100,000 holders? Verifica en Solscan. ¿Un exchange dice que procesó tu retiro? Verifica en Solscan. La blockchain no miente.'
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Qué Puedes Verificar en Solscan?',
+        content: 'Solscan te da acceso a toda la información pública de la blockchain de Solana:',
         features: [
-          { icon: Search, title: 'Transparencia', text: 'Puedes ver el balance y movimientos de cualquier cuenta.' },
-          { icon: CheckCircle, title: 'Confirmaciones', text: 'Si dice "Success" en Solscan, el dinero llegó. Punto.' }
+          { icon: Activity, title: 'Transacciones', text: 'Pega el Signature (TX ID) de cualquier transacción y verás: estado (Success/Fail), monto, direcciones involucradas, fee pagado, timestamp exacto, y bloque donde se incluyó.' },
+          { icon: Wallet, title: 'Wallets/Cuentas', text: 'Pega cualquier dirección de Solana y verás: balance actual de SOL y todos los tokens, historial completo de transacciones, NFTs en la wallet, y tokens SPL.' },
+          { icon: Gem, title: 'Tokens', text: 'Busca cualquier token y verás: supply total, holders, distribución, transacciones recientes, y el contract address oficial (crucial para evitar tokens falsos).' },
+          { icon: Server, title: 'Contratos/Programas', text: 'Cada smart contract en Solana es verificable. Puedes ver su código (si está verificado), historial de uso, y estadísticas.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Caso Práctico: Verificar una Transacción',
+        content: 'Enviaste SOL y quieres confirmar que llegó. Aquí está el proceso exacto:',
+        features: [
+          { icon: Search, title: 'Paso 1: Obtén el TX Signature', text: 'En Phantom, después de enviar, haz clic en la transacción en tu historial. Verás un "Signature" o "TX ID"—una cadena larga de letras y números. Cópialo.' },
+          { icon: Globe, title: 'Paso 2: Abre Solscan', text: 'Ve a solscan.io (verifica la URL). En la barra de búsqueda, pega el Signature y presiona Enter.' },
+          { icon: CheckCircle, title: 'Paso 3: Lee el Resultado', text: 'Verás el estado de la transacción. "Success" = confirmada y completa. "Fail" = falló (los fondos no se movieron). También verás el monto, las direcciones de origen y destino, y el fee.' },
+          { icon: Activity, title: 'Paso 4: Verifica el Destino', text: 'Haz clic en la dirección de destino para ver su balance actual. Si los fondos llegaron, aparecerán en el balance de esa wallet.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Caso Práctico: Investigar una Wallet',
+        content: 'Alguien te va a pagar en P2P. Quieres verificar que realmente tiene fondos antes de enviar tu parte:',
+        features: [
+          { icon: Users, title: 'Pide la Dirección Pública', text: 'La otra persona te da su dirección de Solana. Esto es público y seguro de compartir—solo pueden ver, no sacar fondos.' },
+          { icon: Search, title: 'Búscala en Solscan', text: 'Pega la dirección en solscan.io. Verás inmediatamente su balance de SOL y todos los tokens que tiene.' },
+          { icon: Activity, title: 'Revisa el Historial', text: 'Puedes ver todas las transacciones pasadas. ¿Es una wallet nueva sin historia? ¿O tiene actividad consistente? Esto te dice mucho sobre legitimidad.' },
+          { icon: AlertTriangle, title: 'Red Flags', text: 'Si la wallet tiene balance cero o fue creada hace 5 minutos, sospecha. Los estafadores suelen usar wallets desechables.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Verificar Tokens: Evita Estafas',
+        content: 'Cualquiera puede crear un token llamado "USDC" o "BONK". ¿Cómo sabes cuál es el real?',
+        features: [
+          { icon: Shield, title: 'El Contract Address (CA)', text: 'Cada token tiene una dirección única llamada "mint address" o "contract address". Es como el DNI del token. Dos tokens pueden tener el mismo nombre, pero NUNCA el mismo CA.' },
+          { icon: CheckCircle, title: 'Fuentes Oficiales', text: 'Busca el CA oficial en CoinGecko, CoinMarketCap, o el sitio web oficial del proyecto. Nunca confíes en CAs que te mandan por Discord/Telegram.' },
+          { icon: Search, title: 'Verificación en Solscan', text: 'Busca el token en Solscan y compara el CA. Si coincide con el oficial, es legítimo. Si no, es una copia falsa.' }
+        ],
+        highlight: {
+          title: 'Ejemplo Real',
+          text: 'USDC oficial en Solana: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v. Si alguien te ofrece "USDC" con un CA diferente, es una estafa. SIEMPRE verifica el CA antes de comprar o aceptar cualquier token.'
+        }
+      },
+      {
+        type: 'takeaways',
+        title: 'El Explorador como Superpoder',
+        items: [
+          'Solscan.io es la fuente de verdad de Solana. Lo que dice Solscan, ES la realidad.',
+          'Cualquier transacción puede verificarse usando su Signature/TX ID.',
+          'Cualquier wallet es pública—puedes ver balance e historial de cualquier dirección.',
+          'SIEMPRE verifica el Contract Address de tokens para evitar comprar falsificaciones.',
+          'Antes de trades P2P, verifica que la contraparte realmente tenga los fondos que dice.',
+          '"Don\'t Trust, Verify" no es paranoia—es el estándar profesional en cripto.'
         ]
       }
     ],
@@ -1870,36 +2494,63 @@ export const LESSONS_DATA: Record<number, any> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Para qué sirve Solscan?',
+          question: 'Enviaste SOL hace 10 minutos. Tu amigo dice que no le llegó. ¿Cuál es el paso correcto para verificar?',
           options: [
-            { id: 'a', text: 'Para minar' },
-            { id: 'b', text: 'Para verificar transacciones y cuentas en la blockchain' },
-            { id: 'c', text: 'Para chatear' }
+            { id: 'a', text: 'Confiar en tu amigo y reenviar' },
+            { id: 'b', text: 'Copiar el TX Signature de tu transacción, buscarlo en Solscan, y verificar si dice "Success" y a qué dirección fue' },
+            { id: 'c', text: 'Contactar soporte de Solana' },
+            { id: 'd', text: 'Esperar 24 horas' }
           ],
           correctAnswer: 'b',
-          explanation: 'Es el explorador de bloques de Solana, la fuente de verdad de la red.'
+          explanation: 'La blockchain es la fuente de verdad, no las personas. Si Solscan dice "Success" y muestra la dirección correcta, el dinero llegó. Si tu amigo "no lo ve", el problema está en su wallet, no en la transacción.'
         },
         {
           id: 'q2',
-          question: 'Enviaste SOL hace 5 minutos y tu amigo dice que no llegó. ¿Qué haces?',
+          question: 'Vas a hacer un trade P2P con alguien que dice tener 500 SOL. ¿Cómo verificas que realmente los tiene?',
           options: [
-            { id: 'a', text: 'Reenviar' },
-            { id: 'b', text: 'Copiar el Signature (TX ID) y buscarlo en Solscan para verificar el estado' },
-            { id: 'c', text: 'Llamar al CEO de Solana' }
+            { id: 'a', text: 'Le pido una captura de pantalla de su wallet' },
+            { id: 'b', text: 'Confío en su palabra porque parece buena persona' },
+            { id: 'c', text: 'Le pido su dirección pública y la busco en Solscan para ver su balance real en tiempo real' },
+            { id: 'd', text: 'Le pido su seed phrase para verificar' }
           ],
-          correctAnswer: 'b',
-          explanation: 'La blockchain es la fuente de verdad. Si Solscan dice "Success", el dinero llegó.'
+          correctAnswer: 'c',
+          explanation: 'Las capturas pueden editarse con Photoshop. La blockchain no miente. Pega su dirección en Solscan y verás exactamente cuánto tiene. Las direcciones públicas son seguras de compartir.'
         },
         {
           id: 'q3',
-          question: 'Quieres saber si una wallet tiene mucho SOL antes de hacer un trade P2P. ¿Cómo lo verificas?',
+          question: 'Quieres comprar BONK. Hay 3 tokens llamados "BONK" en Jupiter. ¿Cómo sabes cuál es el real?',
           options: [
-            { id: 'a', text: 'Le pides una captura de pantalla' },
-            { id: 'b', text: 'Pegas su dirección pública en Solscan y ves su balance en tiempo real' },
-            { id: 'c', text: 'Confías en su palabra' }
+            { id: 'a', text: 'El que tenga el logo más bonito' },
+            { id: 'b', text: 'El primero que aparece en la lista' },
+            { id: 'c', text: 'Busco el Contract Address (CA) oficial en CoinGecko y verifico que coincida en Solscan' },
+            { id: 'd', text: 'El que más gente está comprando' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Cualquiera puede crear un token con el mismo nombre y logo. El ÚNICO identificador único es el Contract Address. Siempre verifica el CA desde fuentes oficiales antes de comprar cualquier token.'
+        },
+        {
+          id: 'q4',
+          question: 'En Solscan, buscas una transacción y dice "Status: Fail". ¿Qué significa?',
+          options: [
+            { id: 'a', text: 'La transacción está pendiente' },
+            { id: 'b', text: 'La transacción falló—los fondos NO se movieron y probablemente volvieron a la wallet origen' },
+            { id: 'c', text: 'Los fondos se perdieron' },
+            { id: 'd', text: 'Necesitas esperar más tiempo' }
           ],
           correctAnswer: 'b',
-          explanation: 'Todas las wallets son públicas. Solscan te muestra el balance y el historial completo.'
+          explanation: '"Fail" significa que la transacción no se ejecutó correctamente. Los fondos no se transfirieron. Usualmente siguen en la wallet origen. Deberás intentar de nuevo, posiblemente con más SOL para fees si ese fue el problema.'
+        },
+        {
+          id: 'q5',
+          question: '¿Qué información NO puedes ver en Solscan sobre una wallet pública?',
+          options: [
+            { id: 'a', text: 'Su balance de SOL' },
+            { id: 'b', text: 'Su historial de transacciones' },
+            { id: 'c', text: 'La seed phrase del dueño' },
+            { id: 'd', text: 'Los tokens que posee' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Las seed phrases NUNCA están en la blockchain. Son secretas y solo las conoce el dueño. Todo lo demás (balance, historial, tokens) es público y visible para cualquiera que busque la dirección.'
         }
       ]
     }
@@ -1911,16 +2562,129 @@ export const LESSONS_DATA: Record<number, any> = {
     number: '14 de 20',
     duration: '30 minutos',
     type: 'Seguridad Vital',
-    description: 'El mundo cripto está lleno de depredadores. Aprende a defenderte antes de salir a mar abierto.',
+    description: 'El 99% de los robos en cripto son evitables. Conoce las tácticas de los estafadores y protégete antes de perder el dinero que tanto te costó ganar.',
     sections: [
       {
         type: 'intro',
-        title: 'Paranoia Saludable',
-        content: 'En Cripto, las transacciones son irreversibles. Si te roban, no hay soporte técnico. Debes ser escéptico.',
+        title: 'La Realidad Brutal de Web3',
+        content: 'Aquí no hay bancos que reviertan transacciones fraudulentas. No hay seguro de depósito. No hay policía cripto que recupere tus fondos. Si te roban, perdiste—punto. Pero aquí está la buena noticia: el 99% de las estafas siguen los mismos patrones. Una vez que los conoces, son fáciles de detectar. Esta lección podría ser la más valiosa del curso—literalmente puede salvarte miles de dólares.',
+        highlight: {
+          title: 'Estadística Real',
+          text: 'En 2023, los usuarios perdieron más de $2 MIL MILLONES en estafas cripto—no hackeos sofisticados, sino ingeniería social donde las VÍCTIMAS entregaron sus llaves voluntariamente. Los estafadores no necesitan ser hackers genios. Solo necesitan que bajes la guardia una vez.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Estafa #1: El Falso Soporte Técnico',
+        content: 'Esta es la estafa MÁS común. Así funciona:',
         features: [
-          { icon: AlertTriangle, title: 'DMs de Soporte', text: 'Nadie de soporte te escribirá primero por Telegram/Discord. Son estafas.' },
-          { icon: Link, title: 'Phishing', text: 'Cuidado con los anuncios de Google que llevan a sitios falsos de Phantom o Jupiter.' },
-          { icon: Zap, title: 'Tokens Falsos', text: 'Cualquiera puede crear un token llamado "USDC". Verifica siempre el Contract Address (CA).' }
+          { icon: Users, title: 'El Setup', text: 'Publicas una pregunta en Discord/Telegram/Twitter sobre un problema con tu wallet. O simplemente estás en un servidor de cripto.' },
+          { icon: AlertTriangle, title: 'El Ataque', text: 'Recibes un DM de "Phantom Support", "Jupiter Help", o similar. Dicen que detectaron un problema con tu cuenta y necesitan verificar tu seed phrase para "proteger tus fondos".' },
+          { icon: Shield, title: 'La Realidad', text: 'NINGUNA empresa legítima te escribirá primero por DM. NINGUNA te pedirá tu seed phrase JAMÁS. El "soporte" es un estafador. Si les das la frase, vacían tu wallet en segundos.' }
+        ],
+        highlight: {
+          title: 'Regla Absoluta',
+          text: 'Si alguien te contacta primero ofreciendo "ayuda" con tu wallet, es estafa. El 100% de las veces. Sin excepciones. El soporte real nunca inicia conversaciones por DM.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Estafa #2: Phishing (Sitios Falsos)',
+        content: 'Los estafadores crean copias EXACTAS de sitios legítimos para robarte:',
+        features: [
+          { icon: Globe, title: 'Cómo te Encuentran', text: 'Buscan "Phantom wallet" o "Jupiter swap" en Google. El primer resultado es un ANUNCIO de "phantomm.app" o "jupiter-swap.io". El sitio se ve IDÉNTICO al real.' },
+          { icon: AlertTriangle, title: 'El Engaño', text: 'El sitio te pide "conectar wallet" o "importar wallet existente". Te pide tu seed phrase. Al ingresarla, la roban en tiempo real y vacían todo.' },
+          { icon: Shield, title: 'La Defensa', text: 'NUNCA hagas clic en anuncios de Google para sitios cripto. Escribe la URL manualmente: phantom.app, jup.ag, solscan.io. Guarda los sitios oficiales en favoritos.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Estafa #3: NFTs y Tokens Maliciosos',
+        content: 'Cualquiera puede enviarte tokens o NFTs sin tu permiso. Los estafadores lo usan así:',
+        features: [
+          { icon: Gem, title: 'El Airdrop Misterioso', text: 'Aparece un NFT en tu wallet que dice "Has ganado $10,000. Visita claim-rewards.xyz para reclamar". O recibes un token desconocido con valor aparente.' },
+          { icon: AlertTriangle, title: 'La Trampa', text: 'Si visitas el sitio e interactúas con el contrato, este tiene permisos maliciosos. Puede drenar TODOS tus tokens, no solo el NFT spam.' },
+          { icon: Shield, title: 'Qué Hacer', text: 'IGNORA cualquier NFT o token que no solicitaste. No lo vendas, no lo "quemes" interactuando con sitios dudosos. Simplemente ocúltalo en tu wallet y olvídalo.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Estafa #4: Tokens Falsos',
+        content: 'Cualquiera puede crear un token llamado "USDC" o "BONK". Así te engañan:',
+        features: [
+          { icon: Zap, title: 'El Setup', text: 'Alguien te ofrece vender "USDC" en P2P o te muestra un token "BONK" con buen precio en un DEX desconocido.' },
+          { icon: AlertTriangle, title: 'El Engaño', text: 'El token tiene el mismo nombre y logo, pero es una copia falsa. No tiene valor real. O peor: al interactuar con él, drena tu wallet.' },
+          { icon: Shield, title: 'La Verificación', text: 'SIEMPRE verifica el Contract Address (CA) del token. El CA es único e imposible de falsificar. Compara con CoinGecko, CoinMarketCap, o el sitio oficial del proyecto.' }
+        ],
+        highlight: {
+          title: 'CAs Oficiales que DEBES Guardar',
+          text: 'USDC (Solana): EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v. SOL es nativo (no tiene CA). Cualquier "SOL" o "USDC" con CA diferente es FALSO.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Estafa #5: El Giveaway Falso',
+        content: 'Nadie regala dinero. Así funciona esta estafa:',
+        features: [
+          { icon: Users, title: 'El Anzuelo', text: '"Elon Musk está regalando BTC. Envía 0.1 BTC y recibes 1 BTC de vuelta." O "Jupiter airdrop! Conecta tu wallet para reclamar 500 JUP gratis."' },
+          { icon: AlertTriangle, title: 'La Realidad', text: 'NADIE te pedirá enviar dinero para recibir más. Los airdrops reales NUNCA piden que envíes fondos primero ni tu seed phrase.' },
+          { icon: Shield, title: 'Regla Simple', text: 'Si suena demasiado bueno para ser verdad, es estafa. Siempre. Los giveaways reales no requieren que envíes dinero ni tu seed phrase.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Estafa #6: Drainers en dApps',
+        content: 'Contratos inteligentes maliciosos que drenan tu wallet cuando firmas:',
+        features: [
+          { icon: AlertTriangle, title: 'Cómo Funcionan', text: 'Conectas tu wallet a un sitio aparentemente legítimo. Te pide aprobar una transacción. La transacción incluye permisos ocultos para transferir TODOS tus tokens.' },
+          { icon: Shield, title: 'Las Defensas', text: 'Lee lo que firmas en Phantom—te muestra simulación de lo que pasará. Si dice "Approve unlimited access to all tokens", RECHAZA. Si el sitio no es 100% confiable, no conectes.' },
+          { icon: CheckCircle, title: 'Usa Burner Wallets', text: 'Para probar dApps nuevas, usa una wallet "burner" con fondos mínimos. Si resulta ser estafa, pierdes poco. Tu wallet principal queda intacta.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'Señales de Alerta vs Señales de Legitimidad',
+        leftSide: {
+          title: 'RED FLAGS (Probablemente Estafa)',
+          points: [
+            'Te contactan primero por DM',
+            'Urgencia artificial ("solo hoy", "actúa rápido")',
+            'Te piden seed phrase bajo CUALQUIER pretexto',
+            'Prometen retornos garantizados o multiplicar dinero',
+            'URL con errores sutiles (phantomm, jupiter-swap)',
+            'Anuncios de Google para sitios cripto',
+            'NFTs/tokens misteriosos en tu wallet',
+            '"Influencers" que piden seed para verificar'
+          ]
+        },
+        rightSide: {
+          title: 'GREEN FLAGS (Probablemente Legítimo)',
+          points: [
+            'TÚ inicias el contacto con soporte oficial',
+            'URLs oficiales verificadas (phantom.app, jup.ag)',
+            'NUNCA te piden seed phrase',
+            'No prometen retornos garantizados',
+            'Tienen historial público y verificable',
+            'Código abierto y auditorías públicas',
+            'Comunidad activa con moderación real',
+            'Transacciones simuladas muestran exactamente qué pasará'
+          ]
+        }
+      },
+      {
+        type: 'takeaways',
+        title: 'Las 10 Reglas de Oro Anti-Estafas',
+        items: [
+          'NUNCA compartas tu seed phrase. Nadie legítimo la necesita. Nunca.',
+          'Si alguien te contacta primero ofreciendo ayuda/dinero/inversión, es estafa.',
+          'Escribe URLs manualmente. No hagas clic en anuncios de Google para sitios cripto.',
+          'Verifica el Contract Address de CUALQUIER token antes de comprar o interactuar.',
+          'Si suena demasiado bueno para ser verdad, es estafa. Nadie regala dinero.',
+          'Lee las transacciones antes de firmar. Phantom te muestra simulaciones.',
+          'Usa wallets burner para probar dApps nuevas. Protege tu wallet principal.',
+          'Ignora NFTs y tokens que aparecen sin que los solicitaras.',
+          'Mantén deshabilitados los DMs de Discord/Telegram de desconocidos.',
+          'Si tienes CUALQUIER duda, no firmes. Investiga primero. La blockchain puede esperar.'
         ]
       }
     ],
@@ -1928,47 +2692,75 @@ export const LESSONS_DATA: Record<number, any> = {
       questions: [
         {
           id: 'q1',
-          question: 'Recibes un NFT gratis desconocido en tu wallet que dice "Visita esta web para reclamar $1000". ¿Qué haces?',
+          question: 'Recibes un DM de "Phantom Support" en Discord diciendo que detectaron actividad sospechosa y necesitan verificar tu seed phrase. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Visito la web rápido' },
-            { id: 'b', text: 'Lo ignoro y lo quemo/oculto (Es Scam)' },
-            { id: 'c', text: 'Se lo mando a un amigo' }
+            { id: 'a', text: 'Les envío la seed phrase para proteger mis fondos' },
+            { id: 'b', text: 'Les envío solo las primeras 6 palabras para verificar' },
+            { id: 'c', text: 'Bloqueo, reporto, e ignoro. Phantom NUNCA contacta por DM ni pide seed phrases.' },
+            { id: 'd', text: 'Les pido que me llamen para verificar' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Es una estafa común. Si interactúas con la web, drenarán tu wallet.'
+          correctAnswer: 'c',
+          explanation: 'El 100% de los mensajes de "soporte" que piden seed phrases son estafas. Las empresas legítimas NUNCA inician contacto por DM ni piden tu seed phrase bajo ninguna circunstancia.'
         },
         {
           id: 'q2',
-          question: 'Un "admin" de Discord te escribe diciendo que tu wallet está en peligro y te pide tu seed phrase para "protegerla". ¿Qué haces?',
+          question: 'Buscas "Jupiter swap" en Google. El primer resultado es un anuncio de "jupiter-swap.io". ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Se la doy rápido para no perder todo' },
-            { id: 'b', text: 'Bloqueo y reporto. Ningún admin legítimo NUNCA te pedirá la seed phrase' },
-            { id: 'c', text: 'Le doy solo 6 palabras para confirmar' }
+            { id: 'a', text: 'Hago clic porque apareció primero' },
+            { id: 'b', text: 'Ignoro los anuncios y escribo manualmente jup.ag (el sitio oficial) o uso un favorito guardado' },
+            { id: 'c', text: 'Pruebo en una wallet vacía primero' },
+            { id: 'd', text: 'Verifico que tenga HTTPS' }
           ],
           correctAnswer: 'b',
-          explanation: 'Regla de oro: quien te pida la seed phrase = estafador. Siempre.'
+          explanation: 'Los estafadores PAGAN por anuncios de Google con URLs falsas. NUNCA hagas clic en anuncios para sitios cripto. Escribe la URL oficial manualmente o usa favoritos guardados.'
         },
         {
           id: 'q3',
-          question: 'Ves un anuncio en Google de "phantom-app-secure.com" que ofrece una versión "mejorada" de Phantom. ¿Qué haces?',
+          question: 'Aparece un NFT misterioso en tu wallet que dice "Reclama $5,000 en claim-crypto-rewards.xyz". ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Lo descargo (suena mejor)' },
-            { id: 'b', text: 'Ignoro. El sitio oficial SOLO es phantom.app' },
-            { id: 'c', text: 'Lo pruebo en una wallet secundaria' }
+            { id: 'a', text: 'Visito el sitio para reclamar el premio' },
+            { id: 'b', text: 'Lo vendo rápido en Magic Eden' },
+            { id: 'c', text: 'Lo ignoro completamente. Es un NFT spam diseñado para drenar mi wallet si interactúo con el sitio.' },
+            { id: 'd', text: 'Se lo envío a un amigo' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Los scammers compran ads en Google con URLs muy similares. SIEMPRE verifica la URL exacta.'
+          correctAnswer: 'c',
+          explanation: 'Los NFTs spam son vectores de ataque comunes. Si visitas el sitio y firmas cualquier transacción, el contrato malicioso puede drenar TODA tu wallet. Simplemente ignóralos.'
         },
         {
           id: 'q4',
-          question: 'Quieres comprar el token BONK. Hay 5 tokens con ese nombre en Jupiter. ¿Cómo sabes cuál es el real?',
+          question: 'Quieres comprar USDC en un DEX. Hay 3 tokens llamados "USDC". ¿Cómo verificas cuál es el real?',
           options: [
-            { id: 'a', text: 'El que tiene más holders' },
-            { id: 'b', text: 'Verifico el Contract Address (CA) oficial en CoinGecko o el sitio web del proyecto' },
-            { id: 'c', text: 'El primero que aparece' }
+            { id: 'a', text: 'El que tenga el logo más claro' },
+            { id: 'b', text: 'Comparo el Contract Address con el oficial de CoinGecko: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v' },
+            { id: 'c', text: 'El que tenga más liquidez' },
+            { id: 'd', text: 'Pregunto en Discord cuál es' }
           ],
           correctAnswer: 'b',
-          explanation: 'Cualquiera puede crear un token falso con el mismo nombre. Solo el CA es único e irrefutable.'
+          explanation: 'El Contract Address (CA) es el ÚNICO identificador único de un token. Cualquiera puede copiar nombre y logo, pero el CA es irrepetible. SIEMPRE verifica el CA desde fuentes oficiales.'
+        },
+        {
+          id: 'q5',
+          question: 'Un influencer de Twitter te contacta por DM: "Estoy haciendo un giveaway privado. Envíame 0.5 SOL y te devuelvo 5 SOL". ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Envío los 0.5 SOL porque es un influencer famoso' },
+            { id: 'b', text: 'Le pido prueba de identidad primero' },
+            { id: 'c', text: 'Bloqueo e ignoro. Ningún giveaway legítimo pide que envíes dinero primero. Las cuentas de influencers son frecuentemente hackeadas o impersonadas.' },
+            { id: 'd', text: 'Envío 0.1 SOL para probar' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'NINGÚN giveaway legítimo te pedirá enviar dinero primero. Esto es estafa 100% de las veces. Las cuentas de influencers son objetivos frecuentes de hackers que usan su credibilidad para estafar.'
+        },
+        {
+          id: 'q6',
+          question: 'Conectas tu wallet a una nueva dApp. Phantom muestra: "Esta transacción solicita APROBAR ACCESO ILIMITADO a todos tus tokens". ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Apruebo porque necesito usar la dApp' },
+            { id: 'b', text: 'RECHAZO inmediatamente. Un permiso "ilimitado a todos los tokens" es señal de drainer malicioso. Las dApps legítimas piden permisos específicos y limitados.' },
+            { id: 'c', text: 'Apruebo pero con monto pequeño' },
+            { id: 'd', text: 'Contacto al soporte de la dApp para preguntar' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los drainers funcionan pidiendo permisos excesivos. Una dApp legítima pide acceso SOLO a lo que necesita (ej: "swap 100 USDC por SOL"). Si pide acceso "ilimitado a todos los tokens", es casi seguro maliciosa.'
         }
       ]
     }
@@ -3247,9 +4039,9 @@ export const LESSONS_DATA: Record<number, any> = {
     title: 'Gasta tus Cripto',
     level: 'Principiante',
     number: '15 de 20',
-    duration: '20 min',
+    duration: '25 min',
     type: 'Herramientas',
-    description: 'No necesitas vender a tu banco para gastar. Usa tarjetas cripto directamente.',
+    description: 'El círculo completo: de fiat a cripto, de cripto a gastos reales. Cómo usar tarjetas cripto para vivir sin depender de bancos tradicionales.',
     referrals: [
       {
         title: 'Kast',
@@ -3268,45 +4060,143 @@ export const LESSONS_DATA: Record<number, any> = {
     sections: [
       {
         type: 'intro',
-        title: 'Viviendo en Cripto',
-        content: 'La meta final es no tener que volver al sistema bancario tradicional. Hoy en día existen tarjetas Visa/Mastercard que se recargan con Cripto.',
-        highlight: { title: 'Ventaja', text: 'Evitas la burocracia de los bancos y usas tu dinero libremente.' }
+        title: 'El Sueño: Vivir en Cripto',
+        content: 'Aprendiste a comprar cripto. Aprendiste a guardarlo de forma segura. Aprendiste a moverlo. Ahora viene la pregunta final: ¿cómo lo USAS en el mundo real? La respuesta tradicional era: "vende en un exchange, retira a tu banco, y gasta el fiat". Pero esto tiene problemas: fees de venta, tiempos de espera, límites bancarios, y preguntas incómodas de tu banco sobre "de dónde viene ese dinero". Las **tarjetas cripto** eliminan todo eso. Cargas tu tarjeta con USDC o stablecoins, y la usas como cualquier Visa/Mastercard. Amazon, Netflix, gasolina, supermercado—funciona en cualquier lugar.',
+        highlight: {
+          title: 'El Ciclo Completo',
+          text: 'Fiat → Exchange → Cripto → Tu Wallet → Tarjeta Cripto → Gastos Reales. Todo sin volver a pasar por tu banco tradicional. Sin pedir permiso. Sin límites arbitrarios. Tu dinero, tus reglas.'
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Cómo Funcionan las Tarjetas Cripto?',
+        content: 'Las tarjetas cripto actúan como un puente entre el mundo blockchain y el sistema de pagos tradicional:',
+        features: [
+          { icon: CreditCard, title: 'La Mecánica', text: 'Tú cargas la tarjeta con cripto (usualmente stablecoins como USDC). Cuando pagas en una tienda, la tarjeta convierte automáticamente tu cripto a la moneda local (pesos, dólares) al momento del pago. El comercio recibe fiat normal.' },
+          { icon: Globe, title: 'Aceptación Universal', text: 'Estas tarjetas son Visa o Mastercard reales. Funcionan en CUALQUIER lugar que acepte tarjetas: tiendas físicas, comercio online, cajeros automáticos, pagos de servicios, suscripciones.' },
+          { icon: Zap, title: 'Sin Intermediarios Bancarios', text: 'No necesitas tener una cuenta bancaria en algunos casos. Cargas directamente desde tu wallet a la tarjeta. Eliminas al banco como intermediario.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Opciones de Tarjetas para Latinoamérica',
+        content: 'No todas las tarjetas cripto funcionan en LATAM. Estas son las mejores opciones actualmente:',
+        features: [
+          { icon: CreditCard, title: 'Kast', text: 'Tarjeta virtual y física que acepta USDC y USDT. Funciona en la mayoría de países LATAM. Recarga directamente desde Solana. Sin fees de recarga. Buena opción para comenzar.' },
+          { icon: CreditCard, title: 'Avici', text: 'Tarjeta premium con beneficios adicionales. Acepta múltiples criptomonedas. Buen servicio al cliente en español. Disponible en varios países latinoamericanos.' },
+          { icon: CreditCard, title: 'Binance Card', text: 'Si ya usas Binance, puedes solicitar su tarjeta. Convierte automáticamente desde tu balance del exchange. Disponibilidad limitada según país.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: '¿Por Qué Gastar Stablecoins y NO Bitcoin/SOL?',
+        content: 'Esta es una decisión estratégica importante que muchos nuevos usuarios no consideran:',
+        features: [
+          { icon: TrendingUp, title: 'El Problema de Gastar Activos Volátiles', text: 'Imagina que gastas 1 SOL ($150) en cena. Un mes después, SOL vale $300. Acabas de pagar $300 por una cena de $150. Este "dolor" psicológico es real y tiene nombre: la "pizza de 10,000 BTC" de Laszlo Hanyecz.' },
+          { icon: Shield, title: 'Stablecoins: El Dinero para Gastar', text: 'USDC siempre vale ~$1. No hay volatilidad. Gastar 100 USDC hoy es gastar $100, sin importar qué pase con el mercado mañana. Son perfectos para gastos diarios.' },
+          { icon: PiggyBank, title: 'La Estrategia Óptima', text: 'HODL tus BTC/SOL/ETH como inversión de largo plazo. Convierte a stablecoins SOLO lo que planeas gastar en el corto plazo. Carga tu tarjeta cripto con stablecoins. Así nunca "gastas" tu inversión.' }
+        ],
+        highlight: {
+          title: 'Regla de Oro',
+          text: 'Bitcoin y SOL son para AHORRAR. Stablecoins son para GASTAR. No mezcles los dos. Cuando necesites dinero para gastos, convierte de tu "stack de ahorro" a stablecoins, y de ahí a tu tarjeta.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'El Proceso: De tu Wallet a Gastos Reales',
+        content: 'Así funciona el flujo completo para gastar tu cripto:',
+        features: [
+          { icon: Wallet, title: 'Paso 1: Tienes USDC en Phantom', text: 'Ya sea porque compraste USDC directamente, o porque vendiste algo de SOL por USDC en Jupiter. Tienes stablecoins listos para gastar.' },
+          { icon: CreditCard, title: 'Paso 2: Carga tu Tarjeta Cripto', text: 'Desde la app de Kast/Avici, obtienes una dirección de depósito. Envías USDC desde Phantom a esa dirección. En minutos, el balance aparece en tu tarjeta.' },
+          { icon: Zap, title: 'Paso 3: Usa tu Tarjeta', text: 'Paga en cualquier comercio físico u online que acepte Visa/Mastercard. La conversión a moneda local es automática e instantánea.' },
+          { icon: CheckCircle, title: 'Paso 4: Verifica tu Balance', text: 'En la app de la tarjeta ves el historial de gastos y el balance restante. Recarga cuando necesites más.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Consideraciones Importantes',
+        content: 'Antes de lanzarte a gastar, ten en cuenta estos puntos:',
+        features: [
+          { icon: AlertTriangle, title: 'Impuestos', text: 'En muchos países, convertir cripto a fiat (incluso vía tarjeta) puede ser un evento taxable. Consulta las regulaciones de tu país. Guarda registros de tus transacciones.' },
+          { icon: Percent, title: 'Fees', text: 'Las tarjetas pueden cobrar fees de recarga, de transacción, o de conversión de moneda. Compara opciones. Algunas tarjetas ofrecen cashback que compensa los fees.' },
+          { icon: Shield, title: 'Límites', text: 'Cada tarjeta tiene límites diarios/mensuales de gasto y retiro en cajeros. Verifica que se ajusten a tu uso esperado antes de elegir.' },
+          { icon: Globe, title: 'Disponibilidad Geográfica', text: 'No todas las tarjetas funcionan en todos los países. Verifica disponibilidad en tu país antes de aplicar.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Cerrando el Ciclo',
+        items: [
+          'Las tarjetas cripto te permiten gastar tus activos digitales en el mundo real sin pasar por bancos tradicionales.',
+          'Funcionan como Visa/Mastercard normales—aceptadas en millones de comercios mundialmente.',
+          'Gasta STABLECOINS (USDC), no activos volátiles (BTC, SOL). Los stablecoins son para gastar, las criptos volátiles son para ahorrar.',
+          'El proceso: Phantom → App de tarjeta cripto → Gastos reales. Sin intermediarios bancarios.',
+          'Considera impuestos, fees, y límites antes de elegir tu tarjeta.',
+          'Con esto completas el ciclo: entrada al mundo cripto, custodia segura, y ahora salida práctica para uso diario.'
+        ]
       }
     ],
     quiz: {
       questions: [
         {
           id: 'q1',
-          question: '¿Qué ventaja tiene una tarjeta cripto?',
+          question: 'Tienes 1000 USDC en tu Phantom y quieres comprar algo en Amazon. ¿Cuál es el proceso?',
           options: [
-            { id: 'a', text: 'Es de metal' },
-            { id: 'b', text: 'Permite gastar tus activos sin pasar por un banco tradicional' },
-            { id: 'c', text: 'Es gratis' }
+            { id: 'a', text: 'Amazon acepta USDC directamente, solo pegas tu dirección de wallet' },
+            { id: 'b', text: 'Cargas una tarjeta cripto (Kast, Avici) con tu USDC, y usas esa tarjeta para pagar en Amazon como cualquier Visa/Mastercard' },
+            { id: 'c', text: 'Necesitas vender en un exchange y esperar 5 días para tener el dinero en tu banco' },
+            { id: 'd', text: 'No es posible gastar cripto en el mundo real' }
           ],
           correctAnswer: 'b',
-          explanation: 'Conectan el mundo DeFi con el sistema de pagos tradicional Visa/Mastercard.'
+          explanation: 'Las tarjetas cripto actúan como puente: tú les cargas cripto, ellas pagan al comercio en fiat. Amazon nunca sabe que usaste cripto—reciben pesos/dólares normales de una tarjeta Visa/Mastercard.'
         },
         {
           id: 'q2',
-          question: 'Tienes 1000 USDC en tu Phantom. ¿Puedes comprar en Amazon directamente?',
+          question: 'Tienes 5 SOL (valor actual $750). ¿Por qué NO es recomendable gastar SOL directamente?',
           options: [
-            { id: 'a', text: 'Sí, Amazon acepta USDC' },
-            { id: 'b', text: 'No, necesitas transferir USDC a una tarjeta cripto (Kast, Avici) que convierte a fiat al momento del pago' },
-            { id: 'c', text: 'Solo si compras NFTs' }
+            { id: 'a', text: 'SOL es muy lento para pagos' },
+            { id: 'b', text: 'SOL es volátil—si gastas 1 SOL hoy y mañana vale el doble, efectivamente pagaste el doble por tu compra. Es mejor gastar stablecoins y guardar SOL como inversión.' },
+            { id: 'c', text: 'Las tarjetas cripto no aceptan SOL' },
+            { id: 'd', text: 'SOL no tiene valor real' }
           ],
           correctAnswer: 'b',
-          explanation: 'Las tarjetas cripto actúan de puente: tú pagas en cripto, el comercio recibe fiat.'
+          explanation: 'Este es el "problema de la pizza de Bitcoin". Gastar activos que pueden apreciarse duele psicológicamente. La estrategia óptima: HODL cripto volátil, gasta stablecoins para compras diarias.'
         },
         {
           id: 'q3',
-          question: '¿Por qué muchos prefieren gastar USDC en vez de SOL?',
+          question: '¿Cuál es la diferencia entre gastar con una tarjeta cripto vs vender en exchange y retirar a tu banco?',
           options: [
-            { id: 'a', text: 'USDC es más rápido' },
-            { id: 'b', text: 'USDC es estable (= $1 siempre). Gastar SOL es gastar un activo que puede subir de precio' },
-            { id: 'c', text: 'SOL no se puede gastar' }
+            { id: 'a', text: 'No hay diferencia, es lo mismo' },
+            { id: 'b', text: 'La tarjeta cripto es más rápida (minutos vs días), evita tu banco tradicional, y usualmente tiene menos burocracia y preguntas sobre origen de fondos' },
+            { id: 'c', text: 'Vender en exchange es más rápido' },
+            { id: 'd', text: 'Las tarjetas cripto son ilegales' }
           ],
           correctAnswer: 'b',
-          explanation: 'Gastar SOL cuando vale $100 y verlo subir a $200 duele. Los stablecoins son mejores para gastos diarios.'
+          explanation: 'Retirar a banco puede tomar días, generar preguntas de compliance bancario, y tiene límites. Las tarjetas cripto eliminan al banco como intermediario—cargas y gastas en minutos.'
+        },
+        {
+          id: 'q4',
+          question: 'Quieres empezar a usar una tarjeta cripto en Colombia. ¿Qué debes verificar primero?',
+          options: [
+            { id: 'a', text: 'Que la tarjeta sea de color bonito' },
+            { id: 'b', text: 'Disponibilidad en tu país, fees de recarga/transacción, límites de gasto, y métodos de recarga aceptados' },
+            { id: 'c', text: 'Solo que acepte Bitcoin' },
+            { id: 'd', text: 'Nada, todas funcionan igual en todos los países' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'No todas las tarjetas operan en todos los países. Los fees, límites, y criptos aceptados varían. Investiga antes de aplicar para evitar sorpresas.'
+        },
+        {
+          id: 'q5',
+          question: 'Estrategia óptima: tienes 10 SOL + 500 USDC. ¿Cómo los usas?',
+          options: [
+            { id: 'a', text: 'Gasto todo el SOL primero porque vale más' },
+            { id: 'b', text: 'Convierto todo a USDC y lo gasto' },
+            { id: 'c', text: 'HODL el SOL como inversión de largo plazo. Uso los 500 USDC para cargar mi tarjeta cripto y gastos diarios. Si necesito más, convierto pequeñas cantidades de SOL a USDC.' },
+            { id: 'd', text: 'Guardo todo y nunca gasto' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Separar "dinero de inversión" (SOL) de "dinero de gasto" (USDC) es la estrategia profesional. Nunca gastas tu inversión directamente—solo conviertes lo necesario para gastos puntuales.'
         }
       ]
     }
