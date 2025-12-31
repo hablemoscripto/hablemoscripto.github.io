@@ -4072,7 +4072,7 @@ export const LESSONS_DATA: Record<number, any> = {
         title: '¿Cómo Funcionan las Tarjetas Cripto?',
         content: 'Las tarjetas cripto actúan como un puente entre el mundo blockchain y el sistema de pagos tradicional:',
         features: [
-          { icon: CreditCard, title: 'La Mecánica', text: 'Tú cargas la tarjeta con cripto (usualmente stablecoins como USDC). Cuando pagas en una tienda, la tarjeta convierte automáticamente tu cripto a la moneda local (pesos, dólares) al momento del pago. El comercio recibe fiat normal.' },
+          { icon: Wallet, title: 'La Mecánica', text: 'Tú cargas la tarjeta con cripto (usualmente stablecoins como USDC). Cuando pagas en una tienda, la tarjeta convierte automáticamente tu cripto a la moneda local (pesos, dólares) al momento del pago. El comercio recibe fiat normal.' },
           { icon: Globe, title: 'Aceptación Universal', text: 'Estas tarjetas son Visa o Mastercard reales. Funcionan en CUALQUIER lugar que acepte tarjetas: tiendas físicas, comercio online, cajeros automáticos, pagos de servicios, suscripciones.' },
           { icon: Zap, title: 'Sin Intermediarios Bancarios', text: 'No necesitas tener una cuenta bancaria en algunos casos. Cargas directamente desde tu wallet a la tarjeta. Eliminas al banco como intermediario.' }
         ]
@@ -4082,9 +4082,9 @@ export const LESSONS_DATA: Record<number, any> = {
         title: 'Opciones de Tarjetas para Latinoamérica',
         content: 'No todas las tarjetas cripto funcionan en LATAM. Estas son las mejores opciones actualmente:',
         features: [
-          { icon: CreditCard, title: 'Kast', text: 'Tarjeta virtual y física que acepta USDC y USDT. Funciona en la mayoría de países LATAM. Recarga directamente desde Solana. Sin fees de recarga. Buena opción para comenzar.' },
-          { icon: CreditCard, title: 'Avici', text: 'Tarjeta premium con beneficios adicionales. Acepta múltiples criptomonedas. Buen servicio al cliente en español. Disponible en varios países latinoamericanos.' },
-          { icon: CreditCard, title: 'Binance Card', text: 'Si ya usas Binance, puedes solicitar su tarjeta. Convierte automáticamente desde tu balance del exchange. Disponibilidad limitada según país.' }
+          { icon: Banknote, title: 'Kast', text: 'Tarjeta virtual y física que acepta USDC y USDT. Funciona en la mayoría de países LATAM. Recarga directamente desde Solana. Sin fees de recarga. Buena opción para comenzar.' },
+          { icon: Banknote, title: 'Avici', text: 'Tarjeta premium con beneficios adicionales. Acepta múltiples criptomonedas. Buen servicio al cliente en español. Disponible en varios países latinoamericanos.' },
+          { icon: Banknote, title: 'Binance Card', text: 'Si ya usas Binance, puedes solicitar su tarjeta. Convierte automáticamente desde tu balance del exchange. Disponibilidad limitada según país.' }
         ]
       },
       {
@@ -4107,7 +4107,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: 'Así funciona el flujo completo para gastar tu cripto:',
         features: [
           { icon: Wallet, title: 'Paso 1: Tienes USDC en Phantom', text: 'Ya sea porque compraste USDC directamente, o porque vendiste algo de SOL por USDC en Jupiter. Tienes stablecoins listos para gastar.' },
-          { icon: CreditCard, title: 'Paso 2: Carga tu Tarjeta Cripto', text: 'Desde la app de Kast/Avici, obtienes una dirección de depósito. Envías USDC desde Phantom a esa dirección. En minutos, el balance aparece en tu tarjeta.' },
+          { icon: Banknote, title: 'Paso 2: Carga tu Tarjeta Cripto', text: 'Desde la app de Kast/Avici, obtienes una dirección de depósito. Envías USDC desde Phantom a esa dirección. En minutos, el balance aparece en tu tarjeta.' },
           { icon: Zap, title: 'Paso 3: Usa tu Tarjeta', text: 'Paga en cualquier comercio físico u online que acepte Visa/Mastercard. La conversión a moneda local es automática e instantánea.' },
           { icon: CheckCircle, title: 'Paso 4: Verifica tu Balance', text: 'En la app de la tarjeta ves el historial de gastos y el balance restante. Recarga cuando necesites más.' }
         ]
