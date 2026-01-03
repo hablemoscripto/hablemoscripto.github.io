@@ -103,7 +103,13 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
         setProgress(newProgress);
         localStorage.setItem('hablemos-progress', JSON.stringify(newProgress));
+      } else if (user) {
+        // Authenticated user with no Supabase progress = fresh account
+        // Clear any stale localStorage data and use empty progress
+        localStorage.removeItem('hablemos-progress');
+        setProgress(newProgress);
       } else {
+        // Guest user: fall back to localStorage for offline progress
         const savedProgress = localStorage.getItem('hablemos-progress');
         if (savedProgress) {
           setProgress(JSON.parse(savedProgress));
@@ -112,7 +118,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
     };
 
     fetchProgressByLevel();
-  }, [supabaseProgress, levels]);
+  }, [supabaseProgress, levels, user]);
 
   const getLevelProgress = (levelId: string) => {
     const level = levels.find(l => l.id === levelId);
