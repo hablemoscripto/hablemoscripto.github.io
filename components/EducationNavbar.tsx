@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Bitcoin, Menu, X, BarChart3, ChevronDown, LogOut, BookOpen, Zap, Trophy } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useGamification } from '../contexts/GamificationContext';
+import { useAuth } from '../contexts/AuthContext';
 
 interface EducationNavbarProps {
   globalProgress: number;
@@ -13,9 +14,10 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { xp, level, streak } = useGamification();
+  const { signOut } = useAuth();
 
-  const handleLogout = () => {
-    // Add any logout logic here if needed (e.g. clearing auth state)
+  const handleLogout = async () => {
+    await signOut();
     navigate('/');
   };
 

@@ -3,6 +3,7 @@ import { ChevronLeft, Lock, CheckCircle, PlayCircle, Clock } from 'lucide-react'
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../contexts/ProgressContext';
 import { LevelData } from '../data/courseData';
+import { getPreviousLessonId } from '../utils/courseUtils';
 
 interface LevelDetailProps {
     levelData: LevelData;
@@ -74,9 +75,9 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                                     const isCompleted = isLessonCompleted(lesson.id);
 
                                     // Check if previous lesson is completed (sequential locking)
-                                    // First lesson (id === 1) is always unlocked
-                                    const isPreviousCompleted = lesson.id === 1 || isLessonCompleted(lesson.id - 1);
-                                    const isLocked = !isPreviousCompleted;
+                                    const prevId = getPreviousLessonId(lesson.id);
+                                    const isPreviousCompleted = prevId === null || isLessonCompleted(prevId);
+                                    const isLocked = !isPreviousCompleted && !isLessonCompleted(lesson.id);
 
                                     return (
                                         <button

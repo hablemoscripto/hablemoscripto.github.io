@@ -1,7 +1,5 @@
 import { supabase } from '../lib/supabase';
-
-// Question type definitions for the enhanced quiz system
-export type QuestionType = 'multiple-choice' | 'true-false' | 'multiple-select' | 'ordering' | 'fill-blank';
+import type { QuestionType, Question } from '../components/education/types';
 
 export interface QuizQuestion {
   id: string;
@@ -50,7 +48,7 @@ export interface LessonData {
   videoId?: string;
   sections: any[];
   quiz?: {
-    questions: QuizQuestion[];
+    questions: Question[];
   };
   checkpointQuizzes?: CheckpointQuizData[];
   referrals?: {
@@ -172,12 +170,12 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
       })),
     };
 
-    // Add quiz if exists - map to QuizQuestion format
+    // Add quiz if exists - map to Question format
     if (quiz && quiz.quiz_questions) {
       lessonData.quiz = {
         questions: quiz.quiz_questions
           .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
-          .map((q: any): QuizQuestion => {
+          .map((q: any): Question => {
             // Parse options - handle both string arrays and object arrays
             const options = q.options?.map((opt: any) =>
               typeof opt === 'string' ? opt : opt.text
@@ -197,7 +195,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
 
             return {
               id: q.id.toString(),
-              type: 'multiple-choice' as QuestionType,
+              type: 'multiple-choice',
               question: q.question,
               options,
               correctAnswer,

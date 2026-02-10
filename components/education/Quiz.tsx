@@ -14,70 +14,18 @@ import {
     ChevronUp
 } from 'lucide-react';
 
-// ============================================
-// QUESTION TYPE DEFINITIONS
-// ============================================
-
-type QuestionType = 'multiple-choice' | 'true-false' | 'multiple-select' | 'ordering' | 'fill-blank';
-
-interface BaseQuestion {
-    id: string;
-    type: QuestionType;
-    question: string;
-    explanation: string;
-    hint?: string;
-    difficulty?: 'easy' | 'medium' | 'hard';
-    points?: number;
-}
-
-interface MultipleChoiceQuestion extends BaseQuestion {
-    type: 'multiple-choice';
-    options: string[];
-    correctAnswer: number;
-}
-
-interface TrueFalseQuestion extends BaseQuestion {
-    type: 'true-false';
-    correctAnswer: boolean;
-}
-
-interface MultipleSelectQuestion extends BaseQuestion {
-    type: 'multiple-select';
-    options: string[];
-    correctAnswers: number[];
-}
-
-interface OrderingQuestion extends BaseQuestion {
-    type: 'ordering';
-    items: string[];
-    correctOrder: number[];
-}
-
-interface FillBlankQuestion extends BaseQuestion {
-    type: 'fill-blank';
-    textBefore: string;
-    textAfter: string;
-    correctAnswer: string;
-    acceptableAnswers?: string[];
-}
-
-type Question = MultipleChoiceQuestion | TrueFalseQuestion | MultipleSelectQuestion | OrderingQuestion | FillBlankQuestion;
-
-// Legacy question format for backward compatibility
-interface LegacyQuestion {
-    id: string;
-    question: string;
-    options: string[];
-    correctAnswer: number;
-    explanation: string;
-}
-
-interface QuizProps {
-    questions: (Question | LegacyQuestion)[];
-    onComplete: (score: number) => void;
-    showProgressBar?: boolean;
-    allowNavigation?: boolean;
-}
+import type {
+    QuestionType,
+    BaseQuestion,
+    MultipleChoiceQuestion,
+    TrueFalseQuestion,
+    MultipleSelectQuestion,
+    OrderingQuestion,
+    FillBlankQuestion,
+    Question,
+    LegacyQuestion,
+    QuizProps,
+} from './types';
 
 // ============================================
 // HELPER FUNCTIONS

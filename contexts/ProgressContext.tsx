@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
 import { useGamification } from './GamificationContext';
+import { getAllLessonsOrdered } from '../utils/courseUtils';
 
 interface LessonProgress {
   lessonId: number;
@@ -149,9 +150,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     return progress.filter((p) => p.completed).length;
   };
 
-  // Total lessons across all levels: Beginner (18) + Intermediate (16) + Advanced (14) = 48
   const getTotalLessons = (): number => {
-    return 48;
+    return getAllLessonsOrdered().length;
   };
 
   const getProgressPercentage = (): number => {
