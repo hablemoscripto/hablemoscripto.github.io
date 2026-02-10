@@ -54,3 +54,12 @@ export const getLevelForLesson = (lessonId: number): string => {
 
     return 'beginner'; // Default fallback
 };
+
+export const getBeginnerLessonIds = (): number[] =>
+    BEGINNER_LEVEL.modules.flatMap(m => m.lessons.map(l => l.id));
+
+export const getIntermediateLessonIds = (): number[] =>
+    INTERMEDIATE_LEVEL.modules.flatMap(m => m.lessons.map(l => l.id));
+
+export const getAdvancedLessonIds = (): number[] =>
+    ADVANCED_LEVEL.modules.flatMap(m => m.lessons.map(l => l.id));

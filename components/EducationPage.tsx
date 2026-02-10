@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import EducationNavbar from './EducationNavbar';
-import { Trophy, Shield, TrendingUp, Star, ChevronRight, LucideIcon, Award, Crown } from 'lucide-react';
+import {
+  Trophy, Shield, TrendingUp, Star, ChevronRight, LucideIcon, Award, Crown,
+  Footprints, BookOpen, Flag, GraduationCap, Gem, Zap, Flame, Activity, Calendar, Lock,
+} from 'lucide-react';
 import { useProgress } from '../contexts/ProgressContext';
+import { useGamification } from '../contexts/GamificationContext';
 import LevelCard from './ui/LevelCard';
 import Certificate from './ui/Certificate';
 import PaymentButton from './PaymentButton';
 import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
-import { supabase } from '../lib/supabase'; // Import supabase client
+import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 
 interface EducationPageProps {
@@ -33,6 +37,11 @@ const ICONS: Record<string, LucideIcon> = {
   Star,
 };
 
+const ACHIEVEMENT_ICONS: Record<string, LucideIcon> = {
+  Footprints, BookOpen, Award, Flag, GraduationCap, TrendingUp, Crown, Gem,
+  Zap, Flame, Star, Activity, Calendar, Trophy,
+};
+
 const EducationPage: React.FC<EducationPageProps> = () => {
   const [showModal, setShowModal] = useState(false);
   const [levels, setLevels] = useState<Level[]>([]);
@@ -42,6 +51,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const location = useLocation();
 
   const { progress: supabaseProgress } = useProgress();
+  const { achievements, achievementDefinitions } = useGamification();
   const [progress, setProgress] = useState<ProgressData>({});
 
   useEffect(() => {
@@ -270,6 +280,52 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                           Reclamar Certificado
                         </button>
                       </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Achievements Section */}
+          <div className="container max-w-7xl mx-auto px-6 mt-16">
+            <h2 className="text-2xl font-heading font-bold text-white mb-6 flex items-center gap-2">
+              <Trophy size={24} className="text-brand-500" />
+              Logros
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {achievementDefinitions.map(def => {
+                const unlocked = achievements.find(a => a.id === def.id);
+                const Icon = ACHIEVEMENT_ICONS[def.icon] || Trophy;
+                return (
+                  <div
+                    key={def.id}
+                    className={`relative rounded-xl p-4 text-center transition-all ${
+                      unlocked
+                        ? 'bg-slate-800/80 border border-brand-500/30 shadow-md shadow-brand-500/5'
+                        : 'bg-slate-900/50 border border-white/5 opacity-50'
+                    }`}
+                  >
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 ${
+                      unlocked
+                        ? 'bg-gradient-to-br from-brand-400 to-brand-600'
+                        : 'bg-slate-800'
+                    }`}>
+                      {unlocked ? (
+                        <Icon size={24} className="text-slate-900" />
+                      ) : (
+                        <Lock size={20} className="text-slate-600" />
+                      )}
+                    </div>
+                    <p className={`text-sm font-bold mb-1 ${unlocked ? 'text-white' : 'text-slate-500'}`}>
+                      {def.title}
+                    </p>
+                    {unlocked ? (
+                      <p className="text-xs text-brand-400">
+                        {new Date(unlocked.unlockedAt!).toLocaleDateString('es-CO', { day: 'numeric', month: 'short' })}
+                      </p>
+                    ) : (
+                      <p className="text-xs text-slate-600">{def.description}</p>
                     )}
                   </div>
                 );

@@ -1,8 +1,13 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
+import {
+    getBeginnerLessonIds,
+    getIntermediateLessonIds,
+    getAdvancedLessonIds,
+} from '../utils/courseUtils';
 
-interface Achievement {
+export interface Achievement {
     id: string;
     title: string;
     description: string;
@@ -10,13 +15,136 @@ interface Achievement {
     unlockedAt?: string;
 }
 
+export interface AchievementDefinition {
+    id: string;
+    title: string;
+    description: string;
+    icon: string;
+    condition: (data: ProgressSnapshot) => boolean;
+}
+
+export interface ProgressSnapshot {
+    completedLessonIds: number[];
+    completedCount: number;
+    totalLessons: number;
+    progressPercentage: number;
+    xp: number;
+    streak: number;
+}
+
+const ACHIEVEMENT_DEFINITIONS: AchievementDefinition[] = [
+    {
+        id: 'first_lesson',
+        title: 'Primer Paso',
+        description: 'Completa tu primera lección',
+        icon: 'Footprints',
+        condition: (d) => d.completedCount >= 1,
+    },
+    {
+        id: 'five_lessons',
+        title: 'Ritmo Constante',
+        description: 'Completa 5 lecciones',
+        icon: 'BookOpen',
+        condition: (d) => d.completedCount >= 5,
+    },
+    {
+        id: 'ten_lessons',
+        title: 'Estudiante Dedicado',
+        description: 'Completa 10 lecciones',
+        icon: 'Award',
+        condition: (d) => d.completedCount >= 10,
+    },
+    {
+        id: 'halfway',
+        title: 'Medio Camino',
+        description: 'Alcanza el 50% del curso',
+        icon: 'Flag',
+        condition: (d) => d.progressPercentage >= 50,
+    },
+    {
+        id: 'beginner_complete',
+        title: 'Principiante Graduado',
+        description: 'Completa todas las lecciones de Principiante',
+        icon: 'GraduationCap',
+        condition: (d) => {
+            const ids = getBeginnerLessonIds();
+            return ids.length > 0 && ids.every(id => d.completedLessonIds.includes(id));
+        },
+    },
+    {
+        id: 'intermediate_complete',
+        title: 'Analista Certificado',
+        description: 'Completa todas las lecciones de Intermedio',
+        icon: 'TrendingUp',
+        condition: (d) => {
+            const ids = getIntermediateLessonIds();
+            return ids.length > 0 && ids.every(id => d.completedLessonIds.includes(id));
+        },
+    },
+    {
+        id: 'advanced_complete',
+        title: 'Experto Cripto',
+        description: 'Completa todas las lecciones de Avanzado',
+        icon: 'Crown',
+        condition: (d) => {
+            const ids = getAdvancedLessonIds();
+            return ids.length > 0 && ids.every(id => d.completedLessonIds.includes(id));
+        },
+    },
+    {
+        id: 'all_complete',
+        title: 'Maestro Absoluto',
+        description: 'Completa todas las lecciones del curso',
+        icon: 'Gem',
+        condition: (d) => d.totalLessons > 0 && d.completedCount === d.totalLessons,
+    },
+    {
+        id: 'xp_500',
+        title: 'Aprendiz',
+        description: 'Acumula 500 XP',
+        icon: 'Zap',
+        condition: (d) => d.xp >= 500,
+    },
+    {
+        id: 'xp_2000',
+        title: 'Estudioso',
+        description: 'Acumula 2,000 XP',
+        icon: 'Flame',
+        condition: (d) => d.xp >= 2000,
+    },
+    {
+        id: 'xp_5000',
+        title: 'Sabio Cripto',
+        description: 'Acumula 5,000 XP',
+        icon: 'Star',
+        condition: (d) => d.xp >= 5000,
+    },
+    {
+        id: 'streak_3',
+        title: 'En Racha',
+        description: 'Mantén una racha de 3 días',
+        icon: 'Activity',
+        condition: (d) => d.streak >= 3,
+    },
+    {
+        id: 'streak_7',
+        title: 'Semana Imparable',
+        description: 'Mantén una racha de 7 días',
+        icon: 'Calendar',
+        condition: (d) => d.streak >= 7,
+    },
+];
+
 interface GamificationContextType {
     xp: number;
     level: number;
     streak: number;
     achievements: Achievement[];
+    achievementDefinitions: AchievementDefinition[];
+    pendingToasts: Achievement[];
     addXp: (amount: number) => Promise<void>;
-    checkAchievements: () => Promise<void>;
+    checkAchievements: (progressData: ProgressSnapshot, silent?: boolean) => void;
+    dismissToast: (id: string) => void;
     loading: boolean;
 }
 
@@ -27,6 +155,7 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
     const [xp, setXp] = useState(0);
     const [streak, setStreak] = useState(0);
     const [achievements, setAchievements] = useState<Achievement[]>([]);
+    const [pendingToasts, setPendingToasts] = useState<Achievement[]>([]);
     const [loading, setLoading] = useState(true);
 
     // Level calculation: Level = floor(sqrt(XP / 100)) + 1
@@ -39,6 +168,7 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
             setXp(0);
             setStreak(0);
             setAchievements([]);
+            setPendingToasts([]);
             setLoading(false);
         }
     }, [user]);
@@ -59,12 +189,10 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
             }
 
             // Calculate XP based on completed lessons (100 XP per lesson)
-            // This ensures we sync with existing progress even if gamification is new
             const calculatedXp = (count || 0) * 100;
             setXp(calculatedXp);
 
-            // 2. Fetch Streak (mock logic for now, or fetch from a future 'streaks' table)
-            // For now, we'll check the most recent completed_at date
+            // 2. Fetch Streak
             const { data: lastLesson } = await supabase
                 .from('user_progress')
                 .select('completed_at')
@@ -75,9 +203,6 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
                 .single();
 
             if (lastLesson && lastLesson.completed_at) {
-                // Simple logic: if last lesson was today or yesterday, streak is active.
-                // This is a simplification. A real streak system needs a separate table.
-                // We'll set a default streak of 1 if they have been active recently.
                 const lastDate = new Date(lastLesson.completed_at);
                 const now = new Date();
                 const diffDays = Math.floor((now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
@@ -87,11 +212,10 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
                 }
             }
 
-            // 3. Load other stats from localStorage as a fallback/cache
+            // 3. Load stats from localStorage
             const localStats = localStorage.getItem(`gamification_${user.id}`);
             if (localStats) {
                 const stats = JSON.parse(localStats);
-                // We prefer the calculated XP, but might want to merge other data
                 if (stats.streak > 1) setStreak(stats.streak);
                 setAchievements(stats.achievements || []);
             }
@@ -107,25 +231,65 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
         if (!user) return;
         const stats = { xp: newXp, streak: newStreak, achievements: newAchievements };
         localStorage.setItem(`gamification_${user.id}`, JSON.stringify(stats));
-
-        // Here we would sync with Supabase
-        // supabase.from('profiles').update({ gamification_stats: stats }).eq('id', user.id);
     };
 
     const addXp = async (amount: number) => {
         const newXp = xp + amount;
         setXp(newXp);
         saveStats(newXp, streak, achievements);
-
-        // Check for level up or other events here
     };
 
-    const checkAchievements = async () => {
-        // Logic to check and unlock achievements
-    };
+    const checkAchievements = useCallback((progressData: ProgressSnapshot, silent?: boolean) => {
+        setAchievements(prev => {
+            const unlockedIds = new Set(prev.map(a => a.id));
+            const newlyUnlocked: Achievement[] = [];
+
+            for (const def of ACHIEVEMENT_DEFINITIONS) {
+                if (unlockedIds.has(def.id)) continue;
+                if (def.condition(progressData)) {
+                    newlyUnlocked.push({
+                        id: def.id,
+                        title: def.title,
+                        description: def.description,
+                        icon: def.icon,
+                        unlockedAt: new Date().toISOString(),
+                    });
+                }
+            }
+
+            if (newlyUnlocked.length === 0) return prev;
+
+            const updated = [...prev, ...newlyUnlocked];
+
+            // Save to localStorage
+            if (user) {
+                const localStats = localStorage.getItem(`gamification_${user.id}`);
+                const stats = localStats ? JSON.parse(localStats) : {};
+                stats.achievements = updated;
+                localStorage.setItem(`gamification_${user.id}`, JSON.stringify(stats));
+            }
+
+            // Queue toasts (unless silent)
+            if (!silent) {
+                setPendingToasts(t => [...t, ...newlyUnlocked]);
+            }
+
+            return updated;
+        });
+    }, [user]);
+
+    const dismissToast = useCallback((id: string) => {
+        setPendingToasts(prev => prev.filter(t => t.id !== id));
+    }, []);
 
     return (
-        <GamificationContext.Provider value={{ xp, level, streak, achievements, addXp, checkAchievements, loading }}>
+        <GamificationContext.Provider value={{
+            xp, level, streak, achievements,
+            achievementDefinitions: ACHIEVEMENT_DEFINITIONS,
+            pendingToasts,
+            addXp, checkAchievements, dismissToast,
+            loading,
+        }}>
             {children}
         </GamificationContext.Provider>
     );

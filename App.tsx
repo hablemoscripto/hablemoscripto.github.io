@@ -7,12 +7,14 @@ import EducationPage from './components/EducationPage';
 import LessonView from './components/LessonView';
 import LevelDetail from './components/LevelDetail';
 import NewsletterAdmin from './components/NewsletterAdmin';
+import UnsubscribePage from './components/UnsubscribePage';
 import PaymentSuccess from './components/PaymentSuccess';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProgressProvider } from './contexts/ProgressContext';
 import { GamificationProvider } from './contexts/GamificationContext';
 import ChatWidget from './components/ChatWidget';
+import AchievementToast from './components/ui/AchievementToast';
 import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from './data/courseData';
 import PageTransition from './components/ui/PageTransition';
 
@@ -72,6 +74,10 @@ function AnimatedRoutes() {
           }
         />
         <Route
+          path="/unsubscribe"
+          element={<PageTransition><UnsubscribePage /></PageTransition>}
+        />
+        <Route
           path="/pago-completado"
           element={<PageTransition><PaymentSuccess /></PageTransition>}
         />
@@ -91,6 +97,7 @@ function App() {
               <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
                 <AnimatedRoutes />
                 <ChatWidget />
+                <AchievementToast />
               </div>
             </Router>
           </ProgressProvider>

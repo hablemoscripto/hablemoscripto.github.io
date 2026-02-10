@@ -137,7 +137,7 @@ const NewsletterAdmin: React.FC = () => {
         throw new Error('No hay sesión activa');
       }
 
-      const response = await fetch('/api/send-newsletter', {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-newsletter`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

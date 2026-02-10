@@ -28,7 +28,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState<LessonProgress[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
-  const { addXp } = useGamification();
+  const { addXp, checkAchievements, xp, streak } = useGamification();
 
   // Load progress when user changes
   useEffect(() => {
@@ -63,6 +63,20 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       }));
 
       setProgress(formattedProgress);
+
+      // Retroactive achievement check (silent — no toasts)
+      const completedItems = formattedProgress.filter(p => p.completed);
+      const allLessons = getAllLessonsOrdered();
+      const completedCount = completedItems.length;
+      const totalLessons = allLessons.length;
+      checkAchievements({
+        completedLessonIds: completedItems.map(p => p.lessonId),
+        completedCount,
+        totalLessons,
+        progressPercentage: totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0,
+        xp,
+        streak,
+      }, true);
     } catch (error) {
       console.error('Error loading progress:', error);
     } finally {
@@ -139,10 +153,25 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       console.error('Error saving progress:', error);
     }
 
-    // Award XP if it wasn't already completed
+    // Award XP and check achievements if it wasn't already completed
     const wasAlreadyCompleted = progress.some(p => p.lessonId === lessonId && p.completed);
     if (!wasAlreadyCompleted) {
       addXp(100);
+
+      // Build snapshot including the newly completed lesson
+      const allLessons = getAllLessonsOrdered();
+      const updatedCompleted = [...progress.filter(p => p.completed).map(p => p.lessonId), lessonId];
+      const completedCount = updatedCompleted.length;
+      const totalLessons = allLessons.length;
+      const newXp = xp + 100;
+      checkAchievements({
+        completedLessonIds: updatedCompleted,
+        completedCount,
+        totalLessons,
+        progressPercentage: totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0,
+        xp: newXp,
+        streak,
+      });
     }
   };
 
