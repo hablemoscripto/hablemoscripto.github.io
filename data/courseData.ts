@@ -77,8 +77,8 @@ export const BEGINNER_LEVEL: LevelData = {
   subtitle: 'Entiende el dinero y tu primera wallet',
   description: 'Olvida lo que sabes sobre el dinero. Aprende por qué la inflación te empobrece, cómo Bitcoin arregla la reserva de valor y cómo Solana democratiza las finanzas.',
   stats: {
-    lessons: 20, // Increased count
-    duration: '~7h'
+    lessons: 19,
+    duration: '~8h'
   },
   modules: [
     {
@@ -119,6 +119,10 @@ export const BEGINNER_LEVEL: LevelData = {
         { id: 37, title: 'Exploradores de Bloques (Solscan)', description: 'Aprende a verificar la verdad.', duration: '15 min', type: 'Herramienta' },
         { id: 38, title: 'Evitar Estafas en Web3', description: 'Aprende a defenderte antes de salir a mar abierto.', duration: '30 min', type: 'Seguridad Vital' },
         { id: 39, title: 'Gasta tus Cripto', description: 'Usa tus ganancias en el mundo real con tarjetas cripto.', duration: '20 min', type: 'Herramientas' },
+        { id: 41, title: 'Stablecoins: Tu Dólar Digital', description: 'Qué son USDC y USDT, cómo funcionan, y los riesgos que nadie te cuenta.', duration: '20 min', type: 'Concepto Clave' },
+        { id: 42, title: 'DCA: Invierte Sin Estrés', description: 'La estrategia más simple y poderosa para construir riqueza a largo plazo.', duration: '15 min', type: 'Estrategia' },
+        { id: 43, title: 'Bitcoin vs Altcoins: Qué Comprar Primero', description: 'Entiende el rol de BTC como reserva de valor vs SOL y ETH como plataformas.', duration: '18 min', type: 'Comparativa' },
+        { id: 44, title: 'Tu Plan de Inversión Personal', description: 'Junta todo lo aprendido: portafolio, DCA, seguridad y metas claras.', duration: '20 min', type: 'Práctica' },
       ]
     }
   ]
@@ -130,7 +134,7 @@ export const INTERMEDIATE_LEVEL: LevelData = {
   subtitle: 'Análisis y Psicología de Mercado',
   description: 'Deja de apostar y empieza a invertir. Domina el análisis técnico, entiende los ciclos de mercado y aprende a gestionar tu riesgo emocional.',
   stats: {
-    lessons: 14,
+    lessons: 12,
     duration: '~8h'
   },
   modules: [
@@ -179,7 +183,7 @@ export const ADVANCED_LEVEL: LevelData = {
   subtitle: 'DeFi, NFTs y el Ecosistema Solana',
   description: 'Domina las finanzas descentralizadas. Aprende a usar Jupiter, proveer liquidez, entender los NFTs más allá del arte y navegar el ecosistema Solana como un experto.',
   stats: {
-    lessons: 14,
+    lessons: 11,
     duration: '~10h'
   },
   modules: [
@@ -226,7 +230,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 1,
     title: 'Breve Historia del Dinero',
     level: 'Principiante',
-    number: '1 de 20',
+    number: '1 de 19',
     duration: '18 minutos',
     type: 'Video + Historia',
     description: 'Para entender por qué Bitcoin existe, primero debemos entender qué es el dinero, por qué lo inventamos, y cómo los gobiernos lo corrompieron. Esta es la historia que no te enseñaron en la escuela.',
@@ -389,7 +393,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 2,
     title: 'La Trampa de la Inflación',
     level: 'Principiante',
-    number: '2 de 20',
+    number: '2 de 19',
     duration: '22 minutos',
     type: 'Video + Gráficos',
     description: 'Te han enseñado que la inflación es "natural" y "necesaria". Es mentira. La inflación es una política deliberada que transfiere tu riqueza a otros mientras duermes. Aprende cómo funciona realmente la máquina de crear dinero.',
@@ -568,7 +572,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 3,
     title: 'El Efecto Cantillon',
     level: 'Principiante',
-    number: '3 de 20',
+    number: '3 de 19',
     duration: '20 minutos',
     type: 'Concepto Clave',
     description: 'El secreto mejor guardado de la economía moderna: cuando se imprime dinero, no llega a todos al mismo tiempo. Los primeros en recibirlo se enriquecen. Los últimos se empobrecen. Aprende dónde estás tú en esta cadena.',
@@ -648,7 +652,7 @@ export const LESSONS_DATA: Record<number, any> = {
         title: 'Por Qué la Brecha de Riqueza Crece y Crece',
         content: 'Desde 1971 (fin del patrón oro), la desigualdad de riqueza ha explotado en TODO el mundo. ¿Coincidencia? No. Es el Efecto Cantillon acumulándose década tras década:',
         features: [
-          { icon: TrendingUp, title: 'Los Activos Suben Más que los Salarios', text: 'Desde 1971, el S&P 500 ha subido 3,000%+. Los salarios reales han subido menos de 20%. Si tenías acciones, te hiciste rico. Si solo tenías tu sueldo, te quedaste atrás.' },
+          { icon: TrendingUp, title: 'Los Activos Suben Más que los Salarios', text: 'Desde 1971, el S&P 500 ha subido 3,000%+. Los salarios reales han subido menos de 19%. Si tenías acciones, te hiciste rico. Si solo tenías tu sueldo, te quedaste atrás.' },
           { icon: Landmark, title: 'La Vivienda se Volvió Imposible', text: 'En 1970, una casa promedio costaba 2-3 años de salario mediano. Hoy cuesta 7-10 años. El dinero nuevo fluyó hacia bienes raíces, haciendo imposible comprar para las nuevas generaciones.' },
           { icon: Users, title: 'Los Ricos Tienen Asesores', text: 'Cuando se anuncia impresión de dinero, los ultra-ricos llaman a sus banqueros y mueven su capital a activos que se beneficiarán. Tú te enteras en las noticias semanas después.' }
         ],
@@ -758,7 +762,7 @@ export const LESSONS_DATA: Record<number, any> = {
             { id: 'd', text: 'Los impuestos bajaron para los ricos' }
           ],
           correctAnswer: 'c',
-          explanation: 'El S&P 500 subió 3000%+ desde 1971. Los salarios reales subieron menos de 20%. Si tenías activos, multiplicaste tu riqueza. Si dependías de tu sueldo, te quedaste atrás. No es coincidencia—es el Efecto Cantillon acumulándose durante 50 años.'
+          explanation: 'El S&P 500 subió 3000%+ desde 1971. Los salarios reales subieron menos de 19%. Si tenías activos, multiplicaste tu riqueza. Si dependías de tu sueldo, te quedaste atrás. No es coincidencia—es el Efecto Cantillon acumulándose durante 50 años.'
         }
       ]
     }
@@ -767,15 +771,15 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 4,
     title: 'Bitcoin: La Salida',
     level: 'Principiante',
-    number: '4 de 20',
+    number: '4 de 19',
     duration: '28 minutos',
     type: 'Video + Texto',
     description: 'Después de entender cómo el sistema monetario te empobrece silenciosamente, es hora de conocer la solución. Bitcoin no es una "inversión especulativa"—es la primera alternativa real al dinero corrupto en 5,000 años de historia.',
     sections: [
       {
         type: 'intro',
-        title: 'El Momento Génesis: 3 de Enero de 2009',
-        content: 'El mundo se desmoronaba. La crisis financiera de 2008 había expuesto la corrupción del sistema bancario: préstamos irresponsables, derivados tóxicos, codicia institucional. Los gobiernos respondieron rescatando a los bancos culpables con TRILLONES de dólares del contribuyente. Los ejecutivos que causaron la crisis recibieron bonos millonarios mientras millones perdían sus casas. En medio de este caos, el 3 de enero de 2009, alguien bajo el seudónimo **Satoshi Nakamoto** minó el primer bloque de Bitcoin. En ese bloque, grabó para siempre un mensaje: **"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"** (Canciller al borde de un segundo rescate para los bancos). No era coincidencia. Era una declaración de intenciones.',
+        title: 'El Momento Génesis: 3 de Enero de 1909',
+        content: 'El mundo se desmoronaba. La crisis financiera de 1908 había expuesto la corrupción del sistema bancario: préstamos irresponsables, derivados tóxicos, codicia institucional. Los gobiernos respondieron rescatando a los bancos culpables con TRILLONES de dólares del contribuyente. Los ejecutivos que causaron la crisis recibieron bonos millonarios mientras millones perdían sus casas. En medio de este caos, el 3 de enero de 1909, alguien bajo el seudónimo **Satoshi Nakamoto** minó el primer bloque de Bitcoin. En ese bloque, grabó para siempre un mensaje: **"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"** (Canciller al borde de un segundo rescate para los bancos). No era coincidencia. Era una declaración de intenciones.',
         highlight: {
           title: 'El Mensaje Eterno',
           text: 'Ese titular del Times está grabado PARA SIEMPRE en la blockchain de Bitcoin. Nadie puede borrarlo. Cada vez que alguien mina el bloque génesis, lee ese mensaje: los bancos causan crisis, los gobiernos los rescatan con TU dinero, y la gente común paga la factura. Bitcoin nació como respuesta directa a esa injusticia.'
@@ -856,7 +860,7 @@ export const LESSONS_DATA: Record<number, any> = {
         ],
         highlight: {
           title: 'El Precedente de China',
-          text: 'China ha "prohibido" Bitcoin más de 10 veces desde 2013. Resultado: Bitcoin sigue funcionando perfectamente, ahora vale 100x más que en 2013, y millones de chinos siguen usándolo a través de VPNs. No puedes prohibir matemáticas.'
+          text: 'China ha "prohibido" Bitcoin más de 10 veces desde 1913. Resultado: Bitcoin sigue funcionando perfectamente, ahora vale 100x más que en 2013, y millones de chinos siguen usándolo a través de VPNs. No puedes prohibir matemáticas.'
         }
       },
       {
@@ -877,7 +881,7 @@ export const LESSONS_DATA: Record<number, any> = {
         features: [
           { icon: AlertTriangle, title: 'NO es un "esquema para hacerse rico rápido"', text: 'Bitcoin es volátil a corto plazo. Puede subir 50% o bajar 50% en meses. NO es para el dinero que necesitas mañana. Es para proteger el valor de tu trabajo a LARGO PLAZO (5-10+ años).' },
           { icon: AlertTriangle, title: 'NO es "dinero de criminales"', text: 'Menos del 1% de transacciones de Bitcoin son ilícitas (vs 2-5% del sistema bancario tradicional). Y la blockchain es PÚBLICA—cada transacción queda registrada para siempre. Es el peor dinero posible para criminales.' },
-          { icon: AlertTriangle, title: 'NO es "una burbuja"', text: 'Ha sido declarado "muerto" más de 450 veces desde 2010. Cada vez vuelve más fuerte. Las burbujas no sobreviven 15+ años, no son adoptadas por países como moneda legal, ni son compradas por fondos de inversión institucionales.' },
+          { icon: AlertTriangle, title: 'NO es "una burbuja"', text: 'Ha sido declarado "muerto" más de 450 veces desde 1910. Cada vez vuelve más fuerte. Las burbujas no sobreviven 15+ años, no son adoptadas por países como moneda legal, ni son compradas por fondos de inversión institucionales.' },
           { icon: AlertTriangle, title: 'NO necesitas comprar un Bitcoin entero', text: 'Bitcoin es divisible hasta 8 decimales. Puedes empezar con $10, $50, $100. Cada satoshi (0.00000001 BTC) es tuyo.' }
         ]
       },
@@ -906,7 +910,7 @@ export const LESSONS_DATA: Record<number, any> = {
             { id: 'd', text: 'Nada, el primer bloque estaba vacío' }
           ],
           correctAnswer: 'b',
-          explanation: 'Satoshi grabó "Chancellor on brink of second bailout for banks" del Times del 3 de enero de 2009. Este mensaje permanece para siempre en la blockchain, declarando que Bitcoin nació como respuesta directa al rescate de bancos corruptos con dinero de los contribuyentes.'
+          explanation: 'Satoshi grabó "Chancellor on brink of second bailout for banks" del Times del 3 de enero de 1909. Este mensaje permanece para siempre en la blockchain, declarando que Bitcoin nació como respuesta directa al rescate de bancos corruptos con dinero de los contribuyentes.'
         },
         {
           id: 'q2',
@@ -975,7 +979,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 5,
     title: '¿Qué es Blockchain?',
     level: 'Principiante',
-    number: '5 de 20',
+    number: '5 de 19',
     duration: '25 minutos',
     type: 'Video + Texto',
     description: 'La blockchain es la tecnología que hace posible Bitcoin, pero ¿cómo funciona realmente? Aprende cómo miles de computadoras mantienen un registro que nadie puede falsificar, sin necesidad de confiar en ninguna autoridad central.',
@@ -1212,7 +1216,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 6,
     title: 'Descentralización vs Centralización',
     level: 'Principiante',
-    number: '6 de 20',
+    number: '6 de 19',
     duration: '22 minutos',
     type: 'Video + Texto',
     description: '¿Por qué importa que nadie tenga el control? La descentralización no es solo un buzzword técnico—es la diferencia entre libertad y permiso, entre propiedad real y acceso revocable. Entiende los trade-offs reales.',
@@ -1456,7 +1460,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 7,
     title: 'Wallets: Tu Llave, Tu Dinero',
     level: 'Principiante',
-    number: '7 de 20',
+    number: '7 de 19',
     duration: '25 minutos',
     type: 'Video + Texto',
     description: 'Entiende la diferencia crítica entre tener cripto en un exchange y tenerlo en tu propia wallet. Este conocimiento puede ser la diferencia entre conservar tu riqueza o perderlo todo.',
@@ -1464,7 +1468,7 @@ export const LESSONS_DATA: Record<number, any> = {
       {
         type: 'intro',
         title: 'Not Your Keys, Not Your Coins',
-        content: 'En noviembre de 2022, FTX—el segundo exchange más grande del mundo—colapsó de la noche a la mañana. Millones de personas descubrieron que sus "ahorros" en cripto habían desaparecido. No era un hackeo. Era algo peor: **nunca fueron realmente dueños de su dinero**. Cuando compras Bitcoin en Binance, Coinbase o cualquier exchange, lo que tienes es una PROMESA de que ellos tienen tu cripto. Es como tener un recibo de un banco—si el banco quiebra, tu recibo no vale nada. Una **Wallet** cambia esto completamente. Con una wallet propia, TÚ controlas las llaves criptográficas. Nadie puede congelar tu cuenta. Nadie puede negar tu retiro. Nadie puede "prestarse" tu dinero sin permiso. Eres tu propio banco.',
+        content: 'En noviembre de 1922, FTX—el segundo exchange más grande del mundo—colapsó de la noche a la mañana. Millones de personas descubrieron que sus "ahorros" en cripto habían desaparecido. No era un hackeo. Era algo peor: **nunca fueron realmente dueños de su dinero**. Cuando compras Bitcoin en Binance, Coinbase o cualquier exchange, lo que tienes es una PROMESA de que ellos tienen tu cripto. Es como tener un recibo de un banco—si el banco quiebra, tu recibo no vale nada. Una **Wallet** cambia esto completamente. Con una wallet propia, TÚ controlas las llaves criptográficas. Nadie puede congelar tu cuenta. Nadie puede negar tu retiro. Nadie puede "prestarse" tu dinero sin permiso. Eres tu propio banco.',
         highlight: {
           title: 'La Lección de FTX',
           text: 'Más de $8 MIL MILLONES de dólares de clientes desaparecieron cuando FTX colapsó. Muchos perdieron los ahorros de toda su vida. ¿Los que tenían su cripto en wallets propias? No perdieron absolutamente nada. La autocustodia no es paranoia—es sentido común.'
@@ -1613,7 +1617,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 8,
     title: 'La Frase Semilla (Seed Phrase)',
     level: 'Principiante',
-    number: '8 de 20',
+    number: '8 de 19',
     duration: '28 minutos',
     type: 'Práctica Obligatoria',
     description: 'El secreto más importante de tu vida financiera digital. Estas 12-24 palabras pueden valer millones o cero—todo depende de cómo las protejas.',
@@ -1632,7 +1636,7 @@ export const LESSONS_DATA: Record<number, any> = {
         title: '¿Por Qué 12 Palabras en Vez de una Contraseña Normal?',
         content: 'Las contraseñas tradicionales tienen problemas: son difíciles de recordar, fáciles de hackear, y dependen de un servidor. La frase semilla resuelve todo esto:',
         features: [
-          { icon: Lock, title: 'Estándar Universal (BIP-39)', text: 'Todas las wallets serias usan el mismo estándar de 2048 palabras en inglés. Tu frase de Phantom funciona en Ledger, MetaMask, Trust Wallet, o cualquier otra. No dependes de una empresa.' },
+          { icon: Lock, title: 'Estándar Universal (BIP-39)', text: 'Todas las wallets serias usan el mismo estándar de 1948 palabras en inglés. Tu frase de Phantom funciona en Ledger, MetaMask, Trust Wallet, o cualquier otra. No dependes de una empresa.' },
           { icon: Shield, title: 'Backup Perfecto', text: 'Si tu celular explota, tu computadora se incendia, o la empresa de tu wallet desaparece, tus fondos siguen existiendo en la blockchain. Con tu frase semilla, los recuperas en minutos desde cualquier dispositivo nuevo.' },
           { icon: Network, title: 'Genera Infinitas Direcciones', text: 'De una sola frase semilla se derivan matemáticamente miles de direcciones. Puedes tener direcciones para SOL, ETH, BTC, y más—todo desde las mismas 12 palabras.' }
         ]
@@ -1777,7 +1781,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 9,
     title: 'Instalando Phantom Wallet',
     level: 'Principiante',
-    number: '9 de 20',
+    number: '9 de 19',
     duration: '30 minutos',
     type: 'Tutorial Práctico',
     description: 'Tu puerta de entrada al ecosistema Solana. Instalación paso a paso de la wallet más usada, con todas las precauciones de seguridad que necesitas saber.',
@@ -1931,7 +1935,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 10,
     title: 'Solana vs Ethereum: La Guerra de L1s',
     level: 'Principiante',
-    number: '10 de 20',
+    number: '10 de 19',
     duration: '35 min',
     type: 'Comparativa',
     description: 'Por qué enseñamos Solana primero. Velocidad, costos, y la mejor experiencia de usuario en crypto—todo lo que necesitas saber para entender el debate L1.',
@@ -2003,7 +2007,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: 'La tecnología importa, pero lo que realmente usarás son las aplicaciones. Solana tiene las mejores:',
         features: [
           { icon: Zap, title: 'Jupiter', text: 'El mejor agregador DEX del mundo. Te encuentra el mejor precio entre todos los exchanges descentralizados. Tiene DCA (compra automática), órdenes límite, y perpetuos. Es el "Uniswap de Solana" pero con superpoderes.' },
-          { icon: Wallet, title: 'Phantom', text: 'Ya la conoces. La wallet más usada de Solana. Pero vale repetir: la experiencia de Phantom vs MetaMask es día y noche. MetaMask se siente como software de 2017.' },
+          { icon: Wallet, title: 'Phantom', text: 'Ya la conoces. La wallet más usada de Solana. Pero vale repetir: la experiencia de Phantom vs MetaMask es día y noche. MetaMask se siente como software de 1917.' },
           { icon: Globe, title: 'Magic Eden / Tensor', text: 'Los marketplaces de NFTs en Solana. Puedes comprar y vender NFTs por menos de $0.01 en fees. En OpenSea (Ethereum), los fees pueden ser $20-50.' },
           { icon: Activity, title: 'Marinade / Jito', text: 'Plataformas de liquid staking. Pones tu SOL a trabajar ganando ~7-8% anual mientras sigue siendo líquido. En Ethereum, hacer liquid staking cuesta $20+ en gas.' }
         ]
@@ -2014,7 +2018,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: 'No queremos darte solo la versión positiva. Estos son los argumentos en contra que escucharás:',
         features: [
           { icon: AlertTriangle, title: 'Centralización Relativa', text: 'Solana requiere hardware más potente para correr un validador. Esto significa menos validadores que Ethereum. Críticos dicen que es "menos descentralizada". Counter-argument: ¿de qué sirve una red "descentralizada" que nadie puede pagar usar?' },
-          { icon: AlertTriangle, title: 'Outages Históricos', text: 'Solana tuvo varios "apagones" en 2022-2023 donde la red se detuvo. Esto generó dudas sobre su estabilidad. Sin embargo, desde 2024 ha funcionado sin problemas y las mejoras técnicas han resuelto estos issues.' },
+          { icon: AlertTriangle, title: 'Outages Históricos', text: 'Solana tuvo varios "apagones" en 2022-2023 donde la red se detuvo. Esto generó dudas sobre su estabilidad. Sin embargo, desde 1924 ha funcionado sin problemas y las mejoras técnicas han resuelto estos issues.' },
           { icon: AlertTriangle, title: 'Ecosistema Más Joven', text: 'Ethereum tiene 8+ años. Solana tiene 4. El ecosistema de Ethereum es más grande y tiene más liquidez total. Algunos protocolos "blue chip" solo existen en Ethereum.' }
         ]
       },
@@ -2111,7 +2115,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 35,
     title: 'Obteniendo tus Primeros SOL',
     level: 'Principiante',
-    number: '11 de 20',
+    number: '11 de 19',
     duration: '25 minutos',
     type: 'Tutorial',
     description: 'El puente entre el mundo tradicional y cripto. Cómo convertir pesos, dólares o tu moneda local a SOL y llevarlo a tu wallet.',
@@ -2273,7 +2277,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 36,
     title: 'Tu Primera Transacción',
     level: 'Principiante',
-    number: '12 de 20',
+    number: '12 de 19',
     duration: '20 minutos',
     type: 'Práctica',
     description: 'Envía valor a través del mundo en segundos, sin bancos ni intermediarios. Este momento cambiará tu perspectiva del dinero.',
@@ -2416,7 +2420,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 37,
     title: 'Exploradores de Bloques (Solscan)',
     level: 'Principiante',
-    number: '13 de 20',
+    number: '13 de 19',
     duration: '18 minutos',
     type: 'Herramienta',
     description: '"Don\'t Trust, Verify" — La filosofía central de cripto. Aprende a usar la herramienta que te permite verificar cualquier cosa en la blockchain.',
@@ -2559,7 +2563,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 38,
     title: 'Evitar Estafas en Web3',
     level: 'Principiante',
-    number: '14 de 20',
+    number: '14 de 19',
     duration: '30 minutos',
     type: 'Seguridad Vital',
     description: 'El 99% de los robos en cripto son evitables. Conoce las tácticas de los estafadores y protégete antes de perder el dinero que tanto te costó ganar.',
@@ -3071,7 +3075,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: 'Bitcoin dirige el mercado. Cuando BTC estornuda, las Altcoins se resfrían. Entiende el flujo de dinero: **BTC → ETH → Large Caps → Mid Caps → Memecoins**. El ciclo de 4 años existe porque el halving reduce la emisión de nuevos BTC a la mitad, creando un shock de oferta predecible.',
         highlight: {
           title: 'El Patrón Que Se Repite',
-          text: 'Desde 2012, cada halving ha sido seguido por un bull market 12-18 meses después. No es coincidencia. Es matemáticas.'
+          text: 'Desde 1912, cada halving ha sido seguido por un bull market 12-18 meses después. No es coincidencia. Es matemáticas.'
         }
       },
       {
@@ -3513,7 +3517,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 25,
     title: 'Jupiter: El Rey de los DEXs',
     level: 'Avanzado',
-    number: '1 de 10',
+    number: '1 de 11',
     duration: '35 min',
     type: 'Tutorial Práctico',
     description: 'Olvida los exchanges centralizados. Jupiter (JUP) en Solana ofrece mejor precio, DCA y órdenes límite.',
@@ -3565,7 +3569,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 26,
     title: 'Liquidez y Yield Farming',
     level: 'Avanzado',
-    number: '2 de 10',
+    number: '3 de 11',
     duration: '42 min',
     type: 'Estrategias',
     description: 'Pon tus criptos a trabajar. Provee liquidez en Raydium o Meteora y gana comisiones.',
@@ -3619,7 +3623,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 27,
     title: 'Lending & Borrowing',
     level: 'Avanzado',
-    number: '3 de 10',
+    number: '4 de 11',
     duration: '38 min',
     type: 'Tutorial Práctico',
     description: 'Pide prestado contra tus activos sin venderlos usando Kamino o MarginFi.',
@@ -3662,7 +3666,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 28,
     title: 'Riesgos de DeFi (Impermanent Loss)',
     level: 'Avanzado',
-    number: '4 de 10',
+    number: '5 de 11',
     duration: '32 min',
     type: 'Seguridad',
     description: 'El riesgo matemático de proveer liquidez. Cuándo es mejor solo hacer HODL.',
@@ -3705,7 +3709,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 29,
     title: 'NFTs en Solana',
     level: 'Avanzado',
-    number: '5 de 10',
+    number: '6 de 11',
     duration: '30 min',
     type: 'Mercado',
     description: 'Comunidades, Utilidad y Arte. Tensor y Magic Eden.',
@@ -3762,7 +3766,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 30,
     title: 'Airdrops y Farming',
     level: 'Avanzado',
-    number: '6 de 10',
+    number: '7 de 11',
     duration: '35 min',
     type: 'Estrategia',
     description: 'Cómo ser recompensado por ser un usuario temprano. El caso de Jito y Jupiter.',
@@ -3816,7 +3820,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 31,
     title: 'DePIN: Infraestructura Física',
     level: 'Avanzado',
-    number: '7 de 10',
+    number: '8 de 11',
     duration: '25 min',
     type: 'Tendencias',
     description: 'Decentralized Physical Infrastructure Networks. Helium, Hivemapper y Render.',
@@ -3870,7 +3874,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 32,
     title: 'Monolítico vs Modular',
     level: 'Avanzado',
-    number: '8 de 10',
+    number: '9 de 11',
     duration: '30 min',
     type: 'Técnico',
     description: 'La tesis de escalabilidad. Por qué Solana apuesta por una sola capa gigante.',
@@ -3927,7 +3931,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 33,
     title: 'Firedancer & El Futuro',
     level: 'Avanzado',
-    number: '9 de 10',
+    number: '10 de 11',
     duration: '20 min',
     type: 'Futuro',
     description: 'El nuevo cliente validador que llevará a Solana a 1 millón de TPS.',
@@ -3981,7 +3985,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 34,
     title: 'Seguridad Operacional Avanzada',
     level: 'Avanzado',
-    number: '10 de 10',
+    number: '11 de 11',
     duration: '25 min',
     type: 'Seguridad',
     description: 'Cómo duermen tranquilos los millonarios cripto. Burner wallets y revocación.',
@@ -4038,7 +4042,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 39,
     title: 'Gasta tus Cripto',
     level: 'Principiante',
-    number: '15 de 20',
+    number: '15 de 19',
     duration: '25 min',
     type: 'Herramientas',
     description: 'El círculo completo: de fiat a cripto, de cripto a gastos reales. Cómo usar tarjetas cripto para vivir sin depender de bancos tradicionales.',
@@ -4201,11 +4205,648 @@ export const LESSONS_DATA: Record<number, any> = {
       ]
     }
   },
+  41: {
+    id: 41,
+    title: 'Stablecoins: Tu Dólar Digital',
+    level: 'Principiante',
+    number: '16 de 19',
+    duration: '22 minutos',
+    type: 'Concepto Clave',
+    description: 'Las stablecoins son la herramienta cripto más usada en Latinoamérica—pero la mayoría no entiende qué las respalda, ni los riesgos que esconden. Esta lección puede ahorrarte un desastre financiero.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Dólar que Vive en la Blockchain',
+        content: 'Tienes SOL, BTC, ETH... pero necesitas pagar el arriendo. El precio de tus criptos puede caer 30% mañana. ¿Cómo proteges tu dinero sin salir del ecosistema cripto? La respuesta son las **stablecoins**: tokens diseñados para mantener un valor estable, generalmente anclados 1:1 al dólar estadounidense. 1 USDC = 1 dólar. 1 USDT = 1 dólar. Siempre. Esa es la promesa. En Latinoamérica, las stablecoins se han convertido en algo más que una herramienta de trading. Son la forma más accesible de **dolarizarse** sin necesidad de una cuenta bancaria en Estados Unidos, sin límites de compra de dólares, y sin intermediarios que te cobren spreads abusivos. Un argentino con cepo cambiario, un venezolano con el bolívar destruido, un colombiano que quiere proteger sus pesos—todos usan stablecoins como su cuenta de ahorro en dólares.',
+        highlight: {
+          title: 'El Dato que Importa',
+          text: 'Latinoamérica es la región que más usa stablecoins per cápita en el mundo. No para especular—para SOBREVIVIR. Cuando tu moneda local pierde valor cada semana, tener dólares digitales en tu wallet no es un lujo, es una necesidad.'
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Cómo Funcionan? Los 3 Tipos de Stablecoins',
+        content: 'No todas las stablecoins son iguales. El mecanismo que mantiene su precio estable determina qué tan seguras son realmente:',
+        features: [
+          { icon: Landmark, title: 'Respaldadas por Reservas (USDC, USDT)', text: 'Una empresa tiene dólares reales (o bonos del tesoro) en un banco. Por cada token que emite, tiene $1 en reserva. Cuando quieres canjear tus USDC por dólares, Circle (la empresa detrás de USDC) quema el token y te da el dólar. Es el modelo más simple y el más usado.' },
+          { icon: Lock, title: 'Sobrecolateralizadas (DAI)', text: 'No dependen de una empresa. Usas cripto como garantía (por ejemplo, depositas $150 en ETH para generar $100 en DAI). Si tu garantía baja de valor, se liquida automáticamente. Más descentralizadas, pero más complejas de usar.' },
+          { icon: AlertTriangle, title: 'Algorítmicas (UST/Luna - COLAPSÓ)', text: 'Usaban código y arbitraje de mercado para mantener el precio. Sin respaldo real. Cuando el mecanismo falló en mayo 2022, UST perdió su paridad y cayó a $0. $40 MIL MILLONES desaparecieron en una semana. Personas perdieron los ahorros de toda su vida.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'USDC vs USDT: La Batalla de los Gigantes',
+        content: 'Son las dos stablecoins más grandes del mundo. Las usarás constantemente. Pero tienen diferencias importantes que debes entender:',
+        features: [
+          { icon: Shield, title: 'USDC (Circle)', text: 'Emitido por Circle, empresa regulada en Estados Unidos. Auditorías mensuales públicas. Reservas en bonos del Tesoro de USA y efectivo en bancos regulados. Es la opción más transparente y la preferida por instituciones. Disponible en Solana, Ethereum, y múltiples redes.' },
+          { icon: Globe, title: 'USDT (Tether)', text: 'El más usado del mundo por volumen. Emitido por Tether Limited (Hong Kong). Historial de controversias sobre la composición real de sus reservas—durante años se negaron a hacer auditorías completas. Han mejorado su transparencia, pero la confianza del mercado es menor que en USDC. La ventaja: tiene más liquidez y está en más exchanges y redes.' },
+          { icon: AlertTriangle, title: 'El Riesgo de Ambas', text: 'Las dos dependen de una EMPRESA centralizada. Si Circle o Tether quiebran, si un regulador las cierra, o si los bancos donde tienen reservas fallan, tu stablecoin podría perder su paridad. En marzo 2023, USDC cayó temporalmente a $0.87 cuando Silicon Valley Bank (donde Circle tenía $3.3 mil millones) colapsó. Se recuperó en días, pero el susto fue real.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'USDC vs USDT: ¿Cuál Usar?',
+        leftSide: {
+          title: 'USDC (Circle)',
+          points: [
+            'Auditorías mensuales por Deloitte',
+            'Reservas 100% en bonos del Tesoro + efectivo',
+            'Empresa regulada en USA',
+            'Puede congelar direcciones por orden legal',
+            'Mejor para ahorros y confianza',
+            'Ligeramente menos liquidez que USDT'
+          ]
+        },
+        rightSide: {
+          title: 'USDT (Tether)',
+          points: [
+            'Auditorías trimestrales (más recientes)',
+            'Reservas diversificadas (bonos, BTC, oro, préstamos)',
+            'Empresa offshore en Hong Kong',
+            'También puede congelar direcciones',
+            'Mayor liquidez y adopción global',
+            'Historial de opacidad en reservas'
+          ]
+        }
+      },
+      {
+        type: 'main',
+        title: 'La Catástrofe de UST/Luna: La Lección Más Cara de la Historia',
+        content: 'En mayo de 2022, el mundo cripto vivió su peor catástrofe. **UST** era una stablecoin algorítmica "anclada" al dólar, respaldada por un mecanismo de acuñación y quema con su token hermano **LUNA**. El sistema funcionó durante meses. Miles de personas depositaron sus ahorros en Anchor Protocol, que prometía 20% anual en UST. Parecía dinero fácil. Hasta que dejó de funcionar.',
+        features: [
+          { icon: TrendingDown, title: 'El Colapso', text: 'Una venta masiva de UST rompió el mecanismo de arbitraje. UST perdió su paridad con el dólar. El protocolo intentó salvar UST imprimiendo más LUNA, lo que destruyó el precio de LUNA. Espiral de muerte: UST cae → se imprime más LUNA → LUNA cae → más pánico → UST cae más. En 72 horas, $40 mil millones se evaporaron.' },
+          { icon: AlertTriangle, title: 'Las Víctimas', text: 'Hubo reportes de suicidios. Personas en Corea del Sur perdieron los ahorros de toda su familia. Jubilados que depositaron todo en Anchor por el 20% de "rendimiento seguro". El fundador Do Kwon fue arrestado meses después en Montenegro intentando huir con pasaportes falsos.' },
+          { icon: Shield, title: 'La Lección Permanente', text: 'Si un rendimiento parece demasiado bueno para ser verdad, lo es. 20% anual "sin riesgo" no existe. Las stablecoins algorítmicas sin respaldo real son castillos de naipes. SIEMPRE pregunta: ¿qué respalda esto? Si la respuesta es "un mecanismo de código inteligente", aléjate.' }
+        ],
+        highlight: {
+          title: 'Regla de Supervivencia',
+          text: 'Antes de depositar dinero en CUALQUIER stablecoin, pregunta tres cosas: 1) ¿Qué la respalda exactamente? 2) ¿Puedo canjearla por dólares reales si quiero? 3) ¿Quién la audita? Si no puedes responder las tres, no deposites tus ahorros ahí.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Cómo Usar Stablecoins en tu Vida Diaria',
+        content: 'En Latinoamérica, las stablecoins tienen usos prácticos que van mucho más allá del trading:',
+        features: [
+          { icon: PiggyBank, title: 'Ahorro en Dólares', text: 'Compra USDC con tus pesos y guárdalo en tu wallet. Es como tener una cuenta de ahorro en dólares sin necesidad de cuenta bancaria en USA. Sin cepo. Sin límites. Sin spread bancario abusivo.' },
+          { icon: Globe, title: 'Remesas', text: 'Enviar USDC de USA a Colombia cuesta menos de $0.01 en Solana y llega en segundos. Western Union cobra 5-10% y tarda días. Las familias que reciben remesas pueden ahorrar cientos de dólares al año.' },
+          { icon: Wallet, title: 'Refugio en Volatilidad', text: 'Cuando BTC o SOL caen 20%, puedes convertir temporalmente a USDC para proteger tus ganancias. Luego recompras cuando el precio se estabiliza. Es tu "puerto seguro" dentro del ecosistema cripto.' },
+          { icon: Zap, title: 'Pagos y Tarjetas Cripto', text: 'Las tarjetas como Kast y Avici (que viste en la lección anterior) funcionan principalmente con stablecoins. Cargas USDC, pagas en cualquier tienda. El comercio recibe pesos, tú pagas desde tu wallet.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Lo Que Debes Recordar',
+        items: [
+          'Las stablecoins son tokens anclados al dólar. Las principales son USDC (más transparente) y USDT (más líquida).',
+          'Ambas dependen de empresas centralizadas—NO son descentralizadas como Bitcoin. Eso es un riesgo real.',
+          'NUNCA uses stablecoins algorítmicas (sin respaldo real) para guardar ahorros. La catástrofe UST/Luna destruyó $40 mil millones.',
+          'En Latinoamérica, las stablecoins son la forma más accesible de dolarizarse sin intermediarios bancarios.',
+          'Diversifica: no tengas TODOS tus ahorros en una sola stablecoin. Si usas cantidades grandes, divide entre USDC y USDT.',
+          'Si alguien te promete rendimientos "seguros" del 15-20% en stablecoins, corre. No existe el rendimiento alto sin riesgo alto.'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: '¿Qué hace que una stablecoin mantenga su valor de $1? ¿Y por qué importa entender el mecanismo?',
+          options: [
+            { id: 'a', text: 'Magia del blockchain—todas funcionan igual' },
+            { id: 'b', text: 'El mecanismo de respaldo (reservas reales, sobrecolateralización, o algoritmos) determina qué tan segura es. Las algorítmicas sin respaldo colapsaron y destruyeron $40 mil millones' },
+            { id: 'c', text: 'El gobierno garantiza el valor como con el dinero normal' },
+            { id: 'd', text: 'No importa, todas valen siempre exactamente $1' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El mecanismo importa TODO. USDC tiene dólares reales en reserva. UST tenía solo un algoritmo. Cuando el algoritmo falló, $40 mil millones desaparecieron. Siempre pregunta: ¿qué respalda esto?'
+        },
+        {
+          id: 'q2',
+          question: 'En marzo 2023, USDC cayó temporalmente a $0.87. ¿Por qué pasó esto y qué nos enseña?',
+          options: [
+            { id: 'a', text: 'USDC es una estafa' },
+            { id: 'b', text: 'Circle tenía $3.3 mil millones en Silicon Valley Bank, que colapsó. Esto demuestra que incluso las stablecoins más confiables tienen riesgo porque dependen de bancos e instituciones centralizadas' },
+            { id: 'c', text: 'Fue un error técnico sin importancia' },
+            { id: 'd', text: 'Porque alguien hackeó la blockchain' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'USDC se recuperó cuando el gobierno garantizó los depósitos de SVB. Pero la lección es clara: las stablecoins respaldadas por reservas dependen de que esas reservas estén seguras. Diversificar entre stablecoins reduce este riesgo.'
+        },
+        {
+          id: 'q3',
+          question: 'Un amigo te dice: "Encontré una plataforma que paga 25% anual en stablecoins, sin riesgo." ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Invierto todo inmediatamente, 25% es increíble' },
+            { id: 'b', text: 'Le pido el link para registrarme también' },
+            { id: 'c', text: 'Desconfío inmediatamente. UST/Luna prometía 20% "sin riesgo" y destruyó $40 mil millones. Si parece demasiado bueno para ser verdad, lo es' },
+            { id: 'd', text: 'Invierto solo un poco para probar' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Anchor Protocol ofrecía 20% en UST y atrajo miles de millones. Cuando colapsó, lo perdieron todo. Rendimientos "seguros" mayores al 5-8% en stablecoins son una bandera roja ENORME. Pregunta siempre: ¿de dónde sale el rendimiento?'
+        },
+        {
+          id: 'q4',
+          question: 'Vives en Argentina con cepo cambiario. ¿Cómo te ayudan las stablecoins?',
+          options: [
+            { id: 'a', text: 'No me ayudan, necesito dólares reales' },
+            { id: 'b', text: 'Puedo comprar USDC sin límite a través de exchanges P2P, dolarizando mis ahorros sin depender del cupo oficial del gobierno ni del spread del dólar blue' },
+            { id: 'c', text: 'Solo sirven para comprar NFTs' },
+            { id: 'd', text: 'Son ilegales en Argentina' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Las stablecoins son la salida del cepo. Sin límites de compra, sin spread bancario abusivo, y puedes guardarlas en tu propia wallet donde el gobierno no puede congelarlas. Millones de argentinos ya lo hacen.'
+        },
+        {
+          id: 'q5',
+          question: 'Tienes $5,000 en ahorros y quieres dolarizarlos con stablecoins. ¿Cuál es la estrategia más segura?',
+          options: [
+            { id: 'a', text: 'Todo en USDT porque es la más popular' },
+            { id: 'b', text: 'Todo en la stablecoin que me dé más interés' },
+            { id: 'c', text: 'Dividir entre USDC y USDT en mi propia wallet. USDC por transparencia, USDT por liquidez. Nunca todo en una sola stablecoin ni en un exchange' },
+            { id: 'd', text: 'Buscar una stablecoin algorítmica que pague mejor rendimiento' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Diversificación aplica también a stablecoins. Si USDC tiene un problema (como el incidente de SVB), tener parte en USDT te protege, y viceversa. Y siempre en tu propia wallet—la lección de FTX aplica para todo.'
+        }
+      ]
+    }
+  },
+  42: {
+    id: 42,
+    title: 'DCA: Invierte Sin Estrés',
+    level: 'Principiante',
+    number: '17 de 19',
+    duration: '18 minutos',
+    type: 'Estrategia',
+    description: 'La estrategia más simple y efectiva del mundo para construir riqueza a largo plazo. No necesitas predecir el mercado ni mirar gráficos. Solo necesitas disciplina y tiempo.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'El Secreto Mejor Guardado de los Inversores Profesionales',
+        content: '¿Cuándo es el mejor momento para comprar Bitcoin? La respuesta honesta es: **nadie lo sabe**. Ni los analistas, ni los traders con 20 años de experiencia, ni los "gurús" de Twitter que aciertan una vez y te lo recuerdan por siempre (y olvidan las 50 veces que se equivocaron). Pero hay una estrategia que elimina el problema por completo: **Dollar Cost Averaging (DCA)**—o en español, inversión periódica. La idea es tan simple que parece tonta: compras una cantidad fija de cripto en intervalos regulares, sin importar el precio. $50 cada semana. $200 cada mes. Lo que puedas. Llueva o truene. Sin mirar gráficos. Sin intentar predecir nada. El resultado? Históricamente, DCA ha superado a la mayoría de inversores que intentan "comprar barato y vender caro". Porque el enemigo real no es el mercado—son tus emociones.',
+        highlight: {
+          title: 'El Dato Que Cambia Todo',
+          text: 'Si hubieras invertido $50 semanales en Bitcoin desde 2019 (sin importar el precio), habrías invertido ~$15,600. El valor de esos BTC hoy sería superior a $60,000. No necesitaste acertar el timing. Solo necesitaste no parar.'
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Por Qué Funciona? La Matemática del Promedio',
+        content: 'DCA funciona por un principio matemático poderoso: al comprar a diferentes precios a lo largo del tiempo, tu **precio promedio** se suaviza naturalmente. Compras más unidades cuando está barato (tu dinero rinde más) y menos cuando está caro (limitas tu exposición). No necesitas acertar el punto más bajo.',
+        features: [
+          { icon: TrendingDown, title: 'Cuando el Precio Baja', text: 'Tus $50 semanales compran MÁS cripto. Una caída de 50% significa que estás comprando al doble de rendimiento. Los profesionales AMAN las caídas porque su DCA acumula más por menos.' },
+          { icon: TrendingUp, title: 'Cuando el Precio Sube', text: 'Tus $50 compran menos cripto, pero lo que ya acumulaste vale más. El efecto neto: tus compras baratas anteriores compensan las compras caras actuales.' },
+          { icon: Activity, title: 'El Promedio Gana', text: 'A lo largo de meses y años, tu precio promedio termina siendo significativamente más bajo que el precio promedio del mercado. Esto se llama "costo promedio ponderado" y es la base de cómo invierten los fondos de pensiones más grandes del mundo.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'DCA vs Timing: ¿Qué Dice la Historia?',
+        content: 'Imagina 3 personas que invierten $100 mensuales en Bitcoin durante 4 años:',
+        features: [
+          { icon: Clock, title: 'Ana (DCA Disciplinado)', text: 'Compra $100 cada mes el día 1, sin importar el precio. No mira gráficos. No se estresa. En 4 años invirtió $4,800. Su retorno promedio histórico: entre 150-400% dependiendo del período.' },
+          { icon: AlertTriangle, title: 'Carlos (Intenta Hacer Timing)', text: 'Espera las caídas "perfectas" para comprar. Pero cuando cae, tiene miedo de que caiga más. Cuando sube, piensa que ya es muy tarde. En 4 años solo ejecutó 15 compras en lugar de 48. Invirtió menos y perdió las mejores oportunidades.' },
+          { icon: TrendingDown, title: 'María (Compra Todo de Una Vez)', text: 'Invierte los $4,800 juntos. Si compró en un pico, puede pasar AÑOS en pérdida psicológica. Si compró en un suelo, ganó más que Ana. Pero ¿quién sabe cuándo es el suelo? Nadie. Y el estrés emocional de ver -50% en tus ahorros es devastador.' }
+        ],
+        highlight: {
+          title: 'Estudios Reales',
+          text: 'Un análisis de todos los períodos de 4 años en la historia de Bitcoin muestra que DCA ha generado retorno positivo en el 100% de los casos. Timing el mercado correctamente es casi imposible—pero DCA ha funcionado SIEMPRE para quien mantuvo la disciplina.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'El Verdadero Enemigo: Tus Emociones',
+        content: 'La razón por la que DCA es tan poderoso no es solo la matemática—es que **neutraliza tus emociones**, que son el mayor destructor de riqueza:',
+        features: [
+          { icon: AlertTriangle, title: 'FOMO (Fear Of Missing Out)', text: 'Bitcoin sube 40% en una semana. Todos tus amigos están comprando. Sientes urgencia de meter todo tu dinero AHORA. Con DCA: compras tus $50 normales y sigues viviendo. Sin drama.' },
+          { icon: AlertTriangle, title: 'Pánico en las Caídas', text: 'Bitcoin cae 35%. Los medios dicen que "se acabó". Tu instinto grita: ¡VENDE TODO! Con DCA: compras tus $50 normales (ahora compras más BTC por el mismo precio) y sigues viviendo. Sin drama.' },
+          { icon: CheckCircle, title: 'La Paz Mental', text: 'DCA convierte la inversión de una experiencia emocionalmente agotadora a un proceso automático. Como pagar Netflix cada mes. No piensas en ello. No te estresa. Y con el tiempo, construyes riqueza silenciosamente.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Cómo Configurar tu DCA en la Práctica',
+        content: 'Configurar DCA es más fácil de lo que piensas. Puedes hacerlo manualmente o automatizarlo:',
+        features: [
+          { icon: Wallet, title: 'Manual (Semanal o Mensual)', text: 'Cada semana o mes, compras la cantidad fija que elegiste. En un exchange (Binance P2P, Backpack) o directamente en Jupiter si ya tienes stablecoins. Simple, sin complicaciones.' },
+          { icon: Zap, title: 'Automatizado con Jupiter', text: 'Jupiter en Solana tiene una función de DCA integrada. Depositas USDC y configuras: comprar $X de SOL/BTC cada día/semana/mes. El protocolo ejecuta las compras automáticamente. Sin intervención humana = sin intervención emocional.' },
+          { icon: PiggyBank, title: 'La Regla del Monto', text: 'Invierte solo lo que NO necesitas en los próximos 12 meses. Si ganas $2,000 al mes y tus gastos son $1,500, puedes hacer DCA con $100-200 mensuales. Nunca inviertas el dinero del arriendo o la comida.' }
+        ],
+        highlight: {
+          title: 'Consejo Profesional',
+          text: 'El mejor DCA es el que puedes mantener durante AÑOS sin afectar tu vida. $25 semanales durante 5 años genera más riqueza que $500 de una vez que no puedes repetir. La constancia gana. Siempre.'
+        }
+      },
+      {
+        type: 'takeaways',
+        title: 'Lo Que Debes Recordar',
+        items: [
+          'DCA (Dollar Cost Averaging) = comprar una cantidad fija de cripto a intervalos regulares, sin importar el precio.',
+          'Funciona porque tu precio promedio se suaviza: compras más cuando está barato, menos cuando está caro.',
+          'Históricamente, DCA en Bitcoin ha generado retorno positivo en el 100% de los períodos de 4+ años.',
+          'La ventaja principal no es solo matemática—es emocional. Elimina el FOMO, el pánico, y la parálisis de análisis.',
+          'Puedes automatizarlo en Jupiter (Solana) para eliminar la intervención humana por completo.',
+          'Regla de oro: invierte solo lo que no necesitas en los próximos 12 meses, y nunca pares tu DCA por emociones del mercado.'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: 'Bitcoin cae 40% en una semana. Los medios dicen que "se acabó". Tú haces DCA de $50 semanales. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Vendo todo antes de perder más' },
+            { id: 'b', text: 'Pauso mi DCA hasta que se recupere' },
+            { id: 'c', text: 'Compro mis $50 normales—ahora mi dinero compra más BTC que antes. Las caídas son descuento para mi DCA' },
+            { id: 'd', text: 'Meto todos mis ahorros porque está barato' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'DCA es disciplina, no emoción. Cuando el precio cae, tus $50 compran MÁS cripto. Eso baja tu precio promedio. Parar durante caídas es el error más común—te pierdes las mejores oportunidades de acumulación.'
+        },
+        {
+          id: 'q2',
+          question: '¿Por qué DCA históricamente supera a la mayoría de personas que intentan "comprar barato y vender caro"?',
+          options: [
+            { id: 'a', text: 'Porque el mercado siempre sube' },
+            { id: 'b', text: 'Porque es imposible predecir consistentemente los puntos altos y bajos, y las emociones (FOMO, pánico) hacen que la mayoría compre caro y venda barato—exactamente lo opuesto' },
+            { id: 'c', text: 'Porque DCA tiene algún tipo de ventaja matemática secreta' },
+            { id: 'd', text: 'Solo funciona con Bitcoin, no con otros activos' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El enemigo real es la psicología humana. Cuando sube, el FOMO te empuja a comprar (caro). Cuando cae, el pánico te empuja a vender (barato). DCA elimina las emociones de la ecuación.'
+        },
+        {
+          id: 'q3',
+          question: 'Ganas $1,800 al mes. Tus gastos fijos son $1,400. ¿Cuánto deberías destinar a DCA en cripto?',
+          options: [
+            { id: 'a', text: 'Los $400 completos para maximizar ganancias' },
+            { id: 'b', text: '$100-200 al mes, dejando margen para emergencias y gastos variables' },
+            { id: 'c', text: 'Nada hasta que gane más' },
+            { id: 'd', text: 'Pido un préstamo para invertir más' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Nunca inviertas dinero que puedas necesitar pronto. De los $400 sobrantes, necesitas margen para emergencias, gastos variables, y calidad de vida. $100-200 es un DCA sostenible que puedes mantener durante años—que es lo que importa.'
+        },
+        {
+          id: 'q4',
+          question: '¿Cuál es la mayor ventaja de automatizar tu DCA en una plataforma como Jupiter?',
+          options: [
+            { id: 'a', text: 'Paga mejores precios que comprar manualmente' },
+            { id: 'b', text: 'Elimina completamente la intervención humana y las emociones. No puedes pausar por pánico ni meter de más por FOMO si el proceso es automático' },
+            { id: 'c', text: 'Es más barato en comisiones' },
+            { id: 'd', text: 'Garantiza ganancias' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La automatización es la mejor defensa contra ti mismo. Si el DCA corre solo, no puedes sabotearlo con decisiones emocionales. Es como un débito automático de ahorro—lo configuras una vez y la disciplina está garantizada.'
+        },
+        {
+          id: 'q5',
+          question: 'Un amigo dice: "No voy a comprar Bitcoin ahora porque está muy caro. Voy a esperar a que baje." ¿Qué le responderías basándote en lo que aprendiste?',
+          options: [
+            { id: 'a', text: 'Tiene razón, mejor esperar' },
+            { id: 'b', text: 'Debería comprar todo de una vez ahora' },
+            { id: 'c', text: 'Nadie sabe si bajará o subirá. En vez de esperar el momento "perfecto" que quizás nunca llegue, podría empezar un DCA pequeño ahora. Si baja, su DCA comprará más. Si sube, al menos ya tiene algo' },
+            { id: 'd', text: 'Bitcoin siempre baja después de subir, así que tiene razón' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Esperar el momento perfecto es la forma más común de no invertir nunca. Siempre habrá una razón para esperar. DCA resuelve esto: empiezas con poco, y si el precio baja, tu próxima compra será más barata. El mejor momento para empezar DCA fue hace 5 años. El segundo mejor momento es hoy.'
+        }
+      ]
+    }
+  },
+  43: {
+    id: 43,
+    title: 'Bitcoin vs Altcoins: Qué Comprar Primero',
+    level: 'Principiante',
+    number: '18 de 19',
+    duration: '20 minutos',
+    type: 'Comparativa',
+    description: 'Existen más de 20,000 criptomonedas. No todas son iguales. Entiende por qué BTC es la base de todo portafolio y cómo se diferencia de ETH, SOL y las demás.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'No Todas las Criptomonedas Son Iguales',
+        content: 'Cuando alguien dice "voy a invertir en cripto", es como decir "voy a invertir en internet". ¿En qué exactamente? ¿En Google? ¿En un blog random? ¿En una empresa que promete revolucionar todo y desaparece en 6 meses? El mundo cripto tiene más de 20,000 tokens. La gran mayoría no vale nada y nunca lo valdrá. Pero hay categorías fundamentalmente diferentes que debes entender antes de poner un solo peso. **Bitcoin** no es lo mismo que **Ethereum**. Ethereum no es lo mismo que **Solana**. Y ninguno de los tres es lo mismo que DOGE, SHIB o la meme coin que tu primo te recomendó ayer. Esta lección te da el mapa para navegar este universo sin perderte.',
+        highlight: {
+          title: 'La Regla del 95%',
+          text: 'El 95% de las criptomonedas que existen hoy no existirán en 10 años. Muchas son proyectos experimentales, muchas son estafas, y muchas simplemente no resolvían ningún problema real. La selección importa enormemente.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Bitcoin: La Reserva de Valor Digital',
+        content: 'Bitcoin tiene un propósito claro y único: ser el **oro digital**—la reserva de valor más segura y resistente a la censura del mundo. No intenta hacer todo. Intencionalmente, es lento y "limitado" en funcionalidades porque su prioridad es la **seguridad y descentralización** absolutas.',
+        features: [
+          { icon: Lock, title: 'Escasez Absoluta', text: '21 millones máximo. Nunca habrá más. Ninguna otra criptomoneda tiene esta garantía tan fuerte. La política monetaria de Bitcoin es inmutable—ni siquiera los desarrolladores pueden cambiarla.' },
+          { icon: Shield, title: 'Máxima Descentralización', text: 'Miles de nodos en 100+ países. Ninguna persona, empresa o gobierno controla Bitcoin. Es la red más descentralizada y resistente a la censura del mundo. 15 años sin caídas.' },
+          { icon: Clock, title: 'Track Record', text: 'Desde 2009, Bitcoin ha sobrevivido prohibiciones, hackeos de exchanges, crisis financieras, y declaraciones de "muerte" más de 450 veces. Sigue más fuerte que nunca. Ninguna otra cripto tiene este historial.' },
+          { icon: Landmark, title: 'Adopción Institucional', text: 'ETFs de Bitcoin aprobados, MicroStrategy con $15+ mil millones en BTC, El Salvador como moneda legal, fondos de pensiones comprando. Las instituciones confían en Bitcoin de una forma que no confían en ninguna altcoin.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Ethereum y Solana: Las Plataformas de Utilidad',
+        content: 'Si Bitcoin es oro digital, ETH y SOL son más como **sistemas operativos**: plataformas donde se construyen aplicaciones. No compiten directamente con Bitcoin—resuelven problemas diferentes.',
+        features: [
+          { icon: Layers, title: 'Ethereum (ETH)', text: 'La primera y más grande plataforma de contratos inteligentes. DeFi, NFTs, stablecoins—la mayoría nació aquí. Tiene el ecosistema más maduro y la mayor cantidad de desarrolladores. Pero es lento (~15 TPS) y caro (fees de $1-50+). Piénsalo como Windows: dominante, probado, pero pesado.' },
+          { icon: Zap, title: 'Solana (SOL)', text: 'Plataforma ultra-rápida (~4,000 TPS) con fees de fracciones de centavo. Ecosistema DeFi en crecimiento explosivo (Jupiter, Raydium, Marinade). Ideal para experimentar y aprender porque los errores cuestan centavos, no dólares. Más joven, más riesgos, más potencial de crecimiento.' },
+          { icon: Network, title: 'La Diferencia Clave con Bitcoin', text: 'ETH y SOL tienen inflación (emiten nuevos tokens continuamente para pagar validadores). No tienen el límite duro de 21 millones de Bitcoin. Son inversiones en tecnología y ecosistemas, no en escasez pura. Eso los hace más volátiles y más arriesgados.' }
+        ],
+        highlight: {
+          title: 'Analogía Clara',
+          text: 'Bitcoin = oro digital (reserva de valor, escasez). Ethereum = infraestructura financiera (DeFi maduro, lento pero seguro). Solana = infraestructura de alta velocidad (DeFi rápido, barato, pero más joven). Los tres pueden coexistir porque resuelven problemas diferentes.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'El Universo de las Altcoins: Categorías que Debes Conocer',
+        content: 'Más allá de BTC, ETH y SOL, existen miles de tokens. Estas son las categorías principales que encontrarás:',
+        features: [
+          { icon: Landmark, title: 'Stablecoins (USDC, USDT)', text: 'Ya las conoces de la lección anterior. Ancladas al dólar. No son inversión—son herramienta de ahorro y operación. Esenciales para tu estrategia.' },
+          { icon: Gem, title: 'Tokens de Protocolo (JUP, RAY, RNDR)', text: 'Tokens que representan proyectos específicos con utilidad real: gobernanza, acceso a servicios, descuentos en fees. Su valor depende del éxito del proyecto. Alto riesgo, alto potencial.' },
+          { icon: AlertTriangle, title: 'Meme Coins (DOGE, SHIB, BONK)', text: 'Tokens sin utilidad real, impulsados por comunidad y especulación pura. Algunos generan retornos absurdos (1000x), pero la inmensa mayoría va a cero. Son apuestas, no inversiones. Si participas, hazlo con dinero que estés dispuesto a perder al 100%.' },
+          { icon: AlertTriangle, title: 'Tokens Dudosos (99% del mercado)', text: 'Proyectos sin equipo real, sin producto, sin auditoría. Tokens creados en 5 minutos para extraer dinero de incautos. Si no puedes explicar qué problema resuelve un token en una oración, probablemente no resuelve ninguno.' }
+        ]
+      },
+      {
+        type: 'comparison',
+        title: 'BTC vs ETH vs SOL: ¿Cuál Primero?',
+        leftSide: {
+          title: 'Bitcoin (BTC)',
+          points: [
+            'Reserva de valor #1 del ecosistema',
+            'Máxima descentralización y seguridad',
+            '21 millones — escasez absoluta',
+            'Menor volatilidad que altcoins',
+            'Ideal como base del portafolio (40-60%)',
+            'No sirve para DeFi ni apps'
+          ]
+        },
+        rightSide: {
+          title: 'Ethereum + Solana (ETH/SOL)',
+          points: [
+            'Plataformas para construir aplicaciones',
+            'Ecosistemas DeFi, NFTs, staking',
+            'Inflación continua (no hay límite duro)',
+            'Mayor volatilidad y riesgo',
+            'Complemento del portafolio (20-40%)',
+            'Necesarios para usar DeFi y apps Web3'
+          ]
+        }
+      },
+      {
+        type: 'main',
+        title: 'Cómo Construir tu Primer Portafolio',
+        content: 'No existe un portafolio "perfecto"—depende de tu tolerancia al riesgo y tu horizonte de tiempo. Pero estos son marcos de referencia probados:',
+        features: [
+          { icon: Shield, title: 'Conservador (Menor riesgo)', text: '60-70% BTC + 15-20% ETH + 10-15% SOL + 5-10% Stablecoins. La mayoría en Bitcoin como ancla. Ideal si tu prioridad es preservar valor a largo plazo y no quieres estar pendiente del mercado.' },
+          { icon: Activity, title: 'Moderado (Balance riesgo/retorno)', text: '40-50% BTC + 20-25% SOL + 15-20% ETH + 10-15% Stablecoins + 5% Altcoins selectas. Más exposición a ecosistemas de crecimiento. Requiere más conocimiento y atención.' },
+          { icon: Zap, title: 'Agresivo (Mayor riesgo, mayor potencial)', text: '30% BTC + 30% SOL + 15% ETH + 15% Altcoins de protocolo + 10% Stablecoins. Alta exposición a crecimiento pero también a caídas fuertes. Solo si puedes tolerar ver -50% sin vender en pánico.' }
+        ],
+        highlight: {
+          title: 'La Regla Para Principiantes',
+          text: 'Si apenas empiezas, tu portafolio debería ser 70%+ Bitcoin. Es tentador ir directo a altcoins que prometen 100x, pero Bitcoin es tu ancla. Aprende a caminar antes de correr. Los que se saltaron Bitcoin para ir directo a meme coins usualmente terminaron perdiendo todo.'
+        }
+      },
+      {
+        type: 'takeaways',
+        title: 'Lo Que Debes Recordar',
+        items: [
+          'Bitcoin es reserva de valor (oro digital). ETH y SOL son plataformas de utilidad (sistemas operativos). Resuelven problemas diferentes.',
+          'Bitcoin tiene escasez absoluta (21M), máxima descentralización, y 15+ años de track record. Ninguna otra cripto tiene esto.',
+          'ETH y SOL tienen inflación, son más volátiles, pero permiten DeFi, staking, y aplicaciones que Bitcoin no puede.',
+          'El 95% de altcoins irán a cero. Solo invierte en tokens cuyo problema puedas explicar en una oración.',
+          'Meme coins son apuestas, no inversiones. Si participas, usa solo dinero que puedas perder completamente.',
+          'Como principiante, empieza con 70%+ BTC como base. Agrega ETH/SOL gradualmente conforme aprendas. No te saltes los fundamentales.'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: '¿Cuál es la diferencia fundamental entre Bitcoin y Solana como inversión?',
+          options: [
+            { id: 'a', text: 'No hay diferencia, ambas son criptomonedas' },
+            { id: 'b', text: 'Bitcoin es reserva de valor con escasez absoluta (21M). Solana es una plataforma de utilidad con inflación continua. Resuelven problemas diferentes y tienen perfiles de riesgo distintos' },
+            { id: 'c', text: 'Solana es mejor porque es más rápida' },
+            { id: 'd', text: 'Bitcoin es mejor porque fue la primera' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Bitcoin optimiza para seguridad y escasez (oro digital). Solana optimiza para velocidad y aplicaciones (plataforma). No compiten directamente—son complementarias. Por eso un portafolio puede tener ambas.'
+        },
+        {
+          id: 'q2',
+          question: 'Un influencer recomienda meter todo tu dinero en una meme coin que "va a hacer 1000x". ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Invierto antes de que sea tarde' },
+            { id: 'b', text: 'Investigo la meme coin para ver si es legítima' },
+            { id: 'c', text: 'Entiendo que las meme coins son apuestas especulativas, no inversiones. Si participo, uso solo dinero que puedo perder al 100%, nunca la base de mi portafolio' },
+            { id: 'd', text: 'Si el influencer es famoso, es confiable' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Las meme coins no tienen utilidad real—su valor depende 100% de la especulación y el hype. Los influencers frecuentemente reciben tokens gratis para promoverlos y venden cuando el precio sube con las compras de sus seguidores. Tu portafolio debería basarse en BTC/ETH/SOL, no en apuestas.'
+        },
+        {
+          id: 'q3',
+          question: 'Tienes $1,000 para empezar a invertir en cripto. Nunca has comprado antes. ¿Cómo distribuirías?',
+          options: [
+            { id: 'a', text: '$1,000 en la altcoin más barata para tener más monedas' },
+            { id: 'b', text: '$600-700 en BTC, $150-200 en SOL, $100-150 en ETH, y $100 en stablecoins como reserva' },
+            { id: 'c', text: '$500 en BTC, $500 en meme coins para maximizar potencial' },
+            { id: 'd', text: 'Todo en USDC hasta que aprenda más' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Como principiante, 60-70% en BTC te da una base sólida. ETH y SOL agregan exposición a ecosistemas con potencial. Las stablecoins son tu reserva para comprar oportunidades. Nunca bases un portafolio nuevo en meme coins o altcoins especulativas.'
+        },
+        {
+          id: 'q4',
+          question: '¿Por qué Bitcoin tiene menos riesgo que SOL o ETH como inversión a largo plazo?',
+          options: [
+            { id: 'a', text: 'Porque el precio nunca baja' },
+            { id: 'b', text: 'Porque tiene escasez absoluta, máxima descentralización, 15+ años de historial, adopción institucional (ETFs), y no depende del éxito de ninguna empresa o equipo de desarrollo' },
+            { id: 'c', text: 'Porque es más caro, entonces es mejor' },
+            { id: 'd', text: 'Todos tienen el mismo riesgo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Bitcoin es la cripto más probada del mundo. Su valor no depende de que un equipo lance actualizaciones o de que un ecosistema crezca. SOL y ETH, aunque prometedores, dependen del éxito de sus plataformas y de que los desarrolladores sigan construyendo. Más dependencias = más riesgo.'
+        },
+        {
+          id: 'q5',
+          question: 'Si Bitcoin es "oro digital" y SOL/ETH son "plataformas", ¿por qué no poner todo en Bitcoin si es lo más seguro?',
+          options: [
+            { id: 'a', text: 'Deberías—Bitcoin es lo único que importa' },
+            { id: 'b', text: 'Bitcoin no permite DeFi, staking ni aplicaciones. ETH y SOL dan acceso a herramientas financieras que pueden generar rendimiento adicional sobre tu capital. Un portafolio diversificado balancea seguridad (BTC) con crecimiento (ETH/SOL)' },
+            { id: 'c', text: 'Porque SOL va a superar a Bitcoin en precio' },
+            { id: 'd', text: 'Solo por diversificar, no hay otra razón' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Bitcoin es tu ancla de seguridad y escasez. Pero ETH/SOL te dan acceso a DeFi, staking (ganas rendimiento), y un ecosistema en crecimiento. La combinación ideal es: BTC para preservar riqueza, ETH/SOL para hacerla crecer activamente.'
+        }
+      ]
+    }
+  },
+  44: {
+    id: 44,
+    title: 'Tu Plan de Inversión Personal',
+    level: 'Principiante',
+    number: '19 de 19',
+    duration: '22 minutos',
+    type: 'Práctica',
+    description: 'La lección final del nivel principiante. Junta todo lo que aprendiste en un plan de acción concreto: tu portafolio, tu estrategia DCA, tu seguridad, y tus metas. Sales de aquí con un plan real.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'De Estudiante a Inversor: Tu Graduación',
+        content: 'Felicidades. Si llegaste hasta aquí, ya sabes más sobre dinero, inflación y criptomonedas que el 95% de las personas. Entiendes **por qué** el sistema monetario actual te empobrece (Lecciones 1-3). Conoces **la solución** que Bitcoin representa (Lección 4). Sabes **cómo funciona** la tecnología (Lecciones 5-6). Tienes tu wallet configurada, has hecho transacciones, y sabes identificar estafas (Lecciones 7-15). Entiendes stablecoins, DCA, y la diferencia entre BTC y altcoins (Lecciones 16-18). Ahora falta lo más importante: **convertir todo ese conocimiento en acción**. Un plan sin ejecución es un sueño. Esta lección es tu hoja de ruta.',
+        highlight: {
+          title: 'El Momento de la Verdad',
+          text: 'El conocimiento sin acción no vale nada. Después de esta lección, deberías tener un plan escrito con montos, fechas, y reglas claras. No un "algún día voy a invertir"—un PLAN concreto que ejecutas esta semana.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Paso 1: Define tu Situación Financiera',
+        content: 'Antes de invertir un solo peso en cripto, necesitas claridad brutal sobre tu realidad financiera. Sin esto, cualquier inversión es una apuesta irresponsable:',
+        features: [
+          { icon: PiggyBank, title: 'Fondo de Emergencia Primero', text: 'Antes de cripto, necesitas 3-6 meses de gastos en ahorros líquidos (efectivo o cuenta bancaria). Si mañana te quedas sin empleo, ¿puedes sobrevivir 3 meses? Si la respuesta es no, tu prioridad es ahorrar, no invertir. Cripto es volátil—no puede ser tu salvavidas.' },
+          { icon: Banknote, title: 'Calcula tu Capacidad de Inversión', text: 'Ingresos mensuales - Gastos fijos - Gastos variables - Fondo de emergencia = Lo que PUEDES invertir. Si el número es $25 al mes, perfecto. Empieza con eso. Si es $0, enfócate primero en aumentar ingresos o reducir gastos. Invertir con dinero prestado o necesario es el error #1.' },
+          { icon: Clock, title: 'Define tu Horizonte', text: '¿Cuánto tiempo puedes dejar ese dinero sin tocarlo? Si necesitas el dinero en 6 meses, no inviertas en cripto volátil. Cripto es para horizontes de 2+ años mínimo, idealmente 4-5+ años para maximizar la probabilidad de retorno positivo.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Paso 2: Arma tu Portafolio Base',
+        content: 'Basándote en lo que aprendiste en la lección anterior, define tu distribución. Aquí tienes un marco para principiantes que puedes ajustar según tu perfil:',
+        features: [
+          { icon: Lock, title: 'La Base: Bitcoin (50-70%)', text: 'Tu ancla. La posición que NO tocas. DCA semanal o mensual. Almacenado en cold wallet si supera los $5,000. Aquí va la mayor parte de tu inversión porque es lo más probado y resistente del ecosistema.' },
+          { icon: Zap, title: 'Crecimiento: SOL + ETH (20-35%)', text: 'Tu exposición a ecosistemas en desarrollo. SOL para DeFi y experimentación (fees baratos). ETH como segunda capa de seguridad y madurez. También en DCA, con menor proporción que BTC.' },
+          { icon: Wallet, title: 'Operativo: Stablecoins (5-15%)', text: 'Tu reserva en dólares digitales. Sirve para tres cosas: 1) Comprar caídas cuando se presenten, 2) Gastos con tarjeta cripto, 3) Estabilidad en tu portafolio. USDC + USDT diversificado.' },
+          { icon: AlertTriangle, title: 'Opcional: Altcoins/Memes (0-5%)', text: 'SOLO si te sobra después de cubrir las tres categorías anteriores. Dinero que puedes perder al 100% sin que afecte tu vida. Nunca más del 5% de tu portafolio total. Si no entiendes el proyecto, no inviertas.' }
+        ],
+        highlight: {
+          title: 'La Regla de Oro del Portafolio',
+          text: 'Imagina que mañana todo tu portafolio cae 50%. ¿Puedes dormir tranquilo sabiendo que no necesitas ese dinero por años? Si la respuesta es no, estás invirtiendo demasiado. Reduce hasta que puedas dormir en paz durante un mercado bajista.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Paso 3: Configura tu DCA',
+        content: 'Ahora que tienes tu distribución, configura la ejecución automática para eliminar emociones:',
+        features: [
+          { icon: RefreshCw, title: 'Elige tu Frecuencia', text: 'Semanal es ideal para suavizar la volatilidad al máximo. Quincenal o mensual también funciona. Lo importante es que sea consistente y sostenible. Si cobras quincenal, DCA quincenal. Que coincida con tu flujo de dinero.' },
+          { icon: Banknote, title: 'Elige tu Monto', text: 'Un monto que puedas mantener MÍNIMO 2 años sin sacrificar tu calidad de vida. $25/semana ($100/mes) es un punto de partida excelente. $50/semana ($200/mes) es agresivo pero viable con ingresos medios. Empieza pequeño—siempre puedes aumentar.' },
+          { icon: Zap, title: 'Automatiza', text: 'Opción 1: Jupiter DCA (depositas USDC, configura compras automáticas de SOL/BTC). Opción 2: Alarma semanal en tu teléfono + compra manual. Opción 3: Exchange con compra recurrente. Lo automático es mejor porque elimina la tentación de "esperar un mejor precio".' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Paso 4: Checklist de Seguridad',
+        content: 'Antes de empezar a ejecutar tu plan, verifica que tu seguridad esté en orden. Un plan de inversión sin seguridad es como construir una casa sin cerraduras:',
+        features: [
+          { icon: Shield, title: 'Frase Semilla', text: '¿Está escrita en papel (o metal) y guardada en un lugar seguro FUERA de tu casa? ¿Nunca la has digitado en ningún sitio web ni tomado foto? Si la respuesta a cualquiera es NO, resuelve esto ANTES de invertir más.' },
+          { icon: Lock, title: 'Autenticación', text: '¿Tu exchange tiene 2FA activado (Google Authenticator, NO SMS)? ¿Tu email principal tiene 2FA? ¿Tu wallet tiene contraseña o biometría? Si falta algo, actívalo ahora.' },
+          { icon: Wallet, title: 'Distribución de Custodia', text: '¿Tienes claro qué va en exchange (temporal), qué en hot wallet (operativo), y qué en cold wallet (ahorros)? Si todo tu cripto está en un exchange, mueve la mayoría a tu wallet esta semana.' },
+          { icon: AlertTriangle, title: 'Conocimiento Anti-Estafa', text: '¿Puedes identificar un sitio de phishing? ¿Sabes que NUNCA debes compartir tu frase semilla con nadie? ¿Sabes que "soporte de Phantom" NUNCA te escribe por DM? Si dudas, repasa la Lección 14.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Paso 5: Define tus Reglas y Metas',
+        content: 'Los mejores inversores tienen reglas escritas que siguen sin importar las emociones del momento. Define las tuyas AHORA, antes de que el mercado te ponga a prueba:',
+        features: [
+          { icon: CheckCircle, title: 'Reglas de Compra', text: 'Ejemplo: "Compro $50 de BTC y $25 de SOL cada lunes a las 8am, sin importar el precio. Si el mercado cae más de 30%, agrego una compra extra con mi reserva de stablecoins." Escríbelo. Literalmente.' },
+          { icon: CheckCircle, title: 'Reglas de NO Hacer', text: 'Ejemplo: "No vendo en pánico. No invierto más del X% de mis ingresos. No compro tokens que no entiendo. No tomo decisiones financieras después de medianoche o después de ver un video de un influencer." Escríbelo.' },
+          { icon: CheckCircle, title: 'Meta a 1 Año', text: '¿Cuánto quieres tener invertido en 12 meses? No en ganancias (eso no lo controlas)—en capital invertido. Si tu DCA es $100/mes, tu meta es $1,200 invertidos en 1 año. Eso SÍ lo controlas.' },
+          { icon: CheckCircle, title: 'Revisión Trimestral', text: 'Cada 3 meses, revisa: ¿Seguí mi DCA? ¿Mi distribución sigue en balance? ¿Necesito ajustar montos? ¿Mi seguridad está en orden? 15 minutos cada 3 meses. No mires tu portafolio todos los días—es contraproducente.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Tu Plan de Acción: Ejecuta Esta Semana',
+        items: [
+          'PASO 1: Verifica que tienes fondo de emergencia (3-6 meses de gastos). Si no, prioriza eso.',
+          'PASO 2: Define tu portafolio base: X% BTC + X% SOL + X% ETH + X% Stablecoins. Escríbelo.',
+          'PASO 3: Configura tu DCA: monto fijo + frecuencia + método (automático o manual). Empieza esta semana.',
+          'PASO 4: Completa el checklist de seguridad. Frase semilla segura, 2FA activo, custodia organizada.',
+          'PASO 5: Escribe tus reglas de compra, reglas de NO hacer, meta a 1 año, y fecha de revisión trimestral.',
+          'RECUERDA: El mejor plan es el que ejecutas consistentemente. Perfecto no existe. Empieza con algo simple y ajusta sobre la marcha.',
+          'SIGUIENTE NIVEL: El nivel intermedio te enseñará a leer gráficos, analizar proyectos, y gestionar riesgo como un profesional. Pero primero, ejecuta este plan durante al menos 3 meses.'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: 'Tienes $500 de ahorro y ganas $1,500 al mes con gastos de $1,300. No tienes fondo de emergencia. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Invierto los $500 en BTC porque el mercado está bajando' },
+            { id: 'b', text: 'Primero construyo un fondo de emergencia de 3 meses (~$3,900-4,000). Destino $100-150/mes de mi sobrante a eso. Solo DESPUÉS empiezo a invertir en cripto con lo que sobre' },
+            { id: 'c', text: 'Invierto $250 y ahorro $250' },
+            { id: 'd', text: 'Espero hasta tener más dinero para empezar' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Sin fondo de emergencia, cualquier imprevisto (enfermedad, desempleo, reparación) te obligaría a vender tu cripto en el peor momento posible—probablemente en pérdida. El fondo de emergencia es la base de toda salud financiera.'
+        },
+        {
+          id: 'q2',
+          question: 'Es lunes a las 8am. Tu DCA es $50 semanales en BTC. Pero Bitcoin subió 25% esta semana. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'No compro, está muy caro. Espero a que baje' },
+            { id: 'b', text: 'Compro el doble porque va a seguir subiendo' },
+            { id: 'c', text: 'Compro mis $50 normales como dice mi plan. DCA funciona porque elimina las decisiones emocionales. Mi plan no depende del precio de esta semana' },
+            { id: 'd', text: 'Cambio mi DCA de BTC a una altcoin que no haya subido todavía' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'DCA es disciplina, no reacción. Tu plan dice $50 los lunes, sin importar el precio. Si esta semana compras menos BTC porque está caro, la próxima semana que baje comprarás más. El promedio se encarga del resto.'
+        },
+        {
+          id: 'q3',
+          question: '¿Con qué frecuencia deberías revisar y rebalancear tu portafolio cripto?',
+          options: [
+            { id: 'a', text: 'Todos los días para maximizar ganancias' },
+            { id: 'b', text: 'Cada 3 meses: verificar distribución, ajustar DCA si necesario, revisar seguridad. 15 minutos trimestrales. Mirar el portafolio diariamente es contraproducente y genera ansiedad' },
+            { id: 'c', text: 'Nunca, una vez configurado no se toca' },
+            { id: 'd', text: 'Solo cuando el mercado sube para tomar ganancias' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Revisión trimestral es el equilibrio perfecto. Suficiente para ajustar si algo cambió (ingresos, distribución desbalanceada, nueva información), pero no tan frecuente como para generar decisiones emocionales. Los que miran diario tienden a hacer trading impulsivo.'
+        },
+        {
+          id: 'q4',
+          question: 'Llevas 6 meses haciendo DCA. Tu portafolio está en -20%. Un amigo dice "vendé todo antes de perder más". ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Vendo todo y espero a que baje más para recomprar' },
+            { id: 'b', text: 'Sigo mi plan. Mis reglas dicen "no vendo en pánico". DCA en períodos negativos es cuando acumulo MÁS por el mismo precio. Históricamente, todos los períodos de 4+ años de DCA en BTC han terminado en positivo' },
+            { id: 'c', text: 'Invierto el doble para promediar el precio más rápido' },
+            { id: 'd', text: 'Cambio todo a meme coins que están subiendo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Este es el momento de verdad que separa inversores de apostadores. Tu plan tiene reglas escritas por una razón: para seguirlas cuando las emociones te digan lo contrario. -20% en 6 meses es normal en cripto. Lo que importa es dónde estarás en 3-5 años.'
+        },
+        {
+          id: 'q5',
+          question: 'Completaste el nivel principiante. ¿Cuál debería ser tu siguiente paso concreto?',
+          options: [
+            { id: 'a', text: 'Empezar a hacer trading diario para ganar más rápido' },
+            { id: 'b', text: 'Comprar altcoins que están subiendo en Twitter' },
+            { id: 'c', text: 'Ejecutar mi plan: verificar fondo de emergencia, configurar DCA esta semana, completar checklist de seguridad, escribir mis reglas, y operar mi plan durante 3 meses antes de pasar al nivel intermedio' },
+            { id: 'd', text: 'Esperar al próximo bull market para empezar' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'El conocimiento sin ejecución no vale nada. Tu plan está listo—ahora ejecútalo. 3 meses de DCA disciplinado te darán la experiencia real que ninguna lección puede enseñar. Después, el nivel intermedio te dará herramientas para optimizar tu estrategia.'
+        }
+      ]
+    }
+  },
   40: {
     id: 40,
     title: 'Staking SOL: Gana por Asegurar la Red',
     level: 'Avanzado',
-    number: '11 de 11',
+    number: '2 de 11',
     duration: '30 min',
     type: 'Tutorial + Concepto',
     description: 'Entiende validadores, epochs y cómo ganar ~7% anual delegando tu SOL.',
