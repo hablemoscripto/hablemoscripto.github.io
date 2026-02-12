@@ -31,7 +31,8 @@ courseData.ts (source of truth) → npm run db:seed → Supabase DB → lessonSe
 - **Backend**: Supabase (PostgreSQL + Auth + Edge Functions with Deno)
 - **AI Chat**: Google Gemini API (CBas assistant)
 - **Payments**: Wompi (Colombian gateway)
-- **Hosting**: GitHub Pages (push to `main` triggers deploy)
+- **Hosting**: Vercel (push to `main` triggers deploy)
+- **Email**: Resend API via `mail.hablemoscripto.io` domain
 
 ### Project Structure
 Root-level entry points (`App.tsx`, `index.tsx`, `index.css`) - no `src/` folder. Path alias `@/` maps to project root.
@@ -44,7 +45,7 @@ Root-level entry points (`App.tsx`, `index.tsx`, `index.css`) - no `src/` folder
 | `scripts/seed.ts` | Seeds courseData.ts → Supabase (defines available Lucide icons) |
 | `services/lessonService.ts` | Fetches lessons from Supabase |
 | `contexts/*.tsx` | Auth, Progress, Gamification state management |
-| `supabase/functions/` | Edge Functions (Deno): payment creation, webhooks |
+| `supabase/functions/` | Edge Functions (Deno): payment, webhooks, newsletter, unsubscribe |
 
 ### State Management
 - React Context for global state (AuthContext, ProgressContext, GamificationContext)
@@ -85,9 +86,9 @@ Icons are Lucide React components in courseData.ts, converted to string names by
 
 ## Course Structure
 
-- **Principiante** (Beginner): 20 lessons - Money fundamentals, inflation, Cantillon effect, Bitcoin intro
-- **Intermedio** (Intermediate): 16 lessons - Blockchain, wallets, security, DeFi basics
-- **Avanzado** (Advanced): 14 lessons - Technical deep dives, trading, advanced DeFi
+- **Principiante** (Beginner): 19 lessons - Money fundamentals, inflation, Cantillon effect, Bitcoin intro, wallets, stablecoins, DCA, investment planning
+- **Intermedio** (Intermediate): 12 lessons - Blockchain deep dives, DeFi basics, liquidity pools, yield farming
+- **Avanzado** (Advanced): 11 lessons - Staking, advanced DeFi, MEV, governance, trading strategies
 
 ## Environment Variables
 
