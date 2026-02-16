@@ -177,7 +177,7 @@ export default function PaymentButton({
     return (
       <button
         disabled
-        className={`bg-slate-700 text-slate-400 font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 ${className}`}
+        className={`bg-surface-border text-slate-400 font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 ${className}`}
       >
         <Loader2 size={20} className="animate-spin" />
         Cargando...
@@ -187,7 +187,7 @@ export default function PaymentButton({
 
   if (isPremium) {
     return (
-      <div className={`bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/50 text-amber-400 font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 ${className}`}>
+      <div className={`bg-accent-500/10 border border-accent-500/50 text-accent-400 font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 ${className}`}>
         <CheckCircle size={20} />
         Ya eres Premium
       </div>
@@ -198,7 +198,7 @@ export default function PaymentButton({
     <button
       onClick={handlePayment}
       disabled={loading || !user}
-      className={`bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 disabled:from-slate-600 disabled:to-slate-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:cursor-not-allowed ${className}`}
+      className={`bg-brand-500 hover:bg-brand-400 disabled:bg-surface-border text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:cursor-not-allowed ${className}`}
     >
       {loading ? (
         <>

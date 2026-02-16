@@ -138,7 +138,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                                     : 'bg-red-500'
                                                 : isCurrent
                                                     ? 'bg-brand-500'
-                                                    : 'bg-slate-700'
+                                                    : 'bg-surface-border'
                                         }`}
                                     />
                                 );
@@ -171,10 +171,10 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                         } else if (isSelected) {
                                             optionClass += "bg-red-500/10 border-red-500/50 text-red-400";
                                         } else {
-                                            optionClass += "bg-slate-950 border-slate-800 text-slate-500 opacity-50";
+                                            optionClass += "bg-surface-base border-surface-border text-slate-500 opacity-50";
                                         }
                                     } else {
-                                        optionClass += "bg-slate-950 border-slate-800 text-slate-300 hover:border-brand-500/50 hover:bg-slate-900 cursor-pointer";
+                                        optionClass += "bg-surface-base border-surface-border text-slate-300 hover:border-brand-500/50 hover:bg-surface-1 cursor-pointer";
                                     }
 
                                     return (
@@ -189,7 +189,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                                     ? 'bg-green-500/20 text-green-400'
                                                     : showFeedback && isSelected
                                                         ? 'bg-red-500/20 text-red-400'
-                                                        : 'bg-slate-800 text-slate-400'
+                                                        : 'bg-surface-3 text-slate-400'
                                             }`}>
                                                 {String.fromCharCode(65 + optIdx)}
                                             </span>
@@ -243,7 +243,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                         <div className={`text-center py-4 rounded-lg ${
                             allCorrect
                                 ? 'bg-green-500/10 border border-green-500/20'
-                                : 'bg-slate-800 border border-slate-700'
+                                : 'bg-surface-3 border border-surface-border-hover'
                         }`}>
                             {allCorrect ? (
                                 <div className="space-y-2">

@@ -1,127 +1,141 @@
 import React from 'react';
-import { Book, TrendingUp, Rocket, CheckCircle2, Lock } from 'lucide-react';
+import { Shield, TrendingUp, Star, ArrowRight, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
-const CourseCard: React.FC<{
-  title: string;
-  level: string;
-  description: string;
-  features: string[];
-  icon: React.ElementType;
-  delay: string;
-  isLocked?: boolean;
-  onStartLevel: () => void;
-}> = ({ title, level, description, features, icon: Icon, delay, isLocked = false, onStartLevel }) => (
-  <div className={`group relative bg-slate-900 rounded-2xl border border-slate-800 p-8 ${!isLocked ? 'hover:border-brand-500/50 hover:-translate-y-2' : 'opacity-75'} transition-all duration-500 overflow-hidden ${delay}`}>
-    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+const levels = [
+  {
+    number: '01',
+    title: 'Principiante',
+    subtitle: 'Bases Solidas',
+    lessons: 19,
+    description: 'Dinero, inflacion, Bitcoin, wallets, seguridad, stablecoins y tu primer plan de inversion.',
+    icon: Shield,
+    color: 'brand' as const,
+  },
+  {
+    number: '02',
+    title: 'Intermedio',
+    subtitle: 'Analisis de Mercado',
+    lessons: 12,
+    description: 'Blockchain a fondo, DeFi, liquidity pools, yield farming y metricas on-chain.',
+    icon: TrendingUp,
+    color: 'indigo' as const,
+  },
+  {
+    number: '03',
+    title: 'Avanzado',
+    subtitle: 'DeFi & Estrategias',
+    lessons: 11,
+    description: 'Staking, MEV, gobernanza, estrategias avanzadas de trading y gestion de portafolio.',
+    icon: Star,
+    color: 'rose' as const,
+  },
+];
 
-    <div className={`w-14 h-14 rounded-xl bg-slate-800 flex items-center justify-center mb-6 ${!isLocked ? 'group-hover:bg-brand-500/20' : ''} transition-colors relative`}>
-      <Icon className={`${!isLocked ? 'text-slate-400 group-hover:text-brand-500' : 'text-slate-600'} w-8 h-8 transition-colors`} />
-      {isLocked && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 rounded-xl">
-          <Lock className="w-5 h-5 text-slate-500" />
-        </div>
-      )}
-    </div>
-
-    <div className={`mb-2 text-xs font-bold tracking-widest ${isLocked ? 'text-slate-600' : 'text-brand-500'} uppercase`}>{level}</div>
-    <h3 className={`text-2xl font-bold ${isLocked ? 'text-slate-600' : 'text-white'} mb-4 font-heading`}>{title}</h3>
-    <p className={`${isLocked ? 'text-slate-600' : 'text-slate-400'} mb-6 text-sm leading-relaxed`}>{description}</p>
-
-    <ul className="space-y-3 mb-8">
-      {features.map((feature, i) => (
-        <li key={i} className={`flex items-start gap-2 text-sm ${isLocked ? 'text-slate-700' : 'text-slate-300'}`}>
-          <CheckCircle2 className={`w-4 h-4 ${isLocked ? 'text-slate-700' : 'text-brand-500'} mt-0.5 shrink-0`} />
-          <span>{feature}</span>
-        </li>
-      ))}
-    </ul>
-
-    <button
-      onClick={onStartLevel}
-      disabled={isLocked}
-      className={`w-full py-3 rounded-lg border font-medium transition-all flex items-center justify-center gap-2 ${
-        isLocked
-          ? 'border-slate-800 text-slate-600 bg-slate-900 cursor-not-allowed'
-          : 'border-slate-600 text-white hover:bg-brand-500 hover:border-brand-500 hover:text-slate-900'
-      }`}
-    >
-      {isLocked ? (
-        <>
-          <Lock className="w-4 h-4" />
-          Bloqueado
-        </>
-      ) : (
-        'Empezar Nivel'
-      )}
-    </button>
-  </div>
-);
+const colorMap = {
+  brand: {
+    accent: 'text-brand-500',
+    bg: 'bg-brand-500/10',
+    border: 'border-brand-500/30',
+    dot: 'bg-brand-500',
+  },
+  indigo: {
+    accent: 'text-indigo-400',
+    bg: 'bg-indigo-500/10',
+    border: 'border-indigo-500/30',
+    dot: 'bg-indigo-500',
+  },
+  rose: {
+    accent: 'text-rose-400',
+    bg: 'bg-rose-500/10',
+    border: 'border-rose-500/30',
+    dot: 'bg-rose-500',
+  },
+};
 
 const Courses: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  const handleStartLevel = () => {
+  const handleStart = () => {
     if (user) {
       navigate('/education');
     } else {
-      // Scroll to top and the parent LandingPage will handle the auth modal
       navigate('/?showAuth=true');
     }
   };
 
-  const courses = [
-    {
-      title: "Bases Sólidas",
-      level: "Principiante",
-      description: "Entiende Bitcoin, blockchain y seguridad. Configura tu primera wallet y evita estafas comunes.",
-      icon: Book,
-      features: ["Fundamentos de Blockchain", "Seguridad y Wallets", "Exchanges Centralizados", "Primeras transacciones"],
-      delay: "delay-0",
-      isLocked: false
-    },
-    {
-      title: "Análisis de Mercado",
-      level: "Intermedio",
-      description: "Aprende a leer gráficos, identificar tendencias y entender los ciclos del mercado cripto.",
-      icon: TrendingUp,
-      features: ["Análisis Técnico Básico", "Psicología de Mercado", "Gestión de Riesgo", "Métricas On-Chain"],
-      delay: "delay-100",
-      isLocked: true
-    },
-    {
-      title: "DeFi y Avanzado",
-      level: "Avanzado",
-      description: "Domina finanzas descentralizadas, NFTs, y estrategias avanzadas de inversión on-chain.",
-      icon: Rocket,
-      features: ["Protocolos DeFi", "Yield Farming", "Análisis de Altcoins", "Navegación Web3"],
-      delay: "delay-200",
-      isLocked: true
-    }
-  ];
-
   return (
-    <section id="courses" className="py-24 relative bg-slate-950">
-       {/* Background elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-900/10 via-slate-950 to-slate-950 pointer-events-none"></div>
-
+    <section id="courses" className="py-28 lg:py-32 relative">
       <div className="container max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <span className="text-brand-500 font-bold tracking-wider text-sm uppercase mb-2 block">Plan de Estudio</span>
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
-            Tu Camino hacia la <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-brand-600">Libertad Financiera</span>
+          <span className="text-brand-500 font-bold tracking-wider text-sm uppercase mb-3 block">Plan de Estudio</span>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
+            Tu ruta de aprendizaje
           </h2>
           <p className="text-slate-400 text-lg">
-            Un currículum estructurado paso a paso. Sin saltos, sin confusión. Diseñado para llevarte de cero a experto de forma segura.
+            Un curriculo estructurado paso a paso. Diseñado para llevarte de cero a experto de forma segura.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {courses.map((course, index) => (
-            <CourseCard key={index} {...course} onStartLevel={handleStartLevel} />
-          ))}
+        {/* Learning Path */}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          {levels.map((level, index) => {
+            const colors = colorMap[level.color];
+            const Icon = level.icon;
+            return (
+              <div
+                key={level.number}
+                className="group relative bg-surface-1 rounded-2xl border border-surface-border hover:border-surface-border-hover transition-all duration-300 overflow-hidden"
+              >
+                {/* Top accent line */}
+                <div className={`h-0.5 ${colors.dot}`}></div>
+
+                <div className="p-6 lg:p-8">
+                  {/* Icon + Level label */}
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center`}>
+                      <Icon size={24} className={colors.accent} />
+                    </div>
+                    <div>
+                      <span className={`text-xs font-bold tracking-widest uppercase ${colors.accent}`}>{level.title}</span>
+                      <h3 className="text-xl font-bold text-white">{level.subtitle}</h3>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-slate-400 leading-relaxed mb-6 min-h-[60px]">
+                    {level.description}
+                  </p>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-slate-500 font-medium">{level.lessons} lecciones</span>
+                    <button
+                      onClick={handleStart}
+                      className={`flex items-center gap-1 text-sm font-medium ${colors.accent} hover:underline transition-colors`}
+                    >
+                      Ver nivel <ChevronRight size={16} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Connector line (not on last) */}
+                {index < levels.length - 1 && (
+                  <div className="hidden md:block absolute top-1/2 -right-4 lg:-right-5 w-6 lg:w-8 border-t border-dashed border-surface-border-hover z-10"></div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* CTA below path */}
+        <div className="text-center mt-12">
+          <button
+            onClick={handleStart}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-brand-500/20"
+          >
+            Comenzar Ahora <ArrowRight size={20} />
+          </button>
         </div>
       </div>
     </section>

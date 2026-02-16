@@ -38,10 +38,10 @@ const UnsubscribePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-surface-base flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         {status === 'success' ? (
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center">
+          <div className="bg-surface-1 border border-surface-border rounded-2xl p-8 text-center">
             <CheckCircle className="mx-auto mb-4 text-green-500" size={48} />
             <h1 className="text-2xl font-bold text-white mb-3">
               Suscripcion cancelada
@@ -58,7 +58,7 @@ const UnsubscribePage: React.FC = () => {
             </a>
           </div>
         ) : (
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8">
+          <div className="bg-surface-1 border border-surface-border rounded-2xl p-8">
             <div className="text-center mb-6">
               <MailX className="mx-auto mb-4 text-brand-500" size={48} />
               <h1 className="text-2xl font-bold text-white mb-2">
@@ -79,7 +79,7 @@ const UnsubscribePage: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="tu@email.com"
-                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-brand-500 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-surface-3 border border-surface-border-hover rounded-xl text-white placeholder-slate-500 focus:border-brand-500 focus:outline-none transition-colors"
                 />
               </div>
 

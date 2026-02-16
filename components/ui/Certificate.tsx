@@ -50,7 +50,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
     const styles = getVariantStyles();
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-surface-base/90 backdrop-blur-md overflow-y-auto">
             <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -66,7 +66,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                     </button>
                     <button
                         onClick={onClose}
-                        className="px-4 py-2 bg-slate-800 text-white font-medium rounded-lg hover:bg-slate-700 transition-colors"
+                        className="px-4 py-2 bg-surface-3 text-white font-medium rounded-lg hover:bg-surface-border-hover transition-colors"
                     >
                         Cerrar
                     </button>

@@ -196,14 +196,14 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   }
 
   return (
-    <div className="bg-slate-950 min-h-screen pb-20">
+    <div className="bg-surface-base min-h-screen pb-20">
       <EducationNavbar
         globalProgress={globalPercentage}
         onOpenProgress={() => setShowModal(true)}
         currentView="dashboard"
       />
 
-      <div className="bg-slate-900/50 border-b border-white/5 py-4 sticky top-16 z-30 backdrop-blur-md">
+      <div className="bg-surface-2 border-b border-surface-border py-4 sticky top-16 z-30 backdrop-blur-md">
         <div className="container max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center text-sm text-slate-400">
             <Link to="/" className="hover:text-brand-500 transition-colors">Inicio</Link>
@@ -274,7 +274,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                       <div className="mt-4 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
                         <button
                           onClick={() => handleClaimCertificate(level.id, level.title)}
-                          className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-slate-900 font-bold rounded-xl shadow-lg hover:shadow-yellow-500/20 hover:scale-105 transition-all"
+                          className="inline-flex items-center gap-2 px-6 py-3 bg-accent-500 text-slate-900 font-bold rounded-xl shadow-lg hover:shadow-accent-500/20 hover:scale-105 transition-all"
                         >
                           <Award size={20} />
                           Reclamar Certificado
@@ -302,14 +302,14 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                     key={def.id}
                     className={`relative rounded-xl p-4 text-center transition-all ${
                       unlocked
-                        ? 'bg-slate-800/80 border border-brand-500/30 shadow-md shadow-brand-500/5'
-                        : 'bg-slate-900/50 border border-white/5 opacity-50'
+                        ? 'bg-surface-2 border border-brand-500/30 shadow-md shadow-brand-500/5'
+                        : 'bg-surface-2 border border-surface-border opacity-50'
                     }`}
                   >
                     <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 ${
                       unlocked
-                        ? 'bg-gradient-to-br from-brand-400 to-brand-600'
-                        : 'bg-slate-800'
+                        ? 'bg-brand-500'
+                        : 'bg-surface-3'
                     }`}>
                       {unlocked ? (
                         <Icon size={24} className="text-slate-900" />
@@ -335,8 +335,8 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
           {/* Premium Section - Temporary for testing */}
           <div className="container max-w-7xl mx-auto px-6 mt-12">
-            <div className="bg-gradient-to-br from-slate-900 to-slate-800 border border-amber-500/20 rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-surface-1 border border-accent-500/20 rounded-2xl p-8 text-center">
+              <div className="w-16 h-16 bg-accent-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Crown size={32} className="text-white" />
               </div>
               <h2 className="text-2xl font-bold text-white mb-2">Obtener Premium</h2>
@@ -352,7 +352,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           </div>
 
           <div className="container max-w-7xl mx-auto px-6 mt-8 mb-12">
-            <div className="bg-slate-900/50 border border-white/5 rounded-xl p-6">
+            <div className="bg-surface-2 border border-surface-border rounded-xl p-6">
               <p className="text-sm text-slate-500 leading-relaxed">
                 <strong>Aviso Educativo:</strong> Todo el contenido de esta plataforma es exclusivamente educativo y no constituye asesoramiento financiero, de inversión o trading. Las criptomonedas son activos de alto riesgo con volatilidad extrema. Existe riesgo de pérdida total de capital. Siempre realiza tu propia investigación (DYOR).
               </p>
@@ -364,9 +364,9 @@ const EducationPage: React.FC<EducationPageProps> = () => {
       )}
 
       {showModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-800/50">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-surface-base/80 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-surface-1 border border-surface-border-hover w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="p-6 border-b border-surface-border flex justify-between items-center bg-surface-2">
               <h3 className="font-heading font-bold text-white flex items-center gap-2">
                 <Trophy className="text-brand-500" size={20} />
                 Tu Progreso
@@ -380,17 +380,17 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             </div>
 
             <div className="p-6 space-y-6">
-              <div className="text-center p-6 bg-slate-950 rounded-xl border border-slate-800">
+              <div className="text-center p-6 bg-surface-base rounded-xl border border-surface-border">
                 <div className="relative w-24 h-24 mx-auto mb-4 flex items-center justify-center">
-                  <div className="absolute inset-0 rounded-full border-4 border-slate-800"></div>
+                  <div className="absolute inset-0 rounded-full border-4 border-surface-border"></div>
                   <div
                     className="absolute inset-0 rounded-full border-4 border-brand-500 border-t-transparent transform -rotate-90 transition-all duration-1000"
                     style={{
                       clipPath: `polygon(0 0, 100% 0, 100% 100%, 0 100%)`,
                       borderTopColor: 'transparent',
-                      borderRightColor: globalPercentage > 25 ? '#ffc107' : 'transparent',
-                      borderBottomColor: globalPercentage > 50 ? '#ffc107' : 'transparent',
-                      borderLeftColor: globalPercentage > 75 ? '#ffc107' : 'transparent',
+                      borderRightColor: globalPercentage > 25 ? '#10B981' : 'transparent',
+                      borderBottomColor: globalPercentage > 50 ? '#10B981' : 'transparent',
+                      borderLeftColor: globalPercentage > 75 ? '#10B981' : 'transparent',
                     }}
                   ></div>
                   <span className="text-2xl font-bold text-white">{globalPercentage}%</span>
@@ -425,7 +425,7 @@ const ProgressRow = ({ label, current, total, color }: { label: string, current:
       <span>{label}</span>
       <span>{current}/{total}</span>
     </div>
-    <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+    <div className="w-full h-2 bg-surface-3 rounded-full overflow-hidden">
       <div
         className={`h-full ${color} transition-all duration-500`}
         style={{ width: `${(current / total) * 100}%` }}

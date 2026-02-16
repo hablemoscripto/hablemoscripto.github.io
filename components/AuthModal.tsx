@@ -105,7 +105,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
       />
 
       {/* Modal */}
-      <div className="relative bg-slate-900 border border-slate-700 rounded-2xl p-8 w-full max-w-md mx-4 shadow-2xl">
+      <div className="relative bg-surface-1 border border-surface-border-hover rounded-2xl p-8 w-full max-w-md mx-4 shadow-2xl">
         {/* Close button */}
         <button
           onClick={onClose}
@@ -116,7 +116,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
 
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-brand-500 rounded-full flex items-center justify-center mx-auto mb-4">
             <User size={32} className="text-white" />
           </div>
           <h2 className="text-2xl font-bold text-white">
@@ -145,7 +145,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="tu@email.com"
                 required
-                className="w-full bg-slate-800 border border-slate-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full bg-surface-3 border border-surface-border rounded-lg py-3 pl-10 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
               />
             </div>
           </div>
@@ -163,7 +163,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full bg-slate-800 border border-slate-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full bg-surface-3 border border-surface-border rounded-lg py-3 pl-10 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
               />
             </div>
           </div>
@@ -182,7 +182,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full bg-slate-800 border border-slate-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                  className="w-full bg-surface-3 border border-surface-border rounded-lg py-3 pl-10 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
                 />
               </div>
             </div>
@@ -206,7 +206,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-brand-500 hover:bg-brand-400 text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <>
@@ -221,9 +221,9 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
 
         {/* Divider */}
         <div className="flex items-center gap-4 my-6">
-          <div className="flex-1 h-px bg-slate-700"></div>
+          <div className="flex-1 h-px bg-surface-border"></div>
           <span className="text-slate-500 text-sm">o</span>
-          <div className="flex-1 h-px bg-slate-700"></div>
+          <div className="flex-1 h-px bg-surface-border"></div>
         </div>
 
         {/* Google Sign In */}
@@ -259,7 +259,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
             {isLogin ? 'No tienes cuenta?' : 'Ya tienes cuenta?'}
             <button
               onClick={switchMode}
-              className="ml-2 text-orange-400 hover:text-orange-300 font-medium transition-colors"
+              className="ml-2 text-brand-400 hover:text-brand-300 font-medium transition-colors"
             >
               {isLogin ? 'Registrate' : 'Inicia Sesion'}
             </button>

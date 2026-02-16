@@ -94,7 +94,7 @@ function App() {
         <GamificationProvider>
           <ProgressProvider>
             <Router>
-              <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
+              <div className="min-h-screen bg-surface-base text-white overflow-x-hidden font-sans">
                 <AnimatedRoutes />
                 <ChatWidget />
                 <AchievementToast />

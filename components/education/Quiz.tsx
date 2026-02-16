@@ -107,13 +107,13 @@ const MultipleChoiceRenderer: React.FC<QuestionComponentProps> = ({
                     } else if (answer === optIdx) {
                         optionClass += "bg-red-500/10 border-red-500/50 text-red-400";
                     } else {
-                        optionClass += "bg-slate-950 border-slate-800 text-slate-500 opacity-50";
+                        optionClass += "bg-surface-base border-surface-border text-slate-500 opacity-50";
                     }
                 } else {
                     if (answer === optIdx) {
-                        optionClass += "bg-brand-500/10 border-brand-500 text-white shadow-[0_0_15px_rgba(255,193,7,0.1)]";
+                        optionClass += "bg-brand-500/10 border-brand-500 text-white shadow-lg shadow-brand-500/10";
                     } else {
-                        optionClass += "bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600 hover:bg-slate-900 cursor-pointer";
+                        optionClass += "bg-surface-base border-surface-border text-slate-300 hover:border-surface-border hover:bg-surface-1 cursor-pointer";
                     }
                 }
 
@@ -128,7 +128,7 @@ const MultipleChoiceRenderer: React.FC<QuestionComponentProps> = ({
                             submitted && optIdx === q.correctAnswer ? 'bg-green-500/20 text-green-400' :
                             submitted && answer === optIdx ? 'bg-red-500/20 text-red-400' :
                             answer === optIdx ? 'bg-brand-500/20 text-brand-400' :
-                            'bg-slate-800 text-slate-400'
+                            'bg-surface-3 text-slate-400'
                         }`}>
                             {String.fromCharCode(65 + optIdx)}
                         </span>
@@ -180,13 +180,13 @@ const TrueFalseRenderer: React.FC<QuestionComponentProps> = ({
                         } else if (answer === value) {
                             optionClass += "bg-red-500/10 border-red-500 text-red-400";
                         } else {
-                            optionClass += "bg-slate-950 border-slate-800 text-slate-500 opacity-50";
+                            optionClass += "bg-surface-base border-surface-border text-slate-500 opacity-50";
                         }
                     } else {
                         if (answer === value) {
                             optionClass += "bg-brand-500/10 border-brand-500 text-white";
                         } else {
-                            optionClass += "bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600 cursor-pointer";
+                            optionClass += "bg-surface-base border-surface-border text-slate-300 hover:border-surface-border cursor-pointer";
                         }
                     }
 
@@ -254,13 +254,13 @@ const MultipleSelectRenderer: React.FC<QuestionComponentProps> = ({
                     } else if (!isCorrectOption && isSelected) {
                         optionClass += "bg-red-500/10 border-red-500/50 text-red-400";
                     } else {
-                        optionClass += "bg-slate-950 border-slate-800 text-slate-500 opacity-50";
+                        optionClass += "bg-surface-base border-surface-border text-slate-500 opacity-50";
                     }
                 } else {
                     if (isSelected) {
                         optionClass += "bg-brand-500/10 border-brand-500 text-white";
                     } else {
-                        optionClass += "bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-600 cursor-pointer";
+                        optionClass += "bg-surface-base border-surface-border text-slate-300 hover:border-surface-border cursor-pointer";
                     }
                 }
 
@@ -272,7 +272,7 @@ const MultipleSelectRenderer: React.FC<QuestionComponentProps> = ({
                         className={optionClass}
                     >
                         <span className={`w-6 h-6 rounded border-2 flex items-center justify-center shrink-0 transition-all ${
-                            isSelected ? 'bg-brand-500 border-brand-500' : 'border-slate-600'
+                            isSelected ? 'bg-brand-500 border-brand-500' : 'border-surface-border'
                         }`}>
                             {isSelected && <CheckCircle size={14} className="text-slate-900" />}
                         </span>
@@ -338,12 +338,12 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
                             itemClass += "bg-red-500/10 border-red-500/50 text-red-400";
                         }
                     } else {
-                        itemClass += "bg-slate-950 border-slate-800 text-slate-300";
+                        itemClass += "bg-surface-base border-surface-border text-slate-300";
                     }
 
                     return (
                         <div key={itemIdx} className={itemClass}>
-                            <span className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-sm font-bold text-slate-400">
+                            <span className="w-8 h-8 rounded-lg bg-surface-3 flex items-center justify-center text-sm font-bold text-slate-400">
                                 {position + 1}
                             </span>
                             <GripVertical size={18} className="text-slate-600 shrink-0" />
@@ -353,14 +353,14 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
                                     <button
                                         onClick={() => moveItem(position, 'up')}
                                         disabled={position === 0}
-                                        className="p-1 hover:bg-slate-800 rounded disabled:opacity-30"
+                                        className="p-1 hover:bg-surface-3 rounded disabled:opacity-30"
                                     >
                                         <ChevronUp size={16} />
                                     </button>
                                     <button
                                         onClick={() => moveItem(position, 'down')}
                                         disabled={position === currentOrder.length - 1}
-                                        className="p-1 hover:bg-slate-800 rounded disabled:opacity-30"
+                                        className="p-1 hover:bg-surface-3 rounded disabled:opacity-30"
                                     >
                                         <ChevronDown size={16} />
                                     </button>
@@ -421,12 +421,12 @@ const FillBlankRenderer: React.FC<QuestionComponentProps> = ({
                     onChange={(e) => !submitted && onAnswer(e.target.value)}
                     disabled={submitted}
                     placeholder="Tu respuesta..."
-                    className={`px-4 py-2 rounded-lg border-2 bg-slate-950 font-medium min-w-[150px] transition-all ${
+                    className={`px-4 py-2 rounded-lg border-2 bg-surface-base font-medium min-w-[150px] transition-all ${
                         submitted
                             ? correct
                                 ? 'border-green-500 text-green-400'
                                 : 'border-red-500 text-red-400'
-                            : 'border-slate-700 text-white focus:border-brand-500 focus:outline-none'
+                            : 'border-surface-border-hover text-white focus:border-brand-500 focus:outline-none'
                     }`}
                 />
                 <span>{q.textAfter}</span>
@@ -573,7 +573,7 @@ const Quiz: React.FC<QuizProps> = ({
                             ? questionCorrect
                                 ? 'bg-green-500/20 text-green-400'
                                 : 'bg-red-500/20 text-red-400'
-                            : 'bg-slate-800 text-slate-400'
+                            : 'bg-surface-3 text-slate-400'
                     }`}>
                         {idx + 1}
                     </span>
@@ -632,9 +632,9 @@ const Quiz: React.FC<QuizProps> = ({
     const passed = correctCount >= Math.ceil(questions.length * 0.7);
 
     return (
-        <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden mt-16 shadow-2xl">
+        <div className="bg-surface-1 rounded-2xl border border-surface-border overflow-hidden mt-16 shadow-2xl">
             {/* Header */}
-            <div className="p-6 bg-slate-800 border-b border-slate-700">
+            <div className="p-6 bg-surface-3 border-b border-surface-border-hover">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-xl font-bold text-white flex items-center gap-2">
                         <Target className="text-brand-500" /> Verifica tu conocimiento
@@ -648,7 +648,7 @@ const Quiz: React.FC<QuizProps> = ({
                                 {viewMode === 'single' ? 'Ver todas' : 'Una a la vez'}
                             </button>
                         )}
-                        <span className="text-xs font-bold bg-slate-900 text-slate-400 px-3 py-1 rounded-full border border-slate-700">
+                        <span className="text-xs font-bold bg-surface-1 text-slate-400 px-3 py-1 rounded-full border border-surface-border-hover">
                             {questions.length} Preguntas
                         </span>
                     </div>
@@ -661,7 +661,7 @@ const Quiz: React.FC<QuizProps> = ({
                             <span>Progreso</span>
                             <span>{answeredCount} de {questions.length} respondidas</span>
                         </div>
-                        <div className="h-2 bg-slate-900 rounded-full overflow-hidden">
+                        <div className="h-2 bg-surface-1 rounded-full overflow-hidden">
                             <div
                                 className="h-full bg-brand-500 transition-all duration-300"
                                 style={{ width: `${(answeredCount / questions.length) * 100}%` }}
@@ -686,7 +686,7 @@ const Quiz: React.FC<QuizProps> = ({
                                             ? 'bg-brand-500 scale-125'
                                             : isAnswered
                                                 ? 'bg-green-500/50 hover:bg-green-500'
-                                                : 'bg-slate-700 hover:bg-slate-600'
+                                                : 'bg-surface-border hover:bg-surface-border-hover'
                                     }`}
                                     title={`Pregunta ${idx + 1}`}
                                 />
@@ -703,7 +703,7 @@ const Quiz: React.FC<QuizProps> = ({
                         {renderQuestion(currentQuestion, currentQuestionIndex)}
 
                         {/* Navigation */}
-                        <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+                        <div className="flex items-center justify-between pt-4 border-t border-surface-border">
                             <button
                                 onClick={() => navigateQuestion('prev')}
                                 disabled={currentQuestionIndex === 0}
@@ -752,7 +752,7 @@ const Quiz: React.FC<QuizProps> = ({
                 {/* Results */}
                 {submitted && (
                     <div className={`mt-10 p-8 rounded-2xl text-center border ${
-                        passed ? 'bg-green-500/10 border-green-500/30' : 'bg-slate-800 border-slate-700'
+                        passed ? 'bg-green-500/10 border-green-500/30' : 'bg-surface-3 border-surface-border-hover'
                     }`}>
                         <div className="flex justify-center mb-4">
                             {passed ? (
@@ -760,7 +760,7 @@ const Quiz: React.FC<QuizProps> = ({
                                     <Trophy size={40} className="text-green-500" />
                                 </div>
                             ) : (
-                                <div className="w-20 h-20 rounded-full bg-slate-700 flex items-center justify-center">
+                                <div className="w-20 h-20 rounded-full bg-surface-border flex items-center justify-center">
                                     <Target size={40} className="text-slate-400" />
                                 </div>
                             )}
@@ -790,7 +790,7 @@ const Quiz: React.FC<QuizProps> = ({
                                 </p>
                                 <button
                                     onClick={handleRetry}
-                                    className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-medium rounded-xl transition-colors inline-flex items-center gap-2"
+                                    className="px-6 py-3 bg-surface-border hover:bg-surface-border-hover text-white font-medium rounded-xl transition-colors inline-flex items-center gap-2"
                                 >
                                     <RotateCcw size={18} /> Intentar de nuevo
                                 </button>
