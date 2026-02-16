@@ -32,6 +32,10 @@ import {
   Lock,
   PiggyBank,
   Award,
+  Target,
+  Brain,
+  Eye,
+  Crosshair,
 } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
 import * as dotenv from 'dotenv';
@@ -88,6 +92,10 @@ const ICONS: Record<string, LucideIcon> = {
   Lock,
   PiggyBank,
   Award,
+  Target,
+  Brain,
+  Eye,
+  Crosshair,
 };
 
 function getIconName(icon: LucideIcon): string | null {
