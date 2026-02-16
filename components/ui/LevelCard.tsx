@@ -17,6 +17,7 @@ interface LevelCardProps {
     isLocked: boolean;
     onAction: () => void;
     className?: string;
+    // Prerequisite info for locked levels
     prerequisiteTitle?: string;
     prerequisiteProgress?: number;
     prerequisiteLessonsRemaining?: number;
@@ -32,35 +33,30 @@ const LevelCard: React.FC<LevelCardProps> = ({
 }) => {
 
     const colorClasses = {
-        brand: { accent: 'text-brand-500', bg: 'bg-brand-500/10', border: 'hover:border-brand-500/30', line: 'bg-brand-500' },
-        indigo: { accent: 'text-indigo-400', bg: 'bg-indigo-500/10', border: 'hover:border-indigo-500/30', line: 'bg-indigo-500' },
-        rose: { accent: 'text-rose-400', bg: 'bg-rose-500/10', border: 'hover:border-rose-500/30', line: 'bg-rose-500' },
+        brand: 'text-brand-500 group-hover:border-brand-500/50',
+        indigo: 'text-indigo-400 group-hover:border-indigo-500/50',
+        rose: 'text-rose-400 group-hover:border-rose-500/50',
     };
 
     const btnColors = {
-        brand: 'bg-brand-500 hover:bg-brand-400 text-white',
+        brand: 'bg-brand-500 hover:bg-brand-400 text-slate-900',
         indigo: 'bg-indigo-500 hover:bg-indigo-400 text-white',
         rose: 'bg-rose-500 hover:bg-rose-400 text-white',
     };
 
-    const colors = colorClasses[color];
-
     return (
         <div className={cn(
-            "group relative bg-surface-1 rounded-2xl border border-surface-border overflow-hidden transition-all duration-300 hover:-translate-y-1",
-            !isLocked && colors.border,
-            isLocked ? 'opacity-70' : '',
+            "group relative bg-slate-900 rounded-2xl border border-slate-800 p-0 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
+            colorClasses[color],
+            isLocked ? 'opacity-75' : '',
             className
         )}>
-            {/* Top accent line */}
-            <div className={cn("h-0.5", isLocked ? 'bg-surface-border' : colors.line)}></div>
-
             {/* Header */}
-            <div className="p-6 lg:p-8">
+            <div className="p-8 relative">
                 <div className="flex justify-between items-start mb-6">
                     <div className={cn(
-                        "w-12 h-12 rounded-xl flex items-center justify-center",
-                        isLocked ? 'bg-surface-3 text-slate-500' : cn(colors.bg, colors.accent)
+                        "w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center",
+                        isLocked ? 'text-slate-500' : colorClasses[color].split(' ')[0]
                     )}>
                         {isLocked ? <Lock size={20} /> : <Icon size={24} />}
                     </div>
@@ -68,10 +64,10 @@ const LevelCard: React.FC<LevelCardProps> = ({
                     {/* Circular Progress Mini */}
                     <div className="relative w-12 h-12 flex items-center justify-center">
                         <svg className="w-full h-full transform -rotate-90">
-                            <circle cx="24" cy="24" r="20" className="stroke-surface-border" strokeWidth="4" fill="none" />
+                            <circle cx="24" cy="24" r="20" className="stroke-slate-800" strokeWidth="4" fill="none" />
                             <circle
                                 cx="24" cy="24" r="20"
-                                className={isLocked ? 'stroke-surface-border-hover' : `stroke-current ${colors.accent}`}
+                                className={isLocked ? 'stroke-slate-700' : `stroke-current`}
                                 strokeWidth="4"
                                 fill="none"
                                 strokeDasharray={125.6}
@@ -83,19 +79,30 @@ const LevelCard: React.FC<LevelCardProps> = ({
                     </div>
                 </div>
 
-                <div className="mb-2">
-                    <span className={cn("text-xs font-bold tracking-widest uppercase", isLocked ? 'text-slate-500' : colors.accent)}>{levelNumber} — {subtitle}</span>
+                <div className="flex items-center gap-3 mb-2">
+                    <span className="text-xs font-bold tracking-widest opacity-60 uppercase">{levelNumber}</span>
+                    <h3 className="text-2xl font-bold text-white">{title}</h3>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
+                <p className="text-slate-400 text-sm font-medium mb-4">{subtitle}</p>
 
                 <p className="text-slate-400 text-sm leading-relaxed mb-6 min-h-[60px]">
                     {description}
                 </p>
 
+                <div className="flex flex-wrap gap-2 mb-8">
+                    {tags.map(tag => (
+                        <span key={tag} className="px-2 py-1 rounded-md bg-slate-800 border border-slate-700 text-[10px] uppercase tracking-wider text-slate-400">
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+
                 <div className="flex items-center gap-2 text-xs text-slate-500 mb-6">
-                    <span className="font-bold text-slate-300">{completedCount}</span>
-                    <span>/</span>
-                    <span>{lessonCount} lecciones</span>
+                    <div className="flex items-center gap-1">
+                        <span className="font-bold text-slate-300">{completedCount}</span>
+                        <span>/</span>
+                        <span>{lessonCount} lecciones</span>
+                    </div>
                 </div>
 
                 {isLocked && prerequisiteTitle ? (
@@ -109,7 +116,7 @@ const LevelCard: React.FC<LevelCardProps> = ({
 
                         {prerequisiteProgress !== undefined && (
                             <div className="space-y-1.5">
-                                <div className="w-full h-1.5 bg-surface-3 rounded-full overflow-hidden">
+                                <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
                                     <div
                                         className="h-full bg-brand-500 rounded-full transition-all duration-500"
                                         style={{ width: `${prerequisiteProgress}%` }}
@@ -131,7 +138,7 @@ const LevelCard: React.FC<LevelCardProps> = ({
                         className={cn(
                             "w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all",
                             isLocked
-                                ? 'bg-surface-3 text-slate-500 cursor-not-allowed'
+                                ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
                                 : progress === 100
                                     ? 'bg-green-500 text-white'
                                     : btnColors[color]

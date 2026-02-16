@@ -11,42 +11,26 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
-                heading: ['Plus Jakarta Sans', 'sans-serif'],
+                heading: ['Outfit', 'sans-serif'],
             },
             colors: {
                 brand: {
-                    50: '#ecfdf5',
-                    100: '#d1fae5',
-                    200: '#a7f3d0',
-                    300: '#6ee7b7',
-                    400: '#34d399',
-                    500: '#10B981',
-                    600: '#059669',
-                    700: '#047857',
-                    800: '#065f46',
-                    900: '#064e3b',
-                    950: '#022c22',
+                    50: '#fff8e1',
+                    100: '#ffecb3',
+                    200: '#ffe082',
+                    300: '#ffd54f',
+                    400: '#ffca28',
+                    500: '#ffc107', // Main Amber
+                    600: '#ffb300',
+                    700: '#ffa000',
+                    800: '#ff8f00',
+                    900: '#ff6f00',
                 },
-                accent: {
-                    50: '#fffbeb',
-                    100: '#fef3c7',
-                    200: '#fde68a',
-                    300: '#fcd34d',
-                    400: '#fbbf24',
-                    500: '#f59e0b',
-                    600: '#d97706',
-                    700: '#b45309',
-                    800: '#92400e',
-                    900: '#78350f',
-                },
-                surface: {
-                    base: '#06080F',
-                    1: '#0E1219',
-                    2: '#161B26',
-                    3: '#1E2433',
-                    border: '#2A3142',
-                    'border-hover': '#3B4559',
-                },
+                dark: {
+                    900: '#0f172a',
+                    800: '#1e293b',
+                    700: '#334155',
+                }
             },
             animation: {
                 'float': 'float 6s ease-in-out infinite',
