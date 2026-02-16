@@ -195,6 +195,12 @@ const EducationPage: React.FC<EducationPageProps> = () => {
     advanced: 'rose',
   }
 
+  const levelBgColors: { [key: string]: string } = {
+    beginner: 'bg-brand-500',
+    intermediate: 'bg-indigo-500',
+    advanced: 'bg-rose-500',
+  }
+
   return (
     <div className="bg-slate-950 min-h-screen pb-20">
       <EducationNavbar
@@ -407,7 +413,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                     label={level.title}
                     current={progress[level.id]?.length || 0}
                     total={level.lessons_count}
-                    color={`bg-${levelColors[level.id]}-500`}
+                    color={levelBgColors[level.id]}
                   />
                 ))}
               </div>
