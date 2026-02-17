@@ -17,6 +17,7 @@ import ChatWidget from './components/ChatWidget';
 import AchievementToast from './components/ui/AchievementToast';
 import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from './data/courseData';
 import PageTransition from './components/ui/PageTransition';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -89,21 +90,23 @@ function AnimatedRoutes() {
 
 function App() {
   return (
-    <HelmetProvider>
-      <AuthProvider>
-        <GamificationProvider>
-          <ProgressProvider>
-            <Router>
-              <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
-                <AnimatedRoutes />
-                <ChatWidget />
-                <AchievementToast />
-              </div>
-            </Router>
-          </ProgressProvider>
-        </GamificationProvider>
-      </AuthProvider>
-    </HelmetProvider>
+    <ErrorBoundary>
+      <HelmetProvider>
+        <AuthProvider>
+          <GamificationProvider>
+            <ProgressProvider>
+              <Router>
+                <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
+                  <AnimatedRoutes />
+                  <ChatWidget />
+                  <AchievementToast />
+                </div>
+              </Router>
+            </ProgressProvider>
+          </GamificationProvider>
+        </AuthProvider>
+      </HelmetProvider>
+    </ErrorBoundary>
   );
 }
 
