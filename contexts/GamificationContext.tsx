@@ -192,31 +192,49 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
             const calculatedXp = (count || 0) * 100;
             setXp(calculatedXp);
 
-            // 2. Fetch Streak
-            const { data: lastLesson } = await supabase
+            // 2. Fetch Streak — count consecutive calendar days with completions
+            const { data: completions } = await supabase
                 .from('user_progress')
                 .select('completed_at')
                 .eq('user_id', user.id)
-                .eq('completed', true)
-                .order('completed_at', { ascending: false })
-                .limit(1)
-                .single();
+                .eq('completed', true);
 
-            if (lastLesson && lastLesson.completed_at) {
-                const lastDate = new Date(lastLesson.completed_at);
-                const now = new Date();
-                const diffDays = Math.floor((now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+            if (completions && completions.length > 0) {
+                // Extract unique calendar dates (YYYY-MM-DD in local time)
+                const uniqueDates = [...new Set(
+                    completions
+                        .filter(c => c.completed_at)
+                        .map(c => new Date(c.completed_at).toLocaleDateString('en-CA'))
+                )].sort().reverse();
 
-                if (diffDays <= 1) {
-                    setStreak(prev => Math.max(prev, 1));
+                if (uniqueDates.length > 0) {
+                    const today = new Date().toLocaleDateString('en-CA');
+                    const yesterday = new Date(Date.now() - 86400000).toLocaleDateString('en-CA');
+
+                    // Streak only counts if most recent activity is today or yesterday
+                    if (uniqueDates[0] === today || uniqueDates[0] === yesterday) {
+                        let streakCount = 1;
+                        for (let i = 1; i < uniqueDates.length; i++) {
+                            const curr = new Date(uniqueDates[i - 1] + 'T00:00:00');
+                            const prev = new Date(uniqueDates[i] + 'T00:00:00');
+                            const diffMs = curr.getTime() - prev.getTime();
+                            if (diffMs === 86400000) {
+                                streakCount++;
+                            } else {
+                                break;
+                            }
+                        }
+                        setStreak(streakCount);
+                    } else {
+                        setStreak(0);
+                    }
                 }
             }
 
-            // 3. Load stats from localStorage
+            // 3. Load achievements from localStorage
             const localStats = localStorage.getItem(`gamification_${user.id}`);
             if (localStats) {
                 const stats = JSON.parse(localStats);
-                if (stats.streak > 1) setStreak(stats.streak);
                 setAchievements(stats.achievements || []);
             }
 
