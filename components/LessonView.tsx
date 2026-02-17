@@ -211,9 +211,6 @@ const LessonView: React.FC = () => {
     }
 
     const isCompleted = isLessonCompleted(id);
-    const nextLessonId = id + 1;
-    // For now, assume next lesson exists - we'll improve this later
-    const hasNextLesson = true;
 
     const handleQuizComplete = async (score: number) => {
         await markLessonComplete(id, score);
@@ -221,8 +218,8 @@ const LessonView: React.FC = () => {
     };
 
     const handleNextLesson = () => {
-        if (hasNextLesson) {
-            navigate(`/education/lesson/${nextLessonId}`);
+        if (nextLesson) {
+            navigate(`/education/lesson/${nextLesson.id}`);
         } else {
             navigate('/education');
         }
