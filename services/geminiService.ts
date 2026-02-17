@@ -1,9 +1,4 @@
-import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
-
-const apiKey = process.env.API_KEY || ''; 
-
-// Initialize the Gemini client
-const ai = new GoogleGenAI({ apiKey });
+import { supabase } from '../lib/supabase';
 
 export interface ChatMessage {
   role: 'user' | 'model';
@@ -12,57 +7,71 @@ export interface ChatMessage {
 }
 
 export const streamGeminiResponse = async (
-  history: ChatMessage[], 
+  history: ChatMessage[],
   newMessage: string,
   onChunk: (text: string) => void
 ): Promise<string> => {
-  
-  if (!apiKey) {
-    const errorMsg = "API Key not configured. Please providing a valid API key.";
-    onChunk(errorMsg);
-    return errorMsg;
-  }
 
   try {
-    // Convert history to Gemini format
-    // Note: In a real app, we might manage a ChatSession more persistently.
-    // For this simple widget, we'll start a fresh chat or append context manually if needed,
-    // but here we use the chat feature.
-    
-    const chat = ai.chats.create({
-      model: 'gemini-2.5-flash',
-      config: {
-        systemInstruction: `Eres "CBas AI", el asistente virtual experto de la plataforma educativa "Hablemos Cripto". 
-        Tu objetivo es ayudar a estudiantes a entender conceptos de Bitcoin, Blockchain, Ethereum y Trading.
-        
-        Reglas:
-        1. Respuestas concisas y educativas (máximo 3 párrafos cortos).
-        2. Tono amigable, motivador y profesional.
-        3. Usa analogías sencillas para explicar conceptos técnicos.
-        4. SIEMPRE incluye un descargo de responsabilidad: "Esto es contenido educativo, no asesoramiento financiero".
-        5. Si preguntan por precios futuros, di que nadie puede predecir el mercado y enfócate en el análisis técnico o fundamental.
-        6. Formatea la respuesta usando Markdown (negritas, listas) para mejorar la legibilidad.`,
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      const errorMsg = "Debes iniciar sesión para usar el chat.";
+      onChunk(errorMsg);
+      return errorMsg;
+    }
+
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const response = await fetch(`${supabaseUrl}/functions/v1/gemini-chat`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`,
       },
-      history: history.map(msg => ({
-        role: msg.role,
-        parts: [{ text: msg.text }]
-      }))
+      body: JSON.stringify({
+        history: history.map(msg => ({ role: msg.role, text: msg.text })),
+        message: newMessage,
+      }),
     });
 
-    const resultStream = await chat.sendMessageStream({ message: newMessage });
-    
-    let fullText = '';
-    for await (const chunk of resultStream) {
-        const c = chunk as GenerateContentResponse;
-        const chunkText = c.text || '';
-        fullText += chunkText;
-        onChunk(fullText);
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({ error: 'Unknown error' }));
+      throw new Error(err.error || `HTTP ${response.status}`);
     }
-    
-    return fullText;
 
+    // Parse SSE stream from Edge Function
+    const reader = response.body?.getReader();
+    if (!reader) throw new Error('No response body');
+
+    const decoder = new TextDecoder();
+    let fullText = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value, { stream: true });
+      // SSE format: "data: {...}\n\n"
+      const lines = chunk.split('\n');
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const jsonStr = line.slice(6).trim();
+        if (!jsonStr || jsonStr === '[DONE]') continue;
+        try {
+          const parsed = JSON.parse(jsonStr);
+          const text = parsed?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (text) {
+            fullText += text;
+            onChunk(fullText);
+          }
+        } catch {
+          // Skip unparseable SSE lines
+        }
+      }
+    }
+
+    return fullText || 'No se recibió respuesta.';
   } catch (error) {
-    console.error("Error calling Gemini API:", error);
+    console.error("Error calling Gemini chat:", error);
     const errorMessage = "Lo siento, tuve un problema conectando con la red. Intenta de nuevo.";
     onChunk(errorMessage);
     return errorMessage;
