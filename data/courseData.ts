@@ -279,7 +279,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: 'El 15 de agosto de 1971, el presidente Richard Nixon apareció en televisión y anunció que Estados Unidos "temporalmente" suspendía la convertibilidad del dólar en oro. Francia y otros países estaban exigiendo su oro (sabían que USA había impreso más dólares de los que podía respaldar), y las reservas de Fort Knox se vaciaban. Nixon rompió la promesa "temporalmente". 54 años después, sigue rota. Desde ese día, el dólar—y por extensión todas las monedas del mundo—no están respaldadas por nada tangible. Solo por la "confianza" en el gobierno emisor.',
         highlight: {
           title: 'El Resultado Matemático',
-          text: 'Desde 1971, el dólar ha perdido el 98% de su poder adquisitivo. Una casa que costaba $25,000 en 1971 hoy cuesta $400,000+. Un auto que costaba $3,500 hoy cuesta $48,000. No es que las cosas sean mejores—es que tu dinero vale menos.'
+          text: 'Desde 1971, el dólar ha perdido aproximadamente el 87% de su poder adquisitivo. Una casa que costaba $25,000 en 1971 hoy cuesta $400,000+. Un auto que costaba $3,500 hoy cuesta $48,000. No es que las cosas sean mejores—es que tu dinero vale menos.'
         }
       },
       {
@@ -312,7 +312,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: '"Fiat" viene del latín y significa "hágase" o "por decreto". El dinero fiat es dinero que vale porque un gobierno DICE que vale, no porque esté respaldado por algo escaso. Tu billete de 50,000 pesos colombianos no representa oro, plata, ni nada tangible. Es un papel (o número digital) que tiene valor solo porque el gobierno obliga a aceptarlo y porque todos acordamos creer en él. Es un acto de fe colectiva.',
         features: [
           { icon: AlertTriangle, title: 'El Problema Fundamental', text: 'Si el valor del dinero depende de la "confianza" en los políticos, ¿qué pasa cuando los políticos imprimen para ganar elecciones, rescatar amigos, o financiar guerras? La historia tiene la respuesta: SIEMPRE lo hacen, y SIEMPRE destruyen el valor del dinero eventualmente.' },
-          { icon: TrendingDown, title: 'Dato Histórico', text: 'De las 775 monedas fiat que han existido en la historia, NINGUNA ha sobrevivido a largo plazo. El promedio de vida de una moneda fiat es 27 años. El dólar actual tiene 54 años desde 1971.' }
+          { icon: TrendingDown, title: 'Dato Histórico', text: 'A lo largo de la historia, ninguna moneda fiat ha mantenido su valor a largo plazo. Los imperios romano, otomano, español y británico todos degradaron sus monedas. El dólar actual lleva 54 años sin respaldo en oro desde 1971—y ha perdido el 87% de su poder adquisitivo en ese periodo.' }
         ]
       },
       {
@@ -486,7 +486,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: 'Quizás pienses: "Eso pasa en países con gobiernos locos, aquí no pasará." Pero mira los datos:',
         features: [
           { icon: TrendingDown, title: 'Colombia', text: 'El peso colombiano ha perdido 85%+ de su valor contra el dólar desde el año 2000. Y el dólar TAMBIÉN pierde valor. Estás perdiendo contra una moneda que está perdiendo.' },
-          { icon: TrendingDown, title: 'México', text: 'El peso mexicano valía 12 por dólar en 2008. Llegó a 24 en 2020. Aunque ha recuperado algo, la tendencia histórica es clara: devaluación constante.' },
+          { icon: TrendingDown, title: 'México', text: 'El peso mexicano ha vivido ciclos de devaluación extrema: de 12 por dólar en 2008 llegó a 25 en 2017. Aunque ha tenido periodos de recuperación, las crisis de 1994 y 2008 muestran que ninguna moneda LATAM es inmune a shocks externos.' },
           { icon: TrendingDown, title: 'El Dólar Mismo', text: 'El "rey" de las monedas ha perdido 96% de su poder adquisitivo desde 1913 (cuando se creó la Reserva Federal). Si el dólar se devalúa, ¿qué crees que pasa con las monedas ancladas a él?' }
         ],
         highlight: {
@@ -1211,7 +1211,7 @@ export const LESSONS_DATA: Record<number, any> = {
             { id: 'd', text: 'Una criptomoneda nueva' }
           ],
           correctAnswer: 'b',
-          explanation: 'Bitcoin elige seguridad y descentralización (lento, 7 TPS). Solana elige seguridad y escalabilidad (menos nodos, pero 65,000 TPS). No hay blockchain perfecta—solo diferentes trade-offs para diferentes usos.'
+          explanation: 'Bitcoin elige seguridad y descentralización (lento, 7 TPS). Solana elige seguridad y escalabilidad (menos nodos, pero miles de TPS en producción). No hay blockchain perfecta—solo diferentes trade-offs para diferentes usos.'
         }
       ]
     }
@@ -1307,7 +1307,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: 'La descentralización no es binaria—es un espectro. Diferentes proyectos hacen diferentes trade-offs:',
         features: [
           { icon: Lock, title: 'Bitcoin: Máxima Descentralización', text: '~15,000 nodos. Cualquiera con $300 en hardware puede correr uno. Cambios de protocolo requieren años de debate y consenso casi unánime. Inmunidad casi total a censura y captura.' },
-          { icon: Zap, title: 'Solana: Descentralización Pragmática', text: '~3,000 validadores. Requiere hardware más potente (~$5,000+). Más fácil de coordinar cambios. Trade-off consciente: menos descentralización a cambio de 65,000+ TPS y fees de centavos.' },
+          { icon: Zap, title: 'Solana: Descentralización Pragmática', text: '~3,000 validadores. Requiere hardware más potente (~$5,000+). Más fácil de coordinar cambios. Trade-off consciente: menos descentralización a cambio de ~2,000-4,000 TPS reales en producción (con capacidad teórica mucho mayor) y fees de centavos.' },
           { icon: Server, title: 'Ethereum: Término Medio', text: '~10,000 nodos. Hardware moderado. Transición a Proof of Stake completada. Balance entre descentralización y escalabilidad.' },
           { icon: AlertTriangle, title: 'Binance Smart Chain: Más Centralizada', text: '21 validadores aprobados por Binance. Muy eficiente pero dependiente de una empresa. Si Binance quiere censurar algo, puede hacerlo.' }
         ],
@@ -1349,7 +1349,7 @@ export const LESSONS_DATA: Record<number, any> = {
         features: [
           { icon: AlertTriangle, title: 'Las Críticas Válidas', text: 'Solana ha tenido varias "caídas" donde la red se detuvo y requirió reinicio coordinado de validadores. Esto sugiere cierta centralización operativa. El hardware requerido para validar es costoso, lo que limita quién puede participar.' },
           { icon: CheckCircle, title: 'La Defensa Válida', text: 'Solana tiene ~3,000 validadores en múltiples países y jurisdicciones. Ninguna entidad única controla la red. Las caídas fueron bugs técnicos, no censura deliberada. La red sigue siendo permissionless: cualquiera puede transaccionar.' },
-          { icon: Zap, title: 'El Trade-off Consciente', text: 'Solana prioriza escalabilidad para aplicaciones de consumo masivo. Si quieres la descentralización máxima de Bitcoin, usa Bitcoin. Si quieres 65,000 TPS y fees de centavos para DeFi y pagos, usa Solana.' }
+          { icon: Zap, title: 'El Trade-off Consciente', text: 'Solana prioriza escalabilidad para aplicaciones de consumo masivo. Si quieres la descentralización máxima de Bitcoin, usa Bitcoin. Si quieres miles de TPS y fees de centavos para DeFi y pagos, usa Solana.' }
         ],
         highlight: {
           title: 'La Perspectiva Correcta',
@@ -1419,7 +1419,7 @@ export const LESSONS_DATA: Record<number, any> = {
             { id: 'd', text: 'Porque Solana es nueva' }
           ],
           correctAnswer: 'c',
-          explanation: 'Solana prioriza escalabilidad (65,000 TPS, fees de centavos). Para lograrlo, requiere hardware potente que menos personas pueden costear. Es un trade-off explícito, no un defecto. Bitcoin hace el trade-off opuesto: cualquiera con $300 puede correr un nodo.'
+          explanation: 'Solana prioriza escalabilidad (~2,000-4,000 TPS en producción, fees de centavos). Para lograrlo, requiere hardware potente que menos personas pueden costear. Es un trade-off explícito, no un defecto. Bitcoin hace el trade-off opuesto: cualquiera con $300 puede correr un nodo.'
         },
         {
           id: 'q4',
@@ -1971,7 +1971,7 @@ export const LESSONS_DATA: Record<number, any> = {
         rightSide: {
           title: 'Solana (L1)',
           points: [
-            'Transacciones por segundo: ~3,000-65,000 TPS',
+            'Transacciones por segundo: ~2,000-4,000 TPS (producción real)',
             'Costo por transacción: ~$0.00025 (fracción de centavo)',
             'Tiempo de confirmación: ~400 milisegundos',
             'Todo ocurre en una sola capa (sin L2s necesarios)',

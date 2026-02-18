@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hablemoscripto.io/sitemap.xml
