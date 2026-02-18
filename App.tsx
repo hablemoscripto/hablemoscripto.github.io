@@ -22,6 +22,7 @@ const NewsletterAdmin = lazy(() => import('./components/NewsletterAdmin'));
 const UnsubscribePage = lazy(() => import('./components/UnsubscribePage'));
 const PaymentSuccess = lazy(() => import('./components/PaymentSuccess'));
 const NotFoundPage = lazy(() => import('./components/NotFoundPage'));
+const LegalPage = lazy(() => import('./components/LegalPage'));
 
 function RouteLoader() {
   return (
@@ -86,6 +87,14 @@ function AnimatedRoutes() {
                 <PageTransition><NewsletterAdmin /></PageTransition>
               </ProtectedRoute>
             }
+          />
+          <Route
+            path="/privacidad"
+            element={<PageTransition><LegalPage type="privacy" /></PageTransition>}
+          />
+          <Route
+            path="/terminos"
+            element={<PageTransition><LegalPage type="terms" /></PageTransition>}
           />
           <Route
             path="/unsubscribe"

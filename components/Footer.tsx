@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Twitter, Youtube, Bitcoin } from 'lucide-react';
 
 interface FooterProps {
@@ -58,9 +59,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
           <div>
             <h4 className="text-white font-bold mb-6">Legal</h4>
             <ul className="space-y-4 text-sm text-slate-400">
-              <li><a href="#" className="hover:text-brand-500 transition-colors">Términos de Uso</a></li>
-              <li><a href="#" className="hover:text-brand-500 transition-colors">Política de Privacidad</a></li>
-              <li><a href="#" className="hover:text-brand-500 transition-colors">Cookies</a></li>
+              <li><Link to="/terminos" className="hover:text-brand-500 transition-colors">Términos de Uso</Link></li>
+              <li><Link to="/privacidad" className="hover:text-brand-500 transition-colors">Política de Privacidad</Link></li>
             </ul>
           </div>
         </div>
