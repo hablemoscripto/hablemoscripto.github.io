@@ -46,6 +46,9 @@ const LessonView: React.FC = () => {
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
     const lightboxRef = useRef<HTMLDivElement>(null);
 
+    // Focus Mode
+    const [isFocusMode, setIsFocusMode] = useState(false);
+
     // AI Highlight Tooltip State
     const [selectionState, setSelectionState] = useState<{ visible: boolean; x: number; y: number; text: string }>({
         visible: false,
@@ -516,16 +519,28 @@ const LessonView: React.FC = () => {
                         <h1 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight">{lesson.title}</h1>
                         <p className="text-lg text-slate-400 max-w-3xl leading-relaxed mb-8">{lesson.description}</p>
 
-                        <div className="flex flex-wrap gap-6 text-sm font-medium text-slate-400 border-t border-white/5 pt-6">
+                        <div className="flex flex-wrap gap-6 text-sm font-medium text-slate-400 border-t border-white/5 pt-6 items-center">
                             <div className="flex items-center gap-2"><Clock size={16} className="text-brand-500" /> {lesson.duration}</div>
                             <div className="flex items-center gap-2"><Video size={16} className="text-brand-500" /> Video + Texto</div>
+                            <div className="flex-1"></div>
+                            <button 
+                                onClick={() => setIsFocusMode(!isFocusMode)}
+                                className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all border ${
+                                    isFocusMode 
+                                    ? 'bg-brand-500/10 text-brand-400 border-brand-500/30 shadow-glow-brand/20' 
+                                    : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
+                                }`}
+                            >
+                                <BookOpen size={16} />
+                                {isFocusMode ? 'Modo Enfoque Activo' : 'Activar Modo Enfoque'}
+                            </button>
                         </div>
                     </div>
                 </section>
 
-                <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div className={`max-w-6xl xl:max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 transition-all duration-500`}>
                     {/* Main Content */}
-                    <div className="lg:col-span-9 space-y-8">
+                    <div className={`transition-all duration-500 ${isFocusMode ? 'lg:col-span-10 lg:col-start-2' : 'lg:col-span-9'} space-y-8`}>
                         {/* Video Section */}
                         <VideoPlayer
                             title={lesson.title}
@@ -848,7 +863,7 @@ const LessonView: React.FC = () => {
                     </div>
 
                     {/* Sidebar */}
-                    <div className="lg:col-span-3 space-y-6">
+                    <div className={`lg:col-span-3 space-y-6 transition-all duration-500 ${isFocusMode ? 'hidden opacity-0' : 'block opacity-100'}`}>
                         <div className="sticky top-24">
                             {/* Progress Card */}
                             <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6 mb-6">
