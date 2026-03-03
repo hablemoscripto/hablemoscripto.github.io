@@ -24,8 +24,19 @@ const ChatWidget: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Listen for custom events from other components (like LessonView)
+  useEffect(() => {
+    const handleOpenChat = (e: CustomEvent<{ prompt: string }>) => {
+      setIsOpen(true);
+      setInput(e.detail.prompt);
+    };
+
+    window.addEventListener('open-chat-with-prompt', handleOpenChat as EventListener);
+    return () => window.removeEventListener('open-chat-with-prompt', handleOpenChat as EventListener);
+  }, []);
+
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!input.trim() || isLoading) return;
 
     const userMessage: ChatMessage = {

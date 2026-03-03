@@ -46,6 +46,62 @@ const LessonView: React.FC = () => {
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
     const lightboxRef = useRef<HTMLDivElement>(null);
 
+    // AI Highlight Tooltip State
+    const [selectionState, setSelectionState] = useState<{ visible: boolean; x: number; y: number; text: string }>({
+        visible: false,
+        x: 0,
+        y: 0,
+        text: ''
+    });
+
+    // Handle text selection
+    useEffect(() => {
+        const handleSelection = () => {
+            const selection = window.getSelection();
+            if (!selection || selection.isCollapsed) {
+                setSelectionState(prev => ({ ...prev, visible: false }));
+                return;
+            }
+
+            const text = selection.toString().trim();
+            // Only show for meaningful selections (between 3 and 150 characters)
+            if (text.length > 2 && text.length < 150) {
+                const range = selection.getRangeAt(0);
+                const rect = range.getBoundingClientRect();
+                
+                setSelectionState({
+                    visible: true,
+                    x: rect.left + rect.width / 2,
+                    y: rect.top - 10,
+                    text: text
+                });
+            } else {
+                setSelectionState(prev => ({ ...prev, visible: false }));
+            }
+        };
+
+        const handleMouseDown = () => setSelectionState(prev => ({ ...prev, visible: false }));
+
+        document.addEventListener('mouseup', handleSelection);
+        document.addEventListener('mousedown', handleMouseDown);
+        
+        return () => {
+            document.removeEventListener('mouseup', handleSelection);
+            document.removeEventListener('mousedown', handleMouseDown);
+        };
+    }, []);
+
+    const handleAskAI = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const event = new CustomEvent('open-chat-with-prompt', {
+            detail: { prompt: `Explícame qué significa esto en el contexto de las criptomonedas: "${selectionState.text}"` }
+        });
+        window.dispatchEvent(event);
+        setSelectionState(prev => ({ ...prev, visible: false }));
+    };
+
     // Fetch lesson data from database
     useEffect(() => {
         async function loadLesson() {
@@ -288,6 +344,28 @@ const LessonView: React.FC = () => {
             <Helmet>
                 <title>{lesson.title} | Hablemos Cripto</title>
             </Helmet>
+
+            {/* AI Floating Explain Button */}
+            {selectionState.visible && (
+                <div 
+                    className="fixed z-[100] animate-in zoom-in duration-200"
+                    style={{
+                        left: `${selectionState.x}px`,
+                        top: `${selectionState.y}px`,
+                        transform: 'translate(-50%, -100%)' // Center horizontally, position above cursor
+                    }}
+                >
+                    <button
+                        onMouseDown={handleAskAI} // use onMouseDown to fire before onMouseUp clears the selection
+                        className="flex items-center gap-2 px-3 py-1.5 bg-brand-500 hover:bg-brand-400 text-slate-900 text-xs font-bold rounded-full shadow-glow-brand transition-colors whitespace-nowrap"
+                    >
+                        <MessageSquare size={14} />
+                        Explicar con CBas
+                    </button>
+                    {/* Little downward pointing triangle */}
+                    <div className="w-2 h-2 bg-brand-500 absolute left-1/2 -bottom-1 -translate-x-1/2 rotate-45"></div>
+                </div>
+            )}
 
             {/* Image Lightbox Modal */}
             {lightboxImage && (
