@@ -17,11 +17,11 @@ const Features: React.FC = () => {
               {/* Outer Glow */}
               <div className="absolute -inset-4 bg-brand-500/20 rounded-[2.5rem] blur-2xl group-hover:bg-brand-500/30 transition-all duration-500"></div>
               
-              <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-glass transform lg:-rotate-3 group-hover:rotate-0 transition-all duration-700 bg-navy-900">
+              <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-glass transform lg:-rotate-3 group-hover:rotate-0 transition-all duration-700 bg-navy-900 isolation-isolate z-0">
                 <img
                   src="/images/MadLad.jpg"
                   alt="CBas Founder"
-                  className="w-full max-w-[450px] h-auto block group-hover:scale-105 transition-all duration-700 mix-blend-luminosity hover:mix-blend-normal"
+                  className="w-full max-w-[450px] h-auto block group-hover:scale-105 transition-all duration-700 mix-blend-luminosity hover:mix-blend-normal rounded-[2rem]"
                 />
                 
                 {/* Floating Badge */}
