@@ -59,8 +59,13 @@ const ChatWidget: React.FC = () => {
         timestamp: new Date()
       }]);
 
+      // Filter out the initial greeting if it's the first message to satisfy Gemini API requirements
+      const apiHistory = messages[0]?.role === 'model' && messages.length === 1 
+        ? [] 
+        : messages;
+
       await streamGeminiResponse(
-        messages.concat(userMessage), // Pass full history + new message
+        apiHistory,
         userMessage.text,
         (chunk) => {
           fullResponse = chunk;
@@ -105,7 +110,7 @@ const ChatWidget: React.FC = () => {
               <h3 className="font-bold text-white text-sm">CBas AI Assistant</h3>
               <p className="text-xs text-slate-400 flex items-center gap-1">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                Online con Gemini 2.5
+                Online con Gemini 1.5
               </p>
             </div>
           </div>
