@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import confetti from 'canvas-confetti';
 import {
     CheckCircle,
     AlertCircle,
@@ -532,6 +533,13 @@ const Quiz: React.FC<QuizProps> = ({
 
         // Pass if 70% or more
         if (correctCount >= Math.ceil(questions.length * 0.7)) {
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#10b981', '#f59e0b', '#ffffff'],
+                zIndex: 100
+            });
             onComplete(correctCount);
         }
     };
