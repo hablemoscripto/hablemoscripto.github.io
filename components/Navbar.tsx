@@ -48,81 +48,82 @@ const Navbar: React.FC<NavbarProps> = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled || isMobileMenuOpen
-          ? 'bg-slate-950/90 backdrop-blur-md border-b border-white/10 shadow-lg py-3'
-          : 'bg-transparent py-5'
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled || isMobileMenuOpen
+          ? 'bg-navy-950/80 backdrop-blur-xl border-b border-white/5 shadow-glass py-3'
+          : 'bg-transparent py-6'
           }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="group flex items-center gap-2 z-50">
-            <div className="bg-gradient-to-br from-brand-400 to-brand-600 p-2 rounded-lg group-hover:rotate-12 transition-transform duration-300">
-              <Bitcoin className="text-white h-6 w-6" />
+          <Link to="/" className="group flex items-center gap-3 z-50">
+            <div className="relative">
+              <div className="absolute inset-0 bg-brand-500 blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
+              <div className="relative bg-gradient-to-br from-brand-400 to-brand-600 p-2.5 rounded-xl shadow-glow-brand group-hover:rotate-6 transition-transform duration-500">
+                <Bitcoin className="text-navy-950 h-6 w-6" />
+              </div>
             </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-xl font-heading font-bold text-white tracking-tight">
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-heading font-extrabold text-white tracking-tighter uppercase">
                 Hablemos<span className="text-brand-500">Cripto</span>
               </span>
             </div>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            <ul className="flex gap-8">
+          <div className="hidden md:flex items-center gap-10">
+            <ul className="flex gap-10">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   {link.path ? (
                     <Link
                       to={link.path}
-                      className="text-sm font-medium text-slate-300 hover:text-brand-400 transition-colors relative group"
+                      className="text-[13px] font-bold uppercase tracking-widest text-navy-300 hover:text-white transition-colors relative group"
                     >
                       {link.name}
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full"></span>
+                      <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-1 bg-brand-500 transition-all group-hover:w-full opacity-0 group-hover:opacity-100 rounded-full"></span>
                     </Link>
                   ) : (
                     <button
                       onClick={link.action}
-                      className="text-sm font-medium text-slate-300 hover:text-brand-400 transition-colors relative group"
+                      className="text-[13px] font-bold uppercase tracking-widest text-navy-300 hover:text-white transition-colors relative group"
                     >
                       {link.name}
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full"></span>
+                      <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-1 bg-brand-500 transition-all group-hover:w-full opacity-0 group-hover:opacity-100 rounded-full"></span>
                     </button>
                   )}
                 </li>
               ))}
             </ul>
 
-            <a
-              href="https://discord.gg/W8haa7dDV3"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full font-medium text-sm transition-all transform hover:scale-105 shadow-lg shadow-indigo-500/25"
-            >
-              <ExternalLink size={16} />
-              Unirse a Discord
-            </a>
+            <div className="h-6 w-px bg-white/10 mx-2"></div>
 
             {/* Auth Button */}
             {user ? (
-              <div className="flex items-center gap-3">
-                <span className="text-sm text-slate-300 hidden lg:block">
-                  {user.email?.split('@')[0]}
-                </span>
+              <div className="flex items-center gap-4">
+                <div className="hidden lg:flex flex-col items-end leading-none">
+                   <span className="text-[10px] uppercase tracking-tighter text-navy-400 font-bold">Estudiante</span>
+                   <span className="text-sm text-navy-100 font-medium">
+                    {user.email?.split('@')[0]}
+                  </span>
+                </div>
                 <button
                   onClick={() => signOut()}
-                  className="flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-full font-medium text-sm transition-all"
+                  className="p-2.5 bg-navy-800 hover:bg-navy-700 text-white rounded-xl transition-all border border-white/5 hover:border-white/10"
+                  title="Cerrar Sesión"
                 >
-                  <LogOut size={16} />
-                  Salir
+                  <LogOut size={18} />
                 </button>
               </div>
             ) : (
               <button
                 onClick={() => setIsAuthModalOpen(true)}
-                className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-5 py-2 rounded-full font-medium text-sm transition-all transform hover:scale-105 shadow-lg shadow-orange-500/25"
+                className="group relative px-6 py-2.5 bg-white text-navy-950 rounded-xl font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
               >
-                <User size={16} />
-                Iniciar Sesion
+                <div className="absolute inset-0 bg-brand-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <span className="relative z-10 flex items-center gap-2 group-hover:text-white transition-colors">
+                  <User size={16} />
+                  Ingresar
+                </span>
               </button>
             )}
           </div>
@@ -152,48 +153,48 @@ const Navbar: React.FC<NavbarProps> = () => {
             className="fixed inset-0 md:hidden overflow-y-auto"
             style={{
               zIndex: 99999,
-              backgroundColor: '#0f172a'
+              backgroundColor: '#020617'
             }}
           >
             {/* Header with logo and close */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
+            <div className="flex items-center justify-between px-6 py-6 border-b border-white/5">
               <Link
                 to="/"
-                className="flex items-center gap-2"
+                className="flex items-center gap-3"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <div className="bg-gradient-to-br from-brand-400 to-brand-600 p-2 rounded-lg">
-                  <Bitcoin className="text-white h-5 w-5" />
+                  <Bitcoin className="text-navy-950 h-5 w-5" />
                 </div>
-                <span className="text-lg font-heading font-bold text-white">
+                <span className="text-lg font-heading font-extrabold text-white tracking-tighter uppercase">
                   Hablemos<span className="text-brand-500">Cripto</span>
                 </span>
               </Link>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 text-slate-400 hover:text-white"
+                className="p-2.5 bg-navy-900 text-navy-400 hover:text-white rounded-xl border border-white/5"
               >
-                <X size={24} />
+                <X size={20} />
               </button>
             </div>
 
             {/* Navigation links */}
-            <nav className="px-6 py-8">
-              <ul className="space-y-2">
+            <nav className="px-6 py-10">
+              <ul className="space-y-4">
                 {navLinks.map((link) => (
                   <li key={link.name}>
                     {link.path ? (
                       <Link
                         to={link.path}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="block py-3 px-4 text-lg font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                        className="block py-4 px-6 text-sm font-bold uppercase tracking-[0.2em] text-navy-300 hover:text-white hover:bg-navy-900 rounded-2xl border border-transparent hover:border-white/5 transition-all"
                       >
                         {link.name}
                       </Link>
                     ) : (
                       <button
                         onClick={link.action}
-                        className="block w-full text-left py-3 px-4 text-lg font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                        className="block w-full text-left py-4 px-6 text-sm font-bold uppercase tracking-[0.2em] text-navy-300 hover:text-white hover:bg-navy-900 rounded-2xl border border-transparent hover:border-white/5 transition-all"
                       >
                         {link.name}
                       </button>
@@ -203,28 +204,17 @@ const Navbar: React.FC<NavbarProps> = () => {
               </ul>
 
               {/* Action buttons */}
-              <div className="mt-8 space-y-3">
-                <a
-                  href="https://discord.gg/W8haa7dDV3"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors"
-                >
-                  <ExternalLink size={18} />
-                  Unirse a Discord
-                </a>
-
+              <div className="mt-12 space-y-4">
                 {user ? (
                   <button
                     onClick={() => {
                       signOut();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex items-center justify-center gap-2 w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-4 rounded-xl border border-slate-700 transition-colors"
+                    className="flex items-center justify-center gap-3 w-full bg-navy-900 hover:bg-red-500/10 text-white hover:text-red-500 font-bold py-4 px-6 rounded-2xl border border-white/5 transition-all"
                   >
                     <LogOut size={18} />
-                    Cerrar Sesion ({user.email?.split('@')[0]})
+                    Cerrar Sesión ({user.email?.split('@')[0]})
                   </button>
                 ) : (
                   <button
@@ -232,12 +222,23 @@ const Navbar: React.FC<NavbarProps> = () => {
                       setIsAuthModalOpen(true);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors"
+                    className="flex items-center justify-center gap-3 w-full bg-white text-navy-950 font-bold py-4 px-6 rounded-2xl transition-all shadow-glow-brand"
                   >
                     <User size={18} />
-                    Iniciar Sesion
+                    Iniciar Sesión
                   </button>
                 )}
+                
+                <a
+                  href="https://discord.gg/W8haa7dDV3"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-3 w-full bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold py-4 px-6 rounded-2xl transition-all"
+                >
+                  <ExternalLink size={18} />
+                  Comunidad Discord
+                </a>
               </div>
             </nav>
           </div>

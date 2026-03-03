@@ -33,99 +33,104 @@ const LevelCard: React.FC<LevelCardProps> = ({
 }) => {
 
     const colorClasses = {
-        brand: 'text-brand-500 group-hover:border-brand-500/50',
-        indigo: 'text-indigo-400 group-hover:border-indigo-500/50',
-        rose: 'text-rose-400 group-hover:border-rose-500/50',
+        brand: 'text-brand-500 group-hover:border-brand-500/50 shadow-glow-brand/10',
+        indigo: 'text-indigo-400 group-hover:border-indigo-500/50 shadow-indigo-500/10',
+        rose: 'text-rose-400 group-hover:border-rose-500/50 shadow-rose-500/10',
     };
 
     const btnColors = {
-        brand: 'bg-brand-500 hover:bg-brand-400 text-slate-900',
-        indigo: 'bg-indigo-500 hover:bg-indigo-400 text-white',
-        rose: 'bg-rose-500 hover:bg-rose-400 text-white',
+        brand: 'bg-brand-500 hover:bg-brand-400 text-navy-950 shadow-glow-brand',
+        indigo: 'bg-indigo-500 hover:bg-indigo-400 text-white shadow-indigo-500/30',
+        rose: 'bg-rose-500 hover:bg-rose-400 text-white shadow-rose-500/30',
     };
 
     return (
         <div className={cn(
-            "group relative bg-slate-900 rounded-2xl border border-slate-800 p-0 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
-            colorClasses[color],
-            isLocked ? 'opacity-75' : '',
+            "group relative bg-navy-900 rounded-[2rem] border border-white/5 p-0 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-glass hover:bg-navy-800",
+            isLocked ? 'opacity-70 grayscale-[0.5]' : '',
             className
         )}>
+            {/* Top Pattern Decoration */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-bl-[4rem] pointer-events-none"></div>
+
             {/* Header */}
-            <div className="p-8 relative">
-                <div className="flex justify-between items-start mb-6">
+            <div className="p-10 relative">
+                <div className="flex justify-between items-start mb-8">
                     <div className={cn(
-                        "w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center",
-                        isLocked ? 'text-slate-500' : colorClasses[color].split(' ')[0]
+                        "w-14 h-14 rounded-2xl bg-navy-950 border border-white/5 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:border-white/10 shadow-glass",
+                        isLocked ? 'text-navy-500' : colorClasses[color].split(' ')[0]
                     )}>
-                        {isLocked ? <Lock size={20} /> : <Icon size={24} />}
+                        {isLocked ? <Lock size={24} /> : <Icon size={28} />}
                     </div>
 
                     {/* Circular Progress Mini */}
-                    <div className="relative w-12 h-12 flex items-center justify-center">
+                    <div className="relative w-14 h-14 flex items-center justify-center">
                         <svg className="w-full h-full transform -rotate-90">
-                            <circle cx="24" cy="24" r="20" className="stroke-slate-800" strokeWidth="4" fill="none" />
+                            <circle cx="28" cy="28" r="24" className="stroke-navy-950" strokeWidth="5" fill="none" />
                             <circle
-                                cx="24" cy="24" r="20"
-                                className={isLocked ? 'stroke-slate-700' : `stroke-current`}
-                                strokeWidth="4"
+                                cx="28" cy="28" r="24"
+                                className={cn(
+                                    "transition-all duration-1000 ease-out",
+                                    isLocked ? 'stroke-navy-800' : `stroke-current`
+                                )}
+                                strokeWidth="5"
                                 fill="none"
-                                strokeDasharray={125.6}
-                                strokeDashoffset={125.6 - (125.6 * progress) / 100}
+                                strokeDasharray={150.8}
+                                strokeDashoffset={150.8 - (150.8 * progress) / 100}
                                 strokeLinecap="round"
                             />
                         </svg>
-                        <span className="absolute text-[10px] font-bold text-white">{progress}%</span>
+                        <span className="absolute text-[11px] font-black text-white">{progress}%</span>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-3 mb-2">
-                    <span className="text-xs font-bold tracking-widest opacity-60 uppercase">{levelNumber}</span>
-                    <h3 className="text-2xl font-bold text-white">{title}</h3>
+                <div className="flex flex-col mb-4">
+                    <span className="text-[10px] font-black tracking-[0.3em] text-navy-400 uppercase mb-2">Módulo {levelNumber}</span>
+                    <h3 className="text-3xl font-black text-white tracking-tighter uppercase">{title}</h3>
                 </div>
-                <p className="text-slate-400 text-sm font-medium mb-4">{subtitle}</p>
+                <p className="text-brand-500 text-sm font-black uppercase tracking-widest mb-6">{subtitle}</p>
 
-                <p className="text-slate-400 text-sm leading-relaxed mb-6 min-h-[60px]">
+                <p className="text-navy-300 text-sm leading-relaxed mb-8 min-h-[60px] font-medium">
                     {description}
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-8">
                     {tags.map(tag => (
-                        <span key={tag} className="px-2 py-1 rounded-md bg-slate-800 border border-slate-700 text-[10px] uppercase tracking-wider text-slate-400">
+                        <span key={tag} className="px-3 py-1.5 rounded-xl bg-navy-950 border border-white/5 text-[10px] font-black uppercase tracking-widest text-navy-400 group-hover:text-navy-200 transition-colors">
                             {tag}
                         </span>
                     ))}
                 </div>
 
-                <div className="flex items-center gap-2 text-xs text-slate-500 mb-6">
-                    <div className="flex items-center gap-1">
-                        <span className="font-bold text-slate-300">{completedCount}</span>
-                        <span>/</span>
-                        <span>{lessonCount} lecciones</span>
+                <div className="flex items-center justify-between p-4 bg-navy-950/50 rounded-2xl border border-white/5 mb-8">
+                    <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></div>
+                        <span className="text-xs font-bold text-navy-200">{completedCount} / {lessonCount} completadas</span>
                     </div>
+                    {progress === 100 && <CheckCircle size={18} className="text-accent-500" />}
                 </div>
 
                 {isLocked && prerequisiteTitle ? (
-                    <div className="space-y-3">
-                        <div className="flex items-center gap-2 text-slate-400 text-sm">
-                            <Lock size={14} className="text-slate-500" />
-                            <span>
-                                Completa <span className="text-brand-400 font-medium">{prerequisiteTitle}</span> para desbloquear
+                    <div className="space-y-4 p-6 bg-navy-950 rounded-[1.5rem] border border-white/5">
+                        <div className="flex items-start gap-3 text-navy-400 text-xs">
+                            <Lock size={16} className="text-navy-600 shrink-0 mt-0.5" />
+                            <span className="leading-relaxed font-bold uppercase tracking-tight">
+                                Bloqueado hasta completar <span className="text-brand-500">{prerequisiteTitle}</span>
                             </span>
                         </div>
 
                         {prerequisiteProgress !== undefined && (
-                            <div className="space-y-1.5">
-                                <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                            <div className="space-y-2">
+                                <div className="w-full h-2 bg-navy-800 rounded-full overflow-hidden">
                                     <div
-                                        className="h-full bg-brand-500 rounded-full transition-all duration-500"
+                                        className="h-full bg-brand-500 rounded-full transition-all duration-700"
                                         style={{ width: `${prerequisiteProgress}%` }}
                                     />
                                 </div>
-                                <div className="flex justify-between text-xs text-slate-500">
-                                    <span>{prerequisiteProgress}% completado</span>
+                                <div className="flex justify-between text-[10px] font-black text-navy-500 uppercase tracking-widest">
+                                    <span>{prerequisiteProgress}% progreso</span>
                                     {prerequisiteLessonsRemaining !== undefined && (
-                                        <span>{prerequisiteLessonsRemaining} lecciones restantes</span>
+                                        <span>{prerequisiteLessonsRemaining} restantes</span>
                                     )}
                                 </div>
                             </div>
@@ -136,29 +141,29 @@ const LevelCard: React.FC<LevelCardProps> = ({
                         onClick={onAction}
                         disabled={isLocked}
                         className={cn(
-                            "w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all",
+                            "w-full py-4 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all duration-300 group-hover:scale-[1.02] active:scale-[0.98]",
                             isLocked
-                                ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                                ? 'bg-navy-900 text-navy-600 cursor-not-allowed'
                                 : progress === 100
-                                    ? 'bg-green-500 text-white'
+                                    ? 'bg-accent-500 text-white shadow-glow-accent'
                                     : btnColors[color]
                         )}
                     >
                         {isLocked ? (
                             <>
-                                <Lock size={16} /> Bloqueado
+                                <Lock size={18} /> Bloqueado
                             </>
                         ) : progress === 100 ? (
                             <>
-                                <CheckCircle size={16} /> Completado
+                                <CheckCircle size={18} /> Repasar Nivel
                             </>
                         ) : progress > 0 ? (
                             <>
-                                <PlayCircle size={16} /> Continuar
+                                <PlayCircle size={18} /> Continuar
                             </>
                         ) : (
                             <>
-                                <PlayCircle size={16} /> Empezar Nivel
+                                <PlayCircle size={18} /> Comenzar
                             </>
                         )}
                     </button>

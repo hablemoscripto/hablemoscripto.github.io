@@ -202,25 +202,30 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   }
 
   return (
-    <div className="bg-slate-950 min-h-screen pb-20">
+    <div className="bg-navy-950 min-h-screen pb-20">
       <EducationNavbar
         globalProgress={globalPercentage}
         onOpenProgress={() => setShowModal(true)}
         currentView="dashboard"
       />
 
-      <div className="bg-slate-900/50 border-b border-white/5 py-4 sticky top-16 z-30 backdrop-blur-md">
+      <div className="bg-navy-900/50 border-b border-white/5 py-5 sticky top-16 z-30 backdrop-blur-xl">
         <div className="container max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div className="flex items-center text-sm text-slate-400">
+          <div className="flex items-center text-xs font-black uppercase tracking-widest text-navy-400">
             <Link to="/" className="hover:text-brand-500 transition-colors">Inicio</Link>
-            <ChevronRight size={14} className="mx-2" />
-            <span className="text-brand-500 font-medium">Plataforma Educativa</span>
+            <ChevronRight size={14} className="mx-2 text-navy-600" />
+            <span className="text-brand-500">Plataforma Educativa</span>
           </div>
 
-          <div className="flex items-center gap-6 text-sm">
-            <div className="flex items-center gap-2 text-slate-300">
-              <Trophy size={16} className="text-brand-500" />
-              <span className="font-bold text-white">{totalCompletedLessons}</span> lecciones
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-3">
+               <div className="w-8 h-8 rounded-lg bg-navy-950 border border-white/5 flex items-center justify-center">
+                  <Trophy size={16} className="text-brand-500" />
+               </div>
+               <div className="flex flex-col leading-none">
+                  <span className="text-white font-black text-sm tracking-tight">{totalCompletedLessons}</span>
+                  <span className="text-[10px] text-navy-500 font-bold uppercase tracking-tighter">Lecciones</span>
+               </div>
             </div>
           </div>
         </div>
@@ -240,18 +245,20 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
       {isDashboard ? (
         <>
-          <div className="container max-w-7xl mx-auto px-6 pt-12 pb-16">
-            <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
-                Aprende Cripto <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-brand-600">Paso a Paso</span>
+          <div className="container max-w-7xl mx-auto px-6 pt-16 pb-20">
+            <div className="max-w-4xl mb-16">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-navy-900 border border-white/5 text-brand-500 text-[10px] font-black uppercase tracking-[0.2em] mb-6">
+                 Tu Ruta de Aprendizaje
+              </div>
+              <h1 className="text-4xl md:text-6xl font-heading font-black text-white mb-6 leading-[1.1] tracking-tighter">
+                Domina Cripto <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-brand-500 to-brand-600">Paso a Paso</span>
               </h1>
-              <p className="text-lg text-slate-400 leading-relaxed mb-8">
-                Domina las criptomonedas con nuestro plan de estudios estructurado.
-                Desde conceptos básicos hasta estrategias avanzadas. Tu progreso se guarda automáticamente.
+              <p className="text-xl text-navy-300 leading-relaxed max-w-2xl font-medium">
+                Sigue nuestro plan de estudios estructurado. Desde conceptos fundamentales hasta estrategias de mercado avanzado.
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8 mt-8">
+            <div className="grid lg:grid-cols-3 gap-10 mt-8">
               {levels.map((level, index) => {
                 const isCompleted = getLevelProgress(level.id) === 100;
                 const isLocked = isLevelLocked(level.id);
@@ -277,12 +284,12 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                     />
 
                     {isCompleted && (
-                      <div className="mt-4 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+                      <div className="mt-6 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
                         <button
                           onClick={() => handleClaimCertificate(level.id, level.title)}
-                          className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-slate-900 font-bold rounded-xl shadow-lg hover:shadow-yellow-500/20 hover:scale-105 transition-all"
+                          className="inline-flex items-center gap-3 px-8 py-4 bg-white text-navy-950 font-black uppercase tracking-widest text-xs rounded-2xl shadow-glow-brand hover:scale-105 transition-all"
                         >
-                          <Award size={20} />
+                          <Award size={20} className="text-brand-500" />
                           Reclamar Certificado
                         </button>
                       </div>
@@ -294,44 +301,46 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           </div>
 
           {/* Achievements Section */}
-          <div className="container max-w-7xl mx-auto px-6 mt-16">
-            <h2 className="text-2xl font-heading font-bold text-white mb-6 flex items-center gap-2">
-              <Trophy size={24} className="text-brand-500" />
-              Logros
+          <div className="container max-w-7xl mx-auto px-6 py-24 border-y border-white/5">
+            <h2 className="text-3xl font-heading font-black text-white mb-12 flex items-center gap-4 tracking-tighter uppercase">
+              <div className="p-3 rounded-2xl bg-navy-900 border border-white/5">
+                <Trophy size={32} className="text-brand-500" />
+              </div>
+              Tus Logros
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
               {achievementDefinitions.map(def => {
                 const unlocked = achievements.find(a => a.id === def.id);
                 const Icon = ACHIEVEMENT_ICONS[def.icon] || Trophy;
                 return (
                   <div
                     key={def.id}
-                    className={`relative rounded-xl p-4 text-center transition-all ${
+                    className={`relative rounded-[2rem] p-6 text-center transition-all duration-500 ${
                       unlocked
-                        ? 'bg-slate-800/80 border border-brand-500/30 shadow-md shadow-brand-500/5'
-                        : 'bg-slate-900/50 border border-white/5 opacity-50'
+                        ? 'bg-navy-900 border border-brand-500/30 shadow-glow-brand/5 scale-105'
+                        : 'bg-navy-950 border border-white/5 opacity-40'
                     }`}
                   >
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 ${
+                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 border transition-all duration-500 ${
                       unlocked
-                        ? 'bg-gradient-to-br from-brand-400 to-brand-600'
-                        : 'bg-slate-800'
+                        ? 'bg-gradient-to-br from-brand-400 to-brand-600 border-brand-400/50 shadow-glow-brand rotate-6'
+                        : 'bg-navy-900 border-white/5'
                     }`}>
                       {unlocked ? (
-                        <Icon size={24} className="text-slate-900" />
+                        <Icon size={32} className="text-navy-950" />
                       ) : (
-                        <Lock size={20} className="text-slate-600" />
+                        <Lock size={24} className="text-navy-700" />
                       )}
                     </div>
-                    <p className={`text-sm font-bold mb-1 ${unlocked ? 'text-white' : 'text-slate-500'}`}>
+                    <p className={`text-sm font-black uppercase tracking-tight mb-2 ${unlocked ? 'text-white' : 'text-navy-600'}`}>
                       {def.title}
                     </p>
                     {unlocked ? (
-                      <p className="text-xs text-brand-400">
+                      <div className="inline-block px-3 py-1 rounded-full bg-brand-500/10 text-brand-500 text-[10px] font-black uppercase tracking-widest">
                         {new Date(unlocked.unlockedAt!).toLocaleDateString('es-CO', { day: 'numeric', month: 'short' })}
-                      </p>
+                      </div>
                     ) : (
-                      <p className="text-xs text-slate-600">{def.description}</p>
+                      <p className="text-[10px] text-navy-700 font-bold uppercase tracking-widest leading-tight">{def.description}</p>
                     )}
                   </div>
                 );
@@ -339,21 +348,25 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             </div>
           </div>
 
-          {/* Premium Section - Temporary for testing */}
-          <div className="container max-w-7xl mx-auto px-6 mt-12">
-            <div className="bg-gradient-to-br from-slate-900 to-slate-800 border border-amber-500/20 rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Crown size={32} className="text-white" />
+          {/* Premium Section */}
+          <div className="container max-w-7xl mx-auto px-6 mt-24">
+            <div className="relative overflow-hidden bg-gradient-to-br from-navy-900 to-navy-950 border border-white/10 rounded-[3rem] p-12 md:p-20 text-center shadow-glass group">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-[120px] -mr-48 -mt-48 group-hover:bg-brand-500/20 transition-all duration-1000"></div>
+              
+              <div className="relative z-10 max-w-2xl mx-auto">
+                <div className="w-20 h-20 bg-gradient-to-br from-brand-400 to-brand-600 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-glow-brand-strong rotate-3 group-hover:rotate-12 transition-transform duration-500">
+                  <Crown size={40} className="text-navy-950" />
+                </div>
+                <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tighter uppercase">Obtener <span className="text-brand-500">Premium</span></h2>
+                <p className="text-lg text-navy-300 mb-10 leading-relaxed font-medium">
+                  Accede a contenido exclusivo, análisis de mercado en tiempo real y estrategias avanzadas para llevar tu portafolio al siguiente nivel.
+                </p>
+                <PaymentButton
+                  onSuccess={() => alert('Pago exitoso! Ya eres premium.')}
+                  onError={(error) => alert(error)}
+                  className="mx-auto transform scale-110"
+                />
               </div>
-              <h2 className="text-2xl font-bold text-white mb-2">Obtener Premium</h2>
-              <p className="text-slate-400 mb-6 max-w-md mx-auto">
-                Accede a contenido exclusivo, lecciones avanzadas y recursos adicionales para dominar el mundo cripto.
-              </p>
-              <PaymentButton
-                onSuccess={() => alert('Pago exitoso! Ya eres premium.')}
-                onError={(error) => alert(error)}
-                className="mx-auto"
-              />
             </div>
           </div>
 

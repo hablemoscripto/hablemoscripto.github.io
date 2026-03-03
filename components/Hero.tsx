@@ -41,7 +41,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
   }, [displayText, isDeleting, textIndex]);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 pt-32 pb-20 lg:pt-20 scroll-mt-28">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-navy-950 pt-32 pb-20 lg:pt-20 scroll-mt-28">
 
       {/* Particles Background */}
       <ParticlesBackground />
@@ -49,87 +49,94 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
       {/* Dynamic Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
         {/* Main Banner Background Image */}
-        <div className="absolute inset-0 z-0 opacity-20 mix-blend-screen">
+        <div className="absolute inset-0 z-0 opacity-[0.15] mix-blend-luminosity">
             <img 
                 src="/images/banner.jpg" 
                 alt="Crypto Trading Background" 
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover object-center scale-110"
                 style={{ 
-                    maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 90%)',
-                    WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 90%)'
+                    maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%)'
                 }}
             />
         </div>
 
         {/* Gradient Blobs */}
-        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-brand-500/10 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-600/5 rounded-full blur-[100px]"></div>
+        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-brand-500/10 rounded-full blur-[160px]"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] bg-accent-500/5 rounded-full blur-[140px]"></div>
         
         {/* Texture Pattern */}
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
+        <div className="absolute inset-0 bg-dots-pattern opacity-[0.15]"></div>
       </div>
 
       <div className="container max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
             
+            {/* Tagline */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy-900/50 border border-white/5 text-brand-400 text-xs font-bold uppercase tracking-[0.2em] mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+               <Zap size={14} />
+               La nueva era del aprendizaje cripto
+            </div>
+
             {/* Main Heading */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-white leading-[1.1] tracking-tight mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-white leading-[1] tracking-tighter mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
               De Cero a Experto en <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-brand-500 to-amber-500 drop-shadow-[0_0_30px_rgba(255,193,7,0.2)]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-brand-500 to-brand-600 drop-shadow-glow-brand-strong">
                 Hablemos Cripto
               </span>
             </h1>
 
             {/* Typing Subheading */}
-            <div className="h-12 md:h-16 flex items-center justify-center gap-3 text-2xl md:text-4xl font-light text-slate-300 mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            <div className="h-12 md:h-16 flex items-center justify-center gap-4 text-2xl md:text-4xl font-light text-navy-200 mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
                 <span>Domina</span>
                 <div className="relative">
-                    <span className="font-semibold text-white border-b-2 border-brand-500 pb-1">{displayText}</span>
-                    <span className="absolute -right-3 top-0 h-full w-0.5 bg-brand-500 animate-pulse"></span>
+                    <span className="font-bold text-white border-b-4 border-brand-500 pb-1">{displayText}</span>
+                    <span className="absolute -right-4 top-1 h-[80%] w-1 bg-brand-500 animate-pulse"></span>
                 </div>
             </div>
 
             {/* Description */}
-            <p className="text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-               Únete a la comunidad hispana más confiable. Olvida el ruido y las promesas falsas. Aprende con análisis profesional, estrategias probadas y una ruta de aprendizaje clara.
+            <p className="text-lg md:text-xl text-navy-400 max-w-2xl leading-relaxed mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
+               Olvida el ruido y las promesas falsas. Aprende con análisis profesional, estrategias probadas y una ruta de aprendizaje diseñada para resultados reales.
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400 mb-16">
+            <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400 mb-20">
               <button 
                 onClick={(e) => {
                   e.preventDefault();
                   onStartLearning();
                 }}
-                className="w-full sm:w-auto px-8 py-4 bg-brand-500 text-slate-900 font-bold rounded-xl shadow-[0_0_30px_rgba(255,193,7,0.3)] hover:bg-brand-400 hover:scale-105 hover:shadow-[0_0_50px_rgba(255,193,7,0.5)] transition-all flex items-center justify-center gap-2 text-lg"
+                className="group relative w-full sm:w-auto px-10 py-5 bg-brand-500 text-navy-950 font-black rounded-2xl shadow-glow-brand-strong hover:scale-[1.05] active:scale-[0.98] transition-all flex items-center justify-center gap-3 text-lg overflow-hidden"
               >
-                <BookOpen size={22} />
-                <span>Comenzar Ahora</span>
+                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></div>
+                <BookOpen size={24} className="group-hover:rotate-6 transition-transform" />
+                <span>COMENZAR CURSO</span>
               </button>
               
               <a 
                 href="https://discord.gg/W8haa7dDV3" 
                 target="_blank"
-                className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl border border-slate-700 hover:border-brand-500/50 hover:bg-slate-800 transition-all flex items-center justify-center gap-2 group text-lg"
+                className="w-full sm:w-auto px-10 py-5 bg-navy-900 text-white font-bold rounded-2xl border border-white/5 hover:border-brand-500/30 hover:bg-navy-800 transition-all flex items-center justify-center gap-3 group text-lg"
               >
-                <Users size={22} className="text-slate-400 group-hover:text-brand-500 transition-colors" />
-                <span>Unirse al Discord</span>
+                <Users size={24} className="text-navy-400 group-hover:text-brand-500 transition-colors" />
+                <span>COMUNIDAD</span>
               </a>
             </div>
 
             {/* Stats Grid - Centered & Glassmorphism */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 w-full max-w-4xl border-t border-white/5 pt-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 w-full max-w-4xl border-t border-white/5 pt-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
                 {[
-                    { label: "Experiencia", val: "7+ Años", icon: Award },
-                    { label: "Comunidad", val: "500+", icon: Users },
-                    { label: "Transparencia", val: "100%", icon: Shield }
+                    { label: "Experiencia", val: "7+ Años", icon: Award, color: "text-brand-500" },
+                    { label: "Estudiantes", val: "500+", icon: Users, color: "text-accent-500" },
+                    { label: "Confianza", val: "100%", icon: Shield, color: "text-brand-400" }
                 ].map((stat, i) => (
-                    <div key={i} className="flex flex-col items-center group">
-                        <div className="mb-3 p-3 rounded-full bg-slate-900/50 border border-slate-800 group-hover:border-brand-500/50 group-hover:bg-brand-500/10 transition-all">
-                           <stat.icon className="w-6 h-6 text-slate-400 group-hover:text-brand-500 transition-colors" />
+                    <div key={i} className="flex flex-col items-center group p-6 rounded-3xl hover:bg-white/[0.02] transition-colors">
+                        <div className={`mb-4 p-4 rounded-2xl bg-navy-900 border border-white/5 group-hover:border-white/10 transition-all shadow-glass`}>
+                           <stat.icon className={`w-7 h-7 ${stat.color} group-hover:scale-110 transition-transform`} />
                         </div>
-                        <p className="text-3xl font-bold text-white group-hover:text-brand-400 transition-colors">{stat.val}</p>
-                        <p className="text-sm text-slate-500 uppercase tracking-wider font-medium mt-1">{stat.label}</p>
+                        <p className="text-4xl font-black text-white tracking-tighter mb-1">{stat.val}</p>
+                        <p className="text-[10px] text-navy-500 uppercase tracking-[0.3em] font-black">{stat.label}</p>
                     </div>
                 ))}
             </div>
