@@ -216,10 +216,44 @@ const LessonView: React.FC = () => {
 
     if (lessonLoading) {
         return (
-            <div className="min-h-screen flex items-center justify-center text-white bg-slate-950">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-500 mx-auto mb-4"></div>
-                    <p className="text-slate-400">Cargando lección...</p>
+            <div className="min-h-screen bg-navy-950 pb-20 animate-pulse">
+                {/* Header Skeleton */}
+                <section className="bg-navy-900 border-b border-white/5 py-12">
+                    <div className="container max-w-7xl mx-auto px-6">
+                        <div className="w-24 h-6 bg-navy-800 rounded mb-4"></div>
+                        <div className="w-3/4 max-w-2xl h-12 bg-navy-800 rounded-lg mb-6"></div>
+                        <div className="w-full max-w-3xl h-16 bg-navy-800/50 rounded-lg mb-8"></div>
+                        <div className="flex gap-6 border-t border-white/5 pt-6">
+                            <div className="w-20 h-5 bg-navy-800 rounded"></div>
+                            <div className="w-24 h-5 bg-navy-800 rounded"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <div className="max-w-6xl xl:max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    {/* Main Content Skeleton */}
+                    <div className="lg:col-span-9 space-y-8">
+                        {/* Video Skeleton */}
+                        <div className="w-full aspect-video bg-navy-900 rounded-2xl border border-white/5"></div>
+                        
+                        {/* Paragraph Skeletons */}
+                        <div className="space-y-4">
+                            <div className="w-1/3 h-8 bg-navy-900 rounded-lg mb-6"></div>
+                            <div className="w-full h-4 bg-navy-800/50 rounded"></div>
+                            <div className="w-full h-4 bg-navy-800/50 rounded"></div>
+                            <div className="w-5/6 h-4 bg-navy-800/50 rounded"></div>
+                        </div>
+                        <div className="space-y-4 pt-4">
+                            <div className="w-full h-4 bg-navy-800/50 rounded"></div>
+                            <div className="w-4/5 h-4 bg-navy-800/50 rounded"></div>
+                        </div>
+                    </div>
+
+                    {/* Sidebar Skeleton */}
+                    <div className="lg:col-span-3 space-y-6">
+                        <div className="w-full h-32 bg-navy-900 rounded-2xl border border-white/5"></div>
+                        <div className="w-full h-40 bg-navy-900 rounded-2xl border border-white/5"></div>
+                    </div>
                 </div>
             </div>
         );
