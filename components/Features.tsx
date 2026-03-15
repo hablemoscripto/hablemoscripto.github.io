@@ -1,8 +1,9 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Shield, Users, Compass, Zap } from 'lucide-react';
 
 const Features: React.FC = () => {
+  const [imageActive, setImageActive] = useState(false);
   return (
     <section id="about" className="py-32 bg-navy-950 relative overflow-hidden scroll-mt-28">
       {/* Background decoration */}
@@ -17,7 +18,10 @@ const Features: React.FC = () => {
               {/* Outer Glow */}
               <div className="absolute -inset-4 bg-brand-500/20 rounded-[2.5rem] blur-2xl group-hover:bg-brand-500/30 transition-all duration-500"></div>
               
-              <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-glass transform lg:-rotate-3 group-hover:rotate-0 transition-all duration-700 bg-navy-900 isolation-isolate z-0">
+              <div
+                className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-glass transform lg:-rotate-3 group-hover:rotate-0 transition-all duration-700 bg-navy-900 isolation-isolate z-0 cursor-pointer"
+                onClick={() => setImageActive(prev => !prev)}
+              >
                 <picture>
                   <source
                     srcSet="/images/MadLad.webp 450w, /images/MadLad-2x.webp 900w"
@@ -30,7 +34,11 @@ const Features: React.FC = () => {
                     width={450}
                     height={450}
                     loading="lazy"
-                    className="w-full max-w-[450px] h-auto block group-hover:scale-105 transition-all duration-700 mix-blend-luminosity hover:mix-blend-normal rounded-[2rem]"
+                    className={`w-full max-w-[450px] h-auto block transition-all duration-700 rounded-[2rem] ${
+                      imageActive
+                        ? 'mix-blend-normal scale-105'
+                        : 'mix-blend-luminosity group-hover:mix-blend-normal group-hover:scale-105'
+                    }`}
                   />
                 </picture>
                 
@@ -38,7 +46,7 @@ const Features: React.FC = () => {
                 <div className="absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-navy-950/80 backdrop-blur-xl border border-white/10 shadow-glow-brand">
                    <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-white font-black text-xl tracking-tighter uppercase">CBas</p>
+                        <p className="text-white font-black text-xl tracking-tighter">CBas</p>
                         <p className="text-brand-500 text-xs font-bold uppercase tracking-widest">Fundador & Analista</p>
                       </div>
                       <div className="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-navy-950">
