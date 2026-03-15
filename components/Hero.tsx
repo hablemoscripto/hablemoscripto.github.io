@@ -50,15 +50,25 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
         {/* Main Banner Background Image */}
         <div className="absolute inset-0 z-0 opacity-[0.15] mix-blend-luminosity">
-            <img 
-                src="/images/banner.jpg" 
-                alt="Crypto Trading Background" 
-                className="w-full h-full object-cover object-center scale-110"
-                style={{ 
-                    maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%)',
-                    WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%)'
-                }}
-            />
+            <picture>
+                <source
+                    srcSet="/images/banner-768w.webp 768w, /images/banner-1280w.webp 1280w, /images/banner-1920w.webp 1920w"
+                    sizes="100vw"
+                    type="image/webp"
+                />
+                <img
+                    src="/images/banner-1280w.webp"
+                    alt="Crypto Trading Background"
+                    width={1280}
+                    height={720}
+                    fetchPriority="high"
+                    className="w-full h-full object-cover object-center scale-110"
+                    style={{
+                        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%)',
+                        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%)'
+                    }}
+                />
+            </picture>
         </div>
 
         {/* Gradient Blobs */}
