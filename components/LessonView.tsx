@@ -648,7 +648,15 @@ const LessonView: React.FC = () => {
                                                     >
                                                         <img
                                                             src={section.image}
+                                                            srcSet={
+                                                                section.image.endsWith('.webp')
+                                                                    ? `${section.image.replace('.webp', '-sm.webp')} 640w, ${section.image.replace('.webp', '-md.webp')} 1024w, ${section.image} 2200w`
+                                                                    : undefined
+                                                            }
+                                                            sizes={section.image.endsWith('.webp') ? '(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 800px' : undefined}
                                                             alt={section.imageAlt || section.title || 'Infographic'}
+                                                            width={2200}
+                                                            height={1228}
                                                             loading="lazy"
                                                             className="w-full rounded-xl border border-slate-700/50 shadow-lg transition-all duration-300 group-hover:border-brand-500/50 group-hover:shadow-brand-500/20"
                                                         />
