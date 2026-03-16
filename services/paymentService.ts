@@ -30,12 +30,13 @@ export async function createPaymentWithSignature(
   customerEmail: string,
   customerName?: string
 ): Promise<PaymentData> {
-  const { data: sessionData } = await supabase.auth.getSession();
-  const accessToken = sessionData?.session?.access_token;
+  const { data: { session } } = await supabase.auth.getSession();
 
-  if (!accessToken) {
+  if (!session?.access_token) {
     throw new Error('No authenticated session');
   }
+
+  const accessToken = session.access_token;
 
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 
