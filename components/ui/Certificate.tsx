@@ -56,7 +56,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                 return {
                     border: 'border-slate-400',
                     accent: 'text-slate-500',
-                    bgPattern: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect width='20' height='20' fill='%23f8fafc'/%3E%3Crect x='0' y='0' width='10' height='10' fill='%23f1f5f9' opacity='0.4'/%3E%3Crect x='10' y='10' width='10' height='10' fill='%23f1f5f9' opacity='0.4'/%3E%3C/svg%3E', // Keep same pattern for now, maybe change later
+                    bgPattern: 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27%3E%3Crect width=%2720%27 height=%2720%27 fill=%27%23f8fafc%27/%3E%3Crect x=%270%27 y=%270%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3Crect x=%2710%27 y=%2710%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3C/svg%3E', // Keep same pattern for now, maybe change later
                     badgeColor: 'text-slate-400',
                     titleColor: 'text-slate-700'
                 };
@@ -64,7 +64,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                 return {
                     border: 'border-yellow-600',
                     accent: 'text-yellow-600',
-                    bgPattern: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect width='20' height='20' fill='%23f8fafc'/%3E%3Crect x='0' y='0' width='10' height='10' fill='%23f1f5f9' opacity='0.4'/%3E%3Crect x='10' y='10' width='10' height='10' fill='%23f1f5f9' opacity='0.4'/%3E%3C/svg%3E',
+                    bgPattern: 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27%3E%3Crect width=%2720%27 height=%2720%27 fill=%27%23f8fafc%27/%3E%3Crect x=%270%27 y=%270%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3Crect x=%2710%27 y=%2710%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3C/svg%3E',
                     badgeColor: 'text-yellow-500',
                     titleColor: 'text-yellow-800'
                 };
@@ -72,7 +72,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                 return {
                     border: 'border-orange-700', // Bronze-ish
                     accent: 'text-orange-700',
-                    bgPattern: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect width='20' height='20' fill='%23f8fafc'/%3E%3Crect x='0' y='0' width='10' height='10' fill='%23f1f5f9' opacity='0.4'/%3E%3Crect x='10' y='10' width='10' height='10' fill='%23f1f5f9' opacity='0.4'/%3E%3C/svg%3E',
+                    bgPattern: 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27%3E%3Crect width=%2720%27 height=%2720%27 fill=%27%23f8fafc%27/%3E%3Crect x=%270%27 y=%270%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3Crect x=%2710%27 y=%2710%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3C/svg%3E',
                     badgeColor: 'text-orange-600',
                     titleColor: 'text-slate-800'
                 };
@@ -105,7 +105,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                 </div>
 
                 {/* Certificate Border */}
-                <div ref={certificateRef} className={`border-[10px] border-double ${styles.border} p-8 md:p-12 h-full min-h-[600px] flex flex-col items-center justify-center text-center bg-[url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect width='20' height='20' fill='%23f8fafc'/%3E%3Crect x='0' y='0' width='10' height='10' fill='%23f1f5f9' opacity='0.4'/%3E%3Crect x='10' y='10' width='10' height='10' fill='%23f1f5f9' opacity='0.4'/%3E%3C/svg%3E')]`}>
+                <div ref={certificateRef} className={`border-[10px] border-double ${styles.border} p-8 md:p-12 h-full min-h-[600px] flex flex-col items-center justify-center text-center bg-[url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27%3E%3Crect width=%2720%27 height=%2720%27 fill=%27%23f8fafc%27/%3E%3Crect x=%270%27 y=%270%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3Crect x=%2710%27 y=%2710%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3C/svg%3E')]`}>
 
                     {/* Header */}
                     <div className="mb-8">
