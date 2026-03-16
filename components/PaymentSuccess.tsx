@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { CheckCircle, XCircle, Clock, Loader2, Home } from 'lucide-react';
 import { getPaymentByReference } from '../services/paymentService';
@@ -9,18 +9,20 @@ export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState<PaymentStatus>('loading');
   const [productName, setProductName] = useState('');
+  const statusRef = useRef(status);
+  statusRef.current = status;
 
   const reference = searchParams.get('ref');
 
   useEffect(() => {
-    async function checkPayment() {
-      if (!reference) {
-        setStatus('ERROR');
-        return;
-      }
+    if (!reference) {
+      setStatus('ERROR');
+      return;
+    }
 
+    async function checkPayment() {
       try {
-        const payment = await getPaymentByReference(reference);
+        const payment = await getPaymentByReference(reference!);
         setStatus(payment.status as PaymentStatus);
         setProductName(payment.product_name || 'Premium');
       } catch (error) {
@@ -31,15 +33,17 @@ export default function PaymentSuccess() {
 
     checkPayment();
 
-    // Poll for status updates if pending
+    // Poll for status updates only while pending
     const interval = setInterval(() => {
-      if (status === 'PENDING') {
+      if (statusRef.current === 'PENDING' || statusRef.current === 'loading') {
         checkPayment();
+      } else {
+        clearInterval(interval);
       }
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [reference, status]);
+  }, [reference]);
 
   const renderContent = () => {
     switch (status) {

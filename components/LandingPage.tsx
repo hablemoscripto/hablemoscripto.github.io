@@ -10,11 +10,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-interface LandingPageProps {
-  onNavigate?: () => void; // Optional for backward compat
-}
-
-const LandingPage: React.FC<LandingPageProps> = () => {
+const LandingPage: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -91,8 +87,7 @@ const LandingPage: React.FC<LandingPageProps> = () => {
           setNewsletterMessage('');
         }, 5000);
       }
-    } catch (error) {
-      console.error('Newsletter subscription error:', error);
+    } catch {
       setNewsletterStatus('error');
       setNewsletterMessage('Error al suscribirse. Intenta de nuevo.');
     }
@@ -135,6 +130,7 @@ const LandingPage: React.FC<LandingPageProps> = () => {
               <input
                 type="email"
                 placeholder="tu@email.com"
+                aria-label="Email para newsletter"
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 disabled={newsletterStatus === 'loading'}
@@ -151,13 +147,15 @@ const LandingPage: React.FC<LandingPageProps> = () => {
             </form>
 
             {/* Status Messages */}
-            {newsletterMessage && (
-              <p className={`text-sm mt-4 font-medium ${
-                newsletterStatus === 'success' ? 'text-green-400' : 'text-red-400'
-              }`}>
-                {newsletterMessage}
-              </p>
-            )}
+            <div aria-live="polite" aria-atomic="true">
+              {newsletterMessage && (
+                <p className={`text-sm mt-4 font-medium ${
+                  newsletterStatus === 'success' ? 'text-green-400' : 'text-red-400'
+                }`}>
+                  {newsletterMessage}
+                </p>
+              )}
+            </div>
 
             <p className="text-xs text-slate-500 mt-4">Únete a más de 500 estudiantes activos.</p>
           </div>
