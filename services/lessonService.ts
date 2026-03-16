@@ -68,7 +68,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
     // Fetch lesson basic info
     const { data: lesson, error: lessonError } = await supabase
       .from('lessons')
-      .select('*')
+      .select('id, title, duration, type, description, video_id')
       .eq('id', lessonId)
       .single();
 
@@ -80,7 +80,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
     // Fetch lesson details (sections, content)
     const { data: details, error: detailsError } = await supabase
       .from('lesson_details')
-      .select('*')
+      .select('level, number, description, video_id, sections')
       .eq('lesson_id', lessonId)
       .single();
 
@@ -91,7 +91,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
     // Fetch referrals
     const { data: referrals, error: referralsError } = await supabase
       .from('referrals')
-      .select('*')
+      .select('title, description, link, button_text, code')
       .eq('lesson_id', lessonId);
 
     if (referralsError) {

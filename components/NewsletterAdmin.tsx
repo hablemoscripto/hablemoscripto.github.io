@@ -68,7 +68,7 @@ const NewsletterAdmin: React.FC = () => {
     try {
       const { data, error } = await supabase
         .from('newsletter_subscribers')
-        .select('*')
+        .select('id, email, subscribed_at, is_active')
         .order('subscribed_at', { ascending: false });
 
       if (error) throw error;
