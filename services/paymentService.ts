@@ -47,8 +47,6 @@ export async function createPaymentWithSignature(
     },
     body: JSON.stringify({
       productType: product.type,
-      productName: product.name,
-      amountInCents: product.priceInCents,
       customerEmail,
       customerName,
     }),

@@ -24,10 +24,13 @@ function isRateLimited(userId: string): boolean {
   return entry.count > RATE_LIMIT_MAX
 }
 
+// Canonical product prices — server is the source of truth for amounts
+const PRODUCT_CATALOG: Record<string, { name: string; amountInCents: number }> = {
+  premium_lifetime: { name: 'Premium Lifetime', amountInCents: 9900000 }, // $99,000 COP
+}
+
 interface CreatePaymentRequest {
   productType: string
-  productName: string
-  amountInCents: number
   customerEmail: string
   customerName?: string
 }
@@ -60,6 +63,7 @@ serve(async (req) => {
 
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     const integritySecret = Deno.env.get('WOMPI_INTEGRITY_SECRET')!
 
@@ -72,8 +76,9 @@ serve(async (req) => {
       )
     }
 
+    // Use anon key for user auth verification (principle of least privilege)
     const supabaseClient = createClient(supabaseUrl, supabaseServiceKey)
-    const userClient = createClient(supabaseUrl, supabaseServiceKey, {
+    const userClient = createClient(supabaseUrl, supabaseAnonKey, {
       global: { headers: { Authorization: authHeader } }
     })
 
@@ -94,8 +99,19 @@ serve(async (req) => {
     }
 
     const body: CreatePaymentRequest = await req.json()
-    const { productType, productName, amountInCents, customerEmail, customerName } = body
+    const { productType, customerEmail, customerName } = body
 
+    // Validate productType against the server-side catalog
+    const product = PRODUCT_CATALOG[productType]
+    if (!product) {
+      return new Response(
+        JSON.stringify({ error: 'Tipo de producto no válido' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    const amountInCents = product.amountInCents
+    const productName = product.name
     const reference = generateReference()
     const currency = 'COP'
 
