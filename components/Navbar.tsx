@@ -63,7 +63,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               </div>
             </div>
             <div className="flex flex-col leading-tight">
-              <span className="text-xl font-heading font-extrabold text-white tracking-tighter uppercase">
+              <span className="text-xl font-heading font-extrabold text-white tracking-tighter">
                 Hablemos<span className="text-brand-500">Cripto</span>
               </span>
             </div>
@@ -166,7 +166,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                 <div className="bg-gradient-to-br from-brand-400 to-brand-600 p-2 rounded-lg">
                   <Bitcoin className="text-navy-950 h-5 w-5" />
                 </div>
-                <span className="text-lg font-heading font-extrabold text-white tracking-tighter uppercase">
+                <span className="text-lg font-heading font-extrabold text-white tracking-tighter">
                   Hablemos<span className="text-brand-500">Cripto</span>
                 </span>
               </Link>
