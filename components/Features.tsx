@@ -70,7 +70,7 @@ const Features: React.FC = () => {
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-black text-white leading-tight tracking-tighter mb-6">
                 ¿Por qué aprender con <br />
-                <span className="text-brand-500 uppercase">Hablemos Cripto?</span>
+                <span className="text-brand-500">Hablemos Cripto?</span>
               </h2>
               <p className="text-navy-300 text-lg leading-relaxed font-medium">
                 He creado el recurso que me hubiera gustado tener cuando comencé en 2017. 
