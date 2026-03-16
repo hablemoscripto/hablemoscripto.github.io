@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence } from 'framer-motion';
-import LandingPage from './components/LandingPage';
+// LandingPage is lazy-loaded like other routes for better code-splitting
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProgressProvider } from './contexts/ProgressContext';
@@ -15,6 +15,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import { Loader2 } from 'lucide-react';
 
 // Lazy-loaded route components
+const LandingPage = lazy(() => import('./components/LandingPage'));
 const EducationPage = lazy(() => import('./components/EducationPage'));
 const LessonView = lazy(() => import('./components/LessonView'));
 const LevelDetail = lazy(() => import('./components/LevelDetail'));
