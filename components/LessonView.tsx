@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, AlertTriangle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock, Users, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, LucideIcon, X, ZoomIn, ZoomOut, Move } from 'lucide-react';
 
 // Icon map for dynamic icon rendering from database
@@ -24,7 +24,7 @@ const LessonView: React.FC = () => {
     const navigate = useNavigate();
     const { isLessonCompleted, markLessonComplete, loading } = useProgress();
 
-    const id = parseInt(lessonId || '1');
+    const id = lessonId ? parseInt(lessonId) : NaN;
     const [lesson, setLesson] = useState<LessonData | null>(null);
     const [lessonLoading, setLessonLoading] = useState(true);
 
@@ -186,15 +186,27 @@ const LessonView: React.FC = () => {
         setQuizPassed(false);
     }, [id]);
 
-    // Scroll Progress Logic
+    // Clean up body overflow on unmount (in case lightbox was open)
     useEffect(() => {
+        return () => { document.body.style.overflow = ''; };
+    }, []);
+
+    // Scroll Progress Logic (throttled with rAF)
+    useEffect(() => {
+        let ticking = false;
         const handleScroll = () => {
-            const totalScroll = document.documentElement.scrollTop;
-            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scroll = windowHeight > 0 ? totalScroll / windowHeight : 0;
-            setScrollProgress(Number(scroll));
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(() => {
+                    const totalScroll = document.documentElement.scrollTop;
+                    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scroll = windowHeight > 0 ? totalScroll / windowHeight : 0;
+                    setScrollProgress(Number(scroll));
+                    ticking = false;
+                });
+            }
         };
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -368,14 +380,27 @@ const LessonView: React.FC = () => {
         setIsDragging(false);
     };
 
-    const handleWheel = (e: React.WheelEvent) => {
+    // Wheel zoom handler — attached via ref to use { passive: false }
+    const handleWheel = useCallback((e: WheelEvent) => {
         e.preventDefault();
         if (e.deltaY < 0) {
-            handleZoomIn();
+            setZoomLevel(prev => Math.min(prev + 0.5, 4));
         } else {
-            handleZoomOut();
+            setZoomLevel(prev => {
+                const newZoom = Math.max(prev - 0.5, 1);
+                if (newZoom === 1) setPanPosition({ x: 0, y: 0 });
+                return newZoom;
+            });
         }
-    };
+    }, []);
+
+    // Attach wheel listener as non-passive so preventDefault works
+    useEffect(() => {
+        const el = lightboxRef.current;
+        if (!lightboxImage || !el) return;
+        el.addEventListener('wheel', handleWheel, { passive: false });
+        return () => el.removeEventListener('wheel', handleWheel);
+    }, [lightboxImage, handleWheel]);
 
     return (
         <>
@@ -461,7 +486,6 @@ const LessonView: React.FC = () => {
                         onMouseMove={handleMouseMove}
                         onMouseUp={handleMouseUp}
                         onMouseLeave={handleMouseUp}
-                        onWheel={handleWheel}
                     >
                         <img
                             src={lightboxImage.src}
