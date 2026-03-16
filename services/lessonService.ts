@@ -68,7 +68,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
     // Fetch lesson basic info
     const { data: lesson, error: lessonError } = await supabase
       .from('lessons')
-      .select('*')
+      .select('id, title, duration, type, description')
       .eq('id', lessonId)
       .single();
 
@@ -80,7 +80,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
     // Fetch lesson details (sections, content)
     const { data: details, error: detailsError } = await supabase
       .from('lesson_details')
-      .select('*')
+      .select('level, number, description, sections')
       .eq('lesson_id', lessonId)
       .single();
 
@@ -91,7 +91,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
     // Fetch referrals
     const { data: referrals, error: referralsError } = await supabase
       .from('referrals')
-      .select('*')
+      .select('title, description, link, button_text, code')
       .eq('lesson_id', lessonId);
 
     if (referralsError) {
@@ -159,7 +159,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
       duration: lesson.duration,
       type: lesson.type,
       description: details?.description || lesson.description,
-      videoId: details?.video_id || lesson.video_id, // Map from DB
+      videoId: undefined, // video_id column not in schema; videoId from courseData is not seeded
       sections: details?.sections || [],
       referrals: referrals?.map((ref: any) => ({
         title: ref.title,

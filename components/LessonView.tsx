@@ -658,7 +658,7 @@ const LessonView: React.FC = () => {
                                                 <h2 className="text-2xl font-bold text-white mb-4">{section.title}</h2>
                                             )}
 
-                                            {section.type === 'intro' && (
+                                            {section.type === 'intro' && section.content && (
                                                 <div className="text-lg text-slate-300 leading-relaxed font-medium border-l-4 border-brand-500 pl-4">
                                                     <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{section.content}</ReactMarkdown>
                                                 </div>
@@ -712,7 +712,7 @@ const LessonView: React.FC = () => {
                                                 </div>
                                             )}
 
-                                            {section.type === 'main' && (
+                                            {section.type === 'main' && section.content && (
                                                 <div className="text-slate-300 leading-relaxed">
                                                     <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{section.content}</ReactMarkdown>
                                                 </div>

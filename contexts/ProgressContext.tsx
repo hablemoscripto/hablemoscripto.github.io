@@ -47,7 +47,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       setLoading(true);
       const { data, error } = await supabase
         .from('user_progress')
-        .select('*')
+        .select('lesson_id, completed, quiz_score, completed_at')
         .eq('user_id', user.id);
 
       if (error) {
