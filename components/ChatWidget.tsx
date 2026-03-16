@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Sparkles, Loader2 } from 'lucide-react';
 import { streamGeminiResponse, ChatMessage } from '../services/geminiService';
 import ReactMarkdown from 'react-markdown';
+import rehypeSanitize from 'rehype-sanitize';
 
 const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -70,12 +71,11 @@ const ChatWidget: React.FC = () => {
         (chunk) => {
           fullResponse = chunk;
           setMessages(prev => {
-            const newHistory = [...prev];
-            const lastMsg = newHistory[newHistory.length - 1];
+            const lastMsg = prev[prev.length - 1];
             if (lastMsg.role === 'model') {
-              lastMsg.text = fullResponse;
+              return [...prev.slice(0, -1), { ...lastMsg, text: fullResponse }];
             }
-            return newHistory;
+            return prev;
           });
         }
       );
@@ -131,7 +131,7 @@ const ChatWidget: React.FC = () => {
                 >
                   {msg.role === 'model' ? (
                      <div className="prose prose-invert prose-sm max-w-none">
-                        {msg.text ? <ReactMarkdown>{msg.text}</ReactMarkdown> : <span className="flex items-center gap-1 text-slate-400"><Loader2 size={14} className="animate-spin" /> Pensando...</span>}
+                        {msg.text ? <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{msg.text}</ReactMarkdown> : <span className="flex items-center gap-1 text-slate-400"><Loader2 size={14} className="animate-spin" /> Pensando...</span>}
                      </div>
                   ) : (
                     msg.text

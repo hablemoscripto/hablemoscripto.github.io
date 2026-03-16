@@ -9,6 +9,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   CheckCircle, Clock, BookOpen, Award
 };
 import ReactMarkdown from 'react-markdown';
+import rehypeSanitize from 'rehype-sanitize';
 import VideoPlayer from './ui/VideoPlayer';
 import { useProgress } from '../contexts/ProgressContext';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -635,7 +636,7 @@ const LessonView: React.FC = () => {
 
                                             {section.type === 'intro' && (
                                                 <div className="text-lg text-slate-300 leading-relaxed font-medium border-l-4 border-brand-500 pl-4">
-                                                    <ReactMarkdown>{section.content}</ReactMarkdown>
+                                                    <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{section.content}</ReactMarkdown>
                                                 </div>
                                             )}
 
@@ -689,7 +690,7 @@ const LessonView: React.FC = () => {
 
                                             {section.type === 'main' && (
                                                 <div className="text-slate-300 leading-relaxed">
-                                                    <ReactMarkdown>{section.content}</ReactMarkdown>
+                                                    <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{section.content}</ReactMarkdown>
                                                 </div>
                                             )}
 
