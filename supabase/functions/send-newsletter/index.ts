@@ -1,9 +1,32 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
+const ALLOWED_ORIGIN = 'https://hablemoscripto.io'
+
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
+
+// Simple HTML sanitizer — strip all tags except a safe subset
+function sanitizeHtml(html: string): string {
+  const ALLOWED_TAGS = ['p', 'br', 'b', 'strong', 'i', 'em', 'u', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'code', 'pre', 'hr', 'img', 'span', 'div']
+  const ALLOWED_ATTRS = ['href', 'src', 'alt', 'style', 'class', 'target', 'rel']
+  const tagPattern = /<\/?([a-z][a-z0-9]*)\b([^>]*)>/gi
+  return html.replace(tagPattern, (match, tag, attrs) => {
+    const lowerTag = tag.toLowerCase()
+    if (!ALLOWED_TAGS.includes(lowerTag)) return ''
+    // Filter attributes
+    const cleanAttrs = (attrs as string).replace(/([a-z-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi, (attrMatch, name, val1, val2) => {
+      const attrName = name.toLowerCase()
+      const attrVal = val1 ?? val2 ?? ''
+      if (!ALLOWED_ATTRS.includes(attrName)) return ''
+      // Block javascript: URLs
+      if ((attrName === 'href' || attrName === 'src') && attrVal.trim().toLowerCase().startsWith('javascript:')) return ''
+      return attrMatch
+    })
+    return `<${match.startsWith('</') ? '/' : ''}${lowerTag}${cleanAttrs}>`
+  })
 }
 
 interface SendNewsletterRequest {
@@ -12,8 +35,22 @@ interface SendNewsletterRequest {
   emails: string[]
 }
 
-function buildEmailHtml(content: string, recipientEmail: string, siteUrl: string): string {
-  const unsubscribeUrl = `${siteUrl}/unsubscribe?email=${encodeURIComponent(recipientEmail)}`
+async function generateHmac(email: string, secret: string): Promise<string> {
+  const encoder = new TextEncoder()
+  const key = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  )
+  const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(email))
+  return Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('')
+}
+
+async function buildEmailHtml(content: string, recipientEmail: string, siteUrl: string, hmacSecret: string): Promise<string> {
+  const token = await generateHmac(recipientEmail, hmacSecret)
+  const unsubscribeUrl = `${siteUrl}/unsubscribe?email=${encodeURIComponent(recipientEmail)}&token=${token}`
   return `<!DOCTYPE html>
 <html>
   <head>
@@ -96,6 +133,7 @@ serve(async (req) => {
 
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     const resendApiKey = Deno.env.get('RESEND_API_KEY')!
 
@@ -108,8 +146,9 @@ serve(async (req) => {
       )
     }
 
+    // Use anon key for user auth verification (principle of least privilege)
     const supabaseClient = createClient(supabaseUrl, supabaseServiceKey)
-    const userClient = createClient(supabaseUrl, supabaseServiceKey, {
+    const userClient = createClient(supabaseUrl, supabaseAnonKey, {
       global: { headers: { Authorization: authHeader } }
     })
 
@@ -149,9 +188,15 @@ serve(async (req) => {
     let sent = 0
     const errors: string[] = []
 
+    // Sanitize content before embedding in HTML template
+    const sanitizedContent = sanitizeHtml(content)
+
+    // Use the events secret as HMAC key for unsubscribe tokens
+    const hmacSecret = Deno.env.get('WOMPI_EVENTS_SECRET') || supabaseServiceKey
+
     // Send individual emails via Resend REST API
     for (const email of emails) {
-      const html = buildEmailHtml(content, email, siteUrl)
+      const html = await buildEmailHtml(sanitizedContent, email, siteUrl, hmacSecret)
 
       const resendResponse = await fetch('https://api.resend.com/emails', {
         method: 'POST',

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bitcoin, Menu, X, BarChart3, ChevronDown, LogOut, BookOpen, Zap, Trophy } from 'lucide-react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useGamification } from '../contexts/GamificationContext';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -13,6 +13,12 @@ interface EducationNavbarProps {
 const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpenProgress, currentView }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
   const { xp, level, streak } = useGamification();
   const { signOut } = useAuth();
 

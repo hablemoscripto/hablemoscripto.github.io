@@ -1,8 +1,10 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
+const ALLOWED_ORIGIN = 'https://hablemoscripto.io'
+
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
@@ -100,6 +102,24 @@ serve(async (req) => {
       )
     }
 
+    // Input length validation to prevent token abuse
+    const MAX_MESSAGE_LENGTH = 4000
+    const MAX_HISTORY_ENTRIES = 50
+
+    if (message.length > MAX_MESSAGE_LENGTH) {
+      return new Response(
+        JSON.stringify({ error: 'El mensaje es demasiado largo. Máximo 4000 caracteres.' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    if (history && history.length > MAX_HISTORY_ENTRIES) {
+      return new Response(
+        JSON.stringify({ error: 'Historial de chat demasiado largo.' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
     // Build Gemini API request
     const contents = [
       ...(history || []).map((msg: ChatMessage) => ({
@@ -111,6 +131,9 @@ serve(async (req) => {
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent?alt=sse&key=${geminiApiKey}`
 
+    const abortController = new AbortController()
+    const timeout = setTimeout(() => abortController.abort(), 30_000)
+
     const geminiResponse = await fetch(geminiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -118,7 +141,10 @@ serve(async (req) => {
         system_instruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
         contents,
       }),
+      signal: abortController.signal,
     })
+
+    clearTimeout(timeout)
 
     if (!geminiResponse.ok) {
       const errText = await geminiResponse.text()

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Mail, Lock, User, Loader2, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -20,6 +20,19 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
   const [loading, setLoading] = useState(false);
 
   const { signIn, signUp, signInWithGoogle, resetPassword, resendVerification } = useAuth();
+
+  // Reset form state when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setView('login');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setError('');
+      setSuccess('');
+      setLoading(false);
+    }
+  }, [isOpen]);
 
   const handleGoogleSignIn = async () => {
     setError('');
@@ -145,7 +158,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center" role="dialog" aria-modal="true" aria-label={view === 'login' ? 'Iniciar sesión' : view === 'signup' ? 'Crear cuenta' : view === 'forgot-password' ? 'Restablecer contraseña' : 'Verificar email'}>
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/70 backdrop-blur-sm"

@@ -22,18 +22,24 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
   useEffect(() => {
     const currentWord = WORDS[textIndex % WORDS.length];
 
+    // If word is complete, wait before starting delete
+    if (!isDeleting && displayText === currentWord) {
+      const pauseTimer = setTimeout(() => setIsDeleting(true), PAUSE_TIME);
+      return () => clearTimeout(pauseTimer);
+    }
+
+    // If deleted fully, move to next word
+    if (isDeleting && displayText === '') {
+      setIsDeleting(false);
+      setTextIndex((prev) => prev + 1);
+      return;
+    }
+
     const timer = setTimeout(() => {
       if (isDeleting) {
         setDisplayText(currentWord.substring(0, displayText.length - 1));
       } else {
         setDisplayText(currentWord.substring(0, displayText.length + 1));
-      }
-
-      if (!isDeleting && displayText === currentWord) {
-        setTimeout(() => setIsDeleting(true), PAUSE_TIME);
-      } else if (isDeleting && displayText === '') {
-        setIsDeleting(false);
-        setTextIndex((prev) => prev + 1);
       }
     }, isDeleting ? DELETING_SPEED : TYPING_SPEED);
 
@@ -124,9 +130,10 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
                 <span>COMENZAR CURSO</span>
               </button>
               
-              <a 
-                href="https://discord.gg/W8haa7dDV3" 
+              <a
+                href="https://discord.gg/W8haa7dDV3"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto px-10 py-5 bg-navy-900 text-white font-bold rounded-2xl border border-white/5 hover:border-brand-500/30 hover:bg-navy-800 transition-all flex items-center justify-center gap-3 group text-lg"
               >
                 <Users size={24} className="text-navy-400 group-hover:text-brand-500 transition-colors" />

@@ -447,7 +447,7 @@ const ProgressRow = ({ label, current, total, color }: { label: string, current:
     <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
       <div
         className={`h-full ${color} transition-all duration-500`}
-        style={{ width: `${(current / total) * 100}%` }}
+        style={{ width: `${total > 0 ? (current / total) * 100 : 0}%` }}
       ></div>
     </div>
   </div>

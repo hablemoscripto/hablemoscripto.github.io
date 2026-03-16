@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
 import { useGamification } from './GamificationContext';
@@ -84,14 +84,14 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const isLessonCompleted = (lessonId: number): boolean => {
+  const isLessonCompleted = useCallback((lessonId: number): boolean => {
     return progress.some((p) => p.lessonId === lessonId && p.completed);
-  };
+  }, [progress]);
 
-  const getQuizScore = (lessonId: number): number | null => {
+  const getQuizScore = useCallback((lessonId: number): number | null => {
     const lesson = progress.find((p) => p.lessonId === lessonId);
     return lesson?.quizScore ?? null;
-  };
+  }, [progress]);
 
   const markLessonComplete = async (lessonId: number, quizScore?: number) => {
     if (!user) return;
@@ -175,21 +175,21 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const getCompletedCount = (): number => {
+  const getCompletedCount = useCallback((): number => {
     return progress.filter((p) => p.completed).length;
-  };
+  }, [progress]);
 
-  const getTotalLessons = (): number => {
+  const getTotalLessons = useCallback((): number => {
     return getAllLessonsOrdered().length;
-  };
+  }, []);
 
-  const getProgressPercentage = (): number => {
+  const getProgressPercentage = useCallback((): number => {
     const total = getTotalLessons();
     if (total === 0) return 0;
     return Math.round((getCompletedCount() / total) * 100);
-  };
+  }, [getCompletedCount, getTotalLessons]);
 
-  const value = {
+  const value = useMemo(() => ({
     progress,
     loading,
     isLessonCompleted,
@@ -198,7 +198,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     getCompletedCount,
     getTotalLessons,
     getProgressPercentage,
-  };
+  }), [progress, loading, isLessonCompleted, getQuizScore, markLessonComplete, getCompletedCount, getTotalLessons, getProgressPercentage]);
 
   return <ProgressContext.Provider value={value}>{children}</ProgressContext.Provider>;
 }

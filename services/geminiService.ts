@@ -14,7 +14,7 @@ export const streamGeminiResponse = async (
 
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
+    if (!session?.access_token) {
       const errorMsg = "Debes iniciar sesión para usar el chat.";
       onChunk(errorMsg);
       return errorMsg;

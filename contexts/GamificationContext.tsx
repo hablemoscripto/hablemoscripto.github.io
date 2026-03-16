@@ -251,11 +251,21 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
         localStorage.setItem(`gamification_${user.id}`, JSON.stringify(stats));
     };
 
-    const addXp = async (amount: number) => {
-        const newXp = xp + amount;
-        setXp(newXp);
-        saveStats(newXp, streak, achievements);
-    };
+    const addXp = useCallback(async (amount: number) => {
+        setXp(prev => {
+            const newXp = prev + amount;
+            // Defer save to after state update
+            requestAnimationFrame(() => {
+                if (user) {
+                    const localStats = localStorage.getItem(`gamification_${user.id}`);
+                    const stats = localStats ? JSON.parse(localStats) : {};
+                    stats.xp = newXp;
+                    localStorage.setItem(`gamification_${user.id}`, JSON.stringify(stats));
+                }
+            });
+            return newXp;
+        });
+    }, [user]);
 
     const checkAchievements = useCallback((progressData: ProgressSnapshot, silent?: boolean) => {
         setAchievements(prev => {

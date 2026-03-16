@@ -45,6 +45,7 @@ async function verifySignature(
     const keys = prop.split('.')
     let value: any = { transaction }
     for (const key of keys) {
+      if (value == null) return ''
       value = value[key]
     }
     return value
@@ -98,6 +99,21 @@ serve(async (req) => {
     }
 
     const { transaction } = event.data
+
+    // Idempotency check: skip if payment already has this status
+    const { data: existingPayment } = await supabase
+      .from('payments')
+      .select('status')
+      .eq('wompi_reference', transaction.reference)
+      .single()
+
+    if (existingPayment?.status === transaction.status) {
+      console.log('Duplicate event — payment already has status:', transaction.status)
+      return new Response(
+        JSON.stringify({ success: true, message: 'Already processed' }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
 
     // Update payment in database
     const { data: payment, error: paymentError } = await supabase

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import Features from './Features';
@@ -9,11 +10,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-interface LandingPageProps {
-  onNavigate?: () => void; // Optional for backward compat
-}
-
-const LandingPage: React.FC<LandingPageProps> = () => {
+const LandingPage: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -90,8 +87,7 @@ const LandingPage: React.FC<LandingPageProps> = () => {
           setNewsletterMessage('');
         }, 5000);
       }
-    } catch (error) {
-      console.error('Newsletter subscription error:', error);
+    } catch {
       setNewsletterStatus('error');
       setNewsletterMessage('Error al suscribirse. Intenta de nuevo.');
     }
@@ -104,6 +100,21 @@ const LandingPage: React.FC<LandingPageProps> = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
+      <Helmet>
+        <title>Hablemos Cripto — Aprende Bitcoin y Criptomonedas desde Cero</title>
+        <meta name="description" content="Plataforma educativa de criptomonedas en español para Latinoamérica. Aprende Bitcoin, blockchain, DeFi y trading con cursos estructurados, quizzes y asistente IA." />
+        <meta property="og:title" content="Hablemos Cripto — Aprende Bitcoin y Criptomonedas desde Cero" />
+        <meta property="og:description" content="Plataforma educativa de criptomonedas en español para Latinoamérica. Aprende Bitcoin, blockchain, DeFi y trading con cursos estructurados." />
+        <meta property="og:image" content="https://hablemoscripto.io/images/og-cover.png" />
+        <meta property="og:url" content="https://hablemoscripto.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="es_LA" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Hablemos Cripto — Aprende Bitcoin y Criptomonedas desde Cero" />
+        <meta name="twitter:description" content="Plataforma educativa de criptomonedas en español para Latinoamérica." />
+        <meta name="twitter:image" content="https://hablemoscripto.io/images/og-cover.png" />
+        <link rel="canonical" href="https://hablemoscripto.io" />
+      </Helmet>
       <Navbar />
       <main>
         <Hero onStartLearning={handleNavigateToEducation} />
@@ -119,6 +130,7 @@ const LandingPage: React.FC<LandingPageProps> = () => {
               <input
                 type="email"
                 placeholder="tu@email.com"
+                aria-label="Email para newsletter"
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 disabled={newsletterStatus === 'loading'}
@@ -135,13 +147,15 @@ const LandingPage: React.FC<LandingPageProps> = () => {
             </form>
 
             {/* Status Messages */}
-            {newsletterMessage && (
-              <p className={`text-sm mt-4 font-medium ${
-                newsletterStatus === 'success' ? 'text-green-400' : 'text-red-400'
-              }`}>
-                {newsletterMessage}
-              </p>
-            )}
+            <div aria-live="polite" aria-atomic="true">
+              {newsletterMessage && (
+                <p className={`text-sm mt-4 font-medium ${
+                  newsletterStatus === 'success' ? 'text-green-400' : 'text-red-400'
+                }`}>
+                  {newsletterMessage}
+                </p>
+              )}
+            </div>
 
             <p className="text-xs text-slate-500 mt-4">Únete a más de 500 estudiantes activos.</p>
           </div>
