@@ -50,11 +50,11 @@ import {
 dotenv.config({ path: '.env.local' });
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
-const supabaseServiceKey = process.env.VITE_SUPABASE_SERVICE_KEY;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
 
 if (!supabaseUrl || !supabaseServiceKey) {
   throw new Error(
-    'Supabase credentials not found. Make sure to create a .env.local file with VITE_SUPABASE_URL and VITE_SUPABASE_SERVICE_KEY.'
+    'Supabase credentials not found. Make sure to create a .env.local file with VITE_SUPABASE_URL and SUPABASE_SERVICE_KEY.'
   );
 }
 
