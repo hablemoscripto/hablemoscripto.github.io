@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X, Bitcoin, ExternalLink, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-interface NavbarProps {
-  onNavigateEducation?: () => void; // Optional now, kept for backward compat if needed
-}
-
-const Navbar: React.FC<NavbarProps> = () => {
+const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -24,19 +20,42 @@ const Navbar: React.FC<NavbarProps> = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleScrollToSection = (sectionId: string) => {
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  const handleScrollToSection = useCallback((sectionId: string) => {
     setIsMobileMenuOpen(false);
     if (location.pathname !== '/') {
       navigate('/');
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) element.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      // Use requestAnimationFrame to wait for DOM update after navigation
+      const waitForElement = (attempts = 0) => {
+        requestAnimationFrame(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          } else if (attempts < 10) {
+            waitForElement(attempts + 1);
+          }
+        });
+      };
+      waitForElement();
     } else {
       const element = document.getElementById(sectionId);
       if (element) element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, [location.pathname, navigate]);
 
   const navLinks = [
     { name: 'Inicio', action: () => handleScrollToSection('home') },
@@ -132,6 +151,9 @@ const Navbar: React.FC<NavbarProps> = () => {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden text-slate-300 hover:text-white z-50"
+            aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -150,6 +172,10 @@ const Navbar: React.FC<NavbarProps> = () => {
 
           {/* Menu panel */}
           <div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menú de navegación"
             className="fixed inset-0 md:hidden overflow-y-auto"
             style={{
               zIndex: 99999,
