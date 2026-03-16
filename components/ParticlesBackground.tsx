@@ -126,11 +126,8 @@ const ParticlesBackground: React.FC = memo(() => {
     });
   }, []);
 
-  const particlesLoaded = useCallback(async (container?: Container) => {
+  const particlesLoaded = useCallback(async (_container?: Container) => {
     // Particles loaded successfully
-    if (container) {
-      console.debug('Particles container loaded');
-    }
   }, []);
 
   if (!init) return null;

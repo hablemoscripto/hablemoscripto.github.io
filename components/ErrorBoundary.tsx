@@ -23,6 +23,10 @@ class ErrorBoundary extends Component<Props, State> {
         console.error('ErrorBoundary caught:', error, errorInfo);
     }
 
+    handleRetry = () => {
+        this.setState({ hasError: false, error: null });
+    };
+
     render() {
         if (this.state.hasError) {
             return (
@@ -35,14 +39,22 @@ class ErrorBoundary extends Component<Props, State> {
                             Algo salió mal
                         </h1>
                         <p className="text-slate-400 mb-8 leading-relaxed">
-                            Ocurrió un error inesperado. Por favor, intenta recargar la página.
+                            Ocurrió un error inesperado. Por favor, intenta de nuevo.
                         </p>
-                        <button
-                            onClick={() => { window.location.href = '/'; }}
-                            className="px-6 py-3 bg-brand-500 hover:bg-brand-400 text-slate-900 font-bold rounded-xl transition-colors"
-                        >
-                            Volver al inicio
-                        </button>
+                        <div className="flex gap-4 justify-center">
+                            <button
+                                onClick={this.handleRetry}
+                                className="px-6 py-3 bg-brand-500 hover:bg-brand-400 text-slate-900 font-bold rounded-xl transition-colors"
+                            >
+                                Intentar de nuevo
+                            </button>
+                            <button
+                                onClick={() => { window.location.href = '/'; }}
+                                className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-colors border border-white/10"
+                            >
+                                Volver al inicio
+                            </button>
+                        </div>
                     </div>
                 </div>
             );
