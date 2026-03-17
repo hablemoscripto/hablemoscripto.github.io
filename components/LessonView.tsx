@@ -227,6 +227,28 @@ const LessonView: React.FC = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [lightboxImage]);
 
+    // Wheel zoom handler — attached via ref to use { passive: false }
+    const handleWheel = useCallback((e: WheelEvent) => {
+        e.preventDefault();
+        if (e.deltaY < 0) {
+            setZoomLevel(prev => Math.min(prev + 0.5, 4));
+        } else {
+            setZoomLevel(prev => {
+                const newZoom = Math.max(prev - 0.5, 1);
+                if (newZoom === 1) setPanPosition({ x: 0, y: 0 });
+                return newZoom;
+            });
+        }
+    }, []);
+
+    // Attach wheel listener as non-passive so preventDefault works
+    useEffect(() => {
+        const el = lightboxRef.current;
+        if (!lightboxImage || !el) return;
+        el.addEventListener('wheel', handleWheel, { passive: false });
+        return () => el.removeEventListener('wheel', handleWheel);
+    }, [lightboxImage, handleWheel]);
+
     if (lessonLoading) {
         return (
             <div className="min-h-screen bg-navy-950 pb-20 animate-pulse">
@@ -379,28 +401,6 @@ const LessonView: React.FC = () => {
     const handleMouseUp = () => {
         setIsDragging(false);
     };
-
-    // Wheel zoom handler — attached via ref to use { passive: false }
-    const handleWheel = useCallback((e: WheelEvent) => {
-        e.preventDefault();
-        if (e.deltaY < 0) {
-            setZoomLevel(prev => Math.min(prev + 0.5, 4));
-        } else {
-            setZoomLevel(prev => {
-                const newZoom = Math.max(prev - 0.5, 1);
-                if (newZoom === 1) setPanPosition({ x: 0, y: 0 });
-                return newZoom;
-            });
-        }
-    }, []);
-
-    // Attach wheel listener as non-passive so preventDefault works
-    useEffect(() => {
-        const el = lightboxRef.current;
-        if (!lightboxImage || !el) return;
-        el.addEventListener('wheel', handleWheel, { passive: false });
-        return () => el.removeEventListener('wheel', handleWheel);
-    }, [lightboxImage, handleWheel]);
 
     return (
         <>

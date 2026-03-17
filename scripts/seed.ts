@@ -113,10 +113,12 @@ function serializeSections(sections: any[]): any[] {
     const serialized: any = { ...section };
 
     // Convert features icons to string names
+    // Lucide React icons are objects (React.memo/forwardRef), not functions,
+    // so we check for non-string values and resolve via reference equality
     if (section.features) {
       serialized.features = section.features.map((feature: any) => ({
         ...feature,
-        icon: typeof feature.icon === 'function' ? getIconName(feature.icon) : feature.icon
+        icon: typeof feature.icon === 'string' ? feature.icon : (getIconName(feature.icon) || null)
       }));
     }
 
