@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
 import {
@@ -359,14 +359,16 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
         setPendingToasts(prev => prev.filter(t => t.id !== id));
     }, []);
 
+    const value = useMemo(() => ({
+        xp, level, streak, achievements,
+        achievementDefinitions: ACHIEVEMENT_DEFINITIONS,
+        pendingToasts,
+        addXp, checkAchievements, dismissToast,
+        loading,
+    }), [xp, level, streak, achievements, pendingToasts, addXp, checkAchievements, dismissToast, loading]);
+
     return (
-        <GamificationContext.Provider value={{
-            xp, level, streak, achievements,
-            achievementDefinitions: ACHIEVEMENT_DEFINITIONS,
-            pendingToasts,
-            addXp, checkAchievements, dismissToast,
-            loading,
-        }}>
+        <GamificationContext.Provider value={value}>
             {children}
         </GamificationContext.Provider>
     );

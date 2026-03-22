@@ -72,22 +72,34 @@ const ChatWidget: React.FC = () => {
         ? []
         : messages;
 
+      let frameId = 0;
       await streamGeminiResponse(
         apiHistory,
         userMessage.text,
         (chunk) => {
-          fullResponse = chunk;
-          setMessages(prev => {
-            const lastMsg = prev[prev.length - 1];
-            if (lastMsg.role === 'model') {
-              return [...prev.slice(0, -1), { ...lastMsg, text: fullResponse }];
-            }
-            return prev;
+          cancelAnimationFrame(frameId);
+          frameId = requestAnimationFrame(() => {
+            setMessages(prev => {
+              const updated = [...prev];
+              const last = updated[updated.length - 1];
+              if (last?.role === 'model') {
+                updated[updated.length - 1] = { ...last, text: chunk };
+              }
+              return updated;
+            });
           });
         }
       );
     } catch (error) {
-      console.error(error);
+      const errorMessage = error instanceof Error ? error.message : 'Ocurrió un error. Intenta de nuevo.';
+      setMessages(prev => {
+        const updated = [...prev];
+        const last = updated[updated.length - 1];
+        if (last?.role === 'model' && !last.text) {
+          updated[updated.length - 1] = { ...last, text: `⚠️ ${errorMessage}` };
+        }
+        return updated;
+      });
     } finally {
       setIsLoading(false);
     }

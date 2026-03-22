@@ -1,4 +1,5 @@
 import { supabase } from '../lib/supabase';
+import { reportError } from '../utils/errorReporting';
 
 export interface Product {
   id: string;
@@ -69,7 +70,7 @@ export async function getPaymentByReference(reference: string) {
     .single();
 
   if (error) {
-    console.error('Error getting payment:', error);
+    reportError(error, { component: 'paymentService', action: 'getPaymentByReference' });
     throw error;
   }
 
@@ -88,7 +89,7 @@ export async function getUserPremiumStatus(userId: string) {
     if (error.code === 'PGRST116') {
       return { isPremium: false };
     }
-    console.error('Error getting premium status:', error);
+    reportError(error, { component: 'paymentService', action: 'getUserPremiumStatus' });
     throw error;
   }
 

@@ -89,7 +89,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
         <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
             
             {/* Tagline */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy-900/50 border border-white/5 text-brand-400 text-xs font-bold uppercase tracking-[0.2em] mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy-900/70 border border-white/5 text-brand-400 text-xs font-bold uppercase tracking-[0.2em] mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                <Zap size={14} />
                La nueva era del aprendizaje cripto
             </div>

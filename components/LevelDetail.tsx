@@ -65,7 +65,13 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
             {/* Modules List */}
             <div className="container max-w-5xl mx-auto px-6 py-12">
                 <div className="space-y-8">
-                    {levelData.modules.map((module, moduleIdx) => (
+                    {(() => {
+                        let runningLessonIndex = 0;
+                        return levelData.modules.map((module, moduleIdx) => {
+                            let firstAvailableFound = false;
+                            const moduleStartIndex = runningLessonIndex;
+
+                            return (
                         <div key={module.id} className="animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: `${moduleIdx * 100}ms` }}>
                             <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
                                 <span className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-sm text-slate-400 border border-slate-700">
@@ -76,12 +82,19 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
 
                             <div className="grid gap-4">
                                 {module.lessons.map((lesson, lessonIdx) => {
+                                    const lessonIndex = moduleStartIndex + lessonIdx;
+                                    runningLessonIndex = lessonIndex + 1;
+
                                     const isCompleted = isLessonCompleted(lesson.id);
 
                                     // Check if previous lesson is completed (sequential locking)
                                     const prevId = getPreviousLessonId(lesson.id);
                                     const isPreviousCompleted = prevId === null || isLessonCompleted(prevId);
                                     const isLocked = !isPreviousCompleted && !isLessonCompleted(lesson.id);
+
+                                    // Determine if this is the first available (not locked, not completed) lesson in the module
+                                    const isFirstAvailable = !isLocked && !isCompleted && !firstAvailableFound;
+                                    if (isFirstAvailable) firstAvailableFound = true;
 
                                     return (
                                         <button
@@ -105,16 +118,24 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                                             </div>
 
                                             <div className="flex-1">
-                                                <h4 className={`font-bold mb-1 transition-colors ${
-                                                    isCompleted
-                                                        ? 'text-slate-300'
-                                                        : isLocked
-                                                        ? 'text-slate-600'
-                                                        : 'text-white group-hover:text-brand-400'
-                                                }`}>
-                                                    {lesson.title}
-                                                </h4>
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <h4 className={`font-bold transition-colors ${
+                                                        isCompleted
+                                                            ? 'text-slate-300'
+                                                            : isLocked
+                                                            ? 'text-slate-600'
+                                                            : 'text-white group-hover:text-brand-400'
+                                                    }`}>
+                                                        {lesson.title}
+                                                    </h4>
+                                                    {isFirstAvailable && (
+                                                        <span className="px-2 py-0.5 bg-brand-500/10 text-brand-400 text-[10px] font-bold rounded-full border border-brand-500/20">
+                                                            Comienza aquí
+                                                        </span>
+                                                    )}
+                                                </div>
                                                 <div className={`flex items-center gap-4 text-xs ${isLocked ? 'text-slate-700' : 'text-slate-500'}`}>
+                                                    <span>Lección {lessonIndex + 1} de {totalLessons}</span>
                                                     <span className="flex items-center gap-1"><Clock size={12} /> {lesson.duration}</span>
                                                     {isLocked && prevId ? (
                                                         <span className="text-slate-600">
@@ -134,7 +155,9 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                                 })}
                             </div>
                         </div>
-                    ))}
+                            );
+                        });
+                    })()}
                 </div>
             </div>
         </div>

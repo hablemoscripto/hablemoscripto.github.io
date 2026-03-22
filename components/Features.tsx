@@ -85,7 +85,7 @@ const Features: React.FC = () => {
                 { icon: Zap, title: "Claridad Total", text: "Conceptos complejos explicados de forma sencilla.", color: "text-brand-500" },
                 { icon: Compass, title: "Hoja de Ruta", text: "Estrategias probadas y aplicables de inmediato.", color: "text-brand-300" }
               ].map((item, i) => (
-                <div key={i} className="group flex flex-col gap-4 p-6 rounded-2xl bg-navy-900/50 border border-white/5 hover:border-brand-500/30 hover:bg-navy-900 transition-all duration-300 shadow-glass">
+                <div key={i} className="group flex flex-col gap-4 p-6 rounded-2xl bg-navy-900/50 border border-white/5 hover:border-brand-500/30 hover:bg-navy-900 hover:scale-[1.02] transition-all duration-300 shadow-glass">
                   <div className={`w-12 h-12 rounded-xl bg-navy-950 border border-white/5 flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform`}>
                     <item.icon size={24} />
                   </div>

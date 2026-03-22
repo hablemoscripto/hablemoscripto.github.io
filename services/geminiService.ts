@@ -1,4 +1,5 @@
 import { supabase } from '../lib/supabase';
+import { reportError } from '../utils/errorReporting';
 
 export interface ChatMessage {
   role: 'user' | 'model';
@@ -32,6 +33,10 @@ export const streamGeminiResponse = async (
         message: newMessage,
       }),
     });
+
+    if (response.status === 429) {
+      throw new Error('Has enviado muchos mensajes. Espera un momento e intenta de nuevo.');
+    }
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({ error: 'Unknown error' }));
@@ -71,9 +76,7 @@ export const streamGeminiResponse = async (
 
     return fullText || 'No se recibió respuesta.';
   } catch (error) {
-    console.error("Error calling Gemini chat:", error);
-    const errorMessage = "Lo siento, tuve un problema conectando con la red. Intenta de nuevo.";
-    onChunk(errorMessage);
-    return errorMessage;
+    reportError(error, { component: 'geminiService', action: 'streamGeminiResponse' });
+    throw error;
   }
 };

@@ -1,5 +1,6 @@
 import { supabase } from '../lib/supabase';
 import type { QuestionType, Question } from '../components/education/types';
+import { reportError } from '../utils/errorReporting';
 
 export interface QuizQuestion {
   id: string;
@@ -73,7 +74,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
       .single();
 
     if (lessonError || !lesson) {
-      console.error('Error fetching lesson:', lessonError);
+      reportError(lessonError, { component: 'lessonService', action: 'fetchLessonById' });
       return null;
     }
 
@@ -85,7 +86,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
       .single();
 
     if (detailsError) {
-      console.error('Error fetching lesson details:', detailsError);
+      reportError(detailsError, { component: 'lessonService', action: 'fetchLessonDetails' });
     }
 
     // Fetch referrals
@@ -95,7 +96,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
       .eq('lesson_id', lessonId);
 
     if (referralsError) {
-      console.error('Error fetching referrals:', referralsError);
+      reportError(referralsError, { component: 'lessonService', action: 'fetchReferrals' });
     }
 
     // Fetch quiz - use basic fields that exist in current schema
@@ -117,7 +118,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
       .single();
 
     if (quizError && quizError.code !== 'PGRST116') { // Ignore "not found" errors
-      console.error('Error fetching quiz:', quizError);
+      reportError(quizError, { component: 'lessonService', action: 'fetchQuiz' });
     }
 
     // Checkpoint quizzes are optional - only fetch if table exists
@@ -226,7 +227,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
 
     return lessonData;
   } catch (error) {
-    console.error('Unexpected error fetching lesson:', error);
+    reportError(error, { component: 'lessonService', action: 'fetchLessonById' });
     return null;
   }
 }
@@ -241,7 +242,7 @@ export async function fetchAllLessons() {
     .order('id');
 
   if (error) {
-    console.error('Error fetching all lessons:', error);
+    reportError(error, { component: 'lessonService', action: 'fetchAllLessons' });
     return {};
   }
 

@@ -604,6 +604,15 @@ const Quiz: React.FC<QuizProps> = ({
                     </span>
                     <div className="flex-1">
                         <p className="font-medium text-white text-lg leading-relaxed">{q.question}</p>
+                        {q.type === 'multiple-select' && !submitted && (
+                            <p className="text-sm text-slate-500 mt-1">(Selecciona todas las respuestas correctas)</p>
+                        )}
+                        {q.type === 'ordering' && !submitted && (
+                            <p className="text-sm text-slate-500 mt-1">(Ordena los elementos correctamente)</p>
+                        )}
+                        {q.type === 'fill-blank' && !submitted && (
+                            <p className="text-sm text-slate-500 mt-1">(No importa mayúsculas/minúsculas)</p>
+                        )}
                         {q.difficulty && (
                             <span className={`inline-block mt-2 px-2 py-0.5 rounded text-xs font-medium ${
                                 q.difficulty === 'hard' ? 'bg-red-500/20 text-red-400' :
@@ -727,6 +736,9 @@ const Quiz: React.FC<QuizProps> = ({
                     <div className="space-y-8">
                         {renderQuestion(currentQuestion, currentQuestionIndex)}
 
+                        {/* Pass requirement info */}
+                        <p className="text-xs text-slate-500 text-center">Necesitas el 70% para completar la lección · Sin límite de tiempo</p>
+
                         {/* Navigation */}
                         <div className="flex items-center justify-between pt-4 border-t border-slate-800">
                             <button
@@ -762,6 +774,11 @@ const Quiz: React.FC<QuizProps> = ({
                     <div className="space-y-10">
                         {questions.map((q, idx) => renderQuestion(q, idx))}
                     </div>
+                )}
+
+                {/* Pass requirement info (all view) */}
+                {viewMode === 'all' && !submitted && (
+                    <p className="text-xs text-slate-500 text-center mt-6">Necesitas el 70% para completar la lección · Sin límite de tiempo</p>
                 )}
 
                 {/* Submit Button (for "all" view mode) */}

@@ -48,24 +48,38 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
     const correctCount = questions.filter(q => answers[q.id] === q.correctAnswer).length;
     const allCorrect = correctCount === questions.length;
 
+    const [autoAdvanceTimer, setAutoAdvanceTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
+
+    const handleNext = () => {
+        if (autoAdvanceTimer) {
+            clearTimeout(autoAdvanceTimer);
+            setAutoAdvanceTimer(null);
+        }
+        if (currentQuestionIndex < questions.length - 1) {
+            setCurrentQuestionIndex(prev => prev + 1);
+        } else {
+            setCompleted(true);
+            const lastCorrect = answers[currentQuestion.id] === currentQuestion.correctAnswer;
+            onComplete?.(lastCorrect && correctCount === questions.length - (lastCorrect ? 0 : 1));
+        }
+    };
+
     const handleAnswer = (questionId: string, optionIndex: number) => {
         if (showResult[questionId]) return; // Already answered
 
         setAnswers(prev => ({ ...prev, [questionId]: optionIndex }));
         setShowResult(prev => ({ ...prev, [questionId]: true }));
 
-        // Auto-advance to next question after a delay
-        if (currentQuestionIndex < questions.length - 1) {
-            setTimeout(() => {
+        // Auto-advance fallback after 5 seconds (user can click "Siguiente" sooner)
+        const timer = setTimeout(() => {
+            if (currentQuestionIndex < questions.length - 1) {
                 setCurrentQuestionIndex(prev => prev + 1);
-            }, 1500);
-        } else {
-            // Last question - mark as completed
-            setTimeout(() => {
+            } else {
                 setCompleted(true);
                 onComplete?.(optionIndex === currentQuestion.correctAnswer && correctCount === questions.length - 1);
-            }, 1000);
-        }
+            }
+        }, 5000);
+        setAutoAdvanceTimer(timer);
     };
 
     const toggleHint = (questionId: string) => {
@@ -234,6 +248,16 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                     )}
                                     <span>{currentQuestion.explanation}</span>
                                 </div>
+                            )}
+
+                            {/* Next button */}
+                            {showResult[currentQuestion.id] && !completed && (
+                                <button
+                                    onClick={handleNext}
+                                    className="mt-3 px-4 py-2 bg-brand-500 hover:bg-brand-400 text-slate-900 text-sm font-bold rounded-lg transition-all active:scale-[0.98]"
+                                >
+                                    Siguiente &rarr;
+                                </button>
                             )}
                         </div>
                     )}

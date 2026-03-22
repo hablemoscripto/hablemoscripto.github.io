@@ -24,7 +24,8 @@ const LessonView: React.FC = () => {
     const navigate = useNavigate();
     const { isLessonCompleted, markLessonComplete, loading } = useProgress();
 
-    const id = lessonId ? parseInt(lessonId) : NaN;
+    const id = lessonId ? parseInt(lessonId, 10) : NaN;
+    const isValidId = !isNaN(id) && id > 0;
     const [lesson, setLesson] = useState<LessonData | null>(null);
     const [lessonLoading, setLessonLoading] = useState(true);
 
@@ -248,6 +249,20 @@ const LessonView: React.FC = () => {
         el.addEventListener('wheel', handleWheel, { passive: false });
         return () => el.removeEventListener('wheel', handleWheel);
     }, [lightboxImage, handleWheel]);
+
+    if (!isValidId) {
+        return (
+            <div className="min-h-screen flex items-center justify-center text-white bg-slate-950">
+                <div className="text-center">
+                    <AlertCircle size={48} className="mx-auto text-red-500 mb-4" />
+                    <h2 className="text-2xl font-bold mb-2">Lección no encontrada</h2>
+                    <button onClick={() => navigate('/education')} className="text-brand-500 hover:underline">
+                        Volver al inicio
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     if (lessonLoading) {
         return (
@@ -490,7 +505,7 @@ const LessonView: React.FC = () => {
                         <img
                             src={lightboxImage.src}
                             alt={lightboxImage.alt}
-                            className="max-w-full max-h-[85vh] object-contain select-none transition-transform duration-200"
+                            className="max-w-full max-h-[85vh] object-contain select-none transition-transform duration-200 will-change-transform"
                             style={{
                                 transform: `scale(${zoomLevel}) translate(${panPosition.x / zoomLevel}px, ${panPosition.y / zoomLevel}px)`,
                             }}

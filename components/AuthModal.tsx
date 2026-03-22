@@ -223,7 +223,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
         {view === 'forgot-password' && (
           <>
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-brand-500 to-brand-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Lock size={32} className="text-white" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold text-white">Restablecer contrasena</h2>
@@ -292,7 +292,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
         {(view === 'login' || view === 'signup') && (
           <>
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-brand-500 to-brand-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <User size={32} className="text-white" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold text-white">

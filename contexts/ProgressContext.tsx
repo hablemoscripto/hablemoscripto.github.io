@@ -94,7 +94,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     return lesson?.quizScore ?? null;
   }, [progress]);
 
-  const markLessonComplete = async (lessonId: number, quizScore?: number) => {
+  const markLessonComplete = useCallback(async (lessonId: number, quizScore?: number) => {
     if (!user) return;
 
     const wasAlreadyCompleted = progress.some(p => p.lessonId === lessonId && p.completed);
@@ -161,7 +161,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         streak,
       });
     }
-  };
+  }, [user, progress, xp, streak, addXp, checkAchievements]);
 
   const getCompletedCount = useCallback((): number => {
     return progress.filter((p) => p.completed).length;

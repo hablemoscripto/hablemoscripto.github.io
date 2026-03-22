@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
     <>
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled || isMobileMenuOpen
-          ? 'bg-navy-950/80 backdrop-blur-xl border-b border-white/5 shadow-glass py-3'
+          ? 'bg-navy-950/90 backdrop-blur-xl border-b border-white/5 shadow-glass py-3'
           : 'bg-transparent py-6'
           }`}
       >
@@ -150,7 +150,7 @@ const Navbar: React.FC = () => {
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-slate-300 hover:text-white z-50"
+            className="md:hidden p-2 text-navy-300 hover:text-white z-50"
             aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"

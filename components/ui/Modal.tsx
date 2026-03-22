@@ -218,13 +218,13 @@ export function Modal({
               initial="hidden"
               animate="visible"
               exit="exit"
-              className={`relative bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl w-full ${maxWidth} mx-4 outline-none`}
+              className={`relative bg-navy-900 border border-navy-700 rounded-2xl shadow-2xl w-full ${maxWidth} mx-4 outline-none`}
             >
               {/* Close button */}
               {showCloseButton && (
                 <button
                   onClick={onClose}
-                  className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 text-navy-400 hover:text-white transition-colors"
                   aria-label="Cerrar"
                 >
                   <X size={24} />
@@ -245,7 +245,7 @@ export function Modal({
                   {subtitle && (
                     <p
                       id={subtitleId}
-                      className="mt-1 text-sm text-slate-400"
+                      className="mt-1 text-sm text-navy-400"
                     >
                       {subtitle}
                     </p>
