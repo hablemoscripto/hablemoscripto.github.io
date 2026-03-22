@@ -82,14 +82,14 @@ export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
         >
             {/* Controls */}
             <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
-                <div className="bg-slate-800/80 backdrop-blur-sm rounded-lg px-3 py-1.5 text-sm text-slate-300 flex items-center gap-2">
+                <div className="bg-navy-800/80 backdrop-blur-sm rounded-lg px-3 py-1.5 text-sm text-navy-300 flex items-center gap-2">
                     <Move size={14} />
                     <span>{Math.round(zoomLevel * 100)}%</span>
                 </div>
                 <button
                     onClick={(e) => { e.stopPropagation(); handleZoomOut(); }}
                     disabled={zoomLevel <= 1}
-                    className="p-2 bg-slate-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2 bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-navy-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     aria-label="Alejar"
                 >
                     <ZoomOut size={20} />
@@ -97,14 +97,14 @@ export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
                 <button
                     onClick={(e) => { e.stopPropagation(); handleZoomIn(); }}
                     disabled={zoomLevel >= 4}
-                    className="p-2 bg-slate-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2 bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-navy-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     aria-label="Acercar"
                 >
                     <ZoomIn size={20} />
                 </button>
                 <button
                     onClick={onClose}
-                    className="p-2 bg-slate-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-red-500 transition-colors"
+                    className="p-2 bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-red-500 transition-colors"
                     aria-label="Cerrar"
                 >
                     <X size={20} />
@@ -112,7 +112,7 @@ export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
             </div>
 
             {/* Instructions */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-800/80 backdrop-blur-sm rounded-lg px-4 py-2 text-sm text-slate-400 flex items-center gap-4">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-navy-800/80 backdrop-blur-sm rounded-lg px-4 py-2 text-sm text-navy-400 flex items-center gap-4">
                 <span>Scroll para zoom</span>
                 <span>Arrastra para mover</span>
                 <span>ESC para cerrar</span>

@@ -35,15 +35,15 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                 Hablemos<span className="text-brand-500">Cripto</span>
               </span>
             </Link>
-            <p className="text-slate-400 text-sm max-w-sm mb-6">
+            <p className="text-navy-400 text-sm max-w-sm mb-6">
               La plataforma educativa líder para entender el futuro del dinero.
               Construyendo la próxima generación de inversores inteligentes.
             </p>
             <div className="flex gap-4">
-              <a href="https://twitter.com/Crypto_CBas" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-slate-400 hover:bg-brand-500 hover:text-slate-900 transition-all">
+              <a href="https://twitter.com/Crypto_CBas" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-brand-500 hover:text-navy-900 transition-all">
                 <Twitter size={18} />
               </a>
-              <a href="https://www.youtube.com/@hablemoscripto" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-slate-400 hover:bg-red-600 hover:text-white transition-all">
+              <a href="https://www.youtube.com/@hablemoscripto" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-red-600 hover:text-white transition-all">
                 <Youtube size={18} />
               </a>
             </div>
@@ -51,7 +51,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
 
           <div>
             <h4 className="text-white font-bold mb-6">Plataforma</h4>
-            <ul className="space-y-4 text-sm text-slate-400">
+            <ul className="space-y-4 text-sm text-navy-400">
               <li><a href="/#home" onClick={(e) => handleAnchorClick(e, 'home')} className="hover:text-brand-500 transition-colors">Inicio</a></li>
               <li>
                 <a
@@ -74,7 +74,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
 
           <div>
             <h4 className="text-white font-bold mb-6">Legal</h4>
-            <ul className="space-y-4 text-sm text-slate-400">
+            <ul className="space-y-4 text-sm text-navy-400">
               <li><Link to="/terminos" className="hover:text-brand-500 transition-colors">Términos de Uso</Link></li>
               <li><Link to="/privacidad" className="hover:text-brand-500 transition-colors">Política de Privacidad</Link></li>
             </ul>
@@ -82,12 +82,12 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
         </div>
 
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-slate-500 text-center md:text-left">
+          <p className="text-xs text-navy-500 text-center md:text-left">
             &copy; {new Date().getFullYear()} Hablemos Cripto. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true"></span>
-            <span className="text-xs text-slate-500">Plataforma activa</span>
+            <span className="text-xs text-navy-500">Plataforma activa</span>
           </div>
         </div>
       </div>

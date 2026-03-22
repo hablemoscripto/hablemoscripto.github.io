@@ -109,7 +109,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                     </div>
                     <div className="text-left">
                         <h4 className="font-bold text-white text-sm">{title}</h4>
-                        <p className="text-xs text-slate-400">
+                        <p className="text-xs text-navy-400">
                             {completed
                                 ? `${correctCount}/${questions.length} correctas`
                                 : `${questions.length} pregunta${questions.length > 1 ? 's' : ''} rápida${questions.length > 1 ? 's' : ''}`
@@ -127,7 +127,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                             {allCorrect ? 'Perfecto' : 'Completado'}
                         </span>
                     )}
-                    {expanded ? <ChevronUp size={18} className="text-slate-400" /> : <ChevronDown size={18} className="text-slate-400" />}
+                    {expanded ? <ChevronUp size={18} className="text-navy-400" /> : <ChevronDown size={18} className="text-navy-400" />}
                 </div>
             </button>
 
@@ -152,7 +152,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                                     : 'bg-red-500'
                                                 : isCurrent
                                                     ? 'bg-brand-500'
-                                                    : 'bg-slate-700'
+                                                    : 'bg-navy-700'
                                         }`}
                                     />
                                 );
@@ -185,10 +185,10 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                         } else if (isSelected) {
                                             optionClass += "bg-red-500/10 border-red-500/50 text-red-400";
                                         } else {
-                                            optionClass += "bg-slate-950 border-slate-800 text-slate-500 opacity-50";
+                                            optionClass += "bg-navy-950 border-navy-800 text-navy-500 opacity-50";
                                         }
                                     } else {
-                                        optionClass += "bg-slate-950 border-slate-800 text-slate-300 hover:border-brand-500/50 hover:bg-slate-900 cursor-pointer";
+                                        optionClass += "bg-navy-950 border-navy-800 text-navy-300 hover:border-brand-500/50 hover:bg-navy-900 cursor-pointer";
                                     }
 
                                     return (
@@ -203,7 +203,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                                     ? 'bg-green-500/20 text-green-400'
                                                     : showFeedback && isSelected
                                                         ? 'bg-red-500/20 text-red-400'
-                                                        : 'bg-slate-800 text-slate-400'
+                                                        : 'bg-navy-800 text-navy-400'
                                             }`}>
                                                 {String.fromCharCode(65 + optIdx)}
                                             </span>
@@ -220,7 +220,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                 <>
                                     <button
                                         onClick={() => toggleHint(currentQuestion.id)}
-                                        className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-brand-400 transition-colors"
+                                        className="flex items-center gap-1.5 text-xs text-navy-400 hover:text-brand-400 transition-colors"
                                     >
                                         <Lightbulb size={14} />
                                         {showHints[currentQuestion.id] ? 'Ocultar pista' : 'Necesito una pista'}
@@ -254,7 +254,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                             {showResult[currentQuestion.id] && !completed && (
                                 <button
                                     onClick={handleNext}
-                                    className="mt-3 px-4 py-2 bg-brand-500 hover:bg-brand-400 text-slate-900 text-sm font-bold rounded-lg transition-all active:scale-[0.98]"
+                                    className="mt-3 px-4 py-2 bg-brand-500 hover:bg-brand-400 text-navy-900 text-sm font-bold rounded-lg transition-all active:scale-[0.98]"
                                 >
                                     Siguiente &rarr;
                                 </button>
@@ -267,20 +267,20 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                         <div className={`text-center py-4 rounded-lg ${
                             allCorrect
                                 ? 'bg-green-500/10 border border-green-500/20'
-                                : 'bg-slate-800 border border-slate-700'
+                                : 'bg-navy-800 border border-navy-700'
                         }`}>
                             {allCorrect ? (
                                 <div className="space-y-2">
                                     <CheckCircle size={32} className="mx-auto text-green-500" />
                                     <p className="text-green-400 font-medium">¡Entendiste el concepto!</p>
-                                    <p className="text-xs text-slate-400">Sigue con la lección</p>
+                                    <p className="text-xs text-navy-400">Sigue con la lección</p>
                                 </div>
                             ) : (
                                 <div className="space-y-3">
-                                    <p className="text-slate-300 font-medium">
+                                    <p className="text-navy-300 font-medium">
                                         {correctCount}/{questions.length} respuestas correctas
                                     </p>
-                                    <p className="text-xs text-slate-400">
+                                    <p className="text-xs text-navy-400">
                                         No te preocupes, puedes continuar con la lección
                                     </p>
                                     <button

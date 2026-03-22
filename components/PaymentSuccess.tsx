@@ -51,11 +51,11 @@ export default function PaymentSuccess() {
       case 'loading':
         return (
           <>
-            <div className="w-20 h-20 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 bg-navy-700 rounded-full flex items-center justify-center mx-auto mb-6">
               <Loader2 size={40} className="text-orange-400 animate-spin" />
             </div>
             <h1 className="text-2xl font-bold text-white mb-4">Verificando pago...</h1>
-            <p className="text-slate-400">Estamos confirmando tu transaccion</p>
+            <p className="text-navy-400">Estamos confirmando tu transaccion</p>
           </>
         );
 
@@ -66,8 +66,8 @@ export default function PaymentSuccess() {
               <CheckCircle size={40} className="text-green-400" />
             </div>
             <h1 className="text-2xl font-bold text-white mb-4">Pago Exitoso</h1>
-            <p className="text-slate-400 mb-2">Tu compra de <span className="text-orange-400 font-medium">{productName}</span> ha sido confirmada.</p>
-            <p className="text-slate-500 text-sm mb-8">Referencia: {reference}</p>
+            <p className="text-navy-400 mb-2">Tu compra de <span className="text-orange-400 font-medium">{productName}</span> ha sido confirmada.</p>
+            <p className="text-navy-500 text-sm mb-8">Referencia: {reference}</p>
             <Link
               to="/education"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
@@ -85,14 +85,14 @@ export default function PaymentSuccess() {
               <Clock size={40} className="text-yellow-400" />
             </div>
             <h1 className="text-2xl font-bold text-white mb-4">Pago Pendiente</h1>
-            <p className="text-slate-400 mb-2">Tu pago esta siendo procesado.</p>
-            <p className="text-slate-500 text-sm mb-4">Referencia: {reference}</p>
-            <p className="text-slate-400 text-sm mb-8">
+            <p className="text-navy-400 mb-2">Tu pago esta siendo procesado.</p>
+            <p className="text-navy-500 text-sm mb-4">Referencia: {reference}</p>
+            <p className="text-navy-400 text-sm mb-8">
               Te notificaremos cuando el pago sea confirmado. Esto puede tomar unos minutos.
             </p>
             <Link
               to="/"
-              className="inline-flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
+              className="inline-flex items-center gap-2 bg-navy-700 hover:bg-navy-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
             >
               <Home size={20} />
               Volver al inicio
@@ -107,8 +107,8 @@ export default function PaymentSuccess() {
               <XCircle size={40} className="text-red-400" />
             </div>
             <h1 className="text-2xl font-bold text-white mb-4">Pago Rechazado</h1>
-            <p className="text-slate-400 mb-2">Tu pago no pudo ser procesado.</p>
-            <p className="text-slate-500 text-sm mb-8">
+            <p className="text-navy-400 mb-2">Tu pago no pudo ser procesado.</p>
+            <p className="text-navy-500 text-sm mb-8">
               Por favor intenta de nuevo con otro metodo de pago.
             </p>
             <Link
@@ -129,7 +129,7 @@ export default function PaymentSuccess() {
               <XCircle size={40} className="text-red-400" />
             </div>
             <h1 className="text-2xl font-bold text-white mb-4">Error en el pago</h1>
-            <p className="text-slate-400 mb-8">
+            <p className="text-navy-400 mb-8">
               Hubo un problema con tu transaccion. Por favor intenta de nuevo.
             </p>
             <Link
@@ -145,8 +145,8 @@ export default function PaymentSuccess() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
-      <div className="bg-slate-900 border border-slate-700 rounded-2xl p-8 max-w-md w-full text-center">
+    <div className="min-h-screen bg-navy-950 flex items-center justify-center px-4">
+      <div className="bg-navy-900 border border-navy-700 rounded-2xl p-8 max-w-md w-full text-center">
         {renderContent()}
       </div>
     </div>

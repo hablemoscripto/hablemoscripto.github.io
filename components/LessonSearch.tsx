@@ -150,7 +150,7 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
       <div className="relative" onKeyDown={handleKeyDown}>
         <Search
           size={20}
-          className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400"
           aria-hidden="true"
         />
         <input
@@ -172,9 +172,9 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
           aria-expanded="true"
           aria-controls="search-results"
           aria-autocomplete="list"
-          className="w-full bg-slate-800 border border-slate-600 rounded-xl py-3 pl-11 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-sm"
+          className="w-full bg-navy-800 border border-navy-600 rounded-xl py-3 pl-11 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-sm"
         />
-        <kbd className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] text-slate-500 bg-slate-700 rounded border border-slate-600">
+        <kbd className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] text-navy-500 bg-navy-700 rounded border border-navy-600">
           ESC
         </kbd>
       </div>
@@ -188,7 +188,7 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
         className="mt-3 max-h-[50vh] overflow-y-auto -mx-2"
       >
         {enrichedResults.length === 0 ? (
-          <div className="text-center py-8 text-slate-500">
+          <div className="text-center py-8 text-navy-500">
             <BookOpen size={32} className="mx-auto mb-2 opacity-50" aria-hidden="true" />
             <p className="text-sm">No se encontraron lecciones</p>
             <p className="text-xs mt-1">Intenta con otro término de búsqueda</p>
@@ -205,8 +205,8 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
               onMouseEnter={() => setSelectedIndex(idx)}
               className={`w-full text-left px-3 py-3 rounded-lg flex items-start gap-3 transition-colors ${
                 idx === selectedIndex
-                  ? 'bg-slate-800 ring-1 ring-brand-500/30'
-                  : 'hover:bg-slate-800/50'
+                  ? 'bg-navy-800 ring-1 ring-brand-500/30'
+                  : 'hover:bg-navy-800/50'
               }`}
             >
               <div className="flex-1 min-w-0">
@@ -223,9 +223,9 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
                   )}
                 </div>
                 <p className="text-sm font-medium text-white truncate">{result.title}</p>
-                <p className="text-xs text-slate-500 truncate">{result.moduleName}</p>
+                <p className="text-xs text-navy-500 truncate">{result.moduleName}</p>
               </div>
-              <div className="flex items-center gap-1 text-slate-500 shrink-0 mt-1">
+              <div className="flex items-center gap-1 text-navy-500 shrink-0 mt-1">
                 <Clock size={12} aria-hidden="true" />
                 <span className="text-xs">{result.duration}</span>
                 <ChevronRight size={14} aria-hidden="true" className="ml-1" />
@@ -237,11 +237,11 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
 
       {/* Footer hint */}
       {enrichedResults.length > 0 && (
-        <div className="mt-2 pt-2 border-t border-slate-800 flex items-center justify-between text-[10px] text-slate-500 -mx-2 px-3">
+        <div className="mt-2 pt-2 border-t border-navy-800 flex items-center justify-between text-[10px] text-navy-500 -mx-2 px-3">
           <span>{enrichedResults.length} {enrichedResults.length === 1 ? 'lección' : 'lecciones'}</span>
           <div className="hidden sm:flex items-center gap-3">
-            <span><kbd className="px-1 py-0.5 bg-slate-700 rounded text-slate-400">↑↓</kbd> Navegar</span>
-            <span><kbd className="px-1 py-0.5 bg-slate-700 rounded text-slate-400">Enter</kbd> Ir</span>
+            <span><kbd className="px-1 py-0.5 bg-navy-700 rounded text-navy-400">↑↓</kbd> Navegar</span>
+            <span><kbd className="px-1 py-0.5 bg-navy-700 rounded text-navy-400">Enter</kbd> Ir</span>
           </div>
         </div>
       )}

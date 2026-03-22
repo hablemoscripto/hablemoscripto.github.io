@@ -39,19 +39,19 @@ function ToastItem({ toast, onDismiss }: { toast: { id: string; title: string; d
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 80, scale: 0.95 }}
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-            className="pointer-events-auto flex items-center gap-3 bg-slate-900/95 backdrop-blur-sm border border-brand-500/30 rounded-xl px-4 py-3 shadow-lg shadow-brand-500/10 max-w-xs"
+            className="pointer-events-auto flex items-center gap-3 bg-navy-900/95 backdrop-blur-sm border border-brand-500/30 rounded-xl px-4 py-3 shadow-lg shadow-brand-500/10 max-w-xs"
         >
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center shrink-0">
-                <Icon size={20} className="text-slate-900" />
+                <Icon size={20} className="text-navy-900" />
             </div>
             <div className="min-w-0 flex-1">
                 <p className="text-xs text-brand-400 font-semibold uppercase tracking-wide">Logro desbloqueado</p>
                 <p className="text-sm font-bold text-white truncate">{toast.title}</p>
-                <p className="text-xs text-slate-400 truncate">{toast.description}</p>
+                <p className="text-xs text-navy-400 truncate">{toast.description}</p>
             </div>
             <button
                 onClick={() => onDismiss(toast.id)}
-                className="shrink-0 p-1 rounded-md text-slate-500 hover:text-white hover:bg-slate-800 transition-colors"
+                className="shrink-0 p-1 rounded-md text-navy-500 hover:text-white hover:bg-navy-800 transition-colors"
                 aria-label="Cerrar"
             >
                 <X size={14} />

@@ -147,7 +147,7 @@ const ChatWidget: React.FC = () => {
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 text-slate-900 shadow-lg hover:shadow-brand-500/40 transition-all transform hover:scale-110 active:scale-95 flex items-center justify-center"
+        className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 text-navy-900 shadow-lg hover:shadow-brand-500/40 transition-all transform hover:scale-110 active:scale-95 flex items-center justify-center"
         aria-label={isOpen ? 'Cerrar asistente IA' : 'Abrir asistente IA'}
         aria-expanded={isOpen}
       >
@@ -157,26 +157,26 @@ const ChatWidget: React.FC = () => {
       {/* Chat Window */}
       {isOpen && (
         <section
-          className="fixed bottom-24 right-6 w-[90vw] sm:w-[400px] h-[500px] max-h-[80vh] z-50 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-float-in origin-bottom-right"
+          className="fixed bottom-24 right-6 w-[90vw] sm:w-[400px] h-[500px] max-h-[80vh] z-50 bg-navy-900 border border-navy-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-float-in origin-bottom-right"
           role="region"
           aria-label="Chat con asistente de IA"
         >
 
           {/* Header */}
-          <div className="bg-slate-800 p-4 border-b border-slate-700 flex items-center gap-3">
+          <div className="bg-navy-800 p-4 border-b border-navy-700 flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center border border-brand-500/50">
               <Sparkles size={20} className="text-brand-500" aria-hidden="true" />
             </div>
             <div className="flex-1">
               <h3 className="font-bold text-white text-sm" id="chat-title">CBas AI Assistant</h3>
-              <p className="text-xs text-slate-400 flex items-center gap-1">
+              <p className="text-xs text-navy-400 flex items-center gap-1">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true"></span>
                 Online con Gemini 1.5
               </p>
             </div>
             <button
               onClick={clearChat}
-              className="p-2 text-slate-400 hover:text-red-400 hover:bg-slate-700/50 rounded-lg transition-colors"
+              className="p-2 text-navy-400 hover:text-red-400 hover:bg-navy-700/50 rounded-lg transition-colors"
               aria-label="Limpiar conversación"
               title="Limpiar conversación"
             >
@@ -186,7 +186,7 @@ const ChatWidget: React.FC = () => {
 
           {/* Messages Area */}
           <div
-            className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-950/50 scroll-smooth"
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-navy-950/50 scroll-smooth"
             role="log"
             aria-live="polite"
             aria-atomic="false"
@@ -201,7 +201,7 @@ const ChatWidget: React.FC = () => {
                   className={`max-w-[85%] rounded-2xl p-3 text-sm ${
                     msg.role === 'user'
                       ? 'bg-brand-600 text-white rounded-br-none'
-                      : 'bg-slate-800 text-slate-200 rounded-bl-none border border-slate-700'
+                      : 'bg-navy-800 text-navy-200 rounded-bl-none border border-navy-700'
                   }`}
                   aria-label={msg.role === 'user' ? 'Tu mensaje' : 'Respuesta del asistente'}
                 >
@@ -210,7 +210,7 @@ const ChatWidget: React.FC = () => {
                         {msg.text ? (
                           <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{msg.text}</ReactMarkdown>
                         ) : (
-                          <span className="flex items-center gap-1 text-slate-400" aria-label="Pensando">
+                          <span className="flex items-center gap-1 text-navy-400" aria-label="Pensando">
                             <Loader2 size={14} className="animate-spin" aria-hidden="true" /> Pensando...
                           </span>
                         )}
@@ -225,7 +225,7 @@ const ChatWidget: React.FC = () => {
           </div>
 
           {/* Input Area */}
-          <form onSubmit={handleSubmit} className="p-4 bg-slate-800 border-t border-slate-700 flex gap-2">
+          <form onSubmit={handleSubmit} className="p-4 bg-navy-800 border-t border-navy-700 flex gap-2">
             <input
               ref={inputRef}
               type="text"
@@ -233,22 +233,22 @@ const ChatWidget: React.FC = () => {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Pregunta sobre cripto..."
               aria-label="Escribe tu pregunta sobre criptomonedas"
-              className="flex-1 bg-slate-900 border border-slate-600 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all"
+              className="flex-1 bg-navy-900 border border-navy-600 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all"
               disabled={isLoading}
             />
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
               aria-label={isLoading ? 'Enviando mensaje' : 'Enviar mensaje'}
-              className="p-2 bg-brand-500 text-slate-900 rounded-xl hover:bg-brand-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="p-2 bg-brand-500 text-navy-900 rounded-xl hover:bg-brand-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isLoading ? <Loader2 size={20} className="animate-spin" aria-hidden="true" /> : <Send size={20} aria-hidden="true" />}
             </button>
           </form>
 
           {/* Powered By */}
-          <div className="bg-slate-900 py-1 text-center">
-             <p className="text-[10px] text-slate-500">Powered by Google Gemini</p>
+          <div className="bg-navy-900 py-1 text-center">
+             <p className="text-[10px] text-navy-500">Powered by Google Gemini</p>
           </div>
         </section>
       )}

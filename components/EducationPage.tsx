@@ -486,8 +486,8 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           </div>
 
           <div className="container max-w-7xl mx-auto px-6 mt-8 mb-12">
-            <div className="bg-slate-900/50 border border-white/5 rounded-xl p-6">
-              <p className="text-sm text-slate-500 leading-relaxed">
+            <div className="bg-navy-900/50 border border-white/5 rounded-xl p-6">
+              <p className="text-sm text-navy-500 leading-relaxed">
                 <strong>Aviso Educativo:</strong> Todo el contenido de esta plataforma es exclusivamente educativo y no constituye asesoramiento financiero, de inversión o trading. Las criptomonedas son activos de alto riesgo con volatilidad extrema. Existe riesgo de pérdida total de capital. Siempre realiza tu propia investigación (DYOR).
               </p>
             </div>
@@ -498,26 +498,26 @@ const EducationPage: React.FC<EducationPageProps> = () => {
       )}
 
       {showModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-800/50">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-navy-950/80 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-navy-900 border border-navy-700 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="p-6 border-b border-navy-800 flex justify-between items-center bg-navy-800/50">
               <h3 className="font-heading font-bold text-white flex items-center gap-2">
                 <Trophy className="text-brand-500" size={20} />
                 Tu Progreso
               </h3>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-navy-400 hover:text-white transition-colors"
               >
                 Cerrar
               </button>
             </div>
 
             <div className="p-6 space-y-6">
-              <div className="text-center p-6 bg-slate-950 rounded-xl border border-slate-800">
+              <div className="text-center p-6 bg-navy-950 rounded-xl border border-navy-800">
                 <div className="relative w-28 h-28 mx-auto mb-4">
                   <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100" aria-hidden="true">
-                    <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" strokeWidth="6" className="text-slate-800" />
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" strokeWidth="6" className="text-navy-800" />
                     <circle
                       cx="50" cy="50" r="42" fill="none"
                       stroke="url(#progress-gradient)"
@@ -538,7 +538,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                     <span className="text-2xl font-bold text-white">{globalPercentage}%</span>
                   </div>
                 </div>
-                <p className="text-slate-400 text-sm">
+                <p className="text-navy-400 text-sm">
                   {totalCompletedLessons} de {totalLessons} lecciones completadas
                 </p>
               </div>
@@ -564,11 +564,11 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
 const ProgressRow = ({ label, current, total, color }: { label: string, current: number, total: number, color: string }) => (
   <div className="flex flex-col gap-1">
-    <div className="flex justify-between text-xs font-medium text-slate-300">
+    <div className="flex justify-between text-xs font-medium text-navy-300">
       <span>{label}</span>
       <span>{current}/{total}</span>
     </div>
-    <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+    <div className="w-full h-2 bg-navy-800 rounded-full overflow-hidden">
       <div
         className={`h-full ${color} transition-all duration-500`}
         style={{ width: `${total > 0 ? (current / total) * 100 : 0}%` }}

@@ -67,7 +67,7 @@ export default function SelectionTooltip() {
         >
             <button
                 onMouseDown={handleAskAI}
-                className="flex items-center gap-2 px-3 py-1.5 bg-brand-500 hover:bg-brand-400 text-slate-900 text-xs font-bold rounded-full shadow-glow-brand transition-colors whitespace-nowrap"
+                className="flex items-center gap-2 px-3 py-1.5 bg-brand-500 hover:bg-brand-400 text-navy-900 text-xs font-bold rounded-full shadow-glow-brand transition-colors whitespace-nowrap"
             >
                 <MessageSquare size={14} />
                 Explicar con CBas

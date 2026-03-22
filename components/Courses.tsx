@@ -20,7 +20,7 @@ const CourseCard: React.FC<{
       <Icon className={`${!isLocked ? 'text-navy-300 group-hover:text-brand-500' : 'text-navy-500'} w-8 h-8 transition-colors`} />
       {isLocked && (
         <div className="absolute inset-0 flex items-center justify-center bg-navy-900/80 rounded-xl">
-          <Lock className="w-5 h-5 text-slate-500" />
+          <Lock className="w-5 h-5 text-navy-500" />
         </div>
       )}
     </div>
@@ -44,7 +44,7 @@ const CourseCard: React.FC<{
       className={`w-full py-3 rounded-lg border font-medium transition-all flex items-center justify-center gap-2 ${
         isLocked
           ? 'border-navy-800 text-navy-500 bg-navy-900 cursor-not-allowed'
-          : 'border-navy-600 text-white hover:bg-brand-500 hover:border-brand-500 hover:text-slate-900 active:scale-[0.98]'
+          : 'border-navy-600 text-white hover:bg-brand-500 hover:border-brand-500 hover:text-navy-900 active:scale-[0.98]'
       }`}
     >
       {isLocked ? (

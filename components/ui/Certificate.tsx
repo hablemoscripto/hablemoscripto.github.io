@@ -64,7 +64,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
     }, []);
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/90 backdrop-blur-md overflow-y-auto">
             <motion.div
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -75,13 +75,13 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                 <div className="absolute -top-12 right-0 flex gap-4 print:hidden z-20">
                     <button
                         onClick={() => window.print()}
-                        className="px-4 py-2 bg-brand-500 text-slate-900 font-bold rounded-lg hover:bg-brand-400 transition-colors flex items-center gap-2"
+                        className="px-4 py-2 bg-brand-500 text-navy-900 font-bold rounded-lg hover:bg-brand-400 transition-colors flex items-center gap-2"
                     >
                         <Award size={20} /> Guardar PDF
                     </button>
                     <button
                         onClick={onClose}
-                        className="px-4 py-2 bg-slate-800 text-white font-medium rounded-lg hover:bg-slate-700 transition-colors"
+                        className="px-4 py-2 bg-navy-800 text-white font-medium rounded-lg hover:bg-navy-700 transition-colors"
                     >
                         Cerrar
                     </button>
@@ -89,7 +89,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
 
                 {/* Gradient border effect */}
                 <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${styles.gradientBorder} p-[1px]`}>
-                    <div className="w-full h-full rounded-3xl bg-slate-950" />
+                    <div className="w-full h-full rounded-3xl bg-navy-950" />
                 </div>
 
                 {/* Certificate content */}
@@ -124,7 +124,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                         <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-2 tracking-tight">
                             Certificado de Finalización
                         </h2>
-                        <p className="text-slate-500 text-sm uppercase tracking-widest">Este documento certifica que</p>
+                        <p className="text-navy-500 text-sm uppercase tracking-widest">Este documento certifica que</p>
                     </div>
 
                     {/* Student Name */}
@@ -138,9 +138,9 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
 
                     {/* Description */}
                     <div className="mb-10 space-y-2">
-                        <p className="text-slate-400">ha completado satisfactoriamente el nivel</p>
+                        <p className="text-navy-400">ha completado satisfactoriamente el nivel</p>
                         <h4 className="text-2xl font-heading font-bold text-white uppercase tracking-widest">{level}</h4>
-                        <p className="text-slate-400">del curso <span className="text-white font-semibold">{courseName}</span></p>
+                        <p className="text-navy-400">del curso <span className="text-white font-semibold">{courseName}</span></p>
                     </div>
 
                     {/* Footer */}
@@ -148,7 +148,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                     <div className="flex justify-between items-end max-w-md mx-auto">
                         <div className="text-center">
                             <p className="text-white font-semibold text-sm">{date}</p>
-                            <p className="text-slate-600 text-xs uppercase tracking-widest mt-1">Fecha</p>
+                            <p className="text-navy-600 text-xs uppercase tracking-widest mt-1">Fecha</p>
                         </div>
 
                         <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${styles.gradient} flex items-center justify-center`}>
@@ -157,7 +157,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
 
                         <div className="text-center">
                             <p className="text-white font-semibold text-sm">HablemosCripto</p>
-                            <p className="text-slate-600 text-xs uppercase tracking-widest mt-1">Certificación</p>
+                            <p className="text-navy-600 text-xs uppercase tracking-widest mt-1">Certificación</p>
                         </div>
                     </div>
                 </div>

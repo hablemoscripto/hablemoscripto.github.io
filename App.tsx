@@ -28,7 +28,7 @@ const LegalPage = lazy(() => import('./components/LegalPage'));
 
 function RouteLoader() {
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+    <div className="min-h-screen bg-navy-950 flex items-center justify-center">
       <Loader2 size={32} className="animate-spin text-brand-500" />
     </div>
   );
@@ -130,7 +130,7 @@ function App() {
           <GamificationProvider>
             <ProgressProvider>
               <Router>
-                <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden font-sans">
+                <div className="min-h-screen bg-navy-950 text-white overflow-x-hidden font-sans">
                   <AnimatedRoutes />
                   <ChatWidget />
                   <AchievementToast />

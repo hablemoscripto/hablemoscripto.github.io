@@ -187,7 +187,7 @@ const NewsletterAdmin: React.FC = () => {
 
   if (checkingAdmin || (loading && isAdmin)) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-navy-950 flex items-center justify-center">
         <div className="text-white text-center">
           <RefreshCw className="animate-spin mx-auto mb-4" size={32} />
           <p>{checkingAdmin ? 'Verificando permisos...' : 'Cargando suscriptores...'}</p>
@@ -199,52 +199,52 @@ const NewsletterAdmin: React.FC = () => {
   // Show error and redirect if not admin
   if (!isAdmin) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-navy-950 flex items-center justify-center">
         <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-8 max-w-md text-center">
           <p className="text-red-400 mb-4">{error || 'Acceso denegado'}</p>
-          <p className="text-slate-400 text-sm">Redirigiendo...</p>
+          <p className="text-navy-400 text-sm">Redirigiendo...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white p-6">
+    <div className="min-h-screen bg-navy-950 text-white p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <button
             onClick={() => navigate('/education')}
-            className="text-slate-400 hover:text-white mb-4 transition-colors"
+            className="text-navy-400 hover:text-white mb-4 transition-colors"
           >
             ← Volver al Dashboard
           </button>
           <h1 className="text-4xl font-bold mb-2">Panel de Newsletter</h1>
-          <p className="text-slate-400">Gestiona tus suscriptores de newsletter</p>
+          <p className="text-navy-400">Gestiona tus suscriptores de newsletter</p>
         </div>
 
         {/* Stats */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-slate-900 rounded-xl p-6 border border-slate-800">
+          <div className="bg-navy-900 rounded-xl p-6 border border-navy-800">
             <div className="flex items-center gap-3 mb-2">
               <Users className="text-brand-500" size={24} />
-              <h3 className="font-semibold text-slate-300">Total Suscriptores</h3>
+              <h3 className="font-semibold text-navy-300">Total Suscriptores</h3>
             </div>
             <p className="text-3xl font-bold">{subscribers.length}</p>
           </div>
 
-          <div className="bg-slate-900 rounded-xl p-6 border border-slate-800">
+          <div className="bg-navy-900 rounded-xl p-6 border border-navy-800">
             <div className="flex items-center gap-3 mb-2">
               <Mail className="text-green-500" size={24} />
-              <h3 className="font-semibold text-slate-300">Activos</h3>
+              <h3 className="font-semibold text-navy-300">Activos</h3>
             </div>
             <p className="text-3xl font-bold">{activeSubscribers.length}</p>
           </div>
 
-          <div className="bg-slate-900 rounded-xl p-6 border border-slate-800">
+          <div className="bg-navy-900 rounded-xl p-6 border border-navy-800">
             <div className="flex items-center gap-3 mb-2">
               <Trash2 className="text-red-500" size={24} />
-              <h3 className="font-semibold text-slate-300">Inactivos</h3>
+              <h3 className="font-semibold text-navy-300">Inactivos</h3>
             </div>
             <p className="text-3xl font-bold">{subscribers.length - activeSubscribers.length}</p>
           </div>
@@ -263,7 +263,7 @@ const NewsletterAdmin: React.FC = () => {
 
           <button
             onClick={exportToCSV}
-            className="flex items-center gap-2 px-6 py-3 bg-brand-500 hover:bg-brand-400 text-slate-900 font-bold rounded-xl transition-colors"
+            className="flex items-center gap-2 px-6 py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-colors"
           >
             <Download size={20} />
             Exportar CSV
@@ -271,7 +271,7 @@ const NewsletterAdmin: React.FC = () => {
 
           <button
             onClick={copyAllEmails}
-            className="flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl transition-colors"
+            className="flex items-center gap-2 px-6 py-3 bg-navy-800 hover:bg-navy-700 text-white font-medium rounded-xl transition-colors"
           >
             <Mail size={20} />
             Copiar Emails
@@ -279,7 +279,7 @@ const NewsletterAdmin: React.FC = () => {
 
           <button
             onClick={fetchSubscribers}
-            className="flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl transition-colors"
+            className="flex items-center gap-2 px-6 py-3 bg-navy-800 hover:bg-navy-700 text-white font-medium rounded-xl transition-colors"
           >
             <RefreshCw size={20} />
             Refrescar
@@ -294,28 +294,28 @@ const NewsletterAdmin: React.FC = () => {
         )}
 
         {/* Subscribers Table */}
-        <div className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+        <div className="bg-navy-900 rounded-xl border border-navy-800 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-slate-800/50">
+              <thead className="bg-navy-800/50">
                 <tr>
-                  <th className="text-left px-6 py-4 text-sm font-semibold text-slate-300">Email</th>
-                  <th className="text-left px-6 py-4 text-sm font-semibold text-slate-300">Fecha</th>
-                  <th className="text-left px-6 py-4 text-sm font-semibold text-slate-300">Estado</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-navy-300">Email</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-navy-300">Fecha</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-navy-300">Estado</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800">
+              <tbody className="divide-y divide-navy-800">
                 {subscribers.length === 0 ? (
                   <tr>
-                    <td colSpan={3} className="px-6 py-8 text-center text-slate-500">
+                    <td colSpan={3} className="px-6 py-8 text-center text-navy-500">
                       No hay suscriptores aún
                     </td>
                   </tr>
                 ) : (
                   subscribers.map((sub) => (
-                    <tr key={sub.id} className="hover:bg-slate-800/30 transition-colors">
+                    <tr key={sub.id} className="hover:bg-navy-800/30 transition-colors">
                       <td className="px-6 py-4 text-white">{sub.email}</td>
-                      <td className="px-6 py-4 text-slate-400">
+                      <td className="px-6 py-4 text-navy-400">
                         {new Date(sub.subscribed_at).toLocaleDateString('es-ES', {
                           year: 'numeric',
                           month: 'long',
@@ -343,10 +343,10 @@ const NewsletterAdmin: React.FC = () => {
 
       {/* Email Composer Modal */}
       {showEmailComposer && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-slate-900 border border-slate-700 w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-navy-950/90 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-navy-900 border border-navy-700 w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col">
             {/* Header */}
-            <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-800/50">
+            <div className="p-6 border-b border-navy-800 flex justify-between items-center bg-navy-800/50">
               <h3 className="font-heading font-bold text-white text-xl flex items-center gap-2">
                 <Send className="text-green-500" size={24} />
                 Enviar Newsletter
@@ -356,7 +356,7 @@ const NewsletterAdmin: React.FC = () => {
                   setShowEmailComposer(false);
                   setSendStatus(null);
                 }}
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-navy-400 hover:text-white transition-colors"
               >
                 <X size={24} />
               </button>
@@ -365,15 +365,15 @@ const NewsletterAdmin: React.FC = () => {
             {/* Content */}
             <div className="p-6 space-y-6 overflow-y-auto flex-1">
               {/* Recipient Info */}
-              <div className="bg-slate-950/50 border border-slate-800 rounded-xl p-4">
-                <p className="text-sm text-slate-300">
+              <div className="bg-navy-950/50 border border-navy-800 rounded-xl p-4">
+                <p className="text-sm text-navy-300">
                   <strong>Destinatarios:</strong> {activeSubscribers.length} suscriptores activos
                 </p>
               </div>
 
               {/* Subject */}
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-navy-300 mb-2">
                   Asunto del Email
                 </label>
                 <input
@@ -381,13 +381,13 @@ const NewsletterAdmin: React.FC = () => {
                   value={emailSubject}
                   onChange={(e) => setEmailSubject(e.target.value)}
                   placeholder="Ej: Nueva actualización de Hablemos Cripto"
-                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-brand-500 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-navy-800 border border-navy-700 rounded-xl text-white placeholder-navy-500 focus:border-brand-500 focus:outline-none transition-colors"
                 />
               </div>
 
               {/* Content */}
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-navy-300 mb-2">
                   Contenido (HTML soportado)
                 </label>
                 <textarea
@@ -395,9 +395,9 @@ const NewsletterAdmin: React.FC = () => {
                   onChange={(e) => setEmailContent(e.target.value)}
                   placeholder="Escribe tu mensaje aquí... Puedes usar HTML: <h2>, <p>, <strong>, <a href=''>, etc."
                   rows={12}
-                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-brand-500 focus:outline-none transition-colors resize-none font-mono text-sm"
+                  className="w-full px-4 py-3 bg-navy-800 border border-navy-700 rounded-xl text-white placeholder-navy-500 focus:border-brand-500 focus:outline-none transition-colors resize-none font-mono text-sm"
                 />
-                <p className="text-xs text-slate-500 mt-2">
+                <p className="text-xs text-navy-500 mt-2">
                   Tip: Tu email se enviará con el template de Hablemos Cripto (header, footer, etc.)
                 </p>
               </div>
@@ -415,14 +415,14 @@ const NewsletterAdmin: React.FC = () => {
             </div>
 
             {/* Footer */}
-            <div className="p-6 border-t border-slate-800 flex justify-end gap-4 bg-slate-800/50">
+            <div className="p-6 border-t border-navy-800 flex justify-end gap-4 bg-navy-800/50">
               <button
                 onClick={() => {
                   setShowEmailComposer(false);
                   setSendStatus(null);
                 }}
                 disabled={sending}
-                className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl transition-colors disabled:opacity-50"
+                className="px-6 py-3 bg-navy-800 hover:bg-navy-700 text-white font-medium rounded-xl transition-colors disabled:opacity-50"
               >
                 Cancelar
               </button>

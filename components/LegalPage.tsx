@@ -12,7 +12,7 @@ const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-navy-950 text-white">
       <Navbar />
 
       <main className="pt-32 pb-20">
@@ -28,18 +28,18 @@ const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
             </h1>
           </div>
 
-          <p className="text-slate-500 text-sm mb-12">
+          <p className="text-navy-500 text-sm mb-12">
             Ultima actualizacion: 18 de febrero de 2026
           </p>
 
-          <div className="prose prose-invert prose-slate max-w-none space-y-10 [&_h2]:text-xl [&_h2]:font-heading [&_h2]:font-bold [&_h2]:text-white [&_h2]:mb-4 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-slate-200 [&_h3]:mb-3 [&_p]:text-slate-300 [&_p]:leading-relaxed [&_p]:mb-4 [&_ul]:text-slate-300 [&_ul]:space-y-2 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:leading-relaxed">
+          <div className="prose prose-invert prose-slate max-w-none space-y-10 [&_h2]:text-xl [&_h2]:font-heading [&_h2]:font-bold [&_h2]:text-white [&_h2]:mb-4 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-navy-200 [&_h3]:mb-3 [&_p]:text-navy-300 [&_p]:leading-relaxed [&_p]:mb-4 [&_ul]:text-navy-300 [&_ul]:space-y-2 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:leading-relaxed">
             {type === 'privacy' ? <PrivacyContent /> : <TermsContent />}
           </div>
 
           <div className="mt-16 pt-8 border-t border-white/10">
             <button
               onClick={() => navigate('/')}
-              className="px-6 py-3 bg-brand-500 hover:bg-brand-400 text-slate-900 font-bold rounded-xl transition-colors"
+              className="px-6 py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-colors"
             >
               Volver al inicio
             </button>

@@ -125,7 +125,7 @@ const LandingPage: React.FC = () => {
           <div className="absolute inset-0 bg-brand-600/5"></div>
           <div className="container max-w-4xl mx-auto px-6 text-center relative z-10">
             <h2 className="text-3xl font-bold text-white mb-4">Recursos & Newsletter</h2>
-            <p className="text-slate-400 mb-8">Recibe análisis de mercado, guías gratuitas y oportunidades directamente en tu bandeja de entrada.</p>
+            <p className="text-navy-400 mb-8">Recibe análisis de mercado, guías gratuitas y oportunidades directamente en tu bandeja de entrada.</p>
             <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"
@@ -134,13 +134,13 @@ const LandingPage: React.FC = () => {
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 disabled={newsletterStatus === 'loading'}
-                className="flex-1 px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:border-brand-500 focus:outline-none transition-colors disabled:opacity-50"
+                className="flex-1 px-6 py-3 rounded-xl bg-navy-900 border border-navy-700 text-white focus:border-brand-500 focus:outline-none transition-colors disabled:opacity-50"
                 required
               />
               <button
                 type="submit"
                 disabled={newsletterStatus === 'loading'}
-                className="px-8 py-3 bg-brand-500 hover:bg-brand-400 text-slate-900 font-bold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-8 py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {newsletterStatus === 'loading' ? 'Enviando...' : 'Suscribirse'}
               </button>
@@ -157,7 +157,7 @@ const LandingPage: React.FC = () => {
               )}
             </div>
 
-            <p className="text-xs text-slate-500 mt-4">Únete a más de 500 estudiantes activos.</p>
+            <p className="text-xs text-navy-500 mt-4">Únete a más de 500 estudiantes activos.</p>
           </div>
         </section>
       </main>

@@ -35,7 +35,7 @@ class ErrorBoundary extends Component<Props, State> {
     render() {
         if (this.state.hasError) {
             return (
-                <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
+                <div className="min-h-screen bg-navy-950 flex items-center justify-center p-6">
                     <div className="max-w-md w-full text-center">
                         <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
                             <span className="text-4xl">⚠️</span>
@@ -43,19 +43,19 @@ class ErrorBoundary extends Component<Props, State> {
                         <h1 className="text-2xl font-bold text-white mb-3">
                             Algo salió mal
                         </h1>
-                        <p className="text-slate-400 mb-8 leading-relaxed">
+                        <p className="text-navy-400 mb-8 leading-relaxed">
                             Ocurrió un error inesperado. Por favor, intenta de nuevo.
                         </p>
                         <div className="flex gap-4 justify-center">
                             <button
                                 onClick={this.handleRetry}
-                                className="px-6 py-3 bg-brand-500 hover:bg-brand-400 text-slate-900 font-bold rounded-xl transition-colors"
+                                className="px-6 py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-colors"
                             >
                                 Intentar de nuevo
                             </button>
                             <button
                                 onClick={() => { window.location.href = '/'; }}
-                                className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-colors border border-white/10"
+                                className="px-6 py-3 bg-navy-800 hover:bg-navy-700 text-white font-bold rounded-xl transition-colors border border-white/10"
                             >
                                 Volver al inicio
                             </button>

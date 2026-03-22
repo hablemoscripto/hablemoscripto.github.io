@@ -20,12 +20,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId, thumbnail, title }) 
 
     return (
         <div
-            className="relative aspect-video bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl group"
+            className="relative aspect-video bg-navy-900 rounded-2xl overflow-hidden border border-navy-800 shadow-2xl group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
             {!isPlaying ? (
-                <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
+                <div className="absolute inset-0 flex items-center justify-center bg-navy-900">
                     {thumbnail && (
                         <img
                             src={thumbnail}
@@ -34,14 +34,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId, thumbnail, title }) 
                         />
                     )}
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
 
                     <div className="relative z-10 text-center p-6">
                         <button
                             onClick={handlePlay}
                             className="w-20 h-20 rounded-full bg-brand-500 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(255,193,7,0.3)] group-hover:scale-110 group-hover:shadow-[0_0_50px_rgba(255,193,7,0.5)] transition-all duration-300"
                         >
-                            <Play size={32} className="text-slate-900 fill-slate-900 ml-1" />
+                            <Play size={32} className="text-navy-900 fill-navy-900 ml-1" />
                         </button>
                         <h3 className="text-xl font-bold text-white mb-2 max-w-lg mx-auto">{title}</h3>
                         <p className="text-brand-400 font-medium text-sm uppercase tracking-wider">Ver Lección</p>

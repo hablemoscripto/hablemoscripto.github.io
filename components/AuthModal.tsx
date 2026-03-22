@@ -174,13 +174,13 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                 <Mail size={32} className="text-white" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold text-white">Verifica tu email</h2>
-              <p className="text-slate-400 mt-2">
+              <p className="text-navy-400 mt-2">
                 Te enviamos un enlace de verificacion a <span className="text-white font-medium">{email}</span>
               </p>
             </div>
 
             <div className="space-y-4">
-              <div className="bg-slate-800 border border-slate-600 rounded-lg p-4 text-slate-300 text-sm space-y-2">
+              <div className="bg-navy-800 border border-navy-600 rounded-lg p-4 text-navy-300 text-sm space-y-2">
                 <p>1. Revisa tu bandeja de entrada (y spam)</p>
                 <p>2. Haz clic en el enlace de verificacion</p>
                 <p>3. Vuelve aqui e inicia sesion</p>
@@ -202,7 +202,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                 onClick={handleResendVerification}
                 disabled={loading}
                 aria-busy={loading}
-                className="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg border border-slate-600 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full bg-navy-800 hover:bg-navy-700 text-white font-semibold py-3 rounded-lg border border-navy-600 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {loading ? <Loader2 size={20} className="animate-spin" aria-hidden="true" /> : <Mail size={20} aria-hidden="true" />}
                 Reenviar email de verificacion
@@ -227,16 +227,16 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                 <Lock size={32} className="text-white" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold text-white">Restablecer contrasena</h2>
-              <p className="text-slate-400 mt-2">
+              <p className="text-navy-400 mt-2">
                 Te enviaremos un enlace para crear una nueva contrasena
               </p>
             </div>
 
             <form onSubmit={handleForgotPassword} className="space-y-4" noValidate>
               <div>
-                <label htmlFor="forgot-email" className="block text-sm font-medium text-slate-300 mb-2">Email</label>
+                <label htmlFor="forgot-email" className="block text-sm font-medium text-navy-300 mb-2">Email</label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} aria-hidden="true" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
                   <input
                     id="forgot-email"
                     type="email"
@@ -245,7 +245,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                     placeholder="tu@email.com"
                     required
                     aria-invalid={error ? 'true' : undefined}
-                    className="w-full bg-slate-800 border border-slate-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                   />
                 </div>
               </div>
@@ -298,7 +298,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
               <h2 className="text-2xl font-bold text-white">
                 {view === 'login' ? 'Iniciar Sesion' : 'Crear Cuenta'}
               </h2>
-              <p className="text-slate-400 mt-2">
+              <p className="text-navy-400 mt-2">
                 {view === 'login'
                   ? 'Accede a tu cuenta para continuar'
                   : 'Registrate para guardar tu progreso'
@@ -308,9 +308,9 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
 
             <form onSubmit={handleSubmit} className="space-y-4" noValidate>
               <div>
-                <label htmlFor="auth-email" className="block text-sm font-medium text-slate-300 mb-2">Email</label>
+                <label htmlFor="auth-email" className="block text-sm font-medium text-navy-300 mb-2">Email</label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} aria-hidden="true" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
                   <input
                     id="auth-email"
                     type="email"
@@ -319,15 +319,15 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                     placeholder="tu@email.com"
                     required
                     aria-invalid={error ? 'true' : undefined}
-                    className="w-full bg-slate-800 border border-slate-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="auth-password" className="block text-sm font-medium text-slate-300 mb-2">Contrasena</label>
+                <label htmlFor="auth-password" className="block text-sm font-medium text-navy-300 mb-2">Contrasena</label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} aria-hidden="true" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
                   <input
                     id="auth-password"
                     type="password"
@@ -335,16 +335,16 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     required
-                    className="w-full bg-slate-800 border border-slate-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                   />
                 </div>
               </div>
 
               {view === 'signup' && (
                 <div>
-                  <label htmlFor="auth-confirm-password" className="block text-sm font-medium text-slate-300 mb-2">Confirmar Contrasena</label>
+                  <label htmlFor="auth-confirm-password" className="block text-sm font-medium text-navy-300 mb-2">Confirmar Contrasena</label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} aria-hidden="true" />
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
                     <input
                       id="auth-confirm-password"
                       type="password"
@@ -352,7 +352,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="••••••••"
                       required
-                      className="w-full bg-slate-800 border border-slate-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                      className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                     />
                   </div>
                 </div>
@@ -363,7 +363,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                   <button
                     type="button"
                     onClick={() => switchTo('forgot-password')}
-                    className="text-sm text-slate-400 hover:text-orange-400 transition-colors"
+                    className="text-sm text-navy-400 hover:text-orange-400 transition-colors"
                   >
                     Olvidaste tu contrasena?
                   </button>
@@ -397,9 +397,9 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
             </form>
 
             <div className="flex items-center gap-4 my-6">
-              <div className="flex-1 h-px bg-slate-700" aria-hidden="true"></div>
-              <span className="text-slate-500 text-sm">o</span>
-              <div className="flex-1 h-px bg-slate-700" aria-hidden="true"></div>
+              <div className="flex-1 h-px bg-navy-700" aria-hidden="true"></div>
+              <span className="text-navy-500 text-sm">o</span>
+              <div className="flex-1 h-px bg-navy-700" aria-hidden="true"></div>
             </div>
 
             <button
@@ -417,7 +417,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
             </button>
 
             <div className="mt-6 text-center">
-              <p className="text-slate-400">
+              <p className="text-navy-400">
                 {view === 'login' ? 'No tienes cuenta?' : 'Ya tienes cuenta?'}
                 <button
                   onClick={() => switchTo(view === 'login' ? 'signup' : 'login')}
