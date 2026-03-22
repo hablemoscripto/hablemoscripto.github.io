@@ -1,5 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, AlertTriangle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock, Users, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, LucideIcon, X, ZoomIn, ZoomOut, Move } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, AlertTriangle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock, Users, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, LucideIcon, ZoomIn } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import rehypeSanitize from 'rehype-sanitize';
+import VideoPlayer from './ui/VideoPlayer';
+import ImageLightbox from './lesson/ImageLightbox';
+import SelectionTooltip from './lesson/SelectionTooltip';
+import { useProgress } from '../contexts/ProgressContext';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import Quiz from './education/Quiz';
+import CheckpointQuiz from './education/CheckpointQuiz';
+import { getPreviousLessonId, getNextLessonId, getAllLessonsOrdered, getLevelForLesson } from '../utils/courseUtils';
+import { fetchLessonById, LessonData, type LessonSection } from '../services/lessonService';
 
 // Icon map for dynamic icon rendering from database
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -8,16 +20,6 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, AlertCircle,
   CheckCircle, Clock, BookOpen, Award
 };
-import ReactMarkdown from 'react-markdown';
-import rehypeSanitize from 'rehype-sanitize';
-import VideoPlayer from './ui/VideoPlayer';
-import { useProgress } from '../contexts/ProgressContext';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import Quiz from './education/Quiz';
-import CheckpointQuiz from './education/CheckpointQuiz';
-import { getPreviousLessonId, getNextLessonId, getAllLessonsOrdered, getLevelForLesson } from '../utils/courseUtils';
-import { fetchLessonById, LessonData, type LessonSection } from '../services/lessonService';
 
 const LessonView: React.FC = () => {
     const { lessonId } = useParams<{ lessonId: string }>();
@@ -42,70 +44,9 @@ const LessonView: React.FC = () => {
 
     // Image lightbox state
     const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
-    const [zoomLevel, setZoomLevel] = useState(1);
-    const [panPosition, setPanPosition] = useState({ x: 0, y: 0 });
-    const [isDragging, setIsDragging] = useState(false);
-    const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-    const lightboxRef = useRef<HTMLDivElement>(null);
 
     // Focus Mode
     const [isFocusMode, setIsFocusMode] = useState(false);
-
-    // AI Highlight Tooltip State
-    const [selectionState, setSelectionState] = useState<{ visible: boolean; x: number; y: number; text: string }>({
-        visible: false,
-        x: 0,
-        y: 0,
-        text: ''
-    });
-
-    // Handle text selection
-    useEffect(() => {
-        const handleSelection = () => {
-            const selection = window.getSelection();
-            if (!selection || selection.isCollapsed) {
-                setSelectionState(prev => ({ ...prev, visible: false }));
-                return;
-            }
-
-            const text = selection.toString().trim();
-            // Only show for meaningful selections (between 3 and 150 characters)
-            if (text.length > 2 && text.length < 150) {
-                const range = selection.getRangeAt(0);
-                const rect = range.getBoundingClientRect();
-                
-                setSelectionState({
-                    visible: true,
-                    x: rect.left + rect.width / 2,
-                    y: rect.top - 10,
-                    text: text
-                });
-            } else {
-                setSelectionState(prev => ({ ...prev, visible: false }));
-            }
-        };
-
-        const handleMouseDown = () => setSelectionState(prev => ({ ...prev, visible: false }));
-
-        document.addEventListener('mouseup', handleSelection);
-        document.addEventListener('mousedown', handleMouseDown);
-        
-        return () => {
-            document.removeEventListener('mouseup', handleSelection);
-            document.removeEventListener('mousedown', handleMouseDown);
-        };
-    }, []);
-
-    const handleAskAI = (e: React.MouseEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        const event = new CustomEvent('open-chat-with-prompt', {
-            detail: { prompt: `Explícame qué significa esto en el contexto de las criptomonedas: "${selectionState.text}"` }
-        });
-        window.dispatchEvent(event);
-        setSelectionState(prev => ({ ...prev, visible: false }));
-    };
 
     // Fetch lesson data from database
     useEffect(() => {
@@ -213,45 +154,6 @@ const LessonView: React.FC = () => {
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    // Keyboard handler for lightbox (ESC to close)
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (lightboxImage) {
-                if (e.key === 'Escape') {
-                    closeLightbox();
-                } else if (e.key === '+' || e.key === '=') {
-                    handleZoomIn();
-                } else if (e.key === '-') {
-                    handleZoomOut();
-                }
-            }
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [lightboxImage]);
-
-    // Wheel zoom handler — attached via ref to use { passive: false }
-    const handleWheel = useCallback((e: WheelEvent) => {
-        e.preventDefault();
-        if (e.deltaY < 0) {
-            setZoomLevel(prev => Math.min(prev + 0.5, 4));
-        } else {
-            setZoomLevel(prev => {
-                const newZoom = Math.max(prev - 0.5, 1);
-                if (newZoom === 1) setPanPosition({ x: 0, y: 0 });
-                return newZoom;
-            });
-        }
-    }, []);
-
-    // Attach wheel listener as non-passive so preventDefault works
-    useEffect(() => {
-        const el = lightboxRef.current;
-        if (!lightboxImage || !el) return;
-        el.addEventListener('wheel', handleWheel, { passive: false });
-        return () => el.removeEventListener('wheel', handleWheel);
-    }, [lightboxImage, handleWheel]);
 
     if (!isValidId) {
         return (
@@ -374,50 +276,12 @@ const LessonView: React.FC = () => {
     // Lightbox functions
     const openLightbox = (src: string, alt: string) => {
         setLightboxImage({ src, alt });
-        setZoomLevel(1);
-        setPanPosition({ x: 0, y: 0 });
         document.body.style.overflow = 'hidden';
     };
 
     const closeLightbox = () => {
         setLightboxImage(null);
-        setZoomLevel(1);
-        setPanPosition({ x: 0, y: 0 });
         document.body.style.overflow = '';
-    };
-
-    const handleZoomIn = () => {
-        setZoomLevel(prev => Math.min(prev + 0.5, 4));
-    };
-
-    const handleZoomOut = () => {
-        setZoomLevel(prev => {
-            const newZoom = Math.max(prev - 0.5, 1);
-            if (newZoom === 1) {
-                setPanPosition({ x: 0, y: 0 });
-            }
-            return newZoom;
-        });
-    };
-
-    const handleMouseDown = (e: React.MouseEvent) => {
-        if (zoomLevel > 1) {
-            setIsDragging(true);
-            setDragStart({ x: e.clientX - panPosition.x, y: e.clientY - panPosition.y });
-        }
-    };
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (isDragging && zoomLevel > 1) {
-            setPanPosition({
-                x: e.clientX - dragStart.x,
-                y: e.clientY - dragStart.y
-            });
-        }
-    };
-
-    const handleMouseUp = () => {
-        setIsDragging(false);
     };
 
     return (
@@ -426,97 +290,8 @@ const LessonView: React.FC = () => {
                 <title>{lesson.title} | Hablemos Cripto</title>
             </Helmet>
 
-            {/* AI Floating Explain Button */}
-            {selectionState.visible && (
-                <div 
-                    className="fixed z-[100] animate-in zoom-in duration-200"
-                    style={{
-                        left: `${selectionState.x}px`,
-                        top: `${selectionState.y}px`,
-                        transform: 'translate(-50%, -100%)' // Center horizontally, position above cursor
-                    }}
-                >
-                    <button
-                        onMouseDown={handleAskAI} // use onMouseDown to fire before onMouseUp clears the selection
-                        className="flex items-center gap-2 px-3 py-1.5 bg-brand-500 hover:bg-brand-400 text-slate-900 text-xs font-bold rounded-full shadow-glow-brand transition-colors whitespace-nowrap"
-                    >
-                        <MessageSquare size={14} />
-                        Explicar con CBas
-                    </button>
-                    {/* Little downward pointing triangle */}
-                    <div className="w-2 h-2 bg-brand-500 absolute left-1/2 -bottom-1 -translate-x-1/2 rotate-45"></div>
-                </div>
-            )}
-
-            {/* Image Lightbox Modal */}
-            {lightboxImage && (
-                <div
-                    className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
-                    onClick={closeLightbox}
-                >
-                    {/* Controls */}
-                    <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
-                        <div className="bg-slate-800/80 backdrop-blur-sm rounded-lg px-3 py-1.5 text-sm text-slate-300 flex items-center gap-2">
-                            <Move size={14} />
-                            <span>{Math.round(zoomLevel * 100)}%</span>
-                        </div>
-                        <button
-                            onClick={(e) => { e.stopPropagation(); handleZoomOut(); }}
-                            disabled={zoomLevel <= 1}
-                            className="p-2 bg-slate-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                            title="Alejar"
-                        >
-                            <ZoomOut size={20} />
-                        </button>
-                        <button
-                            onClick={(e) => { e.stopPropagation(); handleZoomIn(); }}
-                            disabled={zoomLevel >= 4}
-                            className="p-2 bg-slate-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                            title="Acercar"
-                        >
-                            <ZoomIn size={20} />
-                        </button>
-                        <button
-                            onClick={closeLightbox}
-                            className="p-2 bg-slate-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-red-500 transition-colors"
-                            title="Cerrar"
-                        >
-                            <X size={20} />
-                        </button>
-                    </div>
-
-                    {/* Instructions */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-800/80 backdrop-blur-sm rounded-lg px-4 py-2 text-sm text-slate-400 flex items-center gap-4">
-                        <span>🖱️ Scroll para zoom</span>
-                        <span>✋ Arrastra para mover</span>
-                        <span>ESC para cerrar</span>
-                    </div>
-
-                    {/* Image Container */}
-                    <div
-                        ref={lightboxRef}
-                        className={`overflow-hidden max-w-[90vw] max-h-[85vh] ${zoomLevel > 1 ? 'cursor-grab' : 'cursor-zoom-in'} ${isDragging ? 'cursor-grabbing' : ''}`}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            if (zoomLevel === 1) handleZoomIn();
-                        }}
-                        onMouseDown={handleMouseDown}
-                        onMouseMove={handleMouseMove}
-                        onMouseUp={handleMouseUp}
-                        onMouseLeave={handleMouseUp}
-                    >
-                        <img
-                            src={lightboxImage.src}
-                            alt={lightboxImage.alt}
-                            className="max-w-full max-h-[85vh] object-contain select-none transition-transform duration-200 will-change-transform"
-                            style={{
-                                transform: `scale(${zoomLevel}) translate(${panPosition.x / zoomLevel}px, ${panPosition.y / zoomLevel}px)`,
-                            }}
-                            draggable={false}
-                        />
-                    </div>
-                </div>
-            )}
+            <SelectionTooltip />
+            <ImageLightbox image={lightboxImage} onClose={closeLightbox} />
 
             <div className="min-h-screen bg-slate-950 pb-20">
                 {/* Progress Bar Fixed Top */}
