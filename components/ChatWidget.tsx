@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Sparkles, Loader2 } from 'lucide-react';
 import { streamGeminiResponse, ChatMessage } from '../services/geminiService';
+import { trackChatMessage } from '../utils/analytics';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
 
@@ -16,6 +17,7 @@ const ChatWidget: React.FC = () => {
     }
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -24,6 +26,13 @@ const ChatWidget: React.FC = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Focus input when chat opens
+  useEffect(() => {
+    if (isOpen) {
+      requestAnimationFrame(() => inputRef.current?.focus());
+    }
+  }, [isOpen]);
 
   // Listen for custom events from other components (like LessonView)
   useEffect(() => {
@@ -46,23 +55,21 @@ const ChatWidget: React.FC = () => {
       timestamp: new Date()
     };
 
-    // Add user message immediately
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
+    trackChatMessage();
 
     try {
       let fullResponse = '';
-      // Add placeholder for model message
       setMessages(prev => [...prev, {
         role: 'model',
         text: '',
         timestamp: new Date()
       }]);
 
-      // Filter out the initial greeting if it's the first message to satisfy Gemini API requirements
-      const apiHistory = messages[0]?.role === 'model' && messages.length === 1 
-        ? [] 
+      const apiHistory = messages[0]?.role === 'model' && messages.length === 1
+        ? []
         : messages;
 
       await streamGeminiResponse(
@@ -92,31 +99,42 @@ const ChatWidget: React.FC = () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 text-slate-900 shadow-lg hover:shadow-brand-500/40 transition-all transform hover:scale-110 active:scale-95 flex items-center justify-center"
-        aria-label="Abrir Asistente IA"
+        aria-label={isOpen ? 'Cerrar asistente IA' : 'Abrir asistente IA'}
+        aria-expanded={isOpen}
       >
-        {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
+        {isOpen ? <X size={28} aria-hidden="true" /> : <MessageCircle size={28} aria-hidden="true" />}
       </button>
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-[90vw] sm:w-[400px] h-[500px] max-h-[80vh] z-50 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-float-in origin-bottom-right">
-          
+        <section
+          className="fixed bottom-24 right-6 w-[90vw] sm:w-[400px] h-[500px] max-h-[80vh] z-50 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-float-in origin-bottom-right"
+          role="region"
+          aria-label="Chat con asistente de IA"
+        >
+
           {/* Header */}
           <div className="bg-slate-800 p-4 border-b border-slate-700 flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center border border-brand-500/50">
-              <Sparkles size={20} className="text-brand-500" />
+              <Sparkles size={20} className="text-brand-500" aria-hidden="true" />
             </div>
             <div>
-              <h3 className="font-bold text-white text-sm">CBas AI Assistant</h3>
+              <h3 className="font-bold text-white text-sm" id="chat-title">CBas AI Assistant</h3>
               <p className="text-xs text-slate-400 flex items-center gap-1">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true"></span>
                 Online con Gemini 1.5
               </p>
             </div>
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-950/50 scroll-smooth">
+          <div
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-950/50 scroll-smooth"
+            role="log"
+            aria-live="polite"
+            aria-atomic="false"
+            aria-label="Historial de mensajes"
+          >
             {messages.map((msg, idx) => (
               <div
                 key={idx}
@@ -128,10 +146,17 @@ const ChatWidget: React.FC = () => {
                       ? 'bg-brand-600 text-white rounded-br-none'
                       : 'bg-slate-800 text-slate-200 rounded-bl-none border border-slate-700'
                   }`}
+                  aria-label={msg.role === 'user' ? 'Tu mensaje' : 'Respuesta del asistente'}
                 >
                   {msg.role === 'model' ? (
                      <div className="prose prose-invert prose-sm max-w-none">
-                        {msg.text ? <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{msg.text}</ReactMarkdown> : <span className="flex items-center gap-1 text-slate-400"><Loader2 size={14} className="animate-spin" /> Pensando...</span>}
+                        {msg.text ? (
+                          <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{msg.text}</ReactMarkdown>
+                        ) : (
+                          <span className="flex items-center gap-1 text-slate-400" aria-label="Pensando">
+                            <Loader2 size={14} className="animate-spin" aria-hidden="true" /> Pensando...
+                          </span>
+                        )}
                      </div>
                   ) : (
                     msg.text
@@ -145,27 +170,30 @@ const ChatWidget: React.FC = () => {
           {/* Input Area */}
           <form onSubmit={handleSubmit} className="p-4 bg-slate-800 border-t border-slate-700 flex gap-2">
             <input
+              ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Pregunta sobre cripto..."
+              aria-label="Escribe tu pregunta sobre criptomonedas"
               className="flex-1 bg-slate-900 border border-slate-600 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all"
               disabled={isLoading}
             />
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
+              aria-label={isLoading ? 'Enviando mensaje' : 'Enviar mensaje'}
               className="p-2 bg-brand-500 text-slate-900 rounded-xl hover:bg-brand-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {isLoading ? <Loader2 size={20} className="animate-spin" /> : <Send size={20} />}
+              {isLoading ? <Loader2 size={20} className="animate-spin" aria-hidden="true" /> : <Send size={20} aria-hidden="true" />}
             </button>
           </form>
-          
+
           {/* Powered By */}
           <div className="bg-slate-900 py-1 text-center">
              <p className="text-[10px] text-slate-500">Powered by Google Gemini</p>
           </div>
-        </div>
+        </section>
       )}
     </>
   );

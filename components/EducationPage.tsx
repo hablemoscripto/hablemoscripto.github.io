@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import EducationNavbar from './EducationNavbar';
+import LessonSearch from './LessonSearch';
 import {
   Trophy, Shield, TrendingUp, Star, ChevronRight, LucideIcon, Award, Crown,
   Footprints, BookOpen, Flag, GraduationCap, Gem, Zap, Flame, Activity, Calendar, Lock,
@@ -44,8 +45,21 @@ const ACHIEVEMENT_ICONS: Record<string, LucideIcon> = {
 
 const EducationPage: React.FC<EducationPageProps> = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const [levels, setLevels] = useState<Level[]>([]);
   const { user } = useAuth();
+
+  // Ctrl+K / Cmd+K keyboard shortcut for search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setShowSearch(true);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
   const [activeCertificate, setActiveCertificate] = useState<{ level: string, title: string, variant: 'beginner' | 'intermediate' | 'advanced' } | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -206,8 +220,10 @@ const EducationPage: React.FC<EducationPageProps> = () => {
       <EducationNavbar
         globalProgress={globalPercentage}
         onOpenProgress={() => setShowModal(true)}
+        onOpenSearch={() => setShowSearch(true)}
         currentView="dashboard"
       />
+      <LessonSearch isOpen={showSearch} onClose={() => setShowSearch(false)} />
 
       <div className="bg-navy-900/50 border-b border-white/5 py-5 sticky top-16 z-30 backdrop-blur-xl">
         <div className="container max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
 import {
@@ -6,6 +6,8 @@ import {
     getIntermediateLessonIds,
     getAdvancedLessonIds,
 } from '../utils/courseUtils';
+import { trackAchievementUnlock } from '../utils/analytics';
+import { reportError } from '../utils/errorReporting';
 
 export interface Achievement {
     id: string;
@@ -142,7 +144,7 @@ interface GamificationContextType {
     achievements: Achievement[];
     achievementDefinitions: AchievementDefinition[];
     pendingToasts: Achievement[];
-    addXp: (amount: number) => Promise<void>;
+    addXp: (amount: number) => void;
     checkAchievements: (progressData: ProgressSnapshot, silent?: boolean) => void;
     dismissToast: (id: string) => void;
     loading: boolean;
@@ -158,6 +160,9 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
     const [pendingToasts, setPendingToasts] = useState<Achievement[]>([]);
     const [loading, setLoading] = useState(true);
 
+    // Track previously persisted achievement IDs to detect new unlocks
+    const persistedIdsRef = useRef<Set<string>>(new Set());
+
     // Level calculation: Level = floor(sqrt(XP / 100)) + 1
     const level = Math.floor(Math.sqrt(xp / 100)) + 1;
 
@@ -169,15 +174,55 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
             setStreak(0);
             setAchievements([]);
             setPendingToasts([]);
+            persistedIdsRef.current = new Set();
             setLoading(false);
         }
     }, [user]);
+
+    // Persist newly unlocked achievements to Supabase
+    useEffect(() => {
+        if (!user || achievements.length === 0) return;
+
+        const newOnes = achievements.filter(a => !persistedIdsRef.current.has(a.id));
+        if (newOnes.length === 0) return;
+
+        // Mark as persisted immediately to avoid duplicate writes
+        for (const a of newOnes) {
+            persistedIdsRef.current.add(a.id);
+        }
+
+        // Write to Supabase (fire-and-forget)
+        Promise.all(
+            newOnes.map(a =>
+                supabase.from('user_achievements').upsert(
+                    {
+                        user_id: user.id,
+                        achievement_id: a.id,
+                        unlocked_at: a.unlockedAt || new Date().toISOString(),
+                    },
+                    { onConflict: 'user_id,achievement_id' }
+                )
+            )
+        ).catch(err => {
+            reportError(err, { component: 'GamificationContext', action: 'persistAchievements' });
+        });
+
+        // Update localStorage cache
+        try {
+            localStorage.setItem(
+                `gamification_${user.id}`,
+                JSON.stringify({ achievements })
+            );
+        } catch {
+            // localStorage may be full or unavailable
+        }
+    }, [achievements, user]);
 
     const fetchUserStats = async () => {
         if (!user) return;
 
         try {
-            // 1. Fetch completed lessons count to calculate XP
+            // 1. Calculate XP from completed lesson count
             const { count, error: progressError } = await supabase
                 .from('user_progress')
                 .select('*', { count: 'exact', head: true })
@@ -185,14 +230,13 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
                 .eq('completed', true);
 
             if (progressError) {
-                console.error('Error fetching progress for gamification:', progressError);
+                reportError(progressError, { component: 'GamificationContext', action: 'fetchXp' });
             }
 
-            // Calculate XP based on completed lessons (100 XP per lesson)
             const calculatedXp = (count || 0) * 100;
             setXp(calculatedXp);
 
-            // 2. Fetch Streak — count consecutive calendar days with completions
+            // 2. Calculate streak from consecutive calendar days with completions
             const { data: completions } = await supabase
                 .from('user_progress')
                 .select('completed_at')
@@ -200,7 +244,6 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
                 .eq('completed', true);
 
             if (completions && completions.length > 0) {
-                // Extract unique calendar dates (YYYY-MM-DD in local time)
                 const uniqueDates = [...new Set(
                     completions
                         .filter(c => c.completed_at)
@@ -211,7 +254,6 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
                     const today = new Date().toLocaleDateString('en-CA');
                     const yesterday = new Date(Date.now() - 86400000).toLocaleDateString('en-CA');
 
-                    // Streak only counts if most recent activity is today or yesterday
                     if (uniqueDates[0] === today || uniqueDates[0] === yesterday) {
                         let streakCount = 1;
                         for (let i = 1; i < uniqueDates.length; i++) {
@@ -231,41 +273,58 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
                 }
             }
 
-            // 3. Load achievements from localStorage
-            const localStats = localStorage.getItem(`gamification_${user.id}`);
-            if (localStats) {
-                const stats = JSON.parse(localStats);
-                setAchievements(stats.achievements || []);
-            }
+            // 3. Load achievements: try Supabase first, fall back to localStorage
+            const { data: dbAchievements, error: achError } = await supabase
+                .from('user_achievements')
+                .select('achievement_id, unlocked_at')
+                .eq('user_id', user.id);
 
+            if (!achError && dbAchievements && dbAchievements.length > 0) {
+                const loaded = dbAchievements.map(a => {
+                    const def = ACHIEVEMENT_DEFINITIONS.find(d => d.id === a.achievement_id);
+                    return {
+                        id: a.achievement_id,
+                        title: def?.title || a.achievement_id,
+                        description: def?.description || '',
+                        icon: def?.icon || 'Award',
+                        unlockedAt: a.unlocked_at,
+                    };
+                });
+                setAchievements(loaded);
+                persistedIdsRef.current = new Set(loaded.map(a => a.id));
+            } else {
+                // Fall back to localStorage (migration path for existing users)
+                try {
+                    const localStats = localStorage.getItem(`gamification_${user.id}`);
+                    if (localStats) {
+                        const stats = JSON.parse(localStats);
+                        const localAchievements: Achievement[] = stats.achievements || [];
+                        setAchievements(localAchievements);
+                        persistedIdsRef.current = new Set(); // Will trigger the persist effect
+                    }
+                } catch {
+                    // Corrupted localStorage — start fresh
+                }
+
+                // If we got a table-not-found error, log it once for awareness
+                if (achError && achError.code !== 'PGRST116') {
+                    reportError(achError, {
+                        component: 'GamificationContext',
+                        action: 'fetchAchievements',
+                        metadata: { hint: 'Run supabase/migrations/create_user_achievements.sql' },
+                    });
+                }
+            }
         } catch (error) {
-            console.error('Error fetching gamification stats:', error);
+            reportError(error, { component: 'GamificationContext', action: 'fetchUserStats' });
         } finally {
             setLoading(false);
         }
     };
 
-    const saveStats = (newXp: number, newStreak: number, newAchievements: Achievement[]) => {
-        if (!user) return;
-        const stats = { xp: newXp, streak: newStreak, achievements: newAchievements };
-        localStorage.setItem(`gamification_${user.id}`, JSON.stringify(stats));
-    };
-
-    const addXp = useCallback(async (amount: number) => {
-        setXp(prev => {
-            const newXp = prev + amount;
-            // Defer save to after state update
-            requestAnimationFrame(() => {
-                if (user) {
-                    const localStats = localStorage.getItem(`gamification_${user.id}`);
-                    const stats = localStats ? JSON.parse(localStats) : {};
-                    stats.xp = newXp;
-                    localStorage.setItem(`gamification_${user.id}`, JSON.stringify(stats));
-                }
-            });
-            return newXp;
-        });
-    }, [user]);
+    const addXp = useCallback((amount: number) => {
+        setXp(prev => prev + amount);
+    }, []);
 
     const checkAchievements = useCallback((progressData: ProgressSnapshot, silent?: boolean) => {
         setAchievements(prev => {
@@ -287,24 +346,14 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
 
             if (newlyUnlocked.length === 0) return prev;
 
-            const updated = [...prev, ...newlyUnlocked];
-
-            // Save to localStorage
-            if (user) {
-                const localStats = localStorage.getItem(`gamification_${user.id}`);
-                const stats = localStats ? JSON.parse(localStats) : {};
-                stats.achievements = updated;
-                localStorage.setItem(`gamification_${user.id}`, JSON.stringify(stats));
-            }
-
-            // Queue toasts (unless silent)
             if (!silent) {
                 setPendingToasts(t => [...t, ...newlyUnlocked]);
+                newlyUnlocked.forEach(a => trackAchievementUnlock(a.id));
             }
 
-            return updated;
+            return [...prev, ...newlyUnlocked];
         });
-    }, [user]);
+    }, []);
 
     const dismissToast = useCallback((id: string) => {
         setPendingToasts(prev => prev.filter(t => t.id !== id));

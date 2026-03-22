@@ -56,6 +56,11 @@ Route components are **lazy-loaded** via `React.lazy()` for code-splitting.
 | `scripts/seed.ts` | Seeds courseData.ts → Supabase (defines available Lucide icons) |
 | `services/lessonService.ts` | Fetches lessons from Supabase |
 | `contexts/*.tsx` | Auth, Progress, Gamification state management |
+| `components/ui/Modal.tsx` | Reusable accessible modal (focus trap, scroll lock, portal, ARIA) |
+| `components/LessonSearch.tsx` | Lesson search with Ctrl+K shortcut |
+| `utils/analytics.ts` | GA4 analytics wrapper (env: `VITE_GA4_MEASUREMENT_ID`) |
+| `utils/errorReporting.ts` | Error reporting utility (env: `VITE_ERROR_REPORTING_URL`) |
+| `supabase/migrations/` | SQL migrations (run manually in Supabase SQL Editor) |
 | `supabase/functions/` | Edge Functions (Deno) — see Edge Functions section |
 
 ### Routes
@@ -144,6 +149,8 @@ VITE_SUPABASE_URL
 VITE_SUPABASE_ANON_KEY
 VITE_SUPABASE_SERVICE_KEY  # Required for seeding only
 VITE_WOMPI_PUBLIC_KEY
+VITE_GA4_MEASUREMENT_ID    # Google Analytics 4 (optional, production only)
+VITE_ERROR_REPORTING_URL   # Error reporting endpoint (optional)
 ```
 
 ### Supabase Edge Function Secrets

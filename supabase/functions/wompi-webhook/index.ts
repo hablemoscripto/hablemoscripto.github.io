@@ -145,9 +145,15 @@ serve(async (req) => {
 
       if (upgradeError) {
         console.error('Error upgrading user:', upgradeError)
-      } else {
-        console.log('User upgraded to premium:', payment.user_id)
+        // Return 500 so Wompi retries the webhook — payment was recorded
+        // but user upgrade failed, which must not be silently ignored
+        return new Response(
+          JSON.stringify({ error: 'Failed to upgrade user', reference: transaction.reference }),
+          { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
       }
+
+      console.log('User upgraded to premium:', payment.user_id)
     }
 
     return new Response(

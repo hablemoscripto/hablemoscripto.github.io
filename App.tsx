@@ -1,8 +1,7 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence } from 'framer-motion';
-// LandingPage is lazy-loaded like other routes for better code-splitting
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProgressProvider } from './contexts/ProgressContext';
@@ -13,6 +12,8 @@ import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from './data/cours
 import PageTransition from './components/ui/PageTransition';
 import ErrorBoundary from './components/ErrorBoundary';
 import { Loader2 } from 'lucide-react';
+import { initAnalytics, trackPageView } from './utils/analytics';
+import { initErrorReporting } from './utils/errorReporting';
 
 // Lazy-loaded route components
 const LandingPage = lazy(() => import('./components/LandingPage'));
@@ -35,6 +36,10 @@ function RouteLoader() {
 
 function AnimatedRoutes() {
   const location = useLocation();
+
+  useEffect(() => {
+    trackPageView(location.pathname);
+  }, [location.pathname]);
 
   return (
     <AnimatePresence mode="wait">
@@ -113,6 +118,11 @@ function AnimatedRoutes() {
 }
 
 function App() {
+  useEffect(() => {
+    initAnalytics();
+    initErrorReporting();
+  }, []);
+
   return (
     <ErrorBoundary>
       <HelmetProvider>

@@ -8,24 +8,35 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-// Simple HTML sanitizer — strip all tags except a safe subset
+// HTML sanitizer — allowlist-based tag and attribute filtering.
+// Builds safe output from scratch rather than stripping in-place,
+// so unquoted or malformed attributes are automatically dropped.
 function sanitizeHtml(html: string): string {
   const ALLOWED_TAGS = ['p', 'br', 'b', 'strong', 'i', 'em', 'u', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'code', 'pre', 'hr', 'img', 'span', 'div']
-  const ALLOWED_ATTRS = ['href', 'src', 'alt', 'style', 'class', 'target', 'rel']
+  const ALLOWED_ATTRS = ['href', 'src', 'alt', 'class', 'target', 'rel']
   const tagPattern = /<\/?([a-z][a-z0-9]*)\b([^>]*)>/gi
+
   return html.replace(tagPattern, (match, tag, attrs) => {
     const lowerTag = tag.toLowerCase()
     if (!ALLOWED_TAGS.includes(lowerTag)) return ''
-    // Filter attributes
-    const cleanAttrs = (attrs as string).replace(/([a-z-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi, (attrMatch, name, val1, val2) => {
-      const attrName = name.toLowerCase()
-      const attrVal = val1 ?? val2 ?? ''
-      if (!ALLOWED_ATTRS.includes(attrName)) return ''
-      // Block javascript: URLs
-      if ((attrName === 'href' || attrName === 'src') && attrVal.trim().toLowerCase().startsWith('javascript:')) return ''
-      return attrMatch
-    })
-    return `<${match.startsWith('</') ? '/' : ''}${lowerTag}${cleanAttrs}>`
+
+    // Closing tags never carry attributes
+    if (match.startsWith('</')) return `</${lowerTag}>`
+
+    // Build attribute string from scratch — only explicitly matched & allowed attrs survive
+    const attrPattern = /([a-z-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi
+    const safeAttrs: string[] = []
+    let attrMatch: RegExpExecArray | null
+    while ((attrMatch = attrPattern.exec(attrs as string)) !== null) {
+      const attrName = attrMatch[1].toLowerCase()
+      const attrVal = attrMatch[2] ?? attrMatch[3] ?? ''
+      if (!ALLOWED_ATTRS.includes(attrName)) continue
+      if ((attrName === 'href' || attrName === 'src') && /^\s*(javascript|data):/i.test(attrVal)) continue
+      safeAttrs.push(`${attrName}="${attrVal}"`)
+    }
+
+    const attrStr = safeAttrs.length > 0 ? ' ' + safeAttrs.join(' ') : ''
+    return `<${lowerTag}${attrStr}>`
   })
 }
 

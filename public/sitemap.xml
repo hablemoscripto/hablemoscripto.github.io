@@ -25,4 +25,60 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Beginner lessons -->
+  <url><loc>https://hablemoscripto.io/education/lesson/1</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/2</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/3</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/4</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/5</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/6</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/7</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/8</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/9</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/10</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/35</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/36</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/37</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/38</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/13</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/14</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/15</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/16</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/17</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Intermediate lessons -->
+  <url><loc>https://hablemoscripto.io/education/lesson/18</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/19</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/20</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/21</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/22</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/23</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/24</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/25</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/26</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/27</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/28</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/29</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Advanced lessons -->
+  <url><loc>https://hablemoscripto.io/education/lesson/30</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/31</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/32</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/33</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/34</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/39</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/40</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/41</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/42</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/43</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://hablemoscripto.io/education/lesson/44</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- Legal pages -->
+  <url>
+    <loc>https://hablemoscripto.io/privacidad</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://hablemoscripto.io/terminos</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>

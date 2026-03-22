@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Bitcoin, Menu, X, BarChart3, ChevronDown, LogOut, BookOpen, Zap, Trophy } from 'lucide-react';
+import { Bitcoin, Menu, X, BarChart3, ChevronDown, LogOut, BookOpen, Zap, Trophy, Search } from 'lucide-react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useGamification } from '../contexts/GamificationContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -7,10 +7,11 @@ import { useAuth } from '../contexts/AuthContext';
 interface EducationNavbarProps {
   globalProgress: number;
   onOpenProgress: () => void;
+  onOpenSearch?: () => void;
   currentView?: 'dashboard' | 'level-beginner' | 'level-intermediate' | 'level-advanced' | 'lesson';
 }
 
-const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpenProgress, currentView }) => {
+const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpenProgress, onOpenSearch, currentView }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -64,6 +65,20 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
                 <span className="text-xs text-slate-500">({xp} XP)</span>
               </div>
             </div>
+
+            {onOpenSearch && (
+              <button
+                onClick={onOpenSearch}
+                className="flex items-center gap-2 px-3 py-2 rounded-full bg-slate-900 border border-slate-800 hover:border-brand-500/30 transition-all text-sm text-slate-400 hover:text-white"
+                aria-label="Buscar lecciones"
+              >
+                <Search size={16} aria-hidden="true" />
+                <span className="hidden lg:inline">Buscar</span>
+                <kbd className="hidden lg:inline-flex ml-1 px-1.5 py-0.5 text-[10px] bg-slate-700 rounded border border-slate-600 text-slate-500">
+                  Ctrl K
+                </kbd>
+              </button>
+            )}
 
             <button
               onClick={onOpenProgress}
@@ -129,6 +144,11 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
               <span className="font-bold">Lvl {level}</span>
             </div>
           </div>
+          {onOpenSearch && (
+            <button onClick={() => { setIsMobileMenuOpen(false); onOpenSearch(); }} className="w-full flex items-center gap-2 p-3 rounded-lg bg-slate-800 text-left text-slate-300">
+              <Search size={16} aria-hidden="true" /> Buscar Lecciones
+            </button>
+          )}
           <button onClick={onOpenProgress} className="w-full flex items-center justify-between p-3 rounded-lg bg-slate-800 text-left">
             <span className="text-slate-300">Mi Progreso</span>
             <span className="font-bold text-brand-500">{globalProgress}%</span>

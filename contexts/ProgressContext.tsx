@@ -3,6 +3,8 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
 import { useGamification } from './GamificationContext';
 import { getAllLessonsOrdered } from '../utils/courseUtils';
+import { trackLessonComplete } from '../utils/analytics';
+import { reportError } from '../utils/errorReporting';
 
 interface LessonProgress {
   lessonId: number;
@@ -30,7 +32,6 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const { addXp, checkAchievements, xp, streak } = useGamification();
 
-  // Load progress when user changes
   useEffect(() => {
     if (user) {
       loadProgress();
@@ -51,7 +52,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         .eq('user_id', user.id);
 
       if (error) {
-        console.error('Error loading progress:', error);
+        reportError(error, { component: 'ProgressContext', action: 'loadProgress' });
         return;
       }
 
@@ -64,7 +65,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
       setProgress(formattedProgress);
 
-      // Retroactive achievement check (silent — no toasts)
+      // Retroactive achievement check (silent — no toasts on page load)
       const completedItems = formattedProgress.filter(p => p.completed);
       const allLessons = getAllLessonsOrdered();
       const completedCount = completedItems.length;
@@ -78,7 +79,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         streak,
       }, true);
     } catch (error) {
-      console.error('Error loading progress:', error);
+      reportError(error, { component: 'ProgressContext', action: 'loadProgress' });
     } finally {
       setLoading(false);
     }
@@ -96,6 +97,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const markLessonComplete = async (lessonId: number, quizScore?: number) => {
     if (!user) return;
 
+    const wasAlreadyCompleted = progress.some(p => p.lessonId === lessonId && p.completed);
+
     try {
       const { error } = await supabase
         .from('user_progress')
@@ -110,7 +113,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         });
 
       if (error) {
-        console.error('Error saving progress:', error);
+        reportError(error, { component: 'ProgressContext', action: 'markLessonComplete' });
         return;
       }
 
@@ -124,10 +127,6 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
               : p
           );
         }
-
-        // If it's a new completion, award XP
-        // We need to access addXp here. Since we can't easily use the hook inside the setState callback,
-        // we'll do it outside.
         return [
           ...prev,
           {
@@ -138,27 +137,16 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
           },
         ];
       });
-
-      // Award XP if this is a new completion (or we just want to reward re-completion? No, usually just once)
-      // We check if it was already completed in the state before this update
-      const wasAlreadyCompleted = progress.some(p => p.lessonId === lessonId && p.completed);
-      if (!wasAlreadyCompleted) {
-        // We need to access the context. 
-        // Since ProgressProvider is a component, we can use the hook at the top level.
-        // But we need to make sure we imported it.
-        // We will assume 'addXp' is available from props or context.
-        // Wait, we need to use useGamification() inside ProgressProvider.
-      }
     } catch (error) {
-      console.error('Error saving progress:', error);
+      reportError(error, { component: 'ProgressContext', action: 'markLessonComplete' });
+      return;
     }
 
-    // Award XP and check achievements if it wasn't already completed
-    const wasAlreadyCompleted = progress.some(p => p.lessonId === lessonId && p.completed);
+    // Award XP and check achievements for new completions only
     if (!wasAlreadyCompleted) {
       addXp(100);
+      trackLessonComplete(lessonId, quizScore);
 
-      // Build snapshot including the newly completed lesson
       const allLessons = getAllLessonsOrdered();
       const updatedCompleted = [...progress.filter(p => p.completed).map(p => p.lessonId), lessonId];
       const completedCount = updatedCompleted.length;
