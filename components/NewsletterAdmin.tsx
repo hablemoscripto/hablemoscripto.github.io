@@ -381,7 +381,7 @@ const NewsletterAdmin: React.FC = () => {
                   value={emailSubject}
                   onChange={(e) => setEmailSubject(e.target.value)}
                   placeholder="Ej: Nueva actualización de Hablemos Cripto"
-                  className="w-full px-4 py-3 bg-navy-800 border border-navy-700 rounded-xl text-white placeholder-navy-500 focus:border-brand-500 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-navy-800 border border-navy-700 rounded-xl text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                 />
               </div>
 
@@ -395,7 +395,7 @@ const NewsletterAdmin: React.FC = () => {
                   onChange={(e) => setEmailContent(e.target.value)}
                   placeholder="Escribe tu mensaje aquí... Puedes usar HTML: <h2>, <p>, <strong>, <a href=''>, etc."
                   rows={12}
-                  className="w-full px-4 py-3 bg-navy-800 border border-navy-700 rounded-xl text-white placeholder-navy-500 focus:border-brand-500 focus:outline-none transition-colors resize-none font-mono text-sm"
+                  className="w-full px-4 py-3 bg-navy-800 border border-navy-700 rounded-xl text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors resize-none font-mono text-sm"
                 />
                 <p className="text-xs text-navy-500 mt-2">
                   Tip: Tu email se enviará con el template de Hablemos Cripto (header, footer, etc.)

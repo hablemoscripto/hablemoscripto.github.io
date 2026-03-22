@@ -94,7 +94,11 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
         return { ...lesson, matchCount };
       })
       .filter((r) => r.matchCount > 0)
-      .sort((a, b) => b.matchCount - a.matchCount);
+      .sort((a, b) => {
+        if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
+        // Preserve curriculum order for tied scores
+        return allLessons.findIndex(l => l.lessonId === a.lessonId) - allLessons.findIndex(l => l.lessonId === b.lessonId);
+      });
   }, [query, allLessons]);
 
   // Mark completed lessons

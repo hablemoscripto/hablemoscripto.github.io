@@ -49,7 +49,10 @@ export default function SelectionTooltip() {
     const handleAskAI = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        const prompt = `Explícame esto en términos simples: "${selection.text}"`;
+        const lessonContext = (window as any).__currentLesson;
+        const prompt = lessonContext
+            ? `En el contexto de la lección "${lessonContext.title}" sobre ${lessonContext.level}, explícame esto: "${selection.text}"`
+            : `Explícame esto en términos simples: "${selection.text}"`;
         window.dispatchEvent(new CustomEvent('open-chat-with-prompt', { detail: { prompt } }));
         setSelection(prev => ({ ...prev, visible: false }));
     };

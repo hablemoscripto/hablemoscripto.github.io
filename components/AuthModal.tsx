@@ -245,7 +245,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                     placeholder="tu@email.com"
                     required
                     aria-invalid={error ? 'true' : undefined}
-                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
                   />
                 </div>
               </div>
@@ -319,7 +319,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                     placeholder="tu@email.com"
                     required
                     aria-invalid={error ? 'true' : undefined}
-                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
                   />
                 </div>
               </div>
@@ -335,7 +335,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     required
-                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
                   />
                 </div>
               </div>
@@ -352,7 +352,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="••••••••"
                       required
-                      className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                      className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
                     />
                   </div>
                 </div>

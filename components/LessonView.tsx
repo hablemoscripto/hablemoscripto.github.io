@@ -56,10 +56,14 @@ const LessonView: React.FC = () => {
             setLesson(lessonData);
             if (lessonData) {
                 localStorage.setItem('last_lesson_id', String(lessonData.id));
+                (window as any).__currentLesson = { title: lessonData.title, level: lessonData.level, id: lessonData.id };
+            } else {
+                (window as any).__currentLesson = null;
             }
             setLessonLoading(false);
         }
         loadLesson();
+        return () => { (window as any).__currentLesson = null; };
     }, [id]);
 
     // Access Control Logic
