@@ -5,6 +5,7 @@ import { reportError } from '../utils/errorReporting';
 import {
   Trophy, Shield, TrendingUp, Star, ChevronRight, LucideIcon, Award, Crown,
   Footprints, BookOpen, Flag, GraduationCap, Gem, Zap, Flame, Activity, Calendar, Lock,
+  PlayCircle, ArrowRight,
 } from 'lucide-react';
 import { useProgress } from '../contexts/ProgressContext';
 import { useGamification } from '../contexts/GamificationContext';
@@ -14,6 +15,7 @@ import PaymentButton from './PaymentButton';
 import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
+import { getAllLessonsOrdered } from '../utils/courseUtils';
 
 interface EducationPageProps {
   onNavigateHome?: () => void; // Optional for backward compat
@@ -68,6 +70,24 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const { progress: supabaseProgress } = useProgress();
   const { achievements, achievementDefinitions } = useGamification();
   const [progress, setProgress] = useState<ProgressData>({});
+  const [lastLessonId, setLastLessonId] = useState<number | null>(null);
+  const [lastLessonTitle, setLastLessonTitle] = useState<string | null>(null);
+
+  // Resume learning: read last visited lesson from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem('last_lesson_id');
+    if (stored) {
+      const id = parseInt(stored, 10);
+      if (!isNaN(id)) {
+        const allLessons = getAllLessonsOrdered();
+        const found = allLessons.find(l => l.id === id);
+        if (found) {
+          setLastLessonId(id);
+          setLastLessonTitle(found.title);
+        }
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const fetchLevels = async () => {
@@ -262,6 +282,25 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
       {isDashboard ? (
         <>
+          {lastLessonId && lastLessonTitle && (
+            <div className="container max-w-7xl mx-auto px-6 mt-6 mb-6">
+              <button
+                onClick={() => navigate(`/education/lesson/${lastLessonId}`)}
+                className="w-full flex items-center justify-between p-4 bg-brand-500/10 border border-brand-500/20 rounded-2xl hover:bg-brand-500/15 transition-all group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-brand-500/20 flex items-center justify-center">
+                    <PlayCircle size={20} className="text-brand-400" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-xs text-brand-400 font-bold uppercase tracking-wider">Continuar aprendiendo</p>
+                    <p className="text-sm text-white font-medium">{lastLessonTitle}</p>
+                  </div>
+                </div>
+                <ArrowRight size={20} className="text-brand-400 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          )}
           <div className="container max-w-7xl mx-auto px-6 pt-16 pb-20">
             <div className="max-w-4xl mb-16">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-navy-900 border border-white/5 text-brand-500 text-[10px] font-black uppercase tracking-[0.2em] mb-6">
@@ -275,6 +314,61 @@ const EducationPage: React.FC<EducationPageProps> = () => {
               </p>
             </div>
 
+            {levels.length === 0 ? (
+              /* Skeleton loading state */
+              <div className="animate-pulse">
+                <div className="grid lg:grid-cols-3 gap-10 mt-8">
+                  {[0, 1, 2].map((i) => (
+                    <div key={i} className="bg-navy-900 rounded-4xl border border-white/5 overflow-hidden">
+                      {/* Top gradient band */}
+                      <div className="h-2 bg-navy-800"></div>
+                      <div className="p-8 space-y-6">
+                        {/* Level number */}
+                        <div className="w-12 h-4 bg-navy-800 rounded"></div>
+                        {/* Icon placeholder */}
+                        <div className="w-16 h-16 bg-navy-800 rounded-2xl"></div>
+                        {/* Title */}
+                        <div className="w-3/4 h-8 bg-navy-800 rounded-lg"></div>
+                        {/* Subtitle */}
+                        <div className="w-1/2 h-5 bg-navy-800/60 rounded"></div>
+                        {/* Description lines */}
+                        <div className="space-y-3">
+                          <div className="w-full h-4 bg-navy-800/40 rounded"></div>
+                          <div className="w-5/6 h-4 bg-navy-800/40 rounded"></div>
+                        </div>
+                        {/* Progress bar */}
+                        <div className="space-y-2">
+                          <div className="flex justify-between">
+                            <div className="w-20 h-3 bg-navy-800/50 rounded"></div>
+                            <div className="w-10 h-3 bg-navy-800/50 rounded"></div>
+                          </div>
+                          <div className="w-full h-2 bg-navy-800 rounded-full"></div>
+                        </div>
+                        {/* Button placeholder */}
+                        <div className="w-full h-14 bg-navy-800 rounded-2xl"></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Achievements section skeleton */}
+                <div className="mt-24 border-y border-white/5 py-24">
+                  <div className="flex items-center gap-4 mb-12">
+                    <div className="w-14 h-14 bg-navy-900 rounded-2xl"></div>
+                    <div className="w-48 h-8 bg-navy-900 rounded-lg"></div>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    {[...Array(10)].map((_, i) => (
+                      <div key={i} className="bg-navy-950 border border-white/5 rounded-2xl p-6 flex flex-col items-center">
+                        <div className="w-16 h-16 bg-navy-900 rounded-2xl mb-4"></div>
+                        <div className="w-20 h-4 bg-navy-900/60 rounded mb-2"></div>
+                        <div className="w-16 h-3 bg-navy-900/40 rounded"></div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
             <div className="grid lg:grid-cols-3 gap-10 mt-8">
               {levels.map((level, index) => {
                 const isCompleted = getLevelProgress(level.id) === 100;
@@ -315,6 +409,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                 );
               })}
             </div>
+            )}
           </div>
 
           {/* Achievements Section */}

@@ -1,21 +1,42 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Sparkles, Loader2 } from 'lucide-react';
+import { MessageCircle, X, Send, Sparkles, Loader2, Trash2 } from 'lucide-react';
 import { streamGeminiResponse, ChatMessage } from '../services/geminiService';
 import { trackChatMessage } from '../utils/analytics';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
 
+const STORAGE_KEY = 'chat_messages';
+
+const INITIAL_GREETING: ChatMessage = {
+  role: 'model',
+  text: '¡Hola! Soy CBas AI 🤖. Pregúntame sobre Bitcoin, cómo empezar en cripto o conceptos de trading. ¿En qué puedo ayudarte hoy?',
+  timestamp: new Date()
+};
+
+function loadStoredMessages(): ChatMessage[] {
+  try {
+    const stored = sessionStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored) as Array<{ role: string; text: string; timestamp: string }>;
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed.map(msg => ({
+          ...msg,
+          role: msg.role as 'user' | 'model',
+          timestamp: new Date(msg.timestamp)
+        }));
+      }
+    }
+  } catch {
+    // Corrupted data — fall back to default
+  }
+  return [INITIAL_GREETING];
+}
+
 const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      role: 'model',
-      text: '¡Hola! Soy CBas AI 🤖. Pregúntame sobre Bitcoin, cómo empezar en cripto o conceptos de trading. ¿En qué puedo ayudarte hoy?',
-      timestamp: new Date()
-    }
-  ]);
+  const [messages, setMessages] = useState<ChatMessage[]>(loadStoredMessages);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -26,6 +47,22 @@ const ChatWidget: React.FC = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Persist messages to sessionStorage when streaming finishes
+  useEffect(() => {
+    if (!isLoading && messages.length > 0) {
+      try {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+      } catch {
+        // sessionStorage full or unavailable — ignore
+      }
+    }
+  }, [messages, isLoading]);
+
+  const clearChat = () => {
+    sessionStorage.removeItem(STORAGE_KEY);
+    setMessages([{ ...INITIAL_GREETING, timestamp: new Date() }]);
+  };
 
   // Focus input when chat opens
   useEffect(() => {
@@ -130,13 +167,21 @@ const ChatWidget: React.FC = () => {
             <div className="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center border border-brand-500/50">
               <Sparkles size={20} className="text-brand-500" aria-hidden="true" />
             </div>
-            <div>
+            <div className="flex-1">
               <h3 className="font-bold text-white text-sm" id="chat-title">CBas AI Assistant</h3>
               <p className="text-xs text-slate-400 flex items-center gap-1">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true"></span>
                 Online con Gemini 1.5
               </p>
             </div>
+            <button
+              onClick={clearChat}
+              className="p-2 text-slate-400 hover:text-red-400 hover:bg-slate-700/50 rounded-lg transition-colors"
+              aria-label="Limpiar conversación"
+              title="Limpiar conversación"
+            >
+              <Trash2 size={16} aria-hidden="true" />
+            </button>
           </div>
 
           {/* Messages Area */}

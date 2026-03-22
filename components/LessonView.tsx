@@ -113,6 +113,9 @@ const LessonView: React.FC = () => {
             setLessonLoading(true);
             const lessonData = await fetchLessonById(id);
             setLesson(lessonData);
+            if (lessonData) {
+                localStorage.setItem('last_lesson_id', String(lessonData.id));
+            }
             setLessonLoading(false);
         }
         loadLesson();
