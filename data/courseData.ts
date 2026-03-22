@@ -59,7 +59,7 @@ export interface Module {
   id: number;
   title: string;
   description: string;
-  icon: any;
+  icon: any; // LucideIcon — typed as any to avoid coupling with lucide-react internals
   lessons: Lesson[];
 }
 

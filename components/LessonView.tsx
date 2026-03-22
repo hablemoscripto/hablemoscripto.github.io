@@ -17,7 +17,7 @@ import { Helmet } from 'react-helmet-async';
 import Quiz from './education/Quiz';
 import CheckpointQuiz from './education/CheckpointQuiz';
 import { getPreviousLessonId, getNextLessonId, getAllLessonsOrdered, getLevelForLesson } from '../utils/courseUtils';
-import { fetchLessonById, LessonData } from '../services/lessonService';
+import { fetchLessonById, LessonData, type LessonSection } from '../services/lessonService';
 
 const LessonView: React.FC = () => {
     const { lessonId } = useParams<{ lessonId: string }>();
@@ -736,7 +736,7 @@ const LessonView: React.FC = () => {
                                             {/* Features Grid */}
                                             {section.features && section.features.length > 0 && (
                                                 <div className="grid gap-4 my-6 not-prose">
-                                                    {section.features.map((feature: any, i: number) => {
+                                                    {section.features.map((feature: { icon?: string; title?: string; text?: string }, i: number) => {
                                                         const IconComponent = typeof feature.icon === 'string'
                                                             ? ICON_MAP[feature.icon]
                                                             : null;

@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase';
 import { Download, Mail, Users, Trash2, RefreshCw, Send, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { reportError } from '../utils/errorReporting';
 
 interface Subscriber {
   id: string;
@@ -52,8 +53,8 @@ const NewsletterAdmin: React.FC = () => {
 
       setIsAdmin(true);
       fetchSubscribers();
-    } catch (err: any) {
-      console.error('Error checking admin status:', err);
+    } catch (err: unknown) {
+      reportError(err, { component: 'NewsletterAdmin', action: 'checkAdminStatus' });
       setError('Error verificando permisos de administrador');
       setTimeout(() => navigate('/education'), 3000);
     } finally {
@@ -74,9 +75,9 @@ const NewsletterAdmin: React.FC = () => {
       if (error) throw error;
 
       setSubscribers(data || []);
-    } catch (err: any) {
-      console.error('Error fetching subscribers:', err);
-      setError(err.message || 'Error al cargar suscriptores');
+    } catch (err: unknown) {
+      reportError(err, { component: 'NewsletterAdmin', action: 'fetchSubscribers' });
+      setError(err instanceof Error ? err.message : 'Error al cargar suscriptores');
     } finally {
       setLoading(false);
     }
@@ -171,11 +172,11 @@ const NewsletterAdmin: React.FC = () => {
         setSendStatus(null);
       }, 3000);
 
-    } catch (error: any) {
-      console.error('Send newsletter error:', error);
+    } catch (error: unknown) {
+      reportError(error, { component: 'NewsletterAdmin', action: 'sendNewsletter' });
       setSendStatus({
         type: 'error',
-        message: error.message || 'Error al enviar el newsletter'
+        message: error instanceof Error ? error.message : 'Error al enviar el newsletter'
       });
     } finally {
       setSending(false);

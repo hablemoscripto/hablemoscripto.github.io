@@ -46,10 +46,23 @@ export default {
                     950: '#020617', // Deepest Navy for background
                 },
             },
+            borderRadius: {
+                '4xl': '2rem',
+                '5xl': '2.5rem',
+                '6xl': '3rem',
+            },
+            spacing: {
+                '18': '4.5rem',
+                '22': '5.5rem',
+                '26': '6.5rem',
+                '30': '7.5rem',
+            },
             boxShadow: {
                 'glow-brand': '0 0 20px rgba(245, 158, 11, 0.15)',
                 'glow-brand-strong': '0 0 30px rgba(245, 158, 11, 0.3)',
                 'glow-accent': '0 0 20px rgba(16, 185, 129, 0.15)',
+                'glow-indigo': '0 0 20px rgba(99, 102, 241, 0.15)',
+                'glow-rose': '0 0 20px rgba(244, 63, 94, 0.15)',
                 'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
             },
             animation: {

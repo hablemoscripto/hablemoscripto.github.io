@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import EducationNavbar from './EducationNavbar';
 import LessonSearch from './LessonSearch';
+import { reportError } from '../utils/errorReporting';
 import {
   Trophy, Shield, TrendingUp, Star, ChevronRight, LucideIcon, Award, Crown,
   Footprints, BookOpen, Flag, GraduationCap, Gem, Zap, Flame, Activity, Calendar, Lock,
@@ -75,7 +76,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
         .select('id, title, subtitle, description, lessons_count, icon_name, color')
         .order('order', { ascending: true });
       if (error) {
-        console.error('Error fetching levels:', error);
+        reportError(error, { component: 'EducationPage', action: 'fetchLevels' });
       } else {
         setLevels(data as Level[]);
       }
@@ -105,14 +106,14 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           `);
 
         if (error) {
-          console.error('Error fetching lessons for progress:', error);
+          reportError(error, { component: 'EducationPage', action: 'fetchLessonsForProgress' });
           return;
         }
 
         // Create a map of lesson ID to level ID
         const lessonToLevel: Record<number, string> = {};
-        lessonsData?.forEach((lesson: any) => {
-          lessonToLevel[lesson.id] = lesson.modules.level_id;
+        lessonsData?.forEach((lesson: { id: number; modules: { level_id: string }[] }) => {
+          lessonToLevel[lesson.id] = lesson.modules[0]?.level_id;
         });
 
         // Map completed lessons to their levels
@@ -369,7 +370,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
           {/* Premium Section */}
           <div className="container max-w-7xl mx-auto px-6 mt-24">
-            <div className="relative overflow-hidden bg-gradient-to-br from-navy-900 to-navy-950 border border-white/10 rounded-[3rem] p-12 md:p-20 text-center shadow-glass group">
+            <div className="relative overflow-hidden bg-gradient-to-br from-navy-900 to-navy-950 border border-white/10 rounded-6xl p-12 md:p-20 text-center shadow-glass group">
               <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-[120px] -mr-48 -mt-48 group-hover:bg-brand-500/20 transition-all duration-1000"></div>
               
               <div className="relative z-10 max-w-2xl mx-auto">

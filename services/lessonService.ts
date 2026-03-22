@@ -2,6 +2,59 @@ import { supabase } from '../lib/supabase';
 import type { QuestionType, Question } from '../components/education/types';
 import { reportError } from '../utils/errorReporting';
 
+// Database row types for Supabase responses
+interface DbQuizQuestion {
+  id: number | string;
+  question: string;
+  options: (string | { id: string; text: string })[];
+  correct_answer: number | string;
+  explanation: string;
+  order?: number;
+}
+
+interface DbCheckpointQuestion extends DbQuizQuestion {
+  hint?: string;
+}
+
+interface DbCheckpoint {
+  id: number;
+  title?: string;
+  section_index?: number;
+  checkpoint_questions: DbCheckpointQuestion[];
+}
+
+interface DbReferral {
+  title: string;
+  description: string;
+  link: string;
+  button_text: string;
+  code?: string;
+}
+
+interface DbLessonBasic {
+  id: number;
+  title: string;
+  duration: string;
+  type: string;
+}
+
+export interface LessonSection {
+  type?: string;
+  title?: string;
+  content?: string;
+  image?: string;
+  imageAlt?: string;
+  imageCaption?: string;
+  imageSummary?: string;
+  highlight?: { title: string; text: string };
+  features?: { icon?: string; title?: string; text?: string }[];
+  items?: string[];
+  leftTitle?: string;
+  rightTitle?: string;
+  leftSide?: { title?: string; points?: string[] };
+  rightSide?: { title?: string; points?: string[] };
+}
+
 export interface QuizQuestion {
   id: string;
   type: QuestionType;
@@ -47,7 +100,7 @@ export interface LessonData {
   type: string;
   description: string;
   videoId?: string;
-  sections: any[];
+  sections: LessonSection[];
   quiz?: {
     questions: Question[];
   };
@@ -122,7 +175,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
     }
 
     // Checkpoint quizzes are optional - only fetch if table exists
-    let checkpoints: any[] | null = null;
+    let checkpoints: DbCheckpoint[] | null = null;
     try {
       const { data, error } = await supabase
         .from('checkpoint_quizzes')
@@ -162,7 +215,7 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
       description: details?.description || lesson.description,
       videoId: undefined, // video_id column not in schema; videoId from courseData is not seeded
       sections: details?.sections || [],
-      referrals: referrals?.map((ref: any) => ({
+      referrals: referrals?.map((ref: DbReferral) => ({
         title: ref.title,
         description: ref.description,
         link: ref.link,
@@ -175,20 +228,17 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
     if (quiz && quiz.quiz_questions) {
       lessonData.quiz = {
         questions: quiz.quiz_questions
-          .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
-          .map((q: any): Question => {
-            // Parse options - handle both string arrays and object arrays
-            const options = q.options?.map((opt: any) =>
+          .sort((a: DbQuizQuestion, b: DbQuizQuestion) => (a.order || 0) - (b.order || 0))
+          .map((q: DbQuizQuestion): Question => {
+            const options = q.options?.map(opt =>
               typeof opt === 'string' ? opt : opt.text
             ) || [];
 
-            // Determine correct answer index
             let correctAnswer: number;
             if (typeof q.correct_answer === 'number') {
               correctAnswer = q.correct_answer;
             } else {
-              // Find index by matching option id or text
-              const idx = q.options?.findIndex((opt: any) =>
+              const idx = q.options?.findIndex(opt =>
                 (typeof opt === 'string' ? opt : opt.id) === q.correct_answer
               );
               correctAnswer = idx >= 0 ? idx : 0;
@@ -208,17 +258,17 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
 
     // Add checkpoint quizzes if they exist
     if (checkpoints && checkpoints.length > 0) {
-      lessonData.checkpointQuizzes = checkpoints.map((cp: any) => ({
+      lessonData.checkpointQuizzes = checkpoints.map((cp: DbCheckpoint) => ({
         id: cp.id,
         title: cp.title || 'Checkpoint',
         sectionIndex: cp.section_index || 0,
         questions: (cp.checkpoint_questions || [])
-          .sort((a: any, b: any) => a.order - b.order)
-          .map((q: any) => ({
+          .sort((a: DbCheckpointQuestion, b: DbCheckpointQuestion) => (a.order || 0) - (b.order || 0))
+          .map((q: DbCheckpointQuestion) => ({
             id: q.id.toString(),
             question: q.question,
-            options: q.options || [],
-            correctAnswer: q.correct_answer,
+            options: (q.options || []).map(opt => typeof opt === 'string' ? opt : opt.text),
+            correctAnswer: typeof q.correct_answer === 'number' ? q.correct_answer : 0,
             explanation: q.explanation || '',
             hint: q.hint,
           })),
@@ -247,8 +297,8 @@ export async function fetchAllLessons() {
   }
 
   // Convert to Record<number, LessonData> format for backward compatibility
-  const lessonsMap: Record<number, any> = {};
-  data.forEach((lesson: any) => {
+  const lessonsMap: Record<number, DbLessonBasic> = {};
+  data.forEach((lesson: DbLessonBasic) => {
     lessonsMap[lesson.id] = lesson;
   });
 

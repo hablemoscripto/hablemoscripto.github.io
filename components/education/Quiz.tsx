@@ -46,7 +46,9 @@ function normalizeQuestion(q: Question | LegacyQuestion): Question {
     } as MultipleChoiceQuestion;
 }
 
-function isCorrect(question: Question, answer: any): boolean {
+type QuizAnswer = number | boolean | number[] | string | null | undefined;
+
+function isCorrect(question: Question, answer: QuizAnswer): boolean {
     switch (question.type) {
         case 'multiple-choice':
             return answer === question.correctAnswer;
@@ -84,8 +86,8 @@ function getPoints(question: Question): number {
 
 interface QuestionComponentProps {
     question: Question;
-    answer: any;
-    onAnswer: (answer: any) => void;
+    answer: QuizAnswer;
+    onAnswer: (answer: QuizAnswer) => void;
     submitted: boolean;
     showHint: boolean;
     onToggleHint: () => void;
@@ -228,7 +230,7 @@ const MultipleSelectRenderer: React.FC<QuestionComponentProps> = ({
     question, answer, onAnswer, submitted, showHint, onToggleHint
 }) => {
     const q = question as MultipleSelectQuestion;
-    const selectedAnswers: number[] = answer || [];
+    const selectedAnswers: number[] = Array.isArray(answer) ? answer as number[] : [];
 
     const toggleOption = (optIdx: number) => {
         if (submitted) return;
@@ -307,7 +309,7 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
     question, answer, onAnswer, submitted, showHint, onToggleHint
 }) => {
     const q = question as OrderingQuestion;
-    const currentOrder: number[] = answer || q.items.map((_, i) => i);
+    const currentOrder: number[] = Array.isArray(answer) ? answer as number[] : q.items.map((_, i) => i);
 
     const moveItem = (fromIndex: number, direction: 'up' | 'down') => {
         if (submitted) return;
@@ -418,7 +420,7 @@ const FillBlankRenderer: React.FC<QuestionComponentProps> = ({
                 <span>{q.textBefore}</span>
                 <input
                     type="text"
-                    value={answer || ''}
+                    value={typeof answer === 'string' ? answer : ''}
                     onChange={(e) => !submitted && onAnswer(e.target.value)}
                     disabled={submitted}
                     placeholder="Tu respuesta..."
@@ -471,7 +473,7 @@ const Quiz: React.FC<QuizProps> = ({
     const questions = useMemo(() => rawQuestions.map(normalizeQuestion), [rawQuestions]);
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [answers, setAnswers] = useState<{ [key: string]: any }>({});
+    const [answers, setAnswers] = useState<Record<string, QuizAnswer>>({});
     const [submitted, setSubmitted] = useState(false);
     const [showHints, setShowHints] = useState<{ [key: string]: boolean }>({});
     const [viewMode, setViewMode] = useState<'single' | 'all'>('single');
@@ -485,7 +487,7 @@ const Quiz: React.FC<QuizProps> = ({
         return true;
     }).length;
 
-    const handleAnswer = (questionId: string, answer: any) => {
+    const handleAnswer = (questionId: string, answer: QuizAnswer) => {
         setAnswers(prev => ({ ...prev, [questionId]: answer }));
     };
 

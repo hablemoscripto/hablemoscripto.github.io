@@ -46,7 +46,7 @@ const LevelCard: React.FC<LevelCardProps> = ({
 
     return (
         <div className={cn(
-            "group relative bg-navy-900 rounded-[2rem] border border-white/5 p-0 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-glass hover:bg-navy-800",
+            "group relative bg-navy-900 rounded-4xl border border-white/5 p-0 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-glass hover:bg-navy-800",
             isLocked ? 'opacity-70 grayscale-[0.5]' : '',
             className
         )}>
@@ -111,7 +111,7 @@ const LevelCard: React.FC<LevelCardProps> = ({
                 </div>
 
                 {isLocked && prerequisiteTitle ? (
-                    <div className="space-y-4 p-6 bg-navy-950 rounded-[1.5rem] border border-white/5">
+                    <div className="space-y-4 p-6 bg-navy-950 rounded-3xl border border-white/5">
                         <div className="flex items-start gap-3 text-navy-400 text-xs">
                             <Lock size={16} className="text-navy-600 shrink-0 mt-0.5" />
                             <span className="leading-relaxed font-bold uppercase tracking-tight">

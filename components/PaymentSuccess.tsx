@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { CheckCircle, XCircle, Clock, Loader2, Home } from 'lucide-react';
 import { getPaymentByReference } from '../services/paymentService';
+import { reportError } from '../utils/errorReporting';
 
 type PaymentStatus = 'loading' | 'APPROVED' | 'PENDING' | 'DECLINED' | 'VOIDED' | 'ERROR';
 
@@ -26,7 +27,7 @@ export default function PaymentSuccess() {
         setStatus(payment.status as PaymentStatus);
         setProductName(payment.product_name || 'Premium');
       } catch (error) {
-        console.error('Error checking payment:', error);
+        reportError(error, { component: 'PaymentSuccess', action: 'checkPayment' });
         setStatus('ERROR');
       }
     }

@@ -56,7 +56,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         return;
       }
 
-      const formattedProgress: LessonProgress[] = (data || []).map((item: any) => ({
+      const formattedProgress: LessonProgress[] = (data || []).map((item: { lesson_id: number; completed: boolean; quiz_score: number | null; completed_at: string | null }) => ({
         lessonId: item.lesson_id,
         completed: item.completed,
         quizScore: item.quiz_score,

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Loader2, Crown, CheckCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { createPaymentWithSignature, Product, PRODUCTS, getUserPremiumStatus } from '../services/paymentService';
+import { reportError } from '../utils/errorReporting';
 
 declare global {
   interface Window {
@@ -71,7 +72,7 @@ export default function PaymentButton({
     script.async = true;
     script.onload = () => setWidgetLoaded(true);
     script.onerror = () => {
-      console.error('Failed to load Wompi widget');
+      reportError('Failed to load Wompi widget', { component: 'PaymentButton', action: 'loadWidget' });
       onError?.('Error al cargar el sistema de pagos');
     };
     document.body.appendChild(script);
@@ -93,7 +94,7 @@ export default function PaymentButton({
         const status = await getUserPremiumStatus(user.id);
         setIsPremium(status.isPremium);
       } catch (error) {
-        console.error('Error checking premium status:', error);
+        reportError(error, { component: 'PaymentButton', action: 'checkPremiumStatus' });
       } finally {
         setCheckingStatus(false);
       }
@@ -115,7 +116,7 @@ export default function PaymentButton({
 
     if (!publicKey) {
       onError?.('Error de configuracion del sistema de pagos');
-      console.error('VITE_WOMPI_PUBLIC_KEY not configured');
+      reportError('VITE_WOMPI_PUBLIC_KEY not configured', { component: 'PaymentButton', action: 'handlePayment' });
       return;
     }
 
@@ -160,7 +161,7 @@ export default function PaymentButton({
       });
     } catch (error) {
       setLoading(false);
-      console.error('Payment error:', error);
+      reportError(error, { component: 'PaymentButton', action: 'processPayment' });
       onError?.('Error al procesar el pago. Intenta de nuevo.');
     }
   };

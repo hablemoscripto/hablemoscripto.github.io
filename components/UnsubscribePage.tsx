@@ -32,9 +32,9 @@ const UnsubscribePage: React.FC = () => {
       }
 
       setStatus('success');
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus('error');
-      setErrorMessage(err.message || 'Error inesperado. Intenta de nuevo.');
+      setErrorMessage(err instanceof Error ? err.message : 'Error inesperado. Intenta de nuevo.');
     }
   };
 
