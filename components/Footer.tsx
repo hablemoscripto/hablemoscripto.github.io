@@ -25,7 +25,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
   };
 
   return (
-    <footer className="bg-slate-950 border-t border-white/5 pt-16 pb-8">
+    <footer className="bg-navy-950 border-t border-white/5 pt-16 pb-8">
       <div className="container max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-2">
@@ -40,10 +40,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
               Construyendo la próxima generación de inversores inteligentes.
             </p>
             <div className="flex gap-4">
-              <a href="https://twitter.com/Crypto_CBas" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-brand-500 hover:text-slate-900 transition-all">
+              <a href="https://twitter.com/Crypto_CBas" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-slate-400 hover:bg-brand-500 hover:text-slate-900 transition-all">
                 <Twitter size={18} />
               </a>
-              <a href="https://www.youtube.com/@hablemoscripto" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-red-600 hover:text-white transition-all">
+              <a href="https://www.youtube.com/@hablemoscripto" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-slate-400 hover:bg-red-600 hover:text-white transition-all">
                 <Youtube size={18} />
               </a>
             </div>
@@ -86,8 +86,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
             &copy; {new Date().getFullYear()} Hablemos Cripto. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            <span className="text-xs text-slate-500">Sistemas Operativos</span>
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true"></span>
+            <span className="text-xs text-slate-500">Plataforma activa</span>
           </div>
         </div>
       </div>

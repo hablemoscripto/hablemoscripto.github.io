@@ -331,32 +331,35 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                 return (
                   <div
                     key={def.id}
-                    className={`relative rounded-[2rem] p-6 text-center transition-all duration-500 ${
+                    className={`relative rounded-2xl p-6 text-center transition-all duration-500 group ${
                       unlocked
-                        ? 'bg-navy-900 border border-brand-500/30 shadow-glow-brand/5 scale-105'
-                        : 'bg-navy-950 border border-white/5 opacity-40'
+                        ? 'bg-navy-900 border border-brand-500/20 shadow-[0_0_30px_rgba(245,158,11,0.08)]'
+                        : 'bg-navy-950 border border-white/5 hover:border-white/10'
                     }`}
                   >
-                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 border transition-all duration-500 ${
+                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-500 ${
                       unlocked
-                        ? 'bg-gradient-to-br from-brand-400 to-brand-600 border-brand-400/50 shadow-glow-brand rotate-6'
-                        : 'bg-navy-900 border-white/5'
+                        ? 'bg-gradient-to-br from-brand-400 to-brand-600 shadow-lg shadow-brand-500/20 rotate-3'
+                        : 'bg-navy-900 border border-white/5 grayscale'
                     }`}>
                       {unlocked ? (
-                        <Icon size={32} className="text-navy-950" />
+                        <Icon size={28} className="text-white" />
                       ) : (
-                        <Lock size={24} className="text-navy-700" />
+                        <div className="relative">
+                          <Icon size={24} className="text-navy-600 opacity-50" />
+                          <Lock size={12} className="absolute -bottom-1 -right-1 text-navy-500" />
+                        </div>
                       )}
                     </div>
-                    <p className={`text-sm font-black uppercase tracking-tight mb-2 ${unlocked ? 'text-white' : 'text-navy-600'}`}>
+                    <p className={`text-sm font-bold mb-2 ${unlocked ? 'text-white' : 'text-navy-500'}`}>
                       {def.title}
                     </p>
                     {unlocked ? (
-                      <div className="inline-block px-3 py-1 rounded-full bg-brand-500/10 text-brand-500 text-[10px] font-black uppercase tracking-widest">
+                      <div className="inline-block px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 text-[10px] font-bold">
                         {new Date(unlocked.unlockedAt!).toLocaleDateString('es-CO', { day: 'numeric', month: 'short' })}
                       </div>
                     ) : (
-                      <p className="text-[10px] text-navy-700 font-bold uppercase tracking-widest leading-tight">{def.description}</p>
+                      <p className="text-[11px] text-navy-600 leading-tight">{def.description}</p>
                     )}
                   </div>
                 );
@@ -416,19 +419,28 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
             <div className="p-6 space-y-6">
               <div className="text-center p-6 bg-slate-950 rounded-xl border border-slate-800">
-                <div className="relative w-24 h-24 mx-auto mb-4 flex items-center justify-center">
-                  <div className="absolute inset-0 rounded-full border-4 border-slate-800"></div>
-                  <div
-                    className="absolute inset-0 rounded-full border-4 border-brand-500 border-t-transparent transform -rotate-90 transition-all duration-1000"
-                    style={{
-                      clipPath: `polygon(0 0, 100% 0, 100% 100%, 0 100%)`,
-                      borderTopColor: 'transparent',
-                      borderRightColor: globalPercentage > 25 ? '#ffc107' : 'transparent',
-                      borderBottomColor: globalPercentage > 50 ? '#ffc107' : 'transparent',
-                      borderLeftColor: globalPercentage > 75 ? '#ffc107' : 'transparent',
-                    }}
-                  ></div>
-                  <span className="text-2xl font-bold text-white">{globalPercentage}%</span>
+                <div className="relative w-28 h-28 mx-auto mb-4">
+                  <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100" aria-hidden="true">
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" strokeWidth="6" className="text-slate-800" />
+                    <circle
+                      cx="50" cy="50" r="42" fill="none"
+                      stroke="url(#progress-gradient)"
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                      strokeDasharray={`${2 * Math.PI * 42}`}
+                      strokeDashoffset={`${2 * Math.PI * 42 * (1 - globalPercentage / 100)}`}
+                      className="transition-all duration-1000 ease-out"
+                    />
+                    <defs>
+                      <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#f59e0b" />
+                        <stop offset="100%" stopColor="#10b981" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-2xl font-bold text-white">{globalPercentage}%</span>
+                  </div>
                 </div>
                 <p className="text-slate-400 text-sm">
                   {totalCompletedLessons} de {totalLessons} lecciones completadas

@@ -3,7 +3,7 @@ import { ChevronLeft, Lock, CheckCircle, PlayCircle, Clock } from 'lucide-react'
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../contexts/ProgressContext';
 import { LevelData } from '../data/courseData';
-import { getPreviousLessonId } from '../utils/courseUtils';
+import { getPreviousLessonId, getAllLessonsOrdered } from '../utils/courseUtils';
 
 interface LevelDetailProps {
     levelData: LevelData;
@@ -20,6 +20,10 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
 
     const totalLessons = levelData.modules.reduce((acc, module) => acc + module.lessons.length, 0);
     const progressPercentage = Math.round((completedCount / totalLessons) * 100);
+
+    // Build a lookup for lesson titles (for prerequisite display)
+    const allLessons = getAllLessonsOrdered();
+    const lessonTitleMap = new Map(allLessons.map(l => [l.id, l.title]));
 
     return (
         <div className="min-h-screen bg-slate-950 pb-20">
@@ -41,16 +45,16 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                             <p className="text-slate-400 max-w-2xl text-lg">{levelData.description}</p>
                         </div>
 
-                        <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 min-w-[200px]">
-                            <div className="flex justify-between text-sm mb-2">
-                                <span className="text-slate-300">Progreso</span>
-                                <span className="text-white font-bold">{progressPercentage}%</span>
+                        <div className="bg-slate-800/50 p-5 rounded-2xl border border-slate-700 min-w-[220px]">
+                            <div className="flex justify-between text-sm mb-3">
+                                <span className="text-slate-400">Progreso</span>
+                                <span className="text-brand-400 font-bold">{progressPercentage}%</span>
                             </div>
                             <div className="w-full h-2 bg-slate-900 rounded-full overflow-hidden">
                                 <div
-                                    className="h-full bg-brand-500 transition-all duration-500"
+                                    className="h-full bg-gradient-to-r from-brand-500 to-brand-400 rounded-full transition-all duration-700 ease-out"
                                     style={{ width: `${progressPercentage}%` }}
-                                ></div>
+                                />
                             </div>
                             <p className="text-xs text-slate-500 mt-2 text-center">{completedCount} de {totalLessons} lecciones</p>
                         </div>
@@ -112,8 +116,13 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                                                 </h4>
                                                 <div className={`flex items-center gap-4 text-xs ${isLocked ? 'text-slate-700' : 'text-slate-500'}`}>
                                                     <span className="flex items-center gap-1"><Clock size={12} /> {lesson.duration}</span>
-                                                    <span>Lección {lesson.id}</span>
-                                                    {isLocked && <span className="flex items-center gap-1 text-slate-600"><Lock size={12} /> Bloqueada</span>}
+                                                    {isLocked && prevId ? (
+                                                        <span className="text-slate-600">
+                                                            Completa &quot;{lessonTitleMap.get(prevId)}&quot; para desbloquear
+                                                        </span>
+                                                    ) : isLocked ? (
+                                                        <span className="flex items-center gap-1 text-slate-600"><Lock size={12} /> Bloqueada</span>
+                                                    ) : null}
                                                 </div>
                                             </div>
 

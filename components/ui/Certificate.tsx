@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
-import { Bitcoin, Award, CheckCircle } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { Bitcoin, Award, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
@@ -12,89 +12,72 @@ interface CertificateProps {
     onClose: () => void;
 }
 
+const VARIANT_STYLES = {
+    beginner: {
+        gradient: 'from-brand-400 to-brand-600',
+        gradientBorder: 'from-brand-400/60 via-brand-500/30 to-brand-600/60',
+        accent: 'text-brand-400',
+        accentBg: 'bg-brand-500/10',
+        borderColor: 'border-brand-500/20',
+        glowColor: 'shadow-[0_0_60px_rgba(245,158,11,0.15)]',
+        badge: 'Bronce',
+    },
+    intermediate: {
+        gradient: 'from-indigo-400 to-indigo-600',
+        gradientBorder: 'from-indigo-400/60 via-indigo-500/30 to-indigo-600/60',
+        accent: 'text-indigo-400',
+        accentBg: 'bg-indigo-500/10',
+        borderColor: 'border-indigo-500/20',
+        glowColor: 'shadow-[0_0_60px_rgba(99,102,241,0.15)]',
+        badge: 'Plata',
+    },
+    advanced: {
+        gradient: 'from-rose-400 to-rose-600',
+        gradientBorder: 'from-rose-400/60 via-rose-500/30 to-rose-600/60',
+        accent: 'text-rose-400',
+        accentBg: 'bg-rose-500/10',
+        borderColor: 'border-rose-500/20',
+        glowColor: 'shadow-[0_0_60px_rgba(244,63,94,0.15)]',
+        badge: 'Oro',
+    },
+};
+
 const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, level, date, variant = 'beginner', onClose }) => {
-    const certificateRef = useRef<HTMLDivElement>(null);
+    const styles = VARIANT_STYLES[variant];
 
     useEffect(() => {
-        // Trigger a prolonged confetti celebration
-        const duration = 3 * 1000;
+        const duration = 3000;
         const animationEnd = Date.now() + duration;
         const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10000 };
-
         const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
 
-        const interval: any = setInterval(function() {
+        const interval = setInterval(() => {
             const timeLeft = animationEnd - Date.now();
-
-            if (timeLeft <= 0) {
-                return clearInterval(interval);
-            }
+            if (timeLeft <= 0) return clearInterval(interval);
 
             const particleCount = 50 * (timeLeft / duration);
-            confetti({
-                ...defaults, particleCount,
-                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-                colors: ['#f59e0b', '#10b981', '#3b82f6']
-            });
-            confetti({
-                ...defaults, particleCount,
-                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-                colors: ['#f59e0b', '#10b981', '#3b82f6']
-            });
+            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#f59e0b', '#10b981', '#3b82f6'] });
+            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#f59e0b', '#10b981', '#3b82f6'] });
         }, 250);
 
         return () => clearInterval(interval);
     }, []);
 
-    const handlePrint = () => {
-        window.print();
-    };
-
-    const getVariantStyles = () => {
-        switch (variant) {
-            case 'intermediate':
-                return {
-                    border: 'border-slate-400',
-                    accent: 'text-slate-500',
-                    bgPattern: 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27%3E%3Crect width=%2720%27 height=%2720%27 fill=%27%23f8fafc%27/%3E%3Crect x=%270%27 y=%270%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3Crect x=%2710%27 y=%2710%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3C/svg%3E', // Keep same pattern for now, maybe change later
-                    badgeColor: 'text-slate-400',
-                    titleColor: 'text-slate-700'
-                };
-            case 'advanced':
-                return {
-                    border: 'border-yellow-600',
-                    accent: 'text-yellow-600',
-                    bgPattern: 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27%3E%3Crect width=%2720%27 height=%2720%27 fill=%27%23f8fafc%27/%3E%3Crect x=%270%27 y=%270%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3Crect x=%2710%27 y=%2710%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3C/svg%3E',
-                    badgeColor: 'text-yellow-500',
-                    titleColor: 'text-yellow-800'
-                };
-            default: // beginner
-                return {
-                    border: 'border-orange-700', // Bronze-ish
-                    accent: 'text-orange-700',
-                    bgPattern: 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27%3E%3Crect width=%2720%27 height=%2720%27 fill=%27%23f8fafc%27/%3E%3Crect x=%270%27 y=%270%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3Crect x=%2710%27 y=%2710%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3C/svg%3E',
-                    badgeColor: 'text-orange-600',
-                    titleColor: 'text-slate-800'
-                };
-        }
-    };
-
-    const styles = getVariantStyles();
-
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md overflow-y-auto">
             <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="relative max-w-4xl w-full bg-white text-slate-900 p-1 md:p-2 rounded-xl shadow-2xl"
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className={`relative max-w-3xl w-full rounded-3xl overflow-hidden ${styles.glowColor}`}
             >
-                {/* Print/Close Controls - Hidden when printing */}
-                <div className="absolute -top-12 right-0 flex gap-4 print:hidden">
+                {/* Print/Close Controls */}
+                <div className="absolute -top-12 right-0 flex gap-4 print:hidden z-20">
                     <button
-                        onClick={handlePrint}
+                        onClick={() => window.print()}
                         className="px-4 py-2 bg-brand-500 text-slate-900 font-bold rounded-lg hover:bg-brand-400 transition-colors flex items-center gap-2"
                     >
-                        <Award size={20} /> Imprimir / Guardar PDF
+                        <Award size={20} /> Guardar PDF
                     </button>
                     <button
                         onClick={onClose}
@@ -104,81 +87,97 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                     </button>
                 </div>
 
-                {/* Certificate Border */}
-                <div ref={certificateRef} className={`border-[10px] border-double ${styles.border} p-8 md:p-12 h-full min-h-[600px] flex flex-col items-center justify-center text-center bg-[url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27%3E%3Crect width=%2720%27 height=%2720%27 fill=%27%23f8fafc%27/%3E%3Crect x=%270%27 y=%270%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3Crect x=%2710%27 y=%2710%27 width=%2710%27 height=%2710%27 fill=%27%23f1f5f9%27 opacity=%270.4%27/%3E%3C/svg%3E')]`}>
+                {/* Gradient border effect */}
+                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${styles.gradientBorder} p-[1px]`}>
+                    <div className="w-full h-full rounded-3xl bg-slate-950" />
+                </div>
+
+                {/* Certificate content */}
+                <div className="relative z-10 p-8 md:p-14 text-center">
+                    {/* Decorative corner accents */}
+                    <div className={`absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 ${styles.borderColor} rounded-tl-xl opacity-50`} />
+                    <div className={`absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 ${styles.borderColor} rounded-tr-xl opacity-50`} />
+                    <div className={`absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 ${styles.borderColor} rounded-bl-xl opacity-50`} />
+                    <div className={`absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 ${styles.borderColor} rounded-br-xl opacity-50`} />
 
                     {/* Header */}
-                    <div className="mb-8">
-                        <div className="flex items-center justify-center gap-3 mb-4">
-                            <Bitcoin size={48} className={styles.accent} />
-                            <h1 className={`text-3xl font-bold ${styles.titleColor} tracking-wider uppercase`}>HablemosCripto</h1>
+                    <div className="mb-10">
+                        <div className="flex items-center justify-center gap-3 mb-3">
+                            <Bitcoin size={28} className="text-brand-500" />
+                            <span className="font-heading text-lg font-bold text-white tracking-wider uppercase">
+                                Hablemos<span className="text-brand-500">Cripto</span>
+                            </span>
                         </div>
-                        <div className={`h-1 w-32 ${styles.border.replace('border-', 'bg-')} mx-auto`}></div>
+                        <div className={`h-px w-24 mx-auto bg-gradient-to-r ${styles.gradient} opacity-50`} />
                     </div>
 
                     {/* Title */}
-                    <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-800 mb-4">Certificado de Finalización</h2>
-                    <p className="text-xl text-slate-600 italic mb-8">Este documento certifica que</p>
+                    <div className="mb-10">
+                        <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+                            className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${styles.gradient} flex items-center justify-center mx-auto mb-6 rotate-3`}
+                        >
+                            <Sparkles size={36} className="text-white" />
+                        </motion.div>
+                        <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-2 tracking-tight">
+                            Certificado de Finalización
+                        </h2>
+                        <p className="text-slate-500 text-sm uppercase tracking-widest">Este documento certifica que</p>
+                    </div>
 
                     {/* Student Name */}
-                    <div className="border-b-2 border-slate-300 px-12 py-2 mb-8 min-w-[300px]">
-                        <h3 className={`text-3xl md:text-5xl font-handwriting font-bold ${styles.accent}`}>{studentName}</h3>
+                    <div className="mb-10">
+                        <div className={`inline-block px-8 py-3 rounded-2xl ${styles.accentBg} border ${styles.borderColor}`}>
+                            <h3 className={`text-3xl md:text-4xl font-heading font-bold ${styles.accent}`}>
+                                {studentName}
+                            </h3>
+                        </div>
                     </div>
 
                     {/* Description */}
-                    <p className="text-xl text-slate-600 mb-2">ha completado satisfactoriamente el nivel</p>
-                    <h4 className={`text-2xl md:text-3xl font-bold ${styles.titleColor} uppercase tracking-widest mb-6`}>{level}</h4>
-                    <p className="text-lg text-slate-600 mb-12">del curso <span className="font-bold">{courseName}</span></p>
-
-                    {/* Footer */}
-                    <div className="flex justify-between w-full max-w-2xl mt-auto pt-12">
-                        <div className="text-center">
-                            <div className="border-t border-slate-400 w-48 pt-2">
-                                <p className="font-bold text-slate-800">{date}</p>
-                                <p className="text-sm text-slate-500 uppercase tracking-wider">Fecha</p>
-                            </div>
-                        </div>
-
-                        <div className="relative">
-                            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
-                                <Award size={64} className={`${styles.badgeColor} opacity-80`} />
-                            </div>
-                            <div className="text-center mt-4">
-                                <div className="border-t border-slate-400 w-48 pt-2">
-                                    <p className="font-bold text-slate-800">HablemosCripto</p>
-                                    <p className="text-sm text-slate-500 uppercase tracking-wider">Certificación Oficial</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="mb-10 space-y-2">
+                        <p className="text-slate-400">ha completado satisfactoriamente el nivel</p>
+                        <h4 className="text-2xl font-heading font-bold text-white uppercase tracking-widest">{level}</h4>
+                        <p className="text-slate-400">del curso <span className="text-white font-semibold">{courseName}</span></p>
                     </div>
 
+                    {/* Footer */}
+                    <div className={`h-px w-full bg-gradient-to-r from-transparent ${styles.gradientBorder} to-transparent mb-8`} />
+                    <div className="flex justify-between items-end max-w-md mx-auto">
+                        <div className="text-center">
+                            <p className="text-white font-semibold text-sm">{date}</p>
+                            <p className="text-slate-600 text-xs uppercase tracking-widest mt-1">Fecha</p>
+                        </div>
+
+                        <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${styles.gradient} flex items-center justify-center`}>
+                            <Award size={28} className="text-white" />
+                        </div>
+
+                        <div className="text-center">
+                            <p className="text-white font-semibold text-sm">HablemosCripto</p>
+                            <p className="text-slate-600 text-xs uppercase tracking-widest mt-1">Certificación</p>
+                        </div>
+                    </div>
                 </div>
             </motion.div>
 
             <style>{`
-        @media print {
-          body * {
-            visibility: hidden;
-          }
-          #root {
-            display: none;
-          }
-          .fixed {
-            position: absolute;
-            inset: 0;
-            background: white;
-            padding: 0;
-            display: block !important;
-            visibility: visible !important;
-          }
-          .fixed * {
-            visibility: visible !important;
-          }
-          .print\\:hidden {
-            display: none !important;
-          }
-        }
-      `}</style>
+                @media print {
+                    body * { visibility: hidden; }
+                    #root { display: none; }
+                    .fixed {
+                        position: absolute; inset: 0;
+                        background: #020617;
+                        padding: 0;
+                        display: block !important;
+                        visibility: visible !important;
+                    }
+                    .fixed * { visibility: visible !important; }
+                    .print\\:hidden { display: none !important; }
+                }
+            `}</style>
         </div>
     );
 };

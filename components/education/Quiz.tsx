@@ -533,13 +533,30 @@ const Quiz: React.FC<QuizProps> = ({
 
         // Pass if 70% or more
         if (correctCount >= Math.ceil(questions.length * 0.7)) {
+            // Celebration burst — two waves for more impact
             confetti({
-                particleCount: 150,
-                spread: 80,
+                particleCount: 200,
+                spread: 100,
                 origin: { y: 0.6 },
-                colors: ['#10b981', '#f59e0b', '#ffffff'],
-                zIndex: 100
+                colors: ['#10b981', '#f59e0b', '#ffffff', '#3b82f6'],
+                zIndex: 100,
             });
+            setTimeout(() => {
+                confetti({
+                    particleCount: 100,
+                    spread: 120,
+                    origin: { y: 0.5, x: 0.3 },
+                    colors: ['#10b981', '#f59e0b'],
+                    zIndex: 100,
+                });
+                confetti({
+                    particleCount: 100,
+                    spread: 120,
+                    origin: { y: 0.5, x: 0.7 },
+                    colors: ['#10b981', '#f59e0b'],
+                    zIndex: 100,
+                });
+            }, 300);
             onComplete(correctCount);
         }
     };
@@ -759,46 +776,55 @@ const Quiz: React.FC<QuizProps> = ({
 
                 {/* Results */}
                 {submitted && (
-                    <div className={`mt-10 p-8 rounded-2xl text-center border ${
-                        passed ? 'bg-green-500/10 border-green-500/30' : 'bg-slate-800 border-slate-700'
+                    <div className={`mt-10 p-8 rounded-2xl text-center border transition-all duration-500 ${
+                        passed
+                            ? 'bg-green-500/10 border-green-500/30 shadow-[0_0_40px_rgba(16,185,129,0.1)]'
+                            : 'bg-slate-800 border-slate-700'
                     }`}>
-                        <div className="flex justify-center mb-4">
+                        <div className="flex justify-center mb-5">
                             {passed ? (
-                                <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center">
-                                    <Trophy size={40} className="text-green-500" />
+                                <div className="relative">
+                                    <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center rotate-3 shadow-lg shadow-green-500/20">
+                                        <Trophy size={44} className="text-white" />
+                                    </div>
+                                    <div className="absolute -top-2 -right-2 px-3 py-1 bg-brand-500 text-slate-900 rounded-full text-xs font-black uppercase tracking-wider shadow-lg animate-bounce">
+                                        +100 XP
+                                    </div>
                                 </div>
                             ) : (
-                                <div className="w-20 h-20 rounded-full bg-slate-700 flex items-center justify-center">
-                                    <Target size={40} className="text-slate-400" />
+                                <div className="w-24 h-24 rounded-3xl bg-slate-700 flex items-center justify-center">
+                                    <Target size={44} className="text-slate-400" />
                                 </div>
                             )}
                         </div>
 
-                        <h3 className="text-2xl font-bold text-white mb-2">
-                            Resultados: <span className={passed ? 'text-green-500' : 'text-brand-500'}>
-                                {correctCount} / {questions.length}
-                            </span>
+                        <h3 className="text-2xl font-heading font-bold text-white mb-1">
+                            {passed ? '¡Lección Completada!' : 'Sigue practicando'}
                         </h3>
 
-                        <p className="text-slate-400 mb-2">
+                        <p className={`text-3xl font-bold mb-3 ${passed ? 'text-green-400' : 'text-brand-500'}`}>
+                            {correctCount} / {questions.length}
+                        </p>
+
+                        <p className="text-slate-400 mb-6">
                             {percentage}% de respuestas correctas
                         </p>
 
                         {passed ? (
-                            <div>
-                                <p className="text-green-400 mb-6">¡Excelente trabajo! Has completado esta lección.</p>
-                            </div>
+                            <p className="text-green-400/80 text-sm">
+                                ¡Excelente trabajo! Has demostrado dominio del tema.
+                            </p>
                         ) : (
                             <div className="space-y-4">
                                 <p className="text-slate-300">
-                                    Necesitas el 70% para aprobar ({Math.ceil(questions.length * 0.7)} respuestas correctas).
+                                    Necesitas el 70% para aprobar — te {Math.ceil(questions.length * 0.7) - correctCount === 1 ? 'falta' : 'faltan'} <span className="text-white font-bold">{Math.ceil(questions.length * 0.7) - correctCount}</span> {Math.ceil(questions.length * 0.7) - correctCount === 1 ? 'respuesta correcta más' : 'respuestas correctas más'}.
                                 </p>
-                                <p className="text-sm text-slate-400">
+                                <p className="text-sm text-slate-500">
                                     Revisa las explicaciones arriba y vuelve a intentarlo.
                                 </p>
                                 <button
                                     onClick={handleRetry}
-                                    className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-medium rounded-xl transition-colors inline-flex items-center gap-2"
+                                    className="px-6 py-3 bg-brand-500 hover:bg-brand-400 text-slate-900 font-bold rounded-xl transition-all inline-flex items-center gap-2 hover:scale-105 active:scale-[0.98]"
                                 >
                                     <RotateCcw size={18} /> Intentar de nuevo
                                 </button>

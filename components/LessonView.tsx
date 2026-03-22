@@ -859,12 +859,18 @@ const LessonView: React.FC = () => {
 
                                     {quizPassed && (
                                         <div className="mt-8 text-center animate-in zoom-in">
-                                            <button
-                                                onClick={handleNextLesson}
-                                                className="px-8 py-4 bg-green-500 hover:bg-green-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-green-500/20 inline-flex items-center gap-2 hover:scale-105 transform duration-200"
-                                            >
-                                                Siguiente Lección <ArrowRight size={20} />
-                                            </button>
+                                            <div className="inline-flex flex-col items-center gap-3 p-6 rounded-2xl bg-green-500/10 border border-green-500/20">
+                                                <div className="flex items-center gap-2 text-green-400 text-sm font-bold">
+                                                    <CheckCircle size={18} />
+                                                    ¡Lección completada! +100 XP
+                                                </div>
+                                                <button
+                                                    onClick={handleNextLesson}
+                                                    className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-green-500/20 inline-flex items-center gap-2 hover:scale-105 active:scale-[0.98]"
+                                                >
+                                                    Siguiente Lección <ArrowRight size={20} />
+                                                </button>
+                                            </div>
                                         </div>
                                     )}
                                 </>
