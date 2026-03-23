@@ -9,6 +9,7 @@ import AuthModal from './AuthModal';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 const LandingPage: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -120,6 +121,37 @@ const LandingPage: React.FC = () => {
         <Hero onStartLearning={handleNavigateToEducation} />
         <Features />
         <Courses />
+        {/* FAQ Section */}
+        <section className="py-24 bg-navy-950 relative">
+            <div className="container max-w-4xl mx-auto px-6">
+                <div className="text-center mb-16">
+                    <span className="text-brand-500 font-bold tracking-wider text-sm uppercase mb-2 block">Preguntas Frecuentes</span>
+                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-white">
+                        Todo lo que necesitas saber
+                    </h2>
+                </div>
+                <div className="space-y-4">
+                    {[
+                        { q: '¿Es gratis?', a: 'El Nivel Principiante con 19 lecciones es 100% gratuito. Los niveles Intermedio y Avanzado requieren completar el nivel anterior para desbloquearse.' },
+                        { q: '¿Necesito experiencia previa en criptomonedas?', a: 'No. Empezamos desde cero, explicando qué es el dinero y por qué importa. No asumimos ningún conocimiento previo.' },
+                        { q: '¿Cuánto tiempo toma completar un nivel?', a: 'El Nivel Principiante toma aproximadamente 8 horas. El Intermedio unas 8 horas y el Avanzado unas 11 horas. Puedes avanzar a tu propio ritmo.' },
+                        { q: '¿Es seguro invertir en criptomonedas?', a: 'Las criptomonedas son activos de alto riesgo. Por eso enseñamos seguridad primero: cómo proteger tu wallet, evitar estafas, y gestionar el riesgo antes de invertir un solo peso.' },
+                        { q: '¿Quién es CBas?', a: 'CBas tiene 7+ años navegando mercados de criptomonedas, incluyendo ciclos alcistas y bajistas completos. Creó Hablemos Cripto para dar a la comunidad LATAM las herramientas que él hubiera querido tener cuando empezó.' },
+                    ].map((item, i) => (
+                        <details key={i} className="group bg-navy-900 border border-white/5 rounded-2xl overflow-hidden">
+                            <summary className="flex items-center justify-between p-6 cursor-pointer text-white font-bold hover:text-brand-500 transition-colors list-none">
+                                <span>{item.q}</span>
+                                <ChevronDown size={20} className="text-navy-400 group-open:rotate-180 transition-transform" />
+                            </summary>
+                            <div className="px-6 pb-6 text-navy-300 leading-relaxed">
+                                {item.a}
+                            </div>
+                        </details>
+                    ))}
+                </div>
+            </div>
+        </section>
+
         {/* Resources / Newsletter Section */}
         <section id="resources" className="py-24 relative scroll-mt-28">
           <div className="absolute inset-0 bg-brand-600/5"></div>

@@ -10,8 +10,16 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Quiz from './education/Quiz';
 import CheckpointQuiz from './education/CheckpointQuiz';
-import { getPreviousLessonId, getNextLessonId, getAllLessonsOrdered, getLevelForLesson } from '../utils/courseUtils';
+import { getPreviousLessonId, getLevelForLesson } from '../utils/courseUtils';
 import { fetchLessonById, LessonData, type LessonSection } from '../services/lessonService';
+import { useScrollProgress } from '../hooks/useScrollProgress';
+import { useLessonNavigation } from '../hooks/useLessonNavigation';
+
+declare global {
+    interface Window {
+        __currentLesson?: { title: string; level: string; id: number } | null;
+    }
+}
 
 // Icon map for dynamic icon rendering from database
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -34,14 +42,12 @@ const LessonView: React.FC = () => {
 
     const [activeSection, setActiveSection] = useState(0);
     const [showQuiz, setShowQuiz] = useState(false);
-    const [scrollProgress, setScrollProgress] = useState(0);
     const [quizPassed, setQuizPassed] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
 
-    // Navigation state
-    const [prevLesson, setPrevLesson] = useState<{ id: number; title: string } | null>(null);
-    const [nextLesson, setNextLesson] = useState<{ id: number; title: string } | null>(null);
-    const [canGoNext, setCanGoNext] = useState(false);
+    // Custom hooks
+    const scrollProgress = useScrollProgress();
+    const { prevLesson, nextLesson, canGoNext } = useLessonNavigation(id, isLessonCompleted(id), isLessonCompleted);
 
     // Image lightbox state
     const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
@@ -57,14 +63,14 @@ const LessonView: React.FC = () => {
             setLesson(lessonData);
             if (lessonData) {
                 localStorage.setItem('last_lesson_id', String(lessonData.id));
-                (window as any).__currentLesson = { title: lessonData.title, level: lessonData.level, id: lessonData.id };
+                window.__currentLesson = { title: lessonData.title, level: lessonData.level, id: lessonData.id };
             } else {
-                (window as any).__currentLesson = null;
+                window.__currentLesson = null;
             }
             setLessonLoading(false);
         }
         loadLesson();
-        return () => { (window as any).__currentLesson = null; };
+        return () => { window.__currentLesson = null; };
     }, [id]);
 
     // Access Control Logic
@@ -94,40 +100,6 @@ const LessonView: React.FC = () => {
         checkAccess();
     }, [id, loading, isLessonCompleted]);
 
-    // Compute navigation info (previous/next lessons)
-    useEffect(() => {
-        const allLessons = getAllLessonsOrdered();
-
-        const prevId = getPreviousLessonId(id);
-        const nextId = getNextLessonId(id);
-
-        if (prevId !== null) {
-            const prevLessonData = allLessons.find(l => l.id === prevId);
-            setPrevLesson(prevLessonData ? { id: prevId, title: prevLessonData.title } : null);
-        } else {
-            setPrevLesson(null);
-        }
-
-        if (nextId !== null) {
-            const nextLessonData = allLessons.find(l => l.id === nextId);
-            setNextLesson(nextLessonData ? { id: nextId, title: nextLessonData.title } : null);
-        } else {
-            setNextLesson(null);
-        }
-    }, [id]);
-
-    // Check if user can navigate to next lesson
-    useEffect(() => {
-        if (loading || !nextLesson) {
-            setCanGoNext(false);
-            return;
-        }
-        // Can go next if current lesson is completed OR next lesson is already completed
-        const currentCompleted = isLessonCompleted(id);
-        const nextCompleted = isLessonCompleted(nextLesson.id);
-        setCanGoNext(currentCompleted || nextCompleted);
-    }, [id, nextLesson, loading, isLessonCompleted]);
-
     // Scroll to top on lesson change
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -139,25 +111,6 @@ const LessonView: React.FC = () => {
     // Clean up body overflow on unmount (in case lightbox was open)
     useEffect(() => {
         return () => { document.body.style.overflow = ''; };
-    }, []);
-
-    // Scroll Progress Logic (throttled with rAF)
-    useEffect(() => {
-        let ticking = false;
-        const handleScroll = () => {
-            if (!ticking) {
-                ticking = true;
-                requestAnimationFrame(() => {
-                    const totalScroll = document.documentElement.scrollTop;
-                    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    const scroll = windowHeight > 0 ? totalScroll / windowHeight : 0;
-                    setScrollProgress(Number(scroll));
-                    ticking = false;
-                });
-            }
-        };
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     if (!isValidId) {
@@ -641,6 +594,7 @@ const LessonView: React.FC = () => {
                             {!showQuiz ? (
                                 <div className="text-center py-8">
                                     <h3 className="text-2xl font-bold text-white mb-4">¿Listo para poner a prueba tu conocimiento?</h3>
+                                    <p className="text-navy-400 text-sm mt-2 mb-6">Necesitas acertar al menos el 70% de las preguntas para completar la lección. Sin límite de tiempo.</p>
                                     <button
                                         onClick={() => setShowQuiz(true)}
                                         className="px-8 py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-all shadow-lg shadow-brand-500/20 hover:scale-105"

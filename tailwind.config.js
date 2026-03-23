@@ -50,6 +50,7 @@ export default {
                 '4xl': '2rem',
                 '5xl': '2.5rem',
                 '6xl': '3rem',
+                '7xl': '4rem',
             },
             spacing: {
                 '18': '4.5rem',

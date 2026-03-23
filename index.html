@@ -141,6 +141,15 @@
             scroll-behavior: auto !important;
         }
     }
+
+    /* Global focus indicators for keyboard navigation */
+    button:focus-visible, a:focus-visible, [role="button"]:focus-visible, [role="option"]:focus-visible {
+        outline: 2px solid #f59e0b;
+        outline-offset: 2px;
+    }
+    input:focus-visible, textarea:focus-visible, select:focus-visible {
+        outline: none; /* Handled by ring utilities */
+    }
   </style>
 </head>
 

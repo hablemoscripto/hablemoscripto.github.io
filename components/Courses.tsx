@@ -50,7 +50,7 @@ const CourseCard: React.FC<{
       {isLocked ? (
         <>
           <Lock className="w-4 h-4" />
-          Bloqueado
+          {level === 'Intermedio' ? 'Completa Principiante' : level === 'Avanzado' ? 'Completa Intermedio' : 'Bloqueado'}
         </>
       ) : (
         'Empezar Nivel'

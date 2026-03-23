@@ -51,7 +51,7 @@ const LevelCard: React.FC<LevelCardProps> = ({
             className
         )}>
             {/* Top Pattern Decoration */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-bl-[4rem] pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-bl-7xl pointer-events-none"></div>
 
             {/* Header */}
             <div className="p-10 relative">

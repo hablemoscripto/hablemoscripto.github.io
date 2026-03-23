@@ -41,7 +41,7 @@ const ChatWidget: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   };
 
   useEffect(() => {
@@ -109,13 +109,13 @@ const ChatWidget: React.FC = () => {
         ? []
         : messages;
 
-      let frameId = 0;
+      const frameIdRef = { current: 0 };
       await streamGeminiResponse(
         apiHistory,
         userMessage.text,
         (chunk) => {
-          cancelAnimationFrame(frameId);
-          frameId = requestAnimationFrame(() => {
+          cancelAnimationFrame(frameIdRef.current);
+          frameIdRef.current = requestAnimationFrame(() => {
             setMessages(prev => {
               const updated = [...prev];
               const last = updated[updated.length - 1];

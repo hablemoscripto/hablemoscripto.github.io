@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import EducationNavbar from './EducationNavbar';
 import LessonSearch from './LessonSearch';
 import { reportError } from '../utils/errorReporting';
@@ -75,17 +75,21 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
   // Resume learning: read last visited lesson from localStorage
   useEffect(() => {
-    const stored = localStorage.getItem('last_lesson_id');
-    if (stored) {
-      const id = parseInt(stored, 10);
-      if (!isNaN(id)) {
-        const allLessons = getAllLessonsOrdered();
-        const found = allLessons.find(l => l.id === id);
-        if (found) {
-          setLastLessonId(id);
-          setLastLessonTitle(found.title);
+    try {
+      const stored = localStorage.getItem('last_lesson_id');
+      if (stored) {
+        const id = parseInt(stored, 10);
+        if (!isNaN(id)) {
+          const allLessons = getAllLessonsOrdered();
+          const found = allLessons.find(l => l.id === id);
+          if (found) {
+            setLastLessonId(id);
+            setLastLessonTitle(found.title);
+          }
         }
       }
+    } catch {
+      // localStorage may be unavailable in private browsing
     }
   }, []);
 
@@ -165,22 +169,22 @@ const EducationPage: React.FC<EducationPageProps> = () => {
     fetchProgressByLevel();
   }, [supabaseProgress, levels, user]);
 
-  const getLevelProgress = (levelId: string) => {
+  const getLevelProgress = useCallback((levelId: string) => {
     const level = levels.find(l => l.id === levelId);
     if (!level || !progress[levelId]) return 0;
 
     const completed = progress[levelId].length;
     const total = level.lessons_count;
     return Math.round((completed / total) * 100);
-  };
+  }, [progress, levels]);
 
-  const isLevelLocked = (levelId: string) => {
+  const isLevelLocked = useCallback((levelId: string) => {
     if (levelId === 'intermediate') return getLevelProgress('beginner') < 100;
     if (levelId === 'advanced') return getLevelProgress('intermediate') < 100;
     return false;
-  };
+  }, [getLevelProgress]);
 
-  const getPrerequisiteInfo = (levelId: string) => {
+  const getPrerequisiteInfo = useCallback((levelId: string) => {
     const prerequisiteMap: Record<string, string> = {
       'intermediate': 'beginner',
       'advanced': 'intermediate'
@@ -202,7 +206,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
       progress: prereqProgress,
       lessonsRemaining
     };
-  };
+  }, [progress, levels, getLevelProgress]);
 
   const totalCompletedLessons = Object.values(progress).reduce((acc, val) => acc + val.length, 0);
   const totalLessons = levels.reduce((acc, level) => acc + level.lessons_count, 0);

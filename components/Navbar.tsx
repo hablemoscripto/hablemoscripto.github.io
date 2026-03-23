@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
         requestAnimationFrame(() => {
           const element = document.getElementById(sectionId);
           if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+            element.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
           } else if (attempts < 10) {
             waitForElement(attempts + 1);
           }
@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
       waitForElement();
     } else {
       const element = document.getElementById(sectionId);
-      if (element) element.scrollIntoView({ behavior: 'smooth' });
+      if (element) element.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     }
   }, [location.pathname, navigate]);
 

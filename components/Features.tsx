@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Shield, Users, Compass, Zap } from 'lucide-react';
+import { Shield, Users, Compass, Zap, Twitter, Youtube } from 'lucide-react';
 
 const Features: React.FC = () => {
   const [imageActive, setImageActive] = useState(false);
@@ -48,6 +48,14 @@ const Features: React.FC = () => {
                       <div>
                         <p className="text-white font-black text-xl tracking-tighter">CBas</p>
                         <p className="text-brand-500 text-xs font-bold uppercase tracking-widest">Fundador & Analista</p>
+                        <div className="flex gap-3 mt-3">
+                            <a href="https://twitter.com/Crypto_CBas" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center text-navy-400 hover:bg-brand-500 hover:text-navy-900 transition-all" aria-label="Twitter">
+                                <Twitter size={14} />
+                            </a>
+                            <a href="https://www.youtube.com/@hablemoscripto" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center text-navy-400 hover:bg-red-600 hover:text-white transition-all" aria-label="YouTube">
+                                <Youtube size={14} />
+                            </a>
+                        </div>
                       </div>
                       <div className="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-navy-950">
                         <Zap size={20} fill="currentColor" />

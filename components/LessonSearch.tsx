@@ -175,6 +175,7 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
           role="combobox"
           aria-expanded="true"
           aria-controls="search-results"
+          aria-owns="search-results"
           aria-autocomplete="list"
           className="w-full bg-navy-800 border border-navy-600 rounded-xl py-3 pl-11 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-sm"
         />

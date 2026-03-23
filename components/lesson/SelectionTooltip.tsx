@@ -49,7 +49,7 @@ export default function SelectionTooltip() {
     const handleAskAI = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        const lessonContext = (window as any).__currentLesson;
+        const lessonContext = window.__currentLesson;
         const prompt = lessonContext
             ? `En el contexto de la lección "${lessonContext.title}" sobre ${lessonContext.level}, explícame esto: "${selection.text}"`
             : `Explícame esto en términos simples: "${selection.text}"`;

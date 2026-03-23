@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Users, BookOpen, Award, Shield, Zap } from 'lucide-react';
+import { Users, BookOpen, Award, Shield, Zap, CheckCircle } from 'lucide-react';
 import ParticlesBackground from './ParticlesBackground';
 
 // Constants moved outside component to prevent re-creation
@@ -115,6 +115,14 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
             <p className="text-lg md:text-xl text-navy-400 max-w-2xl leading-relaxed mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
                Olvida el ruido y las promesas falsas. Aprende con análisis profesional, estrategias probadas y una ruta de aprendizaje diseñada para resultados reales.
             </p>
+
+            {/* Outcomes */}
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-10 text-sm">
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" /> Configura tu wallet</span>
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" /> Identifica estafas</span>
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" /> Entiende blockchain</span>
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" /> Construye tu plan de inversión</span>
+            </div>
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400 mb-20">
