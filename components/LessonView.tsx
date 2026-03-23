@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, AlertTriangle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock, Users, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, LucideIcon, ZoomIn } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, PlayCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, AlertTriangle, Clock, Video, Award, ArrowRight, ArrowLeft, ExternalLink, Lock, Users, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, LucideIcon, ZoomIn, Brain, Eye, Crosshair, Target, Anchor } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
 import VideoPlayer from './ui/VideoPlayer';
@@ -18,7 +18,8 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Users, Lock, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone,
   Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase,
   Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, AlertCircle,
-  CheckCircle, Clock, BookOpen, Award
+  AlertTriangle, CheckCircle, Clock, BookOpen, Award, Brain, Eye, Crosshair,
+  Target, Anchor
 };
 
 const LessonView: React.FC = () => {

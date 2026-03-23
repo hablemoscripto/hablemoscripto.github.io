@@ -33,7 +33,8 @@ import {
   Target,
   Brain,
   Eye,
-  Crosshair
+  Crosshair,
+  MessageSquare
 } from 'lucide-react';
 
 export interface Referral {
@@ -122,8 +123,8 @@ export const BEGINNER_LEVEL: LevelData = {
         { id: 36, title: 'Tu Primera Transacción', description: 'Envía valor a través del mundo en segundos.', duration: '20 min', type: 'Práctica' },
         { id: 37, title: 'Exploradores de Bloques (Solscan)', description: 'Aprende a verificar la verdad.', duration: '15 min', type: 'Herramienta' },
         { id: 38, title: 'Evitar Estafas en Web3', description: 'Aprende a defenderte antes de salir a mar abierto.', duration: '30 min', type: 'Seguridad Vital' },
-        { id: 39, title: 'Gasta tus Cripto', description: 'Usa tus ganancias en el mundo real con tarjetas cripto.', duration: '20 min', type: 'Herramientas' },
         { id: 41, title: 'Stablecoins: Tu Dólar Digital', description: 'Qué son USDC y USDT, cómo funcionan, y los riesgos que nadie te cuenta.', duration: '20 min', type: 'Concepto Clave' },
+        { id: 39, title: 'Gasta tus Cripto', description: 'Usa tus ganancias en el mundo real con tarjetas cripto.', duration: '20 min', type: 'Herramientas' },
         { id: 42, title: 'DCA: Invierte Sin Estrés', description: 'La estrategia más simple y poderosa para construir riqueza a largo plazo.', duration: '15 min', type: 'Estrategia' },
         { id: 43, title: 'Bitcoin vs Altcoins: Qué Comprar Primero', description: 'Entiende el rol de BTC como reserva de valor vs SOL y ETH como plataformas.', duration: '18 min', type: 'Comparativa' },
         { id: 44, title: 'Tu Plan de Inversión Personal', description: 'Junta todo lo aprendido: portafolio, DCA, seguridad y metas claras.', duration: '20 min', type: 'Práctica' },
@@ -187,8 +188,8 @@ export const ADVANCED_LEVEL: LevelData = {
   subtitle: 'DeFi, NFTs y el Ecosistema Solana',
   description: 'Domina las finanzas descentralizadas. Aprende a usar Jupiter, proveer liquidez, entender los NFTs más allá del arte y navegar el ecosistema Solana como un experto.',
   stats: {
-    lessons: 11,
-    duration: '~10h'
+    lessons: 13,
+    duration: '~11h'
   },
   modules: [
     {
@@ -202,6 +203,7 @@ export const ADVANCED_LEVEL: LevelData = {
         { id: 26, title: 'Liquidez y Yield Farming', description: 'Raydium, Orca y Meteora. Gana fees con tus activos.', duration: '42 min', type: 'Estrategias' },
         { id: 27, title: 'Lending & Borrowing', description: 'Kamino y MarginFi. Usa tus activos como colateral.', duration: '38 min', type: 'Tutorial Práctico' },
         { id: 28, title: 'Riesgos de DeFi (Impermanent Loss)', description: 'Entiende los peligros matemáticos antes de invertir.', duration: '32 min', type: 'Seguridad' },
+        { id: 45, title: 'MEV: El Impuesto Invisible', description: 'Cómo los bots extraen valor de cada swap que haces y cómo protegerte.', duration: '28 min', type: 'Seguridad + Concepto' },
       ]
     },
     {
@@ -224,6 +226,7 @@ export const ADVANCED_LEVEL: LevelData = {
         { id: 32, title: 'Monolítico vs Modular', description: 'Por qué Solana escala en L1 vs el enfoque de L2s de Ethereum.', duration: '30 min', type: 'Técnico' },
         { id: 33, title: 'Firedancer & El Futuro', description: 'El nuevo cliente que hará a Solana imparable.', duration: '20 min', type: 'Futuro' },
         { id: 34, title: 'Seguridad Operacional Avanzada', description: 'Burner wallets, Ledger y Revoke.cash.', duration: '25 min', type: 'Seguridad' },
+        { id: 46, title: 'Gobernanza DAO: Tu Voto Importa', description: 'Tokens de gobernanza, mecanismos de votación y cómo participar en decisiones que afectan tus inversiones.', duration: '25 min', type: 'Concepto + Práctica' },
       ]
     }
   ]
@@ -782,8 +785,8 @@ export const LESSONS_DATA: Record<number, any> = {
     sections: [
       {
         type: 'intro',
-        title: 'El Momento Génesis: 3 de Enero de 1909',
-        content: 'El mundo se desmoronaba. La crisis financiera de 1908 había expuesto la corrupción del sistema bancario: préstamos irresponsables, derivados tóxicos, codicia institucional. Los gobiernos respondieron rescatando a los bancos culpables con TRILLONES de dólares del contribuyente. Los ejecutivos que causaron la crisis recibieron bonos millonarios mientras millones perdían sus casas. En medio de este caos, el 3 de enero de 1909, alguien bajo el seudónimo **Satoshi Nakamoto** minó el primer bloque de Bitcoin. En ese bloque, grabó para siempre un mensaje: **"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"** (Canciller al borde de un segundo rescate para los bancos). No era coincidencia. Era una declaración de intenciones.',
+        title: 'El Momento Génesis: 3 de Enero de 2009',
+        content: 'El mundo se desmoronaba. La crisis financiera de 2008 había expuesto la corrupción del sistema bancario: préstamos irresponsables, derivados tóxicos, codicia institucional. Los gobiernos respondieron rescatando a los bancos culpables con TRILLONES de dólares del contribuyente. Los ejecutivos que causaron la crisis recibieron bonos millonarios mientras millones perdían sus casas. En medio de este caos, el 3 de enero de 2009, alguien bajo el seudónimo **Satoshi Nakamoto** minó el primer bloque de Bitcoin. En ese bloque, grabó para siempre un mensaje: **"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"** (Canciller al borde de un segundo rescate para los bancos). No era coincidencia. Era una declaración de intenciones.',
         highlight: {
           title: 'El Mensaje Eterno',
           text: 'Ese titular del Times está grabado PARA SIEMPRE en la blockchain de Bitcoin. Nadie puede borrarlo. Cada vez que alguien mina el bloque génesis, lee ese mensaje: los bancos causan crisis, los gobiernos los rescatan con TU dinero, y la gente común paga la factura. Bitcoin nació como respuesta directa a esa injusticia.'
@@ -864,7 +867,7 @@ export const LESSONS_DATA: Record<number, any> = {
         ],
         highlight: {
           title: 'El Precedente de China',
-          text: 'China ha "prohibido" Bitcoin más de 10 veces desde 1913. Resultado: Bitcoin sigue funcionando perfectamente, ahora vale 100x más que en 2013, y millones de chinos siguen usándolo a través de VPNs. No puedes prohibir matemáticas.'
+          text: 'China ha "prohibido" Bitcoin más de 10 veces desde 2013. Resultado: Bitcoin sigue funcionando perfectamente, ahora vale 100x más que en 2013, y millones de chinos siguen usándolo a través de VPNs. No puedes prohibir matemáticas.'
         }
       },
       {
@@ -885,9 +888,22 @@ export const LESSONS_DATA: Record<number, any> = {
         features: [
           { icon: AlertTriangle, title: 'NO es un "esquema para hacerse rico rápido"', text: 'Bitcoin es volátil a corto plazo. Puede subir 50% o bajar 50% en meses. NO es para el dinero que necesitas mañana. Es para proteger el valor de tu trabajo a LARGO PLAZO (5-10+ años).' },
           { icon: AlertTriangle, title: 'NO es "dinero de criminales"', text: 'Menos del 1% de transacciones de Bitcoin son ilícitas (vs 2-5% del sistema bancario tradicional). Y la blockchain es PÚBLICA—cada transacción queda registrada para siempre. Es el peor dinero posible para criminales.' },
-          { icon: AlertTriangle, title: 'NO es "una burbuja"', text: 'Ha sido declarado "muerto" más de 450 veces desde 1910. Cada vez vuelve más fuerte. Las burbujas no sobreviven 15+ años, no son adoptadas por países como moneda legal, ni son compradas por fondos de inversión institucionales.' },
+          { icon: AlertTriangle, title: 'NO es "una burbuja"', text: 'Ha sido declarado "muerto" más de 450 veces desde 2010. Cada vez vuelve más fuerte. Las burbujas no sobreviven 15+ años, no son adoptadas por países como moneda legal, ni son compradas por fondos de inversión institucionales.' },
           { icon: AlertTriangle, title: 'NO necesitas comprar un Bitcoin entero', text: 'Bitcoin es divisible hasta 8 decimales. Puedes empezar con $10, $50, $100. Cada satoshi (0.00000001 BTC) es tuyo.' }
         ]
+      },
+      {
+        type: 'main',
+        title: '\u{1F9E0} Explícalo Tú: El Test de Feynman',
+        content: 'Richard Feynman, premio Nobel de Física, decía: "Si no puedes explicar algo de forma simple, no lo entiendes realmente." Pon a prueba tu comprensión:',
+        features: [
+          { icon: Brain, title: 'El Reto', text: 'Explícale a CBas por qué Bitcoin es diferente al dinero que usas todos los días. ¿Qué problema resuelve que el peso o el dólar no pueden?' },
+          { icon: MessageSquare, title: 'Usa CBas AI', text: 'Selecciona cualquier texto de esta lección y haz clic en "Explicar con CBas" para profundizar. O abre el chat y explícale el concepto en tus propias palabras—CBas te dirá si tu explicación es correcta.' }
+        ],
+        highlight: {
+          title: 'Por Qué Funciona',
+          text: 'Estudios científicos demuestran que explicar un concepto en tus propias palabras mejora la retención un 28% comparado con solo leerlo. No memorices—comprende.'
+        }
       },
       {
         type: 'takeaways',
@@ -914,7 +930,7 @@ export const LESSONS_DATA: Record<number, any> = {
             { id: 'd', text: 'Nada, el primer bloque estaba vacío' }
           ],
           correctAnswer: 'b',
-          explanation: 'Satoshi grabó "Chancellor on brink of second bailout for banks" del Times del 3 de enero de 1909. Este mensaje permanece para siempre en la blockchain, declarando que Bitcoin nació como respuesta directa al rescate de bancos corruptos con dinero de los contribuyentes.'
+          explanation: 'Satoshi grabó "Chancellor on brink of second bailout for banks" del Times del 3 de enero de 2009. Este mensaje permanece para siempre en la blockchain, declarando que Bitcoin nació como respuesta directa al rescate de bancos corruptos con dinero de los contribuyentes.'
         },
         {
           id: 'q2',
@@ -1027,8 +1043,8 @@ export const LESSONS_DATA: Record<number, any> = {
         title: 'El Hash: La Huella Digital Matemática',
         content: 'El **hash** es el concepto más importante para entender por qué la blockchain es segura. Es una función matemática que convierte CUALQUIER cantidad de datos en un código de longitud fija.',
         features: [
-          { icon: Zap, title: 'Ejemplo de Hash', text: 'Si escribes "Hola" y lo pasas por el algoritmo SHA-256 (el que usa Bitcoin), obtienes: "185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969". Ese código ES el hash de "Hola".' },
-          { icon: AlertTriangle, title: 'Cambio Mínimo = Hash Totalmente Diferente', text: 'Si cambias "Hola" por "hola" (solo la mayúscula), el hash es completamente diferente: "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824". Ni un solo carácter igual.' },
+          { icon: Zap, title: 'Ejemplo de Hash', text: 'Si escribes "Hola" y lo pasas por el algoritmo SHA-256 (el que usa Bitcoin), obtienes: "e633f4fc79badea1dc5db970cf397c8248bac47cc3acf9915ba60b5d76b0e88f". Ese código ES el hash de "Hola".' },
+          { icon: AlertTriangle, title: 'Cambio Mínimo = Hash Totalmente Diferente', text: 'Si cambias "Hola" por "hola" (solo la mayúscula), el hash es completamente diferente: "b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79". Ni un solo carácter igual.' },
           { icon: Lock, title: 'Irreversible', text: 'Es matemáticamente imposible reconstruir el dato original a partir del hash. Solo puedes ir de "Hola" → hash, nunca de hash → "Hola". Es una función de un solo sentido.' }
         ],
         highlight: {
@@ -1044,7 +1060,11 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: Cpu, title: 'Proof of Work (Bitcoin)', text: 'Los "mineros" compiten resolviendo un acertijo matemático extremadamente difícil. El primero en resolverlo gana el derecho de escribir el siguiente bloque (y recibir la recompensa). Esto requiere gastar electricidad real—es el "costo" de escribir en el libro.' },
           { icon: Lock, title: 'Proof of Stake (Solana, Ethereum)', text: 'En vez de gastar electricidad, los "validadores" ponen sus propias monedas como garantía. Si intentan hacer trampa, pierden su dinero. Es como un depósito de seguridad: "Apuesto mi dinero a que esta transacción es legítima".' },
           { icon: CheckCircle, title: 'El Resultado', text: 'Ambos sistemas logran lo mismo: un acuerdo entre desconocidos sin necesidad de confiar en nadie. Las reglas matemáticas reemplazan la confianza humana.' }
-        ]
+        ],
+        highlight: {
+          title: '¿Por Qué Importa?',
+          text: 'Porque por primera vez en la historia, desconocidos pueden ponerse de acuerdo sobre la verdad sin necesitar un intermediario. Esto elimina la necesidad de bancos, notarios y gobiernos para validar transacciones.'
+        }
       },
       {
         type: 'comparison',
@@ -1123,6 +1143,19 @@ export const LESSONS_DATA: Record<number, any> = {
         highlight: {
           title: 'Las Elecciones',
           text: 'Bitcoin maximiza seguridad y descentralización, sacrificando velocidad (~7 TPS). Solana maximiza escalabilidad y seguridad, requiriendo hardware más potente para los validadores (menos descentralizado). No hay solución perfecta—solo trade-offs.'
+        }
+      },
+      {
+        type: 'main',
+        title: '\u{1F9E0} Explícalo Tú: El Test de Feynman',
+        content: 'Richard Feynman, premio Nobel de Física, decía: "Si no puedes explicar algo de forma simple, no lo entiendes realmente." Pon a prueba tu comprensión:',
+        features: [
+          { icon: Brain, title: 'El Reto', text: 'Explícale a CBas cómo funciona una blockchain para que sea segura, sin usar las palabras \'hash\' o \'criptografía\'. Usa analogías.' },
+          { icon: MessageSquare, title: 'Usa CBas AI', text: 'Selecciona cualquier texto de esta lección y haz clic en "Explicar con CBas" para profundizar. O abre el chat y explícale el concepto en tus propias palabras—CBas te dirá si tu explicación es correcta.' }
+        ],
+        highlight: {
+          title: 'Por Qué Funciona',
+          text: 'Estudios científicos demuestran que explicar un concepto en tus propias palabras mejora la retención un 28% comparado con solo leerlo. No memorices—comprende.'
         }
       },
       {
@@ -1212,6 +1245,18 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'b',
           explanation: 'Bitcoin elige seguridad y descentralización (lento, 7 TPS). Solana elige seguridad y escalabilidad (menos nodos, pero miles de TPS en producción). No hay blockchain perfecta—solo diferentes trade-offs para diferentes usos.'
+        },
+        {
+          id: 'review_1',
+          question: '📝 Repaso: ¿Cuál de las siguientes NO es una propiedad esencial del dinero sano?',
+          options: [
+            { id: 'a', text: 'Escasez' },
+            { id: 'b', text: 'Divisibilidad' },
+            { id: 'c', text: 'Emisión controlada por un gobierno' },
+            { id: 'd', text: 'Portabilidad' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'El dinero sano no necesita un gobierno para funcionar. Bitcoin cumple todas las propiedades del dinero sin depender de ninguna autoridad central. (Recuerda la Lección 1: Historia del Dinero)'
         }
       ]
     }
@@ -1304,7 +1349,7 @@ export const LESSONS_DATA: Record<number, any> = {
       {
         type: 'main',
         title: 'El Espectro de la Descentralización',
-        content: 'La descentralización no es binaria—es un espectro. Diferentes proyectos hacen diferentes trade-offs:',
+        content: 'La descentralización no es binaria—es un espectro. Diferentes proyectos hacen diferentes trade-offs:\n\n**¿Por qué debería importarte la descentralización?** Porque significa que NADIE puede congelar tu cuenta, censurar tus transacciones, o devaluar tus ahorros. Es la diferencia entre pedir permiso y ser libre.',
         features: [
           { icon: Lock, title: 'Bitcoin: Máxima Descentralización', text: '~15,000 nodos. Cualquiera con $300 en hardware puede correr uno. Cambios de protocolo requieren años de debate y consenso casi unánime. Inmunidad casi total a censura y captura.' },
           { icon: Zap, title: 'Solana: Descentralización Pragmática', text: '~3,000 validadores. Requiere hardware más potente (~$5,000+). Más fácil de coordinar cambios. Trade-off consciente: menos descentralización a cambio de ~2,000-4,000 TPS reales en producción (con capacidad teórica mucho mayor) y fees de centavos.' },
@@ -1541,6 +1586,19 @@ export const LESSONS_DATA: Record<number, any> = {
         }
       },
       {
+        type: 'main',
+        title: '\u{1F9E0} Explícalo Tú: El Test de Feynman',
+        content: 'Richard Feynman, premio Nobel de Física, decía: "Si no puedes explicar algo de forma simple, no lo entiendes realmente." Pon a prueba tu comprensión:',
+        features: [
+          { icon: Brain, title: 'El Reto', text: 'Explícale a CBas la diferencia entre una hot wallet y una cold wallet, y cuándo usarías cada una.' },
+          { icon: MessageSquare, title: 'Usa CBas AI', text: 'Selecciona cualquier texto de esta lección y haz clic en "Explicar con CBas" para profundizar. O abre el chat y explícale el concepto en tus propias palabras—CBas te dirá si tu explicación es correcta.' }
+        ],
+        highlight: {
+          title: 'Por Qué Funciona',
+          text: 'Estudios científicos demuestran que explicar un concepto en tus propias palabras mejora la retención un 28% comparado con solo leerlo. No memorices—comprende.'
+        }
+      },
+      {
         type: 'takeaways',
         title: 'Lo Que Debes Recordar',
         items: [
@@ -1640,7 +1698,7 @@ export const LESSONS_DATA: Record<number, any> = {
         title: '¿Por Qué 12 Palabras en Vez de una Contraseña Normal?',
         content: 'Las contraseñas tradicionales tienen problemas: son difíciles de recordar, fáciles de hackear, y dependen de un servidor. La frase semilla resuelve todo esto:',
         features: [
-          { icon: Lock, title: 'Estándar Universal (BIP-39)', text: 'Todas las wallets serias usan el mismo estándar de 1948 palabras en inglés. Tu frase de Phantom funciona en Ledger, MetaMask, Trust Wallet, o cualquier otra. No dependes de una empresa.' },
+          { icon: Lock, title: 'Estándar Universal (BIP-39)', text: 'Todas las wallets serias usan el mismo estándar de 2048 palabras en inglés. Tu frase de Phantom funciona en Ledger, MetaMask, Trust Wallet, o cualquier otra. No dependes de una empresa.' },
           { icon: Shield, title: 'Backup Perfecto', text: 'Si tu celular explota, tu computadora se incendia, o la empresa de tu wallet desaparece, tus fondos siguen existiendo en la blockchain. Con tu frase semilla, los recuperas en minutos desde cualquier dispositivo nuevo.' },
           { icon: Network, title: 'Genera Infinitas Direcciones', text: 'De una sola frase semilla se derivan matemáticamente miles de direcciones. Puedes tener direcciones para SOL, ETH, BTC, y más—todo desde las mismas 12 palabras.' }
         ]
@@ -1653,7 +1711,11 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: CheckCircle, title: 'Papel (Mínimo Aceptable)', text: 'Escríbela a mano en papel. Usa letra clara. Verifica 3 veces que cada palabra esté correcta. Guarda el papel en un lugar seguro: caja fuerte, caja de seguridad bancaria, o escondite que solo tú conozcas.' },
           { icon: AlertTriangle, title: 'NUNCA en Digital', text: 'No en fotos. No en capturas de pantalla. No en notas del celular. No en Google Docs. No en emails. No en WhatsApp. No "encriptado" en la nube. Los hackers buscan activamente estas cosas.' },
           { icon: AlertTriangle, title: 'NUNCA la Digas en Voz Alta', text: 'Si hay un micrófono cerca (Alexa, Siri, tu celular), asume que puede estar grabando. Suena paranoico hasta que pierdes todo.' }
-        ]
+        ],
+        highlight: {
+          title: '¿Por Qué Importa?',
+          text: '12 palabras reemplazan a un banco entero. No necesitas sucursal, no necesitas aprobación, no necesitas confiar en nadie. Tu frase semilla es literalmente tu banco en el bolsillo.'
+        }
       },
       {
         type: 'main',
@@ -1777,6 +1839,18 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'b',
           explanation: 'La passphrase es una capa extra de seguridad. Tu seed phrase de 12 palabras + "tu_palabra_secreta" genera direcciones completamente diferentes a la misma seed phrase sola. Esto te protege incluso si alguien obtiene tu seed: sin la passphrase, verán una wallet vacía o diferente.'
+        },
+        {
+          id: 'review_1',
+          question: '📝 Repaso: ¿Cuál es la diferencia fundamental entre una hot wallet y una cold wallet?',
+          options: [
+            { id: 'a', text: 'El precio' },
+            { id: 'b', text: 'La conexión a internet' },
+            { id: 'c', text: 'El número de criptomonedas que soportan' },
+            { id: 'd', text: 'La velocidad de transacción' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La diferencia fundamental es que una hot wallet está conectada a internet (conveniente pero más vulnerable) y una cold wallet está desconectada (más segura para almacenamiento a largo plazo). (Recuerda la Lección 7: Wallets)'
         }
       ]
     }
@@ -2011,7 +2085,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: 'La tecnología importa, pero lo que realmente usarás son las aplicaciones. Solana tiene las mejores:',
         features: [
           { icon: Zap, title: 'Jupiter', text: 'El mejor agregador DEX del mundo. Te encuentra el mejor precio entre todos los exchanges descentralizados. Tiene DCA (compra automática), órdenes límite, y perpetuos. Es el "Uniswap de Solana" pero con superpoderes.' },
-          { icon: Wallet, title: 'Phantom', text: 'Ya la conoces. La wallet más usada de Solana. Pero vale repetir: la experiencia de Phantom vs MetaMask es día y noche. MetaMask se siente como software de 1917.' },
+          { icon: Wallet, title: 'Phantom', text: 'Ya la conoces. La wallet más usada de Solana. Pero vale repetir: la experiencia de Phantom vs MetaMask es día y noche. MetaMask se siente como software de 2017.' },
           { icon: Globe, title: 'Magic Eden / Tensor', text: 'Los marketplaces de NFTs en Solana. Puedes comprar y vender NFTs por menos de $0.01 en fees. En OpenSea (Ethereum), los fees pueden ser $20-50.' },
           { icon: Activity, title: 'Marinade / Jito', text: 'Plataformas de liquid staking. Pones tu SOL a trabajar ganando ~7-8% anual mientras sigue siendo líquido. En Ethereum, hacer liquid staking cuesta $20+ en gas.' }
         ]
@@ -2022,7 +2096,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: 'No queremos darte solo la versión positiva. Estos son los argumentos en contra que escucharás:',
         features: [
           { icon: AlertTriangle, title: 'Centralización Relativa', text: 'Solana requiere hardware más potente para correr un validador. Esto significa menos validadores que Ethereum. Críticos dicen que es "menos descentralizada". Counter-argument: ¿de qué sirve una red "descentralizada" que nadie puede pagar usar?' },
-          { icon: AlertTriangle, title: 'Outages Históricos', text: 'Solana tuvo varios "apagones" en 2022-2023 donde la red se detuvo. Esto generó dudas sobre su estabilidad. Sin embargo, desde 1924 ha funcionado sin problemas y las mejoras técnicas han resuelto estos issues.' },
+          { icon: AlertTriangle, title: 'Outages Históricos', text: 'Solana tuvo varios "apagones" en 2022-2023 donde la red se detuvo. Esto generó dudas sobre su estabilidad. Sin embargo, desde 2024 ha funcionado sin problemas y las mejoras técnicas han resuelto estos issues.' },
           { icon: AlertTriangle, title: 'Ecosistema Más Joven', text: 'Ethereum tiene 8+ años. Solana tiene 4. El ecosistema de Ethereum es más grande y tiene más liquidez total. Algunos protocolos "blue chip" solo existen en Ethereum.' }
         ]
       },
@@ -2110,6 +2184,18 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'c',
           explanation: 'Firedancer es el upgrade más importante en la historia de Solana. Jump Trading (traders profesionales) lo están construyendo desde cero. Hará la red mucho más rápida y resistente al tener múltiples clientes independientes.'
+        },
+        {
+          id: 'review_1',
+          question: '📝 Repaso: ¿Por qué es prácticamente imposible alterar una transacción pasada en una blockchain?',
+          options: [
+            { id: 'a', text: 'Porque los mineros lo impedirían físicamente' },
+            { id: 'b', text: 'Porque cada bloque contiene el hash del bloque anterior, creando una cadena inalterable' },
+            { id: 'c', text: 'Porque Satoshi protege la red personalmente' },
+            { id: 'd', text: 'Porque las transacciones se borran después de confirmarse' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Cada bloque está matemáticamente encadenado al anterior mediante hashes. Alterar un bloque requeriría recalcular todos los hashes siguientes, lo cual es computacionalmente imposible en la práctica. (Recuerda la Lección 5: Blockchain)'
         }
       ]
     }
@@ -2680,6 +2766,21 @@ export const LESSONS_DATA: Record<number, any> = {
         }
       },
       {
+        type: 'main',
+        title: 'Tu Privacidad en la Blockchain',
+        content: 'Toda transacción en blockchain es pública para siempre. Esto es bueno para la transparencia, pero terrible para tu privacidad si no tomas precauciones. Cuando alguien conoce tu dirección de wallet, puede ver CADA transacción que has hecho, tu balance actual, y con quién interactúas. Aquí tienes lo que necesitas saber para proteger tu información personal:',
+        features: [
+          { icon: Eye, title: 'Transacciones Públicas por Defecto', text: 'Cada swap, envío, compra de NFT y aprobación de contrato queda registrada para siempre en la blockchain. Cualquiera puede ir a Solscan, pegar tu dirección, y ver tu historial completo. Cuánto tienes, cuánto ganaste, a quién le enviaste, y qué protocolos usas. No hay "modo incógnito" en la blockchain.' },
+          { icon: Users, title: 'KYC Vincula tu Identidad', text: 'Cuando usas un exchange centralizado (Binance, Coinbase) con verificación de identidad (KYC), tu wallet queda vinculada a tu nombre real. Si envías desde el exchange a tu wallet personal, ahora esa wallet también está asociada a ti. Los exchanges comparten datos con gobiernos cuando lo solicitan. Tu "anonimato" cripto termina en el momento que haces KYC.' },
+          { icon: Wallet, title: 'Separa tus Wallets', text: 'Usa wallets diferentes para diferentes propósitos: una wallet principal para ahorros a largo plazo (mínima actividad), una wallet operativa para DeFi y experimentación, y una wallet burner para probar dApps nuevas o riesgosas. Nunca envíes directamente desde un exchange KYC a tu wallet principal de ahorro—usa una wallet intermedia.' },
+          { icon: Shield, title: 'Prácticas Básicas de Privacidad', text: 'No publiques tu dirección de wallet en redes sociales. No uses ENS/SNS domains vinculados a tu identidad real para wallets con fondos importantes. No compartas capturas de pantalla que muestren tu balance o dirección. Y recuerda: en Web3, tu wallet ES tu identidad financiera—protégela como proteges tu número de cuenta bancaria.' }
+        ],
+        highlight: {
+          title: 'Recuerda',
+          text: 'La blockchain es transparente por diseño. Eso la hace confiable, pero también significa que la privacidad es TU responsabilidad. Con prácticas básicas de separación de wallets y consciencia sobre el rastro que dejas, puedes disfrutar de los beneficios de Web3 sin exponer toda tu vida financiera.'
+        }
+      },
+      {
         type: 'takeaways',
         title: 'Las 10 Reglas de Oro Anti-Estafas',
         items: [
@@ -3136,6 +3237,18 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'b',
           explanation: 'Los niveles psicológicos son reales porque la psicología humana es predecible. Todos pensamos en números redondos. Esa acumulación de órdenes crea zonas de soporte/resistencia "naturales" antes de que el precio las visite.'
+        },
+        {
+          id: 'review_1',
+          question: '📝 Repaso: Una vela japonesa con cuerpo pequeño y mecha inferior muy larga en una zona de soporte indica:',
+          options: [
+            { id: 'a', text: 'Los vendedores están ganando control total' },
+            { id: 'b', text: 'Los compradores rechazaron precios más bajos con fuerza — señal alcista' },
+            { id: 'c', text: 'El mercado está indeciso sin dirección' },
+            { id: 'd', text: 'Es momento de vender inmediatamente' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Una mecha inferior larga significa que los compradores empujaron el precio de vuelta hacia arriba después de una caída. En una zona de soporte, esto es una señal de posible rebote alcista. (Recuerda la Lección 13: Velas Japonesas)'
         }
       ]
     }
@@ -3425,6 +3538,21 @@ export const LESSONS_DATA: Record<number, any> = {
         ]
       },
       {
+        type: 'main',
+        title: 'Ejemplo Completo: De Análisis a Ejecución',
+        content: 'Vamos a poner en práctica TODO lo que aprendiste en este módulo con un ejemplo completo. Imagina que estás analizando SOL/USDC y quieres decidir si comprar, vender, o no hacer nada. Este es el proceso profesional paso a paso:',
+        features: [
+          { icon: BarChart3, title: '1. Lee el Gráfico (Estructura + Contexto)', text: 'Abres el gráfico semanal: SOL viene haciendo HH + HL desde hace 3 meses. Tendencia macro alcista confirmada. Bajas al diario: también alcista, pero el precio retrocedió al último soporte en $160 (zona de demanda que antes fue resistencia). Bajas a 4H: el RSI está en 32 (sobreventa) y el precio tocó la EMA de 200 periodos. Los tres timeframes dicen lo mismo: el contexto favorece una compra en este nivel.' },
+          { icon: Activity, title: '2. Aplica tus Indicadores de Confirmación', text: 'RSI en 4H en sobreventa (32)—señal de que la presión vendedora se agotó. El precio está en la EMA 200 diaria—históricamente actúa como soporte dinámico en tendencias alcistas. Volumen: la vela de retroceso tiene volumen decreciente (los vendedores están perdiendo fuerza). Buscas una vela de reversión: aparece un Hammer en 4H en la zona de $160. Todas las señales están alineadas.' },
+          { icon: Crosshair, title: '3. Define tu Entrada, Stop Loss y Take Profit', text: 'Entrada: $162 (ligeramente por encima del cierre del Hammer para confirmar fuerza compradora). Stop Loss: $153 (debajo del último Higher Low y de la mecha del Hammer—si el precio llega ahí, la estructura alcista se rompe y tu tesis se invalida). Take Profit 1: $185 (resistencia reciente, relación riesgo/recompensa de 1:2.5). Take Profit 2: $200 (siguiente zona de resistencia para la mitad restante). Riesgo por acción: $162 - $153 = $9 de riesgo por SOL.' },
+          { icon: Target, title: '4. Calcula tu Tamaño de Posición', text: 'Regla: nunca arriesgas más del 1-2% de tu capital total en una sola operación. Si tu portafolio es $5,000, tu riesgo máximo es $50-100 por trade. Con $9 de riesgo por SOL y $75 de riesgo máximo: puedes comprar ~8 SOL ($1,296 de posición). No todo tu portafolio—solo la cantidad donde si pierdes $75, duermes tranquilo. Esta es la diferencia entre un trader y un apostador: el apostador pone todo, el trader calcula su riesgo ANTES de entrar.' }
+        ],
+        highlight: {
+          title: 'El Framework Completo',
+          text: 'Estructura (macro) → Soporte/Resistencia (nivel) → Indicadores (confirmación) → Vela de entrada (timing) → Stop en estructura (riesgo) → Posición por % de capital (gestión). Sigue este proceso en cada operación y eliminarás el 90% de las decisiones emocionales que destruyen cuentas.'
+        }
+      },
+      {
         type: 'takeaways',
         title: 'La Estructura lo Es Todo',
         items: [
@@ -3523,7 +3651,7 @@ export const LESSONS_DATA: Record<number, any> = {
       {
         type: 'main',
         title: 'Supply: La Oferta del Token',
-        content: 'El concepto más fundamental es el **supply**—cuántos tokens existen y cuántos van a existir. Hay tres números que DEBES verificar antes de comprar cualquier token:',
+        content: 'El concepto más fundamental es el **supply**—cuántos tokens existen y cuántos van a existir. Hay tres números que DEBES verificar antes de comprar cualquier token:\n\n**¿Por qué importa más el supply que el precio?** Porque un token a $0.01 con 100 mil millones de supply tiene un FDV de $1,000 millones. El precio sin contexto de supply es una ilusión.',
         features: [
           { icon: BarChart3, title: 'Circulating Supply (Supply Circulante)', text: 'Los tokens que AHORA MISMO están en el mercado, en manos de personas que pueden comprar y vender. Este es el número real. Si hay 100 millones de tokens circulando a $1, el **market cap real** es $100M. Este es el número que importa para evaluar el tamaño actual del proyecto.' },
           { icon: Layers, title: 'Total Supply (Supply Total)', text: 'Todos los tokens que existen, incluyendo los que están bloqueados (en vesting, en la tesorería, sin distribuir). Si el total es 1,000 millones pero solo circulan 100 millones, hay **900 millones esperando para entrar al mercado**. Cuando entren, diluirán tu posición.' },
@@ -3612,6 +3740,19 @@ export const LESSONS_DATA: Record<number, any> = {
         ]
       },
       {
+        type: 'main',
+        title: '\u{1F9E0} Explícalo Tú: El Test de Feynman',
+        content: 'Richard Feynman, premio Nobel de Física, decía: "Si no puedes explicar algo de forma simple, no lo entiendes realmente." Pon a prueba tu comprensión:',
+        features: [
+          { icon: Brain, title: 'El Reto', text: 'Explícale a CBas por qué un token a $0.001 puede ser más caro que uno a $100. Usa los conceptos de supply y FDV.' },
+          { icon: MessageSquare, title: 'Usa CBas AI', text: 'Selecciona cualquier texto de esta lección y haz clic en "Explicar con CBas" para profundizar. O abre el chat y explícale el concepto en tus propias palabras—CBas te dirá si tu explicación es correcta.' }
+        ],
+        highlight: {
+          title: 'Por Qué Funciona',
+          text: 'Estudios científicos demuestran que explicar un concepto en tus propias palabras mejora la retención un 28% comparado con solo leerlo. No memorices—comprende.'
+        }
+      },
+      {
         type: 'takeaways',
         title: 'Tu Checklist de Tokenomics',
         items: [
@@ -3685,6 +3826,18 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'c',
           explanation: 'La mayoría de receptores de airdrops venden inmediatamente—recibieron algo gratis y quieren convertirlo en dinero. Esto crea presión de venta enorme. La estrategia inteligente: espera el dump post-airdrop y compra después de la capitulación, no antes.'
+        },
+        {
+          id: 'review_1',
+          question: '📝 Repaso: Cuando un precio rompe un nivel de soporte con alto volumen y luego vuelve a tocarlo desde abajo, ese nivel se convierte en:',
+          options: [
+            { id: 'a', text: 'Un nuevo soporte más fuerte' },
+            { id: 'b', text: 'Una señal de compra' },
+            { id: 'c', text: 'Una nueva resistencia' },
+            { id: 'd', text: 'Un indicador de baja volatilidad' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Cuando un soporte se rompe, se convierte en resistencia (y viceversa). Este concepto de "flip" de niveles es fundamental en análisis técnico. (Recuerda la Lección 14: Soportes y Resistencias)'
         }
       ]
     }
@@ -4935,7 +5088,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 25,
     title: 'Jupiter: El Rey de los DEXs',
     level: 'Avanzado',
-    number: '1 de 11',
+    number: '1 de 13',
     duration: '35 min',
     type: 'Tutorial Práctico',
     description: 'Olvida los exchanges centralizados. Jupiter es el agregador de liquidez más poderoso de Solana: mejor precio, DCA automático, órdenes límite, y perpetuos—todo descentralizado, sin custodia, y con la mejor ejecución del mercado.',
@@ -4957,7 +5110,11 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: Search, title: 'Descubrimiento de Rutas', text: 'Jupiter analiza todos los pools de liquidez disponibles en Solana en milisegundos. Evalúa el precio, la profundidad de liquidez, y el slippage en cada uno. Si tienes una orden de $5,000, puede que el mejor precio sea dividirla: $3,000 por Raydium y $2,000 por Orca—Jupiter calcula esto automáticamente y ejecuta todo en una sola transacción atómica.' },
           { icon: Zap, title: 'Mejor Precio Garantizado', text: 'El resultado es que casi siempre obtienes mejor precio que usando cualquier DEX individual directamente. Para órdenes pequeñas (<$1,000), la diferencia puede ser mínima. Pero para órdenes de $5,000+, la diferencia puede ser del 0.5-2%—que en trading activo se acumula rápidamente.' },
           { icon: Shield, title: 'Sin Custodia, Sin Permisos', text: 'A diferencia de Binance o cualquier CEX, Jupiter nunca toca tus fondos. Conectas tu wallet, firmas la transacción, y los tokens van directamente de tu wallet al pool y de vuelta. Si Jupiter desapareciera mañana, tus fondos están intactos en tu wallet. No hay riesgo de "FTX" con un DEX.' }
-        ]
+        ],
+        highlight: {
+          title: '¿Por Qué Importa?',
+          text: '¿Por qué usar un DEX en vez de Binance? Porque en un DEX, TÚ controlas tus fondos. No hay KYC, no hay congelamiento de cuentas, no hay "mantenimiento del sistema". Tu dinero, tus reglas.'
+        }
       },
       {
         type: 'main',
@@ -5025,6 +5182,19 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: AlertTriangle, title: 'El Riesgo Real', text: 'La inmensa mayoría de traders que usan apalancamiento alto pierden dinero. Con 10×, un movimiento de 10% en tu contra te liquida completamente. El mercado crypto es volátil—movimientos de 10% ocurren regularmente. Si recién empiezas, NO uses perpetuos. Domina primero el spot trading sin apalancamiento.' },
           { icon: BarChart3, title: 'Si Decides Usarlos', text: 'Máximo 2-3× apalancamiento para principiantes en perps. Siempre con stop loss definido ANTES de entrar. Nunca más del 5% de tu portafolio en una posición apalancada. Los perps son herramientas legítimas para hedging y trading direccional—pero solo para quienes entienden y aceptan el riesgo.' }
         ]
+      },
+      {
+        type: 'main',
+        title: '\u{1F9E0} Explícalo Tú: El Test de Feynman',
+        content: 'Richard Feynman, premio Nobel de Física, decía: "Si no puedes explicar algo de forma simple, no lo entiendes realmente." Pon a prueba tu comprensión:',
+        features: [
+          { icon: Brain, title: 'El Reto', text: 'Explícale a CBas cómo funciona un swap en Jupiter, desde que haces clic hasta que los tokens llegan a tu wallet.' },
+          { icon: MessageSquare, title: 'Usa CBas AI', text: 'Selecciona cualquier texto de esta lección y haz clic en "Explicar con CBas" para profundizar. O abre el chat y explícale el concepto en tus propias palabras—CBas te dirá si tu explicación es correcta.' }
+        ],
+        highlight: {
+          title: 'Por Qué Funciona',
+          text: 'Estudios científicos demuestran que explicar un concepto en tus propias palabras mejora la retención un 28% comparado con solo leerlo. No memorices—comprende.'
+        }
       },
       {
         type: 'takeaways',
@@ -5120,7 +5290,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 26,
     title: 'Liquidez y Yield Farming',
     level: 'Avanzado',
-    number: '3 de 11',
+    number: '3 de 13',
     duration: '42 min',
     type: 'Estrategias',
     description: 'Conviértete en el banco. Aprende a proveer liquidez en Raydium, Orca y Meteora para ganar comisiones por cada swap que otros hacen. Entiende la impermanent loss, los pools concentrados, y cuándo vale la pena (y cuándo no).',
@@ -5284,6 +5454,18 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'b',
           explanation: 'Es un trade-off entre eficiencia y mantenimiento. Los pools estándar son "set and forget"—ideales para quien no quiere monitorear. Los pools concentrados son como un oficio activo: requieren atención constante pero recompensan con rendimientos mucho mayores cuando se gestionan correctamente. Elige según tu disponibilidad de tiempo y experiencia.'
+        },
+        {
+          id: 'review_1',
+          question: '📝 Repaso: ¿Por qué Jupiter es un "agregador" de liquidez en vez de un DEX simple?',
+          options: [
+            { id: 'a', text: 'Porque solo funciona en Solana' },
+            { id: 'b', text: 'Porque busca el mejor precio entre múltiples DEXs y divide tu swap entre ellos' },
+            { id: 'c', text: 'Porque cobra fees más altos que otros exchanges' },
+            { id: 'd', text: 'Porque requiere KYC para operar' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Jupiter no tiene su propia liquidez — compara precios en Raydium, Orca, Meteora y otros DEXs, y rutea tu swap por la mejor combinación posible. Por eso casi siempre obtienes mejor precio que yendo directo a un DEX individual. (Recuerda la Lección 25: Jupiter)'
         }
       ]
     }
@@ -5292,7 +5474,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 27,
     title: 'Lending & Borrowing',
     level: 'Avanzado',
-    number: '4 de 11',
+    number: '4 de 13',
     duration: '38 min',
     type: 'Tutorial Práctico',
     description: 'Accede a liquidez sin vender tus criptos. Deposita SOL como colateral, pide prestado USDC, y mantén tu exposición alcista. Pero cuidado: si no entiendes la liquidación, puedes perder todo.',
@@ -5466,7 +5648,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 28,
     title: 'Riesgos de DeFi: La Guía Completa',
     level: 'Avanzado',
-    number: '5 de 11',
+    number: '5 de 13',
     duration: '32 min',
     type: 'Seguridad',
     description: 'DeFi ofrece libertad financiera, pero la libertad viene con responsabilidad. Smart contract hacks, rug pulls, exploits de oráculos, y errores de usuario han costado más de $10 mil millones. Aprende a protegerte.',
@@ -5651,7 +5833,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 29,
     title: 'NFTs en Solana',
     level: 'Avanzado',
-    number: '6 de 11',
+    number: '7 de 13',
     duration: '30 min',
     type: 'Mercado',
     description: 'Los NFTs en Solana van mucho más allá de "JPEGs caros". Son acceso a comunidades exclusivas, herramientas de identidad digital, compresión que permite mintear millones por centavos, y un mercado profesional con Tensor y Magic Eden.',
@@ -5814,7 +5996,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 30,
     title: 'Airdrops y Points Farming',
     level: 'Avanzado',
-    number: '7 de 11',
+    number: '8 de 13',
     duration: '35 min',
     type: 'Estrategia',
     description: 'Los protocolos necesitan usuarios, y los recompensan con tokens de gobernanza. Solana ha tenido los airdrops más lucrativos de la historia: JTO, JUP, PYTH, W. Aprende a posicionarte como usuario temprano legítimamente.',
@@ -5977,7 +6159,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 31,
     title: 'DePIN: Infraestructura Física Descentralizada',
     level: 'Avanzado',
-    number: '8 de 11',
+    number: '9 de 13',
     duration: '28 min',
     type: 'Tendencias',
     description: 'Crypto sale del mundo digital al mundo físico. DePIN usa tokens para incentivar a millones de personas a construir infraestructura real: redes WiFi (Helium), mapas (Hivemapper), computación GPU (Render), y sensores ambientales. Solana es el epicentro.',
@@ -6140,7 +6322,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 32,
     title: 'Monolítico vs Modular: La Guerra de Arquitecturas',
     level: 'Avanzado',
-    number: '9 de 11',
+    number: '10 de 13',
     duration: '30 min',
     type: 'Técnico',
     description: 'El debate más importante de la industria: ¿es mejor una blockchain monolítica ultra-rápida (Solana) o un ecosistema modular de capas especializadas (Ethereum + L2s)? Entiende los trade-offs para tomar mejores decisiones de inversión.',
@@ -6312,7 +6494,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 33,
     title: 'Firedancer & El Futuro de Solana',
     level: 'Avanzado',
-    number: '10 de 11',
+    number: '11 de 13',
     duration: '25 min',
     type: 'Futuro',
     description: 'Firedancer es la reescritura completa del software validador de Solana, construida por Jump Crypto—la firma de trading de alta frecuencia más sofisticada del mundo. Entiende por qué la diversidad de clientes es crucial para la seguridad, cómo Firedancer alcanzó 1 millón de TPS en pruebas de laboratorio, y qué significa esto para el futuro del ecosistema Solana junto con innovaciones como token extensions, compresión de estado y la expansión de la SVM.',
@@ -6499,7 +6681,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 34,
     title: 'Seguridad Operacional Avanzada',
     level: 'Avanzado',
-    number: '11 de 11',
+    number: '12 de 13',
     duration: '30 min',
     type: 'Seguridad',
     description: 'La diferencia entre perder todo y dormir tranquilo es tu modelo de seguridad operacional. Aprende la arquitectura de wallets que usan los profesionales: cold storage para ahorros, hot wallets para operar, y burner wallets para experimentar. Domina la gestión de permisos, la simulación de transacciones, la protección contra phishing y social engineering, y las mejores prácticas de seed phrase que separan a los principiantes de los veteranos.',
@@ -6677,7 +6859,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 39,
     title: 'Gasta tus Cripto',
     level: 'Principiante',
-    number: '15 de 19',
+    number: '16 de 19',
     duration: '25 min',
     type: 'Herramientas',
     description: 'El círculo completo: de fiat a cripto, de cripto a gastos reales. Cómo usar tarjetas cripto para vivir sin depender de bancos tradicionales.',
@@ -6844,7 +7026,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 41,
     title: 'Stablecoins: Tu Dólar Digital',
     level: 'Principiante',
-    number: '16 de 19',
+    number: '15 de 19',
     duration: '22 minutos',
     type: 'Concepto Clave',
     description: 'Las stablecoins son la herramienta cripto más usada en Latinoamérica—pero la mayoría no entiende qué las respalda, ni los riesgos que esconden. Esta lección puede ahorrarte un desastre financiero.',
@@ -6928,6 +7110,21 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: Wallet, title: 'Refugio en Volatilidad', text: 'Cuando BTC o SOL caen 20%, puedes convertir temporalmente a USDC para proteger tus ganancias. Luego recompras cuando el precio se estabiliza. Es tu "puerto seguro" dentro del ecosistema cripto.' },
           { icon: Zap, title: 'Pagos y Tarjetas Cripto', text: 'Las tarjetas como Kast y Avici (que viste en la lección anterior) funcionan principalmente con stablecoins. Cargas USDC, pagas en cualquier tienda. El comercio recibe pesos, tú pagas desde tu wallet.' }
         ]
+      },
+      {
+        type: 'main',
+        title: 'Remesas con Stablecoins: Envía Dinero Sin Fronteras',
+        content: 'Latinoamérica recibe más de $150 mil millones al año en remesas—dinero que trabajadores en USA, España y otros países envían a sus familias. Los servicios tradicionales como Western Union o MoneyGram cobran entre $25 y $50 por envío, más un spread cambiario desfavorable. Las stablecoins eliminan casi todo ese costo. Enviar $500 de USA a Colombia cuesta menos de **$0.01** en comisión de red usando Solana, y llega en segundos—no en 3-5 días hábiles.',
+        features: [
+          { icon: Banknote, title: 'Comparación de Costos', text: 'Enviar $500 con Western Union: $25-50 de comisión + 2-4% de spread cambiario = pierdes $35-70. Enviar $500 en USDC por Solana: $0.001 de fee de red. Eso es un ahorro de $35-70 por envío. Si tu familia recibe remesas mensuales, son $420-840 al año que SE QUEDAN en tu bolsillo en vez de pagárselo a intermediarios.' },
+          { icon: Zap, title: 'Paso a Paso: Enviar Remesa con USDC', text: '1) El trabajador en USA compra USDC en un exchange (Coinbase, Kraken) o P2P. 2) Envía USDC a la wallet de Solana del familiar en LATAM (fee: $0.001, tiempo: ~2 segundos). 3) El familiar convierte USDC a moneda local usando un exchange local o plataforma P2P. 4) Retira a su cuenta bancaria o billetera digital. Todo el proceso puede completarse en minutos.' },
+          { icon: Globe, title: 'Plataformas LATAM para Convertir', text: 'En Colombia: Bitso, Binance P2P, o CopperX permiten vender USDC por pesos colombianos. En México: Bitso es la plataforma líder para convertir USDC a MXN con retiro bancario. En Argentina: plataformas P2P como Binance P2P o Lemon Cash permiten vender USDC al precio del dólar blue. En Venezuela: Binance P2P es la opción más usada. Investiga las opciones disponibles en tu país.' },
+          { icon: AlertTriangle, title: 'Consideraciones Importantes', text: 'La persona que recibe necesita saber usar una wallet cripto o tener una cuenta en un exchange local. La conversión a moneda local puede tener un pequeño spread en la plataforma P2P (1-3%), pero sigue siendo mucho menor que Western Union. Algunos países pueden tener regulaciones sobre la recepción de criptoactivos—infórmate sobre las reglas locales.' }
+        ],
+        highlight: {
+          title: 'El Impacto Real',
+          text: 'Para una familia que recibe $500 mensuales en remesas, cambiar de Western Union a stablecoins puede significar $500-800 extra al año. Ese dinero es un mes adicional de gastos, útiles escolares, o medicinas. Las stablecoins no son solo tecnología—son una herramienta de justicia económica para millones de familias latinoamericanas.'
+        }
       },
       {
         type: 'takeaways',
@@ -7319,6 +7516,18 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'b',
           explanation: 'Bitcoin es tu ancla de seguridad y escasez. Pero ETH/SOL te dan acceso a DeFi, staking (ganas rendimiento), y un ecosistema en crecimiento. La combinación ideal es: BTC para preservar riqueza, ETH/SOL para hacerla crecer activamente.'
+        },
+        {
+          id: 'review_1',
+          question: '📝 Repaso: ¿Cuál es el principal riesgo de las stablecoins algorítmicas comparadas con las respaldadas por dólares reales?',
+          options: [
+            { id: 'a', text: 'Son más lentas' },
+            { id: 'b', text: 'Cuestan más fees' },
+            { id: 'c', text: 'Pueden perder su paridad con el dólar si el mecanismo falla (como UST/LUNA)' },
+            { id: 'd', text: 'Solo funcionan en Ethereum' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Las stablecoins algorítmicas mantienen su paridad mediante mecanismos matemáticos, no respaldo real. Cuando estos mecanismos fallan (como el colapso de UST/LUNA en 2022), pueden perder todo su valor. USDC y USDT están respaldadas por activos reales. (Recuerda la Lección 41: Stablecoins)'
         }
       ]
     }
@@ -7397,6 +7606,21 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: CheckCircle, title: 'Meta a 1 Año', text: '¿Cuánto quieres tener invertido en 12 meses? No en ganancias (eso no lo controlas)—en capital invertido. Si tu DCA es $100/mes, tu meta es $1,200 invertidos en 1 año. Eso SÍ lo controlas.' },
           { icon: CheckCircle, title: 'Revisión Trimestral', text: 'Cada 3 meses, revisa: ¿Seguí mi DCA? ¿Mi distribución sigue en balance? ¿Necesito ajustar montos? ¿Mi seguridad está en orden? 15 minutos cada 3 meses. No mires tu portafolio todos los días—es contraproducente.' }
         ]
+      },
+      {
+        type: 'main',
+        title: 'Impuestos Cripto en LATAM',
+        content: 'Antes de ejecutar tu plan de inversión, debes conocer las obligaciones tributarias de tu país. Las criptomonedas **no son invisibles para las autoridades fiscales**—y la ignorancia no te exime de responsabilidad. Los exchanges reportan datos a las agencias tributarias, y las transacciones on-chain son rastreables. No declarar tus ganancias cripto puede resultar en multas, sanciones, e incluso problemas legales. Aquí te damos un panorama general por país, pero recuerda: las leyes cambian frecuentemente y cada situación es diferente.',
+        features: [
+          { icon: Landmark, title: 'Colombia', text: 'Las ganancias por venta de criptoactivos se consideran ganancia de capital y deben declararse en la renta anual. Si tus activos cripto superan ciertos umbrales, también deben reportarse como patrimonio. La DIAN (Dirección de Impuestos) ha intensificado el monitoreo de transacciones cripto desde 2022. La tarifa de renta varía según tu rango de ingresos (0-39%). Las pérdidas pueden compensarse con ganancias del mismo tipo en el mismo año fiscal.' },
+          { icon: Landmark, title: 'México', text: 'El SAT considera las criptomonedas como activos virtuales. Las ganancias por enajenación (venta o intercambio) de criptoactivos están sujetas al ISR (Impuesto Sobre la Renta). Se calcula sobre la diferencia entre el precio de compra y el de venta. La tasa marginal puede llegar hasta el 35% dependiendo de tu nivel de ingresos. Los exchanges mexicanos regulados (como Bitso) reportan operaciones al SAT. Debes incluir tus operaciones cripto en tu declaración anual.' },
+          { icon: Landmark, title: 'Argentina', text: 'Las ganancias de capital por venta de criptoactivos están gravadas con el impuesto cedular a la renta financiera (actualmente 15% sobre la ganancia neta en moneda extranjera). Además, si tus tenencias superan el mínimo no imponible, deben declararse en Bienes Personales (impuesto al patrimonio). La AFIP ha requerido a exchanges locales información sobre operaciones de sus usuarios. La situación regulatoria cambia frecuentemente—mantente actualizado.' },
+          { icon: Shield, title: 'Registro es Clave', text: 'Mantén un registro detallado de TODAS tus transacciones: fecha de compra, precio de compra, fecha de venta, precio de venta, fees pagados, y dirección de wallet. Herramientas como Koinly, CoinTracker, o incluso una hoja de cálculo simple te ayudan a calcular tus ganancias y pérdidas. Este registro es tu mejor defensa ante una auditoría y hace la declaración mucho más sencilla.' }
+        ],
+        highlight: {
+          title: 'Importante',
+          text: 'Esta información es orientativa y no constituye asesoría fiscal. Las leyes tributarias cambian frecuentemente y cada situación personal es diferente. Consulta SIEMPRE con un contador o profesional tributario de tu país antes de tomar decisiones fiscales. El costo de una consulta con un contador es infinitamente menor que el costo de una multa por no declarar.'
+        }
       },
       {
         type: 'takeaways',
@@ -7481,7 +7705,7 @@ export const LESSONS_DATA: Record<number, any> = {
     id: 40,
     title: 'Staking SOL: Gana por Asegurar la Red',
     level: 'Avanzado',
-    number: '2 de 11',
+    number: '2 de 13',
     duration: '30 min',
     type: 'Tutorial + Concepto',
     description: 'El staking es la forma más simple de poner tu SOL a trabajar: delegas a un validador, ayudas a asegurar la red, y ganas recompensas pasivas (~5-6% APY). Aprende la mecánica de epochs, delegación y slashing, cómo elegir un validador óptimo, las diferencias entre staking nativo y liquid staking (mSOL, jitoSOL, bSOL), y sigue un tutorial paso a paso para empezar desde Phantom o Solflare.',
@@ -7650,6 +7874,318 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'b',
           explanation: 'La inflación de SOL (~5.5% y decreciente) crea nuevos tokens constantemente. Si no stakeas, tu porcentaje de la red total se reduce—estás siendo diluido. Stakear es la defensa mínima: tus recompensas compensan la inflación, manteniendo tu proporción de SOL en la red aproximadamente constante.'
+        }
+      ]
+    }
+  },
+  45: {
+    id: 45,
+    title: 'MEV: El Impuesto Invisible',
+    level: 'Avanzado',
+    number: '6 de 13',
+    duration: '28 min',
+    type: 'DeFi Avanzado',
+    description: 'Cada vez que haces un swap en un DEX, bots invisibles pueden extraer valor de tu transacción. Aprende qué es MEV, cómo te afecta, y las herramientas para protegerte.',
+    sections: [
+      {
+        type: 'intro',
+        title: '¿Qué es MEV y Por Qué Te Importa?',
+        content: 'Imagina que estás en una casa de cambio con un billete de $100 esperando tu turno. Alguien detrás de ti ve que vas a comprar dólares al precio actual, se salta la fila, compra antes que tú (subiendo el precio), y luego te vende más caro. Eso es esencialmente lo que ocurre con **MEV (Maximal Extractable Value)**—el valor máximo que puede extraerse al reordenar, insertar, o censurar transacciones dentro de un bloque. En blockchain, tus transacciones no se ejecutan al instante. Primero van a un "área de espera" (mempool) donde son visibles para todos. Bots automatizados monitorean este área 24/7, analizando cada transacción pendiente para detectar oportunidades de ganancia. Cuando ven tu swap, pueden manipular el orden de ejecución para extraer valor de ti—sin que te des cuenta. Solo en Solana, bots de MEV extraen **millones de dólares por día** de usuarios regulares. Es un impuesto invisible que pagas cada vez que interactúas con DeFi, y la mayoría de usuarios ni siquiera sabe que existe.',
+        highlight: {
+          title: 'La Magnitud del Problema',
+          text: 'En 2024, se estima que bots de MEV extrajeron más de **$1.5 mil millones** en valor de usuarios de DeFi a nivel global. En Solana específicamente, Jito (el principal protocolo anti-MEV) procesa más de $100 millones en tips diarios—evidencia directa de la escala de actividad MEV en la red.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Ataques Sandwich: El Robo que No Ves',
+        content: 'El ataque sandwich es la forma más común y dañina de MEV que afecta a usuarios regulares. Funciona en tres pasos perfectamente sincronizados que ocurren en milisegundos:',
+        features: [
+          { icon: AlertTriangle, title: 'El Ataque Paso a Paso', text: '(1) Tú envías un swap: "Cambiar 100 USDC por SOL". Tu transacción llega al mempool y es visible para todos. (2) Un bot MEV detecta tu transacción y envía una compra de SOL ANTES que la tuya (front-run), subiendo el precio. (3) Tu swap se ejecuta al precio ya inflado—recibes menos SOL del esperado. (4) El bot vende inmediatamente después de ti (back-run), capturando la diferencia como ganancia. Todo ocurre en el mismo bloque, en milisegundos.' },
+          { icon: Eye, title: 'Cómo se Ve en la Práctica', text: 'Ejemplo concreto: Quieres cambiar 100 USDC por SOL. Sin MEV, al precio actual recibirías 0.67 SOL. Pero un bot sandwich interviene: compra SOL antes que tú (precio sube), tu swap se ejecuta y recibes solo 0.65 SOL, el bot vende y gana la diferencia (~0.02 SOL, unos $3). Parece poco, pero multiplica eso por miles de transacciones por hora. Para el bot, es una máquina de imprimir dinero.' },
+          { icon: Target, title: 'Quién es Víctima', text: 'TODOS los usuarios que hacen swaps con slippage alto o transacciones grandes en el mempool público son víctimas potenciales. Los más afectados: (1) Usuarios que configuran slippage alto (5-10%) para que su transacción "pase seguro". (2) Swaps grandes ($1,000+) donde la ganancia del bot justifica el costo de gas. (3) Tokens con poca liquidez donde es fácil mover el precio. Si usas DEX sin protección, estás pagando este impuesto invisible.' },
+          { icon: Shield, title: 'Por Qué Existe', text: 'MEV existe porque en blockchain, el orden de las transacciones dentro de un bloque lo decide el validador (o el builder). Quien controla el orden, controla quién gana y quién pierde. Los bots pagan "tips" o fees prioritarios a los validadores para garantizar que sus transacciones se ejecuten en el orden exacto que necesitan. Es un problema estructural del diseño de blockchain, no un bug—es una característica del sistema que actores sofisticados explotan.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Front-Running y Back-Running',
+        content: 'Más allá del ataque sandwich, hay otras formas de MEV que operan en DeFi constantemente:',
+        features: [
+          { icon: Zap, title: 'Front-Running', text: 'Un bot ve una orden de compra grande pendiente (por ejemplo, alguien va a comprar $50,000 de un token). El bot compra ese token ANTES de que la orden grande se ejecute, sabiendo que la compra grande subirá el precio. Después, vende a precio más alto. Es como tener información privilegiada sobre la siguiente transacción del mercado—excepto que en blockchain, toda la información es pública en el mempool.' },
+          { icon: Activity, title: 'Back-Running', text: 'El bot ejecuta una transacción inmediatamente DESPUÉS de una transacción grande para capturar una oportunidad de arbitraje. Ejemplo: un swap grande mueve el precio de SOL en Jupiter por debajo del precio en Orca. Un bot de back-running compra en Jupiter (barato) y vende en Orca (caro) en el mismo bloque, capturando la diferencia. Este tipo de MEV es menos dañino—en realidad ayuda a equilibrar precios entre DEXs.' },
+          { icon: AlertTriangle, title: 'Liquidation MEV', text: 'En protocolos de lending como Kamino o MarginFi, cuando una posición cae por debajo del colateral mínimo, cualquiera puede liquidarla y recibir un bonus. Los bots de MEV compiten agresivamente por ser los primeros en ejecutar estas liquidaciones—a veces manipulando precios de oráculos temporalmente para forzar liquidaciones que no deberían ocurrir. En Solana, los bots de liquidación operan con latencia de microsegundos, conectándose directamente a validadores.' },
+          { icon: Brain, title: 'El Costo Real para Ti', text: 'Aunque no veas una línea que diga "fee de MEV" en tu transacción, lo pagas en peor ejecución de precio. Si todos tus swaps se ejecutan un 0.5-2% peor de lo esperado, estás perdiendo dinero silenciosamente. Un usuario activo que hace 10 swaps por semana puede perder cientos de dólares al mes sin darse cuenta. Es el impuesto más eficiente del mundo: la víctima ni siquiera sabe que está pagándolo.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Jito y la Solución de Solana',
+        content: 'Solana tiene un enfoque único para manejar MEV, centrado en Jito—el protocolo que ha transformado cómo se procesan transacciones en la red:',
+        features: [
+          { icon: Layers, title: 'Jito Bundles: La Clave', text: 'Jito permite agrupar transacciones en "bundles" (paquetes) que se envían directamente a los validadores, sin pasar por el mempool público. ¿Por qué importa? Si tu transacción nunca es visible en el mempool, los bots sandwich no pueden verla ni atacarla. Los bundles garantizan que tus transacciones se ejecuten en el orden exacto que especificas—eliminando la posibilidad de que alguien inserte transacciones entre las tuyas.' },
+          { icon: Zap, title: 'Jito Tips: Prioridad Inteligente', text: 'En vez de competir en una "carrera ciega" por inclusión en el bloque, Jito introduce un sistema de "tips" (propinas) donde los usuarios pagan directamente a los validadores por prioridad. Esto es más eficiente que el sistema de gas wars: sabes exactamente cuánto pagas y qué obtienes. Jupiter ya integra Jito tips automáticamente—cuando ajustas "Priority Fee" en la configuración de Jupiter, estás usando este sistema.' },
+          { icon: RefreshCw, title: 'Redistribución de MEV', text: 'Jito redirige las ganancias de MEV de bots anónimos hacia validadores y sus stakers. Los validadores que usan el cliente Jito-Solana (más del 90% de la red) reciben tips de MEV y los comparten con sus delegadores. Esto significa que si haces staking con un validador Jito (como jitoSOL liquid staking), parte de las ganancias de MEV te llegan como mayor APY. Jito stakers obtienen ~1-2% más APY que el staking base gracias a rewards de MEV.' },
+          { icon: Network, title: 'El Ecosistema Jito en Números', text: 'Más del 90% de los validadores de Solana ejecutan el cliente Jito-Solana. jitoSOL es uno de los mayores tokens de liquid staking con miles de millones en TVL. Los tips de Jito representan una porción significativa de las recompensas de los validadores. El sistema no elimina MEV completamente—lo hace más transparente y redistribuye las ganancias hacia los participantes de la red en vez de solo los bots.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Cómo Protegerte: Guía Práctica',
+        content: 'No puedes eliminar MEV completamente, pero puedes reducir drásticamente cuánto valor te extraen con estas estrategias:',
+        features: [
+          { icon: Shield, title: 'Usa Jito Tips en Jupiter', text: 'Jupiter ya tiene integración nativa con Jito. En la configuración de tu swap, verás opciones de "Priority Fee" y "Jito Tip". Activa las Jito Tips para que tu transacción se envíe como bundle directo a validadores, sin pasar por el mempool público. Un tip de 0.001-0.005 SOL es suficiente para la mayoría de transacciones y te protege de ataques sandwich.' },
+          { icon: Target, title: 'Configura el Slippage Correctamente', text: 'El slippage es el margen de variación de precio que aceptas. Si pones slippage de 10%, le estás diciendo a los bots: "acepto recibir hasta un 10% menos". Eso es una invitación abierta a un sandwich attack. Para tokens líquidos (SOL, USDC), usa 0.5-1% de slippage. Solo sube a 2-3% para tokens de baja liquidez. Nunca uses más de 5% excepto en emergencias.' },
+          { icon: Lock, title: 'Transacciones Protegidas', text: 'Algunos wallets y DEXs ofrecen "transacciones privadas" o "protección MEV" que envían tu transacción directamente a builders de bloques, sin exponerla en el mempool público. En Solana, esto se logra a través de los bundles de Jito. Verifica que tu wallet o DEX tenga esta opción habilitada por defecto.' },
+          { icon: Scissors, title: 'Divide Swaps Grandes', text: 'Si necesitas cambiar $10,000 o más, no lo hagas en una sola transacción. Divídelo en 3-5 swaps más pequeños. Un swap de $2,000 es menos atractivo para bots que uno de $10,000 porque la ganancia potencial es menor y puede no justificar el costo del ataque. Además, el impacto de precio de cada swap individual es menor.' },
+          { icon: Clock, title: 'Usa Limit Orders', text: 'En vez de hacer un market swap (que se ejecuta al precio actual y es vulnerable a MEV), usa órdenes límite en Jupiter. Con una limit order, especificas el precio exacto al que quieres comprar o vender. La orden se ejecuta solo cuando el precio llega a tu objetivo—y como no pasa por el mempool en tiempo real, es mucho más difícil de sandwichear.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Protegiendo tu Valor en DeFi',
+        items: [
+          'MEV (Maximal Extractable Value) es el valor que bots extraen al reordenar transacciones en un bloque. Es un impuesto invisible que pagas cada vez que haces un swap sin protección—millones de dólares se extraen diariamente en Solana.',
+          'El ataque sandwich es la forma más común: un bot compra antes de tu swap (subiendo el precio), tu swap se ejecuta a peor precio, y el bot vende después capturando la diferencia. Afecta especialmente a swaps con slippage alto y transacciones grandes.',
+          'Jito es la solución principal de Solana: permite enviar transacciones como bundles directos a validadores, sin pasar por el mempool público. Esto elimina la visibilidad que necesitan los bots sandwich para atacarte.',
+          'Los stakers de Jito (jitoSOL) se benefician del MEV: las ganancias se redistribuyen como mayor APY en vez de quedarse en manos de bots anónimos. Más del 90% de los validadores de Solana usan el cliente Jito.',
+          'Para protegerte en la práctica: activa Jito Tips en Jupiter, usa slippage de 0.5-1% (nunca más de 5%), divide swaps grandes en partes, y prefiere limit orders sobre market swaps cuando sea posible.',
+          'MEV no se puede eliminar completamente—es una propiedad estructural de las blockchains. Pero con las herramientas correctas (Jito, slippage bajo, limit orders), puedes reducir tu exposición drásticamente y dejar de pagar el impuesto invisible.'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: '¿Qué es un ataque sandwich en DeFi?',
+          options: [
+            { id: 'a', text: 'Cuando un hacker roba fondos de un smart contract explotando un bug' },
+            { id: 'b', text: 'Un bot detecta tu swap pendiente, compra antes que tú (subiendo el precio), tu swap se ejecuta a peor precio, y el bot vende después capturando la diferencia' },
+            { id: 'c', text: 'Cuando dos personas intentan comprar el mismo token al mismo tiempo' },
+            { id: 'd', text: 'Un tipo de phishing donde un sitio falso roba tus claves privadas' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El ataque sandwich tiene tres pasos: (1) el bot front-runs tu transacción comprando antes, (2) tu swap se ejecuta al precio ya inflado, (3) el bot back-runs vendiendo lo que compró. Todo sucede en el mismo bloque. La víctima recibe menos tokens de los esperados sin saber por qué.'
+        },
+        {
+          id: 'q2',
+          question: 'Pones tu slippage en 10% para un swap en Jupiter. ¿Por qué esto te hace más vulnerable a MEV?',
+          options: [
+            { id: 'a', text: 'Porque el 10% se paga como comisión a Jupiter' },
+            { id: 'b', text: 'Porque le estás diciendo a los bots que aceptas recibir hasta un 10% menos del precio esperado, dándoles un margen enorme para extraer valor con un sandwich attack' },
+            { id: 'c', text: 'Slippage alto no tiene relación con MEV' },
+            { id: 'd', text: 'Porque las transacciones con slippage alto son más lentas' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El slippage define cuánta variación de precio aceptas. Al poner 10%, le dices al protocolo "ejecuta mi swap aunque reciba hasta un 10% menos". Los bots leen esto y saben que pueden moverte el precio hasta un 10% sin que tu transacción falle. Es como poner un cartel que dice "acepto pagar de más". Usa 0.5-1% para tokens líquidos.'
+        },
+        {
+          id: 'q3',
+          question: '¿Cómo protegen los bundles de Jito contra ataques MEV?',
+          options: [
+            { id: 'a', text: 'Encriptan la transacción para que nadie pueda leerla' },
+            { id: 'b', text: 'Envían la transacción directamente a los validadores sin pasar por el mempool público, eliminando la visibilidad que necesitan los bots para atacarte' },
+            { id: 'c', text: 'Bloquean automáticamente a todos los bots de la red' },
+            { id: 'd', text: 'Hacen que tu transacción sea gratuita para que los bots no puedan competir' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Los bots sandwich necesitan VER tu transacción pendiente en el mempool para atacarla. Los bundles de Jito envían tu transacción directamente a los validadores, saltándose el mempool público. Si el bot no puede ver tu swap, no puede construir un sandwich alrededor de él. Es la defensa más efectiva contra MEV en Solana.'
+        },
+        {
+          id: 'q4',
+          question: 'Haces un swap de $5,000 USDC a SOL y recibes 2% menos SOL del precio que viste al confirmar. ¿Qué probablemente ocurrió?',
+          options: [
+            { id: 'a', text: 'Jupiter te cobró una comisión oculta del 2%' },
+            { id: 'b', text: 'El precio de SOL subió naturalmente un 2% en el segundo exacto de tu swap' },
+            { id: 'c', text: 'Un bot sandwich detectó tu transacción grande en el mempool, compró SOL antes que tú (subiendo el precio ~2%), y vendió después de tu swap—extrayendo ~$100 de tu transacción' },
+            { id: 'd', text: 'Es un error de la blockchain que se corregirá automáticamente' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Un swap de $5,000 sin protección MEV es un objetivo atractivo para bots. La pérdida del 2% (~$100) es consistente con un ataque sandwich: el bot infló el precio antes de tu swap y lo vendió después. Para evitarlo: usa Jito Tips, configura slippage bajo (0.5-1%), y considera dividir swaps grandes en partes más pequeñas.'
+        },
+        {
+          id: 'q5',
+          question: '¿Cuál es el método MÁS efectivo para proteger tus swaps cotidianos en Jupiter contra MEV?',
+          options: [
+            { id: 'a', text: 'Hacer swaps solo a las 3am cuando hay menos bots activos' },
+            { id: 'b', text: 'Activar Jito Tips en la configuración de Jupiter para que tu transacción se envíe como bundle directo a validadores, combinado con slippage de 0.5-1%' },
+            { id: 'c', text: 'Usar siempre slippage de 0% para que los bots no puedan moverte el precio' },
+            { id: 'd', text: 'Hacer todos los swaps por cantidades menores a $1 para que no valga la pena atacarte' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La combinación de Jito Tips + slippage bajo es la protección más práctica y efectiva. Jito Tips envía tu transacción directamente a validadores (sin mempool público), y el slippage bajo limita cuánto pueden moverte el precio. Jupiter ya tiene ambas opciones integradas—solo necesitas activarlas en la configuración. Slippage de 0% causaría que muchas transacciones fallen, y esperar horarios específicos no te protege (los bots operan 24/7).'
+        }
+      ]
+    }
+  },
+  46: {
+    id: 46,
+    title: 'Gobernanza DAO: Tu Voto Importa',
+    level: 'Avanzado',
+    number: '13 de 13',
+    duration: '25 min',
+    type: 'Concepto + Práctica',
+    description: 'Los tokens de gobernanza te dan poder de decisión sobre protocolos que manejan miles de millones de dólares. Aprende a votar, delegar, y protegerte de ataques de gobernanza.',
+    sections: [
+      {
+        type: 'intro',
+        title: '¿Qué Son los Tokens de Gobernanza?',
+        content: 'Imagina que pudieras votar sobre las decisiones de tu banco: qué comisiones cobra, en qué invierte tu dinero, y cómo se distribuyen las ganancias. En finanzas tradicionales, eso es imposible. En DeFi, es la norma. Los **tokens de gobernanza** otorgan a sus holders el poder de votar sobre las decisiones que afectan un protocolo: cambios en fees, actualizaciones de código, distribución de tesorería, nuevas integraciones, y más. Si tienes tokens JUP de Jupiter, puedes votar sobre el futuro del mayor agregador DEX del ecosistema Solana. Si tienes MNDE de Marinade, decides cómo evoluciona el protocolo de liquid staking más importante de la red. Es como tener acciones en una empresa, pero con transparencia total—cada voto se registra on-chain, cada propuesta es pública, y cualquiera puede participar.',
+        highlight: {
+          title: 'El Poder Real',
+          text: 'Los protocolos DeFi en Solana manejan miles de millones de dólares en valor. Los holders de tokens de gobernanza deciden cómo se usa ese capital. Tu voto no es simbólico—tiene consecuencias financieras reales para ti y para todo el ecosistema.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Mecanismos de Votación',
+        content: 'No todas las DAOs votan igual. El mecanismo de votación determina quién tiene poder real y cómo se toman las decisiones. Cada sistema tiene trade-offs entre eficiencia, equidad, y resistencia a la manipulación:',
+        features: [
+          { icon: Banknote, title: 'Token-Weighted (1 Token = 1 Voto)', text: 'El mecanismo más común y simple. Quien tiene más tokens tiene más poder de voto. Es transparente y fácil de implementar, pero tiene un problema fundamental: las ballenas (holders con millones de tokens) dominan las votaciones. Una sola wallet con el 5% del supply puede superar a miles de usuarios pequeños. Es democracia del capital, no de las personas. Jupiter y la mayoría de DAOs de Solana usan este modelo.' },
+          { icon: Users, title: 'Votación Cuadrática (Costo Exponencial)', text: 'El costo de votos adicionales crece exponencialmente: 1 voto cuesta 1 token, 2 votos cuestan 4 tokens, 3 votos cuestan 9 tokens, y así sucesivamente. Esto reduce drásticamente el poder de las ballenas porque comprar influencia marginal se vuelve prohibitivamente caro. Es mucho más equitativo, pero vulnerable a ataques Sybil (crear múltiples wallets para dividir tu poder y votar "barato" desde cada una).' },
+          { icon: Clock, title: 'Conviction Voting (Tiempo = Poder)', text: 'Cuanto más tiempo mantienes tu voto en una propuesta, más peso acumula. Es como un "staking de votos": demuestras compromiso real con tu decisión dejando tu capital bloqueado. Favorece a los que realmente creen en una propuesta sobre los que buscan ganancias rápidas. Usado por algunos protocolos en otras cadenas y en experimentación en Solana.' },
+          { icon: Shield, title: 'Vote Escrow (veTokens)', text: 'Bloqueas tus tokens por un periodo (semanas, meses, años) y recibes mayor poder de voto cuanto más largo sea el bloqueo. Alinea los incentivos: los que más arriesgan (bloqueando capital) tienen más influencia. Modelo popularizado por Curve (veCRV) y adoptado por varios protocolos. Desincentiva la especulación de corto plazo con tokens de gobernanza.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Delegación: Vota Sin Votar',
+        content: 'La realidad es que la mayoría de holders de tokens de gobernanza **nunca votan**. Las tasas de participación en DAOs oscilan entre 1% y 15%. Esto es un problema grave: propuestas que afectan miles de millones de dólares se deciden con la participación de una pequeña minoría. La **delegación** es la solución. Puedes asignar tu poder de voto a un "delegado"—alguien que investiga las propuestas y vota en tu nombre. No pierdes tus tokens, solo les prestas tu peso de voto. Puedes revocar la delegación en cualquier momento.',
+        features: [
+          { icon: Users, title: '¿Qué es un Delegado?', text: 'Un delegado es un miembro activo de la comunidad que se compromete a estudiar cada propuesta, publicar su razonamiento, y votar consistentemente. Pueden ser desarrolladores, investigadores, o usuarios activos que entienden profundamente el protocolo. Piénsalo como elegir un representante que defiende tus intereses—pero con la transparencia total que permite la blockchain.' },
+          { icon: AlertTriangle, title: 'El Problema de la Apatía', text: 'Si solo el 5% de los holders votan, un grupo pequeño y coordinado puede controlar decisiones que afectan a todos. Propuestas que benefician a pocos a costa de muchos pueden pasar desapercibidas. La delegación combate esto: aunque no votes directamente, tu poder de voto cuenta a través de tu delegado.' },
+          { icon: Award, title: 'Jupiter ASR: Gobernanza con Recompensas', text: 'Jupiter innovó con su programa de Active Staking Rewards (ASR). Los holders de JUP que stakean sus tokens y votan (o delegan) reciben recompensas al final de cada periodo de gobernanza. Esto crea un incentivo directo: participar en la gobernanza no solo es un deber cívico, sino que es financieramente rentable. Es uno de los modelos más exitosos para combatir la baja participación.' },
+          { icon: Target, title: 'Cómo Elegir un Buen Delegado', text: 'Busca delegados con historial de participación consistente (votan en todas las propuestas), que publiquen su razonamiento antes de votar, que no tengan conflictos de interés obvios, y que estén alineados con tu visión del protocolo. En Jupiter, puedes ver el historial de votación de cada delegado directamente en la plataforma de gobernanza.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Ataques de Gobernanza: El Lado Oscuro',
+        content: 'Con miles de millones de dólares en juego, los mecanismos de gobernanza son un objetivo atractivo para atacantes sofisticados. Entender estos vectores de ataque es esencial para detectar propuestas maliciosas antes de que sea demasiado tarde:',
+        features: [
+          { icon: AlertTriangle, title: 'Flash Loan Governance Attack', text: 'El atacante pide prestados millones de tokens de gobernanza mediante un flash loan (préstamo instantáneo sin colateral), vota en una propuesta maliciosa, y devuelve los tokens—todo en una sola transacción. El atacante nunca tuvo que "comprar" el poder de voto. Este ataque es posible cuando las DAOs no requieren que los tokens estén bloqueados antes de votar. La defensa: exigir "time-lock" (los tokens deben estar stakeados por un periodo mínimo antes de poder votar).' },
+          { icon: AlertTriangle, title: 'Propuestas de Drenaje de Tesorería', text: 'Propuestas que parecen legítimas ("Fondo de desarrollo comunitario", "Programa de marketing", "Subsidio de liquidez") pero que en realidad transfieren fondos de la tesorería a wallets controladas por el proponente o sus cómplices. Son el equivalente cripto de la corrupción política. Cómo detectarlas: analiza a dónde van los fondos, quién propone, y si el monto es proporcional al beneficio esperado.' },
+          { icon: AlertTriangle, title: 'Ataques Sybil en Votación Cuadrática', text: 'Si la votación cuadrática penaliza tener muchos votos en una wallet, la solución del atacante es simple: divide tus tokens entre 100 wallets y vota desde cada una. Así cada wallet paga el "precio barato" de los primeros votos. La defensa: mecanismos de verificación de identidad (Proof of Personhood), análisis on-chain de patrones sospechosos, o combinar cuadrática con requisitos de participación histórica.' },
+          { icon: Eye, title: 'Cómo Identificar Propuestas Maliciosas', text: 'Red flags: propuestas que aparecen con poco tiempo de discusión y votación acelerada. Wallets desconocidas que acumulan tokens justo antes de una votación. Propuestas con lenguaje vago que ocultan transferencias de fondos. Proponentes sin historial en la comunidad. Cambios en parámetros técnicos que pocos entienden (cambiar oracle, modificar ratios de colateral, etc.).' }
+        ],
+        highlight: {
+          title: 'Tu Defensa como Voter',
+          text: 'Lee CADA propuesta antes de votar. Revisa quién la propone y su historial. Analiza el impacto financiero real. Si algo no cuadra, vota en contra y alerta a la comunidad. La gobernanza descentralizada solo funciona si los participantes están informados y vigilantes.'
+        }
+      },
+      {
+        type: 'comparison',
+        title: 'Gobernanza Centralizada vs Descentralizada',
+        leftSide: {
+          title: 'Centralizada (Empresas Tradicionales)',
+          points: [
+            'El CEO y la junta directiva deciden todo',
+            'Decisiones rápidas pero opacas—los usuarios no saben qué se discute',
+            'Los usuarios no tienen voz ni voto sobre cambios que les afectan',
+            'Los incentivos de la empresa no siempre se alinean con los del usuario',
+            'Eficiente pero vulnerable a abuso de poder y corrupción',
+            'Si el CEO actúa mal, tu única opción es irte'
+          ]
+        },
+        rightSide: {
+          title: 'Descentralizada (DAOs)',
+          points: [
+            'La comunidad de holders decide colectivamente',
+            'Proceso más lento pero 100% transparente—todo es público y on-chain',
+            'Cada holder puede proponer, votar, y delegar su poder',
+            'Los incentivos se alinean: los voters son los usuarios del protocolo',
+            'Más democrático pero vulnerable a baja participación y ataques de gobernanza',
+            'Si la gobernanza falla, puedes votar para cambiarla'
+          ]
+        }
+      },
+      {
+        type: 'main',
+        title: 'Participa en Gobernanza de Solana',
+        content: 'El ecosistema Solana tiene un sistema de gobernanza vibrante que va desde la evolución del propio protocolo hasta las decisiones de cada DApp. Aquí están las principales formas de participar y las herramientas que necesitas:',
+        features: [
+          { icon: Cpu, title: 'SIMDs: La Evolución de Solana', text: 'Los **Solana Improvement Documents (SIMDs)** son propuestas para cambiar el protocolo base de Solana. Son el equivalente de los BIPs de Bitcoin o los EIPs de Ethereum. Cualquiera puede escribir un SIMD, pero su implementación requiere consenso entre validadores. Se discuten públicamente en GitHub y en los foros de la comunidad. Seguir los SIMDs te da visibilidad sobre el futuro de la red donde inviertes.' },
+          { icon: Zap, title: 'Jupiter Governance y ASR', text: 'Jupiter es el ejemplo más activo de gobernanza en Solana. Para participar: 1) Compra JUP en Jupiter. 2) Ve a vote.jup.ag y conecta tu wallet. 3) Stakea tus JUP en el panel de gobernanza. 4) Vota en las propuestas activas (o delega a un delegado de confianza). 5) Al final de cada periodo de gobernanza, reclama tus ASR rewards. Votar te da voz en el futuro de Jupiter Y te genera recompensas financieras.' },
+          { icon: Layers, title: 'Marinade Governance', text: 'Marinade (el protocolo de liquid staking de SOL) tiene su propio sistema de gobernanza donde los holders de MNDE votan sobre la dirección de stake, los parámetros del protocolo, y la distribución de incentivos. Accede a través de marinade.finance/governance. Como usuario de mSOL, las decisiones de gobernanza de Marinade te afectan directamente—participar es proteger tu inversión.' },
+          { icon: Globe, title: 'Realms: El Hub de DAOs de Solana', text: 'Realms (realms.today) es la plataforma principal para gobernanza on-chain en Solana. Desde ahí puedes explorar cientos de DAOs activas, ver propuestas en votación, y participar directamente. Es el equivalente de Snapshot para Ethereum, pero todo se ejecuta on-chain. Conecta tu wallet, explora las DAOs de los protocolos que usas, y empieza a votar.' },
+          { icon: Award, title: 'Paso a Paso: Votar en Jupiter', text: '1) Asegúrate de tener JUP en tu wallet Phantom. 2) Ve a vote.jup.ag y conecta tu wallet. 3) Haz clic en "Stake" e ingresa la cantidad de JUP. 4) Confirma la transacción en Phantom. 5) Revisa las propuestas activas en la pestaña "Vote". 6) Lee cada propuesta completa, incluyendo discusiones en el foro. 7) Vota "For", "Against", o "Abstain". 8) Al cierre del periodo, ve a "Rewards" para reclamar tu ASR. Tiempo total: 10 minutos que te dan voz y recompensas.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Tu Voz en el Futuro de DeFi',
+        items: [
+          'Los tokens de gobernanza te dan poder de decisión real sobre protocolos que manejan miles de millones de dólares. No son "meme tokens"—son tu voz y voto en el futuro de las finanzas descentralizadas.',
+          'Los mecanismos de votación varían: token-weighted (1 token = 1 voto), cuadrática (costo exponencial), conviction (tiempo = poder), y vote escrow (bloqueo = influencia). Cada uno tiene trade-offs entre eficiencia y equidad.',
+          'La delegación es la herramienta más poderosa contra la baja participación. Si no tienes tiempo para investigar cada propuesta, delega tu voto a alguien que sí lo haga—pero elige bien y revisa periódicamente.',
+          'Los ataques de gobernanza son reales: flash loans, propuestas de drenaje, y ataques Sybil pueden drenar tesorerías y cambiar parámetros críticos. Lee cada propuesta, verifica quién propone, y vota en contra de lo sospechoso.',
+          'Jupiter ASR es el mejor ejemplo de gobernanza bien ejecutada: votar te da recompensas financieras directas, creando un ciclo virtuoso de participación.',
+          'Empieza hoy: stakea tus JUP en vote.jup.ag, explora DAOs en realms.today, y sigue los SIMDs para entender hacia dónde va Solana. Tu voto importa más de lo que crees.'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: '¿Cuál es el riesgo principal de la votación token-weighted (1 token = 1 voto)?',
+          options: [
+            { id: 'a', text: 'Es demasiado lenta porque hay muchos votos que contar' },
+            { id: 'b', text: 'Las ballenas con grandes cantidades de tokens pueden dominar las decisiones, dejando sin voz efectiva a miles de holders pequeños' },
+            { id: 'c', text: 'Los tokens pierden valor cuando se usan para votar' },
+            { id: 'd', text: 'Solo funciona en Ethereum, no en Solana' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'En votación token-weighted, quien más tokens tiene, más poder tiene. Una sola wallet con el 5% del supply puede superar a miles de usuarios. Es democracia del capital, no de las personas. Por eso existen alternativas como votación cuadrática y conviction voting.'
+        },
+        {
+          id: 'q2',
+          question: 'Un protocolo DeFi anuncia una votación urgente para "transferir 10M USDC de la tesorería a un fondo de crecimiento". La propuesta apareció hace 2 horas y la votación cierra en 6 horas. ¿Qué tipo de ataque podría ser esto?',
+          options: [
+            { id: 'a', text: 'Un ataque Sybil normal, no hay de qué preocuparse' },
+            { id: 'b', text: 'Una propuesta de drenaje de tesorería—la urgencia artificial, el lenguaje vago, y el corto periodo de votación son red flags clásicas de una propuesta maliciosa' },
+            { id: 'c', text: 'Es seguramente legítimo porque la comunidad lo propuso' },
+            { id: 'd', text: 'Un flash loan attack' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Las propuestas maliciosas de drenaje suelen disfrazarse con lenguaje positivo ("crecimiento", "comunidad") y usan urgencia artificial para que los voters no tengan tiempo de analizarla. Red flags: poco tiempo de discusión, montos grandes, wallets destino desconocidas, y proponentes sin historial.'
+        },
+        {
+          id: 'q3',
+          question: '¿Por qué la delegación es importante en gobernanza DAO, y cómo funciona en la práctica?',
+          options: [
+            { id: 'a', text: 'No es importante—cada persona debería votar por sí misma' },
+            { id: 'b', text: 'Porque la mayoría de holders nunca votan (1-15% de participación), lo que permite que minorías coordinen las decisiones. La delegación permite que tu poder de voto cuente a través de un experto sin perder tus tokens' },
+            { id: 'c', text: 'Delegación significa regalar tus tokens a otra persona permanentemente' },
+            { id: 'd', text: 'Solo los validadores pueden delegar votos' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Con tasas de participación del 1-15%, la baja participación es el mayor riesgo de las DAOs. La delegación permite que tu poder de voto cuente sin que investigues cada propuesta. No pierdes tus tokens—solo prestas tu peso de voto, y puedes revocarlo cuando quieras.'
+        },
+        {
+          id: 'q4',
+          question: '¿Cuál es la diferencia fundamental entre gobernanza centralizada (empresa tradicional) y descentralizada (DAO)?',
+          options: [
+            { id: 'a', text: 'No hay diferencia real, ambas son controladas por unos pocos' },
+            { id: 'b', text: 'En la centralizada, un CEO decide sin transparencia y los usuarios no participan. En la descentralizada, los holders votan públicamente en decisiones que afectan el protocolo, con total transparencia on-chain' },
+            { id: 'c', text: 'La gobernanza descentralizada es siempre mejor porque es más rápida' },
+            { id: 'd', text: 'La gobernanza centralizada usa blockchain y la descentralizada no' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La gobernanza descentralizada no es perfecta (es más lenta y vulnerable a baja participación), pero ofrece transparencia total y participación de todos los stakeholders. En la centralizada, las decisiones son opacas y los usuarios solo pueden aceptar o irse. En una DAO, puedes votar para cambiar lo que no te gusta.'
+        },
+        {
+          id: 'q5',
+          question: 'Tienes 500 JUP y quieres participar en la gobernanza de Jupiter. ¿Cuáles son los pasos correctos?',
+          options: [
+            { id: 'a', text: 'Enviar mis JUP a la Solana Foundation para que voten por mí' },
+            { id: 'b', text: 'Ir a vote.jup.ag, conectar mi wallet, stakear mis JUP, votar en las propuestas activas (o delegar a un delegado), y reclamar ASR rewards al final del periodo' },
+            { id: 'c', text: 'Crear un NFT con mis JUP para tener derecho a voto' },
+            { id: 'd', text: 'Publicar mi voto en Twitter y esperar a que lo cuenten' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Jupiter tiene uno de los sistemas de gobernanza más accesibles: stakea JUP en vote.jup.ag, vota en propuestas o delega, y recibe ASR rewards. Todo el proceso toma ~10 minutos y te da voz real en el futuro del mayor DEX de Solana mientras ganas recompensas por participar.'
         }
       ]
     }
