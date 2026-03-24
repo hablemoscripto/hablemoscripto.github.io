@@ -34,7 +34,7 @@ function isRateLimited(userId: string): boolean {
 // ---------------------------------------------------------------------------
 
 const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'
-const SOLANA_RPC_URL = 'https://api.mainnet-beta.solana.com'
+const SOLANA_RPC_URL = Deno.env.get('SOLANA_RPC_URL') || 'https://api.mainnet-beta.solana.com'
 const MAX_TX_AGE_SECONDS = 30 * 60 // 30 minutes
 
 // Tier durations in days
