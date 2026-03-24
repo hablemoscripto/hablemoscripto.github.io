@@ -286,7 +286,7 @@ const LessonView: React.FC = () => {
 
                             {/* Lesson title */}
                             <span className="font-medium text-navy-200 truncate max-w-[140px] sm:max-w-md text-sm sm:text-base">
-                                {id}. {lesson.title}
+                                {lesson.number?.split(' ')[0] || id}. {lesson.title}
                             </span>
 
                             {/* Next lesson arrow */}
