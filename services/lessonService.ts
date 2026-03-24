@@ -1,42 +1,5 @@
-import { supabase } from '../lib/supabase';
-import type { QuestionType, Question } from '../components/education/types';
-import { reportError } from '../utils/errorReporting';
-
-// Database row types for Supabase responses
-interface DbQuizQuestion {
-  id: number | string;
-  question: string;
-  options: (string | { id: string; text: string })[];
-  correct_answer: number | string;
-  explanation: string;
-  order?: number;
-}
-
-interface DbCheckpointQuestion extends DbQuizQuestion {
-  hint?: string;
-}
-
-interface DbCheckpoint {
-  id: number;
-  title?: string;
-  section_index?: number;
-  checkpoint_questions: DbCheckpointQuestion[];
-}
-
-interface DbReferral {
-  title: string;
-  description: string;
-  link: string;
-  button_text: string;
-  code?: string;
-}
-
-interface DbLessonBasic {
-  id: number;
-  title: string;
-  duration: string;
-  type: string;
-}
+import { LESSONS_DATA } from '../data/courseData';
+import type { Question } from '../components/education/types';
 
 export interface LessonSection {
   type?: string;
@@ -53,28 +16,6 @@ export interface LessonSection {
   rightTitle?: string;
   leftSide?: { title?: string; points?: string[] };
   rightSide?: { title?: string; points?: string[] };
-}
-
-export interface QuizQuestion {
-  id: string;
-  type: QuestionType;
-  question: string;
-  explanation: string;
-  hint?: string;
-  difficulty?: 'easy' | 'medium' | 'hard';
-  points?: number;
-  // For multiple-choice and multiple-select
-  options?: string[];
-  correctAnswer?: number | boolean | string;
-  // For multiple-select
-  correctAnswers?: number[];
-  // For ordering
-  items?: string[];
-  correctOrder?: number[];
-  // For fill-blank
-  textBefore?: string;
-  textAfter?: string;
-  acceptableAnswers?: string[];
 }
 
 export interface CheckpointQuizData {
@@ -115,192 +56,81 @@ export interface LessonData {
 }
 
 /**
- * Fetch a single lesson with all its details from the database
+ * Get a single lesson by ID from the bundled course data.
+ * No network request — instant, always in sync with the codebase.
  */
-export async function fetchLessonById(lessonId: number): Promise<LessonData | null> {
-  try {
-    // Fetch lesson basic info
-    const { data: lesson, error: lessonError } = await supabase
-      .from('lessons')
-      .select('id, title, duration, type, description')
-      .eq('id', lessonId)
-      .single();
+export function fetchLessonById(lessonId: number): LessonData | null {
+  const lesson = LESSONS_DATA[lessonId];
+  if (!lesson) return null;
 
-    if (lessonError || !lesson) {
-      reportError(lessonError, { component: 'lessonService', action: 'fetchLessonById' });
-      return null;
-    }
+  // Map the courseData format to LessonData interface.
+  // The data is already in the right shape — sections, quiz, referrals
+  // are all stored directly in LESSONS_DATA.
+  const data: LessonData = {
+    id: lesson.id,
+    title: lesson.title,
+    level: lesson.level || 'Unknown',
+    number: lesson.number || '',
+    duration: lesson.duration || '',
+    type: lesson.type || '',
+    description: lesson.description || '',
+    videoId: lesson.videoId,
+    sections: lesson.sections || [],
+  };
 
-    // Fetch lesson details (sections, content)
-    const { data: details, error: detailsError } = await supabase
-      .from('lesson_details')
-      .select('level, number, description, sections')
-      .eq('lesson_id', lessonId)
-      .single();
+  // Map quiz if present — courseData stores quiz questions with icon
+  // references and richer types than the DB schema
+  if (lesson.quiz?.questions) {
+    data.quiz = {
+      questions: lesson.quiz.questions.map((q: any) => {
+        // courseData quiz questions are already in the right shape —
+        // they have type, options, correctAnswer, etc. Just pass through
+        // with option normalization for backward compatibility.
+        const base = {
+          id: q.id,
+          type: q.type || 'multiple-choice',
+          question: q.question,
+          explanation: q.explanation || '',
+          hint: q.hint,
+          difficulty: q.difficulty,
+          points: q.points,
+        };
 
-    if (detailsError) {
-      reportError(detailsError, { component: 'lessonService', action: 'fetchLessonDetails' });
-    }
+        const options = q.options?.map((opt: any) =>
+          typeof opt === 'string' ? opt : opt.text
+        );
 
-    // Fetch referrals
-    const { data: referrals, error: referralsError } = await supabase
-      .from('referrals')
-      .select('title, description, link, button_text, code')
-      .eq('lesson_id', lessonId);
-
-    if (referralsError) {
-      reportError(referralsError, { component: 'lessonService', action: 'fetchReferrals' });
-    }
-
-    // Fetch quiz - use basic fields that exist in current schema
-    // Enhanced fields (question_type, hint, difficulty, etc.) are optional
-    const { data: quiz, error: quizError } = await supabase
-      .from('quizzes')
-      .select(`
-        id,
-        quiz_questions (
-          id,
-          question,
-          options,
-          correct_answer,
-          explanation,
-          order
-        )
-      `)
-      .eq('lesson_id', lessonId)
-      .single();
-
-    if (quizError && quizError.code !== 'PGRST116') { // Ignore "not found" errors
-      reportError(quizError, { component: 'lessonService', action: 'fetchQuiz' });
-    }
-
-    // Checkpoint quizzes are optional - only fetch if table exists
-    let checkpoints: DbCheckpoint[] | null = null;
-    try {
-      const { data, error } = await supabase
-        .from('checkpoint_quizzes')
-        .select(`
-          id,
-          title,
-          section_index,
-          checkpoint_questions (
-            id,
-            question,
-            options,
-            correct_answer,
-            explanation,
-            hint,
-            order
-          )
-        `)
-        .eq('lesson_id', lessonId)
-        .order('order');
-
-      if (!error) {
-        checkpoints = data;
-      }
-      // Silently ignore if table doesn't exist (PGRST205)
-    } catch {
-      // Table doesn't exist yet - that's fine
-    }
-
-    // Format the data to match the existing structure
-    const lessonData: LessonData = {
-      id: lesson.id,
-      title: lesson.title,
-      level: details?.level || 'Unknown',
-      number: details?.number || '',
-      duration: lesson.duration,
-      type: lesson.type,
-      description: details?.description || lesson.description,
-      videoId: undefined, // video_id column not in schema; videoId from courseData is not seeded
-      sections: details?.sections || [],
-      referrals: referrals?.map((ref: DbReferral) => ({
-        title: ref.title,
-        description: ref.description,
-        link: ref.link,
-        buttonText: ref.button_text,
-        code: ref.code,
-      })),
+        // Return the full question object preserving all type-specific fields
+        return {
+          ...base,
+          ...(options && { options }),
+          ...(q.correctAnswer !== undefined && { correctAnswer: q.correctAnswer }),
+          ...(q.correctAnswers && { correctAnswers: q.correctAnswers }),
+          ...(q.items && { items: q.items }),
+          ...(q.correctOrder && { correctOrder: q.correctOrder }),
+          ...(q.textBefore && { textBefore: q.textBefore }),
+          ...(q.textAfter && { textAfter: q.textAfter }),
+          ...(q.acceptableAnswers && { acceptableAnswers: q.acceptableAnswers }),
+        } as Question;
+      }),
     };
-
-    // Add quiz if exists - map to Question format
-    if (quiz && quiz.quiz_questions) {
-      lessonData.quiz = {
-        questions: quiz.quiz_questions
-          .sort((a: DbQuizQuestion, b: DbQuizQuestion) => (a.order || 0) - (b.order || 0))
-          .map((q: DbQuizQuestion): Question => {
-            const options = q.options?.map(opt =>
-              typeof opt === 'string' ? opt : opt.text
-            ) || [];
-
-            let correctAnswer: number;
-            if (typeof q.correct_answer === 'number') {
-              correctAnswer = q.correct_answer;
-            } else {
-              const idx = q.options?.findIndex(opt =>
-                (typeof opt === 'string' ? opt : opt.id) === q.correct_answer
-              );
-              correctAnswer = idx >= 0 ? idx : 0;
-            }
-
-            return {
-              id: q.id.toString(),
-              type: 'multiple-choice',
-              question: q.question,
-              options,
-              correctAnswer,
-              explanation: q.explanation || '',
-            };
-          }),
-      };
-    }
-
-    // Add checkpoint quizzes if they exist
-    if (checkpoints && checkpoints.length > 0) {
-      lessonData.checkpointQuizzes = checkpoints.map((cp: DbCheckpoint) => ({
-        id: cp.id,
-        title: cp.title || 'Checkpoint',
-        sectionIndex: cp.section_index || 0,
-        questions: (cp.checkpoint_questions || [])
-          .sort((a: DbCheckpointQuestion, b: DbCheckpointQuestion) => (a.order || 0) - (b.order || 0))
-          .map((q: DbCheckpointQuestion) => ({
-            id: q.id.toString(),
-            question: q.question,
-            options: (q.options || []).map(opt => typeof opt === 'string' ? opt : opt.text),
-            correctAnswer: typeof q.correct_answer === 'number' ? q.correct_answer : 0,
-            explanation: q.explanation || '',
-            hint: q.hint,
-          })),
-      }));
-    }
-
-    return lessonData;
-  } catch (error) {
-    reportError(error, { component: 'lessonService', action: 'fetchLessonById' });
-    return null;
-  }
-}
-
-/**
- * Fetch all lessons (lightweight - just IDs and titles)
- */
-export async function fetchAllLessons() {
-  const { data, error } = await supabase
-    .from('lessons')
-    .select('id, title, duration, type')
-    .order('id');
-
-  if (error) {
-    reportError(error, { component: 'lessonService', action: 'fetchAllLessons' });
-    return {};
   }
 
-  // Convert to Record<number, LessonData> format for backward compatibility
-  const lessonsMap: Record<number, DbLessonBasic> = {};
-  data.forEach((lesson: DbLessonBasic) => {
-    lessonsMap[lesson.id] = lesson;
-  });
+  // Map checkpoint quizzes if present
+  if (lesson.checkpointQuizzes) {
+    data.checkpointQuizzes = lesson.checkpointQuizzes;
+  }
 
-  return lessonsMap;
+  // Map referrals if present
+  if (lesson.referrals) {
+    data.referrals = lesson.referrals.map((ref: any) => ({
+      title: ref.title,
+      description: ref.description,
+      link: ref.link,
+      buttonText: ref.buttonText || ref.button_text,
+      code: ref.code,
+    }));
+  }
+
+  return data;
 }

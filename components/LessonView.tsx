@@ -55,21 +55,17 @@ const LessonView: React.FC = () => {
     // Focus Mode
     const [isFocusMode, setIsFocusMode] = useState(false);
 
-    // Fetch lesson data from database
+    // Load lesson data from bundled course content (instant, no network)
     useEffect(() => {
-        async function loadLesson() {
-            setLessonLoading(true);
-            const lessonData = await fetchLessonById(id);
-            setLesson(lessonData);
-            if (lessonData) {
-                localStorage.setItem('last_lesson_id', String(lessonData.id));
-                window.__currentLesson = { title: lessonData.title, level: lessonData.level, id: lessonData.id };
-            } else {
-                window.__currentLesson = null;
-            }
-            setLessonLoading(false);
+        const lessonData = fetchLessonById(id);
+        setLesson(lessonData);
+        setLessonLoading(false);
+        if (lessonData) {
+            try { localStorage.setItem('last_lesson_id', String(lessonData.id)); } catch { /* */ }
+            window.__currentLesson = { title: lessonData.title, level: lessonData.level, id: lessonData.id };
+        } else {
+            window.__currentLesson = null;
         }
-        loadLesson();
         return () => { window.__currentLesson = null; };
     }, [id]);
 
