@@ -320,7 +320,7 @@ const LessonView: React.FC = () => {
                 <section className="bg-navy-900 border-b border-white/5 py-12">
                     <div className="container max-w-7xl mx-auto px-6">
                         <div className="flex items-center gap-2 text-sm text-brand-500 font-bold uppercase tracking-wider mb-4">
-                            <span className="px-2 py-1 bg-brand-500/10 rounded border border-brand-500/20">Lección {id}</span>
+                            <span className="px-2 py-1 bg-brand-500/10 rounded border border-brand-500/20">Lección {lesson.number?.split(' ')[0] || id}</span>
                         </div>
                         <h1 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight">{lesson.title}</h1>
                         <p className="text-lg text-navy-400 max-w-3xl leading-relaxed mb-8">{lesson.description}</p>
