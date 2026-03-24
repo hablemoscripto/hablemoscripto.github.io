@@ -482,7 +482,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                 </p>
                 <PaymentButton
                   onSuccess={() => alert('Pago exitoso! Ya eres premium.')}
-                  onError={(error) => alert(error)}
+                  onError={(error) => reportError(error, { component: 'EducationPage', action: 'payment' })}
                   className="mx-auto transform scale-110"
                 />
               </div>

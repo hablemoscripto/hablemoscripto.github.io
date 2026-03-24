@@ -73,7 +73,8 @@ export default function PaymentButton({
     script.onload = () => setWidgetLoaded(true);
     script.onerror = () => {
       reportError('Failed to load Wompi widget', { component: 'PaymentButton', action: 'loadWidget' });
-      onError?.('Error al cargar el sistema de pagos');
+      // Don't call onError here — script load failures are silent.
+      // The button will show "sistema de pagos no está listo" if user clicks.
     };
     document.body.appendChild(script);
 
