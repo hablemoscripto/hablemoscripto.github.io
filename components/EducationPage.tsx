@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import EducationNavbar from './EducationNavbar';
 import LessonSearch from './LessonSearch';
 import { reportError } from '../utils/errorReporting';
@@ -11,11 +11,13 @@ import { useProgress } from '../contexts/ProgressContext';
 import { useGamification } from '../contexts/GamificationContext';
 import LevelCard from './ui/LevelCard';
 import Certificate from './ui/Certificate';
-import PaymentButton from './PaymentButton';
+import PricingSection from './PricingSection';
+import PaymentModal from './PaymentModal';
 import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { getAllLessonsOrdered } from '../utils/courseUtils';
+import { getUserPremiumStatus } from '../services/paymentService';
 
 interface EducationPageProps {
   onNavigateHome?: () => void; // Optional for backward compat
@@ -51,6 +53,29 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [levels, setLevels] = useState<Level[]>([]);
   const { user } = useAuth();
+
+  // Pricing / payment state
+  const [userTier, setUserTier] = useState<'free' | 'premium' | 'vip'>('free');
+  const [selectedTier, setSelectedTier] = useState<'premium' | 'vip' | null>(null);
+  const [selectedCycle, setSelectedCycle] = useState<'monthly' | 'yearly' | null>(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+
+  // Check user subscription tier on mount
+  useEffect(() => {
+    async function checkSubscriptionStatus() {
+      if (!user) return;
+      try {
+        const status = await getUserPremiumStatus(user.id);
+        if (status.isPremium) {
+          // TODO: distinguish premium vs vip when DB supports it
+          setUserTier('premium');
+        }
+      } catch {
+        // Silently fail — user stays on free tier
+      }
+    }
+    checkSubscriptionStatus();
+  }, [user]);
 
   // Ctrl+K / Cmd+K keyboard shortcut for search
   useEffect(() => {
@@ -467,27 +492,25 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             </div>
           </div>
 
-          {/* Premium Section */}
-          <div className="container max-w-7xl mx-auto px-6 mt-24">
-            <div className="relative overflow-hidden bg-gradient-to-br from-navy-900 to-navy-950 border border-white/10 rounded-6xl p-12 md:p-20 text-center shadow-glass group">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-[120px] -mr-48 -mt-48 group-hover:bg-brand-500/20 transition-all duration-1000"></div>
-              
-              <div className="relative z-10 max-w-2xl mx-auto">
-                <div className="w-20 h-20 bg-gradient-to-br from-brand-400 to-brand-600 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-glow-brand-strong rotate-3 group-hover:rotate-12 transition-transform duration-500">
-                  <Crown size={40} className="text-navy-950" />
-                </div>
-                <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tighter uppercase">Obtener <span className="text-brand-500">Premium</span></h2>
-                <p className="text-lg text-navy-300 mb-10 leading-relaxed font-medium">
-                  Accede a contenido exclusivo, análisis de mercado en tiempo real y estrategias avanzadas para llevar tu portafolio al siguiente nivel.
-                </p>
-                <PaymentButton
-                  onSuccess={() => alert('Pago exitoso! Ya eres premium.')}
-                  onError={(error) => reportError(error, { component: 'EducationPage', action: 'payment' })}
-                  className="mx-auto transform scale-110"
-                />
-              </div>
-            </div>
-          </div>
+          {/* Pricing Section */}
+          <PricingSection
+            currentTier={userTier}
+            onSelectPlan={(tier, cycle) => {
+              setSelectedTier(tier);
+              setSelectedCycle(cycle);
+              setShowPaymentModal(true);
+            }}
+          />
+          <PaymentModal
+            isOpen={showPaymentModal}
+            onClose={() => setShowPaymentModal(false)}
+            tier={selectedTier || 'premium'}
+            billingCycle={selectedCycle || 'monthly'}
+            onSuccess={() => {
+              setShowPaymentModal(false);
+              setUserTier(selectedTier || 'premium');
+            }}
+          />
 
           <div className="container max-w-7xl mx-auto px-6 mt-8 mb-12">
             <div className="bg-navy-900/50 border border-white/5 rounded-xl p-6">
