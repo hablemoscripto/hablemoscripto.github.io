@@ -28,7 +28,7 @@ const PARTICLES_OPTIONS: ISourceOptions = {
         distance: 180,
         links: {
           opacity: 0.8,
-          color: '#ffc107',
+          color: '#f59e0b',
         },
       },
       push: {
@@ -42,7 +42,7 @@ const PARTICLES_OPTIONS: ISourceOptions = {
   },
   particles: {
     color: {
-      value: ['#ffc107', '#ffffff', '#6366f1'],
+      value: ['#f59e0b', '#ffffff', '#fbbf24'],
     },
     links: {
       color: '#ffffff',

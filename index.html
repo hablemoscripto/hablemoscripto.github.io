@@ -87,19 +87,19 @@
   }
   </script>
 
-  <!-- Fonts: Critical weights loaded first, secondary font deferred -->
+  <!-- Fonts: Inter (body) + Outfit (heading), both with swap for reliable brand rendering -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&display=optional"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap"
     rel="stylesheet">
   <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap"
     onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap"></noscript>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap"></noscript>
   <style>
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
@@ -116,7 +116,7 @@
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: #ffc107;
+      background: #f59e0b;
     }
 
     .glass-panel {
@@ -130,7 +130,7 @@
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-image: linear-gradient(to right, #ffc107, #ff8f00);
+      background-image: linear-gradient(to right, #fbbf24, #f59e0b);
     }
 
     @media (prefers-reduced-motion: reduce) {

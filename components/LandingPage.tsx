@@ -9,7 +9,7 @@ import AuthModal from './AuthModal';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Loader2 } from 'lucide-react';
 
 const LandingPage: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -138,13 +138,13 @@ const LandingPage: React.FC = () => {
                         { q: '¿Es seguro invertir en criptomonedas?', a: 'Las criptomonedas son activos de alto riesgo. Por eso enseñamos seguridad primero: cómo proteger tu wallet, evitar estafas, y gestionar el riesgo antes de invertir un solo peso.' },
                         { q: '¿Quién es CBas?', a: 'CBas tiene 7+ años navegando mercados de criptomonedas, incluyendo ciclos alcistas y bajistas completos. Creó Hablemos Cripto para dar a la comunidad LATAM las herramientas que él hubiera querido tener cuando empezó.' },
                     ].map((item, i) => (
-                        <details key={i} className="group bg-navy-900 border border-white/5 rounded-2xl overflow-hidden">
-                            <summary className="flex items-center justify-between p-6 cursor-pointer text-white font-bold hover:text-brand-500 transition-colors list-none">
+                        <details key={i} className="group bg-navy-900 border border-white/5 hover:border-white/10 rounded-2xl overflow-hidden transition-colors">
+                            <summary className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer text-white font-bold hover:text-brand-500 transition-colors list-none">
                                 <span>{item.q}</span>
-                                <ChevronDown size={20} className="text-navy-400 group-open:rotate-180 transition-transform" />
+                                <ChevronDown size={20} className="shrink-0 text-navy-400 group-open:rotate-180 group-open:text-brand-500 transition-transform" />
                             </summary>
-                            <div className="px-6 pb-6 text-navy-300 leading-relaxed">
-                                {item.a}
+                            <div className="px-6 pb-5 pt-1 text-navy-300 leading-relaxed border-t border-white/5">
+                                <p className="pt-4">{item.a}</p>
                             </div>
                         </details>
                     ))}
@@ -172,9 +172,17 @@ const LandingPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={newsletterStatus === 'loading'}
-                className="px-8 py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-busy={newsletterStatus === 'loading'}
+                className="px-8 py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
               >
-                {newsletterStatus === 'loading' ? 'Enviando...' : 'Suscribirse'}
+                {newsletterStatus === 'loading' ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" aria-hidden="true" />
+                    Enviando...
+                  </>
+                ) : (
+                  'Suscribirse'
+                )}
               </button>
             </form>
 

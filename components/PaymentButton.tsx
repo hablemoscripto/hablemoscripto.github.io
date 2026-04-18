@@ -106,17 +106,17 @@ export default function PaymentButton({
 
   const handlePayment = async () => {
     if (!user) {
-      onError?.('Debes iniciar sesion para realizar el pago');
+      onError?.('Debes iniciar sesión para realizar el pago');
       return;
     }
 
     if (!widgetLoaded || !window.WidgetCheckout) {
-      onError?.('El sistema de pagos aun no esta listo. Intenta de nuevo.');
+      onError?.('El sistema de pagos aún no está listo. Intenta de nuevo.');
       return;
     }
 
     if (!publicKey) {
-      onError?.('Error de configuracion del sistema de pagos');
+      onError?.('Error de configuración del sistema de pagos');
       reportError('VITE_WOMPI_PUBLIC_KEY not configured', { component: 'PaymentButton', action: 'handlePayment' });
       return;
     }
@@ -153,7 +153,7 @@ export default function PaymentButton({
             setIsPremium(true);
             onSuccess?.();
           } else if (result.transaction.status === 'DECLINED') {
-            onError?.('El pago fue rechazado. Intenta con otro metodo de pago.');
+            onError?.('El pago fue rechazado. Intenta con otro método de pago.');
           } else if (result.transaction.status === 'VOIDED') {
             onError?.('El pago fue cancelado.');
           }
@@ -189,7 +189,7 @@ export default function PaymentButton({
 
   if (isPremium) {
     return (
-      <div className={`bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/50 text-amber-400 font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 ${className}`}>
+      <div className={`bg-gradient-to-r from-brand-500/20 to-brand-600/20 border border-brand-500/50 text-brand-400 font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 ${className}`}>
         <CheckCircle size={20} />
         Ya eres Premium
       </div>
@@ -200,7 +200,7 @@ export default function PaymentButton({
     <button
       onClick={handlePayment}
       disabled={loading || !user}
-      className={`bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 disabled:from-navy-600 disabled:to-navy-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:cursor-not-allowed ${className}`}
+      className={`bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 disabled:from-navy-600 disabled:to-navy-600 text-navy-950 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:text-navy-300 shadow-glow-brand ${className}`}
     >
       {loading ? (
         <>
@@ -210,7 +210,7 @@ export default function PaymentButton({
       ) : (
         <>
           <Crown size={20} />
-          {user ? `Obtener Premium - ${formatPrice(product.priceInCents)}` : 'Inicia sesion para comprar'}
+          {user ? `Obtener Premium — ${formatPrice(product.priceInCents)}` : 'Inicia sesión para comprar'}
         </>
       )}
     </button>

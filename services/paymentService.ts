@@ -62,7 +62,7 @@ export const PRICING_PLANS: Record<PlanTier, PricingPlan> = {
   premium: {
     tier: 'premium',
     name: 'Inversor',
-    description: 'Acceso completo a toda la educacion',
+    description: 'Acceso completo a toda la educación',
     priceUsdMonthly: 15,
     priceUsdYearly: 120,
     priceCopMonthly: 65000,

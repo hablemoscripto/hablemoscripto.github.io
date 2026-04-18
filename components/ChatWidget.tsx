@@ -147,17 +147,17 @@ const ChatWidget: React.FC = () => {
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 text-navy-900 shadow-lg hover:shadow-brand-500/40 transition-all transform hover:scale-110 active:scale-95 flex items-center justify-center"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 p-3 sm:p-4 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 text-navy-900 shadow-lg hover:shadow-brand-500/40 transition-all transform hover:scale-110 active:scale-95 flex items-center justify-center"
         aria-label={isOpen ? 'Cerrar asistente IA' : 'Abrir asistente IA'}
         aria-expanded={isOpen}
       >
-        {isOpen ? <X size={28} aria-hidden="true" /> : <MessageCircle size={28} aria-hidden="true" />}
+        {isOpen ? <X className="size-6 sm:size-7" aria-hidden="true" /> : <MessageCircle className="size-6 sm:size-7" aria-hidden="true" />}
       </button>
 
       {/* Chat Window */}
       {isOpen && (
         <section
-          className="fixed bottom-24 right-6 w-[90vw] sm:w-[400px] h-[500px] max-h-[80vh] z-50 bg-navy-900 border border-navy-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-float-in origin-bottom-right"
+          className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 w-[calc(100vw-2rem)] sm:w-[400px] h-[500px] max-h-[80vh] z-50 bg-navy-900 border border-navy-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-float-in origin-bottom-right"
           role="region"
           aria-label="Chat con asistente de IA"
         >

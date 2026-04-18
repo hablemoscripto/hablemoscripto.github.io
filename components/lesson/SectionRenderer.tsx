@@ -71,7 +71,7 @@ export default function SectionRenderer({ section, index, checkpoint, onImageCli
                             <p className="text-sm text-navy-500 text-center mt-2 italic">{section.imageCaption}</p>
                         )}
                         {section.imageSummary && (
-                            <div className="mt-4 bg-gradient-to-r from-brand-500/10 to-amber-500/5 border border-brand-500/30 rounded-xl p-4">
+                            <div className="mt-4 bg-gradient-to-r from-brand-500/10 to-brand-400/5 border border-brand-500/30 rounded-xl p-4">
                                 <div className="flex items-start gap-3">
                                     <div className="shrink-0 w-8 h-8 bg-brand-500/20 rounded-lg flex items-center justify-center">
                                         <span className="text-brand-400 text-lg">💡</span>

@@ -289,8 +289,8 @@ export default function PricingSection({ currentTier, onSelectPlan }: PricingSec
                     onClick={() => onSelectPlan(plan.tier as 'premium' | 'vip', billingCycle)}
                     className={`w-full py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 cursor-pointer ${
                       plan.highlighted
-                        ? 'bg-gradient-to-r from-brand-500 to-amber-500 hover:from-brand-600 hover:to-amber-600 text-navy-950 shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40'
-                        : 'bg-gradient-to-r from-indigo-500 to-rose-500 hover:from-indigo-600 hover:to-rose-600 text-white shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40'
+                        ? 'bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40'
+                        : 'bg-navy-800 hover:bg-navy-700 border border-white/10 hover:border-brand-500/40 text-white'
                     }`}
                   >
                     Obtener {plan.name}

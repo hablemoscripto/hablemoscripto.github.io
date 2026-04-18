@@ -47,7 +47,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
     setLoading(true);
     const { error } = await signInWithGoogle();
     if (error) {
-      setError('Error al iniciar sesion con Google');
+      setError('Error al iniciar sesión con Google');
       setLoading(false);
     }
   };
@@ -59,13 +59,13 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
     setLoading(true);
 
     if (view === 'signup' && password !== confirmPassword) {
-      setError('Las contrasenas no coinciden');
+      setError('Las contraseñas no coinciden');
       setLoading(false);
       return;
     }
 
     if ((view === 'login' || view === 'signup') && password.length < 6) {
-      setError('La contrasena debe tener al menos 6 caracteres');
+      setError('La contraseña debe tener al menos 6 caracteres');
       setLoading(false);
       return;
     }
@@ -75,7 +75,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
         const { error } = await signIn(email, password);
         if (error) {
           if (error.message.includes('Invalid login credentials')) {
-            setError('Email o contrasena incorrectos');
+            setError('Email o contraseña incorrectos');
           } else if (error.message.includes('Email not confirmed')) {
             setView('verify-email');
           } else {
@@ -91,7 +91,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
         const { error } = await signUp(email, password);
         if (error) {
           if (error.message.includes('already registered')) {
-            setError('Este email ya esta registrado');
+            setError('Este email ya está registrado');
           } else {
             setError(error.message);
           }
@@ -100,7 +100,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
         }
       }
     } catch (err) {
-      setError('Ocurrio un error. Intenta de nuevo.');
+      setError('Ocurrió un error. Intenta de nuevo.');
     } finally {
       setLoading(false);
     }
@@ -123,10 +123,10 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
       if (error) {
         setError(error.message);
       } else {
-        setSuccess('Te enviamos un enlace para restablecer tu contrasena. Revisa tu email (y la carpeta de spam).');
+        setSuccess('Te enviamos un enlace para restablecer tu contraseña. Revisa tu email (y la carpeta de spam).');
       }
     } catch (err) {
-      setError('Ocurrio un error. Intenta de nuevo.');
+      setError('Ocurrió un error. Intenta de nuevo.');
     } finally {
       setLoading(false);
     }
@@ -142,10 +142,10 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
       if (error) {
         setError(error.message);
       } else {
-        setSuccess('Email de verificacion reenviado. Revisa tu bandeja de entrada.');
+        setSuccess('Email de verificación reenviado. Revisa tu bandeja de entrada.');
       }
     } catch (err) {
-      setError('Ocurrio un error. Intenta de nuevo.');
+      setError('Ocurrió un error. Intenta de nuevo.');
     } finally {
       setLoading(false);
     }
@@ -163,6 +163,10 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
     setView(newView);
   };
 
+  const errorId = 'auth-modal-error';
+  const successId = 'auth-modal-success';
+  const describedBy = [error && errorId, success && successId].filter(Boolean).join(' ') || undefined;
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} ariaLabel={VIEW_LABELS[view]}>
       <div className="px-2">
@@ -175,25 +179,25 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
               </div>
               <h2 className="text-2xl font-bold text-white">Verifica tu email</h2>
               <p className="text-navy-400 mt-2">
-                Te enviamos un enlace de verificacion a <span className="text-white font-medium">{email}</span>
+                Te enviamos un enlace de verificación a <span className="text-white font-medium">{email}</span>
               </p>
             </div>
 
             <div className="space-y-4">
               <div className="bg-navy-800 border border-navy-600 rounded-lg p-4 text-navy-300 text-sm space-y-2">
                 <p>1. Revisa tu bandeja de entrada (y spam)</p>
-                <p>2. Haz clic en el enlace de verificacion</p>
-                <p>3. Vuelve aqui e inicia sesion</p>
+                <p>2. Haz clic en el enlace de verificación</p>
+                <p>3. Vuelve aquí e inicia sesión</p>
               </div>
 
               {error && (
-                <div role="alert" className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm">
+                <div id={errorId} role="alert" className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm">
                   {error}
                 </div>
               )}
 
               {success && (
-                <div role="status" className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm">
+                <div id={successId} role="status" className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm">
                   {success}
                 </div>
               )}
@@ -205,15 +209,15 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                 className="w-full bg-navy-800 hover:bg-navy-700 text-white font-semibold py-3 rounded-lg border border-navy-600 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {loading ? <Loader2 size={20} className="animate-spin" aria-hidden="true" /> : <Mail size={20} aria-hidden="true" />}
-                Reenviar email de verificacion
+                Reenviar email de verificación
               </button>
 
               <button
                 onClick={() => switchTo('login')}
-                className="w-full text-orange-400 hover:text-orange-300 font-medium transition-colors flex items-center justify-center gap-2"
+                className="w-full text-brand-400 hover:text-brand-300 font-medium transition-colors flex items-center justify-center gap-2"
               >
                 <ArrowLeft size={16} aria-hidden="true" />
-                Volver a iniciar sesion
+                Volver a iniciar sesión
               </button>
             </div>
           </>
@@ -226,9 +230,9 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
               <div className="w-16 h-16 bg-gradient-to-br from-brand-500 to-brand-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Lock size={32} className="text-white" aria-hidden="true" />
               </div>
-              <h2 className="text-2xl font-bold text-white">Restablecer contrasena</h2>
+              <h2 className="text-2xl font-bold text-white">Restablecer contraseña</h2>
               <p className="text-navy-400 mt-2">
-                Te enviaremos un enlace para crear una nueva contrasena
+                Te enviaremos un enlace para crear una nueva contraseña
               </p>
             </div>
 
@@ -245,19 +249,20 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                     placeholder="tu@email.com"
                     required
                     aria-invalid={error ? 'true' : undefined}
-                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                    aria-describedby={describedBy}
+                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-navy-900 focus:border-transparent transition-all"
                   />
                 </div>
               </div>
 
               {error && (
-                <div role="alert" className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm">
+                <div id={errorId} role="alert" className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm">
                   {error}
                 </div>
               )}
 
               {success && (
-                <div role="status" className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm">
+                <div id={successId} role="status" className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm">
                   {success}
                 </div>
               )}
@@ -266,7 +271,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                 type="submit"
                 disabled={loading}
                 aria-busy={loading}
-                className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-glow-brand"
               >
                 {loading ? (
                   <><Loader2 size={20} className="animate-spin" aria-hidden="true" /> Enviando...</>
@@ -279,10 +284,10 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
             <div className="mt-6 text-center">
               <button
                 onClick={() => switchTo('login')}
-                className="text-orange-400 hover:text-orange-300 font-medium transition-colors flex items-center justify-center gap-2 mx-auto"
+                className="text-brand-400 hover:text-brand-300 font-medium transition-colors flex items-center justify-center gap-2 mx-auto"
               >
                 <ArrowLeft size={16} aria-hidden="true" />
-                Volver a iniciar sesion
+                Volver a iniciar sesión
               </button>
             </div>
           </>
@@ -296,12 +301,12 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                 <User size={32} className="text-white" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold text-white">
-                {view === 'login' ? 'Iniciar Sesion' : 'Crear Cuenta'}
+                {view === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta'}
               </h2>
               <p className="text-navy-400 mt-2">
                 {view === 'login'
                   ? 'Accede a tu cuenta para continuar'
-                  : 'Registrate para guardar tu progreso'
+                  : 'Regístrate para guardar tu progreso'
                 }
               </p>
             </div>
@@ -319,13 +324,14 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                     placeholder="tu@email.com"
                     required
                     aria-invalid={error ? 'true' : undefined}
-                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                    aria-describedby={describedBy}
+                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-navy-900 focus:border-transparent transition-all"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="auth-password" className="block text-sm font-medium text-navy-300 mb-2">Contrasena</label>
+                <label htmlFor="auth-password" className="block text-sm font-medium text-navy-300 mb-2">Contraseña</label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
                   <input
@@ -335,14 +341,16 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     required
-                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                    aria-invalid={error ? 'true' : undefined}
+                    aria-describedby={describedBy}
+                    className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-navy-900 focus:border-transparent transition-all"
                   />
                 </div>
               </div>
 
               {view === 'signup' && (
                 <div>
-                  <label htmlFor="auth-confirm-password" className="block text-sm font-medium text-navy-300 mb-2">Confirmar Contrasena</label>
+                  <label htmlFor="auth-confirm-password" className="block text-sm font-medium text-navy-300 mb-2">Confirmar Contraseña</label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
                     <input
@@ -352,7 +360,9 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="••••••••"
                       required
-                      className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                      aria-invalid={error ? 'true' : undefined}
+                      aria-describedby={describedBy}
+                      className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-navy-900 focus:border-transparent transition-all"
                     />
                   </div>
                 </div>
@@ -363,21 +373,21 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                   <button
                     type="button"
                     onClick={() => switchTo('forgot-password')}
-                    className="text-sm text-navy-400 hover:text-orange-400 transition-colors"
+                    className="text-sm text-navy-400 hover:text-brand-400 transition-colors"
                   >
-                    Olvidaste tu contrasena?
+                    ¿Olvidaste tu contraseña?
                   </button>
                 </div>
               )}
 
               {error && (
-                <div role="alert" className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm">
+                <div id={errorId} role="alert" className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm">
                   {error}
                 </div>
               )}
 
               {success && (
-                <div role="status" className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm">
+                <div id={successId} role="status" className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm">
                   {success}
                 </div>
               )}
@@ -386,12 +396,12 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
                 type="submit"
                 disabled={loading}
                 aria-busy={loading}
-                className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 font-bold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-glow-brand"
               >
                 {loading ? (
                   <><Loader2 size={20} className="animate-spin" aria-hidden="true" /> Procesando...</>
                 ) : (
-                  view === 'login' ? 'Iniciar Sesion' : 'Crear Cuenta'
+                  view === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta'
                 )}
               </button>
             </form>
@@ -418,12 +428,12 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
 
             <div className="mt-6 text-center">
               <p className="text-navy-400">
-                {view === 'login' ? 'No tienes cuenta?' : 'Ya tienes cuenta?'}
+                {view === 'login' ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?'}
                 <button
                   onClick={() => switchTo(view === 'login' ? 'signup' : 'login')}
-                  className="ml-2 text-orange-400 hover:text-orange-300 font-medium transition-colors"
+                  className="ml-2 text-brand-400 hover:text-brand-300 font-medium transition-colors"
                 >
-                  {view === 'login' ? 'Registrate' : 'Inicia Sesion'}
+                  {view === 'login' ? 'Regístrate' : 'Inicia Sesión'}
                 </button>
               </p>
             </div>

@@ -77,7 +77,7 @@ async function buildEmailHtml(content: string, recipientEmail: string, siteUrl: 
         padding: 20px;
       }
       .header {
-        background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
         padding: 30px;
         text-align: center;
         border-radius: 10px 10px 0 0;
@@ -102,14 +102,14 @@ async function buildEmailHtml(content: string, recipientEmail: string, siteUrl: 
         border-radius: 0 0 10px 10px;
       }
       .footer a {
-        color: #ffc107;
+        color: #f59e0b;
         text-decoration: none;
       }
       .button {
         display: inline-block;
         padding: 12px 24px;
-        background: #ffc107;
-        color: #1e293b;
+        background: #f59e0b;
+        color: #0f172a;
         text-decoration: none;
         border-radius: 8px;
         font-weight: bold;

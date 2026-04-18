@@ -275,7 +275,7 @@ serve(async (req) => {
 
     if (existingPayment) {
       return jsonResponse(
-        { error: 'Esta transaccion ya fue procesada' },
+        { error: 'Esta transacción ya fue procesada' },
         409,
       )
     }
@@ -285,25 +285,25 @@ serve(async (req) => {
 
     if (!tx) {
       return jsonResponse(
-        { error: 'Transaccion no encontrada. Verifica la firma e intenta de nuevo.' },
+        { error: 'Transacción no encontrada. Verifica la firma e intenta de nuevo.' },
         404,
       )
     }
 
     // 1. Transaction must have succeeded
     if (tx.meta?.err) {
-      return jsonResponse({ error: 'La transaccion fallo en la red de Solana' }, 400)
+      return jsonResponse({ error: 'La transacción falló en la red de Solana' }, 400)
     }
 
     // 2. Transaction must be recent
     if (!tx.blockTime) {
-      return jsonResponse({ error: 'No se pudo verificar la fecha de la transaccion' }, 400)
+      return jsonResponse({ error: 'No se pudo verificar la fecha de la transacción' }, 400)
     }
 
     const txAgeSeconds = Math.floor(Date.now() / 1000) - tx.blockTime
     if (txAgeSeconds > MAX_TX_AGE_SECONDS) {
       return jsonResponse(
-        { error: 'La transaccion es demasiado antigua. Debe ser de los ultimos 30 minutos.' },
+        { error: 'La transacción es demasiado antigua. Debe ser de los últimos 30 minutos.' },
         400,
       )
     }
@@ -311,7 +311,7 @@ serve(async (req) => {
     if (txAgeSeconds < 0) {
       // blockTime slightly in the future is possible due to clock skew — allow a small buffer
       if (txAgeSeconds < -120) {
-        return jsonResponse({ error: 'Fecha de transaccion no valida' }, 400)
+        return jsonResponse({ error: 'Fecha de transacción no válida' }, 400)
       }
     }
 
@@ -325,7 +325,7 @@ serve(async (req) => {
       return jsonResponse(
         {
           error:
-            'No se encontro una transferencia USDC valida a la direccion de pago con el monto correcto.',
+            'No se encontró una transferencia USDC válida a la dirección de pago con el monto correcto.',
         },
         400,
       )

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Users, BookOpen, Award, Shield, Zap, CheckCircle } from 'lucide-react';
+import { Users, BookOpen, Award, Zap, CheckCircle } from 'lucide-react';
 import ParticlesBackground from './ParticlesBackground';
 
 // Constants moved outside component to prevent re-creation
@@ -8,6 +8,8 @@ const WORDS = ["Bitcoin", "Solana", "Trading", "Web3", "Cripto"];
 const TYPING_SPEED = 100;
 const DELETING_SPEED = 50;
 const PAUSE_TIME = 2000;
+const FINAL_PAUSE_TIME = 3000;
+const MAX_CYCLES = 2; // Cycle the whole WORDS list twice, then settle on "Cripto"
 
 interface HeroProps {
   onStartLearning: () => void;
@@ -17,18 +19,25 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
   const [textIndex, setTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [settled, setSettled] = useState(false);
 
-  // Typing Effect
+  // Typing Effect — cycles through WORDS twice, then settles on the last word.
+  // Keeps the hero visually alive on arrival without being a permanent distraction.
   useEffect(() => {
-    const currentWord = WORDS[textIndex % WORDS.length];
+    if (settled) return;
 
-    // If word is complete, wait before starting delete
+    const currentWord = WORDS[textIndex % WORDS.length];
+    const isLastWord = textIndex === WORDS.length * MAX_CYCLES - 1;
+
     if (!isDeleting && displayText === currentWord) {
+      if (isLastWord) {
+        const finalTimer = setTimeout(() => setSettled(true), FINAL_PAUSE_TIME);
+        return () => clearTimeout(finalTimer);
+      }
       const pauseTimer = setTimeout(() => setIsDeleting(true), PAUSE_TIME);
       return () => clearTimeout(pauseTimer);
     }
 
-    // If deleted fully, move to next word
     if (isDeleting && displayText === '') {
       setIsDeleting(false);
       setTextIndex((prev) => prev + 1);
@@ -44,7 +53,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
     }, isDeleting ? DELETING_SPEED : TYPING_SPEED);
 
     return () => clearTimeout(timer);
-  }, [displayText, isDeleting, textIndex]);
+  }, [displayText, isDeleting, textIndex, settled]);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-navy-950 pt-32 pb-20 lg:pt-20 scroll-mt-28">
@@ -81,8 +90,6 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
         <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-brand-500/10 rounded-full blur-[160px]"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] bg-accent-500/5 rounded-full blur-[140px]"></div>
         
-        {/* Texture Pattern */}
-        <div className="absolute inset-0 bg-dots-pattern opacity-[0.15]"></div>
       </div>
 
       <div className="container max-w-7xl mx-auto px-6 relative z-10">
@@ -95,7 +102,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-white leading-[1] tracking-tighter mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white leading-[1] tracking-tighter mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
               De Cero a Experto en <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-brand-500 to-brand-600 drop-shadow-glow-brand-strong">
                 Hablemos Cripto
@@ -107,7 +114,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
                 <span>Domina</span>
                 <div className="relative">
                     <span className="font-bold text-white border-b-4 border-brand-500 pb-1">{displayText}</span>
-                    <span className="absolute -right-4 top-1 h-[80%] w-1 bg-brand-500 animate-pulse"></span>
+                    <span className={`absolute -right-4 top-1 h-[80%] w-1 bg-brand-500 transition-opacity duration-500 ${settled ? 'opacity-0' : 'animate-pulse'}`}></span>
                 </div>
             </div>
 
@@ -154,7 +161,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
                 {[
                     { label: "Experiencia", val: "7+ Años", icon: Award, color: "text-brand-500" },
                     { label: "Estudiantes", val: "500+", icon: Users, color: "text-accent-500" },
-                    { label: "Confianza", val: "100%", icon: Shield, color: "text-brand-400" }
+                    { label: "Lecciones", val: "42", icon: BookOpen, color: "text-brand-400" }
                 ].map((stat, i) => (
                     <div key={i} className="flex flex-col items-center group p-6 rounded-3xl hover:bg-white/[0.02] transition-colors">
                         <div className={`mb-4 p-4 rounded-2xl bg-navy-900 border border-white/5 group-hover:border-white/10 transition-all shadow-glass`}>

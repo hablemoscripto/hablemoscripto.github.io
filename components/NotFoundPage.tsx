@@ -8,15 +8,15 @@ export default function NotFoundPage() {
       <div className="text-center max-w-md">
         <div className="text-8xl font-bold text-brand-500 mb-4">404</div>
         <h1 className="text-2xl font-bold text-white mb-3">
-          Pagina no encontrada
+          Página no encontrada
         </h1>
         <p className="text-navy-400 mb-8">
-          La pagina que buscas no existe o fue movida.
+          La página que buscas no existe o fue movida.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             to="/"
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-3 px-6 rounded-lg transition-all"
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 font-bold py-3 px-6 rounded-lg transition-all shadow-glow-brand"
           >
             <Home size={20} />
             Ir al inicio

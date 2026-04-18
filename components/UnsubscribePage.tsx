@@ -28,7 +28,7 @@ const UnsubscribePage: React.FC = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Error al cancelar suscripcion');
+        throw new Error(data.error || 'Error al cancelar suscripción');
       }
 
       setStatus('success');
@@ -63,10 +63,10 @@ const UnsubscribePage: React.FC = () => {
             <div className="text-center mb-6">
               <MailX className="mx-auto mb-4 text-brand-500" size={48} />
               <h1 className="text-2xl font-bold text-white mb-2">
-                Cancelar suscripcion
+                Cancelar suscripción
               </h1>
               <p className="text-navy-400">
-                Confirma tu email para cancelar la suscripcion al newsletter de Hablemos Cripto.
+                Confirma tu email para cancelar la suscripción al newsletter de Hablemos Cripto.
               </p>
             </div>
 
@@ -102,7 +102,7 @@ const UnsubscribePage: React.FC = () => {
                     Procesando...
                   </>
                 ) : (
-                  'Confirmar cancelacion'
+                  'Confirmar cancelación'
                 )}
               </button>
             </div>

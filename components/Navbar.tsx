@@ -136,10 +136,10 @@ const Navbar: React.FC = () => {
             ) : (
               <button
                 onClick={() => setIsAuthModalOpen(true)}
-                className="group relative px-6 py-2.5 bg-white text-navy-950 rounded-xl font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
+                className="group relative px-6 py-2.5 bg-brand-500 text-navy-950 rounded-xl font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] overflow-hidden shadow-glow-brand"
               >
-                <div className="absolute inset-0 bg-brand-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                <span className="relative z-10 flex items-center gap-2 group-hover:text-white transition-colors">
+                <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <span className="relative z-10 flex items-center gap-2 transition-colors">
                   <User size={16} />
                   Ingresar
                 </span>
@@ -165,8 +165,7 @@ const Navbar: React.FC = () => {
         <>
           {/* Dark overlay background */}
           <div
-            className="fixed inset-0 bg-black md:hidden"
-            style={{ zIndex: 99998 }}
+            className="fixed inset-0 bg-black z-[60] md:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
@@ -176,11 +175,7 @@ const Navbar: React.FC = () => {
             role="dialog"
             aria-modal="true"
             aria-label="Menú de navegación"
-            className="fixed inset-0 md:hidden overflow-y-auto"
-            style={{
-              zIndex: 99999,
-              backgroundColor: '#020617'
-            }}
+            className="fixed inset-0 z-[61] bg-navy-950 md:hidden overflow-y-auto"
           >
             {/* Header with logo and close */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-white/5">
@@ -248,21 +243,21 @@ const Navbar: React.FC = () => {
                       setIsAuthModalOpen(true);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex items-center justify-center gap-3 w-full bg-white text-navy-950 font-bold py-4 px-6 rounded-2xl transition-all shadow-glow-brand"
+                    className="flex items-center justify-center gap-3 w-full bg-brand-500 hover:bg-brand-400 text-navy-950 font-bold py-4 px-6 rounded-2xl transition-all shadow-glow-brand"
                   >
                     <User size={18} />
                     Iniciar Sesión
                   </button>
                 )}
-                
+
                 <a
                   href="https://discord.gg/W8haa7dDV3"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-3 w-full bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold py-4 px-6 rounded-2xl transition-all"
+                  className="flex items-center justify-center gap-3 w-full bg-navy-900 hover:bg-navy-800 border border-white/10 hover:border-brand-500/40 text-white font-bold py-4 px-6 rounded-2xl transition-all"
                 >
-                  <ExternalLink size={18} />
+                  <ExternalLink size={18} className="text-navy-400" />
                   Comunidad Discord
                 </a>
               </div>
