@@ -217,7 +217,7 @@ const NewsletterAdmin: React.FC = () => {
             onClick={() => navigate('/education')}
             className="text-navy-400 hover:text-white mb-4 transition-colors"
           >
-            ← Volver al Dashboard
+            ← Volver al Panel
           </button>
           <h1 className="text-4xl font-bold mb-2">Panel de Newsletter</h1>
           <p className="text-navy-400">Gestiona tus suscriptores de newsletter</p>

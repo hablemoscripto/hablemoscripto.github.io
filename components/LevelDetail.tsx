@@ -41,7 +41,7 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                         className="flex items-center gap-2 text-navy-400 hover:text-white transition-colors mb-8"
                     >
                         <ChevronLeft size={20} />
-                        Volver al Dashboard
+                        Volver al Panel
                     </button>
 
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">

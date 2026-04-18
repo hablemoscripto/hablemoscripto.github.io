@@ -39,7 +39,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId, thumbnail, title }) 
                     <div className="relative z-10 text-center p-6">
                         <button
                             onClick={handlePlay}
-                            className="w-20 h-20 rounded-full bg-brand-500 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(255,193,7,0.3)] group-hover:scale-110 group-hover:shadow-[0_0_50px_rgba(255,193,7,0.5)] transition-all duration-300"
+                            className="w-20 h-20 rounded-full bg-brand-500 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(245,158,11,0.3)] group-hover:scale-110 group-hover:shadow-[0_0_50px_rgba(245,158,11,0.5)] transition-all duration-300"
                         >
                             <Play size={32} className="text-navy-900 fill-navy-900 ml-1" />
                         </button>

@@ -269,9 +269,10 @@ const LessonView: React.FC = () => {
                                 <div className="w-9"></div>
                             )}
 
-                            {/* Lesson title */}
-                            <span className="font-medium text-navy-200 truncate max-w-[140px] sm:max-w-md text-sm sm:text-base">
-                                {lesson.number?.split(' ')[0] || id}. {lesson.title}
+                            {/* Lesson title — drop the numeric prefix on mobile to give the title more room */}
+                            <span className="font-medium text-navy-200 truncate max-w-[200px] sm:max-w-md text-sm sm:text-base">
+                                <span className="hidden sm:inline">{lesson.number?.split(' ')[0] || id}. </span>
+                                {lesson.title}
                             </span>
 
                             {/* Next lesson arrow */}
@@ -510,20 +511,28 @@ const LessonView: React.FC = () => {
                             <div className="bg-navy-900 rounded-2xl border border-navy-800 p-6">
                                 <h3 className="font-bold text-white mb-4">Recursos</h3>
                                 <div className="space-y-3">
-                                    <button className="w-full flex items-center justify-between p-3 bg-navy-800 rounded-xl hover:bg-navy-700 transition-colors text-left">
+                                    <a
+                                        href="https://discord.gg/W8haa7dDV3"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-full flex items-center justify-between p-3 bg-navy-800 rounded-xl hover:bg-navy-700 hover:border-brand-500/30 border border-transparent transition-all text-left group"
+                                    >
                                         <div className="flex items-center gap-3">
                                             <MessageSquare size={18} className="text-brand-500" />
-                                            <span className="text-navy-300 text-sm">Comunidad</span>
+                                            <span className="text-navy-300 group-hover:text-white text-sm transition-colors">Comunidad</span>
                                         </div>
-                                        <ExternalLink size={14} className="text-navy-500" />
-                                    </button>
-                                    <button className="w-full flex items-center justify-between p-3 bg-navy-800 rounded-xl hover:bg-navy-700 transition-colors text-left">
+                                        <ExternalLink size={14} className="text-navy-500 group-hover:text-brand-400 transition-colors" />
+                                    </a>
+                                    <a
+                                        href={`mailto:hablemoscripto@gmail.com?subject=${encodeURIComponent(`Feedback · Lección ${lesson.number?.split(' ')[0] || id}: ${lesson.title}`)}`}
+                                        className="w-full flex items-center justify-between p-3 bg-navy-800 rounded-xl hover:bg-navy-700 hover:border-brand-500/30 border border-transparent transition-all text-left group"
+                                    >
                                         <div className="flex items-center gap-3">
                                             <ThumbsUp size={18} className="text-brand-500" />
-                                            <span className="text-navy-300 text-sm">Dar Feedback</span>
+                                            <span className="text-navy-300 group-hover:text-white text-sm transition-colors">Dar Feedback</span>
                                         </div>
-                                        <ExternalLink size={14} className="text-navy-500" />
-                                    </button>
+                                        <ExternalLink size={14} className="text-navy-500 group-hover:text-brand-400 transition-colors" />
+                                    </a>
                                 </div>
                             </div>
                         </div>

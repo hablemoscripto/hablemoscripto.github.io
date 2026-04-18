@@ -114,7 +114,7 @@ const MultipleChoiceRenderer: React.FC<QuestionComponentProps> = ({
                     }
                 } else {
                     if (answer === optIdx) {
-                        optionClass += "bg-brand-500/10 border-brand-500 text-white shadow-[0_0_15px_rgba(255,193,7,0.1)]";
+                        optionClass += "bg-brand-500/10 border-brand-500 text-white shadow-[0_0_15px_rgba(245,158,11,0.15)]";
                     } else {
                         optionClass += "bg-navy-950 border-navy-800 text-navy-300 hover:border-navy-600 hover:bg-navy-900 cursor-pointer";
                     }

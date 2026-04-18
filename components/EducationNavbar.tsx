@@ -126,7 +126,7 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
       {/* Global Progress Line */}
       <div className="h-0.5 bg-navy-900 w-full">
         <div
-          className="h-full bg-gradient-to-r from-brand-500 to-brand-400 shadow-[0_0_10px_rgba(255,193,7,0.5)] transition-all duration-1000 ease-out"
+          className="h-full bg-gradient-to-r from-brand-500 to-brand-400 shadow-[0_0_10px_rgba(245,158,11,0.5)] transition-all duration-1000 ease-out"
           style={{ width: `${globalProgress}%` }}
         ></div>
       </div>
