@@ -9,6 +9,12 @@ interface LevelDetailProps {
     levelData: LevelData;
 }
 
+const LEVEL_LABELS: Record<string, string> = {
+    beginner: 'Principiante',
+    intermediate: 'Intermedio',
+    advanced: 'Avanzado',
+};
+
 const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
     const navigate = useNavigate();
     const { isLessonCompleted } = useProgress();
@@ -40,7 +46,7 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
 
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                         <div>
-                            <span className="text-brand-500 font-bold tracking-wider uppercase text-sm mb-2 block">{levelData.id}</span>
+                            <span className="text-brand-500 font-bold tracking-wider uppercase text-sm mb-2 block">Nivel {LEVEL_LABELS[levelData.id] ?? levelData.id}</span>
                             <h1 className="text-4xl font-bold text-white mb-4">{levelData.title}</h1>
                             <p className="text-navy-400 max-w-2xl text-lg">{levelData.description}</p>
                         </div>

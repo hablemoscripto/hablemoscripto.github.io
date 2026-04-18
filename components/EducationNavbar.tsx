@@ -59,9 +59,9 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
                 <Zap size={18} className="fill-amber-400" />
                 <span className="font-bold">{streak}</span>
               </div>
-              <div className="flex items-center gap-2 text-blue-400" title="Nivel">
+              <div className="flex items-center gap-2 text-brand-400" title="Nivel">
                 <Trophy size={18} />
-                <span className="font-bold">Lvl {level}</span>
+                <span className="font-bold">Nivel {level}</span>
                 <span className="text-xs text-navy-500">({xp} XP)</span>
               </div>
             </div>
@@ -139,9 +139,9 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
               <Zap size={18} className="fill-amber-400" />
               <span className="font-bold">{streak} días</span>
             </div>
-            <div className="flex items-center gap-2 text-blue-400">
+            <div className="flex items-center gap-2 text-brand-400">
               <Trophy size={18} />
-              <span className="font-bold">Lvl {level}</span>
+              <span className="font-bold">Nivel {level}</span>
             </div>
           </div>
           {onOpenSearch && (
