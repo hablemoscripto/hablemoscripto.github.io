@@ -169,7 +169,7 @@ export default function PricingSection({ currentTier, onSelectPlan }: PricingSec
             >
               {/* Gradient border wrapper for VIP */}
               {plan.gradient && (
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-rose-500 p-[1px]">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-300 via-brand-400 to-brand-500 p-[1px]">
                   <div className="w-full h-full rounded-3xl bg-navy-900" />
                 </div>
               )}
@@ -197,7 +197,7 @@ export default function PricingSection({ currentTier, onSelectPlan }: PricingSec
 
                 {plan.gradient && (
                   <div className="absolute -top-px left-1/2 -translate-x-1/2">
-                    <div className="bg-gradient-to-r from-indigo-500 to-rose-500 text-white text-[10px] font-black uppercase tracking-[0.15em] px-4 py-1.5 rounded-b-xl">
+                    <div className="bg-gradient-to-r from-brand-300 to-brand-500 text-navy-950 text-[10px] font-black uppercase tracking-[0.15em] px-4 py-1.5 rounded-b-xl">
                       Mejor Valor
                     </div>
                   </div>
@@ -210,14 +210,14 @@ export default function PricingSection({ currentTier, onSelectPlan }: PricingSec
                       ? 'bg-navy-800 border border-white/5'
                       : plan.highlighted
                         ? 'bg-gradient-to-br from-brand-400 to-brand-600 shadow-lg shadow-brand-500/20'
-                        : 'bg-gradient-to-br from-indigo-400 to-rose-500 shadow-lg shadow-indigo-500/20'
+                        : 'bg-gradient-to-br from-brand-300 to-brand-500 shadow-lg shadow-brand-300/30'
                   }`}>
                     {isFreePlan ? (
                       <Zap size={22} className="text-navy-300" />
                     ) : plan.highlighted ? (
                       <Crown size={22} className="text-navy-950" />
                     ) : (
-                      <Sparkles size={22} className="text-white" />
+                      <Sparkles size={22} className="text-navy-950" />
                     )}
                   </div>
 
@@ -259,7 +259,7 @@ export default function PricingSection({ currentTier, onSelectPlan }: PricingSec
                             ? 'text-navy-400'
                             : plan.highlighted
                               ? 'text-brand-400'
-                              : 'text-indigo-400'
+                              : 'text-brand-300'
                         }`}
                       />
                       <span className="text-sm text-navy-200 font-medium">{feature}</span>

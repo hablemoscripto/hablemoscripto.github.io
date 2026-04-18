@@ -378,7 +378,7 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
           <button
             onClick={handleVerifyCrypto}
             disabled={!txSignature.trim() || verifyStatus === 'loading' || verifyStatus === 'success'}
-            className="w-full py-4 rounded-2xl text-sm font-bold bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-500/20"
+            className="w-full py-4 rounded-2xl text-sm font-bold bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-navy-950 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-500/20"
           >
             {verifyStatus === 'loading' ? (
               <>

@@ -12,7 +12,7 @@ interface LevelCardProps {
     lessonCount: number;
     completedCount: number;
     progress: number;
-    color: 'brand' | 'indigo' | 'rose';
+    color: 'brand' | 'emerald' | 'gold';
     icon: LucideIcon;
     isLocked: boolean;
     onAction: () => void;
@@ -34,14 +34,14 @@ const LevelCard: React.FC<LevelCardProps> = ({
 
     const colorClasses = {
         brand: 'text-brand-500 group-hover:border-brand-500/50 shadow-glow-brand/10',
-        indigo: 'text-indigo-400 group-hover:border-indigo-500/50 shadow-indigo-500/10',
-        rose: 'text-rose-400 group-hover:border-rose-500/50 shadow-rose-500/10',
+        emerald: 'text-emerald-400 group-hover:border-emerald-500/50 shadow-emerald-500/10',
+        gold: 'text-brand-300 group-hover:border-brand-300/50 shadow-brand-300/10',
     };
 
     const btnColors = {
         brand: 'bg-brand-500 hover:bg-brand-400 text-navy-950 shadow-glow-brand',
-        indigo: 'bg-indigo-500 hover:bg-indigo-400 text-white shadow-indigo-500/30',
-        rose: 'bg-rose-500 hover:bg-rose-400 text-white shadow-rose-500/30',
+        emerald: 'bg-emerald-500 hover:bg-emerald-400 text-navy-950 shadow-glow-accent',
+        gold: 'bg-brand-300 hover:bg-brand-200 text-navy-950 shadow-[0_0_20px_rgba(252,211,77,0.3)]',
     };
 
     return (

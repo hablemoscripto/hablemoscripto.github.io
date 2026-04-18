@@ -253,16 +253,16 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
   const isDashboard = location.pathname === '/education';
 
-  const levelColors: { [key: string]: 'brand' | 'indigo' | 'rose' } = {
+  const levelColors: { [key: string]: 'brand' | 'emerald' | 'gold' } = {
     beginner: 'brand',
-    intermediate: 'indigo',
-    advanced: 'rose',
+    intermediate: 'emerald',
+    advanced: 'gold',
   }
 
   const levelBgColors: { [key: string]: string } = {
     beginner: 'bg-brand-500',
-    intermediate: 'bg-indigo-500',
-    advanced: 'bg-rose-500',
+    intermediate: 'bg-emerald-500',
+    advanced: 'bg-brand-300',
   }
 
   return (

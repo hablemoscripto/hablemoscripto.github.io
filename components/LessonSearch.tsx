@@ -22,9 +22,9 @@ interface LessonSearchProps {
 }
 
 const LEVEL_COLORS: Record<string, string> = {
-  beginner: 'bg-green-500/20 text-green-400 border-green-500/30',
-  intermediate: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-  advanced: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+  beginner: 'bg-brand-500/20 text-brand-400 border-brand-500/30',
+  intermediate: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+  advanced: 'bg-brand-300/20 text-brand-300 border-brand-300/40',
 };
 
 const LEVEL_LABELS: Record<string, string> = {

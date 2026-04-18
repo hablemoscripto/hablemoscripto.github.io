@@ -23,21 +23,21 @@ const VARIANT_STYLES = {
         badge: 'Bronce',
     },
     intermediate: {
-        gradient: 'from-indigo-400 to-indigo-600',
-        gradientBorder: 'from-indigo-400/60 via-indigo-500/30 to-indigo-600/60',
-        accent: 'text-indigo-400',
-        accentBg: 'bg-indigo-500/10',
-        borderColor: 'border-indigo-500/20',
-        glowColor: 'shadow-[0_0_60px_rgba(99,102,241,0.15)]',
+        gradient: 'from-emerald-400 to-emerald-600',
+        gradientBorder: 'from-emerald-400/60 via-emerald-500/30 to-emerald-600/60',
+        accent: 'text-emerald-400',
+        accentBg: 'bg-emerald-500/10',
+        borderColor: 'border-emerald-500/20',
+        glowColor: 'shadow-[0_0_60px_rgba(16,185,129,0.15)]',
         badge: 'Plata',
     },
     advanced: {
-        gradient: 'from-rose-400 to-rose-600',
-        gradientBorder: 'from-rose-400/60 via-rose-500/30 to-rose-600/60',
-        accent: 'text-rose-400',
-        accentBg: 'bg-rose-500/10',
-        borderColor: 'border-rose-500/20',
-        glowColor: 'shadow-[0_0_60px_rgba(244,63,94,0.15)]',
+        gradient: 'from-brand-300 to-brand-500',
+        gradientBorder: 'from-brand-300/60 via-brand-400/30 to-brand-500/60',
+        accent: 'text-brand-300',
+        accentBg: 'bg-brand-300/10',
+        borderColor: 'border-brand-300/30',
+        glowColor: 'shadow-[0_0_60px_rgba(252,211,77,0.2)]',
         badge: 'Oro',
     },
 };
@@ -56,8 +56,8 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
             if (timeLeft <= 0) return clearInterval(interval);
 
             const particleCount = 50 * (timeLeft / duration);
-            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#f59e0b', '#10b981', '#3b82f6'] });
-            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#f59e0b', '#10b981', '#3b82f6'] });
+            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#f59e0b', '#10b981', '#fcd34d'] });
+            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#f59e0b', '#10b981', '#fcd34d'] });
         }, 250);
 
         return () => clearInterval(interval);
