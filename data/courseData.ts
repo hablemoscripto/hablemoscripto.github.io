@@ -7821,14 +7821,29 @@ export const LESSONS_DATA: Record<number, any> = {
         }
       },
       {
+        type: 'main',
+        title: 'Paso 6: Tu Primera Acción AHORA (10 Minutos)',
+        content: 'Acabas de leer todo lo anterior. Estás en el punto exacto donde el 90% de los estudiantes de cualquier curso se queda: **inspirados pero inactivos**. Esta sección existe para romper eso. No necesitas "el momento perfecto" para empezar. No necesitas $1,000. No necesitas más lecciones. Necesitas escribir **tres números** en un papel—ahora, antes de cerrar esta lección—y la inercia se rompe para siempre.',
+        highlight: {
+          title: 'La Trampa del "Algún Día"',
+          text: '"Voy a empezar cuando tenga más tiempo / más dinero / más confianza" es la excusa más cara del mundo. Mientras esperas el momento perfecto, la inflación no espera. Empezar mal pero empezar es infinitamente mejor que planear perfecto y no empezar nunca.'
+        },
+        features: [
+          { icon: Clock, title: 'Minuto 1-3: Los Tres Números', text: 'Toma un papel (sí, papel—no celular). Escribe:\n\n**NÚMERO 1** — Tu ingreso neto mensual promedio.\n**NÚMERO 2** — Tu fondo de emergencia actual (cuánto dinero líquido tienes que no necesitas este mes).\n**NÚMERO 3** — Cuánto puedes invertir al mes sin que afecte tu vida (dinero que podrías perder mañana y seguir durmiendo).\n\nEstos tres números son tu realidad financiera. Sin ellos, cualquier plan es ficción.' },
+          { icon: CheckCircle, title: 'Minuto 4-6: Tu Línea Base', text: 'Responde estas tres preguntas con SÍ o NO:\n\n**a)** ¿Mi Número 2 cubre al menos 3 meses de mis gastos fijos? Si NO → tu prioridad no es cripto, es ahorrar.\n\n**b)** ¿Mi Número 3 es mayor a $20/mes? Si NO → enfócate en aumentar ingresos o reducir gastos primero.\n\n**c)** ¿Tengo claridad sobre en qué gasto mi dinero cada mes? Si NO → tu primer paso es hacer un presupuesto, no un portafolio.\n\nSi respondiste SÍ a las tres, estás listo para ejecutar. Si no, tienes algo más valioso: claridad sobre el verdadero primer paso.' },
+          { icon: Zap, title: 'Minuto 7-10: El Compromiso Mínimo Viable', text: 'Abre tu celular. Pon una alarma recurrente para el **próximo lunes a las 9am** (o el día que recibas salario). Nombra la alarma: "**DCA: Mi futuro financiero**".\n\nCuando suene: ejecutas tu primera compra de DCA, aunque sea $20. Da igual si estás cansado, si el mercado cayó, o si ese día tu amigo te dice que todo es una estafa. La alarma suena, tú ejecutas. Período.\n\nNo hace falta tener todo el plan perfecto ahora. Necesitas UN movimiento real antes de que el impulso se pierda.' }
+        ]
+      },
+      {
         type: 'takeaways',
-        title: 'Tu Plan de Acción: Ejecuta Esta Semana',
+        title: 'Tu Plan de Acción: Escríbelo HOY, Ejecuta ESTA SEMANA',
         items: [
-          'PASO 1: Verifica que tienes fondo de emergencia (3-6 meses de gastos). Si no, prioriza eso.',
-          'PASO 2: Define tu portafolio base: X% BTC + X% SOL + X% ETH + X% Stablecoins. Escríbelo.',
+          'PASO 1: Verifica que tienes fondo de emergencia (3-6 meses de gastos). Si no, prioriza eso antes que cripto.',
+          'PASO 2: Define tu portafolio base: X% BTC + X% SOL + X% ETH + X% Stablecoins. Escríbelo en papel.',
           'PASO 3: Configura tu DCA: monto fijo + frecuencia + método (automático o manual). Empieza esta semana.',
           'PASO 4: Completa el checklist de seguridad. Frase semilla segura, 2FA activo, custodia organizada.',
           'PASO 5: Escribe tus reglas de compra, reglas de NO hacer, meta a 1 año, y fecha de revisión trimestral.',
+          'PASO 6: ANTES de cerrar esta lección: escribe los tres números, pon la alarma del lunes, y comprométete con tu primer DCA. 10 minutos que cambian tu trayectoria.',
           'RECUERDA: El mejor plan es el que ejecutas consistentemente. Perfecto no existe. Empieza con algo simple y ajusta sobre la marcha.',
           'SIGUIENTE NIVEL: El nivel intermedio te enseñará a leer gráficos, analizar proyectos, y gestionar riesgo como un profesional. Pero primero, ejecuta este plan durante al menos 3 meses.'
         ]
@@ -7895,6 +7910,30 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'c',
           explanation: 'El conocimiento sin ejecución no vale nada. Tu plan está listo—ahora ejecútalo. 3 meses de DCA disciplinado te darán la experiencia real que ninguna lección puede enseñar. Después, el nivel intermedio te dará herramientas para optimizar tu estrategia.'
+        },
+        {
+          id: 'q6',
+          question: 'Llevas un año haciendo DCA disciplinado. Tu portafolio está en -40% por un mercado bajista prolongado. Tu pareja te dice: "Deberías vender antes de perder más, está claro que esto no funcionó." ¿Qué respondes y qué haces?',
+          options: [
+            { id: 'a', text: 'Tiene razón. Vendo todo y acepto la pérdida antes de que empeore' },
+            { id: 'b', text: 'Sigo mi plan. -40% en un año es normal en cripto—los mercados bajistas históricamente duran 12-18 meses. Mis reglas escritas dicen "no vendo en pánico". De hecho, el DCA durante el bear es cuando acumulo más unidades por el mismo dinero. Lo que importa es dónde estaré en 3-5 años, no en 12 meses' },
+            { id: 'c', text: 'Vendo la mitad para "asegurar" algo y mantengo la otra mitad' },
+            { id: 'd', text: 'Cambio todo a stablecoins hasta que se "estabilice" el mercado' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Este es EL momento que define tu trayectoria como inversor. Históricamente, cada período de 4+ años de DCA en BTC ha terminado en positivo—pero solo si no paras. Los que vendieron en -40% en 2018 perdieron el ciclo completo de 2020-2021. El DCA funciona precisamente porque acumula MÁS durante los bears. Vender en pánico convierte una volatilidad temporal en pérdida permanente. Tu plan escrito te salva de ti mismo.'
+        },
+        {
+          id: 'q7',
+          question: 'Un amigo te dice: "Empecé a invertir en cripto la semana pasada y ya perdí 15%, creo que esto no es para mí." Revisas su situación y descubre que invirtió los $3,000 que tenía guardados para la renta de los próximos 3 meses. ¿Cuál es el error fundamental?',
+          options: [
+            { id: 'a', text: 'Invirtió muy poco—debería haber invertido más para diversificar' },
+            { id: 'b', text: 'No escogió las altcoins correctas' },
+            { id: 'c', text: 'Invirtió dinero que necesitaba en el corto plazo. Cripto es para horizontes de 2+ años con dinero que puedes no tocar. Saltó el PASO 1 del plan (fondo de emergencia) y ahora cualquier caída de mercado lo obliga a vender en pérdida para pagar su vida. El problema no es cripto—es que violó la regla fundamental' },
+            { id: 'd', text: 'Debió haber esperado a que el mercado subiera antes de comprar' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Este es el error más común y costoso que cometen los principiantes: invertir dinero que necesitan pronto. Cripto es volátil—puede bajar 30-50% en semanas. Si necesitas ese dinero para vivir, te obliga a vender en el peor momento. La regla de oro: **solo inviertes lo que puedes no tocar durante 2+ años**. Esto no es "cautela excesiva"—es la diferencia entre construir riqueza y destruirla. El PASO 1 del plan existe precisamente para evitar esto.'
         }
       ]
     }
