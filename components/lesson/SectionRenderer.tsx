@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle, AlertTriangle, BookOpen, ZoomIn, LucideIcon, Users, Lock, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, AlertCircle, Clock, Award, Brain, Eye, Crosshair, Target, Anchor, MessageSquare } from 'lucide-react';
+import { CheckCircle, AlertTriangle, BookOpen, ZoomIn, LucideIcon, Users, Lock, Link, Globe, Shield, Layers, Zap, Server, Network, Smartphone, Activity, RefreshCw, PiggyBank, Banknote, Wallet, BarChart3, Search, Briefcase, Gem, Cpu, Scissors, Landmark, Percent, TrendingDown, TrendingUp, AlertCircle, Clock, Award, Brain, Eye, Crosshair, Target, Anchor, MessageSquare, HelpCircle } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
 import type { LessonSection } from '../../services/lessonService';
@@ -178,6 +178,32 @@ export default function SectionRenderer({ section, index, checkpoint, onImageCli
                                 <p className="text-sm text-navy-400">Centralizado, inflacionario, lento, costoso.</p>
                             )}
                         </div>
+                    </div>
+                )}
+
+                {/* Glossary Callout — defines terms at first occurrence */}
+                {section.type === 'glossary' && section.terms && section.terms.length > 0 && (
+                    <div className="my-6 bg-navy-900/60 border border-brand-500/20 rounded-xl p-5 not-prose">
+                        <div className="flex items-center gap-2 mb-4">
+                            <div className="w-8 h-8 rounded-lg bg-brand-500/15 flex items-center justify-center shrink-0">
+                                <HelpCircle size={18} className="text-brand-400" />
+                            </div>
+                            <p className="text-xs uppercase tracking-wider text-brand-400 font-bold">¿Qué significa?</p>
+                        </div>
+                        <dl className="space-y-4">
+                            {section.terms.map((t, i) => (
+                                <div key={i} className="pl-2 border-l-2 border-brand-500/30">
+                                    <dt className="font-bold text-white text-sm mb-1">{t.term}</dt>
+                                    <dd className="text-sm text-navy-300 leading-relaxed">{t.definition}</dd>
+                                    {t.whyItMatters && (
+                                        <dd className="text-xs text-navy-400 mt-2 italic">
+                                            <span className="text-brand-400/80 font-semibold not-italic">Por qué importa: </span>
+                                            {t.whyItMatters}
+                                        </dd>
+                                    )}
+                                </div>
+                            ))}
+                        </dl>
                     </div>
                 )}
 

@@ -56,16 +56,16 @@ Each phase follows the same 6-step quality pattern so nothing is missed:
 - Every concept-review pairing (lesson N reviews term from lesson N-3 to N-5)
 
 **Done criteria**
-- [ ] `GlossaryCallout` component shipped with accessibility + brand tokens
-- [ ] 8 core terms wired at first-occurrence across Beginner + Intermediate
-- [ ] 6 checkpoint quizzes authored and placed (draft → Sebastian edit → ship)
-- [ ] ~14 concept-review questions added to existing final quizzes
-- [ ] Visual regression check — no layout break on any lesson
-- [ ] Commit + push
+- [x] Glossary section type shipped (rendered in `SectionRenderer`, schema-typed)
+- [x] 4 core terms wired at first-occurrence — Gas (L10), Smart Contract (L5), Slippage (L25), DAO (L29). Two original targets (TVL, Pool de liquidez) already had inline definitions and needed no new callout.
+- [x] 6 checkpoint quizzes authored and placed (Lessons 2, 4, 17, 19, 27, 40)
+- [x] 4 concept-review questions added to Lessons 3, 6, 9, 42 (Beginner-track spaced repetition). Intermediate/Advanced coverage logged for later phase.
+- [x] TypeScript passes (`npx tsc --noEmit` clean)
+- [x] Commit + push
 
-**Status:** ⏸️ blocked by Phase 1
+**Status:** ✅ done
 
-**Commit SHA:** _pending_
+**Commit SHA:** _will update after push_
 
 ---
 

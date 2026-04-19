@@ -573,7 +573,29 @@ export const LESSONS_DATA: Record<number, any> = {
           explanation: 'El patrón es siempre el mismo: gobierno gasta más de lo que tiene → imprime para cubrir el déficit → el dinero pierde valor → los ciudadanos pierden sus ahorros. Es la historia de TODAS las monedas fiat eventualmente.'
         }
       ]
-    }
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 3,
+        title: 'Checkpoint: Inflación Real vs Nominal',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'Ganas un aumento del 8% este año. La inflación oficial del país es del 5%. ¿Cuál es el cambio real en tu poder de compra?',
+            options: [
+              '+8% (ganaste el aumento completo)',
+              '+3% (aumento menos inflación)',
+              '-5% (la inflación anula tu aumento)',
+              '0% (empataste con la inflación)'
+            ],
+            correctAnswer: 1,
+            explanation: 'Poder de compra real = aumento nominal − inflación. 8% − 5% = 3%. Ganaste ese aumento, pero solo 3 puntos te acercan a más capacidad de compra real. Si la inflación hubiera sido 8%, tu "aumento" habría sido inflación disfrazada de mejora.',
+            hint: 'Resta la inflación del aumento nominal.'
+          }
+        ]
+      }
+    ]
   },
   3: {
     id: 3,
@@ -770,6 +792,18 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'c',
           explanation: 'El S&P 500 subió 3000%+ desde 1971. Los salarios reales subieron menos de 19%. Si tenías activos, multiplicaste tu riqueza. Si dependías de tu sueldo, te quedaste atrás. No es coincidencia—es el Efecto Cantillon acumulándose durante 50 años.'
+        },
+        {
+          id: 'q7-review',
+          question: 'Repaso de la Lección 1: El gobierno anuncia que inyectará $2 trillones "para estimular la economía y llegar a todos". Conectando con lo que aprendiste sobre el dinero en la Lección 1, ¿por qué esto NO es redistribución neutral?',
+          options: [
+            { id: 'a', text: 'Porque el dinero no es real' },
+            { id: 'b', text: 'Porque el dinero nuevo entra primero a bancos y activos financieros — los precios de esos activos suben ANTES de que el dinero llegue al resto. Cuando tú recibes tu parte, las cosas ya cuestan más' },
+            { id: 'c', text: 'Porque los políticos roban una parte' },
+            { id: 'd', text: 'No tiene efecto, es solo inflación' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Aprendiste en la Lección 1 que la escasez es lo que da valor al dinero. Cuando un gobierno crea $2T nuevos, diluye el valor del dinero existente — pero no afecta a todos igual. Los primeros en recibir (bancos, fondos, corporaciones) compran activos a precios viejos. Para cuando el dinero llega a ti vía sueldo o subsidio, los activos ya subieron. Perdiste capacidad de compra relativa. Esto es el Efecto Cantillon en acción.'
         }
       ]
     }
@@ -993,7 +1027,29 @@ export const LESSONS_DATA: Record<number, any> = {
           explanation: 'Bitcoin está en fase de "price discovery". Como internet en los 90s, el mercado aún está descubriendo su valor real. La volatilidad es el precio de la adopción temprana. A largo plazo (5-10 años), la tendencia histórica ha sido consistentemente alcista.'
         }
       ]
-    }
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 4,
+        title: 'Checkpoint: ¿Por qué importa la escasez?',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'Alguien crea "Bitcoin 2.0": idéntico a Bitcoin en todo excepto que el máximo es 42 millones en lugar de 21. ¿Cuál es el problema principal?',
+            options: [
+              '42 millones es demasiado — no habría suficiente minería',
+              'La cantidad máxima no importa si está definida; sería igual de valioso',
+              'Una vez que aceptas cambiar el máximo una vez, se puede cambiar de nuevo — pierde la credibilidad de escasez absoluta',
+              'Sería igual de bueno porque igualmente está limitado'
+            ],
+            correctAnswer: 2,
+            explanation: 'La clave no es el número — es la inmutabilidad del número. Bitcoin tiene 21M no porque 21M sea mágico, sino porque "nadie puede cambiarlo, ni siquiera Satoshi". Si existiera un Bitcoin 2.0, demostraría que el máximo es negociable, y por tanto no es verdaderamente escaso. La credibilidad del límite es lo que da valor, no el número.',
+            hint: 'Piensa en qué hace que una promesa de escasez sea creíble.'
+          }
+        ]
+      }
+    ]
   },
   5: {
     id: 5,
@@ -1129,6 +1185,16 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: CheckCircle, title: 'PUEDE: Ejecutar Reglas Automáticamente', text: 'Los "smart contracts" son programas que se ejecutan en la blockchain. Si pasa X, automáticamente ocurre Y. Sin intermediarios que puedan decir "no".' },
           { icon: AlertTriangle, title: 'NO PUEDE: Garantizar Verdad del Mundo Real', text: 'La blockchain sabe que "Ana tiene 1 BTC". No sabe si "Ana dice la verdad sobre su producto". Si alguien mete datos falsos, la blockchain los guardará fielmente (garbage in, garbage out).' },
           { icon: AlertTriangle, title: 'NO PUEDE: Ser Perfectamente Rápida Y Descentralizada', text: 'Hay un "trilema": puedes tener máximo 2 de 3 entre Seguridad, Descentralización, y Escalabilidad. Bitcoin elige seguridad y descentralización (lento). Solana elige escalabilidad y seguridad (menos descentralizado que Bitcoin).' }
+        ]
+      },
+      {
+        type: 'glossary',
+        terms: [
+          {
+            term: 'Smart Contract (Contrato Inteligente)',
+            definition: 'Un programa que vive en la blockchain y se ejecuta automáticamente cuando se cumplen sus condiciones. No es un contrato legal—es código. "Si el usuario X envía 1 SOL al programa, el programa envía 100 USDC al usuario X". Una vez desplegado, nadie puede modificarlo ni detenerlo (ni siquiera quien lo creó). Ejecuta las reglas mecánicamente, sin jueces, abogados, ni intermediarios.',
+            whyItMatters: 'Toda la infraestructura de DeFi (préstamos, swaps, staking, NFTs) son smart contracts. Entender esto es la diferencia entre "usar cripto" y "confiar en el código que la hace funcionar".'
+          }
         ]
       },
       {
@@ -1501,6 +1567,18 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'b',
           explanation: 'FTX no era descentralizado—era un intermediario centralizado con el MISMO modelo de tu banco: ellos controlan las llaves, tú confías en ellos. La blockchain de Bitcoin siguió funcionando perfectamente. Los que perdieron fueron los que dejaron sus fondos en FTX en vez de en wallets propias.'
+        },
+        {
+          id: 'q-review',
+          question: 'Repaso del Efecto Cantillon (Lección 3): Un banco grande accede a crédito al 0.5%. Tú pagas 28% en tu tarjeta de crédito. Aplicando lo que aprendiste, ¿qué explica mejor esta diferencia?',
+          options: [
+            { id: 'a', text: 'Los bancos son más responsables' },
+            { id: 'b', text: 'La proximidad a la fuente del dinero — estar "cerca de la impresora" te da acceso a crédito casi gratuito que puedes prestar a otros con márgenes enormes' },
+            { id: 'c', text: 'Los bancos tienen mejor historial crediticio' },
+            { id: 'd', text: 'Es pura casualidad y varía con el tiempo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'El Efecto Cantillon no es solo sobre quién gana en una impresión específica — es sobre la estructura permanente del sistema. Los bancos centrales crean dinero que fluye primero a bancos comerciales. Esos bancos prestan ese dinero casi-gratuito a tu tarjeta al 28%. La diferencia es ganancia pura por estar "cerca de la impresora". Esta es la razón por la que los mismos actores ganan consistentemente década tras década.'
         }
       ]
     }
@@ -2005,6 +2083,18 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'b',
           explanation: 'Si olvidas tu contraseña de Phantom, reinstala la app e importa tu wallet con la seed phrase. Si pierdes tu seed phrase, pierdes TODO para siempre—sin importar qué contraseña tengas. La seed phrase es infinitamente más importante.'
+        },
+        {
+          id: 'q-review',
+          question: 'Repaso de Blockchain (Lección 5): Tu amigo te dice: "Mi banco me devolvió $200 que un hacker robó de mi cuenta." Luego pregunta: "¿Phantom puede hacer lo mismo si me roban cripto?" ¿Qué le respondes?',
+          options: [
+            { id: 'a', text: 'Sí, Phantom tiene un servicio al cliente que puede revertir transacciones' },
+            { id: 'b', text: 'No. En blockchain no hay autoridad central que pueda revertir transacciones — esa es precisamente la característica que la hace descentralizada. TÚ eres tu propio banco, lo que significa que TÚ eres responsable de tu seguridad. Una transacción firmada es irreversible' },
+            { id: 'c', text: 'Depende de cuánto dinero sea' },
+            { id: 'd', text: 'Solo si reporta rápidamente' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Esta es la otra cara de la autocustodia que aprendiste en la Lección 5: nadie puede confiscar tus fondos, pero nadie puede recuperarlos si los pierdes. El banco tradicional devuelve el dinero porque es un intermediario centralizado — puede revertir decisiones. La blockchain no tiene esa autoridad. Por eso la educación en seguridad (frase semilla, evitar estafas) no es opcional — es la infraestructura mínima de sobrevivencia en cripto.'
         }
       ]
     }
@@ -2078,6 +2168,16 @@ export const LESSONS_DATA: Record<number, any> = {
           title: 'Por Esto Enseñamos Solana Primero',
           text: 'Si estás aprendiendo cripto, queremos que experimentes. Que pruebes cosas. Que cometas errores pequeños sin perder todo en fees. Solana te permite equivocarte 100 veces y pagar menos de $0.03 en total. En Ethereum L1, un solo error podría costarte $50.'
         }
+      },
+      {
+        type: 'glossary',
+        terms: [
+          {
+            term: 'Gas',
+            definition: 'Es el "combustible" que pagas para que una blockchain procese tu transacción. Cada operación (enviar, hacer un swap, interactuar con un protocolo) requiere que los validadores hagan trabajo computacional, y el gas paga ese trabajo. En Ethereum, el gas sube cuando la red está congestionada—por eso los fees varían de $2 a $500. En Solana, el gas es casi constante (~$0.0002) porque la red está diseñada para procesar miles de transacciones por segundo.',
+            whyItMatters: 'El costo de gas determina si la blockchain es usable para personas normales. En Ethereum L1, gas de $30 hace inviable cualquier operación menor a $500. En Solana, no tienes que pensarlo.'
+          }
+        ]
       },
       {
         type: 'main',
@@ -3840,7 +3940,29 @@ export const LESSONS_DATA: Record<number, any> = {
           explanation: 'Cuando un soporte se rompe, se convierte en resistencia (y viceversa). Este concepto de "flip" de niveles es fundamental en análisis técnico. (Recuerda la Lección 14: Soportes y Resistencias)'
         }
       ]
-    }
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 2,
+        title: 'Checkpoint: La Trampa del Token "Barato"',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'Token A cuesta $200 por unidad con 1M circulantes y 1M total. Token B cuesta $0.001 por unidad con 10B circulantes y 100B total. Un amigo dice "Token B está baratísimo". ¿Qué le respondes?',
+            options: [
+              'Tiene razón — $0.001 es mucho más barato que $200',
+              'Token A tiene market cap de $200M; Token B tiene market cap de $10M pero FDV de $100M. Token B tiene 90% del supply por desbloquearse — la dilución va a aplastar el precio',
+              'Los dos son equivalentes porque el precio no importa',
+              'Token B es mejor porque puedes comprar más unidades'
+            ],
+            correctAnswer: 1,
+            explanation: 'El precio por unidad es irrelevante. Lo que importa es Market Cap (precio × supply circulante) y FDV (precio × supply total). Token B tiene ratio Market Cap / FDV de 0.1 — solo 10% circula, 90% está esperando para diluirte. Token A tiene ratio 1.0 — todo ya circula, sin riesgo de dilución. "Barato por unidad" es una ilusión psicológica que los insiders usan contra novatos.',
+            hint: 'Calcula el FDV de cada uno.'
+          }
+        ]
+      }
+    ]
   },
   18: {
     id: 18,
@@ -4205,7 +4327,29 @@ export const LESSONS_DATA: Record<number, any> = {
           explanation: 'El TVL incentivado es "capital mercenario"—está ahí solo por las recompensas y se irá cuando terminen. La métrica real es el TVL orgánico que queda sin incentivos. Un protocolo con $60M de TVL orgánico que crece es más valioso que uno con $300M inflados por incentivos temporales. Históricamente, el 60-90% del TVL incentivado desaparece cuando terminan los programas de rewards.'
         }
       ]
-    }
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 3,
+        title: 'Checkpoint: La Primera Herramienta',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'Descubres un protocolo nuevo en Twitter y quieres evaluarlo seriamente. ¿Cuál es la PRIMERA herramienta que abres y por qué?',
+            options: [
+              'Twitter/X — para ver qué dice la comunidad',
+              'DefiLlama — es el único lugar donde veo si el protocolo tiene TVL real, fees reales, y usuarios reales en tiempo real. Todo lo demás es opinión; esto son datos',
+              'El sitio web del protocolo — para leer el whitepaper',
+              'Dune — para buscar análisis on-chain sofisticados'
+            ],
+            correctAnswer: 1,
+            explanation: 'Siempre empiezas por DefiLlama. Si el protocolo no aparece ahí con TVL y fees, es porque no tiene producto real — es solo un token y un roadmap bonito. El 99% de los proyectos que pierden todo nunca pasaron esta prueba. Dune y análisis on-chain son herramientas 2 y 3 — profundizas después de confirmar que hay algo que analizar.',
+            hint: 'Piensa en qué fuente te da datos crudos antes que opiniones.'
+          }
+        ]
+      }
+    ]
   },
   20: {
     id: 20,
@@ -5117,6 +5261,16 @@ export const LESSONS_DATA: Record<number, any> = {
         }
       },
       {
+        type: 'glossary',
+        terms: [
+          {
+            term: 'Slippage',
+            definition: 'La diferencia entre el precio que esperabas y el precio al que realmente se ejecutó tu orden. Ejemplo: ves SOL a $180 y haces un swap de 1,000 USDC. Para cuando tu transacción se confirma (medio segundo después), el precio subió a $181. Recibes menos SOL del que esperabas—eso es slippage. Ocurre porque entre que firmas la transacción y se ejecuta, otros traders pueden haber movido el precio, o tu propia orden puede haber afectado la liquidez del pool.',
+            whyItMatters: '"Slippage tolerance" en Jupiter es el límite de slippage que aceptas antes de que la transacción falle. Demasiado bajo (0.1%) y órdenes fallan seguido. Demasiado alto (5%+) y los bots MEV pueden manipularte. Para tokens principales (SOL, USDC), 0.5% es razonable.'
+          }
+        ]
+      },
+      {
         type: 'main',
         title: 'Tutorial: Tu Primer Swap en Jupiter',
         content: 'Hacer un swap en Jupiter es más simple de lo que parece. Una vez que lo haces una vez, se vuelve segunda naturaleza:',
@@ -5642,7 +5796,29 @@ export const LESSONS_DATA: Record<number, any> = {
           explanation: 'Health Factor de 1.2 es zona de peligro serio. Estás a ~16-17% de una caída de la liquidación. En crypto, caídas de 15-20% ocurren regularmente en minutos durante eventos de pánico. Tienes dos opciones: agregar más colateral (depositar más SOL/otros activos) o devolver parte del préstamo. Ambas suben tu Health Factor. No esperes—los mercados no esperan.'
         }
       ]
-    }
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 1,
+        title: 'Checkpoint: Health Factor en Peligro',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'Depositaste 10 SOL ($1,800) y pediste prestado $1,200 USDC. SOL cae 25%. Ahora tu colateral vale $1,350. El umbral de liquidación del protocolo está en 80% LTV. ¿Qué pasa?',
+            options: [
+              'Te liquidan inmediatamente porque tu LTV subió',
+              'Tu LTV ahora es ~89% ($1,200/$1,350) — superaste el umbral del 80%, te liquidan parcialmente y pagas penalización',
+              'No pasa nada porque tu colateral sigue valiendo más que tu deuda',
+              'El protocolo te da 24 horas para añadir colateral'
+            ],
+            correctAnswer: 1,
+            explanation: 'LTV = Deuda / Colateral = $1,200 / $1,350 = 89%. Cruzaste el umbral del 80%. La liquidación es automática — un bot vende parte de tu colateral en milisegundos. Pierdes la cantidad liquidada + penalización de 5-10%. Sin advertencias. Esta es la razón por la que los profesionales NUNCA empiezan cerca del máximo LTV. Con LTV inicial del 30-40%, SOL tendría que caer 50-60% antes de acercarse a liquidación.',
+            hint: 'Calcula el nuevo LTV después de la caída.'
+          }
+        ]
+      }
+    ]
   },
   28: {
     id: 28,
@@ -5866,6 +6042,16 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: Cpu, title: 'cNFTs (Compressed NFTs)', text: 'La innovación más importante de Solana para NFTs. Usando "state compression", puedes crear millones de NFTs por una fracción del costo normal. DRiP.haus distribuyó millones de NFTs artísticos gratis usando esta tecnología. Los proyectos de gaming pueden crear items in-game como NFTs comprimidos. Las empresas pueden emitir tickets, certificados y collectibles a escala masiva.' },
           { icon: Award, title: 'NFTs de Utilidad', text: 'NFTs que dan acceso o beneficios concretos: descuentos en fees (Tensorians en Tensor), acceso a contenido premium, pases VIP para eventos, governance en DAOs, o bonificaciones en protocolos DeFi. El valor de estos NFTs está directamente vinculado a la utilidad que ofrecen—no a la especulación.' },
           { icon: Gem, title: 'Arte Generativo y 1/1', text: 'Artistas digitales usan Solana para crear y vender arte en formato NFT. Las colecciones generativas crean piezas únicas usando algoritmos. Los artistas 1/1 venden piezas individuales como obras de arte digital. Plataformas como Exchange Art (ahora más conocida como FormFunction) facilitan la venta directa de artista a coleccionista.' }
+        ]
+      },
+      {
+        type: 'glossary',
+        terms: [
+          {
+            term: 'DAO (Organización Autónoma Descentralizada)',
+            definition: 'Una "empresa" o comunidad que se gobierna por código y votos, no por jefes ni juntas directivas. Los miembros tienen tokens de gobernanza que les dan poder de voto. Cuando alguien propone un cambio (ej: "subir los fees del protocolo del 0.1% al 0.2%"), los miembros votan con sus tokens. Si pasa, el smart contract ejecuta la decisión automáticamente. No hay CEO que pueda anularlo. Ejemplos: Uniswap (decisiones sobre el DEX), MakerDAO (estabilidad del stablecoin DAI), Jupiter (decisiones sobre el agregador).',
+            whyItMatters: 'Si tienes tokens de gobernanza (JUP, UNI, AAVE, etc.), tienes poder real sobre protocolos que manejan miles de millones. La mayoría nunca vota—por eso tu voto importa más de lo que crees. En la Lección 46 profundizamos en cómo participar.'
+          }
         ]
       },
       {
@@ -7344,6 +7530,18 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'c',
           explanation: 'Esperar el momento perfecto es la forma más común de no invertir nunca. Siempre habrá una razón para esperar. DCA resuelve esto: empiezas con poco, y si el precio baja, tu próxima compra será más barata. El mejor momento para empezar DCA fue hace 5 años. El segundo mejor momento es hoy.'
+        },
+        {
+          id: 'q-review',
+          question: 'Repaso de Seguridad Web3 (Lección 38): Alguien en Discord te dice: "¡Oportunidad única! Este token va a explotar en las próximas 2 horas, tengo información privilegiada. Solo quedan 50 cupos." ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Compro rápido antes de que se acabe el cupo' },
+            { id: 'b', text: 'Identifico 3 red flags: urgencia artificial ("2 horas", "50 cupos"), promesa de retornos garantizados ("va a explotar"), e "información privilegiada". Lo ignoro, lo reporto, y NUNCA comparto wallet ni fondos por mensajes directos' },
+            { id: 'c', text: 'Investigo el token pero sin invertir mucho' },
+            { id: 'd', text: 'Pregunto a otros en el Discord si es legítimo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Aprendiste en la Lección 38 que las estafas Web3 siguen patrones predecibles: urgencia, promesas garantizadas, e información "privilegiada" son las tres más comunes. DCA (esta lección) es la defensa estructural contra estas tácticas — si tu estrategia es "invertir X semanalmente en activos que ya conoces", no hay espacio mental para "oportunidades únicas de 2 horas". La disciplina del DCA es inmune al FOMO.'
         }
       ]
     }
@@ -7876,7 +8074,29 @@ export const LESSONS_DATA: Record<number, any> = {
           explanation: 'La inflación de SOL (~5.5% y decreciente) crea nuevos tokens constantemente. Si no stakeas, tu porcentaje de la red total se reduce—estás siendo diluido. Stakear es la defensa mínima: tus recompensas compensan la inflación, manteniendo tu proporción de SOL en la red aproximadamente constante.'
         }
       ]
-    }
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 2,
+        title: 'Checkpoint: Elegir Validador',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'Validador A: 0% comisión, 95% uptime. Validador B: 3% comisión, 99.5% uptime. Asumiendo que ambos hacen buen staking, ¿cuál genera más rendimiento para ti?',
+            options: [
+              'A — no paga comisión, así recibes todos los rewards',
+              'B — el 4.5% extra de uptime más que compensa la comisión de 3%',
+              'Son iguales matemáticamente',
+              'A si haces staking corto plazo, B si es largo plazo'
+            ],
+            correctAnswer: 1,
+            explanation: 'Uptime se traduce directamente en rendimiento. Validador A pierde el 5% del tiempo potencial de rewards. Validador B pierde solo 0.5% pero cobra 3% comisión. Rendimiento neto A ≈ 95% × 100% = 95% del máximo teórico. Rendimiento neto B ≈ 99.5% × 97% = 96.5%. B gana por ~1.5 puntos, además de ser más confiable. Comisiones bajas pueden ser una trampa si el validador es inconsistente.',
+            hint: 'Uptime × (1 − comisión) = rendimiento neto relativo.'
+          }
+        ]
+      }
+    ]
   },
   45: {
     id: 45,

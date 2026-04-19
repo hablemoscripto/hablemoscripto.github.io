@@ -16,6 +16,9 @@ export interface LessonSection {
   rightTitle?: string;
   leftSide?: { title?: string; points?: string[] };
   rightSide?: { title?: string; points?: string[] };
+  // Inline glossary callout — defines terms at first occurrence so lessons
+  // can use technical vocabulary without leaving novices behind.
+  terms?: { term: string; definition: string; whyItMatters?: string }[];
 }
 
 export interface CheckpointQuizData {
