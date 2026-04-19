@@ -6683,7 +6683,7 @@ export const LESSONS_DATA: Record<number, any> = {
     number: '11 de 13',
     duration: '25 min',
     type: 'Futuro',
-    description: 'Firedancer es la reescritura completa del software validador de Solana, construida por Jump Crypto—la firma de trading de alta frecuencia más sofisticada del mundo. Entiende por qué la diversidad de clientes es crucial para la seguridad, cómo Firedancer alcanzó 1 millón de TPS en pruebas de laboratorio, y qué significa esto para el futuro del ecosistema Solana junto con innovaciones como token extensions, compresión de estado y la expansión de la SVM.',
+    description: 'Firedancer es la reescritura completa del software validador de Solana, construida por Jump Crypto—la firma de trading de alta frecuencia más sofisticada del mundo. Entiende por qué la diversidad de clientes es crucial para la seguridad, hasta dónde empuja Firedancer el rendimiento teórico (1M+ TPS en laboratorio, aunque la producción real será sustancialmente menor), y qué significa esto para el futuro del ecosistema Solana junto con innovaciones como token extensions, compresión de estado y la expansión de la SVM.',
     sections: [
       {
         type: 'intro',
@@ -6711,7 +6711,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: 'La decisión de escribir Firedancer en C en lugar de Rust fue deliberada y controversial. C es un lenguaje de los años 70—¿por qué usarlo para la tecnología más avanzada de blockchain?',
         features: [
           { icon: Cpu, title: 'Control Total del Hardware', text: 'C permite acceso directo a la memoria y al hardware sin las abstracciones de lenguajes modernos. En trading de alta frecuencia, cada nanosegundo cuenta. Los ingenieros de Jump han pasado décadas optimizando código C para exprimir cada ciclo de CPU. Esa expertise ahora beneficia a Solana.' },
-          { icon: Activity, title: 'Rendimiento Puro', text: 'En pruebas de laboratorio, Firedancer alcanzó más de 1 millón de transacciones por segundo—un orden de magnitud mayor que el cliente Agave. Aunque el rendimiento real en producción será menor (limitado por consenso y red), el headroom es enorme para el crecimiento futuro.' },
+          { icon: Activity, title: 'Rendimiento Puro', text: 'En pruebas de laboratorio bajo condiciones ideales, Firedancer ha alcanzado más de 1 millón de transacciones por segundo—un orden de magnitud mayor que Agave. **Importante**: este es un benchmark de laboratorio con hardware optimizado y sin restricciones de red ni consenso. El rendimiento real en mainnet estará sustancialmente por debajo de ese número, limitado por la velocidad de propagación entre validadores, el consenso global, y las restricciones del protocolo. Aun así, el headroom arquitectónico es enorme: Solana puede crecer mucho antes de encontrar un techo de diseño.' },
           { icon: Eye, title: 'Cero Dependencias Compartidas', text: 'Si Firedancer usara Rust (como Agave), podrían compartir librerías y dependencias—y también compartir bugs. Al usar C, cada bug de Firedancer es independiente de Agave y viceversa. Es diversidad de software en su forma más pura.' },
           { icon: Brain, title: 'Expertise de HFT', text: 'Jump Crypto mueve miles de millones en mercados financieros tradicionales. Su infraestructura de trading procesa información del mercado en microsegundos. El equipo de Firedancer incluye a los mismos ingenieros que construyen estos sistemas. Es como contratar a ingenieros de Fórmula 1 para construir tu motor.' }
         ]
@@ -6772,6 +6772,21 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: Clock, title: 'Ejecución del Roadmap', text: 'Firedancer lleva años en desarrollo. Token Extensions están disponibles pero la adopción es gradual. Cada innovación prometida necesita no solo construirse, sino también adoptarse masivamente. La historia de cripto está llena de roadmaps ambiciosos que nunca se completaron.' },
           { icon: TrendingDown, title: 'Competencia Creciente', text: 'Solana no es la única blockchain de alto rendimiento. Aptos y Sui (basadas en Move), Monad (EVM paralela), y los Layer 2 de Ethereum compiten por los mismos usuarios y desarrolladores. La ventaja de Solana (ecosistema + liquidez) es fuerte pero no permanente.' }
         ]
+      },
+      {
+        type: 'main',
+        title: '¿Qué Significa Firedancer Para Ti?',
+        content: 'Has leído sobre clientes, consensos, C vs Rust, SIMDs. Todo muy técnico. Pero si eres usuario de Solana (no validador ni desarrollador), la pregunta honesta es: **¿qué cambia en mi día a día?** Aquí está la traducción directa:',
+        features: [
+          { icon: Shield, title: 'Transacciones Más Confiables', text: 'Los apagones de 2022 donde la red se detenía por horas eran un defecto crítico para los usuarios—si Solana se cae mientras tienes una posición abierta en un protocolo de lending, no puedes liquidar ni ajustar. Con dos clientes independientes (Agave + Firedancer), un bug en uno no tumba toda la red. La probabilidad de un apagón total cae dramáticamente. Esto no es teórico—es la diferencia entre un DeFi que puedes confiar y uno que no.' },
+          { icon: Zap, title: 'Mejor UX en Picos de Demanda', text: 'Cuando hay un mint masivo de NFTs o un evento de airdrop muy esperado, la red se congestiona: transacciones fallan, los fees suben temporalmente, las confirmaciones tardan más. Firedancer mejora la tolerancia a esos picos. Para ti como usuario: menos "transaction failed" en momentos críticos cuando más importa.' },
+          { icon: Users, title: 'Más Validadores = Más Descentralización', text: 'Los requisitos de hardware para Agave son caros (~$5,000+ en equipo). Firedancer está diseñado para usar el hardware más eficientemente, lo que podría bajar el costo de operar un validador con el tiempo. Más validadores asequibles = más descentralización de la red = más resistencia a censura. Tú no ves esto directamente, pero protege el valor de largo plazo de tu SOL.' },
+          { icon: CheckCircle, title: 'Sin Acción Requerida', text: 'Firedancer es un upgrade a nivel de validador. Los usuarios regulares no necesitan hacer NADA—no actualices tu wallet, no migres tokens, no cambies apps. La transición ocurre "debajo" de ti. Un día notarás que Solana se siente más estable y más rápida, sin entender exactamente por qué. Ese es el buen diseño de infraestructura: invisible cuando funciona.' }
+        ],
+        highlight: {
+          title: 'La Inversión en Infraestructura',
+          text: 'Si tienes SOL o usas DeFi en Solana, Firedancer es parte de la tesis de inversión aunque no lo hayas pensado así. Cada mejora de confiabilidad y escalabilidad hace a Solana más atractiva para usuarios e instituciones. Más demanda = más valor del token. No hagas staking de SOL basado SOLO en Firedancer, pero entenderlo te da una razón adicional para la convicción de largo plazo.'
+        }
       },
       {
         type: 'takeaways',
