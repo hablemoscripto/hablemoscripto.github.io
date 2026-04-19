@@ -65,7 +65,7 @@ Each phase follows the same 6-step quality pattern so nothing is missed:
 
 **Status:** ✅ done
 
-**Commit SHA:** _will update after push_
+**Commit SHA:** `99c29d2` (2026-04-18)
 
 ---
 
@@ -138,3 +138,4 @@ _(empty)_
 | Date | Phase | Commit | Notes |
 |------|-------|--------|-------|
 | 2026-04-18 | 1 | `daee316` | 6 items fixed (elapsed-time anchors made evergreen, staking APY datestamped, module metadata reconciled, absolutist claims softened). Roadmap + Phase 1 audit docs committed to repo. |
+| 2026-04-18 | 2 | `99c29d2` | Retention infrastructure: glossary section type + 4 inline callouts (Gas, Smart Contract, Slippage, DAO); 6 mid-lesson checkpoint quizzes (L2, L4, L17, L19, L27, L40); 4 concept-review questions (L3, L6, L9, L42). Activates unused CheckpointQuiz infrastructure. |
