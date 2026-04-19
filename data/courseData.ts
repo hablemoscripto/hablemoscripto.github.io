@@ -199,7 +199,7 @@ export const ADVANCED_LEVEL: LevelData = {
       icon: Zap,
       lessons: [
         { id: 25, title: 'Jupiter: El Rey de los DEXs', description: 'Swaps, Limit Orders y DCA en el mejor agregador del mundo.', duration: '35 min', type: 'Tutorial Práctico' },
-        { id: 40, title: 'Staking SOL: Gana por Asegurar la Red', description: 'Entiende validadores, epochs y cómo ganar ~7% anual delegando.', duration: '30 min', type: 'Tutorial + Concepto' },
+        { id: 40, title: 'Staking SOL: Gana por Asegurar la Red', description: 'Entiende validadores, epochs y cómo ganar ~5-7% anual delegando.', duration: '30 min', type: 'Tutorial + Concepto' },
         { id: 26, title: 'Liquidez y Yield Farming', description: 'Raydium, Orca y Meteora. Gana fees con tus activos.', duration: '42 min', type: 'Estrategias' },
         { id: 27, title: 'Lending & Borrowing', description: 'Kamino y MarginFi. Usa tus activos como colateral.', duration: '38 min', type: 'Tutorial Práctico' },
         { id: 28, title: 'Riesgos de DeFi (Impermanent Loss)', description: 'Entiende los peligros matemáticos antes de invertir.', duration: '32 min', type: 'Seguridad' },
@@ -224,7 +224,7 @@ export const ADVANCED_LEVEL: LevelData = {
       icon: Cpu,
       lessons: [
         { id: 32, title: 'Monolítico vs Modular', description: 'Por qué Solana escala en L1 vs el enfoque de L2s de Ethereum.', duration: '30 min', type: 'Técnico' },
-        { id: 33, title: 'Firedancer & El Futuro', description: 'El nuevo cliente que hará a Solana imparable.', duration: '20 min', type: 'Futuro' },
+        { id: 33, title: 'Firedancer & El Futuro', description: 'Cliente validador independiente de Jump Crypto. Por qué la diversidad de clientes aumenta la resiliencia de Solana.', duration: '25 min', type: 'Futuro' },
         { id: 34, title: 'Seguridad Operacional Avanzada', description: 'Burner wallets, Ledger y Revoke.cash.', duration: '25 min', type: 'Seguridad' },
         { id: 46, title: 'Gobernanza DAO: Tu Voto Importa', description: 'Tokens de gobernanza, mecanismos de votación y cómo participar en decisiones que afectan tus inversiones.', duration: '25 min', type: 'Concepto + Práctica' },
       ]
@@ -279,7 +279,7 @@ export const LESSONS_DATA: Record<number, any> = {
       {
         type: 'main',
         title: 'La Ruptura de 1971: El Día que Cambió Todo',
-        content: 'El 15 de agosto de 1971, el presidente Richard Nixon apareció en televisión y anunció que Estados Unidos "temporalmente" suspendía la convertibilidad del dólar en oro. Francia y otros países estaban exigiendo su oro (sabían que USA había impreso más dólares de los que podía respaldar), y las reservas de Fort Knox se vaciaban. Nixon rompió la promesa "temporalmente". 54 años después, sigue rota. Desde ese día, el dólar—y por extensión todas las monedas del mundo—no están respaldadas por nada tangible. Solo por la "confianza" en el gobierno emisor.',
+        content: 'El 15 de agosto de 1971, el presidente Richard Nixon apareció en televisión y anunció que Estados Unidos "temporalmente" suspendía la convertibilidad del dólar en oro. Francia y otros países estaban exigiendo su oro (sabían que USA había impreso más dólares de los que podía respaldar), y las reservas de Fort Knox se vaciaban. Nixon rompió la promesa "temporalmente". Más de medio siglo después, sigue rota. Desde ese día, el dólar—y por extensión todas las monedas del mundo—no están respaldadas por nada tangible. Solo por la "confianza" en el gobierno emisor.',
         highlight: {
           title: 'El Resultado Matemático',
           text: 'Desde 1971, el dólar ha perdido aproximadamente el 87% de su poder adquisitivo. Una casa que costaba $25,000 en 1971 hoy cuesta $400,000+. Un auto que costaba $3,500 hoy cuesta $48,000. No es que las cosas sean mejores—es que tu dinero vale menos.'
@@ -315,7 +315,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: '"Fiat" viene del latín y significa "hágase" o "por decreto". El dinero fiat es dinero que vale porque un gobierno DICE que vale, no porque esté respaldado por algo escaso. Tu billete de 50,000 pesos colombianos no representa oro, plata, ni nada tangible. Es un papel (o número digital) que tiene valor solo porque el gobierno obliga a aceptarlo y porque todos acordamos creer en él. Es un acto de fe colectiva.',
         features: [
           { icon: AlertTriangle, title: 'El Problema Fundamental', text: 'Si el valor del dinero depende de la "confianza" en los políticos, ¿qué pasa cuando los políticos imprimen para ganar elecciones, rescatar amigos, o financiar guerras? La historia tiene la respuesta: SIEMPRE lo hacen, y SIEMPRE destruyen el valor del dinero eventualmente.' },
-          { icon: TrendingDown, title: 'Dato Histórico', text: 'A lo largo de la historia, ninguna moneda fiat ha mantenido su valor a largo plazo. Los imperios romano, otomano, español y británico todos degradaron sus monedas. El dólar actual lleva 54 años sin respaldo en oro desde 1971—y ha perdido el 87% de su poder adquisitivo en ese periodo.' }
+          { icon: TrendingDown, title: 'Dato Histórico', text: 'A lo largo de la historia, ninguna moneda fiat ha mantenido su valor a largo plazo. Los imperios romano, otomano, español y británico todos degradaron sus monedas. El dólar actual lleva más de medio siglo sin respaldo en oro desde 1971—y ha perdido el 87% de su poder adquisitivo en ese periodo.' }
         ]
       },
       {
@@ -2096,7 +2096,7 @@ export const LESSONS_DATA: Record<number, any> = {
         content: 'No queremos darte solo la versión positiva. Estos son los argumentos en contra que escucharás:',
         features: [
           { icon: AlertTriangle, title: 'Centralización Relativa', text: 'Solana requiere hardware más potente para correr un validador. Esto significa menos validadores que Ethereum. Críticos dicen que es "menos descentralizada". Counter-argument: ¿de qué sirve una red "descentralizada" que nadie puede pagar usar?' },
-          { icon: AlertTriangle, title: 'Outages Históricos', text: 'Solana tuvo varios "apagones" en 2022-2023 donde la red se detuvo. Esto generó dudas sobre su estabilidad. Sin embargo, desde 2024 ha funcionado sin problemas y las mejoras técnicas han resuelto estos issues.' },
+          { icon: AlertTriangle, title: 'Outages Históricos', text: 'Solana tuvo varios "apagones" en 2022-2023 donde la red se detuvo. Esto generó dudas sobre su estabilidad. Sin embargo, las mejoras técnicas y el desarrollo de clientes validadores independientes (Firedancer) han mejorado significativamente la resiliencia de la red.' },
           { icon: AlertTriangle, title: 'Ecosistema Más Joven', text: 'Ethereum tiene 8+ años. Solana tiene 4. El ecosistema de Ethereum es más grande y tiene más liquidez total. Algunos protocolos "blue chip" solo existen en Ethereum.' }
         ]
       },
@@ -7727,7 +7727,7 @@ export const LESSONS_DATA: Record<number, any> = {
           { icon: RefreshCw, title: 'Epochs y Distribución', text: 'Cada epoch dura aproximadamente 2-3 días (~432,000 slots). Al final de cada epoch, la red calcula las recompensas de cada validador basándose en su rendimiento (uptime, votos correctos) y las distribuye proporcionalmente a todos los delegadores. No necesitas hacer nada—las recompensas se acumulan automáticamente en tu cuenta de stake.' },
           { icon: Shield, title: 'Slashing: El Castigo por Hacer Trampa', text: 'En teoría, si un validador actúa maliciosamente (ej: vota por dos bloques conflictivos), pierde parte de su stake y el de sus delegadores. Solana aún no tiene slashing activo en producción, pero está en el roadmap. Aun sin slashing, los validadores con mal comportamiento pierden delegadores y comisiones—hay incentivo económico para ser honesto.' },
           { icon: Award, title: 'Comisión del Validador', text: 'Los validadores cobran una comisión sobre las recompensas que generan (típicamente 0-10%). Si un validador cobra 5% de comisión y genera 100 SOL en recompensas para tu delegación, recibes 95 SOL y el validador se queda con 5 SOL. Busca validadores con comisiones razonables (<5%) pero recuerda que 0% comisión puede significar que el validador no es económicamente sostenible.' },
-          { icon: Percent, title: 'APY Real vs Nominal', text: 'El APY de staking en Solana es actualmente ~5-6% (varía por epoch y validador). Pero la inflación de SOL es ~5.5% y decreciente. Esto significa que tu rendimiento REAL (después de inflación) es bajo. Sin embargo, NO hacer staking significa que tu SOL se diluye por inflación. Stakear es la defensa mínima contra la dilución.' }
+          { icon: Percent, title: 'APY Real vs Nominal', text: 'El APY de staking en Solana ronda el ~5-7% (al 2026), y varía por epoch y validador. La inflación del protocolo está en ~4-5% actualmente, con trayectoria decreciente cada año hasta estabilizarse alrededor del 1.5%. Esto significa que tu rendimiento REAL (después de inflación) hoy es bajo, pero mejorará con el tiempo. Y lo más importante: NO hacer staking significa que tu SOL se diluye por la inflación del protocolo. Stakear es la defensa mínima contra la dilución.' }
         ]
       },
       {
