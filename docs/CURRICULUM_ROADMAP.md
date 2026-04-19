@@ -115,9 +115,10 @@ Each phase follows the same 6-step quality pattern so nothing is missed:
 
 **Done criteria**: TBD per component. This phase is larger, will break into multiple sessions.
 
-**Status:** ⏸️ blocked by Phase 3
+**Status:** 🟡 in progress — 4a shipped, 4b/4c/4d pending strategic decisions
 
-**Commit SHA:** _pending_
+**Commit SHAs:**
+- 4a: see session log
 
 ---
 

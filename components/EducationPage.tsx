@@ -13,6 +13,7 @@ import LevelCard from './ui/LevelCard';
 import Certificate from './ui/Certificate';
 import PricingSection from './PricingSection';
 import PaymentModal from './PaymentModal';
+import DailyReviewCard from './education/DailyReviewCard';
 import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
@@ -311,6 +312,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
       {isDashboard ? (
         <>
+          <DailyReviewCard />
           {lastLessonId && lastLessonTitle && (
             <div className="container max-w-7xl mx-auto px-6 mt-6 mb-6">
               <button
