@@ -8387,6 +8387,21 @@ export const LESSONS_DATA: Record<number, any> = {
         ]
       },
       {
+        type: 'main',
+        title: 'Caso de Estudio: La Batalla por la Tokenomics de Jupiter',
+        content: 'Toda la teoría que acabas de leer se prueba en votaciones reales con consecuencias reales. El ejemplo más instructivo del ecosistema Solana: el debate por la circulación del token JUP en 2024. Fue una lección pública sobre cómo funciona (y cómo puede tensarse) la gobernanza de una DAO moderna.',
+        features: [
+          { icon: BookOpen, title: 'El Contexto', text: 'Tras el airdrop inicial de enero 2024, Jupiter tenía una asignación grande de tokens JUP reservada en tesorería (varios miles de millones bloqueados para futuros airdrops, team, y reservas comunitarias). La pregunta crítica para holders: ¿cuándo y cómo deberían desbloquearse esos tokens? Desbloqueo acelerado = más supply circulante = posible presión bajista. Desbloqueo conservador = menos dilución pero también menos recursos para incentivar el crecimiento. No hay respuesta "correcta" matemáticamente—es una decisión estratégica.' },
+          { icon: Users, title: 'El Debate', text: 'Meow (Siong Lee, cofundador de Jupiter) publicó una propuesta proponiendo una reducción significativa del supply total mediante una quema de tokens de la tesorería. La comunidad se dividió: algunos voters querían máxima reducción de supply (bullish para el precio), otros preferían mantener reservas para financiar crecimiento futuro del protocolo. Hubo semanas de debate en el foro de Jupiter, hilos masivos en Twitter, y análisis de influencers crypto. Fue gobernanza en vivo, en tiempo real, con miles de millones en juego.' },
+          { icon: Target, title: 'La Votación', text: 'La propuesta final fue compleja: quemar una porción específica de tokens de tesorería, establecer un calendario claro de desbloqueos futuros, y reservar montos específicos para ASR y crecimiento. Los holders de JUP stakeados votaron. La participación fue alta para estándares DAO (>30% de JUP stakeado participó activamente). La propuesta pasó con amplio apoyo, creando certeza para holders y marcando un precedente: Jupiter se gobernaría por su comunidad, no por el equipo fundador unilateralmente.' },
+          { icon: CheckCircle, title: 'Las Lecciones', text: '**1) La participación importa**: Jupiter pudo decidir democráticamente porque suficientes holders votaron. En una DAO con 5% de participación, 4-5 ballenas habrían decidido por todos. **2) La transparencia funciona**: todo el debate fue público, verificable, y documentado. **3) Los fundadores pueden liderar sin dictar**: Meow propuso pero no impuso—dejó que la comunidad decidiera. **4) Las decisiones de tokenomics son gobernanza, no solo economía**: la estructura del supply afecta a todos los holders, y ellos deberían decidirla. Este caso es por qué JUP vale estudiar aunque no lo tengas.' }
+        ],
+        highlight: {
+          title: 'Lo Que Ganan los Voters Informados',
+          text: 'Los holders que participaron activamente en el debate de JUP no solo votaron—aprendieron cómo leer propuestas de tokenomics, cómo evaluar trade-offs estratégicos, y cómo distinguir marketing de sustancia. Esta educación se transfiere a CUALQUIER DAO que analices en el futuro. Votar una vez bien te hace mejor voter para siempre.'
+        }
+      },
+      {
         type: 'takeaways',
         title: 'Tu Voz en el Futuro de DeFi',
         items: [
@@ -8395,6 +8410,7 @@ export const LESSONS_DATA: Record<number, any> = {
           'La delegación es la herramienta más poderosa contra la baja participación. Si no tienes tiempo para investigar cada propuesta, delega tu voto a alguien que sí lo haga—pero elige bien y revisa periódicamente.',
           'Los ataques de gobernanza son reales: flash loans, propuestas de drenaje, y ataques Sybil pueden drenar tesorerías y cambiar parámetros críticos. Lee cada propuesta, verifica quién propone, y vota en contra de lo sospechoso.',
           'Jupiter ASR es el mejor ejemplo de gobernanza bien ejecutada: votar te da recompensas financieras directas, creando un ciclo virtuoso de participación.',
+          'El caso Jupiter 2024 demostró que la gobernanza DAO funciona cuando la comunidad participa. Estudiar casos reales (no solo teoría) te hace mejor voter en cualquier protocolo.',
           'Empieza hoy: stakea tus JUP en vote.jup.ag, explora DAOs en realms.today, y sigue los SIMDs para entender hacia dónde va Solana. Tu voto importa más de lo que crees.'
         ]
       }
@@ -8460,6 +8476,30 @@ export const LESSONS_DATA: Record<number, any> = {
           ],
           correctAnswer: 'b',
           explanation: 'Jupiter tiene uno de los sistemas de gobernanza más accesibles: stakea JUP en vote.jup.ag, vota en propuestas o delega, y recibe ASR rewards. Todo el proceso toma ~10 minutos y te da voz real en el futuro del mayor DEX de Solana mientras ganas recompensas por participar.'
+        },
+        {
+          id: 'q6',
+          question: 'Un protocolo que usas lanza una propuesta: "Aumentar el multiplicador de rewards del token nativo al depositar en el pool X". Ves que la propuesta fue creada hace 18 horas, la votación cierra en 6 horas, y el proponente es una wallet que apareció hace 3 semanas con volumen alto de voto acumulado recientemente. Aplicando el framework de red flags, ¿qué haces?',
+          options: [
+            { id: 'a', text: 'Voto a favor—más rewards son buenos' },
+            { id: 'b', text: 'Al menos cuatro red flags: (1) periodo de discusión muy corto (<24h), (2) votación acelerada (6h), (3) proponente sin historial (wallet reciente), (4) acumulación sospechosa de poder de voto antes de proponer. Voto en contra, alerto a la comunidad en el foro del protocolo, y investigo si hay lazos entre la wallet proponente y el pool X' },
+            { id: 'c', text: 'Voto abstención para no meterme en problemas' },
+            { id: 'd', text: 'Delego mi voto al delegado más popular sin leer la propuesta' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Este escenario tiene el patrón clásico de un ataque de gobernanza dirigido. La acumulación reciente de poder de voto + propuesta acelerada + proponente sin historial + cambio de parámetros específicos a favor de un pool particular = probable extracción dirigida. La defensa pasiva (abstención) no ayuda—las propuestas se aprueban con los que votan. Los voters responsables activamente votan en contra Y alertan a la comunidad. La gobernanza descentralizada solo funciona con participantes vigilantes.'
+        },
+        {
+          id: 'q7',
+          question: 'Estás comparando dos sistemas de votación para una nueva DAO: Sistema A (conviction voting) requiere que tu voto acumule fuerza con el tiempo—mientras más tiempo lo mantienes, más pesa. Sistema B (vote escrow) requiere bloquear tus tokens por un período fijo (ej: 4 años) y recibes más poder de voto cuanto más largo es el bloqueo. ¿Cuál es la diferencia fundamental?',
+          options: [
+            { id: 'a', text: 'Son lo mismo con diferente nombre' },
+            { id: 'b', text: 'Conviction voting penaliza cambiar de opinión (tu voto pierde peso si lo mueves), mientras vote escrow penaliza salir del protocolo (no puedes vender tus tokens durante el bloqueo). Ambos alinean incentivos con compromiso de largo plazo, pero conviction es más flexible; vote escrow es más brutal pero más difícil de manipular' },
+            { id: 'c', text: 'Vote escrow es solo para Ethereum, conviction solo para Solana' },
+            { id: 'd', text: 'Ambos son vulnerables a flash loan attacks por igual' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Conviction voting y vote escrow resuelven el mismo problema (alinear poder de voto con compromiso real) pero por mecanismos distintos. Conviction = "demuestra compromiso manteniendo tu decisión". Vote escrow = "demuestra compromiso bloqueando capital". Para DAOs con decisiones largas y complejas, conviction puede funcionar mejor. Para protocolos donde el voto específico importa menos que tener "skin in the game", vote escrow es más robusto. Un DAO maduro a veces combina ambos.'
         }
       ]
     }
