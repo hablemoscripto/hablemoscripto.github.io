@@ -145,3 +145,4 @@ _(empty)_
 | 2026-04-18 | 3a | `9565497` | Lesson 44 Capstone: added "Paso 6: Tu Primera Acción AHORA" + 2 quiz questions (bear drawdown, emergency fund). |
 | 2026-04-18 | 3b | `a10c2c8` | Lesson 33 Firedancer: softened 1M TPS claim + added "¿Qué Significa para Ti?" user-impact section. |
 | 2026-04-18 | 3c | `5cf36e8` | Lesson 46 DAO: added Jupiter 2024 tokenomics case study + 2 quiz questions (attack pattern, voting mechanism distinction). |
+| 2026-04-19 | 4a | `2304593` | Daily review card v1: random-from-completed-lessons with time-weighted picker, localStorage state, gentle UX. dailyReviewService + useDailyReview + DailyReviewCard. No backend change. |
