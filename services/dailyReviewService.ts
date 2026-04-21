@@ -97,7 +97,7 @@ export function pickReviewQuestion(
   const pool: { weight: number; rq: ReviewQuestion }[] = [];
 
   for (const c of completions) {
-    const lesson = (LESSONS_DATA as Record<number, any>)[c.lessonId];
+    const lesson = LESSONS_DATA[c.lessonId];
     if (!lesson) continue;
     const questions = lesson.quiz?.questions;
     if (!Array.isArray(questions) || questions.length === 0) continue;

@@ -30,7 +30,6 @@ interface CheckpointQuizProps {
 }
 
 const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
-    id,
     title = "Checkpoint",
     questions,
     onComplete,
@@ -44,7 +43,6 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
     const [completed, setCompleted] = useState(false);
 
     const currentQuestion = questions[currentQuestionIndex];
-    const answeredCount = Object.keys(answers).length;
     const correctCount = questions.filter(q => answers[q.id] === q.correctAnswer).length;
     const allCorrect = correctCount === questions.length;
 

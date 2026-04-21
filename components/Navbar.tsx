@@ -30,8 +30,10 @@ const Navbar: React.FC = () => {
     return () => { document.body.style.overflow = ''; };
   }, [isMobileMenuOpen]);
 
-  // Close mobile menu on route change
+  // Close mobile menu on route change — idiomatic React pattern for resetting
+  // local UI state in response to external navigation.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 

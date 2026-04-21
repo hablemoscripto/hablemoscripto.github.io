@@ -100,18 +100,38 @@ serve(async (req) => {
 
     const { transaction } = event.data
 
-    // Idempotency check: skip if payment already has this status
-    const { data: existingPayment } = await supabase
-      .from('payments')
-      .select('status')
-      .eq('wompi_reference', transaction.reference)
-      .single()
+    // Idempotency: record the event signature before doing any work. A unique
+    // violation on the primary key means we already handled this exact event —
+    // return success so Wompi stops retrying, but perform no side effects.
+    //
+    // This is stronger than comparing `payments.status` alone, which would
+    // incorrectly short-circuit a retry that arrives after a partially
+    // completed prior attempt (e.g. payment row updated but the premium
+    // upgrade RPC failed and the webhook returned 500).
+    const eventId = event.signature.checksum
+    const { error: dedupeError } = await supabase
+      .from('processed_webhook_events')
+      .insert({
+        id: eventId,
+        event_type: event.event,
+        reference: transaction.reference,
+        status: transaction.status,
+      })
 
-    if (existingPayment?.status === transaction.status) {
-      console.log('Duplicate event — payment already has status:', transaction.status)
+    if (dedupeError) {
+      // 23505 = unique_violation → this event was already processed.
+      if (dedupeError.code === '23505') {
+        console.log('Duplicate event — already processed:', eventId)
+        return new Response(
+          JSON.stringify({ success: true, message: 'Already processed' }),
+          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
+      }
+      // Any other insert error is a real failure — surface it so Wompi retries.
+      console.error('Failed to record webhook event:', dedupeError)
       return new Response(
-        JSON.stringify({ success: true, message: 'Already processed' }),
-        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: 'Internal server error' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
 

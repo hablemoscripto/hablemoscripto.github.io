@@ -98,7 +98,6 @@ const ChatWidget: React.FC = () => {
     trackChatMessage();
 
     try {
-      let fullResponse = '';
       setMessages(prev => [...prev, {
         role: 'model',
         text: '',

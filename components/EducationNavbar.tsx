@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Bitcoin, Menu, X, BarChart3, ChevronDown, LogOut, BookOpen, Zap, Trophy, Search } from 'lucide-react';
+import { Bitcoin, Menu, X, BarChart3, LogOut, BookOpen, Zap, Trophy, Search } from 'lucide-react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useGamification } from '../contexts/GamificationContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -16,8 +16,10 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Close mobile menu on route change
+  // Close mobile menu on route change — idiomatic React pattern for resetting
+  // local UI state in response to external navigation.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
   const { xp, level, streak } = useGamification();

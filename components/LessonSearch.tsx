@@ -109,10 +109,13 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
     }));
   }, [results, isLessonCompleted]);
 
-  // Reset on open
+  // Reset on open — idiomatic React pattern for resetting local UI state in
+  // response to an external prop change.
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setQuery('');
+       
       setSelectedIndex(0);
       requestAnimationFrame(() => inputRef.current?.focus());
     }

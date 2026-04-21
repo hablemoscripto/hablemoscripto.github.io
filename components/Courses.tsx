@@ -13,26 +13,26 @@ const CourseCard: React.FC<{
   isLocked?: boolean;
   onStartLevel: () => void;
 }> = ({ title, level, description, features, icon: Icon, delay, isLocked = false, onStartLevel }) => (
-  <div className={`group relative bg-navy-900 rounded-2xl border border-navy-800 p-8 ${!isLocked ? 'hover:border-brand-500/50 hover:-translate-y-2' : 'opacity-75'} transition-all duration-500 overflow-hidden ${delay}`}>
+  <div className={`group relative bg-navy-900 rounded-2xl border border-navy-800 p-8 ${!isLocked ? 'hover:border-brand-500/50 hover:-translate-y-2' : ''} transition-all duration-500 overflow-hidden ${delay}`}>
     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
     <div className={`w-14 h-14 rounded-xl bg-navy-800 flex items-center justify-center mb-6 ${!isLocked ? 'group-hover:bg-brand-500/20' : ''} transition-colors relative`}>
-      <Icon className={`${!isLocked ? 'text-navy-300 group-hover:text-brand-500' : 'text-navy-500'} w-8 h-8 transition-colors`} />
+      <Icon className={`${!isLocked ? 'text-navy-300 group-hover:text-brand-500' : 'text-navy-400'} w-8 h-8 transition-colors`} aria-hidden="true" />
       {isLocked && (
         <div className="absolute inset-0 flex items-center justify-center bg-navy-900/80 rounded-xl">
-          <Lock className="w-5 h-5 text-navy-500" />
+          <Lock className="w-5 h-5 text-navy-300" aria-hidden="true" />
         </div>
       )}
     </div>
 
-    <div className={`mb-2 text-xs font-bold tracking-widest ${isLocked ? 'text-navy-500' : 'text-brand-500'} uppercase`}>{level}</div>
-    <h3 className={`text-2xl font-bold ${isLocked ? 'text-navy-500' : 'text-white'} mb-4 font-heading`}>{title}</h3>
-    <p className={`${isLocked ? 'text-navy-500' : 'text-navy-300'} mb-6 text-sm leading-relaxed`}>{description}</p>
+    <div className={`mb-2 text-xs font-bold tracking-widest ${isLocked ? 'text-navy-300' : 'text-brand-500'} uppercase`}>{level}</div>
+    <h3 className={`text-2xl font-bold ${isLocked ? 'text-navy-200' : 'text-white'} mb-4 font-heading`}>{title}</h3>
+    <p className={`${isLocked ? 'text-navy-400' : 'text-navy-300'} mb-6 text-sm leading-relaxed`}>{description}</p>
 
     <ul className="space-y-3 mb-8">
       {features.map((feature, i) => (
-        <li key={i} className={`flex items-start gap-2 text-sm ${isLocked ? 'text-navy-600' : 'text-navy-200'}`}>
-          <CheckCircle2 className={`w-4 h-4 ${isLocked ? 'text-navy-600' : 'text-brand-500'} mt-0.5 shrink-0`} />
+        <li key={i} className={`flex items-start gap-2 text-sm ${isLocked ? 'text-navy-300' : 'text-navy-200'}`}>
+          <CheckCircle2 className={`w-4 h-4 ${isLocked ? 'text-navy-500' : 'text-brand-500'} mt-0.5 shrink-0`} aria-hidden="true" />
           <span>{feature}</span>
         </li>
       ))}
@@ -41,15 +41,23 @@ const CourseCard: React.FC<{
     <button
       onClick={onStartLevel}
       disabled={isLocked}
+      aria-label={isLocked
+        ? level === 'Intermedio'
+          ? 'Bloqueado — completa el nivel Principiante para desbloquear'
+          : level === 'Avanzado'
+            ? 'Bloqueado — completa el nivel Intermedio para desbloquear'
+            : 'Bloqueado'
+        : `Empezar nivel ${level}`
+      }
       className={`w-full py-3 rounded-lg border font-medium transition-all flex items-center justify-center gap-2 ${
         isLocked
-          ? 'border-navy-800 text-navy-500 bg-navy-900 cursor-not-allowed'
+          ? 'border-navy-700 text-navy-300 bg-navy-900 cursor-not-allowed'
           : 'border-navy-600 text-white hover:bg-brand-500 hover:border-brand-500 hover:text-navy-900 active:scale-[0.98]'
       }`}
     >
       {isLocked ? (
         <>
-          <Lock className="w-4 h-4" />
+          <Lock className="w-4 h-4" aria-hidden="true" />
           {level === 'Intermedio' ? 'Completa Principiante' : level === 'Avanzado' ? 'Completa Intermedio' : 'Bloqueado'}
         </>
       ) : (

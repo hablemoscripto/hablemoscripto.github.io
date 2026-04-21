@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -25,11 +26,14 @@ export default tseslint.config(
     },
   },
 
-  // Project-wide settings
+  // Project-wide settings (browser globals by default)
   {
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
+      globals: {
+        ...globals.browser,
+      },
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
@@ -40,6 +44,20 @@ export default tseslint.config(
       react: {
         version: 'detect',
       },
+    },
+  },
+
+  // Node globals for build/CLI scripts — these run under node, not the browser,
+  // so `console`, `process`, and `__dirname` are ambient.
+  {
+    files: ['scripts/**/*.{js,mjs,ts}', 'vite.config.*', 'eslint.config.*'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
   },
 

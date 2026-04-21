@@ -22,7 +22,7 @@ interface SectionRendererProps {
     onImageClick: (src: string, alt: string) => void;
 }
 
-export default function SectionRenderer({ section, index, checkpoint, onImageClick }: SectionRendererProps) {
+export default function SectionRenderer({ section, checkpoint, onImageClick }: SectionRendererProps) {
     return (
         <div>
             <div className="mb-8">

@@ -32,16 +32,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const { addXp, checkAchievements, xp, streak } = useGamification();
 
-  useEffect(() => {
-    if (user) {
-      loadProgress();
-    } else {
-      setProgress([]);
-      setLoading(false);
-    }
-  }, [user]);
-
-  const loadProgress = async () => {
+  const loadProgress = useCallback(async () => {
     if (!user) return;
 
     try {
@@ -83,7 +74,16 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user, checkAchievements, xp, streak]);
+
+  useEffect(() => {
+    if (user) {
+      loadProgress();
+    } else {
+      setProgress([]);
+      setLoading(false);
+    }
+  }, [user, loadProgress]);
 
   const isLessonCompleted = useCallback((lessonId: number): boolean => {
     return progress.some((p) => p.lessonId === lessonId && p.completed);

@@ -5,7 +5,6 @@
  */
 import sharp from 'sharp';
 import { readdir, stat, mkdir } from 'fs/promises';
-import path from 'path';
 
 const PUBLIC = 'public';
 const IMAGES = `${PUBLIC}/images`;
@@ -76,7 +75,6 @@ async function compressImages() {
   console.log('\n🗜️  Compressing large images...');
 
   // og-cover.png → optimized WebP (for actual use) + keep smaller PNG for OG tags
-  const ogMeta = await sharp(`${IMAGES}/og-cover.png`).metadata();
   await sharp(`${IMAGES}/og-cover.png`)
     .resize(1200, 630, { fit: 'cover' })
     .png({ quality: 80, compressionLevel: 9 })

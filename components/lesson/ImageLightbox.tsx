@@ -13,9 +13,33 @@ export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
     const containerRef = useRef<HTMLDivElement>(null);
 
+    // Handlers are declared before effects that close over them so the
+    // keyboard/wheel effects capture the right references on first render.
+    const handleZoomIn = useCallback(() => setZoomLevel(prev => Math.min(prev + 0.5, 4)), []);
+    const handleZoomOut = useCallback(() => {
+        setZoomLevel(prev => {
+            const next = Math.max(prev - 0.5, 1);
+            if (next === 1) setPanPosition({ x: 0, y: 0 });
+            return next;
+        });
+    }, []);
+
+    // Scroll-to-zoom
+    const handleWheel = useCallback((e: WheelEvent) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.2 : 0.2;
+        setZoomLevel(prev => {
+            const next = Math.max(1, Math.min(4, prev + delta));
+            if (next === 1) setPanPosition({ x: 0, y: 0 });
+            return next;
+        });
+    }, []);
+
     // Reset state when image changes
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setZoomLevel(1);
+         
         setPanPosition({ x: 0, y: 0 });
     }, [image?.src]);
 
@@ -29,18 +53,7 @@ export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
         };
         document.addEventListener('keydown', handleKey);
         return () => document.removeEventListener('keydown', handleKey);
-    }, [image, onClose]);
-
-    // Scroll-to-zoom
-    const handleWheel = useCallback((e: WheelEvent) => {
-        e.preventDefault();
-        const delta = e.deltaY > 0 ? -0.2 : 0.2;
-        setZoomLevel(prev => {
-            const next = Math.max(1, Math.min(4, prev + delta));
-            if (next === 1) setPanPosition({ x: 0, y: 0 });
-            return next;
-        });
-    }, []);
+    }, [image, onClose, handleZoomIn, handleZoomOut]);
 
     useEffect(() => {
         const el = containerRef.current;
@@ -48,15 +61,6 @@ export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
         el.addEventListener('wheel', handleWheel, { passive: false });
         return () => el.removeEventListener('wheel', handleWheel);
     }, [image, handleWheel]);
-
-    const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 0.5, 4));
-    const handleZoomOut = () => {
-        setZoomLevel(prev => {
-            const next = Math.max(prev - 0.5, 1);
-            if (next === 1) setPanPosition({ x: 0, y: 0 });
-            return next;
-        });
-    };
 
     const handleMouseDown = (e: React.MouseEvent) => {
         if (zoomLevel > 1) {

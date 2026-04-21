@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { MailX, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
 
 const UnsubscribePage: React.FC = () => {
@@ -39,13 +40,25 @@ const UnsubscribePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-navy-950 flex items-center justify-center p-6">
+    <>
+      <Helmet>
+        <title>Cancelar suscripción | Hablemos Cripto</title>
+        <meta name="description" content="Cancela tu suscripción al newsletter de Hablemos Cripto." />
+        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href="https://hablemoscripto.io/unsubscribe" />
+        <meta property="og:title" content="Cancelar suscripción | Hablemos Cripto" />
+        <meta property="og:description" content="Cancela tu suscripción al newsletter de Hablemos Cripto." />
+        <meta property="og:url" content="https://hablemoscripto.io/unsubscribe" />
+        <meta name="twitter:title" content="Cancelar suscripción | Hablemos Cripto" />
+        <meta name="twitter:description" content="Cancela tu suscripción al newsletter de Hablemos Cripto." />
+      </Helmet>
+      <main className="min-h-screen bg-navy-950 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         {status === 'success' ? (
           <div className="bg-navy-900 border border-navy-800 rounded-2xl p-8 text-center">
-            <CheckCircle className="mx-auto mb-4 text-green-500" size={48} />
+            <CheckCircle className="mx-auto mb-4 text-green-500" size={48} aria-hidden="true" />
             <h1 className="text-2xl font-bold text-white mb-3">
-              Suscripcion cancelada
+              Suscripción cancelada
             </h1>
             <p className="text-navy-400 mb-6">
               Tu email <span className="text-white font-medium">{email}</span> ha sido
@@ -61,7 +74,7 @@ const UnsubscribePage: React.FC = () => {
         ) : (
           <div className="bg-navy-900 border border-navy-800 rounded-2xl p-8">
             <div className="text-center mb-6">
-              <MailX className="mx-auto mb-4 text-brand-500" size={48} />
+              <MailX className="mx-auto mb-4 text-brand-500" size={48} aria-hidden="true" />
               <h1 className="text-2xl font-bold text-white mb-2">
                 Cancelar suscripción
               </h1>
@@ -109,7 +122,8 @@ const UnsubscribePage: React.FC = () => {
           </div>
         )}
       </div>
-    </div>
+    </main>
+    </>
   );
 };
 

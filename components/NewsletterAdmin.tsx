@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 import { Download, Mail, Users, Trash2, RefreshCw, Send, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
@@ -26,15 +26,28 @@ const NewsletterAdmin: React.FC = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/');
-      return;
-    }
-    checkAdminStatus();
-  }, [user, navigate]);
+  const fetchSubscribers = useCallback(async () => {
+    setLoading(true);
+    setError('');
 
-  const checkAdminStatus = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('newsletter_subscribers')
+        .select('id, email, subscribed_at, is_active')
+        .order('subscribed_at', { ascending: false });
+
+      if (error) throw error;
+
+      setSubscribers(data || []);
+    } catch (err: unknown) {
+      reportError(err, { component: 'NewsletterAdmin', action: 'fetchSubscribers' });
+      setError(err instanceof Error ? err.message : 'Error al cargar suscriptores');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const checkAdminStatus = useCallback(async () => {
     setCheckingAdmin(true);
     try {
       const { data, error } = await supabase
@@ -60,28 +73,15 @@ const NewsletterAdmin: React.FC = () => {
     } finally {
       setCheckingAdmin(false);
     }
-  };
+  }, [user?.id, navigate, fetchSubscribers]);
 
-  const fetchSubscribers = async () => {
-    setLoading(true);
-    setError('');
-
-    try {
-      const { data, error } = await supabase
-        .from('newsletter_subscribers')
-        .select('id, email, subscribed_at, is_active')
-        .order('subscribed_at', { ascending: false });
-
-      if (error) throw error;
-
-      setSubscribers(data || []);
-    } catch (err: unknown) {
-      reportError(err, { component: 'NewsletterAdmin', action: 'fetchSubscribers' });
-      setError(err instanceof Error ? err.message : 'Error al cargar suscriptores');
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    if (!user) {
+      navigate('/');
+      return;
     }
-  };
+    checkAdminStatus();
+  }, [user, navigate, checkAdminStatus]);
 
   const exportToCSV = () => {
     const csv = [

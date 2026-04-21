@@ -39,7 +39,10 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
     }
 
     if (isDeleting && displayText === '') {
+      // Typewriter state transition — this effect IS the animation driver.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDeleting(false);
+       
       setTextIndex((prev) => prev + 1);
       return;
     }

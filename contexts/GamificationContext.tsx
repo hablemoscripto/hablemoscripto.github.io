@@ -177,6 +177,10 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
             persistedIdsRef.current = new Set();
             setLoading(false);
         }
+        // `fetchUserStats` is declared after this effect and is stable per-mount
+        // because it only closes over `user`. We intentionally re-run only on
+        // user-identity changes, not function-identity changes.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     // Persist newly unlocked achievements to Supabase

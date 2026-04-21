@@ -10,14 +10,11 @@ import {
     RotateCcw,
     Trophy,
     Target,
-    Clock,
     ChevronDown,
     ChevronUp
 } from 'lucide-react';
 
 import type {
-    QuestionType,
-    BaseQuestion,
     MultipleChoiceQuestion,
     TrueFalseQuestion,
     MultipleSelectQuestion,
@@ -54,18 +51,20 @@ function isCorrect(question: Question, answer: QuizAnswer): boolean {
             return answer === question.correctAnswer;
         case 'true-false':
             return answer === question.correctAnswer;
-        case 'multiple-select':
+        case 'multiple-select': {
             if (!Array.isArray(answer)) return false;
             const sortedAnswer = [...answer].sort();
             const sortedCorrect = [...question.correctAnswers].sort();
             return JSON.stringify(sortedAnswer) === JSON.stringify(sortedCorrect);
+        }
         case 'ordering':
             return JSON.stringify(answer) === JSON.stringify(question.correctOrder);
-        case 'fill-blank':
+        case 'fill-blank': {
             const userAnswer = (answer || '').toString().toLowerCase().trim();
             const correct = question.correctAnswer.toLowerCase().trim();
             const acceptable = question.acceptableAnswers?.map(a => a.toLowerCase().trim()) || [];
             return userAnswer === correct || acceptable.includes(userAnswer);
+        }
         default:
             return false;
     }
@@ -97,7 +96,6 @@ const MultipleChoiceRenderer: React.FC<QuestionComponentProps> = ({
     question, answer, onAnswer, submitted, showHint, onToggleHint
 }) => {
     const q = question as MultipleChoiceQuestion;
-    const correct = isCorrect(q, answer);
 
     return (
         <div className="space-y-3">
@@ -530,7 +528,6 @@ const Quiz: React.FC<QuizProps> = ({
         setSubmitted(true);
         setViewMode('all'); // Show all questions after submit
 
-        const { earnedPoints, totalPoints } = calculateScore();
         const correctCount = questions.filter(q => isCorrect(q, answers[q.id])).length;
 
         // Pass if 70% or more
@@ -663,7 +660,7 @@ const Quiz: React.FC<QuizProps> = ({
         );
     };
 
-    const { earnedPoints, totalPoints, percentage } = calculateScore();
+    const { percentage } = calculateScore();
     const correctCount = questions.filter(q => isCorrect(q, answers[q.id])).length;
     const passed = correctCount >= Math.ceil(questions.length * 0.7);
 

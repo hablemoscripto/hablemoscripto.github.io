@@ -11,12 +11,20 @@ export default function PaymentSuccess() {
   const [status, setStatus] = useState<PaymentStatus>('loading');
   const [productName, setProductName] = useState('');
   const statusRef = useRef(status);
-  statusRef.current = status;
+
+  // Keep the ref in sync with state — read inside the polling interval below.
+  // Must be in an effect, not in render: refs should not be mutated during
+  // render because it breaks concurrent-safe rendering assumptions.
+  useEffect(() => {
+    statusRef.current = status;
+  }, [status]);
 
   const reference = searchParams.get('ref');
 
   useEffect(() => {
     if (!reference) {
+      // Transition to terminal ERROR state when query param is missing.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setStatus('ERROR');
       return;
     }

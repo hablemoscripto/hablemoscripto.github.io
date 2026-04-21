@@ -31,6 +31,18 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
     const allLessons = getAllLessonsOrdered();
     const lessonTitleMap = new Map(allLessons.map(l => [l.id, l.title]));
 
+    // Precompute the starting lesson index for each module so we can render
+    // absolute lesson numbers ("Lesson N of totalLessons") without mutating
+    // state during render.
+    const moduleStartIndices: number[] = [];
+    {
+        let runningIndex = 0;
+        for (const module of levelData.modules) {
+            moduleStartIndices.push(runningIndex);
+            runningIndex += module.lessons.length;
+        }
+    }
+
     return (
         <div className="min-h-screen bg-navy-950 pb-20">
             {/* Header */}
@@ -71,13 +83,11 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
             {/* Modules List */}
             <div className="container max-w-5xl mx-auto px-6 py-12">
                 <div className="space-y-8">
-                    {(() => {
-                        let runningLessonIndex = 0;
-                        return levelData.modules.map((module, moduleIdx) => {
-                            let firstAvailableFound = false;
-                            const moduleStartIndex = runningLessonIndex;
+                    {levelData.modules.map((module, moduleIdx) => {
+                        let firstAvailableFound = false;
+                        const moduleStartIndex = moduleStartIndices[moduleIdx];
 
-                            return (
+                        return (
                         <div key={module.id} className="animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: `${moduleIdx * 100}ms` }}>
                             <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
                                 <span className="w-8 h-8 rounded-lg bg-navy-800 flex items-center justify-center text-sm text-navy-400 border border-navy-700">
@@ -89,7 +99,6 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                             <div className="grid gap-4">
                                 {module.lessons.map((lesson, lessonIdx) => {
                                     const lessonIndex = moduleStartIndex + lessonIdx;
-                                    runningLessonIndex = lessonIndex + 1;
 
                                     const isCompleted = isLessonCompleted(lesson.id);
 
@@ -161,9 +170,8 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                                 })}
                             </div>
                         </div>
-                            );
-                        });
-                    })()}
+                        );
+                    })}
                 </div>
             </div>
         </div>

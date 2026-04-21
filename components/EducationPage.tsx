@@ -96,28 +96,27 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const { progress: supabaseProgress } = useProgress();
   const { achievements, achievementDefinitions } = useGamification();
   const [progress, setProgress] = useState<ProgressData>({});
-  const [lastLessonId, setLastLessonId] = useState<number | null>(null);
-  const [lastLessonTitle, setLastLessonTitle] = useState<string | null>(null);
-
-  // Resume learning: read last visited lesson from localStorage
-  useEffect(() => {
+  // Resume learning: read last visited lesson from localStorage once on mount.
+  // Computed via a lazy initializer so no effect is needed — the value is
+  // derived synchronously from storage and never changes for this view.
+  const [{ lastLessonId, lastLessonTitle }] = useState<{
+    lastLessonId: number | null;
+    lastLessonTitle: string | null;
+  }>(() => {
     try {
       const stored = localStorage.getItem('last_lesson_id');
-      if (stored) {
-        const id = parseInt(stored, 10);
-        if (!isNaN(id)) {
-          const allLessons = getAllLessonsOrdered();
-          const found = allLessons.find(l => l.id === id);
-          if (found) {
-            setLastLessonId(id);
-            setLastLessonTitle(found.title);
-          }
-        }
-      }
+      if (!stored) return { lastLessonId: null, lastLessonTitle: null };
+      const id = parseInt(stored, 10);
+      if (isNaN(id)) return { lastLessonId: null, lastLessonTitle: null };
+      const found = getAllLessonsOrdered().find(l => l.id === id);
+      return found
+        ? { lastLessonId: id, lastLessonTitle: found.title }
+        : { lastLessonId: null, lastLessonTitle: null };
     } catch {
       // localStorage may be unavailable in private browsing
+      return { lastLessonId: null, lastLessonTitle: null };
     }
-  }, []);
+  });
 
   useEffect(() => {
     const fetchLevels = async () => {

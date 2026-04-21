@@ -113,6 +113,9 @@ const ParticlesBackground: React.FC = memo(() => {
 
   useEffect(() => {
     if (engineInitialized) {
+      // Re-mount case — engine was initialized by a previous render; sync
+      // local state with the module-level flag.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (engineReady) setInit(true);
       return;
     }
@@ -127,7 +130,8 @@ const ParticlesBackground: React.FC = memo(() => {
   }, []);
 
   const particlesLoaded = useCallback(async (_container?: Container) => {
-    // Particles loaded successfully
+    // No-op — required signature but we do not use the container.
+    void _container;
   }, []);
 
   if (!init) return null;

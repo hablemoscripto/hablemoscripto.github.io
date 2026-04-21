@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
+import { Play } from 'lucide-react';
 
 interface VideoPlayerProps {
     videoId?: string; // YouTube ID for now
@@ -9,7 +9,6 @@ interface VideoPlayerProps {
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId, thumbnail, title }) => {
     const [isPlaying, setIsPlaying] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
 
     // Placeholder ID if none provided
     const id = videoId || 'dQw4w9WgXcQ'; // Rick Roll as placeholder default ;)
@@ -19,11 +18,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId, thumbnail, title }) 
     };
 
     return (
-        <div
-            className="relative aspect-video bg-navy-900 rounded-2xl overflow-hidden border border-navy-800 shadow-2xl group"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="relative aspect-video bg-navy-900 rounded-2xl overflow-hidden border border-navy-800 shadow-2xl group">
             {!isPlaying ? (
                 <div className="absolute inset-0 flex items-center justify-center bg-navy-900">
                     {thumbnail && (

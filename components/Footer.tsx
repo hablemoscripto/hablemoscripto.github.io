@@ -40,17 +40,29 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
               Construyendo la próxima generación de inversores inteligentes.
             </p>
             <div className="flex gap-4">
-              <a href="https://twitter.com/Crypto_CBas" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-brand-500 hover:text-navy-900 transition-all">
-                <Twitter size={18} />
+              <a
+                href="https://twitter.com/Crypto_CBas"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter — @Crypto_CBas (abre en una pestaña nueva)"
+                className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-brand-500 hover:text-navy-900 transition-all"
+              >
+                <Twitter size={18} aria-hidden="true" />
               </a>
-              <a href="https://www.youtube.com/@hablemoscripto" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-red-600 hover:text-white transition-all">
-                <Youtube size={18} />
+              <a
+                href="https://www.youtube.com/@hablemoscripto"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube — @hablemoscripto (abre en una pestaña nueva)"
+                className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-red-600 hover:text-white transition-all"
+              >
+                <Youtube size={18} aria-hidden="true" />
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6">Plataforma</h4>
+            <h2 className="text-white font-bold mb-6 text-base">Plataforma</h2>
             <ul className="space-y-4 text-sm text-navy-400">
               <li><a href="/#home" onClick={(e) => handleAnchorClick(e, 'home')} className="hover:text-brand-500 transition-colors">Inicio</a></li>
               <li>
@@ -73,7 +85,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6">Legal</h4>
+            <h2 className="text-white font-bold mb-6 text-base">Legal</h2>
             <ul className="space-y-4 text-sm text-navy-400">
               <li><Link to="/terminos" className="hover:text-brand-500 transition-colors">Términos de Uso</Link></li>
               <li><Link to="/privacidad" className="hover:text-brand-500 transition-colors">Política de Privacidad</Link></li>
@@ -82,12 +94,12 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
         </div>
 
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-navy-500 text-center md:text-left">
+          <p className="text-xs text-navy-400 text-center md:text-left">
             &copy; {new Date().getFullYear()} Hablemos Cripto. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true"></span>
-            <span className="text-xs text-navy-500">Plataforma activa</span>
+            <span className="text-xs text-navy-400">Plataforma activa</span>
           </div>
         </div>
       </div>

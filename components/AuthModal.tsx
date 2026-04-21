@@ -29,15 +29,23 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
 
   const { signIn, signUp, signInWithGoogle, resetPassword, resendVerification } = useAuth();
 
-  // Reset form state when modal opens
+  // Reset form state when modal opens — idiomatic React pattern for
+  // resetting local UI state in response to an external prop change.
   useEffect(() => {
     if (isOpen) {
+       
       setView('login');
+       
       setEmail('');
+       
       setPassword('');
+       
       setConfirmPassword('');
+       
       setError('');
+       
       setSuccess('');
+       
       setLoading(false);
     }
   }, [isOpen]);
@@ -99,7 +107,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
           setView('verify-email');
         }
       }
-    } catch (err) {
+    } catch {
       setError('Ocurrió un error. Intenta de nuevo.');
     } finally {
       setLoading(false);
@@ -125,7 +133,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
       } else {
         setSuccess('Te enviamos un enlace para restablecer tu contraseña. Revisa tu email (y la carpeta de spam).');
       }
-    } catch (err) {
+    } catch {
       setError('Ocurrió un error. Intenta de nuevo.');
     } finally {
       setLoading(false);
@@ -144,7 +152,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
       } else {
         setSuccess('Email de verificación reenviado. Revisa tu bandeja de entrada.');
       }
-    } catch (err) {
+    } catch {
       setError('Ocurrió un error. Intenta de nuevo.');
     } finally {
       setLoading(false);

@@ -23,20 +23,16 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180x180.png" />
   <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Facebook — site-wide defaults only.
+       Per-route title/description/url are set by Helmet in each page component
+       to avoid duplicate meta tags that confuse social scrapers. -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://hablemoscripto.io/" />
-  <meta property="og:title" content="Hablemos Cripto | Educación Bitcoin y Criptomonedas" />
-  <meta property="og:description" content="Aprende sobre Bitcoin, blockchain y criptomonedas con cursos interactivos en español. Desde principiante hasta avanzado." />
   <meta property="og:image" content="https://hablemoscripto.io/images/og-cover-optimized.png" />
   <meta property="og:locale" content="es_LA" />
   <meta property="og:site_name" content="Hablemos Cripto" />
 
-  <!-- Twitter -->
+  <!-- Twitter — site-wide defaults only; per-route overrides via Helmet -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://hablemoscripto.io/" />
-  <meta name="twitter:title" content="Hablemos Cripto | Educación Bitcoin y Criptomonedas" />
-  <meta name="twitter:description" content="Aprende sobre Bitcoin, blockchain y criptomonedas con cursos interactivos en español. Desde principiante hasta avanzado." />
   <meta name="twitter:image" content="https://hablemoscripto.io/images/og-cover-optimized.png" />
 
   <!-- Structured Data (JSON-LD) -->

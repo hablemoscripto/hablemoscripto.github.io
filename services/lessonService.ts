@@ -1,6 +1,35 @@
 import { LESSONS_DATA } from '../data/courseData';
 import type { Question } from '../components/education/types';
 
+// Shape of the quiz questions stored in courseData — wide and permissive
+// because entries predate the typed Question union. Narrowed at read time.
+interface RawQuizQuestion {
+  id: string;
+  type?: string;
+  question: string;
+  options?: Array<string | { id?: string; text?: string }>;
+  correctAnswer?: number | string | boolean;
+  correctAnswers?: number[];
+  items?: string[];
+  correctOrder?: number[];
+  textBefore?: string;
+  textAfter?: string;
+  acceptableAnswers?: string[];
+  explanation?: string;
+  hint?: string;
+  difficulty?: 'easy' | 'medium' | 'hard';
+  points?: number;
+}
+
+interface RawReferral {
+  title: string;
+  description: string;
+  link: string;
+  buttonText?: string;
+  button_text?: string;
+  code?: string;
+}
+
 export interface LessonSection {
   type?: string;
   title?: string;
@@ -85,7 +114,7 @@ export function fetchLessonById(lessonId: number): LessonData | null {
   // references and richer types than the DB schema
   if (lesson.quiz?.questions) {
     data.quiz = {
-      questions: lesson.quiz.questions.map((q: any) => {
+      questions: lesson.quiz.questions.map((q: RawQuizQuestion) => {
         // courseData quiz questions are already in the right shape —
         // they have type, options, correctAnswer, etc. Just pass through
         // with option normalization for backward compatibility.
@@ -99,8 +128,8 @@ export function fetchLessonById(lessonId: number): LessonData | null {
           points: q.points,
         };
 
-        const options = q.options?.map((opt: any) =>
-          typeof opt === 'string' ? opt : opt.text
+        const options = q.options?.map((opt) =>
+          typeof opt === 'string' ? opt : opt.text ?? ''
         );
 
         // Return the full question object preserving all type-specific fields
@@ -126,11 +155,11 @@ export function fetchLessonById(lessonId: number): LessonData | null {
 
   // Map referrals if present
   if (lesson.referrals) {
-    data.referrals = lesson.referrals.map((ref: any) => ({
+    data.referrals = lesson.referrals.map((ref: RawReferral) => ({
       title: ref.title,
       description: ref.description,
       link: ref.link,
-      buttonText: ref.buttonText || ref.button_text,
+      buttonText: ref.buttonText || ref.button_text || '',
       code: ref.code,
     }));
   }

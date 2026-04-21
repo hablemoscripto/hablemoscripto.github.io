@@ -1,3 +1,4 @@
+import type { LucideIcon } from 'lucide-react';
 import {
   Banknote,
   BookOpen,
@@ -60,7 +61,7 @@ export interface Module {
   id: number;
   title: string;
   description: string;
-  icon: any; // LucideIcon — typed as any to avoid coupling with lucide-react internals
+  icon: LucideIcon;
   lessons: Lesson[];
 }
 
@@ -232,7 +233,31 @@ export const ADVANCED_LEVEL: LevelData = {
   ]
 };
 
-export const LESSONS_DATA: Record<number, any> = {
+// Loose shape for an entry in the lesson content bundle. Entries are shaped
+// ad-hoc (sections/quizzes/referrals vary per lesson); consumers narrow the
+// nested fields as they read (see `services/lessonService.ts`).
+export interface LessonEntry {
+  id: number;
+  title: string;
+  level?: string;
+  number?: string;
+  duration?: string;
+  type?: string;
+  description?: string;
+  videoId?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  sections?: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  quiz?: { questions?: any[] };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  checkpointQuizzes?: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  referrals?: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}
+
+export const LESSONS_DATA: Record<number, LessonEntry> = {
   1: {
     id: 1,
     title: 'Breve Historia del Dinero',

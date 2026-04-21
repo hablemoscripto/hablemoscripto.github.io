@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { getPreviousLessonId, getNextLessonId, getAllLessonsOrdered } from '../utils/courseUtils';
 
 interface LessonNavInfo {
@@ -17,36 +17,25 @@ export function useLessonNavigation(
     isCurrentCompleted: boolean,
     isLessonCompleted: (id: number) => boolean
 ): UseLessonNavigationResult {
-    const [prevLesson, setPrevLesson] = useState<LessonNavInfo | null>(null);
-    const [nextLesson, setNextLesson] = useState<LessonNavInfo | null>(null);
-    const [canGoNext, setCanGoNext] = useState(false);
-
-    useEffect(() => {
+    // Prev/next lessons are pure derivations of `lessonId` — compute them with
+    // useMemo instead of mirroring into state via an effect.
+    const { prevLesson, nextLesson } = useMemo(() => {
         const allLessons = getAllLessonsOrdered();
         const prevId = getPreviousLessonId(lessonId);
         const nextId = getNextLessonId(lessonId);
 
-        if (prevId !== null) {
-            const prev = allLessons.find(l => l.id === prevId);
-            setPrevLesson(prev ? { id: prev.id, title: prev.title } : null);
-        } else {
-            setPrevLesson(null);
-        }
+        const prev = prevId !== null ? allLessons.find(l => l.id === prevId) : undefined;
+        const next = nextId !== null ? allLessons.find(l => l.id === nextId) : undefined;
 
-        if (nextId !== null) {
-            const next = allLessons.find(l => l.id === nextId);
-            setNextLesson(next ? { id: next.id, title: next.title } : null);
-        } else {
-            setNextLesson(null);
-        }
+        return {
+            prevLesson: prev ? { id: prev.id, title: prev.title } : null,
+            nextLesson: next ? { id: next.id, title: next.title } : null,
+        };
     }, [lessonId]);
 
-    useEffect(() => {
-        if (!nextLesson) {
-            setCanGoNext(false);
-            return;
-        }
-        setCanGoNext(isCurrentCompleted || isLessonCompleted(nextLesson.id));
+    const canGoNext = useMemo(() => {
+        if (!nextLesson) return false;
+        return isCurrentCompleted || isLessonCompleted(nextLesson.id);
     }, [nextLesson, isCurrentCompleted, isLessonCompleted]);
 
     return { prevLesson, nextLesson, canGoNext };

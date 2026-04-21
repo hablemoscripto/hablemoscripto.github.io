@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { Shield, FileText } from 'lucide-react';
@@ -11,24 +12,45 @@ interface LegalPageProps {
 const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
   const navigate = useNavigate();
 
+  const isPrivacy = type === 'privacy';
+  const title = isPrivacy
+    ? 'Política de Privacidad | Hablemos Cripto'
+    : 'Términos de Uso | Hablemos Cripto';
+  const description = isPrivacy
+    ? 'Cómo Hablemos Cripto recopila, usa y protege tus datos en la plataforma educativa de criptomonedas.'
+    : 'Términos de uso de la plataforma educativa Hablemos Cripto: cuentas, pagos, propiedad intelectual y más.';
+  const path = isPrivacy ? '/privacidad' : '/terminos';
+  const canonicalUrl = `https://hablemoscripto.io${path}`;
+
   return (
     <div className="min-h-screen bg-navy-950 text-white">
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:url" content={canonicalUrl} />
+      </Helmet>
       <Navbar />
 
       <main className="pt-24 md:pt-32 pb-20">
         <div className="container max-w-4xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-8">
-            {type === 'privacy' ? (
-              <Shield className="text-brand-500" size={32} />
+            {isPrivacy ? (
+              <Shield className="text-brand-500" size={32} aria-hidden="true" />
             ) : (
-              <FileText className="text-brand-500" size={32} />
+              <FileText className="text-brand-500" size={32} aria-hidden="true" />
             )}
             <h1 className="text-3xl md:text-4xl font-heading font-bold">
-              {type === 'privacy' ? 'Política de Privacidad' : 'Términos de Uso'}
+              {isPrivacy ? 'Política de Privacidad' : 'Términos de Uso'}
             </h1>
           </div>
 
-          <p className="text-navy-500 text-sm mb-12">
+          <p className="text-navy-400 text-sm mb-12">
             Última actualización: 18 de febrero de 2026
           </p>
 

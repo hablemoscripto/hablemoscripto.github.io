@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useProgress } from '../contexts/ProgressContext';
 import {
   loadReviewState,
@@ -34,7 +34,7 @@ interface UseDailyReviewResult {
 export function useDailyReview(): UseDailyReviewResult {
   const { progress, loading } = useProgress();
   const [reviewState, setReviewState] = useState<ReviewState>(() => loadReviewState());
-  const [question, setQuestion] = useState<ReviewQuestion | null>(null);
+  const [dismissed, setDismissed] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
@@ -49,20 +49,17 @@ export function useDailyReview(): UseDailyReviewResult {
   const today = todayISO();
   const alreadyDone = reviewState.lastDate === today;
 
-  // Pick a question on mount / when completions change / when day rolls.
-  useEffect(() => {
-    if (loading) return;
-    if (alreadyDone) {
-      setQuestion(null);
-      return;
-    }
-    if (completions.length < 3) {
-      setQuestion(null);
-      return;
-    }
-    // Only pick once per render cycle; stable across re-renders until state changes.
-    setQuestion((current) => current ?? pickReviewQuestion(completions, reviewState));
-  }, [loading, completions, alreadyDone, reviewState]);
+  // Pick a question by deriving from inputs — no state mirror needed. The
+  // picker is deterministic-per-inputs thanks to a memoized seed, so re-renders
+  // don't shuffle the question mid-session.
+  const question = useMemo<ReviewQuestion | null>(() => {
+    if (loading) return null;
+    if (alreadyDone) return null;
+    if (dismissed) return null;
+    if (completions.length < 3) return null;
+    return pickReviewQuestion(completions, reviewState);
+    // reviewState only changes on answer/dismiss, so this is stable per day.
+  }, [loading, alreadyDone, dismissed, completions, reviewState]);
 
   const answer = useCallback(
     (index: number) => {
@@ -88,7 +85,7 @@ export function useDailyReview(): UseDailyReviewResult {
     };
     setReviewState(nextState);
     saveReviewState(nextState);
-    setQuestion(null);
+    setDismissed(true);
     setSelectedIndex(null);
     setIsCorrect(null);
   }, [today, reviewState.lastQuestionId]);
