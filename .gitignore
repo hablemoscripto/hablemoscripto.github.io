@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Marketing playbook — kept local, contains strategy and outreach templates
+marketing/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
