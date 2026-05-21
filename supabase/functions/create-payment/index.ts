@@ -26,9 +26,13 @@ function isRateLimited(userId: string): boolean {
   return entry.count > RATE_LIMIT_MAX
 }
 
-// Canonical product prices — server is the source of truth for amounts
+// Canonical product prices — server is the source of truth for amounts.
+// MUST stay in sync with PRICING_PLANS in services/paymentService.ts.
+// Lifetime tiers only at launch; monthly/yearly SKUs added later when the
+// renewal cron is built on top of Wompi Payment Sources.
 const PRODUCT_CATALOG: Record<string, { name: string; amountInCents: number }> = {
-  premium_lifetime: { name: 'Premium Lifetime', amountInCents: 9900000 }, // $99,000 COP
+  inversor_lifetime: { name: 'Inversor — Acceso de por vida', amountInCents: 35000000 }, // 350,000 COP
+  vip_lifetime: { name: 'Cripto Experto — Acceso de por vida', amountInCents: 90000000 }, // 900,000 COP
 }
 
 interface CreatePaymentRequest {

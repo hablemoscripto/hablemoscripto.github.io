@@ -4,6 +4,81 @@ Guidance for Claude Code (claude.ai/code) and future engineers working in this r
 
 ---
 
+## Current launch state — snapshot, May 2026
+
+This section is mid-launch context. Older sections below describe the steady-state architecture; **this is what's actually in flight right now.**
+
+### Pricing model — lifetime, two tiers (Precio Fundador)
+
+Settled May 2026 after auditing a triple price-disagreement (UI vs paymentService vs server catalog). Decision: **lifetime SKUs only at launch**, monthly/yearly subscriptions deferred until a Wompi tokenization-based renewal cron is built.
+
+| Tier | USD | COP | USDC | productType SKU |
+|---|---|---|---|---|
+| Inversor | $99 | 350,000 | 99 | `inversor_lifetime` |
+| Cripto Experto | $249 | 900,000 | 249 | `vip_lifetime` |
+
+Framing in UI: **"Precio Fundador"** — no countdown, no fake urgency. When raising prices later, send a 30-day-notice email; that's the conversion lever, not a launch deadline.
+
+### Source-of-truth contract — keep these in sync
+
+Two files hold the canonical price table. **They MUST agree.** No third source.
+
+1. `services/paymentService.ts` → `PRICING_PLANS` (frontend source of truth — keyed by tier)
+2. `supabase/functions/create-payment/index.ts` → `PRODUCT_CATALOG` (server source of truth — keyed by SKU)
+
+The frontend sends `productType` (e.g. `inversor_lifetime`); the server ignores any client-supplied amount and looks up the canonical COP-cents amount in `PRODUCT_CATALOG`. If you add or rename a SKU, both files change in the same commit.
+
+### Wompi integration state
+
+- **Sandbox keys are set** in Vercel + Supabase Edge Function secrets (May 2026). No production keys yet.
+- Public key (`pub_test_*`) → `VITE_WOMPI_PUBLIC_KEY` (Vercel)
+- Integrity secret → `WOMPI_INTEGRITY_SECRET` (Supabase)
+- Events secret → `WOMPI_EVENTS_SECRET` (Supabase)
+- Wompi private key (`prv_*`) is NOT used — Widget integration only, frontend-driven.
+
+**Still pending (operational, not code):**
+- Register webhook URL in Wompi dashboard: `https://<project>.functions.supabase.co/wompi-webhook`, subscribed to `transaction.updated`
+- Deploy three Edge Functions after the May rework:
+  ```
+  supabase functions deploy create-payment
+  supabase functions deploy wompi-webhook
+  supabase functions deploy verify-crypto-payment
+  ```
+- End-to-end sandbox smoke test (sign up → buy Inversor → webhook fires → premium granted → Fundador welcome email lands)
+
+### Fundador welcome email
+
+Every paid signup triggers a personal welcome email from CBas. Wired into both payment paths.
+
+- Helper: `supabase/functions/_shared/welcome-email.ts` (`sendFundadorWelcome`)
+- Called from `wompi-webhook/index.ts` (after `upgrade_user_to_premium` RPC) and `verify-crypto-payment/index.ts` (after profile update)
+- Failure is non-fatal — upgrade has already succeeded by the time the email tries to send
+- **Email body content lives in `BODY_HTML` in the helper** with a marked placeholder. Sebastián owns this — it's deliberately *his voice*, not a generic template
+- From address: `CBas - Hablemos Cripto <cbas@mail.hablemoscripto.io>` (uses the verified `mail.hablemoscripto.io` domain on Resend)
+- Open question (May 2026): replies bounce to a non-existent inbox unless a `reply_to` is added or the inbox is set up. Sebastián to decide.
+
+### Webhook idempotency — fixed May 2026
+
+`wompi-webhook` previously had a subtle bug: marker row in `processed_webhook_events` was inserted before the upgrade RPC ran. If the RPC failed and Wompi retried, the dedupe row was already there, retry hit "Already processed", and the user paid but never got premium.
+
+Current pattern (still INSERT-then-work, but with cleanup):
+1. INSERT marker row keyed on `signature.checksum` (race protection)
+2. Do all the work
+3. **If anything fails after the insert, DELETE the marker row before returning non-2xx** so retries actually retry
+
+`cleanupDedupeRow()` in `wompi-webhook/index.ts` is the helper.
+
+### Fundador badge in UI
+
+Small `Fundador` pill (Award icon, brand colors) in `/education` sticky subheader. Renders only when `userTier !== 'free'`. Lives in `components/EducationPage.tsx`.
+
+### Recent deletions
+
+- `components/PaymentButton.tsx` — was dead code (nothing imported it). Deleted May 2026 per "no backwards-compat shims" rule.
+- Subscription/`billingCycle` types and parameters across `paymentService.ts`, `PaymentModal.tsx`, `EducationPage.tsx`, `PricingSection.tsx`, `verify-crypto-payment/index.ts`. All gone — re-add when subscriptions ship later.
+
+---
+
 ## What this is
 
 **Hablemos Cripto** is a Spanish-language crypto education platform for Latin America. 42 structured lessons across beginner / intermediate / advanced, with a Gemini-powered AI tutor ("CBas"), gamification (XP / streaks / achievements), spaced-repetition review cards, and Wompi-based premium upgrades.
@@ -19,13 +94,14 @@ Guidance for Claude Code (claude.ai/code) and future engineers working in this r
 Things that will silently break if ignored:
 
 1. **`data/courseData.ts` is the source of truth for lesson content.** Any edit to it requires `npm run db:seed` before it's visible in the app — the UI reads from Supabase, seeded by this script. Skip the seed and your change does not exist for users.
-2. **Edge Functions deploy separately from the frontend.** `git push` deploys Vercel only. Supabase Edge Functions (`supabase/functions/*`) need `supabase functions deploy <name>` to go live.
-3. **Wompi keys must be `pub_prod_*` in production.** `pub_test_*` silently routes to sandbox — payments look normal, nothing settles.
-4. **Two profile tables exist and they are different.** `profiles` holds admin flags (`is_admin`). `user_profiles` holds premium status (`is_premium`, `premium_tier`). Do not conflate.
-5. **Rate limiting is in-memory and resets on Vercel/Supabase cold start.** Acceptable <100 concurrent users; budget work to move to Supabase / Deno KV before scaling.
-6. **Do not commit without explicit ask.** User-facing instruction: only commit when requested.
-7. **Do not run destructive git ops** (force push, reset --hard, branch delete) without explicit approval.
-8. **`marketing/` is gitignored on purpose.** Strategy, creator outreach, messaging docs live there locally and do not ship.
+2. **`PRICING_PLANS` (`services/paymentService.ts`) and `PRODUCT_CATALOG` (`supabase/functions/create-payment/index.ts`) are paired sources of truth for prices.** They MUST stay in sync. Add/rename a SKU in one without the other and the payment flow either silently overcharges users or rejects valid plan selections. Server is authoritative for amounts (it ignores client-supplied prices, by design); frontend is authoritative for what's *shown*.
+3. **Edge Functions deploy separately from the frontend.** `git push` deploys Vercel only. Supabase Edge Functions (`supabase/functions/*`) need `supabase functions deploy <name>` to go live. After any change to `_shared/welcome-email.ts`, redeploy **both** `wompi-webhook` and `verify-crypto-payment` — they import the shared file.
+4. **Wompi keys must be `pub_prod_*` in production.** `pub_test_*` silently routes to sandbox — payments look normal, nothing settles. Currently sandbox keys are set everywhere (May 2026, pre-launch).
+5. **Two profile tables exist and they are different.** `profiles` holds admin flags (`is_admin`). `user_profiles` holds premium status (`is_premium`, `premium_tier`, `premium_expires_at`). Do not conflate. Lifetime tiers leave `premium_expires_at` NULL — only enforce expiration when it's set.
+6. **Rate limiting is in-memory and resets on Vercel/Supabase cold start.** Acceptable <100 concurrent users; budget work to move to Supabase / Deno KV before scaling.
+7. **Do not commit without explicit ask.** User-facing instruction: only commit when requested.
+8. **Do not run destructive git ops** (force push, reset --hard, branch delete) without explicit approval.
+9. **`marketing/` is gitignored on purpose.** Strategy, creator outreach, messaging docs live there locally and do not ship.
 
 ---
 
@@ -105,6 +181,7 @@ Root-level entry points (`App.tsx`, `index.tsx`, `index.css`). **No `src/` folde
 | `scripts/verify-migration.ts` | Ad-hoc migration verifier (diagnostic) |
 | `scripts/check-dns.sh` | DNS sanity check for `hablemoscripto.io` |
 | `supabase/functions/*` | Edge Functions — see §Edge Functions |
+| `supabase/functions/_shared/welcome-email.ts` | Fundador welcome email helper. Imported by `wompi-webhook` and `verify-crypto-payment`. **`BODY_HTML` is the email content** — Sebastián owns it; placeholder is clearly marked. |
 | `supabase/migrations/*.sql` | Run manually in the Supabase SQL editor, in the order listed in `PRODUCTION-CHECKLIST.md` |
 | `supabase/payments-schema.sql` | One-shot schema bootstrap for `user_profiles` + `payments` |
 | `supabase/admin-setup.sql` | One-shot schema bootstrap for `profiles` (admin role) |
@@ -141,10 +218,10 @@ All non-public routes are gated by `ProtectedRoute`. All Helmet-driven routes se
 |---|---|---|---|
 | `gemini-chat` | Proxies to Gemini 2.5 Flash with SSE streaming | JWT | Rate limited 20/min in-memory |
 | `create-payment` | Creates Wompi payment row + integrity signature | JWT | Rate limited 5/min |
-| `wompi-webhook` | Receives `transaction.updated`, verifies signature, upgrades user to premium | Webhook (no JWT) | **Idempotency via `processed_webhook_events` table keyed on `signature.checksum`.** Old status-compare dedupe was insufficient — see commit `eca5422`. |
+| `wompi-webhook` | Receives `transaction.updated`, verifies signature, upgrades user to premium, sends Fundador welcome email | Webhook (no JWT) | **Idempotency via `processed_webhook_events` table keyed on `signature.checksum`.** Insert-then-work pattern with cleanup-on-failure (May 2026 fix) — if the upgrade RPC or any later step fails, `cleanupDedupeRow()` deletes the marker row before returning non-2xx so retries actually retry. |
 | `send-newsletter` | Sends via Resend; sanitizes HTML; per-recipient HMAC unsubscribe token | Admin JWT | Checks `profiles.is_admin` server-side |
 | `unsubscribe` | Public endpoint to set `newsletter_subscribers.is_active = false` | No (HMAC token) | Deploy with `--no-verify-jwt` |
-| `verify-crypto-payment` | Confirms a Solana USDC transfer and upgrades user | JWT | Requires `SOLANA_RPC_URL`, `USDC_PAYMENT_ADDRESS` secrets |
+| `verify-crypto-payment` | Confirms a Solana USDC transfer, upgrades user, sends Fundador welcome email | JWT | Requires `SOLANA_RPC_URL`, `USDC_PAYMENT_ADDRESS` secrets. Lifetime tiers — sets `premium_expires_at = NULL`. |
 
 Secrets are Supabase dashboard → Project Settings → Edge Functions → Secrets. `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` are auto-injected — do not set them manually.
 

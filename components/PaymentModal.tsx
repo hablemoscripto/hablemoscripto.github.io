@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from './ui/Modal';
 import { CreditCard, Wallet, Copy, CheckCircle, Loader2, AlertCircle, ExternalLink } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { createPaymentWithSignature, PRODUCTS } from '../services/paymentService';
+import {
+  createPaymentWithSignature,
+  PRICING_PLANS,
+  submitCryptoPayment,
+} from '../services/paymentService';
 import { reportError } from '../utils/errorReporting';
-import { PRICING_PLANS } from './PricingSection';
 
 declare global {
   interface Window {
@@ -43,13 +46,12 @@ interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
   tier: 'premium' | 'vip';
-  billingCycle: 'monthly' | 'yearly';
   onSuccess: () => void;
 }
 
 const USDC_WALLET_ADDRESS = import.meta.env.VITE_USDC_PAYMENT_ADDRESS || '5KUE3sm7pg2bicvGm8wtn1zyff4h57mmyxShhhiQjHc6';
 
-export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSuccess }: PaymentModalProps) {
+export default function PaymentModal({ isOpen, onClose, tier, onSuccess }: PaymentModalProps) {
   const [activeTab, setActiveTab] = useState<'card' | 'crypto'>('card');
   const [loading, setLoading] = useState(false);
   const [widgetLoaded, setWidgetLoaded] = useState(false);
@@ -59,17 +61,12 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
   const [errorMessage, setErrorMessage] = useState('');
   const { user } = useAuth();
 
-  const plan = PRICING_PLANS.find(p => p.tier === tier);
-  const usdPrice = plan
-    ? (billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice)
-    : 0;
-  const copPriceCents = plan
-    ? (billingCycle === 'monthly' ? plan.monthlyPriceCOP : plan.yearlyPriceCOP)
-    : 0;
+  const plan = PRICING_PLANS[tier];
+  const usdPrice = plan.priceUsd;
+  const copPriceCents = plan.priceCopCents;
 
   const publicKey = import.meta.env.VITE_WOMPI_PUBLIC_KEY;
 
-  // Load Wompi Widget script — check if already present on mount.
   useEffect(() => {
     if (document.getElementById('wompi-widget-script')) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -88,15 +85,13 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
     document.body.appendChild(script);
   }, []);
 
-  // Reset state when modal opens — idiomatic React pattern for resetting
-  // local UI state in response to an external prop change.
   useEffect(() => {
     if (isOpen) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setTxSignature('');
-       
+
       setVerifyStatus('idle');
-       
+
       setErrorMessage('');
     }
   }, [isOpen]);
@@ -126,17 +121,19 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
       return;
     }
 
+    if (!plan.productType) {
+      setErrorMessage('Plan no válido para pago.');
+      return;
+    }
+
     setLoading(true);
     setErrorMessage('');
 
     try {
-      // Use the first available product or create one dynamically
-      const product = PRODUCTS['premium_lifetime'] || Object.values(PRODUCTS)[0];
-
       const paymentData = await createPaymentWithSignature(
-        { ...product, priceInCents: copPriceCents },
+        plan.productType,
         user.email || '',
-        user.user_metadata?.full_name || user.user_metadata?.name
+        user.user_metadata?.full_name || user.user_metadata?.name,
       );
 
       const checkout = new window.WidgetCheckout({
@@ -187,21 +184,14 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
     setVerifyStatus('loading');
     setErrorMessage('');
 
-    try {
-      // TODO: Implement server-side verification via Edge Function
-      // For now, simulate verification delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
+    const result = await submitCryptoPayment(tier, txSignature.trim());
 
-      // Placeholder: in production, this would call an edge function to verify
-      // the transaction on Solana and upgrade the user's plan
+    if (result.success) {
       setVerifyStatus('success');
-      setTimeout(() => {
-        onSuccess();
-      }, 1500);
-    } catch (error) {
+      setTimeout(() => onSuccess(), 1500);
+    } else {
       setVerifyStatus('error');
-      setErrorMessage('No se pudo verificar la transacción. Verifica la firma e intenta de nuevo.');
-      reportError(error, { component: 'PaymentModal', action: 'verifyCryptoPayment' });
+      setErrorMessage(result.error || 'No se pudo verificar la transacción.');
     }
   };
 
@@ -209,11 +199,10 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={`Obtener ${plan?.name || 'Plan'}`}
-      subtitle={billingCycle === 'monthly' ? 'Suscripción mensual' : 'Suscripción anual'}
+      title={`Obtener ${plan.name}`}
+      subtitle="Pago único · Acceso de por vida"
       maxWidth="max-w-lg"
     >
-      {/* Tabs */}
       <div className="flex border-b border-navy-700 -mx-6 px-6 -mt-2 mb-6">
         <button
           onClick={() => { setActiveTab('card'); setErrorMessage(''); }}
@@ -223,7 +212,7 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
               : 'border-transparent text-navy-400 hover:text-navy-200'
           }`}
         >
-          <CreditCard size={16} />
+          <CreditCard size={16} aria-hidden="true" />
           Tarjeta
         </button>
         <button
@@ -234,37 +223,31 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
               : 'border-transparent text-navy-400 hover:text-navy-200'
           }`}
         >
-          <Wallet size={16} />
+          <Wallet size={16} aria-hidden="true" />
           USDC en Solana
         </button>
       </div>
 
-      {/* Card Tab */}
       {activeTab === 'card' && (
         <div className="space-y-6">
-          {/* Price summary */}
           <div className="bg-navy-800/50 rounded-2xl p-5 border border-white/5">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-navy-300 text-sm font-medium">Plan {plan?.name}</span>
+              <span className="text-navy-300 text-sm font-medium">Plan {plan.name}</span>
               <span className="text-white font-bold">{formatCOP(copPriceCents)}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-navy-400 text-xs">
-                {billingCycle === 'monthly' ? 'Facturación mensual' : 'Facturación anual'}
-              </span>
+              <span className="text-navy-400 text-xs">Pago único · acceso de por vida</span>
               <span className="text-navy-400 text-xs">COP</span>
             </div>
           </div>
 
-          {/* Error message */}
           {errorMessage && (
             <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-xl">
-              <AlertCircle size={16} className="text-red-400 flex-shrink-0" />
+              <AlertCircle size={16} aria-hidden="true" className="text-red-400 flex-shrink-0" />
               <p className="text-sm text-red-400">{errorMessage}</p>
             </div>
           )}
 
-          {/* Pay button */}
           <button
             onClick={handleCardPayment}
             disabled={loading || !user}
@@ -272,38 +255,35 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
           >
             {loading ? (
               <>
-                <Loader2 size={18} className="animate-spin" />
+                <Loader2 size={18} aria-hidden="true" className="animate-spin" />
                 Procesando...
               </>
             ) : (
               <>
-                <CreditCard size={18} />
+                <CreditCard size={18} aria-hidden="true" />
                 Pagar con tarjeta — {formatCOP(copPriceCents)}
               </>
             )}
           </button>
 
           <p className="text-[11px] text-navy-500 text-center">
-            Pagos procesados de forma segura por Wompi. Puedes cancelar en cualquier momento.
+            Pagos procesados de forma segura por Wompi.
           </p>
         </div>
       )}
 
-      {/* Crypto Tab */}
       {activeTab === 'crypto' && (
         <div className="space-y-6">
-          {/* Price in USDC */}
           <div className="bg-navy-800/50 rounded-2xl p-5 border border-white/5 text-center">
             <p className="text-navy-400 text-xs font-bold uppercase tracking-wider mb-1">Monto a enviar</p>
             <p className="text-3xl font-black text-white tracking-tight">
               ${usdPrice} <span className="text-lg text-navy-400 font-medium">USDC</span>
             </p>
             <p className="text-navy-500 text-xs mt-1">
-              Red: Solana {billingCycle === 'yearly' ? '(suscripción anual)' : '(suscripción mensual)'}
+              Red: Solana · pago único
             </p>
           </div>
 
-          {/* Wallet address */}
           <div>
             <label className="block text-xs font-bold text-navy-400 uppercase tracking-wider mb-2">
               Dirección de pago
@@ -318,9 +298,9 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
                 aria-label="Copiar dirección"
               >
                 {copied ? (
-                  <CheckCircle size={16} className="text-green-400" />
+                  <CheckCircle size={16} aria-hidden="true" className="text-green-400" />
                 ) : (
-                  <Copy size={16} className="text-navy-300" />
+                  <Copy size={16} aria-hidden="true" className="text-navy-300" />
                 )}
               </button>
             </div>
@@ -329,7 +309,6 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
             )}
           </div>
 
-          {/* Instructions */}
           <div className="bg-navy-800/30 rounded-xl p-4 border border-white/5">
             <p className="text-xs font-bold text-navy-300 mb-3 uppercase tracking-wider">Instrucciones</p>
             <ol className="space-y-2 text-sm text-navy-300">
@@ -348,7 +327,6 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
             </ol>
           </div>
 
-          {/* Transaction signature input */}
           <div>
             <label className="block text-xs font-bold text-navy-400 uppercase tracking-wider mb-2">
               Firma de transacción
@@ -363,23 +341,20 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
             />
           </div>
 
-          {/* Error message */}
           {errorMessage && (
             <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-xl">
-              <AlertCircle size={16} className="text-red-400 flex-shrink-0" />
+              <AlertCircle size={16} aria-hidden="true" className="text-red-400 flex-shrink-0" />
               <p className="text-sm text-red-400">{errorMessage}</p>
             </div>
           )}
 
-          {/* Success message */}
           {verifyStatus === 'success' && (
             <div className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/20 rounded-xl">
-              <CheckCircle size={16} className="text-green-400 flex-shrink-0" />
+              <CheckCircle size={16} aria-hidden="true" className="text-green-400 flex-shrink-0" />
               <p className="text-sm text-green-400">Pago verificado exitosamente. Activando tu plan...</p>
             </div>
           )}
 
-          {/* Verify button */}
           <button
             onClick={handleVerifyCrypto}
             disabled={!txSignature.trim() || verifyStatus === 'loading' || verifyStatus === 'success'}
@@ -387,24 +362,24 @@ export default function PaymentModal({ isOpen, onClose, tier, billingCycle, onSu
           >
             {verifyStatus === 'loading' ? (
               <>
-                <Loader2 size={18} className="animate-spin" />
+                <Loader2 size={18} aria-hidden="true" className="animate-spin" />
                 Verificando en Solana...
               </>
             ) : verifyStatus === 'success' ? (
               <>
-                <CheckCircle size={18} />
+                <CheckCircle size={18} aria-hidden="true" />
                 Pago verificado
               </>
             ) : (
               <>
-                <Wallet size={18} />
+                <Wallet size={18} aria-hidden="true" />
                 Verificar Pago
               </>
             )}
           </button>
 
           <p className="text-[11px] text-navy-500 text-center flex items-center justify-center gap-1">
-            <ExternalLink size={10} />
+            <ExternalLink size={10} aria-hidden="true" />
             Puedes verificar la transacción en{' '}
             <a
               href="https://solscan.io"

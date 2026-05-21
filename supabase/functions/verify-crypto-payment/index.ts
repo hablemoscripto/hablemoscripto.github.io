@@ -1,5 +1,6 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { sendFundadorWelcome } from '../_shared/welcome-email.ts'
 
 const ALLOWED_ORIGIN = 'https://hablemoscripto.io'
 
@@ -37,12 +38,6 @@ const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'
 const SOLANA_RPC_URL = Deno.env.get('SOLANA_RPC_URL') || 'https://api.mainnet-beta.solana.com'
 const MAX_TX_AGE_SECONDS = 30 * 60 // 30 minutes
 
-// Tier durations in days
-const BILLING_DURATIONS: Record<string, number> = {
-  monthly: 30,
-  yearly: 365,
-}
-
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
@@ -51,7 +46,6 @@ interface VerifyRequest {
   transactionSignature: string
   expectedAmount: number
   tier: string
-  billingCycle: string
 }
 
 // Solana JSON-RPC parsed transaction types (subset we need)
@@ -250,18 +244,14 @@ serve(async (req) => {
 
     // ---- Parse body ----
     const body: VerifyRequest = await req.json()
-    const { transactionSignature, expectedAmount, tier, billingCycle } = body
+    const { transactionSignature, expectedAmount, tier } = body
 
-    if (!transactionSignature || !expectedAmount || !tier || !billingCycle) {
+    if (!transactionSignature || !expectedAmount || !tier) {
       return jsonResponse({ error: 'Faltan campos obligatorios' }, 400)
     }
 
     if (!['premium', 'vip'].includes(tier)) {
       return jsonResponse({ error: 'Tier no valido' }, 400)
-    }
-
-    if (!['monthly', 'yearly'].includes(billingCycle)) {
-      return jsonResponse({ error: 'Ciclo de facturacion no valido' }, 400)
     }
 
     // ---- Check for duplicate submission ----
@@ -332,13 +322,8 @@ serve(async (req) => {
     }
 
     // ---- All checks passed — record payment and upgrade user ----
+    // Lifetime tiers leave premium_expires_at NULL.
 
-    // Calculate expiration
-    const durationDays = BILLING_DURATIONS[billingCycle]
-    const expiresAt = new Date()
-    expiresAt.setDate(expiresAt.getDate() + durationDays)
-
-    // Insert crypto payment record
     const { error: insertError } = await adminClient
       .from('crypto_payments')
       .insert({
@@ -346,7 +331,7 @@ serve(async (req) => {
         transaction_signature: transactionSignature,
         amount_usdc: expectedAmount,
         tier,
-        billing_cycle: billingCycle,
+        billing_cycle: 'lifetime',
         status: 'verified',
       })
 
@@ -358,15 +343,14 @@ serve(async (req) => {
       )
     }
 
-    // Upgrade user profile
     const { error: updateError } = await adminClient
       .from('user_profiles')
       .update({
         is_premium: true,
         premium_tier: tier,
-        billing_cycle: billingCycle,
+        billing_cycle: 'lifetime',
         premium_since: new Date().toISOString(),
-        premium_expires_at: expiresAt.toISOString(),
+        premium_expires_at: null,
       })
       .eq('id', user.id)
 
@@ -378,12 +362,18 @@ serve(async (req) => {
       )
     }
 
+    // Fundador welcome email — non-fatal if it fails.
+    await sendFundadorWelcome({
+      to: user.email ?? '',
+      name: user.user_metadata?.full_name ?? user.user_metadata?.name,
+      tier: tier as 'premium' | 'vip',
+      resendApiKey: Deno.env.get('RESEND_API_KEY') ?? '',
+    })
+
     return jsonResponse(
       {
         success: true,
         tier,
-        billingCycle,
-        expiresAt: expiresAt.toISOString(),
       },
       200,
     )

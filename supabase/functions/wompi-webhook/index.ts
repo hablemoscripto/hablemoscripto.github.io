@@ -1,5 +1,6 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { sendFundadorWelcome } from '../_shared/welcome-email.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -99,16 +100,27 @@ serve(async (req) => {
     }
 
     const { transaction } = event.data
-
-    // Idempotency: record the event signature before doing any work. A unique
-    // violation on the primary key means we already handled this exact event —
-    // return success so Wompi stops retrying, but perform no side effects.
-    //
-    // This is stronger than comparing `payments.status` alone, which would
-    // incorrectly short-circuit a retry that arrives after a partially
-    // completed prior attempt (e.g. payment row updated but the premium
-    // upgrade RPC failed and the webhook returned 500).
     const eventId = event.signature.checksum
+
+    // Idempotency strategy:
+    //   1. INSERT a marker row keyed by signature.checksum *before* doing work.
+    //      This wins the race against a simultaneous retry — only one caller
+    //      can pass the unique constraint.
+    //   2. Do the work.
+    //   3. If the work fails, DELETE the marker row before returning non-2xx,
+    //      so Wompi's retry can actually retry. Without step 3, a transient
+    //      RPC failure is fatal: the marker row is left behind, and every
+    //      retry returns "Already processed" while the user never gets premium.
+    const cleanupDedupeRow = async () => {
+      const { error } = await supabase
+        .from('processed_webhook_events')
+        .delete()
+        .eq('id', eventId)
+      if (error) {
+        console.error('Failed to clean up dedupe row for retry:', error)
+      }
+    }
+
     const { error: dedupeError } = await supabase
       .from('processed_webhook_events')
       .insert({
@@ -119,7 +131,6 @@ serve(async (req) => {
       })
 
     if (dedupeError) {
-      // 23505 = unique_violation → this event was already processed.
       if (dedupeError.code === '23505') {
         console.log('Duplicate event — already processed:', eventId)
         return new Response(
@@ -127,7 +138,6 @@ serve(async (req) => {
           { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         )
       }
-      // Any other insert error is a real failure — surface it so Wompi retries.
       console.error('Failed to record webhook event:', dedupeError)
       return new Response(
         JSON.stringify({ error: 'Internal server error' }),
@@ -135,7 +145,6 @@ serve(async (req) => {
       )
     }
 
-    // Update payment in database
     const { data: payment, error: paymentError } = await supabase
       .from('payments')
       .update({
@@ -150,13 +159,13 @@ serve(async (req) => {
 
     if (paymentError) {
       console.error('Error updating payment:', paymentError)
+      await cleanupDedupeRow()
       return new Response(
         JSON.stringify({ error: 'Payment not found' }),
         { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
 
-    // If payment approved, upgrade user to premium
     if (transaction.status === 'APPROVED' && payment.user_id) {
       const { error: upgradeError } = await supabase.rpc('upgrade_user_to_premium', {
         p_user_id: payment.user_id,
@@ -165,8 +174,7 @@ serve(async (req) => {
 
       if (upgradeError) {
         console.error('Error upgrading user:', upgradeError)
-        // Return 500 so Wompi retries the webhook — payment was recorded
-        // but user upgrade failed, which must not be silently ignored
+        await cleanupDedupeRow()
         return new Response(
           JSON.stringify({ error: 'Failed to upgrade user', reference: transaction.reference }),
           { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -174,6 +182,17 @@ serve(async (req) => {
       }
 
       console.log('User upgraded to premium:', payment.user_id)
+
+      // Fundador welcome email — non-fatal if it fails, the upgrade already
+      // succeeded. Tier is derived from the SKU prefix.
+      const tier: 'premium' | 'vip' =
+        payment.product_type === 'vip_lifetime' ? 'vip' : 'premium'
+      await sendFundadorWelcome({
+        to: payment.customer_email ?? transaction.customer_email,
+        name: payment.customer_name ?? transaction.customer_data?.full_name,
+        tier,
+        resendApiKey: Deno.env.get('RESEND_API_KEY') ?? '',
+      })
     }
 
     return new Response(

@@ -58,7 +58,6 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   // Pricing / payment state
   const [userTier, setUserTier] = useState<'free' | 'premium' | 'vip'>('free');
   const [selectedTier, setSelectedTier] = useState<'premium' | 'vip' | null>(null);
-  const [selectedCycle, setSelectedCycle] = useState<'monthly' | 'yearly' | null>(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   // Check user subscription tier on mount
@@ -283,10 +282,21 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             <span className="text-brand-500">Plataforma Educativa</span>
           </div>
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-4 sm:gap-6">
+            {userTier !== 'free' && (
+              <div
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/30"
+                aria-label="Miembro Fundador"
+              >
+                <Award size={12} className="text-brand-400" aria-hidden="true" />
+                <span className="text-[10px] font-black uppercase tracking-[0.18em] text-brand-300">
+                  Fundador
+                </span>
+              </div>
+            )}
             <div className="flex items-center gap-3">
                <div className="w-8 h-8 rounded-lg bg-navy-950 border border-white/5 flex items-center justify-center">
-                  <Trophy size={16} className="text-brand-500" />
+                  <Trophy size={16} className="text-brand-500" aria-hidden="true" />
                </div>
                <div className="flex flex-col leading-none">
                   <span className="text-white font-black text-sm tracking-tight">{totalCompletedLessons}</span>
@@ -496,9 +506,8 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           {/* Pricing Section */}
           <PricingSection
             currentTier={userTier}
-            onSelectPlan={(tier, cycle) => {
+            onSelectPlan={(tier) => {
               setSelectedTier(tier);
-              setSelectedCycle(cycle);
               setShowPaymentModal(true);
             }}
           />
@@ -506,7 +515,6 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             isOpen={showPaymentModal}
             onClose={() => setShowPaymentModal(false)}
             tier={selectedTier || 'premium'}
-            billingCycle={selectedCycle || 'monthly'}
             onSuccess={() => {
               setShowPaymentModal(false);
               setUserTier(selectedTier || 'premium');

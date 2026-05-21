@@ -2,33 +2,84 @@ import { supabase } from '../lib/supabase';
 import { reportError } from '../utils/errorReporting';
 
 // ---------------------------------------------------------------------------
-// Types
+// Pricing model
+//
+// Lifetime tiers only at launch — see PRODUCTION-CHECKLIST.md and the
+// founder-context memory for why. Monthly/yearly subscription SKUs will be
+// added later on top of Wompi tokenization (Payment Sources). Until then,
+// `productType` strings live in this file and the create-payment Edge
+// Function's PRODUCT_CATALOG. The two MUST stay in sync.
 // ---------------------------------------------------------------------------
 
 export type PlanTier = 'free' | 'premium' | 'vip';
-export type BillingCycle = 'monthly' | 'yearly';
 
 export interface PricingPlan {
   tier: PlanTier;
   name: string;
   description: string;
-  priceUsdMonthly: number;
-  priceUsdYearly: number;
-  priceCopMonthly: number;
-  priceCopYearly: number;
-  priceUsdcMonthly: number;
-  priceUsdcYearly: number;
+  priceUsd: number;
+  priceCopCents: number; // centavos — what Wompi expects on amountInCents
+  priceUsdc: number;
+  productType?: string; // SKU sent to create-payment / verify-crypto-payment
   features: string[];
+  highlighted?: boolean;
+  gradient?: boolean;
 }
 
-/** @deprecated Use PricingPlan / PRICING_PLANS instead */
-export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  priceInCents: number;
-  type: 'premium_lifetime' | 'premium_yearly' | 'premium_monthly';
-}
+export const PRICING_PLANS: Record<PlanTier, PricingPlan> = {
+  free: {
+    tier: 'free',
+    name: 'Explorador',
+    description: 'Empieza tu camino en el mundo cripto',
+    priceUsd: 0,
+    priceCopCents: 0,
+    priceUsdc: 0,
+    features: [
+      'Nivel Principiante completo (19 lecciones)',
+      'Quizzes interactivos',
+      'Certificado de nivel',
+      'Sistema de logros',
+      'Asistente IA (límite diario)',
+    ],
+  },
+  premium: {
+    tier: 'premium',
+    name: 'Inversor',
+    description: 'Para quienes quieren dominar DeFi',
+    priceUsd: 99,
+    priceCopCents: 35000000, // 350,000 COP
+    priceUsdc: 99,
+    productType: 'inversor_lifetime',
+    features: [
+      'Todo lo del plan Explorador',
+      'Nivel Intermedio completo (12 lecciones)',
+      'Análisis de mercado semanal',
+      'Asistente IA ilimitado',
+      'Comunidad privada',
+      'Sesiones en vivo mensuales',
+    ],
+    highlighted: true,
+  },
+  vip: {
+    tier: 'vip',
+    name: 'Cripto Experto',
+    description: 'Acceso total + mentoría personalizada',
+    priceUsd: 249,
+    priceCopCents: 90000000, // 900,000 COP
+    priceUsdc: 249,
+    productType: 'vip_lifetime',
+    features: [
+      'Todo lo del plan Inversor',
+      'Nivel Avanzado completo (11 lecciones)',
+      'Mentoría 1 a 1 mensual',
+      'Estrategias avanzadas de trading',
+      'Alertas de mercado en tiempo real',
+      'Acceso anticipado a nuevo contenido',
+      'Grupo exclusivo de networking',
+    ],
+    gradient: true,
+  },
+};
 
 export interface PaymentData {
   reference: string;
@@ -38,86 +89,11 @@ export interface PaymentData {
 }
 
 // ---------------------------------------------------------------------------
-// Pricing plans
-// ---------------------------------------------------------------------------
-
-export const PRICING_PLANS: Record<PlanTier, PricingPlan> = {
-  free: {
-    tier: 'free',
-    name: 'Explorador',
-    description: 'Comienza tu viaje en cripto',
-    priceUsdMonthly: 0,
-    priceUsdYearly: 0,
-    priceCopMonthly: 0,
-    priceCopYearly: 0,
-    priceUsdcMonthly: 0,
-    priceUsdcYearly: 0,
-    features: [
-      'Nivel Principiante completo (19 lecciones)',
-      'Asistente IA CBas (5 preguntas/dia)',
-      'Newsletter semanal gratuito',
-      'Gamificacion basica (XP y rachas)',
-    ],
-  },
-  premium: {
-    tier: 'premium',
-    name: 'Inversor',
-    description: 'Acceso completo a toda la educación',
-    priceUsdMonthly: 15,
-    priceUsdYearly: 120,
-    priceCopMonthly: 65000,
-    priceCopYearly: 520000,
-    priceUsdcMonthly: 15,
-    priceUsdcYearly: 120,
-    features: [
-      'Las 44 lecciones (Principiante + Intermedio + Avanzado)',
-      'Asistente IA CBas ilimitado',
-      'Quizzes y certificados',
-      'Gamificacion completa',
-      'Acceso a contenido futuro',
-    ],
-  },
-  vip: {
-    tier: 'vip',
-    name: 'Cripto Experto',
-    description: 'Mentoria directa con CBas',
-    priceUsdMonthly: 35,
-    priceUsdYearly: 299,
-    priceCopMonthly: 150000,
-    priceCopYearly: 1290000,
-    priceUsdcMonthly: 35,
-    priceUsdcYearly: 299,
-    features: [
-      'Todo lo de Inversor',
-      'Llamada grupal semanal en vivo con CBas',
-      'Canal privado de Discord',
-      'Analisis de mercado semanal detallado',
-      'Q&A directo con prioridad',
-      'Acceso anticipado a nuevo contenido',
-    ],
-  },
-};
-
-/**
- * @deprecated Kept for backward compatibility with PaymentButton.
- * Prefer PRICING_PLANS for new code.
- */
-export const PRODUCTS: Record<string, Product> = {
-  premium_lifetime: {
-    id: 'premium_lifetime',
-    name: 'Premium Lifetime',
-    description: 'Acceso de por vida a todo el contenido premium',
-    priceInCents: 9900000, // $99,000 COP
-    type: 'premium_lifetime',
-  },
-};
-
-// ---------------------------------------------------------------------------
 // Wompi (COP) payments
 // ---------------------------------------------------------------------------
 
 export async function createPaymentWithSignature(
-  product: Product,
+  productType: string,
   customerEmail: string,
   customerName?: string,
 ): Promise<PaymentData> {
@@ -129,17 +105,16 @@ export async function createPaymentWithSignature(
     throw new Error('No authenticated session');
   }
 
-  const accessToken = session.access_token;
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 
   const response = await fetch(`${supabaseUrl}/functions/v1/create-payment`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${session.access_token}`,
     },
     body: JSON.stringify({
-      productType: product.type,
+      productType,
       customerEmail,
       customerName,
     }),
@@ -172,12 +147,9 @@ export async function getPaymentByReference(reference: string) {
 }
 
 // ---------------------------------------------------------------------------
-// Subscription status
+// Subscription / tier status
 // ---------------------------------------------------------------------------
 
-/**
- * @deprecated Use getUserSubscriptionStatus for tier-aware status.
- */
 export async function getUserPremiumStatus(userId: string) {
   const { data, error } = await supabase
     .from('user_profiles')
@@ -196,6 +168,8 @@ export async function getUserPremiumStatus(userId: string) {
     throw error;
   }
 
+  // Lifetime tiers leave premium_expires_at NULL. Only enforce expiration
+  // when it's set — that's the future subscription path.
   if (data.is_premium && data.premium_expires_at) {
     const expiresAt = new Date(data.premium_expires_at);
     if (expiresAt < new Date()) {
@@ -210,28 +184,19 @@ export async function getUserPremiumStatus(userId: string) {
   };
 }
 
-/**
- * Returns the user's current subscription tier, expiration date, and billing
- * cycle. Falls back to 'free' when no active subscription is found or the
- * subscription has expired.
- */
 export async function getUserSubscriptionStatus(
   userId: string,
 ): Promise<{
   tier: PlanTier;
   expiresAt?: string;
-  billingCycle?: BillingCycle;
 }> {
   const { data, error } = await supabase
     .from('user_profiles')
-    .select(
-      'is_premium, premium_tier, premium_expires_at, billing_cycle',
-    )
+    .select('is_premium, premium_tier, premium_expires_at')
     .eq('id', userId)
     .single();
 
   if (error) {
-    // Profile might not exist yet — treat as free
     if (error.code === 'PGRST116') {
       return { tier: 'free' };
     }
@@ -242,12 +207,10 @@ export async function getUserSubscriptionStatus(
     throw error;
   }
 
-  // No active subscription
   if (!data.is_premium) {
     return { tier: 'free' };
   }
 
-  // Check expiration
   if (data.premium_expires_at) {
     const expiresAt = new Date(data.premium_expires_at);
     if (expiresAt < new Date()) {
@@ -265,7 +228,6 @@ export async function getUserSubscriptionStatus(
   return {
     tier,
     expiresAt: data.premium_expires_at ?? undefined,
-    billingCycle: (data.billing_cycle as BillingCycle) ?? undefined,
   };
 }
 
@@ -273,14 +235,8 @@ export async function getUserSubscriptionStatus(
 // USDC (crypto) payments
 // ---------------------------------------------------------------------------
 
-/**
- * Submits a Solana USDC transaction signature to the backend for
- * verification. On success the Edge Function upgrades the user's tier
- * and creates a payment record.
- */
 export async function submitCryptoPayment(
-  tier: PlanTier,
-  billingCycle: BillingCycle,
+  tier: 'premium' | 'vip',
   transactionSignature: string,
 ): Promise<{ success: boolean; error?: string }> {
   const {
@@ -291,10 +247,7 @@ export async function submitCryptoPayment(
     return { success: false, error: 'No authenticated session' };
   }
 
-  const plan = PRICING_PLANS[tier];
-  const expectedAmount =
-    billingCycle === 'yearly' ? plan.priceUsdcYearly : plan.priceUsdcMonthly;
-
+  const expectedAmount = PRICING_PLANS[tier].priceUsdc;
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 
   try {
@@ -310,7 +263,6 @@ export async function submitCryptoPayment(
           transactionSignature,
           expectedAmount,
           tier,
-          billingCycle,
         }),
       },
     );
