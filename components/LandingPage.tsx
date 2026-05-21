@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Hero from './Hero';
 import Features from './Features';
 import Courses from './Courses';
+import PricingSection from './PricingSection';
 import Footer from './Footer';
 import AuthModal from './AuthModal';
 import { useAuth } from '../contexts/AuthContext';
@@ -121,6 +122,15 @@ const LandingPage: React.FC = () => {
         <Hero onStartLearning={handleNavigateToEducation} />
         <Features />
         <Courses />
+
+        {/* Public Pricing Section */}
+        <section id="pricing" className="py-24 bg-navy-950 relative scroll-mt-28">
+          <PricingSection
+            variant="public"
+            onPublicCta={handleNavigateToEducation}
+          />
+        </section>
+
         {/* FAQ Section */}
         <section className="py-24 bg-navy-950 relative">
             <div className="container max-w-4xl mx-auto px-6">

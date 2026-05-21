@@ -4,12 +4,20 @@ import { Check, Crown, Sparkles, Zap } from 'lucide-react';
 import { PRICING_PLANS, type PlanTier } from '../services/paymentService';
 
 interface PricingSectionProps {
-  currentTier: PlanTier;
-  onSelectPlan: (tier: 'premium' | 'vip') => void;
+  variant?: 'authenticated' | 'public';
+  currentTier?: PlanTier;
+  onSelectPlan?: (tier: 'premium' | 'vip') => void;
+  onPublicCta?: () => void;
 }
 
 const tierOrder: Record<PlanTier, number> = { free: 0, premium: 1, vip: 2 };
 const PLAN_ORDER: PlanTier[] = ['free', 'premium', 'vip'];
+
+const PUBLIC_CTA_LABELS: Record<PlanTier, string> = {
+  free: 'Empieza ahora',
+  premium: 'Desbloquea Intermedio',
+  vip: 'Acceso completo',
+};
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -20,11 +28,18 @@ const cardVariants = {
   }),
 };
 
-export default function PricingSection({ currentTier, onSelectPlan }: PricingSectionProps) {
+export default function PricingSection({
+  variant = 'authenticated',
+  currentTier,
+  onSelectPlan,
+  onPublicCta,
+}: PricingSectionProps) {
   const formatUSD = (amount: number) => (amount === 0 ? 'Gratis' : `$${amount}`);
 
-  const isCurrentPlan = (planTier: PlanTier) => planTier === currentTier;
-  const isIncluded = (planTier: PlanTier) => tierOrder[planTier] < tierOrder[currentTier];
+  const isPublic = variant === 'public';
+  const isCurrentPlan = (planTier: PlanTier) => !isPublic && planTier === currentTier;
+  const isIncluded = (planTier: PlanTier) =>
+    !isPublic && currentTier !== undefined && tierOrder[planTier] < tierOrder[currentTier];
 
   return (
     <div className="container max-w-7xl mx-auto px-6 mt-24">
@@ -166,7 +181,18 @@ export default function PricingSection({ currentTier, onSelectPlan }: PricingSec
                   ))}
                 </ul>
 
-                {isFreePlan ? (
+                {isPublic ? (
+                  <button
+                    onClick={() => onPublicCta?.()}
+                    className={`w-full py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 cursor-pointer ${
+                      plan.highlighted || plan.gradient
+                        ? 'bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40'
+                        : 'bg-navy-800 hover:bg-navy-700 border border-white/10 hover:border-brand-500/40 text-white'
+                    }`}
+                  >
+                    {PUBLIC_CTA_LABELS[plan.tier]}
+                  </button>
+                ) : isFreePlan ? (
                   <div className="w-full py-3.5 rounded-2xl text-center text-sm font-bold bg-navy-800 border border-white/5 text-navy-400">
                     {isCurrent ? 'Plan Actual' : 'Incluido'}
                   </div>
@@ -180,7 +206,7 @@ export default function PricingSection({ currentTier, onSelectPlan }: PricingSec
                   </div>
                 ) : (
                   <button
-                    onClick={() => onSelectPlan(plan.tier as 'premium' | 'vip')}
+                    onClick={() => onSelectPlan?.(plan.tier as 'premium' | 'vip')}
                     className={`w-full py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 cursor-pointer ${
                       plan.highlighted
                         ? 'bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40'
