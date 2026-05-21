@@ -1,9 +1,8 @@
 
-import React, { useState } from 'react';
-import { Shield, Users, Compass, Zap, Twitter, Youtube } from 'lucide-react';
+import React from 'react';
+import { Shield, Users, Compass, Zap, Twitter, Youtube, Clock } from 'lucide-react';
 
 const Features: React.FC = () => {
-  const [imageActive, setImageActive] = useState(false);
   return (
     <section id="about" className="py-32 bg-navy-950 relative overflow-hidden scroll-mt-28">
       {/* Background decoration */}
@@ -11,17 +10,17 @@ const Features: React.FC = () => {
 
       <div className="container max-w-7xl mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-20">
-          
-          {/* Image/Profile Side */}
-          <div className="lg:w-1/2 relative flex justify-center lg:justify-start">
+
+          {/* Founder credibility unit — avatar + bio + handles, stacked */}
+          <div className="lg:w-1/2 flex flex-col items-center lg:items-start gap-8">
+
             <div className="relative group">
               {/* Outer Glow */}
               <div className="absolute -inset-4 bg-brand-500/20 rounded-5xl blur-2xl group-hover:bg-brand-500/30 transition-all duration-500"></div>
-              
+
               <div
                 style={{ clipPath: 'inset(0 round 2rem)' }}
-                className="relative border border-white/10 shadow-glass transform lg:-rotate-3 group-hover:rotate-0 transition-all duration-700 bg-navy-900 isolation-isolate z-0 cursor-pointer will-change-transform"
-                onClick={() => setImageActive(prev => !prev)}
+                className="relative border border-white/10 shadow-glass transform lg:-rotate-3 group-hover:rotate-0 transition-all duration-700 bg-navy-900 isolation-isolate z-0 will-change-transform"
               >
                 <picture>
                   <source
@@ -31,43 +30,72 @@ const Features: React.FC = () => {
                   />
                   <img
                     src="/images/MadLad.webp"
-                    alt="CBas Founder"
+                    alt="Avatar de CBas, fundador y analista de Hablemos Cripto"
                     width={450}
                     height={450}
                     loading="lazy"
-                    className={`w-full max-w-[450px] h-auto block transition-all duration-700 ${
-                      imageActive
-                        ? 'mix-blend-normal scale-105'
-                        : 'mix-blend-luminosity group-hover:mix-blend-normal group-hover:scale-105'
-                    }`}
+                    className="w-full max-w-[450px] h-auto block transition-transform duration-700 group-hover:scale-105"
                   />
                 </picture>
-                
-                {/* Floating Badge */}
+
+                {/* Floating Badge — identity tag */}
                 <div className="absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-navy-950/80 backdrop-blur-xl border border-white/10 shadow-glow-brand">
                    <div className="flex items-center justify-between">
                       <div>
                         <p className="text-white font-black text-xl tracking-tighter">CBas</p>
                         <p className="text-brand-500 text-xs font-bold uppercase tracking-widest">Fundador & Analista</p>
-                        <div className="flex gap-3 mt-3">
-                            <a href="https://twitter.com/Crypto_CBas" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center text-navy-400 hover:bg-brand-500 hover:text-navy-900 transition-all" aria-label="Twitter">
-                                <Twitter size={14} />
-                            </a>
-                            <a href="https://www.youtube.com/@hablemoscripto" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center text-navy-400 hover:bg-red-600 hover:text-white transition-all" aria-label="YouTube">
-                                <Youtube size={14} />
-                            </a>
-                        </div>
                       </div>
                       <div className="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-navy-950">
-                        <Zap size={20} fill="currentColor" />
+                        <Zap size={20} fill="currentColor" aria-hidden="true" />
                       </div>
                    </div>
                 </div>
               </div>
-              
+
               {/* Decorative Elements */}
               <div className="absolute -top-6 -right-6 w-24 h-24 border-t-2 border-r-2 border-brand-500/30 rounded-tr-3xl"></div>
               <div className="absolute -bottom-6 -left-6 w-24 h-24 border-b-2 border-l-2 border-brand-500/30 rounded-bl-3xl"></div>
+            </div>
+
+            {/* Sobre CBas — credibility panel anchored to avatar */}
+            <div className="w-full max-w-[450px] p-6 rounded-2xl bg-navy-900/50 border border-white/5 shadow-glass">
+              <p className="text-brand-500 text-[10px] font-black uppercase tracking-[0.2em] mb-3">Sobre CBas</p>
+              <p className="text-navy-200 text-sm leading-relaxed font-medium">
+                He vivido ciclos alcistas y bajistas completos del mercado cripto — desde el crash de 2018 hasta el bull run de 2021 y todo lo que vino después. Aquí enseño a leer el mercado, no a especular con él. Sin shilling ni promesas de enriquecimiento rápido.
+              </p>
+
+              <div className="mt-5 pt-5 border-t border-white/5 space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20">
+                  <Clock size={12} className="text-brand-400" aria-hidden="true" />
+                  <span className="text-[11px] font-bold text-brand-300 uppercase tracking-wider">7+ años en el mercado</span>
+                </div>
+
+                <a
+                  href="https://twitter.com/Crypto_CBas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-navy-300 hover:text-white transition-colors text-sm font-medium group/link"
+                  aria-label="Twitter — @Crypto_CBas (abre en una pestaña nueva)"
+                >
+                  <span className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center text-navy-400 group-hover/link:bg-brand-500 group-hover/link:text-navy-900 transition-all">
+                    <Twitter size={14} aria-hidden="true" />
+                  </span>
+                  <span>@Crypto_CBas</span>
+                </a>
+
+                <a
+                  href="https://www.youtube.com/@hablemoscripto"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-navy-300 hover:text-white transition-colors text-sm font-medium group/link"
+                  aria-label="YouTube — @hablemoscripto (abre en una pestaña nueva)"
+                >
+                  <span className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center text-navy-400 group-hover/link:bg-red-600 group-hover/link:text-white transition-all">
+                    <Youtube size={14} aria-hidden="true" />
+                  </span>
+                  <span>@hablemoscripto</span>
+                </a>
+              </div>
             </div>
           </div>
 
