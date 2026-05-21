@@ -2,38 +2,65 @@ import { supabase } from '../lib/supabase';
 import { reportError } from '../utils/errorReporting';
 
 // ---------------------------------------------------------------------------
-// Pricing model
+// Pricing model — v2 (May 2026)
 //
-// Lifetime tiers only at launch — see PRODUCTION-CHECKLIST.md and the
-// founder-context memory for why. Monthly/yearly subscription SKUs will be
-// added later on top of Wompi tokenization (Payment Sources). Until then,
-// `productType` strings live in this file and the create-payment Edge
-// Function's PRODUCT_CATALOG. The two MUST stay in sync.
+// Replaces the legacy binary free/premium/vip set with a multi-product
+// structure for LatAm: two lifetime course tiers (Básico / Completo), a
+// 12-month Comunidad pass, and an Acceso Total bundle. All v1 products are
+// one-time purchases — Wompi does not natively support recurring billing,
+// so Comunidad renews via re-purchase + email reminder, not a subscription.
+//
+// `wompiSku` is the SKU sent to create-payment / wompi-webhook. The server
+// catalog (supabase/functions/create-payment/index.ts → PRODUCT_CATALOG)
+// MUST stay in sync with `wompiSku` values here.
 // ---------------------------------------------------------------------------
 
-export type PlanTier = 'free' | 'premium' | 'vip';
+export type PlanId =
+  | 'free'
+  | 'basico'
+  | 'completo'
+  | 'comunidad_anual'
+  | 'acceso_total';
+
+export type ProductType = 'course' | 'community' | 'bundle';
+
+export type CourseTier = 'free' | 'basico' | 'completo';
+export type CommunityStatus = 'none' | 'active' | 'expired';
 
 export interface PricingPlan {
-  tier: PlanTier;
+  id: PlanId;
+  productType: ProductType;
   name: string;
   description: string;
   priceUsd: number;
-  priceCopCents: number; // centavos — what Wompi expects on amountInCents
-  priceUsdc: number;
-  productType?: string; // SKU sent to create-payment / verify-crypto-payment
+  // TODO(launch-blocker, priceCopCents): the COP figures below are arithmetic
+  // conversions of priceUsd at a placeholder FX rate (~4,000 COP/USD). Before
+  // any real launch, replace with EITHER (a) a daily-updated FX rate computed
+  // at checkout time, OR (b) deliberately re-priced COP-native round numbers
+  // (e.g., 299,000 COP instead of 316,000 — rounder and more familiar for
+  // Colombian buyers anyway). Do NOT ship with these placeholder values.
+  priceCopCents: number; // centavos — Wompi widget expects amountInCents in COP
+
+  wompiSku?: string; // SKU sent to create-payment Edge Function
+
+  // Entitlement grants applied on successful purchase.
+  grantsCourseTier?: CourseTier;    // omitted for community-only plans
+  grantsCommunityMonths?: number;   // sets communityStatus='active' for N months
+
+  // UI metadata
   features: string[];
   highlighted?: boolean;
   gradient?: boolean;
 }
 
-export const PRICING_PLANS: Record<PlanTier, PricingPlan> = {
+export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
   free: {
-    tier: 'free',
-    name: 'Explorador',
+    id: 'free',
+    productType: 'course',
+    name: 'Principiante',
     description: 'Empieza tu camino en el mundo cripto',
     priceUsd: 0,
     priceCopCents: 0,
-    priceUsdc: 0,
     features: [
       'Nivel Principiante completo (19 lecciones)',
       'Quizzes interactivos',
@@ -42,40 +69,68 @@ export const PRICING_PLANS: Record<PlanTier, PricingPlan> = {
       'Asistente IA (límite diario)',
     ],
   },
-  premium: {
-    tier: 'premium',
-    name: 'Inversor',
-    description: 'Para quienes quieren dominar DeFi',
-    priceUsd: 99,
-    priceCopCents: 35000000, // 350,000 COP
-    priceUsdc: 99,
-    productType: 'inversor_lifetime',
+  basico: {
+    id: 'basico',
+    productType: 'course',
+    name: 'Cripto Básico',
+    description: 'Desbloquea el Nivel Intermedio',
+    priceUsd: 79,
+    priceCopCents: 31600000,
+    wompiSku: 'basico_lifetime',
+    grantsCourseTier: 'basico',
     features: [
-      'Todo lo del plan Explorador',
+      'Todo lo del plan Principiante',
       'Nivel Intermedio completo (12 lecciones)',
-      'Análisis de mercado semanal',
-      'Asistente IA ilimitado',
-      'Comunidad privada',
-      'Sesiones en vivo mensuales',
+      'Acceso de por vida',
     ],
     highlighted: true,
   },
-  vip: {
-    tier: 'vip',
-    name: 'Cripto Experto',
-    description: 'Acceso total + mentoría personalizada',
-    priceUsd: 249,
-    priceCopCents: 90000000, // 900,000 COP
-    priceUsdc: 249,
-    productType: 'vip_lifetime',
+  completo: {
+    id: 'completo',
+    productType: 'course',
+    name: 'Cripto Completo',
+    description: 'Acceso de por vida a todo el contenido',
+    priceUsd: 179,
+    priceCopCents: 71600000,
+    wompiSku: 'completo_lifetime',
+    grantsCourseTier: 'completo',
     features: [
-      'Todo lo del plan Inversor',
+      'Todo lo del plan Cripto Básico',
       'Nivel Avanzado completo (11 lecciones)',
-      'Mentoría 1 a 1 mensual',
-      'Estrategias avanzadas de trading',
-      'Alertas de mercado en tiempo real',
-      'Acceso anticipado a nuevo contenido',
-      'Grupo exclusivo de networking',
+      'Acceso de por vida',
+    ],
+    gradient: true,
+  },
+  comunidad_anual: {
+    id: 'comunidad_anual',
+    productType: 'community',
+    name: 'Comunidad anual',
+    description: '12 meses de acceso a la Comunidad',
+    priceUsd: 190,
+    priceCopCents: 76000000,
+    wompiSku: 'comunidad_annual',
+    grantsCommunityMonths: 12,
+    features: [
+      '12 meses de acceso a la Comunidad (Discord)',
+      'Sesiones en vivo mensuales',
+      'Análisis de mercado y oportunidades',
+      'Renovación manual al vencer',
+    ],
+  },
+  acceso_total: {
+    id: 'acceso_total',
+    productType: 'bundle',
+    name: 'Acceso Total',
+    description: 'Cripto Completo + 12 meses de Comunidad',
+    priceUsd: 329,
+    priceCopCents: 131600000,
+    wompiSku: 'acceso_total_bundle',
+    grantsCourseTier: 'completo',
+    grantsCommunityMonths: 12,
+    features: [
+      'Cripto Completo (de por vida)',
+      '12 meses de Comunidad',
+      'Mejor relación precio/valor',
     ],
     gradient: true,
   },
