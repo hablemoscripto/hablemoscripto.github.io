@@ -4,7 +4,7 @@ import { Users, BookOpen, Award, Zap, CheckCircle } from 'lucide-react';
 import ParticlesBackground from './ParticlesBackground';
 
 // Constants moved outside component to prevent re-creation
-const WORDS = ["Bitcoin", "Solana", "Trading", "Web3", "Cripto"];
+const WORDS = ["Bitcoin", "Solana", "Trading", "Web3"];
 const TYPING_SPEED = 100;
 const DELETING_SPEED = 50;
 const PAUSE_TIME = 2000;
@@ -108,7 +108,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white leading-[1] tracking-tighter mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
               De Cero a Experto en <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-brand-500 to-brand-600 drop-shadow-glow-brand-strong">
-                Hablemos Cripto
+                Cripto.
               </span>
             </h1>
 
