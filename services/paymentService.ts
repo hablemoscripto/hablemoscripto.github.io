@@ -166,6 +166,46 @@ export const ANONYMOUS_ENTITLEMENTS: UserEntitlements = {
 };
 
 // ---------------------------------------------------------------------------
+// Access helpers
+//
+// canAccessLevel — gates lesson levels by courseTier. Note this is the
+// entitlement gate (do they own the level?), not the progress gate (have
+// they finished the prerequisite level?). Both gates are independent;
+// progress-based locking lives in EducationPage.isLevelLocked.
+//
+// hasCommunityAccess — true iff communityStatus is 'active' AND the
+// expiry date is still in the future. Lazy-derived; the DB row may say
+// 'active' but be effectively expired until a maintenance job runs.
+// ---------------------------------------------------------------------------
+
+const COURSE_TIER_RANK: Record<CourseTier, number> = {
+  free: 0,
+  basico: 1,
+  completo: 2,
+};
+
+const LEVEL_REQUIREMENTS: Record<string, CourseTier> = {
+  beginner: 'free',
+  intermediate: 'basico',
+  advanced: 'completo',
+};
+
+export function canAccessLevel(
+  user: UserEntitlements,
+  levelId: string,
+): boolean {
+  const required = LEVEL_REQUIREMENTS[levelId];
+  if (required === undefined) return false;
+  return COURSE_TIER_RANK[user.courseTier] >= COURSE_TIER_RANK[required];
+}
+
+export function hasCommunityAccess(user: UserEntitlements): boolean {
+  if (user.communityStatus !== 'active') return false;
+  if (!user.communityExpiresAt) return false;
+  return user.communityExpiresAt.getTime() > Date.now();
+}
+
+// ---------------------------------------------------------------------------
 // Wompi (COP) payments
 // ---------------------------------------------------------------------------
 

@@ -19,6 +19,7 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { useEntitlements } from '../contexts/EntitlementsContext';
 import { getAllLessonsOrdered } from '../utils/courseUtils';
+import { hasCommunityAccess } from '../services/paymentService';
 
 interface EducationPageProps {
   onNavigateHome?: () => void; // Optional for backward compat
@@ -266,7 +267,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           </div>
 
           <div className="flex items-center gap-4 sm:gap-6">
-            {entitlements.courseTier !== 'free' && (
+            {(entitlements.courseTier !== 'free' || hasCommunityAccess(entitlements)) && (
               <div
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/30"
                 aria-label="Miembro Fundador"

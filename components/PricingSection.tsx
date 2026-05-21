@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Check, Crown, Sparkles, Zap } from 'lucide-react';
 import {
   PRICING_PLANS,
-  type PlanId,
+  type CourseTier,
   type UserEntitlements,
 } from '../services/paymentService';
 
@@ -18,15 +18,15 @@ interface PricingSectionProps {
 // TODO(pricing-ui, later phase): render Comunidad anual and Acceso Total
 // here too. Their plans are already in PRICING_PLANS (data layer) but the
 // pricing UI redesign that surfaces them is a separate phase.
-const COURSE_PLAN_ORDER: PlanId[] = ['free', 'basico', 'completo'];
+const COURSE_PLAN_ORDER: CourseTier[] = ['free', 'basico', 'completo'];
 
-const COURSE_TIER_RANK: Record<'free' | 'basico' | 'completo', number> = {
+const COURSE_TIER_RANK: Record<CourseTier, number> = {
   free: 0,
   basico: 1,
   completo: 2,
 };
 
-const PUBLIC_CTA_LABELS: Record<'free' | 'basico' | 'completo', string> = {
+const PUBLIC_CTA_LABELS: Record<CourseTier, string> = {
   free: 'Empieza ahora',
   basico: 'Desbloquea Intermedio',
   completo: 'Acceso completo',
@@ -52,10 +52,10 @@ export default function PricingSection({
   const isPublic = variant === 'public';
   const currentCourseTier = entitlements?.courseTier ?? 'free';
 
-  const isCurrentPlan = (planId: 'free' | 'basico' | 'completo') =>
-    !isPublic && planId === currentCourseTier;
-  const isIncluded = (planId: 'free' | 'basico' | 'completo') =>
-    !isPublic && COURSE_TIER_RANK[planId] < COURSE_TIER_RANK[currentCourseTier];
+  const isCurrentPlan = (tier: CourseTier) =>
+    !isPublic && tier === currentCourseTier;
+  const isIncluded = (tier: CourseTier) =>
+    !isPublic && COURSE_TIER_RANK[tier] < COURSE_TIER_RANK[currentCourseTier];
 
   return (
     <div className="container max-w-7xl mx-auto px-6 mt-24">
@@ -81,12 +81,11 @@ export default function PricingSection({
       </div>
 
       <div className="grid lg:grid-cols-3 gap-8 items-start">
-        {COURSE_PLAN_ORDER.map((planId, index) => {
-          const plan = PRICING_PLANS[planId];
-          const courseTier = planId as 'free' | 'basico' | 'completo';
+        {COURSE_PLAN_ORDER.map((courseTier, index) => {
+          const plan = PRICING_PLANS[courseTier];
           const isCurrent = isCurrentPlan(courseTier);
           const included = isIncluded(courseTier);
-          const isFreePlan = plan.id === 'free';
+          const isFreePlan = courseTier === 'free';
 
           return (
             <motion.div
@@ -223,6 +222,8 @@ export default function PricingSection({
                   </div>
                 ) : (
                   <button
+                    // courseTier is narrowed by isFreePlan branch above; this
+                    // cast tells TS the callback's payable-only contract holds.
                     onClick={() => onSelectPlan?.(courseTier as 'basico' | 'completo')}
                     className={`w-full py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 cursor-pointer ${
                       plan.highlighted
