@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence } from 'framer-motion';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
+import { EntitlementsProvider } from './contexts/EntitlementsContext';
 import { ProgressProvider } from './contexts/ProgressContext';
 import { GamificationProvider } from './contexts/GamificationContext';
 import ChatWidget from './components/ChatWidget';
@@ -127,17 +128,19 @@ function App() {
     <ErrorBoundary>
       <HelmetProvider>
         <AuthProvider>
-          <GamificationProvider>
-            <ProgressProvider>
-              <Router>
-                <div className="min-h-screen bg-navy-950 text-white overflow-x-hidden font-sans">
-                  <AnimatedRoutes />
-                  <ChatWidget />
-                  <AchievementToast />
-                </div>
-              </Router>
-            </ProgressProvider>
-          </GamificationProvider>
+          <EntitlementsProvider>
+            <GamificationProvider>
+              <ProgressProvider>
+                <Router>
+                  <div className="min-h-screen bg-navy-950 text-white overflow-x-hidden font-sans">
+                    <AnimatedRoutes />
+                    <ChatWidget />
+                    <AchievementToast />
+                  </div>
+                </Router>
+              </ProgressProvider>
+            </GamificationProvider>
+          </EntitlementsProvider>
         </AuthProvider>
       </HelmetProvider>
     </ErrorBoundary>

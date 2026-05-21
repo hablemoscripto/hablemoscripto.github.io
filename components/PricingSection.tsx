@@ -1,22 +1,35 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Crown, Sparkles, Zap } from 'lucide-react';
-import { PRICING_PLANS, type PlanTier } from '../services/paymentService';
+import {
+  PRICING_PLANS,
+  type PlanId,
+  type UserEntitlements,
+} from '../services/paymentService';
 
 interface PricingSectionProps {
   variant?: 'authenticated' | 'public';
-  currentTier?: PlanTier;
-  onSelectPlan?: (tier: 'premium' | 'vip') => void;
+  entitlements?: UserEntitlements;
+  onSelectPlan?: (planId: 'basico' | 'completo') => void;
   onPublicCta?: () => void;
 }
 
-const tierOrder: Record<PlanTier, number> = { free: 0, premium: 1, vip: 2 };
-const PLAN_ORDER: PlanTier[] = ['free', 'premium', 'vip'];
+// Course-tier rendering scope, v2 launch phase.
+//
+// TODO(pricing-ui, later phase): render Comunidad anual and Acceso Total
+// here too. Their plans are already in PRICING_PLANS (data layer) but the
+// pricing UI redesign that surfaces them is a separate phase.
+const COURSE_PLAN_ORDER: PlanId[] = ['free', 'basico', 'completo'];
 
-const PUBLIC_CTA_LABELS: Record<PlanTier, string> = {
+const COURSE_TIER_RANK: Record<'free' | 'basico' | 'completo', number> = {
+  free: 0,
+  basico: 1,
+  completo: 2,
+};
+
+const PUBLIC_CTA_LABELS: Record<'free' | 'basico' | 'completo', string> = {
   free: 'Empieza ahora',
-  premium: 'Desbloquea Intermedio',
-  vip: 'Acceso completo',
+  basico: 'Desbloquea Intermedio',
+  completo: 'Acceso completo',
 };
 
 const cardVariants = {
@@ -30,16 +43,19 @@ const cardVariants = {
 
 export default function PricingSection({
   variant = 'authenticated',
-  currentTier,
+  entitlements,
   onSelectPlan,
   onPublicCta,
 }: PricingSectionProps) {
   const formatUSD = (amount: number) => (amount === 0 ? 'Gratis' : `$${amount}`);
 
   const isPublic = variant === 'public';
-  const isCurrentPlan = (planTier: PlanTier) => !isPublic && planTier === currentTier;
-  const isIncluded = (planTier: PlanTier) =>
-    !isPublic && currentTier !== undefined && tierOrder[planTier] < tierOrder[currentTier];
+  const currentCourseTier = entitlements?.courseTier ?? 'free';
+
+  const isCurrentPlan = (planId: 'free' | 'basico' | 'completo') =>
+    !isPublic && planId === currentCourseTier;
+  const isIncluded = (planId: 'free' | 'basico' | 'completo') =>
+    !isPublic && COURSE_TIER_RANK[planId] < COURSE_TIER_RANK[currentCourseTier];
 
   return (
     <div className="container max-w-7xl mx-auto px-6 mt-24">
@@ -65,15 +81,16 @@ export default function PricingSection({
       </div>
 
       <div className="grid lg:grid-cols-3 gap-8 items-start">
-        {PLAN_ORDER.map((tier, index) => {
-          const plan = PRICING_PLANS[tier];
-          const isCurrent = isCurrentPlan(plan.tier);
-          const included = isIncluded(plan.tier);
-          const isFreePlan = plan.tier === 'free';
+        {COURSE_PLAN_ORDER.map((planId, index) => {
+          const plan = PRICING_PLANS[planId];
+          const courseTier = planId as 'free' | 'basico' | 'completo';
+          const isCurrent = isCurrentPlan(courseTier);
+          const included = isIncluded(courseTier);
+          const isFreePlan = plan.id === 'free';
 
           return (
             <motion.div
-              key={plan.tier}
+              key={plan.id}
               custom={index}
               variants={cardVariants}
               initial="hidden"
@@ -190,7 +207,7 @@ export default function PricingSection({
                         : 'bg-navy-800 hover:bg-navy-700 border border-white/10 hover:border-brand-500/40 text-white'
                     }`}
                   >
-                    {PUBLIC_CTA_LABELS[plan.tier]}
+                    {PUBLIC_CTA_LABELS[courseTier]}
                   </button>
                 ) : isFreePlan ? (
                   <div className="w-full py-3.5 rounded-2xl text-center text-sm font-bold bg-navy-800 border border-white/5 text-navy-400">
@@ -206,7 +223,7 @@ export default function PricingSection({
                   </div>
                 ) : (
                   <button
-                    onClick={() => onSelectPlan?.(plan.tier as 'premium' | 'vip')}
+                    onClick={() => onSelectPlan?.(courseTier as 'basico' | 'completo')}
                     className={`w-full py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 cursor-pointer ${
                       plan.highlighted
                         ? 'bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40'

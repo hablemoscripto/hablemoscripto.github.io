@@ -17,8 +17,8 @@ import DailyReviewCard from './education/DailyReviewCard';
 import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
+import { useEntitlements } from '../contexts/EntitlementsContext';
 import { getAllLessonsOrdered } from '../utils/courseUtils';
-import { getUserPremiumStatus } from '../services/paymentService';
 
 interface EducationPageProps {
   onNavigateHome?: () => void; // Optional for backward compat
@@ -54,28 +54,11 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [levels, setLevels] = useState<Level[]>([]);
   const { user } = useAuth();
+  const { entitlements, refresh: refreshEntitlements } = useEntitlements();
 
   // Pricing / payment state
-  const [userTier, setUserTier] = useState<'free' | 'premium' | 'vip'>('free');
-  const [selectedTier, setSelectedTier] = useState<'premium' | 'vip' | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<'basico' | 'completo' | null>(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
-
-  // Check user subscription tier on mount
-  useEffect(() => {
-    async function checkSubscriptionStatus() {
-      if (!user) return;
-      try {
-        const status = await getUserPremiumStatus(user.id);
-        if (status.isPremium) {
-          // TODO: distinguish premium vs vip when DB supports it
-          setUserTier('premium');
-        }
-      } catch {
-        // Silently fail — user stays on free tier
-      }
-    }
-    checkSubscriptionStatus();
-  }, [user]);
 
   // Ctrl+K / Cmd+K keyboard shortcut for search
   useEffect(() => {
@@ -283,7 +266,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           </div>
 
           <div className="flex items-center gap-4 sm:gap-6">
-            {userTier !== 'free' && (
+            {entitlements.courseTier !== 'free' && (
               <div
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/30"
                 aria-label="Miembro Fundador"
@@ -505,19 +488,19 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
           {/* Pricing Section */}
           <PricingSection
-            currentTier={userTier}
-            onSelectPlan={(tier) => {
-              setSelectedTier(tier);
+            entitlements={entitlements}
+            onSelectPlan={(planId) => {
+              setSelectedPlan(planId);
               setShowPaymentModal(true);
             }}
           />
           <PaymentModal
             isOpen={showPaymentModal}
             onClose={() => setShowPaymentModal(false)}
-            tier={selectedTier || 'premium'}
+            planId={selectedPlan || 'basico'}
             onSuccess={() => {
               setShowPaymentModal(false);
-              setUserTier(selectedTier || 'premium');
+              refreshEntitlements();
             }}
           />
 

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from './ui/Modal';
-import { CreditCard, Wallet, Copy, CheckCircle, Loader2, AlertCircle, ExternalLink } from 'lucide-react';
+import { CreditCard, Wallet, Loader2, AlertCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import {
   createPaymentWithSignature,
   PRICING_PLANS,
-  submitCryptoPayment,
 } from '../services/paymentService';
 import { reportError } from '../utils/errorReporting';
 
@@ -45,24 +44,18 @@ interface WompiResult {
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  tier: 'premium' | 'vip';
+  planId: 'basico' | 'completo';
   onSuccess: () => void;
 }
 
-const USDC_WALLET_ADDRESS = import.meta.env.VITE_USDC_PAYMENT_ADDRESS || '5KUE3sm7pg2bicvGm8wtn1zyff4h57mmyxShhhiQjHc6';
-
-export default function PaymentModal({ isOpen, onClose, tier, onSuccess }: PaymentModalProps) {
+export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: PaymentModalProps) {
   const [activeTab, setActiveTab] = useState<'card' | 'crypto'>('card');
   const [loading, setLoading] = useState(false);
   const [widgetLoaded, setWidgetLoaded] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [txSignature, setTxSignature] = useState('');
-  const [verifyStatus, setVerifyStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const { user } = useAuth();
 
-  const plan = PRICING_PLANS[tier];
-  const usdPrice = plan.priceUsd;
+  const plan = PRICING_PLANS[planId];
   const copPriceCents = plan.priceCopCents;
 
   const publicKey = import.meta.env.VITE_WOMPI_PUBLIC_KEY;
@@ -88,10 +81,6 @@ export default function PaymentModal({ isOpen, onClose, tier, onSuccess }: Payme
   useEffect(() => {
     if (isOpen) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTxSignature('');
-
-      setVerifyStatus('idle');
-
       setErrorMessage('');
     }
   }, [isOpen]);
@@ -121,7 +110,7 @@ export default function PaymentModal({ isOpen, onClose, tier, onSuccess }: Payme
       return;
     }
 
-    if (!plan.productType) {
+    if (!plan.wompiSku) {
       setErrorMessage('Plan no válido para pago.');
       return;
     }
@@ -130,8 +119,14 @@ export default function PaymentModal({ isOpen, onClose, tier, onSuccess }: Payme
     setErrorMessage('');
 
     try {
+      // TODO(wompi-integration, later phase): the create-payment Edge Function's
+      // PRODUCT_CATALOG still uses the legacy SKUs (inversor_lifetime /
+      // vip_lifetime). The card path is non-functional until that catalog is
+      // updated to recognize basico_lifetime / completo_lifetime / comunidad_annual
+      // / acceso_total_bundle. Prod is not on this branch, so this is acceptable
+      // during the v2 refactor phase.
       const paymentData = await createPaymentWithSignature(
-        plan.productType,
+        plan.wompiSku,
         user.email || '',
         user.user_metadata?.full_name || user.user_metadata?.name,
       );
@@ -166,32 +161,6 @@ export default function PaymentModal({ isOpen, onClose, tier, onSuccess }: Payme
       setLoading(false);
       reportError(error, { component: 'PaymentModal', action: 'processCardPayment' });
       setErrorMessage('Error al procesar el pago. Intenta de nuevo.');
-    }
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(USDC_WALLET_ADDRESS);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleVerifyCrypto = async () => {
-    if (!txSignature.trim()) {
-      setErrorMessage('Ingresa la firma de la transacción');
-      return;
-    }
-
-    setVerifyStatus('loading');
-    setErrorMessage('');
-
-    const result = await submitCryptoPayment(tier, txSignature.trim());
-
-    if (result.success) {
-      setVerifyStatus('success');
-      setTimeout(() => onSuccess(), 1500);
-    } else {
-      setVerifyStatus('error');
-      setErrorMessage(result.error || 'No se pudo verificar la transacción.');
     }
   };
 
@@ -273,123 +242,27 @@ export default function PaymentModal({ isOpen, onClose, tier, onSuccess }: Payme
       )}
 
       {activeTab === 'crypto' && (
-        <div className="space-y-6">
-          <div className="bg-navy-800/50 rounded-2xl p-5 border border-white/5 text-center">
-            <p className="text-navy-400 text-xs font-bold uppercase tracking-wider mb-1">Monto a enviar</p>
-            <p className="text-3xl font-black text-white tracking-tight">
-              ${usdPrice} <span className="text-lg text-navy-400 font-medium">USDC</span>
-            </p>
-            <p className="text-navy-500 text-xs mt-1">
-              Red: Solana · pago único
-            </p>
+        // TODO(crypto, later phase): re-enable USDC payments once
+        // verify-crypto-payment is updated to the new plan IDs and USDC
+        // pricing is decided for the v2 product set. Form internals were
+        // removed in this refactor — see git history if reviving.
+        <div className="space-y-6 text-center py-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-navy-800 border border-white/5 mb-2">
+            <Wallet size={24} aria-hidden="true" className="text-navy-300" />
           </div>
-
           <div>
-            <label className="block text-xs font-bold text-navy-400 uppercase tracking-wider mb-2">
-              Dirección de pago
-            </label>
-            <div className="flex items-center gap-2 bg-navy-950 border border-navy-700 rounded-xl p-3">
-              <code className="text-xs text-navy-200 font-mono flex-1 break-all select-all">
-                {USDC_WALLET_ADDRESS}
-              </code>
-              <button
-                onClick={handleCopy}
-                className="flex-shrink-0 p-2 rounded-lg bg-navy-800 hover:bg-navy-700 transition-colors"
-                aria-label="Copiar dirección"
-              >
-                {copied ? (
-                  <CheckCircle size={16} aria-hidden="true" className="text-green-400" />
-                ) : (
-                  <Copy size={16} aria-hidden="true" className="text-navy-300" />
-                )}
-              </button>
-            </div>
-            {copied && (
-              <p className="text-xs text-green-400 mt-1 font-medium">Dirección copiada</p>
-            )}
+            <p className="text-base font-bold text-white mb-1">Pagos en cripto — próximamente</p>
+            <p className="text-sm text-navy-400 max-w-sm mx-auto leading-relaxed">
+              Por ahora, completa tu compra con tarjeta. Vamos a habilitar USDC en una próxima fase.
+            </p>
           </div>
-
-          <div className="bg-navy-800/30 rounded-xl p-4 border border-white/5">
-            <p className="text-xs font-bold text-navy-300 mb-3 uppercase tracking-wider">Instrucciones</p>
-            <ol className="space-y-2 text-sm text-navy-300">
-              <li className="flex items-start gap-2">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-500/20 text-brand-400 text-[10px] font-black flex items-center justify-center">1</span>
-                <span>Abre Phantom u otra wallet de Solana</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-500/20 text-brand-400 text-[10px] font-black flex items-center justify-center">2</span>
-                <span>Envía <strong className="text-white">${usdPrice} USDC</strong> a la dirección de arriba</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-500/20 text-brand-400 text-[10px] font-black flex items-center justify-center">3</span>
-                <span>Pega la firma de la transacción aquí abajo</span>
-              </li>
-            </ol>
-          </div>
-
-          <div>
-            <label className="block text-xs font-bold text-navy-400 uppercase tracking-wider mb-2">
-              Firma de transacción
-            </label>
-            <input
-              type="text"
-              value={txSignature}
-              onChange={(e) => setTxSignature(e.target.value)}
-              placeholder="Ej: 5xG7k9... (signature de Solana)"
-              className="w-full bg-navy-950 border border-navy-700 rounded-xl px-4 py-3 text-sm text-white placeholder-navy-600 focus:outline-none focus:border-brand-500/50 focus:ring-1 focus:ring-brand-500/20 font-mono transition-all"
-              disabled={verifyStatus === 'loading' || verifyStatus === 'success'}
-            />
-          </div>
-
-          {errorMessage && (
-            <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-xl">
-              <AlertCircle size={16} aria-hidden="true" className="text-red-400 flex-shrink-0" />
-              <p className="text-sm text-red-400">{errorMessage}</p>
-            </div>
-          )}
-
-          {verifyStatus === 'success' && (
-            <div className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/20 rounded-xl">
-              <CheckCircle size={16} aria-hidden="true" className="text-green-400 flex-shrink-0" />
-              <p className="text-sm text-green-400">Pago verificado exitosamente. Activando tu plan...</p>
-            </div>
-          )}
-
           <button
-            onClick={handleVerifyCrypto}
-            disabled={!txSignature.trim() || verifyStatus === 'loading' || verifyStatus === 'success'}
-            className="w-full py-4 rounded-2xl text-sm font-bold bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-navy-950 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-500/20"
+            onClick={() => setActiveTab('card')}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold bg-navy-800 hover:bg-navy-700 border border-white/10 hover:border-brand-500/40 text-white transition-all"
           >
-            {verifyStatus === 'loading' ? (
-              <>
-                <Loader2 size={18} aria-hidden="true" className="animate-spin" />
-                Verificando en Solana...
-              </>
-            ) : verifyStatus === 'success' ? (
-              <>
-                <CheckCircle size={18} aria-hidden="true" />
-                Pago verificado
-              </>
-            ) : (
-              <>
-                <Wallet size={18} aria-hidden="true" />
-                Verificar Pago
-              </>
-            )}
+            <CreditCard size={16} aria-hidden="true" />
+            Volver a pago con tarjeta
           </button>
-
-          <p className="text-[11px] text-navy-500 text-center flex items-center justify-center gap-1">
-            <ExternalLink size={10} aria-hidden="true" />
-            Puedes verificar la transacción en{' '}
-            <a
-              href="https://solscan.io"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-400 hover:underline"
-            >
-              Solscan
-            </a>
-          </p>
         </div>
       )}
     </Modal>

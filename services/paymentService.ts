@@ -144,6 +144,28 @@ export interface PaymentData {
 }
 
 // ---------------------------------------------------------------------------
+// User entitlements — v2
+//
+// Two independent entitlements replace the old single `tier`:
+//   - courseTier: lifetime, set on course purchase, never expires.
+//   - communityStatus: 12-month entitlement tied to communityExpiresAt.
+//     Renewal is manual (re-purchase of Comunidad anual); no recurring
+//     billing in v1 — Wompi doesn't support it natively.
+// ---------------------------------------------------------------------------
+
+export interface UserEntitlements {
+  courseTier: CourseTier;
+  communityStatus: CommunityStatus;
+  communityExpiresAt: Date | null;
+}
+
+export const ANONYMOUS_ENTITLEMENTS: UserEntitlements = {
+  courseTier: 'free',
+  communityStatus: 'none',
+  communityExpiresAt: null,
+};
+
+// ---------------------------------------------------------------------------
 // Wompi (COP) payments
 // ---------------------------------------------------------------------------
 
@@ -202,49 +224,24 @@ export async function getPaymentByReference(reference: string) {
 }
 
 // ---------------------------------------------------------------------------
-// Subscription / tier status
+// Derive UserEntitlements from the legacy user_profiles row.
+//
+// The DB schema still uses `is_premium` + `premium_tier` ('premium' | 'vip').
+// Legacy mapping (one-way, lossy): vip → courseTier 'completo', premium →
+// courseTier 'basico'. communityStatus is unknowable from legacy data →
+// always 'none'. A schema migration that introduces native course_tier /
+// community_status columns is a later-phase concern.
+//
+// TODO(migration, later phase): legacy `vip` users need a goodwill grant of
+// communityStatus 'active' + communityExpiresAt = migration_date + 12 months,
+// in addition to the courseTier 'completo' mapping below. Legacy `premium` →
+// `basico` is value-equivalent, no goodwill grant needed. Manual review;
+// surfaced in the v2-refactor final report.
 // ---------------------------------------------------------------------------
 
-export async function getUserPremiumStatus(userId: string) {
-  const { data, error } = await supabase
-    .from('user_profiles')
-    .select('is_premium, premium_since, premium_expires_at')
-    .eq('id', userId)
-    .single();
-
-  if (error) {
-    if (error.code === 'PGRST116') {
-      return { isPremium: false };
-    }
-    reportError(error, {
-      component: 'paymentService',
-      action: 'getUserPremiumStatus',
-    });
-    throw error;
-  }
-
-  // Lifetime tiers leave premium_expires_at NULL. Only enforce expiration
-  // when it's set — that's the future subscription path.
-  if (data.is_premium && data.premium_expires_at) {
-    const expiresAt = new Date(data.premium_expires_at);
-    if (expiresAt < new Date()) {
-      return { isPremium: false, expired: true };
-    }
-  }
-
-  return {
-    isPremium: data.is_premium,
-    premiumSince: data.premium_since,
-    premiumExpiresAt: data.premium_expires_at,
-  };
-}
-
-export async function getUserSubscriptionStatus(
+export async function getUserEntitlements(
   userId: string,
-): Promise<{
-  tier: PlanTier;
-  expiresAt?: string;
-}> {
+): Promise<UserEntitlements> {
   const { data, error } = await supabase
     .from('user_profiles')
     .select('is_premium, premium_tier, premium_expires_at')
@@ -253,93 +250,44 @@ export async function getUserSubscriptionStatus(
 
   if (error) {
     if (error.code === 'PGRST116') {
-      return { tier: 'free' };
+      return ANONYMOUS_ENTITLEMENTS;
     }
     reportError(error, {
       component: 'paymentService',
-      action: 'getUserSubscriptionStatus',
+      action: 'getUserEntitlements',
     });
     throw error;
   }
 
   if (!data.is_premium) {
-    return { tier: 'free' };
+    return ANONYMOUS_ENTITLEMENTS;
   }
 
   if (data.premium_expires_at) {
     const expiresAt = new Date(data.premium_expires_at);
     if (expiresAt < new Date()) {
-      return { tier: 'free' };
+      return ANONYMOUS_ENTITLEMENTS;
     }
   }
 
-  const tier: PlanTier =
+  const courseTier: CourseTier =
     data.premium_tier === 'vip'
-      ? 'vip'
+      ? 'completo'
       : data.premium_tier === 'premium'
-        ? 'premium'
+        ? 'basico'
         : 'free';
 
   return {
-    tier,
-    expiresAt: data.premium_expires_at ?? undefined,
+    courseTier,
+    communityStatus: 'none',
+    communityExpiresAt: null,
   };
 }
 
 // ---------------------------------------------------------------------------
-// USDC (crypto) payments
+// TODO(crypto, later phase): USDC payments are out of v1 (USD-only, Wompi-
+// only). When reviving, restore the submitCryptoPayment client + the
+// verify-crypto-payment Edge Function to speak the new PlanId vocab
+// (Comunidad / Acceso Total may want crypto pricing too, not just course
+// tiers). See git history before this commit for the previous shape.
 // ---------------------------------------------------------------------------
-
-export async function submitCryptoPayment(
-  tier: 'premium' | 'vip',
-  transactionSignature: string,
-): Promise<{ success: boolean; error?: string }> {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (!session?.access_token) {
-    return { success: false, error: 'No authenticated session' };
-  }
-
-  const expectedAmount = PRICING_PLANS[tier].priceUsdc;
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-
-  try {
-    const response = await fetch(
-      `${supabaseUrl}/functions/v1/verify-crypto-payment`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${session.access_token}`,
-        },
-        body: JSON.stringify({
-          transactionSignature,
-          expectedAmount,
-          tier,
-        }),
-      },
-    );
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      return {
-        success: false,
-        error: result.error || 'Error al verificar el pago',
-      };
-    }
-
-    return { success: true };
-  } catch (err) {
-    reportError(err, {
-      component: 'paymentService',
-      action: 'submitCryptoPayment',
-    });
-    return {
-      success: false,
-      error: 'Error de conexion al verificar el pago',
-    };
-  }
-}
