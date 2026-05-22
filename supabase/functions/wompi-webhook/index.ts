@@ -2,6 +2,14 @@ import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { sendFundadorWelcome } from '../_shared/welcome-email.ts'
 
+// TODO(wompi-integration, Phase B): this handler still calls
+// upgrade_user_to_premium and derives a legacy 'premium' | 'vip' tier from
+// the SKU. Replace with PlanId-aware logic that applies plan.grantsCourseTier
+// and/or plan.grantsCommunityMonths per the spec in
+// services/paymentService.ts — see the TODO(wompi-integration) and
+// TODO(bridges) blocks there for event handling, signature verification,
+// and reference encoding.
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',

@@ -325,7 +325,60 @@ export async function getUserEntitlements(
 }
 
 // ---------------------------------------------------------------------------
-// TODO(crypto, later phase): USDC payments are out of v1 (USD-only, Wompi-
+// TODO(wompi-integration, Phase B):
+//
+// Wompi is the v1 processor. ALL plans above are one-time purchases — Wompi
+// does not natively support recurring billing. Community access is a one-time
+// 12-month pass that requires manual renewal (re-purchase + email reminder).
+//
+// Webhook events to handle in supabase/functions/wompi-webhook:
+//   - APPROVED   → apply plan.grantsCourseTier (if any). For
+//                  plan.grantsCommunityMonths (if any), set
+//                  communityStatus='active' and bump communityExpiresAt
+//                  forward by N months from MAX(now, current expiry) so
+//                  renewals stack rather than reset on still-active passes.
+//                  For 'acceso_total', BOTH grants apply in a single tx.
+//   - DECLINED   → no entitlement change; log for support.
+//   - VOIDED     → no entitlement change; reconcile if a previous APPROVED
+//                  for the same reference was already applied (refund path).
+//   - PENDING    → no entitlement change; await terminal event.
+//
+// All event payloads MUST pass HMAC-SHA256 verification using the
+// WOMPI_EVENTS_SECRET against the canonical signature.properties string per
+// Wompi's docs. Reject and log on signature mismatch — do not retry.
+//
+// Transaction `reference` field MUST be set to `${userId}:${planId}` (e.g.
+// `7c9a...:basico`) when create-payment generates the reference, so the
+// webhook attributes the entitlement back to the purchasing user even when
+// customer_email diverges from auth.email. Parse defensively — the
+// reference is the only trustworthy link between Wompi's record and ours.
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// TODO(bridges, Phase B+):
+//
+// Cross-product entitlement bridges, spec only — none of these are implemented
+// in v1. They live here so the gating helpers and webhook code know where
+// they'll plug in.
+//
+//   1. Course → Comunidad grant: on course-tier APPROVED, also grant 3 months
+//      of Comunidad (set communityStatus='active', communityExpiresAt =
+//      MAX(now + 3 months, current expiry) — never shorten an existing pass).
+//      Applies to 'basico' and 'completo' purchases, NOT 'acceso_total'
+//      (acceso_total already grants 12 months explicitly).
+//
+//   2. Comunidad → course discount: any user with hasCommunityAccess() === true
+//      at checkout time gets 25% off course-tier plans. Discount math runs
+//      server-side in create-payment; never trust a client-supplied flag.
+//
+//   3. Newsletter → course coupon: newsletter signup issues a one-time 20%-off
+//      course coupon, 14-day expiry from issuance. Requires a coupons table
+//      (one row per issuance, redeemed-at timestamp). Out of scope for the
+//      multi-product refactor; spec lives here.
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// TODO(crypto, Phase C+): USDC payments are out of v1 (USD-only, Wompi-
 // only). When reviving, restore the submitCryptoPayment client + the
 // verify-crypto-payment Edge Function to speak the new PlanId vocab
 // (Comunidad / Acceso Total may want crypto pricing too, not just course

@@ -2,6 +2,12 @@ import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { sendFundadorWelcome } from '../_shared/welcome-email.ts'
 
+// TODO(crypto, Phase C+): function is dormant in v1 — the frontend crypto tab
+// is disabled and submitCryptoPayment was removed in the v2 refactor. Body
+// still speaks the legacy 'premium' | 'vip' vocab and writes premium_tier.
+// When reviving, port to the PlanId vocab and the new entitlement columns
+// (course_tier / community_status) once the schema migration lands.
+
 const ALLOWED_ORIGIN = 'https://hablemoscripto.io'
 
 const corsHeaders = {
