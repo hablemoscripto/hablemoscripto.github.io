@@ -87,7 +87,7 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     id: 'fundador',
     productType: 'bundle',
     name: 'Fundador',
-    description: 'Plataforma completa + Comunidad activa (solo primeras 100 personas)',
+    description: 'Plataforma completa + charlas semanales en vivo y comunidad privada (solo primeras 100)',
     priceUsd: 249,
     priceCopCents: 89900000, // ~899,000 COP
     wompiSku: 'fundador_lifetime',
@@ -95,9 +95,8 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     grantsCommunityMonths: 120, // effectively lifetime for community access in this model
     features: [
       'Todo lo del plan Intermedio',
-      'Acceso completo a la Comunidad en Discord',
-      'Charlas semanales en vivo con análisis y Q&A',
-      'Newsletter premium con perspectivas profundas',
+      'Acceso a la comunidad privada en Discord',
+      'Charlas semanales en vivo donde profundizo en los temas del newsletter + Q&A en tiempo real',
       'Prioridad al solicitar Mentoría Personalizada',
     ],
     highlighted: true,
@@ -107,7 +106,7 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     id: 'experto',
     productType: 'bundle',
     name: 'Experto',
-    description: 'Plataforma completa + Comunidad activa',
+    description: 'Plataforma completa + charlas semanales en vivo y comunidad privada',
     priceUsd: 249,
     priceCopCents: 89900000,
     wompiSku: 'experto_lifetime',
@@ -115,9 +114,8 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     grantsCommunityMonths: 120,
     features: [
       'Todo lo del plan Intermedio',
-      'Acceso completo a la Comunidad en Discord',
-      'Charlas semanales en vivo con análisis y Q&A',
-      'Newsletter premium con perspectivas profundas',
+      'Acceso a la comunidad privada en Discord',
+      'Charlas semanales en vivo donde profundizo en los temas del newsletter + Q&A en tiempo real',
       'Prioridad al solicitar Mentoría Personalizada',
     ],
   },

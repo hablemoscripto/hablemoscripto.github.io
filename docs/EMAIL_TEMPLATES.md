@@ -14,12 +14,16 @@ Hola,
 
 Durante los últimos meses he estado trabajando en algo más completo que solo lecciones.
 
-A partir de hoy, Hablemos Cripto deja de ser únicamente una plataforma de cursos y se convierte en un ecosistema completo: educación estructurada, análisis semanal en vivo y una comunidad de personas que toman esto en serio.
+A partir de hoy, Hablemos Cripto deja de ser únicamente una plataforma de cursos y se convierte en un ecosistema completo: educación estructurada, análisis de mercado y una comunidad de personas que toman esto en serio.
+
+Todos los suscriptores recibirán el mismo newsletter semanal. 
+
+La diferencia real está en las **charlas semanales en vivo**, donde profundizo en los temas del newsletter, comparto contexto adicional y respondo preguntas en tiempo real dentro de la comunidad privada.
 
 Hay dos planes principales:
 
 • Intermedio – Acceso completo a las 42 lecciones  
-• Fundador – Todo lo anterior + comunidad activa, charlas semanales y prioridad en mentoría
+• Fundador – Todo lo anterior + acceso a las charlas semanales en vivo + comunidad privada en Discord + prioridad para mentoría 1-a-1
 
 El tier Fundador solo estará disponible para las primeras 100 personas. Después de eso, el nombre del plan cambiará a Experto.
 
@@ -44,9 +48,9 @@ Gracias por confiar en el proyecto desde el inicio.
 
 Tu estatus de **Fundador** es permanente. Aunque en el futuro el plan pase a llamarse Experto, tú mantendrás este reconocimiento dentro de la comunidad para siempre.
 
-En las próximas horas recibirás acceso al Discord y las instrucciones para unirte a las charlas semanales.
+En las próximas horas recibirás acceso al Discord y las instrucciones para unirte a las charlas semanales en vivo.
 
-Si en algún momento quieres agendar una sesión de mentoría, recuerda que como Fundador tienes prioridad.
+En esas sesiones profundizo en los temas que cubro en el newsletter y respondo preguntas de la comunidad. Como Fundador también tienes prioridad para sesiones de mentoría 1-a-1.
 
 Bienvenido a bordo.
 

@@ -140,14 +140,14 @@ const LandingPage: React.FC = () => {
         <section id="mentoria" className="py-20 bg-navy-900/60 border-y border-white/5 scroll-mt-28">
           <div className="container max-w-5xl mx-auto px-6 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 mb-6">
-              <span className="text-brand-400 text-xs font-black uppercase tracking-[0.2em]">Alta demanda</span>
+              <span className="text-brand-400 text-xs font-black uppercase tracking-[0.2em]">La experiencia premium</span>
             </div>
 
             <h2 className="text-4xl md:text-5xl font-heading font-black text-white tracking-tighter mb-4">
-              Mentoría Personalizada con CBas
+              Charlas Semanales en Vivo
             </h2>
             <p className="text-xl text-navy-300 max-w-2xl mx-auto mb-8">
-              Sesiones individuales limitadas. Diseñadas para quienes buscan claridad estratégica, revisión de portafolio o acompañamiento directo.
+              Todos recibimos el mismo newsletter semanal. La diferencia real está en las charlas en vivo, donde profundizo en los temas, comparto contexto adicional y respondo preguntas de la comunidad en tiempo real.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -155,7 +155,7 @@ const LandingPage: React.FC = () => {
                 href="#pricing"
                 className="px-8 py-4 bg-white text-navy-950 font-bold rounded-2xl hover:bg-navy-100 transition-colors"
               >
-                Ver disponibilidad y precios
+                Ver planes y charlas
               </a>
               <button
                 onClick={() => setIsMentoriaModalOpen(true)}
@@ -166,7 +166,7 @@ const LandingPage: React.FC = () => {
             </div>
 
             <p className="mt-6 text-sm text-navy-400">
-              Miembros Fundador y Experto tienen prioridad al solicitar una sesión.
+              Miembros Fundador y Experto tienen prioridad para sesiones de mentoría 1-a-1.
             </p>
           </div>
         </section>

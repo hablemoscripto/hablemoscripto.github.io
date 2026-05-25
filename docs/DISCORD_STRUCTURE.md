@@ -35,8 +35,9 @@ Free users should **not** have access to the Discord server.
 ## Live Sessions Guidelines (#charlas-semanales)
 
 - Only accessible to Fundador and Experto roles.
+- This is the **main premium experience**: every week I unpack the topics covered in the newsletter, add deeper context, share my current thinking, and answer questions live.
 - Sessions are announced 24-48 hours in advance.
-- Record sessions when possible and share the recording afterward as added value.
+- Recording + summary is usually shared afterward for members who couldn't attend.
 - Keep a professional, high-signal tone. No pumps, no low-quality shilling.
 
 ## Moderation Principles
