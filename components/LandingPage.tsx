@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Hero from './Hero';
 import Features from './Features';
 import Courses from './Courses';
+import ProblemSection from './ProblemSection';
 import PricingSection from './PricingSection';
 import Footer from './Footer';
 import AuthModal from './AuthModal';
@@ -123,31 +124,21 @@ const LandingPage: React.FC = () => {
       <main>
         <Hero onStartLearning={handleNavigateToEducation} />
         <Features />
+        <ProblemSection />
         <Courses />
 
-        {/* Public Pricing Section */}
-        <section id="pricing" className="py-24 bg-navy-950 relative scroll-mt-28">
-          <PricingSection
-            variant="public"
-            onPublicCta={handleNavigateToEducation}
-            onSelectPlan={(planId) => {
-              handleNavigateToEducation();
-            }}
-          />
-        </section>
-
-        {/* Mentoría Personalizada Teaser */}
+        {/* Experiencia real — Charlas semanales en vivo (valor antes del precio) */}
         <section id="mentoria" className="py-20 bg-navy-900/60 border-y border-white/5 scroll-mt-28">
           <div className="container max-w-5xl mx-auto px-6 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 mb-6">
-              <span className="text-brand-400 text-xs font-black uppercase tracking-[0.2em]">La experiencia premium</span>
+              <span className="text-brand-400 text-xs font-black uppercase tracking-[0.2em]">La experiencia real</span>
             </div>
 
             <h2 className="text-4xl md:text-5xl font-heading font-black text-white tracking-tighter mb-4">
               Charlas Semanales en Vivo
             </h2>
             <p className="text-xl text-navy-300 max-w-2xl mx-auto mb-8">
-              Todos recibimos el mismo newsletter semanal. La diferencia real está en las charlas en vivo, donde profundizo en los temas, comparto contexto adicional y respondo preguntas de la comunidad en tiempo real.
+              Todos recibimos el mismo newsletter semanal. La diferencia real está en las <span className="font-semibold text-white">charlas semanales en vivo</span>, donde profundizo en los temas del newsletter, comparto mi análisis actual y respondo preguntas directamente.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -169,6 +160,17 @@ const LandingPage: React.FC = () => {
               Miembros Fundador y Experto tienen prioridad para sesiones de mentoría 1-a-1.
             </p>
           </div>
+        </section>
+
+        {/* Public Pricing Section */}
+        <section id="pricing" className="py-24 bg-navy-950 relative scroll-mt-28">
+          <PricingSection
+            variant="public"
+            onPublicCta={handleNavigateToEducation}
+            onSelectPlan={(planId) => {
+              handleNavigateToEducation();
+            }}
+          />
         </section>
 
         {/* FAQ Section */}
