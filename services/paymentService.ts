@@ -167,8 +167,9 @@ export const ANONYMOUS_ENTITLEMENTS: UserEntitlements = {
 
 const COURSE_TIER_RANK: Record<CourseTier, number> = {
   free: 0,
-  basico: 1,
-  completo: 2,
+  intermedio: 1,
+  fundador: 2,
+  experto: 2,
 };
 
 const LEVEL_REQUIREMENTS: Record<string, CourseTier> = {

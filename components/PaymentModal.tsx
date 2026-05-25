@@ -58,6 +58,8 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
   const plan = PRICING_PLANS[planId];
   const copPriceCents = plan.priceCopCents;
 
+  const isHighTier = planId === 'fundador' || planId === 'experto';
+
   const publicKey = import.meta.env.VITE_WOMPI_PUBLIC_KEY;
 
   useEffect(() => {
@@ -203,6 +205,12 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
               <span className="text-navy-300 text-sm font-medium">Plan {plan.name}</span>
               <span className="text-white font-bold">{formatCOP(copPriceCents)}</span>
             </div>
+
+            {isHighTier && (
+              <p className="text-[11px] text-brand-400 mt-1">
+                Como miembro de la Comunidad tienes prioridad al solicitar Mentoría Personalizada.
+              </p>
+            )}
             <div className="flex justify-between items-center">
               <span className="text-navy-400 text-xs">Pago único · acceso de por vida</span>
               <span className="text-navy-400 text-xs">COP</span>

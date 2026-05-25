@@ -26,7 +26,7 @@ const COURSE_TIER_RANK: Record<CourseTier, number> = {
 const PUBLIC_CTA_LABELS: Record<CourseTier, string> = {
   free: 'Comenzar gratis',
   intermedio: 'Elegir Intermedio',
-  fundador: 'Elegir Fundador',
+  fundador: 'Unirme como Fundador',
   experto: 'Elegir Experto',
 };
 
@@ -151,6 +151,18 @@ export default function PricingSection({
                   <p className="text-sm text-navy-300 mt-1 font-medium leading-snug">
                     {plan.description}
                   </p>
+
+                  {courseTier === 'fundador' && (
+                    <p className="text-xs text-brand-400 mt-2 font-medium">
+                      Estatus permanente de Fundador incluso después de que el plan pase a llamarse Experto.
+                    </p>
+                  )}
+
+                  {(courseTier === 'fundador' || courseTier === 'experto') && isPublic && (
+                    <p className="text-[11px] text-navy-400 mt-3">
+                      Incluye prioridad para <span className="text-brand-400">Mentoría Personalizada</span>.
+                    </p>
+                  )}
                 </div>
 
                 <div className="mt-6 mb-8">
@@ -234,7 +246,7 @@ export default function PricingSection({
                         : 'bg-navy-800 hover:bg-navy-700 border border-white/10 hover:border-brand-500/40 text-white'
                     }`}
                   >
-                    Obtener {plan.name}
+                    Actualizar a {plan.name}
                   </button>
                 )}
               </div>

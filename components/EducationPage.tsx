@@ -13,6 +13,7 @@ import LevelCard from './ui/LevelCard';
 import Certificate from './ui/Certificate';
 import PricingSection from './PricingSection';
 import PaymentModal from './PaymentModal';
+import MentoriaModal from './MentoriaModal';
 import DailyReviewCard from './education/DailyReviewCard';
 import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
@@ -53,6 +54,7 @@ const ACHIEVEMENT_ICONS: Record<string, LucideIcon> = {
 const EducationPage: React.FC<EducationPageProps> = () => {
   const [showModal, setShowModal] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [showMentoriaModal, setShowMentoriaModal] = useState(false);
   const [levels, setLevels] = useState<Level[]>([]);
   const { user } = useAuth();
   const { entitlements, refresh: refreshEntitlements } = useEntitlements();
@@ -277,6 +279,15 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                   Comunidad Activa
                 </span>
               </div>
+            )}
+
+            {hasCommunityAccess(entitlements) && (
+              <button
+                onClick={() => setShowMentoriaModal(true)}
+                className="text-xs font-bold px-3 py-1.5 rounded-lg border border-brand-500/40 text-brand-400 hover:bg-brand-500/10 transition-colors"
+              >
+                Pedir Mentoría
+              </button>
             )}
             <div className="flex items-center gap-3">
                <div className="w-8 h-8 rounded-lg bg-navy-950 border border-white/5 flex items-center justify-center">
@@ -503,6 +514,11 @@ const EducationPage: React.FC<EducationPageProps> = () => {
               setShowPaymentModal(false);
               refreshEntitlements();
             }}
+          />
+
+          <MentoriaModal
+            isOpen={showMentoriaModal}
+            onClose={() => setShowMentoriaModal(false)}
           />
 
           <div className="container max-w-7xl mx-auto px-6 mt-8 mb-12">
