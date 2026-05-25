@@ -96,7 +96,9 @@ export default function PricingSection({
               className={`group relative flex flex-col rounded-3xl overflow-hidden transition-all duration-300 ${
                 isTopTier
                   ? 'border border-brand-500/30 shadow-[0_0_50px_rgba(245,158,11,0.08)]'
-                  : 'border border-white/10'
+                  : isFreePlan
+                  ? 'border border-white/10'
+                  : 'border border-white/10 bg-navy-900/40'
               }`}
             >
               {/* Background */}
@@ -112,12 +114,12 @@ export default function PricingSection({
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <div
-                      className={`flex h-11 w-11 items-center justify-center rounded-2xl ${
+                      className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
                         isTopTier
-                          ? 'bg-gradient-to-br from-brand-400 to-brand-600 shadow-lg shadow-brand-500/20'
+                          ? 'bg-gradient-to-br from-brand-400 to-brand-600 shadow-lg shadow-brand-500/25'
                           : isFreePlan
                           ? 'bg-navy-800 border border-white/10'
-                          : 'bg-navy-800 border border-white/10'
+                          : 'bg-navy-800 border border-brand-500/20'
                       }`}
                     >
                       {isTopTier ? (
@@ -196,7 +198,9 @@ export default function PricingSection({
                     className={`mt-auto w-full rounded-2xl py-3.5 text-sm font-bold transition-all duration-200 ${
                       isTopTier
                         ? 'bg-gradient-to-r from-brand-500 to-brand-600 text-navy-950 shadow-lg shadow-brand-500/20 hover:from-brand-400 hover:to-brand-500'
-                        : 'border border-white/15 bg-navy-800 text-white hover:border-white/25 hover:bg-navy-700'
+                        : isFreePlan
+                        ? 'border border-white/10 bg-navy-800 text-white hover:bg-navy-700 hover:border-white/20'
+                        : 'border border-white/15 bg-navy-800 text-white hover:border-brand-500/40 hover:bg-navy-700'
                     }`}
                   >
                     {PUBLIC_CTA_LABELS[courseTier]}
@@ -217,7 +221,9 @@ export default function PricingSection({
                     className={`mt-auto w-full rounded-2xl py-3.5 text-sm font-bold transition-all duration-200 ${
                       isTopTier
                         ? 'bg-gradient-to-r from-brand-500 to-brand-600 text-navy-950 shadow-lg shadow-brand-500/20 hover:from-brand-400 hover:to-brand-500'
-                        : 'border border-white/15 bg-navy-800 text-white hover:border-white/25 hover:bg-navy-700'
+                        : isFreePlan
+                        ? 'border border-white/10 bg-navy-800 text-white hover:bg-navy-700 hover:border-white/20'
+                        : 'border border-white/15 bg-navy-800 text-white hover:border-brand-500/40 hover:bg-navy-700'
                     }`}
                   >
                     Actualizar a {plan.name}
