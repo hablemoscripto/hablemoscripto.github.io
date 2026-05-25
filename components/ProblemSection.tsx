@@ -69,13 +69,13 @@ const ProblemSection: React.FC = () => {
               <motion.div
                 key={index}
                 variants={cardVariants}
-                className="group flex flex-col gap-4 p-6 rounded-2xl bg-navy-900/50 border border-white/5 hover:border-brand-500/30 hover:bg-navy-900/70 transition-all duration-300"
+                className="group flex flex-col gap-5 px-6 py-7 rounded-2xl bg-navy-900/50 border border-white/5 hover:border-brand-500/30 hover:bg-navy-900/70 transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-xl bg-navy-950 border border-white/5 flex items-center justify-center text-brand-400 group-hover:bg-brand-500/10 group-hover:border-brand-500/20 group-hover:text-brand-500 transition-all">
                   <Icon size={24} aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="font-black text-white text-lg tracking-tight mb-3 leading-tight">
+                  <h3 className="font-black text-white text-lg tracking-tight mb-4 leading-tight">
                     {problem.title}
                   </h3>
                   <p className="text-sm text-navy-400 leading-relaxed font-medium">
