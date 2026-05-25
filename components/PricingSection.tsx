@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Check, Crown, Sparkles, Zap } from 'lucide-react';
+import { Check, Crown, Zap } from 'lucide-react';
 import {
   PRICING_PLANS,
   type CourseTier,
@@ -9,18 +9,17 @@ import {
 interface PricingSectionProps {
   variant?: 'authenticated' | 'public';
   entitlements?: UserEntitlements;
-  onSelectPlan?: (planId: 'intermedio' | 'fundador') => void;
+  onSelectPlan?: (planId: 'intermedio' | 'fundador' | 'experto') => void;
   onPublicCta?: () => void;
 }
 
-// Display order for the pricing cards on the public site.
 const COURSE_PLAN_ORDER: CourseTier[] = ['free', 'intermedio', 'fundador'];
 
 const COURSE_TIER_RANK: Record<CourseTier, number> = {
   free: 0,
   intermedio: 1,
   fundador: 2,
-  experto: 2, // same access level as Fundador
+  experto: 2,
 };
 
 const PUBLIC_CTA_LABELS: Record<CourseTier, string> = {
@@ -35,7 +34,7 @@ const cardVariants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.5, ease: 'easeOut' as const },
+    transition: { delay: i * 0.12, duration: 0.5, ease: 'easeOut' as const },
   }),
 };
 
@@ -52,38 +51,39 @@ export default function PricingSection({
 
   const isCurrentPlan = (tier: CourseTier) =>
     !isPublic && tier === currentCourseTier;
+
   const isIncluded = (tier: CourseTier) =>
     !isPublic && COURSE_TIER_RANK[tier] < COURSE_TIER_RANK[currentCourseTier];
 
   return (
-    <div className="container max-w-7xl mx-auto px-6 mt-24">
+    <div className="container max-w-7xl mx-auto px-6">
       <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-navy-900 border border-white/5 text-brand-500 text-[10px] font-black uppercase tracking-[0.2em] mb-6">
-          <Crown size={14} />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-900 border border-white/10 text-brand-500 text-xs font-black uppercase tracking-[0.2em] mb-6">
           Planes y Precios
         </div>
-        <h2 className="text-4xl md:text-5xl font-heading font-black text-white mb-4 tracking-tighter">
-          Elige tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-brand-500 to-brand-600">camino</span>
+
+        <h2 className="text-4xl md:text-5xl font-heading font-black text-white tracking-tighter mb-4">
+          Elige tu nivel de profundidad
         </h2>
-        <p className="text-lg text-navy-300 max-w-2xl mx-auto font-medium">
-          Pago único. Acceso de por vida. Sin suscripciones, sin renovaciones.
+        <p className="text-lg text-navy-300 max-w-2xl mx-auto">
+          Pago único. Acceso de por vida. Sin suscripciones.
         </p>
 
-        {/* Founder pricing notice */}
-        <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/30">
-          <Sparkles size={14} className="text-brand-400" />
-          <span className="text-xs font-bold text-brand-300">
+        {/* Fundador scarcity notice */}
+        <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/30 text-sm">
+          <span className="text-brand-400 font-medium">
             Las primeras 100 personas que elijan el plan superior recibirán el estatus permanente de Fundador.
           </span>
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8 items-start">
+      <div className="grid lg:grid-cols-3 gap-6 items-stretch">
         {COURSE_PLAN_ORDER.map((courseTier, index) => {
           const plan = PRICING_PLANS[courseTier];
           const isCurrent = isCurrentPlan(courseTier);
           const included = isIncluded(courseTier);
           const isFreePlan = courseTier === 'free';
+          const isTopTier = courseTier === 'fundador' || courseTier === 'experto';
 
           return (
             <motion.div
@@ -92,158 +92,132 @@ export default function PricingSection({
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '-50px' }}
-              className={`relative rounded-3xl overflow-hidden transition-all duration-300 ${
-                plan.highlighted ? 'lg:scale-105 lg:-my-2' : ''
+              viewport={{ once: true, margin: '-80px' }}
+              className={`group relative flex flex-col rounded-3xl overflow-hidden transition-all duration-300 ${
+                isTopTier
+                  ? 'border border-brand-500/30 shadow-[0_0_50px_rgba(245,158,11,0.08)]'
+                  : 'border border-white/10'
               }`}
             >
-              {plan.gradient && (
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-300 via-brand-400 to-brand-500 p-[1px]">
-                  <div className="w-full h-full rounded-3xl bg-navy-900" />
-                </div>
+              {/* Background */}
+              <div className="absolute inset-0 bg-navy-900/70 backdrop-blur-xl" />
+
+              {/* Premium border for Fundador */}
+              {isTopTier && (
+                <div className="absolute inset-0 rounded-3xl border border-brand-500/20" />
               )}
 
-              {plan.highlighted && !plan.gradient && (
-                <div className="absolute inset-0 rounded-3xl border-2 border-brand-500/30 shadow-[0_0_40px_rgba(245,158,11,0.12)]" />
-              )}
-
-              {!plan.highlighted && !plan.gradient && (
-                <div className="absolute inset-0 rounded-3xl border border-navy-700" />
-              )}
-
-              <div className="relative z-10 p-8 bg-navy-900 rounded-3xl m-[1px]">
-                {plan.highlighted && (
-                  <div className="absolute -top-px left-1/2 -translate-x-1/2">
-                    <div className="bg-brand-500 text-navy-950 text-[10px] font-black uppercase tracking-[0.15em] px-4 py-1.5 rounded-b-xl">
-                      Más Popular
+              <div className="relative z-10 flex h-full flex-col p-8">
+                {/* Header */}
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div
+                      className={`flex h-11 w-11 items-center justify-center rounded-2xl ${
+                        isTopTier
+                          ? 'bg-gradient-to-br from-brand-400 to-brand-600 shadow-lg shadow-brand-500/20'
+                          : isFreePlan
+                          ? 'bg-navy-800 border border-white/10'
+                          : 'bg-navy-800 border border-white/10'
+                      }`}
+                    >
+                      {isTopTier ? (
+                        <Crown className="h-5 w-5 text-navy-950" />
+                      ) : (
+                        <Zap className="h-5 w-5 text-brand-400" />
+                      )}
                     </div>
-                  </div>
-                )}
 
-                {plan.gradient && (
-                  <div className="absolute -top-px left-1/2 -translate-x-1/2">
-                    <div className="bg-gradient-to-r from-brand-300 to-brand-500 text-navy-950 text-[10px] font-black uppercase tracking-[0.15em] px-4 py-1.5 rounded-b-xl">
-                      Mejor Valor
-                    </div>
-                  </div>
-                )}
-
-                <div className={`mt-${plan.highlighted || plan.gradient ? '4' : '0'}`}>
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 ${
-                    isFreePlan
-                      ? 'bg-navy-800 border border-white/5'
-                      : plan.highlighted
-                        ? 'bg-gradient-to-br from-brand-400 to-brand-600 shadow-lg shadow-brand-500/20'
-                        : 'bg-gradient-to-br from-brand-300 to-brand-500 shadow-lg shadow-brand-300/30'
-                  }`}>
-                    {isFreePlan ? (
-                      <Zap size={22} className="text-navy-300" aria-hidden="true" />
-                    ) : plan.highlighted ? (
-                      <Crown size={22} className="text-navy-950" aria-hidden="true" />
-                    ) : (
-                      <Sparkles size={22} className="text-navy-950" aria-hidden="true" />
+                    {isTopTier && (
+                      <span className="rounded-full bg-brand-500 px-3 py-1 text-xs font-black uppercase tracking-[0.15em] text-navy-950">
+                        Mejor Valor
+                      </span>
                     )}
                   </div>
 
                   <h3 className="text-2xl font-heading font-black text-white tracking-tight">
                     {plan.name}
                   </h3>
-                  <p className="text-sm text-navy-300 mt-1 font-medium leading-snug">
+                  <p className="mt-2 text-sm text-navy-300 leading-snug">
                     {plan.description}
                   </p>
 
                   {courseTier === 'fundador' && (
-                    <p className="text-xs text-brand-400 mt-2 font-medium">
-                      Estatus permanente de Fundador incluso después de que el plan pase a llamarse Experto.
-                    </p>
-                  )}
-
-                  {(courseTier === 'fundador' || courseTier === 'experto') && isPublic && (
-                    <p className="text-[11px] text-navy-400 mt-3">
-                      Incluye prioridad para <span className="text-brand-400">Mentoría Personalizada</span>.
+                    <p className="mt-3 text-xs text-brand-400 font-medium">
+                      Estatus de Fundador permanente, incluso cuando el plan pase a llamarse Experto.
                     </p>
                   )}
                 </div>
 
-                <div className="mt-6 mb-8">
-                  {!isFreePlan && courseTier === 'fundador' && (
-                    <span className="inline-block text-[10px] font-black uppercase tracking-[0.18em] text-brand-400 bg-brand-500/10 border border-brand-500/20 px-2 py-0.5 rounded-md mb-2">
-                      Limitado a las primeras 100 personas
-                    </span>
-                  )}
-                  {!isFreePlan && courseTier !== 'fundador' && (
-                    <span className="inline-block text-[10px] font-black uppercase tracking-[0.18em] text-brand-400 bg-brand-500/10 border border-brand-500/20 px-2 py-0.5 rounded-md mb-2">
-                      Precio Fundador
-                    </span>
-                  )}
+                {/* Price */}
+                <div className="mt-8 mb-6">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-black text-white tracking-tight">
+                    <span className="text-5xl font-black text-white tracking-[-1.5px]">
                       {formatUSD(plan.priceUsd)}
                     </span>
                     {!isFreePlan && (
-                      <span className="text-navy-400 text-sm font-medium">
-                        USD · pago único
+                      <span className="text-sm font-medium text-navy-400 ml-1">
+                        USD
                       </span>
                     )}
                   </div>
                   {!isFreePlan && (
-                    <p className="text-xs text-navy-500 font-medium mt-1">
-                      Acceso de por vida — sin renovaciones
+                    <p className="text-xs text-navy-500 mt-1 font-medium">
+                      Pago único · Acceso de por vida
                     </p>
                   )}
                 </div>
 
-                <ul className="space-y-3 mb-8">
+                {/* Scarcity */}
+                {courseTier === 'fundador' && (
+                  <div className="mb-6 inline-flex items-center rounded-lg border border-brand-500/30 bg-brand-500/10 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-brand-400">
+                    Limitado a las primeras 100 personas
+                  </div>
+                )}
+
+                {/* Features */}
+                <ul className="space-y-3.5 mb-8 flex-1">
                   {plan.features.map((feature, fi) => (
-                    <li key={fi} className="flex items-start gap-3">
+                    <li key={fi} className="flex items-start gap-3 text-sm">
                       <Check
-                        size={18}
-                        aria-hidden="true"
-                        className={`flex-shrink-0 mt-0.5 ${
-                          isFreePlan
-                            ? 'text-navy-400'
-                            : plan.highlighted
-                              ? 'text-brand-400'
-                              : 'text-brand-300'
+                        size={17}
+                        className={`mt-0.5 flex-shrink-0 ${
+                          isTopTier ? 'text-brand-400' : 'text-navy-400'
                         }`}
                       />
-                      <span className="text-sm text-navy-200 font-medium">{feature}</span>
+                      <span className="text-navy-200">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
+                {/* CTA */}
                 {isPublic ? (
                   <button
                     onClick={() => onPublicCta?.()}
-                    className={`w-full py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 cursor-pointer ${
-                      plan.highlighted || plan.gradient
-                        ? 'bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40'
-                        : 'bg-navy-800 hover:bg-navy-700 border border-white/10 hover:border-brand-500/40 text-white'
+                    className={`mt-auto w-full rounded-2xl py-3.5 text-sm font-bold transition-all duration-200 ${
+                      isTopTier
+                        ? 'bg-gradient-to-r from-brand-500 to-brand-600 text-navy-950 shadow-lg shadow-brand-500/20 hover:from-brand-400 hover:to-brand-500'
+                        : 'border border-white/15 bg-navy-800 text-white hover:border-white/25 hover:bg-navy-700'
                     }`}
                   >
                     {PUBLIC_CTA_LABELS[courseTier]}
                   </button>
-                ) : isFreePlan ? (
-                  <div className="w-full py-3.5 rounded-2xl text-center text-sm font-bold bg-navy-800 border border-white/5 text-navy-400">
-                    {isCurrent ? 'Plan Actual' : 'Incluido'}
-                  </div>
                 ) : isCurrent ? (
-                  <div className="w-full py-3.5 rounded-2xl text-center text-sm font-bold bg-brand-500/10 border border-brand-500/20 text-brand-400">
+                  <div className="mt-auto w-full rounded-2xl border border-brand-500/30 bg-brand-500/10 py-3.5 text-center text-sm font-bold text-brand-400">
                     Plan Actual
                   </div>
                 ) : included ? (
-                  <div className="w-full py-3.5 rounded-2xl text-center text-sm font-bold bg-navy-800 border border-white/5 text-navy-400">
+                  <div className="mt-auto w-full rounded-2xl border border-white/10 bg-navy-800 py-3.5 text-center text-sm font-medium text-navy-400">
                     Incluido
                   </div>
                 ) : (
                   <button
-                    // courseTier is narrowed by isFreePlan branch above; this
-                    // cast tells TS the callback's payable-only contract holds.
-                    onClick={() => onSelectPlan?.(courseTier as 'intermedio' | 'fundador')}
-                    className={`w-full py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 cursor-pointer ${
-                      plan.highlighted
-                        ? 'bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40'
-                        : 'bg-navy-800 hover:bg-navy-700 border border-white/10 hover:border-brand-500/40 text-white'
+                    onClick={() =>
+                      onSelectPlan?.(courseTier as 'intermedio' | 'fundador' | 'experto')
+                    }
+                    className={`mt-auto w-full rounded-2xl py-3.5 text-sm font-bold transition-all duration-200 ${
+                      isTopTier
+                        ? 'bg-gradient-to-r from-brand-500 to-brand-600 text-navy-950 shadow-lg shadow-brand-500/20 hover:from-brand-400 hover:to-brand-500'
+                        : 'border border-white/15 bg-navy-800 text-white hover:border-white/25 hover:bg-navy-700'
                     }`}
                   >
                     Actualizar a {plan.name}
