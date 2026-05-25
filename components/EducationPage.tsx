@@ -58,7 +58,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const { entitlements, refresh: refreshEntitlements } = useEntitlements();
 
   // Pricing / payment state
-  const [selectedPlan, setSelectedPlan] = useState<'basico' | 'completo' | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<'intermedio' | 'fundador' | null>(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   // Ctrl+K / Cmd+K keyboard shortcut for search
@@ -267,14 +267,14 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           </div>
 
           <div className="flex items-center gap-4 sm:gap-6">
-            {(entitlements.courseTier !== 'free' || hasCommunityAccess(entitlements)) && (
+            {hasCommunityAccess(entitlements) && (
               <div
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/30"
-                aria-label="Miembro Fundador"
+                aria-label="Miembro de la Comunidad"
               >
                 <Award size={12} className="text-brand-400" aria-hidden="true" />
                 <span className="text-[10px] font-black uppercase tracking-[0.18em] text-brand-300">
-                  Fundador
+                  Comunidad Activa
                 </span>
               </div>
             )}
@@ -491,14 +491,14 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           <PricingSection
             entitlements={entitlements}
             onSelectPlan={(planId) => {
-              setSelectedPlan(planId);
+              setSelectedPlan(planId as 'intermedio' | 'fundador');
               setShowPaymentModal(true);
             }}
           />
           <PaymentModal
             isOpen={showPaymentModal}
             onClose={() => setShowPaymentModal(false)}
-            planId={selectedPlan || 'basico'}
+            planId={selectedPlan || 'intermedio'}
             onSuccess={() => {
               setShowPaymentModal(false);
               refreshEntitlements();

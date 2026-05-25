@@ -44,7 +44,7 @@ interface WompiResult {
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  planId: 'basico' | 'completo';
+  planId: 'intermedio' | 'fundador' | 'experto';
   onSuccess: () => void;
 }
 
@@ -122,8 +122,7 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
       // TODO(wompi-integration, later phase): the create-payment Edge Function's
       // PRODUCT_CATALOG still uses the legacy SKUs (inversor_lifetime /
       // vip_lifetime). The card path is non-functional until that catalog is
-      // updated to recognize basico_lifetime / completo_lifetime / comunidad_annual
-      // / acceso_total_bundle. Prod is not on this branch, so this is acceptable
+      // TODO: Update comment once backend catalog is fully migrated to new SKUs (intermedio_lifetime, fundador_lifetime, experto_lifetime)
       // during the v2 refactor phase.
       const paymentData = await createPaymentWithSignature(
         plan.wompiSku,

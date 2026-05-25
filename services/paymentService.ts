@@ -2,29 +2,28 @@ import { supabase } from '../lib/supabase';
 import { reportError } from '../utils/errorReporting';
 
 // ---------------------------------------------------------------------------
-// Pricing model — v2 (May 2026)
+// Pricing model — Launch 2026
 //
-// Replaces the legacy binary free/premium/vip set with a multi-product
-// structure for LatAm: two lifetime course tiers (Básico / Completo), a
-// 12-month Comunidad pass, and an Acceso Total bundle. All v1 products are
-// one-time purchases — Wompi does not natively support recurring billing,
-// so Comunidad renews via re-purchase + email reminder, not a subscription.
+// Clean structure aligned with product vision:
+// - Principiante (free)
+// - Intermedio (full platform access)
+// - Fundador (full platform + Comunidad, limited to first 100 buyers)
+// - Experto (same benefits as Fundador, after Fundador spots are exhausted)
 //
-// `wompiSku` is the SKU sent to create-payment / wompi-webhook. The server
-// catalog (supabase/functions/create-payment/index.ts → PRODUCT_CATALOG)
-// MUST stay in sync with `wompiSku` values here.
+// All plans are one-time lifetime purchases.
+// Recurring revenue (annual renewals or packaged mentorship) is planned
+// for a later phase once payment infrastructure supports it cleanly.
 // ---------------------------------------------------------------------------
 
 export type PlanId =
   | 'free'
-  | 'basico'
-  | 'completo'
-  | 'comunidad_anual'
-  | 'acceso_total';
+  | 'intermedio'
+  | 'fundador'
+  | 'experto';
 
 export type ProductType = 'course' | 'community' | 'bundle';
 
-export type CourseTier = 'free' | 'basico' | 'completo';
+export type CourseTier = 'free' | 'intermedio' | 'fundador' | 'experto';
 export type CommunityStatus = 'none' | 'active' | 'expired';
 
 export interface PricingPlan {
@@ -58,81 +57,69 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     id: 'free',
     productType: 'course',
     name: 'Principiante',
-    description: 'Empieza tu camino en el mundo cripto',
+    description: 'Newsletter semanal + Nivel Principiante',
     priceUsd: 0,
     priceCopCents: 0,
     features: [
       'Nivel Principiante completo (19 lecciones)',
-      'Quizzes interactivos',
-      'Certificado de nivel',
-      'Sistema de logros',
-      'Asistente IA (límite diario)',
+      'Newsletter semanal con análisis de mercado',
+      'Acceso a recursos gratuitos',
     ],
   },
-  basico: {
-    id: 'basico',
+  intermedio: {
+    id: 'intermedio',
     productType: 'course',
-    name: 'Cripto Básico',
-    description: 'Desbloquea el Nivel Intermedio',
-    priceUsd: 79,
-    priceCopCents: 31600000,
-    wompiSku: 'basico_lifetime',
-    grantsCourseTier: 'basico',
+    name: 'Intermedio',
+    description: 'Acceso completo a toda la plataforma educativa',
+    priceUsd: 99,
+    priceCopCents: 34900000, // ~349,000 COP
+    wompiSku: 'intermedio_lifetime',
+    grantsCourseTier: 'intermedio',
     features: [
-      'Todo lo del plan Principiante',
-      'Nivel Intermedio completo (12 lecciones)',
-      'Acceso de por vida',
+      'Acceso completo a las 42 lecciones',
+      'Videos dedicados en cada lección',
+      'Todas las actualizaciones futuras',
+      'Certificados de nivel',
+      'Sistema de logros y repaso espaciado',
+    ],
+  },
+  fundador: {
+    id: 'fundador',
+    productType: 'bundle',
+    name: 'Fundador',
+    description: 'Plataforma completa + Comunidad activa (solo primeras 100 personas)',
+    priceUsd: 249,
+    priceCopCents: 89900000, // ~899,000 COP
+    wompiSku: 'fundador_lifetime',
+    grantsCourseTier: 'fundador',
+    grantsCommunityMonths: 120, // effectively lifetime for community access in this model
+    features: [
+      'Todo lo del plan Intermedio',
+      'Acceso completo a la Comunidad en Discord',
+      'Charlas semanales en vivo con análisis y Q&A',
+      'Newsletter premium con perspectivas profundas',
+      'Prioridad al solicitar Mentoría Personalizada',
     ],
     highlighted: true,
-  },
-  completo: {
-    id: 'completo',
-    productType: 'course',
-    name: 'Cripto Completo',
-    description: 'Acceso de por vida a todo el contenido',
-    priceUsd: 179,
-    priceCopCents: 71600000,
-    wompiSku: 'completo_lifetime',
-    grantsCourseTier: 'completo',
-    features: [
-      'Todo lo del plan Cripto Básico',
-      'Nivel Avanzado completo (11 lecciones)',
-      'Acceso de por vida',
-    ],
     gradient: true,
   },
-  comunidad_anual: {
-    id: 'comunidad_anual',
-    productType: 'community',
-    name: 'Comunidad anual',
-    description: '12 meses de acceso a la Comunidad',
-    priceUsd: 190,
-    priceCopCents: 76000000,
-    wompiSku: 'comunidad_annual',
-    grantsCommunityMonths: 12,
-    features: [
-      '12 meses de acceso a la Comunidad (Discord)',
-      'Sesiones en vivo mensuales',
-      'Análisis de mercado y oportunidades',
-      'Renovación manual al vencer',
-    ],
-  },
-  acceso_total: {
-    id: 'acceso_total',
+  experto: {
+    id: 'experto',
     productType: 'bundle',
-    name: 'Acceso Total',
-    description: 'Cripto Completo + 12 meses de Comunidad',
-    priceUsd: 329,
-    priceCopCents: 131600000,
-    wompiSku: 'acceso_total_bundle',
-    grantsCourseTier: 'completo',
-    grantsCommunityMonths: 12,
+    name: 'Experto',
+    description: 'Plataforma completa + Comunidad activa',
+    priceUsd: 249,
+    priceCopCents: 89900000,
+    wompiSku: 'experto_lifetime',
+    grantsCourseTier: 'experto',
+    grantsCommunityMonths: 120,
     features: [
-      'Cripto Completo (de por vida)',
-      '12 meses de Comunidad',
-      'Mejor relación precio/valor',
+      'Todo lo del plan Intermedio',
+      'Acceso completo a la Comunidad en Discord',
+      'Charlas semanales en vivo con análisis y Q&A',
+      'Newsletter premium con perspectivas profundas',
+      'Prioridad al solicitar Mentoría Personalizada',
     ],
-    gradient: true,
   },
 };
 
@@ -186,8 +173,8 @@ const COURSE_TIER_RANK: Record<CourseTier, number> = {
 
 const LEVEL_REQUIREMENTS: Record<string, CourseTier> = {
   beginner: 'free',
-  intermediate: 'basico',
-  advanced: 'completo',
+  intermediate: 'intermedio',
+  advanced: 'fundador', // or 'experto' — both grant full access
 };
 
 export function canAccessLevel(
@@ -267,16 +254,10 @@ export async function getPaymentByReference(reference: string) {
 // Derive UserEntitlements from the legacy user_profiles row.
 //
 // The DB schema still uses `is_premium` + `premium_tier` ('premium' | 'vip').
-// Legacy mapping (one-way, lossy): vip → courseTier 'completo', premium →
-// courseTier 'basico'. communityStatus is unknowable from legacy data →
-// always 'none'. A schema migration that introduces native course_tier /
-// community_status columns is a later-phase concern.
-//
-// TODO(migration, later phase): legacy `vip` users need a goodwill grant of
-// communityStatus 'active' + communityExpiresAt = migration_date + 12 months,
-// in addition to the courseTier 'completo' mapping below. Legacy `premium` →
-// `basico` is value-equivalent, no goodwill grant needed. Manual review;
-// surfaced in the v2-refactor final report.
+// Legacy mapping kept for users who purchased before the 2026 relaunch.
+// Old `premium` → intermedio equivalent
+// Old `vip`     → fundador/experto equivalent
+// This logic can be removed after a full migration of historical users.
 // ---------------------------------------------------------------------------
 
 export async function getUserEntitlements(
@@ -312,9 +293,9 @@ export async function getUserEntitlements(
 
   const courseTier: CourseTier =
     data.premium_tier === 'vip'
-      ? 'completo'
+      ? 'fundador'
       : data.premium_tier === 'premium'
-        ? 'basico'
+        ? 'intermedio'
         : 'free';
 
   return {

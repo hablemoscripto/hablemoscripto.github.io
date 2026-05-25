@@ -9,27 +9,25 @@ import {
 interface PricingSectionProps {
   variant?: 'authenticated' | 'public';
   entitlements?: UserEntitlements;
-  onSelectPlan?: (planId: 'basico' | 'completo') => void;
+  onSelectPlan?: (planId: 'intermedio' | 'fundador') => void;
   onPublicCta?: () => void;
 }
 
-// Course-tier rendering scope, v2 launch phase.
-//
-// TODO(pricing-ui, later phase): render Comunidad anual and Acceso Total
-// here too. Their plans are already in PRICING_PLANS (data layer) but the
-// pricing UI redesign that surfaces them is a separate phase.
-const COURSE_PLAN_ORDER: CourseTier[] = ['free', 'basico', 'completo'];
+// Display order for the pricing cards on the public site.
+const COURSE_PLAN_ORDER: CourseTier[] = ['free', 'intermedio', 'fundador'];
 
 const COURSE_TIER_RANK: Record<CourseTier, number> = {
   free: 0,
-  basico: 1,
-  completo: 2,
+  intermedio: 1,
+  fundador: 2,
+  experto: 2, // same access level as Fundador
 };
 
 const PUBLIC_CTA_LABELS: Record<CourseTier, string> = {
-  free: 'Empieza ahora',
-  basico: 'Desbloquea Intermedio',
-  completo: 'Acceso completo',
+  free: 'Comenzar gratis',
+  intermedio: 'Elegir Intermedio',
+  fundador: 'Elegir Fundador',
+  experto: 'Elegir Experto',
 };
 
 const cardVariants = {
@@ -75,7 +73,7 @@ export default function PricingSection({
         <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/30">
           <Sparkles size={14} className="text-brand-400" />
           <span className="text-xs font-bold text-brand-300">
-            Precio Fundador — sube cuando completemos la siguiente fase del producto
+            Las primeras 100 personas que elijan el plan superior recibirán el estatus permanente de Fundador.
           </span>
         </div>
       </div>
@@ -150,13 +148,18 @@ export default function PricingSection({
                   <h3 className="text-2xl font-heading font-black text-white tracking-tight">
                     {plan.name}
                   </h3>
-                  <p className="text-sm text-navy-400 mt-1 font-medium">
+                  <p className="text-sm text-navy-300 mt-1 font-medium leading-snug">
                     {plan.description}
                   </p>
                 </div>
 
                 <div className="mt-6 mb-8">
-                  {!isFreePlan && (
+                  {!isFreePlan && courseTier === 'fundador' && (
+                    <span className="inline-block text-[10px] font-black uppercase tracking-[0.18em] text-brand-400 bg-brand-500/10 border border-brand-500/20 px-2 py-0.5 rounded-md mb-2">
+                      Limitado a las primeras 100 personas
+                    </span>
+                  )}
+                  {!isFreePlan && courseTier !== 'fundador' && (
                     <span className="inline-block text-[10px] font-black uppercase tracking-[0.18em] text-brand-400 bg-brand-500/10 border border-brand-500/20 px-2 py-0.5 rounded-md mb-2">
                       Precio Fundador
                     </span>
@@ -224,7 +227,7 @@ export default function PricingSection({
                   <button
                     // courseTier is narrowed by isFreePlan branch above; this
                     // cast tells TS the callback's payable-only contract holds.
-                    onClick={() => onSelectPlan?.(courseTier as 'basico' | 'completo')}
+                    onClick={() => onSelectPlan?.(courseTier as 'intermedio' | 'fundador')}
                     className={`w-full py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 cursor-pointer ${
                       plan.highlighted
                         ? 'bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40'

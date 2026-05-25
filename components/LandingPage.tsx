@@ -7,6 +7,7 @@ import Courses from './Courses';
 import PricingSection from './PricingSection';
 import Footer from './Footer';
 import AuthModal from './AuthModal';
+import MentoriaModal from './MentoriaModal';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -14,6 +15,7 @@ import { ChevronDown, Loader2 } from 'lucide-react';
 
 const LandingPage: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isMentoriaModalOpen, setIsMentoriaModalOpen] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [newsletterMessage, setNewsletterMessage] = useState('');
@@ -128,7 +130,45 @@ const LandingPage: React.FC = () => {
           <PricingSection
             variant="public"
             onPublicCta={handleNavigateToEducation}
+            onSelectPlan={(planId) => {
+              handleNavigateToEducation();
+            }}
           />
+        </section>
+
+        {/* Mentoría Personalizada Teaser */}
+        <section id="mentoria" className="py-20 bg-navy-900/60 border-y border-white/5 scroll-mt-28">
+          <div className="container max-w-5xl mx-auto px-6 text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 mb-6">
+              <span className="text-brand-400 text-xs font-black uppercase tracking-[0.2em]">Alta demanda</span>
+            </div>
+
+            <h2 className="text-4xl md:text-5xl font-heading font-black text-white tracking-tighter mb-4">
+              Mentoría Personalizada con CBas
+            </h2>
+            <p className="text-xl text-navy-300 max-w-2xl mx-auto mb-8">
+              Sesiones individuales limitadas. Diseñadas para quienes buscan claridad estratégica, revisión de portafolio o acompañamiento directo.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="#pricing"
+                className="px-8 py-4 bg-white text-navy-950 font-bold rounded-2xl hover:bg-navy-100 transition-colors"
+              >
+                Ver disponibilidad y precios
+              </a>
+              <button
+                onClick={() => setIsMentoriaModalOpen(true)}
+                className="px-8 py-4 border border-white/20 hover:bg-white/5 text-white font-bold rounded-2xl transition-colors"
+              >
+                Conocer más
+              </button>
+            </div>
+
+            <p className="mt-6 text-sm text-navy-400">
+              Miembros Fundador y Experto tienen prioridad al solicitar una sesión.
+            </p>
+          </div>
         </section>
 
         {/* FAQ Section */}
@@ -218,6 +258,11 @@ const LandingPage: React.FC = () => {
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
         onLoginSuccess={handleLoginSuccess}
+      />
+
+      <MentoriaModal
+        isOpen={isMentoriaModalOpen}
+        onClose={() => setIsMentoriaModalOpen(false)}
       />
     </motion.div>
   );
