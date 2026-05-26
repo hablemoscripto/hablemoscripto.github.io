@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Sparkles, Loader2, Trash2 } from 'lucide-react';
-import { streamGeminiResponse, ChatMessage } from '../services/geminiService';
+import { streamAIResponse, ChatMessage } from '../services/aiService';
 import { trackChatMessage } from '../utils/analytics';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
@@ -109,7 +109,7 @@ const ChatWidget: React.FC = () => {
         : messages;
 
       const frameIdRef = { current: 0 };
-      await streamGeminiResponse(
+      await streamAIResponse(
         apiHistory,
         userMessage.text,
         (chunk) => {
@@ -170,7 +170,7 @@ const ChatWidget: React.FC = () => {
               <h3 className="font-bold text-white text-sm" id="chat-title">CBas AI Assistant</h3>
               <p className="text-xs text-navy-400 flex items-center gap-1">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true"></span>
-                Online con Gemini 1.5
+                Online con Grok
               </p>
             </div>
             <button
@@ -247,7 +247,7 @@ const ChatWidget: React.FC = () => {
 
           {/* Powered By */}
           <div className="bg-navy-900 py-1 text-center">
-             <p className="text-[10px] text-navy-500">Powered by Google Gemini</p>
+             <p className="text-[10px] text-navy-500">Powered by Grok (xAI)</p>
           </div>
         </section>
       )}
