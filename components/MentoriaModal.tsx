@@ -9,6 +9,25 @@ interface MentoriaModalProps {
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
+const GENERIC_ERROR = 'No pudimos enviar tu solicitud. Intenta de nuevo.';
+
+// supabase-js's FunctionsHttpError surfaces only "non-2xx status code" by default.
+// The actual server message lives in error.context (the underlying Response).
+async function extractFunctionError(error: unknown): Promise<string> {
+  if (!error || typeof error !== 'object') return GENERIC_ERROR;
+  const ctx = (error as { context?: unknown }).context;
+  if (ctx && typeof (ctx as Response).json === 'function') {
+    try {
+      const body = await (ctx as Response).json();
+      if (body && typeof body.error === 'string') return body.error;
+    } catch {
+      // body wasn't JSON or stream already consumed — fall through
+    }
+  }
+  const message = (error as { message?: unknown }).message;
+  return typeof message === 'string' && message ? message : GENERIC_ERROR;
+}
+
 export default function MentoriaModal({ isOpen, onClose }: MentoriaModalProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -29,21 +48,43 @@ export default function MentoriaModal({ isOpen, onClose }: MentoriaModalProps) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus('submitting');
     setErrorMessage('');
+
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
+
+    if (trimmedName.length < 2) {
+      setErrorMessage('Ingresa tu nombre completo.');
+      setStatus('error');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setErrorMessage('Ingresa un email válido.');
+      setStatus('error');
+      return;
+    }
+    if (trimmedMessage.length < 10) {
+      setErrorMessage('Cuéntame un poco más — al menos 10 caracteres para entender tu situación.');
+      setStatus('error');
+      return;
+    }
+
+    setStatus('submitting');
 
     try {
       const { data, error } = await supabase.functions.invoke('mentoria-request', {
-        body: {
-          name: name.trim(),
-          email: email.trim(),
-          message: message.trim(),
-        },
+        body: { name: trimmedName, email: trimmedEmail, message: trimmedMessage },
       });
 
-      if (error || (data && (data as { error?: string }).error)) {
-        const msg = (data as { error?: string } | null)?.error || error?.message || 'No pudimos enviar tu solicitud. Intenta de nuevo.';
-        setErrorMessage(msg);
+      if (error) {
+        setErrorMessage(await extractFunctionError(error));
+        setStatus('error');
+        return;
+      }
+
+      if (data && typeof (data as { error?: string }).error === 'string') {
+        setErrorMessage((data as { error: string }).error);
         setStatus('error');
         return;
       }
