@@ -186,6 +186,7 @@ const LandingPage: React.FC = () => {
                     {[
                         { q: '¿Es gratis?', a: 'El Nivel Principiante con 19 lecciones es 100% gratuito. Los niveles Intermedio y Avanzado requieren completar el nivel anterior para desbloquearse.' },
                         { q: '¿Necesito experiencia previa en criptomonedas?', a: 'No. Empezamos desde cero, explicando qué es el dinero y por qué importa. No asumimos ningún conocimiento previo.' },
+                        { q: '¿Qué diferencia hay con lo que ya está gratis en YouTube y Twitter?', a: 'El contenido gratuito te da fragmentos sin orden y muchas veces está pagado por quien quiere venderte algo después — señales, tokens, cursos caros. Aquí tienes un currículum estructurado de 42 lecciones, profundizo en los temas en charlas semanales y mi modelo es transparente: tú pagas la plataforma, no terceros que quieran sacar comisión de tus decisiones.' },
                         { q: '¿Cuánto tiempo toma completar un nivel?', a: 'El Nivel Principiante toma aproximadamente 8 horas. El Intermedio unas 8 horas y el Avanzado unas 11 horas. Puedes avanzar a tu propio ritmo.' },
                         { q: '¿Es seguro invertir en criptomonedas?', a: 'Las criptomonedas son activos de alto riesgo. Por eso enseñamos seguridad primero: cómo proteger tu wallet, evitar estafas, y gestionar el riesgo antes de invertir un solo peso.' },
                         { q: '¿Quién es CBas?', a: 'CBas tiene 7+ años navegando mercados de criptomonedas, incluyendo ciclos alcistas y bajistas completos. Creó Hablemos Cripto para dar a la comunidad LATAM las herramientas que él hubiera querido tener cuando empezó.' },
@@ -208,8 +209,8 @@ const LandingPage: React.FC = () => {
         <section id="resources" className="py-24 relative scroll-mt-28">
           <div className="absolute inset-0 bg-brand-600/5"></div>
           <div className="container max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 className="text-3xl font-bold text-white mb-4">Recursos & Newsletter</h2>
-            <p className="text-navy-400 mb-8">Recibe análisis de mercado, guías gratuitas y oportunidades directamente en tu bandeja de entrada.</p>
+            <h2 className="text-3xl font-bold text-white mb-4">Análisis semanal. Sin shilling.</h2>
+            <p className="text-navy-400 mb-8">Lo que pasó esta semana en cripto, interpretado para LATAM. Mi tesis actual, las señales que estoy mirando y lo que estoy ignorando.</p>
             <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"

@@ -32,7 +32,7 @@ const CourseCard: React.FC<{
     <ul className="space-y-3 mb-8">
       {features.map((feature, i) => (
         <li key={i} className={`flex items-start gap-2 text-sm ${isLocked ? 'text-navy-300' : 'text-navy-200'}`}>
-          <CheckCircle2 className={`w-4 h-4 ${isLocked ? 'text-navy-500' : 'text-brand-500'} mt-0.5 shrink-0`} aria-hidden="true" />
+          <CheckCircle2 className={`w-4 h-4 ${isLocked ? 'text-navy-400' : 'text-brand-500'} mt-0.5 shrink-0`} aria-hidden="true" />
           <span>{feature}</span>
         </li>
       ))}
@@ -43,9 +43,9 @@ const CourseCard: React.FC<{
       disabled={isLocked}
       aria-label={isLocked
         ? level === 'Intermedio'
-          ? 'Bloqueado — completa el nivel Principiante para desbloquear'
+          ? 'Empieza por el nivel Principiante para acceder a Intermedio'
           : level === 'Avanzado'
-            ? 'Bloqueado — completa el nivel Intermedio para desbloquear'
+            ? 'Empieza por el nivel Intermedio para acceder a Avanzado'
             : 'Bloqueado'
         : `Empezar nivel ${level}`
       }
@@ -58,7 +58,7 @@ const CourseCard: React.FC<{
       {isLocked ? (
         <>
           <Lock className="w-4 h-4" aria-hidden="true" />
-          {level === 'Intermedio' ? 'Completa Principiante' : level === 'Avanzado' ? 'Completa Intermedio' : 'Bloqueado'}
+          {level === 'Intermedio' ? 'Empieza por Principiante' : level === 'Avanzado' ? 'Empieza por Intermedio' : 'Bloqueado'}
         </>
       ) : (
         'Empezar Nivel'

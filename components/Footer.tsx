@@ -36,8 +36,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
               </span>
             </Link>
             <p className="text-navy-400 text-sm max-w-sm mb-6">
-              La plataforma educativa líder para entender el futuro del dinero.
-              Construyendo la próxima generación de inversores inteligentes.
+              Educación cripto en español para LATAM. Desde lo básico hasta análisis avanzado — sin ruido y sin promesas falsas.
             </p>
             <div className="flex gap-4">
               <a
@@ -79,7 +78,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                     Cursos
                 </a>
               </li>
-              <li><a href="/#about" onClick={(e) => handleAnchorClick(e, 'about')} className="hover:text-brand-500 transition-colors">Sobre Nosotros</a></li>
+              <li><a href="/#about" onClick={(e) => handleAnchorClick(e, 'about')} className="hover:text-brand-500 transition-colors">Sobre CBas</a></li>
               <li><a href="/#resources" onClick={(e) => handleAnchorClick(e, 'resources')} className="hover:text-brand-500 transition-colors">Recursos Gratuitos</a></li>
             </ul>
           </div>

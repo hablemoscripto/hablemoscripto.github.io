@@ -170,7 +170,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
                            <stat.icon className={`w-7 h-7 ${stat.color} group-hover:scale-110 transition-transform`} />
                         </div>
                         <p className="text-4xl font-black text-white tracking-tighter mb-1">{stat.val}</p>
-                        <p className="text-[10px] text-navy-500 uppercase tracking-[0.3em] font-black">{stat.label}</p>
+                        <p className="text-[10px] text-navy-400 uppercase tracking-[0.3em] font-black">{stat.label}</p>
                     </div>
                 ))}
             </div>

@@ -8,6 +8,8 @@ import { readdir, stat, mkdir } from 'fs/promises';
 
 const PUBLIC = 'public';
 const IMAGES = `${PUBLIC}/images`;
+// Source assets live outside public/ so they don't ship to the deployed site.
+const SOURCE = 'assets/source';
 
 async function ensureDir(dir) {
   await mkdir(dir, { recursive: true });
@@ -19,7 +21,7 @@ async function generatePWAIcons() {
   const iconDir = `${PUBLIC}/icons`;
   await ensureDir(iconDir);
 
-  const source = `${IMAGES}/og-cover.png`;
+  const source = `${SOURCE}/og-cover.png`;
   const sizes = [16, 32, 48, 72, 96, 128, 144, 152, 180, 192, 384, 512];
 
   // Extract center square from the 1200x630 image
@@ -75,7 +77,7 @@ async function compressImages() {
   console.log('\n🗜️  Compressing large images...');
 
   // og-cover.png → optimized WebP (for actual use) + keep smaller PNG for OG tags
-  await sharp(`${IMAGES}/og-cover.png`)
+  await sharp(`${SOURCE}/og-cover.png`)
     .resize(1200, 630, { fit: 'cover' })
     .png({ quality: 80, compressionLevel: 9 })
     .toFile(`${IMAGES}/og-cover-optimized.png`);

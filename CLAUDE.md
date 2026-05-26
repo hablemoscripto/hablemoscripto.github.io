@@ -177,7 +177,7 @@ Root-level entry points (`App.tsx`, `index.tsx`, `index.css`). **No `src/` folde
 | `lib/supabase.ts` | Supabase client (browser-side, anon key) |
 | `utils/` | `analytics.ts` (GA4 wrapper), `errorReporting.ts`, `courseUtils.ts` (lesson ordering / prev-next) |
 | `scripts/seed.ts` | Seeds `courseData.ts` → Supabase. Holds the allowed icon list. |
-| `scripts/optimize-images.mjs` | Generates PWA icons + responsive WebP variants from `public/images/og-cover.png` |
+| `scripts/optimize-images.mjs` | Generates PWA icons + responsive WebP variants from `assets/source/og-cover.png` (source kept outside `public/` so the unoptimized 6.7 MB original doesn't ship to the deployed site) |
 | `scripts/verify-migration.ts` | Ad-hoc migration verifier (diagnostic) |
 | `scripts/check-dns.sh` | DNS sanity check for `hablemoscripto.io` |
 | `supabase/functions/*` | Edge Functions — see §Edge Functions |

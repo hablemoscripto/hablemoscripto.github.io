@@ -131,7 +131,7 @@ export default function PricingSection({
 
                     {isTopTier && (
                       <span className="rounded-full bg-brand-500 px-3 py-1 text-xs font-black uppercase tracking-[0.15em] text-navy-950">
-                        Mejor Valor
+                        Estatus Fundador
                       </span>
                     )}
                   </div>
@@ -162,19 +162,17 @@ export default function PricingSection({
                       </span>
                     )}
                   </div>
+                  {!isFreePlan && plan.priceCopCents > 0 && (
+                    <p className="text-sm text-navy-300 mt-1.5 font-medium">
+                      ≈ ${(plan.priceCopCents / 100).toLocaleString('es-CO')} COP
+                    </p>
+                  )}
                   {!isFreePlan && (
-                    <p className="text-xs text-navy-500 mt-1 font-medium">
+                    <p className="text-xs text-navy-400 mt-2 font-medium">
                       Pago único · Acceso de por vida
                     </p>
                   )}
                 </div>
-
-                {/* Scarcity */}
-                {courseTier === 'fundador' && (
-                  <div className="mb-6 inline-flex items-center rounded-lg border border-brand-500/30 bg-brand-500/10 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-brand-400">
-                    Limitado a las primeras 100 personas
-                  </div>
-                )}
 
                 {/* Features */}
                 <ul className="space-y-3.5 mb-8 flex-1">
