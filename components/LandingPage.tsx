@@ -137,9 +137,44 @@ const LandingPage: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-heading font-black text-white tracking-tighter mb-4">
               Charlas Semanales en Vivo
             </h2>
-            <p className="text-xl text-navy-300 max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-navy-300 max-w-2xl mx-auto mb-10">
               Todos recibimos el mismo newsletter semanal. La diferencia real está en las <span className="font-semibold text-white">charlas semanales en vivo</span>, donde profundizo en los temas del newsletter, comparto mi análisis actual y respondo preguntas directamente.
             </p>
+
+            <div className="grid sm:grid-cols-3 gap-4 mb-10 text-left">
+              {[
+                {
+                  label: 'Análisis de mercado',
+                  title: 'Qué estoy mirando esta semana',
+                  body: 'Estructura de precio, niveles clave y la tesis con la que entro y salgo de posiciones.',
+                },
+                {
+                  label: 'Respuestas en vivo',
+                  title: 'Tus preguntas, sin filtro',
+                  body: 'Trae tu portafolio o tu duda. Respondo lo que normalmente cobraría en una mentoría 1-a-1.',
+                },
+                {
+                  label: 'Contexto LATAM',
+                  title: 'Cómo aterrizar la tesis en pesos',
+                  body: 'Implicaciones reales para Colombia y la región: rampa fiat, impuestos, riesgo cambiario.',
+                },
+              ].map((topic, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl bg-navy-950/60 border border-white/5 px-5 py-5"
+                >
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-400 mb-3">
+                    {topic.label}
+                  </p>
+                  <h3 className="text-base font-bold text-white mb-2 leading-tight">
+                    {topic.title}
+                  </h3>
+                  <p className="text-sm text-navy-300 leading-relaxed">
+                    {topic.body}
+                  </p>
+                </div>
+              ))}
+            </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
