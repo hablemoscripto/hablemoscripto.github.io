@@ -59,7 +59,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
   }, [displayText, isDeleting, textIndex, settled]);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-navy-950 pt-32 pb-20 lg:pt-20 scroll-mt-28">
+    <section id="home" className="relative flex items-center justify-center overflow-hidden bg-navy-950 pt-32 pb-20 lg:pt-24 scroll-mt-28">
 
       {/* Particles Background */}
       <ParticlesBackground />
@@ -135,7 +135,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400 mb-20">
+            <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400 mb-12">
               <button 
                 onClick={(e) => {
                   e.preventDefault();
