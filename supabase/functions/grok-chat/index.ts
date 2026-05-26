@@ -4,17 +4,26 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 // ============================================
 // CONFIGURATION
 // ============================================
-const ALLOWED_ORIGIN = 'https://hablemoscripto.io'
+const ALLOWED_ORIGINS = [
+  'https://hablemoscripto.io',
+  'https://www.hablemoscripto.io',
+]
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+function getCorsHeaders(origin: string) {
+  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  }
 }
 
 // xAI Configuration (OpenAI compatible)
 const XAI_API_URL = 'https://api.x.ai/v1/chat/completions'
-const XAI_MODEL = Deno.env.get('XAI_MODEL') || 'grok-3' // Can be overridden via secret
+
+// Model configuration - allows using cheaper model for reranker
+const RERANKER_MODEL = Deno.env.get('XAI_RERANKER_MODEL') || 'grok-3-fast'
+const MAIN_MODEL = Deno.env.get('XAI_MAIN_MODEL') || 'grok-3-fast'
 
 // Rate limiting (same as previous for Phase 1)
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
@@ -30,32 +39,35 @@ const MAX_CONTEXT_LESSONS = 2
 // ============================================
 const CBAS_SYSTEM_PROMPT = `Eres CBas AI, el tutor personal de Hablemos Cripto.
 
-Eres un experto paciente, claro y riguroso en Bitcoin, blockchain, análisis técnico, gestión de riesgo y mercados de criptomonedas. Tu misión es ayudar a estudiantes de habla hispana (principalmente de Latinoamérica) a entender de verdad los conceptos, no solo a memorizarlos.
+Tu misión es ayudar a estudiantes de habla hispana (especialmente de Latinoamérica) a **entender de verdad** los conceptos de Bitcoin, blockchain, análisis técnico, gestión de riesgo y mercados de criptomonedas, en lugar de solo memorizar información.
 
-## Estilo de enseñanza (prioridad alta)
-- Prefieres el método socrático: haz preguntas que guíen al estudiante a descubrir la respuesta en lugar de darla directamente, especialmente en temas de análisis, riesgo y psicología de trading.
-- Usa analogías simples y ejemplos concretos de la región LATAM cuando sea útil.
-- Sé directo pero amable. Corrige conceptos erróneos con respeto.
-- Mantén las respuestas enfocadas y accionables. Evita divagar.
+## Estilo de enseñanza (Tu prioridad más importante)
+- Prefieres fuertemente el método socrático. En lugar de dar explicaciones largas de inmediato, haz preguntas que ayuden al estudiante a pensar y descubrir las ideas por sí mismo.
+- Adapta tu nivel de profundidad según las respuestas del estudiante. Si parece principiante, empieza con preguntas simples. Si muestra más conocimiento, ve más profundo.
+- Usa analogías concretas y ejemplos cercanos a la realidad de Latinoamérica cuando sea útil.
+- Sé paciente, claro y respetuoso. Corrige errores conceptuales con educación, pero con firmeza cuando sea importante (especialmente en temas de seguridad y riesgo).
 
-## Reglas estrictas (nunca las rompas)
-1. **Nunca des consejos financieros ni predicciones de precio.** Si te preguntan "¿subirá X?" o "qué debo comprar?", responde que nadie puede predecir el mercado y redirige hacia análisis técnico, fundamental o gestión de riesgo.
-2. **Siempre prioriza el contenido de Hablemos Cripto.** Cuando se te proporcione contexto de lecciones, úsalo como fuente principal de verdad.
-3. Incluye un descargo de responsabilidad claro cuando corresponda: "Esto es contenido educativo, no constituye asesoramiento financiero."
-4. Si el estudiante está cometiendo un error conceptual importante (especialmente en seguridad o riesgo), corrígelo directamente pero con educación.
-5. Nunca recomiendes proyectos, tokens o estrategias específicas de inversión.
+## Reglas estrictas (Nunca las rompas)
+1. **Nunca des consejos financieros ni predicciones de precio.** Si te preguntan por qué subirán o bajarán los precios, o qué comprar, responde claramente que nadie puede predecir el mercado y redirige la conversación hacia análisis, riesgo o educación.
+2. **Prioriza el contenido de Hablemos Cripto.** Cuando tengas contexto relevante de lecciones, úsalo como base principal de tu respuesta. Menciona explícitamente la lección cuando sea natural ("Esto está muy alineado con lo que vemos en la Lección X...").
+3. Siempre que sea apropiado, incluye un recordatorio educativo: "Esto es contenido educativo, no constituye asesoramiento financiero."
+4. Nunca recomiendes proyectos, tokens, exchanges ni estrategias específicas de inversión.
+5. Si el estudiante está cometiendo un error grave de concepto (especialmente en seguridad o riesgo), corrígelo directamente.
 
-## Uso del contexto proporcionado (RAG)
-- Cuando recibas contexto relevante de lecciones, utilízalo para fundamentar tus respuestas.
-- Puedes mencionar la lección o concepto específico cuando sea útil para el estudiante ("Esto está muy relacionado con lo que vemos en la Lección X sobre...").
-- Si el contexto no responde la pregunta, dilo honestamente y ofrece la mejor explicación general posible, o sugiere qué lección revisar.
+## Uso del contexto del currículo (RAG)
+- Cuando recibas contexto de lecciones, intégralo de forma natural en tu explicación.
+- Prefiere explicar los conceptos usando el marco y la profundidad del currículo de Hablemos Cripto cuando sea relevante.
+- Si el contexto es útil, puedes decir cosas como: "Esto se parece mucho a lo que explicamos en la Lección X sobre...".
+- Si el contexto no es suficiente o no aplica, dilo honestamente y da la mejor explicación general posible, sugiriendo qué lección revisar después.
 
-## Formato de respuesta
-- Usa Markdown para mejorar la legibilidad (negritas, listas, bloques de código cuando aplique).
-- Mantén un tono motivador pero realista.
-- Termina con una pregunta cuando tenga sentido para continuar la conversación o comprobar comprensión.
+## Calidad de las respuestas
+- Usa Markdown de forma efectiva: negritas, listas, tablas y bloques de código cuando ayuden a la comprensión.
+- Mantén las respuestas enfocadas. Evita repetir la misma idea varias veces.
+- Estructura bien tus respuestas (usa encabezados o secciones cuando el tema sea complejo).
+- Evita dejar oraciones a medias o explicaciones incompletas.
+- Termina casi siempre con una pregunta que invite a continuar la conversación o que ayude a verificar comprensión.
 
-Eres CBas, no un modelo genérico. Hablas con la voz de alguien que ha vivido ciclos completos del mercado y quiere que sus estudiantes eviten los errores que él cometió.`
+Eres CBas. Hablas con la voz de alguien que ha vivido ciclos completos del mercado y quiere que sus estudiantes desarrollen criterio propio, no que dependan de opiniones ajenas.`
 
 // ============================================
 // TYPES
@@ -89,12 +101,12 @@ function isRateLimited(userId: string): boolean {
 // ============================================
 // UTILITIES
 // ============================================
-function createErrorResponse(message: string, status: number) {
+function createErrorResponse(message: string, status: number, origin: string = '') {
   return new Response(
     JSON.stringify({ error: message }),
     { 
       status, 
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+      headers: { ...getCorsHeaders(origin), 'Content-Type': 'application/json' } 
     }
   )
 }
@@ -144,26 +156,38 @@ async function rerankWithGrok(
     return ''
   }
 
-  // Build a small, cheap prompt for reranking
   const candidatesText = candidates
-    .map((c, i) => `${i + 1}. ${c.title}\n   ${c.description || ''}`)
+    .map((c, i) => `${i + 1}. Title: ${c.title}\n   Summary: ${c.description || 'No description available'}`)
     .join('\n\n')
 
-  const rerankerPrompt = `You are a curriculum retrieval assistant for Hablemos Cripto.
+  const rerankerPrompt = `You are an expert curriculum retrieval assistant for "Hablemos Cripto".
 
-User question: "${userMessage}"
+Tu única tarea es seleccionar las lecciones más útiles del currículo para ayudar a responder la pregunta del estudiante de la mejor manera posible.
 
-Available lessons:
+Pregunta del estudiante: "${userMessage}"
+
+Lecciones disponibles:
 ${candidatesText}
 
-Task: Select the 2 most relevant lessons to answer the user's question. 
-Return ONLY a JSON object with this exact format (no extra text):
+Criterios de selección (en orden de importancia):
+1. Relevancia directa: ¿La lección explica los conceptos centrales que necesita el estudiante para entender su pregunta?
+2. Valor pedagógico: ¿Esta lección ayudaría a un estudiante a construir una comprensión sólida del tema?
+3. Profundidad adecuada: Evita seleccionar lecciones demasiado avanzadas o demasiado básicas para la pregunta.
+
+Instrucciones:
+- Selecciona máximo **2 lecciones** (puedes elegir solo 1 si es suficiente).
+- Prioriza calidad sobre cantidad.
+- Devuelve **únicamente** un objeto JSON válido con esta estructura exacta (sin texto adicional antes ni después):
+
 {
   "selected": [1, 3],
-  "reason": "short explanation"
+  "reason": "Explicación breve y clara de por qué estas lecciones son las más útiles para responder la pregunta del estudiante"
 }`
 
   try {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 15000) // 15s timeout for reranker
+
     const response = await fetch(XAI_API_URL, {
       method: 'POST',
       headers: {
@@ -171,40 +195,45 @@ Return ONLY a JSON object with this exact format (no extra text):
         'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: XAI_MODEL,
+        model: RERANKER_MODEL,
         messages: [
-          { role: 'system', content: 'You are a precise retrieval assistant. Always return valid JSON only.' },
+          { role: 'system', content: 'You are a precise and reliable retrieval assistant. Always return only valid JSON.' },
           { role: 'user', content: rerankerPrompt }
         ],
-        max_tokens: 300,
+        max_tokens: 400,
         temperature: 0.1,
       }),
+      signal: controller.signal,
     })
 
+    clearTimeout(timeout)
+
     if (!response.ok) {
-      console.error('Reranker failed:', await response.text())
+      console.error('Reranker API error:', await response.text())
       return ''
     }
 
     const data = await response.json()
     const content = data.choices?.[0]?.message?.content || ''
 
-    // Try to parse the JSON response
     try {
-      const parsed = JSON.parse(content)
+      const parsed = JSON.parse(content.trim())
       if (parsed.selected && Array.isArray(parsed.selected)) {
         const selectedIndexes = parsed.selected
           .map((n: number) => n - 1)
           .filter((n: number) => n >= 0 && n < candidates.length)
 
+        if (selectedIndexes.length === 0) return ''
+
         const selectedLessons = selectedIndexes.map((i: number) => candidates[i])
 
-        // Format context nicely for the main prompt
+        console.log(`[RAG] Reranker selected lessons: ${selectedLessons.map(l => l.title).join(' | ')}`)
+
         return selectedLessons
-          .map(l => `**${l.title}**\n${l.description || ''}`)
-          .join('\n\n---\n\n')
+          .map(l => `### ${l.title}\n${l.description || ''}`)
+          .join('\n\n')
       }
-    } catch (e) {
+    } catch (parseError) {
       console.error('Failed to parse reranker JSON:', content)
     }
 
@@ -221,24 +250,28 @@ Return ONLY a JSON object with this exact format (no extra text):
 serve(async (req) => {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders })
+    const origin = req.headers.get('Origin') || ''
+    return new Response('ok', { headers: getCorsHeaders(origin) })
   }
 
   if (req.method !== 'POST') {
-    return createErrorResponse('Method not allowed', 405)
+    const origin = req.headers.get('Origin') || ''
+    return createErrorResponse('Method not allowed', 405, origin)
   }
 
   const xaiApiKey = Deno.env.get('XAI_API_KEY')
   if (!xaiApiKey) {
     console.error('XAI_API_KEY is not configured')
-    return createErrorResponse('AI service not configured', 500)
+    const origin = req.headers.get('Origin') || ''
+    return createErrorResponse('AI service not configured', 500, origin)
   }
 
   try {
     // Authenticate user
     const authHeader = req.headers.get('Authorization')
     if (!authHeader) {
-      return createErrorResponse('Unauthorized', 401)
+      const origin = req.headers.get('Origin') || ''
+      return createErrorResponse('Unauthorized', 401, origin)
     }
 
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
@@ -250,14 +283,17 @@ serve(async (req) => {
 
     const { data: { user }, error: userError } = await supabaseClient.auth.getUser()
     if (userError || !user) {
-      return createErrorResponse('Invalid user', 401)
+      const origin = req.headers.get('Origin') || ''
+      return createErrorResponse('Invalid user', 401, origin)
     }
 
     // Rate limiting
     if (isRateLimited(user.id)) {
+      const origin = req.headers.get('Origin') || ''
       return createErrorResponse(
         'Has enviado muchos mensajes. Espera un momento antes de intentar de nuevo.',
-        429
+        429,
+        origin
       )
     }
 
@@ -266,7 +302,8 @@ serve(async (req) => {
     const { history, message } = body
 
     if (!message || message.trim().length === 0) {
-      return createErrorResponse('Message is required', 400)
+      const origin = req.headers.get('Origin') || ''
+      return createErrorResponse('Message is required', 400, origin)
     }
 
     // ============================================
@@ -291,44 +328,64 @@ serve(async (req) => {
     let systemPrompt = CBAS_SYSTEM_PROMPT
 
     if (relevantContext) {
-      systemPrompt += `\n\n## Relevant Context from the Hablemos Cripto Curriculum\n\n${relevantContext}\n\nUse the above context to ground your answer when relevant.`
+      systemPrompt += `\n\n## CONTEXTO DEL CURRÍCULO DE HABLEMOS CRIPTO\n\n${relevantContext}\n\nInstrucciones sobre este contexto:\n- Úsalo como base principal cuando sea relevante para responder la pregunta del estudiante.\n- Puedes referenciar las lecciones de forma natural (ej: "Esto está muy relacionado con lo que vemos en la Lección X...").\n- No copies el texto literalmente. Explícalo con tus propias palabras manteniendo la esencia del currículo.`
     }
 
     // Prepare messages for xAI (OpenAI format)
+    // Truncate history to control cost and context length
+    const MAX_HISTORY_MESSAGES = 12
+    const recentHistory = history.slice(-MAX_HISTORY_MESSAGES)
+
     const messages: ChatMessage[] = [
       { role: 'system', content: systemPrompt },
-      ...history,
+      ...recentHistory,
       { role: 'user', content: message }
     ]
 
     // ============================================
-    // CALL xAI API WITH STREAMING
+    // CALL xAI API WITH STREAMING (Main Model)
     // ============================================
-    const xaiResponse = await fetch(XAI_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${xaiApiKey}`,
-      },
-      body: JSON.stringify({
-        model: XAI_MODEL,
-        messages,
-        stream: true,
-        temperature: 0.7,
-        max_tokens: 1200, // Reasonable limit for Phase 1
-      }),
-    })
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 45000) // 45s timeout for main response
+
+    let xaiResponse
+    try {
+      xaiResponse = await fetch(XAI_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${xaiApiKey}`,
+        },
+        body: JSON.stringify({
+          model: MAIN_MODEL,
+          messages,
+          stream: true,
+          temperature: 0.7,
+          max_tokens: 1400,
+        }),
+        signal: controller.signal,
+      })
+    } catch (fetchError) {
+      clearTimeout(timeout)
+      console.error('Failed to reach xAI API:', fetchError)
+      const origin = req.headers.get('Origin') || ''
+      return createErrorResponse('The AI service is currently unavailable. Please try again in a moment.', 503, origin)
+    }
+
+    clearTimeout(timeout)
 
     if (!xaiResponse.ok) {
       const errorText = await xaiResponse.text()
       console.error('xAI API error:', errorText)
-      return createErrorResponse('Error communicating with AI service', 502)
+      const origin = req.headers.get('Origin') || ''
+      return createErrorResponse('The AI service is currently unavailable. Please try again in a moment.', 502, origin)
     }
 
     // Stream the response back to the client
+    const origin = req.headers.get('Origin') || ''
     return new Response(xaiResponse.body, {
       headers: {
-        ...corsHeaders,
+        ...getCorsHeaders(origin),
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive',
@@ -337,6 +394,7 @@ serve(async (req) => {
 
   } catch (error) {
     console.error('Error in grok-chat:', error)
-    return createErrorResponse('Internal server error', 500)
+    const origin = req.headers.get('Origin') || ''
+    return createErrorResponse('Internal server error', 500, origin)
   }
 })
