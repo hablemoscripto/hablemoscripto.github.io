@@ -160,10 +160,9 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
             </div>
 
             {/* Stats Grid - Centered & Glassmorphism */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 w-full max-w-4xl border-t border-white/5 pt-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 w-full max-w-3xl border-t border-white/5 pt-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
                 {[
                     { label: "Experiencia", val: "7+ Años", icon: Award, color: "text-brand-500" },
-                    { label: "Estudiantes", val: "500+", icon: Users, color: "text-accent-500" },
                     { label: "Lecciones", val: "42", icon: BookOpen, color: "text-brand-400" }
                 ].map((stat, i) => (
                     <div key={i} className="flex flex-col items-center group p-6 rounded-3xl hover:bg-white/[0.02] transition-colors">

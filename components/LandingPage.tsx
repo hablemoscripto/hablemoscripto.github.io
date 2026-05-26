@@ -123,8 +123,8 @@ const LandingPage: React.FC = () => {
       <Navbar />
       <main>
         <Hero onStartLearning={handleNavigateToEducation} />
-        <Features />
         <ProblemSection />
+        <Features />
         <Courses />
 
         {/* Experiencia real — Charlas semanales en vivo (valor antes del precio) */}
@@ -249,7 +249,7 @@ const LandingPage: React.FC = () => {
               )}
             </div>
 
-            <p className="text-xs text-navy-400 mt-4">Únete a más de 500 estudiantes activos.</p>
+            <p className="text-xs text-navy-400 mt-4">Sin spam. Cancela cuando quieras.</p>
           </div>
         </section>
       </main>

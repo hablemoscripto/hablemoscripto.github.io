@@ -26,17 +26,17 @@ const ProblemSection: React.FC = () => {
     {
       icon: AlertTriangle,
       title: "El espejismo de la información \"gratis\"",
-      text: "La mayor parte del contenido que consumes en YouTube, Twitter y Telegram está financiado por quien quiere venderte algo después. Señales \"infalibles\", gurús con resultados falsos y cursos caros que entregan poco. El resultado típico: entras con ilusión, tomas decisiones con datos sesgados y tu primera experiencia termina en pérdidas que te hacen pensar que \"el cripto es una estafa\".",
+      text: "La mayor parte del contenido en YouTube, Twitter y Telegram está pagado por quien quiere venderte algo después. Señales \"infalibles\", gurús con resultados falsos, cursos caros que entregan poco. Entras con ilusión, pierdes plata y te vas pensando que el cripto es una estafa.",
     },
     {
       icon: TrendingDown,
-      title: "El salto sin red al trading avanzado",
-      text: "Una vez que dominas los básicos, el siguiente paso natural es futures y perpetuals con apalancamiento. Sin un framework riguroso de análisis técnico, gestión de riesgo y control emocional, el apalancamiento multiplica las pérdidas, no las ganancias. Una mala racha liquida cuentas enteras en horas.",
+      title: "Entrar tarde, salir en pánico",
+      text: "El patrón se repite: ves un pump y entras en máximos por FOMO. Cuando todo cae, vendes en mínimos por pánico. Sin un plan claro de qué comprar, cuándo entrar y cuándo vender, terminas haciendo lo contrario de lo que sabes que deberías hacer.",
     },
     {
       icon: Globe,
       title: "El factor LATAM que lo empeora todo",
-      text: "En nuestra región la inflación y la devaluación constante generan una urgencia real por proteger el poder adquisitivo. Esa necesidad legítima choca con un océano de promesas irreales de rendimientos fáciles. La combinación es explosiva: personas inteligentes y prudentes en otros ámbitos de su vida cometen errores que nunca cometerían en su profesión.",
+      text: "En nuestra región la inflación y la devaluación generan una urgencia real por proteger lo que ganaste. Esa necesidad legítima choca con un océano de promesas irreales. Personas prudentes en otros ámbitos cometen errores que nunca cometerían en su profesión.",
     },
   ];
 
@@ -52,7 +52,7 @@ const ProblemSection: React.FC = () => {
             Por qué la mayoría falla antes de empezar de verdad
           </h2>
           <p className="text-xl text-navy-300 max-w-3xl mx-auto">
-            No es falta de inteligencia ni de ganas. Es que el camino está lleno de ruido, estafas bien empaquetadas y saltos al trading avanzado sin red de seguridad.
+            No es falta de inteligencia ni de ganas. Es que el camino está lleno de ruido, estafas bien empaquetadas y decisiones impulsivas que cuestan caro.
           </p>
         </div>
 
