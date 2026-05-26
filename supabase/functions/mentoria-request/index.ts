@@ -12,14 +12,24 @@
 
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 
-const ALLOWED_ORIGIN = 'https://hablemoscripto.io'
+const ALLOWED_ORIGINS = new Set([
+  'https://hablemoscripto.io',
+  'https://www.hablemoscripto.io',
+])
+const DEFAULT_ALLOWED_ORIGIN = 'https://hablemoscripto.io'
 const FROM_ADDRESS = 'Hablemos Cripto <mentoria@mail.hablemoscripto.io>'
 const DEFAULT_NOTIFY_TO = 'cbas@mail.hablemoscripto.io'
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+function buildCorsHeaders(requestOrigin: string | null): Record<string, string> {
+  const allowOrigin = requestOrigin && ALLOWED_ORIGINS.has(requestOrigin)
+    ? requestOrigin
+    : DEFAULT_ALLOWED_ORIGIN
+  return {
+    'Access-Control-Allow-Origin': allowOrigin,
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Vary': 'Origin',
+  }
 }
 
 // Simple in-memory rate limiter — caps an IP to 3 submissions per 10 minutes.
@@ -57,7 +67,7 @@ interface MentoriaPayload {
   message?: unknown
 }
 
-function json(status: number, body: unknown) {
+function json(status: number, body: unknown, corsHeaders: Record<string, string>) {
   return new Response(JSON.stringify(body), {
     status,
     headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -65,24 +75,26 @@ function json(status: number, body: unknown) {
 }
 
 serve(async (req) => {
+  const corsHeaders = buildCorsHeaders(req.headers.get('Origin'))
+
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
 
   if (req.method !== 'POST') {
-    return json(405, { error: 'Method not allowed' })
+    return json(405, { error: 'Method not allowed' }, corsHeaders)
   }
 
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown'
   if (isRateLimited(ip)) {
-    return json(429, { error: 'Demasiadas solicitudes. Intenta en unos minutos.' })
+    return json(429, { error: 'Demasiadas solicitudes. Intenta en unos minutos.' }, corsHeaders)
   }
 
   let payload: MentoriaPayload
   try {
     payload = await req.json()
   } catch {
-    return json(400, { error: 'Body inválido' })
+    return json(400, { error: 'Body inválido' }, corsHeaders)
   }
 
   const name = typeof payload.name === 'string' ? payload.name.trim() : ''
@@ -90,19 +102,19 @@ serve(async (req) => {
   const message = typeof payload.message === 'string' ? payload.message.trim() : ''
 
   if (!name || name.length < 2 || name.length > 120) {
-    return json(400, { error: 'Nombre inválido' })
+    return json(400, { error: 'Nombre inválido' }, corsHeaders)
   }
   if (!email || !EMAIL_REGEX.test(email) || email.length > 200) {
-    return json(400, { error: 'Email inválido' })
+    return json(400, { error: 'Email inválido' }, corsHeaders)
   }
   if (!message || message.length < 10 || message.length > 4000) {
-    return json(400, { error: 'Mensaje inválido (mínimo 10, máximo 4000 caracteres)' })
+    return json(400, { error: 'Mensaje inválido (mínimo 10, máximo 4000 caracteres)' }, corsHeaders)
   }
 
   const resendApiKey = Deno.env.get('RESEND_API_KEY')
   if (!resendApiKey) {
     console.error('mentoria-request: RESEND_API_KEY not set')
-    return json(500, { error: 'Servicio no configurado' })
+    return json(500, { error: 'Servicio no configurado' }, corsHeaders)
   }
   const notifyTo = Deno.env.get('MENTORIA_NOTIFY_TO') || DEFAULT_NOTIFY_TO
 
@@ -136,12 +148,12 @@ serve(async (req) => {
     if (!response.ok) {
       const errorText = await response.text()
       console.error(`mentoria-request: Resend failed (${response.status}):`, errorText)
-      return json(502, { error: 'No pudimos enviar tu solicitud. Intenta de nuevo.' })
+      return json(502, { error: 'No pudimos enviar tu solicitud. Intenta de nuevo.' }, corsHeaders)
     }
 
-    return json(200, { ok: true })
+    return json(200, { ok: true }, corsHeaders)
   } catch (err) {
     console.error('mentoria-request: unexpected error', err)
-    return json(500, { error: 'Error inesperado. Intenta de nuevo.' })
+    return json(500, { error: 'Error inesperado. Intenta de nuevo.' }, corsHeaders)
   }
 })
