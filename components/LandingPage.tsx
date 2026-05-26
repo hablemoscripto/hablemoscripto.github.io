@@ -256,11 +256,12 @@ const LandingPage: React.FC = () => {
       </main>
       <Footer onNavigateEducation={handleNavigateToEducation} />
 
-      {/* Auth Modal for protected navigation */}
+      {/* Auth Modal for protected navigation — defaults to signup since landing CTAs are primarily for new visitors. */}
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
         onLoginSuccess={handleLoginSuccess}
+        initialView="signup"
       />
 
       <MentoriaModal

@@ -3,13 +3,14 @@ import { Mail, Lock, User, Loader2, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Modal } from './ui/Modal';
 
+type ModalView = 'login' | 'signup' | 'forgot-password' | 'verify-email';
+
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   onLoginSuccess?: () => void;
+  initialView?: ModalView;
 }
-
-type ModalView = 'login' | 'signup' | 'forgot-password' | 'verify-email';
 
 const VIEW_LABELS: Record<ModalView, string> = {
   login: 'Iniciar sesión',
@@ -18,11 +19,12 @@ const VIEW_LABELS: Record<ModalView, string> = {
   'verify-email': 'Verificar email',
 };
 
-export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModalProps) {
-  const [view, setView] = useState<ModalView>('login');
+export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView = 'login' }: AuthModalProps) {
+  const [view, setView] = useState<ModalView>(initialView);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [fullName, setFullName] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
@@ -33,22 +35,16 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
   // resetting local UI state in response to an external prop change.
   useEffect(() => {
     if (isOpen) {
-       
-      setView('login');
-       
+      setView(initialView);
       setEmail('');
-       
       setPassword('');
-       
       setConfirmPassword('');
-       
+      setFullName('');
       setError('');
-       
       setSuccess('');
-       
       setLoading(false);
     }
-  }, [isOpen]);
+  }, [isOpen, initialView]);
 
   const handleGoogleSignIn = async () => {
     setError('');
@@ -96,7 +92,12 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
           }
         }
       } else if (view === 'signup') {
-        const { error } = await signUp(email, password);
+        if (!fullName.trim()) {
+          setError('Ingresa tu nombre');
+          setLoading(false);
+          return;
+        }
+        const { error } = await signUp(email, password, fullName);
         if (error) {
           if (error.message.includes('already registered')) {
             setError('Este email ya está registrado');
@@ -320,6 +321,27 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+              {view === 'signup' && (
+                <div>
+                  <label htmlFor="auth-name" className="block text-sm font-medium text-navy-300 mb-2">Nombre</label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
+                    <input
+                      id="auth-name"
+                      type="text"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="¿Cómo te llamas?"
+                      autoComplete="name"
+                      required
+                      aria-invalid={error ? 'true' : undefined}
+                      aria-describedby={describedBy}
+                      className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-navy-900 focus:border-transparent transition-all"
+                    />
+                  </div>
+                </div>
+              )}
+
               <div>
                 <label htmlFor="auth-email" className="block text-sm font-medium text-navy-300 mb-2">Email</label>
                 <div className="relative">
