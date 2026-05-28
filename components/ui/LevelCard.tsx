@@ -58,7 +58,7 @@ const LevelCard: React.FC<LevelCardProps> = ({
                 <div className="flex justify-between items-start mb-8">
                     <div className={cn(
                         "w-14 h-14 rounded-2xl bg-navy-950 border border-white/5 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:border-white/10 shadow-glass",
-                        isLocked ? 'text-navy-500' : colorClasses[color].split(' ')[0]
+                        isLocked ? 'text-navy-400' : colorClasses[color].split(' ')[0]
                     )}>
                         {isLocked ? <Lock size={24} /> : <Icon size={28} />}
                     </div>
@@ -116,7 +116,7 @@ const LevelCard: React.FC<LevelCardProps> = ({
                     {isLocked && prerequisiteTitle ? (
                         <div className="space-y-4 p-6 bg-navy-950 rounded-3xl border border-white/5">
                             <div className="flex items-start gap-3 text-navy-400 text-xs">
-                                <Lock size={16} className="text-navy-500 shrink-0 mt-0.5" />
+                                <Lock size={16} className="text-navy-400 shrink-0 mt-0.5" />
                                 <span className="leading-relaxed font-bold uppercase tracking-tight">
                                     Bloqueado hasta completar <span className="text-brand-500">{prerequisiteTitle}</span>
                                 </span>
@@ -146,7 +146,7 @@ const LevelCard: React.FC<LevelCardProps> = ({
                             className={cn(
                                 "w-full py-4 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all duration-300 group-hover:scale-[1.02] active:scale-[0.98]",
                                 isLocked
-                                    ? 'bg-navy-900 text-navy-600 cursor-not-allowed'
+                                    ? 'bg-navy-900 text-navy-400 cursor-not-allowed'
                                     : progress === 100
                                         ? 'bg-accent-500 text-white shadow-glow-accent'
                                         : btnColors[color]

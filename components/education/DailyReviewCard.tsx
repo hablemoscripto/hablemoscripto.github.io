@@ -69,7 +69,7 @@ const DailyReviewCard: React.FC = () => {
                 } else if (isSelected) {
                   className += 'bg-red-500/10 border-red-500/50 text-red-400';
                 } else {
-                  className += 'bg-navy-950 border-navy-800 text-navy-500 opacity-50';
+                  className += 'bg-navy-950 border-navy-800 text-navy-400 opacity-60';
                 }
               } else {
                 className += 'bg-navy-950 border-navy-800 text-navy-300 hover:border-brand-500/50 hover:bg-navy-900 cursor-pointer';

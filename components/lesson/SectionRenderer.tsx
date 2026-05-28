@@ -68,7 +68,7 @@ export default function SectionRenderer({ section, checkpoint, onImageClick }: S
                             </div>
                         </div>
                         {section.imageCaption && (
-                            <p className="text-sm text-navy-500 text-center mt-2 italic">{section.imageCaption}</p>
+                            <p className="text-sm text-navy-400 text-center mt-2 italic">{section.imageCaption}</p>
                         )}
                         {section.imageSummary && (
                             <div className="mt-4 bg-gradient-to-r from-brand-500/10 to-brand-400/5 border border-brand-500/30 rounded-xl p-4">

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Bitcoin, Award, Sparkles } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
 interface CertificateProps {
@@ -44,8 +44,10 @@ const VARIANT_STYLES = {
 
 const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, level, date, variant = 'beginner', onClose }) => {
     const styles = VARIANT_STYLES[variant];
+    const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
+        if (shouldReduceMotion) return;
         const duration = 3000;
         const animationEnd = Date.now() + duration;
         const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10000 };
@@ -61,14 +63,14 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
         }, 250);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [shouldReduceMotion]);
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/90 backdrop-blur-md overflow-y-auto">
             <motion.div
-                initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
+                initial={shouldReduceMotion ? { opacity: 0 } : { scale: 0.9, opacity: 0, y: 20 }}
+                animate={shouldReduceMotion ? { opacity: 1 } : { scale: 1, opacity: 1, y: 0 }}
+                transition={{ duration: shouldReduceMotion ? 0.2 : 0.5, ease: 'easeOut' }}
                 className={`relative max-w-3xl w-full rounded-3xl overflow-hidden ${styles.glowColor}`}
             >
                 {/* Print/Close Controls */}
@@ -114,9 +116,9 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                     {/* Title */}
                     <div className="mb-10">
                         <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+                            initial={shouldReduceMotion ? { opacity: 0 } : { scale: 0 }}
+                            animate={shouldReduceMotion ? { opacity: 1 } : { scale: 1 }}
+                            transition={shouldReduceMotion ? { duration: 0.2 } : { delay: 0.3, type: 'spring', stiffness: 200 }}
                             className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${styles.gradient} flex items-center justify-center mx-auto mb-6 rotate-3`}
                         >
                             <Sparkles size={36} className="text-white" />
@@ -124,7 +126,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                         <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-2 tracking-tight">
                             Certificado de Finalización
                         </h2>
-                        <p className="text-navy-500 text-sm uppercase tracking-widest">Este documento certifica que</p>
+                        <p className="text-navy-400 text-sm uppercase tracking-widest">Este documento certifica que</p>
                     </div>
 
                     {/* Student Name */}
@@ -148,7 +150,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                     <div className="flex justify-between items-end max-w-md mx-auto">
                         <div className="text-center">
                             <p className="text-white font-semibold text-sm">{date}</p>
-                            <p className="text-navy-600 text-xs uppercase tracking-widest mt-1">Fecha</p>
+                            <p className="text-navy-400 text-xs uppercase tracking-widest mt-1">Fecha</p>
                         </div>
 
                         <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${styles.gradient} flex items-center justify-center`}>
@@ -157,7 +159,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
 
                         <div className="text-center">
                             <p className="text-white font-semibold text-sm">HablemosCripto</p>
-                            <p className="text-navy-600 text-xs uppercase tracking-widest mt-1">Certificación</p>
+                            <p className="text-navy-400 text-xs uppercase tracking-widest mt-1">Certificación</p>
                         </div>
                     </div>
                 </div>

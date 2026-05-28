@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Bitcoin, Menu, X, BarChart3, LogOut, BookOpen, Zap, Trophy, Search } from 'lucide-react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useGamification } from '../contexts/GamificationContext';
@@ -15,6 +15,8 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   // Close mobile menu on route change — idiomatic React pattern for resetting
   // local UI state in response to external navigation.
@@ -22,6 +24,33 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
+
+  // Lock body scroll while the mobile menu is open.
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
+  // Escape to close + focus the menu when it opens; restore focus to the
+  // toggle on close.
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const toggle = mobileToggleRef.current;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    requestAnimationFrame(() => mobileMenuRef.current?.focus());
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      toggle?.focus();
+    };
+  }, [isMobileMenuOpen]);
+
   const { xp, level, streak } = useGamification();
   const { signOut } = useAuth();
 
@@ -64,7 +93,7 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
               <div className="flex items-center gap-2 text-brand-400" title="Nivel">
                 <Trophy size={18} />
                 <span className="font-bold">Nivel {level}</span>
-                <span className="text-xs text-navy-500">({xp} XP)</span>
+                <span className="text-xs text-navy-400">({xp} XP)</span>
               </div>
             </div>
 
@@ -76,7 +105,7 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
               >
                 <Search size={16} aria-hidden="true" />
                 <span className="hidden lg:inline">Buscar</span>
-                <kbd className="hidden lg:inline-flex ml-1 px-1.5 py-0.5 text-[10px] bg-navy-700 rounded border border-navy-600 text-navy-500">
+                <kbd className="hidden lg:inline-flex ml-1 px-1.5 py-0.5 text-[10px] bg-navy-700 rounded border border-navy-600 text-navy-400">
                   Ctrl K
                 </kbd>
               </button>
@@ -117,8 +146,12 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
 
           {/* Mobile Toggle */}
           <button
+            ref={mobileToggleRef}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-navy-400 hover:text-white"
+            aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="education-mobile-menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -135,30 +168,46 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-navy-900 border-b border-white/5 p-4 space-y-4 absolute w-full shadow-2xl z-50">
-          <div className="flex justify-between items-center p-3 bg-navy-800/50 rounded-lg">
-            <div className="flex items-center gap-2 text-amber-400">
-              <Zap size={18} className="fill-amber-400" />
-              <span className="font-bold">{streak} días</span>
+        <>
+          {/* Backdrop — click to dismiss */}
+          <div
+            className="fixed inset-0 top-16 bg-black/60 z-40 md:hidden"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            id="education-mobile-menu"
+            ref={mobileMenuRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menú de navegación"
+            tabIndex={-1}
+            className="md:hidden bg-navy-900 border-b border-white/5 p-4 space-y-4 absolute w-full shadow-2xl z-50 outline-none"
+          >
+            <div className="flex justify-between items-center p-3 bg-navy-800/50 rounded-lg">
+              <div className="flex items-center gap-2 text-amber-400">
+                <Zap size={18} className="fill-amber-400" />
+                <span className="font-bold">{streak} días</span>
+              </div>
+              <div className="flex items-center gap-2 text-brand-400">
+                <Trophy size={18} />
+                <span className="font-bold">Nivel {level}</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-brand-400">
-              <Trophy size={18} />
-              <span className="font-bold">Nivel {level}</span>
-            </div>
-          </div>
-          {onOpenSearch && (
-            <button onClick={() => { setIsMobileMenuOpen(false); onOpenSearch(); }} className="w-full flex items-center gap-2 p-3 rounded-lg bg-navy-800 text-left text-navy-300">
-              <Search size={16} aria-hidden="true" /> Buscar Lecciones
+            {onOpenSearch && (
+              <button onClick={() => { setIsMobileMenuOpen(false); onOpenSearch(); }} className="w-full flex items-center gap-2 p-3 rounded-lg bg-navy-800 text-left text-navy-300">
+                <Search size={16} aria-hidden="true" /> Buscar Lecciones
+              </button>
+            )}
+            <button onClick={onOpenProgress} className="w-full flex items-center justify-between p-3 rounded-lg bg-navy-800 text-left">
+              <span className="text-navy-300">Mi Progreso</span>
+              <span className="font-bold text-brand-500">{globalProgress}%</span>
             </button>
-          )}
-          <button onClick={onOpenProgress} className="w-full flex items-center justify-between p-3 rounded-lg bg-navy-800 text-left">
-            <span className="text-navy-300">Mi Progreso</span>
-            <span className="font-bold text-brand-500">{globalProgress}%</span>
-          </button>
-          <button onClick={handleLogout} className="w-full flex items-center gap-2 p-3 text-navy-400">
-            <LogOut size={16} /> Volver al Inicio
-          </button>
-        </div>
+            <button onClick={handleLogout} className="w-full flex items-center gap-2 p-3 text-navy-400">
+              <LogOut size={16} /> Cerrar sesión
+            </button>
+          </div>
+        </>
       )}
     </nav>
   );

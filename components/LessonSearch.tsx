@@ -182,7 +182,7 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
           aria-autocomplete="list"
           className="w-full bg-navy-800 border border-navy-600 rounded-xl py-3 pl-11 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-sm"
         />
-        <kbd className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] text-navy-500 bg-navy-700 rounded border border-navy-600">
+        <kbd className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] text-navy-400 bg-navy-700 rounded border border-navy-600">
           ESC
         </kbd>
       </div>
@@ -196,7 +196,7 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
         className="mt-3 max-h-[50vh] overflow-y-auto -mx-2"
       >
         {enrichedResults.length === 0 ? (
-          <div className="text-center py-8 text-navy-500">
+          <div className="text-center py-8 text-navy-400">
             <BookOpen size={32} className="mx-auto mb-2 opacity-50" aria-hidden="true" />
             <p className="text-sm">No se encontraron lecciones</p>
             <p className="text-xs mt-1">Intenta con otro término de búsqueda</p>
@@ -231,9 +231,9 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
                   )}
                 </div>
                 <p className="text-sm font-medium text-white truncate">{result.title}</p>
-                <p className="text-xs text-navy-500 truncate">{result.moduleName}</p>
+                <p className="text-xs text-navy-400 truncate">{result.moduleName}</p>
               </div>
-              <div className="flex items-center gap-1 text-navy-500 shrink-0 mt-1">
+              <div className="flex items-center gap-1 text-navy-400 shrink-0 mt-1">
                 <Clock size={12} aria-hidden="true" />
                 <span className="text-xs">{result.duration}</span>
                 <ChevronRight size={14} aria-hidden="true" className="ml-1" />
@@ -245,7 +245,7 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
 
       {/* Footer hint */}
       {enrichedResults.length > 0 && (
-        <div className="mt-2 pt-2 border-t border-navy-800 flex items-center justify-between text-[10px] text-navy-500 -mx-2 px-3">
+        <div className="mt-2 pt-2 border-t border-navy-800 flex items-center justify-between text-[10px] text-navy-400 -mx-2 px-3">
           <span>{enrichedResults.length} {enrichedResults.length === 1 ? 'lección' : 'lecciones'}</span>
           <div className="hidden sm:flex items-center gap-3">
             <span><kbd className="px-1 py-0.5 bg-navy-700 rounded text-navy-400">↑↓</kbd> Navegar</span>

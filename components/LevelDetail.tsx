@@ -74,7 +74,7 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                                     style={{ width: `${progressPercentage}%` }}
                                 />
                             </div>
-                            <p className="text-xs text-navy-500 mt-2 text-center">{completedCount} de {totalLessons} lecciones</p>
+                            <p className="text-xs text-navy-400 mt-2 text-center">{completedCount} de {totalLessons} lecciones</p>
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                                                 isCompleted
                                                     ? 'bg-green-500/10 text-green-500'
                                                     : isLocked
-                                                    ? 'bg-navy-800 text-navy-600'
+                                                    ? 'bg-navy-800 text-navy-400'
                                                     : 'bg-navy-800 text-navy-400 group-hover:bg-brand-500/10 group-hover:text-brand-500'
                                                 }`}>
                                                 {isCompleted ? <CheckCircle size={20} /> : isLocked ? <Lock size={20} /> : <PlayCircle size={20} />}
@@ -138,7 +138,7 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                                                         isCompleted
                                                             ? 'text-navy-300'
                                                             : isLocked
-                                                            ? 'text-navy-600'
+                                                            ? 'text-navy-400'
                                                             : 'text-white group-hover:text-brand-400'
                                                     }`}>
                                                         {lesson.title}
@@ -149,15 +149,15 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                                                         </span>
                                                     )}
                                                 </div>
-                                                <div className={`flex items-center gap-4 text-xs ${isLocked ? 'text-navy-700' : 'text-navy-500'}`}>
+                                                <div className="flex items-center gap-4 text-xs text-navy-400">
                                                     <span>Lección {lessonIndex + 1} de {totalLessons}</span>
                                                     <span className="flex items-center gap-1"><Clock size={12} /> {lesson.duration}</span>
                                                     {isLocked && prevId ? (
-                                                        <span className="text-navy-600">
+                                                        <span className="text-navy-400">
                                                             Completa &quot;{lessonTitleMap.get(prevId)}&quot; para desbloquear
                                                         </span>
                                                     ) : isLocked ? (
-                                                        <span className="flex items-center gap-1 text-navy-600"><Lock size={12} /> Bloqueada</span>
+                                                        <span className="flex items-center gap-1 text-navy-400"><Lock size={12} /> Bloqueada</span>
                                                     ) : null}
                                                 </div>
                                             </div>

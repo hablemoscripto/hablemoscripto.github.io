@@ -251,8 +251,10 @@ const LessonView: React.FC = () => {
                     <div className="h-full bg-brand-500 transition-all duration-100 ease-out" style={{ width: `${scrollProgress * 100}%` }}></div>
                 </div>
 
-                {/* Top Navigation Bar */}
-                <div className="sticky top-0 z-40 bg-navy-950/80 backdrop-blur-md border-b border-white/10">
+                {/* Top Navigation Bar — non-sticky on mobile so it doesn't stack
+                    on top of the (sticky) EducationNavbar and bury content;
+                    re-stickies from sm: up where there's vertical room. */}
+                <div className="static sm:sticky top-0 z-40 bg-navy-950/80 backdrop-blur-md border-b border-white/10">
                     <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
                         {/* Left: Back to level dashboard */}
                         <button
@@ -292,7 +294,7 @@ const LessonView: React.FC = () => {
                                     className={`p-2 rounded-lg transition-colors ${
                                         canGoNext
                                             ? 'text-navy-400 hover:text-white hover:bg-navy-800'
-                                            : 'text-navy-600 cursor-not-allowed'
+                                            : 'text-navy-400 cursor-not-allowed'
                                     }`}
                                     title={canGoNext ? `Siguiente: ${nextLesson.title}` : 'Completa esta lección para continuar'}
                                 >
@@ -389,7 +391,7 @@ const LessonView: React.FC = () => {
                         )}
 
                         {/* Content Sections with Checkpoint Quizzes */}
-                        <div className="prose prose-invert prose-lg max-w-none">
+                        <div className="prose prose-invert prose-lg max-w-none break-words">
                             {lesson.sections.map((section, idx) => (
                                 <SectionRenderer
                                     key={idx}
@@ -454,7 +456,7 @@ const LessonView: React.FC = () => {
                                             <ArrowLeft size={20} className="text-navy-400 group-hover:text-white transition-colors" />
                                         </div>
                                         <div className="min-w-0">
-                                            <p className="text-xs text-navy-500 uppercase tracking-wider mb-1">Anterior</p>
+                                            <p className="text-xs text-navy-400 uppercase tracking-wider mb-1">Anterior</p>
                                             <p className="text-sm text-navy-300 group-hover:text-white truncate transition-colors">{prevLesson.title}</p>
                                         </div>
                                     </button>
@@ -474,11 +476,11 @@ const LessonView: React.FC = () => {
                                         }`}
                                     >
                                         <div className="min-w-0">
-                                            <p className={`text-xs uppercase tracking-wider mb-1 ${canGoNext ? 'text-brand-400' : 'text-navy-600'}`}>
+                                            <p className={`text-xs uppercase tracking-wider mb-1 ${canGoNext ? 'text-brand-400' : 'text-navy-400'}`}>
                                                 {canGoNext ? 'Siguiente' : 'Bloqueado'}
                                             </p>
                                             <p className={`text-sm truncate transition-colors ${
-                                                canGoNext ? 'text-navy-300 group-hover:text-white' : 'text-navy-600'
+                                                canGoNext ? 'text-navy-300 group-hover:text-white' : 'text-navy-400'
                                             }`}>{nextLesson.title}</p>
                                         </div>
                                         <div className={`shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
@@ -489,7 +491,7 @@ const LessonView: React.FC = () => {
                                             {canGoNext ? (
                                                 <ArrowRight size={20} className="text-brand-400 group-hover:text-brand-300 transition-colors" />
                                             ) : (
-                                                <Lock size={18} className="text-navy-600" />
+                                                <Lock size={18} className="text-navy-400" />
                                             )}
                                         </div>
                                     </button>
@@ -530,7 +532,7 @@ const LessonView: React.FC = () => {
                                             <MessageSquare size={18} className="text-brand-500" />
                                             <span className="text-navy-300 group-hover:text-white text-sm transition-colors">Comunidad</span>
                                         </div>
-                                        <ExternalLink size={14} className="text-navy-500 group-hover:text-brand-400 transition-colors" />
+                                        <ExternalLink size={14} className="text-navy-400 group-hover:text-brand-400 transition-colors" />
                                     </a>
                                     <a
                                         href={`mailto:hablemoscripto@gmail.com?subject=${encodeURIComponent(`Feedback · Lección ${lesson.number?.split(' ')[0] || id}: ${lesson.title}`)}`}
@@ -540,7 +542,7 @@ const LessonView: React.FC = () => {
                                             <ThumbsUp size={18} className="text-brand-500" />
                                             <span className="text-navy-300 group-hover:text-white text-sm transition-colors">Dar Feedback</span>
                                         </div>
-                                        <ExternalLink size={14} className="text-navy-500 group-hover:text-brand-400 transition-colors" />
+                                        <ExternalLink size={14} className="text-navy-400 group-hover:text-brand-400 transition-colors" />
                                     </a>
                                 </div>
                             </div>

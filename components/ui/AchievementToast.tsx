@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useGamification } from '../../contexts/GamificationContext';
 import {
     Footprints, BookOpen, Award, Flag, GraduationCap, TrendingUp, Crown, Gem,
@@ -15,7 +15,11 @@ export default function AchievementToast() {
     const { pendingToasts, dismissToast } = useGamification();
 
     return (
-        <div className="fixed top-20 right-4 z-50 flex flex-col gap-3 pointer-events-none">
+        <div
+            className="fixed top-20 right-4 z-50 flex flex-col gap-3 pointer-events-none"
+            role="status"
+            aria-live="polite"
+        >
             <AnimatePresence>
                 {pendingToasts.map(toast => (
                     <ToastItem key={toast.id} toast={toast} onDismiss={dismissToast} />
@@ -26,6 +30,8 @@ export default function AchievementToast() {
 }
 
 function ToastItem({ toast, onDismiss }: { toast: { id: string; title: string; description: string; icon: string }; onDismiss: (id: string) => void }) {
+    const shouldReduceMotion = useReducedMotion();
+
     useEffect(() => {
         const timer = setTimeout(() => onDismiss(toast.id), 6000);
         return () => clearTimeout(timer);
@@ -35,10 +41,10 @@ function ToastItem({ toast, onDismiss }: { toast: { id: string; title: string; d
 
     return (
         <motion.div
-            initial={{ opacity: 0, x: 80, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: 80, scale: 0.95 }}
-            transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: 80, scale: 0.95 }}
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0, scale: 1 }}
+            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: 80, scale: 0.95 }}
+            transition={shouldReduceMotion ? { duration: 0.2 } : { type: 'spring', damping: 20, stiffness: 300 }}
             className="pointer-events-auto flex items-center gap-3 bg-navy-900/95 backdrop-blur-sm border border-brand-500/30 rounded-xl px-4 py-3 shadow-lg shadow-brand-500/10 max-w-xs"
         >
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center shrink-0">
@@ -51,10 +57,10 @@ function ToastItem({ toast, onDismiss }: { toast: { id: string; title: string; d
             </div>
             <button
                 onClick={() => onDismiss(toast.id)}
-                className="shrink-0 p-1 rounded-md text-navy-500 hover:text-white hover:bg-navy-800 transition-colors"
+                className="shrink-0 w-11 h-11 -mr-2 flex items-center justify-center rounded-md text-navy-400 hover:text-white hover:bg-navy-800 transition-colors"
                 aria-label="Cerrar"
             >
-                <X size={14} />
+                <X size={16} />
             </button>
         </motion.div>
     );

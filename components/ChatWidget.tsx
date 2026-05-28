@@ -9,7 +9,7 @@ const STORAGE_KEY = 'chat_messages';
 
 const INITIAL_GREETING: ChatMessage = {
   role: 'model',
-  text: '¡Hola! Soy CBas AI 🤖. Pregúntame sobre Bitcoin, cómo empezar en cripto o conceptos de trading. ¿En qué puedo ayudarte hoy?',
+  text: '¡Hola! Soy CBas 🤖. Pregúntame sobre Bitcoin, cómo empezar en cripto o conceptos de trading. ¿En qué puedo ayudarte hoy?',
   timestamp: new Date()
 };
 
@@ -167,10 +167,10 @@ const ChatWidget: React.FC = () => {
               <Sparkles size={20} className="text-brand-500" aria-hidden="true" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-white text-sm" id="chat-title">CBas AI Assistant</h3>
+              <h3 className="font-bold text-white text-sm" id="chat-title">CBas</h3>
               <p className="text-xs text-navy-400 flex items-center gap-1">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true"></span>
-                Online con Grok
+                En línea
               </p>
             </div>
             <button
@@ -205,7 +205,7 @@ const ChatWidget: React.FC = () => {
                   aria-label={msg.role === 'user' ? 'Tu mensaje' : 'Respuesta del asistente'}
                 >
                   {msg.role === 'model' ? (
-                     <div className="prose prose-invert prose-sm max-w-none">
+                     <div className="prose prose-invert prose-sm max-w-none break-words">
                         {msg.text ? (
                           <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{msg.text}</ReactMarkdown>
                         ) : (
@@ -247,7 +247,7 @@ const ChatWidget: React.FC = () => {
 
           {/* Powered By */}
           <div className="bg-navy-900 py-1 text-center">
-             <p className="text-[10px] text-navy-500">Powered by Grok (xAI)</p>
+             <p className="text-[10px] text-navy-400">Con tecnología de Grok (xAI)</p>
           </div>
         </section>
       )}

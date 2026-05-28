@@ -44,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter — @Crypto_CBas (abre en una pestaña nueva)"
-                className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-brand-500 hover:text-navy-900 transition-all"
+                className="w-11 h-11 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-brand-500 hover:text-navy-900 transition-all"
               >
                 <Twitter size={18} aria-hidden="true" />
               </a>
@@ -53,7 +53,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube — @hablemoscripto (abre en una pestaña nueva)"
-                className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-red-600 hover:text-white transition-all"
+                className="w-11 h-11 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-red-600 hover:text-white transition-all"
               >
                 <Youtube size={18} aria-hidden="true" />
               </a>
@@ -61,7 +61,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
           </div>
 
           <div>
-            <h2 className="text-white font-bold mb-6 text-base">Plataforma</h2>
+            <h3 className="text-white font-bold mb-6 text-base">Plataforma</h3>
             <ul className="space-y-4 text-sm text-navy-400">
               <li><a href="/#home" onClick={(e) => handleAnchorClick(e, 'home')} className="hover:text-brand-500 transition-colors">Inicio</a></li>
               <li>
@@ -84,7 +84,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
           </div>
 
           <div>
-            <h2 className="text-white font-bold mb-6 text-base">Legal</h2>
+            <h3 className="text-white font-bold mb-6 text-base">Legal</h3>
             <ul className="space-y-4 text-sm text-navy-400">
               <li><Link to="/terminos" className="hover:text-brand-500 transition-colors">Términos de Uso</Link></li>
               <li><Link to="/privacidad" className="hover:text-brand-500 transition-colors">Política de Privacidad</Link></li>

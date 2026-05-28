@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useId, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { X } from 'lucide-react';
 
 interface ModalProps {
@@ -33,6 +33,12 @@ const panelVariants = {
     y: 10,
     transition: { duration: 0.2, ease: 'easeIn' as const },
   },
+};
+
+const reducedPanelVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.15 } },
+  exit: { opacity: 0, transition: { duration: 0.15 } },
 };
 
 /**
@@ -68,6 +74,7 @@ export function Modal({
   const id = useId();
   const titleId = `${id}-title`;
   const subtitleId = `${id}-subtitle`;
+  const shouldReduceMotion = useReducedMotion();
 
   const panelRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<Element | null>(null);
@@ -200,9 +207,10 @@ export function Modal({
             aria-hidden="true"
           />
 
-          {/* Centering wrapper — click-outside target */}
+          {/* Centering wrapper — click-outside target. Scrolls when the panel
+              is taller than the viewport (e.g. signup form + mobile keyboard). */}
           <div
-            className="relative z-10 flex items-center justify-center w-full h-full p-4"
+            className="relative z-10 flex items-center justify-center w-full h-full p-4 overflow-y-auto overscroll-contain"
             onClick={handleBackdropClick}
           >
             {/* Panel */}
@@ -214,11 +222,11 @@ export function Modal({
               aria-label={!title ? ariaLabel : undefined}
               aria-describedby={subtitle ? subtitleId : undefined}
               tabIndex={-1}
-              variants={panelVariants}
+              variants={shouldReduceMotion ? reducedPanelVariants : panelVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
-              className={`relative bg-navy-900 border border-navy-700 rounded-2xl shadow-2xl w-full ${maxWidth} mx-4 outline-none`}
+              className={`relative bg-navy-900 border border-navy-700 rounded-2xl shadow-2xl w-full ${maxWidth} mx-4 my-auto max-h-[90dvh] overflow-y-auto overscroll-contain outline-none`}
             >
               {/* Close button */}
               {showCloseButton && (

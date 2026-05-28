@@ -183,7 +183,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                         } else if (isSelected) {
                                             optionClass += "bg-red-500/10 border-red-500/50 text-red-400";
                                         } else {
-                                            optionClass += "bg-navy-950 border-navy-800 text-navy-500 opacity-50";
+                                            optionClass += "bg-navy-950 border-navy-800 text-navy-400 opacity-60";
                                         }
                                     } else {
                                         optionClass += "bg-navy-950 border-navy-800 text-navy-300 hover:border-brand-500/50 hover:bg-navy-900 cursor-pointer";

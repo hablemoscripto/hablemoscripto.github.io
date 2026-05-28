@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, type Variants } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 
 interface PageTransitionProps {
     children: React.ReactNode;
@@ -25,13 +25,22 @@ const pageVariants: Variants = {
     },
 };
 
+// When the user prefers reduced motion, cross-fade only — no translate/scale.
+const reducedVariants: Variants = {
+    initial: { opacity: 0 },
+    in: { opacity: 1, transition: { duration: 0.2 } },
+    out: { opacity: 0, transition: { duration: 0.2 } },
+};
+
 const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
+    const shouldReduceMotion = useReducedMotion();
+
     return (
         <motion.div
             initial="initial"
             animate="in"
             exit="out"
-            variants={pageVariants}
+            variants={shouldReduceMotion ? reducedVariants : pageVariants}
             className="w-full h-full"
         >
             {children}

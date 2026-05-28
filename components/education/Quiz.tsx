@@ -70,15 +70,6 @@ function isCorrect(question: Question, answer: QuizAnswer): boolean {
     }
 }
 
-function getPoints(question: Question): number {
-    if (question.points) return question.points;
-    switch (question.difficulty) {
-        case 'hard': return 3;
-        case 'medium': return 2;
-        default: return 1;
-    }
-}
-
 // ============================================
 // QUESTION COMPONENTS
 // ============================================
@@ -108,7 +99,7 @@ const MultipleChoiceRenderer: React.FC<QuestionComponentProps> = ({
                     } else if (answer === optIdx) {
                         optionClass += "bg-red-500/10 border-red-500/50 text-red-400";
                     } else {
-                        optionClass += "bg-navy-950 border-navy-800 text-navy-500 opacity-50";
+                        optionClass += "bg-navy-950 border-navy-800 text-navy-400 opacity-60";
                     }
                 } else {
                     if (answer === optIdx) {
@@ -181,7 +172,7 @@ const TrueFalseRenderer: React.FC<QuestionComponentProps> = ({
                         } else if (answer === value) {
                             optionClass += "bg-red-500/10 border-red-500 text-red-400";
                         } else {
-                            optionClass += "bg-navy-950 border-navy-800 text-navy-500 opacity-50";
+                            optionClass += "bg-navy-950 border-navy-800 text-navy-400 opacity-60";
                         }
                     } else {
                         if (answer === value) {
@@ -255,7 +246,7 @@ const MultipleSelectRenderer: React.FC<QuestionComponentProps> = ({
                     } else if (!isCorrectOption && isSelected) {
                         optionClass += "bg-red-500/10 border-red-500/50 text-red-400";
                     } else {
-                        optionClass += "bg-navy-950 border-navy-800 text-navy-500 opacity-50";
+                        optionClass += "bg-navy-950 border-navy-800 text-navy-400 opacity-60";
                     }
                 } else {
                     if (isSelected) {
@@ -347,29 +338,31 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
                             <span className="w-8 h-8 rounded-lg bg-navy-800 flex items-center justify-center text-sm font-bold text-navy-400">
                                 {position + 1}
                             </span>
-                            <GripVertical size={18} className="text-navy-600 shrink-0" />
+                            <GripVertical size={18} className="text-navy-400 shrink-0" />
                             <span className="flex-1">{q.items[itemIdx]}</span>
                             {!submitted && (
-                                <div className="flex flex-col gap-1">
+                                <div className="flex flex-row gap-1">
                                     <button
                                         onClick={() => moveItem(position, 'up')}
                                         disabled={position === 0}
-                                        className="p-1 hover:bg-navy-800 rounded disabled:opacity-30"
+                                        className="w-10 h-10 flex items-center justify-center hover:bg-navy-800 rounded disabled:opacity-30"
+                                        aria-label="Mover arriba"
                                     >
-                                        <ChevronUp size={16} />
+                                        <ChevronUp size={18} />
                                     </button>
                                     <button
                                         onClick={() => moveItem(position, 'down')}
                                         disabled={position === currentOrder.length - 1}
-                                        className="p-1 hover:bg-navy-800 rounded disabled:opacity-30"
+                                        className="w-10 h-10 flex items-center justify-center hover:bg-navy-800 rounded disabled:opacity-30"
+                                        aria-label="Mover abajo"
                                     >
-                                        <ChevronDown size={16} />
+                                        <ChevronDown size={18} />
                                     </button>
                                 </div>
                             )}
                             {submitted && isCorrectPosition && <CheckCircle size={18} className="text-green-500" />}
                             {submitted && !isCorrectPosition && (
-                                <span className="text-xs text-navy-500">
+                                <span className="text-xs text-navy-400">
                                     (Posición correcta: {getItemPosition(itemIdx) + 1})
                                 </span>
                             )}
@@ -475,6 +468,7 @@ const Quiz: React.FC<QuizProps> = ({
     const [submitted, setSubmitted] = useState(false);
     const [showHints, setShowHints] = useState<{ [key: string]: boolean }>({});
     const [viewMode, setViewMode] = useState<'single' | 'all'>('single');
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     const currentQuestion = questions[currentQuestionIndex];
 
@@ -487,26 +481,21 @@ const Quiz: React.FC<QuizProps> = ({
 
     const handleAnswer = (questionId: string, answer: QuizAnswer) => {
         setAnswers(prev => ({ ...prev, [questionId]: answer }));
+        if (submitError) setSubmitError(null);
     };
 
     const toggleHint = (questionId: string) => {
         setShowHints(prev => ({ ...prev, [questionId]: !prev[questionId] }));
     };
 
-    const calculateScore = () => {
-        let totalPoints = 0;
-        let earnedPoints = 0;
-
-        questions.forEach(q => {
-            const points = getPoints(q);
-            totalPoints += points;
-            if (isCorrect(q, answers[q.id])) {
-                earnedPoints += points;
-            }
-        });
-
-        return { totalPoints, earnedPoints, percentage: Math.round((earnedPoints / totalPoints) * 100) };
-    };
+    // Single definition of score: raw count of correct questions. The displayed
+    // percentage and the pass threshold MUST use this same basis so a user can
+    // never see "75% correctas" yet fail (which happened when the percentage was
+    // point-weighted while the pass check counted raw questions).
+    const correctCount = questions.filter(q => isCorrect(q, answers[q.id])).length;
+    const passThreshold = Math.ceil(questions.length * 0.7);
+    const percentage = Math.round((correctCount / questions.length) * 100);
+    const passed = correctCount >= passThreshold;
 
     const handleSubmit = () => {
         // Check if all questions are answered
@@ -518,44 +507,55 @@ const Quiz: React.FC<QuizProps> = ({
         });
 
         if (unanswered.length > 0) {
-            alert(`Por favor responde todas las preguntas. Faltan ${unanswered.length} pregunta(s).`);
+            setSubmitError(
+                `Por favor responde todas las preguntas. ${
+                    unanswered.length === 1
+                        ? 'Falta 1 pregunta'
+                        : `Faltan ${unanswered.length} preguntas`
+                }.`
+            );
             // Navigate to first unanswered
             const firstUnansweredIndex = questions.findIndex(q => unanswered.includes(q));
             setCurrentQuestionIndex(firstUnansweredIndex);
             return;
         }
 
+        setSubmitError(null);
         setSubmitted(true);
         setViewMode('all'); // Show all questions after submit
 
-        const correctCount = questions.filter(q => isCorrect(q, answers[q.id])).length;
+        if (passed) {
+            const prefersReducedMotion =
+                typeof window !== 'undefined' &&
+                typeof window.matchMedia === 'function' &&
+                window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // Pass if 70% or more
-        if (correctCount >= Math.ceil(questions.length * 0.7)) {
-            // Celebration burst — two waves for more impact
-            confetti({
-                particleCount: 200,
-                spread: 100,
-                origin: { y: 0.6 },
-                colors: ['#10b981', '#f59e0b', '#ffffff', '#3b82f6'],
-                zIndex: 100,
-            });
-            setTimeout(() => {
+            if (!prefersReducedMotion) {
+                // Celebration burst — two waves for more impact
                 confetti({
-                    particleCount: 100,
-                    spread: 120,
-                    origin: { y: 0.5, x: 0.3 },
-                    colors: ['#10b981', '#f59e0b'],
+                    particleCount: 200,
+                    spread: 100,
+                    origin: { y: 0.6 },
+                    colors: ['#10b981', '#f59e0b', '#ffffff', '#3b82f6'],
                     zIndex: 100,
                 });
-                confetti({
-                    particleCount: 100,
-                    spread: 120,
-                    origin: { y: 0.5, x: 0.7 },
-                    colors: ['#10b981', '#f59e0b'],
-                    zIndex: 100,
-                });
-            }, 300);
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 100,
+                        spread: 120,
+                        origin: { y: 0.5, x: 0.3 },
+                        colors: ['#10b981', '#f59e0b'],
+                        zIndex: 100,
+                    });
+                    confetti({
+                        particleCount: 100,
+                        spread: 120,
+                        origin: { y: 0.5, x: 0.7 },
+                        colors: ['#10b981', '#f59e0b'],
+                        zIndex: 100,
+                    });
+                }, 300);
+            }
             onComplete(correctCount);
         }
     };
@@ -566,6 +566,7 @@ const Quiz: React.FC<QuizProps> = ({
         setShowHints({});
         setCurrentQuestionIndex(0);
         setViewMode('single');
+        setSubmitError(null);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -604,13 +605,13 @@ const Quiz: React.FC<QuizProps> = ({
                     <div className="flex-1">
                         <p className="font-medium text-white text-lg leading-relaxed">{q.question}</p>
                         {q.type === 'multiple-select' && !submitted && (
-                            <p className="text-sm text-navy-500 mt-1">(Selecciona todas las respuestas correctas)</p>
+                            <p className="text-sm text-navy-400 mt-1">(Selecciona todas las respuestas correctas)</p>
                         )}
                         {q.type === 'ordering' && !submitted && (
-                            <p className="text-sm text-navy-500 mt-1">(Ordena los elementos correctamente)</p>
+                            <p className="text-sm text-navy-400 mt-1">(Ordena los elementos correctamente)</p>
                         )}
                         {q.type === 'fill-blank' && !submitted && (
-                            <p className="text-sm text-navy-500 mt-1">(No importa mayúsculas/minúsculas)</p>
+                            <p className="text-sm text-navy-400 mt-1">(No importa mayúsculas/minúsculas)</p>
                         )}
                         {q.difficulty && (
                             <span className={`inline-block mt-2 px-2 py-0.5 rounded text-xs font-medium ${
@@ -660,10 +661,6 @@ const Quiz: React.FC<QuizProps> = ({
         );
     };
 
-    const { percentage } = calculateScore();
-    const correctCount = questions.filter(q => isCorrect(q, answers[q.id])).length;
-    const passed = correctCount >= Math.ceil(questions.length * 0.7);
-
     return (
         <div className="bg-navy-900 rounded-2xl border border-navy-800 overflow-hidden mt-16 shadow-2xl">
             {/* Header */}
@@ -705,7 +702,7 @@ const Quiz: React.FC<QuizProps> = ({
 
                 {/* Question Navigation Dots */}
                 {viewMode === 'single' && !submitted && (
-                    <div className="flex items-center justify-center gap-2 mt-4">
+                    <div className="flex items-center justify-center mt-2">
                         {questions.map((q, idx) => {
                             const isAnswered = answers[q.id] !== undefined && answers[q.id] !== null && answers[q.id] !== '';
                             const isCurrent = idx === currentQuestionIndex;
@@ -714,15 +711,20 @@ const Quiz: React.FC<QuizProps> = ({
                                 <button
                                     key={q.id}
                                     onClick={() => allowNavigation && setCurrentQuestionIndex(idx)}
-                                    className={`w-3 h-3 rounded-full transition-all ${
-                                        isCurrent
-                                            ? 'bg-brand-500 scale-125'
-                                            : isAnswered
-                                                ? 'bg-green-500/50 hover:bg-green-500'
-                                                : 'bg-navy-700 hover:bg-navy-600'
-                                    }`}
+                                    className="w-9 h-9 flex items-center justify-center group"
+                                    aria-label={`Ir a la pregunta ${idx + 1}`}
                                     title={`Pregunta ${idx + 1}`}
-                                />
+                                >
+                                    <span
+                                        className={`block w-3 h-3 rounded-full transition-all ${
+                                            isCurrent
+                                                ? 'bg-brand-500 scale-125'
+                                                : isAnswered
+                                                    ? 'bg-green-500/50 group-hover:bg-green-500'
+                                                    : 'bg-navy-700 group-hover:bg-navy-600'
+                                        }`}
+                                    />
+                                </button>
                             );
                         })}
                     </div>
@@ -736,7 +738,17 @@ const Quiz: React.FC<QuizProps> = ({
                         {renderQuestion(currentQuestion, currentQuestionIndex)}
 
                         {/* Pass requirement info */}
-                        <p className="text-xs text-navy-500 text-center">Necesitas el 70% para completar la lección · Sin límite de tiempo</p>
+                        <p className="text-xs text-navy-400 text-center">Necesitas el 70% para completar la lección · Sin límite de tiempo</p>
+
+                        {submitError && (
+                            <div
+                                role="alert"
+                                className="flex items-start gap-2 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-300"
+                            >
+                                <AlertCircle size={18} className="shrink-0 mt-0.5" />
+                                <span>{submitError}</span>
+                            </div>
+                        )}
 
                         {/* Navigation */}
                         <div className="flex items-center justify-between pt-4 border-t border-navy-800">
@@ -748,7 +760,7 @@ const Quiz: React.FC<QuizProps> = ({
                                 <ArrowLeft size={18} /> Anterior
                             </button>
 
-                            <span className="text-sm text-navy-500">
+                            <span className="text-sm text-navy-400">
                                 {currentQuestionIndex + 1} / {questions.length}
                             </span>
 
@@ -777,17 +789,28 @@ const Quiz: React.FC<QuizProps> = ({
 
                 {/* Pass requirement info (all view) */}
                 {viewMode === 'all' && !submitted && (
-                    <p className="text-xs text-navy-500 text-center mt-6">Necesitas el 70% para completar la lección · Sin límite de tiempo</p>
+                    <p className="text-xs text-navy-400 text-center mt-6">Necesitas el 70% para completar la lección · Sin límite de tiempo</p>
                 )}
 
                 {/* Submit Button (for "all" view mode) */}
                 {viewMode === 'all' && !submitted && (
-                    <button
-                        onClick={handleSubmit}
-                        className="w-full mt-8 py-4 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-colors shadow-lg shadow-brand-500/20 flex items-center justify-center gap-2 group"
-                    >
-                        Verificar Respuestas <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    <>
+                        {submitError && (
+                            <div
+                                role="alert"
+                                className="flex items-start gap-2 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-300 mt-6"
+                            >
+                                <AlertCircle size={18} className="shrink-0 mt-0.5" />
+                                <span>{submitError}</span>
+                            </div>
+                        )}
+                        <button
+                            onClick={handleSubmit}
+                            className="w-full mt-4 py-4 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-colors shadow-lg shadow-brand-500/20 flex items-center justify-center gap-2 group"
+                        >
+                            Verificar Respuestas <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                        </button>
+                    </>
                 )}
 
                 {/* Results */}
@@ -833,9 +856,9 @@ const Quiz: React.FC<QuizProps> = ({
                         ) : (
                             <div className="space-y-4">
                                 <p className="text-navy-300">
-                                    Necesitas el 70% para aprobar — te {Math.ceil(questions.length * 0.7) - correctCount === 1 ? 'falta' : 'faltan'} <span className="text-white font-bold">{Math.ceil(questions.length * 0.7) - correctCount}</span> {Math.ceil(questions.length * 0.7) - correctCount === 1 ? 'respuesta correcta más' : 'respuestas correctas más'}.
+                                    Necesitas el 70% para aprobar — te {passThreshold - correctCount === 1 ? 'falta' : 'faltan'} <span className="text-white font-bold">{passThreshold - correctCount}</span> {passThreshold - correctCount === 1 ? 'respuesta correcta más' : 'respuestas correctas más'}.
                                 </p>
-                                <p className="text-sm text-navy-500">
+                                <p className="text-sm text-navy-400">
                                     Revisa las explicaciones arriba y vuelve a intentarlo.
                                 </p>
                                 <button

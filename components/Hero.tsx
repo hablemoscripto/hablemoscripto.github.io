@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import { useReducedMotion } from 'framer-motion';
 import { Users, BookOpen, Award, Zap, CheckCircle } from 'lucide-react';
 import ParticlesBackground from './ParticlesBackground';
 
@@ -9,22 +10,27 @@ const TYPING_SPEED = 100;
 const DELETING_SPEED = 50;
 const PAUSE_TIME = 2000;
 const FINAL_PAUSE_TIME = 3000;
-const MAX_CYCLES = 2; // Cycle the whole WORDS list twice, then settle on "Cripto"
+const MAX_CYCLES = 2; // Cycle the whole WORDS list twice, then settle on the last word
+// The word the animation settles on after the final cycle.
+const SETTLED_WORD = WORDS[(WORDS.length * MAX_CYCLES - 1) % WORDS.length];
 
 interface HeroProps {
   onStartLearning: () => void;
 }
 
 const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
+  const prefersReducedMotion = useReducedMotion();
   const [textIndex, setTextIndex] = useState(0);
-  const [displayText, setDisplayText] = useState('');
+  const [displayText, setDisplayText] = useState(prefersReducedMotion ? SETTLED_WORD : '');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [settled, setSettled] = useState(false);
+  const [settled, setSettled] = useState(!!prefersReducedMotion);
 
   // Typing Effect — cycles through WORDS twice, then settles on the last word.
   // Keeps the hero visually alive on arrival without being a permanent distraction.
+  // Skipped entirely when the user prefers reduced motion: the final word is
+  // shown immediately and no setTimeout typing loop runs.
   useEffect(() => {
-    if (settled) return;
+    if (prefersReducedMotion || settled) return;
 
     const currentWord = WORDS[textIndex % WORDS.length];
     const isLastWord = textIndex === WORDS.length * MAX_CYCLES - 1;
@@ -56,7 +62,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
     }, isDeleting ? DELETING_SPEED : TYPING_SPEED);
 
     return () => clearTimeout(timer);
-  }, [displayText, isDeleting, textIndex, settled]);
+  }, [displayText, isDeleting, textIndex, settled, prefersReducedMotion]);
 
   return (
     <section id="home" className="relative flex items-center justify-center overflow-hidden bg-navy-950 pt-32 pb-20 lg:pt-24 scroll-mt-28">

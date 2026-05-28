@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play } from 'lucide-react';
+import { Play, Clapperboard } from 'lucide-react';
 
 interface VideoPlayerProps {
     videoId?: string; // YouTube ID for now
@@ -10,12 +10,33 @@ interface VideoPlayerProps {
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId, thumbnail, title }) => {
     const [isPlaying, setIsPlaying] = useState(false);
 
-    // Placeholder ID if none provided
-    const id = videoId || 'dQw4w9WgXcQ'; // Rick Roll as placeholder default ;)
-
     const handlePlay = () => {
         setIsPlaying(true);
     };
+
+    // No video yet — show a placeholder rather than embedding any fallback.
+    if (!videoId) {
+        return (
+            <div className="relative aspect-video bg-navy-900 rounded-2xl overflow-hidden border border-navy-800 shadow-2xl flex items-center justify-center">
+                {thumbnail && (
+                    <img
+                        src={thumbnail}
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute inset-0 w-full h-full object-cover opacity-20"
+                    />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/60 to-transparent"></div>
+                <div className="relative z-10 text-center p-6">
+                    <div className="w-16 h-16 rounded-full bg-navy-800 flex items-center justify-center mx-auto mb-4">
+                        <Clapperboard size={28} className="text-navy-400" aria-hidden="true" />
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2 max-w-lg mx-auto">{title}</h3>
+                    <p className="text-navy-400 font-medium text-sm uppercase tracking-wider">Video próximamente</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="relative aspect-video bg-navy-900 rounded-2xl overflow-hidden border border-navy-800 shadow-2xl group">
@@ -44,7 +65,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId, thumbnail, title }) 
                 </div>
             ) : (
                 <iframe
-                    src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`}
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
                     title={title}
                     className="w-full h-full"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

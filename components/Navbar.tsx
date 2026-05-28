@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Menu, X, Bitcoin, ExternalLink, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
@@ -11,6 +11,8 @@ const Navbar: React.FC = () => {
   const { user, signOut } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +38,22 @@ const Navbar: React.FC = () => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
+
+  // Escape to close + focus management: move focus into the menu when it opens
+  // and restore it to the toggle on close.
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const toggle = mobileToggleRef.current;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    requestAnimationFrame(() => mobileMenuRef.current?.focus());
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      toggle?.focus();
+    };
+  }, [isMobileMenuOpen]);
 
   const handleScrollToSection = useCallback((sectionId: string) => {
     setIsMobileMenuOpen(false);
@@ -151,6 +169,7 @@ const Navbar: React.FC = () => {
 
           {/* Mobile Toggle */}
           <button
+            ref={mobileToggleRef}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-navy-300 hover:text-white z-50"
             aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
@@ -174,10 +193,12 @@ const Navbar: React.FC = () => {
           {/* Menu panel */}
           <div
             id="mobile-menu"
+            ref={mobileMenuRef}
             role="dialog"
             aria-modal="true"
             aria-label="Menú de navegación"
-            className="fixed inset-0 z-[61] bg-navy-950 md:hidden overflow-y-auto"
+            tabIndex={-1}
+            className="fixed inset-0 z-[61] bg-navy-950 md:hidden overflow-y-auto outline-none"
           >
             {/* Header with logo and close */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-white/5">

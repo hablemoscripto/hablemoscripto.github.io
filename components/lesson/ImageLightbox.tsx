@@ -6,12 +6,20 @@ interface ImageLightboxProps {
     onClose: () => void;
 }
 
+// Coarse pointers (touch) get touch-friendly hint copy; fine pointers (mouse)
+// keep the scroll/drag wording.
+const isCoarsePointer = () =>
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(pointer: coarse)').matches;
+
 export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
     const [zoomLevel, setZoomLevel] = useState(1);
     const [panPosition, setPanPosition] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
     const containerRef = useRef<HTMLDivElement>(null);
+    const touchStateRef = useRef<{ x: number; y: number } | null>(null);
 
     // Handlers are declared before effects that close over them so the
     // keyboard/wheel effects capture the right references on first render.
@@ -77,12 +85,42 @@ export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
 
     const handleMouseUp = () => setIsDragging(false);
 
+    const handleTouchStart = (e: React.TouchEvent) => {
+        if (zoomLevel > 1 && e.touches.length === 1) {
+            const t = e.touches[0];
+            setIsDragging(true);
+            touchStateRef.current = { x: t.clientX - panPosition.x, y: t.clientY - panPosition.y };
+        }
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        if (isDragging && zoomLevel > 1 && e.touches.length === 1 && touchStateRef.current) {
+            const t = e.touches[0];
+            // Prevent the page from scrolling underneath while panning the image.
+            if (e.cancelable) e.preventDefault();
+            setPanPosition({
+                x: t.clientX - touchStateRef.current.x,
+                y: t.clientY - touchStateRef.current.y,
+            });
+        }
+    };
+
+    const handleTouchEnd = () => {
+        setIsDragging(false);
+        touchStateRef.current = null;
+    };
+
     if (!image) return null;
+
+    const coarse = isCoarsePointer();
 
     return (
         <div
             className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
             onClick={onClose}
+            role="dialog"
+            aria-modal="true"
+            aria-label={image.alt || 'Imagen ampliada'}
         >
             {/* Controls */}
             <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
@@ -93,7 +131,7 @@ export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
                 <button
                     onClick={(e) => { e.stopPropagation(); handleZoomOut(); }}
                     disabled={zoomLevel <= 1}
-                    className="p-2 bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-navy-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-11 h-11 flex items-center justify-center bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-navy-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     aria-label="Alejar"
                 >
                     <ZoomOut size={20} />
@@ -101,14 +139,14 @@ export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
                 <button
                     onClick={(e) => { e.stopPropagation(); handleZoomIn(); }}
                     disabled={zoomLevel >= 4}
-                    className="p-2 bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-navy-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-11 h-11 flex items-center justify-center bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-navy-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     aria-label="Acercar"
                 >
                     <ZoomIn size={20} />
                 </button>
                 <button
                     onClick={onClose}
-                    className="p-2 bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-red-500 transition-colors"
+                    className="w-11 h-11 flex items-center justify-center bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-red-500 transition-colors"
                     aria-label="Cerrar"
                 >
                     <X size={20} />
@@ -117,20 +155,32 @@ export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
 
             {/* Instructions */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-navy-800/80 backdrop-blur-sm rounded-lg px-4 py-2 text-sm text-navy-400 flex items-center gap-4">
-                <span>Scroll para zoom</span>
-                <span>Arrastra para mover</span>
-                <span>ESC para cerrar</span>
+                {coarse ? (
+                    <>
+                        <span>Toca para acercar</span>
+                        <span>Desliza para mover</span>
+                    </>
+                ) : (
+                    <>
+                        <span>Scroll para zoom</span>
+                        <span>Arrastra para mover</span>
+                        <span>ESC para cerrar</span>
+                    </>
+                )}
             </div>
 
             {/* Image Container */}
             <div
                 ref={containerRef}
-                className={`overflow-hidden max-w-[90vw] max-h-[85vh] ${zoomLevel > 1 ? 'cursor-grab' : 'cursor-zoom-in'} ${isDragging ? 'cursor-grabbing' : ''}`}
+                className={`overflow-hidden max-w-[90vw] max-h-[85vh] touch-none ${zoomLevel > 1 ? 'cursor-grab' : 'cursor-zoom-in'} ${isDragging ? 'cursor-grabbing' : ''}`}
                 onClick={(e) => { e.stopPropagation(); if (zoomLevel === 1) handleZoomIn(); }}
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseUp}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
             >
                 <img
                     src={image.src}

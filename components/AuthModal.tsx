@@ -438,7 +438,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
 
             <div className="flex items-center gap-4 my-6">
               <div className="flex-1 h-px bg-navy-700" aria-hidden="true"></div>
-              <span className="text-navy-500 text-sm">o</span>
+              <span className="text-navy-400 text-sm">o</span>
               <div className="flex-1 h-px bg-navy-700" aria-hidden="true"></div>
             </div>
 

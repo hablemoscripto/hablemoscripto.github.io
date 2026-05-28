@@ -23,6 +23,7 @@ const NewsletterAdmin: React.FC = () => {
   const [sendStatus, setSendStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [checkingAdmin, setCheckingAdmin] = useState(true);
+  const [copyStatus, setCopyStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -102,14 +103,19 @@ const NewsletterAdmin: React.FC = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  const copyAllEmails = () => {
+  const copyAllEmails = async () => {
     const emails = subscribers
       .filter(sub => sub.is_active)
       .map(sub => sub.email)
       .join(', ');
 
-    navigator.clipboard.writeText(emails);
-    alert('Emails copiados al portapapeles!');
+    try {
+      await navigator.clipboard.writeText(emails);
+      setCopyStatus({ type: 'success', message: 'Emails copiados al portapapeles.' });
+    } catch {
+      setCopyStatus({ type: 'error', message: 'No se pudieron copiar los emails. Cópialos manualmente.' });
+    }
+    setTimeout(() => setCopyStatus(null), 4000);
   };
 
   const handleSendNewsletter = async () => {
@@ -286,9 +292,23 @@ const NewsletterAdmin: React.FC = () => {
           </button>
         </div>
 
+        {/* Copy-to-clipboard feedback */}
+        {copyStatus && (
+          <div
+            role="alert"
+            className={`rounded-xl p-4 mb-8 border ${
+              copyStatus.type === 'success'
+                ? 'bg-green-500/10 border-green-500/20 text-green-400'
+                : 'bg-red-500/10 border-red-500/20 text-red-400'
+            }`}
+          >
+            {copyStatus.message}
+          </div>
+        )}
+
         {/* Error Display */}
         {error && (
-          <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-8">
+          <div role="alert" className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-8">
             <p className="text-red-400">{error}</p>
           </div>
         )}
@@ -307,7 +327,7 @@ const NewsletterAdmin: React.FC = () => {
               <tbody className="divide-y divide-navy-800">
                 {subscribers.length === 0 ? (
                   <tr>
-                    <td colSpan={3} className="px-6 py-8 text-center text-navy-500">
+                    <td colSpan={3} className="px-6 py-8 text-center text-navy-400">
                       No hay suscriptores aún
                     </td>
                   </tr>
@@ -397,7 +417,7 @@ const NewsletterAdmin: React.FC = () => {
                   rows={12}
                   className="w-full px-4 py-3 bg-navy-800 border border-navy-700 rounded-xl text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors resize-none font-mono text-sm"
                 />
-                <p className="text-xs text-navy-500 mt-2">
+                <p className="text-xs text-navy-400 mt-2">
                   Tip: Tu email se enviará con el template de Hablemos Cripto (header, footer, etc.)
                 </p>
               </div>
