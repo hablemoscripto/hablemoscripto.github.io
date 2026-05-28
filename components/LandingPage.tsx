@@ -110,14 +110,9 @@ const LandingPage: React.FC = () => {
         <meta name="description" content="Plataforma educativa de criptomonedas en español para Latinoamérica. Aprende Bitcoin, blockchain, DeFi y trading con cursos estructurados, quizzes y asistente IA." />
         <meta property="og:title" content="Hablemos Cripto — Aprende Bitcoin y Criptomonedas desde Cero" />
         <meta property="og:description" content="Plataforma educativa de criptomonedas en español para Latinoamérica. Aprende Bitcoin, blockchain, DeFi y trading con cursos estructurados." />
-        <meta property="og:image" content="https://hablemoscripto.io/images/og-cover-optimized.png" />
         <meta property="og:url" content="https://hablemoscripto.io" />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="es_LA" />
-        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Hablemos Cripto — Aprende Bitcoin y Criptomonedas desde Cero" />
         <meta name="twitter:description" content="Plataforma educativa de criptomonedas en español para Latinoamérica." />
-        <meta name="twitter:image" content="https://hablemoscripto.io/images/og-cover-optimized.png" />
         <link rel="canonical" href="https://hablemoscripto.io" />
       </Helmet>
       <Navbar />
@@ -202,7 +197,7 @@ const LandingPage: React.FC = () => {
           <PricingSection
             variant="public"
             onPublicCta={handleNavigateToEducation}
-            onSelectPlan={(planId) => {
+            onSelectPlan={() => {
               handleNavigateToEducation();
             }}
           />

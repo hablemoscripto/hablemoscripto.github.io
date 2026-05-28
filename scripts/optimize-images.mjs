@@ -87,7 +87,7 @@ async function compressImages() {
   // MadLad.jpg → WebP at multiple sizes
   for (const width of [450, 900]) {
     const suffix = width === 450 ? '' : '-2x';
-    await sharp(`${IMAGES}/MadLad.jpg`)
+    await sharp(`${SOURCE}/MadLad.jpg`)
       .resize(width, null, { withoutEnlargement: true })
       .webp({ quality: 80 })
       .toFile(`${IMAGES}/MadLad${suffix}.webp`);
@@ -97,7 +97,7 @@ async function compressImages() {
 
   // banner.jpg → WebP at multiple sizes (hero background)
   for (const width of [768, 1280, 1920]) {
-    await sharp(`${IMAGES}/banner.jpg`)
+    await sharp(`${SOURCE}/banner.jpg`)
       .resize(width, null, { withoutEnlargement: true })
       .webp({ quality: 75 })
       .toFile(`${IMAGES}/banner-${width}w.webp`);

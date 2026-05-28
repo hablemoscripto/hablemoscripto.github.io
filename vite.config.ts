@@ -1,10 +1,9 @@
 import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
-export default defineConfig(({ mode }) => {
-    const env = loadEnv(mode, '.', '');
+export default defineConfig(() => {
     return {
       base: '/',
       server: {
@@ -23,8 +22,10 @@ export default defineConfig(({ mode }) => {
             'icons/icon-512x512.png',
           ],
           workbox: {
-            globPatterns: ['**/*.{js,css,html,webp,woff2,svg}'],
-            globIgnores: ['**/og-cover.png', '**/MadLad.jpg', '**/banner.jpg'],
+            // Precache only the app shell + fonts. Lesson images (~8 MB across 76 entries)
+            // are served on demand via the /images/lessons/ runtimeCaching rule below —
+            // precaching them all on install is wasteful for the LATAM mobile audience.
+            globPatterns: ['**/*.{js,css,html,woff2,svg}'],
             maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
             runtimeCaching: [
               {
@@ -83,10 +84,6 @@ export default defineConfig(({ mode }) => {
           },
         })
       ],
-      define: {
-        'import.meta.env.VITE_SUPABASE_URL': JSON.stringify(env.VITE_SUPABASE_URL),
-        'import.meta.env.VITE_SUPABASE_ANON_KEY': JSON.stringify(env.VITE_SUPABASE_ANON_KEY)
-      },
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '.'),
