@@ -120,11 +120,24 @@ interface LessonCandidate {
   description: string | null
 }
 
+// PostgREST treats ,()*: as structural characters inside the .or() filter DSL,
+// so a raw user message could break out of the ilike pattern. Whitelist to
+// letters/numbers/spaces/Spanish accents and cap length to keep keyword search
+// working without allowing filter injection.
+function sanitizeKeywordQuery(query: string): string {
+  return query
+    .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 120)
+}
+
 async function getKeywordCandidates(
   supabase: any,
   query: string
 ): Promise<LessonCandidate[]> {
-  if (!query || query.trim().length < 3) {
+  const safeQuery = sanitizeKeywordQuery(query)
+  if (safeQuery.length < 3) {
     return []
   }
 
@@ -133,7 +146,7 @@ async function getKeywordCandidates(
   const { data, error } = await supabase
     .from('lessons')
     .select('id, title, description')
-    .or(`title.ilike.%${query}%,description.ilike.%${query}%`)
+    .or(`title.ilike.%${safeQuery}%,description.ilike.%${safeQuery}%`)
     .limit(MAX_KEYWORD_RESULTS)
 
   if (error) {

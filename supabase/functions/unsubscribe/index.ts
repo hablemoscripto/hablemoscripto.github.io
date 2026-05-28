@@ -8,7 +8,29 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-async function verifyHmac(email: string, token: string, secret: string): Promise<boolean> {
+// Compare two byte arrays without short-circuiting, so verification time does
+// not leak how many leading bytes matched (timing-attack resistance).
+function constantTimeEqual(a: Uint8Array, b: Uint8Array): boolean {
+  if (a.length !== b.length) return false
+  let diff = 0
+  for (let i = 0; i < a.length; i++) {
+    diff |= a[i] ^ b[i]
+  }
+  return diff === 0
+}
+
+function hexToBytes(hex: string): Uint8Array | null {
+  if (hex.length % 2 !== 0 || !/^[0-9a-f]*$/i.test(hex)) return null
+  const bytes = new Uint8Array(hex.length / 2)
+  for (let i = 0; i < bytes.length; i++) {
+    bytes[i] = parseInt(hex.slice(i * 2, i * 2 + 2), 16)
+  }
+  return bytes
+}
+
+// Verifies an unsubscribe token over `${emailLower}:${exp}`. Signing side lives
+// in send-newsletter/index.ts — keep the signed message and secret in sync.
+async function verifyHmac(email: string, exp: number, token: string, secret: string): Promise<boolean> {
   const encoder = new TextEncoder()
   const key = await crypto.subtle.importKey(
     'raw',
@@ -17,9 +39,14 @@ async function verifyHmac(email: string, token: string, secret: string): Promise
     false,
     ['sign']
   )
-  const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(email))
-  const expected = Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('')
-  return expected === token
+  const message = `${email.toLowerCase()}:${exp}`
+  const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(message))
+  const expected = new Uint8Array(signature)
+
+  const provided = hexToBytes(token)
+  if (!provided) return false
+
+  return constantTimeEqual(expected, provided)
 }
 
 serve(async (req) => {
@@ -31,7 +58,12 @@ serve(async (req) => {
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-    const hmacSecret = Deno.env.get('WOMPI_EVENTS_SECRET') || supabaseServiceKey
+    // Must match the fallback chain in send-newsletter/index.ts. Set
+    // UNSUBSCRIBE_HMAC_SECRET in production; the others are legacy fallbacks.
+    const hmacSecret =
+      Deno.env.get('UNSUBSCRIBE_HMAC_SECRET') ||
+      Deno.env.get('WOMPI_EVENTS_SECRET') ||
+      supabaseServiceKey
 
     const { email, token } = await req.json()
 
@@ -49,8 +81,36 @@ serve(async (req) => {
       )
     }
 
+    // Token is `${exp}.${hmacHex}` — self-contained so the unsubscribe page only
+    // needs to forward `token`. Split exp back out before verifying.
+    const dotIndex = token.indexOf('.')
+    if (dotIndex <= 0) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid unsubscribe token' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    const expSeconds = Number.parseInt(token.slice(0, dotIndex), 10)
+    const mac = token.slice(dotIndex + 1)
+    if (!Number.isFinite(expSeconds) || expSeconds <= 0 || !mac) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid unsubscribe token' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    if (Math.floor(Date.now() / 1000) > expSeconds) {
+      return new Response(
+        JSON.stringify({ error: 'Unsubscribe link has expired' }),
+        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    const emailLower = email.toLowerCase()
+
     // Verify HMAC token to prevent unauthorized unsubscriptions
-    const isValid = await verifyHmac(email.toLowerCase(), token, hmacSecret)
+    const isValid = await verifyHmac(emailLower, expSeconds, mac, hmacSecret)
     if (!isValid) {
       return new Response(
         JSON.stringify({ error: 'Invalid unsubscribe token' }),
@@ -63,7 +123,7 @@ serve(async (req) => {
     const { error } = await supabaseClient
       .from('newsletter_subscribers')
       .update({ is_active: false })
-      .eq('email', email.toLowerCase())
+      .eq('email', emailLower)
 
     if (error) {
       console.error('Unsubscribe error:', error)

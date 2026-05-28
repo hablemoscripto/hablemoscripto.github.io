@@ -44,13 +44,22 @@ const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'
 const SOLANA_RPC_URL = Deno.env.get('SOLANA_RPC_URL') || 'https://api.mainnet-beta.solana.com'
 const MAX_TX_AGE_SECONDS = 30 * 60 // 30 minutes
 
+// Server-side canonical USDC prices per tier. Never trust the client-supplied
+// expectedAmount — derive from here so a forged amount can't unlock a tier
+// cheaply. Mirrors the COP/USD lifetime catalog (Inversor 99, Cripto Experto 249).
+const TIER_USDC_AMOUNT: Record<string, number> = {
+  premium: 99,
+  vip: 249,
+}
+
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
 
 interface VerifyRequest {
   transactionSignature: string
-  expectedAmount: number
+  // Ignored server-side; amount is derived from tier via TIER_USDC_AMOUNT.
+  expectedAmount?: number
   tier: string
 }
 
@@ -75,13 +84,19 @@ interface ParsedInstruction {
   }
 }
 
+interface TokenBalance {
+  accountIndex: number
+  mint: string
+  owner?: string
+}
+
 interface SolanaTransaction {
   slot: number
   blockTime: number | null
   meta: {
     err: unknown
-    preTokenBalances?: unknown[]
-    postTokenBalances?: unknown[]
+    preTokenBalances?: TokenBalance[]
+    postTokenBalances?: TokenBalance[]
   } | null
   transaction: {
     message: {
@@ -140,6 +155,31 @@ async function fetchTransaction(
  * Walk all instructions (top-level + inner) looking for a USDC transfer
  * to the payment wallet with the expected amount.
  */
+// The plain `transfer` instruction does not carry the token mint, so we resolve
+// the mint of the destination token account from the transaction's token-balance
+// metadata. This lets us reject a non-USDC token with the same 6 decimals that
+// would otherwise satisfy a plain transfer.
+function destinationAccountIsUsdc(
+  tx: SolanaTransaction,
+  destination: string,
+): boolean {
+  const accountKeys = tx.transaction.message.accountKeys
+  const balances = [
+    ...(tx.meta?.postTokenBalances ?? []),
+    ...(tx.meta?.preTokenBalances ?? []),
+  ]
+
+  for (const balance of balances) {
+    const acct = accountKeys[balance.accountIndex]?.pubkey
+    if (acct === destination) {
+      return balance.mint === USDC_MINT
+    }
+  }
+
+  // Mint could not be resolved — fail closed.
+  return false
+}
+
 function findMatchingTransfer(
   tx: SolanaTransaction,
   paymentAddress: string,
@@ -147,7 +187,7 @@ function findMatchingTransfer(
 ): boolean {
   // Check top-level instructions
   for (const ix of tx.transaction.message.instructions) {
-    if (isMatchingTransfer(ix, paymentAddress, expectedAmountRaw)) {
+    if (isMatchingTransfer(tx, ix, paymentAddress, expectedAmountRaw)) {
       return true
     }
   }
@@ -161,7 +201,7 @@ function findMatchingTransfer(
   if (innerInstructions) {
     for (const inner of innerInstructions) {
       for (const ix of inner.instructions) {
-        if (isMatchingTransfer(ix, paymentAddress, expectedAmountRaw)) {
+        if (isMatchingTransfer(tx, ix, paymentAddress, expectedAmountRaw)) {
           return true
         }
       }
@@ -172,6 +212,7 @@ function findMatchingTransfer(
 }
 
 function isMatchingTransfer(
+  tx: SolanaTransaction,
   ix: ParsedInstruction,
   paymentAddress: string,
   expectedAmountRaw: string,
@@ -184,7 +225,8 @@ function isMatchingTransfer(
   if (type === 'transfer') {
     return (
       info.destination === paymentAddress &&
-      info.amount === expectedAmountRaw
+      info.amount === expectedAmountRaw &&
+      destinationAccountIsUsdc(tx, paymentAddress)
     )
   }
 
@@ -249,14 +291,22 @@ serve(async (req) => {
     }
 
     // ---- Parse body ----
+    // expectedAmount from the client is intentionally ignored — the amount is
+    // derived server-side from the tier (see TIER_USDC_AMOUNT) so a forged
+    // amount cannot unlock a tier for less than its real price.
     const body: VerifyRequest = await req.json()
-    const { transactionSignature, expectedAmount, tier } = body
+    const { transactionSignature, tier } = body
 
-    if (!transactionSignature || !expectedAmount || !tier) {
+    if (!transactionSignature || !tier) {
       return jsonResponse({ error: 'Faltan campos obligatorios' }, 400)
     }
 
     if (!['premium', 'vip'].includes(tier)) {
+      return jsonResponse({ error: 'Tier no valido' }, 400)
+    }
+
+    const expectedAmount = TIER_USDC_AMOUNT[tier]
+    if (!expectedAmount) {
       return jsonResponse({ error: 'Tier no valido' }, 400)
     }
 

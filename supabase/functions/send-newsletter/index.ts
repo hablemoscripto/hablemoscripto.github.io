@@ -46,7 +46,12 @@ interface SendNewsletterRequest {
   emails: string[]
 }
 
-async function generateHmac(email: string, secret: string): Promise<string> {
+// Token expiry — 90 days. Must match the verify window in unsubscribe/index.ts.
+const UNSUBSCRIBE_TOKEN_TTL_SECONDS = 90 * 24 * 60 * 60
+
+// Sign over `${emailLower}:${exp}` so the token can't be replayed past expiry
+// and stays compatible with the unsubscribe verifier (same canonical email).
+async function generateHmac(email: string, exp: number, secret: string): Promise<string> {
   const encoder = new TextEncoder()
   const key = await crypto.subtle.importKey(
     'raw',
@@ -55,12 +60,17 @@ async function generateHmac(email: string, secret: string): Promise<string> {
     false,
     ['sign']
   )
-  const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(email))
+  const message = `${email.toLowerCase()}:${exp}`
+  const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(message))
   return Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('')
 }
 
 async function buildEmailHtml(content: string, recipientEmail: string, siteUrl: string, hmacSecret: string): Promise<string> {
-  const token = await generateHmac(recipientEmail, hmacSecret)
+  const exp = Math.floor(Date.now() / 1000) + UNSUBSCRIBE_TOKEN_TTL_SECONDS
+  const mac = await generateHmac(recipientEmail, exp, hmacSecret)
+  // Embed exp in the token (`exp.mac`) so the self-contained token survives a
+  // client that only forwards `token`; the unsubscribe function splits it back.
+  const token = `${exp}.${mac}`
   const unsubscribeUrl = `${siteUrl}/unsubscribe?email=${encodeURIComponent(recipientEmail)}&token=${token}`
   return `<!DOCTYPE html>
 <html>
@@ -202,8 +212,14 @@ serve(async (req) => {
     // Sanitize content before embedding in HTML template
     const sanitizedContent = sanitizeHtml(content)
 
-    // Use the events secret as HMAC key for unsubscribe tokens
-    const hmacSecret = Deno.env.get('WOMPI_EVENTS_SECRET') || supabaseServiceKey
+    // Dedicated secret for unsubscribe-token HMAC. Falls back to the Wompi
+    // events secret (then the service key) only so existing deployments keep
+    // working — set UNSUBSCRIBE_HMAC_SECRET in production. Must match the
+    // fallback chain in unsubscribe/index.ts or tokens won't verify.
+    const hmacSecret =
+      Deno.env.get('UNSUBSCRIBE_HMAC_SECRET') ||
+      Deno.env.get('WOMPI_EVENTS_SECRET') ||
+      supabaseServiceKey
 
     // Send individual emails via Resend REST API
     for (const email of emails) {

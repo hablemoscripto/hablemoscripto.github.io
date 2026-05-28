@@ -58,8 +58,19 @@ llega a mi bandeja.</p>
 // Sender
 // ---------------------------------------------------------------------------
 
+// Buyer/user name is attacker-controllable and gets interpolated into BODY_HTML,
+// which is sent as an HTML email — escape before substitution to prevent injection.
+function escapeHtml(input: string): string {
+  return input
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 function renderTemplate(template: string, values: Record<string, string>): string {
-  return template.replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] ?? '')
+  return template.replace(/\{\{(\w+)\}\}/g, (_, key) => escapeHtml(values[key] ?? ''))
 }
 
 function firstName(fullName?: string | null): string {
