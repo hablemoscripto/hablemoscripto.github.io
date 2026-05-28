@@ -18,6 +18,9 @@ marketing/
 # Scratch / screenshots — local only
 temp/
 
+# Supabase CLI local state (contains pooler URL, project refs)
+supabase/.temp/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
