@@ -88,6 +88,27 @@ export interface LessonData {
 }
 
 /**
+ * Final-lesson quizzes in courseData store multiple-choice answers as a
+ * letter ('a'-'d'), but the Quiz component compares the chosen option's
+ * numeric index against correctAnswer. Without this conversion every
+ * multiple-choice answer scores as wrong, no quiz reaches the 70% pass
+ * threshold, and no lesson can ever be completed. Mirrors the letter->index
+ * logic in dailyReviewService. Only multiple-choice answers are letters;
+ * true-false (boolean) and fill-blank (string) answers are left untouched.
+ */
+function resolveCorrectAnswer(
+  type: string,
+  correctAnswer: number | string | boolean | undefined,
+  optionCount: number
+): number | string | boolean | undefined {
+  if (type !== 'multiple-choice' || typeof correctAnswer !== 'string') {
+    return correctAnswer;
+  }
+  const index = correctAnswer.trim().toLowerCase().charCodeAt(0) - 97; // 'a' = 0
+  return index >= 0 && index < optionCount ? index : correctAnswer;
+}
+
+/**
  * Get a single lesson by ID from the bundled course data.
  * No network request — instant, always in sync with the codebase.
  */
@@ -118,9 +139,10 @@ export function fetchLessonById(lessonId: number): LessonData | null {
         // courseData quiz questions are already in the right shape —
         // they have type, options, correctAnswer, etc. Just pass through
         // with option normalization for backward compatibility.
+        const type = q.type || 'multiple-choice';
         const base = {
           id: q.id,
-          type: q.type || 'multiple-choice',
+          type,
           question: q.question,
           explanation: q.explanation || '',
           hint: q.hint,
@@ -132,11 +154,17 @@ export function fetchLessonById(lessonId: number): LessonData | null {
           typeof opt === 'string' ? opt : opt.text ?? ''
         );
 
+        const correctAnswer = resolveCorrectAnswer(
+          type,
+          q.correctAnswer,
+          options?.length ?? 0
+        );
+
         // Return the full question object preserving all type-specific fields
         return {
           ...base,
           ...(options && { options }),
-          ...(q.correctAnswer !== undefined && { correctAnswer: q.correctAnswer }),
+          ...(correctAnswer !== undefined && { correctAnswer }),
           ...(q.correctAnswers && { correctAnswers: q.correctAnswers }),
           ...(q.items && { items: q.items }),
           ...(q.correctOrder && { correctOrder: q.correctOrder }),

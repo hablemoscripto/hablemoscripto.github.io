@@ -276,13 +276,27 @@ async function seed() {
         questionIndex,
         question,
       ] of lessonData.quiz.questions.entries()) {
+        // Mirror the read-path normalization (lessonService.resolveCorrectAnswer):
+        // flatten options to string[] and convert letter answers ('a'-'d') to
+        // the numeric option index so a future DB-backed read path scores
+        // multiple-choice answers correctly.
+        const options = (question.options ?? []).map((opt: unknown) =>
+          typeof opt === 'string' ? opt : (opt as { text?: string }).text ?? ''
+        );
+        const type = question.type ?? 'multiple-choice';
+        let correctAnswer = question.correctAnswer;
+        if (type === 'multiple-choice' && typeof correctAnswer === 'string') {
+          const index = correctAnswer.trim().toLowerCase().charCodeAt(0) - 97;
+          if (index >= 0 && index < options.length) correctAnswer = index;
+        }
+
         const { error: questionError } = await supabase
           .from('quiz_questions')
           .insert({
             quiz_id: quizData.id,
             question: question.question,
-            options: question.options,
-            correct_answer: question.correctAnswer,
+            options,
+            correct_answer: correctAnswer,
             explanation: question.explanation,
             order: questionIndex,
           });
