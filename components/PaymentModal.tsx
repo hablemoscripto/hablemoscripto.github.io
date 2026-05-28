@@ -240,6 +240,26 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
           <p className="text-[11px] text-navy-400 text-center">
             Pagos procesados de forma segura por Wompi.
           </p>
+
+          {isHighTier && (
+            <div className="pt-4 border-t border-navy-700">
+              <p className="text-xs text-navy-400 text-center mb-2">
+                Como Cripto Experto tendrás prioridad para sesiones de mentoría.
+              </p>
+              <button
+                onClick={() => {
+                  onClose();
+                  // Scroll to the mentoría section on the page
+                  setTimeout(() => {
+                    document.getElementById('mentoria')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  }, 300);
+                }}
+                className="w-full text-sm py-2.5 rounded-xl border border-brand-500/40 text-brand-400 hover:bg-brand-500/5 font-medium transition-colors"
+              >
+                Conocer más sobre Mentoría Personalizada
+              </button>
+            </div>
+          )}
         </div>
       )}
 
