@@ -172,6 +172,31 @@ serve(async (req) => {
       )
     }
 
+    // Defense-in-depth: the event is signature-verified, but never grant premium
+    // unless the paid amount and currency match the order we created. Guards against
+    // a valid-but-stale/partial transaction being replayed against a real reference.
+    // A mismatch is permanent, so keep the dedupe marker and return 2xx — retrying
+    // can't fix it and we don't want Wompi hammering the endpoint forever.
+    if (
+      transaction.status === 'APPROVED' &&
+      (transaction.amount_in_cents !== Number(payment.amount_in_cents) ||
+        transaction.currency !== payment.currency)
+    ) {
+      console.error(
+        `Amount/currency mismatch for ${transaction.reference}: ` +
+          `got ${transaction.amount_in_cents} ${transaction.currency}, ` +
+          `expected ${payment.amount_in_cents} ${payment.currency} — refusing upgrade`
+      )
+      await supabase
+        .from('payments')
+        .update({ status: 'AMOUNT_MISMATCH' })
+        .eq('wompi_reference', transaction.reference)
+      return new Response(
+        JSON.stringify({ received: true, status: 'AMOUNT_MISMATCH' }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
     if (transaction.status === 'APPROVED' && payment.user_id) {
       // 'premium' (Inversor / inversor_lifetime) or 'vip' (Cripto Experto /
       // vip_lifetime). The RPC persists this as user_profiles.premium_tier.

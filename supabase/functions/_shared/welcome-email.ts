@@ -22,37 +22,125 @@ interface WelcomeEmailParams {
 // ---------------------------------------------------------------------------
 // EMAIL CONTENT — the part Sebastián owns.
 //
-// This is the message every new Miembro Fundador receives. It should sound
-// like CBas wrote it personally, not like a SaaS auto-responder.
-// Use the placeholders below — they're substituted at send time:
+// Two separate messages, one per paid tier. Both should sound like CBas wrote
+// them personally, not like a SaaS auto-responder.
+//   premium → Inversor ($99)
+//   vip     → Cripto Experto ($249)
+// Placeholders substituted at send time:
 //   {{name}}      → first name (or "fundador" if name unknown)
 //   {{planName}}  → "Inversor" or "Cripto Experto"
 // ---------------------------------------------------------------------------
 
-const SUBJECT = 'Bienvenido, miembro Fundador de Hablemos Cripto 👋'
+// Subject line per tier — they can differ or be identical.
+const SUBJECT_BY_TIER: Record<'premium' | 'vip', string> = {
+  premium: '¡Bienvenido a Hablemos Cripto!',
+  vip: 'Bienvenido, miembro Fundador de Hablemos Cripto 👋',
+}
 
-// REPLACE THE BODY BELOW WITH YOUR VOICE BEFORE DEPLOYING.
+// REPLACE BOTH BODIES BELOW WITH YOUR VOICE BEFORE DEPLOYING.
 // HTML is allowed (basic tags: p, strong, em, a, ul, li, br).
-const BODY_HTML = `
+const BODY_HTML_BY_TIER: Record<'premium' | 'vip', string> = {
+  // ======================= INVERSOR ($99) =======================
+  premium: `
 <p>Hola {{name}},</p>
 
-<p>Te escribo personalmente para darte la bienvenida. Acabas de unirte como
-<strong>Miembro Fundador</strong> al plan <strong>{{planName}}</strong>, y
-quiero que sepas que esto significa algo para mí.</p>
+<p><strong>¡Bienvenido a Hablemos Cripto!</strong></p>
 
-<p><em>[Reemplaza este párrafo con tu mensaje personal:
-qué significa para ti tener fundadores, qué pueden esperar en las
-próximas semanas, cómo contactarte, etc.]</em></p>
+<p>Acabas de asegurar tu <strong>acceso de por vida</strong> al plan
+{{planName}}: todo el contenido, sin renovaciones y sin sorpresas. Me alegra
+muchísimo que hayas tomado la decisión de invertir en una educación que durará
+para siempre.</p>
 
-<p>Tienes acceso de por vida a todo el contenido del plan. Sin renovaciones,
-sin sorpresas. Si alguna vez quieres responderme directamente, este correo
-llega a mi bandeja.</p>
+<p>Llevo alrededor de 8 años en el mundo de las criptomonedas y, la verdad,
+hubiera soñado con tener acceso a una plataforma como esta cuando comencé:
+acceso a una persona creíble, con años de experiencia, que ha vivido todas las
+experiencias posibles en el juego. Desde soñar con volverme millonario en poco
+tiempo y fallar, hasta enamorarme de la libertad tan única que ofrecen las
+criptomonedas en todo sentido.</p>
 
-<p>Gracias por confiar en este proyecto desde el inicio.</p>
+<p>Hay muchas personas y grupos que prometen millones en poco tiempo y que,
+claro, causan emoción. Pero la mayoría o todos se quedan ahí: promesas de aire
+que nunca se convierten en realidad, que se aprovechan de las emociones y la
+necesidad de la gente. Por eso construí esto. Es un tema que me apasiona
+demasiado, me ha cambiado la vida y me encanta compartir lo que sé.</p>
 
-<p>— CBas<br>
+<p>Si estás aquí, es porque eres uno de esos interesados en conocer de verdad
+este mundo. Te felicito: invertir en educación nunca es una mala idea, y menos
+cuando se trata de una tecnología tan novedosa.</p>
+
+<p>Te llevaré de principiante a experto para que te sientas cómodo y seguro en
+el mundo de las criptomonedas. Aquí no te prometeré volverte millonario a corto
+plazo, pero sí la posibilidad de crear tu propio camino, lo más seguro posible.
+Hasta dónde llegues y cuánto éxito alcances dependerá de ti.</p>
+
+<p>Espero que disfrutes de todo el contenido de la plataforma. Me desvelé muchas
+noches asegurándome de que fuera de la mejor calidad posible. Empieza aquí:</p>
+
+<p>👉 <a href="https://www.hablemoscripto.io/education">https://www.hablemoscripto.io/education</a></p>
+
+<p>Nos vemos adentro,<br>
+CBas<br>
 <a href="https://hablemoscripto.io">hablemoscripto.io</a></p>
-`
+`,
+  // ==================== CRIPTO EXPERTO ($249) ===================
+  vip: `
+<p>Hola {{name}},</p>
+
+<p><strong>¡Bienvenido a Hablemos Cripto!</strong></p>
+
+<p>Acabas de asegurar tu <strong>acceso de por vida</strong> al plan
+{{planName}}: todo el contenido de la plataforma, sin renovaciones y sin
+sorpresas. Pero elegiste el plan que, para mí, tiene lo más valioso de todo.</p>
+
+<p>Como miembro Cripto Experto entras a la comunidad, donde tienes acceso
+directo a mí y a un grupo de personas que están en el mismo camino que tú. Te
+soy sincero: tener algo así cuando yo empecé me hubiera hecho una diferencia
+enorme. Aprender solo es lento y confuso; hacerlo rodeado de gente con la que
+puedes preguntar, debatir y compartir lo cambia todo.</p>
+
+<p>Cada semana haré una transmisión en vivo dentro del Discord donde desgloso el
+newsletter de la semana y respondo tus preguntas en una sesión de Q&amp;A. Es el
+espacio para resolver tus dudas en tiempo real y entender lo que está pasando en
+el mercado conmigo.</p>
+
+<p>Y si en algún momento te interesa una mentoría uno a uno, como miembro Cripto
+Experto tienes la prioridad: estás primero en la fila.</p>
+
+<p>Tu acceso a la comunidad está aquí. Únete al Discord y preséntate cuando
+quieras:</p>
+
+<p>👉 <a href="https://discord.gg/CQYyvzQb65">https://discord.gg/CQYyvzQb65</a></p>
+
+<p>Llevo alrededor de 8 años en el mundo de las criptomonedas y he vivido todas
+las experiencias posibles en el juego: desde soñar con volverme millonario en
+poco tiempo y fallar, hasta enamorarme de la libertad tan única que ofrecen las
+criptomonedas en todo sentido.</p>
+
+<p>Hay muchas personas y grupos que prometen millones en poco tiempo y que,
+claro, causan emoción. Pero la mayoría o todos se quedan ahí: promesas de aire
+que nunca se convierten en realidad, que se aprovechan de las emociones y la
+necesidad de la gente. Por eso construí esto. Es un tema que me apasiona
+demasiado, me ha cambiado la vida y me encanta compartir lo que sé.</p>
+
+<p>Si estás aquí, es porque eres uno de esos interesados en conocer de verdad
+este mundo. Te felicito: invertir en educación nunca es una mala idea, y menos
+cuando se trata de una tecnología tan novedosa.</p>
+
+<p>Te llevaré de principiante a experto para que te sientas cómodo y seguro en
+el mundo de las criptomonedas. Aquí no te prometeré volverte millonario a corto
+plazo, pero sí la posibilidad de crear tu propio camino, lo más seguro posible.
+Hasta dónde llegues y cuánto éxito alcances dependerá de ti.</p>
+
+<p>Espero que disfrutes de todo el contenido de la plataforma. Me desvelé muchas
+noches asegurándome de que fuera de la mejor calidad posible. Empieza aquí:</p>
+
+<p>👉 <a href="https://www.hablemoscripto.io/education">https://www.hablemoscripto.io/education</a></p>
+
+<p>Nos vemos adentro,<br>
+CBas<br>
+<a href="https://hablemoscripto.io">hablemoscripto.io</a></p>
+`,
+}
 
 // ---------------------------------------------------------------------------
 // Sender
@@ -104,7 +192,9 @@ export async function sendFundadorWelcome(params: WelcomeEmailParams): Promise<v
   const planName = TIER_PLAN_NAMES[tier] ?? tier
   const values = { name: firstName(name), planName }
 
-  const innerHtml = renderTemplate(BODY_HTML, values)
+  const subject = SUBJECT_BY_TIER[tier] ?? SUBJECT_BY_TIER.premium
+  const body = BODY_HTML_BY_TIER[tier] ?? BODY_HTML_BY_TIER.premium
+  const innerHtml = renderTemplate(body, values)
   const fullHtml = buildHtmlEmail(innerHtml)
 
   try {
@@ -117,7 +207,7 @@ export async function sendFundadorWelcome(params: WelcomeEmailParams): Promise<v
       body: JSON.stringify({
         from: FROM_ADDRESS,
         to: [to],
-        subject: SUBJECT,
+        subject,
         html: fullHtml,
         // Reply-to defaults to the From address; if you want replies to
         // bounce to a separate inbox, add `reply_to` here.

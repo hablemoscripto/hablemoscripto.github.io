@@ -212,14 +212,16 @@ serve(async (req) => {
     // Sanitize content before embedding in HTML template
     const sanitizedContent = sanitizeHtml(content)
 
-    // Dedicated secret for unsubscribe-token HMAC. Falls back to the Wompi
-    // events secret (then the service key) only so existing deployments keep
-    // working — set UNSUBSCRIBE_HMAC_SECRET in production. Must match the
-    // fallback chain in unsubscribe/index.ts or tokens won't verify.
-    const hmacSecret =
-      Deno.env.get('UNSUBSCRIBE_HMAC_SECRET') ||
-      Deno.env.get('WOMPI_EVENTS_SECRET') ||
-      supabaseServiceKey
+    // Dedicated secret for unsubscribe-token HMAC. Must match unsubscribe/index.ts.
+    // Never fall back to the service-role key — see the note there.
+    const hmacSecret = Deno.env.get('UNSUBSCRIBE_HMAC_SECRET') || ''
+    if (!hmacSecret) {
+      console.error('UNSUBSCRIBE_HMAC_SECRET not configured')
+      return new Response(
+        JSON.stringify({ error: 'Server configuration error' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
 
     // Send individual emails via Resend REST API
     for (const email of emails) {

@@ -58,12 +58,17 @@ serve(async (req) => {
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-    // Must match the fallback chain in send-newsletter/index.ts. Set
-    // UNSUBSCRIBE_HMAC_SECRET in production; the others are legacy fallbacks.
-    const hmacSecret =
-      Deno.env.get('UNSUBSCRIBE_HMAC_SECRET') ||
-      Deno.env.get('WOMPI_EVENTS_SECRET') ||
-      supabaseServiceKey
+    // Dedicated secret only. Must match send-newsletter/index.ts. Never fall back
+    // to the service-role key — reusing the most privileged credential as an HMAC
+    // secret couples unrelated secrets and widens its exposure.
+    const hmacSecret = Deno.env.get('UNSUBSCRIBE_HMAC_SECRET') || ''
+    if (!hmacSecret) {
+      console.error('UNSUBSCRIBE_HMAC_SECRET not configured')
+      return new Response(
+        JSON.stringify({ error: 'Server configuration error' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
 
     const { email, token } = await req.json()
 
