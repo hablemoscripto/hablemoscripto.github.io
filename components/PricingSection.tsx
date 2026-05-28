@@ -9,24 +9,22 @@ import {
 interface PricingSectionProps {
   variant?: 'authenticated' | 'public';
   entitlements?: UserEntitlements;
-  onSelectPlan?: (planId: 'intermedio' | 'fundador' | 'experto') => void;
+  onSelectPlan?: (planId: 'inversor' | 'experto') => void;
   onPublicCta?: () => void;
 }
 
-const COURSE_PLAN_ORDER: CourseTier[] = ['free', 'intermedio', 'fundador'];
+const COURSE_PLAN_ORDER: CourseTier[] = ['free', 'inversor', 'experto'];
 
 const COURSE_TIER_RANK: Record<CourseTier, number> = {
   free: 0,
-  intermedio: 1,
-  fundador: 2,
+  inversor: 1,
   experto: 2,
 };
 
 const PUBLIC_CTA_LABELS: Record<CourseTier, string> = {
   free: 'Comenzar gratis',
-  intermedio: 'Elegir Intermedio',
-  fundador: 'Unirme como Fundador',
-  experto: 'Elegir Experto',
+  inversor: 'Elegir Inversor',
+  experto: 'Convertirme en Cripto Experto',
 };
 
 const cardVariants = {
@@ -69,10 +67,10 @@ export default function PricingSection({
           Pago único. Acceso de por vida. Sin suscripciones.
         </p>
 
-        {/* Fundador scarcity notice */}
+        {/* Precio Fundador — honest launch pricing, no fake scarcity */}
         <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/30 text-sm">
           <span className="text-brand-400 font-medium">
-            Las primeras 100 personas que elijan el plan superior recibirán el estatus permanente de Fundador.
+            Precio Fundador: estos son los precios de lanzamiento. Avisaremos con 30 días de anticipación antes de cualquier aumento.
           </span>
         </div>
       </div>
@@ -83,7 +81,7 @@ export default function PricingSection({
           const isCurrent = isCurrentPlan(courseTier);
           const included = isIncluded(courseTier);
           const isFreePlan = courseTier === 'free';
-          const isTopTier = courseTier === 'fundador' || courseTier === 'experto';
+          const isTopTier = courseTier === 'experto';
 
           return (
             <motion.div
@@ -104,7 +102,7 @@ export default function PricingSection({
               {/* Background */}
               <div className="absolute inset-0 bg-navy-900/70 backdrop-blur-xl" />
 
-              {/* Premium border for Fundador */}
+              {/* Premium border for the top tier */}
               {isTopTier && (
                 <div className="absolute inset-0 rounded-3xl border border-brand-500/20" />
               )}
@@ -131,7 +129,7 @@ export default function PricingSection({
 
                     {isTopTier && (
                       <span className="rounded-full bg-brand-500 px-3 py-1 text-xs font-black uppercase tracking-[0.15em] text-navy-950">
-                        Estatus Fundador
+                        Recomendado
                       </span>
                     )}
                   </div>
@@ -142,12 +140,6 @@ export default function PricingSection({
                   <p className="mt-2 text-sm text-navy-300 leading-snug">
                     {plan.description}
                   </p>
-
-                  {courseTier === 'fundador' && (
-                    <p className="mt-3 text-xs text-brand-400 font-medium">
-                      Estatus de Fundador permanente, incluso cuando el plan pase a llamarse Experto.
-                    </p>
-                  )}
                 </div>
 
                 {/* Price */}
@@ -164,7 +156,7 @@ export default function PricingSection({
                   </div>
                   {!isFreePlan && plan.priceCopCents > 0 && (
                     <p className="text-sm text-navy-300 mt-1.5 font-medium">
-                      ≈ ${(plan.priceCopCents / 100).toLocaleString('es-CO')} COP
+                      ${(plan.priceCopCents / 100).toLocaleString('es-CO')} COP
                     </p>
                   )}
                   {!isFreePlan && (
@@ -214,7 +206,7 @@ export default function PricingSection({
                 ) : (
                   <button
                     onClick={() =>
-                      onSelectPlan?.(courseTier as 'intermedio' | 'fundador' | 'experto')
+                      onSelectPlan?.(courseTier as 'inversor' | 'experto')
                     }
                     className={`mt-auto w-full rounded-2xl py-3.5 text-sm font-bold transition-all duration-200 ${
                       isTopTier

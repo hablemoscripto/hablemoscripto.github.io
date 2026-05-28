@@ -20,7 +20,7 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { useEntitlements } from '../contexts/EntitlementsContext';
 import { getAllLessonsOrdered } from '../utils/courseUtils';
-import { hasCommunityAccess } from '../services/paymentService';
+import { getUserEntitlements, hasCommunityAccess } from '../services/paymentService';
 
 interface EducationPageProps {
   onNavigateHome?: () => void; // Optional for backward compat
@@ -60,8 +60,29 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const { entitlements, refresh: refreshEntitlements } = useEntitlements();
 
   // Pricing / payment state
-  const [selectedPlan, setSelectedPlan] = useState<'intermedio' | 'fundador' | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<'inversor' | 'experto' | null>(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+
+  // After a successful Wompi payment the webhook grants premium server-side and
+  // asynchronously, so the first entitlements read can still be stale. Poll the
+  // source of truth with backoff and sync the context once the tier upgrades.
+  const pollEntitlementsUntilUpgraded = useCallback(async () => {
+    if (!user?.id) return;
+    const delays = [1000, 2000, 3000, 5000, 5000, 8000];
+    for (const delay of delays) {
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      try {
+        const fresh = await getUserEntitlements(user.id);
+        if (fresh.courseTier !== 'free') {
+          await refreshEntitlements();
+          return;
+        }
+      } catch {
+        // transient; keep polling
+      }
+    }
+    await refreshEntitlements();
+  }, [refreshEntitlements, user]);
 
   // Ctrl+K / Cmd+K keyboard shortcut for search
   useEffect(() => {
@@ -264,7 +285,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
         <div className="container max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center text-xs font-black uppercase tracking-widest text-navy-400">
             <Link to="/" className="hover:text-brand-500 transition-colors">Inicio</Link>
-            <ChevronRight size={14} className="mx-2 text-navy-600" />
+            <ChevronRight size={14} className="mx-2 text-navy-400" />
             <span className="text-brand-500">Plataforma Educativa</span>
           </div>
 
@@ -295,7 +316,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                </div>
                <div className="flex flex-col leading-none">
                   <span className="text-white font-black text-sm tracking-tight">{totalCompletedLessons}</span>
-                  <span className="text-[10px] text-navy-500 font-bold uppercase tracking-tighter">Lecciones</span>
+                  <span className="text-[10px] text-navy-400 font-bold uppercase tracking-tighter">Lecciones</span>
                </div>
             </div>
           </div>
@@ -477,12 +498,12 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                         <Icon size={28} className="text-white" />
                       ) : (
                         <div className="relative">
-                          <Icon size={24} className="text-navy-600 opacity-50" />
-                          <Lock size={12} className="absolute -bottom-1 -right-1 text-navy-500" />
+                          <Icon size={24} className="text-navy-400 opacity-50" />
+                          <Lock size={12} className="absolute -bottom-1 -right-1 text-navy-400" />
                         </div>
                       )}
                     </div>
-                    <p className={`text-sm font-bold mb-2 ${unlocked ? 'text-white' : 'text-navy-500'}`}>
+                    <p className={`text-sm font-bold mb-2 ${unlocked ? 'text-white' : 'text-navy-400'}`}>
                       {def.title}
                     </p>
                     {unlocked ? (
@@ -490,7 +511,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                         {new Date(unlocked.unlockedAt!).toLocaleDateString('es-CO', { day: 'numeric', month: 'short' })}
                       </div>
                     ) : (
-                      <p className="text-[11px] text-navy-600 leading-tight">{def.description}</p>
+                      <p className="text-[11px] text-navy-400 leading-tight">{def.description}</p>
                     )}
                   </div>
                 );
@@ -502,17 +523,17 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           <PricingSection
             entitlements={entitlements}
             onSelectPlan={(planId) => {
-              setSelectedPlan(planId as 'intermedio' | 'fundador');
+              setSelectedPlan(planId);
               setShowPaymentModal(true);
             }}
           />
           <PaymentModal
             isOpen={showPaymentModal}
             onClose={() => setShowPaymentModal(false)}
-            planId={selectedPlan || 'intermedio'}
+            planId={selectedPlan || 'inversor'}
             onSuccess={() => {
               setShowPaymentModal(false);
-              refreshEntitlements();
+              void pollEntitlementsUntilUpgraded();
             }}
           />
 
@@ -523,7 +544,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
           <div className="container max-w-7xl mx-auto px-6 mt-8 mb-12">
             <div className="bg-navy-900/50 border border-white/5 rounded-xl p-6">
-              <p className="text-sm text-navy-500 leading-relaxed">
+              <p className="text-sm text-navy-400 leading-relaxed">
                 <strong>Aviso Educativo:</strong> Todo el contenido de esta plataforma es exclusivamente educativo y no constituye asesoramiento financiero, de inversión o trading. Las criptomonedas son activos de alto riesgo con volatilidad extrema. Existe riesgo de pérdida total de capital. Siempre realiza tu propia investigación (DYOR).
               </p>
             </div>

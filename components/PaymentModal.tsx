@@ -44,7 +44,7 @@ interface WompiResult {
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  planId: 'intermedio' | 'fundador' | 'experto';
+  planId: 'inversor' | 'experto';
   onSuccess: () => void;
 }
 
@@ -58,7 +58,7 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
   const plan = PRICING_PLANS[planId];
   const copPriceCents = plan.priceCopCents;
 
-  const isHighTier = planId === 'fundador' || planId === 'experto';
+  const isHighTier = planId === 'experto';
 
   const publicKey = import.meta.env.VITE_WOMPI_PUBLIC_KEY;
 
@@ -121,11 +121,6 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
     setErrorMessage('');
 
     try {
-      // TODO(wompi-integration, later phase): the create-payment Edge Function's
-      // PRODUCT_CATALOG still uses the legacy SKUs (inversor_lifetime /
-      // vip_lifetime). The card path is non-functional until that catalog is
-      // TODO: Update comment once backend catalog is fully migrated to new SKUs (intermedio_lifetime, fundador_lifetime, experto_lifetime)
-      // during the v2 refactor phase.
       const paymentData = await createPaymentWithSignature(
         plan.wompiSku,
         user.email || '',
@@ -242,7 +237,7 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
             )}
           </button>
 
-          <p className="text-[11px] text-navy-500 text-center">
+          <p className="text-[11px] text-navy-400 text-center">
             Pagos procesados de forma segura por Wompi.
           </p>
         </div>

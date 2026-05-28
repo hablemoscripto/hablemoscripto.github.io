@@ -2,13 +2,11 @@ import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { sendFundadorWelcome } from '../_shared/welcome-email.ts'
 
-// TODO(wompi-integration, Phase B): this handler still calls
-// upgrade_user_to_premium and derives a legacy 'premium' | 'vip' tier from
-// the SKU. Replace with PlanId-aware logic that applies plan.grantsCourseTier
-// and/or plan.grantsCommunityMonths per the spec in
-// services/paymentService.ts — see the TODO(wompi-integration) and
-// TODO(bridges) blocks there for event handling, signature verification,
-// and reference encoding.
+// Receives Wompi transaction.updated events, verifies the HMAC signature, and
+// on APPROVED upgrades the user via the upgrade_user_to_premium RPC with the
+// stored tier ('premium' = Inversor / inversor_lifetime, 'vip' = Cripto Experto
+// / vip_lifetime), then sends the Fundador welcome email (non-fatal).
+// Idempotent via the processed_webhook_events table.
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -175,9 +173,14 @@ serve(async (req) => {
     }
 
     if (transaction.status === 'APPROVED' && payment.user_id) {
+      // 'premium' (Inversor / inversor_lifetime) or 'vip' (Cripto Experto /
+      // vip_lifetime). The RPC persists this as user_profiles.premium_tier.
+      const tier: 'premium' | 'vip' =
+        payment.product_type === 'vip_lifetime' ? 'vip' : 'premium'
+
       const { error: upgradeError } = await supabase.rpc('upgrade_user_to_premium', {
         p_user_id: payment.user_id,
-        p_product_type: payment.product_type,
+        p_tier: tier,
       })
 
       if (upgradeError) {
@@ -191,16 +194,20 @@ serve(async (req) => {
 
       console.log('User upgraded to premium:', payment.user_id)
 
-      // Fundador welcome email — non-fatal if it fails, the upgrade already
-      // succeeded. Tier is derived from the SKU prefix.
-      const tier: 'premium' | 'vip' =
-        payment.product_type === 'vip_lifetime' ? 'vip' : 'premium'
-      await sendFundadorWelcome({
-        to: payment.customer_email ?? transaction.customer_email,
-        name: payment.customer_name ?? transaction.customer_data?.full_name,
-        tier,
-        resendApiKey: Deno.env.get('RESEND_API_KEY') ?? '',
-      })
+      // Fundador welcome email — strictly non-fatal: the upgrade already
+      // succeeded, so an email failure must never make the webhook return a
+      // non-2xx (Wompi would retry against an already-processed dedupe row and
+      // hit "Already processed" without re-running the upgrade).
+      try {
+        await sendFundadorWelcome({
+          to: payment.customer_email ?? transaction.customer_email,
+          name: payment.customer_name ?? transaction.customer_data?.full_name,
+          tier,
+          resendApiKey: Deno.env.get('RESEND_API_KEY') ?? '',
+        })
+      } catch (emailError) {
+        console.error('Fundador welcome email failed (non-fatal):', emailError)
+      }
     }
 
     return new Response(

@@ -26,14 +26,9 @@ function isRateLimited(userId: string): boolean {
   return entry.count > RATE_LIMIT_MAX
 }
 
-// Canonical product prices — server is the source of truth for amounts.
-// MUST stay in sync with PRICING_PLANS in services/paymentService.ts.
-//
-// TODO(wompi-integration, Phase B): catalog still on legacy SKUs. Replace
-// with the v2 plan set (basico_lifetime, completo_lifetime, comunidad_annual,
-// acceso_total_bundle) — see PRICING_PLANS.wompiSku in paymentService.ts for
-// the canonical list and the full Wompi-integration TODO block there for
-// reference-encoding (`${userId}:${planId}`) and event-handling spec.
+// Canonical product prices — server is the source of truth for amounts and
+// ignores any client-supplied price. MUST stay in sync with PRICING_PLANS in
+// services/paymentService.ts (frontend sends the SKU; server looks up the COP).
 const PRODUCT_CATALOG: Record<string, { name: string; amountInCents: number }> = {
   inversor_lifetime: { name: 'Inversor — Acceso de por vida', amountInCents: 35000000 }, // 350,000 COP
   vip_lifetime: { name: 'Cripto Experto — Acceso de por vida', amountInCents: 90000000 }, // 900,000 COP

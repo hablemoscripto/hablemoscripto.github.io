@@ -2,28 +2,22 @@ import { supabase } from '../lib/supabase';
 import { reportError } from '../utils/errorReporting';
 
 // ---------------------------------------------------------------------------
-// Pricing model — Launch 2026
+// Pricing model — Launch 2026 (two paid lifetime tiers + free)
 //
-// Clean structure aligned with product vision:
-// - Principiante (free)
-// - Intermedio (full platform access)
-// - Fundador (full platform + Comunidad, limited to first 100 buyers)
-// - Experto (same benefits as Fundador, after Fundador spots are exhausted)
+// - Principiante (free): Nivel Principiante only.
+// - Inversor ($99): full platform — all 42 lessons.
+// - Cripto Experto ($249): full platform + Comunidad (Discord + charlas en vivo).
 //
-// All plans are one-time lifetime purchases.
-// Recurring revenue (annual renewals or packaged mentorship) is planned
-// for a later phase once payment infrastructure supports it cleanly.
+// All plans are one-time lifetime purchases (no subscriptions at launch).
+// "Precio Fundador": launch pricing rises later with 30-day notice — no fake
+// scarcity. The server (PRODUCT_CATALOG) is authoritative for charged amounts.
 // ---------------------------------------------------------------------------
 
-export type PlanId =
-  | 'free'
-  | 'intermedio'
-  | 'fundador'
-  | 'experto';
+export type PlanId = 'free' | 'inversor' | 'experto';
 
 export type ProductType = 'course' | 'community' | 'bundle';
 
-export type CourseTier = 'free' | 'intermedio' | 'fundador' | 'experto';
+export type CourseTier = 'free' | 'inversor' | 'experto';
 export type CommunityStatus = 'none' | 'active' | 'expired';
 
 export interface PricingPlan {
@@ -32,13 +26,10 @@ export interface PricingPlan {
   name: string;
   description: string;
   priceUsd: number;
-  // TODO(launch-blocker, priceCopCents): the COP figures below are arithmetic
-  // conversions of priceUsd at a placeholder FX rate (~4,000 COP/USD). Before
-  // any real launch, replace with EITHER (a) a daily-updated FX rate computed
-  // at checkout time, OR (b) deliberately re-priced COP-native round numbers
-  // (e.g., 299,000 COP instead of 316,000 — rounder and more familiar for
-  // Colombian buyers anyway). Do NOT ship with these placeholder values.
-  priceCopCents: number; // centavos — Wompi widget expects amountInCents in COP
+  // COP-native launch prices (centavos). Wompi charges amountInCents in COP.
+  // MUST match PRODUCT_CATALOG in supabase/functions/create-payment — the
+  // server is authoritative for the charged amount and ignores client values.
+  priceCopCents: number;
 
   wompiSku?: string; // SKU sent to create-payment Edge Function
 
@@ -66,15 +57,15 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
       'Acceso a recursos gratuitos',
     ],
   },
-  intermedio: {
-    id: 'intermedio',
+  inversor: {
+    id: 'inversor',
     productType: 'course',
-    name: 'Intermedio',
+    name: 'Inversor',
     description: 'Acceso completo a toda la plataforma educativa',
     priceUsd: 99,
-    priceCopCents: 34900000, // ~349,000 COP
-    wompiSku: 'intermedio_lifetime',
-    grantsCourseTier: 'intermedio',
+    priceCopCents: 35000000, // 350,000 COP
+    wompiSku: 'inversor_lifetime',
+    grantsCourseTier: 'inversor',
     features: [
       'Acceso completo a las 42 lecciones',
       'Videos dedicados en cada lección',
@@ -83,41 +74,24 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
       'Sistema de logros y repaso espaciado',
     ],
   },
-  fundador: {
-    id: 'fundador',
+  experto: {
+    id: 'experto',
     productType: 'bundle',
-    name: 'Fundador',
-    description: 'Plataforma completa + charlas semanales en vivo y comunidad privada (solo primeras 100)',
+    name: 'Cripto Experto',
+    description: 'Plataforma completa + comunidad privada y charlas en vivo',
     priceUsd: 249,
-    priceCopCents: 89900000, // ~899,000 COP
-    wompiSku: 'fundador_lifetime',
-    grantsCourseTier: 'fundador',
-    grantsCommunityMonths: 120, // effectively lifetime for community access in this model
+    priceCopCents: 90000000, // 900,000 COP
+    wompiSku: 'vip_lifetime',
+    grantsCourseTier: 'experto',
+    grantsCommunityMonths: 120, // lifetime community access in this model
     features: [
-      'Todo lo del plan Intermedio',
+      'Todo lo del plan Inversor',
       'Acceso a la comunidad privada en Discord',
       'Charlas semanales en vivo donde profundizo en los temas del newsletter + Q&A en tiempo real',
       'Prioridad al solicitar Mentoría Personalizada',
     ],
     highlighted: true,
     gradient: true,
-  },
-  experto: {
-    id: 'experto',
-    productType: 'bundle',
-    name: 'Experto',
-    description: 'Plataforma completa + charlas semanales en vivo y comunidad privada',
-    priceUsd: 249,
-    priceCopCents: 89900000,
-    wompiSku: 'experto_lifetime',
-    grantsCourseTier: 'experto',
-    grantsCommunityMonths: 120,
-    features: [
-      'Todo lo del plan Intermedio',
-      'Acceso a la comunidad privada en Discord',
-      'Charlas semanales en vivo donde profundizo en los temas del newsletter + Q&A en tiempo real',
-      'Prioridad al solicitar Mentoría Personalizada',
-    ],
   },
 };
 
@@ -158,22 +132,23 @@ export const ANONYMOUS_ENTITLEMENTS: UserEntitlements = {
 // they finished the prerequisite level?). Both gates are independent;
 // progress-based locking lives in EducationPage.isLevelLocked.
 //
-// hasCommunityAccess — true iff communityStatus is 'active' AND the
-// expiry date is still in the future. Lazy-derived; the DB row may say
-// 'active' but be effectively expired until a maintenance job runs.
+// hasCommunityAccess — true iff communityStatus is 'active' and either it has
+// no expiry (null = lifetime, e.g. Cripto Experto) or the expiry is still in
+// the future. Lazy-derived; a dated row may be effectively expired.
 // ---------------------------------------------------------------------------
 
 const COURSE_TIER_RANK: Record<CourseTier, number> = {
   free: 0,
-  intermedio: 1,
-  fundador: 2,
+  inversor: 1,
   experto: 2,
 };
 
+// Both paid tiers grant the full course (all 42 lessons); they differ only in
+// community access. So every paid level requires just the entry paid tier.
 const LEVEL_REQUIREMENTS: Record<string, CourseTier> = {
   beginner: 'free',
-  intermediate: 'intermedio',
-  advanced: 'fundador', // or 'experto' — both grant full access
+  intermediate: 'inversor',
+  advanced: 'inversor',
 };
 
 export function canAccessLevel(
@@ -187,7 +162,8 @@ export function canAccessLevel(
 
 export function hasCommunityAccess(user: UserEntitlements): boolean {
   if (user.communityStatus !== 'active') return false;
-  if (!user.communityExpiresAt) return false;
+  // null expiry = lifetime access (Cripto Experto); a date = expires then.
+  if (!user.communityExpiresAt) return true;
   return user.communityExpiresAt.getTime() > Date.now();
 }
 
@@ -250,13 +226,11 @@ export async function getPaymentByReference(reference: string) {
 }
 
 // ---------------------------------------------------------------------------
-// Derive UserEntitlements from the legacy user_profiles row.
+// Derive UserEntitlements from the user_profiles row.
 //
-// The DB schema still uses `is_premium` + `premium_tier` ('premium' | 'vip').
-// Legacy mapping kept for users who purchased before the 2026 relaunch.
-// Old `premium` → intermedio equivalent
-// Old `vip`     → fundador/experto equivalent
-// This logic can be removed after a full migration of historical users.
+// DB stores is_premium + premium_tier ('premium' | 'vip'). UI tiers:
+//   premium → 'inversor'  (full course)
+//   vip     → 'experto'   (full course + lifetime community)
 // ---------------------------------------------------------------------------
 
 export async function getUserEntitlements(
@@ -292,75 +266,33 @@ export async function getUserEntitlements(
 
   const courseTier: CourseTier =
     data.premium_tier === 'vip'
-      ? 'fundador'
+      ? 'experto'
       : data.premium_tier === 'premium'
-        ? 'intermedio'
+        ? 'inversor'
         : 'free';
+
+  // Cripto Experto (vip) includes lifetime community access; Inversor doesn't.
+  const communityStatus: CommunityStatus =
+    data.premium_tier === 'vip' ? 'active' : 'none';
 
   return {
     courseTier,
-    communityStatus: 'none',
-    communityExpiresAt: null,
+    communityStatus,
+    communityExpiresAt: null, // lifetime when active
   };
 }
 
 // ---------------------------------------------------------------------------
-// TODO(wompi-integration, Phase B):
-//
-// Wompi is the v1 processor. ALL plans above are one-time purchases — Wompi
-// does not natively support recurring billing. Community access is a one-time
-// 12-month pass that requires manual renewal (re-purchase + email reminder).
-//
-// Webhook events to handle in supabase/functions/wompi-webhook:
-//   - APPROVED   → apply plan.grantsCourseTier (if any). For
-//                  plan.grantsCommunityMonths (if any), set
-//                  communityStatus='active' and bump communityExpiresAt
-//                  forward by N months from MAX(now, current expiry) so
-//                  renewals stack rather than reset on still-active passes.
-//                  For 'acceso_total', BOTH grants apply in a single tx.
-//   - DECLINED   → no entitlement change; log for support.
-//   - VOIDED     → no entitlement change; reconcile if a previous APPROVED
-//                  for the same reference was already applied (refund path).
-//   - PENDING    → no entitlement change; await terminal event.
-//
-// All event payloads MUST pass HMAC-SHA256 verification using the
-// WOMPI_EVENTS_SECRET against the canonical signature.properties string per
-// Wompi's docs. Reject and log on signature mismatch — do not retry.
-//
-// Transaction `reference` field MUST be set to `${userId}:${planId}` (e.g.
-// `7c9a...:basico`) when create-payment generates the reference, so the
-// webhook attributes the entitlement back to the purchasing user even when
-// customer_email diverges from auth.email. Parse defensively — the
-// reference is the only trustworthy link between Wompi's record and ours.
+// Deferred (post-launch): Wompi has no native recurring billing, so any future
+// renewal/subscription model needs a tokenization-based cron. Possible later
+// work: stacking community renewals (bump communityExpiresAt from MAX(now,
+// current expiry)) and cross-product bridges (course→community grants,
+// community→course discounts, newsletter coupons). None implemented at launch.
+// All amounts and grants are derived server-side, never from client values.
 // ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
-// TODO(bridges, Phase B+):
-//
-// Cross-product entitlement bridges, spec only — none of these are implemented
-// in v1. They live here so the gating helpers and webhook code know where
-// they'll plug in.
-//
-//   1. Course → Comunidad grant: on course-tier APPROVED, also grant 3 months
-//      of Comunidad (set communityStatus='active', communityExpiresAt =
-//      MAX(now + 3 months, current expiry) — never shorten an existing pass).
-//      Applies to 'basico' and 'completo' purchases, NOT 'acceso_total'
-//      (acceso_total already grants 12 months explicitly).
-//
-//   2. Comunidad → course discount: any user with hasCommunityAccess() === true
-//      at checkout time gets 25% off course-tier plans. Discount math runs
-//      server-side in create-payment; never trust a client-supplied flag.
-//
-//   3. Newsletter → course coupon: newsletter signup issues a one-time 20%-off
-//      course coupon, 14-day expiry from issuance. Requires a coupons table
-//      (one row per issuance, redeemed-at timestamp). Out of scope for the
-//      multi-product refactor; spec lives here.
-// ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
-// TODO(crypto, Phase C+): USDC payments are out of v1 (USD-only, Wompi-
-// only). When reviving, restore the submitCryptoPayment client + the
-// verify-crypto-payment Edge Function to speak the new PlanId vocab
-// (Comunidad / Acceso Total may want crypto pricing too, not just course
-// tiers). See git history before this commit for the previous shape.
+// Deferred (crypto, post-launch): USDC-on-Solana is disabled in the UI at
+// launch (card-only). verify-crypto-payment exists but is dormant; revive it
+// to speak the inversor/experto vocab with a server-side USDC price table.
 // ---------------------------------------------------------------------------

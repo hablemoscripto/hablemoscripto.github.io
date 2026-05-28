@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { CheckCircle, XCircle, Clock, Loader2, Home } from 'lucide-react';
 import { getPaymentByReference } from '../services/paymentService';
 import { reportError } from '../utils/errorReporting';
@@ -10,7 +11,9 @@ export default function PaymentSuccess() {
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState<PaymentStatus>('loading');
   const [productName, setProductName] = useState('');
+  const [pollExhausted, setPollExhausted] = useState(false);
   const statusRef = useRef(status);
+  const attemptsRef = useRef(0);
 
   // Keep the ref in sync with state — read inside the polling interval below.
   // Must be in an effect, not in render: refs should not be mutated during
@@ -42,13 +45,21 @@ export default function PaymentSuccess() {
 
     checkPayment();
 
-    // Poll for status updates only while pending
+    // Poll for status updates only while pending, capped so we never loop
+    // forever if the webhook never lands (e.g. not yet registered in Wompi).
+    const MAX_POLL_ATTEMPTS = 24; // ~2 minutes at 5s
     const interval = setInterval(() => {
-      if (statusRef.current === 'PENDING' || statusRef.current === 'loading') {
-        checkPayment();
-      } else {
+      if (statusRef.current !== 'PENDING' && statusRef.current !== 'loading') {
         clearInterval(interval);
+        return;
       }
+      attemptsRef.current += 1;
+      if (attemptsRef.current >= MAX_POLL_ATTEMPTS) {
+        clearInterval(interval);
+        setPollExhausted(true);
+        return;
+      }
+      checkPayment();
     }, 5000);
 
     return () => clearInterval(interval);
@@ -75,7 +86,7 @@ export default function PaymentSuccess() {
             </div>
             <h1 className="text-2xl font-bold text-white mb-4">Pago Exitoso</h1>
             <p className="text-navy-400 mb-2">Tu compra de <span className="text-brand-400 font-medium">{productName}</span> ha sido confirmada.</p>
-            <p className="text-navy-500 text-sm mb-8">Referencia: {reference}</p>
+            <p className="text-navy-400 text-sm mb-8">Referencia: {reference}</p>
             <Link
               to="/education"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-glow-brand"
@@ -94,10 +105,17 @@ export default function PaymentSuccess() {
             </div>
             <h1 className="text-2xl font-bold text-white mb-4">Pago Pendiente</h1>
             <p className="text-navy-400 mb-2">Tu pago está siendo procesado.</p>
-            <p className="text-navy-500 text-sm mb-4">Referencia: {reference}</p>
+            <p className="text-navy-400 text-sm mb-4">Referencia: {reference}</p>
             <p className="text-navy-400 text-sm mb-8">
               Te notificaremos cuando el pago sea confirmado. Esto puede tomar unos minutos.
             </p>
+            {pollExhausted && (
+              <p className="text-navy-300 text-sm mb-8">
+                Está tardando más de lo normal. Si ya completaste el pago, no te
+                preocupes: tu acceso se activará automáticamente en cuanto se
+                confirme. Guarda tu número de referencia.
+              </p>
+            )}
             <Link
               to="/"
               className="inline-flex items-center gap-2 bg-navy-700 hover:bg-navy-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300"
@@ -116,7 +134,7 @@ export default function PaymentSuccess() {
             </div>
             <h1 className="text-2xl font-bold text-white mb-4">Pago Rechazado</h1>
             <p className="text-navy-400 mb-2">Tu pago no pudo ser procesado.</p>
-            <p className="text-navy-500 text-sm mb-8">
+            <p className="text-navy-400 text-sm mb-8">
               Por favor intenta de nuevo con otro método de pago.
             </p>
             <Link
@@ -154,7 +172,15 @@ export default function PaymentSuccess() {
 
   return (
     <div className="min-h-screen bg-navy-950 flex items-center justify-center px-4">
-      <div className="bg-navy-900 border border-navy-700 rounded-2xl p-8 max-w-md w-full text-center">
+      <Helmet>
+        <title>Estado del pago — Hablemos Cripto</title>
+        <meta name="robots" content="noindex" />
+      </Helmet>
+      <div
+        role="status"
+        aria-live="polite"
+        className="bg-navy-900 border border-navy-700 rounded-2xl p-8 max-w-md w-full text-center"
+      >
         {renderContent()}
       </div>
     </div>
