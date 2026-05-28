@@ -46,7 +46,7 @@ const LevelCard: React.FC<LevelCardProps> = ({
 
     return (
         <div className={cn(
-            "group relative bg-navy-900 rounded-4xl border border-white/5 p-0 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-glass hover:bg-navy-800",
+            "group relative h-full flex flex-col bg-navy-900 rounded-4xl border border-white/5 p-0 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-glass hover:bg-navy-800",
             isLocked ? 'opacity-70 grayscale-[0.5]' : '',
             className
         )}>
@@ -54,7 +54,7 @@ const LevelCard: React.FC<LevelCardProps> = ({
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-bl-7xl pointer-events-none"></div>
 
             {/* Header */}
-            <div className="p-10 relative">
+            <div className="p-10 relative flex flex-col flex-1">
                 <div className="flex justify-between items-start mb-8">
                     <div className={cn(
                         "w-14 h-14 rounded-2xl bg-navy-950 border border-white/5 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:border-white/10 shadow-glass",
@@ -94,13 +94,15 @@ const LevelCard: React.FC<LevelCardProps> = ({
                     {description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-8">
-                    {tags.map(tag => (
-                        <span key={tag} className="px-3 py-1.5 rounded-xl bg-navy-950 border border-white/5 text-[10px] font-black uppercase tracking-widest text-navy-400 group-hover:text-navy-200 transition-colors">
-                            {tag}
-                        </span>
-                    ))}
-                </div>
+                {tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-8">
+                        {tags.map(tag => (
+                            <span key={tag} className="px-3 py-1.5 rounded-xl bg-navy-950 border border-white/5 text-[10px] font-black uppercase tracking-widest text-navy-400 group-hover:text-navy-200 transition-colors">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                )}
 
                 <div className="flex items-center justify-between p-4 bg-navy-950/50 rounded-2xl border border-white/5 mb-8">
                     <div className="flex items-center gap-3">
@@ -110,64 +112,66 @@ const LevelCard: React.FC<LevelCardProps> = ({
                     {progress === 100 && <CheckCircle size={18} className="text-accent-500" />}
                 </div>
 
-                {isLocked && prerequisiteTitle ? (
-                    <div className="space-y-4 p-6 bg-navy-950 rounded-3xl border border-white/5">
-                        <div className="flex items-start gap-3 text-navy-400 text-xs">
-                            <Lock size={16} className="text-navy-600 shrink-0 mt-0.5" />
-                            <span className="leading-relaxed font-bold uppercase tracking-tight">
-                                Bloqueado hasta completar <span className="text-brand-500">{prerequisiteTitle}</span>
-                            </span>
-                        </div>
-
-                        {prerequisiteProgress !== undefined && (
-                            <div className="space-y-2">
-                                <div className="w-full h-2 bg-navy-800 rounded-full overflow-hidden">
-                                    <div
-                                        className="h-full bg-brand-500 rounded-full transition-all duration-700"
-                                        style={{ width: `${prerequisiteProgress}%` }}
-                                    />
-                                </div>
-                                <div className="flex justify-between text-[10px] font-black text-navy-500 uppercase tracking-widest">
-                                    <span>{prerequisiteProgress}% progreso</span>
-                                    {prerequisiteLessonsRemaining !== undefined && (
-                                        <span>{prerequisiteLessonsRemaining} restantes</span>
-                                    )}
-                                </div>
+                <div className="mt-auto">
+                    {isLocked && prerequisiteTitle ? (
+                        <div className="space-y-4 p-6 bg-navy-950 rounded-3xl border border-white/5">
+                            <div className="flex items-start gap-3 text-navy-400 text-xs">
+                                <Lock size={16} className="text-navy-500 shrink-0 mt-0.5" />
+                                <span className="leading-relaxed font-bold uppercase tracking-tight">
+                                    Bloqueado hasta completar <span className="text-brand-500">{prerequisiteTitle}</span>
+                                </span>
                             </div>
-                        )}
-                    </div>
-                ) : (
-                    <button
-                        onClick={onAction}
-                        disabled={isLocked}
-                        className={cn(
-                            "w-full py-4 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all duration-300 group-hover:scale-[1.02] active:scale-[0.98]",
-                            isLocked
-                                ? 'bg-navy-900 text-navy-600 cursor-not-allowed'
-                                : progress === 100
-                                    ? 'bg-accent-500 text-white shadow-glow-accent'
-                                    : btnColors[color]
-                        )}
-                    >
-                        {isLocked ? (
-                            <>
-                                <Lock size={18} /> Bloqueado
-                            </>
-                        ) : progress === 100 ? (
-                            <>
-                                <CheckCircle size={18} /> Repasar Nivel
-                            </>
-                        ) : progress > 0 ? (
-                            <>
-                                <PlayCircle size={18} /> Continuar
-                            </>
-                        ) : (
-                            <>
-                                <PlayCircle size={18} /> Comenzar
-                            </>
-                        )}
-                    </button>
-                )}
+
+                            {prerequisiteProgress !== undefined && (
+                                <div className="space-y-2">
+                                    <div className="w-full h-2 bg-navy-800 rounded-full overflow-hidden">
+                                        <div
+                                            className="h-full bg-brand-500 rounded-full transition-all duration-700"
+                                            style={{ width: `${prerequisiteProgress}%` }}
+                                        />
+                                    </div>
+                                    <div className="flex justify-between text-[10px] font-black text-navy-400 uppercase tracking-widest">
+                                        <span>{prerequisiteProgress}% progreso</span>
+                                        {prerequisiteLessonsRemaining !== undefined && (
+                                            <span>{prerequisiteLessonsRemaining} restantes</span>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <button
+                            onClick={onAction}
+                            disabled={isLocked}
+                            className={cn(
+                                "w-full py-4 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all duration-300 group-hover:scale-[1.02] active:scale-[0.98]",
+                                isLocked
+                                    ? 'bg-navy-900 text-navy-600 cursor-not-allowed'
+                                    : progress === 100
+                                        ? 'bg-accent-500 text-white shadow-glow-accent'
+                                        : btnColors[color]
+                            )}
+                        >
+                            {isLocked ? (
+                                <>
+                                    <Lock size={18} /> Bloqueado
+                                </>
+                            ) : progress === 100 ? (
+                                <>
+                                    <CheckCircle size={18} /> Repasar Nivel
+                                </>
+                            ) : progress > 0 ? (
+                                <>
+                                    <PlayCircle size={18} /> Continuar
+                                </>
+                            ) : (
+                                <>
+                                    <PlayCircle size={18} /> Comenzar
+                                </>
+                            )}
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
     );
