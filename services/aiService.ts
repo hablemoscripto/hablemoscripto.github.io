@@ -120,7 +120,7 @@ export const streamAIResponse = async (
       }
 
       reportError(error, { component: 'aiService', action: 'streamAIResponse' });
-      throw new Error(userMessage);
+      throw new Error(userMessage, { cause: error });
     }
   }
 

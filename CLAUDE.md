@@ -10,14 +10,17 @@ This section is mid-launch context. Older sections below describe the steady-sta
 
 ### Pricing model — lifetime, two tiers (Precio Fundador)
 
-Settled May 2026 after auditing a triple price-disagreement (UI vs paymentService vs server catalog). Decision: **lifetime SKUs only at launch**, monthly/yearly subscriptions deferred until a Wompi tokenization-based renewal cron is built.
+Settled May 2026 after auditing a triple price-disagreement (UI vs paymentService vs server catalog) and aligning a frontend that had drifted out of sync. Decision: **two paid lifetime tiers only at launch** plus the free Principiante level; monthly/yearly subscriptions deferred until a Wompi tokenization-based renewal cron is built.
 
-| Tier | USD | COP | USDC | productType SKU |
-|---|---|---|---|---|
-| Inversor | $99 | 350,000 | 99 | `inversor_lifetime` |
-| Cripto Experto | $249 | 900,000 | 249 | `vip_lifetime` |
+| Tier | USD | COP | USDC | productType SKU | frontend tier | DB `premium_tier` |
+|---|---|---|---|---|---|---|
+| Principiante (free) | — | — | — | — | `free` | — |
+| Inversor | $99 | 350,000 | 99 | `inversor_lifetime` | `inversor` | `premium` |
+| Cripto Experto | $249 | 900,000 | 249 | `vip_lifetime` | `experto` | `vip` |
 
-Framing in UI: **"Precio Fundador"** — no countdown, no fake urgency. When raising prices later, send a 30-day-notice email; that's the conversion lever, not a launch deadline.
+Framing in UI: **"Precio Fundador"** — no countdown, no fake urgency. The earlier "first 100 buyers = Fundador" limited-tier idea was **dropped** in favor of honest launch pricing: the price rises later with a 30-day-notice email, which is the conversion lever, not a fake scarcity counter or launch deadline.
+
+The frontend `PRICING_PLANS` and tier vocabulary were renamed to `inversor` / `experto` to match this copy. Internally the DB still stores `premium_tier` as `'premium'` (Inversor) / `'vip'` (Cripto Experto) — do not conflate the UI-facing tier name with the stored value.
 
 ### Source-of-truth contract — keep these in sync
 
@@ -72,8 +75,13 @@ Current pattern (still INSERT-then-work, but with cleanup):
 
 Small `Fundador` pill (Award icon, brand colors) in `/education` sticky subheader. Renders only when `userTier !== 'free'`. Lives in `components/EducationPage.tsx`.
 
+### AI tutor — migrated to Grok (xAI)
+
+The AI tutor "CBas" persona is now powered by **Grok (xAI)** via the `grok-chat` Edge Function. The client is `services/aiService.ts` (`streamAIResponse`). The previous Gemini implementation (`services/geminiService.ts` and the `supabase/functions/gemini-chat/` function) was **deleted** May 2026 — the `GEMINI_API_KEY` Supabase secret is no longer used and can be removed. `grok-chat` reads `XAI_API_KEY` (and optional `XAI_MAIN_MODEL` / `XAI_RERANKER_MODEL`).
+
 ### Recent deletions
 
+- `services/geminiService.ts` + `supabase/functions/gemini-chat/` — replaced by the Grok path (`services/aiService.ts` + `grok-chat`). Deleted May 2026.
 - `components/PaymentButton.tsx` — was dead code (nothing imported it). Deleted May 2026 per "no backwards-compat shims" rule.
 - Subscription/`billingCycle` types and parameters across `paymentService.ts`, `PaymentModal.tsx`, `EducationPage.tsx`, `PricingSection.tsx`, `verify-crypto-payment/index.ts`. All gone — re-add when subscriptions ship later.
 
@@ -81,7 +89,7 @@ Small `Fundador` pill (Award icon, brand colors) in `/education` sticky subheade
 
 ## What this is
 
-**Hablemos Cripto** is a Spanish-language crypto education platform for Latin America. 42 structured lessons across beginner / intermediate / advanced, with a Gemini-powered AI tutor ("CBas"), gamification (XP / streaks / achievements), spaced-repetition review cards, and Wompi-based premium upgrades.
+**Hablemos Cripto** is a Spanish-language crypto education platform for Latin America. 42 structured lessons across beginner / intermediate / advanced, with a Grok-powered AI tutor ("CBas"), gamification (XP / streaks / achievements), spaced-repetition review cards, and Wompi-based premium upgrades.
 
 - **Language:** all user-facing copy is Spanish (LATAM register, not Spain)
 - **Home market:** Colombia first — Wompi is Colombian, pricing examples use COP, local examples skew Colombian
@@ -119,7 +127,7 @@ npx tsc --noEmit     # type check without emit
 
 # Edge Function deploys (Supabase CLI required):
 supabase functions deploy wompi-webhook --no-verify-jwt
-supabase functions deploy gemini-chat
+supabase functions deploy grok-chat
 supabase functions deploy create-payment
 supabase functions deploy send-newsletter --no-verify-jwt
 supabase functions deploy unsubscribe --no-verify-jwt
@@ -153,7 +161,7 @@ The app is currently wired to read from `LESSONS_DATA` in `data/courseData.ts` *
 | State | React Context (Auth, Progress, Gamification) |
 | Animation | framer-motion + framer-motion page transitions |
 | Backend | Supabase (Postgres + Auth + Edge Functions with Deno) |
-| AI | Google Gemini 2.5 Flash via `gemini-chat` Edge Function (server-side key) |
+| AI | Grok (xAI) via `grok-chat` Edge Function (server-side key) |
 | Payments | Wompi (cards, COP) + USDC-on-Solana (verify-crypto-payment) |
 | Email | Resend via `mail.hablemoscripto.io` domain |
 | Hosting | Vercel (push to `main` auto-deploys; `vercel.json` does SPA rewrites + security headers) |
@@ -173,7 +181,7 @@ Root-level entry points (`App.tsx`, `index.tsx`, `index.css`). **No `src/` folde
 | `components/` | 26 top-level components + `lesson/`, `education/`, `ui/` subfolders |
 | `contexts/` | `AuthContext`, `ProgressContext`, `GamificationContext` — see §State below |
 | `hooks/` | `useDailyReview`, `useLessonNavigation`, `useScrollProgress` |
-| `services/` | `lessonService` (lesson read), `dailyReviewService` (SR picker), `geminiService` (AI client), `paymentService` (Wompi client) |
+| `services/` | `lessonService` (lesson read), `dailyReviewService` (SR picker), `aiService` (Grok AI client), `paymentService` (Wompi client) |
 | `lib/supabase.ts` | Supabase client (browser-side, anon key) |
 | `utils/` | `analytics.ts` (GA4 wrapper), `errorReporting.ts`, `courseUtils.ts` (lesson ordering / prev-next) |
 | `scripts/seed.ts` | Seeds `courseData.ts` → Supabase. Holds the allowed icon list. |
@@ -216,7 +224,7 @@ All non-public routes are gated by `ProtectedRoute`. All Helmet-driven routes se
 
 | Function | Purpose | Auth | Notes |
 |---|---|---|---|
-| `gemini-chat` | Proxies to Gemini 2.5 Flash with SSE streaming | JWT | Rate limited 20/min in-memory |
+| `grok-chat` | Proxies to Grok (xAI) with SSE streaming; keyword + Grok reranker RAG over lesson content | JWT | Rate limited 20/min in-memory. Client is `services/aiService.ts`. |
 | `create-payment` | Creates Wompi payment row + integrity signature | JWT | Rate limited 5/min |
 | `wompi-webhook` | Receives `transaction.updated`, verifies signature, upgrades user to premium, sends Fundador welcome email | Webhook (no JWT) | **Idempotency via `processed_webhook_events` table keyed on `signature.checksum`.** Insert-then-work pattern with cleanup-on-failure (May 2026 fix) — if the upgrade RPC or any later step fails, `cleanupDedupeRow()` deletes the marker row before returning non-2xx so retries actually retry. |
 | `send-newsletter` | Sends via Resend; sanitizes HTML; per-recipient HMAC unsubscribe token | Admin JWT | Checks `profiles.is_admin` server-side |
@@ -325,7 +333,7 @@ Quick reference:
 
 - **Frontend (Vite, must start with `VITE_`):** `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_WOMPI_PUBLIC_KEY` (`pub_prod_*` in prod), `VITE_GA4_MEASUREMENT_ID` (optional), `VITE_ERROR_REPORTING_URL` (optional), `VITE_USDC_PAYMENT_ADDRESS` (optional).
 - **Seed script only (not exposed to client):** `SUPABASE_SERVICE_KEY`.
-- **Supabase Edge Function secrets:** `GEMINI_API_KEY`, `RESEND_API_KEY`, `WOMPI_INTEGRITY_SECRET`, `WOMPI_EVENTS_SECRET`, `SOLANA_RPC_URL`, `USDC_PAYMENT_ADDRESS`.
+- **Supabase Edge Function secrets:** `XAI_API_KEY`, `RESEND_API_KEY`, `WOMPI_INTEGRITY_SECRET`, `WOMPI_EVENTS_SECRET`, `SOLANA_RPC_URL`, `USDC_PAYMENT_ADDRESS`. (Optional: `XAI_MAIN_MODEL`, `XAI_RERANKER_MODEL` — default to `grok-3-fast`.) The old `GEMINI_API_KEY` secret is no longer used and can be removed.
 
 ---
 
@@ -334,6 +342,7 @@ Quick reference:
 - **Frontend:** `git push origin main` → Vercel builds and deploys. `vercel.json` handles SPA rewrites, cache headers, and CSP.
 - **Edge Functions:** `supabase functions deploy <name>` per function. Do not assume git push updates these — it does not.
 - **Migrations:** applied manually in Supabase SQL editor. Order matters; follow `PRODUCTION-CHECKLIST.md`.
+- **Pending launch migration:** apply `supabase/migrations/2026-05-28_fix_payments_security_and_tiers.sql` — closes an RLS self-upgrade hole and makes the premium tier persist on purchase.
 
 ---
 
@@ -354,7 +363,7 @@ Quick reference:
 Ordered by priority. None blocks launch.
 
 1. **Split `data/courseData.ts` per level.** Saves ~100–200 kB on first load. Non-trivial — touches `LESSONS_DATA`, `BEGINNER_LEVEL`, `INTERMEDIATE_LEVEL`, `ADVANCED_LEVEL`, and the seed script.
-2. **Persistent rate limiting** for `gemini-chat` and `create-payment`. Supabase KV or Redis.
+2. **Persistent rate limiting** for `grok-chat` and `create-payment`. Supabase KV or Redis.
 3. **Certificate flow.** `components/ui/Certificate.tsx` is built but unrouted. Users completing Nivel Principiante expect a downloadable PDF or shareable image.
 4. **Tighten CSP** — drop `unsafe-eval` (needs Wompi widget cooperation) and move inline styles to CSS files or nonces.
 5. **Community / forum** — currently single-player except for the AI chat.
@@ -402,7 +411,7 @@ curl -sI https://<project>.functions.supabase.co/wompi-webhook
 - **Lesson content or structure** → `data/courseData.ts`, then `components/LessonView.tsx` and `components/lesson/SectionRenderer.tsx`
 - **Auth flow** → `contexts/AuthContext.tsx` + `components/AuthModal.tsx`
 - **Payments** → `services/paymentService.ts` + `components/PaymentModal.tsx` + `supabase/functions/create-payment` + `supabase/functions/wompi-webhook`
-- **AI chat** → `services/geminiService.ts` + `components/ChatWidget.tsx` + `supabase/functions/gemini-chat`
+- **AI chat** → `services/aiService.ts` (Grok client) + `components/ChatWidget.tsx` + `supabase/functions/grok-chat`
 - **Gamification** → `contexts/GamificationContext.tsx`
 - **Spaced repetition review** → `hooks/useDailyReview.ts` + `services/dailyReviewService.ts` + `components/education/DailyReviewCard.tsx`
 - **Anything deploy-related** → `PRODUCTION-CHECKLIST.md`
