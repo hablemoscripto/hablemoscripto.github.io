@@ -3,6 +3,12 @@ import { Bitcoin, Menu, X, BarChart3, LogOut, BookOpen, Zap, Trophy, Search } fr
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useGamification } from '../contexts/GamificationContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useEntitlements } from '../contexts/EntitlementsContext';
+import { hasCommunityAccess } from '../services/paymentService';
+
+// Cripto Experto Discord invite. Keep in sync with the invite in the Experto
+// welcome email (_shared/welcome-email.ts).
+const COMMUNITY_INVITE_URL = 'https://discord.gg/CQYyvzQb65';
 
 interface EducationNavbarProps {
   globalProgress: number;
@@ -53,6 +59,8 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
 
   const { xp, level, streak } = useGamification();
   const { signOut } = useAuth();
+  const { entitlements } = useEntitlements();
+  const showCommunity = hasCommunityAccess(entitlements);
 
   const handleLogout = async () => {
     await signOut();
@@ -126,14 +134,16 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
 
             <div className="h-6 w-px bg-navy-800"></div>
 
-            <a
-              href="https://discord.gg/W8haa7dDV3"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-navy-300 hover:text-white transition-colors"
-            >
-              Comunidad
-            </a>
+            {showCommunity && (
+              <a
+                href={COMMUNITY_INVITE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-navy-300 hover:text-white transition-colors"
+              >
+                Comunidad
+              </a>
+            )}
 
             <button
               onClick={handleLogout}
@@ -203,6 +213,16 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
               <span className="text-navy-300">Mi Progreso</span>
               <span className="font-bold text-brand-500">{globalProgress}%</span>
             </button>
+            {showCommunity && (
+              <a
+                href={COMMUNITY_INVITE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center gap-2 p-3 rounded-lg bg-navy-800 text-left text-navy-300"
+              >
+                Comunidad
+              </a>
+            )}
             <button onClick={handleLogout} className="w-full flex items-center gap-2 p-3 text-navy-400">
               <LogOut size={16} /> Cerrar sesión
             </button>
