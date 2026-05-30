@@ -49,22 +49,25 @@ const LessonView: React.FC = () => {
     // Focus Mode
     const [isFocusMode, setIsFocusMode] = useState(false);
 
-    // Load lesson data from bundled course content (instant, no network).
-    // setState inside the effect is the correct pattern here — lesson data
-    // is derived from the `id` prop, which only changes via route navigation.
+    // Load lesson data. Free lessons resolve from the bundle instantly; paid
+    // lessons are fetched from the gated Edge Function (async). The cancelled
+    // flag guards against a stale resolve when the route id changes mid-fetch.
     useEffect(() => {
-        const lessonData = fetchLessonById(id);
+        let cancelled = false;
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setLesson(lessonData);
-         
-        setLessonLoading(false);
-        if (lessonData) {
-            try { localStorage.setItem('last_lesson_id', String(lessonData.id)); } catch { /* */ }
-            window.__currentLesson = { title: lessonData.title, level: lessonData.level, id: lessonData.id };
-        } else {
-            window.__currentLesson = null;
-        }
-        return () => { window.__currentLesson = null; };
+        setLessonLoading(true);
+        fetchLessonById(id).then((lessonData) => {
+            if (cancelled) return;
+            setLesson(lessonData);
+            setLessonLoading(false);
+            if (lessonData) {
+                try { localStorage.setItem('last_lesson_id', String(lessonData.id)); } catch { /* */ }
+                window.__currentLesson = { title: lessonData.title, level: lessonData.level, id: lessonData.id };
+            } else {
+                window.__currentLesson = null;
+            }
+        });
+        return () => { cancelled = true; window.__currentLesson = null; };
     }, [id]);
 
     // Access Control Logic
@@ -125,6 +128,26 @@ const LessonView: React.FC = () => {
         );
     }
 
+    // Hard paywall: if the lesson's level isn't in the user's tier, show the
+    // upgrade screen. This is checked BEFORE loading/not-found because paid
+    // lesson bodies aren't bundled and the gated fetch will (correctly) fail for
+    // non-premium users, so we must not fall through to a "not found" state.
+    const lessonLevel = getLevelForLesson(id);
+    const LEVEL_TITLES: Record<string, string> = {
+        beginner: 'Nivel Principiante',
+        intermediate: 'Nivel Intermedio',
+        advanced: 'Nivel Avanzado',
+    };
+    if (!entitlementsLoading && !canAccessLevel(entitlements, lessonLevel)) {
+        return (
+            <UpgradePaywall
+                levelTitle={LEVEL_TITLES[lessonLevel] ?? 'Este nivel'}
+                onUpgrade={() => navigate('/education?upgrade=inversor')}
+                onBack={() => navigate('/education')}
+            />
+        );
+    }
+
     if (lessonLoading) {
         return (
             <div className="min-h-screen bg-navy-950 pb-20 animate-pulse">
@@ -181,25 +204,6 @@ const LessonView: React.FC = () => {
                     </button>
                 </div>
             </div>
-        );
-    }
-
-    // Hard paywall: the lesson's level isn't in the user's tier. Takes
-    // precedence over the sequential progress lock below. Guarded on
-    // entitlements load so a paid user doesn't flash the paywall on deep links.
-    const lessonLevel = getLevelForLesson(id);
-    const LEVEL_TITLES: Record<string, string> = {
-        beginner: 'Nivel Principiante',
-        intermediate: 'Nivel Intermedio',
-        advanced: 'Nivel Avanzado',
-    };
-    if (!entitlementsLoading && !canAccessLevel(entitlements, lessonLevel)) {
-        return (
-            <UpgradePaywall
-                levelTitle={LEVEL_TITLES[lessonLevel] ?? 'Este nivel'}
-                onUpgrade={() => navigate('/education?upgrade=inversor')}
-                onBack={() => navigate('/education')}
-            />
         );
     }
 

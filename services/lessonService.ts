@@ -1,6 +1,23 @@
-import { LESSONS_DATA } from '../data/courseData';
+import { LESSONS_DATA, type LessonEntry } from '../data/courseData';
 import type { Question } from '../components/education/types';
 import { shuffleQuizOptions } from '../utils/quizShuffle';
+import { supabase } from '../lib/supabase';
+
+// Paid (Intermedio/Avanzado) lesson bodies are not bundled. Fetch them from the
+// gated Edge Function, which verifies premium server-side. Returns null if the
+// user isn't entitled, the lesson is free/unknown, or the network fails — the
+// caller already handles a null lesson (not-found / locked states).
+async function fetchPaidLesson(lessonId: number): Promise<LessonEntry | null> {
+  try {
+    const { data, error } = await supabase.functions.invoke('get-lesson-content', {
+      body: { lessonId },
+    });
+    if (error || !data?.content) return null;
+    return data.content as LessonEntry;
+  } catch {
+    return null;
+  }
+}
 
 // Shape of the quiz questions stored in courseData — wide and permissive
 // because entries predate the typed Question union. Narrowed at read time.
@@ -113,8 +130,8 @@ function resolveCorrectAnswer(
  * Get a single lesson by ID from the bundled course data.
  * No network request — instant, always in sync with the codebase.
  */
-export function fetchLessonById(lessonId: number): LessonData | null {
-  const lesson = LESSONS_DATA[lessonId];
+export async function fetchLessonById(lessonId: number): Promise<LessonData | null> {
+  const lesson = LESSONS_DATA[lessonId] ?? (await fetchPaidLesson(lessonId));
   if (!lesson) return null;
 
   // Map the courseData format to LessonData interface.

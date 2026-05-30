@@ -45,6 +45,7 @@ import {
   ADVANCED_LEVEL,
 } from '../data/levels';
 import { LESSONS_DATA, type LevelData } from '../data/courseData';
+import { PAID_LESSONS } from '../data/paidContent';
 
 dotenv.config({ path: '.env.local' });
 
@@ -133,6 +134,7 @@ async function seed() {
   const tables = [
     'referrals',
     'quiz_questions',
+    'protected_lessons',
     'quizzes',
     'lesson_details',
     'lessons',
@@ -140,7 +142,7 @@ async function seed() {
     'levels',
   ];
   for (const table of tables) {
-    const cleanupColumn = table === 'lesson_details' ? 'lesson_id' : 'id';
+    const cleanupColumn = table === 'lesson_details' || table === 'protected_lessons' ? 'lesson_id' : 'id';
     const { error } = await supabase.from(table).delete().neq(cleanupColumn, -1); // trick to delete all rows
     if (error) {
       console.error(`Error cleaning up ${table}:`, error);
@@ -239,10 +241,14 @@ async function seed() {
   }
   console.log('Levels, modules, and lessons seeded successfully.');
 
-  // 3. Seed Lesson Details and Quizzes
+  // 3. Seed Lesson Details and Quizzes for ALL lessons (free + paid). Free
+  // lessons live in courseData (bundled); paid lessons live in paidContent
+  // (NOT bundled). lesson_details is needed for the grok-chat RAG.
   console.log('Seeding lesson details and quizzes...');
-  for (const lessonId in LESSONS_DATA) {
-    const lessonData = LESSONS_DATA[lessonId];
+  const ALL_LESSONS = { ...LESSONS_DATA, ...PAID_LESSONS };
+  for (const lessonId in ALL_LESSONS) {
+    const lessonData = ALL_LESSONS[lessonId];
+    const isPaid = !!PAID_LESSONS[lessonId];
 
     // Seed Lesson Details
     const { error: detailError } = await supabase
@@ -256,6 +262,22 @@ async function seed() {
       });
     if (detailError) {
       console.error(`Error seeding details for lesson ${lessonId}:`, detailError);
+    }
+
+    // Paid lessons: store the full lesson body as a protected blob, served at
+    // runtime by the get-lesson-content Edge Function after a premium check.
+    // Sections are icon-serialized (component -> name) so the blob is JSON-safe
+    // and SectionRenderer's ICON_MAP resolves them on the client.
+    if (isPaid) {
+      const { error: protError } = await supabase
+        .from('protected_lessons')
+        .insert({
+          lesson_id: lessonData.id,
+          content: { ...lessonData, sections: serializeSections(lessonData.sections) },
+        });
+      if (protError) {
+        console.error(`Error seeding protected content for lesson ${lessonId}:`, protError);
+      }
     }
 
     // Seed Quiz
