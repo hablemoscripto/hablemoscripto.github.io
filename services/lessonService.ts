@@ -1,5 +1,6 @@
 import { LESSONS_DATA } from '../data/courseData';
 import type { Question } from '../components/education/types';
+import { shuffleQuizOptions } from '../utils/quizShuffle';
 
 // Shape of the quiz questions stored in courseData — wide and permissive
 // because entries predate the typed Question union. Narrowed at read time.
@@ -160,11 +161,21 @@ export function fetchLessonById(lessonId: number): LessonData | null {
           options?.length ?? 0
         );
 
+        // Defeat the position bias (correct answer is ~73% "B" in source) by
+        // shuffling multiple-choice options deterministically per question.
+        let finalOptions = options;
+        let finalCorrect = correctAnswer;
+        if (type === 'multiple-choice' && options && typeof correctAnswer === 'number') {
+          const shuffled = shuffleQuizOptions(options, correctAnswer, `${lessonId}-${q.id}`);
+          finalOptions = shuffled.options;
+          finalCorrect = shuffled.correctIndex;
+        }
+
         // Return the full question object preserving all type-specific fields
         return {
           ...base,
-          ...(options && { options }),
-          ...(correctAnswer !== undefined && { correctAnswer }),
+          ...(finalOptions && { options: finalOptions }),
+          ...(finalCorrect !== undefined && { correctAnswer: finalCorrect }),
           ...(q.correctAnswers && { correctAnswers: q.correctAnswers }),
           ...(q.items && { items: q.items }),
           ...(q.correctOrder && { correctOrder: q.correctOrder }),

@@ -1,4 +1,5 @@
 import { LESSONS_DATA } from '../data/courseData';
+import { shuffleQuizOptions } from '../utils/quizShuffle';
 
 // A question from a completed lesson, flattened for the review card.
 // Handles both legacy format (options as {id, text}, correctAnswer as letter)
@@ -66,13 +67,17 @@ function normalizeQuestion(
   }
   if (correctIndex < 0 || correctIndex >= options.length) return null;
 
+  // Same deterministic shuffle as the lesson quiz (matching seed) so the review
+  // card isn't biased toward the source's ~73%-"B" correct-answer position.
+  const shuffled = shuffleQuizOptions(options, correctIndex, `${lessonId}-${q.id}`);
+
   return {
     questionId: `${lessonId}-${q.id}`,
     lessonId,
     lessonTitle,
     question: q.question,
-    options,
-    correctIndex,
+    options: shuffled.options,
+    correctIndex: shuffled.correctIndex,
     explanation: q.explanation || '',
   };
 }
