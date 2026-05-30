@@ -62,6 +62,7 @@ Tu misión es ayudar a estudiantes de habla hispana (especialmente de Latinoamé
 
 ## Calidad de las respuestas
 - Usa Markdown de forma efectiva: negritas, listas, tablas y bloques de código cuando ayuden a la comprensión.
+- No uses guiones largos (— ni –) en tus respuestas. Usa comas, dos puntos, paréntesis o puntos en su lugar.
 - Mantén las respuestas enfocadas. Evita repetir la misma idea varias veces.
 - Estructura bien tus respuestas (usa encabezados o secciones cuando el tema sea complejo).
 - Evita dejar oraciones a medias o explicaciones incompletas.
@@ -240,10 +241,10 @@ Instrucciones:
 
         const selectedLessons = selectedIndexes.map((i: number) => candidates[i])
 
-        console.log(`[RAG] Reranker selected lessons: ${selectedLessons.map(l => l.title).join(' | ')}`)
+        console.log(`[RAG] Reranker selected lessons: ${selectedLessons.map((l: LessonCandidate) => l.title).join(' | ')}`)
 
         return selectedLessons
-          .map(l => `### ${l.title}\n${l.description || ''}`)
+          .map((l: LessonCandidate) => `### ${l.title}\n${l.description || ''}`)
           .join('\n\n')
       }
     } catch (parseError) {
@@ -317,6 +318,11 @@ serve(async (req) => {
     if (!message || message.trim().length === 0) {
       const origin = req.headers.get('Origin') || ''
       return createErrorResponse('Message is required', 400, origin)
+    }
+
+    if (message.length > 2000) {
+      const origin = req.headers.get('Origin') || ''
+      return createErrorResponse('Message too long', 400, origin)
     }
 
     // ============================================

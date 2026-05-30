@@ -3,6 +3,7 @@ import { MessageCircle, X, Send, Sparkles, Loader2, Trash2 } from 'lucide-react'
 import { streamAIResponse, ChatMessage } from '../services/aiService';
 import { trackChatMessage } from '../utils/analytics';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import rehypeSanitize from 'rehype-sanitize';
 
 const STORAGE_KEY = 'chat_messages';
@@ -207,7 +208,7 @@ const ChatWidget: React.FC = () => {
                   {msg.role === 'model' ? (
                      <div className="prose prose-invert prose-sm max-w-none break-words">
                         {msg.text ? (
-                          <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{msg.text}</ReactMarkdown>
+                          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>{msg.text}</ReactMarkdown>
                         ) : (
                           <span className="flex items-center gap-1 text-navy-400" aria-label="Pensando">
                             <Loader2 size={14} className="animate-spin" aria-hidden="true" /> Pensando...
@@ -232,6 +233,7 @@ const ChatWidget: React.FC = () => {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Pregunta sobre cripto..."
               aria-label="Escribe tu pregunta sobre criptomonedas"
+              maxLength={1000}
               className="flex-1 bg-navy-900 border border-navy-600 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
               disabled={isLoading}
             />
