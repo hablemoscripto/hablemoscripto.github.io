@@ -133,21 +133,48 @@ function sanitizeKeywordQuery(query: string): string {
     .slice(0, 120)
 }
 
+// Spanish stopwords + filler dropped from keyword extraction so the search
+// matches on meaningful terms (bitcoin, halving, wallet) rather than the whole
+// question, which almost never appears verbatim in a title/description.
+const STOPWORDS = new Set([
+  'que', 'qué', 'como', 'cómo', 'cual', 'cuál', 'cuáles', 'para', 'por', 'con',
+  'del', 'los', 'las', 'una', 'uno', 'unos', 'unas', 'este', 'esta', 'esto',
+  'eso', 'esa', 'ese', 'sobre', 'entre', 'más', 'muy', 'pero', 'porque', 'cuando',
+  'donde', 'dónde', 'quien', 'quién', 'sus', 'mis', 'tus', 'son', 'está', 'están',
+  'hay', 'tiene', 'tienen', 'puede', 'pueden', 'desde', 'hasta', 'también', 'sí',
+  'sirve', 'significa', 'funciona', 'explica', 'explícame', 'dime', 'cuáles',
+])
+
+function extractKeywords(query: string): string[] {
+  return Array.from(
+    new Set(
+      sanitizeKeywordQuery(query)
+        .toLowerCase()
+        .split(' ')
+        .filter((w) => w.length >= 4 && !STOPWORDS.has(w))
+    )
+  ).slice(0, 6)
+}
+
 async function getKeywordCandidates(
   supabase: any,
   query: string
 ): Promise<LessonCandidate[]> {
-  const safeQuery = sanitizeKeywordQuery(query)
-  if (safeQuery.length < 3) {
+  const keywords = extractKeywords(query)
+  if (keywords.length === 0) {
     return []
   }
 
-  // Simple but effective keyword search using Postgres full-text search
-  // We search across title + description
+  // OR each meaningful keyword across title + description. The keywords are
+  // already sanitized to letters/numbers, so they're safe inside the .or() DSL.
+  const orFilter = keywords
+    .flatMap((k) => [`title.ilike.%${k}%`, `description.ilike.%${k}%`])
+    .join(',')
+
   const { data, error } = await supabase
     .from('lessons')
     .select('id, title, description')
-    .or(`title.ilike.%${safeQuery}%,description.ilike.%${safeQuery}%`)
+    .or(orFilter)
     .limit(MAX_KEYWORD_RESULTS)
 
   if (error) {
@@ -158,6 +185,57 @@ async function getKeywordCandidates(
   return data || []
 }
 
+// Fetch the real lesson content (lesson_details.sections) for the reranked
+// lessons and flatten it into grounded context. This is the substance the tutor
+// teaches from — previously only titles + one-line descriptions were injected.
+const MAX_CHARS_PER_LESSON = 3000
+
+async function fetchLessonContent(
+  supabase: any,
+  candidates: LessonCandidate[],
+  lessonIds: number[]
+): Promise<string> {
+  if (lessonIds.length === 0) return ''
+
+  const titleById = new Map(candidates.map((c) => [c.id, c.title]))
+
+  const { data, error } = await supabase
+    .from('lesson_details')
+    .select('lesson_id, sections')
+    .in('lesson_id', lessonIds)
+
+  if (error || !data) {
+    console.error('lesson_details fetch error:', error)
+    return ''
+  }
+
+  const sectionsById = new Map<number, unknown>(data.map((d: { lesson_id: number; sections: unknown }) => [d.lesson_id, d.sections]))
+  const blocks: string[] = []
+
+  // Preserve the reranker's selection order.
+  for (const id of lessonIds) {
+    const sections = sectionsById.get(id)
+    if (!Array.isArray(sections)) continue
+    const title = titleById.get(id) || `Lección ${id}`
+
+    let body = sections
+      .map((s: { title?: unknown; content?: unknown }) => {
+        const t = typeof s.title === 'string' ? s.title : ''
+        const c = typeof s.content === 'string' ? s.content : ''
+        return [t, c].filter(Boolean).join(': ')
+      })
+      .filter(Boolean)
+      .join('\n\n')
+
+    if (body.length > MAX_CHARS_PER_LESSON) {
+      body = body.slice(0, MAX_CHARS_PER_LESSON) + '…'
+    }
+    if (body) blocks.push(`### ${title}\n${body}`)
+  }
+
+  return blocks.join('\n\n---\n\n')
+}
+
 // ============================================
 // RAG: GROK RERANKER (Phase 1 - Balanced)
 // ============================================
@@ -165,9 +243,9 @@ async function rerankWithGrok(
   apiKey: string,
   userMessage: string,
   candidates: LessonCandidate[]
-): Promise<string> {
+): Promise<number[]> {
   if (candidates.length === 0) {
-    return ''
+    return []
   }
 
   const candidatesText = candidates
@@ -224,7 +302,7 @@ Instrucciones:
 
     if (!response.ok) {
       console.error('Reranker API error:', await response.text())
-      return ''
+      return []
     }
 
     const data = await response.json()
@@ -233,28 +311,24 @@ Instrucciones:
     try {
       const parsed = JSON.parse(content.trim())
       if (parsed.selected && Array.isArray(parsed.selected)) {
-        const selectedIndexes = parsed.selected
-          .map((n: number) => n - 1)
-          .filter((n: number) => n >= 0 && n < candidates.length)
+        const selectedLessons = parsed.selected
+          .map((n: number) => candidates[n - 1])
+          .filter((c: LessonCandidate | undefined): c is LessonCandidate => !!c)
 
-        if (selectedIndexes.length === 0) return ''
-
-        const selectedLessons = selectedIndexes.map((i: number) => candidates[i])
+        if (selectedLessons.length === 0) return []
 
         console.log(`[RAG] Reranker selected lessons: ${selectedLessons.map((l: LessonCandidate) => l.title).join(' | ')}`)
 
-        return selectedLessons
-          .map((l: LessonCandidate) => `### ${l.title}\n${l.description || ''}`)
-          .join('\n\n')
+        return selectedLessons.map((l: LessonCandidate) => l.id)
       }
     } catch (parseError) {
       console.error('Failed to parse reranker JSON:', content)
     }
 
-    return ''
+    return []
   } catch (error) {
     console.error('Reranker error:', error)
-    return ''
+    return []
   }
 }
 
@@ -332,9 +406,10 @@ serve(async (req) => {
 
     try {
       const candidates = await getKeywordCandidates(supabaseClient, message)
-      
+
       if (candidates.length > 0) {
-        relevantContext = await rerankWithGrok(xaiApiKey, message, candidates)
+        const selectedIds = await rerankWithGrok(xaiApiKey, message, candidates)
+        relevantContext = await fetchLessonContent(supabaseClient, candidates, selectedIds)
       }
     } catch (ragError) {
       console.error('RAG pipeline error (non-fatal):', ragError)
@@ -347,7 +422,7 @@ serve(async (req) => {
     let systemPrompt = CBAS_SYSTEM_PROMPT
 
     if (relevantContext) {
-      systemPrompt += `\n\n## CONTEXTO DEL CURRÍCULO DE HABLEMOS CRIPTO\n\n${relevantContext}\n\nInstrucciones sobre este contexto:\n- Úsalo como base principal cuando sea relevante para responder la pregunta del estudiante.\n- Puedes referenciar las lecciones de forma natural (ej: "Esto está muy relacionado con lo que vemos en la Lección X...").\n- No copies el texto literalmente. Explícalo con tus propias palabras manteniendo la esencia del currículo.`
+      systemPrompt += `\n\n## CONTENIDO REAL DE LAS LECCIONES DE HABLEMOS CRIPTO\n\nLo siguiente es el contenido textual de las lecciones más relevantes del currículo para esta pregunta. Es tu fuente principal de verdad:\n\n${relevantContext}\n\nInstrucciones sobre este contexto:\n- Basa tu respuesta en este contenido cuando sea relevante; es lo que el estudiante está estudiando en la plataforma.\n- Referencia las lecciones de forma natural (ej: "Esto es justo lo que vemos en la lección sobre...").\n- No copies el texto literalmente ni lo cites en bloque. Explícalo con tus propias palabras, manteniendo la esencia y la profundidad del currículo.\n- Si la pregunta va más allá de este contenido, complementa con tu conocimiento general y sugiere qué lección revisar.`
     }
 
     // Prepare messages for xAI (OpenAI format)
