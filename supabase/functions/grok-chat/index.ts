@@ -369,6 +369,11 @@ serve(async (req) => {
       global: { headers: { Authorization: authHeader } }
     })
 
+    // Service-role client for RAG reads: lesson_details is now locked to
+    // service-role only (content-protection migration), so the anon client
+    // can no longer read it. Used only for the curriculum retrieval below.
+    const ragClient = createClient(supabaseUrl, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)
+
     const { data: { user }, error: userError } = await supabaseClient.auth.getUser()
     if (userError || !user) {
       const origin = req.headers.get('Origin') || ''
@@ -405,11 +410,11 @@ serve(async (req) => {
     let relevantContext = ''
 
     try {
-      const candidates = await getKeywordCandidates(supabaseClient, message)
+      const candidates = await getKeywordCandidates(ragClient, message)
 
       if (candidates.length > 0) {
         const selectedIds = await rerankWithGrok(xaiApiKey, message, candidates)
-        relevantContext = await fetchLessonContent(supabaseClient, candidates, selectedIds)
+        relevantContext = await fetchLessonContent(ragClient, candidates, selectedIds)
       }
     } catch (ragError) {
       console.error('RAG pipeline error (non-fatal):', ragError)
