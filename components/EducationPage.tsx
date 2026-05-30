@@ -519,14 +519,17 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             </div>
           </div>
 
-          {/* Pricing Section */}
-          <PricingSection
-            entitlements={entitlements}
-            onSelectPlan={(planId) => {
-              setSelectedPlan(planId);
-              setShowPaymentModal(true);
-            }}
-          />
+          {/* Pricing Section — hidden for top-tier (experto) owners, who have
+              nothing left to buy and shouldn't be shown launch-pricing copy. */}
+          {entitlements.courseTier !== 'experto' && (
+            <PricingSection
+              entitlements={entitlements}
+              onSelectPlan={(planId) => {
+                setSelectedPlan(planId);
+                setShowPaymentModal(true);
+              }}
+            />
+          )}
           <PaymentModal
             isOpen={showPaymentModal}
             onClose={() => setShowPaymentModal(false)}

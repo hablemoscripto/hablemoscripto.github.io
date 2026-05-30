@@ -815,7 +815,7 @@ const Quiz: React.FC<QuizProps> = ({
 
                 {/* Results */}
                 {submitted && (
-                    <div className={`mt-10 p-8 rounded-2xl text-center border transition-all duration-500 ${
+                    <div role="status" aria-live="polite" className={`mt-10 p-8 rounded-2xl text-center border transition-all duration-500 ${
                         passed
                             ? 'bg-green-500/10 border-green-500/30 shadow-[0_0_40px_rgba(16,185,129,0.1)]'
                             : 'bg-navy-800 border-navy-700'

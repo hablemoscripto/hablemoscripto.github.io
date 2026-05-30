@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { Users, BookOpen, Award, Zap, CheckCircle } from 'lucide-react';
 import ParticlesBackground from './ParticlesBackground';
+import { getAllLessonsOrdered } from '../utils/courseUtils';
+
+// Derive the lesson count from the catalog so the headline stat can never drift.
+const LESSON_COUNT = getAllLessonsOrdered().length;
 
 // Constants moved outside component to prevent re-creation
 const WORDS = ["Bitcoin", "Solana", "Trading", "Web3"];
@@ -169,7 +173,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 w-full max-w-3xl border-t border-white/5 pt-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
                 {[
                     { label: "Experiencia", val: "7+ Años", icon: Award, color: "text-brand-500" },
-                    { label: "Lecciones", val: "42", icon: BookOpen, color: "text-brand-400" }
+                    { label: "Lecciones", val: String(LESSON_COUNT), icon: BookOpen, color: "text-brand-400" }
                 ].map((stat, i) => (
                     <div key={i} className="flex flex-col items-center group p-6 rounded-3xl hover:bg-white/[0.02] transition-colors">
                         <div className={`mb-4 p-4 rounded-2xl bg-navy-900 border border-white/5 group-hover:border-white/10 transition-all shadow-glass`}>

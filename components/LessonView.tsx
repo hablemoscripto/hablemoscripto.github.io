@@ -328,7 +328,11 @@ const LessonView: React.FC = () => {
 
                         <div className="flex flex-wrap gap-6 text-sm font-medium text-navy-400 border-t border-white/5 pt-6 items-center">
                             <div className="flex items-center gap-2"><Clock size={16} className="text-brand-500" /> {lesson.duration}</div>
-                            <div className="flex items-center gap-2"><Video size={16} className="text-brand-500" /> Video + Texto</div>
+                            <div className="flex items-center gap-2">
+                                {lesson.videoId
+                                    ? <><Video size={16} className="text-brand-500" /> Video + Texto</>
+                                    : <><BookOpen size={16} className="text-brand-500" /> Lectura</>}
+                            </div>
                             <div className="flex-1"></div>
                             <button 
                                 onClick={() => setIsFocusMode(!isFocusMode)}
@@ -348,11 +352,13 @@ const LessonView: React.FC = () => {
                 <div className={`max-w-6xl xl:max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 transition-all duration-500`}>
                     {/* Main Content */}
                     <div className={`transition-all duration-500 ${isFocusMode ? 'lg:col-span-10 lg:col-start-2' : 'lg:col-span-9'} space-y-8`}>
-                        {/* Video Section */}
-                        <VideoPlayer
-                            title={lesson.title}
-                            videoId={lesson.videoId} // We'll need to add this to the data type later
-                        />
+                        {/* Video Section — only when the lesson actually has a video */}
+                        {lesson.videoId && (
+                            <VideoPlayer
+                                title={lesson.title}
+                                videoId={lesson.videoId}
+                            />
+                        )}
 
                         {/* Referral Section */}
                         {lesson.referrals && lesson.referrals.length > 0 && (
@@ -424,10 +430,10 @@ const LessonView: React.FC = () => {
                                     />
 
                                     {quizPassed && (
-                                        <div className="mt-8 text-center animate-in zoom-in">
+                                        <div className="mt-8 text-center animate-in zoom-in" role="status" aria-live="polite">
                                             <div className="inline-flex flex-col items-center gap-3 p-6 rounded-2xl bg-green-500/10 border border-green-500/20">
                                                 <div className="flex items-center gap-2 text-green-400 text-sm font-bold">
-                                                    <CheckCircle size={18} />
+                                                    <CheckCircle size={18} aria-hidden="true" />
                                                     ¡Lección completada! +100 XP
                                                 </div>
                                                 <button

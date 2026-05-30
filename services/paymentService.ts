@@ -67,7 +67,7 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     wompiSku: 'inversor_lifetime',
     grantsCourseTier: 'inversor',
     features: [
-      'Acceso completo a las 42 lecciones',
+      'Acceso completo a las 44 lecciones',
       'Videos dedicados en cada lección',
       'Todas las actualizaciones futuras',
       'Certificados de nivel',

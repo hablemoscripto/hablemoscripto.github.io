@@ -41,8 +41,10 @@ export default function SectionRenderer({ section, checkpoint, onImageClick }: S
                 {/* Section Image */}
                 {section.image && (
                     <div className="my-6 not-prose">
-                        <div
-                            className="relative group cursor-pointer"
+                        <button
+                            type="button"
+                            aria-label={`Ampliar imagen: ${section.imageAlt || section.title || 'infografía'}`}
+                            className="relative group cursor-pointer block w-full text-left"
                             onClick={() => onImageClick(section.image!, section.imageAlt || section.title || 'Infographic')}
                         >
                             <img
@@ -62,11 +64,11 @@ export default function SectionRenderer({ section, checkpoint, onImageClick }: S
                             {/* Hover overlay */}
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 rounded-xl transition-all duration-300 flex items-center justify-center">
                                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-navy-900/80 backdrop-blur-sm px-4 py-2 rounded-lg flex items-center gap-2 text-white text-sm font-medium">
-                                    <ZoomIn size={18} />
+                                    <ZoomIn size={18} aria-hidden="true" />
                                     <span>Click para ampliar</span>
                                 </div>
                             </div>
-                        </div>
+                        </button>
                         {section.imageCaption && (
                             <p className="text-sm text-navy-400 text-center mt-2 italic">{section.imageCaption}</p>
                         )}
