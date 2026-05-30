@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { Search, Clock, ChevronRight, BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from './ui/Modal';
-import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL, type LevelData } from '../data/courseData';
+import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from '../data/levels';
+import type { LevelData } from '../data/courseData';
 import { useProgress } from '../contexts/ProgressContext';
 
 interface SearchResult {

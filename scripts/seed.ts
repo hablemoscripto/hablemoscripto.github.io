@@ -43,9 +43,8 @@ import {
   BEGINNER_LEVEL,
   INTERMEDIATE_LEVEL,
   ADVANCED_LEVEL,
-  LESSONS_DATA,
-  LevelData,
-} from '../data/courseData';
+} from '../data/levels';
+import { LESSONS_DATA, type LevelData } from '../data/courseData';
 
 dotenv.config({ path: '.env.local' });
 

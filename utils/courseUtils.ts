@@ -1,4 +1,5 @@
-import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL, Lesson } from '../data/courseData';
+import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from '../data/levels';
+import type { Lesson } from '../data/courseData';
 
 export const getAllLessonsOrdered = (): Lesson[] => {
     const levels = [BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL];
