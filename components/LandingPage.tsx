@@ -214,7 +214,7 @@ const LandingPage: React.FC = () => {
                 </div>
                 <div className="space-y-4">
                     {[
-                        { q: '¿Es gratis?', a: 'El Nivel Principiante con 19 lecciones es 100% gratuito. Los niveles Intermedio y Avanzado requieren completar el nivel anterior para desbloquearse.' },
+                        { q: '¿Es gratis?', a: 'El Nivel Principiante (19 lecciones) es 100% gratuito, sin tarjeta. Los niveles Intermedio y Avanzado son parte de los planes Inversor y Cripto Experto, con acceso de por vida y un solo pago.' },
                         { q: '¿Necesito experiencia previa en criptomonedas?', a: 'No. Empezamos desde cero, explicando qué es el dinero y por qué importa. No asumimos ningún conocimiento previo.' },
                         { q: '¿Qué diferencia hay con lo que ya está gratis en YouTube y Twitter?', a: 'El contenido gratuito te da fragmentos sin orden y muchas veces está pagado por quien quiere venderte algo después — señales, tokens, cursos caros. Aquí tienes un currículum estructurado de 44 lecciones, profundizo en los temas en charlas semanales y mi modelo es transparente: tú pagas la plataforma, no terceros que quieran sacar comisión de tus decisiones.' },
                         { q: '¿Cuánto tiempo toma completar un nivel?', a: 'El Nivel Principiante toma aproximadamente 8 horas. El Intermedio unas 8 horas y el Avanzado unas 11 horas. Puedes avanzar a tu propio ritmo.' },

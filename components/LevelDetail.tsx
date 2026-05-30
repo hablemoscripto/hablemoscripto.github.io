@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../contexts/ProgressContext';
 import { LevelData } from '../data/courseData';
 import { getPreviousLessonId, getAllLessonsOrdered } from '../utils/courseUtils';
+import { useEntitlements } from '../contexts/EntitlementsContext';
+import { canAccessLevel } from '../services/paymentService';
+import UpgradePaywall from './ui/UpgradePaywall';
 
 interface LevelDetailProps {
     levelData: LevelData;
@@ -18,6 +21,20 @@ const LEVEL_LABELS: Record<string, string> = {
 const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
     const navigate = useNavigate();
     const { isLessonCompleted } = useProgress();
+    const { entitlements, loading: entitlementsLoading } = useEntitlements();
+
+    // Hard paywall: levels the user's tier doesn't include show an upgrade
+    // screen instead of the lessons (distinct from the sequential progress lock).
+    if (!entitlementsLoading && !canAccessLevel(entitlements, levelData.id)) {
+        return (
+            <UpgradePaywall
+                levelTitle={levelData.title}
+                teaser={levelData.modules.map((m) => m.title)}
+                onUpgrade={() => navigate('/education?upgrade=inversor')}
+                onBack={() => navigate('/education')}
+            />
+        );
+    }
 
     // Calculate progress
     const completedCount = levelData.modules.reduce((acc, module) => {

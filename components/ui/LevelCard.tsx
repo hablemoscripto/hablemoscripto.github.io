@@ -17,10 +17,13 @@ interface LevelCardProps {
     isLocked: boolean;
     onAction: () => void;
     className?: string;
-    // Prerequisite info for locked levels
+    // Prerequisite info for progress-locked levels
     prerequisiteTitle?: string;
     prerequisiteProgress?: number;
     prerequisiteLessonsRemaining?: number;
+    // Payment gate: the user's tier doesn't include this level (hard paywall).
+    requiresUpgrade?: boolean;
+    onUpgrade?: () => void;
 }
 
 export function cn(...inputs: (string | undefined | null | false)[]) {
@@ -29,7 +32,7 @@ export function cn(...inputs: (string | undefined | null | false)[]) {
 
 const LevelCard: React.FC<LevelCardProps> = ({
     levelNumber, title, subtitle, description, tags, lessonCount, completedCount, progress, color, icon: Icon, isLocked, onAction, className,
-    prerequisiteTitle, prerequisiteProgress, prerequisiteLessonsRemaining
+    prerequisiteTitle, prerequisiteProgress, prerequisiteLessonsRemaining, requiresUpgrade, onUpgrade
 }) => {
 
     const colorClasses = {
@@ -113,7 +116,19 @@ const LevelCard: React.FC<LevelCardProps> = ({
                 </div>
 
                 <div className="mt-auto">
-                    {isLocked && prerequisiteTitle ? (
+                    {requiresUpgrade ? (
+                        <div className="space-y-3">
+                            <p className="text-xs font-bold text-navy-400 text-center uppercase tracking-tight">
+                                Incluido en <span className="text-brand-400">Inversor</span> y <span className="text-brand-400">Cripto Experto</span>
+                            </p>
+                            <button
+                                onClick={onUpgrade}
+                                className="w-full py-4 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all duration-300 group-hover:scale-[1.02] active:scale-[0.98] bg-brand-500 hover:bg-brand-400 text-navy-950 shadow-glow-brand"
+                            >
+                                <Lock size={18} /> Desbloquear
+                            </button>
+                        </div>
+                    ) : isLocked && prerequisiteTitle ? (
                         <div className="space-y-4 p-6 bg-navy-950 rounded-3xl border border-white/5">
                             <div className="flex items-start gap-3 text-navy-400 text-xs">
                                 <Lock size={16} className="text-navy-400 shrink-0 mt-0.5" />

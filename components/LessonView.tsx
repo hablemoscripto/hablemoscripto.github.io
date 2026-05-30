@@ -10,6 +10,9 @@ import { Helmet } from 'react-helmet-async';
 import Quiz from './education/Quiz';
 import { getPreviousLessonId, getLevelForLesson } from '../utils/courseUtils';
 import { fetchLessonById, LessonData } from '../services/lessonService';
+import { useEntitlements } from '../contexts/EntitlementsContext';
+import { canAccessLevel } from '../services/paymentService';
+import UpgradePaywall from './ui/UpgradePaywall';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { useLessonNavigation } from '../hooks/useLessonNavigation';
 
@@ -23,6 +26,7 @@ const LessonView: React.FC = () => {
     const { lessonId } = useParams<{ lessonId: string }>();
     const navigate = useNavigate();
     const { isLessonCompleted, markLessonComplete, loading } = useProgress();
+    const { entitlements, loading: entitlementsLoading } = useEntitlements();
 
     const id = lessonId ? parseInt(lessonId, 10) : NaN;
     const isValidId = !isNaN(id) && id > 0;
@@ -177,6 +181,25 @@ const LessonView: React.FC = () => {
                     </button>
                 </div>
             </div>
+        );
+    }
+
+    // Hard paywall: the lesson's level isn't in the user's tier. Takes
+    // precedence over the sequential progress lock below. Guarded on
+    // entitlements load so a paid user doesn't flash the paywall on deep links.
+    const lessonLevel = getLevelForLesson(id);
+    const LEVEL_TITLES: Record<string, string> = {
+        beginner: 'Nivel Principiante',
+        intermediate: 'Nivel Intermedio',
+        advanced: 'Nivel Avanzado',
+    };
+    if (!entitlementsLoading && !canAccessLevel(entitlements, lessonLevel)) {
+        return (
+            <UpgradePaywall
+                levelTitle={LEVEL_TITLES[lessonLevel] ?? 'Este nivel'}
+                onUpgrade={() => navigate('/education?upgrade=inversor')}
+                onBack={() => navigate('/education')}
+            />
         );
     }
 

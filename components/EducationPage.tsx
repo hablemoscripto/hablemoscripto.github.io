@@ -15,12 +15,12 @@ import PricingSection from './PricingSection';
 import PaymentModal from './PaymentModal';
 import MentoriaModal from './MentoriaModal';
 import DailyReviewCard from './education/DailyReviewCard';
-import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
+import { useNavigate, Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { useEntitlements } from '../contexts/EntitlementsContext';
 import { getAllLessonsOrdered } from '../utils/courseUtils';
-import { getUserEntitlements, hasCommunityAccess } from '../services/paymentService';
+import { getUserEntitlements, hasCommunityAccess, canAccessLevel } from '../services/paymentService';
 
 interface EducationPageProps {
   onNavigateHome?: () => void; // Optional for backward compat
@@ -57,7 +57,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const [showMentoriaModal, setShowMentoriaModal] = useState(false);
   const [levels, setLevels] = useState<Level[]>([]);
   const { user } = useAuth();
-  const { entitlements, refresh: refreshEntitlements } = useEntitlements();
+  const { entitlements, loading: entitlementsLoading, refresh: refreshEntitlements } = useEntitlements();
 
   // Pricing / payment state
   const [selectedPlan, setSelectedPlan] = useState<'inversor' | 'experto' | null>(null);
@@ -98,6 +98,21 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const [activeCertificate, setActiveCertificate] = useState<{ level: string, title: string, variant: 'beginner' | 'intermediate' | 'advanced' } | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Deep link from a paywall (e.g. /education?upgrade=inversor) opens the
+  // payment modal on the matching plan, then clears the param.
+  useEffect(() => {
+    const upgrade = searchParams.get('upgrade');
+    if (upgrade === 'inversor' || upgrade === 'experto') {
+      /* eslint-disable react-hooks/set-state-in-effect */
+      setSelectedPlan(upgrade);
+      setShowPaymentModal(true);
+      /* eslint-enable react-hooks/set-state-in-effect */
+      searchParams.delete('upgrade');
+      setSearchParams(searchParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   const { progress: supabaseProgress } = useProgress();
   const { achievements, achievementDefinitions } = useGamification();
@@ -357,6 +372,28 @@ const EducationPage: React.FC<EducationPageProps> = () => {
               </button>
             </div>
           )}
+          {!lastLessonId && totalCompletedLessons === 0 && (
+            <div className="container max-w-7xl mx-auto px-6 mt-6 mb-2">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 p-6 rounded-3xl bg-gradient-to-r from-brand-500/15 to-brand-400/5 border border-brand-500/30">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-brand-500/20 flex items-center justify-center shrink-0">
+                    <PlayCircle size={24} className="text-brand-400" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-brand-400 font-black uppercase tracking-[0.2em] mb-1">Empieza aquí</p>
+                    <h2 className="text-lg font-bold text-white">Tu primera lección te toma ~15 minutos</h2>
+                    <p className="text-sm text-navy-300">Comienza por el principio: qué es el dinero y por qué Bitcoin importa.</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => navigate('/education/lesson/1')}
+                  className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-brand-500 hover:bg-brand-400 text-navy-950 font-black uppercase tracking-widest text-xs rounded-2xl shadow-glow-brand transition-all hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  Empezar Lección 1 <ArrowRight size={16} aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+          )}
           <div className="container max-w-7xl mx-auto px-6 pt-16 pb-20">
             <div className="max-w-4xl mb-16">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-navy-900 border border-white/5 text-brand-500 text-[10px] font-black uppercase tracking-[0.2em] mb-6">
@@ -428,8 +465,12 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             <div className="grid lg:grid-cols-3 gap-10 mt-8">
               {levels.map((level, index) => {
                 const isCompleted = getLevelProgress(level.id) === 100;
-                const isLocked = isLevelLocked(level.id);
-                const prereqInfo = isLocked ? getPrerequisiteInfo(level.id) : null;
+                // Payment gate takes precedence over the progress gate: a free
+                // user can't reach paid levels regardless of progress. Treat as
+                // accessible while entitlements are still loading to avoid a flash.
+                const requiresUpgrade = !entitlementsLoading && !canAccessLevel(entitlements, level.id);
+                const isProgressLocked = !requiresUpgrade && isLevelLocked(level.id);
+                const prereqInfo = isProgressLocked ? getPrerequisiteInfo(level.id) : null;
                 return (
                   <div key={level.id} className="relative">
                     <LevelCard
@@ -443,8 +484,10 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                       progress={getLevelProgress(level.id)}
                       color={levelColors[level.id]}
                       icon={ICONS[level.icon_name] || Shield}
-                      isLocked={isLocked}
-                      onAction={() => !isLocked && handleLevelSelect(level.id)}
+                      isLocked={isProgressLocked}
+                      requiresUpgrade={requiresUpgrade}
+                      onUpgrade={() => { setSelectedPlan('inversor'); setShowPaymentModal(true); }}
+                      onAction={() => { if (!isProgressLocked && !requiresUpgrade) handleLevelSelect(level.id); }}
                       prerequisiteTitle={prereqInfo?.title}
                       prerequisiteProgress={prereqInfo?.progress}
                       prerequisiteLessonsRemaining={prereqInfo?.lessonsRemaining}
