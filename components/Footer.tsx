@@ -43,7 +43,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                 href="https://twitter.com/Crypto_CBas"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Twitter — @Crypto_CBas (abre en una pestaña nueva)"
+                aria-label="Twitter: @Crypto_CBas (abre en una pestaña nueva)"
                 className="w-11 h-11 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-brand-500 hover:text-navy-900 transition-all"
               >
                 <Twitter size={18} aria-hidden="true" />
@@ -52,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                 href="https://www.youtube.com/@hablemoscripto"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="YouTube — @hablemoscripto (abre en una pestaña nueva)"
+                aria-label="YouTube: @hablemoscripto (abre en una pestaña nueva)"
                 className="w-11 h-11 rounded-full bg-navy-900 flex items-center justify-center text-navy-400 hover:bg-red-600 hover:text-white transition-all"
               >
                 <Youtube size={18} aria-hidden="true" />

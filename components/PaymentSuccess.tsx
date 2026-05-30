@@ -173,7 +173,7 @@ export default function PaymentSuccess() {
   return (
     <div className="min-h-screen bg-navy-950 flex items-center justify-center px-4">
       <Helmet>
-        <title>Estado del pago — Hablemos Cripto</title>
+        <title>Estado del pago | Hablemos Cripto</title>
         <meta name="robots" content="noindex" />
       </Helmet>
       <div

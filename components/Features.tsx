@@ -75,7 +75,7 @@ const Features: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-navy-300 hover:text-white transition-colors text-sm font-medium group/link"
-                  aria-label="Twitter — @Crypto_CBas (abre en una pestaña nueva)"
+                  aria-label="Twitter: @Crypto_CBas (abre en una pestaña nueva)"
                 >
                   <span className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center text-navy-400 group-hover/link:bg-brand-500 group-hover/link:text-navy-900 transition-all">
                     <Twitter size={14} aria-hidden="true" />
@@ -88,7 +88,7 @@ const Features: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-navy-300 hover:text-white transition-colors text-sm font-medium group/link"
-                  aria-label="YouTube — @hablemoscripto (abre en una pestaña nueva)"
+                  aria-label="YouTube: @hablemoscripto (abre en una pestaña nueva)"
                 >
                   <span className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center text-navy-400 group-hover/link:bg-red-600 group-hover/link:text-white transition-all">
                     <Youtube size={14} aria-hidden="true" />

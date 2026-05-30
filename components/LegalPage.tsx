@@ -163,12 +163,12 @@ function PrivacyContent() {
         </p>
         <p>Compartimos datos únicamente con los siguientes proveedores de servicio, necesarios para el funcionamiento de la plataforma:</p>
         <ul>
-          <li><strong>Supabase</strong> — Alojamiento de base de datos y autenticación</li>
-          <li><strong>Google</strong> — Autenticación OAuth (inicio de sesión)</li>
-          <li><strong>xAI (Grok)</strong> — Modelo de IA que potencia el asistente educativo</li>
-          <li><strong>Wompi</strong> — Procesamiento de pagos</li>
-          <li><strong>Resend</strong> — Envío de correos electrónicos (newsletter y transaccionales)</li>
-          <li><strong>Vercel</strong> — Alojamiento de la aplicación web</li>
+          <li><strong>Supabase</strong>: Alojamiento de base de datos y autenticación</li>
+          <li><strong>Google</strong>: Autenticación OAuth (inicio de sesión)</li>
+          <li><strong>xAI (Grok)</strong>: Modelo de IA que potencia el asistente educativo</li>
+          <li><strong>Wompi</strong>: Procesamiento de pagos</li>
+          <li><strong>Resend</strong>: Envío de correos electrónicos (newsletter y transaccionales)</li>
+          <li><strong>Vercel</strong>: Alojamiento de la aplicación web</li>
         </ul>
         <p>
           Cada proveedor opera bajo sus propias políticas de privacidad y cumple con estándares de seguridad de la industria.

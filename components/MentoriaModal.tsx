@@ -64,7 +64,7 @@ export default function MentoriaModal({ isOpen, onClose }: MentoriaModalProps) {
       return;
     }
     if (trimmedMessage.length < 10) {
-      setErrorMessage('Cuéntame un poco más — al menos 10 caracteres para entender tu situación.');
+      setErrorMessage('Cuéntame un poco más, al menos 10 caracteres para entender tu situación.');
       setStatus('error');
       return;
     }

@@ -106,12 +106,12 @@ const LandingPage: React.FC = () => {
       transition={{ duration: 0.5 }}
     >
       <Helmet>
-        <title>Hablemos Cripto — Aprende Bitcoin y Criptomonedas desde Cero</title>
+        <title>Hablemos Cripto: Aprende Bitcoin y Criptomonedas desde Cero</title>
         <meta name="description" content="Plataforma educativa de criptomonedas en español para Latinoamérica. Aprende Bitcoin, blockchain, DeFi y trading con cursos estructurados, quizzes y asistente IA." />
-        <meta property="og:title" content="Hablemos Cripto — Aprende Bitcoin y Criptomonedas desde Cero" />
+        <meta property="og:title" content="Hablemos Cripto: Aprende Bitcoin y Criptomonedas desde Cero" />
         <meta property="og:description" content="Plataforma educativa de criptomonedas en español para Latinoamérica. Aprende Bitcoin, blockchain, DeFi y trading con cursos estructurados." />
         <meta property="og:url" content="https://hablemoscripto.io" />
-        <meta name="twitter:title" content="Hablemos Cripto — Aprende Bitcoin y Criptomonedas desde Cero" />
+        <meta name="twitter:title" content="Hablemos Cripto: Aprende Bitcoin y Criptomonedas desde Cero" />
         <meta name="twitter:description" content="Plataforma educativa de criptomonedas en español para Latinoamérica." />
         <link rel="canonical" href="https://hablemoscripto.io" />
       </Helmet>
@@ -216,7 +216,7 @@ const LandingPage: React.FC = () => {
                     {[
                         { q: '¿Es gratis?', a: 'El Nivel Principiante (19 lecciones) es 100% gratuito, sin tarjeta. Los niveles Intermedio y Avanzado son parte de los planes Inversor y Cripto Experto, con acceso de por vida y un solo pago.' },
                         { q: '¿Necesito experiencia previa en criptomonedas?', a: 'No. Empezamos desde cero, explicando qué es el dinero y por qué importa. No asumimos ningún conocimiento previo.' },
-                        { q: '¿Qué diferencia hay con lo que ya está gratis en YouTube y Twitter?', a: 'El contenido gratuito te da fragmentos sin orden y muchas veces está pagado por quien quiere venderte algo después — señales, tokens, cursos caros. Aquí tienes un currículum estructurado de 44 lecciones, profundizo en los temas en charlas semanales y mi modelo es transparente: tú pagas la plataforma, no terceros que quieran sacar comisión de tus decisiones.' },
+                        { q: '¿Qué diferencia hay con lo que ya está gratis en YouTube y Twitter?', a: 'El contenido gratuito te da fragmentos sin orden y muchas veces está pagado por quien quiere venderte algo después: señales, tokens, cursos caros. Aquí tienes un currículum estructurado de 44 lecciones, profundizo en los temas en charlas semanales y mi modelo es transparente: tú pagas la plataforma, no terceros que quieran sacar comisión de tus decisiones.' },
                         { q: '¿Cuánto tiempo toma completar un nivel?', a: 'El Nivel Principiante toma aproximadamente 8 horas. El Intermedio unas 8 horas y el Avanzado unas 11 horas. Puedes avanzar a tu propio ritmo.' },
                         { q: '¿Es seguro invertir en criptomonedas?', a: 'Las criptomonedas son activos de alto riesgo. Por eso enseñamos seguridad primero: cómo proteger tu wallet, evitar estafas, y gestionar el riesgo antes de invertir un solo peso.' },
                         { q: '¿Quién es CBas?', a: 'CBas tiene 7+ años navegando mercados de criptomonedas, incluyendo ciclos alcistas y bajistas completos. Creó Hablemos Cripto para dar a la comunidad LATAM las herramientas que él hubiera querido tener cuando empezó.' },

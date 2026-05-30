@@ -856,7 +856,7 @@ const Quiz: React.FC<QuizProps> = ({
                         ) : (
                             <div className="space-y-4">
                                 <p className="text-navy-300">
-                                    Necesitas el 70% para aprobar — te {passThreshold - correctCount === 1 ? 'falta' : 'faltan'} <span className="text-white font-bold">{passThreshold - correctCount}</span> {passThreshold - correctCount === 1 ? 'respuesta correcta más' : 'respuestas correctas más'}.
+                                    Necesitas el 70% para aprobar, te {passThreshold - correctCount === 1 ? 'falta' : 'faltan'} <span className="text-white font-bold">{passThreshold - correctCount}</span> {passThreshold - correctCount === 1 ? 'respuesta correcta más' : 'respuestas correctas más'}.
                                 </p>
                                 <p className="text-sm text-navy-400">
                                     Revisa las explicaciones arriba y vuelve a intentarlo.

@@ -273,7 +273,7 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
             <Wallet size={24} aria-hidden="true" className="text-navy-300" />
           </div>
           <div>
-            <p className="text-base font-bold text-white mb-1">Pagos en cripto — próximamente</p>
+            <p className="text-base font-bold text-white mb-1">Pagos en cripto (próximamente)</p>
             <p className="text-sm text-navy-400 max-w-sm mx-auto leading-relaxed">
               Por ahora, completa tu compra con tarjeta. Vamos a habilitar USDC en una próxima fase.
             </p>
