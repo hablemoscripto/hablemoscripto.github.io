@@ -18,7 +18,11 @@ export function EntitlementsProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const userId = user?.id;
   const [entitlements, setEntitlements] = useState<UserEntitlements>(ANONYMOUS_ENTITLEMENTS);
-  const [loading, setLoading] = useState(false);
+  // Start true (mirroring Auth/Progress contexts) so consumer guards like
+  // `!entitlementsLoading && !canAccessLevel(...)` don't treat the default
+  // anonymous entitlements as authoritative on the first render — that flashed a
+  // "pay to unlock" paywall to paying users deep-linking/refreshing paid lessons.
+  const [loading, setLoading] = useState(true);
 
   // Re-fetch on auth identity change (login / logout / account switch).
   // Depending on `userId` rather than `user` avoids re-fetching on benign
@@ -26,6 +30,7 @@ export function EntitlementsProvider({ children }: { children: ReactNode }) {
   const refresh = useCallback(async () => {
     if (!userId) {
       setEntitlements(ANONYMOUS_ENTITLEMENTS);
+      setLoading(false);
       return;
     }
     setLoading(true);

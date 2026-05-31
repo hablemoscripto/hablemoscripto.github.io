@@ -264,12 +264,12 @@ export async function getUserEntitlements(
     }
   }
 
+  // is_premium is already confirmed true above. Mirror the server gate
+  // (get-lesson-content checks is_premium only): any premium user gets at least
+  // full course access (inversor); vip adds the experto/community tier. This
+  // avoids locking out a premium row whose tier is null/unrecognized.
   const courseTier: CourseTier =
-    data.premium_tier === 'vip'
-      ? 'experto'
-      : data.premium_tier === 'premium'
-        ? 'inversor'
-        : 'free';
+    data.premium_tier === 'vip' ? 'experto' : 'inversor';
 
   // Cripto Experto (vip) includes lifetime community access; Inversor doesn't.
   const communityStatus: CommunityStatus =

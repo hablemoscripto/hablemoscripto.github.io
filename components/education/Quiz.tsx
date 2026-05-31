@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import {
     CheckCircle,
@@ -299,6 +299,18 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
 }) => {
     const q = question as OrderingQuestion;
     const currentOrder: number[] = Array.isArray(answer) ? answer as number[] : q.items.map((_, i) => i);
+
+    // Seed the identity order as the answer on mount so the displayed default
+    // order counts as a real (and possibly already-correct) answer. Without this
+    // the question reads as "unanswered" and blocks submission until the user
+    // nudges an item, even when the shown order is correct.
+    useEffect(() => {
+        if (!Array.isArray(answer)) {
+            onAnswer(q.items.map((_, i) => i));
+        }
+        // Run once on mount for this question.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const moveItem = (fromIndex: number, direction: 'up' | 'down') => {
         if (submitted) return;

@@ -36,6 +36,7 @@ import {
   Brain,
   Eye,
   Crosshair,
+  MessageSquare,
 } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
 import * as dotenv from 'dotenv';
@@ -96,6 +97,7 @@ const ICONS: Record<string, LucideIcon> = {
   Brain,
   Eye,
   Crosshair,
+  MessageSquare,
 };
 
 function getIconName(icon: LucideIcon): string | null {

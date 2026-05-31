@@ -117,9 +117,11 @@ const ACHIEVEMENT_DEFINITIONS: AchievementDefinition[] = [
     {
         id: 'xp_5000',
         title: 'Sabio Cripto',
-        description: 'Acumula 5,000 XP',
+        description: 'Acumula 4,000 XP',
         icon: 'Star',
-        condition: (d) => d.xp >= 5000,
+        // Max XP is 44 lessons x 100 = 4400, so the top tier must sit at or below
+        // that to be reachable. Keep the id stable to preserve persisted unlocks.
+        condition: (d) => d.xp >= 4000,
     },
     {
         id: 'streak_3',
@@ -146,6 +148,7 @@ interface GamificationContextType {
     pendingToasts: Achievement[];
     addXp: (amount: number) => void;
     checkAchievements: (progressData: ProgressSnapshot, silent?: boolean) => void;
+    refreshStreak: () => Promise<number>;
     dismissToast: (id: string) => void;
     loading: boolean;
 }
@@ -222,6 +225,53 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
         }
     }, [achievements, user]);
 
+    // Recompute the streak from completed_at timestamps and return it. Exposed so
+    // a lesson completion can refresh the streak mid-session (it would otherwise
+    // stay frozen at login until a full page reload).
+    const refreshStreak = useCallback(async (): Promise<number> => {
+        if (!user) return 0;
+        try {
+            const { data: completions } = await supabase
+                .from('user_progress')
+                .select('completed_at')
+                .eq('user_id', user.id)
+                .eq('completed', true);
+
+            let streakCount = 0;
+            if (completions && completions.length > 0) {
+                const uniqueDates = [...new Set(
+                    completions
+                        .filter(c => c.completed_at)
+                        .map(c => new Date(c.completed_at).toLocaleDateString('en-CA'))
+                )].sort().reverse();
+
+                if (uniqueDates.length > 0) {
+                    const today = new Date().toLocaleDateString('en-CA');
+                    const yesterday = new Date(Date.now() - 86400000).toLocaleDateString('en-CA');
+                    if (uniqueDates[0] === today || uniqueDates[0] === yesterday) {
+                        streakCount = 1;
+                        for (let i = 1; i < uniqueDates.length; i++) {
+                            // Parse as UTC midnights so DST transitions (23h/25h local
+                            // days) don't break the consecutive-day check for LATAM users.
+                            const curr = Date.parse(uniqueDates[i - 1] + 'T00:00:00Z');
+                            const prev = Date.parse(uniqueDates[i] + 'T00:00:00Z');
+                            if (curr - prev === 86400000) {
+                                streakCount++;
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            setStreak(streakCount);
+            return streakCount;
+        } catch (error) {
+            reportError(error, { component: 'GamificationContext', action: 'refreshStreak' });
+            return 0;
+        }
+    }, [user]);
+
     const fetchUserStats = async () => {
         if (!user) return;
 
@@ -240,42 +290,8 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
             const calculatedXp = (count || 0) * 100;
             setXp(calculatedXp);
 
-            // 2. Calculate streak from consecutive calendar days with completions
-            const { data: completions } = await supabase
-                .from('user_progress')
-                .select('completed_at')
-                .eq('user_id', user.id)
-                .eq('completed', true);
-
-            if (completions && completions.length > 0) {
-                const uniqueDates = [...new Set(
-                    completions
-                        .filter(c => c.completed_at)
-                        .map(c => new Date(c.completed_at).toLocaleDateString('en-CA'))
-                )].sort().reverse();
-
-                if (uniqueDates.length > 0) {
-                    const today = new Date().toLocaleDateString('en-CA');
-                    const yesterday = new Date(Date.now() - 86400000).toLocaleDateString('en-CA');
-
-                    if (uniqueDates[0] === today || uniqueDates[0] === yesterday) {
-                        let streakCount = 1;
-                        for (let i = 1; i < uniqueDates.length; i++) {
-                            const curr = new Date(uniqueDates[i - 1] + 'T00:00:00');
-                            const prev = new Date(uniqueDates[i] + 'T00:00:00');
-                            const diffMs = curr.getTime() - prev.getTime();
-                            if (diffMs === 86400000) {
-                                streakCount++;
-                            } else {
-                                break;
-                            }
-                        }
-                        setStreak(streakCount);
-                    } else {
-                        setStreak(0);
-                    }
-                }
-            }
+            // 2. Streak from consecutive calendar days with completions
+            await refreshStreak();
 
             // 3. Load achievements: try Supabase first, fall back to localStorage
             const { data: dbAchievements, error: achError } = await supabase
@@ -367,9 +383,9 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
         xp, level, streak, achievements,
         achievementDefinitions: ACHIEVEMENT_DEFINITIONS,
         pendingToasts,
-        addXp, checkAchievements, dismissToast,
+        addXp, checkAchievements, refreshStreak, dismissToast,
         loading,
-    }), [xp, level, streak, achievements, pendingToasts, addXp, checkAchievements, dismissToast, loading]);
+    }), [xp, level, streak, achievements, pendingToasts, addXp, checkAchievements, refreshStreak, dismissToast, loading]);
 
     return (
         <GamificationContext.Provider value={value}>

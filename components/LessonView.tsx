@@ -44,6 +44,7 @@ const LessonView: React.FC = () => {
     const [, setActiveSection] = useState(0);
     const [showQuiz, setShowQuiz] = useState(false);
     const [quizPassed, setQuizPassed] = useState(false);
+    const [saveError, setSaveError] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
     const [showCert, setShowCert] = useState(false);
 
@@ -113,8 +114,9 @@ const LessonView: React.FC = () => {
         setActiveSection(0);
          
         setShowQuiz(false);
-         
+
         setQuizPassed(false);
+        setSaveError(false);
     }, [id]);
 
     // Clean up body overflow on unmount (in case lightbox was open)
@@ -257,8 +259,16 @@ const LessonView: React.FC = () => {
     const studentName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'Estudiante';
 
     const handleQuizComplete = async (score: number) => {
-        await markLessonComplete(id, score);
-        setQuizPassed(true);
+        // Only show the success/certificate state if the completion actually
+        // persisted — otherwise a silent save failure would falsely claim "+100 XP"
+        // and (on a level's last lesson) hide the certificate with no explanation.
+        const saved = await markLessonComplete(id, score);
+        if (saved) {
+            setSaveError(false);
+            setQuizPassed(true);
+        } else {
+            setSaveError(true);
+        }
     };
 
     const handleNextLesson = () => {
@@ -523,6 +533,20 @@ const LessonView: React.FC = () => {
                                                 >
                                                     Siguiente Lección <ArrowRight size={20} />
                                                 </button>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {saveError && !quizPassed && (
+                                        <div className="mt-8 text-center" role="alert" aria-live="assertive">
+                                            <div className="inline-flex flex-col items-center gap-2 p-6 rounded-2xl bg-red-500/10 border border-red-500/20">
+                                                <div className="flex items-center gap-2 text-red-400 text-sm font-bold">
+                                                    <AlertCircle size={18} aria-hidden="true" />
+                                                    No pudimos guardar tu progreso
+                                                </div>
+                                                <p className="text-navy-300 text-sm max-w-sm">
+                                                    Revisa tu conexión y vuelve a enviar el quiz. Tu avance no se perderá.
+                                                </p>
                                             </div>
                                         </div>
                                     )}

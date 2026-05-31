@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useProgress } from '../contexts/ProgressContext';
 import {
   loadReviewState,
@@ -49,17 +49,25 @@ export function useDailyReview(): UseDailyReviewResult {
   const today = todayISO();
   const alreadyDone = reviewState.lastDate === today;
 
-  // Pick a question by deriving from inputs — no state mirror needed. The
-  // picker is deterministic-per-inputs thanks to a memoized seed, so re-renders
-  // don't shuffle the question mid-session.
-  const question = useMemo<ReviewQuestion | null>(() => {
-    if (loading) return null;
-    if (alreadyDone) return null;
-    if (dismissed) return null;
-    if (completions.length < 3) return null;
-    return pickReviewQuestion(completions, reviewState);
-    // reviewState only changes on answer/dismiss, so this is stable per day.
-  }, [loading, alreadyDone, dismissed, completions, reviewState]);
+  // Whether the card should currently offer a question. Gated on
+  // `selectedIndex === null` for the already-done case so that answering today
+  // (which flips alreadyDone true) does NOT hide the question being answered —
+  // that was the bug where the whole card vanished the instant you answered.
+  const eligible =
+    !loading && completions.length >= 3 && !dismissed && !(alreadyDone && selectedIndex === null);
+
+  // Freeze the picked question for the session. pickReviewQuestion is random AND
+  // excludes reviewState.lastQuestionId, so re-deriving it after answer() writes
+  // lastQuestionId would swap in a different question under the answered-state UI.
+  const [picked, setPicked] = useState<ReviewQuestion | null>(null);
+  useEffect(() => {
+    if (eligible && !picked) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPicked(pickReviewQuestion(completions, reviewState));
+    }
+  }, [eligible, picked, completions, reviewState]);
+
+  const question = eligible ? picked : null;
 
   const answer = useCallback(
     (index: number) => {

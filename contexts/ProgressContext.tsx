@@ -18,7 +18,7 @@ interface ProgressContextType {
   loading: boolean;
   isLessonCompleted: (lessonId: number) => boolean;
   getQuizScore: (lessonId: number) => number | null;
-  markLessonComplete: (lessonId: number, quizScore?: number) => Promise<void>;
+  markLessonComplete: (lessonId: number, quizScore?: number) => Promise<boolean>;
   getCompletedCount: () => number;
   getTotalLessons: () => number;
   getProgressPercentage: () => number;
@@ -30,7 +30,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState<LessonProgress[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
-  const { addXp, checkAchievements, xp, streak } = useGamification();
+  const { addXp, checkAchievements, refreshStreak, xp, streak } = useGamification();
 
   const loadProgress = useCallback(async () => {
     if (!user) return;
@@ -94,8 +94,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     return lesson?.quizScore ?? null;
   }, [progress]);
 
-  const markLessonComplete = useCallback(async (lessonId: number, quizScore?: number) => {
-    if (!user) return;
+  const markLessonComplete = useCallback(async (lessonId: number, quizScore?: number): Promise<boolean> => {
+    if (!user) return false;
 
     const wasAlreadyCompleted = progress.some(p => p.lessonId === lessonId && p.completed);
 
@@ -114,7 +114,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
       if (error) {
         reportError(error, { component: 'ProgressContext', action: 'markLessonComplete' });
-        return;
+        return false;
       }
 
       // Update local state
@@ -139,13 +139,18 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       });
     } catch (error) {
       reportError(error, { component: 'ProgressContext', action: 'markLessonComplete' });
-      return;
+      return false;
     }
 
     // Award XP and check achievements for new completions only
     if (!wasAlreadyCompleted) {
       addXp(100);
       trackLessonComplete(lessonId, quizScore);
+
+      // Recompute the streak now so the navbar updates immediately and the
+      // streak achievements are evaluated against today's activity rather than
+      // the value frozen at login.
+      const newStreak = await refreshStreak();
 
       const allLessons = getAllLessonsOrdered();
       const updatedCompleted = [...progress.filter(p => p.completed).map(p => p.lessonId), lessonId];
@@ -158,10 +163,12 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         totalLessons,
         progressPercentage: totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0,
         xp: newXp,
-        streak,
+        streak: newStreak,
       });
     }
-  }, [user, progress, xp, streak, addXp, checkAchievements]);
+
+    return true;
+  }, [user, progress, xp, addXp, checkAchievements, refreshStreak]);
 
   const getCompletedCount = useCallback((): number => {
     return progress.filter((p) => p.completed).length;

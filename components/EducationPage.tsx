@@ -348,7 +348,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           studentName={user?.user_metadata?.full_name || user?.email?.split('@')[0] || "Estudiante"}
           courseName={activeCertificate.title}
           level={activeCertificate.level}
-          date={new Date().toLocaleDateString()}
+          date={new Date().toLocaleDateString('es-CO')}
           variant={activeCertificate.variant}
           onClose={() => setActiveCertificate(null)}
         />

@@ -98,10 +98,14 @@ export default function SectionRenderer({ section, checkpoint, onImageClick }: S
                 {/* Features Grid */}
                 {section.features && section.features.length > 0 && (
                     <div className="grid gap-4 my-6 not-prose">
-                        {section.features.map((feature: { icon?: string; title?: string; text?: string }, i: number) => {
-                            const IconComponent = typeof feature.icon === 'string'
-                                ? ICON_MAP[feature.icon]
-                                : null;
+                        {section.features.map((feature: { icon?: unknown; title?: string; text?: string }, i: number) => {
+                            // Paid lessons (DB-served) store icon as a string name resolved via
+                            // ICON_MAP; free lessons (bundled from courseData) carry the Lucide
+                            // component reference directly. Handle both so icons render either way.
+                            const rawIcon = feature.icon;
+                            const IconComponent = typeof rawIcon === 'string'
+                                ? ICON_MAP[rawIcon]
+                                : ((rawIcon as React.ComponentType<{ size?: number; className?: string }> | undefined) ?? null);
                             return (
                                 <div key={i} className="bg-navy-900/50 p-5 rounded-xl border border-navy-700/50 hover:border-brand-500/30 transition-colors">
                                     <div className="flex items-start gap-4">
