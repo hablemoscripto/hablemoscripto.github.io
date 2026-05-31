@@ -8,11 +8,14 @@ import { sendFundadorWelcome } from '../_shared/welcome-email.ts'
 // When reviving, port to the PlanId vocab and the new entitlement columns
 // (course_tier / community_status) once the schema migration lands.
 
-const ALLOWED_ORIGIN = 'https://hablemoscripto.io'
+const ALLOWED_ORIGINS = ['https://hablemoscripto.io', 'https://www.hablemoscripto.io']
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+function buildCorsHeaders(origin: string | null) {
+  const allowed = origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
+  return {
+    'Access-Control-Allow-Origin': allowed,
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -110,16 +113,6 @@ interface SolanaTransaction {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-
-function jsonResponse(
-  body: Record<string, unknown>,
-  status: number,
-): Response {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-  })
-}
 
 /**
  * Fetch a parsed Solana transaction via JSON-RPC.
@@ -246,6 +239,14 @@ function isMatchingTransfer(
 // ---------------------------------------------------------------------------
 
 serve(async (req) => {
+  const corsHeaders = buildCorsHeaders(req.headers.get('Origin'))
+
+  const jsonResponse = (body: Record<string, unknown>, status: number): Response =>
+    new Response(JSON.stringify(body), {
+      status,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
+
   // CORS preflight
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
