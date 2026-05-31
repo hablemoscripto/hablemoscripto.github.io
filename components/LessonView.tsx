@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, ArrowRight, ArrowLeft, ExternalLink, Lock } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, ArrowRight, ArrowLeft, ExternalLink, Lock, Award } from 'lucide-react';
 import VideoPlayer from './ui/VideoPlayer';
 import ImageLightbox from './lesson/ImageLightbox';
 import SelectionTooltip from './lesson/SelectionTooltip';
@@ -8,13 +8,19 @@ import { useProgress } from '../contexts/ProgressContext';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Quiz from './education/Quiz';
-import { getPreviousLessonId, getLevelForLesson } from '../utils/courseUtils';
+import { getPreviousLessonId, getLevelForLesson, getBeginnerLessonIds, getIntermediateLessonIds, getAdvancedLessonIds } from '../utils/courseUtils';
 import { fetchLessonById, LessonData } from '../services/lessonService';
 import { useEntitlements } from '../contexts/EntitlementsContext';
-import { canAccessLevel } from '../services/paymentService';
+import { canAccessLevel, hasCommunityAccess } from '../services/paymentService';
 import UpgradePaywall from './ui/UpgradePaywall';
+import Certificate from './ui/Certificate';
+import { useAuth } from '../contexts/AuthContext';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { useLessonNavigation } from '../hooks/useLessonNavigation';
+
+// Cripto Experto Discord invite. Keep in sync with EducationNavbar + the
+// Experto welcome email (_shared/welcome-email.ts).
+const COMMUNITY_INVITE_URL = 'https://discord.gg/CQYyvzQb65';
 
 declare global {
     interface Window {
@@ -27,6 +33,7 @@ const LessonView: React.FC = () => {
     const navigate = useNavigate();
     const { isLessonCompleted, markLessonComplete, loading } = useProgress();
     const { entitlements, loading: entitlementsLoading } = useEntitlements();
+    const { user } = useAuth();
 
     const id = lessonId ? parseInt(lessonId, 10) : NaN;
     const isValidId = !isNaN(id) && id > 0;
@@ -38,6 +45,7 @@ const LessonView: React.FC = () => {
     const [showQuiz, setShowQuiz] = useState(false);
     const [quizPassed, setQuizPassed] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
+    const [showCert, setShowCert] = useState(false);
 
     // Custom hooks
     const scrollProgress = useScrollProgress();
@@ -239,6 +247,15 @@ const LessonView: React.FC = () => {
 
     const isCompleted = isLessonCompleted(id);
 
+    // Did finishing this lesson complete the whole level? (Sequential locking
+    // guarantees the others are done.) Drives the in-flow certificate moment.
+    const levelLessonIds =
+        lessonLevel === 'beginner' ? getBeginnerLessonIds()
+        : lessonLevel === 'intermediate' ? getIntermediateLessonIds()
+        : getAdvancedLessonIds();
+    const levelJustCompleted = quizPassed && levelLessonIds.length > 0 && levelLessonIds.every((lid) => isLessonCompleted(lid));
+    const studentName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'Estudiante';
+
     const handleQuizComplete = async (score: number) => {
         await markLessonComplete(id, score);
         setQuizPassed(true);
@@ -271,6 +288,17 @@ const LessonView: React.FC = () => {
 
             <SelectionTooltip />
             <ImageLightbox image={lightboxImage} onClose={closeLightbox} />
+
+            {showCert && (
+                <Certificate
+                    studentName={studentName}
+                    courseName="Curso de Criptomonedas"
+                    level={LEVEL_TITLES[lessonLevel] ?? 'Nivel'}
+                    date={new Date().toLocaleDateString('es-CO')}
+                    variant={(lessonLevel as 'beginner' | 'intermediate' | 'advanced')}
+                    onClose={() => setShowCert(false)}
+                />
+            )}
 
             <div className="min-h-screen bg-navy-950 pb-20">
                 {/* Progress Bar Fixed Top */}
@@ -456,7 +484,33 @@ const LessonView: React.FC = () => {
                                         onComplete={handleQuizComplete}
                                     />
 
-                                    {quizPassed && (
+                                    {quizPassed && levelJustCompleted && (
+                                        <div className="mt-8 text-center animate-in zoom-in" role="status" aria-live="polite">
+                                            <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl bg-gradient-to-br from-brand-500/15 to-brand-400/5 border border-brand-500/30">
+                                                <div className="flex items-center gap-2 text-brand-400 font-bold uppercase tracking-widest text-xs">
+                                                    <Award size={18} aria-hidden="true" />
+                                                    Completaste el {LEVEL_TITLES[lessonLevel] ?? 'nivel'}
+                                                </div>
+                                                <p className="text-navy-200 text-sm max-w-sm">Terminaste todas las lecciones de este nivel. Reclama tu certificado y compártelo.</p>
+                                                <div className="flex flex-col sm:flex-row gap-3">
+                                                    <button
+                                                        onClick={() => setShowCert(true)}
+                                                        className="px-8 py-4 bg-brand-500 hover:bg-brand-400 text-navy-950 font-black uppercase tracking-widest text-xs rounded-xl shadow-glow-brand inline-flex items-center gap-2 hover:scale-105 active:scale-[0.98] transition-all"
+                                                    >
+                                                        <Award size={18} aria-hidden="true" /> Ver mi certificado
+                                                    </button>
+                                                    <button
+                                                        onClick={handleNextLesson}
+                                                        className="px-6 py-4 bg-navy-800 hover:bg-navy-700 text-white font-bold rounded-xl transition-all inline-flex items-center gap-2"
+                                                    >
+                                                        Continuar <ArrowRight size={20} />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {quizPassed && !levelJustCompleted && (
                                         <div className="mt-8 text-center animate-in zoom-in" role="status" aria-live="polite">
                                             <div className="inline-flex flex-col items-center gap-3 p-6 rounded-2xl bg-green-500/10 border border-green-500/20">
                                                 <div className="flex items-center gap-2 text-green-400 text-sm font-bold">
@@ -555,8 +609,9 @@ const LessonView: React.FC = () => {
                             <div className="bg-navy-900 rounded-2xl border border-navy-800 p-6">
                                 <h3 className="font-bold text-white mb-4">Recursos</h3>
                                 <div className="space-y-3">
+                                    {hasCommunityAccess(entitlements) && (
                                     <a
-                                        href="https://discord.gg/W8haa7dDV3"
+                                        href={COMMUNITY_INVITE_URL}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-full flex items-center justify-between p-3 bg-navy-800 rounded-xl hover:bg-navy-700 hover:border-brand-500/30 border border-transparent transition-all text-left group"
@@ -567,6 +622,7 @@ const LessonView: React.FC = () => {
                                         </div>
                                         <ExternalLink size={14} className="text-navy-400 group-hover:text-brand-400 transition-colors" />
                                     </a>
+                                    )}
                                     <a
                                         href={`mailto:hablemoscripto@gmail.com?subject=${encodeURIComponent(`Feedback · Lección ${lesson.number?.split(' ')[0] || id}: ${lesson.title}`)}`}
                                         className="w-full flex items-center justify-between p-3 bg-navy-800 rounded-xl hover:bg-navy-700 hover:border-brand-500/30 border border-transparent transition-all text-left group"

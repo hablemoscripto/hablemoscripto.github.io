@@ -180,10 +180,14 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           return;
         }
 
-        // Create a map of lesson ID to level ID
+        // Create a map of lesson ID to level ID. PostgREST returns the to-one
+        // `modules` embed as an object, but can return an array depending on
+        // relationship detection — handle both so progress always maps.
         const lessonToLevel: Record<number, string> = {};
-        lessonsData?.forEach((lesson: { id: number; modules: { level_id: string }[] }) => {
-          lessonToLevel[lesson.id] = lesson.modules[0]?.level_id;
+        lessonsData?.forEach((lesson: { id: number; modules: { level_id: string } | { level_id: string }[] }) => {
+          const m = lesson.modules;
+          const levelId = Array.isArray(m) ? m[0]?.level_id : m?.level_id;
+          if (levelId) lessonToLevel[lesson.id] = levelId;
         });
 
         // Map completed lessons to their levels

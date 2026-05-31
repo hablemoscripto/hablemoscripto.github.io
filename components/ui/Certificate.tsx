@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { Bitcoin, Award, Sparkles } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Bitcoin, Award, Sparkles, Download, Share2, Loader2 } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { toPng } from 'html-to-image';
 
 interface CertificateProps {
     studentName: string;
@@ -45,6 +46,55 @@ const VARIANT_STYLES = {
 const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, level, date, variant = 'beginner', onClose }) => {
     const styles = VARIANT_STYLES[variant];
     const shouldReduceMotion = useReducedMotion();
+    const certRef = useRef<HTMLDivElement>(null);
+    const [busy, setBusy] = useState(false);
+    const fileName = `certificado-${variant}-hablemoscripto.png`;
+
+    const renderPng = async (): Promise<string | null> => {
+        if (!certRef.current) return null;
+        try {
+            // Render at 2x and wait a tick so fonts/gradients are settled.
+            return await toPng(certRef.current, { pixelRatio: 2, cacheBust: true, backgroundColor: '#020617' });
+        } catch (err) {
+            console.error('Certificate export failed:', err);
+            return null;
+        }
+    };
+
+    const handleDownload = async () => {
+        setBusy(true);
+        const url = await renderPng();
+        setBusy(false);
+        if (!url) return;
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        a.click();
+    };
+
+    const handleShare = async () => {
+        setBusy(true);
+        const url = await renderPng();
+        if (!url) { setBusy(false); return; }
+        try {
+            const blob = await (await fetch(url)).blob();
+            const file = new File([blob], fileName, { type: 'image/png' });
+            const nav = navigator as Navigator & { canShare?: (d: ShareData) => boolean };
+            if (nav.canShare && nav.canShare({ files: [file] })) {
+                await nav.share({ files: [file], title: 'Mi certificado de Hablemos Cripto', text: `Completé el nivel ${level} en Hablemos Cripto.` });
+            } else {
+                // No native share (most desktops): fall back to downloading the image.
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                a.click();
+            }
+        } catch {
+            // User cancelled the share sheet, or it's unsupported — no-op.
+        } finally {
+            setBusy(false);
+        }
+    };
 
     useEffect(() => {
         if (shouldReduceMotion) return;
@@ -71,15 +121,23 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                 initial={shouldReduceMotion ? { opacity: 0 } : { scale: 0.9, opacity: 0, y: 20 }}
                 animate={shouldReduceMotion ? { opacity: 1 } : { scale: 1, opacity: 1, y: 0 }}
                 transition={{ duration: shouldReduceMotion ? 0.2 : 0.5, ease: 'easeOut' }}
-                className={`relative max-w-3xl w-full rounded-3xl overflow-hidden ${styles.glowColor}`}
+                className={`relative max-w-3xl w-full`}
             >
-                {/* Print/Close Controls */}
-                <div className="absolute -top-12 right-0 flex gap-4 print:hidden z-20">
+                {/* Export / Close Controls (not part of the captured image) */}
+                <div className="absolute -top-12 right-0 flex gap-3 z-20">
                     <button
-                        onClick={() => window.print()}
-                        className="px-4 py-2 bg-brand-500 text-navy-900 font-bold rounded-lg hover:bg-brand-400 transition-colors flex items-center gap-2"
+                        onClick={handleDownload}
+                        disabled={busy}
+                        className="px-4 py-2 bg-brand-500 text-navy-900 font-bold rounded-lg hover:bg-brand-400 transition-colors flex items-center gap-2 disabled:opacity-60"
                     >
-                        <Award size={20} /> Guardar PDF
+                        {busy ? <Loader2 size={18} className="animate-spin" aria-hidden="true" /> : <Download size={18} aria-hidden="true" />} Descargar
+                    </button>
+                    <button
+                        onClick={handleShare}
+                        disabled={busy}
+                        className="px-4 py-2 bg-navy-800 text-white font-medium rounded-lg hover:bg-navy-700 transition-colors flex items-center gap-2 disabled:opacity-60"
+                    >
+                        <Share2 size={18} aria-hidden="true" /> Compartir
                     </button>
                     <button
                         onClick={onClose}
@@ -89,6 +147,8 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                     </button>
                 </div>
 
+                {/* Certificate visual — this node is captured as the shareable PNG */}
+                <div ref={certRef} className={`relative rounded-3xl overflow-hidden bg-navy-950 ${styles.glowColor}`}>
                 {/* Gradient border effect */}
                 <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${styles.gradientBorder} p-[1px]`}>
                     <div className="w-full h-full rounded-3xl bg-navy-950" />
@@ -162,6 +222,7 @@ const Certificate: React.FC<CertificateProps> = ({ studentName, courseName, leve
                             <p className="text-navy-400 text-xs uppercase tracking-widest mt-1">Certificación</p>
                         </div>
                     </div>
+                </div>
                 </div>
             </motion.div>
 
