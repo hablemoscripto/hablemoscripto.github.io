@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Menu, X, Bitcoin, ExternalLink, User, LogOut } from 'lucide-react';
+import { Menu, X, Bitcoin, Users, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -274,14 +274,12 @@ const Navbar: React.FC = () => {
                 )}
 
                 <a
-                  href="https://discord.gg/W8haa7dDV3"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#pricing"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center justify-center gap-3 w-full bg-navy-900 hover:bg-navy-800 border border-white/10 hover:border-brand-500/40 text-white font-bold py-4 px-6 rounded-2xl transition-all"
                 >
-                  <ExternalLink size={18} className="text-navy-400" />
-                  Comunidad Discord
+                  <Users size={18} className="text-navy-400" />
+                  Comunidad Privada
                 </a>
               </div>
             </nav>

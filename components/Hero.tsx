@@ -158,15 +158,14 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
                 <span>COMENZAR CURSO</span>
               </button>
               
-              <a
-                href="https://discord.gg/W8haa7dDV3"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
                 className="w-full sm:w-auto px-10 py-5 bg-navy-900 text-white font-bold rounded-2xl border border-white/5 hover:border-brand-500/30 hover:bg-navy-800 transition-all flex items-center justify-center gap-3 group text-lg"
               >
                 <Users size={24} className="text-navy-400 group-hover:text-brand-500 transition-colors" />
-                <span>COMUNIDAD</span>
-              </a>
+                <span>COMUNIDAD PRIVADA</span>
+              </button>
             </div>
 
             {/* Stats Grid - Centered & Glassmorphism */}
