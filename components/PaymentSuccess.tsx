@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { CheckCircle, XCircle, Clock, Loader2, Home } from 'lucide-react';
 import { getPaymentByReference } from '../services/paymentService';
+import { useEntitlements } from '../contexts/EntitlementsContext';
 import { reportError } from '../utils/errorReporting';
 
 type PaymentStatus = 'loading' | 'APPROVED' | 'PENDING' | 'DECLINED' | 'VOIDED' | 'ERROR';
@@ -14,6 +15,16 @@ export default function PaymentSuccess() {
   const [pollExhausted, setPollExhausted] = useState(false);
   const statusRef = useRef(status);
   const attemptsRef = useRef(0);
+
+  // When the payment is confirmed APPROVED, the webhook has already granted
+  // premium server-side. Refresh the cached entitlements (once) so navigating
+  // to /education shows the unlocked content without a re-login.
+  const { refresh: refreshEntitlements } = useEntitlements();
+  const refreshRef = useRef(refreshEntitlements);
+  const refreshedRef = useRef(false);
+  useEffect(() => {
+    refreshRef.current = refreshEntitlements;
+  }, [refreshEntitlements]);
 
   // Keep the ref in sync with state — read inside the polling interval below.
   // Must be in an effect, not in render: refs should not be mutated during
@@ -37,6 +48,10 @@ export default function PaymentSuccess() {
         const payment = await getPaymentByReference(reference!);
         setStatus(payment.status as PaymentStatus);
         setProductName(payment.product_name || 'Premium');
+        if (payment.status === 'APPROVED' && !refreshedRef.current) {
+          refreshedRef.current = true;
+          void refreshRef.current();
+        }
       } catch (error) {
         reportError(error, { component: 'PaymentSuccess', action: 'checkPayment' });
         setStatus('ERROR');
@@ -86,6 +101,7 @@ export default function PaymentSuccess() {
             </div>
             <h1 className="text-2xl font-bold text-white mb-4">Pago Exitoso</h1>
             <p className="text-navy-400 mb-2">Tu compra de <span className="text-brand-400 font-medium">{productName}</span> ha sido confirmada.</p>
+            <p className="text-green-400 text-sm font-medium mb-2">Tu acceso ya está activo. Toda la plataforma está desbloqueada.</p>
             <p className="text-navy-400 text-sm mb-8">Referencia: {reference}</p>
             <Link
               to="/education"
