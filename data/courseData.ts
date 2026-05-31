@@ -208,6 +208,51 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           explanation: 'La "doble coincidencia de deseos" requiere que dos personas quieran exactamente lo que la otra tiene. El dinero elimina este problema al servir como medio de intercambio universal.'
         },
         {
+          id: 'q-tf',
+          type: 'true-false',
+          question: 'Bitcoin tiene un límite máximo de 21 millones de monedas que nadie puede aumentar.',
+          correctAnswer: true,
+          explanation: 'Correcto. El límite de 21 millones está escrito en el código y asegurado por la red. A diferencia del dinero fiat, nadie puede crear más, ni gobiernos ni mineros.'
+        },
+        {
+          id: 'q-ms',
+          type: 'multiple-select',
+          question: '¿Cuáles de las siguientes son propiedades del buen dinero? Selecciona todas las correctas.',
+          options: [
+            { id: 'a', text: 'Escasez' },
+            { id: 'b', text: 'Ser visualmente bonito' },
+            { id: 'c', text: 'Divisibilidad' },
+            { id: 'd', text: 'Estar respaldado por un gobierno' },
+            { id: 'e', text: 'Portabilidad' }
+          ],
+          correctAnswers: [0, 2, 4],
+          explanation: 'Escasez, divisibilidad y portabilidad son tres de las seis propiedades del buen dinero. La apariencia no importa, y el respaldo de un gobierno no es un requisito (el oro funcionó sin él durante miles de años).'
+        },
+        {
+          id: 'q-ord',
+          type: 'ordering',
+          question: 'Ordena la evolución del dinero, de lo más antiguo a lo más reciente.',
+          items: [
+            'Trueque directo',
+            'Conchas y mercancías',
+            'Monedas de oro',
+            'Papel respaldado en oro',
+            'Dinero fiat sin respaldo'
+          ],
+          correctOrder: [0, 1, 2, 3, 4],
+          explanation: 'El dinero evolucionó del trueque a mercancías, luego al oro, después al papel respaldado en oro, y finalmente al dinero fiat sin respaldo que usamos hoy.'
+        },
+        {
+          id: 'q-fb',
+          type: 'fill-blank',
+          question: 'Completa la frase sobre el fin del patrón oro.',
+          textBefore: 'En 1971, el presidente Nixon rompió la conexión del dólar con el',
+          textAfter: ', dando origen al dinero fiat moderno.',
+          correctAnswer: 'oro',
+          acceptableAnswers: ['oro', 'patrón oro', 'el oro'],
+          explanation: 'En 1971 Nixon cerró la "ventanilla del oro": los dólares dejaron de ser canjeables por oro. Desde entonces el dinero no está respaldado por nada tangible.'
+        },
+        {
           id: 'q2',
           question: '¿Por qué el oro se convirtió en dinero durante 5,000 años mientras las conchas de mar dejaron de funcionar?',
           options: [
