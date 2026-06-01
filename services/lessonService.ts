@@ -66,6 +66,9 @@ export interface LessonSection {
   // Inline glossary callout — defines terms at first occurrence so lessons
   // can use technical vocabulary without leaving novices behind.
   terms?: { term: string; definition: string; whyItMatters?: string }[];
+  // Key into INFOGRAPHIC_MAP — renders a code-native infographic in this
+  // section's visual slot (replaces the default comparison/features/highlight).
+  infographic?: string;
 }
 
 export interface CheckpointQuizData {

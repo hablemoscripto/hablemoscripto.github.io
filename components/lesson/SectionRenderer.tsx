@@ -5,6 +5,7 @@ import rehypeSanitize from 'rehype-sanitize';
 import type { LessonSection } from '../../services/lessonService';
 import type { CheckpointQuizData } from '../../services/lessonService';
 import CheckpointQuiz from '../education/CheckpointQuiz';
+import { INFOGRAPHIC_MAP } from './infographics';
 
 // Icon map for dynamic icon rendering from course data
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -23,6 +24,7 @@ interface SectionRendererProps {
 }
 
 export default function SectionRenderer({ section, checkpoint, onImageClick }: SectionRendererProps) {
+    const Infographic = section.infographic ? INFOGRAPHIC_MAP[section.infographic] : null;
     return (
         <div>
             <div className="mb-8">
@@ -95,8 +97,16 @@ export default function SectionRenderer({ section, checkpoint, onImageClick }: S
                     </div>
                 )}
 
+                {/* Code-native infographic — occupies this section's visual slot,
+                    replacing the default comparison / features / highlight render. */}
+                {Infographic && (
+                    <div className="my-6 not-prose">
+                        <Infographic />
+                    </div>
+                )}
+
                 {/* Features Grid */}
-                {section.features && section.features.length > 0 && (
+                {!Infographic && section.features && section.features.length > 0 && (
                     <div className="grid gap-4 my-6 not-prose">
                         {section.features.map((feature: { icon?: unknown; title?: string; text?: string }, i: number) => {
                             // Paid lessons (DB-served) store icon as a string name resolved via
@@ -126,7 +136,7 @@ export default function SectionRenderer({ section, checkpoint, onImageClick }: S
                 )}
 
                 {/* Highlight Box */}
-                {section.highlight && (
+                {!Infographic && section.highlight && (
                     <div className="bg-brand-500/10 border border-brand-500/30 rounded-xl p-5 my-6 not-prose">
                         <h4 className="font-bold text-brand-400 mb-2">{section.highlight.title}</h4>
                         <p className="text-navy-300 text-sm leading-relaxed">{section.highlight.text}</p>
@@ -134,7 +144,7 @@ export default function SectionRenderer({ section, checkpoint, onImageClick }: S
                 )}
 
                 {/* Comparison Section */}
-                {section.type === 'comparison' && (
+                {section.type === 'comparison' && !Infographic && (
                     <div className="relative grid md:grid-cols-2 gap-4 my-6 not-prose">
                         {/* VS Badge */}
                         <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
