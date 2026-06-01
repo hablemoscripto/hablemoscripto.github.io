@@ -141,7 +141,6 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'La Ruptura de 1971: El Día que Cambió Todo',
-        infographic: 'inflation-calculator',
         content: 'El 15 de agosto de 1971, el presidente Richard Nixon apareció en televisión y anunció que Estados Unidos "temporalmente" suspendía la convertibilidad del dólar en oro. Francia y otros países estaban exigiendo su oro (sabían que USA había impreso más dólares de los que podía respaldar), y las reservas de Fort Knox se vaciaban. Nixon rompió la promesa "temporalmente". Más de medio siglo después, sigue rota. Desde ese día, el dólar, y por extensión todas las monedas del mundo, no están respaldadas por nada tangible. Solo por la "confianza" en el gobierno emisor.',
         highlight: {
           title: 'El Resultado Matemático',
@@ -151,7 +150,6 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'comparison',
         title: 'Antes vs Después de 1971',
-        infographic: 'gold-vs-fiat-1971',
         leftSide: {
           title: 'Antes de 1971 (Patrón Oro)',
           points: [
@@ -367,7 +365,6 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Por Qué los Gobiernos AMAN la Inflación',
-        infographic: 'govt-loves-inflation',
         content: 'La inflación no es un error, es una política deliberada. Los gobiernos tienen incentivos muy claros para mantener inflación moderada (y a veces no tan moderada):',
         features: [
           { icon: Landmark, title: 'Licuar la Deuda', text: 'Si el gobierno debe $1 trillón, puede imprimirlo y pagar. Técnicamente "pagó" su deuda, pero el dinero ahora vale menos. Transfirió su deuda a todos los que tienen esa moneda.' },
@@ -385,7 +382,6 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Casos Reales: Cuando la Inflación Destruye Países',
-        infographic: 'hyperinflation-cases',
         content: 'Esto no es teoría. No es algo que "podría pasar". Ha pasado decenas de veces en la historia y está pasando AHORA MISMO mientras lees esto:',
         features: [
           { icon: AlertTriangle, title: 'Venezuela (2016-2020)', text: 'Inflación de 1,000,000% anual. El salario mínimo mensual no alcanzaba para comprar un kilo de carne. La clase media se volvió mendiga en meses. Doctores y abogados huyeron del país con lo puesto. Todo porque el gobierno decidió "imprimir su camino fuera de los problemas".' },

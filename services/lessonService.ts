@@ -1,4 +1,6 @@
 import { LESSONS_DATA, type LessonEntry } from '../data/courseData';
+import { LESSON_INFOGRAPHICS } from '../data/lessonInfographics';
+import type { InfographicSpec } from '../components/lesson/infographics/spec';
 import type { Question } from '../components/education/types';
 import { shuffleQuizOptions } from '../utils/quizShuffle';
 import { supabase } from '../lib/supabase';
@@ -66,9 +68,10 @@ export interface LessonSection {
   // Inline glossary callout — defines terms at first occurrence so lessons
   // can use technical vocabulary without leaving novices behind.
   terms?: { term: string; definition: string; whyItMatters?: string }[];
-  // Key into INFOGRAPHIC_MAP — renders a code-native infographic in this
-  // section's visual slot (replaces the default comparison/features/highlight).
-  infographic?: string;
+  // Infographic attached at read time from data/lessonInfographics.ts — renders
+  // in this section's visual slot (replaces the default comparison/features/
+  // highlight). A spec object (data-driven primitive) or {kind:'component'}.
+  infographic?: InfographicSpec;
 }
 
 export interface CheckpointQuizData {
@@ -149,7 +152,10 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
     type: lesson.type || '',
     description: lesson.description || '',
     videoId: lesson.videoId,
-    sections: lesson.sections || [],
+    sections: (lesson.sections || []).map((s: LessonSection) => {
+      const spec = LESSON_INFOGRAPHICS[lesson.id]?.[s.title ?? ''];
+      return spec ? { ...s, infographic: spec } : s;
+    }),
   };
 
   // Map quiz if present — courseData stores quiz questions with icon
