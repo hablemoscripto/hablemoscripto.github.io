@@ -141,7 +141,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'La Ruptura de 1971: El Día que Cambió Todo',
-        infographic: 'dollar-erosion-1971',
+        infographic: 'inflation-calculator',
         content: 'El 15 de agosto de 1971, el presidente Richard Nixon apareció en televisión y anunció que Estados Unidos "temporalmente" suspendía la convertibilidad del dólar en oro. Francia y otros países estaban exigiendo su oro (sabían que USA había impreso más dólares de los que podía respaldar), y las reservas de Fort Knox se vaciaban. Nixon rompió la promesa "temporalmente". Más de medio siglo después, sigue rota. Desde ese día, el dólar, y por extensión todas las monedas del mundo, no están respaldadas por nada tangible. Solo por la "confianza" en el gobierno emisor.',
         highlight: {
           title: 'El Resultado Matemático',

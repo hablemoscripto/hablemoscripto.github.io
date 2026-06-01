@@ -3,6 +3,7 @@ import GoldVsFiat1971 from './GoldVsFiat1971';
 import DollarErosion1971 from './DollarErosion1971';
 import HyperinflationCases from './HyperinflationCases';
 import GovtLovesInflation from './GovtLovesInflation';
+import InflationCalculator from './InflationCalculator';
 
 // Code-native (vector/HTML) infographics, keyed by the string a lesson section
 // sets in `section.infographic`. Real text → crisp at any zoom, on-brand,
@@ -13,4 +14,5 @@ export const INFOGRAPHIC_MAP: Record<string, React.FC> = {
   'dollar-erosion-1971': DollarErosion1971,
   'hyperinflation-cases': HyperinflationCases,
   'govt-loves-inflation': GovtLovesInflation,
+  'inflation-calculator': InflationCalculator,
 };
