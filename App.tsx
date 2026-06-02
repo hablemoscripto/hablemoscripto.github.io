@@ -7,7 +7,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { EntitlementsProvider } from './contexts/EntitlementsContext';
 import { ProgressProvider } from './contexts/ProgressContext';
 import { GamificationProvider } from './contexts/GamificationContext';
-import ChatWidget from './components/ChatWidget';
+import { useAuth } from './contexts/AuthContext';
 import AchievementToast from './components/ui/AchievementToast';
 import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from './data/levels';
 import PageTransition from './components/ui/PageTransition';
@@ -26,6 +26,7 @@ const UnsubscribePage = lazy(() => import('./components/UnsubscribePage'));
 const PaymentSuccess = lazy(() => import('./components/PaymentSuccess'));
 const NotFoundPage = lazy(() => import('./components/NotFoundPage'));
 const LegalPage = lazy(() => import('./components/LegalPage'));
+const ChatWidget = lazy(() => import('./components/ChatWidget'));
 
 function RouteLoader() {
   return (
@@ -118,6 +119,19 @@ function AnimatedRoutes() {
   );
 }
 
+// The AI tutor (CBas) is a learning tool for enrolled users. Gate it on auth so
+// it never appears on the public landing page and its heavy markdown/SSE stack
+// is lazy-loaded only once a logged-in user is present.
+function AuthedChatWidget() {
+  const { user } = useAuth();
+  if (!user) return null;
+  return (
+    <Suspense fallback={null}>
+      <ChatWidget />
+    </Suspense>
+  );
+}
+
 function App() {
   useEffect(() => {
     initAnalytics();
@@ -134,7 +148,7 @@ function App() {
                 <Router>
                   <div className="min-h-screen bg-navy-950 text-white overflow-x-hidden font-sans">
                     <AnimatedRoutes />
-                    <ChatWidget />
+                    <AuthedChatWidget />
                     <AchievementToast />
                   </div>
                 </Router>

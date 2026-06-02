@@ -30,7 +30,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState<LessonProgress[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
-  const { addXp, checkAchievements, refreshStreak, xp, streak } = useGamification();
+  const { addXp, checkAchievements, refreshStreak, xp } = useGamification();
 
   const loadProgress = useCallback(async () => {
     if (!user) return;
@@ -56,25 +56,31 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
       setProgress(formattedProgress);
 
-      // Retroactive achievement check (silent — no toasts on page load)
+      // Retroactive achievement check (silent — no toasts on page load).
+      // Use authoritative values rather than the context closures: XP is exactly
+      // 100 per completed lesson, and the streak is recomputed here. The closures
+      // (xp/streak) can still be 0 on first load because GamificationContext's
+      // fetchUserStats races this — which left streak achievements (streak_3/_7)
+      // never unlocking even with a qualifying streak.
       const completedItems = formattedProgress.filter(p => p.completed);
       const allLessons = getAllLessonsOrdered();
       const completedCount = completedItems.length;
       const totalLessons = allLessons.length;
+      const freshStreak = await refreshStreak();
       checkAchievements({
         completedLessonIds: completedItems.map(p => p.lessonId),
         completedCount,
         totalLessons,
         progressPercentage: totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0,
-        xp,
-        streak,
+        xp: completedCount * 100,
+        streak: freshStreak,
       }, true);
     } catch (error) {
       reportError(error, { component: 'ProgressContext', action: 'loadProgress' });
     } finally {
       setLoading(false);
     }
-  }, [user, checkAchievements, xp, streak]);
+  }, [user, checkAchievements, refreshStreak]);
 
   useEffect(() => {
     if (user) {
