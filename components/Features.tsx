@@ -80,7 +80,10 @@ const Features: React.FC = () => {
                   <span className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center text-navy-400 group-hover/link:bg-brand-500 group-hover/link:text-navy-900 transition-all">
                     <Twitter size={14} aria-hidden="true" />
                   </span>
-                  <span>@Crypto_CBas</span>
+                  <span className="flex flex-col leading-tight">
+                    <span>@Crypto_CBas</span>
+                    <span className="text-[11px] text-navy-400 group-hover/link:text-navy-300">3.2K+ seguidores en X</span>
+                  </span>
                 </a>
 
                 <a
