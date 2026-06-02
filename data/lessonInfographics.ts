@@ -12,6 +12,19 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     "La Ruptura de 1971: El Día que Cambió Todo": {
       "kind": "component",
       "key": "inflation-calculator"
+    },
+    "Las 6 Propiedades del Dinero Perfecto": {
+      "kind": "iconGrid",
+      "columns": 3,
+      "intro": "El buen dinero debe cumplir 6 propiedades. El oro las cumplió por milenios; el dinero fiat falla en la primera (escasez).",
+      "items": [
+        { "icon": "Gem", "title": "Escasez", "text": "Si no es escaso, pierde valor." },
+        { "icon": "Scissors", "title": "Divisibilidad", "text": "Para compras pequeñas, no solo grandes." },
+        { "icon": "Shield", "title": "Durabilidad", "text": "Si no, desaparece con el tiempo." },
+        { "icon": "Wallet", "title": "Portabilidad", "text": "Fácil de llevar y de usar." },
+        { "icon": "Coins", "title": "Fungibilidad", "text": "Cada unidad vale exactamente igual." },
+        { "icon": "Search", "title": "Verificabilidad", "text": "Para que no te puedan engañar." }
+      ]
     }
   },
   2: {
