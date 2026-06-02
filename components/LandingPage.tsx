@@ -83,7 +83,7 @@ const LandingPage: React.FC = () => {
         }
       } else {
         setNewsletterStatus('success');
-        setNewsletterMessage('¡Suscripción exitosa! Revisa tu email.');
+        setNewsletterMessage('¡Listo! Quedaste suscrito. Tu próximo análisis te llegará pronto.');
         setNewsletterEmail('');
 
         // Reset success message after 5 seconds
