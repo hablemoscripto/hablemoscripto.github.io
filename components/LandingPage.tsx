@@ -6,6 +6,7 @@ import Features from './Features';
 import Courses from './Courses';
 import ProblemSection from './ProblemSection';
 import PricingSection from './PricingSection';
+import SocialProof from './SocialProof';
 import Footer from './Footer';
 import AuthModal from './AuthModal';
 import MentoriaModal from './MentoriaModal';
@@ -191,6 +192,9 @@ const LandingPage: React.FC = () => {
             </p>
           </div>
         </section>
+
+        {/* Credibility / social proof */}
+        <SocialProof />
 
         {/* Public Pricing Section */}
         <section id="pricing" className="py-24 bg-navy-950 relative scroll-mt-28">

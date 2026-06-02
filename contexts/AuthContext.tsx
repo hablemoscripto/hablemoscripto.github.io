@@ -6,7 +6,7 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signUp: (email: string, password: string, fullName?: string) => Promise<{ error: Error | null }>;
+  signUp: (email: string, password: string, fullName?: string, newsletter?: boolean) => Promise<{ error: Error | null }>;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   signInWithGoogle: () => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
@@ -39,12 +39,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = useCallback(async (email: string, password: string, fullName?: string) => {
+  const signUp = useCallback(async (email: string, password: string, fullName?: string, newsletter?: boolean) => {
     const trimmedName = fullName?.trim();
+    // Pass full_name + newsletter intent through user_metadata; the
+    // handle_new_user() trigger reads these to create the profile rows and
+    // (when newsletter is true) add the email to newsletter_subscribers.
+    const data: Record<string, unknown> = {};
+    if (trimmedName) data.full_name = trimmedName;
+    if (newsletter) data.newsletter = true;
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: trimmedName ? { data: { full_name: trimmedName } } : undefined,
+      options: Object.keys(data).length ? { data } : undefined,
     });
     return { error: error as Error | null };
   }, []);

@@ -25,6 +25,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [fullName, setFullName] = useState('');
+  const [newsletter, setNewsletter] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
@@ -97,7 +98,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
           setLoading(false);
           return;
         }
-        const { error } = await signUp(email, password, fullName);
+        const { error } = await signUp(email, password, fullName, newsletter);
         if (error) {
           if (error.message.includes('already registered')) {
             setError('Este email ya está registrado');
@@ -396,6 +397,18 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                     />
                   </div>
                 </div>
+              )}
+
+              {view === 'signup' && (
+                <label className="flex items-start gap-2.5 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={newsletter}
+                    onChange={(e) => setNewsletter(e.target.checked)}
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-brand-500"
+                  />
+                  <span className="text-sm text-navy-300">Quiero recibir el newsletter semanal con análisis de mercado.</span>
+                </label>
               )}
 
               {view === 'login' && (
