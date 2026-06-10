@@ -1081,7 +1081,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           { icon: BarChart3, title: 'Ciclo 1: Halving Nov 2012', text: 'BTC pasó de ~$12 en el halving a **$1,100** en diciembre 2013 (90× en 13 meses). Luego cayó -85% hasta $170 en enero 2015. Primer ciclo completo: de la nada a más de mil dólares, y de vuelta a casi nada para los que no vendieron.' },
           { icon: BarChart3, title: 'Ciclo 2: Halving Jul 2016', text: 'BTC pasó de ~$650 en el halving a **$19,700** en diciembre 2017 (30× en 17 meses). Luego cayó -84% hasta $3,200 en diciembre 2018. La era de las ICOs, la locura de las altcoins, y el crash que "mató" crypto (de nuevo).' },
           { icon: BarChart3, title: 'Ciclo 3: Halving May 2020', text: 'BTC pasó de ~$8,700 en el halving a **$69,000** en noviembre 2021 (8× en 18 meses). DeFi Summer, NFT mania, SOL pasó de $1 a $260. Luego el bear de 2022: Luna crash, FTX crash, BTC cayó -77% hasta $15,500.' },
-          { icon: BarChart3, title: 'Ciclo 4: Halving Abr 2024', text: 'BTC en el halving: ~$64,000. Para finales de 2024 ya superó los $100K. El patrón continúa. ETFs de Bitcoin aprobados, adopción institucional masiva. ¿Hasta dónde llegará? La historia sugiere que el pico podría llegar en 2025.' }
+          { icon: BarChart3, title: 'Ciclo 4: Halving Abr 2024', text: 'BTC en el halving: ~$64,000. Para finales de 2024 ya superó los $100K. El patrón continúa. ETFs de Bitcoin aprobados, adopción institucional masiva. El patrón se cumplió de nuevo: el ciclo hizo pico en octubre de 2025, con Bitcoin marcando un máximo histórico cercano a $126,000 (unos 18 meses después del halving, dentro de la ventana que la historia anticipaba). Después vino la corrección, como en cada ciclo.' }
         ]
       },
       {
@@ -1160,7 +1160,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Estamos en diciembre 2025. El halving fue en abril 2024. Bitcoin ya superó su ATH anterior. ¿En qué fase del ciclo estamos probablemente?',
+          question: 'Imagina que es diciembre de 2025. El halving fue en abril 2024. Bitcoin ya superó su ATH anterior. ¿En qué fase del ciclo estarías probablemente?',
           options: [
             { id: 'a', text: 'Acumulación, todavía es muy temprano' },
             { id: 'b', text: 'Bull market maduro, 20 meses post-halving, en la segunda mitad del ciclo alcista. Históricamente el pico llega 12-18 meses post-halving' },
@@ -1168,7 +1168,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'No se puede determinar la fase actual' }
           ],
           correctAnswer: 'b',
-          explanation: 'Abril 2024 + 18 meses = Octubre 2025. Para diciembre 2025, estamos en fase avanzada del bull market. Los ciclos anteriores hicieron pico 12-18 meses post-halving. No estamos al inicio, estamos más cerca del final que del principio.'
+          explanation: 'Abril 2024 + 18 meses = octubre de 2025, que fue justo cuando este ciclo hizo su pico. Para diciembre de 2025 ya estarías en la fase final del bull market o en el inicio de la corrección. Los ciclos anteriores hicieron pico 12-18 meses después del halving: no al inicio, sino más cerca del final.'
         },
         {
           id: 'q2',
@@ -2306,6 +2306,14 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     duration: '35 min',
     type: 'Tutorial Práctico',
     description: 'Olvida los exchanges centralizados. Jupiter es el agregador de liquidez más poderoso de Solana: mejor precio, DCA automático, órdenes límite, y perpetuos, todo descentralizado, sin custodia, y con la mejor ejecución del mercado.',
+    referrals: [
+      {
+        title: 'Jupiter',
+        description: 'El agregador de DEXs líder de Solana: el mejor precio en tus swaps, DCA automático y órdenes límite, todo sin custodia.',
+        link: 'https://jup.ag/?ref=6kg0a2qpd813',
+        buttonText: 'Abrir Jupiter'
+      }
+    ],
     sections: [
       {
         type: 'intro',
@@ -4219,7 +4227,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         items: [
           'Staking es la forma más simple de rendimiento en Solana: delegas tu SOL a un validador, ayudas a asegurar la red, y ganas ~5-6% APY. Tu SOL nunca sale de tu wallet, solo le das peso de voto al validador.',
           'Elige validadores con cuidado: >98% uptime, comisión <5-7%, fuera del superminority, y al menos 6 meses de historial estable. Usa StakeWiz para comparar métricas antes de delegar.',
-          'No hacer staking es perder dinero: la inflación de SOL (~5.5% y decreciente) diluye tu holdings. Stakear es la defensa mínima contra la dilución, esencialmente mantener tu porcentaje de la red constante.',
+          'No hacer staking es perder dinero: la inflación de SOL (~4.5% y decreciente) diluye tu holdings. Stakear es la defensa mínima contra la dilución, esencialmente mantener tu porcentaje de la red constante.',
           'Liquid staking (mSOL, jitoSOL, bSOL) te da flexibilidad para usar tu SOL stakeado en DeFi, pero añade capas de riesgo: smart contract del protocolo, posible depeg en estrés extremo, y complejidad adicional.',
           'Jito ofrece APY ligeramente superior gracias a la captura de MEV. Marinade prioriza descentralización distribuyendo entre cientos de validadores. BlazeStake incentiva validadores pequeños con tokens BLZE.',
           'Siempre deja 0.1-0.5 SOL sin stakear para pagar fees de transacciones futuras. Y recuerda: el staking es un compromiso de largo plazo, el retiro nativo tiene cooldown de ~2-3 días.'
@@ -4298,7 +4306,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Solo para poder votar en la gobernanza de Solana' }
           ],
           correctAnswer: 'b',
-          explanation: 'La inflación de SOL (~5.5% y decreciente) crea nuevos tokens constantemente. Si no stakeas, tu porcentaje de la red total se reduce, estás siendo diluido. Stakear es la defensa mínima: tus recompensas compensan la inflación, manteniendo tu proporción de SOL en la red aproximadamente constante.'
+          explanation: 'La inflación de SOL (~4.5% y decreciente) crea nuevos tokens constantemente. Si no stakeas, tu porcentaje de la red total se reduce, estás siendo diluido. Stakear es la defensa mínima: tus recompensas compensan la inflación, manteniendo tu proporción de SOL en la red aproximadamente constante.'
         }
       ]
     },
