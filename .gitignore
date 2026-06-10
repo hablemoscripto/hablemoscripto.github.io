@@ -21,6 +21,11 @@ temp/
 # Supabase CLI local state (contains pooler URL, project refs)
 supabase/.temp/
 
+# Database backups / dumps — contain user PII, password hashes, auth tokens. Never commit.
+backup-*.sql
+*.dump
+db-dump*.sql
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
