@@ -155,9 +155,10 @@ In the Supabase dashboard → **Authentication**:
 
 - [ ] Confirm the Supabase plan tier. **Free tier has no automated backups.** Enable daily backups (Pro) or schedule a `pg_dump` before launch.
 - [ ] **Take a manual backup before every `npm run db:seed`** against production — the seed deletes-then-reinserts content tables, so a bad run is unrecoverable without one.
-- [ ] Verify the `user_progress.lesson_id` foreign key is **not** `ON DELETE CASCADE` against `lessons` — if it is, a content reseed (which deletes all `lessons` rows) wipes every user's progress. Check with:
+- [x] **Verified (2026-06-10): a reseed does NOT wipe user progress.** `user_progress` has a single foreign key — `user_id → auth.users` with `ON DELETE CASCADE`, which is correct and desirable (deleting a user removes their progress). There is **no** `lesson_id → lessons` foreign key, so deleting all `lessons` rows during a reseed does not cascade into `user_progress`. Re-check if the schema changes:
   ```sql
-  SELECT conname, confdeltype FROM pg_constraint
+  SELECT conname, confdeltype, confrelid::regclass AS references_table
+  FROM pg_constraint
   WHERE conrelid = 'user_progress'::regclass AND contype = 'f';
   ```
-  `confdeltype` must be `a` (NO ACTION) or `r` (RESTRICT), never `c` (CASCADE).
+  A CASCADE referencing `auth.users` is fine. The danger would be a CASCADE referencing a **reseeded content table** (`lessons`) — none exists today.
