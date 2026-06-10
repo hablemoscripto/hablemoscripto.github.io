@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, ArrowRight, ArrowLeft, ExternalLink, Lock, Award } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, BookOpen, MessageSquare, ThumbsUp, AlertCircle, Clock, Video, ArrowRight, ArrowLeft, ExternalLink, Lock, Award, RefreshCw, Loader2 } from 'lucide-react';
 import VideoPlayer from './ui/VideoPlayer';
 import ImageLightbox from './lesson/ImageLightbox';
 import SelectionTooltip from './lesson/SelectionTooltip';
@@ -45,6 +45,8 @@ const LessonView: React.FC = () => {
     const [showQuiz, setShowQuiz] = useState(false);
     const [quizPassed, setQuizPassed] = useState(false);
     const [saveError, setSaveError] = useState(false);
+    const [lastScore, setLastScore] = useState<number | null>(null);
+    const [retryingSave, setRetryingSave] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
     const [showCert, setShowCert] = useState(false);
 
@@ -117,6 +119,8 @@ const LessonView: React.FC = () => {
 
         setQuizPassed(false);
         setSaveError(false);
+        setLastScore(null);
+        setRetryingSave(false);
     }, [id]);
 
     // Clean up body overflow on unmount (in case lightbox was open)
@@ -262,6 +266,7 @@ const LessonView: React.FC = () => {
         // Only show the success/certificate state if the completion actually
         // persisted — otherwise a silent save failure would falsely claim "+100 XP"
         // and (on a level's last lesson) hide the certificate with no explanation.
+        setLastScore(score); // keep the passing score so the user can retry the save without redoing the quiz
         const saved = await markLessonComplete(id, score);
         if (saved) {
             setSaveError(false);
@@ -269,6 +274,13 @@ const LessonView: React.FC = () => {
         } else {
             setSaveError(true);
         }
+    };
+
+    const handleRetrySave = async () => {
+        if (lastScore === null || retryingSave) return;
+        setRetryingSave(true);
+        await handleQuizComplete(lastScore);
+        setRetryingSave(false);
     };
 
     const handleNextLesson = () => {
@@ -545,8 +557,20 @@ const LessonView: React.FC = () => {
                                                     No pudimos guardar tu progreso
                                                 </div>
                                                 <p className="text-navy-300 text-sm max-w-sm">
-                                                    Revisa tu conexión y vuelve a enviar el quiz. Tu avance no se perderá.
+                                                    Revisa tu conexión y reintenta. No tienes que repetir el quiz.
                                                 </p>
+                                                <button
+                                                    onClick={handleRetrySave}
+                                                    disabled={retryingSave || lastScore === null}
+                                                    aria-busy={retryingSave}
+                                                    className="mt-1 px-6 py-3 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 font-bold rounded-xl transition-all inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                                >
+                                                    {retryingSave ? (
+                                                        <><Loader2 size={18} className="animate-spin" aria-hidden="true" /> Reintentando...</>
+                                                    ) : (
+                                                        <><RefreshCw size={18} aria-hidden="true" /> Reintentar guardado</>
+                                                    )}
+                                                </button>
                                             </div>
                                         </div>
                                     )}
