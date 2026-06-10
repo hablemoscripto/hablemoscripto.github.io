@@ -392,8 +392,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: '¿Y Colombia? ¿Y México? ¿Y España?',
         content: 'Quizás pienses: "Eso pasa en países con gobiernos locos, aquí no pasará." Pero mira los datos:',
         features: [
-          { icon: TrendingDown, title: 'Colombia', text: 'El peso colombiano ha perdido 85%+ de su valor contra el dólar desde el año 2000. Y el dólar TAMBIÉN pierde valor. Estás perdiendo contra una moneda que está perdiendo.' },
-          { icon: TrendingDown, title: 'México', text: 'El peso mexicano ha vivido ciclos de devaluación extrema: de 12 por dólar en 2008 llegó a 25 en 2017. Aunque ha tenido periodos de recuperación, las crisis de 1994 y 2008 muestran que ninguna moneda LATAM es inmune a shocks externos.' },
+          { icon: TrendingDown, title: 'Colombia', text: 'El peso colombiano ha perdido cerca de la mitad de su valor frente al dólar desde el año 2000: pasó de unos 2,000 por dólar a moverse entre 3,500 y 4,500 en los últimos años (con picos por encima de 5,000 en 2022). Y el dólar TAMBIÉN pierde valor. Estás perdiendo contra una moneda que está perdiendo.' },
+          { icon: TrendingDown, title: 'México', text: 'El peso mexicano ha vivido ciclos de devaluación: de alrededor de 10 por dólar en 2008 pasó a más de 20 hacia 2016-2017 y tocó cerca de 25 durante la pandemia de 2020. Tuvo periodos de recuperación, pero las crisis de 1994 y 2008 muestran que ninguna moneda LATAM es inmune a shocks externos.' },
           { icon: TrendingDown, title: 'El Dólar Mismo', text: 'El "rey" de las monedas ha perdido 96% de su poder adquisitivo desde 1913 (cuando se creó la Reserva Federal). Si el dólar se devalúa, ¿qué crees que pasa con las monedas ancladas a él?' }
         ],
         highlight: {
@@ -816,7 +816,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           { icon: AlertTriangle, title: 'Venezuela', text: 'Mientras el bolívar perdía 99.99% de su valor, los venezolanos que tenían Bitcoin preservaron su riqueza. Muchos pudieron emigrar llevando su dinero en una frase de 12 palabras memorizada, imposible de confiscar en la frontera.' },
           { icon: AlertTriangle, title: 'Ucrania 2022', text: 'Cuando Rusia invadió y los bancos cerraron, el gobierno ucraniano recibió $100+ millones en donaciones de Bitcoin en DÍAS. Dinero que llegó directo, sin intermediarios, sin demoras burocráticas.' },
           { icon: AlertTriangle, title: 'Líbano', text: 'Los bancos congelaron los ahorros de todos. La gente literalmente no podía acceder a SU dinero. Los que tenían Bitcoin seguían teniendo control total de sus fondos.' },
-          { icon: AlertTriangle, title: 'Argentina', text: 'Con 140%+ de inflación, muchos argentinos convierten sus pesos a Bitcoin el mismo día de cobro. Es la única forma de que su salario no pierda valor mientras duermen.' }
+          { icon: AlertTriangle, title: 'Argentina', text: 'Durante la crisis inflacionaria de 2023-2024 (con más de 140% de inflación anual), muchos argentinos convertían sus pesos a Bitcoin el mismo día de cobro. Para millones fue la forma de que su salario no perdiera valor mientras dormían.' }
         ]
       },
       {
@@ -1348,7 +1348,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Sería deshonesto decir que la descentralización no tiene costos. Tiene trade-offs reales que debes entender:',
         features: [
           { icon: TrendingDown, title: 'Puede Ser Más Lenta', text: 'Coordinar miles de nodos toma más tiempo que un servidor central. Bitcoin confirma cada 10 minutos. Tu banco confirma en segundos. Aunque Solana resuelve esto (400ms), sigue siendo un trade-off arquitectónico.' },
-          { icon: TrendingDown, title: 'Puede Ser Más Cara', text: 'En momentos de congestión, las fees de Ethereum han llegado a $50-100 por transacción. La descentralización tiene costo de coordinación.' },
+          { icon: TrendingDown, title: 'Puede Ser Más Cara', text: 'En momentos de congestión extrema (como en 2021), las fees de Ethereum llegaron a $50-100 por transacción. Hoy suelen ser mucho más bajas, pero la red principal sigue siendo más cara y variable que alternativas más nuevas. La descentralización tiene un costo de coordinación.' },
           { icon: TrendingDown, title: 'No Hay "Soporte al Cliente"', text: 'Si pierdes tus llaves, nadie puede ayudarte. No hay "recuperar contraseña". La auto-soberanía implica auto-responsabilidad.' },
           { icon: TrendingDown, title: 'La Gobernanza es Lenta', text: 'Cambios en Bitcoin toman años de debate. No hay CEO que diga "esto se hace así". Puede ser frustrante cuando se necesitan mejoras urgentes.' }
         ],
@@ -2015,7 +2015,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: '¿Por Qué Existe Esta "Guerra"?',
-        content: 'Ethereum fue la primera blockchain programable. Inventó los smart contracts, DeFi, NFTs, todo lo que hoy conocemos como Web3 nació ahí. Es el "abuelo respetado" del espacio. Pero tiene un problema fundamental: **no escala para uso masivo**. Cuando mucha gente quiere usarlo, se congestiona. Los fees suben a $50, $100, incluso $500 por transacción en momentos de alta demanda. Para una persona en Latinoamérica que quiere probar DeFi con $100, esto es prohibitivo. Solana nació en 2020 con una pregunta: ¿y si construimos una blockchain desde cero, optimizada para velocidad y bajo costo? El resultado es una red donde las transacciones cuestan menos de un centavo y se confirman en menos de un segundo.',
+        content: 'Ethereum fue la primera blockchain programable. Inventó los smart contracts, DeFi, NFTs, todo lo que hoy conocemos como Web3 nació ahí. Es el "abuelo respetado" del espacio. Pero tiene un problema fundamental: **no escala para uso masivo**. Cuando mucha gente quiere usarlo, se congestiona y los fees suben. En el pico de 2021, una transacción podía costar $50, $100 o más. Tras mejoras como la actualización Dencun (2024), hoy un swap en la red principal suele costar entre menos de $1 y unos pocos dólares, aunque sigue siendo más caro y variable que redes más nuevas. Para montos pequeños, ese costo todavía puede comerse una parte importante de tu inversión. Solana nació en 2020 con una pregunta: ¿y si construimos una blockchain desde cero, optimizada para velocidad y bajo costo? El resultado es una red donde las transacciones cuestan menos de un centavo y se confirman en menos de un segundo.',
         highlight: {
           title: 'La Metáfora',
           text: 'Ethereum es como un Mercedes clásico de 1990: revolucionario en su época, confiable, prestigioso, pero lento y caro de mantener. Solana es como un Tesla: diseñado para el mundo moderno, rápido, eficiente, y construido pensando en el futuro.'
@@ -2028,7 +2028,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           title: 'Ethereum (L1)',
           points: [
             'Transacciones por segundo: ~15-30 TPS',
-            'Costo por transacción: $2-$100+ (varía con congestión)',
+            'Costo por transacción: desde menos de $1 hasta varios dólares (sube con la congestión)',
             'Tiempo de confirmación: ~12-15 segundos',
             'Para usar DeFi barato: necesitas L2s (Arbitrum, Optimism)',
             'Fragmentación de liquidez entre L1 y múltiples L2s',
@@ -2064,7 +2064,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Caso Real: Hacer un Swap de $50',
         content: 'Veamos qué pasa en la práctica cuando quieres intercambiar $50 de USDC por otro token:',
         features: [
-          { icon: TrendingDown, title: 'En Ethereum L1', text: 'Abres Uniswap. El swap te costaría $15-40 en gas. Para $50, perderías 30-80% solo en fees. No tiene sentido económico. Te dicen "usa un L2".' },
+          { icon: TrendingDown, title: 'En Ethereum L1', text: 'Abres Uniswap. Un swap pequeño te costaría desde alrededor de $1 hasta varios dólares en gas (mucho menos que en 2021, pero todavía variable). Para un swap de $50, esos fees ya son una mordida real. Por eso te dicen "usa un L2".' },
           { icon: Network, title: 'En Ethereum L2 (Arbitrum)', text: 'Primero debes bridgear fondos de L1 a L2 ($10-20 de gas + espera). Luego haces el swap ($0.50 de gas). Si quieres volver a L1, otro bridge ($10-20). El proceso toma minutos/horas y múltiples transacciones.' },
           { icon: Zap, title: 'En Solana', text: 'Abres Jupiter. Haces el swap. Pagas $0.0002 de fee. Tarda 1 segundo. Listo. No hay capas. No hay bridges. No hay esperas. Tu experiencia es idéntica si swapeas $50 o $50,000.' }
         ],
@@ -2078,7 +2078,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         terms: [
           {
             term: 'Gas',
-            definition: 'Es el "combustible" que pagas para que una blockchain procese tu transacción. Cada operación (enviar, hacer un swap, interactuar con un protocolo) requiere que los validadores hagan trabajo computacional, y el gas paga ese trabajo. En Ethereum, el gas sube cuando la red está congestionada, por eso los fees varían de $2 a $500. En Solana, el gas es casi constante (~$0.0002) porque la red está diseñada para procesar miles de transacciones por segundo.',
+            definition: 'Es el "combustible" que pagas para que una blockchain procese tu transacción. Cada operación (enviar, hacer un swap, interactuar con un protocolo) requiere que los validadores hagan trabajo computacional, y el gas paga ese trabajo. En Ethereum, el gas sube cuando la red está congestionada, por eso los fees varían desde menos de $1 hasta varios dólares en la red principal (y llegaron a ser mucho más altos en años de mayor demanda). En Solana, el gas es casi constante (~$0.0002) porque la red está diseñada para procesar miles de transacciones por segundo.',
             whyItMatters: 'El costo de gas determina si la blockchain es usable para personas normales. En Ethereum L1, gas de $30 hace inviable cualquier operación menor a $500. En Solana, no tienes que pensarlo.'
           }
         ]
@@ -2091,7 +2091,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           { icon: Zap, title: 'Jupiter', text: 'El mejor agregador DEX del mundo. Te encuentra el mejor precio entre todos los exchanges descentralizados. Tiene DCA (compra automática), órdenes límite, y perpetuos. Es el "Uniswap de Solana" pero con superpoderes.' },
           { icon: Wallet, title: 'Phantom', text: 'Ya la conoces. La wallet más usada de Solana. Pero vale repetir: la experiencia de Phantom vs MetaMask es día y noche. MetaMask se siente como software de 2017.' },
           { icon: Globe, title: 'Magic Eden / Tensor', text: 'Los marketplaces de NFTs en Solana. Puedes comprar y vender NFTs por menos de $0.01 en fees. En OpenSea (Ethereum), los fees pueden ser $20-50.' },
-          { icon: Activity, title: 'Marinade / Jito', text: 'Plataformas de liquid staking. Pones tu SOL a trabajar ganando ~7-8% anual mientras sigue siendo líquido. En Ethereum, hacer liquid staking cuesta $20+ en gas.' }
+          { icon: Activity, title: 'Marinade / Jito', text: 'Plataformas de liquid staking. Pones tu SOL a trabajar ganando alrededor de 6-8% anual mientras sigue siendo líquido. En Solana, hacer y deshacer estas operaciones cuesta una fracción de centavo.' }
         ]
       },
       {
@@ -2109,7 +2109,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'El Futuro: Firedancer y Más Allá',
         content: 'Solana no se queda quieta. Estas son las mejoras que vienen:',
         features: [
-          { icon: Cpu, title: 'Firedancer', text: 'Jump Trading (uno de los traders más grandes del mundo) está construyendo un nuevo cliente de validador desde cero. Se espera que aumente la velocidad 10-100x y elimine los riesgos de "un solo cliente". Es el upgrade más importante en la historia de Solana.' },
+          { icon: Cpu, title: 'Firedancer', text: 'Jump Trading (uno de los traders más grandes del mundo) construyó Firedancer, un nuevo cliente de validador desde cero. Llegó a la red principal a finales de 2025 de forma gradual; busca aumentar mucho el rendimiento de Solana (con la meta de largo plazo de hasta ~1 millón de TPS) y eliminar el riesgo de depender de "un solo cliente". Es uno de los upgrades más importantes en la historia de la red.' },
           { icon: Smartphone, title: 'Saga/Seeker (Mobile)', text: 'Solana tiene su propio teléfono móvil con wallet integrada. La visión es hacer que interactuar con cripto sea tan fácil como usar cualquier app. El futuro es móvil.' },
           { icon: Globe, title: 'Blinks', text: 'Acciones de blockchain que funcionan directamente en Twitter, Discord, y otras apps. Compra un NFT desde un tweet. Haz un swap desde un mensaje. Web3 sin salir de Web2.' }
         ]
@@ -2134,12 +2134,12 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: 'Quieres hacer un swap de $50 USDC por SOL. ¿Cuánto pagarías aproximadamente en fees en Ethereum L1 vs Solana?',
           options: [
             { id: 'a', text: 'Ethereum: $0.50, Solana: $0.50 (igual)' },
-            { id: 'b', text: 'Ethereum: $15-40, Solana: $0.0002' },
+            { id: 'b', text: 'Ethereum: $1-3, Solana: menos de $0.001' },
             { id: 'c', text: 'Ethereum: $0.01, Solana: $5' },
             { id: 'd', text: 'Ambos son gratis' }
           ],
           correctAnswer: 'b',
-          explanation: 'Esta es la diferencia práctica más importante. En Ethereum L1, un swap simple puede costar $15-40 en gas. En Solana, cuesta menos de un centavo. Para montos pequeños, Ethereum L1 es económicamente inviable.'
+          explanation: 'En Ethereum L1, tras mejoras como Dencun, un swap pequeño suele costar entre $1 y unos pocos dólares en gas (mucho menos que en 2021, pero todavía variable). En Solana cuesta una fracción de centavo. Para montos pequeños, Solana sigue siendo mucho más eficiente.'
         },
         {
           id: 'q2',
@@ -2183,11 +2183,11 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Un nuevo token de Solana' },
             { id: 'b', text: 'Una wallet alternativa a Phantom' },
-            { id: 'c', text: 'Un nuevo cliente de validador construido por Jump Trading que aumentará la velocidad 10-100x y eliminará el riesgo de "un solo cliente"' },
+            { id: 'c', text: 'Un nuevo cliente de validador construido por Jump Trading que llegó a la red principal a finales de 2025, busca aumentar mucho el rendimiento de la red y elimina el riesgo de depender de "un solo cliente"' },
             { id: 'd', text: 'Un juego en Solana' }
           ],
           correctAnswer: 'c',
-          explanation: 'Firedancer es el upgrade más importante en la historia de Solana. Jump Trading (traders profesionales) lo están construyendo desde cero. Hará la red mucho más rápida y resistente al tener múltiples clientes independientes.'
+          explanation: 'Firedancer es uno de los upgrades más importantes de Solana. Jump Trading lo construyó desde cero y llegó a la red principal a finales de 2025 de forma gradual. Hace la red más rápida y resistente al sumar un cliente validador independiente.'
         },
         {
           id: 'review_1',
@@ -2890,13 +2890,13 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         title: 'Kast',
         description: 'Tarjeta virtual y física para gastar tus stablecoins (USDC/USDT) en cualquier lugar.',
-        link: 'https://go.kast.xyz/VqVO/NGUCNBNA',
+        link: 'https://app.kast.xyz/referral/NGUCNBNA',
         buttonText: 'Solicitar Tarjeta Kast'
       },
       {
         title: 'Avici',
-        description: 'Tarjeta cripto premium. Obtén 10% de descuento en la compra de tu tarjeta.',
-        link: 'https://avici.app',
+        description: 'Tarjeta Visa autocustodia para gastar tus stablecoins (USDC). Usa el código y obtén 10% de descuento en la compra de tu tarjeta.',
+        link: 'https://avici.money',
         buttonText: 'Ir a Avici',
         code: '9EULQP'
       }
@@ -3057,7 +3057,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: 'El Dólar que Vive en la Blockchain',
-        content: 'Tienes SOL, BTC, ETH... pero necesitas pagar el arriendo. El precio de tus criptos puede caer 30% mañana. ¿Cómo proteges tu dinero sin salir del ecosistema cripto? La respuesta son las **stablecoins**: tokens diseñados para mantener un valor estable, generalmente anclados 1:1 al dólar estadounidense. 1 USDC = 1 dólar. 1 USDT = 1 dólar. Siempre. Esa es la promesa. En Latinoamérica, las stablecoins se han convertido en algo más que una herramienta de trading. Son la forma más accesible de **dolarizarse** sin necesidad de una cuenta bancaria en Estados Unidos, sin límites de compra de dólares, y sin intermediarios que te cobren spreads abusivos. Un argentino con cepo cambiario, un venezolano con el bolívar destruido, un colombiano que quiere proteger sus pesos, todos usan stablecoins como su cuenta de ahorro en dólares.',
+        content: 'Tienes SOL, BTC, ETH... pero necesitas pagar el arriendo. El precio de tus criptos puede caer 30% mañana. ¿Cómo proteges tu dinero sin salir del ecosistema cripto? La respuesta son las **stablecoins**: tokens diseñados para mantener un valor estable, generalmente anclados 1:1 al dólar estadounidense. 1 USDC = 1 dólar. 1 USDT = 1 dólar. Siempre. Esa es la promesa. En Latinoamérica, las stablecoins se han convertido en algo más que una herramienta de trading. Son la forma más accesible de **dolarizarse** sin necesidad de una cuenta bancaria en Estados Unidos, sin límites de compra de dólares, y sin intermediarios que te cobren spreads abusivos. Un argentino que durante años convivió con controles de cambio (el llamado cepo), un venezolano con el bolívar destruido, un colombiano que quiere proteger sus pesos, todos usan stablecoins como su cuenta de ahorro en dólares.',
         highlight: {
           title: 'El Dato que Importa',
           text: 'Latinoamérica es la región que más usa stablecoins per cápita en el mundo. No para especular, para SOBREVIVIR. Cuando tu moneda local pierde valor cada semana, tener dólares digitales en tu wallet no es un lujo, es una necesidad.'
@@ -3079,7 +3079,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Son las dos stablecoins más grandes del mundo. Las usarás constantemente. Pero tienen diferencias importantes que debes entender:',
         features: [
           { icon: Shield, title: 'USDC (Circle)', text: 'Emitido por Circle, empresa regulada en Estados Unidos. Auditorías mensuales públicas. Reservas en bonos del Tesoro de USA y efectivo en bancos regulados. Es la opción más transparente y la preferida por instituciones. Disponible en Solana, Ethereum, y múltiples redes.' },
-          { icon: Globe, title: 'USDT (Tether)', text: 'El más usado del mundo por volumen. Emitido por Tether Limited (Hong Kong). Historial de controversias sobre la composición real de sus reservas, durante años se negaron a hacer auditorías completas. Han mejorado su transparencia, pero la confianza del mercado es menor que en USDC. La ventaja: tiene más liquidez y está en más exchanges y redes.' },
+          { icon: Globe, title: 'USDT (Tether)', text: 'El más usado del mundo por volumen. Emitido por Tether, que trasladó su sede a El Salvador en 2025 (antes operaba principalmente desde las Islas Vírgenes Británicas). Historial de controversias sobre la composición real de sus reservas, durante años se negaron a hacer auditorías completas. Han mejorado su transparencia, pero la confianza del mercado es menor que en USDC. La ventaja: tiene más liquidez y está en más exchanges y redes.' },
           { icon: AlertTriangle, title: 'El Riesgo de Ambas', text: 'Las dos dependen de una EMPRESA centralizada. Si Circle o Tether quiebran, si un regulador las cierra, o si los bancos donde tienen reservas fallan, tu stablecoin podría perder su paridad. En marzo 2023, USDC cayó temporalmente a $0.87 cuando Silicon Valley Bank (donde Circle tenía $3.3 mil millones) colapsó. Se recuperó en días, pero el susto fue real.' }
         ]
       },
@@ -3102,7 +3102,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           points: [
             'Auditorías trimestrales (más recientes)',
             'Reservas diversificadas (bonos, BTC, oro, préstamos)',
-            'Empresa offshore en Hong Kong',
+            'Con sede en El Salvador (antes en las Islas Vírgenes Británicas)',
             'También puede congelar direcciones',
             'Mayor liquidez y adopción global',
             'Historial de opacidad en reservas'
@@ -3128,10 +3128,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Cómo Usar Stablecoins en tu Vida Diaria',
         content: 'En Latinoamérica, las stablecoins tienen usos prácticos que van mucho más allá del trading:',
         features: [
-          { icon: PiggyBank, title: 'Ahorro en Dólares', text: 'Compra USDC con tus pesos y guárdalo en tu wallet. Es como tener una cuenta de ahorro en dólares sin necesidad de cuenta bancaria en USA. Sin cepo. Sin límites. Sin spread bancario abusivo.' },
+          { icon: PiggyBank, title: 'Ahorro en Dólares', text: 'Compra USDC con tus pesos y guárdalo en tu wallet. Es como tener una cuenta de ahorro en dólares sin necesidad de cuenta bancaria en USA. Sin controles de cambio. Sin límites. Sin spread bancario abusivo.' },
           { icon: Globe, title: 'Remesas', text: 'Enviar USDC de USA a Colombia cuesta menos de $0.01 en Solana y llega en segundos. Western Union cobra 5-10% y tarda días. Las familias que reciben remesas pueden ahorrar cientos de dólares al año.' },
           { icon: Wallet, title: 'Refugio en Volatilidad', text: 'Cuando BTC o SOL caen 20%, puedes convertir temporalmente a USDC para proteger tus ganancias. Luego recompras cuando el precio se estabiliza. Es tu "puerto seguro" dentro del ecosistema cripto.' },
-          { icon: Zap, title: 'Pagos y Tarjetas Cripto', text: 'Las tarjetas como Kast y Avici (que viste en la lección anterior) funcionan principalmente con stablecoins. Cargas USDC, pagas en cualquier tienda. El comercio recibe pesos, tú pagas desde tu wallet.' }
+          { icon: Zap, title: 'Pagos y Tarjetas Cripto', text: 'Las tarjetas cripto como Kast y Avici funcionan principalmente con stablecoins. Cargas USDC, pagas en cualquier tienda. El comercio recibe pesos, tú pagas desde tu wallet.' }
         ]
       },
       {
@@ -3202,7 +3202,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'q4',
-          question: 'Vives en Argentina con cepo cambiario. ¿Cómo te ayudan las stablecoins?',
+          question: 'Imagina que vives en un país con fuertes controles de cambio (como el cepo que tuvo Argentina durante años). ¿Cómo te ayudan las stablecoins?',
           options: [
             { id: 'a', text: 'No me ayudan, necesito dólares reales' },
             { id: 'b', text: 'Puedo comprar USDC sin límite a través de exchanges P2P, dolarizando mis ahorros sin depender del cupo oficial del gobierno ni del spread del dólar blue' },
@@ -3210,7 +3210,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Son ilegales en Argentina' }
           ],
           correctAnswer: 'b',
-          explanation: 'Las stablecoins son la salida del cepo. Sin límites de compra, sin spread bancario abusivo, y puedes guardarlas en tu propia wallet donde el gobierno no puede congelarlas. Millones de argentinos ya lo hacen.'
+          explanation: 'Las stablecoins son una salida a los controles de cambio. Sin límites de compra, sin spread bancario abusivo, y puedes guardarlas en tu propia wallet donde el gobierno no puede congelarlas. Millones de argentinos las adoptaron por esta razón.'
         },
         {
           id: 'q5',
