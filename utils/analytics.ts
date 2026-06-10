@@ -30,10 +30,17 @@ function isEnabled(): boolean {
 }
 
 /**
- * Dynamically injects the GA4 gtag.js script and initializes it.
- * Only runs once and only in production.
+ * Sets up the gtag stub + dataLayer, queues js/config, and injects gtag.js.
+ * Runs once, only in production with a measurement ID.
+ *
+ * Called at MODULE LOAD (below) so window.gtag exists and js/config are queued
+ * before the first trackPageView. React runs child effects before parent
+ * effects, so the route tracker's first page_view used to fire before the old
+ * App-level initAnalytics() — landing the landing-page view (the one ad
+ * attribution depends on) in a no-op. Queuing at import time fixes the order:
+ * once gtag.js loads it replays js → config → page_view from the dataLayer.
  */
-export function initAnalytics(): void {
+function setupGtag(): void {
   if (initialized || !isEnabled() || !import.meta.env.PROD) {
     return;
   }
@@ -41,11 +48,6 @@ export function initAnalytics(): void {
   if (typeof document === 'undefined') {
     return;
   }
-
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`;
-  document.head.appendChild(script);
 
   window.dataLayer = window.dataLayer || [];
   window.gtag = function gtag(
@@ -59,7 +61,23 @@ export function initAnalytics(): void {
     send_page_view: false,
   });
 
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`;
+  document.head.appendChild(script);
+
   initialized = true;
+}
+
+// Initialize at import time, before any component renders or effects run.
+setupGtag();
+
+/**
+ * Retained for the existing App.tsx call site. Idempotent — the real setup runs
+ * at module load; this is a safety net in case the module-load run was skipped.
+ */
+export function initAnalytics(): void {
+  setupGtag();
 }
 
 /**
