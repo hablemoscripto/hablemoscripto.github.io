@@ -14,6 +14,25 @@ interface EntitlementsContextType {
 
 const EntitlementsContext = createContext<EntitlementsContextType | undefined>(undefined);
 
+// Retry transient failures (network blip, Supabase hiccup) with a short backoff.
+// getUserEntitlements resolves to free entitlements when there's simply no
+// profile row yet; it only throws on real errors, which is what we retry.
+async function fetchEntitlementsWithRetry(
+  userId: string,
+  attempts = 3,
+): Promise<UserEntitlements | null> {
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await getUserEntitlements(userId);
+    } catch {
+      if (i < attempts - 1) {
+        await new Promise((resolve) => setTimeout(resolve, 400 * (i + 1)));
+      }
+    }
+  }
+  return null;
+}
+
 export function EntitlementsProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const userId = user?.id;
@@ -35,10 +54,17 @@ export function EntitlementsProvider({ children }: { children: ReactNode }) {
     }
     setLoading(true);
     try {
-      const next = await getUserEntitlements(userId);
-      setEntitlements(next);
-    } catch {
-      setEntitlements(ANONYMOUS_ENTITLEMENTS);
+      const next = await fetchEntitlementsWithRetry(userId);
+      // On total failure (next === null), deliberately KEEP the previous
+      // entitlements rather than asserting anonymous: the initial default is
+      // already anonymous (so a never-loaded user still can't see paid content),
+      // but a paying user must not be demoted to the upgrade paywall by a
+      // transient blip. The server re-checks is_premium before serving paid
+      // content regardless, so a stale client value can never grant access it
+      // shouldn't.
+      if (next) {
+        setEntitlements(next);
+      }
     } finally {
       setLoading(false);
     }
