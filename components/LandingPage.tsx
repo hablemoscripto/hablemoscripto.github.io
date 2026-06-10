@@ -10,6 +10,7 @@ import Footer from './Footer';
 import AuthModal from './AuthModal';
 import MentoriaModal from './MentoriaModal';
 import { useAuth } from '../contexts/AuthContext';
+import type { CourseTier } from '../services/paymentService';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronDown, Loader2 } from 'lucide-react';
@@ -34,16 +35,45 @@ const LandingPage: React.FC = () => {
     }
   }, [searchParams, setSearchParams]);
 
+  // Consume post-auth redirect intent once the user becomes available. This is
+  // the ONLY path that works for Google OAuth: signInWithGoogle does a full-page
+  // redirect, so the in-component onLoginSuccess callback is gone by the time we
+  // return — but sessionStorage survives. Guarded on a stored target so a
+  // logged-in visitor deliberately viewing the landing page is never bounced.
+  useEffect(() => {
+    if (!user) return;
+    const redirectPath = sessionStorage.getItem('redirectAfterLogin');
+    if (redirectPath) {
+      sessionStorage.removeItem('redirectAfterLogin');
+      navigate(redirectPath);
+    }
+  }, [user, navigate]);
+
   const handleNavigateToEducation = () => {
     if (user) {
       navigate('/education');
     } else {
+      sessionStorage.setItem('redirectAfterLogin', '/education');
+      setIsAuthModalOpen(true);
+    }
+  };
+
+  // Public pricing CTA: carry the chosen plan through signup so the buyer lands
+  // back on that exact plan's payment modal (EducationPage reads ?upgrade=).
+  const handlePublicPlanCta = (tier: CourseTier) => {
+    const target = tier === 'free' ? '/education' : `/education?upgrade=${tier}`;
+    if (user) {
+      navigate(target);
+    } else {
+      sessionStorage.setItem('redirectAfterLogin', target);
       setIsAuthModalOpen(true);
     }
   };
 
   const handleLoginSuccess = () => {
-    // Check if there's a redirect URL stored
+    // Synchronous path for email/password login (fires before the user-state
+    // effect, so it wins the race and the effect then no-ops). OAuth never
+    // reaches here — the effect above handles it.
     const redirectPath = sessionStorage.getItem('redirectAfterLogin');
     if (redirectPath) {
       sessionStorage.removeItem('redirectAfterLogin');
@@ -196,10 +226,7 @@ const LandingPage: React.FC = () => {
         <section id="pricing" className="py-24 bg-navy-950 relative scroll-mt-28">
           <PricingSection
             variant="public"
-            onPublicCta={handleNavigateToEducation}
-            onSelectPlan={() => {
-              handleNavigateToEducation();
-            }}
+            onPublicCta={handlePublicPlanCta}
           />
         </section>
 

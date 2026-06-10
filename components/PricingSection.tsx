@@ -10,7 +10,7 @@ interface PricingSectionProps {
   variant?: 'authenticated' | 'public';
   entitlements?: UserEntitlements;
   onSelectPlan?: (planId: 'inversor' | 'experto') => void;
-  onPublicCta?: () => void;
+  onPublicCta?: (tier: CourseTier) => void;
 }
 
 const COURSE_PLAN_ORDER: CourseTier[] = ['free', 'inversor', 'experto'];
@@ -184,7 +184,7 @@ export default function PricingSection({
                 {/* CTA */}
                 {isPublic ? (
                   <button
-                    onClick={() => onPublicCta?.()}
+                    onClick={() => onPublicCta?.(courseTier)}
                     className={`mt-auto w-full rounded-2xl py-3.5 text-sm font-bold transition-all duration-200 ${
                       isTopTier
                         ? 'bg-gradient-to-r from-brand-500 to-brand-600 text-navy-950 shadow-lg shadow-brand-500/20 hover:from-brand-400 hover:to-brand-500'

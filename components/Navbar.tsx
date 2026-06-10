@@ -77,6 +77,17 @@ const Navbar: React.FC = () => {
     }
   }, [location.pathname, navigate]);
 
+  // Give OAuth a return target before opening the modal: signInWithGoogle does a
+  // full-page redirect, so onLoginSuccess never fires on the way back — the
+  // LandingPage consumer effect reads this key instead. Don't clobber a more
+  // specific redirect a ProtectedRoute may have stored.
+  const handleOpenAuth = useCallback(() => {
+    if (!sessionStorage.getItem('redirectAfterLogin')) {
+      sessionStorage.setItem('redirectAfterLogin', '/education');
+    }
+    setIsAuthModalOpen(true);
+  }, []);
+
   const navLinks = [
     { name: 'Inicio', action: () => handleScrollToSection('home') },
     { name: 'Por Qué HC', action: () => handleScrollToSection('about') }, // Assuming 'about' section exists or will exist
@@ -155,7 +166,7 @@ const Navbar: React.FC = () => {
               </div>
             ) : (
               <button
-                onClick={() => setIsAuthModalOpen(true)}
+                onClick={handleOpenAuth}
                 className="group relative px-6 py-2.5 bg-brand-500 text-navy-950 rounded-xl font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] overflow-hidden shadow-glow-brand"
               >
                 <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
@@ -263,7 +274,7 @@ const Navbar: React.FC = () => {
                 ) : (
                   <button
                     onClick={() => {
-                      setIsAuthModalOpen(true);
+                      handleOpenAuth();
                       setIsMobileMenuOpen(false);
                     }}
                     className="flex items-center justify-center gap-3 w-full bg-brand-500 hover:bg-brand-400 text-navy-950 font-bold py-4 px-6 rounded-2xl transition-all shadow-glow-brand"
