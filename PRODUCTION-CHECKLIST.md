@@ -27,7 +27,7 @@ Set these via `supabase secrets set` or the Supabase dashboard → **Project Set
 | `RESEND_API_KEY` | `send-newsletter`, welcome email | Resend dashboard → API Keys |
 | `WOMPI_INTEGRITY_SECRET` | `create-payment` | **Production secret, not sandbox** |
 | `WOMPI_EVENTS_SECRET` | `wompi-webhook` | **Production secret, not sandbox** |
-| `UNSUBSCRIBE_HMAC_SECRET` | `unsubscribe`, `send-newsletter` | Long random string for signing unsubscribe tokens. Falls back to `WOMPI_EVENTS_SECRET` if unset, but set a dedicated one. |
+| `UNSUBSCRIBE_HMAC_SECRET` | `unsubscribe`, `send-newsletter` | **Required.** Long random string for signing unsubscribe tokens. No fallback — both functions return 500 if unset. Must be identical in both. |
 | `USDC_PAYMENT_ADDRESS` | `verify-crypto-payment` | Only if crypto payments are live (dormant at launch) |
 | `SOLANA_RPC_URL` | `verify-crypto-payment` | Mainnet RPC (Helius/QuickNode recommended) |
 
@@ -37,22 +37,45 @@ The old `GEMINI_API_KEY` secret is no longer used (the AI tutor moved to Grok) a
 
 ## 3. Database migrations
 
-Apply in order in the Supabase **SQL Editor**:
+Apply in this exact order in the Supabase **SQL Editor**. **Order matters** — later files redefine functions and reference tables created earlier. The base `*.sql` files use bare `CREATE TABLE`/`CREATE POLICY` (no `IF NOT EXISTS`), so they are **fresh-DB only** and will error on re-run; the dated `migrations/*` files are idempotent and safe to re-run.
 
-1. `supabase/payments-schema.sql` — creates `user_profiles`, `payments`, `upgrade_user_to_premium` RPC
-2. `supabase/admin-setup.sql` — creates `profiles` table with `is_admin`, trigger, and RLS policies
-3. `supabase/migrations/add_subscription_tiers.sql` — premium tier tracking
-4. `supabase/migrations/create_user_achievements.sql` — gamification achievements
-5. `supabase/migrations/add_processed_webhook_events.sql` — idempotency table for Wompi retries
-6. `supabase/migrations/2026-05-28_fix_payments_security_and_tiers.sql` — **critical.** Closes an RLS hole that let any logged-in user self-grant premium, makes `premium_tier` actually persist on purchase (changes the `upgrade_user_to_premium` signature to `(uuid, tier)`), and merges the duplicate signup trigger. **Apply before deploying the updated `wompi-webhook`** — the new function calls the new RPC signature.
+**Course content schema:**
+1. `supabase/course-schema.sql` — creates `levels`, `modules`, `lessons`, `quiz_questions`, `referrals`
+2. `supabase/add-level-fields.sql` — adds `icon_name` / `color` / `order` to `levels`
+3. `supabase/quiz-enhancements.sql` — multi-type questions, checkpoint quizzes
 
-After step 2, promote your account:
+**User / payments / admin schema:**
+4. `supabase/payments-schema.sql` — `user_profiles`, `payments`, `upgrade_user_to_premium` RPC, signup trigger v1
+5. `supabase/admin-setup.sql` — `profiles` table with `is_admin`, trigger, RLS policies *(creates a policy on `newsletter_subscribers` — that table must already exist; see note below)*
+6. `supabase/migrations/create_user_achievements.sql` — gamification achievements table
+7. `supabase/migrations/add_subscription_tiers.sql` — premium tier tracking + `crypto_payments`
+8. `supabase/migrations/add_processed_webhook_events.sql` — idempotency table for Wompi retries
+9. `supabase/migrations/2026-05-26_fix_user_profiles_and_achievements_rls.sql` — adds `premium_tier` column, fixes achievements upsert RLS
+
+**Security + content protection (apply last, in this order):**
+10. `supabase/migrations/2026-05-28_fix_payments_security_and_tiers.sql` — **critical.** Closes the RLS hole that let any logged-in user self-grant premium, makes `premium_tier` persist on purchase (changes `upgrade_user_to_premium` to `(uuid, tier)`), and merges the duplicate signup trigger. **Apply before deploying the updated `wompi-webhook`** — the new function calls the new RPC signature.
+11. `supabase/migrations/2026-05-30_content_protection.sql` — creates `protected_lessons` (references `lessons(id)`) and locks paid content tables to service-role-only. **Without this, the paid-lesson path 500s.**
+12. `supabase/migrations/2026-06-02_newsletter_autosubscribe.sql` — **MUST run last.** Both this and step 10 `CREATE OR REPLACE handle_new_user()`; if 10 runs after this, the newsletter signup opt-in is silently dropped.
+
+> **Not in the repo (gap):** the DDL for `user_progress` and `newsletter_subscribers` lives only in the live DB (an earlier external migration), not in `supabase/`. A fresh-environment rebuild needs both created **before** step 5 (which adds a policy to `newsletter_subscribers`) and before the seed. Capture their real DDL into `supabase/` so the schema is reproducible. `supabase/verify-order-column.sql` is a diagnostic, not a migration — do not apply it.
+
+After step 5, promote your account:
 
 ```sql
 UPDATE public.profiles
 SET is_admin = true
 WHERE email = 'sebastianbarrientosa@gmail.com';
 ```
+
+## 3a. Seed lesson content
+
+After migrations, push course content to the DB. The AI tutor's RAG grounding (`lesson_details`) and all 25 paid lessons (`protected_lessons`) only exist after this runs:
+
+```
+npm run db:seed   # requires SUPABASE_SERVICE_KEY in the local environment
+```
+
+**Take a database backup first** (see §8). The current seed deletes-then-reinserts content tables, so a failed run can leave content tables empty until it succeeds.
 
 ## 3b. Deploy Edge Functions
 
@@ -62,12 +85,17 @@ WHERE email = 'sebastianbarrientosa@gmail.com';
 supabase functions deploy create-payment
 supabase functions deploy wompi-webhook
 supabase functions deploy grok-chat
-supabase functions deploy verify-crypto-payment
+supabase functions deploy get-lesson-content
 supabase functions deploy unsubscribe --no-verify-jwt
 supabase functions deploy send-newsletter --no-verify-jwt
+supabase functions deploy mentoria-request --no-verify-jwt
 ```
 
-`_shared/welcome-email.ts` is imported by `wompi-webhook` and `verify-crypto-payment`, so redeploy both after any change to it.
+`get-lesson-content` serves the 25 paid lessons after a server-side premium check — **paid lessons are dead without it.** `mentoria-request` is a public form endpoint and needs `--no-verify-jwt`.
+
+**Do NOT deploy `verify-crypto-payment` at launch.** Crypto payments are deferred. The function does not bind the on-chain payer to the authenticated user, so anyone could claim someone else's USDC transfer. Leave it undeployed until payer-binding is implemented (a signed nonce from the source wallet, or a per-user memo). The crypto tab is already disabled in the UI.
+
+`_shared/welcome-email.ts` is imported by `wompi-webhook` (and `verify-crypto-payment` when it ships later), so redeploy `wompi-webhook` after any change to it.
 
 ## 4. Wompi webhook configuration
 
@@ -79,11 +107,23 @@ https://<your-supabase-project>.functions.supabase.co/wompi-webhook
 
 Subscribe to `transaction.updated` events. The signature checksum on each event is recorded in `processed_webhook_events` so retries are safely deduplicated.
 
+## 4b. Supabase Auth configuration
+
+In the Supabase dashboard → **Authentication**:
+
+- [ ] **URL Configuration → Site URL** = `https://hablemoscripto.io` (used as the default redirect for email links). A wrong Site URL sends password-reset / verification links to localhost or a preview domain.
+- [ ] **URL Configuration → Redirect URLs** — add the production domain (and any Vercel preview domains you test on) so Google OAuth callback and password-reset return correctly: `https://hablemoscripto.io/**`.
+- [ ] **Providers → Email → Confirm email** = **ON.** With confirmations off, new email signups are returned an active session while the UI shows the "verify your email" screen — a dead end. (The signup flow assumes confirmation is required.)
+- [ ] **Providers → Google** — OAuth client ID/secret set, and the Supabase callback URL added to the Google Cloud console authorized redirect URIs.
+
 ## 5. Smoke tests (do these before announcing)
+
+> **Run these against a deployed Vercel preview URL, not `localhost`.** Local dev serves no CSP or security headers, so a CSP rule that blocks the Wompi widget's API calls (or any header regression) will pass locally and only fail in production. Watch the browser console for CSP violations during the payment test.
 
 - [ ] Load homepage — no console errors, hero animation plays, CTAs clickable
 - [ ] Sign up with a throwaway email — verify email lands, verification link works
-- [ ] Log in with Google — first-time user is created, lands on `/education`
+- [ ] Log in with Google — first-time user is created, lands on `/education` (not stranded on the landing page)
+- [ ] On the public landing page, click **"Convertirme en Cripto Experto"**, sign up, and confirm you land on `/education` with the **Experto** payment modal already open (plan carried through signup)
 - [ ] Complete Lesson 1 — XP and completion checkmark appear
 - [ ] Buy **Inversor** with a Wompi sandbox card — `pago-completado` shows APPROVED, and within a few seconds `/education` unlocks all levels (verify `user_profiles.premium_tier` = `premium`)
 - [ ] Buy **Cripto Experto** — `premium_tier` = `vip` and the "Comunidad Activa" badge appears in the `/education` subheader
@@ -98,8 +138,9 @@ Subscribe to `transaction.updated` events. The signature checksum on each event 
 ## 6. Observability
 
 - [ ] Open Vercel Analytics (or Umami/Plausible) — confirm page views recording
-- [ ] Open Supabase **Logs → Edge Functions** — verify no 5xx on `wompi-webhook`, `grok-chat`, `send-newsletter`
-- [ ] If `VITE_GA4_MEASUREMENT_ID` is set, open GA4 real-time report and confirm events (`page_view`, `sign_up`, `lesson_complete`) are firing
+- [ ] Open Supabase **Logs → Edge Functions** — verify no 5xx on `wompi-webhook`, `grok-chat`, `send-newsletter`. **Check daily during launch week** — a "paid but no premium" failure surfaces here first.
+- [ ] If `VITE_GA4_MEASUREMENT_ID` is set, open GA4 real-time report and confirm events (`page_view`, `sign_up`, `lesson_complete`) are firing — including the **landing-page** `page_view` (the first one, which ad attribution depends on)
+- [ ] Client errors currently `console.error` in the browser unless `VITE_ERROR_REPORTING_URL` points somewhere. Set it (even to a tiny Edge Function that inserts into an `error_logs` table) so production errors are captured, not lost.
 
 ## 7. Known post-launch work (not blocking)
 
@@ -107,3 +148,16 @@ Subscribe to `transaction.updated` events. The signature checksum on each event 
 - Replace in-memory rate limiting in `grok-chat` / `create-payment` with Supabase Redis or Deno KV (resets on cold start today)
 - Ship the certificate flow (`components/ui/Certificate.tsx` exists but has no route)
 - Tighten CSP — drop `unsafe-eval` once the Wompi widget supports nonces
+- Wire `verify-crypto-payment` payer-binding, then deploy and re-enable the USDC tab
+- Reconcile stuck `PENDING` payments (a daily job querying Wompi by reference) in case a webhook is never delivered
+
+## 8. Backups & data safety
+
+- [ ] Confirm the Supabase plan tier. **Free tier has no automated backups.** Enable daily backups (Pro) or schedule a `pg_dump` before launch.
+- [ ] **Take a manual backup before every `npm run db:seed`** against production — the seed deletes-then-reinserts content tables, so a bad run is unrecoverable without one.
+- [ ] Verify the `user_progress.lesson_id` foreign key is **not** `ON DELETE CASCADE` against `lessons` — if it is, a content reseed (which deletes all `lessons` rows) wipes every user's progress. Check with:
+  ```sql
+  SELECT conname, confdeltype FROM pg_constraint
+  WHERE conrelid = 'user_progress'::regclass AND contype = 'f';
+  ```
+  `confdeltype` must be `a` (NO ACTION) or `r` (RESTRICT), never `c` (CASCADE).
