@@ -83,7 +83,7 @@ npm run db:seed   # requires SUPABASE_SERVICE_KEY in the local environment
 
 ```
 supabase functions deploy create-payment
-supabase functions deploy wompi-webhook
+supabase functions deploy wompi-webhook --no-verify-jwt
 supabase functions deploy grok-chat
 supabase functions deploy get-lesson-content
 supabase functions deploy unsubscribe --no-verify-jwt
@@ -91,7 +91,14 @@ supabase functions deploy send-newsletter --no-verify-jwt
 supabase functions deploy mentoria-request --no-verify-jwt
 ```
 
-`get-lesson-content` serves the 25 paid lessons after a server-side premium check — **paid lessons are dead without it.** `mentoria-request` is a public form endpoint and needs `--no-verify-jwt`.
+**`--no-verify-jwt` matters.** Deploy each function as its own command (the CLI takes one name, not a comma list). The platform checks the JWT *before* your function runs, so any caller that doesn't send a Supabase JWT must be deployed with `--no-verify-jwt`, or it's rejected with 401 before the code executes:
+- `wompi-webhook` — called by Wompi (no JWT). **Without the flag, every payment event is rejected and no user gets premium.** The in-function HMAC signature check is the real gate.
+- `unsubscribe`, `mentoria-request` — public endpoints. `send-newsletter` does its own admin check inside the function.
+- `create-payment`, `get-lesson-content`, `grok-chat` are called by the logged-in frontend (which sends a JWT) — deploy these **without** the flag so JWT verification stays on.
+
+There is no `supabase/config.toml`, so `verify_jwt` is set per deploy by the flag (CLI default is `true`). Redeploying without the flag silently re-enables JWT verification — always include it for the public functions above.
+
+`get-lesson-content` serves the 25 paid lessons after a server-side premium check — **paid lessons are dead without it.**
 
 **Do NOT deploy `verify-crypto-payment` at launch.** Crypto payments are deferred. The function does not bind the on-chain payer to the authenticated user, so anyone could claim someone else's USDC transfer. Leave it undeployed until payer-binding is implemented (a signed nonce from the source wallet, or a per-user memo). The crypto tab is already disabled in the UI.
 
