@@ -128,8 +128,18 @@ function serializeSections(sections: any[]): any[] {
   });
 }
 
+// Tracks soft failures (a single lesson/quiz/referral) so the run can finish
+// the rest but still exit non-zero — a partial seed must never look successful.
+let hadError = false;
+
 async function seed() {
   console.log('Starting database seed...');
+  console.warn(
+    '\n⚠️  DESTRUCTIVE: this deletes and reinserts all content tables.\n' +
+      '   Deleting `lessons` CASCADE-wipes protected_lessons (paid content) and\n' +
+      '   lesson_details (AI RAG) until the reinsert completes. Run against\n' +
+      '   production only with a fresh backup and during low traffic.\n'
+  );
 
   // 1. Clean up existing data
   console.log('Cleaning up old data...');
@@ -148,7 +158,7 @@ async function seed() {
     const { error } = await supabase.from(table).delete().neq(cleanupColumn, -1); // trick to delete all rows
     if (error) {
       console.error(`Error cleaning up ${table}:`, error);
-      return;
+      process.exit(1); // a half-cleaned DB must abort loudly, not continue
     }
   }
   console.log('Old data cleaned up successfully.');
@@ -186,7 +196,7 @@ async function seed() {
     });
     if (levelError) {
       console.error('Error seeding level:', levelError);
-      return;
+      process.exit(1);
     }
 
     for (const [moduleIndex, module] of level.modules.entries()) {
@@ -204,7 +214,7 @@ async function seed() {
 
       if (moduleError) {
         console.error('Error seeding module:', moduleError);
-        return;
+        process.exit(1);
       }
 
       for (const [lessonIndex, lesson] of module.lessons.entries()) {
@@ -221,7 +231,7 @@ async function seed() {
 
         if (lessonError) {
           console.error('Error seeding lesson:', lessonError);
-          return;
+          process.exit(1);
         }
 
         // Seed Referrals if they exist
@@ -235,6 +245,7 @@ async function seed() {
               });
             if (referralError) {
               console.error('Error seeding referral:', referralError);
+              hadError = true;
             }
           }
         }
@@ -264,6 +275,7 @@ async function seed() {
       });
     if (detailError) {
       console.error(`Error seeding details for lesson ${lessonId}:`, detailError);
+      hadError = true;
     }
 
     // Paid lessons: store the full lesson body as a protected blob, served at
@@ -279,6 +291,7 @@ async function seed() {
         });
       if (protError) {
         console.error(`Error seeding protected content for lesson ${lessonId}:`, protError);
+        hadError = true;
       }
     }
 
@@ -292,7 +305,7 @@ async function seed() {
 
       if (quizError) {
         console.error(`Error seeding quiz for lesson ${lessonId}:`, quizError);
-        return;
+        process.exit(1);
       }
 
       for (const [
@@ -329,12 +342,25 @@ async function seed() {
             `Error seeding question for lesson ${lessonId}:`,
             questionError
           );
+          hadError = true;
         }
       }
     }
   }
   console.log('Lesson details and quizzes seeded successfully.');
+
+  if (hadError) {
+    console.error(
+      '\n❌ Seed finished with errors above — some rows did not persist. ' +
+        'Do NOT treat this as a successful seed; fix the errors and re-run.'
+    );
+    process.exit(1);
+  }
+
   console.log('Database seed complete! ✅');
 }
 
-seed();
+seed().catch((err) => {
+  console.error('Seed failed with an unexpected error:', err);
+  process.exit(1);
+});
