@@ -76,6 +76,12 @@ serve(async (req) => {
     return new Response('ok', { headers: corsHeaders })
   }
 
+  // Tracked across the try/catch so an unexpected throw after the dedupe marker
+  // is inserted can still remove it — otherwise Wompi's retry hits "Already
+  // processed" and the user pays but never gets premium.
+  let markerInserted = false
+  let cleanupMarker: (() => Promise<void>) | null = null
+
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
@@ -150,6 +156,11 @@ serve(async (req) => {
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
+
+    // Marker is committed. From here on, any unexpected throw must clean it up
+    // (see outer catch) so the Wompi retry isn't swallowed as already-processed.
+    markerInserted = true
+    cleanupMarker = cleanupDedupeRow
 
     const { data: payment, error: paymentError } = await supabase
       .from('payments')
@@ -241,6 +252,11 @@ serve(async (req) => {
     )
   } catch (error) {
     console.error('Webhook error:', error)
+    // If we inserted the dedupe marker before throwing, remove it so Wompi's
+    // retry actually re-runs the upgrade instead of hitting "Already processed".
+    if (markerInserted && cleanupMarker) {
+      await cleanupMarker()
+    }
     return new Response(
       JSON.stringify({ error: 'Internal server error' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
