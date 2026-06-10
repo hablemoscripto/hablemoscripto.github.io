@@ -213,9 +213,30 @@ export async function fetchLessonById(lessonId: number): Promise<LessonData | nu
     };
   }
 
-  // Map checkpoint quizzes if present
+  // Map checkpoint quizzes if present, applying the same deterministic option
+  // shuffle as the main quiz so the correct answer isn't always at the same
+  // index (the source data leans heavily toward index 1).
   if (lesson.checkpointQuizzes) {
-    data.checkpointQuizzes = lesson.checkpointQuizzes;
+    data.checkpointQuizzes = (lesson.checkpointQuizzes as CheckpointQuizData[]).map(
+      (cp) => ({
+        ...cp,
+        questions: cp.questions.map((q) => {
+          if (Array.isArray(q.options) && typeof q.correctAnswer === 'number') {
+            const shuffled = shuffleQuizOptions(
+              q.options,
+              q.correctAnswer,
+              `cp-${lessonId}-${cp.id}-${q.id}`
+            );
+            return {
+              ...q,
+              options: shuffled.options,
+              correctAnswer: shuffled.correctIndex,
+            };
+          }
+          return q;
+        }),
+      })
+    );
   }
 
   // Map referrals if present
