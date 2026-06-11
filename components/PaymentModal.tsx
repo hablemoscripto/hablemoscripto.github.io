@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Modal } from './ui/Modal';
 import { CreditCard, Wallet, Loader2, AlertCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
@@ -52,6 +52,7 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
   const [activeTab, setActiveTab] = useState<'card' | 'crypto'>('card');
   const [loading, setLoading] = useState(false);
   const [widgetLoaded, setWidgetLoaded] = useState(false);
+  const [widgetFailed, setWidgetFailed] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const { user } = useAuth();
 
@@ -62,12 +63,17 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
 
   const publicKey = import.meta.env.VITE_WOMPI_PUBLIC_KEY;
 
-  useEffect(() => {
-    if (document.getElementById('wompi-widget-script')) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+  // Adblockers and flaky mobile networks can block the Wompi script entirely;
+  // a stale <script> tag in the DOM does not mean it ever executed, so the
+  // source of truth for "loaded" is window.WidgetCheckout, and failures must
+  // surface to the buyer with a retry instead of a dead "intenta de nuevo".
+  const injectWidgetScript = useCallback(() => {
+    setWidgetFailed(false);
+    if (window.WidgetCheckout) {
       setWidgetLoaded(true);
       return;
     }
+    document.getElementById('wompi-widget-script')?.remove();
 
     const script = document.createElement('script');
     script.id = 'wompi-widget-script';
@@ -75,10 +81,19 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
     script.async = true;
     script.onload = () => setWidgetLoaded(true);
     script.onerror = () => {
+      setWidgetFailed(true);
       reportError('Failed to load Wompi widget', { component: 'PaymentModal', action: 'loadWidget' });
     };
     document.body.appendChild(script);
   }, []);
+
+  useEffect(() => {
+    // Sets state synchronously only when the widget is already on window
+    // (remount with the script previously loaded) — same pattern as the
+    // isOpen effect below.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    injectWidgetScript();
+  }, [injectWidgetScript]);
 
   useEffect(() => {
     if (isOpen) {
@@ -102,7 +117,7 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
     }
 
     if (!widgetLoaded || !window.WidgetCheckout) {
-      setErrorMessage('El sistema de pagos aún no está listo. Intenta de nuevo.');
+      setErrorMessage('El sistema de pagos todavía se está cargando. Espera unos segundos e intenta de nuevo.');
       return;
     }
 
@@ -212,7 +227,30 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
             </div>
           </div>
 
-          {errorMessage && (
+          {widgetFailed && (
+            <div role="alert" className="p-3 bg-red-500/10 border border-red-500/20 rounded-xl space-y-2">
+              <div className="flex items-start gap-2">
+                <AlertCircle size={16} aria-hidden="true" className="text-red-400 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-red-400">
+                  No pudimos cargar el sistema de pagos de Wompi. Esto suele pasar cuando un
+                  bloqueador de anuncios lo impide. Desactívalo para este sitio y reintenta, o
+                  escríbenos a{' '}
+                  <a href="mailto:hablemoscripto@gmail.com" className="underline hover:text-red-300 transition-colors">
+                    hablemoscripto@gmail.com
+                  </a>{' '}
+                  y te ayudamos a completar tu compra.
+                </p>
+              </div>
+              <button
+                onClick={injectWidgetScript}
+                className="w-full text-sm py-2 rounded-lg border border-red-500/30 text-red-300 hover:bg-red-500/10 font-medium transition-colors"
+              >
+                Reintentar carga
+              </button>
+            </div>
+          )}
+
+          {errorMessage && !widgetFailed && (
             <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-xl">
               <AlertCircle size={16} aria-hidden="true" className="text-red-400 flex-shrink-0" />
               <p className="text-sm text-red-400">{errorMessage}</p>
@@ -221,7 +259,7 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
 
           <button
             onClick={handleCardPayment}
-            disabled={loading || !user}
+            disabled={loading || !user || widgetFailed}
             className="w-full py-4 rounded-2xl text-sm font-bold bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-brand-500/20"
           >
             {loading ? (
@@ -232,7 +270,7 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
             ) : (
               <>
                 <CreditCard size={18} aria-hidden="true" />
-                Pagar con tarjeta — {formatCOP(copPriceCents)}
+                Pagar con tarjeta: {formatCOP(copPriceCents)}
               </>
             )}
           </button>
