@@ -17,14 +17,14 @@ export default defineConfig(() => {
           includeAssets: [
             'favicon.png',
             'robots.txt',
-            'images/og-cover-optimized.png',
             'icons/icon-192x192.png',
             'icons/icon-512x512.png',
           ],
           workbox: {
-            // Precache only the app shell + fonts. Lesson images (~8 MB across 76 entries)
-            // are served on demand via the /images/lessons/ runtimeCaching rule below —
-            // precaching them all on install is wasteful for the LATAM mobile audience.
+            // Precache only the app shell + fonts. Lesson images are served on demand
+            // via the /images/lessons/ runtimeCaching rule below — precaching them all
+            // on install is wasteful for the LATAM mobile audience. og-cover is for
+            // social scrapers only and is deliberately not precached.
             globPatterns: ['**/*.{js,css,html,woff2,svg}'],
             maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
             runtimeCaching: [

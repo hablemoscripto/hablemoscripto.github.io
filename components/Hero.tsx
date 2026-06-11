@@ -1,9 +1,12 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { Users, BookOpen, Award, Zap, CheckCircle } from 'lucide-react';
-import ParticlesBackground from './ParticlesBackground';
 import { getAllLessonsOrdered } from '../utils/courseUtils';
+
+// The particles engine is ~40 kB gzipped and purely decorative — keep it out of
+// the critical landing chunk and only mount it once the browser is idle.
+const ParticlesBackground = React.lazy(() => import('./ParticlesBackground'));
 
 // Derive the lesson count from the catalog so the headline stat can never drift.
 const LESSON_COUNT = getAllLessonsOrdered().length;
@@ -28,6 +31,19 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
   const [displayText, setDisplayText] = useState(prefersReducedMotion ? SETTLED_WORD : '');
   const [isDeleting, setIsDeleting] = useState(false);
   const [settled, setSettled] = useState(!!prefersReducedMotion);
+  const [showParticles, setShowParticles] = useState(false);
+
+  // Defer the decorative particles until the main thread is idle so they never
+  // compete with first paint on slow devices.
+  useEffect(() => {
+    const start = () => setShowParticles(true);
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(start, { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const timer = window.setTimeout(start, 1200);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   // Typing Effect — cycles through WORDS twice, then settles on the last word.
   // Keeps the hero visually alive on arrival without being a permanent distraction.
@@ -71,8 +87,12 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
   return (
     <section id="home" className="relative flex items-center justify-center overflow-hidden bg-navy-950 pt-32 pb-20 lg:pt-24 scroll-mt-28">
 
-      {/* Particles Background */}
-      <ParticlesBackground />
+      {/* Particles Background — deferred to idle, skipped on reduced motion / save-data */}
+      {showParticles && (
+        <Suspense fallback={null}>
+          <ParticlesBackground />
+        </Suspense>
+      )}
 
       {/* Dynamic Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
@@ -123,7 +143,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
             </h1>
 
             {/* Typing Subheading */}
-            <div className="h-12 md:h-16 flex items-center justify-center gap-4 text-2xl md:text-4xl font-light text-navy-200 mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            <div className="h-12 md:h-16 flex items-center justify-center gap-4 text-2xl md:text-4xl font-normal text-navy-200 mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
                 <span>Domina</span>
                 <div className="relative">
                     <span className="font-bold text-white border-b-4 border-brand-500 pb-1">{displayText}</span>

@@ -108,10 +108,21 @@ const PARTICLES_OPTIONS: ISourceOptions = {
 let engineInitialized = false;
 let engineReady = false;
 
+// The particles canvas animates continuously; skip it entirely for users who
+// asked for less motion or less data. matchMedia can't stop a canvas via CSS,
+// so the gate must live here, not in a stylesheet.
+const particlesDisabled = (): boolean => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+  const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+  return connection?.saveData === true;
+};
+
 const ParticlesBackground: React.FC = memo(() => {
   const [init, setInit] = useState(engineReady);
+  const [disabled] = useState(particlesDisabled);
 
   useEffect(() => {
+    if (disabled) return;
     if (engineInitialized) {
       // Re-mount case — engine was initialized by a previous render; sync
       // local state with the module-level flag.
@@ -127,14 +138,14 @@ const ParticlesBackground: React.FC = memo(() => {
       engineReady = true;
       setInit(true);
     });
-  }, []);
+  }, [disabled]);
 
   const particlesLoaded = useCallback(async (_container?: Container) => {
     // No-op — required signature but we do not use the container.
     void _container;
   }, []);
 
-  if (!init) return null;
+  if (disabled || !init) return null;
 
   return (
     <Particles

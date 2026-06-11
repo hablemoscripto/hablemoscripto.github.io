@@ -23,6 +23,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId, thumbnail, title }) 
                         src={thumbnail}
                         alt=""
                         aria-hidden="true"
+                        loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover opacity-20"
                     />
                 )}
@@ -46,6 +47,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoId, thumbnail, title }) 
                         <img
                             src={thumbnail}
                             alt={title}
+                            loading="lazy"
                             className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity duration-500"
                         />
                     )}
