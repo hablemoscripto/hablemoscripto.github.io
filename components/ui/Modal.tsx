@@ -232,10 +232,10 @@ export function Modal({
               {showCloseButton && (
                 <button
                   onClick={onClose}
-                  className="absolute top-4 right-4 text-navy-400 hover:text-white transition-colors"
+                  className="absolute top-2 right-2 p-2.5 text-navy-400 hover:text-white transition-colors"
                   aria-label="Cerrar"
                 >
-                  <X size={24} />
+                  <X size={24} aria-hidden="true" />
                 </button>
               )}
 

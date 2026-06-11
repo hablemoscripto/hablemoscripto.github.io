@@ -120,7 +120,7 @@ const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden lg:flex items-center gap-10">
             <ul className="flex gap-10">
               {navLinks.map((link) => (
                 <li key={link.name}>
@@ -182,7 +182,7 @@ const Navbar: React.FC = () => {
           <button
             ref={mobileToggleRef}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-navy-300 hover:text-white z-50"
+            className="lg:hidden p-2 text-navy-300 hover:text-white z-50"
             aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -197,7 +197,7 @@ const Navbar: React.FC = () => {
         <>
           {/* Dark overlay background */}
           <div
-            className="fixed inset-0 bg-black z-[60] md:hidden"
+            className="fixed inset-0 bg-black z-[60] lg:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
@@ -209,7 +209,7 @@ const Navbar: React.FC = () => {
             aria-modal="true"
             aria-label="Menú de navegación"
             tabIndex={-1}
-            className="fixed inset-0 z-[61] bg-navy-950 md:hidden overflow-y-auto outline-none"
+            className="fixed inset-0 z-[61] bg-navy-950 lg:hidden overflow-y-auto outline-none"
           >
             {/* Header with logo and close */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-white/5">
