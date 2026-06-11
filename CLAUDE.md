@@ -89,7 +89,7 @@ The AI tutor "CBas" persona is now powered by **Grok (xAI)** via the `grok-chat`
 
 ## What this is
 
-**Hablemos Cripto** is a Spanish-language crypto education platform for Latin America. 42 structured lessons across beginner / intermediate / advanced, with a Grok-powered AI tutor ("CBas"), gamification (XP / streaks / achievements), spaced-repetition review cards, and Wompi-based premium upgrades.
+**Hablemos Cripto** is a Spanish-language crypto education platform for Latin America. 44 structured lessons (19 beginner / 13 intermediate / 12 advanced), with a Grok-powered AI tutor ("CBas"), gamification (XP / streaks / achievements), spaced-repetition review cards, and Wompi-based premium upgrades.
 
 - **Language:** all user-facing copy is Spanish (LATAM register, not Spain)
 - **Home market:** Colombia first — Wompi is Colombian, pricing examples use COP, local examples skew Colombian
@@ -177,7 +177,7 @@ Root-level entry points (`App.tsx`, `index.tsx`, `index.css`). **No `src/` folde
 | Path | What lives there |
 |---|---|
 | `App.tsx` | Route tree, context providers, error boundary, chat widget mount |
-| `data/courseData.ts` | **All 42 lessons**, levels, modules, quizzes. ~8.5 MB monolith (Babel deoptimizes styling; splitting is known post-launch work). |
+| `data/courseData.ts` | **All 44 lessons**, levels, modules, quizzes. ~762 kB (Babel deoptimizes styling; splitting is known post-launch work). |
 | `components/` | 26 top-level components + `lesson/`, `education/`, `ui/` subfolders |
 | `contexts/` | `AuthContext`, `ProgressContext`, `GamificationContext` — see §State below |
 | `hooks/` | `useDailyReview`, `useLessonNavigation`, `useScrollProgress` |

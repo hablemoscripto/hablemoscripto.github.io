@@ -7,7 +7,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 export default tseslint.config(
   // Global ignores
   {
-    ignores: ['dist/', 'node_modules/', 'supabase/functions/', 'public/'],
+    ignores: ['dist/', 'node_modules/', 'supabase/functions/', 'public/', 'audit/'],
   },
 
   // Base JS recommended rules
