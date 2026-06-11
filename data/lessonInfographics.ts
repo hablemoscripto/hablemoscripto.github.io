@@ -36,16 +36,16 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "kind": "statCards",
       "cards": [
         {
-          "value": "−85%",
+          "value": "≈ −50%",
           "label": "Peso colombiano vs dólar",
-          "sublabel": "Desde el año 2000, y el dólar también pierde",
+          "sublabel": "Desde 2000: de ~2,000 a 3,500-4,500 por dólar, con picos sobre 5,000 en 2022",
           "tone": "red",
           "flag": "🇨🇴"
         },
         {
-          "value": "12 → 25",
+          "value": "10 → 25",
           "label": "Pesos por dólar en México",
-          "sublabel": "2008 a 2017; crisis de 1994 y 2008",
+          "sublabel": "De ~10 en 2008 a más de 20 en 2016-2017 y ~25 en la pandemia de 2020",
           "tone": "amber",
           "flag": "🇲🇽"
         },
@@ -235,7 +235,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "140%+",
           "label": "Argentina",
-          "sublabel": "Convierten el sueldo el día de cobro",
+          "sublabel": "En la crisis de 2023 y 2024 convertían el sueldo el día de cobro",
           "tone": "amber",
           "flag": "🇦🇷"
         }
@@ -777,7 +777,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Ethereum (L1)",
         "points": [
           "~15-30 TPS",
-          "Costo: $2-$100+ por transacción",
+          "Costo: desde menos de $1 hasta varios dólares, sube con la congestión",
           "Confirmación: ~12-15 segundos",
           "DeFi barato solo vía L2s (Arbitrum, Optimism)",
           "Liquidez fragmentada entre L1 y L2s",
@@ -831,15 +831,15 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "kind": "statCards",
       "cards": [
         {
-          "value": "$15-40",
+          "value": "$1-3",
           "label": "Ethereum L1 (Uniswap)",
-          "sublabel": "30-80% perdido en fees: sin sentido",
+          "sublabel": "Mucho menos que en 2021, pero variable y sube con la congestión",
           "tone": "red"
         },
         {
           "value": "3+ pasos",
           "label": "Ethereum L2 (Arbitrum)",
-          "sublabel": "Bridge ida/vuelta $20-40 + swap $0.50, minutos/horas",
+          "sublabel": "Bridge de ida y vuelta + swap: más barato, pero con esperas y pasos extra",
           "tone": "amber"
         },
         {
@@ -873,7 +873,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "PiggyBank",
           "title": "Marinade / Jito",
-          "text": "Liquid staking: ~7-8% anual y tu SOL sigue líquido."
+          "text": "Liquid staking: ~6-7% anual y tu SOL sigue líquido."
         }
       ],
       "intro": "El mapa de herramientas que realmente vas a usar en Solana.",
@@ -885,7 +885,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "kind": "component",
       "key": "candlestick-anatomy"
     },
-    "Los 5 Patrones de Vela Individual que Debes Conocer": {
+    "Los 4 Patrones de Vela Individual que Debes Conocer": {
       "kind": "iconGrid",
       "items": [
         {
@@ -1460,9 +1460,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "tone": "green"
         },
         {
-          "value": "$100K+",
+          "value": "$126K",
           "label": "Ciclo 4 — Halving Abr 2024",
-          "sublabel": "~$64,000 → +$100K. ETFs + institucional. El patrón continúa.",
+          "sublabel": "~$64,000 → pico de ~$126K en octubre 2025, ~18 meses después del halving. Luego la corrección.",
           "tone": "amber"
         }
       ],
@@ -3581,16 +3581,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "label": "Premium con beneficios",
           "sublabel": "Múltiples criptos y soporte en español. Varios países LATAM.",
           "tone": "neutral"
-        },
-        {
-          "value": "Binance Card",
-          "label": "Desde tu balance Binance",
-          "sublabel": "Convierte desde el exchange. Disponibilidad limitada según país.",
-          "tone": "amber"
         }
       ],
       "intro": "No todas las tarjetas cripto sirven en LATAM. Estas son las mejores opciones.",
-      "columns": 3
+      "columns": 2
     },
     "El Sueño: Vivir en Cripto": {
       "kind": "steps",
@@ -3776,7 +3770,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Auditorías trimestrales (más recientes)",
           "Reservas diversificadas: bonos, BTC, oro, préstamos",
-          "Empresa offshore en Hong Kong",
+          "Con sede en El Salvador desde 2025, antes en las Islas Vírgenes Británicas",
           "También puede congelar direcciones",
           "Mayor liquidez y adopción global",
           "Historial de opacidad en reservas"

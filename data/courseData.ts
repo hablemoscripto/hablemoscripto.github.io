@@ -535,7 +535,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             'Bancos centrales y comerciales',
             'Gobierno (puede gastar el dinero nuevo primero)',
             'Grandes corporaciones con acceso a crédito barato',
-            'Fondos de inversión y hedge funds',
+            'Fondos de inversión y hedge funds (fondos privados que invierten dinero de grandes capitales)',
             'Dueños de activos: acciones, bienes raíces, Bitcoin',
             'Personas con DEUDAS grandes (la deuda se licúa)',
             'Los muy ricos que tienen asesores para anticipar la inflación'
@@ -560,7 +560,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'El Efecto Cantillon no es teoría abstracta. Lo vivimos en tiempo real durante la pandemia:',
         features: [
           { icon: Landmark, title: 'Marzo 2020', text: 'La Fed anuncia que imprimirá trillones para "salvar la economía". Los mercados, que habían caído 30%, empiezan a subir ESE MISMO DÍA. Los que tenían efectivo para comprar acciones en el fondo multiplicaron su dinero.' },
-          { icon: TrendingUp, title: '2020-2021', text: 'El S&P 500 sube 100%. Las casas en USA suben 30-40%. Bitcoin sube de $5,000 a $69,000. Los que ya tenían estos activos vieron su riqueza explotar.' },
+          { icon: TrendingUp, title: '2020-2021', text: 'El S&P 500 (el índice de las 500 empresas más grandes de la bolsa de USA) sube 100%. Las casas en USA suben 30-40%. Bitcoin sube de $5,000 a $69,000. Los que ya tenían estos activos vieron su riqueza explotar.' },
           { icon: Users, title: 'Mientras Tanto...', text: 'Millones perdieron empleos. Los "cheques de estímulo" ($1,200-$3,200) ayudaron a sobrevivir pero no a comprar activos. La clase media usó ese dinero para pagar renta y comida.' },
           { icon: TrendingDown, title: '2022-2023', text: 'La inflación llega al 9%+. Los precios de todo explotan. Los salarios suben 3-5%. Los que vivían de sueldo ahora no llegan a fin de mes. El "estímulo" que los ayudó a sobrevivir ahora los empobrece.' }
         ],
@@ -599,7 +599,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'En LATAM, el Efecto Cantillon es aún más brutal porque nuestras monedas se devalúan contra el dólar, que a su vez se devalúa contra activos reales:',
         features: [
           { icon: AlertTriangle, title: 'Colombia', text: 'El peso se devalúa → los que tienen dólares o activos dolarizados preservan riqueza → los que tienen pesos pierden. ¿Quién tiene acceso a comprar dólares fácilmente? Los ricos, los bancos, las empresas grandes.' },
-          { icon: AlertTriangle, title: 'Argentina', text: 'Caso extremo: los que pueden comprar dólar blue preservan algo. Los que dependen del peso oficial ven sus ahorros evaporarse. El acceso al dólar ES un privilegio de clase.' },
+          { icon: AlertTriangle, title: 'Argentina', text: 'Caso extremo: los que pueden comprar dólar blue (el dólar del mercado paralelo argentino) preservan algo. Los que dependen del peso oficial ven sus ahorros evaporarse. El acceso al dólar ES un privilegio de clase.' },
           { icon: AlertTriangle, title: 'Venezuela', text: 'Los conectados al gobierno recibieron dólares preferenciales y se enriquecieron obscenamente. La clase media y baja recibió bolívares que se volvieron papel higiénico.' }
         ]
       },
@@ -2015,7 +2015,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: '¿Por Qué Existe Esta "Guerra"?',
-        content: 'Ethereum fue la primera blockchain programable. Inventó los smart contracts, DeFi, NFTs, todo lo que hoy conocemos como Web3 nació ahí. Es el "abuelo respetado" del espacio. Pero tiene un problema fundamental: **no escala para uso masivo**. Cuando mucha gente quiere usarlo, se congestiona y los fees suben. En el pico de 2021, una transacción podía costar $50, $100 o más. Tras mejoras como la actualización Dencun (2024), hoy un swap en la red principal suele costar entre menos de $1 y unos pocos dólares, aunque sigue siendo más caro y variable que redes más nuevas. Para montos pequeños, ese costo todavía puede comerse una parte importante de tu inversión. Solana nació en 2020 con una pregunta: ¿y si construimos una blockchain desde cero, optimizada para velocidad y bajo costo? El resultado es una red donde las transacciones cuestan menos de un centavo y se confirman en menos de un segundo.',
+        content: 'Ethereum fue la primera blockchain programable. Inventó los smart contracts, DeFi (aplicaciones financieras que funcionan sin bancos), NFTs, todo lo que hoy conocemos como Web3 nació ahí. Es el "abuelo respetado" del espacio. Pero tiene un problema fundamental: **no escala para uso masivo**. Cuando mucha gente quiere usarlo, se congestiona y los fees suben. En el pico de 2021, una transacción podía costar $50, $100 o más. Tras mejoras como la actualización Dencun (2024), hoy un swap (un intercambio de una cripto por otra) en la red principal suele costar entre menos de $1 y unos pocos dólares, aunque sigue siendo más caro y variable que redes más nuevas. Para montos pequeños, ese costo todavía puede comerse una parte importante de tu inversión. Solana nació en 2020 con una pregunta: ¿y si construimos una blockchain desde cero, optimizada para velocidad y bajo costo? El resultado es una red donde las transacciones cuestan menos de un centavo y se confirman en menos de un segundo.',
         highlight: {
           title: 'La Metáfora',
           text: 'Ethereum es como un Mercedes clásico de 1990: revolucionario en su época, confiable, prestigioso, pero lento y caro de mantener. Solana es como un Tesla: diseñado para el mundo moderno, rápido, eficiente, y construido pensando en el futuro.'
@@ -2062,7 +2062,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Caso Real: Hacer un Swap de $50',
-        content: 'Veamos qué pasa en la práctica cuando quieres intercambiar $50 de USDC por otro token:',
+        content: 'Veamos qué pasa en la práctica cuando quieres intercambiar $50 de USDC (un "dólar digital" que siempre vale ~$1; lo verás a fondo en la lección de stablecoins) por otro token:',
         features: [
           { icon: TrendingDown, title: 'En Ethereum L1', text: 'Abres Uniswap. Un swap pequeño te costaría desde alrededor de $1 hasta varios dólares en gas (mucho menos que en 2021, pero todavía variable). Para un swap de $50, esos fees ya son una mordida real. Por eso te dicen "usa un L2".' },
           { icon: Network, title: 'En Ethereum L2 (Arbitrum)', text: 'Primero debes bridgear fondos de L1 a L2 ($10-20 de gas + espera). Luego haces el swap ($0.50 de gas). Si quieres volver a L1, otro bridge ($10-20). El proceso toma minutos/horas y múltiples transacciones.' },
@@ -2091,7 +2091,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           { icon: Zap, title: 'Jupiter', text: 'El mejor agregador DEX del mundo. Te encuentra el mejor precio entre todos los exchanges descentralizados. Tiene DCA (compra automática), órdenes límite, y perpetuos. Es el "Uniswap de Solana" pero con superpoderes.' },
           { icon: Wallet, title: 'Phantom', text: 'Ya la conoces. La wallet más usada de Solana. Pero vale repetir: la experiencia de Phantom vs MetaMask es día y noche. MetaMask se siente como software de 2017.' },
           { icon: Globe, title: 'Magic Eden / Tensor', text: 'Los marketplaces de NFTs en Solana. Puedes comprar y vender NFTs por menos de $0.01 en fees. En OpenSea (Ethereum), los fees pueden ser $20-50.' },
-          { icon: Activity, title: 'Marinade / Jito', text: 'Plataformas de liquid staking. Pones tu SOL a trabajar ganando alrededor de 6-8% anual mientras sigue siendo líquido. En Solana, hacer y deshacer estas operaciones cuesta una fracción de centavo.' }
+          { icon: Activity, title: 'Marinade / Jito', text: 'Plataformas de liquid staking. Pones tu SOL a trabajar ganando alrededor de 6-7% anual mientras sigue siendo líquido. En Solana, hacer y deshacer estas operaciones cuesta una fracción de centavo.' }
         ]
       },
       {
@@ -2927,8 +2927,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'No todas las tarjetas cripto funcionan en LATAM. Estas son las mejores opciones actualmente:',
         features: [
           { icon: Banknote, title: 'Kast', text: 'Tarjeta virtual y física que acepta USDC y USDT. Funciona en la mayoría de países LATAM. Recarga directamente desde Solana. Sin fees de recarga. Buena opción para comenzar.' },
-          { icon: Banknote, title: 'Avici', text: 'Tarjeta premium con beneficios adicionales. Acepta múltiples criptomonedas. Buen servicio al cliente en español. Disponible en varios países latinoamericanos.' },
-          { icon: Banknote, title: 'Binance Card', text: 'Si ya usas Binance, puedes solicitar su tarjeta. Convierte automáticamente desde tu balance del exchange. Disponibilidad limitada según país.' }
+          { icon: Banknote, title: 'Avici', text: 'Tarjeta premium con beneficios adicionales. Acepta múltiples criptomonedas. Buen servicio al cliente en español. Disponible en varios países latinoamericanos.' }
         ]
       },
       {
@@ -3579,7 +3578,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: 'De Estudiante a Inversor: Tu Graduación',
-        content: 'Felicidades. Si llegaste hasta aquí, ya sabes más sobre dinero, inflación y criptomonedas que el 95% de las personas. Entiendes **por qué** el sistema monetario actual te empobrece (Lecciones 1-3). Conoces **la solución** que Bitcoin representa (Lección 4). Sabes **cómo funciona** la tecnología (Lecciones 5-6). Tienes tu wallet configurada, has hecho transacciones, y sabes identificar estafas (Lecciones 7-15). Entiendes stablecoins, DCA, y la diferencia entre BTC y altcoins (Lecciones 16-18). Ahora falta lo más importante: **convertir todo ese conocimiento en acción**. Un plan sin ejecución es un sueño. Esta lección es tu hoja de ruta.',
+        content: 'Felicidades. Si llegaste hasta aquí, ya sabes más sobre dinero, inflación y criptomonedas que el 95% de las personas. Entiendes **por qué** el sistema monetario actual te empobrece (Lecciones 1-3). Conoces **la solución** que Bitcoin representa (Lección 4). Sabes **cómo funciona** la tecnología (Lecciones 5-6). Tienes tu wallet configurada, has hecho transacciones, y sabes identificar estafas (Lecciones 7-14). Entiendes stablecoins, DCA, y la diferencia entre BTC y altcoins (Lecciones 15-18). Ahora falta lo más importante: **convertir todo ese conocimiento en acción**. Un plan sin ejecución es un sueño. Esta lección es tu hoja de ruta.',
         highlight: {
           title: 'El Momento de la Verdad',
           text: 'El conocimiento sin acción no vale nada. Después de esta lección, deberías tener un plan escrito con montos, fechas, y reglas claras. No un "algún día voy a invertir", un PLAN concreto que ejecutas esta semana.'

@@ -75,8 +75,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       },
       {
         type: 'main',
-        title: 'Los 5 Patrones de Vela Individual que Debes Conocer',
-        content: 'Una sola vela puede contarte una historia poderosa. Estos son los 5 patrones de vela individual que aparecen una y otra vez en los gráficos de crypto:',
+        title: 'Los 4 Patrones de Vela Individual que Debes Conocer',
+        content: 'Una sola vela puede contarte una historia poderosa. Estos son los 4 patrones de vela individual que aparecen una y otra vez en los gráficos de crypto:',
         features: [
           { icon: Activity, title: 'Doji (Indecisión)', text: 'Cuerpo prácticamente inexistente, abrió y cerró al mismo precio. Las mechas pueden ser largas o cortas. Significa **equilibrio total** entre toros y osos. En zona de soporte o resistencia, un Doji puede ser señal de reversión. Solo no indica dirección.' },
           { icon: TrendingUp, title: 'Hammer (Martillo), Señal Alcista', text: 'Cuerpo pequeño en la parte superior, mecha inferior MUY larga (al menos 2× el cuerpo), poca o ninguna mecha superior. Significa: los osos tiraron el precio fuerte, pero los toros lo rescataron antes del cierre. **Solo es válido en zona de soporte tras una caída.** Es la mano fuerte diciendo "hasta aquí".' },
@@ -1081,7 +1081,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           { icon: BarChart3, title: 'Ciclo 1: Halving Nov 2012', text: 'BTC pasó de ~$12 en el halving a **$1,100** en diciembre 2013 (90× en 13 meses). Luego cayó -85% hasta $170 en enero 2015. Primer ciclo completo: de la nada a más de mil dólares, y de vuelta a casi nada para los que no vendieron.' },
           { icon: BarChart3, title: 'Ciclo 2: Halving Jul 2016', text: 'BTC pasó de ~$650 en el halving a **$19,700** en diciembre 2017 (30× en 17 meses). Luego cayó -84% hasta $3,200 en diciembre 2018. La era de las ICOs, la locura de las altcoins, y el crash que "mató" crypto (de nuevo).' },
           { icon: BarChart3, title: 'Ciclo 3: Halving May 2020', text: 'BTC pasó de ~$8,700 en el halving a **$69,000** en noviembre 2021 (8× en 18 meses). DeFi Summer, NFT mania, SOL pasó de $1 a $260. Luego el bear de 2022: Luna crash, FTX crash, BTC cayó -77% hasta $15,500.' },
-          { icon: BarChart3, title: 'Ciclo 4: Halving Abr 2024', text: 'BTC en el halving: ~$64,000. Para finales de 2024 ya superó los $100K. El patrón continúa. ETFs de Bitcoin aprobados, adopción institucional masiva. El patrón se cumplió de nuevo: el ciclo hizo pico en octubre de 2025, con Bitcoin marcando un máximo histórico cercano a $126,000 (unos 18 meses después del halving, dentro de la ventana que la historia anticipaba). Después vino la corrección, como en cada ciclo.' }
+          { icon: BarChart3, title: 'Ciclo 4: Halving Abr 2024', text: 'BTC en el halving: ~$64,000. Para finales de 2024 ya superó los $100K. ETFs de Bitcoin aprobados, adopción institucional masiva. El patrón se cumplió de nuevo: el ciclo hizo pico en octubre de 2025, con Bitcoin marcando un máximo histórico cercano a $126,000 (unos 18 meses después del halving, dentro de la ventana que la historia anticipaba). Después vino la corrección, como en cada ciclo.' }
         ]
       },
       {
@@ -4160,7 +4160,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           { icon: RefreshCw, title: 'Epochs y Distribución', text: 'Cada epoch dura aproximadamente 2-3 días (~432,000 slots). Al final de cada epoch, la red calcula las recompensas de cada validador basándose en su rendimiento (uptime, votos correctos) y las distribuye proporcionalmente a todos los delegadores. No necesitas hacer nada, las recompensas se acumulan automáticamente en tu cuenta de stake.' },
           { icon: Shield, title: 'Slashing: El Castigo por Hacer Trampa', text: 'En teoría, si un validador actúa maliciosamente (ej: vota por dos bloques conflictivos), pierde parte de su stake y el de sus delegadores. Solana aún no tiene slashing activo en producción, pero está en el roadmap. Aun sin slashing, los validadores con mal comportamiento pierden delegadores y comisiones, hay incentivo económico para ser honesto.' },
           { icon: Award, title: 'Comisión del Validador', text: 'Los validadores cobran una comisión sobre las recompensas que generan (típicamente 0-10%). Si un validador cobra 5% de comisión y genera 100 SOL en recompensas para tu delegación, recibes 95 SOL y el validador se queda con 5 SOL. Busca validadores con comisiones razonables (<5%) pero recuerda que 0% comisión puede significar que el validador no es económicamente sostenible.' },
-          { icon: Percent, title: 'APY Real vs Nominal', text: 'El APY de staking en Solana ronda el ~5-7% (al 2026), y varía por epoch y validador. La inflación del protocolo está en ~4-5% actualmente, con trayectoria decreciente cada año hasta estabilizarse alrededor del 1.5%. Esto significa que tu rendimiento REAL (después de inflación) hoy es bajo, pero mejorará con el tiempo. Y lo más importante: NO hacer staking significa que tu SOL se diluye por la inflación del protocolo. Stakear es la defensa mínima contra la dilución.' }
+          { icon: Percent, title: 'APY Real vs Nominal', text: 'El APY de staking en Solana ronda el ~5-6% (al 2026), y varía por epoch y validador. La inflación del protocolo está en ~4-5% actualmente, con trayectoria decreciente cada año hasta estabilizarse alrededor del 1.5%. Esto significa que tu rendimiento REAL (después de inflación) hoy es bajo, pero mejorará con el tiempo. Y lo más importante: NO hacer staking significa que tu SOL se diluye por la inflación del protocolo. Stakear es la defensa mínima contra la dilución.' }
         ]
       },
       {
