@@ -144,6 +144,9 @@ async function seed() {
   // 1. Clean up existing data
   console.log('Cleaning up old data...');
   const tables = [
+    // referrals: unused table — the app reads referrals from the lesson body
+    // (bundle for free lessons, protected_lessons.content for paid). Kept in
+    // cleanup so it stays empty; drop via migration when convenient.
     'referrals',
     'quiz_questions',
     'protected_lessons',
@@ -234,27 +237,6 @@ async function seed() {
           process.exit(1);
         }
 
-        // Seed Referrals if they exist. The DB column is button_text (snake_case)
-        // while the data field is buttonText (camelCase), so map it explicitly —
-        // a blind spread inserts an unknown `buttonText` column and the row fails.
-        if (lesson.referrals) {
-          for (const referral of lesson.referrals) {
-            const { error: referralError } = await supabase
-              .from('referrals')
-              .insert({
-                lesson_id: lesson.id,
-                title: referral.title,
-                description: referral.description,
-                link: referral.link,
-                button_text: referral.buttonText,
-                code: referral.code ?? null,
-              });
-            if (referralError) {
-              console.error('Error seeding referral:', referralError);
-              hadError = true;
-            }
-          }
-        }
       }
     }
   }
