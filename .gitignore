@@ -26,6 +26,12 @@ backup-*.sql
 *.dump
 db-dump*.sql
 
+# Internal review/audit docs — describe security posture and unpatched findings.
+# Repo is public; keep these local.
+audit/
+REVIEW-*.md
+INFOGRAPHIC-BRIEF.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
