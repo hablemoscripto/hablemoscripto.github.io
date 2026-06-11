@@ -447,6 +447,19 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                   view === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta'
                 )}
               </button>
+
+              {view === 'signup' && (
+                <p className="text-xs text-navy-400 text-center">
+                  Al crear tu cuenta aceptas los{' '}
+                  <a href="/terminos" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-400 transition-colors">
+                    Términos de Uso
+                  </a>{' '}
+                  y la{' '}
+                  <a href="/privacidad" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-400 transition-colors">
+                    Política de Privacidad
+                  </a>.
+                </p>
+              )}
             </form>
 
             <div className="flex items-center gap-4 my-6">

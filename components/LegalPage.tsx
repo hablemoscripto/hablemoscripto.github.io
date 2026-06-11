@@ -119,7 +119,7 @@ function PrivacyContent() {
 
         <h3>2.5 Datos del asistente de IA</h3>
         <ul>
-          <li>Las consultas realizadas al asistente de IA (CBas) se envían a la API de Google Gemini para generar respuestas. No almacenamos permanentemente el contenido de estas conversaciones.</li>
+          <li>Las consultas realizadas al asistente de IA (CBas) se envían a la API de xAI (Grok) para generar respuestas. No almacenamos permanentemente el contenido de estas conversaciones.</li>
         </ul>
       </section>
 

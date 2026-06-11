@@ -61,7 +61,7 @@ const Features: React.FC = () => {
             <div className="w-full max-w-[450px] p-6 rounded-2xl bg-navy-900/50 border border-white/5 shadow-glass">
               <p className="text-brand-500 text-[10px] font-black uppercase tracking-[0.2em] mb-3">Sobre CBas</p>
               <p className="text-navy-200 text-sm leading-relaxed font-medium">
-                He vivido ciclos alcistas y bajistas completos del mercado cripto — desde el crash de 2018 hasta el bull run de 2021 y todo lo que vino después. Aquí enseño a leer el mercado, no a especular con él. Sin shilling ni promesas de enriquecimiento rápido.
+                He vivido ciclos alcistas y bajistas completos del mercado cripto, desde el crash de 2018 hasta el bull run de 2021 y todo lo que vino después. Aquí enseño a leer el mercado, no a especular con él. Sin shilling ni promesas de enriquecimiento rápido.
               </p>
 
               <div className="mt-5 pt-5 border-t border-white/5 space-y-3">
@@ -106,7 +106,7 @@ const Features: React.FC = () => {
           <div className="lg:w-1/2 space-y-10">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-navy-900 border border-white/5 text-brand-500 text-[10px] font-black uppercase tracking-[0.2em] mb-6">
-                 Experiencia Certificada
+                 Experiencia Comprobada
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-black text-white leading-tight tracking-tighter mb-6">
                 ¿Por qué aprender con <br />
@@ -121,7 +121,7 @@ const Features: React.FC = () => {
             <div className="grid sm:grid-cols-2 gap-6">
               {[
                 { icon: Shield, title: "Experiencia Real", text: "7+ años navegando ciclos alcistas y bajistas con éxito.", color: "text-brand-400" },
-                { icon: Users, title: "Comunidad VIP", text: "Grupo privado enfocado en el crecimiento mutuo.", color: "text-accent-500" },
+                { icon: Users, title: "Comunidad Privada", text: "Grupo privado enfocado en el crecimiento mutuo.", color: "text-accent-500" },
                 { icon: Zap, title: "Claridad Total", text: "Conceptos complejos explicados de forma sencilla.", color: "text-brand-500" },
                 { icon: Compass, title: "Hoja de Ruta", text: "Estrategias probadas y aplicables de inmediato.", color: "text-brand-300" }
               ].map((item, i) => (

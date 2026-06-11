@@ -5,7 +5,7 @@ import { reportError } from '../utils/errorReporting';
 // Pricing model — Launch 2026 (two paid lifetime tiers + free)
 //
 // - Principiante (free): Nivel Principiante only.
-// - Inversor ($99): full platform — all 42 lessons.
+// - Inversor ($99): full platform — all 44 lessons.
 // - Cripto Experto ($249): full platform + Comunidad (Discord + charlas en vivo).
 //
 // All plans are one-time lifetime purchases (no subscriptions at launch).
@@ -143,7 +143,7 @@ const COURSE_TIER_RANK: Record<CourseTier, number> = {
   experto: 2,
 };
 
-// Both paid tiers grant the full course (all 42 lessons); they differ only in
+// Both paid tiers grant the full course (all 44 lessons); they differ only in
 // community access. So every paid level requires just the entry paid tier.
 const LEVEL_REQUIREMENTS: Record<string, CourseTier> = {
   beginner: 'free',

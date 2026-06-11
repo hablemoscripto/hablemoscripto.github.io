@@ -36,7 +36,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
               </span>
             </Link>
             <p className="text-navy-400 text-sm max-w-sm mb-6">
-              Educación cripto en español para LATAM. Desde lo básico hasta análisis avanzado — sin ruido y sin promesas falsas.
+              Educación cripto en español para LATAM. Desde lo básico hasta análisis avanzado, sin ruido y sin promesas falsas.
             </p>
             <div className="flex gap-4">
               <a
@@ -62,8 +62,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
 
           <div>
             <h3 className="text-white font-bold mb-6 text-base">Plataforma</h3>
-            <ul className="space-y-4 text-sm text-navy-400">
-              <li><a href="/#home" onClick={(e) => handleAnchorClick(e, 'home')} className="hover:text-brand-500 transition-colors">Inicio</a></li>
+            <ul className="space-y-1 text-sm text-navy-400">
+              <li><a href="/#home" onClick={(e) => handleAnchorClick(e, 'home')} className="inline-block py-2 hover:text-brand-500 transition-colors">Inicio</a></li>
               <li>
                 <a
                     href="/education"
@@ -73,21 +73,21 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                             onNavigateEducation();
                         }
                     }}
-                    className="hover:text-brand-500 transition-colors"
+                    className="inline-block py-2 hover:text-brand-500 transition-colors"
                 >
                     Cursos
                 </a>
               </li>
-              <li><a href="/#about" onClick={(e) => handleAnchorClick(e, 'about')} className="hover:text-brand-500 transition-colors">Sobre CBas</a></li>
-              <li><a href="/#resources" onClick={(e) => handleAnchorClick(e, 'resources')} className="hover:text-brand-500 transition-colors">Recursos Gratuitos</a></li>
+              <li><a href="/#about" onClick={(e) => handleAnchorClick(e, 'about')} className="inline-block py-2 hover:text-brand-500 transition-colors">Sobre CBas</a></li>
+              <li><a href="/#resources" onClick={(e) => handleAnchorClick(e, 'resources')} className="inline-block py-2 hover:text-brand-500 transition-colors">Recursos Gratuitos</a></li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-white font-bold mb-6 text-base">Legal</h3>
-            <ul className="space-y-4 text-sm text-navy-400">
-              <li><Link to="/terminos" className="hover:text-brand-500 transition-colors">Términos de Uso</Link></li>
-              <li><Link to="/privacidad" className="hover:text-brand-500 transition-colors">Política de Privacidad</Link></li>
+            <ul className="space-y-1 text-sm text-navy-400">
+              <li><Link to="/terminos" className="inline-block py-2 hover:text-brand-500 transition-colors">Términos de Uso</Link></li>
+              <li><Link to="/privacidad" className="inline-block py-2 hover:text-brand-500 transition-colors">Política de Privacidad</Link></li>
             </ul>
           </div>
         </div>
@@ -95,6 +95,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-navy-400 text-center md:text-left">
             &copy; {new Date().getFullYear()} Hablemos Cripto. Todos los derechos reservados.
+            <span className="block mt-1">Contenido educativo. No es asesoría financiera.</span>
           </p>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true"></span>

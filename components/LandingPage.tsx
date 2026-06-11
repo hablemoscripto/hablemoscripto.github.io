@@ -87,8 +87,9 @@ const LandingPage: React.FC = () => {
     e.preventDefault();
 
     // Basic email validation
+    const email = newsletterEmail.trim().toLowerCase();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(newsletterEmail)) {
+    if (!emailRegex.test(email)) {
       setNewsletterStatus('error');
       setNewsletterMessage('Por favor ingresa un email válido');
       return;
@@ -101,7 +102,7 @@ const LandingPage: React.FC = () => {
       const { supabase } = await import('../lib/supabase');
       const { error } = await supabase
         .from('newsletter_subscribers')
-        .insert([{ email: newsletterEmail.toLowerCase().trim() }]);
+        .insert([{ email }]);
 
       if (error) {
         // Check if it's a duplicate email error
@@ -217,7 +218,7 @@ const LandingPage: React.FC = () => {
             </div>
 
             <p className="mt-6 text-sm text-navy-400">
-              Miembros Fundador y Experto tienen prioridad para sesiones de mentoría 1-a-1.
+              Los miembros del plan Cripto Experto tienen prioridad para sesiones de mentoría 1 a 1.
             </p>
           </div>
         </section>
