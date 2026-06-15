@@ -6,7 +6,6 @@ import {
     ArrowRight,
     ArrowLeft,
     Lightbulb,
-    GripVertical,
     RotateCcw,
     Trophy,
     Target,
@@ -70,6 +69,25 @@ function isCorrect(question: Question, answer: QuizAnswer): boolean {
     }
 }
 
+// Keyboard handler for the WAI-ARIA radio pattern: arrow keys move selection and
+// focus to the adjacent option (wrapping). Shared by the single-choice renderers.
+function moveRadioFocus(
+    e: React.KeyboardEvent<HTMLButtonElement>,
+    currentIdx: number,
+    count: number,
+    select: (idx: number) => void,
+) {
+    let next: number | null = null;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = currentIdx === count - 1 ? 0 : currentIdx + 1;
+    else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = currentIdx === 0 ? count - 1 : currentIdx - 1;
+    if (next === null) return;
+    e.preventDefault();
+    select(next);
+    const group = e.currentTarget.parentElement;
+    const radios = group?.querySelectorAll<HTMLButtonElement>('[role="radio"]');
+    radios?.[next]?.focus();
+}
+
 // ============================================
 // QUESTION COMPONENTS
 // ============================================
@@ -87,15 +105,17 @@ const MultipleChoiceRenderer: React.FC<QuestionComponentProps> = ({
     question, answer, onAnswer, submitted, showHint, onToggleHint
 }) => {
     const q = question as MultipleChoiceQuestion;
+    const selectedIdx = typeof answer === 'number' ? answer : null;
 
     return (
         <div className="space-y-3">
+            <div role="radiogroup" aria-label="Opciones de respuesta" className="space-y-3">
             {q.options.map((opt, optIdx) => {
                 let optionClass = "w-full p-4 rounded-xl text-left border transition-all flex items-center gap-3 group ";
 
                 if (submitted) {
                     if (optIdx === q.correctAnswer) {
-                        optionClass += "bg-green-500/10 border-green-500/50 text-green-400";
+                        optionClass += "bg-emerald-500/10 border-emerald-500/50 text-emerald-400";
                     } else if (answer === optIdx) {
                         optionClass += "bg-red-500/10 border-red-500/50 text-red-400";
                     } else {
@@ -109,15 +129,24 @@ const MultipleChoiceRenderer: React.FC<QuestionComponentProps> = ({
                     }
                 }
 
+                // Roving tabindex: the selected option (or the first when none is
+                // selected) is the single tab stop; arrows move + select per the
+                // WAI-ARIA radio pattern.
+                const isTabStop = selectedIdx === optIdx || (selectedIdx === null && optIdx === 0);
+
                 return (
                     <button
                         key={optIdx}
+                        role="radio"
+                        aria-checked={answer === optIdx}
+                        tabIndex={submitted ? 0 : (isTabStop ? 0 : -1)}
+                        onKeyDown={(e) => moveRadioFocus(e, optIdx, q.options.length, (i) => onAnswer(i))}
                         onClick={() => !submitted && onAnswer(optIdx)}
                         disabled={submitted}
                         className={optionClass}
                     >
                         <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${
-                            submitted && optIdx === q.correctAnswer ? 'bg-green-500/20 text-green-400' :
+                            submitted && optIdx === q.correctAnswer ? 'bg-emerald-500/20 text-emerald-400' :
                             submitted && answer === optIdx ? 'bg-red-500/20 text-red-400' :
                             answer === optIdx ? 'bg-brand-500/20 text-brand-400' :
                             'bg-navy-800 text-navy-400'
@@ -125,11 +154,12 @@ const MultipleChoiceRenderer: React.FC<QuestionComponentProps> = ({
                             {String.fromCharCode(65 + optIdx)}
                         </span>
                         <span className="flex-1">{opt}</span>
-                        {submitted && optIdx === q.correctAnswer && <CheckCircle size={20} className="text-green-500 shrink-0" />}
+                        {submitted && optIdx === q.correctAnswer && <CheckCircle size={20} className="text-emerald-500 shrink-0" />}
                         {submitted && answer === optIdx && optIdx !== q.correctAnswer && <AlertCircle size={20} className="text-red-500 shrink-0" />}
                     </button>
                 );
             })}
+            </div>
 
             {/* Hint Button */}
             {q.hint && !submitted && (
@@ -160,15 +190,17 @@ const TrueFalseRenderer: React.FC<QuestionComponentProps> = ({
         { value: false, label: 'Falso', icon: '✗' }
     ];
 
+    const selectedIdx = options.findIndex((o) => o.value === answer);
+
     return (
         <div className="space-y-3">
-            <div className="grid grid-cols-2 gap-4">
-                {options.map(({ value, label, icon }) => {
+            <div role="radiogroup" aria-label="Verdadero o Falso" className="grid grid-cols-2 gap-4">
+                {options.map(({ value, label, icon }, optIdx) => {
                     let optionClass = "p-6 rounded-xl border-2 transition-all flex flex-col items-center gap-2 ";
 
                     if (submitted) {
                         if (value === q.correctAnswer) {
-                            optionClass += "bg-green-500/10 border-green-500 text-green-400";
+                            optionClass += "bg-emerald-500/10 border-emerald-500 text-emerald-400";
                         } else if (answer === value) {
                             optionClass += "bg-red-500/10 border-red-500 text-red-400";
                         } else {
@@ -182,14 +214,20 @@ const TrueFalseRenderer: React.FC<QuestionComponentProps> = ({
                         }
                     }
 
+                    const isTabStop = selectedIdx === optIdx || (selectedIdx === -1 && optIdx === 0);
+
                     return (
                         <button
                             key={label}
+                            role="radio"
+                            aria-checked={answer === value}
+                            tabIndex={submitted ? 0 : (isTabStop ? 0 : -1)}
+                            onKeyDown={(e) => moveRadioFocus(e, optIdx, options.length, (i) => onAnswer(options[i].value))}
                             onClick={() => !submitted && onAnswer(value)}
                             disabled={submitted}
                             className={optionClass}
                         >
-                            <span className="text-3xl">{icon}</span>
+                            <span className="text-3xl" aria-hidden="true">{icon}</span>
                             <span className="font-bold">{label}</span>
                         </button>
                     );
@@ -231,7 +269,7 @@ const MultipleSelectRenderer: React.FC<QuestionComponentProps> = ({
 
     return (
         <div className="space-y-3">
-            <p className="text-sm text-brand-400 font-medium mb-2">Selecciona todas las respuestas correctas</p>
+            <div role="group" aria-label="Selecciona todas las respuestas correctas" className="space-y-3">
             {q.options.map((opt, optIdx) => {
                 const isSelected = selectedAnswers.includes(optIdx);
                 const isCorrectOption = q.correctAnswers.includes(optIdx);
@@ -240,7 +278,7 @@ const MultipleSelectRenderer: React.FC<QuestionComponentProps> = ({
 
                 if (submitted) {
                     if (isCorrectOption && isSelected) {
-                        optionClass += "bg-green-500/10 border-green-500/50 text-green-400";
+                        optionClass += "bg-emerald-500/10 border-emerald-500/50 text-emerald-400";
                     } else if (isCorrectOption && !isSelected) {
                         optionClass += "bg-yellow-500/10 border-yellow-500/50 text-yellow-400";
                     } else if (!isCorrectOption && isSelected) {
@@ -259,6 +297,8 @@ const MultipleSelectRenderer: React.FC<QuestionComponentProps> = ({
                 return (
                     <button
                         key={optIdx}
+                        role="checkbox"
+                        aria-checked={isSelected}
                         onClick={() => toggleOption(optIdx)}
                         disabled={submitted}
                         className={optionClass}
@@ -269,11 +309,12 @@ const MultipleSelectRenderer: React.FC<QuestionComponentProps> = ({
                             {isSelected && <CheckCircle size={14} className="text-navy-900" />}
                         </span>
                         <span className="flex-1">{opt}</span>
-                        {submitted && isCorrectOption && <CheckCircle size={18} className="text-green-500 shrink-0" />}
+                        {submitted && isCorrectOption && <CheckCircle size={18} className="text-emerald-500 shrink-0" />}
                         {submitted && !isCorrectOption && isSelected && <AlertCircle size={18} className="text-red-500 shrink-0" />}
                     </button>
                 );
             })}
+            </div>
 
             {q.hint && !submitted && (
                 <button
@@ -328,7 +369,6 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
 
     return (
         <div className="space-y-3">
-            <p className="text-sm text-brand-400 font-medium mb-2">Ordena los elementos correctamente</p>
             <div className="space-y-2">
                 {currentOrder.map((itemIdx, position) => {
                     const isCorrectPosition = submitted && q.correctOrder[position] === itemIdx;
@@ -337,7 +377,7 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
 
                     if (submitted) {
                         if (isCorrectPosition) {
-                            itemClass += "bg-green-500/10 border-green-500/50 text-green-400";
+                            itemClass += "bg-emerald-500/10 border-emerald-500/50 text-emerald-400";
                         } else {
                             itemClass += "bg-red-500/10 border-red-500/50 text-red-400";
                         }
@@ -350,7 +390,6 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
                             <span className="w-8 h-8 rounded-lg bg-navy-800 flex items-center justify-center text-sm font-bold text-navy-400">
                                 {position + 1}
                             </span>
-                            <GripVertical size={18} className="text-navy-400 shrink-0" />
                             <span className="flex-1">{q.items[itemIdx]}</span>
                             {!submitted && (
                                 <div className="flex flex-row gap-1">
@@ -372,7 +411,7 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
                                     </button>
                                 </div>
                             )}
-                            {submitted && isCorrectPosition && <CheckCircle size={18} className="text-green-500" />}
+                            {submitted && isCorrectPosition && <CheckCircle size={18} className="text-emerald-500" />}
                             {submitted && !isCorrectPosition && (
                                 <span className="text-xs text-navy-400">
                                     (Posición correcta: {getItemPosition(itemIdx) + 1})
@@ -427,10 +466,12 @@ const FillBlankRenderer: React.FC<QuestionComponentProps> = ({
                     onChange={(e) => !submitted && onAnswer(e.target.value)}
                     disabled={submitted}
                     placeholder="Tu respuesta..."
+                    aria-label={`Completa el espacio en blanco: ${q.textBefore} ___ ${q.textAfter}`.trim()}
+                    autoComplete="off"
                     className={`px-4 py-2 rounded-lg border-2 bg-navy-950 font-medium min-w-[150px] transition-all ${
                         submitted
                             ? correct
-                                ? 'border-green-500 text-green-400'
+                                ? 'border-emerald-500 text-emerald-400'
                                 : 'border-red-500 text-red-400'
                             : 'border-navy-700 text-white focus:border-brand-500 focus:outline-none'
                     }`}
@@ -440,7 +481,7 @@ const FillBlankRenderer: React.FC<QuestionComponentProps> = ({
 
             {submitted && !correct && (
                 <p className="text-sm text-navy-400">
-                    Respuesta correcta: <span className="text-green-400 font-bold">{q.correctAnswer}</span>
+                    Respuesta correcta: <span className="text-emerald-400 font-bold">{q.correctAnswer}</span>
                 </p>
             )}
 
@@ -483,6 +524,15 @@ const Quiz: React.FC<QuizProps> = ({
     const [submitError, setSubmitError] = useState<string | null>(null);
 
     const currentQuestion = questions[currentQuestionIndex];
+
+    // Signal the global chat FAB to hide while the quiz is on screen so it can't
+    // overlap an answer option (the highest-stakes touch target).
+    useEffect(() => {
+        window.dispatchEvent(new CustomEvent('quiz-active', { detail: { active: true } }));
+        return () => {
+            window.dispatchEvent(new CustomEvent('quiz-active', { detail: { active: false } }));
+        };
+    }, []);
 
     const answeredCount = Object.keys(answers).filter(key => {
         const answer = answers[key];
@@ -608,7 +658,7 @@ const Quiz: React.FC<QuizProps> = ({
                     <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${
                         submitted
                             ? questionCorrect
-                                ? 'bg-green-500/20 text-green-400'
+                                ? 'bg-emerald-500/20 text-emerald-400'
                                 : 'bg-red-500/20 text-red-400'
                             : 'bg-navy-800 text-navy-400'
                     }`}>
@@ -629,7 +679,7 @@ const Quiz: React.FC<QuizProps> = ({
                             <span className={`inline-block mt-2 px-2 py-0.5 rounded text-xs font-medium ${
                                 q.difficulty === 'hard' ? 'bg-red-500/20 text-red-400' :
                                 q.difficulty === 'medium' ? 'bg-yellow-500/20 text-yellow-400' :
-                                'bg-green-500/20 text-green-400'
+                                'bg-emerald-500/20 text-emerald-400'
                             }`}>
                                 {q.difficulty === 'hard' ? 'Difícil' : q.difficulty === 'medium' ? 'Intermedio' : 'Fácil'}
                             </span>
@@ -651,17 +701,17 @@ const Quiz: React.FC<QuizProps> = ({
                 {submitted && (
                     <div className={`animate-in fade-in slide-in-from-top-2 rounded-xl p-4 ${
                         questionCorrect
-                            ? 'bg-green-500/5 border border-green-500/20'
+                            ? 'bg-emerald-500/5 border border-emerald-500/20'
                             : 'bg-amber-500/5 border border-amber-500/20'
                     }`}>
                         <div className="flex items-start gap-3">
                             {questionCorrect ? (
-                                <CheckCircle size={20} className="text-green-500 shrink-0 mt-0.5" />
+                                <CheckCircle size={20} className="text-emerald-500 shrink-0 mt-0.5" />
                             ) : (
                                 <AlertCircle size={20} className="text-amber-500 shrink-0 mt-0.5" />
                             )}
                             <div>
-                                <p className={`font-medium mb-1 ${questionCorrect ? 'text-green-400' : 'text-amber-400'}`}>
+                                <p className={`font-medium mb-1 ${questionCorrect ? 'text-emerald-400' : 'text-amber-400'}`}>
                                     {questionCorrect ? '¡Correcto!' : 'Incorrecto'}
                                 </p>
                                 <p className="text-sm text-navy-300">{q.explanation}</p>
@@ -703,7 +753,14 @@ const Quiz: React.FC<QuizProps> = ({
                             <span>Progreso</span>
                             <span>{answeredCount} de {questions.length} respondidas</span>
                         </div>
-                        <div className="h-2 bg-navy-900 rounded-full overflow-hidden">
+                        <div
+                            className="h-2 bg-navy-900 rounded-full overflow-hidden"
+                            role="progressbar"
+                            aria-valuenow={answeredCount}
+                            aria-valuemin={0}
+                            aria-valuemax={questions.length}
+                            aria-label="Preguntas respondidas"
+                        >
                             <div
                                 className="h-full bg-brand-500 transition-all duration-300"
                                 style={{ width: `${(answeredCount / questions.length) * 100}%` }}
@@ -732,7 +789,7 @@ const Quiz: React.FC<QuizProps> = ({
                                             isCurrent
                                                 ? 'bg-brand-500 scale-125'
                                                 : isAnswered
-                                                    ? 'bg-green-500/50 group-hover:bg-green-500'
+                                                    ? 'bg-emerald-500/50 group-hover:bg-emerald-500'
                                                     : 'bg-navy-700 group-hover:bg-navy-600'
                                         }`}
                                     />
@@ -829,13 +886,13 @@ const Quiz: React.FC<QuizProps> = ({
                 {submitted && (
                     <div role="status" aria-live="polite" className={`mt-10 p-8 rounded-2xl text-center border transition-all duration-500 ${
                         passed
-                            ? 'bg-green-500/10 border-green-500/30 shadow-[0_0_40px_rgba(16,185,129,0.1)]'
+                            ? 'bg-emerald-500/10 border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.1)]'
                             : 'bg-navy-800 border-navy-700'
                     }`}>
                         <div className="flex justify-center mb-5">
                             {passed ? (
                                 <div className="relative">
-                                    <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center rotate-3 shadow-lg shadow-green-500/20">
+                                    <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center rotate-3 shadow-lg shadow-emerald-500/20">
                                         <Trophy size={44} className="text-white" />
                                     </div>
                                     <div className="absolute -top-2 -right-2 px-3 py-1 bg-brand-500 text-navy-900 rounded-full text-xs font-black uppercase tracking-wider shadow-lg animate-bounce">
@@ -853,7 +910,7 @@ const Quiz: React.FC<QuizProps> = ({
                             {passed ? '¡Lección Completada!' : 'Sigue practicando'}
                         </h3>
 
-                        <p className={`text-3xl font-bold mb-3 ${passed ? 'text-green-400' : 'text-brand-500'}`}>
+                        <p className={`text-3xl font-bold mb-3 ${passed ? 'text-emerald-400' : 'text-brand-500'}`}>
                             {correctCount} / {questions.length}
                         </p>
 
@@ -862,7 +919,7 @@ const Quiz: React.FC<QuizProps> = ({
                         </p>
 
                         {passed ? (
-                            <p className="text-green-400/80 text-sm">
+                            <p className="text-emerald-400/80 text-sm">
                                 ¡Excelente trabajo! Has demostrado dominio del tema.
                             </p>
                         ) : (

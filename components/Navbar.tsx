@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Menu, X, Bitcoin, Users, User, LogOut } from 'lucide-react';
+import { Menu, X, Users, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
+import Logo from './ui/Logo';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
@@ -105,19 +106,7 @@ const Navbar: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="group flex items-center gap-3 z-50">
-            <div className="relative">
-              <div className="absolute inset-0 bg-brand-500 blur-lg opacity-20 group-hover:opacity-40 transition-opacity"></div>
-              <div className="relative bg-gradient-to-br from-brand-400 to-brand-600 p-2.5 rounded-xl shadow-glow-brand group-hover:rotate-6 transition-transform duration-500">
-                <Bitcoin className="text-navy-950 h-6 w-6" />
-              </div>
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-xl font-heading font-extrabold text-white tracking-tighter">
-                Hablemos<span className="text-brand-500">Cripto</span>
-              </span>
-            </div>
-          </Link>
+          <Logo size="md" className="z-50" />
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-10">
@@ -213,18 +202,7 @@ const Navbar: React.FC = () => {
           >
             {/* Header with logo and close */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-white/5">
-              <Link
-                to="/"
-                className="flex items-center gap-3"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <div className="bg-gradient-to-br from-brand-400 to-brand-600 p-2 rounded-lg">
-                  <Bitcoin className="text-navy-950 h-5 w-5" />
-                </div>
-                <span className="text-lg font-heading font-extrabold text-white tracking-tighter">
-                  Hablemos<span className="text-brand-500">Cripto</span>
-                </span>
-              </Link>
+              <Logo size="sm" onClick={() => setIsMobileMenuOpen(false)} />
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-2.5 bg-navy-900 text-navy-400 hover:text-white rounded-xl border border-white/5"
@@ -280,7 +258,7 @@ const Navbar: React.FC = () => {
                     className="flex items-center justify-center gap-3 w-full bg-brand-500 hover:bg-brand-400 text-navy-950 font-bold py-4 px-6 rounded-2xl transition-all shadow-glow-brand"
                   >
                     <User size={18} />
-                    Iniciar Sesión
+                    Ingresar
                   </button>
                 )}
 
@@ -290,7 +268,7 @@ const Navbar: React.FC = () => {
                   className="flex items-center justify-center gap-3 w-full bg-navy-900 hover:bg-navy-800 border border-white/10 hover:border-brand-500/40 text-white font-bold py-4 px-6 rounded-2xl transition-all"
                 >
                   <Users size={18} className="text-navy-400" />
-                  Comunidad Privada
+                  Ver planes y precios
                 </a>
               </div>
             </nav>

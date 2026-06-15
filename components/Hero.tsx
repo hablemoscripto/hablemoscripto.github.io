@@ -184,7 +184,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
                 className="w-full sm:w-auto px-10 py-5 bg-navy-900 text-white font-bold rounded-2xl border border-white/5 hover:border-brand-500/30 hover:bg-navy-800 transition-all flex items-center justify-center gap-3 group text-lg"
               >
                 <Users size={24} className="text-navy-400 group-hover:text-brand-500 transition-colors" />
-                <span>COMUNIDAD PRIVADA</span>
+                <span>VER PLANES Y PRECIOS</span>
               </button>
             </div>
 

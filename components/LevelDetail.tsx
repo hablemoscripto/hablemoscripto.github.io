@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChevronLeft, Lock, CheckCircle, PlayCircle, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../contexts/ProgressContext';
@@ -7,6 +7,8 @@ import { getPreviousLessonId, getAllLessonsOrdered } from '../utils/courseUtils'
 import { useEntitlements } from '../contexts/EntitlementsContext';
 import { canAccessLevel } from '../services/paymentService';
 import UpgradePaywall from './ui/UpgradePaywall';
+import EducationNavbar from './EducationNavbar';
+import LessonSearch from './LessonSearch';
 
 interface LevelDetailProps {
     levelData: LevelData;
@@ -22,6 +24,7 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
     const navigate = useNavigate();
     const { isLessonCompleted } = useProgress();
     const { entitlements, loading: entitlementsLoading } = useEntitlements();
+    const [showSearch, setShowSearch] = useState(false);
 
     // Hard paywall: levels the user's tier doesn't include show an upgrade
     // screen instead of the lessons (distinct from the sequential progress lock).
@@ -48,6 +51,10 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
     const allLessons = getAllLessonsOrdered();
     const lessonTitleMap = new Map(allLessons.map(l => [l.id, l.title]));
 
+    // Platform-wide progress for the shared navbar.
+    const globalCompleted = allLessons.filter(l => isLessonCompleted(l.id)).length;
+    const globalProgress = allLessons.length ? Math.round((globalCompleted / allLessons.length) * 100) : 0;
+
     // Precompute the starting lesson index for each module so we can render
     // absolute lesson numbers ("Lesson N of totalLessons") without mutating
     // state during render.
@@ -61,17 +68,25 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
     }
 
     return (
-        <div className="min-h-screen bg-navy-950 pb-20">
+        <>
+            <EducationNavbar
+                globalProgress={globalProgress}
+                onOpenProgress={() => navigate('/education')}
+                onOpenSearch={() => setShowSearch(true)}
+                currentView={`level-${levelData.id}` as 'level-beginner' | 'level-intermediate' | 'level-advanced'}
+            />
+            <LessonSearch isOpen={showSearch} onClose={() => setShowSearch(false)} />
+            <main id="contenido" tabIndex={-1} className="min-h-screen bg-navy-950 pb-20 outline-none">
             {/* Header */}
-            <div className="bg-navy-900 border-b border-white/5 pt-24 pb-12">
+            <div className="bg-navy-900 border-b border-white/5 pt-12 pb-12">
                 <div className="container max-w-5xl mx-auto px-6">
-                    <button
-                        onClick={() => navigate('/education')}
-                        className="flex items-center gap-2 text-navy-400 hover:text-white transition-colors mb-8"
-                    >
-                        <ChevronLeft size={20} />
-                        Volver al Panel
-                    </button>
+                    <nav aria-label="Ruta de navegación" className="flex items-center text-xs font-black uppercase tracking-widest text-navy-400 mb-8">
+                        <button onClick={() => navigate('/')} className="hover:text-brand-500 transition-colors">Inicio</button>
+                        <ChevronLeft size={14} className="mx-2 rotate-180 text-navy-600" aria-hidden="true" />
+                        <button onClick={() => navigate('/education')} className="hover:text-brand-500 transition-colors">Plataforma</button>
+                        <ChevronLeft size={14} className="mx-2 rotate-180 text-navy-600" aria-hidden="true" />
+                        <span className="text-brand-500">Nivel {LEVEL_LABELS[levelData.id] ?? levelData.id}</span>
+                    </nav>
 
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                         <div>
@@ -191,7 +206,8 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                     })}
                 </div>
             </div>
-        </div>
+            </main>
+        </>
     );
 };
 

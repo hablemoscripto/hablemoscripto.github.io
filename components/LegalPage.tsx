@@ -284,7 +284,7 @@ function TermsContent() {
 
         <h3>4.3 Política de reembolsos</h3>
         <p>
-          Dado que el contenido digital es accesible inmediatamente después del pago, los reembolsos se evaluarán caso por caso. Si tienes problemas con tu compra, contáctanos en hablemoscripto@gmail.com.
+          Ofrecemos una garantía de devolución de 7 días desde la fecha de compra. Si dentro de ese plazo decides que el contenido no es para ti, escríbenos a hablemoscripto@gmail.com y te devolvemos el 100% de tu dinero, sin preguntas. Pasados los 7 días, dado que el contenido digital es de acceso inmediato, no se realizan reembolsos.
         </p>
       </section>
 

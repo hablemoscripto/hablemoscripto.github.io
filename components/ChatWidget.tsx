@@ -38,8 +38,13 @@ const ChatWidget: React.FC = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(loadStoredMessages);
+  // Suppress the floating button while a blocking overlay (modal / mobile menu /
+  // lightbox — all lock body scroll) or an in-progress quiz is on screen, so the
+  // FAB never covers a dialog action or a quiz answer option.
+  const [suppressed, setSuppressed] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
@@ -82,6 +87,50 @@ const ChatWidget: React.FC = () => {
     window.addEventListener('open-chat-with-prompt', handleOpenChat as EventListener);
     return () => window.removeEventListener('open-chat-with-prompt', handleOpenChat as EventListener);
   }, []);
+
+  // Hide the FAB when a quiz is active (Quiz emits 'quiz-active') or when any
+  // overlay locks body scroll, so it can never overlap an answer option or a
+  // modal/menu action.
+  useEffect(() => {
+    let quizActive = false;
+    let overlayActive = false;
+    const update = () => setSuppressed(quizActive || overlayActive);
+    const onQuiz = (e: Event) => {
+      quizActive = (e as CustomEvent<{ active: boolean }>).detail?.active ?? false;
+      update();
+    };
+    window.addEventListener('quiz-active', onQuiz as EventListener);
+    const observer = new MutationObserver(() => {
+      const locked = document.body.style.overflow === 'hidden';
+      if (locked !== overlayActive) {
+        overlayActive = locked;
+        update();
+      }
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+    return () => {
+      window.removeEventListener('quiz-active', onQuiz as EventListener);
+      observer.disconnect();
+    };
+  }, []);
+
+  // Close the panel (and on Escape) and return focus to the launcher.
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen]);
+
+  // If suppression kicks in while the panel is open, close it.
+  useEffect(() => {
+    if (suppressed && isOpen) setIsOpen(false);
+  }, [suppressed, isOpen]);
 
   const handleSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -142,12 +191,15 @@ const ChatWidget: React.FC = () => {
     }
   };
 
+  if (suppressed) return null;
+
   return (
     <>
       {/* Toggle Button */}
       <button
+        ref={toggleRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 p-3 sm:p-4 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 text-navy-900 shadow-lg hover:shadow-brand-500/40 transition-all transform hover:scale-110 active:scale-95 flex items-center justify-center"
+        className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] sm:bottom-[max(1.5rem,env(safe-area-inset-bottom))] sm:right-[max(1.5rem,env(safe-area-inset-right))] z-50 p-3 sm:p-4 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 text-navy-900 shadow-lg hover:shadow-brand-500/40 transition-all transform hover:scale-110 active:scale-95 flex items-center justify-center"
         aria-label={isOpen ? 'Cerrar asistente IA' : 'Abrir asistente IA'}
         aria-expanded={isOpen}
       >
@@ -157,7 +209,7 @@ const ChatWidget: React.FC = () => {
       {/* Chat Window */}
       {isOpen && (
         <section
-          className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 w-[calc(100vw-2rem)] sm:w-[400px] h-[500px] max-h-[80vh] z-50 bg-navy-900 border border-navy-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-float-in origin-bottom-right"
+          className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 w-[calc(100vw-2rem)] sm:w-[400px] h-[500px] max-h-[80vh] z-50 bg-navy-900 border border-navy-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 zoom-in-95 duration-200 origin-bottom-right"
           role="region"
           aria-label="Chat con asistente de IA"
         >

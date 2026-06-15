@@ -257,6 +257,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="tu@email.com"
+                    autoComplete="email"
                     required
                     aria-invalid={error ? 'true' : undefined}
                     aria-describedby={describedBy}
@@ -311,7 +312,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                 <User size={32} className="text-white" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold text-white">
-                {view === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta'}
+                {view === 'login' ? 'Iniciar sesión' : 'Crear Cuenta'}
               </h2>
               <p className="text-navy-400 mt-2">
                 {view === 'login'
@@ -353,6 +354,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="tu@email.com"
+                    autoComplete="email"
                     required
                     aria-invalid={error ? 'true' : undefined}
                     aria-describedby={describedBy}
@@ -371,6 +373,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
+                    autoComplete={view === 'login' ? 'current-password' : 'new-password'}
                     required
                     aria-invalid={error ? 'true' : undefined}
                     aria-describedby={describedBy}
@@ -390,6 +393,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="••••••••"
+                      autoComplete="new-password"
                       required
                       aria-invalid={error ? 'true' : undefined}
                       aria-describedby={describedBy}
@@ -444,7 +448,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                 {loading ? (
                   <><Loader2 size={20} className="animate-spin" aria-hidden="true" /> Procesando...</>
                 ) : (
-                  view === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta'
+                  view === 'login' ? 'Iniciar sesión' : 'Crear Cuenta'
                 )}
               </button>
 
@@ -489,7 +493,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                   onClick={() => switchTo(view === 'login' ? 'signup' : 'login')}
                   className="ml-2 text-brand-400 hover:text-brand-300 font-medium transition-colors"
                 >
-                  {view === 'login' ? 'Regístrate' : 'Inicia Sesión'}
+                  {view === 'login' ? 'Regístrate' : 'Iniciar sesión'}
                 </button>
               </p>
             </div>

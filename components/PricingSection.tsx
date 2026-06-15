@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Check, Crown, Zap } from 'lucide-react';
+import { Check, Crown, Zap, ShieldCheck } from 'lucide-react';
 import {
   PRICING_PLANS,
   type CourseTier,
@@ -223,6 +223,22 @@ export default function PricingSection({
             </motion.div>
           );
         })}
+      </div>
+
+      {/* Purchase de-risking: guarantee + a human to talk to before paying. */}
+      <div className="mt-10 flex flex-col items-center gap-3 text-center">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30">
+          <ShieldCheck size={16} className="text-emerald-400" aria-hidden="true" />
+          <span className="text-sm font-medium text-emerald-300">
+            Garantía de 7 días: si no es para ti, te devolvemos tu dinero.
+          </span>
+        </div>
+        <p className="text-sm text-navy-400">
+          ¿Dudas antes de comprar? Escríbenos a{' '}
+          <a href="mailto:hablemoscripto@gmail.com" className="text-brand-400 hover:text-brand-300 underline">
+            hablemoscripto@gmail.com
+          </a>
+        </p>
       </div>
     </div>
   );

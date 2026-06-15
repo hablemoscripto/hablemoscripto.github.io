@@ -188,7 +188,7 @@ export default function MentoriaModal({ isOpen, onClose }: MentoriaModalProps) {
           </form>
 
           <p className="text-xs text-navy-400 mt-6 text-center">
-            Miembros Fundador tienen prioridad de respuesta.
+            Los miembros del plan Cripto Experto tienen prioridad de respuesta.
           </p>
         </>
       ) : (

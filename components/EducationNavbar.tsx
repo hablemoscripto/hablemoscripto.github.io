@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Bitcoin, Menu, X, BarChart3, LogOut, BookOpen, Zap, Trophy, Search } from 'lucide-react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { Menu, X, BarChart3, LogOut, BookOpen, Zap, Trophy, Search } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Logo from './ui/Logo';
 import { useGamification } from '../contexts/GamificationContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useEntitlements } from '../contexts/EntitlementsContext';
@@ -74,14 +75,7 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
 
           {/* Logo Area */}
           <div className="flex items-center gap-8">
-            <Link to="/" className="flex items-center gap-2 group">
-              <div className="bg-navy-800 p-1.5 rounded-lg group-hover:bg-navy-700 transition-colors">
-                <Bitcoin className="text-brand-500 h-5 w-5" />
-              </div>
-              <span className="font-heading font-bold text-white text-lg hidden sm:inline">
-                Hablemos<span className="text-brand-500">Cripto</span>
-              </span>
-            </Link>
+            <Logo size="sm" wordmarkClassName="hidden sm:inline" />
 
             {/* Mini Context Badge */}
             <div className="hidden md:flex items-center px-3 py-1 rounded-full bg-navy-900 border border-navy-800 text-xs font-medium text-navy-400">
@@ -91,15 +85,16 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-6">
-            {/* Gamification Stats */}
+          <div className="hidden lg:flex items-center gap-6">
+            {/* Gamification Stats — streak in amber (flame), Nivel in white so the
+                two don't read as one amber block. */}
             <div className="flex items-center gap-4 mr-4 border-r border-navy-800 pr-6">
               <div className="flex items-center gap-2 text-amber-400" title="Racha de días">
                 <Zap size={18} className="fill-amber-400" />
                 <span className="font-bold">{streak}</span>
               </div>
-              <div className="flex items-center gap-2 text-brand-400" title="Nivel">
-                <Trophy size={18} />
+              <div className="flex items-center gap-2 text-navy-100" title="Nivel">
+                <Trophy size={18} className="text-brand-500" />
                 <span className="font-bold">Nivel {level}</span>
                 <span className="text-xs text-navy-400">({xp} XP)</span>
               </div>
@@ -113,7 +108,7 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
               >
                 <Search size={16} aria-hidden="true" />
                 <span className="hidden lg:inline">Buscar</span>
-                <kbd className="hidden lg:inline-flex ml-1 px-1.5 py-0.5 text-[10px] bg-navy-700 rounded border border-navy-600 text-navy-400">
+                <kbd className="hidden lg:inline-flex ml-1 px-1.5 py-0.5 text-[10px] bg-navy-700 rounded border border-navy-600 text-navy-200">
                   Ctrl K
                 </kbd>
               </button>
@@ -158,7 +153,7 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
           <button
             ref={mobileToggleRef}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-navy-400 hover:text-white"
+            className="lg:hidden p-2 text-navy-400 hover:text-white"
             aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={isMobileMenuOpen}
             aria-controls="education-mobile-menu"
@@ -181,7 +176,7 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
         <>
           {/* Backdrop — click to dismiss */}
           <div
-            className="fixed inset-0 top-16 bg-black/60 z-40 md:hidden"
+            className="fixed inset-0 top-16 bg-black/60 z-40 lg:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
             aria-hidden="true"
           />
@@ -192,15 +187,15 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
             aria-modal="true"
             aria-label="Menú de navegación"
             tabIndex={-1}
-            className="md:hidden bg-navy-900 border-b border-white/5 p-4 space-y-4 absolute w-full shadow-2xl z-50 outline-none"
+            className="lg:hidden bg-navy-900 border-b border-white/5 p-4 space-y-4 absolute w-full shadow-2xl z-50 outline-none"
           >
             <div className="flex justify-between items-center p-3 bg-navy-800/50 rounded-lg">
               <div className="flex items-center gap-2 text-amber-400">
                 <Zap size={18} className="fill-amber-400" />
                 <span className="font-bold">{streak} días</span>
               </div>
-              <div className="flex items-center gap-2 text-brand-400">
-                <Trophy size={18} />
+              <div className="flex items-center gap-2 text-navy-100">
+                <Trophy size={18} className="text-brand-500" />
                 <span className="font-bold">Nivel {level}</span>
               </div>
             </div>

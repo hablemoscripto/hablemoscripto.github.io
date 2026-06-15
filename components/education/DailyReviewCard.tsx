@@ -56,7 +56,7 @@ const DailyReviewCard: React.FC = () => {
           <p className="text-white font-medium leading-relaxed">{question.question}</p>
 
           {/* Options */}
-          <div className="space-y-2">
+          <div className="space-y-2" role="radiogroup" aria-label="Opciones de respuesta">
             {question.options.map((opt, optIdx) => {
               const isSelected = selectedIndex === optIdx;
               const isCorrectOption = optIdx === question.correctIndex;
@@ -78,6 +78,8 @@ const DailyReviewCard: React.FC = () => {
               return (
                 <button
                   key={optIdx}
+                  role="radio"
+                  aria-checked={isSelected}
                   onClick={() => answer(optIdx)}
                   disabled={submitted}
                   className={className}
@@ -104,6 +106,8 @@ const DailyReviewCard: React.FC = () => {
           {/* Feedback */}
           {status === 'answered' && question.explanation && (
             <div
+              role="status"
+              aria-live="polite"
               className={`rounded-lg p-3 text-sm flex items-start gap-2 animate-in fade-in slide-in-from-top-2 ${
                 isCorrect
                   ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-300'

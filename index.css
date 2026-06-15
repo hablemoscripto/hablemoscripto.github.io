@@ -1,2 +1,13 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 @config "./tailwind.config.js";
+
+/* Lesson and chat content is rendered as markdown inside `.prose` containers,
+   but the Tailwind Typography plugin is not installed, so its `prose-*` classes
+   emit nothing. Until the plugin is added, give emphasized text real contrast on
+   the dark theme so bold terms stand out (review finding E2-06). */
+.prose strong,
+.prose b {
+  color: #f8fafc;
+  font-weight: 700;
+}

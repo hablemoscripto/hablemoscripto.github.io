@@ -5,20 +5,35 @@ import type { Question } from '../components/education/types';
 import { shuffleQuizOptions } from '../utils/quizShuffle';
 import { supabase } from '../lib/supabase';
 
+// Thrown when a paid-lesson fetch fails for a transport/server reason (network,
+// CORS, 5xx, blocked request) as opposed to the lesson genuinely not existing.
+// Lets LessonView show a "couldn't load, retry" state to an entitled buyer
+// instead of a misleading "Lección no encontrada" dead-end.
+export class LessonFetchError extends Error {
+  constructor() {
+    super('lesson-fetch-failed');
+    this.name = 'LessonFetchError';
+  }
+}
+
 // Paid (Intermedio/Avanzado) lesson bodies are not bundled. Fetch them from the
-// gated Edge Function, which verifies premium server-side. Returns null if the
-// user isn't entitled, the lesson is free/unknown, or the network fails — the
-// caller already handles a null lesson (not-found / locked states).
+// gated Edge Function, which verifies premium server-side. Returns null only
+// when the function responds but carries no content (genuinely unknown lesson);
+// THROWS LessonFetchError on a transport/server failure so the caller can offer
+// a retry. Non-entitled users are gated by the UI paywall before this renders.
 async function fetchPaidLesson(lessonId: number): Promise<LessonEntry | null> {
+  let result;
   try {
-    const { data, error } = await supabase.functions.invoke('get-lesson-content', {
+    result = await supabase.functions.invoke('get-lesson-content', {
       body: { lessonId },
     });
-    if (error || !data?.content) return null;
-    return data.content as LessonEntry;
   } catch {
-    return null;
+    throw new LessonFetchError();
   }
+  if (result.error) throw new LessonFetchError();
+  const data = result.data as { content?: unknown } | null;
+  if (!data?.content) return null;
+  return data.content as LessonEntry;
 }
 
 // Shape of the quiz questions stored in courseData — wide and permissive

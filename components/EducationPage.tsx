@@ -5,7 +5,7 @@ import { reportError } from '../utils/errorReporting';
 import {
   Trophy, Shield, TrendingUp, Star, ChevronRight, LucideIcon, Award, Crown,
   Footprints, BookOpen, Flag, GraduationCap, Gem, Zap, Flame, Activity, Calendar, Lock,
-  PlayCircle, ArrowRight,
+  PlayCircle, ArrowRight, AlertTriangle, RefreshCw,
 } from 'lucide-react';
 import { useProgress } from '../contexts/ProgressContext';
 import { useGamification } from '../contexts/GamificationContext';
@@ -56,6 +56,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [showMentoriaModal, setShowMentoriaModal] = useState(false);
   const [levels, setLevels] = useState<Level[]>([]);
+  const [levelsError, setLevelsError] = useState(false);
   const { user } = useAuth();
   const { entitlements, loading: entitlementsLoading, refresh: refreshEntitlements } = useEntitlements();
 
@@ -139,21 +140,24 @@ const EducationPage: React.FC<EducationPageProps> = () => {
     }
   });
 
-  useEffect(() => {
-    const fetchLevels = async () => {
-      const { data, error } = await supabase
-        .from('levels')
-        .select('id, title, subtitle, description, lessons_count, icon_name, color')
-        .order('order', { ascending: true });
-      if (error) {
-        reportError(error, { component: 'EducationPage', action: 'fetchLevels' });
-      } else {
-        setLevels(data as Level[]);
-      }
-    };
-
-    fetchLevels();
+  const fetchLevels = useCallback(async () => {
+    setLevelsError(false);
+    const { data, error } = await supabase
+      .from('levels')
+      .select('id, title, subtitle, description, lessons_count, icon_name, color')
+      .order('order', { ascending: true });
+    if (error) {
+      reportError(error, { component: 'EducationPage', action: 'fetchLevels' });
+      setLevelsError(true);
+    } else {
+      setLevels(data as Level[]);
+    }
   }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchLevels();
+  }, [fetchLevels]);
 
   useEffect(() => {
     const fetchProgressByLevel = async () => {
@@ -331,7 +335,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             )}
             <div className="flex items-center gap-3">
                <div className="w-8 h-8 rounded-lg bg-navy-950 border border-white/5 flex items-center justify-center">
-                  <Trophy size={16} className="text-brand-500" aria-hidden="true" />
+                  <GraduationCap size={16} className="text-brand-500" aria-hidden="true" />
                </div>
                <div className="flex flex-col leading-none">
                   <span className="text-white font-black text-sm tracking-tight">{totalCompletedLessons}</span>
@@ -354,6 +358,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
         />
       )}
 
+      <main id="contenido" tabIndex={-1} className="outline-none">
       {isDashboard ? (
         <>
           <DailyReviewCard />
@@ -411,7 +416,22 @@ const EducationPage: React.FC<EducationPageProps> = () => {
               </p>
             </div>
 
-            {levels.length === 0 ? (
+            {levels.length === 0 && levelsError ? (
+              /* Fetch failed — offer a retry instead of an endless skeleton */
+              <div className="text-center max-w-md mx-auto bg-navy-900/50 p-8 rounded-3xl border border-white/10 mt-8">
+                <AlertTriangle size={40} className="mx-auto text-amber-500 mb-4" aria-hidden="true" />
+                <h2 className="text-xl font-bold text-white mb-2">No pudimos cargar tus niveles</h2>
+                <p className="text-navy-400 mb-6 leading-relaxed">
+                  Parece un problema de conexión temporal. Tu progreso está a salvo.
+                </p>
+                <button
+                  onClick={() => fetchLevels()}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-all"
+                >
+                  <RefreshCw size={18} aria-hidden="true" /> Reintentar
+                </button>
+              </div>
+            ) : levels.length === 0 ? (
               /* Skeleton loading state */
               <div className="animate-pulse">
                 <div className="grid lg:grid-cols-3 gap-10 mt-8">
@@ -603,6 +623,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
       ) : (
         <Outlet />
       )}
+      </main>
 
       {showModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-navy-950/80 backdrop-blur-sm animate-in fade-in duration-200">

@@ -147,7 +147,7 @@ const LandingPage: React.FC = () => {
         <link rel="canonical" href="https://hablemoscripto.io" />
       </Helmet>
       <Navbar />
-      <main>
+      <main id="contenido" tabIndex={-1} className="outline-none">
         <Hero onStartLearning={handleNavigateToEducation} />
         <ProblemSection />
         <Features />
@@ -177,7 +177,7 @@ const LandingPage: React.FC = () => {
                 {
                   label: 'Respuestas en vivo',
                   title: 'Tus preguntas, sin filtro',
-                  body: 'Trae tu portafolio o tu duda. Respondo lo que normalmente cobraría en una mentoría 1-a-1.',
+                  body: 'Trae tu portafolio o tu duda. Respondo lo que normalmente cobraría en una mentoría 1 a 1.',
                 },
                 {
                   label: 'Contexto LATAM',
@@ -248,6 +248,12 @@ const LandingPage: React.FC = () => {
                         { q: '¿Cuánto tiempo toma completar un nivel?', a: 'El Nivel Principiante toma aproximadamente 8 horas. El Intermedio unas 8 horas y el Avanzado unas 11 horas. Puedes avanzar a tu propio ritmo.' },
                         { q: '¿Es seguro invertir en criptomonedas?', a: 'Las criptomonedas son activos de alto riesgo. Por eso enseñamos seguridad primero: cómo proteger tu wallet, evitar estafas, y gestionar el riesgo antes de invertir un solo peso.' },
                         { q: '¿Quién es CBas?', a: 'CBas tiene 7+ años navegando mercados de criptomonedas, incluyendo ciclos alcistas y bajistas completos. Creó Hablemos Cripto para dar a la comunidad LATAM las herramientas que él hubiera querido tener cuando empezó.' },
+                        { q: '¿Cómo pago y es seguro?', a: 'El pago se procesa con Wompi, una de las pasarelas de pago más usadas en Colombia. Pagas con tarjeta en pesos colombianos (COP). Es un pago único: no hay suscripciones ni cargos recurrentes.' },
+                        { q: '¿Hay garantía?', a: 'Sí. Tienes una garantía de 7 días. Si dentro de ese plazo sientes que el contenido no es para ti, escríbenos a hablemoscripto@gmail.com y te devolvemos el 100% de tu dinero, sin preguntas.' },
+                        { q: '¿Qué pasa justo después de pagar?', a: 'Tu acceso se activa de inmediato en tu cuenta y recibes un correo de bienvenida. Puedes empezar el nivel que desbloqueaste al instante.' },
+                        { q: '¿El precio sube después?', a: 'Estos son precios de lanzamiento (Precio Fundador). El precio subirá más adelante, pero avisaremos por correo con 30 días de anticipación. Si compras hoy, conservas tu acceso de por vida sin pagar la diferencia.' },
+                        { q: '¿Funciona en celular y computador?', a: 'Sí. Funciona en cualquier navegador, en celular, tablet o computador. Tu progreso se guarda en tu cuenta y se sincroniza entre dispositivos.' },
+                        { q: '¿Cuál plan elijo, Inversor o Cripto Experto?', a: 'Con Inversor obtienes las 44 lecciones completas de por vida. Cripto Experto añade la comunidad privada, las charlas semanales en vivo y prioridad para mentoría 1 a 1. Si buscas acompañamiento cercano, elige Cripto Experto.' },
                     ].map((item, i) => (
                         <details key={i} className="group bg-navy-900 border border-white/5 hover:border-white/10 rounded-2xl overflow-hidden transition-colors">
                             <summary className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer text-white font-bold hover:text-brand-500 transition-colors list-none">
@@ -267,7 +273,7 @@ const LandingPage: React.FC = () => {
         <section id="resources" className="py-24 relative scroll-mt-28">
           <div className="absolute inset-0 bg-brand-600/5"></div>
           <div className="container max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 className="text-3xl font-bold text-white mb-4">Análisis semanal. Sin shilling.</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">Análisis semanal. Sin recomendaciones pagadas.</h2>
             <p className="text-navy-400 mb-8">Lo que pasó esta semana en cripto, interpretado para LATAM. Mi tesis actual, las señales que estoy mirando y lo que estoy ignorando.</p>
             <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" onSubmit={handleNewsletterSubmit}>
               <input

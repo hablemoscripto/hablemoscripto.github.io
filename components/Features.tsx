@@ -61,7 +61,7 @@ const Features: React.FC = () => {
             <div className="w-full max-w-[450px] p-6 rounded-2xl bg-navy-900/50 border border-white/5 shadow-glass">
               <p className="text-brand-500 text-[10px] font-black uppercase tracking-[0.2em] mb-3">Sobre CBas</p>
               <p className="text-navy-200 text-sm leading-relaxed font-medium">
-                He vivido ciclos alcistas y bajistas completos del mercado cripto, desde el crash de 2018 hasta el bull run de 2021 y todo lo que vino después. Aquí enseño a leer el mercado, no a especular con él. Sin shilling ni promesas de enriquecimiento rápido.
+                He vivido ciclos alcistas y bajistas completos del mercado cripto, desde el crash de 2018 hasta el bull run de 2021 y todo lo que vino después. Aquí enseño a leer el mercado, no a especular con él. Sin agendas ocultas ni promesas de enriquecimiento rápido.
               </p>
 
               <div className="mt-5 pt-5 border-t border-white/5 space-y-3">

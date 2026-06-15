@@ -49,8 +49,10 @@ const LevelCard: React.FC<LevelCardProps> = ({
 
     return (
         <div className={cn(
+            // An owned-but-progress-gated level (isLocked) stays full color and
+            // inviting; only a not-purchased level (requiresUpgrade) is dimmed.
             "group relative h-full flex flex-col bg-navy-900 rounded-4xl border border-white/5 p-0 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-glass hover:bg-navy-800",
-            isLocked ? 'opacity-70 grayscale-[0.5]' : '',
+            requiresUpgrade ? 'opacity-80' : '',
             className
         )}>
             {/* Top Pattern Decoration */}
@@ -61,9 +63,9 @@ const LevelCard: React.FC<LevelCardProps> = ({
                 <div className="flex justify-between items-start mb-8">
                     <div className={cn(
                         "w-14 h-14 rounded-2xl bg-navy-950 border border-white/5 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:border-white/10 shadow-glass",
-                        isLocked ? 'text-navy-400' : colorClasses[color].split(' ')[0]
+                        requiresUpgrade ? 'text-navy-400' : colorClasses[color].split(' ')[0]
                     )}>
-                        {isLocked ? <Lock size={24} /> : <Icon size={28} />}
+                        {requiresUpgrade ? <Lock size={24} /> : <Icon size={28} />}
                     </div>
 
                     {/* Circular Progress Mini */}
@@ -74,7 +76,7 @@ const LevelCard: React.FC<LevelCardProps> = ({
                                 cx="28" cy="28" r="24"
                                 className={cn(
                                     "transition-all duration-1000 ease-out",
-                                    isLocked ? 'stroke-navy-800' : `stroke-current`
+                                    requiresUpgrade ? 'stroke-navy-800' : `stroke-current`
                                 )}
                                 strokeWidth="5"
                                 fill="none"
@@ -129,11 +131,11 @@ const LevelCard: React.FC<LevelCardProps> = ({
                             </button>
                         </div>
                     ) : isLocked && prerequisiteTitle ? (
-                        <div className="space-y-4 p-6 bg-navy-950 rounded-3xl border border-white/5">
-                            <div className="flex items-start gap-3 text-navy-400 text-xs">
-                                <Lock size={16} className="text-navy-400 shrink-0 mt-0.5" />
+                        <div className="space-y-4 p-6 bg-navy-950 rounded-3xl border border-brand-500/15">
+                            <div className="flex items-start gap-3 text-navy-300 text-xs">
+                                <PlayCircle size={16} className="text-brand-400 shrink-0 mt-0.5" aria-hidden="true" />
                                 <span className="leading-relaxed font-bold uppercase tracking-tight">
-                                    Bloqueado hasta completar <span className="text-brand-500">{prerequisiteTitle}</span>
+                                    Disponible al completar <span className="text-brand-400">{prerequisiteTitle}</span>
                                 </span>
                             </div>
 

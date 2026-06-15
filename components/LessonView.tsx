@@ -39,6 +39,10 @@ const LessonView: React.FC = () => {
     const isValidId = !isNaN(id) && id > 0;
     const [lesson, setLesson] = useState<LessonData | null>(null);
     const [lessonLoading, setLessonLoading] = useState(true);
+    // Distinguish a genuine not-found (null) from a transport failure so an
+    // entitled buyer who hits a network blip gets a retry, not a dead-end.
+    const [lessonError, setLessonError] = useState(false);
+    const [reloadKey, setReloadKey] = useState(0);
 
     // `setActiveSection` is used to reset scroll-spy state on lesson change.
     const [, setActiveSection] = useState(0);
@@ -67,19 +71,29 @@ const LessonView: React.FC = () => {
         let cancelled = false;
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setLessonLoading(true);
-        fetchLessonById(id).then((lessonData) => {
-            if (cancelled) return;
-            setLesson(lessonData);
-            setLessonLoading(false);
-            if (lessonData) {
-                try { localStorage.setItem('last_lesson_id', String(lessonData.id)); } catch { /* */ }
-                window.__currentLesson = { title: lessonData.title, level: lessonData.level, id: lessonData.id };
-            } else {
+        setLessonError(false);
+        fetchLessonById(id)
+            .then((lessonData) => {
+                if (cancelled) return;
+                setLesson(lessonData);
+                setLessonLoading(false);
+                if (lessonData) {
+                    try { localStorage.setItem('last_lesson_id', String(lessonData.id)); } catch { /* */ }
+                    window.__currentLesson = { title: lessonData.title, level: lessonData.level, id: lessonData.id };
+                } else {
+                    window.__currentLesson = null;
+                }
+            })
+            .catch(() => {
+                if (cancelled) return;
+                // A real fetch failure (network/server), not a missing lesson.
+                setLesson(null);
+                setLessonError(true);
+                setLessonLoading(false);
                 window.__currentLesson = null;
-            }
-        });
+            });
         return () => { cancelled = true; window.__currentLesson = null; };
-    }, [id]);
+    }, [id, reloadKey]);
 
     // Access Control Logic
     useEffect(() => {
@@ -159,6 +173,37 @@ const LessonView: React.FC = () => {
                 onUpgrade={() => navigate('/education?upgrade=inversor')}
                 onBack={() => navigate('/education')}
             />
+        );
+    }
+
+    if (lessonError) {
+        return (
+            <div className="min-h-screen flex items-center justify-center text-white bg-navy-950 p-4">
+                <div className="text-center max-w-md bg-navy-900/50 p-8 rounded-2xl border border-white/10 backdrop-blur-sm">
+                    <AlertCircle size={48} className="mx-auto text-amber-500 mb-4" aria-hidden="true" />
+                    <h2 className="text-2xl font-bold mb-2">No pudimos cargar la lección</h2>
+                    <p className="text-navy-400 mb-6 leading-relaxed">
+                        Puede ser un problema temporal de conexión. Tu acceso está intacto. Intenta de nuevo en un momento.
+                    </p>
+                    <div className="flex flex-col gap-3">
+                        <button
+                            onClick={() => setReloadKey((k) => k + 1)}
+                            className="w-full py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-all inline-flex items-center justify-center gap-2"
+                        >
+                            <RefreshCw size={18} aria-hidden="true" /> Reintentar
+                        </button>
+                        <a
+                            href={`mailto:hablemoscripto@gmail.com?subject=${encodeURIComponent(`No carga la lección ${id}`)}`}
+                            className="w-full py-3 bg-navy-800 hover:bg-navy-700 text-white font-medium rounded-xl transition-all"
+                        >
+                            Escribir a soporte
+                        </a>
+                        <button onClick={() => navigate('/education')} className="text-navy-400 hover:text-white text-sm transition-colors">
+                            Volver al inicio
+                        </button>
+                    </div>
+                </div>
+            </div>
         );
     }
 
@@ -322,21 +367,21 @@ const LessonView: React.FC = () => {
                 />
             )}
 
-            <div className="min-h-screen bg-navy-950 pb-20">
+            <main id="contenido" tabIndex={-1} className="min-h-screen bg-navy-950 pb-20 outline-none">
                 {/* Progress Bar Fixed Top */}
-                <div className="fixed top-16 left-0 w-full h-1 bg-navy-900 z-30">
+                <div className="fixed top-16 left-0 w-full h-1 bg-navy-900 z-30" role="progressbar" aria-label="Progreso de lectura" aria-valuenow={Math.round(scrollProgress * 100)} aria-valuemin={0} aria-valuemax={100}>
                     <div className="h-full bg-brand-500 transition-all duration-100 ease-out" style={{ width: `${scrollProgress * 100}%` }}></div>
                 </div>
 
                 {/* Top Navigation Bar — non-sticky on mobile so it doesn't stack
                     on top of the (sticky) EducationNavbar and bury content;
                     re-stickies from sm: up where there's vertical room. */}
-                <div className="static sm:sticky top-0 z-40 bg-navy-950/80 backdrop-blur-md border-b border-white/10">
+                <nav aria-label="Navegación de la lección" className="static sm:sticky top-0 z-40 bg-navy-950/80 backdrop-blur-md border-b border-white/10">
                     <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
                         {/* Left: Back to level dashboard */}
                         <button
                             onClick={() => navigate(`/education/${getLevelForLesson(id)}`)}
-                            className="flex items-center gap-1 px-2 sm:px-3 py-1.5 text-navy-400 hover:text-white hover:bg-navy-800 rounded-lg transition-colors"
+                            className="flex items-center justify-center gap-1 px-3 min-h-[44px] text-navy-400 hover:text-white hover:bg-navy-800 rounded-lg transition-colors"
                         >
                             <ChevronLeft size={18} />
                             <span className="hidden sm:inline text-sm">Volver</span>
@@ -348,13 +393,14 @@ const LessonView: React.FC = () => {
                             {prevLesson ? (
                                 <button
                                     onClick={() => navigate(`/education/lesson/${prevLesson.id}`)}
-                                    className="p-2 text-navy-400 hover:text-white hover:bg-navy-800 rounded-lg transition-colors"
+                                    className="min-h-[44px] min-w-[44px] flex items-center justify-center text-navy-400 hover:text-white hover:bg-navy-800 rounded-lg transition-colors"
                                     title={`Anterior: ${prevLesson.title}`}
+                                    aria-label={`Lección anterior: ${prevLesson.title}`}
                                 >
                                     <ChevronLeft size={20} />
                                 </button>
                             ) : (
-                                <div className="w-9"></div>
+                                <div className="w-11"></div>
                             )}
 
                             {/* Lesson title — drop the numeric prefix on mobile to give the title more room */}
@@ -368,17 +414,18 @@ const LessonView: React.FC = () => {
                                 <button
                                     onClick={() => canGoNext && navigate(`/education/lesson/${nextLesson.id}`)}
                                     disabled={!canGoNext}
-                                    className={`p-2 rounded-lg transition-colors ${
+                                    className={`min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg transition-colors ${
                                         canGoNext
                                             ? 'text-navy-400 hover:text-white hover:bg-navy-800'
                                             : 'text-navy-400 cursor-not-allowed'
                                     }`}
                                     title={canGoNext ? `Siguiente: ${nextLesson.title}` : 'Completa esta lección para continuar'}
+                                    aria-label={canGoNext ? `Siguiente lección: ${nextLesson.title}` : 'Completa esta lección para continuar'}
                                 >
                                     {canGoNext ? <ChevronRight size={20} /> : <Lock size={16} />}
                                 </button>
                             ) : (
-                                <div className="w-9"></div>
+                                <div className="w-11"></div>
                             )}
                         </div>
 
@@ -392,7 +439,7 @@ const LessonView: React.FC = () => {
                             <div className="w-20 sm:w-28"></div>
                         )}
                     </div>
-                </div>
+                </nav>
 
                 {/* Header */}
                 <section className="bg-navy-900 border-b border-white/5 py-12">
@@ -473,8 +520,11 @@ const LessonView: React.FC = () => {
                             </div>
                         )}
 
-                        {/* Content Sections with Checkpoint Quizzes */}
-                        <div className="prose prose-invert prose-lg max-w-none break-words">
+                        {/* Content Sections with Checkpoint Quizzes.
+                            Measure capped to ~70ch and centered for comfortable
+                            study-length reading; bold rendered white so emphasized
+                            terms pop on the dark theme. */}
+                        <div className="prose prose-invert prose-lg max-w-[70ch] mx-auto break-words prose-strong:text-white">
                             {lesson.sections.map((section, idx) => (
                                 <SectionRenderer
                                     key={idx}
@@ -686,7 +736,7 @@ const LessonView: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </>
     );
 };

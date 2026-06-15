@@ -36,6 +36,19 @@ function RouteLoader() {
   );
 }
 
+// Keyboard/screen-reader users can jump past the navbar to the page body.
+// Targets the <main id="contenido"> rendered by the primary routes.
+function SkipLink() {
+  return (
+    <a
+      href="#contenido"
+      className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-brand-500 focus:text-navy-950 focus:font-bold focus:shadow-lg"
+    >
+      Saltar al contenido
+    </a>
+  );
+}
+
 function AnimatedRoutes() {
   const location = useLocation();
 
@@ -147,6 +160,7 @@ function App() {
               <ProgressProvider>
                 <Router>
                   <div className="min-h-screen bg-navy-950 text-white overflow-x-hidden font-sans">
+                    <SkipLink />
                     <AnimatedRoutes />
                     <AuthedChatWidget />
                     <AchievementToast />

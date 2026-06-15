@@ -46,13 +46,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
     const correctCount = questions.filter(q => answers[q.id] === q.correctAnswer).length;
     const allCorrect = correctCount === questions.length;
 
-    const [autoAdvanceTimer, setAutoAdvanceTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
-
     const handleNext = () => {
-        if (autoAdvanceTimer) {
-            clearTimeout(autoAdvanceTimer);
-            setAutoAdvanceTimer(null);
-        }
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(prev => prev + 1);
         } else {
@@ -67,17 +61,8 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
 
         setAnswers(prev => ({ ...prev, [questionId]: optionIndex }));
         setShowResult(prev => ({ ...prev, [questionId]: true }));
-
-        // Auto-advance fallback after 5 seconds (user can click "Siguiente" sooner)
-        const timer = setTimeout(() => {
-            if (currentQuestionIndex < questions.length - 1) {
-                setCurrentQuestionIndex(prev => prev + 1);
-            } else {
-                setCompleted(true);
-                onComplete?.(optionIndex === currentQuestion.correctAnswer && correctCount === questions.length - 1);
-            }
-        }, 5000);
-        setAutoAdvanceTimer(timer);
+        // No auto-advance: the explanation is the learning moment, so the learner
+        // controls progression via the "Siguiente" button (WCAG 2.2.1 Timing).
     };
 
     const toggleHint = (questionId: string) => {
@@ -119,7 +104,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                     {completed && (
                         <span className={`text-xs font-medium px-2 py-1 rounded ${
                             allCorrect
-                                ? 'bg-green-500/20 text-green-400'
+                                ? 'bg-emerald-500/20 text-emerald-400'
                                 : 'bg-amber-500/20 text-amber-400'
                         }`}>
                             {allCorrect ? 'Perfecto' : 'Completado'}
@@ -146,7 +131,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                         className={`h-1.5 flex-1 rounded-full transition-all ${
                                             isAnswered
                                                 ? isCorrect
-                                                    ? 'bg-green-500'
+                                                    ? 'bg-emerald-500'
                                                     : 'bg-red-500'
                                                 : isCurrent
                                                     ? 'bg-brand-500'
@@ -169,7 +154,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                             </p>
 
                             {/* Options */}
-                            <div className="space-y-2">
+                            <div className="space-y-2" role="radiogroup" aria-label="Opciones de respuesta">
                                 {currentQuestion.options.map((opt, optIdx) => {
                                     const isSelected = answers[currentQuestion.id] === optIdx;
                                     const isCorrectOption = optIdx === currentQuestion.correctAnswer;
@@ -179,7 +164,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
 
                                     if (showFeedback) {
                                         if (isCorrectOption) {
-                                            optionClass += "bg-green-500/10 border-green-500/50 text-green-400";
+                                            optionClass += "bg-emerald-500/10 border-emerald-500/50 text-emerald-400";
                                         } else if (isSelected) {
                                             optionClass += "bg-red-500/10 border-red-500/50 text-red-400";
                                         } else {
@@ -192,13 +177,15 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                     return (
                                         <button
                                             key={optIdx}
+                                            role="radio"
+                                            aria-checked={isSelected}
                                             onClick={() => handleAnswer(currentQuestion.id, optIdx)}
                                             disabled={showFeedback}
                                             className={optionClass}
                                         >
                                             <span className={`w-6 h-6 rounded flex items-center justify-center text-xs font-bold shrink-0 ${
                                                 showFeedback && isCorrectOption
-                                                    ? 'bg-green-500/20 text-green-400'
+                                                    ? 'bg-emerald-500/20 text-emerald-400'
                                                     : showFeedback && isSelected
                                                         ? 'bg-red-500/20 text-red-400'
                                                         : 'bg-navy-800 text-navy-400'
@@ -206,7 +193,7 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                                 {String.fromCharCode(65 + optIdx)}
                                             </span>
                                             <span className="flex-1">{opt}</span>
-                                            {showFeedback && isCorrectOption && <CheckCircle size={16} className="text-green-500" />}
+                                            {showFeedback && isCorrectOption && <CheckCircle size={16} className="text-emerald-500" />}
                                             {showFeedback && isSelected && !isCorrectOption && <AlertCircle size={16} className="text-red-500" />}
                                         </button>
                                     );
@@ -234,9 +221,9 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
 
                             {/* Feedback */}
                             {showResult[currentQuestion.id] && (
-                                <div className={`rounded-lg p-3 text-sm flex items-start gap-2 animate-in fade-in slide-in-from-top-2 ${
+                                <div role="status" aria-live="polite" className={`rounded-lg p-3 text-sm flex items-start gap-2 animate-in fade-in slide-in-from-top-2 ${
                                     answers[currentQuestion.id] === currentQuestion.correctAnswer
-                                        ? 'bg-green-500/10 border border-green-500/20 text-green-300'
+                                        ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-300'
                                         : 'bg-amber-500/10 border border-amber-500/20 text-amber-300'
                                 }`}>
                                     {answers[currentQuestion.id] === currentQuestion.correctAnswer ? (
@@ -264,13 +251,13 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                     {completed && (
                         <div className={`text-center py-4 rounded-lg ${
                             allCorrect
-                                ? 'bg-green-500/10 border border-green-500/20'
+                                ? 'bg-emerald-500/10 border border-emerald-500/20'
                                 : 'bg-navy-800 border border-navy-700'
                         }`}>
                             {allCorrect ? (
                                 <div className="space-y-2">
-                                    <CheckCircle size={32} className="mx-auto text-green-500" />
-                                    <p className="text-green-400 font-medium">¡Entendiste el concepto!</p>
+                                    <CheckCircle size={32} className="mx-auto text-emerald-500" />
+                                    <p className="text-emerald-400 font-medium">¡Entendiste el concepto!</p>
                                     <p className="text-xs text-navy-400">Sigue con la lección</p>
                                 </div>
                             ) : (
