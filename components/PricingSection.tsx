@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Check, Crown, Zap, ShieldCheck } from 'lucide-react';
+import { Check, Crown, Zap, ShieldCheck, Clock } from 'lucide-react';
 import {
   PRICING_PLANS,
   type CourseTier,
@@ -72,6 +72,53 @@ export default function PricingSection({
           <span className="text-brand-400 font-medium">
             Precio Fundador: estos son los precios de lanzamiento. Avisaremos con 30 días de anticipación antes de cualquier aumento.
           </span>
+        </div>
+      </div>
+
+      {/* Founder trust at the point of sale: real, verifiable track record +
+          honest founding-member framing. No testimonials are invented. */}
+      <div className="mb-12 max-w-3xl mx-auto">
+        <div className="rounded-3xl border border-white/10 bg-navy-900/50 backdrop-blur-sm p-6 sm:p-8 text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-5">
+            <img
+              src="/images/MadLad.webp"
+              srcSet="/images/MadLad.webp 450w, /images/MadLad-2x.webp 900w"
+              sizes="80px"
+              alt="CBas, fundador de Hablemos Cripto"
+              width={80}
+              height={80}
+              loading="lazy"
+              className="h-20 w-20 flex-shrink-0 rounded-2xl object-cover border border-white/10"
+            />
+            <div className="flex-1">
+              <p className="text-white font-black text-lg tracking-tight">
+                No le pagas a un curso anónimo. Aprendes con CBas.
+              </p>
+              <p className="mt-2 text-sm text-navy-300 leading-relaxed">
+                Más de 7 años en el mercado, con ciclos alcistas y bajistas completos vividos en carne propia, desde el crash de 2018 hasta el bull run de 2021 y todo lo que vino después. Aquí se enseña a leer el mercado, sin venderte monedas ni prometerte riqueza rápida.
+              </p>
+              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-brand-300">
+                  <Clock size={12} aria-hidden="true" />
+                  7+ años en el mercado
+                </span>
+                <a
+                  href="https://twitter.com/Crypto_CBas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-navy-300 underline decoration-navy-600 underline-offset-4 hover:text-white hover:decoration-brand-400 transition-colors"
+                >
+                  Verifica su trayectoria en @Crypto_CBas
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="mt-6 pt-5 border-t border-white/10">
+            <p className="text-sm text-navy-300 leading-relaxed">
+              <span className="text-white font-semibold">Estás entrando como miembro fundador.</span>{' '}
+              Los precios de lanzamiento reconocen a quienes llegan primero. Si suben más adelante, quienes ya compraron conservan su acceso de por vida sin pagar la diferencia.
+            </p>
+          </div>
         </div>
       </div>
 
