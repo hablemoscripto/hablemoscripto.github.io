@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, useCallback, useMemo, ReactNode } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
+import { trackSignUp, trackLogin } from '../utils/analytics';
 
 interface AuthContextType {
   user: User | null;
@@ -20,6 +21,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  // Dedupe SIGNED_IN attribution per page-load: SIGNED_IN can refire on tab
+  // focus / token refresh, and we must not double-count a sign-up/login.
+  const trackedSignInsRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     // Get initial session
@@ -30,10 +34,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
+
+      // Attribution for Google OAuth only (email is tracked in AuthModal, which
+      // stays mounted through that flow; Google redirects away and back).
+      const u = session?.user;
+      if (
+        event === 'SIGNED_IN' &&
+        u &&
+        u.app_metadata?.provider === 'google' &&
+        !trackedSignInsRef.current.has(u.id)
+      ) {
+        trackedSignInsRef.current.add(u.id);
+        const created = u.created_at ? Date.parse(u.created_at) : 0;
+        const lastSignIn = u.last_sign_in_at
+          ? Date.parse(u.last_sign_in_at)
+          : created;
+        // First OAuth sign-in: Supabase stamps created_at and last_sign_in_at
+        // together, so a near-zero gap means a brand-new account.
+        const isNewUser = created > 0 && Math.abs(lastSignIn - created) < 30_000;
+        if (isNewUser) {
+          trackSignUp('google');
+        } else {
+          trackLogin('google');
+        }
+      }
     });
 
     return () => subscription.unsubscribe();

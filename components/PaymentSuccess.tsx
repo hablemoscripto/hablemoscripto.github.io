@@ -5,6 +5,7 @@ import { CheckCircle, XCircle, Clock, Loader2, Home } from 'lucide-react';
 import { getPaymentByReference } from '../services/paymentService';
 import { useEntitlements } from '../contexts/EntitlementsContext';
 import { reportError } from '../utils/errorReporting';
+import { trackPremiumPurchase } from '../utils/analytics';
 
 type PaymentStatus = 'loading' | 'APPROVED' | 'PENDING' | 'DECLINED' | 'VOIDED' | 'ERROR';
 
@@ -22,6 +23,7 @@ export default function PaymentSuccess() {
   const { refresh: refreshEntitlements } = useEntitlements();
   const refreshRef = useRef(refreshEntitlements);
   const refreshedRef = useRef(false);
+  const purchaseTrackedRef = useRef(false);
   useEffect(() => {
     refreshRef.current = refreshEntitlements;
   }, [refreshEntitlements]);
@@ -51,6 +53,13 @@ export default function PaymentSuccess() {
         if (payment.status === 'APPROVED' && !refreshedRef.current) {
           refreshedRef.current = true;
           void refreshRef.current();
+        }
+        if (payment.status === 'APPROVED' && !purchaseTrackedRef.current) {
+          purchaseTrackedRef.current = true;
+          trackPremiumPurchase(
+            (payment.amount_in_cents ?? 0) / 100,
+            payment.currency ?? 'COP',
+          );
         }
       } catch (error) {
         reportError(error, { component: 'PaymentSuccess', action: 'checkPayment' });

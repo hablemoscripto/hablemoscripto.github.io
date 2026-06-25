@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Mail, Lock, User, Loader2, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Modal } from './ui/Modal';
+import { trackSignUp, trackLogin } from '../utils/analytics';
 
 type ModalView = 'login' | 'signup' | 'forgot-password' | 'verify-email';
 
@@ -87,6 +88,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
             setError(error.message);
           }
         } else {
+          trackLogin('email');
           onClose();
           if (onLoginSuccess) {
             onLoginSuccess();
@@ -106,6 +108,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
             setError(error.message);
           }
         } else {
+          trackSignUp('email');
           setView('verify-email');
         }
       }

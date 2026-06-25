@@ -210,7 +210,7 @@ export async function createPaymentWithSignature(
 export async function getPaymentByReference(reference: string) {
   const { data, error } = await supabase
     .from('payments')
-    .select('status, product_name, wompi_reference')
+    .select('status, product_name, wompi_reference, amount_in_cents, currency')
     .eq('wompi_reference', reference)
     .single();
 

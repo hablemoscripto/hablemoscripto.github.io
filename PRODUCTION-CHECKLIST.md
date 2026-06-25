@@ -11,7 +11,8 @@ Set these in **Vercel → Project → Settings → Environment Variables** for t
 | `VITE_SUPABASE_URL` | ✅ | Supabase project URL |
 | `VITE_SUPABASE_ANON_KEY` | ✅ | Supabase anon key (safe to ship to browser) |
 | `VITE_WOMPI_PUBLIC_KEY` | ✅ | **Must start with `pub_prod_`** — `pub_test_` keys will silently use sandbox |
-| `VITE_GA4_MEASUREMENT_ID` | Optional | `G-XXXXXXXXXX`. Analytics no-op if unset. Only fires in prod build. |
+| `VITE_GA4_MEASUREMENT_ID` | Optional | `G-XXXXXXXXXX`. Analytics no-op if unset. Only fires in prod build. Fires `page_view`, `sign_up`, `login`, `purchase`. |
+| `VITE_META_PIXEL_ID` | Optional | Meta (Facebook) Pixel ID. No-op if unset. Only fires in prod build. Fires `PageView`, `Lead` (sign-up), `Purchase` (premium upgrade) from the same call sites as GA4. Required for the marketing plan's Meta retargeting + lookalike audiences. |
 | `VITE_ERROR_REPORTING_URL` | Optional | Endpoint for client error reports. No-op if unset. |
 | `VITE_USDC_PAYMENT_ADDRESS` | Optional | Solana address that receives USDC. Leave empty to disable crypto tab. |
 
@@ -146,7 +147,8 @@ In the Supabase dashboard → **Authentication**:
 
 - [ ] Open Vercel Analytics (or Umami/Plausible) — confirm page views recording
 - [ ] Open Supabase **Logs → Edge Functions** — verify no 5xx on `wompi-webhook`, `grok-chat`, `send-newsletter`. **Check daily during launch week** — a "paid but no premium" failure surfaces here first.
-- [ ] If `VITE_GA4_MEASUREMENT_ID` is set, open GA4 real-time report and confirm events (`page_view`, `sign_up`, `lesson_complete`) are firing — including the **landing-page** `page_view` (the first one, which ad attribution depends on)
+- [ ] If `VITE_GA4_MEASUREMENT_ID` is set, open GA4 real-time report and confirm events (`page_view`, `sign_up`, `purchase`) are firing — including the **landing-page** `page_view` (the first one, which ad attribution depends on). `sign_up` fires on email and Google signup; `purchase` fires on the APPROVED `/pago-completado` screen with the real COP value.
+- [ ] If `VITE_META_PIXEL_ID` is set, open Meta Events Manager → Test Events and confirm `PageView`, `Lead`, and `Purchase` fire. The pixel and GA4 share call sites, so if one fires and the other does not, the missing one's env var is unset or its CSP host is blocked (check the browser console for a CSP violation on `connect.facebook.net`).
 - [ ] Client errors currently `console.error` in the browser unless `VITE_ERROR_REPORTING_URL` points somewhere. Set it (even to a tiny Edge Function that inserts into an `error_logs` table) so production errors are captured, not lost.
 
 ## 7. Known post-launch work (not blocking)
