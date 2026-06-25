@@ -1376,7 +1376,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Custodial vs No-Custodial: Donde La Descentralización Te Afecta',
         content: 'La descentralización de una red no importa si TÚ no controlas tus llaves. Aquí es donde esto se vuelve personal:',
         features: [
-          { icon: AlertTriangle, title: 'Exchange Centralizado (Binance, Coinbase)', text: 'Aunque Bitcoin sea descentralizado, si tienes tu BTC en Binance, Binance tiene las llaves. Pueden congelarte, quebrar, o ser hackeados. El colapso de FTX demostró esto: millones perdieron todo.' },
+          { icon: AlertTriangle, title: 'Exchange Centralizado (Binance, Coinbase)', text: 'Aunque Bitcoin sea descentralizado, si tienes tu BTC en Binance, Binance tiene las llaves. Pueden congelarte, quebrar, o ser hackeados. El colapso de FTX demostró esto: millones quedaron con sus fondos congelados por años.' },
           { icon: CheckCircle, title: 'Wallet No-Custodial (Phantom, Ledger)', text: 'TÚ tienes las llaves. Nadie puede congelar tu wallet. Nadie puede confiscar tus fondos. Si Phantom (la empresa) desaparece mañana, tus fondos siguen ahí, solo necesitas otra wallet compatible.' }
         ],
         highlight: {
@@ -1462,7 +1462,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'q6',
-          question: 'FTX era un exchange "cripto" que colapsó en 2022 y millones perdieron sus fondos. ¿Qué lección demuestra esto sobre la descentralización?',
+          question: 'FTX era un exchange "cripto" que colapsó en 2022 y millones quedaron sin acceso a sus fondos durante años. ¿Qué lección demuestra esto sobre la descentralización?',
           options: [
             { id: 'a', text: 'Que las criptomonedas son una estafa' },
             { id: 'b', text: 'Que la descentralización de Bitcoin/Solana no te protege si TÚ usas un intermediario centralizado (exchange) que tiene tus llaves' },
@@ -1470,7 +1470,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Que el gobierno debería regular más' }
           ],
           correctAnswer: 'b',
-          explanation: 'FTX no era descentralizado, era un intermediario centralizado con el MISMO modelo de tu banco: ellos controlan las llaves, tú confías en ellos. La blockchain de Bitcoin siguió funcionando perfectamente. Los que perdieron fueron los que dejaron sus fondos en FTX en vez de en wallets propias.'
+          explanation: 'FTX no era descentralizado, era un intermediario centralizado con el MISMO modelo de tu banco: ellos controlan las llaves, tú confías en ellos. La blockchain de Bitcoin siguió funcionando perfectamente. Los que quedaron atrapados en la quiebra fueron los que dejaron sus fondos en FTX en vez de en wallets propias.'
         },
         {
           id: 'q-review',
@@ -1499,10 +1499,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: 'Not Your Keys, Not Your Coins',
-        content: 'En noviembre de 2022, FTX, el segundo exchange más grande del mundo, colapsó de la noche a la mañana. Millones de personas descubrieron que sus "ahorros" en cripto habían desaparecido. No era un hackeo. Era algo peor: **nunca fueron realmente dueños de su dinero**. Cuando compras Bitcoin en Binance, Coinbase o cualquier exchange, lo que tienes es una PROMESA de que ellos tienen tu cripto. Es como tener un recibo de un banco, si el banco quiebra, tu recibo no vale nada. Una **Wallet** cambia esto completamente. Con una wallet propia, TÚ controlas las llaves criptográficas. Nadie puede congelar tu cuenta. Nadie puede negar tu retiro. Nadie puede "prestarse" tu dinero sin permiso. Eres tu propio banco.',
+        content: 'En noviembre de 2022, FTX, el segundo exchange más grande del mundo, colapsó de la noche a la mañana. Millones de personas perdieron el acceso a sus "ahorros" en cripto. No era un hackeo. Era algo peor: **nunca fueron realmente dueños de su dinero**. Tras más de dos años atrapados en tribunales, la mayoría terminó recuperando su dinero, pero en dólares de noviembre de 2022: quien tenía un Bitcoin recibió alrededor de $16,000 en efectivo, no su Bitcoin, que para 2025 ya valía más de $100,000. Perdieron el control, perdieron años y se perdieron toda la recuperación del mercado. Cuando compras Bitcoin en Binance, Coinbase o cualquier exchange, lo que tienes es una PROMESA de que ellos tienen tu cripto. Es como tener un recibo de un banco, si el banco quiebra, tu recibo queda congelado en un proceso legal por años. Una **Wallet** cambia esto completamente. Con una wallet propia, TÚ controlas las llaves criptográficas. Nadie puede congelar tu cuenta. Nadie puede negar tu retiro. Nadie puede "prestarse" tu dinero sin permiso. Eres tu propio banco.',
         highlight: {
           title: 'La Lección de FTX',
-          text: 'Más de $8 MIL MILLONES de dólares de clientes desaparecieron cuando FTX colapsó. Muchos perdieron los ahorros de toda su vida. ¿Los que tenían su cripto en wallets propias? No perdieron absolutamente nada. La autocustodia no es paranoia, es sentido común.'
+          text: 'Cuando FTX colapsó, más de $8 mil millones en fondos de clientes quedaron congelados de un día para otro. Recuperarlos tomó más de dos años de tribunales, y se pagaron en dólares de 2022, sin la enorme subida que vino después. ¿Los que tenían su cripto en wallets propias? Conservaron sus monedas y toda esa subida. La autocustodia no es paranoia, es sentido común.'
         }
       },
       {
@@ -1586,7 +1586,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         items: [
           'Una wallet no "guarda" cripto, guarda las LLAVES que prueban que eres dueño de fondos en la blockchain.',
           'Si no tienes las llaves, no tienes el cripto. Los exchanges son custodios, no bancos con seguro gubernamental.',
-          'FTX, Mt. Gox, Celsius, BlockFi, Voyager, la lista de exchanges que colapsaron llevándose fondos de usuarios es LARGA y sigue creciendo.',
+          'FTX, Mt. Gox, Celsius, BlockFi, Voyager, la lista de exchanges que colapsaron y dejaron a sus usuarios atrapados en quiebras durante años es LARGA y sigue creciendo.',
           'Hot wallets (Phantom, MetaMask) son para uso diario. Cold wallets (Ledger, Trezor) son para ahorros serios.',
           'La autocustodia es una responsabilidad: si pierdes tu frase semilla, nadie puede ayudarte. Pero esa responsabilidad es el precio de la verdadera propiedad.'
         ]
@@ -1604,7 +1604,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Sus fondos estaban seguros porque estaban en blockchain' }
           ],
           correctAnswer: 'b',
-          explanation: 'Más de $8 mil millones desaparecieron. Los usuarios con fondos en FTX tuvieron que esperar AÑOS en procesos legales para recuperar centavos por dólar. Los que tenían autocustodia no perdieron nada.'
+          explanation: 'Más de $8 mil millones quedaron congelados. Los usuarios con fondos en FTX esperaron más de dos años en procesos legales y recuperaron su dinero en dólares de 2022, perdiéndose toda la recuperación posterior del mercado. Los que tenían autocustodia conservaron sus monedas y esa subida.'
         },
         {
           id: 'q2',
@@ -2924,7 +2924,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Opciones de Tarjetas para Latinoamérica',
-        content: 'No todas las tarjetas cripto funcionan en LATAM. Estas son las mejores opciones actualmente:',
+        content: 'No todas las tarjetas cripto funcionan en LATAM. Estas son dos opciones que operan en la región (verifica disponibilidad y condiciones en tu país antes de solicitarlas):',
         features: [
           { icon: Banknote, title: 'Kast', text: 'Tarjeta virtual y física que acepta USDC y USDT. Funciona en la mayoría de países LATAM. Recarga directamente desde Solana. Sin fees de recarga. Buena opción para comenzar.' },
           { icon: Banknote, title: 'Avici', text: 'Tarjeta premium con beneficios adicionales. Acepta múltiples criptomonedas. Buen servicio al cliente en español. Disponible en varios países latinoamericanos.' }
@@ -3408,7 +3408,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           { icon: Lock, title: 'Escasez Absoluta', text: '21 millones máximo. Nunca habrá más. Ninguna otra criptomoneda tiene esta garantía tan fuerte. La política monetaria de Bitcoin es inmutable, ni siquiera los desarrolladores pueden cambiarla.' },
           { icon: Shield, title: 'Máxima Descentralización', text: 'Miles de nodos en 100+ países. Ninguna persona, empresa o gobierno controla Bitcoin. Es la red más descentralizada y resistente a la censura del mundo. 15 años sin caídas.' },
           { icon: Clock, title: 'Track Record', text: 'Desde 2009, Bitcoin ha sobrevivido prohibiciones, hackeos de exchanges, crisis financieras, y declaraciones de "muerte" más de 450 veces. Sigue más fuerte que nunca. Ninguna otra cripto tiene este historial.' },
-          { icon: Landmark, title: 'Adopción Institucional', text: 'ETFs de Bitcoin aprobados, MicroStrategy con $15+ mil millones en BTC, fondos de pensiones comprando. El Salvador fue pionero al adoptarlo como moneda legal en 2021, aunque revirtió ese estatus a uso voluntario en 2025. Las instituciones confían en Bitcoin de una forma que no confían en ninguna altcoin.' }
+          { icon: Landmark, title: 'Adopción Institucional', text: 'ETFs de Bitcoin aprobados, Strategy (antes MicroStrategy) acumulando más de 600,000 bitcoins en su tesorería, fondos de pensiones comprando. El Salvador fue pionero al adoptarlo como moneda legal en 2021, aunque revirtió ese estatus a uso voluntario en 2025. Las instituciones confían en Bitcoin de una forma que no confían en ninguna altcoin.' }
         ]
       },
       {
