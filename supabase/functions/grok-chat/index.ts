@@ -122,6 +122,9 @@ interface LessonCandidate {
   id: number
   title: string
   description: string | null
+  // Section titles that matched the keywords (v2 RPC). Lets the reranker see
+  // WHY a lesson is a candidate when the match lives inside a section.
+  matched_sections?: string | null
 }
 
 // PostgREST treats ,()*: as structural characters inside the .or() filter DSL,
@@ -272,7 +275,13 @@ async function rerankWithGrok(
   }
 
   const candidatesText = candidates
-    .map((c, i) => `${i + 1}. Title: ${c.title}\n   Summary: ${c.description || 'No description available'}`)
+    .map((c, i) => {
+      const lines = [`${i + 1}. Title: ${c.title}`, `   Summary: ${c.description || 'No description available'}`]
+      if (c.matched_sections) {
+        lines.push(`   Secciones que coinciden con la pregunta: ${c.matched_sections}`)
+      }
+      return lines.join('\n')
+    })
     .join('\n\n')
 
   const rerankerPrompt = `You are an expert curriculum retrieval assistant for "Hablemos Cripto".
