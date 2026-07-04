@@ -6,14 +6,14 @@ import { TrendingDown } from 'lucide-react';
 const COP = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 });
 
 const PRESETS: { label: string; rate: number }[] = [
-  { label: 'Dólar ~3%', rate: 3 },
-  { label: 'Colombia ~9%', rate: 9 },
-  { label: 'Argentina ~140%', rate: 140 },
+  { label: 'Dólar ~3% (2026)', rate: 3 },
+  { label: 'Colombia ~6% (2026)', rate: 6 },
+  { label: 'Argentina ~33% (2026)', rate: 33 },
 ];
 
 const InflationCalculator: React.FC = () => {
   const [monto, setMonto] = useState(1_000_000);
-  const [rate, setRate] = useState(9);
+  const [rate, setRate] = useState(6);
   const [years, setYears] = useState(10);
 
   const { real, lost, lostPct, remainingPct } = useMemo(() => {

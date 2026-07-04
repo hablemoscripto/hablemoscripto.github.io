@@ -99,7 +99,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "milestones": [
         {
           "label": "Marzo 2020",
-          "detail": "La Fed anuncia trillones. Tras caer 30%, los mercados rebotan ese mismo día."
+          "detail": "La Fed anuncia billones de dólares (millones de millones). Tras caer 30%, los mercados rebotan ese mismo día."
         },
         {
           "label": "2020-2021",
@@ -115,7 +115,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "label": "Resultado",
-          "detail": "Billonarios +$5 trillones; la clase media vio sus ahorros evaporarse.",
+          "detail": "Los más ricos sumaron ~$5 billones (millones de millones); la clase media vio sus ahorros evaporarse.",
           "highlight": true
         }
       ]
@@ -221,7 +221,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "$100M+",
           "label": "Ucrania 2022",
-          "sublabel": "En donaciones en días, sin intermediarios",
+          "sublabel": "En donaciones en cripto en las primeras semanas, sin intermediarios",
           "tone": "green",
           "flag": "🇺🇦"
         },
@@ -323,7 +323,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Shield",
           "title": "Seguridad",
-          "text": "¿Qué tan difícil es atacar la red? Bitcoin: 15 años sin ataque exitoso."
+          "text": "¿Qué tan difícil es atacar la red? Bitcoin: sin un ataque exitoso desde 2010."
         },
         {
           "icon": "Network",
@@ -373,7 +373,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "kind": "statCards",
       "cards": [
         {
-          "value": "21",
+          "value": "~40-45",
           "label": "Binance Smart Chain",
           "sublabel": "validadores aprobados por Binance",
           "tone": "red"
@@ -385,9 +385,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "tone": "amber"
         },
         {
-          "value": "~3,000",
+          "value": "~800",
           "label": "Solana",
-          "sublabel": "validadores, 2,000-4,000 TPS, fees de centavos",
+          "sublabel": "validadores activos (2026), 2,000-4,000 TPS, fees de centavos",
           "tone": "amber"
         },
         {
@@ -443,20 +443,20 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "~7",
           "label": "BSC",
-          "sublabel": "de 21 validadores, todos de Binance",
+          "sublabel": "de ~40-45 validadores, muchos ligados a Binance",
           "tone": "red"
         },
         {
-          "value": "~19-31",
+          "value": "~20",
           "label": "Solana",
           "sublabel": "validadores para frenar la red (33% del stake)",
           "tone": "amber"
         },
         {
-          "value": "Muy Alto",
-          "label": "Bitcoin",
-          "sublabel": "4-5 pools en jurisdicciones distintas para el 51%",
-          "tone": "green"
+          "value": "~2-3",
+          "label": "Bitcoin (pools)",
+          "sublabel": "los 2-3 pools más grandes suman ~50% del hashrate (Foundry + AntPool ~44-48%); los mineros pueden migrar de pool",
+          "tone": "amber"
         }
       ],
       "intro": "Coeficiente de Nakamoto: cuántas entidades deberían coordinarse para comprometer el sistema.",
@@ -673,7 +673,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "good": {
         "title": "El único sitio real",
         "items": [
-          "phantom.app, sin guiones ni números",
+          "phantom.com (antes phantom.app), sin guiones ni números",
           "Escríbelo tú mismo en la barra de direcciones",
           "Verifica el desarrollador: Phantom Technologies Incorporated",
           "Móvil solo desde App Store o Google Play",
@@ -696,7 +696,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "Descarga desde fuente oficial",
-          "detail": "Solo phantom.app, App Store o Google Play. Verifica el desarrollador."
+          "detail": "Solo phantom.com (antes phantom.app), App Store o Google Play. Verifica el desarrollador."
         },
         {
           "title": "Create a new wallet",
@@ -777,7 +777,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Ethereum (L1)",
         "points": [
           "~15-30 TPS",
-          "Costo: desde menos de $1 hasta varios dólares, sube con la congestión",
+          "Costo: transferencia ~$0.10-0.25 y swap ~$0.25-0.50 en L1 (2026), sube con la congestión",
           "Confirmación: ~12-15 segundos",
           "DeFi barato solo vía L2s (Arbitrum, Optimism)",
           "Liquidez fragmentada entre L1 y L2s",
@@ -790,7 +790,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Solana (L1)",
         "points": [
           "~2,000-4,000 TPS (producción real)",
-          "Costo: ~$0.00025 (fracción de centavo)",
+          "Costo: ~0.000005 SOL por transacción, una fracción de centavo (~$0.001)",
           "Confirmación: ~400 milisegundos",
           "Todo en una sola capa, sin L2s",
           "Liquidez unificada en un solo lugar",
@@ -831,9 +831,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "kind": "statCards",
       "cards": [
         {
-          "value": "$1-3",
+          "value": "~$0.25-0.50",
           "label": "Ethereum L1 (Uniswap)",
-          "sublabel": "Mucho menos que en 2021, pero variable y sube con la congestión",
+          "sublabel": "Mucho menos que en 2021 (2026, post-Dencun), pero variable y sube con la congestión",
           "tone": "red"
         },
         {
@@ -843,9 +843,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "tone": "amber"
         },
         {
-          "value": "$0.0002",
+          "value": "~$0.001",
           "label": "Solana (Jupiter)",
-          "sublabel": "1 swap, 1 segundo, listo",
+          "sublabel": "~0.000005 SOL de fee base: 1 swap, 1 segundo, listo",
           "tone": "green"
         }
       ],
@@ -868,12 +868,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Gem",
           "title": "Magic Eden / Tensor",
-          "text": "Marketplaces de NFTs con fees <$0.01, frente a $20-50 en OpenSea."
+          "text": "Marketplaces de NFTs con fees de centavos, frente a ~$1-5 de gas en OpenSea (Ethereum L1, 2026)."
         },
         {
           "icon": "PiggyBank",
           "title": "Marinade / Jito",
-          "text": "Liquid staking: ~6-7% anual y tu SOL sigue líquido."
+          "text": "Liquid staking: ~5.5-6.5% anual neto (~6-7% con validadores MEV de Jito) y tu SOL sigue líquido."
         }
       ],
       "intro": "El mapa de herramientas que realmente vas a usar en Solana.",
@@ -1121,12 +1121,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "TrendingUp",
           "title": "Golden Cross",
-          "text": "EMA rápida cruza por encima de la lenta. Señal alcista de mediano plazo; se confirma días después."
+          "text": "La media rápida (50) cruza por encima de la lenta (200); el cruce clásico usa SMA. Señal alcista de mediano plazo; se confirma días después."
         },
         {
           "icon": "TrendingDown",
           "title": "Death Cross",
-          "text": "EMA rápida cruza por debajo de la lenta. Señal bajista; históricamente precedió caídas de -30% a -50%."
+          "text": "La media rápida (50) cruza por debajo de la lenta (200). Señal bajista rezagada: unas veces precedió caídas y otras marcó el suelo (marzo 2020, septiembre 2024)."
         },
         {
           "icon": "AlertTriangle",
@@ -1278,7 +1278,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Precio unitario: $0.001 (parece regalado)",
           "100,000M en circulación = Market Cap $100M",
-          "Supply total: 10 TRILLONES",
+          "Supply total: 10 BILLONES (millones de millones)",
           "FDV $10,000M: vale como las mayores empresas",
           "Ratio MC/FDV < 0.10: 90% esperando para diluirte"
         ],
@@ -1313,8 +1313,8 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "detail": "Se desbloquea 1/48 cada mes. Mejor que todo de golpe."
         },
         {
-          "label": "Pump Before Unlock",
-          "detail": "Precio sube 30-50% antes: insiders necesitan precio alto."
+          "label": "Semanas previas al unlock",
+          "detail": "El mercado suele anticipar los unlocks grandes: el precio tiende a debilitarse en las semanas previas."
         },
         {
           "label": "Unlock masivo (>10% del supply)",
@@ -1393,7 +1393,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "label": "3. Bull Market (Verano)",
-          "detail": "12-18 meses post-halving. Rompe el ATH. BTC sube 3-5x, luego altcoins 10-100x."
+          "detail": "12-18 meses post-halving. Rompe el ATH. El múltiplo de BTC se reduce cada ciclo (de ~90× a ~8× desde el mínimo); las altcoins amplifican el movimiento."
         },
         {
           "label": "4. Distribución (Otoño)",
@@ -1462,11 +1462,11 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "$126K",
           "label": "Ciclo 4 — Halving Abr 2024",
-          "sublabel": "~$64,000 → pico de ~$126K en octubre 2025, ~18 meses después del halving. Luego la corrección.",
+          "sublabel": "~$64,000 → pico de ~$126K en octubre 2025, ~18 meses después del halving. Hasta ahora, el máximo de este ciclo (a mediados de 2026).",
           "tone": "amber"
         }
       ],
-      "intro": "Cuatro ciclos, cuatro resultados similares. El multiplicador decrece, pero el patrón se mantiene 4 de 4.",
+      "intro": "Cuatro ciclos con un patrón parecido hasta ahora. El multiplicador se reduce cada ciclo: es un patrón histórico, no una ley.",
       "columns": 4
     },
     "Bitcoin Dominance y la Altseason": {
@@ -1511,7 +1511,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "¿Cómo es el tokenomics?",
-          "detail": "TokenUnlocks: ideal >50% circulando y vesting 2-4 años. Cliff del 30% en 3 meses = bomba.",
+          "detail": "Tokenomist (tokenomist.ai): ideal >50% circulando y vesting 2-4 años. Cliff del 30% en 3 meses = bomba.",
           "warning": true
         },
         {
@@ -1597,7 +1597,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "icon": "Clock",
-          "title": "TokenUnlocks.app",
+          "title": "Tokenomist (tokenomist.ai)",
           "text": "Calendario de desbloqueos. Anticipa la presión de venta cuando se libera supply."
         }
       ],
@@ -1727,7 +1727,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "60%",
           "label": "Core (Base Segura)",
-          "sublabel": "BTC, ETH, SOL — hacen 3-8× en bull, protegen tu capital",
+          "sublabel": "BTC, ETH, SOL: 2-5× desde mínimos del bear, protegen tu capital",
           "tone": "green"
         },
         {
@@ -1754,7 +1754,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Sobrevive a crashes del -50% sin destruirse",
           "Una posición en cero = pérdida limitada al 3-5%",
           "Liquidez disponible para comprar en el pánico",
-          "Retorno de ciclo: 5-15× del portafolio total",
+          "Retorno de ciclo: 2-5× desde mínimos del bear (realista para un core BTC/ETH/SOL)",
           "Duermes tranquilo sin revisar el precio",
           "Decisiones racionales con base psicológica sólida"
         ],
@@ -1877,7 +1877,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Tu pérdida queda en $200, pase lo que pase",
-          "detail": "Solo el 2% del capital. Puedes perder 50 trades seguidos y seguir en el juego."
+          "detail": "Solo el 2% del capital. Con 2% compuesto por trade, 20 pérdidas seguidas te dejan ~67% del capital; hasta 50 te dejan ~36%. Sobrevives para recuperarte."
         }
       ],
       "intro": "Tamaño de posición = (Capital × % riesgo) / Distancia al stop. Nunca arriesgues más del 1-2% por operación."
@@ -2097,7 +2097,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Los 5 elementos de tu plan",
         "items": [
           "Criterios de entrada: qué señal abre el trade (técnica, on-chain, narrativa)",
-          "Tamaño de posición: nunca más de 2-5% del portafolio",
+          "Tamaño de posición: nunca arriesgues más del 1-2% del portafolio por trade",
           "Stop loss: precio de salida si te equivocas, definido ANTES de entrar",
           "Take profit: toma ganancias parciales 1/3, 1/3, 1/3",
           "Estado mental: no opero si estoy enojado, cansado o ebrio"
@@ -2179,11 +2179,11 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Revisa y confirma",
-          "detail": "Price Impact <0.5%, slippage 0.5%, firma en Phantom. Fee Jupiter 0%."
+          "detail": "Price Impact <0.5%, slippage 0.5%, firma en Phantom. Fee Jupiter: 0% en modo manual; el modo Ultra (por defecto) cobra 0-0.1% según el par."
         },
         {
           "title": "Configuración avanzada",
-          "detail": "Órdenes >$10,000: slippage 0.1-0.3%. Activa Jito Tips contra bots MEV."
+          "detail": "Órdenes >$10,000: slippage 0.1-0.3%. Activa MEV Protect (Jito) contra bots MEV."
         }
       ],
       "intro": "Tres pasos en jup.ag y tu swap está listo en 1-2 segundos."
@@ -2342,13 +2342,13 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "75%",
           "label": "LTV máximo",
-          "sublabel": "Una caída del 33% te liquida. Jugar con fuego.",
+          "sublabel": "Una caída de ~6% te liquida (umbral de liquidación 80%). Jugar con fuego.",
           "tone": "red"
         },
         {
           "value": "40-60%",
           "label": "LTV profesional",
-          "sublabel": "Aquí debes estar: margen amplio",
+          "sublabel": "Aquí debes estar: con 50% LTV necesitas una caída de ~33-40% para ser liquidado",
           "tone": "green"
         },
         {
@@ -2554,19 +2554,19 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "left": {
         "title": "Solana",
         "points": [
-          "Minteo: menos de $0.01 por NFT",
+          "Minteo regular: ~0.01+ SOL (~$1-3); los cNFTs cuestan fracciones de centavo",
           "cNFTs: millones de NFTs por centavos",
           "Transacciones instantáneas (~400ms)",
           "Marketplaces: Tensor, Magic Eden",
           "Enfoque en utilidad y comunidades activas",
-          "Mercado joven en rápido crecimiento"
+          "Mercado impulsado por utilidad y cNFTs (2026)"
         ],
         "tone": "green"
       },
       "right": {
         "title": "Ethereum",
         "points": [
-          "Minteo: $30 a $100+ por NFT",
+          "Minteo: ~$1-5 por NFT en L1 (2026, post-Dencun)",
           "Sin compresión nativa (caro a escala)",
           "Transacciones lentas (~12s) y caras",
           "Marketplaces: OpenSea, Blur",
@@ -2575,7 +2575,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         ],
         "tone": "amber"
       },
-      "note": "El golpe está en el costo: $0.01 frente a $100+ por NFT."
+      "note": "El golpe está en el costo a escala: los cNFTs de Solana cuestan fracciones de centavo frente a ~$1-5 por NFT en Ethereum."
     },
     "El Ecosistema de NFTs en Solana": {
       "kind": "iconGrid",
@@ -2598,7 +2598,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Gem",
           "title": "Arte Generativo y 1/1",
-          "text": "Piezas por algoritmo o únicas. Exchange Art (FormFunction): artista a coleccionista."
+          "text": "Piezas por algoritmo o únicas. Exchange Art: arte 1/1 de artista a coleccionista (Formfunction, otra plataforma, cerró en 2023)."
         }
       ],
       "columns": 2
@@ -2618,9 +2618,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "bad": {
         "title": "Dónde operar",
         "items": [
-          "Tensor: profesional, orderbooks y floor price",
+          "Tensor: profesional, lidera el volumen pro-trader (~60-70%)",
           "Tensor es a los NFTs lo que Jupiter a los tokens",
-          "Magic Eden: accesible y amigable, multi-chain",
+          "Magic Eden: accesible y amigable, enfocado 100% en Solana desde 2026",
           "Magic Eden: ideal para tu primera compra"
         ]
       }
@@ -2737,7 +2737,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Infraestructura Tradicional",
         "points": [
           "La construye una sola corporación centralizada",
-          "La empresa invierte billones en capital",
+          "La empresa invierte miles de millones en capital",
           "Empleados y contratistas pagados con salario",
           "Cobertura concentrada en zonas rentables",
           "El valor lo capturan accionistas y ejecutivos",
@@ -2772,7 +2772,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "label": "Vuelve a empezar con más participantes",
-          "detail": "Helium: de 0 a 900,000+ hotspots en pocos años",
+          "detail": "Helium: creció a ~1M de hotspots en 2022; hoy ~376,000 activos (2026). El flywheel también puede girar al revés.",
           "highlight": true
         }
       ],
@@ -2783,8 +2783,8 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "items": [
         {
           "icon": "Network",
-          "title": "Helium (HNT/MOBILE/IOT)",
-          "text": "Red inalámbrica descentralizada. 900,000+ hotspots en 180+ países. Plan celular de $20/mes en USA."
+          "title": "Helium (HNT)",
+          "text": "Red descentralizada de IoT (LoRaWAN) y 5G/WiFi móvil. ~376,000 hotspots activos (2026, tras el pico de ~1M en 2022). Desde HIP-138 (enero 2025) todo se paga en HNT. Plan móvil de $15-30/mes en USA."
         },
         {
           "icon": "Globe",
@@ -2827,7 +2827,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     }
   },
   32: {
-    "Monolítico (Solana) vs Ethereum + L2s (Modular)": {
+    "Monolítico (Solana) vs Modular (Ethereum + L2s)": {
       "kind": "comparison",
       "left": {
         "title": "Solana (Monolítico)",
@@ -2920,7 +2920,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Debilidades de Ethereum + L2s",
         "points": [
           "La fragmentación empeora con cada nueva L2",
-          "Bridges: puntos de fallo costosos, billones perdidos en hacks",
+          "Bridges: puntos de fallo costosos, miles de millones perdidos en hacks",
           "UX confusa para los novatos",
           "El sequencer suele estar en manos de una sola empresa"
         ],
@@ -3065,7 +3065,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "left": {
         "title": "Señales de Phishing/Scam",
         "points": [
-          "URLs con errores sutiles: \"phantorn.app\" en vez de \"phantom.app\"",
+          "URLs con errores sutiles: \"phantorn.com\" en vez de \"phantom.com\"",
           "DMs ofreciendo \"airdrops exclusivos\" o \"soporte técnico\"",
           "Pop-ups urgentes: \"Verifica en 24h o pierdes tus fondos\"",
           "Piden tu seed phrase bajo cualquier pretexto",
@@ -3241,9 +3241,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "tone": "amber"
         },
         {
-          "value": "$0.0002",
+          "value": "~$0.001",
           "label": "Fee real de la red Solana",
-          "sublabel": "Lo que de verdad cuesta la transacción",
+          "sublabel": "~0.000005 SOL por transacción, una fracción de centavo",
           "tone": "green"
         }
       ],
@@ -3265,7 +3265,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Pega la dirección destino",
-          "detail": "Pega la dirección (ej. \"7xK9p...\") y VERIFICA los primeros y últimos 4 caracteres.",
+          "detail": "Pega la dirección (ej. \"7xK9p...\") y VERIFICA de 6 a 8 caracteres al inicio Y al final.",
           "warning": true
         },
         {
@@ -3284,7 +3284,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "good": {
         "title": "Haz siempre esto",
         "items": [
-          "Compara los primeros 4 y últimos 4 caracteres de la dirección.",
+          "Compara de 6 a 8 caracteres al inicio Y al final; nunca copies direcciones de tu historial de transacciones (address poisoning).",
           "Si envías $1,000+, manda primero una prueba de $1-5 y espera a que llegue.",
           "Tómate 2 minutos de verificación: las transacciones legítimas pueden esperar."
         ]
@@ -3437,7 +3437,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Green flags (probablemente legítimo)",
         "points": [
           "TÚ inicias el contacto con soporte oficial",
-          "URLs oficiales verificadas: phantom.app, jup.ag",
+          "URLs oficiales verificadas: phantom.com (antes phantom.app), jup.ag",
           "NUNCA te piden tu seed phrase",
           "No prometen retornos garantizados",
           "Tienen historial público y verificable",
@@ -3573,13 +3573,13 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "Kast",
           "label": "Virtual y física",
-          "sublabel": "USDC y USDT, recarga desde Solana sin fees. Buena para comenzar.",
+          "sublabel": "USDC y USDT, 0% de recarga con stablecoins; hasta 1.75% FX en moneda extranjera. Buena para comenzar.",
           "tone": "green"
         },
         {
           "value": "Avici",
-          "label": "Premium con beneficios",
-          "sublabel": "Múltiples criptos y soporte en español. Varios países LATAM.",
+          "label": "Neobank autocustodial en Solana",
+          "sublabel": "Tarjeta Visa asegurada con USDC, $10 de emisión, 0% FX. Sirve Colombia y LATAM (avici.money).",
           "tone": "neutral"
         }
       ],
@@ -3756,7 +3756,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "left": {
         "title": "USDC (Circle)",
         "points": [
-          "Auditorías mensuales por Deloitte",
+          "Atestaciones mensuales verificadas por Deloitte",
           "Reservas: bonos del Tesoro + efectivo",
           "Empresa regulada en USA",
           "Puede congelar direcciones por orden legal",
@@ -3768,7 +3768,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "right": {
         "title": "USDT (Tether)",
         "points": [
-          "Auditorías trimestrales (más recientes)",
+          "Atestaciones trimestrales (BDO); nunca una auditoría completa",
           "Reservas diversificadas: bonos, BTC, oro, préstamos",
           "Con sede en El Salvador desde 2025, antes en las Islas Vírgenes Británicas",
           "También puede congelar direcciones",
@@ -3812,9 +3812,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "kind": "statCards",
       "cards": [
         {
-          "value": "$35-70",
-          "label": "Lo que pierdes con Western Union",
-          "sublabel": "Comisión + spread, llega en 3-5 días",
+          "value": "$15-30",
+          "label": "Lo que pierdes por cada $500 con remesadoras tradicionales",
+          "sublabel": "Típicamente 3-6% entre comisión y spread. El retiro en efectivo llega en minutos; las transferencias bancarias tardan días.",
           "tone": "red"
         },
         {
@@ -3824,9 +3824,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "tone": "green"
         },
         {
-          "value": "$420-840",
-          "label": "Ahorro al año",
-          "sublabel": "Si recibes remesas cada mes",
+          "value": "$180-360",
+          "label": "Ahorro típico al año",
+          "sublabel": "Si recibes $500 en remesas cada mes",
           "tone": "green"
         }
       ],
@@ -3841,7 +3841,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "48 / 48",
           "label": "Ana (DCA disciplinado)",
-          "sublabel": "Compra el día 1 cada mes. Retorno histórico 150-400%.",
+          "sublabel": "Compra el día 1 cada mes. Retorno histórico 150-400% (ventanas de 4+ años, hasta 2025; rendimientos pasados no garantizan futuros).",
           "tone": "green"
         },
         {
@@ -3887,7 +3887,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "Define el monto seguro",
-          "detail": "Invierte solo lo que no necesitas en 12 meses. Nunca el arriendo ni la comida.",
+          "detail": "Invierte solo lo que no necesitas en 2+ años. Nunca el arriendo ni la comida.",
           "warning": true
         },
         {
@@ -3938,7 +3938,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "icon": "Coins",
-          "title": "Tokens de protocolo (JUP, RAY, RNDR)",
+          "title": "Tokens de protocolo (JUP, RAY, RENDER)",
           "text": "Utilidad real: gobernanza, fees, servicios. Alto riesgo, alto potencial."
         },
         {
@@ -3963,7 +3963,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Primera y mayor plataforma de contratos inteligentes",
           "DeFi, NFTs y stablecoins nacieron aquí",
           "Ecosistema más maduro, más desarrolladores",
-          "Lento (~15 TPS) y caro (fees $1-50+)",
+          "L1 ~15 TPS con fees de centavos a pocos dólares (2026); las L2 cuestan centavos",
           "Dominante y probado, pero pesado"
         ],
         "tone": "amber"
@@ -4091,7 +4091,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "15%",
           "label": "Argentina",
-          "sublabel": "AFIP. Renta financiera + Bienes Personales sobre tenencias",
+          "sublabel": "ARCA (ex AFIP). Renta financiera + Bienes Personales sobre tenencias",
           "tone": "amber",
           "flag": "🇦🇷"
         }
@@ -4106,7 +4106,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "PAN: el bot compra ANTES (front-run)",
-          "detail": "Ve tu swap en el mempool y compra SOL primero, subiendo el precio.",
+          "detail": "Un validador o RPC con cliente modificado ve tu swap antes de ejecutarse y compra SOL primero, subiendo el precio.",
           "warning": true
         },
         {
@@ -4128,7 +4128,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "TrendingUp",
           "title": "Front-Running",
-          "text": "Ve una orden grande de $50,000 pendiente, compra antes y vende más caro. Te perjudica."
+          "text": "Detecta una orden grande de $50,000 en camino (vía un RPC o validador con cliente modificado), compra antes y vende más caro. Te perjudica."
         },
         {
           "icon": "RefreshCw",
@@ -4147,9 +4147,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     "Jito y la Solución de Solana": {
       "kind": "comparison",
       "left": {
-        "title": "SIN Jito (mempool público)",
+        "title": "Sin protección MEV",
         "points": [
-          "Tu swap es visible para todos los bots",
+          "Validadores y RPCs con clientes modificados pueden ver tu swap antes de ejecutarlo",
           "Bots sandwich detectan y atacan tu orden",
           "Carrera ciega de fees por inclusión",
           "Las ganancias de MEV van a bots anónimos"
@@ -4159,22 +4159,22 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "right": {
         "title": "CON Jito Bundle",
         "points": [
-          "Bundle directo al validador, fuera del mempool",
+          "Bundle directo al validador líder, sin intermediarios que filtren tu orden",
           "Invisible para bots: no pueden sandwichearte",
           "Orden de ejecución garantizado",
           "MEV redistribuido a validadores y stakers"
         ],
         "tone": "green"
       },
-      "note": "+90% de validadores usan el cliente Jito-Solana. Stakers de jitoSOL ganan ~1-2% más APY por MEV."
+      "note": "Solana no tiene mempool público: Gulf Stream envía las transacciones directo al líder, y los sandwiches ocurren vía validadores y RPCs con clientes modificados (Jito cerró su mempool público en marzo de 2024). +90% de validadores usan el cliente Jito-Solana; stakers de jitoSOL ganan ~1-2% más APY por MEV."
     },
     "Cómo Protegerte: Guía Práctica": {
       "kind": "iconGrid",
       "items": [
         {
           "icon": "Shield",
-          "title": "Activa Jito Tips en Jupiter",
-          "text": "Un tip de 0.001-0.005 SOL envía tu swap como bundle directo a validadores, fuera del mempool."
+          "title": "Activa MEV Protect en Jupiter",
+          "text": "Envía tu swap como bundle de Jito (tip de 0.001-0.005 SOL) directo al validador líder, sin exponer tu orden a clientes modificados."
         },
         {
           "icon": "Percent",
@@ -4194,7 +4194,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Target",
           "title": "Usa limit orders",
-          "text": "Precio fijo en Jupiter. No pasa por el mempool en tiempo real, mucho más difícil de sandwichear."
+          "text": "Precio fijo en Jupiter. Tu orden no viaja como swap inmediato visible, mucho más difícil de sandwichear."
         }
       ],
       "intro": "No puedes eliminar el MEV, pero estos 5 escudos reducen drásticamente cuánto te extraen.",

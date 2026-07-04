@@ -129,9 +129,9 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'El Papel Moneda: Una Promesa de Oro',
-        content: 'Cargar oro era peligroso y poco práctico. En China (siglo VII) y luego en Europa, surgió una solución elegante: los **certificados de depósito**. Depositabas tu oro en un banco seguro y recibías un papel que decía "Este papel es canjeable por X gramos de oro". El papel era más fácil de cargar, pero su valor dependía de una PROMESA: que el banco realmente tenía el oro. Este sistema funcionó durante siglos... hasta que los bancos descubrieron que podían imprimir más papeles de los que tenían oro para respaldar.',
+        content: 'Cargar oro era peligroso y poco práctico. En China (época Tang, siglos VII-IX) y luego en Europa, surgió una solución elegante: los **certificados de depósito**. Depositabas tu oro en un banco seguro y recibías un papel que decía "Este papel es canjeable por X gramos de oro". El papel era más fácil de cargar, pero su valor dependía de una PROMESA: que el banco realmente tenía el oro. Este sistema funcionó durante siglos... hasta que los bancos descubrieron que podían imprimir más papeles de los que tenían oro para respaldar.',
         features: [
-          { icon: Landmark, title: 'El Patrón Oro', text: 'Hasta 1971, el dólar estadounidense estaba respaldado por oro en Fort Knox. Cada dólar era un certificado que podías canjear por oro real.' },
+          { icon: Landmark, title: 'El Patrón Oro', text: 'Hasta 1971, el dólar estadounidense estaba respaldado por oro en Fort Knox. Pero ojo con el detalle que casi nadie cuenta: en 1933 el gobierno prohibió a sus propios ciudadanos canjear (e incluso poseer) oro monetario. De 1934 a 1971, solo los gobiernos extranjeros podían cambiar sus dólares por oro real.' },
           { icon: Globe, title: 'Bretton Woods (1944)', text: 'Después de la Segunda Guerra Mundial, el mundo acordó usar el dólar como moneda de reserva mundial, porque el dólar estaba respaldado por oro. Otras monedas se anclaban al dólar.' }
         ]
       },
@@ -152,7 +152,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           points: [
             'Cada dólar representaba oro real',
             'Los gobiernos no podían imprimir dinero a voluntad',
-            'Un salario mínimo compraba 5+ onzas de oro',
+            'Un salario mínimo mensual compraba ~8 onzas de oro',
             'Una familia vivía con un solo sueldo',
             'Los precios eran estables por décadas'
           ]
@@ -161,8 +161,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           title: 'Después de 1971 (Dinero Fiat)',
           points: [
             'El dólar es un papel sin respaldo tangible',
-            'Los gobiernos imprimen trillones cuando quieren',
-            'Un salario mínimo compra 0.15 onzas de oro',
+            'Los gobiernos imprimen billones (millones de millones) cuando quieren',
+            'Un salario mínimo mensual compra ~0.3-0.4 onzas de oro (a mediados de 2026), una caída de ~95%',
             'Ambos padres trabajan y apenas alcanzan',
             'Los precios suben cada año sin excepción'
           ]
@@ -287,7 +287,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'q5',
-          question: 'Si el dinero es "tiempo humano cristalizado", ¿qué significa cuando un gobierno imprime trillones de la nada?',
+          question: 'Si el dinero es "tiempo humano cristalizado", ¿qué significa cuando un gobierno imprime billones (millones de millones) de la nada?',
           options: [
             { id: 'a', text: 'Crea riqueza para todos' },
             { id: 'b', text: 'No afecta a nadie porque es solo un número' },
@@ -314,8 +314,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'El Robo Silencioso que Nadie Te Explicó',
         content: 'Tu abuela podía comprar una casa con el sueldo de 3 años. Hoy necesitas 15 años o más. ¿La gente de antes trabajaba más duro? ¿Las casas de hoy son 5 veces mejores? No. La diferencia es simple: **tu dinero vale menos cada año**. La inflación no es un fenómeno natural como el clima. No es inevitable. Es una **política deliberada** de los gobiernos que, año tras año, transfiere riqueza silenciosamente de los que ahorran a los que imprimen y a los que reciben el dinero nuevo primero.',
         image: '/images/lessons/lesson-2/lesson2-5.webp',
-        imageAlt: 'El Dato que Deberías Tatuarte: En 1971 un salario mínimo compraba 5 onzas de oro, hoy compra 0.15 onzas - 97% menos poder adquisitivo',
-        imageSummary: 'En 1971: $1.60/hora compraba 5 onzas de oro. Hoy: $7.25/hora compra 0.15 onzas. El sueldo subió 4.5x en números, pero tu poder REAL cayó 97%. No trabajamos menos, nos pagan en dinero que vale menos. Este es el robo silencioso de la inflación.'
+        imageAlt: 'El Dato que Deberías Tatuarte: en 1971 un salario mínimo mensual compraba unas 8 onzas de oro, hoy compra 0.3-0.4 onzas, una caída de ~95% en poder adquisitivo',
+        imageSummary: 'En 1971: el salario mínimo de $1.60/hora equivalía a unas 7.9 onzas de oro AL MES. A mediados de 2026, con el oro entre $3,000 y $4,000 por onza, los $7.25/hora del mínimo federal compran unas 0.3-0.4 onzas al mes. El sueldo subió 4.5x en números, pero tu poder REAL cayó ~95%. No trabajamos menos, nos pagan en dinero que vale menos. Este es el robo silencioso de la inflación.'
       },
       {
         type: 'main',
@@ -323,7 +323,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Pregúntale a cualquier persona en la calle: "¿Por qué el dinero tiene valor?" Casi todos responderán algo como "porque está respaldado por el gobierno" o "porque hay oro en algún banco". **Ambas respuestas son incorrectas.** Desde 1971, tu dinero no está respaldado por absolutamente nada tangible. Es un número en una computadora (o un papel pintado) que tiene valor únicamente porque: 1) El gobierno te obliga a aceptarlo para pagar impuestos, y 2) Todos acordamos creer en él colectivamente.',
         features: [
           { icon: Landmark, title: 'El Mito del Respaldo', text: 'No hay oro en Fort Knox respaldando tu dinero. No hay petróleo. No hay nada. El "respaldo" es la promesa de un político de no abusar del poder de imprimir. ¿Confías en esa promesa?' },
-          { icon: AlertTriangle, title: 'La Prueba', text: 'Si el dinero estuviera respaldado por algo, los gobiernos no podrían crear trillones de la nada en semanas como hicieron en 2020. Simplemente NO TENDRÍAN ese "algo" para respaldar el dinero nuevo.' }
+          { icon: AlertTriangle, title: 'La Prueba', text: 'Si el dinero estuviera respaldado por algo, los gobiernos no podrían crear billones (millones de millones) de la nada en cuestión de meses como hicieron entre 2020 y 2021. Simplemente NO TENDRÍAN ese "algo" para respaldar el dinero nuevo.' }
         ]
       },
       {
@@ -336,14 +336,14 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: '1. El Banco Central Imprime',
         image: '/images/lessons/lesson-2/lesson2-1.webp',
         imageAlt: 'Cómo el banco central crea dinero de la nada',
-        imageSummary: 'No hay caja fuerte. No hay oro. Solo un funcionario, un teclado, y la autoridad para agregar ceros. En 2020, la Fed creó $4.5 TRILLONES así, dinero que no existía el día anterior. Ese "dinero" ahora compite con el tuyo por los mismos bienes.'
+        imageSummary: 'No hay caja fuerte. No hay oro. Solo un funcionario, un teclado, y la autoridad para agregar ceros. Entre 2020 y 2021, la Fed creó así unos 4.5 BILLONES de dólares (millones de millones), dinero que no existía el día anterior. Ese "dinero" ahora compite con el tuyo por los mismos bienes.'
       },
       {
         type: 'main',
         title: '2. Los Bancos Multiplican (Reserva Fraccionaria)',
         image: '/images/lessons/lesson-2/lesson2-2.webp',
         imageAlt: 'Sistema de reserva fraccionaria y multiplicación del dinero',
-        imageSummary: 'Depositas $100. El banco guarda $10 y presta $90. Ese préstamo se deposita en otro banco, que guarda $9 y presta $81. Y así sucesivamente. Tus $100 "seguros" se convierten en $900+ de deuda circulando. Si todos fueran a retirar su dinero mañana, no existe.'
+        imageSummary: 'Depositas $100. El banco guarda $10 y presta $90. Ese préstamo se deposita en otro banco, que guarda $9 y presta $81. Y así sucesivamente. Tus $100 "seguros" se convierten en $900+ de deuda circulando. Es un modelo simplificado (la banca moderna crea el crédito primero y busca las reservas después), pero la conclusión no cambia: si todos fueran a retirar su dinero mañana, no existe.'
       },
       {
         type: 'main',
@@ -364,9 +364,9 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Por Qué los Gobiernos AMAN la Inflación',
         content: 'La inflación no es un error, es una política deliberada. Los gobiernos tienen incentivos muy claros para mantener inflación moderada (y a veces no tan moderada):',
         features: [
-          { icon: Landmark, title: 'Licuar la Deuda', text: 'Si el gobierno debe $1 trillón, puede imprimirlo y pagar. Técnicamente "pagó" su deuda, pero el dinero ahora vale menos. Transfirió su deuda a todos los que tienen esa moneda.' },
+          { icon: Landmark, title: 'Licuar la Deuda', text: 'Si el gobierno debe 1 billón de dólares, puede imprimirlo y pagar. Técnicamente "pagó" su deuda, pero el dinero ahora vale menos. Transfirió su deuda a todos los que tienen esa moneda.' },
           { icon: Users, title: 'Financiar Sin Impuestos Visibles', text: 'Subir impuestos es impopular. Pero imprimir dinero es invisible para la mayoría. Es un "impuesto oculto" que la gente no entiende y no protesta.' },
-          { icon: TrendingDown, title: 'Manipular las Estadísticas', text: '¿Sabías que los gobiernos cambian constantemente cómo calculan la inflación? Cuando la inflación "oficial" es 4%, la inflación REAL (lo que tú sientes en el supermercado) suele ser el doble o más.' }
+          { icon: TrendingDown, title: 'Manipular las Estadísticas', text: '¿Sabías que los gobiernos cambian constantemente cómo calculan la inflación? El índice oficial promedia la canasta de todo un país. Tu canasta personal (comida, arriendo, transporte) puede subir bastante más rápido que ese promedio. Por eso el 4% "oficial" rara vez coincide con lo que tú ves en el supermercado.' }
         ]
       },
       {
@@ -374,15 +374,15 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'La Inflación Real vs La Inflación Oficial',
         image: '/images/lessons/lesson-2/lesson2-6.webp',
         imageAlt: 'La Inflación Real vs La Inflación Oficial: Trucos como sustitución, ajuste hedónico y exclusiones convenientes que usan los gobiernos para ocultar la inflación real',
-        imageSummary: 'Los gobiernos manipulan las cifras: si el bistec sube, dicen que "compraste pollo". Si la computadora es más rápida, dicen que "bajó de precio". Y excluyen comida y energía por ser "volátiles", justo lo que más compras. Tu supermercado no miente. Las estadísticas oficiales sí.'
+        imageSummary: 'Los gobiernos manipulan las cifras: si el bistec sube, dicen que "compraste pollo". Si la computadora es más rápida, dicen que "bajó de precio". Y aunque el índice general SÍ incluye comida y energía, la medida "núcleo" que analistas y bancos centrales prefieren citar las excluye por "volátiles", justo lo que más compras. Tu supermercado no miente. Los titulares con la cifra conveniente sí.'
       },
       {
         type: 'main',
         title: 'Casos Reales: Cuando la Inflación Destruye Países',
-        content: 'Esto no es teoría. No es algo que "podría pasar". Ha pasado decenas de veces en la historia y está pasando AHORA MISMO mientras lees esto:',
+        content: 'Esto no es teoría. No es algo que "podría pasar". Ha pasado decenas de veces en la historia, y varios de estos casos siguen frescos en la memoria de millones:',
         features: [
           { icon: AlertTriangle, title: 'Venezuela (2016-2020)', text: 'Inflación de 1,000,000% anual. El salario mínimo mensual no alcanzaba para comprar un kilo de carne. La clase media se volvió mendiga en meses. Doctores y abogados huyeron del país con lo puesto. Todo porque el gobierno decidió "imprimir su camino fuera de los problemas".' },
-          { icon: AlertTriangle, title: 'Argentina (2023-2024)', text: '140%+ de inflación anual. Los abuelos ven sus pensiones de toda una vida evaporarse en meses. La gente corre a comprar cualquier cosa el día de cobro porque mañana estará más caro. Los supermercados cambian precios DURANTE el día.' },
+          { icon: AlertTriangle, title: 'Argentina (2023-2024)', text: 'La inflación cerró 2023 en 211% anual y tocó un pico de 289% en abril de 2024. Los abuelos vieron sus pensiones de toda una vida evaporarse en meses. La gente corría a comprar cualquier cosa el día de cobro porque mañana estaría más caro. Los supermercados cambiaban precios DURANTE el día. Para mediados de 2026 la inflación bajó a ~33% anual, pero los ahorros destruidos no volvieron.' },
           { icon: AlertTriangle, title: 'Turquía (2021-2023)', text: 'La lira perdió 80% de su valor en 2 años. La clase media turca, que había construido vidas estables, se encontró de pronto sin poder pagar la renta. Todo por políticas monetarias del gobierno.' },
           { icon: AlertTriangle, title: 'Líbano (2020-2023)', text: 'El sistema bancario colapsó. La gente no podía sacar su propio dinero de los bancos. La libra libanesa perdió 98% de su valor. Familias de clase media alta se volvieron pobres literalmente de la noche a la mañana.' }
         ]
@@ -406,7 +406,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'La Verdad Incómoda y La Salida',
         items: [
           'La inflación no es natural ni inevitable, es una política deliberada que transfiere riqueza de ahorradores a deudores y de ciudadanos a gobiernos.',
-          'El dinero que tienes en el banco está perdiendo valor cada día. Los intereses bancarios NUNCA compensan la inflación real.',
+          'El dinero que tienes en el banco está perdiendo valor cada día. En crisis inflacionarias, los intereses bancarios casi nunca alcanzan a compensar la subida de precios (en Colombia hubo CDTs que le ganaron a la inflación en 2023-2024, pero eso es la excepción, no la regla).',
           'Desde 1971, NO existe ninguna moneda nacional respaldada por algo tangible. Todas dependen de promesas de políticos.',
           'El historial es claro: TODOS los gobiernos eventualmente abusan del poder de imprimir. Es solo cuestión de tiempo y grado.',
           'Bitcoin fue creado específicamente para resolver este problema: solo existirán 21 millones. Nadie, ni Satoshi, ni los mineros, ni ningún gobierno, puede crear más.',
@@ -438,11 +438,11 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: '$150,000 (la inflación te ayuda)' }
           ],
           correctAnswer: 'c',
-          explanation: 'Tienes $110,000 nominales, pero los precios subieron 50%. $110,000/1.5 = $73,333 de poder de compra real. Ganaste 10% pero perdiste 50% = -27% neto. Los intereses bancarios NUNCA compensan inflación alta.'
+          explanation: 'Tienes $110,000 nominales, pero los precios subieron 50%. $110,000/1.5 = $73,333 de poder de compra real. Ganaste 10% pero perdiste 50% = -27% neto. En una crisis inflacionaria, los intereses bancarios casi nunca alcanzan a compensar la subida de precios.'
         },
         {
           id: 'q3',
-          question: 'En 2020, la Reserva Federal de USA creó $4.5 trillones. ¿De dónde salió ese dinero?',
+          question: 'Entre 2020 y 2021, la Reserva Federal de USA creó unos 4.5 billones de dólares (millones de millones). ¿De dónde salió ese dinero?',
           options: [
             { id: 'a', text: 'De los impuestos de los ciudadanos' },
             { id: 'b', text: 'De reservas de oro en Fort Knox' },
@@ -481,7 +481,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     checkpointQuizzes: [
       {
         id: 1,
-        sectionIndex: 3,
+        sectionIndex: 6,
         title: 'Checkpoint: Inflación Real vs Nominal',
         questions: [
           {
@@ -521,7 +521,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Cómo Funciona: El Camino del Dinero Nuevo',
-        content: 'Vamos a rastrear exactamente qué pasa cuando un banco central "crea" $1 trillón de la nada. Este es el camino real que recorre ese dinero:',
+        content: 'Vamos a rastrear exactamente qué pasa cuando un banco central "crea" 1 billón de dólares (millones de millones) de la nada. Este es el camino real que recorre ese dinero:',
         image: '/images/lessons/lesson-3/lesson3-2.webp',
         imageAlt: 'El Camino del Dinero Nuevo: De la creación a tu bolsillo en 5 pasos - Banco Central, Bancos Grandes, Corporaciones, Efecto Goteo, y finalmente Tú',
         imageSummary: 'Paso 1: El banco central crea dinero digital. Paso 2: JP Morgan y Goldman Sachs lo reciben primero. Paso 3: Corporaciones compran activos (los precios SUBEN). Paso 4: Meses después, algo "gotea" a la economía real. Paso 5: Tú recibes un "aumento" del 5%... pero los precios ya subieron 30%. Tu aumento es una reducción disfrazada.'
@@ -559,14 +559,14 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Ejemplo Concreto: La Pandemia 2020-2022',
         content: 'El Efecto Cantillon no es teoría abstracta. Lo vivimos en tiempo real durante la pandemia:',
         features: [
-          { icon: Landmark, title: 'Marzo 2020', text: 'La Fed anuncia que imprimirá trillones para "salvar la economía". Los mercados, que habían caído 30%, empiezan a subir ESE MISMO DÍA. Los que tenían efectivo para comprar acciones en el fondo multiplicaron su dinero.' },
+          { icon: Landmark, title: 'Marzo 2020', text: 'La Fed anuncia que imprimirá billones para "salvar la economía". Los mercados, que habían caído 30%, empiezan a subir ESE MISMO DÍA. Los que tenían efectivo para comprar acciones en el fondo multiplicaron su dinero.' },
           { icon: TrendingUp, title: '2020-2021', text: 'El S&P 500 (el índice de las 500 empresas más grandes de la bolsa de USA) sube 100%. Las casas en USA suben 30-40%. Bitcoin sube de $5,000 a $69,000. Los que ya tenían estos activos vieron su riqueza explotar.' },
           { icon: Users, title: 'Mientras Tanto...', text: 'Millones perdieron empleos. Los "cheques de estímulo" ($1,200-$3,200) ayudaron a sobrevivir pero no a comprar activos. La clase media usó ese dinero para pagar renta y comida.' },
           { icon: TrendingDown, title: '2022-2023', text: 'La inflación llega al 9%+. Los precios de todo explotan. Los salarios suben 3-5%. Los que vivían de sueldo ahora no llegan a fin de mes. El "estímulo" que los ayudó a sobrevivir ahora los empobrece.' }
         ],
         highlight: {
           title: 'El Resultado Final',
-          text: 'Entre 2020-2022, los billonarios del mundo aumentaron su riqueza en $5 TRILLONES. La clase media vio sus ahorros evaporarse por la inflación. El dinero no llegó a todos igual. Los primeros en la fila ganaron. Los últimos perdieron.'
+          text: 'Entre 2020 y 2022, los multimillonarios del mundo aumentaron su riqueza en unos 5 BILLONES de dólares. La clase media vio sus ahorros evaporarse por la inflación. El dinero no llegó a todos igual. Los primeros en la fila ganaron. Los últimos perdieron.'
         }
       },
       {
@@ -574,7 +574,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'El Mapa de Cantillon: ¿Dónde Estás Tú?',
         content: 'Vamos a ser honestos sobre tu posición en este sistema. Responde mentalmente:',
         features: [
-          { icon: CheckCircle, title: '¿Tienes acceso a crédito institucional a tasas bajas?', text: 'Si no eres corporación o ultra-rico, probablemente no. Tú pagas 15-30% en tu tarjeta de crédito. BlackRock paga 2%.' },
+          { icon: CheckCircle, title: '¿Tienes acceso a crédito institucional a tasas bajas?', text: 'Si no eres corporación o ultra-rico, probablemente no. Tú pagas 15-30% en tu tarjeta de crédito. BlackRock paga una fracción de eso.' },
           { icon: CheckCircle, title: '¿Puedes comprar activos ANTES de que el dinero nuevo llegue al mercado?', text: 'Los fondos de inversión tienen traders que actúan en SEGUNDOS cuando la Fed anuncia algo. Tú te enteras días después.' },
           { icon: CheckCircle, title: '¿Tu ingreso se ajusta automáticamente con la inflación?', text: 'Probablemente no. Tienes que PEDIR aumento y esperar que te lo den. Los precios no esperan.' },
           { icon: CheckCircle, title: '¿La mayor parte de tu riqueza está en activos que suben con la inflación?', text: 'Si tu "riqueza" está en una cuenta de ahorros, estás perdiendo cada día. Si está en casa propia, acciones o Bitcoin, estás parcialmente protegido.' }
@@ -583,10 +583,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Por Qué la Brecha de Riqueza Crece y Crece',
-        content: 'Desde 1971 (fin del patrón oro), la desigualdad de riqueza ha explotado en TODO el mundo. ¿Coincidencia? No. Es el Efecto Cantillon acumulándose década tras década:',
+        content: 'Desde 1971 (fin del patrón oro), la desigualdad de riqueza ha explotado en TODO el mundo. ¿Coincidencia? Difícilmente. El Efecto Cantillon no es la única causa, pero sí es una de las causas estructurales menos discutidas, acumulándose década tras década:',
         features: [
           { icon: TrendingUp, title: 'Los Activos Suben Más que los Salarios', text: 'Desde 1971, el S&P 500 ha subido 3,000%+. Los salarios reales han subido menos de 19%. Si tenías acciones, te hiciste rico. Si solo tenías tu sueldo, te quedaste atrás.' },
-          { icon: Landmark, title: 'La Vivienda se Volvió Imposible', text: 'En 1970, una casa promedio costaba 2-3 años de salario mediano. Hoy cuesta 7-10 años. El dinero nuevo fluyó hacia bienes raíces, haciendo imposible comprar para las nuevas generaciones.' },
+          { icon: Landmark, title: 'La Vivienda se Volvió Imposible', text: 'En 1970, una casa promedio costaba 2-3 años de salario mediano. Hoy cuesta 6-8 años. El dinero nuevo fluyó hacia bienes raíces, haciendo imposible comprar para las nuevas generaciones.' },
           { icon: Users, title: 'Los Ricos Tienen Asesores', text: 'Cuando se anuncia impresión de dinero, los ultra-ricos llaman a sus banqueros y mueven su capital a activos que se beneficiarán. Tú te enteras en las noticias semanas después.' }
         ],
         image: '/images/lessons/lesson-3/lesson3-3.webp',
@@ -618,8 +618,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           'Tú estás al FINAL de la cadena. Para cuando el dinero nuevo llega a tu sueldo, los precios ya subieron.',
           'Los ganadores del sistema actual: bancos, gobiernos, corporaciones, dueños de activos, ultra-ricos con acceso a crédito barato.',
           'Los perdedores: asalariados, pensionados, ahorradores en efectivo, jóvenes sin activos, clase media latinoamericana.',
-          'La brecha de riqueza no es coincidencia, es el resultado matemático de 50+ años de impresión monetaria beneficiando siempre a los mismos.',
-          'Bitcoin es el primer sistema monetario donde NO existe el Efecto Cantillon. No hay privilegiados. No hay "cerca de la impresora". Escasez absoluta para todos por igual.'
+          'La brecha de riqueza no es coincidencia: 50+ años de impresión monetaria beneficiando siempre a los mismos es una de sus causas estructurales menos discutidas.',
+          'Bitcoin es el primer sistema monetario donde NO existe el Efecto Cantillon. No hay privilegiados. No hay "cerca de la impresora". Los mineros reciben el BTC nuevo primero, sí, pero pagan su costo completo en hardware y electricidad, y la emisión la conoce todo el mundo de antemano: no hay descuento ni sorpresa. Escasez absoluta para todos por igual.'
         ]
       }
     ],
@@ -627,7 +627,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'El banco central imprime $1 trillón para "estimular la economía". ¿Quién recibe ese dinero PRIMERO?',
+          question: 'El banco central imprime 1 billón de dólares (millones de millones) para "estimular la economía". ¿Quién recibe ese dinero PRIMERO?',
           options: [
             { id: 'a', text: 'Los trabajadores asalariados' },
             { id: 'b', text: 'Los pensionados' },
@@ -639,7 +639,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'q2',
-          question: 'En 2020, la Fed imprimió trillones. El S&P 500 subió 100%, las casas subieron 30-40%. Los salarios subieron 5%. ¿Quién ganó y quién perdió?',
+          question: 'En 2020, la Fed imprimió billones de dólares. El S&P 500 subió 100%, las casas subieron 30-40%. Los salarios subieron 5%. ¿Quién ganó y quién perdió?',
           options: [
             { id: 'a', text: 'Todos ganaron por igual' },
             { id: 'b', text: 'Los dueños de activos (acciones, casas) ganaron. Los que solo tenían sueldo perdieron poder de compra relativo' },
@@ -647,11 +647,11 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Nadie ganó, fue una crisis' }
           ],
           correctAnswer: 'b',
-          explanation: 'Ejemplo perfecto del Efecto Cantillon en tiempo real. Los que tenían activos vieron su riqueza explotar. Los que dependían de salarios vieron su poder de compra erosionarse. Los billonarios ganaron $5 trillones mientras la clase media recibía cheques de $1,200.'
+          explanation: 'Ejemplo perfecto del Efecto Cantillon en tiempo real. Los que tenían activos vieron su riqueza explotar. Los que dependían de salarios vieron su poder de compra erosionarse. Los multimillonarios ganaron unos 5 billones de dólares mientras la clase media recibía cheques de $1,200.'
         },
         {
           id: 'q3',
-          question: 'Un joven de 25 años en Colombia quiere comprar su primera casa. Desde que nació, el peso se ha devaluado 85%+ y las casas han subido de precio mucho más que los salarios. ¿Por qué le es casi imposible comprar?',
+          question: 'Un joven de 25 años en Colombia quiere comprar su primera casa. Desde que nació, el peso ha perdido más del 70% de su poder de compra (y cerca del 45% de su valor frente al dólar), y las casas han subido de precio mucho más que los salarios. ¿Por qué le es casi imposible comprar?',
           options: [
             { id: 'a', text: 'Porque no trabaja suficiente' },
             { id: 'b', text: 'Porque las casas de hoy son mucho mejores' },
@@ -687,7 +687,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'q6',
-          question: 'Desde 1971, la brecha entre ricos y pobres ha crecido dramáticamente en casi todos los países. Según el Efecto Cantillon, ¿cuál es la causa estructural?',
+          question: 'Desde 1971, la brecha entre ricos y pobres ha crecido dramáticamente en casi todos los países. Según el Efecto Cantillon, ¿cuál es una de las causas estructurales?',
           options: [
             { id: 'a', text: 'Los pobres se volvieron más perezosos' },
             { id: 'b', text: 'La tecnología eliminó empleos' },
@@ -695,11 +695,11 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Los impuestos bajaron para los ricos' }
           ],
           correctAnswer: 'c',
-          explanation: 'El S&P 500 subió 3000%+ desde 1971. Los salarios reales subieron menos de 19%. Si tenías activos, multiplicaste tu riqueza. Si dependías de tu sueldo, te quedaste atrás. No es coincidencia, es el Efecto Cantillon acumulándose durante 50 años.'
+          explanation: 'El S&P 500 subió 3000%+ desde 1971. Los salarios reales subieron menos de 19%. Si tenías activos, multiplicaste tu riqueza. Si dependías de tu sueldo, te quedaste atrás. No es la única causa de la desigualdad, pero es el Efecto Cantillon acumulándose durante más de 50 años, una de las menos discutidas.'
         },
         {
           id: 'q7-review',
-          question: 'Repaso de la Lección 1: El gobierno anuncia que inyectará $2 trillones "para estimular la economía y llegar a todos". Conectando con lo que aprendiste sobre el dinero en la Lección 1, ¿por qué esto NO es redistribución neutral?',
+          question: 'Repaso de la Lección 1: El gobierno anuncia que inyectará 2 billones de dólares "para estimular la economía y llegar a todos". Conectando con lo que aprendiste sobre el dinero en la Lección 1, ¿por qué esto NO es redistribución neutral?',
           options: [
             { id: 'a', text: 'Porque el dinero no es real' },
             { id: 'b', text: 'Porque el dinero nuevo entra primero a bancos y activos financieros, los precios de esos activos suben ANTES de que el dinero llegue al resto. Cuando tú recibes tu parte, las cosas ya cuestan más' },
@@ -707,7 +707,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'No tiene efecto, es solo inflación' }
           ],
           correctAnswer: 'b',
-          explanation: 'Aprendiste en la Lección 1 que la escasez es lo que da valor al dinero. Cuando un gobierno crea $2T nuevos, diluye el valor del dinero existente, pero no afecta a todos igual. Los primeros en recibir (bancos, fondos, corporaciones) compran activos a precios viejos. Para cuando el dinero llega a ti vía sueldo o subsidio, los activos ya subieron. Perdiste capacidad de compra relativa. Esto es el Efecto Cantillon en acción.'
+          explanation: 'Aprendiste en la Lección 1 que la escasez es lo que da valor al dinero. Cuando un gobierno crea 2 billones de dólares nuevos, diluye el valor del dinero existente, pero no afecta a todos igual. Los primeros en recibir (bancos, fondos, corporaciones) compran activos a precios viejos. Para cuando el dinero llega a ti vía sueldo o subsidio, los activos ya subieron. Perdiste capacidad de compra relativa. Esto es el Efecto Cantillon en acción.'
         }
       ]
     }
@@ -724,10 +724,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: 'El Momento Génesis: 3 de Enero de 2009',
-        content: 'El mundo se desmoronaba. La crisis financiera de 2008 había expuesto la corrupción del sistema bancario: préstamos irresponsables, derivados tóxicos, codicia institucional. Los gobiernos respondieron rescatando a los bancos culpables con TRILLONES de dólares del contribuyente. Los ejecutivos que causaron la crisis recibieron bonos millonarios mientras millones perdían sus casas. En medio de este caos, el 3 de enero de 2009, alguien bajo el seudónimo **Satoshi Nakamoto** minó el primer bloque de Bitcoin. En ese bloque, grabó para siempre un mensaje: **"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"** (Canciller al borde de un segundo rescate para los bancos). No era coincidencia. Era una declaración de intenciones.',
+        content: 'El mundo se desmoronaba. La crisis financiera de 2008 había expuesto la corrupción del sistema bancario: préstamos irresponsables, derivados tóxicos, codicia institucional. Los gobiernos respondieron rescatando a los bancos culpables con BILLONES de dólares (millones de millones) del contribuyente. Los ejecutivos que causaron la crisis recibieron bonos millonarios mientras millones perdían sus casas. En medio de este caos, el 3 de enero de 2009, alguien bajo el seudónimo **Satoshi Nakamoto** minó el primer bloque de Bitcoin. En ese bloque, grabó para siempre un mensaje: **"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"** (Canciller al borde de un segundo rescate para los bancos). No era coincidencia. Era una declaración de intenciones.',
         highlight: {
           title: 'El Mensaje Eterno',
-          text: 'Ese titular del Times está grabado PARA SIEMPRE en la blockchain de Bitcoin. Nadie puede borrarlo. Cada vez que alguien mina el bloque génesis, lee ese mensaje: los bancos causan crisis, los gobiernos los rescatan con TU dinero, y la gente común paga la factura. Bitcoin nació como respuesta directa a esa injusticia.'
+          text: 'Ese titular del Times está grabado PARA SIEMPRE en la blockchain de Bitcoin. Nadie puede borrarlo. Cada vez que alguien consulta el bloque génesis, lee ese mensaje: los bancos causan crisis, los gobiernos los rescatan con TU dinero, y la gente común paga la factura. Bitcoin nació como respuesta directa a esa injusticia.'
         }
       },
       {
@@ -748,7 +748,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           { icon: Lock, title: '1. Escasez Digital Absoluta', text: 'Solo existirán **21 millones de Bitcoin**. NUNCA. JAMÁS. Esta cantidad está grabada en el código y nadie puede cambiarla, ni Satoshi, ni los mineros, ni ningún gobierno. Es la primera vez en la historia que existe algo verdaderamente escaso en el mundo digital. Antes de Bitcoin, todo lo digital podía copiarse infinitamente.' },
           { icon: Network, title: '2. Descentralización Real', text: 'No hay CEO de Bitcoin. No hay servidor central. No hay empresa que demandar o presionar. Miles de computadoras en más de 100 países mantienen la red simultáneamente. Para "apagar" Bitcoin, tendrías que apagar todas estas computadoras al mismo tiempo en todo el mundo, y otras nuevas aparecerían.' },
           { icon: Shield, title: '3. Inmutabilidad', text: 'Una vez que una transacción se confirma en la blockchain, es PERMANENTE. Nadie puede revertirla, censurarla, o modificarla. Ni Satoshi. Ni los mineros. Ni ningún gobierno. El historial de Bitcoin es matemáticamente inalterable.' },
-          { icon: Globe, title: '4. Sin Fronteras ni Permisos', text: 'Puedes enviar $1 o $1 billón a cualquier país del mundo, 24/7, sin pedir permiso a nadie. No hay bancos que aprobar tu transacción. No hay límites arbitrarios. No hay "horario bancario". El dinero llega en minutos, no días.' }
+          { icon: Globe, title: '4. Sin Fronteras ni Permisos', text: 'Puedes enviar $1 o $1,000 millones a cualquier país del mundo, 24/7, sin pedir permiso a nadie. No hay bancos que deban aprobar tu transacción. No hay límites arbitrarios. No hay "horario bancario". El dinero llega en minutos, no días.' }
         ]
       },
       {
@@ -757,7 +757,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'La escasez de Bitcoin no es arbitraria, está matemáticamente garantizada por el código y el proceso de emisión:',
         features: [
           { icon: Clock, title: 'El Halving (Reducción a la Mitad)', text: 'Aproximadamente cada 4 años, la cantidad de Bitcoin nuevo que se crea se reduce A LA MITAD. En 2009, se creaban 50 BTC cada 10 minutos. Hoy (después de 4 halvings), se crean solo 3.125 BTC cada 10 minutos. En 2140, no se creará ninguno más.' },
-          { icon: TrendingDown, title: 'Emisión Decreciente', text: 'A diferencia del dinero fiat (que se imprime cada vez MÁS), Bitcoin se emite cada vez MENOS. Es deflación programada vs inflación garantizada. Mientras los bancos centrales crean trillones, la emisión de Bitcoin se reduce matemáticamente.' },
+          { icon: TrendingDown, title: 'Emisión Decreciente', text: 'A diferencia del dinero fiat (que se imprime cada vez MÁS), Bitcoin se emite cada vez MENOS. Es emisión decreciente programada vs inflación garantizada. Mientras los bancos centrales crean billones, la emisión de Bitcoin se reduce matemáticamente.' },
           { icon: Lock, title: 'Verificación Distribuida', text: 'Miles de computadoras (nodos) en todo el mundo verifican constantemente que las reglas se cumplan. Si alguien intentara crear más de 21 millones, su versión sería rechazada por toda la red instantáneamente.' }
         ],
         highlight: {
@@ -785,7 +785,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           points: [
             'Escasez ABSOLUTA (21 millones máximo, verificable)',
             'Divisible hasta 8 decimales (satoshis)',
-            'Almacenable gratis en tu memoria (frase semilla)',
+            'Almacenable con una frase semilla (siempre con respaldo físico seguro)',
             'Enviable a cualquier lugar en minutos',
             'Imposible de confiscar sin tu clave',
             'Verificación instantánea y gratuita',
@@ -796,7 +796,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Por Qué los Gobiernos NO Pueden Detener Bitcoin',
-        content: 'China prohibió Bitcoin en 2013, 2017, 2019 y 2021. India lo prohibió y revirtió. Nigeria lo prohibió y es el país #2 en adopción per cápita. Turquía intentó restringirlo mientras su moneda colapsaba. ¿Por qué NINGUNA prohibición funciona?',
+        content: 'China prohibió Bitcoin en 2013, 2017, 2019 y 2021. India lo prohibió y revirtió. Nigeria lo prohibió (y revirtió la prohibición en diciembre de 2023) mientras se mantenía entre los primeros países del mundo en adopción per cápita. Turquía intentó restringirlo mientras su moneda colapsaba. ¿Por qué NINGUNA prohibición funciona?',
         features: [
           { icon: Network, title: 'No Hay Servidor que Cerrar', text: 'Bitcoin corre en más de 15,000 nodos en 100+ países. No hay "sede central", no hay CEO, no hay empresa. Para apagar Bitcoin tendrías que apagar internet en TODO el mundo simultáneamente.' },
           { icon: Shield, title: 'Criptografía de Grado Militar', text: 'Tus bitcoins están protegidos por la misma matemática que protege secretos nucleares. Romper una clave privada de Bitcoin tomaría más energía de la que produce el sol en toda su vida. No es exageración, es matemática.' },
@@ -813,10 +813,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Bitcoin en Tiempos de Crisis: Casos Reales',
         content: 'Bitcoin no es teoría, está salvando vidas y fortunas ahora mismo:',
         features: [
-          { icon: AlertTriangle, title: 'Venezuela', text: 'Mientras el bolívar perdía 99.99% de su valor, los venezolanos que tenían Bitcoin preservaron su riqueza. Muchos pudieron emigrar llevando su dinero en una frase de 12 palabras memorizada, imposible de confiscar en la frontera.' },
-          { icon: AlertTriangle, title: 'Ucrania 2022', text: 'Cuando Rusia invadió y los bancos cerraron, el gobierno ucraniano recibió $100+ millones en donaciones de Bitcoin en DÍAS. Dinero que llegó directo, sin intermediarios, sin demoras burocráticas.' },
+          { icon: AlertTriangle, title: 'Venezuela', text: 'Mientras el bolívar perdía 99.99% de su valor, los venezolanos que tenían Bitcoin preservaron su riqueza. Muchos pudieron emigrar llevando su dinero en una frase de 12 palabras memorizada, imposible de confiscar en la frontera. Eso sí: la memoria fue el vehículo del viaje, no la bóveda. Sin un respaldo físico seguro esperando en el destino, olvidar una sola palabra significa perderlo todo.' },
+          { icon: AlertTriangle, title: 'Ucrania 2022', text: 'Cuando Rusia invadió y los bancos cerraron, el gobierno ucraniano recibió más de $100 millones en donaciones en criptomonedas en las primeras semanas. Dinero que llegó directo, sin intermediarios, sin demoras burocráticas.' },
           { icon: AlertTriangle, title: 'Líbano', text: 'Los bancos congelaron los ahorros de todos. La gente literalmente no podía acceder a SU dinero. Los que tenían Bitcoin seguían teniendo control total de sus fondos.' },
-          { icon: AlertTriangle, title: 'Argentina', text: 'Durante la crisis inflacionaria de 2023-2024 (con más de 140% de inflación anual), muchos argentinos convertían sus pesos a Bitcoin el mismo día de cobro. Para millones fue la forma de que su salario no perdiera valor mientras dormían.' }
+          { icon: AlertTriangle, title: 'Argentina', text: 'Durante la crisis inflacionaria de 2023-2024 (2023 cerró con 211% de inflación anual, con un pico de 289% en abril de 2024), muchos argentinos convertían sus pesos a Bitcoin el mismo día de cobro. Para millones fue la forma de que su salario no perdiera valor mientras dormían.' }
         ]
       },
       {
@@ -826,7 +826,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: AlertTriangle, title: 'NO es un "esquema para hacerse rico rápido"', text: 'Bitcoin es volátil a corto plazo. Puede subir 50% o bajar 50% en meses. NO es para el dinero que necesitas mañana. Es para proteger el valor de tu trabajo a LARGO PLAZO (5-10+ años).' },
           { icon: AlertTriangle, title: 'NO es "dinero de criminales"', text: 'Menos del 1% de transacciones de Bitcoin son ilícitas (vs 2-5% del sistema bancario tradicional). Y la blockchain es PÚBLICA, cada transacción queda registrada para siempre. Es el peor dinero posible para criminales.' },
-          { icon: AlertTriangle, title: 'NO es "una burbuja"', text: 'Ha sido declarado "muerto" más de 450 veces desde 2010. Cada vez vuelve más fuerte. Las burbujas no sobreviven 15+ años, no son adoptadas por países como moneda legal, ni son compradas por fondos de inversión institucionales.' },
+          { icon: AlertTriangle, title: 'NO es "una burbuja"', text: 'Ha sido declarado "muerto" más de 450 veces desde 2010. Cada vez vuelve más fuerte. Las burbujas no sobreviven 15+ años ni son compradas por fondos de inversión institucionales. El Salvador lo adoptó como moneda de curso legal en 2021 (desde enero de 2025 su aceptación es voluntaria, no obligatoria), algo que ninguna burbuja ha logrado.' },
           { icon: AlertTriangle, title: 'NO necesitas comprar un Bitcoin entero', text: 'Bitcoin es divisible hasta 8 decimales. Puedes empezar con $10, $50, $100. Cada satoshi (0.00000001 BTC) es tuyo.' }
         ]
       },
@@ -880,19 +880,19 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Porque los mineros votan cada año sobre el límite' }
           ],
           correctAnswer: 'b',
-          explanation: 'El límite de 21 millones está grabado en el código y verificado por más de 15,000 nodos globalmente. Cambiarlo requeriría que TODOS aceptaran, matemáticamente imposible. Es la primera vez que existe escasez absoluta en el mundo digital.'
+          explanation: 'El límite de 21 millones está grabado en el código y verificado por más de 15,000 nodos globalmente. Cambiarlo requeriría que prácticamente toda la red (nodos, mineros, usuarios) aceptara romper la promesa central de Bitcoin: un consenso social que nunca ha estado ni cerca de ocurrir, porque destruiría el valor de lo que todos poseen. Es la primera vez que existe escasez absoluta en el mundo digital.'
         },
         {
           id: 'q3',
           question: '¿Qué es el "halving" de Bitcoin y por qué es importante para el valor a largo plazo?',
           options: [
-            { id: 'a', text: 'Cuando el precio baja 50%' },
-            { id: 'b', text: 'Cada 4 años la emisión de nuevos BTC se reduce a la mitad, creando deflación programada mientras el dinero fiat tiene inflación garantizada' },
-            { id: 'c', text: 'Cuando los mineros dividen sus ganancias' },
+            { id: 'a', text: 'Cuando el precio de Bitcoin baja 50% desde su máximo histórico' },
+            { id: 'b', text: 'Cada 4 años la emisión de nuevos BTC se reduce a la mitad: emisión decreciente programada, frente a la inflación garantizada del fiat' },
+            { id: 'c', text: 'Cuando los mineros dividen sus ganancias entre los nodos de la red' },
             { id: 'd', text: 'Un error en el código que ocurre cada 4 años' }
           ],
           correctAnswer: 'b',
-          explanation: 'El halving es deflación programada. En 2009 se creaban 50 BTC cada 10 min, ahora solo 3.125 BTC. Mientras los bancos centrales imprimen más cada año, Bitcoin produce MENOS. Para 2140, no habrá emisión nueva.'
+          explanation: 'El halving es emisión decreciente programada. En 2009 se creaban 50 BTC cada 10 min, ahora solo 3.125 BTC. Mientras los bancos centrales imprimen más cada año, Bitcoin produce MENOS. Para 2140, no habrá emisión nueva.'
         },
         {
           id: 'q4',
@@ -910,13 +910,13 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q5',
           question: 'Un refugiado venezolano necesita cruzar la frontera con sus ahorros de toda la vida. ¿Cuál es la forma más segura?',
           options: [
-            { id: 'a', text: 'Efectivo escondido en la ropa' },
-            { id: 'b', text: 'Transferencia bancaria' },
-            { id: 'c', text: 'Una frase semilla de 12 palabras memorizada que representa sus Bitcoin, imposible de confiscar porque existe solo en su mente' },
-            { id: 'd', text: 'Joyas de oro' }
+            { id: 'a', text: 'Efectivo en dólares escondido en la ropa y el equipaje' },
+            { id: 'b', text: 'Una transferencia bancaria internacional programada con anticipación' },
+            { id: 'c', text: 'Sus Bitcoin: cruza con la frase semilla memorizada y un respaldo físico seguro esperando en el destino' },
+            { id: 'd', text: 'Joyas de oro repartidas entre varias maletas' }
           ],
           correctAnswer: 'c',
-          explanation: 'Miles de venezolanos han cruzado fronteras con su riqueza en Bitcoin, memorizada como 12-24 palabras. El efectivo se puede confiscar, las transferencias se pueden bloquear, el oro se puede detectar. Pero nadie puede quitarte lo que está en tu memoria.'
+          explanation: 'Miles de venezolanos han cruzado fronteras con su riqueza en Bitcoin. El efectivo se puede confiscar, las transferencias se pueden bloquear, el oro se puede detectar. Pero ojo: memorizar NO reemplaza el respaldo físico. Si olvidas una sola palabra, pierdes todo para siempre. La memoria sirve para el cruce; del otro lado debe esperarte un respaldo físico seguro (o escribes la frase de nuevo apenas llegues).'
         },
         {
           id: 'q6',
@@ -1059,7 +1059,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: Shield, title: 'El Ataque del 51%', text: 'El único ataque teórico viable es controlar más del 50% del poder de cómputo (en PoW) o del stake (en PoS). Así podrías escribir bloques fraudulentos más rápido que el resto de la red.' },
           { icon: TrendingDown, title: 'El Costo es Absurdo', text: 'Para atacar Bitcoin necesitarías más poder de cómputo que todos los mineros del mundo combinados. Hoy eso costaría decenas de MILES DE MILLONES de dólares en hardware y electricidad. Y solo podrías hacer "double spend" de tus propias monedas, no robar las de otros.' },
-          { icon: AlertTriangle, title: 'El Incentivo No Existe', text: 'Si gastas billones para atacar Bitcoin, el ataque se detectaría inmediatamente, el precio colapsaría, y tu botín valdría nada. Es más rentable usar ese poder de cómputo para minar honestamente.' }
+          { icon: AlertTriangle, title: 'El Incentivo No Existe', text: 'Si gastas decenas de miles de millones de dólares para atacar Bitcoin, el ataque se detectaría inmediatamente, el precio colapsaría, y tu botín valdría nada. Es más rentable usar ese poder de cómputo para minar honestamente.' }
         ],
         highlight: {
           title: 'La Genialidad del Diseño',
@@ -1073,11 +1073,11 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: Server, title: 'Full Node', text: 'Tiene toda la historia de la blockchain desde el bloque génesis. Verifica CADA transacción y CADA bloque. No confía en nadie más, verifica todo por sí mismo. Cualquiera puede correr un full node en su casa.' },
           { icon: Cpu, title: 'Nodo Minero/Validador', text: 'Además de verificar, también CREA nuevos bloques. Estos son los que compiten para agregar la siguiente página al libro. Reciben recompensas por su trabajo.' },
-          { icon: Smartphone, title: 'Light Node', text: 'No tiene toda la blockchain, solo los headers de los bloques. Confía en otros nodos para verificaciones detalladas. Es lo que usa tu wallet móvil.' }
+          { icon: Smartphone, title: 'Light Node', text: 'No tiene toda la blockchain, solo los headers de los bloques, y confía en otros nodos para las verificaciones detalladas. En la práctica, la mayoría de wallets móviles ni siquiera son light nodes: consultan servidores RPC de terceros que hacen la verificación por ti.' }
         ],
         highlight: {
           title: '¿Por Qué Importan los Nodos?',
-          text: 'Mientras más nodos independientes existan, más descentralizada y resistente es la red. Bitcoin tiene ~15,000+ nodos. Ethereum tiene ~10,000+. Solana tiene ~3,000+. Cada nodo es un "voto" que valida las reglas.'
+          text: 'Mientras más nodos independientes existan, más descentralizada y resistente es la red. Bitcoin tiene ~15,000+ nodos. Ethereum tiene ~10,000+. Solana tiene ~800 validadores con voto a mediados de 2026 (en descenso desde ~2,500 en 2023), más miles de nodos RPC. Cada nodo es un "voto" que valida las reglas.'
         }
       },
       {
@@ -1096,8 +1096,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         terms: [
           {
             term: 'Smart Contract (Contrato Inteligente)',
-            definition: 'Un programa que vive en la blockchain y se ejecuta automáticamente cuando se cumplen sus condiciones. No es un contrato legal, es código. "Si el usuario X envía 1 SOL al programa, el programa envía 100 USDC al usuario X". Una vez desplegado, nadie puede modificarlo ni detenerlo (ni siquiera quien lo creó). Ejecuta las reglas mecánicamente, sin jueces, abogados, ni intermediarios.',
-            whyItMatters: 'Toda la infraestructura de DeFi (préstamos, swaps, staking, NFTs) son smart contracts. Entender esto es la diferencia entre "usar cripto" y "confiar en el código que la hace funcionar".'
+            definition: 'Un programa que vive en la blockchain y se ejecuta automáticamente cuando se cumplen sus condiciones. No es un contrato legal, es código. "Si el usuario X envía 1 SOL al programa, el programa envía 100 USDC al usuario X". Ejecuta las reglas mecánicamente, sin jueces, abogados, ni intermediarios. Ojo con un mito peligroso: un smart contract solo es inmutable si su creador renuncia a la autoridad de actualización. Muchos contratos SÍ pueden ser modificados por quien los desplegó, y en Solana los programas son actualizables por defecto.',
+            whyItMatters: 'Toda la infraestructura de DeFi (préstamos, swaps, staking, NFTs) son smart contracts. Entender esto es la diferencia entre "usar cripto" y "confiar en el código que la hace funcionar". Y parte de tu seguridad es verificar si alguien puede cambiar ese código mañana.'
           }
         ]
       },
@@ -1106,7 +1106,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'El Trilema de la Blockchain',
         content: 'Vitalik Buterin (creador de Ethereum) describió el **trilema de la blockchain**: ninguna blockchain puede maximizar simultáneamente las tres propiedades:',
         features: [
-          { icon: Shield, title: 'Seguridad', text: '¿Qué tan difícil es atacar la red? Bitcoin es extremadamente seguro, tiene 15 años sin un ataque exitoso.' },
+          { icon: Shield, title: 'Seguridad', text: '¿Qué tan difícil es atacar la red? Bitcoin es extremadamente seguro: no sufre un ataque exitoso desde 2010.' },
           { icon: Network, title: 'Descentralización', text: '¿Cuántos nodos independientes mantienen la red? ¿Qué tan distribuido está el poder?' },
           { icon: Zap, title: 'Escalabilidad', text: '¿Cuántas transacciones por segundo puede procesar? ¿Qué tan barato es usarla?' }
         ],
@@ -1196,13 +1196,13 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q5',
           question: '¿Por qué no tiene sentido económico ejecutar un ataque del 51% contra Bitcoin?',
           options: [
-            { id: 'a', text: 'Porque es ilegal' },
-            { id: 'b', text: 'Porque costaría decenas de billones de dólares, sería detectado inmediatamente, el precio colapsaría, y tu botín valdría nada' },
-            { id: 'c', text: 'Porque Satoshi lo impediría' },
+            { id: 'a', text: 'Porque es ilegal en casi todos los países del mundo' },
+            { id: 'b', text: 'Porque costaría decenas de miles de millones de dólares, sería detectado, y el colapso del precio dejaría tu botín sin valor' },
+            { id: 'c', text: 'Porque Satoshi lo impediría usando sus llaves del código original' },
             { id: 'd', text: 'Porque los mineros son muy amigables' }
           ],
           correctAnswer: 'b',
-          explanation: 'Satoshi diseñó un sistema donde la honestidad siempre es más rentable. Si gastas billones en atacar, el ataque se detecta, el precio colapsa, y pierdes todo. Es más rentable usar ese poder de cómputo para minar honestamente.'
+          explanation: 'Satoshi diseñó un sistema donde la honestidad siempre es más rentable. Si gastas decenas de miles de millones en atacar, el ataque se detecta, el precio colapsa, y pierdes todo. Es más rentable usar ese poder de cómputo para minar honestamente.'
         },
         {
           id: 'q6',
@@ -1218,7 +1218,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'review_1',
-          question: '📝 Repaso: ¿Cuál de las siguientes NO es una propiedad esencial del dinero sano?',
+          question: 'Repaso: ¿Cuál de las siguientes NO es una propiedad esencial del dinero sano?',
           options: [
             { id: 'a', text: 'Escasez' },
             { id: 'b', text: 'Divisibilidad' },
@@ -1246,7 +1246,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Cada sistema que usas para manejar tu dinero o tus datos tiene una arquitectura de poder. Alguien, en algún lugar, puede presionar un botón y cambiar las reglas. La pregunta es: **¿quién tiene ese botón?** En los sistemas tradicionales (tu banco, tu red social, tu gobierno), ese botón lo tiene una entidad central. Pueden congelar tu cuenta, censurar tu contenido, o cambiar las reglas sin tu permiso. En los sistemas descentralizados (Bitcoin, Solana), ese botón está distribuido entre miles de participantes. Nadie individualmente puede presionarlo. Esa distribución del poder es lo que llamamos **descentralización**.',
         highlight: {
           title: 'No es Teoría, Es Tu Realidad',
-          text: 'En 2022, Canadá congeló las cuentas bancarias de personas que donaron $50 a protestas de camioneros. Sin juicio, sin apelación. Un burócrata decidió. Si esas donaciones hubieran sido en Bitcoin, nadie podría haberlas congelado. Esa es la diferencia práctica.'
+          text: 'En 2022, Canadá invocó su Ley de Emergencias y los bancos congelaron unas 280 cuentas (unos $8 millones) ligadas a las protestas de camioneros, sin orden judicial previa. En 2024, un tribunal federal dictaminó que invocar esa ley fue irrazonable, pero el fallo llegó dos años después de los congelamientos. Si esos fondos hubieran estado en Bitcoin en wallets propias, nadie habría podido congelarlos. Esa es la diferencia práctica.'
         }
       },
       {
@@ -1269,11 +1269,11 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Casos Reales de Abuso Centralizado',
         content: 'Esto no es paranoia ni teoría conspirativa. Son eventos documentados que ya ocurrieron:',
         features: [
-          { icon: AlertTriangle, title: 'Canadá 2022', text: 'El gobierno invocó la Ley de Emergencias y ordenó a los bancos congelar cuentas de personas que donaron a protestas. Sin orden judicial. Sin proceso legal. Miles de ciudadanos perdieron acceso a su dinero por decisión ejecutiva.' },
+          { icon: AlertTriangle, title: 'Canadá 2022', text: 'El gobierno invocó la Ley de Emergencias y los bancos congelaron unas 280 cuentas con cerca de $8 millones, sin orden judicial. En 2024, un tribunal federal concluyó que la invocación fue irrazonable. Para los afectados, el fallo llegó dos años tarde: su dinero estuvo congelado por decisión ejecutiva.' },
           { icon: AlertTriangle, title: 'Grecia 2015', text: 'El gobierno impuso un "corralito": límite de €60/día en retiros. La gente hacía filas para sacar migajas de su propio dinero. Las cuentas estaban congeladas "temporalmente" durante semanas.' },
-          { icon: AlertTriangle, title: 'Chipre 2013', text: 'El gobierno confiscó hasta 47.5% de los depósitos mayores a €100,000 para "rescatar" a los bancos. Un día tenías €200,000, al siguiente tenías €105,000. Así de simple.' },
-          { icon: AlertTriangle, title: 'China (continuo)', text: 'El "social credit score" afecta acceso a servicios financieros. Si el gobierno no aprueba tu comportamiento, puedes perder acceso a crédito, viajes, o incluso tu cuenta bancaria.' },
-          { icon: AlertTriangle, title: 'Nigeria 2021', text: 'El banco central prohibió a los bancos procesar transacciones cripto. De un día para otro, millones perdieron acceso a una industria completa. Por decreto.' },
+          { icon: AlertTriangle, title: 'Chipre 2013', text: 'El gobierno confiscó hasta 47.5% de los depósitos por encima de los €100,000 asegurados para "rescatar" a los bancos. Un día tenías €200,000; al siguiente tenías los €100,000 protegidos más unos €52,500 del excedente: unos €152,500, y el resto convertido en acciones del banco que valían casi nada. Así de simple.' },
+          { icon: AlertTriangle, title: 'China (continuo)', text: 'El mecanismo real no es el mítico "social credit score" de las películas: es la lista negra judicial de deudores. Si un tribunal te declara moroso, pierdes acceso a vuelos, trenes rápidos y crédito. Millones de personas están en esa lista. Una autoridad central decide y el sistema financiero obedece.' },
+          { icon: AlertTriangle, title: 'Nigeria 2021', text: 'El banco central prohibió a los bancos procesar transacciones cripto. De un día para otro, millones perdieron acceso a una industria completa. Por decreto. La prohibición fue revertida en diciembre de 2023, pero ya había demostrado lo frágil que es el acceso cuando depende de una autoridad central.' },
           { icon: AlertTriangle, title: 'PayPal (frecuente)', text: 'Congela cuentas por "actividad sospechosa" y retiene fondos durante meses. No hay recurso efectivo, estás a su merced.' }
         ]
       },
@@ -1284,7 +1284,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: Network, title: 'Miles de Nodos', text: 'Bitcoin tiene ~15,000 nodos en todo el mundo. Cada uno verifica independientemente TODAS las transacciones. Para "hackear" Bitcoin, necesitarías comprometer miles de computadoras en decenas de países simultáneamente.' },
           { icon: Users, title: 'Nadie es "El Jefe"', text: 'No hay CEO de Bitcoin. No hay sede central. No hay servidor principal. Satoshi desapareció hace años y la red sigue funcionando perfectamente. El sistema no depende de ninguna persona o empresa.' },
-          { icon: Lock, title: 'Reglas Inmutables', text: 'Las reglas de Bitcoin (21 millones máximo, halving cada 4 años, etc.) están grabadas en el código que ejecutan TODOS los nodos. Cambiarlas requeriría que todos se pongan de acuerdo, algo que no pasa.' },
+          { icon: Lock, title: 'Reglas Monetarias Inmutables', text: 'Hay que distinguir dos cosas. El protocolo SÍ evoluciona con consenso amplio: mejoras técnicas como SegWit (2017) o Taproot (2021) se activaron tras años de debate. Pero las reglas monetarias (21 millones máximo, halving cada 4 años) nunca han cambiado: tocarlas destruiría la promesa central de Bitcoin, y ningún consenso lo ha intentado siquiera.' },
           { icon: Shield, title: 'Resistencia a Censura', text: 'Si el gobierno de USA ordena censurar ciertas transacciones, los nodos en Japón, Brasil, Nigeria y otros 100 países las procesarán igual. No hay jurisdicción única que pueda censurar Bitcoin.' }
         ]
       },
@@ -1308,7 +1308,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           points: [
             'Miles de participantes independientes',
             'NADIE puede congelar tu wallet',
-            'Cambiar reglas requiere consenso casi imposible',
+            'Cambiar las reglas monetarias requiere un consenso casi imposible',
             'Sin punto único de fallo: si un nodo cae, hay 14,999 más',
             'Puede ser más lento (pero mejorando)',
             'No necesitas confiar en nadie específico',
@@ -1322,9 +1322,9 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'La descentralización no es binaria, es un espectro. Diferentes proyectos hacen diferentes trade-offs:\n\n**¿Por qué debería importarte la descentralización?** Porque significa que NADIE puede congelar tu cuenta, censurar tus transacciones, o devaluar tus ahorros. Es la diferencia entre pedir permiso y ser libre.',
         features: [
           { icon: Lock, title: 'Bitcoin: Máxima Descentralización', text: '~15,000 nodos. Cualquiera con $300 en hardware puede correr uno. Cambios de protocolo requieren años de debate y consenso casi unánime. Inmunidad casi total a censura y captura.' },
-          { icon: Zap, title: 'Solana: Descentralización Pragmática', text: '~3,000 validadores. Requiere hardware más potente (~$5,000+). Más fácil de coordinar cambios. Trade-off consciente: menos descentralización a cambio de ~2,000-4,000 TPS reales en producción (con capacidad teórica mucho mayor) y fees de centavos.' },
+          { icon: Zap, title: 'Solana: Descentralización Pragmática', text: '~800 validadores con voto a mediados de 2026 (en descenso desde ~2,500 en 2023). Requiere hardware más potente (~$5,000+). Más fácil de coordinar cambios. Trade-off consciente: menos descentralización a cambio de ~2,000-4,000 TPS reales en producción (con capacidad teórica mucho mayor) y fees de centavos.' },
           { icon: Server, title: 'Ethereum: Término Medio', text: '~10,000 nodos. Hardware moderado. Transición a Proof of Stake completada. Balance entre descentralización y escalabilidad.' },
-          { icon: AlertTriangle, title: 'Binance Smart Chain: Más Centralizada', text: '21 validadores aprobados por Binance. Muy eficiente pero dependiente de una empresa. Si Binance quiere censurar algo, puede hacerlo.' }
+          { icon: AlertTriangle, title: 'BNB Smart Chain: Más Centralizada', text: '~40-45 validadores activos, elegidos por stake de BNB y con fuerte influencia del ecosistema Binance. Muy eficiente, pero un grupo tan pequeño y alineado puede coordinar cambios o censura con facilidad.' }
         ],
         highlight: {
           title: 'No Hay Respuesta "Correcta"',
@@ -1334,12 +1334,12 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'El Coeficiente de Nakamoto',
-        content: 'Para medir descentralización de forma objetiva, existe el **Coeficiente de Nakamoto**: el número mínimo de entidades que necesitarían coordinarse para comprometer el sistema.',
+        content: 'Para medir descentralización de forma objetiva, existe el **Coeficiente de Nakamoto**: el número mínimo de entidades que necesitarían coordinarse para comprometer el sistema. Un matiz importante que confunde a muchos: contar nodos no es lo mismo que medir concentración. Una red puede tener miles de nodos verificando las reglas y aun así tener el hashrate o el stake concentrado en pocas manos. Las dos cosas importan.',
         features: [
           { icon: Landmark, title: 'Tu Banco: Coeficiente = 1', text: 'Una sola entidad (el banco, o el gobierno que lo regula) puede hacer lo que quiera con tu cuenta.' },
-          { icon: Network, title: 'Bitcoin: Coeficiente = Muy Alto', text: 'Para controlar 51% del hashrate necesitarías coordinación de los 4-5 pools de minería más grandes, ubicados en diferentes países con diferentes jurisdicciones e incentivos.' },
-          { icon: Zap, title: 'Solana: Coeficiente = ~19-31', text: 'Se necesitarían ~31 validadores coordinándose para controlar 33% del stake (suficiente para detener la red). Es menor que Bitcoin, pero sigue siendo resistente.' },
-          { icon: AlertTriangle, title: 'BSC: Coeficiente = ~7', text: 'Solo ~7 de los 21 validadores necesitarían coordinarse. Y todos están aprobados por Binance. Mucho más centralizado.' }
+          { icon: Network, title: 'Bitcoin: Alto en Nodos, Concentrado en Pools', text: 'Sus ~15,000 nodos que verifican las reglas son imposibles de capturar. Pero el hashrate está más concentrado de lo que parece: a mediados de 2026, los 2-3 pools de minería más grandes suman ~50%. El matiz honesto: los pools son coaliciones, no dueños del hashrate; los mineros individuales pueden cambiarse de pool en minutos si uno intenta algo raro.' },
+          { icon: Zap, title: 'Solana: Coeficiente = ~20', text: 'Se necesitarían ~20 validadores coordinándose para controlar 33% del stake (suficiente para detener la red), de un total de ~800 validadores con voto. Es un número menor que hace unos años, pero sigue repartido entre países y jurisdicciones distintas.' },
+          { icon: AlertTriangle, title: 'BSC: Coeficiente Bajo', text: 'Con ~40-45 validadores activos elegidos por stake de BNB, bastaría la coordinación de un puñado de ellos para comprometer la red. Y el ecosistema gira alrededor de una sola empresa. Mucho más centralizado.' }
         ]
       },
       {
@@ -1363,7 +1363,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Esta es una pregunta frecuente y legítima. Vamos a analizarla honestamente:',
         features: [
           { icon: AlertTriangle, title: 'Las Críticas Válidas', text: 'Solana ha tenido varias "caídas" donde la red se detuvo y requirió reinicio coordinado de validadores. Esto sugiere cierta centralización operativa. El hardware requerido para validar es costoso, lo que limita quién puede participar.' },
-          { icon: CheckCircle, title: 'La Defensa Válida', text: 'Solana tiene ~3,000 validadores en múltiples países y jurisdicciones. Ninguna entidad única controla la red. Las caídas fueron bugs técnicos, no censura deliberada. La red sigue siendo permissionless: cualquiera puede transaccionar.' },
+          { icon: CheckCircle, title: 'La Defensa Válida', text: 'Solana tiene ~800 validadores con voto en múltiples países y jurisdicciones. Ninguna entidad única controla la red. Las caídas fueron bugs técnicos, no censura deliberada, y no ocurre una caída total desde febrero de 2024: más de dos años de funcionamiento continuo a mediados de 2026. La red sigue siendo permissionless: cualquiera puede transaccionar.' },
           { icon: Zap, title: 'El Trade-off Consciente', text: 'Solana prioriza escalabilidad para aplicaciones de consumo masivo. Si quieres la descentralización máxima de Bitcoin, usa Bitcoin. Si quieres miles de TPS y fees de centavos para DeFi y pagos, usa Solana.' }
         ],
         highlight: {
@@ -1402,7 +1402,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'En 2022, Canadá congeló cuentas bancarias de personas que donaron a protestas. ¿Por qué esto NO podría pasar con Bitcoin en una wallet no-custodial?',
+          question: 'En 2022, Canadá invocó una ley de emergencia y los bancos congelaron cientos de cuentas ligadas a unas protestas, sin orden judicial. ¿Por qué esto NO podría pasar con Bitcoin en una wallet no-custodial?',
           options: [
             { id: 'a', text: 'Porque Bitcoin es ilegal en Canadá' },
             { id: 'b', text: 'Porque no hay entidad central que pueda ejecutar la orden, miles de nodos en 100+ países seguirían procesando transacciones' },
@@ -1426,7 +1426,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'q3',
-          question: '¿Por qué Solana tiene "solo" ~3,000 validadores mientras Bitcoin tiene ~15,000 nodos?',
+          question: '¿Por qué Solana tiene "solo" ~800 validadores mientras Bitcoin tiene ~15,000 nodos?',
           options: [
             { id: 'a', text: 'Porque Solana es una estafa' },
             { id: 'b', text: 'Porque nadie quiere validar Solana' },
@@ -1446,7 +1446,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Una medida de velocidad' }
           ],
           correctAnswer: 'b',
-          explanation: 'El Coeficiente de Nakamoto mide descentralización objetivamente. Tu banco = 1 (una entidad decide todo). Bitcoin = muy alto (necesitarías coordinar múltiples pools de minería en diferentes países). Mayor número = más descentralizado.'
+          explanation: 'El Coeficiente de Nakamoto mide descentralización objetivamente. Tu banco = 1 (una entidad decide todo). En las blockchains depende de qué midas: en Bitcoin los nodos son incapturables, pero los 2-3 pools de minería más grandes suman ~50% del hashrate (con el matiz de que los mineros pueden salirse de un pool en minutos). Mayor número = más descentralizado.'
         },
         {
           id: 'q5',
@@ -1527,7 +1527,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             'Si quiebran, haces fila con otros acreedores',
             'Pueden prestar TU cripto a otros (muchos lo hacen)',
             'Dependes de su seguridad, si los hackean, pierdes',
-            'KYC: saben exactamente cuánto tienes y qué haces'
+            'KYC (la verificación de identidad que piden los exchanges): saben exactamente cuánto tienes y qué haces'
           ]
         },
         rightSide: {
@@ -1550,7 +1550,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: Landmark, title: 'Exchange (Custodia de Terceros)', text: 'Binance, Coinbase, Kraken guardan tus llaves por ti. Conveniente para trading activo. NUNCA para ahorros. Úsalo solo para comprar/vender y retira inmediatamente. Si tienes más de $500 en un exchange por más de una semana, estás jugando con fuego.' },
           { icon: Smartphone, title: 'Hot Wallet (Conectada a Internet)', text: 'Phantom, MetaMask, Trust Wallet. Las llaves están en tu celular o navegador. Perfecta para uso diario, DeFi, NFTs. Riesgo: si hackean tu dispositivo o firmas una transacción maliciosa, pierdes fondos. Ideal para montos que usas activamente.' },
-          { icon: Shield, title: 'Cold Wallet (Hardware/Offline)', text: 'Ledger, Trezor. Las llaves NUNCA tocan internet. Solo se conectan para firmar. Máxima seguridad para ahorros de largo plazo. Si tienes más de $5,000-10,000 en cripto, necesitas una. Es una inversión de $70-150 que puede salvarte miles.' }
+          { icon: Shield, title: 'Cold Wallet (Hardware/Offline)', text: 'Ledger, Trezor. Las llaves NUNCA tocan internet. Solo se conectan para firmar. Máxima seguridad para ahorros de largo plazo. Si tienes más de $5,000-10,000 en cripto, necesitas una. Es una inversión de $50-150 que puede salvarte miles.' }
         ]
       },
       {
@@ -1577,7 +1577,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         ],
         highlight: {
           title: 'Por Qué Funciona',
-          text: 'Estudios científicos demuestran que explicar un concepto en tus propias palabras mejora la retención un 28% comparado con solo leerlo. No memorices, comprende.'
+          text: 'Estudios científicos demuestran que explicar un concepto en tus propias palabras mejora significativamente la retención comparado con solo leerlo. No memorices, comprende.'
         }
       },
       {
@@ -1680,7 +1680,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: '¿Por Qué 12 Palabras en Vez de una Contraseña Normal?',
         content: 'Las contraseñas tradicionales tienen problemas: son difíciles de recordar, fáciles de hackear, y dependen de un servidor. La frase semilla resuelve todo esto:',
         features: [
-          { icon: Lock, title: 'Estándar Universal (BIP-39)', text: 'Todas las wallets serias usan el mismo estándar de 2048 palabras en inglés. Tu frase de Phantom funciona en Ledger, MetaMask, Trust Wallet, o cualquier otra. No dependes de una empresa.' },
+          { icon: Lock, title: 'Estándar Universal (BIP-39)', text: 'Todas las wallets serias usan el mismo estándar de 2048 palabras en inglés, así que no dependes de una empresa. Dos matices importantes: al importar tu frase en otra wallet puede aparecer "vacía" hasta que selecciones la ruta de derivación correcta (la misma frase genera direcciones distintas según esa configuración). Y una hardware wallet como Ledger debe generar su PROPIA frase nueva en el dispositivo: nunca importes en ella la frase de tu hot wallet, porque perderías justo la protección que estás comprando.' },
           { icon: Shield, title: 'Backup Perfecto', text: 'Si tu celular explota, tu computadora se incendia, o la empresa de tu wallet desaparece, tus fondos siguen existiendo en la blockchain. Con tu frase semilla, los recuperas en minutos desde cualquier dispositivo nuevo.' },
           { icon: Network, title: 'Genera Infinitas Direcciones', text: 'De una sola frase semilla se derivan matemáticamente miles de direcciones. Puedes tener direcciones para SOL, ETH, BTC, y más, todo desde las mismas 12 palabras.' }
         ]
@@ -1710,7 +1710,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         ],
         highlight: {
           title: 'Shamir Secret Sharing',
-          text: 'Para el máximo nivel de seguridad, puedes dividir tu frase en partes que requieren combinarse. Ejemplo: divides en 3 partes, necesitas 2 para recuperar. Guardas una en tu casa, otra con tu hermano, otra en el banco. Ninguna ubicación por sí sola es suficiente para robar.'
+          text: 'Para el máximo nivel de seguridad, puedes dividir tu frase en partes que requieren combinarse. Ejemplo: divides en 3 partes, necesitas 2 para recuperar. Guardas una en tu casa, otra con tu hermano, otra en el banco. Ninguna ubicación por sí sola es suficiente para robar. ADVERTENCIA: cortar tu frase en pedazos por tu cuenta NO es Shamir y es peligroso: cada pedazo filtra información al que lo encuentre, y perder un solo pedazo puede costarte todo. El esquema real requiere herramientas diseñadas para eso, como las que incluyen algunas hardware wallets.'
         }
       },
       {
@@ -1719,7 +1719,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Aprende de las tragedias de otros. Estos son errores REALES que han destruido fortunas:',
         features: [
           { icon: AlertTriangle, title: 'La Foto en iCloud', text: 'Un usuario tomó foto de su frase "para no perderla". Su cuenta de iCloud fue hackeada. Perdió $300,000 en minutos. Las fotos se sincronizan automáticamente a la nube.' },
-          { icon: AlertTriangle, title: 'El Archivo en Google Drive', text: '"Está encriptado, es seguro". Un empleado de Google con acceso comprometió su cuenta. El "archivo encriptado" fue descifrado. $2.4 millones perdidos.' },
+          { icon: AlertTriangle, title: 'El Archivo en Google Drive', text: '"Está encriptado, es seguro". Su cuenta de Google fue comprometida (un patrón documentado: phishing o contraseñas reutilizadas), el atacante encontró el archivo y rompió la contraseña débil que lo protegía. $2.4 millones perdidos.' },
           { icon: AlertTriangle, title: 'El Mensaje a Sí Mismo', text: 'Se envió la frase por WhatsApp "para tenerla en el celular". Su cuenta de WhatsApp Web quedó abierta en una computadora pública. Adiós $50,000.' },
           { icon: AlertTriangle, title: 'El Único Papel', text: 'Guardó su frase en un papel en casa. Hubo un incendio. El papel se quemó. $180,000 en Bitcoin perdidos para siempre, los fondos siguen en la blockchain, pero nadie puede accederlos nunca más.' }
         ]
@@ -1727,10 +1727,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Anatomía de una Estafa de Seed Phrase',
-        content: 'El 99% de los robos de cripto no son "hackeos sofisticados", son ingeniería social donde TÚ entregas tu frase. Así operan:',
+        content: 'La gran mayoría de los robos de cripto no son "hackeos sofisticados", son ingeniería social donde TÚ entregas tu frase. Así operan:',
         features: [
           { icon: AlertTriangle, title: 'El Falso Soporte Técnico', text: '"Hola, soy de Phantom Support. Detectamos actividad sospechosa en tu cuenta. Para proteger tus fondos, necesitamos verificar tu frase semilla." MENTIRA. Phantom NUNCA te contactará primero. NUNCA te pedirá tu frase. NADIE legítimo lo hará.' },
-          { icon: AlertTriangle, title: 'El Sitio Falso', text: 'Buscas "Phantom wallet" en Google. El primer resultado es un anuncio de "phantomm-wallet.com" (con dos M). El sitio se ve idéntico. Te pide "importar wallet" y escribes tu frase. La roban en tiempo real.' },
+          { icon: AlertTriangle, title: 'El Sitio Falso', text: 'Buscas "Phantom wallet" en Google. El primer resultado es un anuncio de "phantomm-wallet.com" (con dos M). El sitio se ve idéntico. Te pide "importar wallet" y escribes tu frase. La roban en tiempo real. El único sitio real es phantom.com (antes phantom.app).' },
           { icon: AlertTriangle, title: 'El Airdrop Gratis', text: '"Has sido seleccionado para recibir 500 SOL gratis. Conecta tu wallet y verifica tu seed phrase para reclamar." Nadie regala $50,000. Es estafa.' },
           { icon: AlertTriangle, title: 'El DM del Influencer', text: '"Hola, soy [YouTuber famoso]. Estoy haciendo un giveaway privado. Solo necesito verificar que eres holder real, envíame tu seed phrase." Los influencers reales NUNCA hacen esto.' }
         ]
@@ -1744,6 +1744,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           'NUNCA la guardes en formato digital: no fotos, no archivos, no notas, no emails, no mensajes, no "encriptado" en la nube.',
           'Escríbela en papel como MÍNIMO. Mejor en metal. Guarda múltiples copias en ubicaciones separadas.',
           'Verifica 3 veces que la escribiste correctamente. Un error de una sola letra puede hacer irrecuperables tus fondos.',
+          'Tu frase solo se digita UNA vez fuera del papel: dentro de la app oficial de la wallet, cuando la recuperas. Jamás en una página web, un formulario o un chat.',
           'Si alguien te pide la frase semilla, es estafa. El 100% de las veces. Sin excepciones.'
         ]
       }
@@ -1849,11 +1850,11 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: '¿Por Qué Phantom es la Wallet Recomendada?',
-        content: 'En el mundo de las wallets de Solana, Phantom se ha ganado la corona. No es solo una interfaz bonita, es una herramienta diseñada pensando en la seguridad Y la usabilidad. Millones de usuarios la usan diariamente, tiene el mejor historial de seguridad del ecosistema, y su equipo responde rápidamente ante cualquier vulnerabilidad. MetaMask domina Ethereum. Phantom domina Solana. Si estás empezando en cripto, Phantom es tu mejor aliado.',
+        content: 'En el mundo de las wallets de Solana, Phantom se ha ganado la corona. No es solo una interfaz bonita, es una herramienta diseñada pensando en la seguridad Y la usabilidad. Millones de usuarios la usan diariamente, tiene el mejor historial de seguridad del ecosistema, y su equipo responde rápidamente ante cualquier vulnerabilidad. Phantom nació en Solana y hoy es multichain: desde una sola app maneja Solana, Ethereum, Base, Polygon, Sui y Bitcoin, con UNA dirección distinta por cada red. En este curso la usamos como tu wallet de Solana. Si estás empezando en cripto, Phantom es tu mejor aliado.',
         features: [
           { icon: Shield, title: 'Alertas de Seguridad Integradas', text: 'Phantom analiza cada transacción ANTES de que la firmes. Si detecta un contrato malicioso conocido, te advierte. Si un sitio intenta drenar tu wallet, te alerta. Es como tener un guardaespaldas digital.' },
           { icon: Zap, title: 'Velocidad de Solana', text: 'Transacciones confirmadas en menos de 1 segundo. Fees de fracción de centavo. La experiencia es tan fluida que parece magia comparado con Ethereum.' },
-          { icon: Smartphone, title: 'Multi-Plataforma Sincronizado', text: 'Úsala en navegador (Chrome, Firefox, Brave, Edge) y en móvil (iOS, Android). Misma wallet, mismos fondos, sincronización perfecta.' }
+          { icon: Smartphone, title: 'Multi-Plataforma', text: 'Úsala en navegador (Chrome, Firefox, Brave, Edge) y en móvil (iOS, Android). Misma frase semilla, mismos fondos: tus balances viven en la blockchain, no en el dispositivo, así que ves exactamente lo mismo en todos lados.' }
         ]
       },
       {
@@ -1861,22 +1862,22 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Paso 1: Descarga SOLO desde Fuentes Oficiales',
         content: 'Este paso parece obvio pero es donde MUCHOS pierden todo su dinero. Los estafadores crean sitios falsos que lucen idénticos a Phantom pero roban tu seed phrase en el momento que la ingresas.',
         features: [
-          { icon: CheckCircle, title: 'Sitio Oficial', text: 'El ÚNICO sitio oficial es **phantom.app** (sin guiones, sin números, sin variaciones). Escríbelo tú mismo en la barra de direcciones. NO hagas clic en anuncios de Google, los estafadores compran ads para aparecer primero.' },
-          { icon: CheckCircle, title: 'Extensión de Navegador', text: 'Ve a phantom.app → haz clic en "Download" → elige tu navegador. Te llevará a la Chrome Web Store, Firefox Add-ons, etc. Verifica que el desarrollador sea "Phantom Technologies Incorporated".' },
+          { icon: CheckCircle, title: 'Sitio Oficial', text: 'El ÚNICO sitio oficial es **phantom.com** (antes phantom.app; sin guiones, sin números, sin variaciones). Escríbelo tú mismo en la barra de direcciones. NO hagas clic en anuncios de Google, los estafadores compran ads para aparecer primero.' },
+          { icon: CheckCircle, title: 'Extensión de Navegador', text: 'Ve a phantom.com → haz clic en "Download" → elige tu navegador. Te llevará a la Chrome Web Store, Firefox Add-ons, etc. Verifica que el desarrollador sea "Phantom Technologies Incorporated".' },
           { icon: CheckCircle, title: 'App Móvil', text: 'Descarga SOLO desde App Store (iOS) o Google Play (Android). Busca "Phantom" y verifica el desarrollador oficial. Hay apps falsas con nombres similares.' }
         ],
         highlight: {
           title: 'Lista de URLs Falsas Comunes',
-          text: 'phantom-app.com, phantomwallet.io, phantom-wallet.app, phantomm.app, phantom.finance, TODAS son estafas. El sitio real es ÚNICAMENTE phantom.app. Guárdalo en favoritos después de verificar.'
+          text: 'phantom-app.com, phantomwallet.io, phantom-wallet.app, phantomm.com, phantom.finance, TODAS son estafas. El sitio real es ÚNICAMENTE phantom.com (antes phantom.app). Guárdalo en favoritos después de verificar.'
         }
       },
       {
         type: 'main',
         title: 'Paso 2: Crear una Nueva Wallet',
-        content: 'Una vez instalada la extensión o app, Phantom te dará dos opciones: crear una nueva wallet o importar una existente. Si es tu primera wallet, selecciona **"Create a new wallet"**.',
+        content: 'Una vez instalada la extensión o app, Phantom te dará opciones: crear una nueva wallet o importar una existente. Si es tu primera wallet, selecciona **"Create a new wallet"**. Ojo: Phantom puede ofrecerte crear la wallet con tu cuenta de Google o Apple y un PIN (sin frase semilla), o respaldar tu frase en la nube (iCloud/Google Drive). Para este curso, elige el camino clásico de frase semilla y RECHAZA el respaldo en la nube: contradice la regla de "nunca en digital" que aprendiste en la lección anterior.',
         features: [
           { icon: Lock, title: 'Contraseña de Desbloqueo', text: 'Phantom te pedirá crear una contraseña. Esta contraseña desbloquea la app en TU dispositivo, NO es tu seed phrase. Si olvidas esta contraseña, puedes reinstalar Phantom e importar tu wallet con la seed phrase.' },
-          { icon: Shield, title: 'Generación de Seed Phrase', text: 'Phantom generará 12 palabras aleatorias. DETENTE AQUÍ. No hagas clic en "siguiente" hasta que hayas escrito estas palabras en PAPEL. No las copies al portapapeles. No las escribas en notas digitales.' },
+          { icon: Shield, title: 'Generación de Seed Phrase', text: 'Phantom generará 12 palabras aleatorias. DETENTE AQUÍ. No hagas clic en "siguiente" hasta que hayas escrito estas palabras en PAPEL. No las copies al portapapeles. No las escribas en notas digitales. Si Phantom te ofrece respaldarlas en iCloud o Google Drive, di que no.' },
           { icon: CheckCircle, title: 'Verificación', text: 'Phantom te pedirá confirmar algunas palabras para asegurar que las guardaste correctamente. Si fallas, vuelve a empezar. Este paso existe porque MILES de personas pierden fondos por errores de escritura.' }
         ]
       },
@@ -1885,7 +1886,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Paso 3: Entendiendo la Interfaz de Phantom',
         content: 'Ya tienes tu wallet creada. Ahora entiende qué estás viendo:',
         features: [
-          { icon: Wallet, title: 'Tu Dirección Pública', text: 'En la parte superior verás algo como "ABC12...XYZ". Esta es tu dirección de Solana, como un número de cuenta. Puedes compartirla libremente para recibir pagos. Haz clic para copiarla.' },
+          { icon: Wallet, title: 'Tu Dirección Pública', text: 'En la parte superior verás algo como "ABC12...XYZ". Como Phantom es multichain, tienes UNA dirección distinta por cada red (Solana, Ethereum, Base, Polygon, Sui, Bitcoin). Para recibir SOL, copia la dirección de SOLANA, no la de otra red. Es como un número de cuenta: puedes compartirla libremente para recibir pagos.' },
           { icon: Activity, title: 'Balance y Tokens', text: 'Verás tu saldo de SOL y cualquier otro token que recibas. Phantom muestra el valor en USD automáticamente y detecta la mayoría de los tokens legítimos.' },
           { icon: Globe, title: 'Historial de Transacciones', text: 'Cada envío, recepción, o interacción con una dApp queda registrada. Puedes hacer clic en cualquier transacción para ver detalles en Solscan (el explorador de bloques).' },
           { icon: Network, title: 'Conexiones de Apps', text: 'En "Settings" → "Connected Apps" verás qué sitios tienen permiso para conectarse a tu wallet. Revisa periódicamente y desconecta los que no uses.' }
@@ -1916,7 +1917,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         type: 'takeaways',
         title: 'Checklist Post-Instalación',
         items: [
-          'Descargaste Phantom ÚNICAMENTE desde phantom.app, App Store, o Google Play (verificando el desarrollador oficial).',
+          'Descargaste Phantom ÚNICAMENTE desde phantom.com, App Store, o Google Play (verificando el desarrollador oficial).',
+          'Elegiste el camino clásico de frase semilla y rechazaste el respaldo en la nube.',
           'Escribiste tu seed phrase de 12 palabras en PAPEL (no digital) y la guardaste en lugar seguro.',
           'Verificaste la seed phrase correctamente en el proceso de Phantom.',
           'Creaste una contraseña de desbloqueo fuerte (diferente a otras contraseñas).',
@@ -1933,12 +1935,12 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: 'Buscas "Phantom wallet" en Google. El primer resultado es un anuncio de "phantom-app.com". ¿Qué haces?',
           options: [
             { id: 'a', text: 'Hago clic porque apareció primero en Google' },
-            { id: 'b', text: 'Ignoro el anuncio y escribo manualmente phantom.app en la barra de direcciones' },
+            { id: 'b', text: 'Ignoro el anuncio y escribo manualmente phantom.com en la barra de direcciones' },
             { id: 'c', text: 'Descargo de cualquiera de los dos, son iguales' },
             { id: 'd', text: 'Busco en otro buscador' }
           ],
           correctAnswer: 'b',
-          explanation: 'Los estafadores PAGAN para aparecer como anuncios en Google con URLs falsas. phantom-app.com NO es el sitio oficial. El ÚNICO sitio real es phantom.app (sin guiones). Siempre escríbelo manualmente.'
+          explanation: 'Los estafadores PAGAN para aparecer como anuncios en Google con URLs falsas. phantom-app.com NO es el sitio oficial. El ÚNICO sitio real es phantom.com (antes phantom.app, sin guiones). Siempre escríbelo manualmente.'
         },
         {
           id: 'q2',
@@ -1950,7 +1952,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Hacer clic en "siguiente" rápido y anotarlas después' }
           ],
           correctAnswer: 'c',
-          explanation: 'Capturas de pantalla se sincronizan a la nube. El portapapeles puede ser leído por malware. Solo PAPEL físico es seguro. Y debes hacerlo ANTES de continuar, después no podrás ver la frase de nuevo en Phantom.'
+          explanation: 'Capturas de pantalla se sincronizan a la nube. El portapapeles puede ser leído por malware. Solo PAPEL físico es seguro. Hazlo AHORA, en este paso: aunque Phantom permite volver a ver la frase después (Settings → Security & Privacy → Show Recovery Phrase), quien lo posterga suele terminar depositando fondos sin respaldo.'
         },
         {
           id: 'q3',
@@ -2001,7 +2003,29 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           explanation: 'Esta es la otra cara de la autocustodia que aprendiste en la Lección 5: nadie puede confiscar tus fondos, pero nadie puede recuperarlos si los pierdes. El banco tradicional devuelve el dinero porque es un intermediario centralizado, puede revertir decisiones. La blockchain no tiene esa autoridad. Por eso la educación en seguridad (frase semilla, evitar estafas) no es opcional, es la infraestructura mínima de sobrevivencia en cripto.'
         }
       ]
-    }
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 2,
+        title: 'Checkpoint: Tus 12 Palabras',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'Acabas de crear tu wallet y Phantom te muestra las 12 palabras de tu frase semilla. Tienes prisa y quieres avanzar rápido. ¿Qué haces con las 12 palabras?',
+            options: [
+              'Les tomo una captura de pantalla rápida y las paso a papel después',
+              'Acepto el respaldo en iCloud/Google Drive que ofrece Phantom, es lo más rápido',
+              'Me detengo, las escribo a mano en papel, verifico palabra por palabra, y solo entonces continúo',
+              'Continúo sin anotarlas, total, Phantom me deja verlas después en Settings'
+            ],
+            correctAnswer: 2,
+            explanation: 'La frase solo debe existir en papel (o metal), nunca en formato digital: ni capturas, ni nube, ni notas. Y aunque Phantom permite verla después en Settings → Security & Privacy, quien posterga el respaldo suele terminar con fondos depositados y cero respaldo. La prisa es el enemigo: este paso vale más que cualquier otra cosa que hagas hoy.',
+            hint: 'Recuerda la regla de oro de la Lección 8: la frase nunca debe existir en formato digital.'
+          }
+        ]
+      }
+    ]
   },
   10: {
     id: 10,
@@ -2015,7 +2039,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: '¿Por Qué Existe Esta "Guerra"?',
-        content: 'Ethereum fue la primera blockchain programable. Inventó los smart contracts, DeFi (aplicaciones financieras que funcionan sin bancos), NFTs, todo lo que hoy conocemos como Web3 nació ahí. Es el "abuelo respetado" del espacio. Pero tiene un problema fundamental: **no escala para uso masivo**. Cuando mucha gente quiere usarlo, se congestiona y los fees suben. En el pico de 2021, una transacción podía costar $50, $100 o más. Tras mejoras como la actualización Dencun (2024), hoy un swap (un intercambio de una cripto por otra) en la red principal suele costar entre menos de $1 y unos pocos dólares, aunque sigue siendo más caro y variable que redes más nuevas. Para montos pequeños, ese costo todavía puede comerse una parte importante de tu inversión. Solana nació en 2020 con una pregunta: ¿y si construimos una blockchain desde cero, optimizada para velocidad y bajo costo? El resultado es una red donde las transacciones cuestan menos de un centavo y se confirman en menos de un segundo.',
+        content: 'Ethereum fue la primera blockchain programable. Inventó los smart contracts, DeFi (aplicaciones financieras que funcionan sin bancos), NFTs, todo lo que hoy conocemos como Web3 nació ahí. Es el "abuelo respetado" del espacio. Pero tiene un problema fundamental: **no escala para uso masivo**. Cuando mucha gente quiere usarlo, se congestiona y los fees suben. En el pico de 2021, una transacción podía costar $50, $100 o más. Tras mejoras como la actualización Dencun (2024), a mediados de 2026 un swap (un intercambio de una cripto por otra) en la red principal suele costar $0.25-0.50, y puede subir a varios dólares cuando hay congestión. Es una mejora enorme, pero sigue siendo más caro y variable que redes más nuevas. Solana nació en 2020 con una pregunta: ¿y si construimos una blockchain desde cero, optimizada para velocidad y bajo costo? El resultado es una red donde las transacciones cuestan menos de un centavo y se confirman en menos de un segundo.',
         highlight: {
           title: 'La Metáfora',
           text: 'Ethereum es como un Mercedes clásico de 1990: revolucionario en su época, confiable, prestigioso, pero lento y caro de mantener. Solana es como un Tesla: diseñado para el mundo moderno, rápido, eficiente, y construido pensando en el futuro.'
@@ -2028,7 +2052,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           title: 'Ethereum (L1)',
           points: [
             'Transacciones por segundo: ~15-30 TPS',
-            'Costo por transacción: desde menos de $1 hasta varios dólares (sube con la congestión)',
+            'Costo por transacción: ~$0.10-0.50 típico (sube a varios dólares con congestión)',
             'Tiempo de confirmación: ~12-15 segundos',
             'Para usar DeFi barato: necesitas L2s (Arbitrum, Optimism)',
             'Fragmentación de liquidez entre L1 y múltiples L2s',
@@ -2040,7 +2064,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           title: 'Solana (L1)',
           points: [
             'Transacciones por segundo: ~2,000-4,000 TPS (producción real)',
-            'Costo por transacción: ~$0.00025 (fracción de centavo)',
+            'Costo por transacción: 0.000005 SOL de base (~$0.001)',
             'Tiempo de confirmación: ~400 milisegundos',
             'Todo ocurre en una sola capa (sin L2s necesarios)',
             'Toda la liquidez unificada en un solo lugar',
@@ -2064,13 +2088,13 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Caso Real: Hacer un Swap de $50',
         content: 'Veamos qué pasa en la práctica cuando quieres intercambiar $50 de USDC (un "dólar digital" que siempre vale ~$1; lo verás a fondo en la lección de stablecoins) por otro token:',
         features: [
-          { icon: TrendingDown, title: 'En Ethereum L1', text: 'Abres Uniswap. Un swap pequeño te costaría desde alrededor de $1 hasta varios dólares en gas (mucho menos que en 2021, pero todavía variable). Para un swap de $50, esos fees ya son una mordida real. Por eso te dicen "usa un L2".' },
-          { icon: Network, title: 'En Ethereum L2 (Arbitrum)', text: 'Primero debes bridgear fondos de L1 a L2 ($10-20 de gas + espera). Luego haces el swap ($0.50 de gas). Si quieres volver a L1, otro bridge ($10-20). El proceso toma minutos/horas y múltiples transacciones.' },
-          { icon: Zap, title: 'En Solana', text: 'Abres Jupiter. Haces el swap. Pagas $0.0002 de fee. Tarda 1 segundo. Listo. No hay capas. No hay bridges. No hay esperas. Tu experiencia es idéntica si swapeas $50 o $50,000.' }
+          { icon: TrendingDown, title: 'En Ethereum L1', text: 'Abres Uniswap. Un swap pequeño te cuesta alrededor de $0.25-0.50 en gas (mucho menos que los $50-100 de 2021, pero variable: sube con la congestión). Para un swap de $50, sigue siendo un costo notable frente a los centavos de otras redes. Por eso te dicen "usa un L2".' },
+          { icon: Network, title: 'En Ethereum L2 (Arbitrum)', text: 'Hoy muchos exchanges retiran directo a Arbitrum o Base, así que el bridge suele ser innecesario. Si necesitas bridgear desde L1, cuesta alrededor de $1-5. Ya en el L2, el swap cuesta centavos (menos de $0.05). Mucho mejor que antes, pero sigues gestionando capas, redes y saldos separados.' },
+          { icon: Zap, title: 'En Solana', text: 'Abres Jupiter. Haces el swap. Pagas 0.000005 SOL de fee base (~$0.001; con priority fees, típicamente $0.001-0.01). Tarda 1 segundo. Listo. No hay capas. No hay bridges. No hay esperas. El fee de red es igual de mínimo si swapeas $50 o $50,000 (en montos grandes lo que cambia es el slippage, el impacto de tu orden en el precio).' }
         ],
         highlight: {
           title: 'Por Esto Enseñamos Solana Primero',
-          text: 'Si estás aprendiendo cripto, queremos que experimentes. Que pruebes cosas. Que cometas errores pequeños sin perder todo en fees. Solana te permite equivocarte 100 veces y pagar menos de $0.03 en total. En Ethereum L1, un solo error podría costarte $50.'
+          text: 'Si estás aprendiendo cripto, queremos que experimentes. Que pruebes cosas. Que cometas errores pequeños sin perder todo en fees. Solana te permite equivocarte 100 veces y pagar menos de $1 en total. En el Ethereum de 2021, un solo error podía costarte $50; hoy es más barato, pero cada intento en L1 sigue costando más que decenas de intentos en Solana.'
         }
       },
       {
@@ -2078,8 +2102,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         terms: [
           {
             term: 'Gas',
-            definition: 'Es el "combustible" que pagas para que una blockchain procese tu transacción. Cada operación (enviar, hacer un swap, interactuar con un protocolo) requiere que los validadores hagan trabajo computacional, y el gas paga ese trabajo. En Ethereum, el gas sube cuando la red está congestionada, por eso los fees varían desde menos de $1 hasta varios dólares en la red principal (y llegaron a ser mucho más altos en años de mayor demanda). En Solana, el gas es casi constante (~$0.0002) porque la red está diseñada para procesar miles de transacciones por segundo.',
-            whyItMatters: 'El costo de gas determina si la blockchain es usable para personas normales. En Ethereum L1, gas de $30 hace inviable cualquier operación menor a $500. En Solana, no tienes que pensarlo.'
+            definition: 'Es el "combustible" que pagas para que una blockchain procese tu transacción. Cada operación (enviar, hacer un swap, interactuar con un protocolo) requiere que los validadores hagan trabajo computacional, y el gas paga ese trabajo. En Ethereum, el gas sube cuando la red está congestionada, por eso los fees varían desde centavos hasta varios dólares en la red principal (y llegaron a ser mucho más altos en años de mayor demanda). En Solana, la red cobra una base de 0.000005 SOL por transacción (~$0.001); con priority fees típicamente pagas $0.001-0.01, y puede subir en momentos de congestión.',
+            whyItMatters: 'El costo de gas determina si la blockchain es usable para personas normales. En el Ethereum de 2021, gas de $30 hacía inviable cualquier operación menor a $500; hoy es mucho más barato, pero sigue siendo variable. En Solana, no tienes que pensarlo.'
           }
         ]
       },
@@ -2090,8 +2114,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: Zap, title: 'Jupiter', text: 'El mejor agregador DEX del mundo. Te encuentra el mejor precio entre todos los exchanges descentralizados. Tiene DCA (compra automática), órdenes límite, y perpetuos. Es el "Uniswap de Solana" pero con superpoderes.' },
           { icon: Wallet, title: 'Phantom', text: 'Ya la conoces. La wallet más usada de Solana. Pero vale repetir: la experiencia de Phantom vs MetaMask es día y noche. MetaMask se siente como software de 2017.' },
-          { icon: Globe, title: 'Magic Eden / Tensor', text: 'Los marketplaces de NFTs en Solana. Puedes comprar y vender NFTs por menos de $0.01 en fees. En OpenSea (Ethereum), los fees pueden ser $20-50.' },
-          { icon: Activity, title: 'Marinade / Jito', text: 'Plataformas de liquid staking. Pones tu SOL a trabajar ganando alrededor de 6-7% anual mientras sigue siendo líquido. En Solana, hacer y deshacer estas operaciones cuesta una fracción de centavo.' }
+          { icon: Globe, title: 'Magic Eden / Tensor', text: 'Los marketplaces de NFTs en Solana. Puedes comprar y vender NFTs por menos de $0.01 en fees. En OpenSea (Ethereum), el gas de una compra suele ser $1-5.' },
+          { icon: Activity, title: 'Marinade / Jito', text: 'Plataformas de liquid staking. Pones tu SOL a trabajar ganando alrededor de 5.5-6.5% anual (algo más con validadores MEV como Jito) mientras sigue siendo líquido. En Solana, hacer y deshacer estas operaciones cuesta una fracción de centavo.' }
         ]
       },
       {
@@ -2100,8 +2124,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'No queremos darte solo la versión positiva. Estos son los argumentos en contra que escucharás:',
         features: [
           { icon: AlertTriangle, title: 'Centralización Relativa', text: 'Solana requiere hardware más potente para correr un validador. Esto significa menos validadores que Ethereum. Críticos dicen que es "menos descentralizada". Counter-argument: ¿de qué sirve una red "descentralizada" que nadie puede pagar usar?' },
-          { icon: AlertTriangle, title: 'Outages Históricos', text: 'Solana tuvo varios "apagones" en 2022-2023 donde la red se detuvo. Esto generó dudas sobre su estabilidad. Sin embargo, las mejoras técnicas y el desarrollo de clientes validadores independientes (Firedancer) han mejorado significativamente la resiliencia de la red.' },
-          { icon: AlertTriangle, title: 'Ecosistema Más Joven', text: 'Ethereum tiene 8+ años. Solana tiene 4. El ecosistema de Ethereum es más grande y tiene más liquidez total. Algunos protocolos "blue chip" solo existen en Ethereum.' }
+          { icon: AlertTriangle, title: 'Outages Históricos', text: 'Solana tuvo varios "apagones" en 2022-2023 donde la red se detuvo. Esto generó dudas sobre su estabilidad. Sin embargo, no ha habido ninguna caída total desde febrero de 2024: más de dos años de uptime continuo a mediados de 2026, gracias a mejoras técnicas y al desarrollo de clientes validadores independientes (Firedancer).' },
+          { icon: AlertTriangle, title: 'Ecosistema Más Joven', text: 'Ethereum tiene ~11 años. Solana tiene ~6 (su mainnet beta arrancó en marzo de 2020). El ecosistema de Ethereum es más grande y tiene más liquidez total. Algunos protocolos "blue chip" solo existen en Ethereum.' }
         ]
       },
       {
@@ -2109,9 +2133,9 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'El Futuro: Firedancer y Más Allá',
         content: 'Solana no se queda quieta. Estas son las mejoras que vienen:',
         features: [
-          { icon: Cpu, title: 'Firedancer', text: 'Jump Trading (uno de los traders más grandes del mundo) construyó Firedancer, un nuevo cliente de validador desde cero. Llegó a la red principal a finales de 2025 de forma gradual; busca aumentar mucho el rendimiento de Solana (con la meta de largo plazo de hasta ~1 millón de TPS) y eliminar el riesgo de depender de "un solo cliente". Es uno de los upgrades más importantes en la historia de la red.' },
+          { icon: Cpu, title: 'Firedancer', text: 'Jump Trading (uno de los traders más grandes del mundo) construyó Firedancer, un nuevo cliente de validador desde cero. Su versión híbrida (Frankendancer) corre en la red principal desde 2024 y a mediados de 2026 maneja alrededor del 20-26% del stake; el cliente completo (v1.0) llegó a testnet en junio de 2026. Busca aumentar mucho el rendimiento de Solana (con la meta de largo plazo de hasta ~1 millón de TPS) y eliminar el riesgo de depender de "un solo cliente". Es uno de los upgrades más importantes en la historia de la red.' },
           { icon: Smartphone, title: 'Saga/Seeker (Mobile)', text: 'Solana tiene su propio teléfono móvil con wallet integrada. La visión es hacer que interactuar con cripto sea tan fácil como usar cualquier app. El futuro es móvil.' },
-          { icon: Globe, title: 'Blinks', text: 'Acciones de blockchain que funcionan directamente en Twitter, Discord, y otras apps. Compra un NFT desde un tweet. Haz un swap desde un mensaje. Web3 sin salir de Web2.' }
+          { icon: Globe, title: 'Blinks', text: 'Acciones de blockchain que funcionaban directamente en Twitter y otras apps: comprar un NFT o hacer un swap desde un tweet. En la práctica requerían una extensión de wallet y la iniciativa perdió fuerza, pero vale conocerla como ejemplo de hacia dónde apunta la UX de Solana: Web3 sin salir de Web2.' }
         ]
       },
       {
@@ -2119,7 +2143,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Solana vs Ethereum: El Veredicto',
         items: [
           'Ethereum fue el pionero y tiene el ecosistema más grande. Merece respeto por todo lo que inventó.',
-          'Pero para un usuario nuevo, Ethereum L1 es prácticamente inusable por los costos. Te empujan a L2s que añaden complejidad.',
+          'Pero para un usuario nuevo, Ethereum sigue siendo más caro y más complejo: los costos de L1 son variables y los L2s añaden capas, redes y saldos que gestionar.',
           'Solana fue diseñada pensando en el usuario final: barata, rápida, simple. Una sola capa, sin fragmentación.',
           'Para aprender y experimentar con cripto, Solana es objetivamente mejor. Puedes probar 100 cosas por menos de $1.',
           'Esto no significa que Ethereum sea "malo", pero sí que Solana es mejor para empezar y para uso diario.',
@@ -2134,12 +2158,12 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: 'Quieres hacer un swap de $50 USDC por SOL. ¿Cuánto pagarías aproximadamente en fees en Ethereum L1 vs Solana?',
           options: [
             { id: 'a', text: 'Ethereum: $0.50, Solana: $0.50 (igual)' },
-            { id: 'b', text: 'Ethereum: $1-3, Solana: menos de $0.001' },
+            { id: 'b', text: 'Ethereum: $0.25-0.50 (y más con congestión), Solana: ~$0.001' },
             { id: 'c', text: 'Ethereum: $0.01, Solana: $5' },
             { id: 'd', text: 'Ambos son gratis' }
           ],
           correctAnswer: 'b',
-          explanation: 'En Ethereum L1, tras mejoras como Dencun, un swap pequeño suele costar entre $1 y unos pocos dólares en gas (mucho menos que en 2021, pero todavía variable). En Solana cuesta una fracción de centavo. Para montos pequeños, Solana sigue siendo mucho más eficiente.'
+          explanation: 'En Ethereum L1, tras mejoras como Dencun, un swap pequeño suele costar $0.25-0.50 en gas (mucho menos que en 2021, pero todavía variable: sube con la congestión). En Solana cuesta una fracción de centavo. Para montos pequeños, Solana sigue siendo mucho más eficiente.'
         },
         {
           id: 'q2',
@@ -2181,13 +2205,13 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q5',
           question: '¿Qué es Firedancer y por qué importa?',
           options: [
-            { id: 'a', text: 'Un nuevo token de Solana' },
-            { id: 'b', text: 'Una wallet alternativa a Phantom' },
-            { id: 'c', text: 'Un nuevo cliente de validador construido por Jump Trading que llegó a la red principal a finales de 2025, busca aumentar mucho el rendimiento de la red y elimina el riesgo de depender de "un solo cliente"' },
+            { id: 'a', text: 'Un nuevo token de Solana creado por Jump Trading para pagar los fees de la red' },
+            { id: 'b', text: 'Una wallet alternativa a Phantom diseñada para validadores profesionales' },
+            { id: 'c', text: 'Un cliente de validador independiente construido por Jump Trading, cuya versión híbrida ya corre en la red principal' },
             { id: 'd', text: 'Un juego en Solana' }
           ],
           correctAnswer: 'c',
-          explanation: 'Firedancer es uno de los upgrades más importantes de Solana. Jump Trading lo construyó desde cero y llegó a la red principal a finales de 2025 de forma gradual. Hace la red más rápida y resistente al sumar un cliente validador independiente.'
+          explanation: 'Firedancer es uno de los upgrades más importantes de Solana. Jump Trading lo construyó desde cero: su versión híbrida (Frankendancer) corre en la red principal desde 2024, y el cliente completo llegó a testnet en junio de 2026. Suma un cliente validador independiente que hace la red más rápida y resistente al eliminar la dependencia de un solo software.'
         },
         {
           id: 'review_1',
@@ -2216,7 +2240,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     referrals: [
       {
         title: 'Backpack Exchange',
-        description: 'El exchange más seguro y regulado para comprar cripto. Obtén descuentos en fees usando este link.',
+        description: 'Exchange enfocado en Solana, regulado en Dubai (licencia VARA). Yo lo uso para el paso de trading en Solana: los pesos entran por Binance (PSE o P2P) y aquí operas. Transparencia total: es mi link de referido, ambos obtenemos beneficio en fees.',
         link: 'https://backpack.exchange/join/cbas',
         buttonText: 'Crear Cuenta en Backpack'
       }
@@ -2236,10 +2260,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Eligiendo tu Exchange: Opciones para Latinoamérica',
         content: 'No todos los exchanges operan en todos los países ni aceptan todas las monedas. Estas son las opciones más confiables para la región:',
         features: [
-          { icon: Landmark, title: 'Binance', text: 'El exchange más grande del mundo. Acepta transferencias bancarias locales en muchos países LATAM (Colombia, Argentina, México, Perú). Tiene P2P para comprar con pesos directamente a otros usuarios. Fees bajos.' },
-          { icon: Shield, title: 'Backpack Exchange', text: 'Creado por el equipo detrás de Mad Lads (NFT top de Solana). Especializado en Solana. Regulado en Dubai. Excelente si tu foco es el ecosistema Solana. Interfaz moderna y fees competitivos.' },
+          { icon: Landmark, title: 'Binance', text: 'El exchange más grande del mundo. En Colombia acepta depósitos directos en COP por transferencia bancaria (PSE), y su P2P (Nequi, Bancolombia, Daviplata) sigue siendo la vía más popular para comprar con pesos. Fees bajos.' },
+          { icon: Shield, title: 'Backpack Exchange', text: 'Creado por el equipo detrás de Mad Lads (NFT top de Solana). Especializado en Solana. Regulado en Dubai (licencia VARA), con cobertura adicional en la UE. Ojo: sus rieles fiat son solo en USD (transferencia SWIFT, mínimo $100), no acepta COP. Úsalo para operar en el ecosistema Solana, no como puerta de entrada de tus pesos.' },
           { icon: Globe, title: 'Coinbase', text: 'El exchange más regulado y "tradicional". Ideal si valoras la seguridad institucional sobre todo. Más caro que otros, pero muy confiable. Bueno para USA y algunos países LATAM.' },
-          { icon: Activity, title: 'Kraken', text: 'Excelente reputación de seguridad. Nunca ha sido hackeado en 10+ años. Acepta muchas monedas fiat. Buena opción si priorizas track record de seguridad.' }
+          { icon: Activity, title: 'Kraken', text: 'Excelente reputación de seguridad: sin pérdidas de fondos de usuarios en más de una década. Acepta muchas monedas fiat. Buena opción si priorizas track record de seguridad.' }
         ]
       },
       {
@@ -2260,7 +2284,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: CheckCircle, title: 'Red Correcta', text: 'Solana (SOL) o "Solana Network" o simplemente "SOL". La dirección de Phantom empieza con caracteres como "5xB7..." o similar.' },
           { icon: AlertTriangle, title: 'Redes Incorrectas', text: 'ERC20 (Ethereum), BEP20 (BNB Chain), TRC20 (Tron). Si ves estas opciones y las eliges, tus fondos van a una blockchain diferente donde Phantom NO puede accederlos.' },
-          { icon: Shield, title: 'Verificación Triple', text: 'Antes de confirmar: 1) ¿La red dice "Solana"? 2) ¿La dirección es la de mi Phantom? 3) ¿Verifiqué los primeros y últimos 4 caracteres? Si todo está bien, procede.' }
+          { icon: Shield, title: 'Verificación Triple', text: 'Antes de confirmar: 1) ¿La red dice "Solana"? 2) ¿La dirección es la de mi Phantom? 3) ¿Verifiqué 6-8 caracteres al INICIO y 6-8 al FINAL de la dirección? Si todo está bien, procede.' },
+          { icon: AlertTriangle, title: 'Cuidado: Address Poisoning', text: 'Existe un ataque donde generan direcciones que imitan los primeros Y últimos caracteres de las tuyas y "ensucian" tu historial con transferencias mínimas, esperando que copies la del atacante por error. NUNCA copies tu dirección desde un historial de transacciones: cópiala directo de Phantom (o usa el código QR) y verifica 6-8 caracteres en ambos extremos. En la Lección 12 lo vemos a fondo.' }
         ],
         highlight: {
           title: 'Historia Real',
@@ -2274,18 +2299,19 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: Percent, title: 'Fee de Depósito', text: 'Transferencia bancaria: usualmente gratis. Tarjeta de crédito: 2-4% (evítalo si puedes). P2P: varía según el vendedor.' },
           { icon: Percent, title: 'Fee de Trading', text: 'Cuando compras SOL, el exchange cobra 0.1-0.5% del monto. En $100, pagarías $0.10-$0.50. Pequeño.' },
-          { icon: Percent, title: 'Fee de Retiro', text: 'El exchange cobra un fee FIJO por retirar, independiente del monto. Binance cobra ~0.01 SOL (~$2-3). Este fee es del EXCHANGE, no de Solana. El fee real de la red Solana es $0.0002.' },
+          { icon: Percent, title: 'Fee de Retiro', text: 'El exchange cobra un fee FIJO por retirar, independiente del monto. En Binance es del orden de 0.001-0.01 SOL, revisa su página de fees actualizada antes de retirar. Este fee es del EXCHANGE, no de Solana. El fee real de la red Solana es 0.000005 SOL (~$0.001).' },
           { icon: CheckCircle, title: 'Estrategia Óptima', text: 'Deposita por transferencia bancaria (gratis), compra en lotes grandes para minimizar fees de retiro proporcionales, y retira inmediatamente a tu wallet.' }
         ]
       },
       {
         type: 'main',
         title: 'Alternativa: Compra P2P (Peer-to-Peer)',
-        content: 'Si tu banco no puede transferir a exchanges o quieres más privacidad, el P2P es una opción:',
+        content: 'Si tu banco no puede transferir a exchanges o prefieres pagar por Nequi o Daviplata, el P2P es una opción. Como comprador, estas son las reglas que te protegen:',
         features: [
-          { icon: Users, title: 'Cómo Funciona', text: 'Dentro del exchange (Binance P2P, por ejemplo), compras directamente a OTRO usuario. Tú le transfieres pesos por Nequi/Bancolombia/etc, y él te envía USDT o SOL a tu cuenta del exchange. El exchange actúa como escrow.' },
-          { icon: CheckCircle, title: 'Ventajas', text: 'Más métodos de pago (Nequi, Daviplata, efectivo), a veces mejores tasas, útil si tu banco bloquea transferencias a exchanges.' },
-          { icon: AlertTriangle, title: 'Riesgos', text: 'Vendedores con poca reputación pueden ser estafadores. SOLO usa vendedores con 95%+ de calificación positiva y muchas transacciones completadas. Nunca liberes el cripto antes de confirmar que recibiste el pago.' }
+          { icon: Users, title: 'Cómo Funciona', text: 'Dentro del exchange (Binance P2P, por ejemplo), compras directamente a OTRO usuario. Tú le transfieres pesos por Nequi/Bancolombia/etc, y él te envía USDT (la stablecoin de Tether: un token que vale ~1 dólar, lo verás a fondo en la Lección 15) o SOL a tu cuenta del exchange. El exchange actúa como escrow: retiene el cripto del vendedor hasta que el pago se confirma.' },
+          { icon: CheckCircle, title: 'Reglas del Comprador', text: 'Paga SOLO desde una cuenta bancaria a TU nombre (el mismo de tu KYC en el exchange). Guarda el comprobante de la transferencia. NUNCA marques "Pagado" sin haber pagado realmente. NUNCA aceptes mover el trato a WhatsApp o fuera de la plataforma. Y NO escribas "Binance", "cripto" ni "USDT" en la referencia o descripción de la transferencia: algunos bancos bloquean cuentas por eso.' },
+          { icon: AlertTriangle, title: 'Riesgos del Lado Fiat', text: 'Los estafadores también atacan la parte en pesos: comprobantes de pago falsos de Nequi/Bancolombia (contra vendedores), pagos que luego se reversan porque salieron de cuentas robadas, y el riesgo de "mula": si recibes dinero de origen ilícito, tu cuenta bancaria puede quedar congelada mientras investigan. Por eso: solo contrapartes con reputación y solo cuentas a tu propio nombre.' },
+          { icon: Shield, title: 'Elige Bien la Contraparte', text: 'SOLO usa vendedores con 95%+ de calificación positiva y muchas órdenes completadas. Si algo se siente raro (presión, prisa, "mejor tasa por fuera"), cancela. Perder una buena tasa cuesta centavos; una estafa cuesta todo.' }
         ]
       },
       {
@@ -2296,7 +2322,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           'Depositaste fiat usando el método más barato disponible (transferencia > tarjeta).',
           'Compraste SOL usando una orden de mercado simple.',
           'Al retirar, seleccionaste la red SOLANA (no ERC20, no BEP20).',
-          'Verificaste la dirección de tu Phantom: primeros 4 caracteres + últimos 4 caracteres.',
+          'Verificaste la dirección de tu Phantom: 6-8 caracteres al inicio y 6-8 al final, copiada directo de Phantom (nunca desde un historial de transacciones).',
           'Esperaste la confirmación y verificaste que llegó a tu Phantom.',
           'NO dejaste fondos en el exchange. Todo está en tu wallet propia.'
         ]
@@ -2330,7 +2356,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'q3',
-          question: 'El exchange cobra 0.01 SOL (~$2) por retirar a tu wallet. El fee real de la red Solana es $0.0002. ¿Por qué la diferencia?',
+          question: 'El exchange cobra un fee fijo por retirar a tu wallet (del orden de 0.001-0.01 SOL). El fee real de la red Solana es 0.000005 SOL (~$0.001). ¿Por qué la diferencia?',
           options: [
             { id: 'a', text: 'Solana subió sus fees' },
             { id: 'b', text: 'El exchange está cobrando su propio fee de servicio, muy por encima del costo real de la red' },
@@ -2365,7 +2391,29 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           explanation: 'Tarjetas de crédito cobran 2-4% de fee ($10-20 en $500). Transferencias bancarias suelen ser gratuitas o muy baratas. Si puedes esperar unas horas, la transferencia es siempre mejor opción.'
         }
       ]
-    }
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 3,
+        title: 'Checkpoint: Eligiendo la Red Correcta',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'Vas a retirar tus SOL de Binance a tu Phantom. El exchange te muestra las redes SOL, ERC20 y BEP20, y notas que BEP20 tiene el fee de retiro más bajo. ¿Qué haces?',
+            options: [
+              'Elijo BEP20 porque el fee es más bajo y el dinero llega igual',
+              'Elijo ERC20 porque Ethereum es la red más conocida y segura',
+              'Elijo SOL (Solana), verifico que la dirección sea la de mi Phantom revisando 6-8 caracteres al inicio y al final, y confirmo',
+              'Elijo cualquiera y, si no llega, pido al exchange que reverse la transacción'
+            ],
+            correctAnswer: 2,
+            explanation: 'La red debe coincidir con la wallet destino. Phantom espera SOL por la red Solana: si eliges ERC20 o BEP20, tus fondos van a una blockchain donde tu Phantom no puede accederlos y se pierden para siempre. Ningún fee "más barato" justifica ese riesgo, y no existen reversiones en blockchain.',
+            hint: 'Phantom es tu wallet de Solana. ¿Por qué red viaja el SOL?'
+          }
+        ]
+      }
+    ]
   },
   36: {
     id: 36,
@@ -2382,7 +2430,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Hay un antes y un después de tu primera transacción cripto. Cuando envías valor a alguien del otro lado del mundo, en segundos, sin pedir permiso a nadie, y pagando menos de un centavo, algo hace "clic" en tu cabeza. Entiendes visceralmente por qué esto es revolucionario. Ya tienes SOL en tu Phantom. Ahora vamos a moverlo. Puedes enviar a un amigo, a una segunda wallet tuya, o incluso hacer un swap. Lo importante es que experimentes el proceso completo.',
         highlight: {
           title: 'Lo Que Estás a Punto de Experimentar',
-          text: 'En el sistema bancario, una transferencia internacional tarda 3-5 días y cuesta $25-50. En Solana, tarda menos de 1 segundo y cuesta menos de $0.001. Misma función, 1000x más eficiente. Esto no es exageración, es la realidad que vas a vivir en los próximos 2 minutos.'
+          text: 'En el sistema bancario, una transferencia internacional tarda 3-5 días y cuesta $25-50. En Solana, tarda menos de 1 segundo y cuesta alrededor de $0.001. Misma función, 1000x más eficiente. Esto no es exageración, es la realidad que vas a vivir en los próximos 2 minutos.'
         }
       },
       {
@@ -2391,8 +2439,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Antes de hacerlo, entiende qué está pasando bajo la superficie cuando envías cripto:',
         features: [
           { icon: Lock, title: 'Firmas Criptográficas', text: 'Cuando presionas "Enviar", tu wallet usa tu llave privada para "firmar" la transacción matemáticamente. Esta firma prueba que TÚ autorizaste el movimiento, sin revelar tu llave privada.' },
-          { icon: Network, title: 'Propagación a la Red', text: 'Tu transacción firmada se envía a los validadores de Solana. En milisegundos, miles de computadoras en todo el mundo la verifican y la agregan al siguiente bloque.' },
-          { icon: CheckCircle, title: 'Confirmación', text: 'Una vez incluida en un bloque, la transacción es PERMANENTE. Queda grabada para siempre en la blockchain. Nadie puede revertirla, censurarla, o negarla.' },
+          { icon: Network, title: 'Propagación a la Red', text: 'Tu transacción firmada se envía a los validadores de Solana. En milisegundos, unos 800 validadores en todo el mundo (más miles de nodos que sirven datos) la verifican y la agregan al siguiente bloque.' },
+          { icon: CheckCircle, title: 'Confirmación', text: 'Una vez incluida en un bloque, la transacción es PERMANENTE. Queda grabada para siempre en la blockchain. Nadie puede revertirla, censurarla, o negarla. Y si una transacción falla, tus fondos nunca salen de tu wallet, aunque la red igual cobra el pequeño fee de procesamiento.' },
           { icon: Globe, title: 'Actualización del Estado', text: 'La blockchain actualiza los balances: tu cuenta tiene menos SOL, la cuenta destino tiene más. Todo esto pasa en ~400 milisegundos.' }
         ]
       },
@@ -2403,7 +2451,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: Wallet, title: 'Paso 1: Abre Phantom', text: 'En la pantalla principal verás tu balance de SOL. Haz clic en el token SOL para ver opciones.' },
           { icon: Zap, title: 'Paso 2: Haz clic en "Send"', text: 'Verás un campo para ingresar la dirección destino y el monto a enviar.' },
-          { icon: Shield, title: 'Paso 3: Pega la Dirección Destino', text: 'Pide a tu amigo que te envíe su dirección de Solana (algo como "7xK9p..."). Pégala en el campo. VERIFICA los primeros y últimos 4 caracteres manualmente.' },
+          { icon: Shield, title: 'Paso 3: Pega la Dirección Destino', text: 'Pide a tu amigo que te envíe su dirección de Solana (algo como "7xK9p..."). Pégala en el campo. VERIFICA 6-8 caracteres al inicio y al final manualmente. Recuerda que Phantom es multichain: envía SOL por la red Solana, a una dirección de Solana.' },
           { icon: Activity, title: 'Paso 4: Ingresa el Monto', text: 'Para la primera prueba, envía algo pequeño ($1-5 en SOL). Siempre deja algo de SOL para fees futuros (~0.01 SOL mínimo).' },
           { icon: CheckCircle, title: 'Paso 5: Confirma y Observa', text: 'Revisa el resumen, confirma. En 1-2 segundos verás "Confirmed". Pide a tu amigo que revise, ya debería ver los fondos.' }
         ]
@@ -2413,7 +2461,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'El Protocolo de Seguridad: Nunca Saltártelo',
         content: 'Las transacciones blockchain son IRREVERSIBLES. No hay "Ctrl+Z". No hay soporte técnico que las cancele. Estas precauciones son obligatorias:',
         features: [
-          { icon: AlertTriangle, title: 'Verifica la Dirección', text: 'SIEMPRE compara los primeros 4 y últimos 4 caracteres de la dirección con el original. Los clipboard hijackers pueden cambiar la dirección cuando la copias. Una letra diferente = fondos perdidos para siempre.' },
+          { icon: AlertTriangle, title: 'Verifica la Dirección', text: 'SIEMPRE compara 6-8 caracteres al INICIO y 6-8 al FINAL de la dirección con el original (o un bloque del medio). Los clipboard hijackers pueden cambiar la dirección cuando la copias. Una letra diferente = fondos perdidos para siempre.' },
+          { icon: AlertTriangle, title: 'Address Poisoning: El Historial Envenenado', text: 'Los atacantes generan direcciones que coinciden en los PRIMEROS y ÚLTIMOS caracteres con las que usas, y te envían transferencias de polvo para que su dirección aparezca en tu historial. Si copias una dirección desde el historial, puedes estar copiando la del atacante. NUNCA copies direcciones del historial de transacciones: usa la libreta de direcciones de Phantom o un código QR, y verifica 6-8 caracteres en AMBOS extremos o un bloque del medio. La transacción de prueba también te protege de este ataque.' },
           { icon: Shield, title: 'Transacción de Prueba', text: 'Si vas a enviar $1,000+, SIEMPRE envía primero una prueba de $1-5. Espera a que llegue. SOLO ENTONCES envía el resto. Los segundos que "pierdes" pueden salvarte miles.' },
           { icon: Lock, title: 'Confirma el Contexto', text: 'Si alguien "te urge" a enviar rápido, es red flag. Los estafadores crean presión artificial. Las transacciones legítimas pueden esperar 2 minutos de verificación.' }
         ],
@@ -2437,7 +2486,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Lo Que Acabas de Lograr',
         items: [
           'Enviaste valor a través del mundo sin pedir permiso a ningún banco, gobierno, o intermediario.',
-          'Pagaste menos de $0.001 en fees, comparado con $25-50 en el sistema tradicional.',
+          'Pagaste alrededor de $0.001 en fees, comparado con $25-50 en el sistema tradicional.',
           'La transacción tardó ~1 segundo, comparado con 3-5 días bancarios.',
           'Quedó grabada permanentemente en la blockchain, verificable por cualquiera, para siempre.',
           'Entiendes por qué las direcciones deben verificarse: las transacciones son IRREVERSIBLES.',
@@ -2464,12 +2513,12 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: 'Copiaste una dirección de Solana y la pegaste en Phantom. Antes de enviar, ¿qué debes verificar?',
           options: [
             { id: 'a', text: 'Que la persona que te la dio sea simpática' },
-            { id: 'b', text: 'Los primeros 4 y últimos 4 caracteres de la dirección coinciden con el original (protección contra clipboard hijackers)' },
+            { id: 'b', text: 'Que 6-8 caracteres al inicio Y al final coincidan con el original (protección contra clipboard hijackers y address poisoning)' },
             { id: 'c', text: 'Nada, confío en el copy-paste' },
             { id: 'd', text: 'Solo el primer carácter' }
           ],
           correctAnswer: 'b',
-          explanation: 'El malware llamado "clipboard hijacker" puede reemplazar silenciosamente la dirección que copias por una del atacante. Verificar visualmente los caracteres es tu última línea de defensa.'
+          explanation: 'El malware llamado "clipboard hijacker" puede reemplazar silenciosamente la dirección que copias por una del atacante, y el address poisoning siembra direcciones parecidas en tu historial. Verificar 6-8 caracteres en ambos extremos es tu última línea de defensa.'
         },
         {
           id: 'q3',
@@ -2500,12 +2549,12 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: '¿Cuánto cuesta aproximadamente una transacción en Solana?',
           options: [
             { id: 'a', text: '$5-10, similar a una transferencia bancaria' },
-            { id: 'b', text: '$0.0002 aproximadamente (fracción de centavo)' },
+            { id: 'b', text: '0.000005 SOL de base (~$0.001, una fracción de centavo)' },
             { id: 'c', text: '1% del monto enviado' },
             { id: 'd', text: 'Es gratis completamente' }
           ],
           correctAnswer: 'b',
-          explanation: 'Una transacción típica en Solana cuesta alrededor de 5,000 lamports (~$0.0002). Es tan barato que puedes hacer cientos de transacciones por menos de $1. Esto es lo que hace a Solana práctica para uso diario.'
+          explanation: 'Una transacción típica en Solana cuesta 5,000 lamports, es decir 0.000005 SOL (~$0.001). Es tan barato que puedes hacer cientos de transacciones por menos de $1. Esto es lo que hace a Solana práctica para uso diario.'
         }
       ]
     }
@@ -2579,7 +2628,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         type: 'takeaways',
         title: 'El Explorador como Superpoder',
         items: [
-          'Solscan.io es la fuente de verdad de Solana. Lo que dice Solscan, ES la realidad.',
+          'Solscan es tu ventana a la blockchain: la cadena es la fuente de verdad. El explorador puede fallar o ser clonado por phishing, así que verifica siempre la URL (solscan.io).',
           'Cualquier transacción puede verificarse usando su Signature/TX ID.',
           'Cualquier wallet es pública, puedes ver balance e historial de cualquier dirección.',
           'SIEMPRE verifica el Contract Address de tokens para evitar comprar falsificaciones.',
@@ -2631,12 +2680,12 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: 'En Solscan, buscas una transacción y dice "Status: Fail". ¿Qué significa?',
           options: [
             { id: 'a', text: 'La transacción está pendiente' },
-            { id: 'b', text: 'La transacción falló, los fondos NO se movieron y probablemente volvieron a la wallet origen' },
+            { id: 'b', text: 'La transacción falló, los fondos NO se movieron y siguen en la wallet origen' },
             { id: 'c', text: 'Los fondos se perdieron' },
             { id: 'd', text: 'Necesitas esperar más tiempo' }
           ],
           correctAnswer: 'b',
-          explanation: '"Fail" significa que la transacción no se ejecutó correctamente. Los fondos no se transfirieron. Usualmente siguen en la wallet origen. Deberás intentar de nuevo, posiblemente con más SOL para fees si ese fue el problema.'
+          explanation: '"Fail" significa que la transacción no se ejecutó correctamente. Los fondos nunca salieron de tu wallet, aunque la red sí cobra el pequeño fee de procesamiento. Deberás intentar de nuevo, posiblemente con más SOL para fees si ese fue el problema.'
         },
         {
           id: 'q5',
@@ -2660,15 +2709,15 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     number: '14 de 19',
     duration: '30 minutos',
     type: 'Seguridad Vital',
-    description: 'El 99% de los robos en cripto son evitables. Conoce las tácticas de los estafadores y protégete antes de perder el dinero que tanto te costó ganar.',
+    description: 'La gran mayoría de los robos en cripto son evitables. Conoce las tácticas de los estafadores y protégete antes de perder el dinero que tanto te costó ganar.',
     sections: [
       {
         type: 'intro',
         title: 'La Realidad Brutal de Web3',
-        content: 'Aquí no hay bancos que reviertan transacciones fraudulentas. No hay seguro de depósito. No hay policía cripto que recupere tus fondos. Si te roban, perdiste, punto. Pero aquí está la buena noticia: el 99% de las estafas siguen los mismos patrones. Una vez que los conoces, son fáciles de detectar. Esta lección podría ser la más valiosa del curso, literalmente puede salvarte miles de dólares.',
+        content: 'Aquí no hay bancos que reviertan transacciones fraudulentas. No hay seguro de depósito. No hay policía cripto que recupere tus fondos. Si te roban, perdiste, punto. Pero aquí está la buena noticia: la gran mayoría de las estafas siguen los mismos patrones. Una vez que los conoces, son fáciles de detectar. Esta lección podría ser la más valiosa del curso, literalmente puede salvarte miles de dólares.',
         highlight: {
           title: 'Estadística Real',
-          text: 'En 2023, los usuarios perdieron más de $2 MIL MILLONES en estafas cripto, no hackeos sofisticados, sino ingeniería social donde las VÍCTIMAS entregaron sus llaves voluntariamente. Los estafadores no necesitan ser hackers genios. Solo necesitan que bajes la guardia una vez.'
+          text: 'Según Chainalysis, solo en 2024 las estafas cripto recibieron al menos $9,900 millones de dólares (y la cifra real podría superar los $12,000 millones). El FBI reportó $9,300 millones en pérdidas por fraude cripto en Estados Unidos ese mismo año. No fueron hackeos sofisticados, sino ingeniería social donde las VÍCTIMAS entregaron su dinero o sus llaves voluntariamente. Los estafadores no necesitan ser hackers genios. Solo necesitan que bajes la guardia una vez.'
         }
       },
       {
@@ -2692,7 +2741,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: Globe, title: 'Cómo te Encuentran', text: 'Buscan "Phantom wallet" o "Jupiter swap" en Google. El primer resultado es un ANUNCIO de "phantomm.app" o "jupiter-swap.io". El sitio se ve IDÉNTICO al real.' },
           { icon: AlertTriangle, title: 'El Engaño', text: 'El sitio te pide "conectar wallet" o "importar wallet existente". Te pide tu seed phrase. Al ingresarla, la roban en tiempo real y vacían todo.' },
-          { icon: Shield, title: 'La Defensa', text: 'NUNCA hagas clic en anuncios de Google para sitios cripto. Escribe la URL manualmente: phantom.app, jup.ag, solscan.io. Guarda los sitios oficiales en favoritos.' }
+          { icon: Shield, title: 'La Defensa', text: 'NUNCA hagas clic en anuncios de Google para sitios cripto. Escribe la URL manualmente: phantom.com (antes phantom.app), jup.ag, solscan.io. Guarda los sitios oficiales en favoritos.' }
         ]
       },
       {
@@ -2710,7 +2759,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Estafa #4: Tokens Falsos',
         content: 'Cualquiera puede crear un token llamado "USDC" o "BONK". Así te engañan:',
         features: [
-          { icon: Zap, title: 'El Setup', text: 'Alguien te ofrece vender "USDC" en P2P o te muestra un token "BONK" con buen precio en un DEX desconocido.' },
+          { icon: Zap, title: 'El Setup', text: 'Alguien te ofrece vender "USDC" en P2P o te muestra un token "BONK" con buen precio en un DEX desconocido. Y ojo: en P2P el riesgo no es solo el token, también el pago fiat (comprobantes falsos, pagos reversados). Las reglas de comprador están en la Lección 11 de este nivel.' },
           { icon: AlertTriangle, title: 'El Engaño', text: 'El token tiene el mismo nombre y logo, pero es una copia falsa. No tiene valor real. O peor: al interactuar con él, drena tu wallet.' },
           { icon: Shield, title: 'La Verificación', text: 'SIEMPRE verifica el Contract Address (CA) del token. El CA es único e imposible de falsificar. Compara con CoinGecko, CoinMarketCap, o el sitio oficial del proyecto.' }
         ],
@@ -2734,9 +2783,37 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Estafa #6: Drainers en dApps',
         content: 'Contratos inteligentes maliciosos que drenan tu wallet cuando firmas:',
         features: [
-          { icon: AlertTriangle, title: 'Cómo Funcionan', text: 'Conectas tu wallet a un sitio aparentemente legítimo. Te pide aprobar una transacción. La transacción incluye permisos ocultos para transferir TODOS tus tokens.' },
-          { icon: Shield, title: 'Las Defensas', text: 'Lee lo que firmas en Phantom, te muestra simulación de lo que pasará. Si dice "Approve unlimited access to all tokens", RECHAZA. Si el sitio no es 100% confiable, no conectes.' },
+          { icon: AlertTriangle, title: 'Cómo Funcionan', text: 'Conectas tu wallet a un sitio aparentemente legítimo y te pide firmar una transacción. En Solana no hacen falta "permisos ilimitados": una sola transacción maliciosa firmada puede transferir o reasignar tus tokens y NFTs en el mismo instante. La firma es el momento crítico.' },
+          { icon: Shield, title: 'Las Defensas', text: 'LEE la simulación que Phantom te muestra antes de firmar. Si indica que tus tokens, NFTs o SOL van a SALIR de tu wallet y eso no era lo que esperabas, RECHAZA. Si el sitio no es 100% confiable, no conectes.' },
           { icon: CheckCircle, title: 'Usa Burner Wallets', text: 'Para probar dApps nuevas, usa una wallet "burner" con fondos mínimos. Si resulta ser estafa, pierdes poco. Tu wallet principal queda intacta.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Las Estafas Que No Necesitan Blockchain',
+        content: 'Hasta aquí hablamos de estafas Web3: phishing, drainers, tokens falsos. Pero la mayor parte del dinero que la gente pierde "en cripto" se pierde en estafas que nunca tocan la blockchain. Ocurren por WhatsApp, Telegram y redes sociales, y la palabra "cripto" es solo el anzuelo. Estas son las cuatro que más víctimas cobran en Latinoamérica:',
+        features: [
+          { icon: Users, title: 'El "Cerdo Engordado" (Pig Butchering)', text: 'Alguien te escribe "por error" a WhatsApp o te contacta en redes. Semanas de conversación, amistad o romance. No te pide dinero... al principio. Luego te presenta "su plataforma de inversión". Depositas poco, ves ganancias (falsas), depositas más. Cuando intentas retirar, la plataforma te exige "pagar el impuesto para liberar tus fondos". Ese pago es la segunda estafa. Tu dinero nunca estuvo invertido.' },
+          { icon: MessageSquare, title: 'Grupos de "Señales" en WhatsApp/Telegram', text: 'Te agregan a un grupo donde un "trader experto" comparte capturas de ganancias increíbles (se fabrican en minutos con cualquier editor). Ofrecen que un "gestor" invierta por ti. Los primeros pagos pequeños llegan puntuales: salen del dinero de las víctimas nuevas. Cuando dejan de entrar víctimas, los admins desaparecen con todo.' },
+          { icon: Globe, title: 'Plataformas de Trading Falsas', text: 'Sitios y apps que imitan a un exchange real. Tu "balance" sube en pantalla, pero son números en una base de datos, no cripto real. El retiro siempre falla: "verificación pendiente", "paga una comisión", "sube a nivel VIP". Al final cierran el sitio y se van con los depósitos.' },
+          { icon: TrendingDown, title: 'Ponzis y Piramidales Explícitos', text: '"Rendimiento fijo del 10% mensual garantizado" más "bonos por traer referidos". En Colombia ya vivimos esto con DMG y las captadoras ilegales: la fórmula es idéntica, solo cambiaron la palabra "divisas" por "cripto". La matemática no perdona: pagar rendimientos fijos exige que entren víctimas nuevas sin parar, y cuando el flujo se frena, colapsa. Siempre colapsa.' }
+        ],
+        highlight: {
+          title: 'La Señal Universal',
+          text: 'Nadie que realmente pueda generar retornos garantizados necesita tu dinero ni recluta desconocidos por WhatsApp. Rendimiento fijo prometido, urgencia y bonos por referidos: esa combinación es estafa. Sin excepciones.'
+        }
+      },
+      {
+        type: 'main',
+        title: '¿Ya te Estafaron? Haz Esto',
+        content: 'Si ya caíste, o sospechas que caíste, cada minuto cuenta. Sigue estos pasos en orden:',
+        features: [
+          { icon: AlertTriangle, title: '1. No Envíes Más Dinero JAMÁS', text: 'El "recovery scam" es la segunda ola: aparece gente que promete recuperar tus fondos a cambio de un pago adelantado. Son los mismos estafadores u otros que compraron tu contacto. Nadie recupera cripto robada cobrando un fee por adelantado.' },
+          { icon: Lock, title: '2. Si Diste tu Frase Semilla, Actúa YA', text: 'Crea una wallet NUEVA con una frase nueva y mueve lo que quede de inmediato. La wallet comprometida está muerta para siempre: no le deposites nunca más, aunque parezca que no pasó nada.' },
+          { icon: Shield, title: '3. Revoca Conexiones', text: 'Desde la wallet comprometida, revoca las conexiones y delegaciones de los sitios que autorizaste (en Phantom: Configuración, Aplicaciones conectadas). Reduce el daño que aún pueden hacerte.' },
+          { icon: Search, title: '4. Guarda la Evidencia', text: 'Capturas de los chats, comprobantes de pago, direcciones de wallet, URLs de la plataforma. No borres nada por vergüenza: es lo único que permite investigar, reportar y advertir a otros.' },
+          { icon: Landmark, title: '5. Denuncia', text: 'En Colombia: el CAI Virtual de la Policía Nacional y la Fiscalía. Reporta también la dirección del estafador en el exchange que usaste: si los fondos llegan ahí, pueden congelarlos.' },
+          { icon: Users, title: '6. No te Avergüences', text: 'Los estafadores son profesionales que perfeccionan sus guiones con miles de víctimas. Esto le pasa a médicos, ingenieros y abogados. Contarlo protege a otros; callarlo solo protege al estafador.' }
         ]
       },
       {
@@ -2759,7 +2836,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           title: 'GREEN FLAGS (Probablemente Legítimo)',
           points: [
             'TÚ inicias el contacto con soporte oficial',
-            'URLs oficiales verificadas (phantom.app, jup.ag)',
+            'URLs oficiales verificadas (phantom.com, jup.ag)',
             'NUNCA te piden seed phrase',
             'No prometen retornos garantizados',
             'Tienen historial público y verificable',
@@ -2810,7 +2887,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'Les envío la seed phrase para proteger mis fondos' },
             { id: 'b', text: 'Les envío solo las primeras 6 palabras para verificar' },
             { id: 'c', text: 'Bloqueo, reporto, e ignoro. Phantom NUNCA contacta por DM ni pide seed phrases.' },
-            { id: 'd', text: 'Les pido que me llamen para verificar' }
+            { id: 'd', text: 'Les pido que me llamen por teléfono para verificar que son reales' }
           ],
           correctAnswer: 'c',
           explanation: 'El 100% de los mensajes de "soporte" que piden seed phrases son estafas. Las empresas legítimas NUNCA inician contacto por DM ni piden tu seed phrase bajo ninguna circunstancia.'
@@ -2822,7 +2899,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'Hago clic porque apareció primero' },
             { id: 'b', text: 'Ignoro los anuncios y escribo manualmente jup.ag (el sitio oficial) o uso un favorito guardado' },
             { id: 'c', text: 'Pruebo en una wallet vacía primero' },
-            { id: 'd', text: 'Verifico que tenga HTTPS' }
+            { id: 'd', text: 'Verifico que tenga HTTPS y el candado de seguridad en el navegador' }
           ],
           correctAnswer: 'b',
           explanation: 'Los estafadores PAGAN por anuncios de Google con URLs falsas. NUNCA hagas clic en anuncios para sitios cripto. Escribe la URL oficial manualmente o usa favoritos guardados.'
@@ -2832,7 +2909,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: 'Aparece un NFT misterioso en tu wallet que dice "Reclama $5,000 en claim-crypto-rewards.xyz". ¿Qué haces?',
           options: [
             { id: 'a', text: 'Visito el sitio para reclamar el premio' },
-            { id: 'b', text: 'Lo vendo rápido en Magic Eden' },
+            { id: 'b', text: 'Lo vendo rápido en Magic Eden antes de que pierda su valor' },
             { id: 'c', text: 'Lo ignoro completamente. Es un NFT spam diseñado para drenar mi wallet si interactúo con el sitio.' },
             { id: 'd', text: 'Se lo envío a un amigo' }
           ],
@@ -2845,7 +2922,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'El que tenga el logo más claro' },
             { id: 'b', text: 'Comparo el Contract Address con el oficial de CoinGecko: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v' },
-            { id: 'c', text: 'El que tenga más liquidez' },
+            { id: 'c', text: 'El que tenga más liquidez y más volumen de trading en el DEX' },
             { id: 'd', text: 'Pregunto en Discord cuál es' }
           ],
           correctAnswer: 'b',
@@ -2857,23 +2934,23 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Envío los 0.5 SOL porque es un influencer famoso' },
             { id: 'b', text: 'Le pido prueba de identidad primero' },
-            { id: 'c', text: 'Bloqueo e ignoro. Ningún giveaway legítimo pide que envíes dinero primero. Las cuentas de influencers son frecuentemente hackeadas o impersonadas.' },
-            { id: 'd', text: 'Envío 0.1 SOL para probar' }
+            { id: 'c', text: 'Bloqueo e ignoro. Ningún giveaway legítimo pide que envíes dinero primero.' },
+            { id: 'd', text: 'Envío 0.1 SOL primero para probar si de verdad devuelve el dinero' }
           ],
           correctAnswer: 'c',
           explanation: 'NINGÚN giveaway legítimo te pedirá enviar dinero primero. Esto es estafa 100% de las veces. Las cuentas de influencers son objetivos frecuentes de hackers que usan su credibilidad para estafar.'
         },
         {
           id: 'q6',
-          question: 'Conectas tu wallet a una nueva dApp. Phantom muestra: "Esta transacción solicita APROBAR ACCESO ILIMITADO a todos tus tokens". ¿Qué haces?',
+          question: 'Conectas tu wallet a una nueva dApp para hacer un swap pequeño. La simulación de Phantom muestra que TODOS tus tokens y tu SOL saldrán de tu wallet. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Apruebo porque necesito usar la dApp' },
-            { id: 'b', text: 'RECHAZO inmediatamente. Un permiso "ilimitado a todos los tokens" es señal de drainer malicioso. Las dApps legítimas piden permisos específicos y limitados.' },
-            { id: 'c', text: 'Apruebo pero con monto pequeño' },
-            { id: 'd', text: 'Contacto al soporte de la dApp para preguntar' }
+            { id: 'a', text: 'Firmo porque necesito usar la dApp' },
+            { id: 'b', text: 'RECHAZO inmediatamente. La simulación muestra que la transacción vaciaría mi wallet: es un drainer.' },
+            { id: 'c', text: 'Firmo pero solo con un monto pequeño' },
+            { id: 'd', text: 'Contacto al soporte de la dApp por Discord para preguntar si eso es normal' }
           ],
           correctAnswer: 'b',
-          explanation: 'Los drainers funcionan pidiendo permisos excesivos. Una dApp legítima pide acceso SOLO a lo que necesita (ej: "swap 100 USDC por SOL"). Si pide acceso "ilimitado a todos los tokens", es casi seguro maliciosa.'
+          explanation: 'En Solana, una sola transacción firmada puede transferir todos tus activos de una vez. Por eso la simulación de Phantom es tu última línea de defensa: léela SIEMPRE. Una dApp legítima solo mueve lo que la operación requiere (ej: "swap 100 USDC por SOL"). Si muestra salidas que no esperabas, rechaza sin dudar.'
         }
       ]
     }
@@ -2889,13 +2966,13 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     referrals: [
       {
         title: 'Kast',
-        description: 'Tarjeta virtual y física para gastar tus stablecoins (USDC/USDT) en cualquier lugar.',
+        description: 'Tarjeta virtual y física para gastar tus stablecoins (USDC/USDT) en cualquier lugar. Plan Standard: $0 al año y 0% de fee al recargar con stablecoins. Link de referido: ambos obtenemos beneficio.',
         link: 'https://app.kast.xyz/referral/NGUCNBNA',
         buttonText: 'Solicitar Tarjeta Kast'
       },
       {
         title: 'Avici',
-        description: 'Tarjeta Visa autocustodia para gastar tus stablecoins (USDC). Usa el código y obtén 10% de descuento en la compra de tu tarjeta.',
+        description: 'Neobank autocustodial en Solana. Su tarjeta Visa de crédito Avici Platinum está asegurada con tu USDC como colateral: $10 de emisión única, $0 anual y 0% de FX. Usa el código y obtén 10% de descuento en la emisión. Link de referido: ambos obtenemos beneficio.',
         link: 'https://avici.money',
         buttonText: 'Ir a Avici',
         code: '9EULQP'
@@ -2905,10 +2982,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: 'El Sueño: Vivir en Cripto',
-        content: 'Aprendiste a comprar cripto. Aprendiste a guardarlo de forma segura. Aprendiste a moverlo. Ahora viene la pregunta final: ¿cómo lo USAS en el mundo real? La respuesta tradicional era: "vende en un exchange, retira a tu banco, y gasta el fiat". Pero esto tiene problemas: fees de venta, tiempos de espera, límites bancarios, y preguntas incómodas de tu banco sobre "de dónde viene ese dinero". Las **tarjetas cripto** eliminan todo eso. Cargas tu tarjeta con USDC o stablecoins, y la usas como cualquier Visa/Mastercard. Amazon, Netflix, gasolina, supermercado, funciona en cualquier lugar.',
+        content: 'Aprendiste a comprar cripto. Aprendiste a guardarlo de forma segura. Aprendiste a moverlo. Ahora viene la pregunta final: ¿cómo lo USAS en el mundo real? La respuesta tradicional era: "vende en un exchange, retira a tu banco, y gasta el fiat". Pero esto tiene problemas: fees en cada paso, tiempos de espera de días, y límites bancarios que no controlas. Las **tarjetas cripto** eliminan casi toda esa fricción. Cargas tu tarjeta con USDC o stablecoins, y la usas como cualquier Visa/Mastercard. Amazon, Netflix, gasolina, supermercado, funciona en cualquier lugar.',
         highlight: {
           title: 'El Ciclo Completo',
-          text: 'Fiat → Exchange → Cripto → Tu Wallet → Tarjeta Cripto → Gastos Reales. Todo sin volver a pasar por tu banco tradicional. Sin pedir permiso. Sin límites arbitrarios. Tu dinero, tus reglas.'
+          text: 'Fiat → Exchange → Cripto → Tu Wallet → Tarjeta Cripto → Gastos Reales. Todo sin volver a pasar por tu banco tradicional: más velocidad, menos fees, y control directo de tu dinero. Eso sí: las tarjetas cripto también requieren verificación de identidad (KYC), y tus obligaciones fiscales siguen aplicando.'
         }
       },
       {
@@ -2918,7 +2995,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: Wallet, title: 'La Mecánica', text: 'Tú cargas la tarjeta con cripto (usualmente stablecoins como USDC). Cuando pagas en una tienda, la tarjeta convierte automáticamente tu cripto a la moneda local (pesos, dólares) al momento del pago. El comercio recibe fiat normal.' },
           { icon: Globe, title: 'Aceptación Universal', text: 'Estas tarjetas son Visa o Mastercard reales. Funcionan en CUALQUIER lugar que acepte tarjetas: tiendas físicas, comercio online, cajeros automáticos, pagos de servicios, suscripciones.' },
-          { icon: Zap, title: 'Sin Intermediarios Bancarios', text: 'No necesitas tener una cuenta bancaria en algunos casos. Cargas directamente desde tu wallet a la tarjeta. Eliminas al banco como intermediario.' }
+          { icon: Zap, title: 'Sin Intermediarios Bancarios', text: 'No necesitas tener una cuenta bancaria en algunos casos. Cargas directamente desde tu wallet a la tarjeta. Eliminas al banco como intermediario del gasto diario.' },
+          { icon: Shield, title: 'Sí Requieren KYC', text: 'Los emisores de estas tarjetas están regulados como cualquier emisor Visa/Mastercard: te pedirán tu documento de identidad y verificación completa (KYC) para emitirla. La autocustodia aplica a tus fondos, no a tu identidad. Y gastar cripto puede ser un evento fiscal en tu país: guarda tus registros.' }
         ]
       },
       {
@@ -2926,8 +3004,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Opciones de Tarjetas para Latinoamérica',
         content: 'No todas las tarjetas cripto funcionan en LATAM. Estas son dos opciones que operan en la región (verifica disponibilidad y condiciones en tu país antes de solicitarlas):',
         features: [
-          { icon: Banknote, title: 'Kast', text: 'Tarjeta virtual y física que acepta USDC y USDT. Funciona en la mayoría de países LATAM. Recarga directamente desde Solana. Sin fees de recarga. Buena opción para comenzar.' },
-          { icon: Banknote, title: 'Avici', text: 'Tarjeta premium con beneficios adicionales. Acepta múltiples criptomonedas. Buen servicio al cliente en español. Disponible en varios países latinoamericanos.' }
+          { icon: Banknote, title: 'Kast', text: 'Tarjeta virtual y física que acepta USDC y USDT. Disponible en Colombia y la mayoría de países LATAM. Recargas directamente desde Solana. Su plan Standard cuesta $0 al año, con 0% de fee al recargar con stablecoins (las compras en moneda extranjera pueden tener hasta 1.75% de FX). Buena opción para comenzar.' },
+          { icon: Banknote, title: 'Avici', text: 'Neobank autocustodial construido sobre Solana. Su tarjeta Visa Avici Platinum es una tarjeta de crédito asegurada: usas tu USDC como colateral, sin necesidad de historial crediticio. Cuesta $10 de emisión (pago único), con $0 de cuota anual y 0% de FX. Sirve Colombia y gran parte de LATAM.' }
         ]
       },
       {
@@ -2974,7 +3052,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           'Funcionan como Visa/Mastercard normales, aceptadas en millones de comercios mundialmente.',
           'Gasta STABLECOINS (USDC), no activos volátiles (BTC, SOL). Los stablecoins son para gastar, las criptos volátiles son para ahorrar.',
           'El proceso: Phantom → App de tarjeta cripto → Gastos reales. Sin intermediarios bancarios.',
-          'Considera impuestos, fees, y límites antes de elegir tu tarjeta.',
+          'Todas requieren verificación de identidad (KYC). Considera impuestos, fees, y límites antes de elegir tu tarjeta.',
           'Con esto completas el ciclo: entrada al mundo cripto, custodia segura, y ahora salida práctica para uso diario.'
         ]
       }
@@ -2999,8 +3077,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'SOL es muy lento para pagos' },
             { id: 'b', text: 'SOL es volátil, si gastas 1 SOL hoy y mañana vale el doble, efectivamente pagaste el doble por tu compra. Es mejor gastar stablecoins y guardar SOL como inversión.' },
-            { id: 'c', text: 'Las tarjetas cripto no aceptan SOL' },
-            { id: 'd', text: 'SOL no tiene valor real' }
+            { id: 'c', text: 'Las tarjetas cripto no aceptan SOL directamente en ningún caso' },
+            { id: 'd', text: 'SOL no tiene valor real fuera del ecosistema Solana' }
           ],
           correctAnswer: 'b',
           explanation: 'Este es el "problema de la pizza de Bitcoin". Gastar activos que pueden apreciarse duele psicológicamente. La estrategia óptima: HODL cripto volátil, gasta stablecoins para compras diarias.'
@@ -3009,13 +3087,13 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q3',
           question: '¿Cuál es la diferencia entre gastar con una tarjeta cripto vs vender en exchange y retirar a tu banco?',
           options: [
-            { id: 'a', text: 'No hay diferencia, es lo mismo' },
-            { id: 'b', text: 'La tarjeta cripto es más rápida (minutos vs días), evita tu banco tradicional, y usualmente tiene menos burocracia y preguntas sobre origen de fondos' },
+            { id: 'a', text: 'No hay ninguna diferencia práctica, ambos caminos terminan en lo mismo' },
+            { id: 'b', text: 'La tarjeta cripto es más rápida (minutos vs días), suele tener menos fees, y te da control directo: gastas desde tu wallet sin esperar transferencias' },
             { id: 'c', text: 'Vender en exchange es más rápido' },
             { id: 'd', text: 'Las tarjetas cripto son ilegales' }
           ],
           correctAnswer: 'b',
-          explanation: 'Retirar a banco puede tomar días, generar preguntas de compliance bancario, y tiene límites. Las tarjetas cripto eliminan al banco como intermediario, cargas y gastas en minutos.'
+          explanation: 'Retirar a banco puede tomar días y suma fees en cada paso; la tarjeta convierte tu cripto en el momento del pago. Ojo: las preguntas del banco sobre origen de fondos son un deber legal (SARLAFT en Colombia), no un abuso, y las tarjetas cripto también exigen KYC completo. Los impuestos aplican igual, uses tarjeta o banco.'
         },
         {
           id: 'q4',
@@ -3034,7 +3112,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: 'Estrategia óptima: tienes 10 SOL + 500 USDC. ¿Cómo los usas?',
           options: [
             { id: 'a', text: 'Gasto todo el SOL primero porque vale más' },
-            { id: 'b', text: 'Convierto todo a USDC y lo gasto' },
+            { id: 'b', text: 'Convierto todo a USDC de inmediato y lo voy gastando poco a poco' },
             { id: 'c', text: 'HODL el SOL como inversión de largo plazo. Uso los 500 USDC para cargar mi tarjeta cripto y gastos diarios. Si necesito más, convierto pequeñas cantidades de SOL a USDC.' },
             { id: 'd', text: 'Guardo todo y nunca gasto' }
           ],
@@ -3059,7 +3137,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Tienes SOL, BTC, ETH... pero necesitas pagar el arriendo. El precio de tus criptos puede caer 30% mañana. ¿Cómo proteges tu dinero sin salir del ecosistema cripto? La respuesta son las **stablecoins**: tokens diseñados para mantener un valor estable, generalmente anclados 1:1 al dólar estadounidense. 1 USDC = 1 dólar. 1 USDT = 1 dólar. Siempre. Esa es la promesa. En Latinoamérica, las stablecoins se han convertido en algo más que una herramienta de trading. Son la forma más accesible de **dolarizarse** sin necesidad de una cuenta bancaria en Estados Unidos, sin límites de compra de dólares, y sin intermediarios que te cobren spreads abusivos. Un argentino que durante años convivió con controles de cambio (el llamado cepo), un venezolano con el bolívar destruido, un colombiano que quiere proteger sus pesos, todos usan stablecoins como su cuenta de ahorro en dólares.',
         highlight: {
           title: 'El Dato que Importa',
-          text: 'Latinoamérica es la región que más usa stablecoins per cápita en el mundo. No para especular, para SOBREVIVIR. Cuando tu moneda local pierde valor cada semana, tener dólares digitales en tu wallet no es un lujo, es una necesidad.'
+          text: 'Latinoamérica es una de las regiones donde más se usan stablecoins para la vida diaria. No para especular, para SOBREVIVIR. Cuando tu moneda local pierde valor cada semana, tener dólares digitales en tu wallet no es un lujo, es una necesidad.'
         }
       },
       {
@@ -3077,8 +3155,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'USDC vs USDT: La Batalla de los Gigantes',
         content: 'Son las dos stablecoins más grandes del mundo. Las usarás constantemente. Pero tienen diferencias importantes que debes entender:',
         features: [
-          { icon: Shield, title: 'USDC (Circle)', text: 'Emitido por Circle, empresa regulada en Estados Unidos. Auditorías mensuales públicas. Reservas en bonos del Tesoro de USA y efectivo en bancos regulados. Es la opción más transparente y la preferida por instituciones. Disponible en Solana, Ethereum, y múltiples redes.' },
-          { icon: Globe, title: 'USDT (Tether)', text: 'El más usado del mundo por volumen. Emitido por Tether, que trasladó su sede a El Salvador en 2025 (antes operaba principalmente desde las Islas Vírgenes Británicas). Historial de controversias sobre la composición real de sus reservas, durante años se negaron a hacer auditorías completas. Han mejorado su transparencia, pero la confianza del mercado es menor que en USDC. La ventaja: tiene más liquidez y está en más exchanges y redes.' },
+          { icon: Shield, title: 'USDC (Circle)', text: 'Emitido por Circle, empresa regulada en Estados Unidos. Atestaciones mensuales públicas verificadas por Deloitte (revisiones de reservas, no auditorías completas). Reservas en bonos del Tesoro de USA y efectivo en bancos regulados. Es la opción más transparente y la preferida por instituciones. Disponible en Solana, Ethereum, y múltiples redes.' },
+          { icon: Globe, title: 'USDT (Tether)', text: 'El más usado del mundo por volumen. Emitido por Tether, que trasladó su sede a El Salvador en 2025 (antes operaba principalmente desde las Islas Vírgenes Británicas). Historial de controversias sobre la composición real de sus reservas: en 2021 pagó multas por declaraciones engañosas al respecto ($41 millones a la CFTC y $18.5 millones a la Fiscalía de Nueva York), y nunca ha completado una auditoría completa, solo atestaciones trimestrales de BDO. Han mejorado su transparencia, pero la confianza del mercado es menor que en USDC. La ventaja: tiene más liquidez y está en más exchanges y redes.' },
           { icon: AlertTriangle, title: 'El Riesgo de Ambas', text: 'Las dos dependen de una EMPRESA centralizada. Si Circle o Tether quiebran, si un regulador las cierra, o si los bancos donde tienen reservas fallan, tu stablecoin podría perder su paridad. En marzo 2023, USDC cayó temporalmente a $0.87 cuando Silicon Valley Bank (donde Circle tenía $3.3 mil millones) colapsó. Se recuperó en días, pero el susto fue real.' }
         ]
       },
@@ -3088,7 +3166,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         leftSide: {
           title: 'USDC (Circle)',
           points: [
-            'Auditorías mensuales por Deloitte',
+            'Atestaciones mensuales verificadas por Deloitte',
             'Reservas 100% en bonos del Tesoro + efectivo',
             'Empresa regulada en USA',
             'Puede congelar direcciones por orden legal',
@@ -3099,7 +3177,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         rightSide: {
           title: 'USDT (Tether)',
           points: [
-            'Auditorías trimestrales (más recientes)',
+            'Atestaciones trimestrales (BDO); nunca una auditoría completa',
             'Reservas diversificadas (bonos, BTC, oro, préstamos)',
             'Con sede en El Salvador (antes en las Islas Vírgenes Británicas)',
             'También puede congelar direcciones',
@@ -3128,7 +3206,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'En Latinoamérica, las stablecoins tienen usos prácticos que van mucho más allá del trading:',
         features: [
           { icon: PiggyBank, title: 'Ahorro en Dólares', text: 'Compra USDC con tus pesos y guárdalo en tu wallet. Es como tener una cuenta de ahorro en dólares sin necesidad de cuenta bancaria en USA. Sin controles de cambio. Sin límites. Sin spread bancario abusivo.' },
-          { icon: Globe, title: 'Remesas', text: 'Enviar USDC de USA a Colombia cuesta menos de $0.01 en Solana y llega en segundos. Western Union cobra 5-10% y tarda días. Las familias que reciben remesas pueden ahorrar cientos de dólares al año.' },
+          { icon: Globe, title: 'Remesas', text: 'Enviar USDC de USA a Colombia cuesta menos de $0.01 en comisión de red en Solana y llega en segundos. Los servicios tradicionales cuestan en promedio un 6% del envío en total. Con stablecoins ahorras típicamente 3-6% (~$15-30 por cada $500), incluso después del spread de convertir a pesos.' },
           { icon: Wallet, title: 'Refugio en Volatilidad', text: 'Cuando BTC o SOL caen 20%, puedes convertir temporalmente a USDC para proteger tus ganancias. Luego recompras cuando el precio se estabiliza. Es tu "puerto seguro" dentro del ecosistema cripto.' },
           { icon: Zap, title: 'Pagos y Tarjetas Cripto', text: 'Las tarjetas cripto como Kast y Avici funcionan principalmente con stablecoins. Cargas USDC, pagas en cualquier tienda. El comercio recibe pesos, tú pagas desde tu wallet.' }
         ]
@@ -3136,16 +3214,16 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Remesas con Stablecoins: Envía Dinero Sin Fronteras',
-        content: 'Latinoamérica recibe más de $150 mil millones al año en remesas, dinero que trabajadores en USA, España y otros países envían a sus familias. Los servicios tradicionales como Western Union o MoneyGram cobran entre $25 y $50 por envío, más un spread cambiario desfavorable. Las stablecoins eliminan casi todo ese costo. Enviar $500 de USA a Colombia cuesta menos de **$0.01** en comisión de red usando Solana, y llega en segundos, no en 3-5 días hábiles.',
+        content: 'Latinoamérica recibe más de $150 mil millones al año en remesas, dinero que trabajadores en USA, España y otros países envían a sus familias. Los servicios tradicionales como Western Union o MoneyGram cuestan en promedio un 6% del envío entre comisión y spread cambiario (~$30 por cada $500); los proveedores online pueden ser algo más baratos, y el retiro en efectivo suele llegar en minutos. Las stablecoins eliminan la mayor parte de ese costo: enviar $500 de USA a Colombia cuesta menos de **$0.01** en comisión de red usando Solana y llega en segundos. El costo real está al final del camino: convertir USDC a pesos tiene un spread de 1-3% en la plataforma local. Aun así, el ahorro típico es de 3-6% por envío.',
         features: [
-          { icon: Banknote, title: 'Comparación de Costos', text: 'Enviar $500 con Western Union: $25-50 de comisión + 2-4% de spread cambiario = pierdes $35-70. Enviar $500 en USDC por Solana: $0.001 de fee de red. Eso es un ahorro de $35-70 por envío. Si tu familia recibe remesas mensuales, son $420-840 al año que SE QUEDAN en tu bolsillo en vez de pagárselo a intermediarios.' },
+          { icon: Banknote, title: 'Comparación de Costos', text: 'Enviar $500 por canales tradicionales: entre comisión y spread cambiario pierdes en promedio ~$30 (un 6% del total). Enviar $500 en USDC por Solana: $0.001 de fee de red, más el spread de 1-3% (~$5-15) al convertir a pesos. Ahorro típico: 3-6% por envío (~$15-30 por cada $500). Si tu familia recibe remesas mensuales, son $180-360 al año que SE QUEDAN en el bolsillo en vez de pagárselos a intermediarios.' },
           { icon: Zap, title: 'Paso a Paso: Enviar Remesa con USDC', text: '1) El trabajador en USA compra USDC en un exchange (Coinbase, Kraken) o P2P. 2) Envía USDC a la wallet de Solana del familiar en LATAM (fee: $0.001, tiempo: ~2 segundos). 3) El familiar convierte USDC a moneda local usando un exchange local o plataforma P2P. 4) Retira a su cuenta bancaria o billetera digital. Todo el proceso puede completarse en minutos.' },
           { icon: Globe, title: 'Plataformas LATAM para Convertir', text: 'En Colombia: Bitso, Binance P2P, o CopperX permiten vender USDC por pesos colombianos. En México: Bitso es la plataforma líder para convertir USDC a MXN con retiro bancario. En Argentina: plataformas P2P como Binance P2P o Lemon Cash permiten vender USDC al precio del dólar blue. En Venezuela: Binance P2P es la opción más usada. Investiga las opciones disponibles en tu país.' },
-          { icon: AlertTriangle, title: 'Consideraciones Importantes', text: 'La persona que recibe necesita saber usar una wallet cripto o tener una cuenta en un exchange local. La conversión a moneda local puede tener un pequeño spread en la plataforma P2P (1-3%), pero sigue siendo mucho menor que Western Union. Algunos países pueden tener regulaciones sobre la recepción de criptoactivos, infórmate sobre las reglas locales.' }
+          { icon: AlertTriangle, title: 'Consideraciones Importantes', text: 'La persona que recibe necesita saber usar una wallet cripto o tener una cuenta en un exchange local. La conversión a moneda local tiene un spread en la plataforma P2P (1-3%): es la mayor parte del costo total, y aun así el camino completo sigue siendo más barato que el promedio tradicional. Algunos países pueden tener regulaciones sobre la recepción de criptoactivos, infórmate sobre las reglas locales.' }
         ],
         highlight: {
           title: 'El Impacto Real',
-          text: 'Para una familia que recibe $500 mensuales en remesas, cambiar de Western Union a stablecoins puede significar $500-800 extra al año. Ese dinero es un mes adicional de gastos, útiles escolares, o medicinas. Las stablecoins no son solo tecnología, son una herramienta de justicia económica para millones de familias latinoamericanas.'
+          text: 'Para una familia que recibe $500 mensuales en remesas, cambiar de los canales tradicionales a stablecoins puede significar $180-360 extra al año. Ese dinero es útiles escolares, medicinas, o buena parte del mercado de un mes. Las stablecoins no son solo tecnología, son una herramienta de justicia económica para millones de familias latinoamericanas.'
         }
       },
       {
@@ -3169,8 +3247,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Magia del blockchain, todas funcionan igual' },
             { id: 'b', text: 'El mecanismo de respaldo (reservas reales, sobrecolateralización, o algoritmos) determina qué tan segura es. Las algorítmicas sin respaldo colapsaron y destruyeron $40 mil millones' },
-            { id: 'c', text: 'El gobierno garantiza el valor como con el dinero normal' },
-            { id: 'd', text: 'No importa, todas valen siempre exactamente $1' }
+            { id: 'c', text: 'El gobierno garantiza el valor como lo hace con el dinero normal de los bancos' },
+            { id: 'd', text: 'No importa el mecanismo, todas valen siempre exactamente $1 por diseño' }
           ],
           correctAnswer: 'b',
           explanation: 'El mecanismo importa TODO. USDC tiene dólares reales en reserva. UST tenía solo un algoritmo. Cuando el algoritmo falló, $40 mil millones desaparecieron. Siempre pregunta: ¿qué respalda esto?'
@@ -3181,8 +3259,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'USDC es una estafa' },
             { id: 'b', text: 'Circle tenía $3.3 mil millones en Silicon Valley Bank, que colapsó. Esto demuestra que incluso las stablecoins más confiables tienen riesgo porque dependen de bancos e instituciones centralizadas' },
-            { id: 'c', text: 'Fue un error técnico sin importancia' },
-            { id: 'd', text: 'Porque alguien hackeó la blockchain' }
+            { id: 'c', text: 'Fue un error técnico de la red que se corrigió solo y no enseña nada' },
+            { id: 'd', text: 'Porque alguien hackeó la blockchain de Solana ese fin de semana' }
           ],
           correctAnswer: 'b',
           explanation: 'USDC se recuperó cuando el gobierno garantizó los depósitos de SVB. Pero la lección es clara: las stablecoins respaldadas por reservas dependen de que esas reservas estén seguras. Diversificar entre stablecoins reduce este riesgo.'
@@ -3194,7 +3272,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'Invierto todo inmediatamente, 25% es increíble' },
             { id: 'b', text: 'Le pido el link para registrarme también' },
             { id: 'c', text: 'Desconfío inmediatamente. UST/Luna prometía 20% "sin riesgo" y destruyó $40 mil millones. Si parece demasiado bueno para ser verdad, lo es' },
-            { id: 'd', text: 'Invierto solo un poco para probar' }
+            { id: 'd', text: 'Invierto solo un poco al principio para probar que los retiros funcionan de verdad' }
           ],
           correctAnswer: 'c',
           explanation: 'Anchor Protocol ofrecía 20% en UST y atrajo miles de millones. Cuando colapsó, lo perdieron todo. Rendimientos "seguros" mayores al 5-8% en stablecoins son una bandera roja ENORME. Pregunta siempre: ¿de dónde sale el rendimiento?'
@@ -3203,7 +3281,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q4',
           question: 'Imagina que vives en un país con fuertes controles de cambio (como el cepo que tuvo Argentina durante años). ¿Cómo te ayudan las stablecoins?',
           options: [
-            { id: 'a', text: 'No me ayudan, necesito dólares reales' },
+            { id: 'a', text: 'No me ayudan en nada, para dolarizarme de verdad necesito billetes físicos' },
             { id: 'b', text: 'Puedo comprar USDC sin límite a través de exchanges P2P, dolarizando mis ahorros sin depender del cupo oficial del gobierno ni del spread del dólar blue' },
             { id: 'c', text: 'Solo sirven para comprar NFTs' },
             { id: 'd', text: 'Son ilegales en Argentina' }
@@ -3215,7 +3293,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q5',
           question: 'Tienes $5,000 en ahorros y quieres dolarizarlos con stablecoins. ¿Cuál es la estrategia más segura?',
           options: [
-            { id: 'a', text: 'Todo en USDT porque es la más popular' },
+            { id: 'a', text: 'Todo en USDT porque es la más popular y la que tiene más liquidez global' },
             { id: 'b', text: 'Todo en la stablecoin que me dé más interés' },
             { id: 'c', text: 'Dividir entre USDC y USDT en mi propia wallet. USDC por transparencia, USDT por liquidez. Nunca todo en una sola stablecoin ni en un exchange' },
             { id: 'd', text: 'Buscar una stablecoin algorítmica que pague mejor rendimiento' }
@@ -3241,7 +3319,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: '¿Cuándo es el mejor momento para comprar Bitcoin? La respuesta honesta es: **nadie lo sabe**. Ni los analistas, ni los traders con 20 años de experiencia, ni los "gurús" de Twitter que aciertan una vez y te lo recuerdan por siempre (y olvidan las 50 veces que se equivocaron). Pero hay una estrategia que elimina el problema por completo: **Dollar Cost Averaging (DCA)**, o en español, inversión periódica. La idea es tan simple que parece tonta: compras una cantidad fija de cripto en intervalos regulares, sin importar el precio. $50 cada semana. $200 cada mes. Lo que puedas. Llueva o truene. Sin mirar gráficos. Sin intentar predecir nada. El resultado? Históricamente, DCA ha superado a la mayoría de inversores que intentan "comprar barato y vender caro". Porque el enemigo real no es el mercado, son tus emociones.',
         highlight: {
           title: 'El Dato Que Cambia Todo',
-          text: 'Si hubieras invertido $50 semanales en Bitcoin desde 2019 (sin importar el precio), habrías invertido ~$15,600. El valor de esos BTC hoy sería superior a $60,000. No necesitaste acertar el timing. Solo necesitaste no parar.'
+          text: 'Si hubieras invertido $50 semanales en Bitcoin desde 2019 (sin importar el precio), a mediados de 2026 habrías invertido ~$19,500 en unas 390 semanas y acumulado ~0.9 BTC. Con BTC en $60,000-65,000 tras la corrección de 2026, ese stack vale ~$55,000-57,000: casi 3 veces lo invertido, habiendo atravesado caídas de más del 50% en el camino. No necesitaste acertar el timing. Solo necesitaste no parar.'
         }
       },
       {
@@ -3259,13 +3337,13 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'DCA vs Timing: ¿Qué Dice la Historia?',
         content: 'Imagina 3 personas que invierten $100 mensuales en Bitcoin durante 4 años:',
         features: [
-          { icon: Clock, title: 'Ana (DCA Disciplinado)', text: 'Compra $100 cada mes el día 1, sin importar el precio. No mira gráficos. No se estresa. En 4 años invirtió $4,800. Su retorno promedio histórico: entre 150-400% dependiendo del período.' },
+          { icon: Clock, title: 'Ana (DCA Disciplinado)', text: 'Compra $100 cada mes el día 1, sin importar el precio. No mira gráficos. No se estresa. En 4 años invirtió $4,800. Su retorno promedio histórico: entre 150-400% dependiendo del período (ventanas de 4+ años, hasta 2025).' },
           { icon: AlertTriangle, title: 'Carlos (Intenta Hacer Timing)', text: 'Espera las caídas "perfectas" para comprar. Pero cuando cae, tiene miedo de que caiga más. Cuando sube, piensa que ya es muy tarde. En 4 años solo ejecutó 15 compras en lugar de 48. Invirtió menos y perdió las mejores oportunidades.' },
           { icon: TrendingDown, title: 'María (Compra Todo de Una Vez)', text: 'Invierte los $4,800 juntos. Si compró en un pico, puede pasar AÑOS en pérdida psicológica. Si compró en un suelo, ganó más que Ana. Pero ¿quién sabe cuándo es el suelo? Nadie. Y el estrés emocional de ver -50% en tus ahorros es devastador.' }
         ],
         highlight: {
           title: 'Estudios Reales',
-          text: 'Un análisis de todos los períodos de 4 años en la historia de Bitcoin muestra que DCA ha generado retorno positivo en el 100% de los casos. Timing el mercado correctamente es casi imposible, pero DCA ha funcionado SIEMPRE para quien mantuvo la disciplina.'
+          text: 'Un análisis de la historia de Bitcoin muestra que DCA generó retorno positivo en todos los períodos históricos de 4 años o más hasta 2025. Timing el mercado correctamente es casi imposible; DCA funcionó en cada una de esas ventanas para quien mantuvo la disciplina. Eso sí: los rendimientos pasados no garantizan resultados futuros.'
         }
       },
       {
@@ -3284,12 +3362,21 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Configurar DCA es más fácil de lo que piensas. Puedes hacerlo manualmente o automatizarlo:',
         features: [
           { icon: Wallet, title: 'Manual (Semanal o Mensual)', text: 'Cada semana o mes, compras la cantidad fija que elegiste. En un exchange (Binance P2P, Backpack) o directamente en Jupiter si ya tienes stablecoins. Simple, sin complicaciones.' },
-          { icon: Zap, title: 'Automatizado con Jupiter', text: 'Jupiter en Solana tiene una función de DCA integrada. Depositas USDC y configuras: comprar $X de SOL/BTC cada día/semana/mes. El protocolo ejecuta las compras automáticamente. Sin intervención humana = sin intervención emocional.' },
-          { icon: PiggyBank, title: 'La Regla del Monto', text: 'Invierte solo lo que NO necesitas en los próximos 12 meses. Si ganas $2,000 al mes y tus gastos son $1,500, puedes hacer DCA con $100-200 mensuales. Nunca inviertas el dinero del arriendo o la comida.' }
+          { icon: Zap, title: 'Automatizado con Jupiter', text: 'Jupiter en Solana tiene órdenes recurrentes (Recurring) integradas. Depositas USDC y configuras: comprar $X de SOL o BTC cada día/semana/mes. El protocolo ejecuta las compras automáticamente y cobra 0.1% por orden ejecutada. Ten en cuenta: el BTC en Solana es BTC envuelto (wrapped), con riesgo adicional del puente/custodio. Sin intervención humana = sin intervención emocional.' },
+          { icon: PiggyBank, title: 'La Regla del Monto', text: 'Invierte solo lo que NO necesitas en los próximos 2 años o más. Si ganas $2,000 al mes y tus gastos son $1,500, puedes hacer DCA con $100-200 mensuales. Nunca inviertas el dinero del arriendo o la comida.' }
         ],
         highlight: {
           title: 'Consejo Profesional',
           text: 'El mejor DCA es el que puedes mantener durante AÑOS sin afectar tu vida. $25 semanales durante 5 años genera más riqueza que $500 de una vez que no puedes repetir. La constancia gana. Siempre.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Antes de Cerrar: Lo Que Este Curso Es (y No Es)',
+        content: 'Una aclaración importante que aplica a esta lección y a todo el curso. Aquí aprendes herramientas y criterios para decidir mejor, pero las decisiones son tuyas y el riesgo también.',
+        highlight: {
+          title: 'Educación, no asesoría',
+          text: 'Todo lo que ves aquí es educación financiera general. No es asesoría personalizada ni una promesa de retornos. Los rendimientos pasados no garantizan resultados futuros. Invierte solo lo que puedas permitirte perder.'
         }
       },
       {
@@ -3298,10 +3385,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         items: [
           'DCA (Dollar Cost Averaging) = comprar una cantidad fija de cripto a intervalos regulares, sin importar el precio.',
           'Funciona porque tu precio promedio se suaviza: compras más cuando está barato, menos cuando está caro.',
-          'Históricamente, DCA en Bitcoin ha generado retorno positivo en el 100% de los períodos de 4+ años.',
+          'Históricamente, DCA en Bitcoin generó retorno positivo en todos los períodos de 4+ años hasta 2025. Los rendimientos pasados no garantizan resultados futuros.',
           'La ventaja principal no es solo matemática, es emocional. Elimina el FOMO, el pánico, y la parálisis de análisis.',
-          'Puedes automatizarlo en Jupiter (Solana) para eliminar la intervención humana por completo.',
-          'Regla de oro: invierte solo lo que no necesitas en los próximos 12 meses, y nunca pares tu DCA por emociones del mercado.'
+          'Puedes automatizarlo con las órdenes recurrentes (Recurring) de Jupiter en Solana para eliminar la intervención humana por completo.',
+          'Regla de oro: invierte solo lo que no necesitas en los próximos 2 años o más, y nunca pares tu DCA por emociones del mercado.'
         ]
       }
     ],
@@ -3325,7 +3412,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Porque el mercado siempre sube' },
             { id: 'b', text: 'Porque es imposible predecir consistentemente los puntos altos y bajos, y las emociones (FOMO, pánico) hacen que la mayoría compre caro y venda barato, exactamente lo opuesto' },
-            { id: 'c', text: 'Porque DCA tiene algún tipo de ventaja matemática secreta' },
+            { id: 'c', text: 'Porque DCA tiene una ventaja matemática secreta que los bancos y fondos prefieren ocultar' },
             { id: 'd', text: 'Solo funciona con Bitcoin, no con otros activos' }
           ],
           correctAnswer: 'b',
@@ -3338,18 +3425,18 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'Los $400 completos para maximizar ganancias' },
             { id: 'b', text: '$100-200 al mes, dejando margen para emergencias y gastos variables' },
             { id: 'c', text: 'Nada hasta que gane más' },
-            { id: 'd', text: 'Pido un préstamo para invertir más' }
+            { id: 'd', text: 'Pido un préstamo para invertir más mientras el mercado sigue barato' }
           ],
           correctAnswer: 'b',
           explanation: 'Nunca inviertas dinero que puedas necesitar pronto. De los $400 sobrantes, necesitas margen para emergencias, gastos variables, y calidad de vida. $100-200 es un DCA sostenible que puedes mantener durante años, que es lo que importa.'
         },
         {
           id: 'q4',
-          question: '¿Cuál es la mayor ventaja de automatizar tu DCA en una plataforma como Jupiter?',
+          question: '¿Cuál es la mayor ventaja de automatizar tu DCA con las órdenes recurrentes (Recurring) de Jupiter?',
           options: [
             { id: 'a', text: 'Paga mejores precios que comprar manualmente' },
-            { id: 'b', text: 'Elimina completamente la intervención humana y las emociones. No puedes pausar por pánico ni meter de más por FOMO si el proceso es automático' },
-            { id: 'c', text: 'Es más barato en comisiones' },
+            { id: 'b', text: 'Elimina la intervención humana y las emociones: no puedes pausar por pánico ni meter de más por FOMO' },
+            { id: 'c', text: 'Es más barato en comisiones que cualquier compra manual en un exchange' },
             { id: 'd', text: 'Garantiza ganancias' }
           ],
           correctAnswer: 'b',
@@ -3362,22 +3449,22 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'Tiene razón, mejor esperar' },
             { id: 'b', text: 'Debería comprar todo de una vez ahora' },
             { id: 'c', text: 'Nadie sabe si bajará o subirá. En vez de esperar el momento "perfecto" que quizás nunca llegue, podría empezar un DCA pequeño ahora. Si baja, su DCA comprará más. Si sube, al menos ya tiene algo' },
-            { id: 'd', text: 'Bitcoin siempre baja después de subir, así que tiene razón' }
+            { id: 'd', text: 'Bitcoin siempre baja después de una subida fuerte, así que lo más inteligente es esperar' }
           ],
           correctAnswer: 'c',
           explanation: 'Esperar el momento perfecto es la forma más común de no invertir nunca. Siempre habrá una razón para esperar. DCA resuelve esto: empiezas con poco, y si el precio baja, tu próxima compra será más barata. El mejor momento para empezar DCA fue hace 5 años. El segundo mejor momento es hoy.'
         },
         {
           id: 'q-review',
-          question: 'Repaso de Seguridad Web3 (Lección 38): Alguien en Discord te dice: "¡Oportunidad única! Este token va a explotar en las próximas 2 horas, tengo información privilegiada. Solo quedan 50 cupos." ¿Qué haces?',
+          question: 'Repaso de Seguridad Web3 (Lección 14 de este nivel): Alguien en Discord te dice: "¡Oportunidad única! Este token va a explotar en las próximas 2 horas, tengo información privilegiada. Solo quedan 50 cupos." ¿Qué haces?',
           options: [
             { id: 'a', text: 'Compro rápido antes de que se acabe el cupo' },
-            { id: 'b', text: 'Identifico 3 red flags: urgencia artificial ("2 horas", "50 cupos"), promesa de retornos garantizados ("va a explotar"), e "información privilegiada". Lo ignoro, lo reporto, y NUNCA comparto wallet ni fondos por mensajes directos' },
-            { id: 'c', text: 'Investigo el token pero sin invertir mucho' },
-            { id: 'd', text: 'Pregunto a otros en el Discord si es legítimo' }
+            { id: 'b', text: 'Identifico 3 red flags: urgencia artificial, retornos garantizados, e "información privilegiada". Lo ignoro y lo reporto' },
+            { id: 'c', text: 'Investigo el token por mi cuenta pero entro solo con un monto pequeño por si acaso' },
+            { id: 'd', text: 'Pregunto a otros miembros del Discord si la oportunidad es legítima' }
           ],
           correctAnswer: 'b',
-          explanation: 'Aprendiste en la Lección 38 que las estafas Web3 siguen patrones predecibles: urgencia, promesas garantizadas, e información "privilegiada" son las tres más comunes. DCA (esta lección) es la defensa estructural contra estas tácticas, si tu estrategia es "invertir X semanalmente en activos que ya conoces", no hay espacio mental para "oportunidades únicas de 2 horas". La disciplina del DCA es inmune al FOMO.'
+          explanation: 'Aprendiste en la Lección 14 de este nivel que las estafas Web3 siguen patrones predecibles: urgencia, promesas garantizadas, e información "privilegiada" son las tres más comunes. DCA (esta lección) es la defensa estructural contra estas tácticas, si tu estrategia es "invertir X semanalmente en activos que ya conoces", no hay espacio mental para "oportunidades únicas de 2 horas". La disciplina del DCA es inmune al FOMO.'
         }
       ]
     }
@@ -3389,12 +3476,12 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     number: '18 de 19',
     duration: '20 minutos',
     type: 'Comparativa',
-    description: 'Existen más de 20,000 criptomonedas. No todas son iguales. Entiende por qué BTC es la base de todo portafolio y cómo se diferencia de ETH, SOL y las demás.',
+    description: 'Existen millones de tokens. Casi ninguno vale la pena. Entiende por qué BTC es la base de todo portafolio y cómo se diferencia de ETH, SOL y las demás.',
     sections: [
       {
         type: 'intro',
         title: 'No Todas las Criptomonedas Son Iguales',
-        content: 'Cuando alguien dice "voy a invertir en cripto", es como decir "voy a invertir en internet". ¿En qué exactamente? ¿En Google? ¿En un blog random? ¿En una empresa que promete revolucionar todo y desaparece en 6 meses? El mundo cripto tiene más de 20,000 tokens. La gran mayoría no vale nada y nunca lo valdrá. Pero hay categorías fundamentalmente diferentes que debes entender antes de poner un solo peso. **Bitcoin** no es lo mismo que **Ethereum**. Ethereum no es lo mismo que **Solana**. Y ninguno de los tres es lo mismo que DOGE, SHIB o la meme coin que tu primo te recomendó ayer. Esta lección te da el mapa para navegar este universo sin perderte.',
+        content: 'Cuando alguien dice "voy a invertir en cripto", es como decir "voy a invertir en internet". ¿En qué exactamente? ¿En Google? ¿En un blog random? ¿En una empresa que promete revolucionar todo y desaparece en 6 meses? El mundo cripto tiene millones de tokens (solo pump.fun creó más de 10 millones para 2025). La gran mayoría no vale nada y nunca lo valdrá. Pero hay categorías fundamentalmente diferentes que debes entender antes de poner un solo peso. **Bitcoin** no es lo mismo que **Ethereum**. Ethereum no es lo mismo que **Solana**. Y ninguno de los tres es lo mismo que DOGE, SHIB o la meme coin que tu primo te recomendó ayer. Esta lección te da el mapa para navegar este universo sin perderte.',
         highlight: {
           title: 'La Regla del 95%',
           text: 'El 95% de las criptomonedas que existen hoy no existirán en 10 años. Muchas son proyectos experimentales, muchas son estafas, y muchas simplemente no resolvían ningún problema real. La selección importa enormemente.'
@@ -3406,7 +3493,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Bitcoin tiene un propósito claro y único: ser el **oro digital**, la reserva de valor más segura y resistente a la censura del mundo. No intenta hacer todo. Intencionalmente, es lento y "limitado" en funcionalidades porque su prioridad es la **seguridad y descentralización** absolutas.',
         features: [
           { icon: Lock, title: 'Escasez Absoluta', text: '21 millones máximo. Nunca habrá más. Ninguna otra criptomoneda tiene esta garantía tan fuerte. La política monetaria de Bitcoin es inmutable, ni siquiera los desarrolladores pueden cambiarla.' },
-          { icon: Shield, title: 'Máxima Descentralización', text: 'Miles de nodos en 100+ países. Ninguna persona, empresa o gobierno controla Bitcoin. Es la red más descentralizada y resistente a la censura del mundo. 15 años sin caídas.' },
+          { icon: Shield, title: 'Máxima Descentralización', text: 'Miles de nodos en 100+ países. Ninguna persona, empresa o gobierno controla Bitcoin. Es la red más descentralizada y resistente a la censura del mundo. Uptime de ~99.98% desde 2009 (las únicas interrupciones fueron en 2010 y 2013).' },
           { icon: Clock, title: 'Track Record', text: 'Desde 2009, Bitcoin ha sobrevivido prohibiciones, hackeos de exchanges, crisis financieras, y declaraciones de "muerte" más de 450 veces. Sigue más fuerte que nunca. Ninguna otra cripto tiene este historial.' },
           { icon: Landmark, title: 'Adopción Institucional', text: 'ETFs de Bitcoin aprobados, Strategy (antes MicroStrategy) acumulando más de 600,000 bitcoins en su tesorería, fondos de pensiones comprando. El Salvador fue pionero al adoptarlo como moneda legal en 2021, aunque revirtió ese estatus a uso voluntario en 2025. Las instituciones confían en Bitcoin de una forma que no confían en ninguna altcoin.' }
         ]
@@ -3416,9 +3503,9 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Ethereum y Solana: Las Plataformas de Utilidad',
         content: 'Si Bitcoin es oro digital, ETH y SOL son más como **sistemas operativos**: plataformas donde se construyen aplicaciones. No compiten directamente con Bitcoin, resuelven problemas diferentes.',
         features: [
-          { icon: Layers, title: 'Ethereum (ETH)', text: 'La primera y más grande plataforma de contratos inteligentes. DeFi, NFTs, stablecoins, la mayoría nació aquí. Tiene el ecosistema más maduro y la mayor cantidad de desarrolladores. Pero es lento (~15 TPS) y caro (fees de $1-50+). Piénsalo como Windows: dominante, probado, pero pesado.' },
+          { icon: Layers, title: 'Ethereum (ETH)', text: 'La primera y más grande plataforma de contratos inteligentes. DeFi, NFTs, stablecoins, la mayoría nació aquí. Tiene el ecosistema más maduro y la mayor cantidad de desarrolladores. Pero su capa base es lenta (~15 TPS solo en L1) y sus fees en L1 rondan $0.10-0.50 en una transferencia o swap típico a mediados de 2026 (en sus L2s, centavos). Piénsalo como Windows: dominante, probado, pero pesado.' },
           { icon: Zap, title: 'Solana (SOL)', text: 'Plataforma ultra-rápida (~4,000 TPS) con fees de fracciones de centavo. Ecosistema DeFi en crecimiento explosivo (Jupiter, Raydium, Marinade). Ideal para experimentar y aprender porque los errores cuestan centavos, no dólares. Más joven, más riesgos, más potencial de crecimiento.' },
-          { icon: Network, title: 'La Diferencia Clave con Bitcoin', text: 'ETH y SOL tienen inflación (emiten nuevos tokens continuamente para pagar validadores). No tienen el límite duro de 21 millones de Bitcoin. Son inversiones en tecnología y ecosistemas, no en escasez pura. Eso los hace más volátiles y más arriesgados.' }
+          { icon: Network, title: 'La Diferencia Clave con Bitcoin', text: 'ETH y SOL no tienen un límite fijo de 21 millones como Bitcoin. SOL emite nuevos tokens continuamente para pagar validadores; ETH, desde el Merge, tiene una emisión mínima (~0.5% anual) que por momentos llega a ser deflacionaria. Son inversiones en tecnología y ecosistemas, no en escasez pura. Eso los hace más volátiles y más arriesgados.' }
         ],
         highlight: {
           title: 'Analogía Clara',
@@ -3428,10 +3515,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'El Universo de las Altcoins: Categorías que Debes Conocer',
-        content: 'Más allá de BTC, ETH y SOL, existen miles de tokens. Estas son las categorías principales que encontrarás:',
+        content: 'Más allá de BTC, ETH y SOL, existen millones de tokens. Estas son las categorías principales que encontrarás:',
         features: [
-          { icon: Landmark, title: 'Stablecoins (USDC, USDT)', text: 'Ya las conoces de la lección anterior. Ancladas al dólar. No son inversión, son herramienta de ahorro y operación. Esenciales para tu estrategia.' },
-          { icon: Gem, title: 'Tokens de Protocolo (JUP, RAY, RNDR)', text: 'Tokens que representan proyectos específicos con utilidad real: gobernanza, acceso a servicios, descuentos en fees. Su valor depende del éxito del proyecto. Alto riesgo, alto potencial.' },
+          { icon: Landmark, title: 'Stablecoins (USDC, USDT)', text: 'Ya las conoces de la Lección 15 de este nivel. Ancladas al dólar. No son inversión, son herramienta de ahorro y operación. Esenciales para tu estrategia.' },
+          { icon: Gem, title: 'Tokens de Protocolo (JUP, RAY, RENDER)', text: 'Tokens que representan proyectos específicos con utilidad real: gobernanza, acceso a servicios, descuentos en fees. Su valor depende del éxito del proyecto. Alto riesgo, alto potencial.' },
           { icon: AlertTriangle, title: 'Meme Coins (DOGE, SHIB, BONK)', text: 'Tokens sin utilidad real, impulsados por comunidad y especulación pura. Algunos generan retornos absurdos (1000x), pero la inmensa mayoría va a cero. Son apuestas, no inversiones. Si participas, hazlo con dinero que estés dispuesto a perder al 100%.' },
           { icon: AlertTriangle, title: 'Tokens Dudosos (99% del mercado)', text: 'Proyectos sin equipo real, sin producto, sin auditoría. Tokens creados en 5 minutos para extraer dinero de incautos. Si no puedes explicar qué problema resuelve un token en una oración, probablemente no resuelve ninguno.' }
         ]
@@ -3455,7 +3542,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           points: [
             'Plataformas para construir aplicaciones',
             'Ecosistemas DeFi, NFTs, staking',
-            'Inflación continua (no hay límite duro)',
+            'Sin límite fijo de 21M como Bitcoin',
             'Mayor volatilidad y riesgo',
             'Complemento del portafolio (20-40%)',
             'Necesarios para usar DeFi y apps Web3'
@@ -3465,15 +3552,24 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Cómo Construir tu Primer Portafolio',
-        content: 'No existe un portafolio "perfecto", depende de tu tolerancia al riesgo y tu horizonte de tiempo. Pero estos son marcos de referencia probados:',
+        content: 'No existe un portafolio "perfecto", depende de tu tolerancia al riesgo y tu horizonte de tiempo. Los siguientes son ejemplos de marcos de referencia para que veas la lógica, no recetas: esto es un marco educativo, no una recomendación personalizada.',
         features: [
-          { icon: Shield, title: 'Conservador (Menor riesgo)', text: '60-70% BTC + 15-20% ETH + 10-15% SOL + 5-10% Stablecoins. La mayoría en Bitcoin como ancla. Ideal si tu prioridad es preservar valor a largo plazo y no quieres estar pendiente del mercado.' },
-          { icon: Activity, title: 'Moderado (Balance riesgo/retorno)', text: '40-50% BTC + 20-25% SOL + 15-20% ETH + 10-15% Stablecoins + 5% Altcoins selectas. Más exposición a ecosistemas de crecimiento. Requiere más conocimiento y atención.' },
-          { icon: Zap, title: 'Agresivo (Mayor riesgo, mayor potencial)', text: '30% BTC + 30% SOL + 15% ETH + 15% Altcoins de protocolo + 10% Stablecoins. Alta exposición a crecimiento pero también a caídas fuertes. Solo si puedes tolerar ver -50% sin vender en pánico.' }
+          { icon: Shield, title: 'Conservador (Menor riesgo)', text: 'Por ejemplo: 60-70% BTC + 15-20% ETH + 10-15% SOL + 5-10% Stablecoins. La mayoría en Bitcoin como ancla. Ideal si tu prioridad es preservar valor a largo plazo y no quieres estar pendiente del mercado.' },
+          { icon: Activity, title: 'Moderado (Balance riesgo/retorno)', text: 'Por ejemplo: 40-50% BTC + 20-25% SOL + 15-20% ETH + 10-15% Stablecoins + 5% Altcoins selectas. Más exposición a ecosistemas de crecimiento. Requiere más conocimiento y atención.' },
+          { icon: Zap, title: 'Agresivo (Mayor riesgo, mayor potencial)', text: 'Por ejemplo: 30% BTC + 30% SOL + 15% ETH + 15% Altcoins de protocolo + 10% Stablecoins. Alta exposición a crecimiento pero también a caídas fuertes. Solo si puedes tolerar ver -50% sin vender en pánico.' }
         ],
         highlight: {
           title: 'La Regla Para Principiantes',
           text: 'Si apenas empiezas, tu portafolio debería ser 70%+ Bitcoin. Es tentador ir directo a altcoins que prometen 100x, pero Bitcoin es tu ancla. Aprende a caminar antes de correr. Los que se saltaron Bitcoin para ir directo a meme coins usualmente terminaron perdiendo todo.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Antes de Cerrar: Lo Que Este Curso Es (y No Es)',
+        content: 'Una aclaración importante que aplica a esta lección y a todo el curso. Aquí aprendes herramientas y criterios para decidir mejor, pero las decisiones son tuyas y el riesgo también.',
+        highlight: {
+          title: 'Educación, no asesoría',
+          text: 'Todo lo que ves aquí es educación financiera general. No es asesoría personalizada ni una promesa de retornos. Los rendimientos pasados no garantizan resultados futuros. Invierte solo lo que puedas permitirte perder.'
         }
       },
       {
@@ -3482,7 +3578,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         items: [
           'Bitcoin es reserva de valor (oro digital). ETH y SOL son plataformas de utilidad (sistemas operativos). Resuelven problemas diferentes.',
           'Bitcoin tiene escasez absoluta (21M), máxima descentralización, y 15+ años de track record. Ninguna otra cripto tiene esto.',
-          'ETH y SOL tienen inflación, son más volátiles, pero permiten DeFi, staking, y aplicaciones que Bitcoin no puede.',
+          'ETH y SOL no tienen límite fijo de emisión, son más volátiles, pero permiten DeFi, staking, y aplicaciones que Bitcoin no puede.',
           'El 95% de altcoins irán a cero. Solo invierte en tokens cuyo problema puedas explicar en una oración.',
           'Meme coins son apuestas, no inversiones. Si participas, usa solo dinero que puedas perder completamente.',
           'Como principiante, empieza con 70%+ BTC como base. Agrega ETH/SOL gradualmente conforme aprendas. No te saltes los fundamentales.'
@@ -3496,8 +3592,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: '¿Cuál es la diferencia fundamental entre Bitcoin y Solana como inversión?',
           options: [
             { id: 'a', text: 'No hay diferencia, ambas son criptomonedas' },
-            { id: 'b', text: 'Bitcoin es reserva de valor con escasez absoluta (21M). Solana es una plataforma de utilidad con inflación continua. Resuelven problemas diferentes y tienen perfiles de riesgo distintos' },
-            { id: 'c', text: 'Solana es mejor porque es más rápida' },
+            { id: 'b', text: 'Bitcoin es reserva de valor con escasez absoluta (21M). Solana es una plataforma de utilidad sin límite fijo de emisión. Resuelven problemas diferentes y tienen perfiles de riesgo distintos' },
+            { id: 'c', text: 'Solana es mejor en todo porque es más rápida y mucho más barata de usar' },
             { id: 'd', text: 'Bitcoin es mejor porque fue la primera' }
           ],
           correctAnswer: 'b',
@@ -3508,7 +3604,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: 'Un influencer recomienda meter todo tu dinero en una meme coin que "va a hacer 1000x". ¿Qué haces?',
           options: [
             { id: 'a', text: 'Invierto antes de que sea tarde' },
-            { id: 'b', text: 'Investigo la meme coin para ver si es legítima' },
+            { id: 'b', text: 'Investigo la meme coin a fondo para confirmar si el proyecto detrás es legítimo antes de entrar' },
             { id: 'c', text: 'Entiendo que las meme coins son apuestas especulativas, no inversiones. Si participo, uso solo dinero que puedo perder al 100%, nunca la base de mi portafolio' },
             { id: 'd', text: 'Si el influencer es famoso, es confiable' }
           ],
@@ -3521,7 +3617,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: '$1,000 en la altcoin más barata para tener más monedas' },
             { id: 'b', text: '$600-700 en BTC, $150-200 en SOL, $100-150 en ETH, y $100 en stablecoins como reserva' },
-            { id: 'c', text: '$500 en BTC, $500 en meme coins para maximizar potencial' },
+            { id: 'c', text: '$500 en BTC y $500 en meme coins para balancear seguridad con potencial de 100x' },
             { id: 'd', text: 'Todo en USDC hasta que aprenda más' }
           ],
           correctAnswer: 'b',
@@ -3534,7 +3630,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'Porque el precio nunca baja' },
             { id: 'b', text: 'Porque tiene escasez absoluta, máxima descentralización, 15+ años de historial, adopción institucional (ETFs), y no depende del éxito de ninguna empresa o equipo de desarrollo' },
             { id: 'c', text: 'Porque es más caro, entonces es mejor' },
-            { id: 'd', text: 'Todos tienen el mismo riesgo' }
+            { id: 'd', text: 'Todos tienen exactamente el mismo riesgo, lo único que cambia es el precio de entrada' }
           ],
           correctAnswer: 'b',
           explanation: 'Bitcoin es la cripto más probada del mundo. Su valor no depende de que un equipo lance actualizaciones o de que un ecosistema crezca. SOL y ETH, aunque prometedores, dependen del éxito de sus plataformas y de que los desarrolladores sigan construyendo. Más dependencias = más riesgo.'
@@ -3545,15 +3641,15 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Deberías, Bitcoin es lo único que importa' },
             { id: 'b', text: 'Bitcoin no permite DeFi, staking ni aplicaciones. ETH y SOL dan acceso a herramientas financieras que pueden generar rendimiento adicional sobre tu capital. Un portafolio diversificado balancea seguridad (BTC) con crecimiento (ETH/SOL)' },
-            { id: 'c', text: 'Porque SOL va a superar a Bitcoin en precio' },
-            { id: 'd', text: 'Solo por diversificar, no hay otra razón' }
+            { id: 'c', text: 'Porque SOL va a superar a Bitcoin en precio tarde o temprano' },
+            { id: 'd', text: 'Solo por diversificar por diversificar, no hay ninguna otra razón real' }
           ],
           correctAnswer: 'b',
           explanation: 'Bitcoin es tu ancla de seguridad y escasez. Pero ETH/SOL te dan acceso a DeFi, staking (ganas rendimiento), y un ecosistema en crecimiento. La combinación ideal es: BTC para preservar riqueza, ETH/SOL para hacerla crecer activamente.'
         },
         {
           id: 'review_1',
-          question: '📝 Repaso: ¿Cuál es el principal riesgo de las stablecoins algorítmicas comparadas con las respaldadas por dólares reales?',
+          question: 'Repaso: ¿Cuál es el principal riesgo de las stablecoins algorítmicas comparadas con las respaldadas por dólares reales?',
           options: [
             { id: 'a', text: 'Son más lentas' },
             { id: 'b', text: 'Cuestan más fees' },
@@ -3561,7 +3657,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Solo funcionan en Ethereum' }
           ],
           correctAnswer: 'c',
-          explanation: 'Las stablecoins algorítmicas mantienen su paridad mediante mecanismos matemáticos, no respaldo real. Cuando estos mecanismos fallan (como el colapso de UST/LUNA en 2022), pueden perder todo su valor. USDC y USDT están respaldadas por activos reales. (Recuerda la Lección 41: Stablecoins)'
+          explanation: 'Las stablecoins algorítmicas mantienen su paridad mediante mecanismos matemáticos, no respaldo real. Cuando estos mecanismos fallan (como el colapso de UST/LUNA en 2022), pueden perder todo su valor. USDC y USDT están respaldadas por activos reales. (Recuerda la Lección 15 de este nivel: Stablecoins)'
         }
       ]
     }
@@ -3646,9 +3742,9 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Impuestos Cripto en LATAM',
         content: 'Antes de ejecutar tu plan de inversión, debes conocer las obligaciones tributarias de tu país. Las criptomonedas **no son invisibles para las autoridades fiscales**, y la ignorancia no te exime de responsabilidad. Los exchanges reportan datos a las agencias tributarias, y las transacciones on-chain son rastreables. No declarar tus ganancias cripto puede resultar en multas, sanciones, e incluso problemas legales. Aquí te damos un panorama general por país, pero recuerda: las leyes cambian frecuentemente y cada situación es diferente.',
         features: [
-          { icon: Landmark, title: 'Colombia', text: 'Las ganancias por venta de criptoactivos se consideran ganancia de capital y deben declararse en la renta anual. Si tus activos cripto superan ciertos umbrales, también deben reportarse como patrimonio. La DIAN (Dirección de Impuestos) ha intensificado el monitoreo de transacciones cripto desde 2022. La tarifa de renta varía según tu rango de ingresos (0-39%). Las pérdidas pueden compensarse con ganancias del mismo tipo en el mismo año fiscal.' },
+          { icon: Landmark, title: 'Colombia', text: 'Las ganancias por venta de criptoactivos deben declararse en la renta anual. Un matiz clave: si el activo lo poseíste 2 años o más, la utilidad tributa como ganancia ocasional al 15%; si lo tuviste menos de 2 años, tributa como renta ordinaria bajo la tabla progresiva (0-39%). Si tus activos cripto superan ciertos umbrales, también deben reportarse como patrimonio. La DIAN (Dirección de Impuestos) ha intensificado el monitoreo de transacciones cripto desde 2022. Las pérdidas pueden compensarse con ganancias del mismo tipo en el mismo año fiscal.' },
           { icon: Landmark, title: 'México', text: 'El SAT considera las criptomonedas como activos virtuales. Las ganancias por enajenación (venta o intercambio) de criptoactivos están sujetas al ISR (Impuesto Sobre la Renta). Se calcula sobre la diferencia entre el precio de compra y el de venta. La tasa marginal puede llegar hasta el 35% dependiendo de tu nivel de ingresos. Los exchanges mexicanos regulados (como Bitso) reportan operaciones al SAT. Debes incluir tus operaciones cripto en tu declaración anual.' },
-          { icon: Landmark, title: 'Argentina', text: 'Las ganancias de capital por venta de criptoactivos están gravadas con el impuesto cedular a la renta financiera (actualmente 15% sobre la ganancia neta en moneda extranjera). Además, si tus tenencias superan el mínimo no imponible, deben declararse en Bienes Personales (impuesto al patrimonio). La AFIP ha requerido a exchanges locales información sobre operaciones de sus usuarios. La situación regulatoria cambia frecuentemente, mantente actualizado.' },
+          { icon: Landmark, title: 'Argentina', text: 'Las ganancias de capital por venta de criptoactivos están gravadas con el impuesto cedular a la renta financiera (actualmente 15% sobre la ganancia neta en moneda extranjera). Además, si tus tenencias superan el mínimo no imponible, deben declararse en Bienes Personales (impuesto al patrimonio). ARCA (ex AFIP) ha requerido a exchanges locales información sobre operaciones de sus usuarios. La situación regulatoria cambia frecuentemente, mantente actualizado.' },
           { icon: Shield, title: 'Registro es Clave', text: 'Mantén un registro detallado de TODAS tus transacciones: fecha de compra, precio de compra, fecha de venta, precio de venta, fees pagados, y dirección de wallet. Herramientas como Koinly, CoinTracker, o incluso una hoja de cálculo simple te ayudan a calcular tus ganancias y pérdidas. Este registro es tu mejor defensa ante una auditoría y hace la declaración mucho más sencilla.' }
         ],
         highlight: {
