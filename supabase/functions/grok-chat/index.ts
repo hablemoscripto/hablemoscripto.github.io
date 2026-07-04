@@ -146,6 +146,11 @@ const STOPWORDS = new Set([
   'donde', 'dónde', 'quien', 'quién', 'sus', 'mis', 'tus', 'son', 'está', 'están',
   'hay', 'tiene', 'tienen', 'puede', 'pueden', 'desde', 'hasta', 'también', 'sí',
   'sirve', 'significa', 'funciona', 'explica', 'explícame', 'dime', 'cuáles',
+  // Meta-words about the course itself: they match every lesson and crowd
+  // real topic keywords out of the 8-candidate retrieval window.
+  'lección', 'lecciones', 'leccion', 'curso', 'cursos', 'nivel', 'niveles',
+  'enseñan', 'enseña', 'enseñar', 'aprender', 'aprendo', 'clase', 'clases',
+  'módulo', 'modulo', 'plataforma', 'hablemos',
 ])
 
 function extractKeywords(query: string): string[] {
