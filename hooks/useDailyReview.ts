@@ -9,13 +9,16 @@ import {
   type ReviewState,
 } from '../services/dailyReviewService';
 
-export type ReviewStatus = 'hidden' | 'idle' | 'answered' | 'done-today';
+export type ReviewStatus = 'hidden' | 'locked-teaser' | 'idle' | 'answered' | 'done-today';
 
 interface UseDailyReviewResult {
   status: ReviewStatus;
   question: ReviewQuestion | null;
   selectedIndex: number | null;
   isCorrect: boolean | null;
+  // Lessons still needed to unlock the daily review (only meaningful in
+  // 'locked-teaser').
+  lessonsToUnlock: number;
   answer: (index: number) => void;
   dismissUntilTomorrow: () => void;
 }
@@ -23,7 +26,8 @@ interface UseDailyReviewResult {
 /**
  * Provides the state machine for the daily review card.
  *
- * - `hidden`        — user hasn't completed enough lessons yet (< 3)
+ * - `hidden`        — brand-new user (0 completions); nothing to tease yet
+ * - `locked-teaser` — 1-2 completions; compact banner announcing the feature
  * - `idle`          — card shown, waiting for an answer
  * - `answered`      — user answered today; showing feedback
  * - `done-today`    — compact banner state until midnight local time
@@ -100,7 +104,8 @@ export function useDailyReview(): UseDailyReviewResult {
 
   const status: ReviewStatus = useMemo(() => {
     if (loading) return 'hidden';
-    if (completions.length < 3) return 'hidden';
+    if (completions.length === 0) return 'hidden';
+    if (completions.length < 3) return 'locked-teaser';
     if (alreadyDone && selectedIndex === null) return 'done-today';
     if (selectedIndex !== null) return 'answered';
     if (question) return 'idle';
@@ -112,6 +117,7 @@ export function useDailyReview(): UseDailyReviewResult {
     question,
     selectedIndex,
     isCorrect,
+    lessonsToUnlock: Math.max(0, 3 - completions.length),
     answer,
     dismissUntilTomorrow,
   };

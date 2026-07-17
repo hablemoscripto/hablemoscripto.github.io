@@ -95,6 +95,15 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
   },
 };
 
+// Shared COP display formatting so every surface renders prices identically.
+export function formatCop(cents: number): string {
+  return new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+  }).format(cents / 100);
+}
+
 export interface PaymentData {
   reference: string;
   amountInCents: number;

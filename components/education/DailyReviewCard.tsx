@@ -10,10 +10,33 @@ import { useDailyReview } from '../../hooks/useDailyReview';
  * Deliberately gentle: no streak pressure, no nagging. Dismissible.
  */
 const DailyReviewCard: React.FC = () => {
-  const { status, question, selectedIndex, isCorrect, answer, dismissUntilTomorrow } =
+  const { status, question, selectedIndex, isCorrect, lessonsToUnlock, answer, dismissUntilTomorrow } =
     useDailyReview();
 
   if (status === 'hidden') return null;
+
+  // Teaser for users with 1-2 completions: the feature exists, here's how to
+  // earn it. Without this the daily loop is invisible exactly when the habit
+  // should be forming.
+  if (status === 'locked-teaser') {
+    return (
+      <div className="container max-w-7xl mx-auto px-6 mt-6">
+        <div className="flex items-center gap-3 px-4 py-3 bg-navy-900/60 border border-brand-500/20 rounded-2xl">
+          <div className="w-8 h-8 rounded-lg bg-brand-500/15 flex items-center justify-center shrink-0">
+            <Sparkles size={16} className="text-brand-400" aria-hidden="true" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm text-white font-medium">Repaso diario: casi desbloqueado</p>
+            <p className="text-xs text-navy-400">
+              {lessonsToUnlock === 1
+                ? 'Completa 1 lección más y cada día te esperará una pregunta rápida para reforzar lo aprendido.'
+                : `Completa ${lessonsToUnlock} lecciones más y cada día te esperará una pregunta rápida para reforzar lo aprendido.`}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Compact "already reviewed today" banner
   if (status === 'done-today') {

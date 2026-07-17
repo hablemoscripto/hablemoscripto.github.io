@@ -1,5 +1,6 @@
 import React from 'react';
 import { Lock, Check, Sparkles, ArrowRight, ChevronLeft } from 'lucide-react';
+import { PRICING_PLANS, formatCop } from '../../services/paymentService';
 
 interface UpgradePaywallProps {
   levelTitle: string;
@@ -56,6 +57,9 @@ const UpgradePaywall: React.FC<UpgradePaywallProps> = ({ levelTitle, teaser, onU
         >
           <Sparkles size={16} aria-hidden="true" /> Desbloquear ahora <ArrowRight size={16} aria-hidden="true" />
         </button>
+        <p className="text-xs text-navy-400">
+          Desde {formatCop(PRICING_PLANS.inversor.priceCopCents)} COP, pago único (≈ ${PRICING_PLANS.inversor.priceUsd} USD)
+        </p>
         {onBack && (
           <button
             onClick={onBack}

@@ -4,6 +4,7 @@ import { CreditCard, Loader2, AlertCircle, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import {
   createPaymentWithSignature,
+  formatCop,
   PRICING_PLANS,
 } from '../services/paymentService';
 import { reportError } from '../utils/errorReporting';
@@ -46,9 +47,12 @@ interface PaymentModalProps {
   onClose: () => void;
   planId: 'inversor' | 'experto';
   onSuccess: () => void;
+  // When provided, the Inversor view offers a path to Cripto Experto so the
+  // higher tier is reachable from the unlock flow, not only from the pricing grid.
+  onSwitchPlan?: (planId: 'inversor' | 'experto') => void;
 }
 
-export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: PaymentModalProps) {
+export default function PaymentModal({ isOpen, onClose, planId, onSuccess, onSwitchPlan }: PaymentModalProps) {
   const [loading, setLoading] = useState(false);
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const [widgetFailed, setWidgetFailed] = useState(false);
@@ -100,14 +104,6 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
       setErrorMessage('');
     }
   }, [isOpen]);
-
-  const formatCOP = (cents: number) => {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
-      minimumFractionDigits: 0,
-    }).format(cents / 100);
-  };
 
   const handleCardPayment = async () => {
     if (!user) {
@@ -187,7 +183,7 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
             <div className="flex justify-between items-baseline mb-1">
               <span className="text-navy-300 text-sm font-medium">Plan {plan.name}</span>
               <span className="text-white font-bold">
-                {formatCOP(copPriceCents)} <span className="text-navy-400 text-xs font-normal">COP</span>
+                {formatCop(copPriceCents)} <span className="text-navy-400 text-xs font-normal">COP</span>
               </span>
             </div>
             <div className="flex justify-between items-center">
@@ -239,25 +235,40 @@ export default function PaymentModal({ isOpen, onClose, planId, onSuccess }: Pay
             ) : (
               <>
                 <CreditCard size={18} aria-hidden="true" />
-                Pagar con tarjeta: {formatCOP(copPriceCents)} COP
+                Pagar con tarjeta: {formatCop(copPriceCents)} COP
               </>
             )}
           </button>
 
-          <div className="flex items-center justify-center gap-1.5 text-[11px] text-emerald-300 -mb-2">
-            <ShieldCheck size={13} aria-hidden="true" />
-            Garantía de 7 días. Si no es para ti, te devolvemos tu dinero.
+          <div className="space-y-2">
+            <div className="flex items-start justify-center gap-1.5 text-[11px] text-emerald-300">
+              <ShieldCheck size={13} aria-hidden="true" className="shrink-0 mt-0.5" />
+              <span>Garantía de 7 días. Si no es para ti, te devolvemos tu dinero.</span>
+            </div>
+            <p className="text-[11px] text-navy-400 text-center">
+              Pagos procesados de forma segura por Wompi.
+            </p>
+            <p className="text-[11px] text-navy-400 text-center">
+              ¿Dudas antes de pagar? Escríbenos a{' '}
+              <a href="mailto:hablemoscripto@gmail.com" className="text-brand-400 hover:text-brand-300 underline">
+                hablemoscripto@gmail.com
+              </a>
+            </p>
           </div>
 
-          <p className="text-[11px] text-navy-400 text-center">
-            Pagos procesados de forma segura por Wompi.
-          </p>
-          <p className="text-[11px] text-navy-400 text-center -mt-3">
-            ¿Dudas antes de pagar? Escríbenos a{' '}
-            <a href="mailto:hablemoscripto@gmail.com" className="text-brand-400 hover:text-brand-300 underline">
-              hablemoscripto@gmail.com
-            </a>
-          </p>
+          {!isHighTier && onSwitchPlan && (
+            <div className="pt-4 border-t border-navy-700">
+              <p className="text-xs text-navy-400 text-center mb-2">
+                ¿Quieres también la comunidad privada y las charlas en vivo?
+              </p>
+              <button
+                onClick={() => onSwitchPlan('experto')}
+                className="w-full text-sm min-h-11 py-2.5 rounded-xl border border-brand-500/40 text-brand-400 hover:bg-brand-500/5 font-medium transition-colors"
+              >
+                Ver plan Cripto Experto ({formatCop(PRICING_PLANS.experto.priceCopCents)} COP)
+              </button>
+            </div>
+          )}
 
           {isHighTier && (
             <div className="pt-4 border-t border-navy-700">

@@ -303,14 +303,15 @@ Instrucciones:
 - Prioriza calidad sobre cantidad.
 - Devuelve **únicamente** un objeto JSON válido con esta estructura exacta (sin texto adicional antes ni después):
 
-{
-  "selected": [1, 3],
-  "reason": "Explicación breve y clara de por qué estas lecciones son las más útiles para responder la pregunta del estudiante"
-}`
+{"selected": [1, 3]}`
 
   try {
     const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 15000) // 15s timeout for reranker
+    // The user is staring at a spinner for the FULL duration of this call before
+    // the first token of the real answer streams. Past ~6s the latency costs
+    // more than better retrieval buys; the caller falls back to the top keyword
+    // candidates on abort.
+    const timeout = setTimeout(() => controller.abort(), 6000)
 
     const response = await fetch(XAI_API_URL, {
       method: 'POST',
@@ -324,7 +325,7 @@ Instrucciones:
           { role: 'system', content: 'You are a precise and reliable retrieval assistant. Always return only valid JSON.' },
           { role: 'user', content: rerankerPrompt }
         ],
-        max_tokens: 400,
+        max_tokens: 100,
         temperature: 0.1,
       }),
       signal: controller.signal,
@@ -445,7 +446,19 @@ serve(async (req) => {
       const candidates = await getKeywordCandidates(ragClient, message)
 
       if (candidates.length > 0) {
-        const selectedIds = await rerankWithGrok(xaiApiKey, message, candidates)
+        let selectedIds: number[]
+        if (candidates.length <= MAX_CONTEXT_LESSONS) {
+          // Nothing to rank: skipping the reranker saves a full LLM round-trip
+          // that the user would spend staring at "Pensando...".
+          selectedIds = candidates.map((c) => c.id)
+        } else {
+          selectedIds = await rerankWithGrok(xaiApiKey, message, candidates)
+          if (selectedIds.length === 0) {
+            // Reranker failed or timed out. The top keyword candidates beat an
+            // answer with no curriculum grounding at all.
+            selectedIds = candidates.slice(0, MAX_CONTEXT_LESSONS).map((c) => c.id)
+          }
+        }
         relevantContext = await fetchLessonContent(ragClient, candidates, selectedIds)
       }
     } catch (ragError) {

@@ -80,7 +80,11 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  }, [user, checkAchievements, refreshStreak]);
+    // Keyed on user.id (not the object): auth events mint fresh user objects,
+    // and identity-keying refired this whole load (progress fetch + streak
+    // fetch + achievement check) several times per page view.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id, checkAchievements, refreshStreak]);
 
   useEffect(() => {
     if (user) {
@@ -89,7 +93,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       setProgress([]);
       setLoading(false);
     }
-  }, [user, loadProgress]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id, loadProgress]);
 
   const isLessonCompleted = useCallback((lessonId: number): boolean => {
     return progress.some((p) => p.lessonId === lessonId && p.completed);

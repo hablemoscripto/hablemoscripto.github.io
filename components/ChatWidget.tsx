@@ -33,6 +33,32 @@ function loadStoredMessages(): ChatMessage[] {
   return [INITIAL_GREETING];
 }
 
+// First-message suggestions: newcomers don't know what to ask a tutor, and an
+// empty input next to a greeting is a dead end.
+const STARTER_PROMPTS = [
+  '¿Cómo empiezo con poco dinero?',
+  '¿Cómo evito que me estafen?',
+  'Explícame Bitcoin en palabras simples',
+];
+
+// The answer takes several seconds to start streaming (the server searches the
+// lessons first). Labeled stages read as work in progress; static dots read as
+// a hang.
+const WaitingIndicator: React.FC = () => {
+  const [stage, setStage] = useState(0);
+  useEffect(() => {
+    const t1 = setTimeout(() => setStage(1), 2500);
+    const t2 = setTimeout(() => setStage(2), 9000);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+  const labels = ['Pensando...', 'Buscando en las lecciones...', 'Preparando tu respuesta...'];
+  return (
+    <span className="flex items-center gap-1 text-navy-400" role="status">
+      <Loader2 size={14} className="animate-spin" aria-hidden="true" /> {labels[stage]}
+    </span>
+  );
+};
+
 const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
@@ -134,11 +160,15 @@ const ChatWidget: React.FC = () => {
 
   const handleSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    await sendMessage(input);
+  };
+
+  const sendMessage = async (raw: string) => {
+    if (!raw.trim() || isLoading) return;
 
     const userMessage: ChatMessage = {
       role: 'user',
-      text: input.trim(),
+      text: raw.trim(),
       timestamp: new Date()
     };
 
@@ -199,7 +229,11 @@ const ChatWidget: React.FC = () => {
       <button
         ref={toggleRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] sm:bottom-[max(1.5rem,env(safe-area-inset-bottom))] sm:right-[max(1.5rem,env(safe-area-inset-right))] z-50 p-3 sm:p-4 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 text-navy-900 shadow-lg hover:shadow-brand-500/40 transition-all transform hover:scale-110 active:scale-95 flex items-center justify-center"
+        className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] sm:bottom-[max(1.5rem,env(safe-area-inset-bottom))] sm:right-[max(1.5rem,env(safe-area-inset-right))] z-50 p-3 sm:p-4 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 text-navy-900 shadow-lg hover:shadow-brand-500/40 transition-all transform hover:scale-110 active:scale-95 items-center justify-center ${
+          // On mobile the open panel is a full-screen sheet with its own close
+          // button; a floating X on top of it is redundant and overlaps the input.
+          isOpen ? 'hidden sm:flex' : 'flex'
+        }`}
         aria-label={isOpen ? 'Cerrar asistente IA' : 'Abrir asistente IA'}
         aria-expanded={isOpen}
       >
@@ -209,7 +243,7 @@ const ChatWidget: React.FC = () => {
       {/* Chat Window */}
       {isOpen && (
         <section
-          className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 w-[calc(100vw-2rem)] sm:w-[400px] h-[500px] max-h-[80vh] z-50 bg-navy-900 border border-navy-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 zoom-in-95 duration-200 origin-bottom-right"
+          className="fixed inset-0 w-full h-full max-h-none rounded-none sm:inset-auto sm:bottom-24 sm:right-6 sm:w-[400px] sm:h-[500px] sm:max-h-[80vh] sm:rounded-2xl z-50 bg-navy-900 border border-navy-700 shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 sm:zoom-in-95 duration-200 origin-bottom-right"
           role="region"
           aria-label="Chat con asistente de IA"
         >
@@ -228,11 +262,18 @@ const ChatWidget: React.FC = () => {
             </div>
             <button
               onClick={clearChat}
-              className="p-2 text-navy-400 hover:text-red-400 hover:bg-navy-700/50 rounded-lg transition-colors"
+              className="p-2 min-h-11 min-w-11 flex items-center justify-center text-navy-400 hover:text-red-400 hover:bg-navy-700/50 rounded-lg transition-colors"
               aria-label="Limpiar conversación"
               title="Limpiar conversación"
             >
               <Trash2 size={16} aria-hidden="true" />
+            </button>
+            <button
+              onClick={() => { setIsOpen(false); toggleRef.current?.focus(); }}
+              className="sm:hidden p-2 min-h-11 min-w-11 flex items-center justify-center text-navy-400 hover:text-white hover:bg-navy-700/50 rounded-lg transition-colors"
+              aria-label="Cerrar asistente IA"
+            >
+              <X size={20} aria-hidden="true" />
             </button>
           </div>
 
@@ -262,9 +303,7 @@ const ChatWidget: React.FC = () => {
                         {msg.text ? (
                           <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>{msg.text}</ReactMarkdown>
                         ) : (
-                          <span className="flex items-center gap-1 text-navy-400" aria-label="Pensando">
-                            <Loader2 size={14} className="animate-spin" aria-hidden="true" /> Pensando...
-                          </span>
+                          <WaitingIndicator />
                         )}
                      </div>
                   ) : (
@@ -273,6 +312,19 @@ const ChatWidget: React.FC = () => {
                 </div>
               </div>
             ))}
+            {messages.length === 1 && !isLoading && (
+              <div className="flex flex-col items-start gap-2 pt-1" aria-label="Preguntas sugeridas">
+                {STARTER_PROMPTS.map((prompt) => (
+                  <button
+                    key={prompt}
+                    onClick={() => void sendMessage(prompt)}
+                    className="text-left text-sm px-3 py-2.5 min-h-11 rounded-xl border border-brand-500/30 text-brand-300 hover:bg-brand-500/10 hover:border-brand-500/50 transition-colors"
+                  >
+                    {prompt}
+                  </button>
+                ))}
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
 

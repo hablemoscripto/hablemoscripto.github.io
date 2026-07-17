@@ -22,6 +22,17 @@ import { useLessonNavigation } from '../hooks/useLessonNavigation';
 // Experto welcome email (_shared/welcome-email.ts).
 const COMMUNITY_INVITE_URL = 'https://discord.gg/CQYyvzQb65';
 
+// An in-progress quiz attempt saved by Quiz (sessionStorage). When one exists
+// the quiz opens directly so the restored answers are visible.
+function hasQuizDraft(key: string | undefined): boolean {
+    if (!key || typeof window === 'undefined') return false;
+    try {
+        return window.sessionStorage.getItem(key) !== null;
+    } catch {
+        return false;
+    }
+}
+
 declare global {
     interface Window {
         __currentLesson?: { title: string; level: string; id: number } | null;
@@ -46,7 +57,10 @@ const LessonView: React.FC = () => {
 
     // `setActiveSection` is used to reset scroll-spy state on lesson change.
     const [, setActiveSection] = useState(0);
-    const [showQuiz, setShowQuiz] = useState(false);
+    const quizStorageKey = Number.isNaN(id) ? undefined : `hc_quiz_draft_${id}`;
+    // Reopen the quiz automatically when an in-progress attempt survived a
+    // reload; otherwise the restored answers hide behind "Comenzar Quiz".
+    const [showQuiz, setShowQuiz] = useState(() => hasQuizDraft(quizStorageKey));
     const [quizPassed, setQuizPassed] = useState(false);
     const [saveError, setSaveError] = useState(false);
     const [lastScore, setLastScore] = useState<number | null>(null);
@@ -128,8 +142,8 @@ const LessonView: React.FC = () => {
         window.scrollTo(0, 0);
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setActiveSection(0);
-         
-        setShowQuiz(false);
+
+        setShowQuiz(hasQuizDraft(Number.isNaN(id) ? undefined : `hc_quiz_draft_${id}`));
 
         setQuizPassed(false);
         setSaveError(false);
@@ -554,6 +568,7 @@ const LessonView: React.FC = () => {
                                     <Quiz
                                         questions={lesson.quiz?.questions || []}
                                         onComplete={handleQuizComplete}
+                                        storageKey={quizStorageKey}
                                     />
 
                                     {quizPassed && levelJustCompleted && (

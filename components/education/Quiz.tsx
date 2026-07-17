@@ -44,6 +44,71 @@ function normalizeQuestion(q: Question | LegacyQuestion): Question {
 
 type QuizAnswer = number | boolean | number[] | string | null | undefined;
 
+interface QuizDraft {
+    answers: Record<string, QuizAnswer>;
+    index: number;
+}
+
+function loadQuizDraft(key: string | undefined, questions: Question[]): QuizDraft {
+    const empty: QuizDraft = { answers: {}, index: 0 };
+    if (!key || typeof window === 'undefined') return empty;
+    try {
+        const raw = window.sessionStorage.getItem(key);
+        if (!raw) return empty;
+        const parsed = JSON.parse(raw);
+        // Only restore answers whose question ids still exist, so a stale draft
+        // after a content edit can't inflate the answered count.
+        const ids = new Set(questions.map(q => q.id));
+        const answers: Record<string, QuizAnswer> = {};
+        for (const [id, a] of Object.entries(parsed?.answers ?? {})) {
+            if (ids.has(id)) answers[id] = a as QuizAnswer;
+        }
+        const index =
+            Number.isInteger(parsed?.index) && parsed.index >= 0 && parsed.index < questions.length
+                ? (parsed.index as number)
+                : 0;
+        return { answers, index };
+    } catch {
+        return empty;
+    }
+}
+
+function clearQuizDraft(key: string | undefined) {
+    if (!key || typeof window === 'undefined') return;
+    try {
+        window.sessionStorage.removeItem(key);
+    } catch {
+        // sessionStorage unavailable — nothing to clear
+    }
+}
+
+// Deterministic permutation for ordering questions, seeded by question id so the
+// scrambled start (and "Reiniciar orden") is stable across renders and reloads.
+// Guaranteed to differ from the correct order; otherwise the question grades
+// itself before the user touches it.
+function scrambledOrder(count: number, correctOrder: number[], seed: string): number[] {
+    let h = 2166136261;
+    for (let i = 0; i < seed.length; i++) {
+        h ^= seed.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+    }
+    const next = () => {
+        h ^= h << 13; h ^= h >>> 17; h ^= h << 5;
+        return (h >>> 0) / 4294967296;
+    };
+    const order = Array.from({ length: count }, (_, i) => i);
+    for (let attempt = 0; attempt < 10; attempt++) {
+        for (let i = count - 1; i > 0; i--) {
+            const j = Math.floor(next() * (i + 1));
+            [order[i], order[j]] = [order[j], order[i]];
+        }
+        if (JSON.stringify(order) !== JSON.stringify(correctOrder)) return order;
+    }
+    // Pathological seed: rotate away from the correct order (count >= 2 given a
+    // real ordering question).
+    return [...correctOrder.slice(1), correctOrder[0]];
+}
+
 function isCorrect(question: Question, answer: QuizAnswer): boolean {
     switch (question.type) {
         case 'multiple-choice':
@@ -165,7 +230,7 @@ const MultipleChoiceRenderer: React.FC<QuestionComponentProps> = ({
             {q.hint && !submitted && (
                 <button
                     onClick={onToggleHint}
-                    className="flex items-center gap-2 text-sm text-navy-400 hover:text-brand-400 transition-colors mt-2"
+                    className="flex items-center gap-2 min-h-11 px-1 text-sm text-navy-400 hover:text-brand-400 transition-colors mt-2"
                 >
                     <Lightbulb size={16} />
                     {showHint ? 'Ocultar pista' : 'Ver pista'}
@@ -237,7 +302,7 @@ const TrueFalseRenderer: React.FC<QuestionComponentProps> = ({
             {q.hint && !submitted && (
                 <button
                     onClick={onToggleHint}
-                    className="flex items-center gap-2 text-sm text-navy-400 hover:text-brand-400 transition-colors"
+                    className="flex items-center gap-2 min-h-11 px-1 text-sm text-navy-400 hover:text-brand-400 transition-colors"
                 >
                     <Lightbulb size={16} />
                     {showHint ? 'Ocultar pista' : 'Ver pista'}
@@ -319,7 +384,7 @@ const MultipleSelectRenderer: React.FC<QuestionComponentProps> = ({
             {q.hint && !submitted && (
                 <button
                     onClick={onToggleHint}
-                    className="flex items-center gap-2 text-sm text-navy-400 hover:text-brand-400 transition-colors"
+                    className="flex items-center gap-2 min-h-11 px-1 text-sm text-navy-400 hover:text-brand-400 transition-colors"
                 >
                     <Lightbulb size={16} />
                     {showHint ? 'Ocultar pista' : 'Ver pista'}
@@ -339,15 +404,21 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
     question, answer, onAnswer, submitted, showHint, onToggleHint
 }) => {
     const q = question as OrderingQuestion;
-    const currentOrder: number[] = Array.isArray(answer) ? answer as number[] : q.items.map((_, i) => i);
+    // Scrambled start: presenting the source order would hand most questions to
+    // the user pre-solved (authors write items in chronological order). Seeded by
+    // question id so "Reiniciar orden" and re-renders agree.
+    const initialOrder = useMemo(
+        () => scrambledOrder(q.items.length, q.correctOrder, q.id),
+        [q.items.length, q.correctOrder, q.id],
+    );
+    const currentOrder: number[] = Array.isArray(answer) ? answer as number[] : initialOrder;
 
-    // Seed the identity order as the answer on mount so the displayed default
-    // order counts as a real (and possibly already-correct) answer. Without this
-    // the question reads as "unanswered" and blocks submission until the user
-    // nudges an item, even when the shown order is correct.
+    // Seed the scrambled order as the answer on mount so the question counts as
+    // answered (arranging is optional if the user believes the shown order) and
+    // submission isn't blocked on an untouched ordering question.
     useEffect(() => {
         if (!Array.isArray(answer)) {
-            onAnswer(q.items.map((_, i) => i));
+            onAnswer(initialOrder);
         }
         // Run once on mount for this question.
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -424,8 +495,8 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
 
             {!submitted && (
                 <button
-                    onClick={() => onAnswer(q.items.map((_, i) => i))}
-                    className="text-sm text-navy-400 hover:text-white flex items-center gap-1"
+                    onClick={() => onAnswer(initialOrder)}
+                    className="text-sm text-navy-400 hover:text-white flex items-center gap-1 min-h-11 px-1"
                 >
                     <RotateCcw size={14} /> Reiniciar orden
                 </button>
@@ -434,7 +505,7 @@ const OrderingRenderer: React.FC<QuestionComponentProps> = ({
             {q.hint && !submitted && (
                 <button
                     onClick={onToggleHint}
-                    className="flex items-center gap-2 text-sm text-navy-400 hover:text-brand-400 transition-colors"
+                    className="flex items-center gap-2 min-h-11 px-1 text-sm text-navy-400 hover:text-brand-400 transition-colors"
                 >
                     <Lightbulb size={16} />
                     {showHint ? 'Ocultar pista' : 'Ver pista'}
@@ -488,7 +559,7 @@ const FillBlankRenderer: React.FC<QuestionComponentProps> = ({
             {q.hint && !submitted && (
                 <button
                     onClick={onToggleHint}
-                    className="flex items-center gap-2 text-sm text-navy-400 hover:text-brand-400 transition-colors"
+                    className="flex items-center gap-2 min-h-11 px-1 text-sm text-navy-400 hover:text-brand-400 transition-colors"
                 >
                     <Lightbulb size={16} />
                     {showHint ? 'Ocultar pista' : 'Ver pista'}
@@ -512,12 +583,15 @@ const Quiz: React.FC<QuizProps> = ({
     questions: rawQuestions,
     onComplete,
     showProgressBar = true,
-    allowNavigation = true
+    allowNavigation = true,
+    storageKey
 }) => {
     const questions = useMemo(() => rawQuestions.map(normalizeQuestion), [rawQuestions]);
 
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [answers, setAnswers] = useState<Record<string, QuizAnswer>>({});
+    // Restore an in-progress attempt (reload, back-swipe) from sessionStorage.
+    const [draft] = useState(() => loadQuizDraft(storageKey, questions));
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(draft.index);
+    const [answers, setAnswers] = useState<Record<string, QuizAnswer>>(draft.answers);
     const [submitted, setSubmitted] = useState(false);
     const [showHints, setShowHints] = useState<{ [key: string]: boolean }>({});
     const [viewMode, setViewMode] = useState<'single' | 'all'>('single');
@@ -533,6 +607,20 @@ const Quiz: React.FC<QuizProps> = ({
             window.dispatchEvent(new CustomEvent('quiz-active', { detail: { active: false } }));
         };
     }, []);
+
+    // Persist the attempt while it's in progress; the draft dies with the tab
+    // (sessionStorage), on submit, and on retry.
+    useEffect(() => {
+        if (!storageKey || submitted || typeof window === 'undefined') return;
+        try {
+            window.sessionStorage.setItem(
+                storageKey,
+                JSON.stringify({ answers, index: currentQuestionIndex }),
+            );
+        } catch {
+            // Quota or disabled storage — persistence is best-effort
+        }
+    }, [storageKey, answers, currentQuestionIndex, submitted]);
 
     const answeredCount = Object.keys(answers).filter(key => {
         const answer = answers[key];
@@ -585,6 +673,7 @@ const Quiz: React.FC<QuizProps> = ({
         setSubmitError(null);
         setSubmitted(true);
         setViewMode('all'); // Show all questions after submit
+        clearQuizDraft(storageKey);
 
         if (passed) {
             const prefersReducedMotion =
@@ -629,6 +718,7 @@ const Quiz: React.FC<QuizProps> = ({
         setCurrentQuestionIndex(0);
         setViewMode('single');
         setSubmitError(null);
+        clearQuizDraft(storageKey);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -735,7 +825,7 @@ const Quiz: React.FC<QuizProps> = ({
                         {!submitted && (
                             <button
                                 onClick={() => setViewMode(viewMode === 'single' ? 'all' : 'single')}
-                                className="text-xs text-navy-400 hover:text-white transition-colors"
+                                className="text-xs min-h-11 px-2 text-navy-400 hover:text-white transition-colors"
                             >
                                 {viewMode === 'single' ? 'Ver todas' : 'Una a la vez'}
                             </button>
@@ -824,7 +914,7 @@ const Quiz: React.FC<QuizProps> = ({
                             <button
                                 onClick={() => navigateQuestion('prev')}
                                 disabled={currentQuestionIndex === 0}
-                                className="flex items-center gap-2 text-navy-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                                className="flex items-center gap-2 min-h-11 px-2 text-navy-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                             >
                                 <ArrowLeft size={18} /> Anterior
                             </button>
@@ -836,19 +926,30 @@ const Quiz: React.FC<QuizProps> = ({
                             {currentQuestionIndex < questions.length - 1 ? (
                                 <button
                                     onClick={() => navigateQuestion('next')}
-                                    className="flex items-center gap-2 text-navy-400 hover:text-white transition-colors"
+                                    className="flex items-center gap-2 min-h-11 px-2 text-navy-400 hover:text-white transition-colors"
                                 >
                                     Siguiente <ArrowRight size={18} />
                                 </button>
                             ) : (
                                 <button
                                     onClick={handleSubmit}
-                                    className="flex items-center gap-2 px-4 py-2 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-lg transition-colors"
+                                    className="flex items-center gap-2 min-h-11 px-4 py-2 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-lg transition-colors"
                                 >
                                     Enviar Quiz <ArrowRight size={18} />
                                 </button>
                             )}
                         </div>
+
+                        {/* Submit from anywhere once every question is answered — fixing
+                            a skipped question shouldn't require paging back to the end. */}
+                        {answeredCount === questions.length && currentQuestionIndex < questions.length - 1 && (
+                            <button
+                                onClick={handleSubmit}
+                                className="w-full min-h-12 py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-colors shadow-lg shadow-brand-500/20 flex items-center justify-center gap-2"
+                            >
+                                Enviar Quiz ({questions.length}/{questions.length} respondidas) <ArrowRight size={18} />
+                            </button>
+                        )}
                     </div>
                 ) : (
                     <div className="space-y-10">

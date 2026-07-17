@@ -149,17 +149,36 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
             </button>
           </div>
 
-          {/* Mobile Toggle */}
-          <button
-            ref={mobileToggleRef}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-navy-400 hover:text-white"
-            aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="education-mobile-menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile: streak + level always visible — the habit signal can't live
+              only inside the hamburger on the audience's primary device. */}
+          <div className="flex lg:hidden items-center gap-2">
+            <button
+              onClick={onOpenProgress}
+              className="flex items-center gap-3 min-h-11 px-3 rounded-full bg-navy-900 border border-navy-800 text-sm"
+              aria-label={`Racha de ${streak} días, nivel ${level}. Ver mi progreso`}
+            >
+              <span className="flex items-center gap-1 text-amber-400">
+                <Zap size={15} className="fill-amber-400" aria-hidden="true" />
+                <span className="font-bold">{streak}</span>
+              </span>
+              <span className="flex items-center gap-1 text-navy-100">
+                <Trophy size={15} className="text-brand-500" aria-hidden="true" />
+                <span className="font-bold">Nv {level}</span>
+              </span>
+            </button>
+
+            {/* Mobile Toggle */}
+            <button
+              ref={mobileToggleRef}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 min-h-11 min-w-11 flex items-center justify-center text-navy-400 hover:text-white"
+              aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="education-mobile-menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 

@@ -35,10 +35,10 @@ export const BEGINNER_LEVEL: LevelData = {
       description: 'La historia oculta de la banca, la inflación y la impresión de dinero',
       icon: Banknote,
       lessons: [
-        { id: 1, title: 'Breve Historia del Dinero', description: 'Del trueque al patrón oro y al dinero Fiat.', duration: '15 min', type: 'Video + Historia' },
-        { id: 2, title: 'La Trampa de la Inflación', description: 'Cómo la impresión de dinero roba tu tiempo y trabajo.', duration: '20 min', type: 'Video + Gráficos' },
-        { id: 3, title: 'El Efecto Cantillon', description: '¿Quién se beneficia realmente cuando imprimen billetes?', duration: '15 min', type: 'Concepto Clave' },
-        { id: 4, title: 'Bitcoin: La Salida', description: 'La primera solución matemática a la corrupción monetaria.', duration: '18 min', type: 'Video + Texto' },
+        { id: 1, title: 'Breve Historia del Dinero', description: 'Del trueque al patrón oro y al dinero Fiat.', duration: '18 min', type: 'Video + Historia' },
+        { id: 2, title: 'La Trampa de la Inflación', description: 'Cómo la impresión de dinero roba tu tiempo y trabajo.', duration: '22 min', type: 'Video + Gráficos' },
+        { id: 3, title: 'El Efecto Cantillon', description: '¿Quién se beneficia realmente cuando imprimen billetes?', duration: '20 min', type: 'Concepto Clave' },
+        { id: 4, title: 'Bitcoin: La Salida', description: 'La primera solución matemática a la corrupción monetaria.', duration: '28 min', type: 'Video + Texto' },
       ]
     },
     {
@@ -47,8 +47,8 @@ export const BEGINNER_LEVEL: LevelData = {
       description: 'La tecnología detrás de la revolución',
       icon: BookOpen,
       lessons: [
-        { id: 5, title: '¿Qué es Blockchain?', description: 'El libro contable que nadie puede manipular.', duration: '20 min', type: 'Video + Texto' },
-        { id: 6, title: 'Descentralización vs Centralización', description: 'Por qué importa que nadie tenga el control.', duration: '12 min', type: 'Video + Texto' },
+        { id: 5, title: '¿Qué es Blockchain?', description: 'El libro contable que nadie puede manipular.', duration: '25 min', type: 'Video + Texto' },
+        { id: 6, title: 'Descentralización vs Centralización', description: 'Por qué importa que nadie tenga el control.', duration: '22 min', type: 'Video + Texto' },
       ]
     },
     {
@@ -57,19 +57,19 @@ export const BEGINNER_LEVEL: LevelData = {
       description: 'Configura tu wallet y entiende las redes (Solana vs ETH)',
       icon: Wallet,
       lessons: [
-        { id: 7, title: 'Wallets: Tu Llave, Tu Dinero', description: 'Hot vs Cold wallets y la importancia de la custodia.', duration: '18 min', type: 'Video + Texto' },
-        { id: 8, title: 'La Frase Semilla (Seed Phrase)', description: 'Las 12 palabras que valen millones. Seguridad extrema.', duration: '25 min', type: 'Video + Práctica' },
+        { id: 7, title: 'Wallets: Tu Llave, Tu Dinero', description: 'Hot vs Cold wallets y la importancia de la custodia.', duration: '25 min', type: 'Video + Texto' },
+        { id: 8, title: 'La Frase Semilla (Seed Phrase)', description: 'Las 12 palabras que valen millones. Seguridad extrema.', duration: '28 min', type: 'Video + Práctica' },
         { id: 9, title: 'Instalando Phantom Wallet', description: 'Tu puerta de entrada al ecosistema Solana.', duration: '30 min', type: 'Tutorial Práctico' },
         { id: 10, title: 'Solana vs Ethereum: La Guerra de L1s', description: 'Por qué usamos Solana: Velocidad, costos y comunidad.', duration: '35 min', type: 'Comparativa' },
         { id: 35, title: 'Obteniendo tus Primeros SOL', description: 'Cómo convertir tu dinero local a Cripto usando Exchanges.', duration: '25 min', type: 'Tutorial' },
         { id: 36, title: 'Tu Primera Transacción', description: 'Envía valor a través del mundo en segundos.', duration: '20 min', type: 'Práctica' },
-        { id: 37, title: 'Exploradores de Bloques (Solscan)', description: 'Aprende a verificar la verdad.', duration: '15 min', type: 'Herramienta' },
+        { id: 37, title: 'Exploradores de Bloques (Solscan)', description: 'Aprende a verificar la verdad.', duration: '18 min', type: 'Herramienta' },
         { id: 38, title: 'Evitar Estafas en Web3', description: 'Aprende a defenderte antes de salir a mar abierto.', duration: '30 min', type: 'Seguridad Vital' },
-        { id: 41, title: 'Stablecoins: Tu Dólar Digital', description: 'Qué son USDC y USDT, cómo funcionan, y los riesgos que nadie te cuenta.', duration: '20 min', type: 'Concepto Clave' },
-        { id: 39, title: 'Gasta tus Cripto', description: 'Usa tus ganancias en el mundo real con tarjetas cripto.', duration: '20 min', type: 'Herramientas' },
-        { id: 42, title: 'DCA: Invierte Sin Estrés', description: 'La estrategia más simple y poderosa para construir riqueza a largo plazo.', duration: '15 min', type: 'Estrategia' },
-        { id: 43, title: 'Bitcoin vs Altcoins: Qué Comprar Primero', description: 'Entiende el rol de BTC como reserva de valor vs SOL y ETH como plataformas.', duration: '18 min', type: 'Comparativa' },
-        { id: 44, title: 'Tu Plan de Inversión Personal', description: 'Junta todo lo aprendido: portafolio, DCA, seguridad y metas claras.', duration: '20 min', type: 'Práctica' },
+        { id: 41, title: 'Stablecoins: Tu Dólar Digital', description: 'Qué son USDC y USDT, cómo funcionan, y los riesgos que nadie te cuenta.', duration: '22 min', type: 'Concepto Clave' },
+        { id: 39, title: 'Gasta tus Cripto', description: 'Usa tus ganancias en el mundo real con tarjetas cripto.', duration: '25 min', type: 'Herramientas' },
+        { id: 42, title: 'DCA: Invierte Sin Estrés', description: 'La estrategia más simple y poderosa para construir riqueza a largo plazo.', duration: '18 min', type: 'Estrategia' },
+        { id: 43, title: 'Bitcoin vs Altcoins: Qué Comprar Primero', description: 'Entiende el rol de BTC como reserva de valor vs SOL y ETH como plataformas.', duration: '20 min', type: 'Comparativa' },
+        { id: 44, title: 'Tu Plan de Inversión Personal', description: 'Junta todo lo aprendido: portafolio, DCA, seguridad y metas claras.', duration: '22 min', type: 'Práctica' },
       ]
     }
   ]
@@ -104,8 +104,8 @@ export const INTERMEDIATE_LEVEL: LevelData = {
       icon: Search,
       lessons: [
         { id: 17, title: 'Tokenomics 101', description: 'Inflación, Supply y Vesting. Evita ser la liquidez de salida.', duration: '35 min', type: 'Concepto' },
-        { id: 18, title: 'Ciclos de Mercado (Halving)', description: 'El ritmo de 4 años de Bitcoin y cómo afecta a las Altcoins.', duration: '26 min', type: 'Análisis' },
-        { id: 19, title: 'Investigación de Proyectos', description: 'Cómo analizar Whitepapers, Equipos y Githubs.', duration: '30 min', type: 'Casos Prácticos' },
+        { id: 18, title: 'Ciclos de Mercado (Halving)', description: 'El ritmo de 4 años de Bitcoin y cómo afecta a las Altcoins.', duration: '30 min', type: 'Análisis' },
+        { id: 19, title: 'Investigación de Proyectos', description: 'Cómo analizar Whitepapers, Equipos y Githubs.', duration: '35 min', type: 'Casos Prácticos' },
         { id: 20, title: 'Narrativas y Rotación', description: 'IA, Gaming, Meme Coins. Dónde fluye el dinero.', duration: '24 min', type: 'Estrategia' },
       ]
     },
@@ -118,7 +118,7 @@ export const INTERMEDIATE_LEVEL: LevelData = {
         { id: 21, title: 'Diversificación Inteligente', description: 'No pongas todos los huevos en la misma canasta.', duration: '32 min', type: 'Estrategia' },
         { id: 22, title: 'El Arte del Stop Loss', description: 'Protege tu capital antes de buscar ganancias.', duration: '28 min', type: 'Tutorial Práctico' },
         { id: 23, title: 'Toma de Ganancias (Take Profit)', description: 'Nadie quebró por tomar ganancias. Estrategias de salida.', duration: '25 min', type: 'Tutorial Práctico' },
-        { id: 24, title: 'Mentalidad de Trader', description: 'Control emocional, FOMO y disciplina.', duration: '20 min', type: 'Psicología' },
+        { id: 24, title: 'Mentalidad de Trader', description: 'Control emocional, FOMO y disciplina.', duration: '28 min', type: 'Psicología' },
       ]
     }
   ]
@@ -156,7 +156,7 @@ export const ADVANCED_LEVEL: LevelData = {
       lessons: [
         { id: 29, title: 'NFTs en Solana', description: 'Magic Eden, Tensor y por qué los NFTs de Solana son diferentes.', duration: '30 min', type: 'Mercado' },
         { id: 30, title: 'Airdrops y Farming', description: 'Cómo posicionarte para recompensas retroactivas legítimas.', duration: '35 min', type: 'Estrategia' },
-        { id: 31, title: 'DePIN: Infraestructura Física', description: 'Helium, Hivemapper. El mundo real en la blockchain.', duration: '25 min', type: 'Tendencias' },
+        { id: 31, title: 'DePIN: Infraestructura Física', description: 'Helium, Hivemapper. El mundo real en la blockchain.', duration: '28 min', type: 'Tendencias' },
       ]
     },
     {
@@ -167,7 +167,7 @@ export const ADVANCED_LEVEL: LevelData = {
       lessons: [
         { id: 32, title: 'Monolítico vs Modular', description: 'Por qué Solana escala en L1 vs el enfoque de L2s de Ethereum.', duration: '30 min', type: 'Técnico' },
         { id: 33, title: 'Firedancer & El Futuro', description: 'Cliente validador independiente de Jump Crypto. Por qué la diversidad de clientes aumenta la resiliencia de Solana.', duration: '25 min', type: 'Futuro' },
-        { id: 34, title: 'Seguridad Operacional Avanzada', description: 'Burner wallets, Ledger y Revoke.cash.', duration: '25 min', type: 'Seguridad' },
+        { id: 34, title: 'Seguridad Operacional Avanzada', description: 'Burner wallets, Ledger y Revoke.cash.', duration: '30 min', type: 'Seguridad' },
         { id: 46, title: 'Gobernanza DAO: Tu Voto Importa', description: 'Tokens de gobernanza, mecanismos de votación y cómo participar en decisiones que afectan tus inversiones.', duration: '25 min', type: 'Concepto + Práctica' },
       ]
     }

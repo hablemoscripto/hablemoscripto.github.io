@@ -20,6 +20,35 @@ const VIEW_LABELS: Record<ModalView, string> = {
   'verify-email': 'Verificar email',
 };
 
+// A user who clicked a paid plan CTA has that intent stored in
+// sessionStorage.redirectAfterLogin (e.g. '/education?upgrade=inversor').
+// Surface it in the modal copy so the flow acknowledges what they came to do.
+function pendingPlanName(): string | null {
+  try {
+    const redirect = window.sessionStorage.getItem('redirectAfterLogin');
+    if (!redirect) return null;
+    const upgrade = new URLSearchParams(redirect.split('?')[1] ?? '').get('upgrade');
+    if (upgrade === 'inversor') return 'Inversor';
+    if (upgrade === 'experto') return 'Cripto Experto';
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+// Supabase auth errors surface raw English strings ("Failed to fetch") on
+// transport failure. Translate the known failure classes; anything else keeps
+// its original message so real validation errors still show.
+function humanizeAuthError(message: string): string {
+  if (/failed to fetch|network|load failed|fetch/i.test(message)) {
+    return 'No pudimos conectar con el servidor. No es tu conexión, es un problema de nuestro lado. Intenta de nuevo en unos minutos o escríbenos a hablemoscripto@gmail.com';
+  }
+  if (/rate limit|too many requests/i.test(message)) {
+    return 'Demasiados intentos. Espera un minuto e intenta de nuevo.';
+  }
+  return message;
+}
+
 export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView = 'login' }: AuthModalProps) {
   const [view, setView] = useState<ModalView>(initialView);
   const [email, setEmail] = useState('');
@@ -85,7 +114,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
           } else if (error.message.includes('Email not confirmed')) {
             setView('verify-email');
           } else {
-            setError(error.message);
+            setError(humanizeAuthError(error.message));
           }
         } else {
           trackLogin('email');
@@ -105,7 +134,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
           if (error.message.includes('already registered')) {
             setError('Este email ya está registrado');
           } else {
-            setError(error.message);
+            setError(humanizeAuthError(error.message));
           }
         } else {
           trackSignUp('email');
@@ -134,7 +163,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
     try {
       const { error } = await resetPassword(email);
       if (error) {
-        setError(error.message);
+        setError(humanizeAuthError(error.message));
       } else {
         setSuccess('Te enviamos un enlace para restablecer tu contraseña. Revisa tu email (y la carpeta de spam).');
       }
@@ -153,7 +182,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
     try {
       const { error } = await resendVerification(email);
       if (error) {
-        setError(error.message);
+        setError(humanizeAuthError(error.message));
       } else {
         setSuccess('Email de verificación reenviado. Revisa tu bandeja de entrada.');
       }
@@ -318,10 +347,17 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                 {view === 'login' ? 'Iniciar sesión' : 'Crear Cuenta'}
               </h2>
               <p className="text-navy-400 mt-2">
-                {view === 'login'
-                  ? 'Accede a tu cuenta para continuar'
-                  : 'Regístrate para guardar tu progreso'
-                }
+                {(() => {
+                  const plan = pendingPlanName();
+                  if (plan) {
+                    return view === 'login'
+                      ? `Inicia sesión para continuar con tu plan ${plan}`
+                      : `Crea tu cuenta y sigue al pago del plan ${plan}`;
+                  }
+                  return view === 'login'
+                    ? 'Accede a tu cuenta para continuar'
+                    : 'Regístrate para guardar tu progreso';
+                })()}
               </p>
             </div>
 

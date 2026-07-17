@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import EducationNavbar from './EducationNavbar';
 import LessonSearch from './LessonSearch';
 import { reportError } from '../utils/errorReporting';
@@ -116,27 +116,23 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   }, [searchParams, setSearchParams]);
 
   const { progress: supabaseProgress } = useProgress();
-  const { achievements, achievementDefinitions } = useGamification();
+  const { achievements, achievementDefinitions, xp, streak } = useGamification();
   const [progress, setProgress] = useState<ProgressData>({});
   // Resume learning: read last visited lesson from localStorage once on mount.
   // Computed via a lazy initializer so no effect is needed — the value is
-  // derived synchronously from storage and never changes for this view.
-  const [{ lastLessonId, lastLessonTitle }] = useState<{
-    lastLessonId: number | null;
-    lastLessonTitle: string | null;
-  }>(() => {
+  // derived synchronously from storage and never changes for this view. The
+  // title comes from continueTarget below, which also handles the case where
+  // the last visited lesson is already completed.
+  const [lastLessonId] = useState<number | null>(() => {
     try {
       const stored = localStorage.getItem('last_lesson_id');
-      if (!stored) return { lastLessonId: null, lastLessonTitle: null };
+      if (!stored) return null;
       const id = parseInt(stored, 10);
-      if (isNaN(id)) return { lastLessonId: null, lastLessonTitle: null };
-      const found = getAllLessonsOrdered().find(l => l.id === id);
-      return found
-        ? { lastLessonId: id, lastLessonTitle: found.title }
-        : { lastLessonId: null, lastLessonTitle: null };
+      if (isNaN(id)) return null;
+      return getAllLessonsOrdered().some(l => l.id === id) ? id : null;
     } catch {
       // localStorage may be unavailable in private browsing
-      return { lastLessonId: null, lastLessonTitle: null };
+      return null;
     }
   });
 
@@ -222,6 +218,38 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
     fetchProgressByLevel();
   }, [supabaseProgress, levels, user]);
+
+  // "Continuar aprendiendo" target: resume the last visited lesson while it's
+  // unfinished; once it's completed, advance to the next uncompleted lesson in
+  // course order instead of pointing back at finished work.
+  const continueTarget = useMemo(() => {
+    const ordered = getAllLessonsOrdered();
+    const isDone = (lid: number) => supabaseProgress.some(p => p.lessonId === lid && p.completed);
+    const anchorIdx = lastLessonId ? ordered.findIndex(l => l.id === lastLessonId) : -1;
+    if (anchorIdx >= 0 && !isDone(ordered[anchorIdx].id)) {
+      return { ...ordered[anchorIdx], resuming: true };
+    }
+    for (let i = anchorIdx + 1; i < ordered.length; i++) {
+      if (!isDone(ordered[i].id)) return { ...ordered[i], resuming: false };
+    }
+    const firstPending = ordered.find(l => !isDone(l.id));
+    return firstPending ? { ...firstPending, resuming: false } : null;
+  }, [supabaseProgress, lastLessonId]);
+
+  // Snapshot for rendering partial progress on locked achievement cards.
+  // Mirrors the shape ProgressContext feeds checkAchievements.
+  const achievementSnapshot = useMemo(() => {
+    const completedLessonIds = supabaseProgress.filter(p => p.completed).map(p => p.lessonId);
+    const totalLessons = getAllLessonsOrdered().length;
+    return {
+      completedLessonIds,
+      completedCount: completedLessonIds.length,
+      totalLessons,
+      progressPercentage: totalLessons > 0 ? Math.round((completedLessonIds.length / totalLessons) * 100) : 0,
+      xp,
+      streak,
+    };
+  }, [supabaseProgress, xp, streak]);
 
   const getLevelProgress = useCallback((levelId: string) => {
     const level = levels.find(l => l.id === levelId);
@@ -362,10 +390,10 @@ const EducationPage: React.FC<EducationPageProps> = () => {
       {isDashboard ? (
         <>
           <DailyReviewCard />
-          {lastLessonId && lastLessonTitle && (
+          {(lastLessonId || totalCompletedLessons > 0) && continueTarget && (
             <div className="container max-w-7xl mx-auto px-6 mt-6 mb-6">
               <button
-                onClick={() => navigate(`/education/lesson/${lastLessonId}`)}
+                onClick={() => navigate(`/education/lesson/${continueTarget.id}`)}
                 className="w-full flex items-center justify-between p-4 bg-brand-500/10 border border-brand-500/20 rounded-2xl hover:bg-brand-500/15 transition-all group"
               >
                 <div className="flex items-center gap-3">
@@ -373,8 +401,10 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                     <PlayCircle size={20} className="text-brand-400" />
                   </div>
                   <div className="text-left">
-                    <p className="text-xs text-brand-400 font-bold uppercase tracking-wider">Continuar aprendiendo</p>
-                    <p className="text-sm text-white font-medium">{lastLessonTitle}</p>
+                    <p className="text-xs text-brand-400 font-bold uppercase tracking-wider">
+                      {continueTarget.resuming ? 'Continuar aprendiendo' : 'Siguiente lección'}
+                    </p>
+                    <p className="text-sm text-white font-medium">{continueTarget.title}</p>
                   </div>
                 </div>
                 <ArrowRight size={20} className="text-brand-400 group-hover:translate-x-1 transition-transform" />
@@ -578,7 +608,33 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                         {new Date(unlocked.unlockedAt!).toLocaleDateString('es-CO', { day: 'numeric', month: 'short' })}
                       </div>
                     ) : (
-                      <p className="text-[11px] text-navy-400 leading-tight">{def.description}</p>
+                      <>
+                        <p className="text-[11px] text-navy-400 leading-tight">{def.description}</p>
+                        {def.progress && (() => {
+                          const { current, target, suffix = '' } = def.progress(achievementSnapshot);
+                          const capped = Math.min(current, target);
+                          return (
+                            <div className="mt-3 space-y-1.5">
+                              <div
+                                className="h-1 bg-navy-800 rounded-full overflow-hidden"
+                                role="progressbar"
+                                aria-valuenow={capped}
+                                aria-valuemin={0}
+                                aria-valuemax={target}
+                                aria-label={`Progreso hacia ${def.title}`}
+                              >
+                                <div
+                                  className="h-full bg-brand-500/60 rounded-full transition-all duration-500"
+                                  style={{ width: `${target > 0 ? (capped / target) * 100 : 0}%` }}
+                                />
+                              </div>
+                              <p className="text-[10px] text-navy-400 font-medium">
+                                {capped}{suffix === '%' ? '%' : ''} / {target}{suffix}
+                              </p>
+                            </div>
+                          );
+                        })()}
+                      </>
                     )}
                   </div>
                 );
@@ -605,6 +661,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
               setShowPaymentModal(false);
               void pollEntitlementsUntilUpgraded();
             }}
+            onSwitchPlan={setSelectedPlan}
           />
 
           <MentoriaModal

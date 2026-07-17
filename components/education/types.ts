@@ -63,6 +63,9 @@ export interface QuizProps {
     onComplete: (score: number) => void;
     showProgressBar?: boolean;
     allowNavigation?: boolean;
+    // Persists in-progress answers to sessionStorage under this key so a reload
+    // or accidental back-swipe restores the attempt instead of wiping it.
+    storageKey?: string;
 }
 
 export interface CheckpointQuestion {
