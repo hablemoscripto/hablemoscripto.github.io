@@ -64,6 +64,20 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       },
       {
         type: 'main',
+        title: 'Antes de Empezar: El Trading y Tu Plan de Inversión',
+        content: 'Si vienes del nivel Principiante, cerraste con un plan de inversión escrito: portafolio base, DCA automático, reglas claras. Ahora este nivel te habla de velas, tendencias y trading, y es normal preguntarse: ¿no habíamos quedado en que el trading diario era un error? La respuesta corta: **tu plan sigue intacto, y este nivel no lo reemplaza**. Aquí aprendes una capa nueva de habilidades encima de esa base. Aclaremos las reglas del juego antes de la primera vela:',
+        features: [
+          { icon: PiggyBank, title: 'Tu Plan DCA Sigue Siendo la Base', text: 'Nada de lo que aprendas en este nivel cambia tu portafolio base ni tu DCA. Eso sigue corriendo en automático, sin importar lo que hagas aquí. Lo que construyes ahora es capacidad de análisis: entender POR QUÉ el mercado hace lo que hace mientras tu plan se ejecuta solo.' },
+          { icon: Shield, title: 'Si Decides Operar, Hazlo con Poco', text: 'El trading activo es opcional y tiene reglas propias: usa máximo el 5-10% de tu portafolio, con dinero que NO es tu DCA ni tu fondo de emergencia. Entre el 70% y el 90% de los traders retail pierde dinero. Ese dato no es para asustarte: es para que operes con un tamaño donde equivocarte sea aprendizaje, no tragedia.' },
+          { icon: TrendingUp, title: 'Estas Habilidades Sirven Aunque Nunca Operes', text: 'Leer gráficos te ayuda a entender las caídas sin entrar en pánico. El análisis fundamental te enseña a evaluar proyectos antes de invertir. La gestión de riesgo y la psicología de mercado te protegen de tus propios impulsos. Todo eso te hace mejor inversor, hagas trading o no.' }
+        ],
+        highlight: {
+          title: 'Inversor Primero, Trader Después (y Solo Si Quieres)',
+          text: 'Este nivel te convierte en analista, no en apostador. Si al terminar decides que el trading activo no es para ti, igual saldrás leyendo el mercado mejor que la mayoría. Y tu plan de inversión seguirá corriendo, intacto.'
+        }
+      },
+      {
+        type: 'main',
         title: 'Anatomía de una Vela: Los 4 Datos Clave',
         content: 'Cada vela japonesa comprime 4 datos en una sola figura visual. Entender cada componente es como aprender las letras antes de leer palabras:',
         features: [

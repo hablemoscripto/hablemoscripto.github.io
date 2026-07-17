@@ -3777,7 +3777,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           'PASO 5: Escribe tus reglas de compra, reglas de NO hacer, meta a 1 año, y fecha de revisión trimestral.',
           'PASO 6: ANTES de cerrar esta lección: escribe los tres números, pon la alarma del lunes, y comprométete con tu primer DCA. 10 minutos que cambian tu trayectoria.',
           'RECUERDA: El mejor plan es el que ejecutas consistentemente. Perfecto no existe. Empieza con algo simple y ajusta sobre la marcha.',
-          'SIGUIENTE NIVEL: El nivel intermedio te enseñará a leer gráficos, analizar proyectos, y gestionar riesgo como un profesional. Pero primero, ejecuta este plan durante al menos 3 meses.'
+          'SIGUIENTE NIVEL: Tu plan corre solo: el DCA es automático y la revisión es trimestral. Mientras se ejecuta, el nivel intermedio te enseña a leer gráficos, analizar proyectos a fondo y gestionar riesgo como un profesional. Empieza tu plan esta semana y estudia en paralelo: ejecutar y aprender se complementan.'
         ]
       }
     ],
@@ -3837,11 +3837,11 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Empezar a hacer trading diario para ganar más rápido' },
             { id: 'b', text: 'Comprar altcoins que están subiendo en Twitter' },
-            { id: 'c', text: 'Ejecutar mi plan: verificar fondo de emergencia, configurar DCA esta semana, completar checklist de seguridad, escribir mis reglas, y operar mi plan durante 3 meses antes de pasar al nivel intermedio' },
+            { id: 'c', text: 'Ejecutar mi plan esta semana: fondo de emergencia verificado, DCA configurado, checklist de seguridad completo y reglas escritas. Y mientras el plan corre en automático, seguir aprendiendo' },
             { id: 'd', text: 'Esperar al próximo bull market para empezar' }
           ],
           correctAnswer: 'c',
-          explanation: 'El conocimiento sin ejecución no vale nada. Tu plan está listo, ahora ejecútalo. 3 meses de DCA disciplinado te darán la experiencia real que ninguna lección puede enseñar. Después, el nivel intermedio te dará herramientas para optimizar tu estrategia.'
+          explanation: 'El conocimiento sin ejecución no vale nada: tu plan empieza esta semana, no "algún día". Y como el DCA corre en automático, tu aprendizaje no se pausa. El nivel intermedio te da herramientas de análisis y gestión de riesgo que complementan tu plan mientras lo ejecutas. Ejecutar y aprender en paralelo es como avanza un inversor serio.'
         },
         {
           id: 'q6',

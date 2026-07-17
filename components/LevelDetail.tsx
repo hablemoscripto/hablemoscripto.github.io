@@ -3,7 +3,7 @@ import { ChevronLeft, Lock, CheckCircle, PlayCircle, Clock } from 'lucide-react'
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../contexts/ProgressContext';
 import { LevelData } from '../data/courseData';
-import { getPreviousLessonId, getAllLessonsOrdered } from '../utils/courseUtils';
+import { getPreviousLessonId, getAllLessonsOrdered, getBeginnerLessonIds, getIntermediateLessonIds } from '../utils/courseUtils';
 import { useEntitlements } from '../contexts/EntitlementsContext';
 import { canAccessLevel } from '../services/paymentService';
 import UpgradePaywall from './ui/UpgradePaywall';
@@ -29,10 +29,27 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
     // Hard paywall: levels the user's tier doesn't include show an upgrade
     // screen instead of the lessons (distinct from the sequential progress lock).
     if (!entitlementsLoading && !canAccessLevel(entitlements, levelData.id)) {
+        // Graduation framing when every lesson of the previous level is done
+        // (mirrors the LessonView paywall).
+        const prevLevelIds =
+            levelData.id === 'intermediate' ? getBeginnerLessonIds()
+            : levelData.id === 'advanced' ? getIntermediateLessonIds()
+            : [];
+        const graduated = prevLevelIds.length > 0 && prevLevelIds.every((lid) => isLessonCompleted(lid));
         return (
             <UpgradePaywall
                 levelTitle={levelData.title}
                 teaser={levelData.modules.map((m) => m.title)}
+                completedContext={
+                    graduated
+                        ? {
+                              completedLevelTitle:
+                                  levelData.id === 'advanced' ? 'Nivel Intermedio' : 'Nivel Principiante',
+                              lessonsCompleted: prevLevelIds.length,
+                              xp: prevLevelIds.length * 100,
+                          }
+                        : undefined
+                }
                 onUpgrade={() => navigate('/education?upgrade=inversor')}
                 onBack={() => navigate('/education')}
             />
