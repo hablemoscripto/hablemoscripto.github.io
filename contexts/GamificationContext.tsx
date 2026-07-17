@@ -17,6 +17,7 @@ import {
 } from '../utils/courseUtils';
 import { trackAchievementUnlock } from '../utils/analytics';
 import { reportError } from '../utils/errorReporting';
+import { REVIEW_XP } from '../services/reviewConstants';
 
 export interface Achievement {
   id: string;
@@ -267,7 +268,10 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
     }
   }, [achievements, user]);
 
-  // Recompute the streak from completed_at timestamps and return it. Exposed so
+  // Recompute the streak from qualifying-activity dates and return it. A day
+  // qualifies if the user completed a lesson OR answered a daily review — the
+  // 1-minute review is deliberately enough to keep the streak alive (a streak
+  // only sustainable via full 20-minute lessons dies in week one). Exposed so
   // a lesson completion can refresh the streak mid-session (it would otherwise
   // stay frozen at login until a full page reload).
   const refreshStreak = useCallback(async (): Promise<number> => {
@@ -279,14 +283,25 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
         .eq('user_id', user.id)
         .eq('completed', true);
 
+      // Review activity also counts. Missing table (migration not yet run)
+      // returns an error — degrade to completion-only streaks.
+      const { data: reviews, error: reviewsError } = await supabase
+        .from('daily_review_activity')
+        .select('review_date')
+        .eq('user_id', user.id);
+      const reviewDates: string[] = reviewsError || !reviews
+        ? []
+        : reviews.filter((r) => r.review_date).map((r) => String(r.review_date));
+
       let streakCount = 0;
-      if (completions && completions.length > 0) {
+      if ((completions && completions.length > 0) || reviewDates.length > 0) {
         const uniqueDates = [
-          ...new Set(
-            completions
+          ...new Set([
+            ...(completions ?? [])
               .filter((c) => c.completed_at)
-              .map((c) => new Date(c.completed_at).toLocaleDateString('en-CA'))
-          ),
+              .map((c) => new Date(c.completed_at).toLocaleDateString('en-CA')),
+            ...reviewDates,
+          ]),
         ]
           .sort()
           .reverse();
@@ -325,7 +340,9 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
     if (!user) return;
 
     try {
-      // 1. Calculate XP from completed lesson count
+      // 1. Calculate XP: 100 per completed lesson + REVIEW_XP per answered
+      // daily review. Both are recomputed from source tables so XP can never
+      // drift (missing review table pre-migration simply contributes 0).
       const { count, error: progressError } = await supabase
         .from('user_progress')
         .select('*', { count: 'exact', head: true })
@@ -336,7 +353,13 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
         reportError(progressError, { component: 'GamificationContext', action: 'fetchXp' });
       }
 
-      const calculatedXp = (count || 0) * 100;
+      const { count: reviewCount, error: reviewCountError } = await supabase
+        .from('daily_review_activity')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', user.id);
+
+      const calculatedXp =
+        (count || 0) * 100 + (reviewCountError ? 0 : (reviewCount || 0) * REVIEW_XP);
       setXp(calculatedXp);
 
       // 2. Streak from consecutive calendar days with completions

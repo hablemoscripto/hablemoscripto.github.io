@@ -1,17 +1,31 @@
 import React from 'react';
-import { Sparkles, CheckCircle, AlertCircle, Trophy, ArrowRight } from 'lucide-react';
+import { Sparkles, CheckCircle, AlertCircle, Trophy, ArrowRight, Flame, Zap, RotateCw } from 'lucide-react';
 import { useDailyReview } from '../../hooks/useDailyReview';
 
 /**
  * Daily review card — surfaces one question from a completed lesson to
  * trigger the testing effect (Roediger & Karpicke 2006). Shown on
- * /education for users with 3+ completed lessons, once per day.
+ * /education for users with 3+ completed lessons.
  *
- * Deliberately gentle: no streak pressure, no nagging. Dismissible.
+ * This is the cheap daily habit: answering counts toward the streak and
+ * awards XP, so the streak is sustainable in one minute a day instead of
+ * requiring a full lesson. Up to 3 questions per day, dismissible.
  */
 const DailyReviewCard: React.FC = () => {
-  const { status, question, selectedIndex, isCorrect, lessonsToUnlock, answer, dismissUntilTomorrow } =
-    useDailyReview();
+  const {
+    status,
+    question,
+    selectedIndex,
+    isCorrect,
+    lessonsToUnlock,
+    remainingToday,
+    streakAtRisk,
+    streak,
+    xpPerReview,
+    answer,
+    nextQuestion,
+    dismissUntilTomorrow,
+  } = useDailyReview();
 
   if (status === 'hidden') return null;
 
@@ -47,7 +61,9 @@ const DailyReviewCard: React.FC = () => {
             <Trophy size={16} className="text-emerald-400" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm text-white font-medium">Ya revisaste hoy</p>
+            <p className="text-sm text-white font-medium">
+              {streak >= 1 ? `Repaso listo: racha de ${streak} ${streak === 1 ? 'día' : 'días'} protegida` : 'Ya revisaste hoy'}
+            </p>
             <p className="text-xs text-navy-400">Mañana vuelve otra pregunta para reforzar lo que sabes.</p>
           </div>
         </div>
@@ -72,7 +88,21 @@ const DailyReviewCard: React.FC = () => {
               Una pregunta rápida de <span className="text-navy-200 font-medium">{question.lessonTitle}</span>
             </p>
           </div>
+          <span className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-brand-500/15 text-brand-300 text-xs font-bold shrink-0">
+            <Zap size={12} aria-hidden="true" /> +{xpPerReview} XP
+          </span>
         </div>
+
+        {/* Streak at risk — the loss-aversion nudge that makes the habit real */}
+        {status === 'idle' && streakAtRisk && (
+          <div className="px-5 py-2.5 bg-amber-500/10 border-b border-amber-500/20 flex items-center gap-2">
+            <Flame size={14} className="text-amber-400 shrink-0" aria-hidden="true" />
+            <p className="text-xs text-amber-300">
+              Tu racha de <span className="font-bold">{streak} {streak === 1 ? 'día' : 'días'}</span> se
+              pierde hoy si no repasas. Esta pregunta la mantiene viva.
+            </p>
+          </div>
+        )}
 
         {/* Body */}
         <div className="p-5 space-y-4">
@@ -127,36 +157,62 @@ const DailyReviewCard: React.FC = () => {
           </div>
 
           {/* Feedback */}
-          {status === 'answered' && question.explanation && (
+          {status === 'answered' && (
             <div
               role="status"
               aria-live="polite"
-              className={`rounded-lg p-3 text-sm flex items-start gap-2 animate-in fade-in slide-in-from-top-2 ${
+              className={`rounded-lg p-3 text-sm animate-in fade-in slide-in-from-top-2 ${
                 isCorrect
                   ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-300'
                   : 'bg-brand-500/10 border border-brand-500/20 text-brand-300'
               }`}
             >
-              {isCorrect ? (
-                <CheckCircle size={16} className="shrink-0 mt-0.5" />
-              ) : (
-                <AlertCircle size={16} className="shrink-0 mt-0.5" />
-              )}
-              <span className="leading-relaxed">{question.explanation}</span>
+              <div className="flex items-start gap-2">
+                {isCorrect ? (
+                  <CheckCircle size={16} className="shrink-0 mt-0.5" />
+                ) : (
+                  <AlertCircle size={16} className="shrink-0 mt-0.5" />
+                )}
+                <span className="leading-relaxed">
+                  {question.explanation || (isCorrect ? 'Correcto.' : 'Casi. Revisa la explicación en la lección.')}
+                </span>
+              </div>
+              <p className="mt-2 flex items-center gap-1 text-xs font-bold text-brand-300">
+                <Zap size={12} aria-hidden="true" /> +{xpPerReview} XP
+                {streak >= 1 && (
+                  <span className="ml-2 inline-flex items-center gap-1 text-amber-300">
+                    <Flame size={12} aria-hidden="true" /> Racha protegida
+                  </span>
+                )}
+              </p>
             </div>
           )}
 
           {/* Done state CTA */}
           {status === 'answered' && (
-            <div className="flex items-center justify-between pt-2">
-              <p className="text-xs text-navy-400">Mañana te espera otra pregunta.</p>
-              <button
-                onClick={dismissUntilTomorrow}
-                className="flex items-center gap-2 px-4 py-2 bg-brand-500 hover:bg-brand-400 text-navy-950 text-sm font-bold rounded-lg transition-all active:scale-[0.98]"
-              >
-                Hasta mañana
-                <ArrowRight size={14} />
-              </button>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
+              <p className="text-xs text-navy-400">
+                {remainingToday > 0
+                  ? `Puedes repasar ${remainingToday} ${remainingToday === 1 ? 'pregunta más' : 'preguntas más'} hoy.`
+                  : 'Mañana te espera otra pregunta.'}
+              </p>
+              <div className="flex items-center gap-2">
+                {remainingToday > 0 && (
+                  <button
+                    onClick={nextQuestion}
+                    className="flex items-center gap-2 px-4 py-2 bg-navy-800 hover:bg-navy-700 text-white text-sm font-bold rounded-lg transition-all active:scale-[0.98]"
+                  >
+                    <RotateCw size={14} aria-hidden="true" /> Una más
+                  </button>
+                )}
+                <button
+                  onClick={dismissUntilTomorrow}
+                  className="flex items-center gap-2 px-4 py-2 bg-brand-500 hover:bg-brand-400 text-navy-950 text-sm font-bold rounded-lg transition-all active:scale-[0.98]"
+                >
+                  Hasta mañana
+                  <ArrowRight size={14} />
+                </button>
+              </div>
             </div>
           )}
         </div>

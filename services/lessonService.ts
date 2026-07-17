@@ -4,6 +4,7 @@ import type { InfographicSpec } from '../components/lesson/infographics/spec';
 import type { Question } from '../components/education/types';
 import { shuffleQuizOptions } from '../utils/quizShuffle';
 import { supabase } from '../lib/supabase';
+import { cachePaidLessonQuestions } from './dailyReviewService';
 
 // Thrown when a paid-lesson fetch fails for a transport/server reason (network,
 // CORS, 5xx, blocked request) as opposed to the lesson genuinely not existing.
@@ -152,7 +153,14 @@ function resolveCorrectAnswer(
  * No network request — instant, always in sync with the codebase.
  */
 export async function fetchLessonById(lessonId: number): Promise<LessonData | null> {
-  const lesson = LESSONS_DATA[lessonId] ?? (await fetchPaidLesson(lessonId));
+  let lesson = LESSONS_DATA[lessonId];
+  if (!lesson) {
+    const paid = await fetchPaidLesson(lessonId);
+    // Cache paid quiz questions locally so the daily review can draw from
+    // completed paid lessons (their bodies are never bundled client-side).
+    if (paid) cachePaidLessonQuestions(paid);
+    lesson = paid ?? undefined;
+  }
   if (!lesson) return null;
 
   // Map the courseData format to LessonData interface.
