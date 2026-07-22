@@ -4,7 +4,7 @@ import { Shield, Users, Compass, Zap, Twitter, Youtube, Clock } from 'lucide-rea
 
 const Features: React.FC = () => {
   return (
-    <section id="about" className="py-32 bg-navy-950 relative overflow-hidden scroll-mt-28">
+    <section id="about" className="py-16 md:py-28 bg-navy-950 relative overflow-hidden scroll-mt-28">
       {/* Background decoration */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-brand-500/10 rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -121,13 +121,13 @@ const Features: React.FC = () => {
             <div className="grid sm:grid-cols-2 gap-6">
               {[
                 { icon: Shield, title: "Experiencia Real", text: "7+ años navegando ciclos alcistas y bajistas con éxito.", color: "text-brand-400" },
-                { icon: Users, title: "Comunidad Privada", text: "Grupo privado enfocado en el crecimiento mutuo.", color: "text-accent-500" },
+                { icon: Users, title: "Comunidad de fundadores", text: "Acceso prioritario a la comunidad privada cuando la abramos con Cripto Experto.", color: "text-accent-500" },
                 { icon: Zap, title: "Claridad Total", text: "Conceptos complejos explicados de forma sencilla.", color: "text-brand-500" },
                 { icon: Compass, title: "Hoja de Ruta", text: "Estrategias probadas y aplicables de inmediato.", color: "text-brand-300" }
               ].map((item, i) => (
                 <div key={i} className="group flex flex-col gap-4 p-6 rounded-2xl bg-navy-900/50 border border-white/5 hover:border-brand-500/30 hover:bg-navy-900 hover:scale-[1.02] transition-all duration-300 shadow-glass">
                   <div className={`w-12 h-12 rounded-xl bg-navy-950 border border-white/5 flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform`}>
-                    <item.icon size={24} />
+                    <item.icon size={24} aria-hidden="true" />
                   </div>
                   <div>
                     <h3 className="font-black text-white uppercase tracking-tight mb-1">{item.title}</h3>

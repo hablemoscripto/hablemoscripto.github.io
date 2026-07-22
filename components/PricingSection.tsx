@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion';
-import { Check, Crown, Zap, ShieldCheck, Clock } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Check, Crown, Zap, ShieldCheck } from 'lucide-react';
 import {
   PRICING_PLANS,
+  formatCop,
   type CourseTier,
   type UserEntitlements,
 } from '../services/paymentService';
@@ -22,10 +23,14 @@ const COURSE_TIER_RANK: Record<CourseTier, number> = {
 };
 
 const PUBLIC_CTA_LABELS: Record<CourseTier, string> = {
-  free: 'Comenzar gratis',
+  free: 'Empezar gratis',
   inversor: 'Elegir Inversor',
-  experto: 'Convertirme en Cripto Experto',
+  experto: 'Elegir Cripto Experto',
 };
+
+// Inversor is the primary paid recommendation while community/live for Experto
+// is still opening with fundadores. Keep Experto available and honest, not hyped.
+const RECOMMENDED_TIER: CourseTier = 'inversor';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -34,6 +39,11 @@ const cardVariants = {
     y: 0,
     transition: { delay: i * 0.12, duration: 0.5, ease: 'easeOut' as const },
   }),
+  visibleReduced: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.01 },
+  },
 };
 
 export default function PricingSection({
@@ -42,20 +52,20 @@ export default function PricingSection({
   onSelectPlan,
   onPublicCta,
 }: PricingSectionProps) {
+  const prefersReducedMotion = useReducedMotion();
   const formatUSD = (amount: number) => (amount === 0 ? 'Gratis' : `$${amount}`);
 
   const isPublic = variant === 'public';
   const currentCourseTier = entitlements?.courseTier ?? 'free';
 
-  const isCurrentPlan = (tier: CourseTier) =>
-    !isPublic && tier === currentCourseTier;
+  const isCurrentPlan = (tier: CourseTier) => !isPublic && tier === currentCourseTier;
 
   const isIncluded = (tier: CourseTier) =>
     !isPublic && COURSE_TIER_RANK[tier] < COURSE_TIER_RANK[currentCourseTier];
 
   return (
     <div className="container max-w-7xl mx-auto px-6">
-      <div className="text-center mb-12">
+      <div className="text-center mb-10 md:mb-12">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-900 border border-white/10 text-brand-500 text-xs font-black uppercase tracking-[0.2em] mb-6">
           Planes y Precios
         </div>
@@ -67,59 +77,30 @@ export default function PricingSection({
           Pago único. Acceso de por vida. Sin suscripciones.
         </p>
 
-        {/* Precio Fundador — honest launch pricing, no fake scarcity */}
-        <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/30 text-sm">
+        <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/30 text-sm max-w-xl">
           <span className="text-brand-400 font-medium">
-            Precio Fundador: estos son los precios de lanzamiento. Avisaremos con 30 días de anticipación antes de cualquier aumento.
+            Precio Fundador: precios de lanzamiento. Avisaremos con 30 días de anticipación antes de
+            cualquier aumento.
           </span>
         </div>
       </div>
 
-      {/* Founder trust at the point of sale: real, verifiable track record +
-          honest founding-member framing. No testimonials are invented. */}
-      <div className="mb-12 max-w-3xl mx-auto">
-        <div className="rounded-3xl border border-white/10 bg-navy-900/50 backdrop-blur-sm p-6 sm:p-8 text-left">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-5">
-            <img
-              src="/images/MadLad.webp"
-              srcSet="/images/MadLad.webp 450w, /images/MadLad-2x.webp 900w"
-              sizes="80px"
-              alt="CBas, fundador de Hablemos Cripto"
-              width={80}
-              height={80}
-              loading="lazy"
-              className="h-20 w-20 flex-shrink-0 rounded-2xl object-cover border border-white/10"
-            />
-            <div className="flex-1">
-              <p className="text-white font-black text-lg tracking-tight">
-                No le pagas a un curso anónimo. Aprendes con CBas.
-              </p>
-              <p className="mt-2 text-sm text-navy-300 leading-relaxed">
-                Más de 7 años en el mercado, con ciclos alcistas y bajistas completos vividos en carne propia, desde el crash de 2018 hasta el bull run de 2021 y todo lo que vino después. Aquí se enseña a leer el mercado, sin venderte monedas ni prometerte riqueza rápida.
-              </p>
-              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-brand-300">
-                  <Clock size={12} aria-hidden="true" />
-                  7+ años en el mercado
-                </span>
-                <a
-                  href="https://twitter.com/Crypto_CBas"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-medium text-navy-300 underline decoration-navy-600 underline-offset-4 hover:text-white hover:decoration-brand-400 transition-colors"
-                >
-                  Verifica su trayectoria en @Crypto_CBas
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="mt-6 pt-5 border-t border-white/10">
-            <p className="text-sm text-navy-300 leading-relaxed">
-              <span className="text-white font-semibold">Estás entrando como miembro fundador.</span>{' '}
-              Los precios de lanzamiento reconocen a quienes llegan primero. Si suben más adelante, quienes ya compraron conservan su acceso de por vida sin pagar la diferencia.
-            </p>
-          </div>
-        </div>
+      {/* Slim trust strip: no second founder portrait (Features already owns that). */}
+      <div className="mb-10 max-w-2xl mx-auto text-center">
+        <p className="text-sm text-navy-300 leading-relaxed">
+          <span className="text-white font-semibold">Miembro fundador.</span> Entras con los precios
+          de lanzamiento y conservas tu acceso de por vida si el precio sube después. Trayectoria
+          verificable en{' '}
+          <a
+            href="https://twitter.com/Crypto_CBas"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-400 hover:text-brand-300 underline decoration-brand-500/40 underline-offset-4"
+          >
+            @Crypto_CBas
+          </a>
+          .
+        </p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6 items-stretch">
@@ -128,53 +109,54 @@ export default function PricingSection({
           const isCurrent = isCurrentPlan(courseTier);
           const included = isIncluded(courseTier);
           const isFreePlan = courseTier === 'free';
-          const isTopTier = courseTier === 'experto';
+          const isRecommended = courseTier === RECOMMENDED_TIER;
+          const isExperto = courseTier === 'experto';
 
           return (
             <motion.div
               key={plan.id}
               custom={index}
               variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
+              initial={prefersReducedMotion ? false : 'hidden'}
+              whileInView={prefersReducedMotion ? 'visibleReduced' : 'visible'}
               viewport={{ once: true, margin: '-80px' }}
               className={`group relative flex flex-col rounded-3xl overflow-hidden transition-all duration-300 ${
-                isTopTier
-                  ? 'border border-brand-500/30 shadow-[0_0_50px_rgba(245,158,11,0.08)]'
-                  : isFreePlan
-                  ? 'border border-white/10'
-                  : 'border border-white/10 bg-navy-900/40'
+                isRecommended
+                  ? 'border border-brand-500/40 shadow-[0_0_50px_rgba(245,158,11,0.1)] lg:scale-[1.02]'
+                  : isExperto
+                    ? 'border border-white/15'
+                    : 'border border-white/10'
               }`}
             >
-              {/* Background */}
               <div className="absolute inset-0 bg-navy-900/70 backdrop-blur-xl" />
 
-              {/* Premium border for the top tier */}
-              {isTopTier && (
-                <div className="absolute inset-0 rounded-3xl border border-brand-500/20" />
+              {isRecommended && (
+                <div className="absolute inset-0 rounded-3xl border border-brand-500/25 pointer-events-none" />
               )}
 
               <div className="relative z-10 flex h-full flex-col p-8">
-                {/* Header */}
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
-                        isTopTier
+                        isRecommended
                           ? 'bg-gradient-to-br from-brand-400 to-brand-600 shadow-lg shadow-brand-500/25'
                           : isFreePlan
-                          ? 'bg-navy-800 border border-white/10'
-                          : 'bg-navy-800 border border-brand-500/20'
+                            ? 'bg-navy-800 border border-white/10'
+                            : 'bg-navy-800 border border-white/10'
                       }`}
                     >
-                      {isTopTier ? (
-                        <Crown className="h-5 w-5 text-navy-950" />
+                      {isExperto ? (
+                        <Crown className="h-5 w-5 text-brand-400" aria-hidden="true" />
                       ) : (
-                        <Zap className="h-5 w-5 text-brand-400" />
+                        <Zap
+                          className={`h-5 w-5 ${isRecommended ? 'text-navy-950' : 'text-brand-400'}`}
+                          aria-hidden="true"
+                        />
                       )}
                     </div>
 
-                    {isTopTier && (
+                    {isRecommended && (
                       <span className="rounded-full bg-brand-500 px-3 py-1 text-xs font-black uppercase tracking-[0.15em] text-navy-950">
                         Recomendado
                       </span>
@@ -184,26 +166,21 @@ export default function PricingSection({
                   <h3 className="text-2xl font-heading font-black text-white tracking-tight">
                     {plan.name}
                   </h3>
-                  <p className="mt-2 text-sm text-navy-300 leading-snug">
-                    {plan.description}
-                  </p>
+                  <p className="mt-2 text-sm text-navy-300 leading-snug">{plan.description}</p>
                 </div>
 
-                {/* Price */}
                 <div className="mt-8 mb-6">
                   <div className="flex items-baseline gap-1">
                     <span className="text-5xl font-black text-white tracking-[-1.5px]">
                       {formatUSD(plan.priceUsd)}
                     </span>
                     {!isFreePlan && (
-                      <span className="text-sm font-medium text-navy-400 ml-1">
-                        USD
-                      </span>
+                      <span className="text-sm font-medium text-navy-400 ml-1">USD</span>
                     )}
                   </div>
                   {!isFreePlan && plan.priceCopCents > 0 && (
                     <p className="text-sm text-navy-300 mt-1.5 font-medium">
-                      ${(plan.priceCopCents / 100).toLocaleString('es-CO')} COP
+                      {formatCop(plan.priceCopCents)}
                     </p>
                   )}
                   {!isFreePlan && (
@@ -213,31 +190,31 @@ export default function PricingSection({
                   )}
                 </div>
 
-                {/* Features */}
                 <ul className="space-y-3.5 mb-8 flex-1">
                   {plan.features.map((feature, fi) => (
                     <li key={fi} className="flex items-start gap-3 text-sm">
                       <Check
                         size={17}
                         className={`mt-0.5 flex-shrink-0 ${
-                          isTopTier ? 'text-brand-400' : 'text-navy-400'
+                          isRecommended ? 'text-brand-400' : 'text-navy-400'
                         }`}
+                        aria-hidden="true"
                       />
                       <span className="text-navy-200">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
-                {/* CTA */}
                 {isPublic ? (
                   <button
+                    type="button"
                     onClick={() => onPublicCta?.(courseTier)}
                     className={`mt-auto w-full rounded-2xl py-3.5 text-sm font-bold transition-all duration-200 ${
-                      isTopTier
+                      isRecommended
                         ? 'bg-gradient-to-r from-brand-500 to-brand-600 text-navy-950 shadow-lg shadow-brand-500/20 hover:from-brand-400 hover:to-brand-500'
                         : isFreePlan
-                        ? 'border border-white/10 bg-navy-800 text-white hover:bg-navy-700 hover:border-white/20'
-                        : 'border border-white/15 bg-navy-800 text-white hover:border-brand-500/40 hover:bg-navy-700'
+                          ? 'border border-white/10 bg-navy-800 text-white hover:bg-navy-700 hover:border-white/20'
+                          : 'border border-brand-500/30 bg-navy-800 text-white hover:border-brand-500/50 hover:bg-navy-700'
                     }`}
                   >
                     {PUBLIC_CTA_LABELS[courseTier]}
@@ -252,15 +229,14 @@ export default function PricingSection({
                   </div>
                 ) : (
                   <button
-                    onClick={() =>
-                      onSelectPlan?.(courseTier as 'inversor' | 'experto')
-                    }
+                    type="button"
+                    onClick={() => onSelectPlan?.(courseTier as 'inversor' | 'experto')}
                     className={`mt-auto w-full rounded-2xl py-3.5 text-sm font-bold transition-all duration-200 ${
-                      isTopTier
+                      isRecommended
                         ? 'bg-gradient-to-r from-brand-500 to-brand-600 text-navy-950 shadow-lg shadow-brand-500/20 hover:from-brand-400 hover:to-brand-500'
                         : isFreePlan
-                        ? 'border border-white/10 bg-navy-800 text-white hover:bg-navy-700 hover:border-white/20'
-                        : 'border border-white/15 bg-navy-800 text-white hover:border-brand-500/40 hover:bg-navy-700'
+                          ? 'border border-white/10 bg-navy-800 text-white hover:bg-navy-700 hover:border-white/20'
+                          : 'border border-brand-500/30 bg-navy-800 text-white hover:border-brand-500/50 hover:bg-navy-700'
                     }`}
                   >
                     Actualizar a {plan.name}
@@ -272,7 +248,6 @@ export default function PricingSection({
         })}
       </div>
 
-      {/* Purchase de-risking: guarantee + a human to talk to before paying. */}
       <div className="mt-10 flex flex-col items-center gap-3 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30">
           <ShieldCheck size={16} className="text-emerald-400" aria-hidden="true" />
@@ -282,7 +257,10 @@ export default function PricingSection({
         </div>
         <p className="text-sm text-navy-400">
           ¿Dudas antes de comprar? Escríbenos a{' '}
-          <a href="mailto:hablemoscripto@gmail.com" className="text-brand-400 hover:text-brand-300 underline">
+          <a
+            href="mailto:hablemoscripto@gmail.com"
+            className="text-brand-400 hover:text-brand-300 underline"
+          >
             hablemoscripto@gmail.com
           </a>
         </p>

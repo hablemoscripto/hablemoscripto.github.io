@@ -3,6 +3,7 @@ import { Mail, Lock, User, Loader2, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Modal } from './ui/Modal';
 import { trackSignUp, trackLogin } from '../utils/analytics';
+import { PRICING_PLANS, formatCop, type CourseTier } from '../services/paymentService';
 
 type ModalView = 'login' | 'signup' | 'forgot-password' | 'verify-email';
 
@@ -20,17 +21,30 @@ const VIEW_LABELS: Record<ModalView, string> = {
   'verify-email': 'Verificar email',
 };
 
+interface PendingPlan {
+  tier: 'inversor' | 'experto';
+  name: string;
+  priceUsd: number;
+  priceCopCents: number;
+}
+
 // A user who clicked a paid plan CTA has that intent stored in
 // sessionStorage.redirectAfterLogin (e.g. '/education?upgrade=inversor').
-// Surface it in the modal copy so the flow acknowledges what they came to do.
-function pendingPlanName(): string | null {
+// Surface name + price so the flow acknowledges what they came to do.
+function pendingPlan(): PendingPlan | null {
   try {
     const redirect = window.sessionStorage.getItem('redirectAfterLogin');
     if (!redirect) return null;
     const upgrade = new URLSearchParams(redirect.split('?')[1] ?? '').get('upgrade');
-    if (upgrade === 'inversor') return 'Inversor';
-    if (upgrade === 'experto') return 'Cripto Experto';
-    return null;
+    if (upgrade !== 'inversor' && upgrade !== 'experto') return null;
+    const tier = upgrade as 'inversor' | 'experto';
+    const plan = PRICING_PLANS[tier as CourseTier];
+    return {
+      tier,
+      name: plan.name,
+      priceUsd: plan.priceUsd,
+      priceCopCents: plan.priceCopCents,
+    };
   } catch {
     return null;
   }
@@ -344,21 +358,43 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                 <User size={32} className="text-white" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold text-white">
-                {view === 'login' ? 'Iniciar sesión' : 'Crear Cuenta'}
+                {view === 'login' ? 'Iniciar sesión' : 'Crear cuenta'}
               </h2>
-              <p className="text-navy-400 mt-2">
-                {(() => {
-                  const plan = pendingPlanName();
-                  if (plan) {
-                    return view === 'login'
-                      ? `Inicia sesión para continuar con tu plan ${plan}`
-                      : `Crea tu cuenta y sigue al pago del plan ${plan}`;
-                  }
-                  return view === 'login'
-                    ? 'Accede a tu cuenta para continuar'
-                    : 'Regístrate para guardar tu progreso';
-                })()}
-              </p>
+              {(() => {
+                const plan = pendingPlan();
+                if (plan) {
+                  return (
+                    <>
+                      <p className="text-navy-400 mt-2">
+                        {view === 'login'
+                          ? `Inicia sesión para continuar con tu plan ${plan.name}`
+                          : `Crea tu cuenta y sigue al pago del plan ${plan.name}`}
+                      </p>
+                      <div className="mt-4 rounded-2xl border border-brand-500/25 bg-brand-500/10 px-4 py-3 text-left">
+                        <p className="text-xs font-bold uppercase tracking-wider text-brand-400 mb-1">
+                          Plan seleccionado
+                        </p>
+                        <div className="flex items-baseline justify-between gap-3">
+                          <span className="text-white font-bold">{plan.name}</span>
+                          <span className="text-white font-black tabular-nums">
+                            ${plan.priceUsd} USD
+                          </span>
+                        </div>
+                        <p className="text-xs text-navy-300 mt-1">
+                          {formatCop(plan.priceCopCents)} · Pago único · Acceso de por vida
+                        </p>
+                      </div>
+                    </>
+                  );
+                }
+                return (
+                  <p className="text-navy-400 mt-2">
+                    {view === 'login'
+                      ? 'Accede a tu cuenta para continuar'
+                      : 'Regístrate gratis y guarda tu progreso'}
+                  </p>
+                );
+              })()}
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4" noValidate>

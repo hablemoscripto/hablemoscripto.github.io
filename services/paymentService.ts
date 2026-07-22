@@ -61,7 +61,7 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     id: 'inversor',
     productType: 'course',
     name: 'Inversor',
-    description: 'Acceso completo a toda la plataforma educativa',
+    description: 'Las 44 lecciones completas de por vida. El plan principal.',
     priceUsd: 99,
     priceCopCents: 35000000, // 350,000 COP
     wompiSku: 'inversor_lifetime',
@@ -69,16 +69,18 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     features: [
       'Acceso completo a las 44 lecciones',
       'Videos dedicados en cada lección',
-      'Todas las actualizaciones futuras',
-      'Certificados de nivel',
+      'Todas las actualizaciones futuras del currículum',
+      'Certificado al completar cada nivel',
       'Sistema de logros y repaso espaciado',
     ],
+    highlighted: true,
   },
   experto: {
     id: 'experto',
     productType: 'bundle',
     name: 'Cripto Experto',
-    description: 'Plataforma completa + comunidad privada y charlas en vivo',
+    description:
+      'Todo Inversor, más acceso de fundador a comunidad y mentoría cuando abramos ese canal',
     priceUsd: 249,
     priceCopCents: 90000000, // 900,000 COP
     wompiSku: 'vip_lifetime',
@@ -86,11 +88,10 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     grantsCommunityMonths: 120, // lifetime community access in this model
     features: [
       'Todo lo del plan Inversor',
-      'Acceso a la comunidad privada en Discord',
-      'Charlas semanales en vivo donde profundizo en los temas del newsletter + Q&A en tiempo real',
-      'Prioridad al solicitar Mentoría Personalizada',
+      'Acceso de fundador a la comunidad privada cuando abra (Discord)',
+      'Charlas en vivo y Q&A cuando se activen con la comunidad',
+      'Prioridad al solicitar mentoría 1 a 1',
     ],
-    highlighted: true,
     gradient: true,
   },
 };

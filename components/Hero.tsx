@@ -85,7 +85,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
   }, [displayText, isDeleting, textIndex, settled, prefersReducedMotion]);
 
   return (
-    <section id="home" className="relative flex items-center justify-center overflow-hidden bg-navy-950 pt-32 pb-20 lg:pt-24 scroll-mt-28">
+    <section id="home" className="relative flex items-center justify-center overflow-hidden bg-navy-950 pt-28 pb-16 md:pt-32 md:pb-20 lg:pt-24 scroll-mt-28">
 
       {/* Particles Background — deferred to idle, skipped on reduced motion / save-data */}
       {showParticles && (
@@ -157,51 +157,52 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
             </p>
 
             {/* Outcomes */}
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-10 text-sm">
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" /> Configura tu wallet</span>
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" /> Identifica estafas</span>
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" /> Entiende blockchain</span>
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" /> Construye tu plan de inversión</span>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8 text-sm">
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Configura tu wallet</span>
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Identifica estafas</span>
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Entiende blockchain</span>
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Construye tu plan de inversión</span>
+            </div>
+
+            {/* Credibility above the fold (stats before CTAs on short viewports) */}
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-10 text-sm animate-in fade-in duration-700">
+              <span className="inline-flex items-center gap-2 text-navy-300">
+                <Award size={16} className="text-brand-500" aria-hidden="true" />
+                <span><span className="font-bold text-white">7+ años</span> en el mercado</span>
+              </span>
+              <span className="inline-flex items-center gap-2 text-navy-300">
+                <BookOpen size={16} className="text-brand-400" aria-hidden="true" />
+                <span><span className="font-bold text-white">{LESSON_COUNT}</span> lecciones estructuradas</span>
+              </span>
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400 mb-12">
-              <button 
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400">
+              <button
+                type="button"
                 onClick={(e) => {
                   e.preventDefault();
                   onStartLearning();
                 }}
-                className="group relative w-full sm:w-auto px-10 py-5 bg-brand-500 text-navy-950 font-black rounded-2xl shadow-glow-brand-strong hover:scale-[1.05] active:scale-[0.98] transition-all flex items-center justify-center gap-3 text-lg overflow-hidden"
+                className="group relative w-full sm:w-auto px-10 py-5 bg-brand-500 text-navy-950 font-bold rounded-2xl shadow-glow-brand-strong hover:bg-brand-400 active:scale-[0.98] transition-all flex items-center justify-center gap-3 text-lg"
               >
-                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></div>
-                <BookOpen size={24} className="group-hover:rotate-6 transition-transform" />
-                <span>COMENZAR CURSO</span>
+                <BookOpen size={22} aria-hidden="true" />
+                <span>Empezar gratis</span>
               </button>
-              
+
               <button
                 type="button"
-                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                className="w-full sm:w-auto px-10 py-5 bg-navy-900 text-white font-bold rounded-2xl border border-white/5 hover:border-brand-500/30 hover:bg-navy-800 transition-all flex items-center justify-center gap-3 group text-lg"
+                onClick={() => {
+                  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                  document.getElementById('pricing')?.scrollIntoView({
+                    behavior: reduce ? 'auto' : 'smooth',
+                  });
+                }}
+                className="w-full sm:w-auto px-10 py-5 bg-navy-900 text-white font-bold rounded-2xl border border-white/10 hover:border-brand-500/30 hover:bg-navy-800 transition-all flex items-center justify-center gap-3 group text-lg"
               >
-                <Users size={24} className="text-navy-400 group-hover:text-brand-500 transition-colors" />
-                <span>VER PLANES Y PRECIOS</span>
+                <Users size={22} className="text-navy-400 group-hover:text-brand-500 transition-colors" aria-hidden="true" />
+                <span>Ver planes y precios</span>
               </button>
-            </div>
-
-            {/* Stats Grid - Centered & Glassmorphism */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 w-full max-w-3xl border-t border-white/5 pt-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
-                {[
-                    { label: "Experiencia", val: "7+ Años", icon: Award, color: "text-brand-500" },
-                    { label: "Lecciones", val: String(LESSON_COUNT), icon: BookOpen, color: "text-brand-400" }
-                ].map((stat, i) => (
-                    <div key={i} className="flex flex-col items-center group p-6 rounded-3xl hover:bg-white/[0.02] transition-colors">
-                        <div className={`mb-4 p-4 rounded-2xl bg-navy-900 border border-white/5 group-hover:border-white/10 transition-all shadow-glass`}>
-                           <stat.icon className={`w-7 h-7 ${stat.color} group-hover:scale-110 transition-transform`} />
-                        </div>
-                        <p className="text-4xl font-black text-white tracking-tighter mb-1">{stat.val}</p>
-                        <p className="text-[10px] text-navy-400 uppercase tracking-[0.3em] font-black">{stat.label}</p>
-                    </div>
-                ))}
             </div>
 
         </div>

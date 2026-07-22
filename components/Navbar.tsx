@@ -3,7 +3,7 @@ import { Menu, X, Users, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
 import Logo from './ui/Logo';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -89,10 +89,11 @@ const Navbar: React.FC = () => {
     setIsAuthModalOpen(true);
   }, []);
 
-  const navLinks = [
+  const navLinks: { name: string; action: () => void }[] = [
     { name: 'Inicio', action: () => handleScrollToSection('home') },
-    { name: 'Por Qué HC', action: () => handleScrollToSection('about') }, // Assuming 'about' section exists or will exist
-    { name: 'Cursos', path: '/education' },
+    { name: 'Por Qué HC', action: () => handleScrollToSection('about') },
+    { name: 'Cursos', action: () => handleScrollToSection('courses') },
+    { name: 'Precios', action: () => handleScrollToSection('pricing') },
     { name: 'Recursos', action: () => handleScrollToSection('resources') },
   ];
 
@@ -110,26 +111,17 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-10">
-            <ul className="flex gap-10">
+            <ul className="flex gap-8 xl:gap-10">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  {link.path ? (
-                    <Link
-                      to={link.path}
-                      className="text-[13px] font-bold uppercase tracking-widest text-navy-300 hover:text-white transition-colors relative group"
-                    >
-                      {link.name}
-                      <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-1 bg-brand-500 transition-all group-hover:w-full opacity-0 group-hover:opacity-100 rounded-full"></span>
-                    </Link>
-                  ) : (
-                    <button
-                      onClick={link.action}
-                      className="text-[13px] font-bold uppercase tracking-widest text-navy-300 hover:text-white transition-colors relative group"
-                    >
-                      {link.name}
-                      <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-1 bg-brand-500 transition-all group-hover:w-full opacity-0 group-hover:opacity-100 rounded-full"></span>
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    onClick={link.action}
+                    className="text-[13px] font-bold uppercase tracking-widest text-navy-300 hover:text-white transition-colors relative group"
+                  >
+                    {link.name}
+                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-1 bg-brand-500 transition-all group-hover:w-full opacity-0 group-hover:opacity-100 rounded-full" />
+                  </button>
                 </li>
               ))}
             </ul>
@@ -216,22 +208,13 @@ const Navbar: React.FC = () => {
               <ul className="space-y-4">
                 {navLinks.map((link) => (
                   <li key={link.name}>
-                    {link.path ? (
-                      <Link
-                        to={link.path}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block py-4 px-6 text-sm font-bold uppercase tracking-[0.2em] text-navy-300 hover:text-white hover:bg-navy-900 rounded-2xl border border-transparent hover:border-white/5 transition-all"
-                      >
-                        {link.name}
-                      </Link>
-                    ) : (
-                      <button
-                        onClick={link.action}
-                        className="block w-full text-left py-4 px-6 text-sm font-bold uppercase tracking-[0.2em] text-navy-300 hover:text-white hover:bg-navy-900 rounded-2xl border border-transparent hover:border-white/5 transition-all"
-                      >
-                        {link.name}
-                      </button>
-                    )}
+                    <button
+                      type="button"
+                      onClick={link.action}
+                      className="block w-full text-left py-4 px-6 text-sm font-bold uppercase tracking-[0.2em] text-navy-300 hover:text-white hover:bg-navy-900 rounded-2xl border border-transparent hover:border-white/5 transition-all"
+                    >
+                      {link.name}
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -262,14 +245,14 @@ const Navbar: React.FC = () => {
                   </button>
                 )}
 
-                <a
-                  href="#pricing"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                <button
+                  type="button"
+                  onClick={() => handleScrollToSection('pricing')}
                   className="flex items-center justify-center gap-3 w-full bg-navy-900 hover:bg-navy-800 border border-white/10 hover:border-brand-500/40 text-white font-bold py-4 px-6 rounded-2xl transition-all"
                 >
-                  <Users size={18} className="text-navy-400" />
+                  <Users size={18} className="text-navy-400" aria-hidden="true" />
                   Ver planes y precios
-                </a>
+                </button>
               </div>
             </nav>
           </div>

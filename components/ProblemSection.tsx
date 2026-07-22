@@ -41,7 +41,7 @@ const ProblemSection: React.FC = () => {
   ];
 
   return (
-    <section id="el-problema" className="py-24 bg-navy-950 relative scroll-mt-28">
+    <section id="el-problema" className="py-16 md:py-24 bg-navy-950 relative scroll-mt-28">
       <div className="container max-w-5xl mx-auto px-6">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 mb-6">

@@ -153,35 +153,38 @@ const LandingPage: React.FC = () => {
         <Features />
         <Courses />
 
-        {/* Experiencia real — Charlas semanales en vivo (valor antes del precio) */}
-        <section id="mentoria" className="py-20 bg-navy-900/60 border-y border-white/5 scroll-mt-28">
+        {/* Mentoría / fundador community (honest: lives & Discord not live yet) */}
+        <section id="mentoria" className="py-16 md:py-20 bg-navy-900/60 border-y border-white/5 scroll-mt-28">
           <div className="container max-w-5xl mx-auto px-6 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 mb-6">
-              <span className="text-brand-400 text-xs font-black uppercase tracking-[0.2em]">La experiencia real</span>
+              <span className="text-brand-400 text-xs font-black uppercase tracking-[0.2em]">Acompañamiento</span>
             </div>
 
             <h2 className="text-4xl md:text-5xl font-heading font-black text-white tracking-tighter mb-4">
-              Charlas Semanales en Vivo
+              Mentoría y comunidad de fundadores
             </h2>
             <p className="text-xl text-navy-300 max-w-2xl mx-auto mb-10">
-              Todos recibimos el mismo newsletter semanal. La diferencia real está en las <span className="font-semibold text-white">charlas semanales en vivo</span>, donde profundizo en los temas del newsletter, comparto mi análisis actual y respondo preguntas directamente.
+              Todos reciben el mismo newsletter semanal. El plan{' '}
+              <span className="font-semibold text-white">Cripto Experto</span> suma acceso de fundador
+              a la comunidad y a las charlas en vivo cuando las abramos, más prioridad para mentoría
+              1 a 1. Hoy puedes pedir mentoría o empezar por el currículum completo con Inversor.
             </p>
 
             <div className="grid sm:grid-cols-3 gap-4 mb-10 text-left">
               {[
                 {
-                  label: 'Análisis de mercado',
-                  title: 'Qué estoy mirando esta semana',
-                  body: 'Estructura de precio, niveles clave y la tesis con la que entro y salgo de posiciones.',
+                  label: 'Análisis',
+                  title: 'Qué estoy mirando',
+                  body: 'Estructura de precio, niveles clave y la tesis con la que leo el mercado, sin señales mágicas.',
                 },
                 {
-                  label: 'Respuestas en vivo',
-                  title: 'Tus preguntas, sin filtro',
-                  body: 'Trae tu portafolio o tu duda. Respondo lo que normalmente cobraría en una mentoría 1 a 1.',
+                  label: 'Mentoría 1 a 1',
+                  title: 'Tu caso, en privado',
+                  body: 'Cuéntame tu situación. Prioridad de agenda para miembros Cripto Experto cuando abramos cupos.',
                 },
                 {
                   label: 'Contexto LATAM',
-                  title: 'Cómo aterrizar la tesis en pesos',
+                  title: 'Cómo aterrizar en pesos',
                   body: 'Implicaciones reales para Colombia y la región: rampa fiat, impuestos, riesgo cambiario.',
                 },
               ].map((topic, i) => (
@@ -205,26 +208,28 @@ const LandingPage: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="#pricing"
-                className="px-8 py-4 bg-white text-navy-950 font-bold rounded-2xl hover:bg-navy-100 transition-colors"
+                className="px-8 py-4 bg-brand-500 text-navy-950 font-bold rounded-2xl hover:bg-brand-400 transition-colors"
               >
-                Ver planes y charlas
+                Ver planes
               </a>
               <button
+                type="button"
                 onClick={() => setIsMentoriaModalOpen(true)}
-                className="px-8 py-4 border border-white/20 hover:bg-white/5 text-white font-bold rounded-2xl transition-colors"
+                className="px-8 py-4 border border-white/15 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-2xl transition-colors"
               >
-                Conocer más
+                Solicitar mentoría
               </button>
             </div>
 
             <p className="mt-6 text-sm text-navy-400">
-              Los miembros del plan Cripto Experto tienen prioridad para sesiones de mentoría 1 a 1.
+              Comunidad y charlas en vivo: se activan con los primeros fundadores Experto. Te avisamos
+              por correo cuando abran.
             </p>
           </div>
         </section>
 
         {/* Public Pricing Section */}
-        <section id="pricing" className="py-24 bg-navy-950 relative scroll-mt-28">
+        <section id="pricing" className="py-16 md:py-24 bg-navy-950 relative scroll-mt-28">
           <PricingSection
             variant="public"
             onPublicCta={handlePublicPlanCta}
@@ -232,9 +237,9 @@ const LandingPage: React.FC = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-24 bg-navy-950 relative">
+        <section id="faq" className="py-16 md:py-24 bg-navy-950 relative scroll-mt-28">
             <div className="container max-w-4xl mx-auto px-6">
-                <div className="text-center mb-16">
+                <div className="text-center mb-12 md:mb-16">
                     <span className="text-brand-500 font-bold tracking-wider text-sm uppercase mb-2 block">Preguntas Frecuentes</span>
                     <h2 className="text-4xl md:text-5xl font-heading font-bold text-white">
                         Todo lo que necesitas saber
@@ -242,9 +247,9 @@ const LandingPage: React.FC = () => {
                 </div>
                 <div className="space-y-4">
                     {[
-                        { q: '¿Es gratis?', a: 'El Nivel Principiante (19 lecciones) es 100% gratuito, sin tarjeta. Los niveles Intermedio y Avanzado son parte de los planes Inversor y Cripto Experto, con acceso de por vida y un solo pago.' },
+                        { q: '¿Es gratis?', a: 'El Nivel Principiante (19 lecciones) es 100% gratuito, sin tarjeta. Los niveles Intermedio y Avanzado se desbloquean con los planes Inversor y Cripto Experto, con acceso de por vida y un solo pago.' },
                         { q: '¿Necesito experiencia previa en criptomonedas?', a: 'No. Empezamos desde cero, explicando qué es el dinero y por qué importa. No asumimos ningún conocimiento previo.' },
-                        { q: '¿Qué diferencia hay con lo que ya está gratis en YouTube y Twitter?', a: 'El contenido gratuito te da fragmentos sin orden y muchas veces está pagado por quien quiere venderte algo después: señales, tokens, cursos caros. Aquí tienes un currículum estructurado de 44 lecciones, profundizo en los temas en charlas semanales y mi modelo es transparente: tú pagas la plataforma, no terceros que quieran sacar comisión de tus decisiones.' },
+                        { q: '¿Qué diferencia hay con lo que ya está gratis en YouTube y Twitter?', a: 'El contenido gratuito te da fragmentos sin orden y muchas veces está pagado por quien quiere venderte algo después: señales, tokens, cursos caros. Aquí tienes un currículum estructurado de 44 lecciones y un modelo transparente: tú pagas la plataforma, no terceros que quieran comisión de tus decisiones.' },
                         { q: '¿Cuánto tiempo toma completar un nivel?', a: 'El Nivel Principiante toma aproximadamente 8 horas. El Intermedio unas 8 horas y el Avanzado unas 11 horas. Puedes avanzar a tu propio ritmo.' },
                         { q: '¿Es seguro invertir en criptomonedas?', a: 'Las criptomonedas son activos de alto riesgo. Por eso enseñamos seguridad primero: cómo proteger tu wallet, evitar estafas, y gestionar el riesgo antes de invertir un solo peso.' },
                         { q: '¿Quién es CBas?', a: 'CBas tiene 7+ años navegando mercados de criptomonedas, incluyendo ciclos alcistas y bajistas completos. Creó Hablemos Cripto para dar a la comunidad LATAM las herramientas que él hubiera querido tener cuando empezó.' },
@@ -253,12 +258,12 @@ const LandingPage: React.FC = () => {
                         { q: '¿Qué pasa justo después de pagar?', a: 'Tu acceso se activa de inmediato en tu cuenta y recibes un correo de bienvenida. Puedes empezar el nivel que desbloqueaste al instante.' },
                         { q: '¿El precio sube después?', a: 'Estos son precios de lanzamiento (Precio Fundador). El precio subirá más adelante, pero avisaremos por correo con 30 días de anticipación. Si compras hoy, conservas tu acceso de por vida sin pagar la diferencia.' },
                         { q: '¿Funciona en celular y computador?', a: 'Sí. Funciona en cualquier navegador, en celular, tablet o computador. Tu progreso se guarda en tu cuenta y se sincroniza entre dispositivos.' },
-                        { q: '¿Cuál plan elijo, Inversor o Cripto Experto?', a: 'Con Inversor obtienes las 44 lecciones completas de por vida. Cripto Experto añade la comunidad privada, las charlas semanales en vivo y prioridad para mentoría 1 a 1. Si buscas acompañamiento cercano, elige Cripto Experto.' },
+                        { q: '¿Cuál plan elijo, Inversor o Cripto Experto?', a: 'Inversor es el plan principal: las 44 lecciones completas de por vida. Cripto Experto incluye todo eso más acceso de fundador a la comunidad y charlas en vivo cuando las abramos, y prioridad para mentoría 1 a 1. Si solo quieres el currículum, elige Inversor.' },
                     ].map((item, i) => (
                         <details key={i} className="group bg-navy-900 border border-white/5 hover:border-white/10 rounded-2xl overflow-hidden transition-colors">
                             <summary className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer text-white font-bold hover:text-brand-500 transition-colors list-none">
                                 <span>{item.q}</span>
-                                <ChevronDown size={20} className="shrink-0 text-navy-400 group-open:rotate-180 group-open:text-brand-500 transition-transform" />
+                                <ChevronDown size={20} className="shrink-0 text-navy-400 group-open:rotate-180 group-open:text-brand-500 transition-transform" aria-hidden="true" />
                             </summary>
                             <div className="px-6 pb-5 pt-1 text-navy-300 leading-relaxed border-t border-white/5">
                                 <p className="pt-4">{item.a}</p>
@@ -270,7 +275,7 @@ const LandingPage: React.FC = () => {
         </section>
 
         {/* Resources / Newsletter Section */}
-        <section id="resources" className="py-24 relative scroll-mt-28">
+        <section id="resources" className="py-16 md:py-24 relative scroll-mt-28">
           <div className="absolute inset-0 bg-brand-600/5"></div>
           <div className="container max-w-4xl mx-auto px-6 text-center relative z-10">
             <h2 className="text-3xl font-bold text-white mb-4">Análisis semanal. Sin recomendaciones pagadas.</h2>
