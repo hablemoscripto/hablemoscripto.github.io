@@ -38,7 +38,7 @@ const PlatformPreview: React.FC = () => {
         </ol>
       </div>
 
-      <div className="container mx-auto max-w-7xl px-6 py-14 md:py-20">
+      <div className="container mx-auto max-w-7xl px-6 pb-14 pt-8 md:pb-20 md:pt-10">
         <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           <div>
             <p className="mb-4 text-sm font-bold text-brand-400">Así se ve la ruta</p>
