@@ -19,7 +19,27 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
       id="home"
       className="relative overflow-hidden border-b border-white/5 bg-navy-950 pb-16 pt-32 scroll-mt-28 md:pb-24 md:pt-40"
     >
-      <div className="container mx-auto max-w-7xl px-6">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <picture>
+          <source
+            srcSet="/images/banner-768w.webp 768w, /images/banner-1280w.webp 1280w, /images/banner-1920w.webp 1920w"
+            sizes="100vw"
+            type="image/webp"
+          />
+          <img
+            src="/images/banner-1280w.webp"
+            alt=""
+            width={1280}
+            height={720}
+            fetchPriority="high"
+            className="h-full w-full object-contain object-center opacity-[0.12] mix-blend-luminosity md:object-cover md:opacity-[0.22]"
+          />
+        </picture>
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/80 to-navy-950/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-navy-950" />
+      </div>
+
+      <div className="container relative mx-auto max-w-7xl px-6">
         <div className="grid items-end gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.65fr)] lg:gap-20">
           <div>
             <div className="mb-8 flex items-center gap-3 text-sm font-semibold text-brand-400">
