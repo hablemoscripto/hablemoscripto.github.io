@@ -463,38 +463,39 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           <>
             <DailyReviewCard />
             {(lastLessonId || totalCompletedLessons > 0) && continueTarget && (
-              <div className="container max-w-7xl mx-auto px-6 mt-6 mb-6">
+              <div className="container mx-auto mb-6 mt-6 max-w-7xl px-6">
                 <button
                   onClick={() => navigate(`/education/lesson/${continueTarget.id}`)}
-                  className="w-full flex items-center justify-between p-4 bg-brand-500/10 border border-brand-500/20 rounded-2xl hover:bg-brand-500/15 transition-all group"
+                  className="group flex w-full items-center justify-between rounded-2xl border border-brand-500/25 bg-brand-500/10 p-4 transition-colors hover:bg-brand-500/15"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-brand-500/20 flex items-center justify-center">
-                      <PlayCircle size={20} className="text-brand-400" />
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500/20">
+                      <PlayCircle size={20} className="text-brand-400" aria-hidden="true" />
                     </div>
                     <div className="text-left">
-                      <p className="text-xs text-brand-400 font-bold uppercase tracking-wider">
+                      <p className="text-xs font-bold uppercase tracking-wide text-brand-400">
                         {continueTarget.resuming ? 'Continuar aprendiendo' : 'Siguiente lección'}
                       </p>
-                      <p className="text-sm text-white font-medium">{continueTarget.title}</p>
+                      <p className="text-sm font-medium text-white">{continueTarget.title}</p>
                     </div>
                   </div>
                   <ArrowRight
                     size={20}
-                    className="text-brand-400 group-hover:translate-x-1 transition-transform"
+                    className="text-brand-400 transition-transform group-hover:translate-x-1"
+                    aria-hidden="true"
                   />
                 </button>
               </div>
             )}
             {!lastLessonId && totalCompletedLessons === 0 && (
-              <div className="container max-w-7xl mx-auto px-6 mt-6 mb-2">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 p-6 rounded-3xl bg-gradient-to-r from-brand-500/15 to-brand-400/5 border border-brand-500/30">
+              <div className="container mx-auto mb-2 mt-6 max-w-7xl px-6">
+                <div className="flex flex-col items-start justify-between gap-5 rounded-2xl border border-brand-500/30 bg-brand-500/10 p-6 sm:flex-row sm:items-center">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-brand-500/20 flex items-center justify-center shrink-0">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-500/20">
                       <PlayCircle size={24} className="text-brand-400" aria-hidden="true" />
                     </div>
                     <div>
-                      <p className="text-[10px] text-brand-400 font-black uppercase tracking-[0.2em] mb-1">
+                      <p className="mb-1 text-xs font-bold uppercase tracking-wide text-brand-400">
                         Empieza aquí
                       </p>
                       <h2 className="text-lg font-bold text-white">
@@ -507,26 +508,21 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                   </div>
                   <button
                     onClick={() => navigate('/education/lesson/1')}
-                    className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-brand-500 hover:bg-brand-400 text-navy-950 font-black uppercase tracking-widest text-xs rounded-2xl shadow-glow-brand transition-all hover:scale-[1.02] active:scale-[0.98]"
+                    className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand-500 px-6 py-3 text-sm font-bold text-navy-950 transition-colors hover:bg-brand-400"
                   >
                     Empezar Lección 1 <ArrowRight size={16} aria-hidden="true" />
                   </button>
                 </div>
               </div>
             )}
-            <div className="container max-w-7xl mx-auto px-6 pt-16 pb-20">
-              <div className="max-w-4xl mb-16">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-navy-900 border border-white/5 text-brand-500 text-[10px] font-black uppercase tracking-[0.2em] mb-6">
-                  Tu Ruta de Aprendizaje
-                </div>
-                <h1 className="text-4xl md:text-6xl font-heading font-black text-white mb-6 leading-[1.1] tracking-tighter">
-                  Domina Cripto{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-brand-500 to-brand-600">
-                    Paso a Paso
-                  </span>
+            <div className="container mx-auto max-w-7xl px-6 pb-20 pt-14">
+              <div className="mb-12 max-w-4xl">
+                <p className="mb-4 text-sm font-bold text-brand-400">Tu ruta de aprendizaje</p>
+                <h1 className="mb-4 font-heading text-4xl font-bold tracking-tight text-white md:text-5xl">
+                  Tu ruta
                 </h1>
-                <p className="text-xl text-navy-300 leading-relaxed max-w-2xl font-medium">
-                  Sigue nuestro plan de estudios estructurado. Desde conceptos fundamentales hasta
+                <p className="max-w-2xl text-lg leading-relaxed text-navy-300">
+                  Sigue el plan de estudios estructurado. Desde conceptos fundamentales hasta
                   estrategias de mercado avanzado.
                 </p>
               </div>

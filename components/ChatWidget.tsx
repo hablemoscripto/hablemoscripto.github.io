@@ -10,7 +10,7 @@ const STORAGE_KEY = 'chat_messages';
 
 const INITIAL_GREETING: ChatMessage = {
   role: 'model',
-  text: '¡Hola! Soy CBas 🤖. Pregúntame sobre Bitcoin, cómo empezar en cripto o conceptos de trading. ¿En qué puedo ayudarte hoy?',
+  text: '¡Hola! Soy CBas. Pregúntame sobre Bitcoin, cómo empezar en cripto o conceptos de trading. ¿En qué puedo ayudarte hoy?',
   timestamp: new Date()
 };
 

@@ -71,29 +71,11 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
             <ul className="space-y-1 text-sm text-navy-400">
               <li>
                 <a
-                  href="/#home"
-                  onClick={(e) => handleAnchorClick(e, 'home')}
+                  href="/#plataforma"
+                  onClick={(e) => handleAnchorClick(e, 'plataforma')}
                   className="inline-block py-2 hover:text-brand-500 transition-colors"
                 >
-                  Inicio
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#courses"
-                  onClick={(e) => handleAnchorClick(e, 'courses')}
-                  className="inline-block py-2 hover:text-brand-500 transition-colors"
-                >
-                  Cursos
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#pricing"
-                  onClick={(e) => handleAnchorClick(e, 'pricing')}
-                  className="inline-block py-2 hover:text-brand-500 transition-colors"
-                >
-                  Precios
+                  La ruta
                 </a>
               </li>
               <li>
@@ -103,6 +85,15 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                   className="inline-block py-2 hover:text-brand-500 transition-colors"
                 >
                   Sobre CBas
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/#pricing"
+                  onClick={(e) => handleAnchorClick(e, 'pricing')}
+                  className="inline-block py-2 hover:text-brand-500 transition-colors"
+                >
+                  Precios
                 </a>
               </li>
               <li>
@@ -120,7 +111,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                   onClick={(e) => handleAnchorClick(e, 'resources')}
                   className="inline-block py-2 hover:text-brand-500 transition-colors"
                 >
-                  Recursos gratuitos
+                  Análisis semanal
                 </a>
               </li>
               {onNavigateEducation && (
@@ -128,7 +119,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                   <button
                     type="button"
                     onClick={onNavigateEducation}
-                    className="inline-block py-2 hover:text-brand-500 transition-colors text-left"
+                    className="inline-block py-2 text-left hover:text-brand-500 transition-colors"
                   >
                     Entrar a la plataforma
                   </button>
