@@ -2,65 +2,81 @@ import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from '../data/leve
 import type { Lesson } from '../data/courseData';
 
 export const getAllLessonsOrdered = (): Lesson[] => {
-    const levels = [BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL];
-    const allLessons: Lesson[] = [];
+  const levels = [BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL];
+  const allLessons: Lesson[] = [];
 
-    levels.forEach((level) => {
-        level.modules.forEach((module) => {
-            module.lessons.forEach((lesson) => {
-                allLessons.push(lesson);
-            });
-        });
+  levels.forEach((level) => {
+    level.modules.forEach((module) => {
+      module.lessons.forEach((lesson) => {
+        allLessons.push(lesson);
+      });
     });
+  });
 
-    return allLessons;
+  return allLessons;
 };
 
 export const getPreviousLessonId = (currentLessonId: number): number | null => {
-    const allLessons = getAllLessonsOrdered();
-    const currentIndex = allLessons.findIndex((l) => l.id === currentLessonId);
+  const allLessons = getAllLessonsOrdered();
+  const currentIndex = allLessons.findIndex((l) => l.id === currentLessonId);
 
-    if (currentIndex <= 0) {
-        return null;
-    }
+  if (currentIndex <= 0) {
+    return null;
+  }
 
-    return allLessons[currentIndex - 1].id;
+  return allLessons[currentIndex - 1].id;
 };
 
 export const getNextLessonId = (currentLessonId: number): number | null => {
-    const allLessons = getAllLessonsOrdered();
-    const currentIndex = allLessons.findIndex((l) => l.id === currentLessonId);
+  const allLessons = getAllLessonsOrdered();
+  const currentIndex = allLessons.findIndex((l) => l.id === currentLessonId);
 
-    if (currentIndex === -1 || currentIndex === allLessons.length - 1) {
-        return null;
-    }
+  if (currentIndex === -1 || currentIndex === allLessons.length - 1) {
+    return null;
+  }
 
-    return allLessons[currentIndex + 1].id;
+  return allLessons[currentIndex + 1].id;
 };
 
-export const getLevelForLesson = (lessonId: number): string => {
-    const levels = [
-        { data: BEGINNER_LEVEL, route: 'beginner' },
-        { data: INTERMEDIATE_LEVEL, route: 'intermediate' },
-        { data: ADVANCED_LEVEL, route: 'advanced' },
-    ];
+export const getLevelForLesson = (lessonId: number): CourseLevelId => {
+  const levels = [
+    { data: BEGINNER_LEVEL, route: 'beginner' as const },
+    { data: INTERMEDIATE_LEVEL, route: 'intermediate' as const },
+    { data: ADVANCED_LEVEL, route: 'advanced' as const },
+  ];
 
-    for (const level of levels) {
-        for (const module of level.data.modules) {
-            if (module.lessons.some((l) => l.id === lessonId)) {
-                return level.route;
-            }
-        }
+  for (const level of levels) {
+    for (const module of level.data.modules) {
+      if (module.lessons.some((l) => l.id === lessonId)) {
+        return level.route;
+      }
     }
+  }
 
-    return 'beginner'; // Default fallback
+  return 'beginner'; // Default fallback
 };
 
 export const getBeginnerLessonIds = (): number[] =>
-    BEGINNER_LEVEL.modules.flatMap(m => m.lessons.map(l => l.id));
+  BEGINNER_LEVEL.modules.flatMap((m) => m.lessons.map((l) => l.id));
 
 export const getIntermediateLessonIds = (): number[] =>
-    INTERMEDIATE_LEVEL.modules.flatMap(m => m.lessons.map(l => l.id));
+  INTERMEDIATE_LEVEL.modules.flatMap((m) => m.lessons.map((l) => l.id));
 
 export const getAdvancedLessonIds = (): number[] =>
-    ADVANCED_LEVEL.modules.flatMap(m => m.lessons.map(l => l.id));
+  ADVANCED_LEVEL.modules.flatMap((m) => m.lessons.map((l) => l.id));
+
+export type CourseLevelId = 'beginner' | 'intermediate' | 'advanced';
+
+export const getLessonIdsForLevel = (levelId: CourseLevelId): number[] => {
+  if (levelId === 'beginner') return getBeginnerLessonIds();
+  if (levelId === 'intermediate') return getIntermediateLessonIds();
+  return getAdvancedLessonIds();
+};
+
+export const isLevelComplete = (
+  levelId: CourseLevelId,
+  isLessonCompleted: (lessonId: number) => boolean
+): boolean => {
+  const lessonIds = getLessonIdsForLevel(levelId);
+  return lessonIds.length > 0 && lessonIds.every(isLessonCompleted);
+};

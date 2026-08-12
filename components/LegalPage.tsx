@@ -50,9 +50,7 @@ const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
             </h1>
           </div>
 
-          <p className="text-navy-400 text-sm mb-12">
-            Última actualización: 18 de febrero de 2026
-          </p>
+          <p className="text-navy-400 text-sm mb-12">Última actualización: 18 de febrero de 2026</p>
 
           <div className="prose prose-invert prose-slate max-w-none space-y-10 [&_h2]:text-xl [&_h2]:font-heading [&_h2]:font-bold [&_h2]:text-white [&_h2]:mb-4 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-navy-200 [&_h3]:mb-3 [&_p]:text-navy-300 [&_p]:leading-relaxed [&_p]:mb-4 [&_ul]:text-navy-300 [&_ul]:space-y-2 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:leading-relaxed">
             {type === 'privacy' ? <PrivacyContent /> : <TermsContent />}
@@ -80,10 +78,14 @@ function PrivacyContent() {
       <section>
         <h2>1. Introducción</h2>
         <p>
-          Hablemos Cripto (&quot;nosotros&quot;, &quot;nuestro&quot; o &quot;la plataforma&quot;) se compromete a proteger la privacidad de sus usuarios. Esta Política de Privacidad describe cómo recopilamos, usamos, almacenamos y protegemos tu información personal cuando utilizas nuestra plataforma educativa en hablemoscripto.io.
+          Hablemos Cripto (&quot;nosotros&quot;, &quot;nuestro&quot; o &quot;la plataforma&quot;) se
+          compromete a proteger la privacidad de sus usuarios. Esta Política de Privacidad describe
+          cómo recopilamos, usamos, almacenamos y protegemos tu información personal cuando utilizas
+          nuestra plataforma educativa en hablemoscripto.io.
         </p>
         <p>
-          Al registrarte o usar nuestros servicios, aceptas las prácticas descritas en esta política.
+          Al registrarte o usar nuestros servicios, aceptas las prácticas descritas en esta
+          política.
         </p>
       </section>
 
@@ -107,19 +109,35 @@ function PrivacyContent() {
 
         <h3>2.3 Información de pago</h3>
         <ul>
-          <li>Los pagos se procesan a través de Wompi, nuestro proveedor de pagos. No almacenamos datos de tarjetas de crédito ni información bancaria directamente en nuestros servidores.</li>
-          <li>Registramos el estado de la transacción (completada, pendiente, fallida) y la referencia del pago para activar tu acceso premium.</li>
+          <li>
+            Los pagos se procesan a través de Wompi, nuestro proveedor de pagos. No almacenamos
+            datos de tarjetas de crédito ni información bancaria directamente en nuestros
+            servidores.
+          </li>
+          <li>
+            Registramos el estado de la transacción (completada, pendiente, fallida) y la referencia
+            del pago para activar tu acceso premium.
+          </li>
         </ul>
 
         <h3>2.4 Datos del newsletter</h3>
         <ul>
-          <li>Si te suscribes a nuestro newsletter, almacenamos tu correo electrónico y tu preferencia de suscripción.</li>
-          <li>La suscripción al newsletter es completamente voluntaria y puedes cancelarla en cualquier momento.</li>
+          <li>
+            Si te suscribes a nuestro newsletter, almacenamos tu correo electrónico y tu preferencia
+            de suscripción.
+          </li>
+          <li>
+            La suscripción al newsletter es completamente voluntaria y puedes cancelarla en
+            cualquier momento.
+          </li>
         </ul>
 
         <h3>2.5 Datos del asistente de IA</h3>
         <ul>
-          <li>Las consultas realizadas al asistente de IA (CBas) se envían a la API de xAI (Grok) para generar respuestas. No almacenamos permanentemente el contenido de estas conversaciones.</li>
+          <li>
+            Las consultas realizadas al asistente de IA (CBas) se envían a la API de xAI (Grok) para
+            generar respuestas. No almacenamos permanentemente el contenido de estas conversaciones.
+          </li>
         </ul>
       </section>
 
@@ -130,7 +148,10 @@ function PrivacyContent() {
           <li>Proporcionar y mantener tu cuenta en la plataforma</li>
           <li>Rastrear tu progreso educativo y personalizar tu experiencia de aprendizaje</li>
           <li>Procesar pagos y activar acceso a contenido premium</li>
-          <li>Enviar comunicaciones relacionadas con tu cuenta (verificación de email, restablecimiento de contraseña)</li>
+          <li>
+            Enviar comunicaciones relacionadas con tu cuenta (verificación de email,
+            restablecimiento de contraseña)
+          </li>
           <li>Enviar el newsletter si has dado tu consentimiento</li>
           <li>Mejorar nuestros servicios y contenido educativo</li>
         </ul>
@@ -139,39 +160,65 @@ function PrivacyContent() {
       <section>
         <h2>4. Almacenamiento y Seguridad</h2>
         <p>
-          Tus datos se almacenan de forma segura en Supabase, una plataforma de infraestructura en la nube con encriptación en tránsito (TLS) y en reposo. La base de datos está alojada en servidores seguros con acceso restringido.
+          Tus datos se almacenan de forma segura en Supabase, una plataforma de infraestructura en
+          la nube con encriptación en tránsito (TLS) y en reposo. La base de datos está alojada en
+          servidores seguros con acceso restringido.
         </p>
         <p>
-          Las contraseñas se almacenan de forma cifrada y nunca son accesibles en texto plano. Utilizamos políticas de seguridad a nivel de base de datos (Row Level Security) para garantizar que cada usuario solo pueda acceder a sus propios datos.
+          Las contraseñas se almacenan de forma cifrada y nunca son accesibles en texto plano.
+          Utilizamos políticas de seguridad a nivel de base de datos (Row Level Security) para
+          garantizar que cada usuario solo pueda acceder a sus propios datos.
         </p>
       </section>
 
       <section>
         <h2>5. Cookies y Tecnologías Similares</h2>
         <p>
-          Utilizamos almacenamiento local del navegador (localStorage) para mantener tu sesión iniciada y tus preferencias. No utilizamos cookies de seguimiento de terceros con fines publicitarios.
+          Utilizamos almacenamiento local del navegador (localStorage) para mantener tu sesión
+          iniciada y tus preferencias. No utilizamos cookies de seguimiento de terceros con fines
+          publicitarios.
         </p>
         <p>
-          Las cookies esenciales de autenticación son necesarias para el funcionamiento básico de la plataforma.
+          Las cookies esenciales de autenticación son necesarias para el funcionamiento básico de la
+          plataforma.
         </p>
       </section>
 
       <section>
         <h2>6. Compartir Información con Terceros</h2>
         <p>
-          <strong>No vendemos, alquilamos ni compartimos tu información personal con terceros con fines comerciales.</strong>
+          <strong>
+            No vendemos, alquilamos ni compartimos tu información personal con terceros con fines
+            comerciales.
+          </strong>
         </p>
-        <p>Compartimos datos únicamente con los siguientes proveedores de servicio, necesarios para el funcionamiento de la plataforma:</p>
+        <p>
+          Compartimos datos únicamente con los siguientes proveedores de servicio, necesarios para
+          el funcionamiento de la plataforma:
+        </p>
         <ul>
-          <li><strong>Supabase</strong>: Alojamiento de base de datos y autenticación</li>
-          <li><strong>Google</strong>: Autenticación OAuth (inicio de sesión)</li>
-          <li><strong>xAI (Grok)</strong>: Modelo de IA que potencia el asistente educativo</li>
-          <li><strong>Wompi</strong>: Procesamiento de pagos</li>
-          <li><strong>Resend</strong>: Envío de correos electrónicos (newsletter y transaccionales)</li>
-          <li><strong>Vercel</strong>: Alojamiento de la aplicación web</li>
+          <li>
+            <strong>Supabase</strong>: Alojamiento de base de datos y autenticación
+          </li>
+          <li>
+            <strong>Google</strong>: Autenticación OAuth (inicio de sesión)
+          </li>
+          <li>
+            <strong>xAI (Grok)</strong>: Modelo de IA que potencia el asistente educativo
+          </li>
+          <li>
+            <strong>Wompi</strong>: Procesamiento de pagos
+          </li>
+          <li>
+            <strong>Resend</strong>: Envío de correos electrónicos (newsletter y transaccionales)
+          </li>
+          <li>
+            <strong>Vercel</strong>: Alojamiento de la aplicación web
+          </li>
         </ul>
         <p>
-          Cada proveedor opera bajo sus propias políticas de privacidad y cumple con estándares de seguridad de la industria.
+          Cada proveedor opera bajo sus propias políticas de privacidad y cumple con estándares de
+          seguridad de la industria.
         </p>
       </section>
 
@@ -179,39 +226,63 @@ function PrivacyContent() {
         <h2>7. Tus Derechos</h2>
         <p>Como usuario de Hablemos Cripto, tienes derecho a:</p>
         <ul>
-          <li><strong>Acceder</strong> a tu información personal almacenada en la plataforma</li>
-          <li><strong>Rectificar</strong> datos incorrectos o incompletos</li>
-          <li><strong>Eliminar</strong> tu cuenta y datos asociados enviando una solicitud a nuestro equipo</li>
-          <li><strong>Cancelar</strong> tu suscripción al newsletter en cualquier momento mediante el enlace de cancelación incluido en cada correo</li>
-          <li><strong>Retirar tu consentimiento</strong> para el procesamiento de datos en cualquier momento</li>
+          <li>
+            <strong>Acceder</strong> a tu información personal almacenada en la plataforma
+          </li>
+          <li>
+            <strong>Rectificar</strong> datos incorrectos o incompletos
+          </li>
+          <li>
+            <strong>Eliminar</strong> tu cuenta y datos asociados enviando una solicitud a nuestro
+            equipo
+          </li>
+          <li>
+            <strong>Cancelar</strong> tu suscripción al newsletter en cualquier momento mediante el
+            enlace de cancelación incluido en cada correo
+          </li>
+          <li>
+            <strong>Retirar tu consentimiento</strong> para el procesamiento de datos en cualquier
+            momento
+          </li>
         </ul>
         <p>
-          Para ejercer cualquiera de estos derechos, contáctanos en <strong>hablemoscripto@gmail.com</strong>.
+          Para ejercer cualquiera de estos derechos, contáctanos en{' '}
+          <strong>soporte@hablemoscripto.io</strong>.
         </p>
       </section>
 
       <section>
         <h2>8. Menores de Edad</h2>
         <p>
-          Nuestra plataforma está diseñada para usuarios mayores de 18 años. No recopilamos intencionalmente información de menores de edad. Si descubrimos que hemos recopilado datos de un menor, los eliminaremos de inmediato.
+          Nuestra plataforma está diseñada para usuarios mayores de 18 años. No recopilamos
+          intencionalmente información de menores de edad. Si descubrimos que hemos recopilado datos
+          de un menor, los eliminaremos de inmediato.
         </p>
       </section>
 
       <section>
         <h2>9. Cambios a esta Política</h2>
         <p>
-          Nos reservamos el derecho de actualizar esta Política de Privacidad. Cualquier cambio significativo será notificado a través de la plataforma o por correo electrónico. El uso continuado de la plataforma después de dichos cambios constituye la aceptación de la política actualizada.
+          Nos reservamos el derecho de actualizar esta Política de Privacidad. Cualquier cambio
+          significativo será notificado a través de la plataforma o por correo electrónico. El uso
+          continuado de la plataforma después de dichos cambios constituye la aceptación de la
+          política actualizada.
         </p>
       </section>
 
       <section>
         <h2>10. Contacto</h2>
         <p>
-          Si tienes preguntas sobre esta Política de Privacidad o sobre el manejo de tus datos personales, puedes contactarnos en:
+          Si tienes preguntas sobre esta Política de Privacidad o sobre el manejo de tus datos
+          personales, puedes contactarnos en:
         </p>
         <ul>
-          <li>Email: <strong>hablemoscripto@gmail.com</strong></li>
-          <li>Twitter/X: <strong>@Crypto_CBas</strong></li>
+          <li>
+            Email: <strong>soporte@hablemoscripto.io</strong>
+          </li>
+          <li>
+            Twitter/X: <strong>@Crypto_CBas</strong>
+          </li>
         </ul>
       </section>
     </>
@@ -224,26 +295,42 @@ function TermsContent() {
       <section>
         <h2>1. Aceptación de los Términos</h2>
         <p>
-          Al acceder y utilizar la plataforma Hablemos Cripto (hablemoscripto.io), aceptas estos Términos de Uso en su totalidad. Si no estás de acuerdo con alguno de estos términos, no debes utilizar la plataforma.
+          Al acceder y utilizar la plataforma Hablemos Cripto (hablemoscripto.io), aceptas estos
+          Términos de Uso en su totalidad. Si no estás de acuerdo con alguno de estos términos, no
+          debes utilizar la plataforma.
         </p>
       </section>
 
       <section>
         <h2>2. Naturaleza del Servicio</h2>
         <p>
-          Hablemos Cripto es una <strong>plataforma exclusivamente educativa</strong> sobre criptomonedas, blockchain y finanzas digitales. Nuestro contenido tiene como único propósito la educación y formación de nuestros usuarios.
+          Hablemos Cripto es una <strong>plataforma exclusivamente educativa</strong> sobre
+          criptomonedas, blockchain y finanzas digitales. Nuestro contenido tiene como único
+          propósito la educación y formación de nuestros usuarios.
         </p>
 
         <h3>2.1 Descargo de responsabilidad financiera</h3>
         <p>
-          <strong>IMPORTANTE: Nada de lo publicado en esta plataforma constituye asesoría financiera, de inversión, fiscal o legal.</strong>
+          <strong>
+            IMPORTANTE: Nada de lo publicado en esta plataforma constituye asesoría financiera, de
+            inversión, fiscal o legal.
+          </strong>
         </p>
         <ul>
           <li>No somos asesores financieros certificados ni pretendemos serlo.</li>
-          <li>No recomendamos la compra, venta ni tenencia de ninguna criptomoneda o activo financiero en particular.</li>
+          <li>
+            No recomendamos la compra, venta ni tenencia de ninguna criptomoneda o activo financiero
+            en particular.
+          </li>
           <li>No garantizamos rendimientos, ganancias ni resultados financieros de ningún tipo.</li>
-          <li>Las criptomonedas son activos altamente volátiles. Puedes perder la totalidad de tu inversión.</li>
-          <li>Siempre realiza tu propia investigación (DYOR) y consulta con un profesional financiero antes de tomar decisiones de inversión.</li>
+          <li>
+            Las criptomonedas son activos altamente volátiles. Puedes perder la totalidad de tu
+            inversión.
+          </li>
+          <li>
+            Siempre realiza tu propia investigación (DYOR) y consulta con un profesional financiero
+            antes de tomar decisiones de inversión.
+          </li>
         </ul>
       </section>
 
@@ -251,7 +338,9 @@ function TermsContent() {
         <h2>3. Cuentas de Usuario</h2>
         <h3>3.1 Registro</h3>
         <p>
-          Para acceder al contenido de la plataforma, debes crear una cuenta proporcionando información veraz y actualizada. Eres responsable de mantener la confidencialidad de tus credenciales de acceso.
+          Para acceder al contenido de la plataforma, debes crear una cuenta proporcionando
+          información veraz y actualizada. Eres responsable de mantener la confidencialidad de tus
+          credenciales de acceso.
         </p>
 
         <h3>3.2 Responsabilidades del usuario</h3>
@@ -264,7 +353,9 @@ function TermsContent() {
 
         <h3>3.3 Suspensión de cuentas</h3>
         <p>
-          Nos reservamos el derecho de suspender o eliminar cuentas que violen estos términos, incluyendo pero no limitado a: uso fraudulento, compartir credenciales, o conducta abusiva en la plataforma.
+          Nos reservamos el derecho de suspender o eliminar cuentas que violen estos términos,
+          incluyendo pero no limitado a: uso fraudulento, compartir credenciales, o conducta abusiva
+          en la plataforma.
         </p>
       </section>
 
@@ -272,30 +363,47 @@ function TermsContent() {
         <h2>4. Contenido Premium y Pagos</h2>
         <h3>4.1 Acceso gratuito y premium</h3>
         <p>
-          La plataforma ofrece contenido educativo gratuito (nivel principiante) y contenido premium (niveles intermedio y avanzado) que requiere un pago único para su desbloqueo.
+          La plataforma ofrece contenido educativo gratuito (nivel principiante) y contenido premium
+          (niveles intermedio y avanzado) que requiere un pago único para su desbloqueo.
         </p>
 
         <h3>4.2 Procesamiento de pagos</h3>
         <ul>
           <li>Los pagos se procesan de forma segura a través de Wompi.</li>
-          <li>Una vez completado el pago, el acceso premium se activa automáticamente en tu cuenta.</li>
-          <li>El pago otorga acceso de por vida al contenido premium disponible al momento de la compra.</li>
+          <li>
+            Una vez completado el pago, el acceso premium se activa automáticamente en tu cuenta.
+          </li>
+          <li>
+            El pago otorga acceso de por vida al contenido premium disponible al momento de la
+            compra.
+          </li>
         </ul>
 
         <h3>4.3 Política de reembolsos</h3>
         <p>
-          Ofrecemos una garantía de devolución de 7 días desde la fecha de compra. Si dentro de ese plazo decides que el contenido no es para ti, escríbenos a hablemoscripto@gmail.com y te devolvemos el 100% de tu dinero, sin preguntas. Pasados los 7 días, dado que el contenido digital es de acceso inmediato, no se realizan reembolsos.
+          Ofrecemos una garantía de devolución de 7 días desde la fecha de compra. Si dentro de ese
+          plazo decides que el contenido no es para ti, escríbenos a soporte@hablemoscripto.io y te
+          devolvemos el 100% de tu dinero, sin preguntas. Pasados los 7 días, dado que el contenido
+          digital es de acceso inmediato, no se realizan reembolsos.
         </p>
       </section>
 
       <section>
         <h2>5. Propiedad Intelectual</h2>
         <p>
-          Todo el contenido de la plataforma — incluyendo pero no limitado a textos, gráficos, imágenes, infografías, quizzes, estructura de cursos, diseño y código — es propiedad exclusiva de Hablemos Cripto y está protegido por leyes de propiedad intelectual.
+          Todo el contenido de la plataforma — incluyendo pero no limitado a textos, gráficos,
+          imágenes, infografías, quizzes, estructura de cursos, diseño y código — es propiedad
+          exclusiva de Hablemos Cripto y está protegido por leyes de propiedad intelectual.
         </p>
         <ul>
-          <li>No puedes copiar, reproducir, distribuir ni crear obras derivadas del contenido sin autorización expresa por escrito.</li>
-          <li>El acceso a la plataforma te otorga una licencia personal, no transferible y no exclusiva para consumir el contenido con fines educativos.</li>
+          <li>
+            No puedes copiar, reproducir, distribuir ni crear obras derivadas del contenido sin
+            autorización expresa por escrito.
+          </li>
+          <li>
+            El acceso a la plataforma te otorga una licencia personal, no transferible y no
+            exclusiva para consumir el contenido con fines educativos.
+          </li>
           <li>Está prohibido el uso del contenido con fines comerciales sin autorización.</li>
         </ul>
       </section>
@@ -303,12 +411,18 @@ function TermsContent() {
       <section>
         <h2>6. Asistente de IA (CBas)</h2>
         <p>
-          La plataforma incluye un asistente de inteligencia artificial para apoyo educativo. Ten en cuenta que:
+          La plataforma incluye un asistente de inteligencia artificial para apoyo educativo. Ten en
+          cuenta que:
         </p>
         <ul>
-          <li>Las respuestas del asistente son generadas por IA y pueden contener inexactitudes.</li>
+          <li>
+            Las respuestas del asistente son generadas por IA y pueden contener inexactitudes.
+          </li>
           <li>El asistente no proporciona asesoría financiera ni recomendaciones de inversión.</li>
-          <li>No debes tomar decisiones financieras basándote únicamente en las respuestas del asistente.</li>
+          <li>
+            No debes tomar decisiones financieras basándote únicamente en las respuestas del
+            asistente.
+          </li>
           <li>Hablemos Cripto no se responsabiliza por las respuestas generadas por la IA.</li>
         </ul>
       </section>
@@ -316,44 +430,63 @@ function TermsContent() {
       <section>
         <h2>7. Newsletter</h2>
         <p>
-          Si te suscribes al newsletter, recibirás comunicaciones periódicas por correo electrónico con contenido educativo y actualizaciones de la plataforma. Puedes cancelar tu suscripción en cualquier momento mediante el enlace incluido en cada correo.
+          Si te suscribes al newsletter, recibirás comunicaciones periódicas por correo electrónico
+          con contenido educativo y actualizaciones de la plataforma. Puedes cancelar tu suscripción
+          en cualquier momento mediante el enlace incluido en cada correo.
         </p>
       </section>
 
       <section>
         <h2>8. Limitación de Responsabilidad</h2>
         <p>
-          Hablemos Cripto se proporciona &quot;tal como está&quot; y &quot;según disponibilidad&quot;. No garantizamos que la plataforma estará disponible de forma ininterrumpida o libre de errores.
+          Hablemos Cripto se proporciona &quot;tal como está&quot; y &quot;según
+          disponibilidad&quot;. No garantizamos que la plataforma estará disponible de forma
+          ininterrumpida o libre de errores.
         </p>
         <ul>
-          <li>No somos responsables de pérdidas financieras derivadas de decisiones de inversión tomadas con base en nuestro contenido educativo.</li>
-          <li>No somos responsables de interrupciones del servicio, pérdida de datos o problemas técnicos fuera de nuestro control.</li>
-          <li>Nuestra responsabilidad máxima se limita al monto pagado por el usuario por el acceso premium.</li>
+          <li>
+            No somos responsables de pérdidas financieras derivadas de decisiones de inversión
+            tomadas con base en nuestro contenido educativo.
+          </li>
+          <li>
+            No somos responsables de interrupciones del servicio, pérdida de datos o problemas
+            técnicos fuera de nuestro control.
+          </li>
+          <li>
+            Nuestra responsabilidad máxima se limita al monto pagado por el usuario por el acceso
+            premium.
+          </li>
         </ul>
       </section>
 
       <section>
         <h2>9. Modificaciones</h2>
         <p>
-          Nos reservamos el derecho de modificar estos Términos de Uso en cualquier momento. Los cambios serán publicados en esta página con la fecha de actualización correspondiente. El uso continuado de la plataforma después de las modificaciones constituye la aceptación de los nuevos términos.
+          Nos reservamos el derecho de modificar estos Términos de Uso en cualquier momento. Los
+          cambios serán publicados en esta página con la fecha de actualización correspondiente. El
+          uso continuado de la plataforma después de las modificaciones constituye la aceptación de
+          los nuevos términos.
         </p>
       </section>
 
       <section>
         <h2>10. Ley Aplicable</h2>
         <p>
-          Estos términos se rigen por las leyes de la República de Colombia. Cualquier disputa será sometida a la jurisdicción de los tribunales competentes de Colombia.
+          Estos términos se rigen por las leyes de la República de Colombia. Cualquier disputa será
+          sometida a la jurisdicción de los tribunales competentes de Colombia.
         </p>
       </section>
 
       <section>
         <h2>11. Contacto</h2>
-        <p>
-          Para consultas sobre estos Términos de Uso, contáctanos en:
-        </p>
+        <p>Para consultas sobre estos Términos de Uso, contáctanos en:</p>
         <ul>
-          <li>Email: <strong>hablemoscripto@gmail.com</strong></li>
-          <li>Twitter/X: <strong>@Crypto_CBas</strong></li>
+          <li>
+            Email: <strong>soporte@hablemoscripto.io</strong>
+          </li>
+          <li>
+            Twitter/X: <strong>@Crypto_CBas</strong>
+          </li>
         </ul>
       </section>
     </>

@@ -66,9 +66,7 @@ export default function PricingSection({
   return (
     <div className="container max-w-7xl mx-auto px-6">
       <div className="text-center mb-10 md:mb-12">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-900 border border-white/10 text-brand-500 text-xs font-black uppercase tracking-[0.2em] mb-6">
-          Planes y Precios
-        </div>
+        <div className="mb-4 text-sm font-semibold text-brand-400">Planes y Precios</div>
 
         <h2 className="text-4xl md:text-5xl font-heading font-black text-white tracking-tighter mb-4">
           Elige tu nivel de profundidad
@@ -77,7 +75,7 @@ export default function PricingSection({
           Pago único. Acceso de por vida. Sin suscripciones.
         </p>
 
-        <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/30 text-sm max-w-xl">
+        <div className="mx-auto mt-6 max-w-xl border-l-2 border-brand-500 pl-4 text-left text-sm">
           <span className="text-brand-400 font-medium">
             Precio Fundador: precios de lanzamiento. Avisaremos con 30 días de anticipación antes de
             cualquier aumento.
@@ -122,13 +120,13 @@ export default function PricingSection({
               viewport={{ once: true, margin: '-80px' }}
               className={`group relative flex flex-col rounded-3xl overflow-hidden transition-all duration-300 ${
                 isRecommended
-                  ? 'border border-brand-500/40 shadow-[0_0_50px_rgba(245,158,11,0.1)] lg:scale-[1.02]'
+                  ? 'border border-brand-500/50'
                   : isExperto
                     ? 'border border-white/15'
                     : 'border border-white/10'
               }`}
             >
-              <div className="absolute inset-0 bg-navy-900/70 backdrop-blur-xl" />
+              <div className="absolute inset-0 bg-navy-900" />
 
               {isRecommended && (
                 <div className="absolute inset-0 rounded-3xl border border-brand-500/25 pointer-events-none" />
@@ -140,7 +138,7 @@ export default function PricingSection({
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
                         isRecommended
-                          ? 'bg-gradient-to-br from-brand-400 to-brand-600 shadow-lg shadow-brand-500/25'
+                          ? 'bg-brand-500'
                           : isFreePlan
                             ? 'bg-navy-800 border border-white/10'
                             : 'bg-navy-800 border border-white/10'
@@ -211,7 +209,7 @@ export default function PricingSection({
                     onClick={() => onPublicCta?.(courseTier)}
                     className={`mt-auto w-full rounded-2xl py-3.5 text-sm font-bold transition-all duration-200 ${
                       isRecommended
-                        ? 'bg-gradient-to-r from-brand-500 to-brand-600 text-navy-950 shadow-lg shadow-brand-500/20 hover:from-brand-400 hover:to-brand-500'
+                        ? 'bg-brand-500 text-navy-950 hover:bg-brand-400'
                         : isFreePlan
                           ? 'border border-white/10 bg-navy-800 text-white hover:bg-navy-700 hover:border-white/20'
                           : 'border border-brand-500/30 bg-navy-800 text-white hover:border-brand-500/50 hover:bg-navy-700'
@@ -233,7 +231,7 @@ export default function PricingSection({
                     onClick={() => onSelectPlan?.(courseTier as 'inversor' | 'experto')}
                     className={`mt-auto w-full rounded-2xl py-3.5 text-sm font-bold transition-all duration-200 ${
                       isRecommended
-                        ? 'bg-gradient-to-r from-brand-500 to-brand-600 text-navy-950 shadow-lg shadow-brand-500/20 hover:from-brand-400 hover:to-brand-500'
+                        ? 'bg-brand-500 text-navy-950 hover:bg-brand-400'
                         : isFreePlan
                           ? 'border border-white/10 bg-navy-800 text-white hover:bg-navy-700 hover:border-white/20'
                           : 'border border-brand-500/30 bg-navy-800 text-white hover:border-brand-500/50 hover:bg-navy-700'
@@ -258,10 +256,10 @@ export default function PricingSection({
         <p className="text-sm text-navy-400">
           ¿Dudas antes de comprar? Escríbenos a{' '}
           <a
-            href="mailto:hablemoscripto@gmail.com"
+            href="mailto:soporte@hablemoscripto.io"
             className="text-brand-400 hover:text-brand-300 underline"
           >
-            hablemoscripto@gmail.com
+            soporte@hablemoscripto.io
           </a>
         </p>
       </div>

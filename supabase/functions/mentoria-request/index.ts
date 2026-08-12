@@ -1,6 +1,6 @@
-// Receives a Mentoría Personalizada request from the public landing page
-// and emails it to CBas via Resend. Public endpoint (no JWT verification)
-// since prospective leads aren't logged in.
+// Receives mentoría requests and emails them to CBas via Resend. The endpoint
+// remains public for prospects; when a valid user JWT is present, a server-side
+// profile lookup marks Cripto Experto requests as priority.
 //
 // Required Supabase Edge Function secrets:
 //   RESEND_API_KEY        — same key the newsletter/welcome-email flow uses
@@ -11,6 +11,7 @@
 //   supabase functions deploy mentoria-request --no-verify-jwt
 
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 const ALLOWED_ORIGINS = new Set([
   'https://hablemoscripto.io',
@@ -74,6 +75,34 @@ function json(status: number, body: unknown, corsHeaders: Record<string, string>
   })
 }
 
+async function getVipRequester(authHeader: string | null): Promise<string | null> {
+  if (!authHeader?.startsWith('Bearer ')) return null
+
+  const supabaseUrl = Deno.env.get('SUPABASE_URL')
+  const anonKey = Deno.env.get('SUPABASE_ANON_KEY')
+  const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
+  if (!supabaseUrl || !anonKey || !serviceKey) return null
+
+  const userClient = createClient(supabaseUrl, anonKey, {
+    global: { headers: { Authorization: authHeader } },
+  })
+  const { data: { user }, error: userError } = await userClient.auth.getUser()
+  if (userError || !user) return null
+
+  const adminClient = createClient(supabaseUrl, serviceKey)
+  const { data: profile, error: profileError } = await adminClient
+    .from('user_profiles')
+    .select('is_premium, premium_tier')
+    .eq('id', user.id)
+    .single()
+
+  if (profileError || !profile?.is_premium || profile.premium_tier !== 'vip') {
+    return null
+  }
+
+  return user.email ?? user.id
+}
+
 serve(async (req) => {
   const corsHeaders = buildCorsHeaders(req.headers.get('Origin'))
 
@@ -117,10 +146,12 @@ serve(async (req) => {
     return json(500, { error: 'Servicio no configurado' }, corsHeaders)
   }
   const notifyTo = Deno.env.get('MENTORIA_NOTIFY_TO') || DEFAULT_NOTIFY_TO
+  const vipRequester = await getVipRequester(req.headers.get('Authorization'))
 
-  const subject = `Nueva solicitud de mentoría — ${name}`
+  const subject = `${vipRequester ? '[EXPERTO] ' : ''}Nueva solicitud de mentoría - ${name}`
   const html = `<!DOCTYPE html><html><body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; line-height: 1.6; color: #1f2937; max-width: 640px; margin: 0 auto; padding: 24px;">
   <h2 style="margin: 0 0 16px;">Nueva solicitud de Mentoría Personalizada</h2>
+  ${vipRequester ? `<p style="margin: 0 0 16px; color: #92400e;"><strong>Prioridad Cripto Experto</strong><br>Cuenta verificada: ${escapeHtml(vipRequester)}</p>` : ''}
   <p style="margin: 0 0 8px;"><strong>Nombre:</strong> ${escapeHtml(name)}</p>
   <p style="margin: 0 0 8px;"><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
   <p style="margin: 16px 0 4px;"><strong>Mensaje:</strong></p>

@@ -34,8 +34,8 @@ export interface PricingPlan {
   wompiSku?: string; // SKU sent to create-payment Edge Function
 
   // Entitlement grants applied on successful purchase.
-  grantsCourseTier?: CourseTier;    // omitted for community-only plans
-  grantsCommunityMonths?: number;   // sets communityStatus='active' for N months
+  grantsCourseTier?: CourseTier; // omitted for community-only plans
+  grantsCommunityMonths?: number; // sets communityStatus='active' for N months
 
   // UI metadata
   features: string[];
@@ -48,13 +48,13 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     id: 'free',
     productType: 'course',
     name: 'Principiante',
-    description: 'Newsletter semanal + Nivel Principiante',
+    description: 'Nivel Principiante para aprender desde cero',
     priceUsd: 0,
     priceCopCents: 0,
     features: [
       'Nivel Principiante completo (19 lecciones)',
-      'Newsletter semanal con análisis de mercado',
-      'Acceso a recursos gratuitos',
+      'Quizzes y progreso guardado',
+      'Acceso a recursos educativos gratuitos',
     ],
   },
   inversor: {
@@ -79,8 +79,7 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     id: 'experto',
     productType: 'bundle',
     name: 'Cripto Experto',
-    description:
-      'Todo Inversor, más acceso de fundador a comunidad y mentoría cuando abramos ese canal',
+    description: 'Todo Inversor, más comunidad, bienvenida privada y encuentros mensuales',
     priceUsd: 249,
     priceCopCents: 90000000, // 900,000 COP
     wompiSku: 'vip_lifetime',
@@ -88,8 +87,9 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     grantsCommunityMonths: 120, // lifetime community access in this model
     features: [
       'Todo lo del plan Inversor',
-      'Acceso de fundador a la comunidad privada cuando abra (Discord)',
-      'Charlas en vivo y Q&A cuando se activen con la comunidad',
+      'Acceso inmediato de fundador a la comunidad privada',
+      'Sesión privada de bienvenida coordinada después de tu compra',
+      'Encuentros grupales mensuales a medida que crece la comunidad',
       'Prioridad al solicitar mentoría 1 a 1',
     ],
     gradient: true,
@@ -161,10 +161,7 @@ const LEVEL_REQUIREMENTS: Record<string, CourseTier> = {
   advanced: 'inversor',
 };
 
-export function canAccessLevel(
-  user: UserEntitlements,
-  levelId: string,
-): boolean {
+export function canAccessLevel(user: UserEntitlements, levelId: string): boolean {
   const required = LEVEL_REQUIREMENTS[levelId];
   if (required === undefined) return false;
   return COURSE_TIER_RANK[user.courseTier] >= COURSE_TIER_RANK[required];
@@ -184,7 +181,7 @@ export function hasCommunityAccess(user: UserEntitlements): boolean {
 export async function createPaymentWithSignature(
   productType: string,
   customerEmail: string,
-  customerName?: string,
+  customerName?: string
 ): Promise<PaymentData> {
   const {
     data: { session },
@@ -243,9 +240,7 @@ export async function getPaymentByReference(reference: string) {
 //   vip     → 'experto'   (full course + lifetime community)
 // ---------------------------------------------------------------------------
 
-export async function getUserEntitlements(
-  userId: string,
-): Promise<UserEntitlements> {
+export async function getUserEntitlements(userId: string): Promise<UserEntitlements> {
   const { data, error } = await supabase
     .from('user_profiles')
     .select('is_premium, premium_tier, premium_expires_at')
@@ -278,12 +273,10 @@ export async function getUserEntitlements(
   // (get-lesson-content checks is_premium only): any premium user gets at least
   // full course access (inversor); vip adds the experto/community tier. This
   // avoids locking out a premium row whose tier is null/unrecognized.
-  const courseTier: CourseTier =
-    data.premium_tier === 'vip' ? 'experto' : 'inversor';
+  const courseTier: CourseTier = data.premium_tier === 'vip' ? 'experto' : 'inversor';
 
   // Cripto Experto (vip) includes lifetime community access; Inversor doesn't.
-  const communityStatus: CommunityStatus =
-    data.premium_tier === 'vip' ? 'active' : 'none';
+  const communityStatus: CommunityStatus = data.premium_tier === 'vip' ? 'active' : 'none';
 
   return {
     courseTier,

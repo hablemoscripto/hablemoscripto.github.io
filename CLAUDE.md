@@ -12,11 +12,11 @@ This section is mid-launch context. Older sections below describe the steady-sta
 
 Settled May 2026 after auditing a triple price-disagreement (UI vs paymentService vs server catalog) and aligning a frontend that had drifted out of sync. Decision: **two paid lifetime tiers only at launch** plus the free Principiante level; monthly/yearly subscriptions deferred until a Wompi tokenization-based renewal cron is built.
 
-| Tier | USD | COP | USDC | productType SKU | frontend tier | DB `premium_tier` |
-|---|---|---|---|---|---|---|
-| Principiante (free) | — | — | — | — | `free` | — |
-| Inversor | $99 | 350,000 | 99 | `inversor_lifetime` | `inversor` | `premium` |
-| Cripto Experto | $249 | 900,000 | 249 | `vip_lifetime` | `experto` | `vip` |
+| Tier                | USD  | COP     | USDC | productType SKU     | frontend tier | DB `premium_tier` |
+| ------------------- | ---- | ------- | ---- | ------------------- | ------------- | ----------------- |
+| Principiante (free) | —    | —       | —    | —                   | `free`        | —                 |
+| Inversor            | $99  | 350,000 | 99   | `inversor_lifetime` | `inversor`    | `premium`         |
+| Cripto Experto      | $249 | 900,000 | 249  | `vip_lifetime`      | `experto`     | `vip`             |
 
 Framing in UI: **"Precio Fundador"** — no countdown, no fake urgency. The earlier "first 100 buyers = Fundador" limited-tier idea was **dropped** in favor of honest launch pricing: the price rises later with a 30-day-notice email, which is the conversion lever, not a fake scarcity counter or launch deadline.
 
@@ -54,15 +54,16 @@ Every paid signup triggers a personal welcome email from CBas. Wired into both p
 - Helper: `supabase/functions/_shared/welcome-email.ts` (`sendFundadorWelcome`)
 - Called from `wompi-webhook/index.ts` (after `upgrade_user_to_premium` RPC) and `verify-crypto-payment/index.ts` (after profile update)
 - Failure is non-fatal — upgrade has already succeeded by the time the email tries to send
-- **Email body content lives in `BODY_HTML` in the helper** with a marked placeholder. Sebastián owns this — it's deliberately *his voice*, not a generic template
+- **Email body content lives in `BODY_HTML_BY_TIER` in the helper.** Sebastián owns this — keep it personal and consistent with the plan promises
 - From address: `CBas - Hablemos Cripto <cbas@mail.hablemoscripto.io>` (uses the verified `mail.hablemoscripto.io` domain on Resend)
-- Open question (May 2026): replies bounce to a non-existent inbox unless a `reply_to` is added or the inbox is set up. Sebastián to decide.
+- Replies go to `soporte@hablemoscripto.io`; the alias must forward to a monitored inbox before launch.
 
 ### Webhook idempotency — fixed May 2026
 
 `wompi-webhook` previously had a subtle bug: marker row in `processed_webhook_events` was inserted before the upgrade RPC ran. If the RPC failed and Wompi retried, the dedupe row was already there, retry hit "Already processed", and the user paid but never got premium.
 
 Current pattern (still INSERT-then-work, but with cleanup):
+
 1. INSERT marker row keyed on `signature.checksum` (race protection)
 2. Do all the work
 3. **If anything fails after the insert, DELETE the marker row before returning non-2xx** so retries actually retry
@@ -81,12 +82,12 @@ The AI tutor "CBas" persona is now powered by **Grok (xAI)** via the `grok-chat`
 
 Lesson data lives in **four files** now (see Prime directive 1 for the editing rules):
 
-| File | Size | What | Delivery |
-|---|---|---|---|
-| `data/courseData.ts` | ~296 kB | Free-lesson bodies (`LESSONS_DATA`) | Bundled, lazy chunk (not on the landing path) |
-| `data/paidContent.ts` | ~444 kB | Paid-lesson bodies (`PAID_LESSONS`) | **NOT bundled.** Seeded to `protected_lessons`, served by the `get-lesson-content` Edge Function after a premium check |
-| `data/levels.ts` | ~12 kB | Level/module nav metadata (titles, durations, lesson stubs) | Bundled in the landing/dashboard entry chunk |
-| `data/lessonInfographics.ts` | ~152 kB | Infographic specs | Bundled; attached client-side at read time, keyed by **exact section title** |
+| File                         | Size    | What                                                        | Delivery                                                                                                               |
+| ---------------------------- | ------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `data/courseData.ts`         | ~296 kB | Free-lesson bodies (`LESSONS_DATA`)                         | Bundled, lazy chunk (not on the landing path)                                                                          |
+| `data/paidContent.ts`        | ~444 kB | Paid-lesson bodies (`PAID_LESSONS`)                         | **NOT bundled.** Seeded to `protected_lessons`, served by the `get-lesson-content` Edge Function after a premium check |
+| `data/levels.ts`             | ~12 kB  | Level/module nav metadata (titles, durations, lesson stubs) | Bundled in the landing/dashboard entry chunk                                                                           |
+| `data/lessonInfographics.ts` | ~152 kB | Infographic specs                                           | Bundled; attached client-side at read time, keyed by **exact section title**                                           |
 
 Hard paywall is live: `EntitlementsContext` + `canAccessLevel` (paymentService) gate Intermedio/Avanzado in the UI (`UpgradePaywall`), and `get-lesson-content` enforces it server-side.
 
@@ -126,7 +127,7 @@ Two full audits (security, code, content accuracy, UX funnel, performance, brows
 Things that will silently break if ignored:
 
 1. **Lesson content has four source files and two delivery paths.** Free lessons (`data/courseData.ts`) render from the bundle — users see edits on the next frontend deploy, but seed anyway because `lesson_details` feeds the AI tutor's RAG. Paid lessons (`data/paidContent.ts`) are served from the `protected_lessons` table — **edits do not exist for users until `npm run db:seed` runs.** Infographics (`data/lessonInfographics.ts`) replace matching section blocks at render — fact fixes must touch them too, and they match by exact section title (see "The infographic trap" above). Nav metadata is `data/levels.ts`. The seed is **DESTRUCTIVE** (wipe + reinsert): back up first — `supabase db dump --linked --data-only -f backup-data-<date>.sql` — and run it during low traffic; paid lessons 404 for a few seconds mid-run.
-2. **`PRICING_PLANS` (`services/paymentService.ts`) and `PRODUCT_CATALOG` (`supabase/functions/create-payment/index.ts`) are paired sources of truth for prices.** They MUST stay in sync. Add/rename a SKU in one without the other and the payment flow either silently overcharges users or rejects valid plan selections. Server is authoritative for amounts (it ignores client-supplied prices, by design); frontend is authoritative for what's *shown*.
+2. **`PRICING_PLANS` (`services/paymentService.ts`) and `PRODUCT_CATALOG` (`supabase/functions/create-payment/index.ts`) are paired sources of truth for prices.** They MUST stay in sync. Add/rename a SKU in one without the other and the payment flow either silently overcharges users or rejects valid plan selections. Server is authoritative for amounts (it ignores client-supplied prices, by design); frontend is authoritative for what's _shown_.
 3. **Edge Functions deploy separately from the frontend.** `git push` deploys Vercel only. Supabase Edge Functions (`supabase/functions/*`) need `supabase functions deploy <name>` to go live (one name per command; some need `--no-verify-jwt` — see §Commands). After any change to `_shared/welcome-email.ts`, redeploy `wompi-webhook` (and `verify-crypto-payment` only if it's ever revived — it is deliberately NOT deployed, see launch-state section).
 4. **Wompi keys must be `pub_prod_*` in production.** `pub_test_*` silently routes to sandbox — payments look normal, nothing settles. Sandbox keys are set everywhere as of June 2026 (pre-launch).
 5. **Two profile tables exist and they are different.** `profiles` holds admin flags (`is_admin`). `user_profiles` holds premium status (`is_premium`, `premium_tier`, `premium_expires_at`). Do not conflate. Lifetime tiers leave `premium_expires_at` NULL — only enforce expiration when it's set.
@@ -188,20 +189,20 @@ Free lessons never hit the network for content; paid lessons always do (server-s
 
 ## Tech stack
 
-| Layer | Choice |
-|---|---|
-| Frontend | React 19 + TypeScript + Vite 6. **tsconfig is NOT strict** (no `strict` flag) — `tsc --noEmit` is a weaker gate than it looks; enabling `strictNullChecks` is known deferred work |
-| Styling | Tailwind CSS 4 + custom `navy-*` and `brand-*` scales |
-| Routing | react-router-dom 7, lazy-loaded route components via `React.lazy` |
-| State | React Context (Auth, Entitlements, Progress, Gamification) |
-| Animation | framer-motion + framer-motion page transitions |
-| Backend | Supabase (Postgres + Auth + Edge Functions with Deno) |
-| AI | Grok (xAI) via `grok-chat` Edge Function (server-side key) |
-| Payments | Wompi Widget (cards, COP) — card-only at launch; USDC-on-Solana exists in code but is deferred (see launch state) |
-| Email | Resend via `mail.hablemoscripto.io` domain |
-| Hosting | Vercel (push to `main` auto-deploys; `vercel.json` does SPA rewrites + security headers) |
-| SEO | react-helmet-async for per-route `<title>`, `canonical`, `og:*`, `twitter:*` |
-| PWA | vite-plugin-pwa; workbox precaches the app shell, lesson images are runtime-cached on demand (deliberate — LATAM mobile data) |
+| Layer     | Choice                                                                                                                                                                            |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend  | React 19 + TypeScript + Vite 6. **tsconfig is NOT strict** (no `strict` flag) — `tsc --noEmit` is a weaker gate than it looks; enabling `strictNullChecks` is known deferred work |
+| Styling   | Tailwind CSS 4 + custom `navy-*` and `brand-*` scales                                                                                                                             |
+| Routing   | react-router-dom 7, lazy-loaded route components via `React.lazy`                                                                                                                 |
+| State     | React Context (Auth, Entitlements, Progress, Gamification)                                                                                                                        |
+| Animation | framer-motion + framer-motion page transitions                                                                                                                                    |
+| Backend   | Supabase (Postgres + Auth + Edge Functions with Deno)                                                                                                                             |
+| AI        | Grok (xAI) via `grok-chat` Edge Function (server-side key)                                                                                                                        |
+| Payments  | Wompi Widget (cards, COP) — card-only at launch; USDC-on-Solana exists in code but is deferred (see launch state)                                                                 |
+| Email     | Resend via `mail.hablemoscripto.io` domain                                                                                                                                        |
+| Hosting   | Vercel (push to `main` auto-deploys; `vercel.json` does SPA rewrites + security headers)                                                                                          |
+| SEO       | react-helmet-async for per-route `<title>`, `canonical`, `og:*`, `twitter:*`                                                                                                      |
+| PWA       | vite-plugin-pwa; workbox precaches the app shell, lesson images are runtime-cached on demand (deliberate — LATAM mobile data)                                                     |
 
 Root-level entry points (`App.tsx`, `index.tsx`, `index.css`). **No `src/` folder.** Path alias `@/` maps to project root.
 
@@ -209,50 +210,50 @@ Root-level entry points (`App.tsx`, `index.tsx`, `index.css`). **No `src/` folde
 
 ## Directory map (pointers — read the code for the details)
 
-| Path | What lives there |
-|---|---|
-| `App.tsx` | Route tree, context providers, error boundary, lazy auth-gated chat widget mount |
-| `data/courseData.ts` | Free-lesson bodies (`LESSONS_DATA`), ~296 kB. Bundled as a lazy chunk. |
-| `data/paidContent.ts` | Paid-lesson bodies (`PAID_LESSONS`), ~444 kB. NOT bundled — DB-served via `get-lesson-content`. |
-| `data/levels.ts` | Level/module nav metadata (lesson stubs only — no bodies, no referrals). What landing/dashboard import. |
-| `data/lessonInfographics.ts` | Infographic specs keyed by lesson id + exact section title. Replaces matching section blocks at render. |
-| `components/` | Top-level components + `lesson/`, `education/`, `ui/` subfolders |
-| `contexts/` | `AuthContext`, `EntitlementsContext`, `ProgressContext`, `GamificationContext` — see §State below |
-| `hooks/` | `useDailyReview`, `useLessonNavigation`, `useScrollProgress` |
-| `services/` | `lessonService` (lesson read, quiz shuffle, infographic attach), `dailyReviewService` (SR picker), `aiService` (Grok AI client), `paymentService` (Wompi client, `PRICING_PLANS`, `canAccessLevel`) |
-| `lib/supabase.ts` | Supabase client (browser-side, anon key) |
-| `utils/` | `analytics.ts` (GA4 wrapper; gtag stub at module load), `errorReporting.ts`, `courseUtils.ts` (lesson ordering / prev-next), `quizShuffle.ts` (deterministic option shuffle — defeats the answer-position bias in source data) |
-| `scripts/seed.ts` | Seeds all four data files → Supabase. DESTRUCTIVE, fails loudly (non-zero exit). Holds the allowed icon list. |
-| `scripts/optimize-images.mjs` | Generates PWA icons + responsive WebP variants from `assets/source/og-cover.png` (source kept outside `public/` so the unoptimized 6.7 MB original doesn't ship to the deployed site) |
-| `scripts/verify-migration.ts` | Ad-hoc migration verifier (diagnostic) |
-| `scripts/check-dns.sh` | DNS sanity check for `hablemoscripto.io` |
-| `supabase/functions/*` | Edge Functions — see §Edge Functions |
-| `supabase/functions/_shared/welcome-email.ts` | Fundador welcome email helper. Imported by `wompi-webhook` and `verify-crypto-payment`. **`BODY_HTML` is the email content** — Sebastián owns it; placeholder is clearly marked. |
-| `supabase/migrations/*.sql` | Run manually in the Supabase SQL editor, in the order listed in `PRODUCTION-CHECKLIST.md` |
-| `supabase/payments-schema.sql` | One-shot schema bootstrap for `user_profiles` + `payments` |
-| `supabase/admin-setup.sql` | One-shot schema bootstrap for `profiles` (admin role) |
-| `public/` | Static assets (sitemap, robots, images, icons, manifest) |
-| `PRODUCTION-CHECKLIST.md` | Ordered pre-launch steps. Read before deploying. |
-| `marketing/` (gitignored) | Go-to-market playbook — strategy, creator outreach templates, messaging, KPIs |
+| Path                                          | What lives there                                                                                                                                                                                                               |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `App.tsx`                                     | Route tree, context providers, error boundary, lazy auth-gated chat widget mount                                                                                                                                               |
+| `data/courseData.ts`                          | Free-lesson bodies (`LESSONS_DATA`), ~296 kB. Bundled as a lazy chunk.                                                                                                                                                         |
+| `data/paidContent.ts`                         | Paid-lesson bodies (`PAID_LESSONS`), ~444 kB. NOT bundled — DB-served via `get-lesson-content`.                                                                                                                                |
+| `data/levels.ts`                              | Level/module nav metadata (lesson stubs only — no bodies, no referrals). What landing/dashboard import.                                                                                                                        |
+| `data/lessonInfographics.ts`                  | Infographic specs keyed by lesson id + exact section title. Replaces matching section blocks at render.                                                                                                                        |
+| `components/`                                 | Top-level components + `lesson/`, `education/`, `ui/` subfolders                                                                                                                                                               |
+| `contexts/`                                   | `AuthContext`, `EntitlementsContext`, `ProgressContext`, `GamificationContext` — see §State below                                                                                                                              |
+| `hooks/`                                      | `useDailyReview`, `useLessonNavigation`, `useScrollProgress`                                                                                                                                                                   |
+| `services/`                                   | `lessonService` (lesson read, quiz shuffle, infographic attach), `dailyReviewService` (SR picker), `aiService` (Grok AI client), `paymentService` (Wompi client, `PRICING_PLANS`, `canAccessLevel`)                            |
+| `lib/supabase.ts`                             | Supabase client (browser-side, anon key)                                                                                                                                                                                       |
+| `utils/`                                      | `analytics.ts` (GA4 wrapper; gtag stub at module load), `errorReporting.ts`, `courseUtils.ts` (lesson ordering / prev-next), `quizShuffle.ts` (deterministic option shuffle — defeats the answer-position bias in source data) |
+| `scripts/seed.ts`                             | Seeds all four data files → Supabase. DESTRUCTIVE, fails loudly (non-zero exit). Holds the allowed icon list.                                                                                                                  |
+| `scripts/optimize-images.mjs`                 | Generates PWA icons + responsive WebP variants from `assets/source/og-cover.png` (source kept outside `public/` so the unoptimized 6.7 MB original doesn't ship to the deployed site)                                          |
+| `scripts/verify-migration.ts`                 | Ad-hoc migration verifier (diagnostic)                                                                                                                                                                                         |
+| `scripts/check-dns.sh`                        | DNS sanity check for `hablemoscripto.io`                                                                                                                                                                                       |
+| `supabase/functions/*`                        | Edge Functions — see §Edge Functions                                                                                                                                                                                           |
+| `supabase/functions/_shared/welcome-email.ts` | Fundador welcome email helper. Imported by `wompi-webhook` and `verify-crypto-payment`. **`BODY_HTML` is the email content** — Sebastián owns it; placeholder is clearly marked.                                               |
+| `supabase/migrations/*.sql`                   | Run manually in the Supabase SQL editor, in the order listed in `PRODUCTION-CHECKLIST.md`                                                                                                                                      |
+| `supabase/payments-schema.sql`                | One-shot schema bootstrap for `user_profiles` + `payments`                                                                                                                                                                     |
+| `supabase/admin-setup.sql`                    | One-shot schema bootstrap for `profiles` (admin role)                                                                                                                                                                          |
+| `public/`                                     | Static assets (sitemap, robots, images, icons, manifest)                                                                                                                                                                       |
+| `PRODUCTION-CHECKLIST.md`                     | Ordered pre-launch steps. Read before deploying.                                                                                                                                                                               |
+| `marketing/` (gitignored)                     | Go-to-market playbook — strategy, creator outreach templates, messaging, KPIs                                                                                                                                                  |
 
 ---
 
 ## Routes
 
-| Path | Component | Auth |
-|---|---|---|
-| `/` | LandingPage | No |
-| `/education` | EducationPage (dashboard) | Yes |
-| `/education/beginner` | LevelDetail (BEGINNER_LEVEL) | Yes |
-| `/education/intermediate` | LevelDetail (INTERMEDIATE_LEVEL) | Yes |
-| `/education/advanced` | LevelDetail (ADVANCED_LEVEL) | Yes |
-| `/education/lesson/:lessonId` | LessonView | Yes |
-| `/admin/newsletter` | NewsletterAdmin | Yes + `profiles.is_admin = true` |
-| `/privacidad` | LegalPage (privacy) | No |
-| `/terminos` | LegalPage (terms) | No |
-| `/unsubscribe` | UnsubscribePage | No (public, token-signed) |
-| `/pago-completado` | PaymentSuccess | No |
-| `*` | NotFoundPage | No |
+| Path                          | Component                        | Auth                             |
+| ----------------------------- | -------------------------------- | -------------------------------- |
+| `/`                           | LandingPage                      | No                               |
+| `/education`                  | EducationPage (dashboard)        | Yes                              |
+| `/education/beginner`         | LevelDetail (BEGINNER_LEVEL)     | Yes                              |
+| `/education/intermediate`     | LevelDetail (INTERMEDIATE_LEVEL) | Yes                              |
+| `/education/advanced`         | LevelDetail (ADVANCED_LEVEL)     | Yes                              |
+| `/education/lesson/:lessonId` | LessonView                       | Yes                              |
+| `/admin/newsletter`           | NewsletterAdmin                  | Yes + `profiles.is_admin = true` |
+| `/privacidad`                 | LegalPage (privacy)              | No                               |
+| `/terminos`                   | LegalPage (terms)                | No                               |
+| `/unsubscribe`                | UnsubscribePage                  | No (public, token-signed)        |
+| `/pago-completado`            | PaymentSuccess                   | No                               |
+| `*`                           | NotFoundPage                     | No                               |
 
 All non-public routes are gated by `ProtectedRoute`. All Helmet-driven routes set `<title>`, `<canonical>`, `og:*`, and `twitter:*` per-route. Index-level defaults live in `index.html` for `og:image`, `og:type`, `og:locale`, `og:site_name`, `twitter:card`.
 
@@ -260,16 +261,16 @@ All non-public routes are gated by `ProtectedRoute`. All Helmet-driven routes se
 
 ## Edge Functions (Supabase, Deno)
 
-| Function | Purpose | Auth | Notes |
-|---|---|---|---|
-| `grok-chat` | Proxies to Grok (xAI) with SSE streaming; keyword + Grok reranker RAG over lesson content | JWT | Rate limited 20/min in-memory. Client is `services/aiService.ts`. |
-| `create-payment` | Creates Wompi payment row + integrity signature | JWT | Rate limited 5/min |
-| `wompi-webhook` | Receives `transaction.updated`, verifies signature, upgrades user to premium, sends Fundador welcome email | Webhook (no JWT) | **Idempotency via `processed_webhook_events` table keyed on `signature.checksum`.** Insert-then-work pattern with cleanup-on-failure (May 2026 fix) — if the upgrade RPC or any later step fails, `cleanupDedupeRow()` deletes the marker row before returning non-2xx so retries actually retry. |
-| `get-lesson-content` | Serves paid lesson bodies from `protected_lessons` after a premium check (`user_profiles.is_premium`) | JWT | Paid lessons are dead without it — it's in the deploy list |
-| `mentoria-request` | Receives mentoría inquiries from `MentoriaModal`, emails via Resend | No JWT | Deploy with `--no-verify-jwt` |
-| `send-newsletter` | Sends via Resend; sanitizes HTML; per-recipient HMAC unsubscribe token | Admin JWT | Checks `profiles.is_admin` server-side |
-| `unsubscribe` | Public endpoint to set `newsletter_subscribers.is_active = false` | No (HMAC token) | Deploy with `--no-verify-jwt` |
-| `verify-crypto-payment` | Confirms a Solana USDC transfer, upgrades user, sends Fundador welcome email | JWT | **NOT DEPLOYED — do not deploy.** Never binds the on-chain payer to the user (anyone can claim someone else's transfer). Crypto launch deferred; fix payer binding first. |
+| Function                | Purpose                                                                                                    | Auth             | Notes                                                                                                                                                                                                                                                                                             |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `grok-chat`             | Proxies to Grok (xAI) with SSE streaming; keyword + Grok reranker RAG over lesson content                  | JWT              | Rate limited 20/min in-memory. Client is `services/aiService.ts`.                                                                                                                                                                                                                                 |
+| `create-payment`        | Creates Wompi payment row + integrity signature                                                            | JWT              | Rate limited 5/min                                                                                                                                                                                                                                                                                |
+| `wompi-webhook`         | Receives `transaction.updated`, verifies signature, upgrades user to premium, sends Fundador welcome email | Webhook (no JWT) | **Idempotency via `processed_webhook_events` table keyed on `signature.checksum`.** Insert-then-work pattern with cleanup-on-failure (May 2026 fix) — if the upgrade RPC or any later step fails, `cleanupDedupeRow()` deletes the marker row before returning non-2xx so retries actually retry. |
+| `get-lesson-content`    | Serves paid lesson bodies from `protected_lessons` after a premium check (`user_profiles.is_premium`)      | JWT              | Paid lessons are dead without it — it's in the deploy list                                                                                                                                                                                                                                        |
+| `mentoria-request`      | Receives mentoría inquiries from `MentoriaModal`, emails via Resend                                        | No JWT           | Deploy with `--no-verify-jwt`                                                                                                                                                                                                                                                                     |
+| `send-newsletter`       | Sends via Resend; sanitizes HTML; per-recipient HMAC unsubscribe token                                     | Admin JWT        | Checks `profiles.is_admin` server-side                                                                                                                                                                                                                                                            |
+| `unsubscribe`           | Public endpoint to set `newsletter_subscribers.is_active = false`                                          | No (HMAC token)  | Deploy with `--no-verify-jwt`                                                                                                                                                                                                                                                                     |
+| `verify-crypto-payment` | Confirms a Solana USDC transfer, upgrades user, sends Fundador welcome email                               | JWT              | **NOT DEPLOYED — do not deploy.** Never binds the on-chain payer to the user (anyone can claim someone else's transfer). Crypto launch deferred; fix payer binding first.                                                                                                                         |
 
 Secrets are Supabase dashboard → Project Settings → Edge Functions → Secrets. `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` are auto-injected — do not set them manually.
 
@@ -313,12 +314,12 @@ Each lesson in `LESSONS_DATA` (`data/courseData.ts`, free) or `PAID_LESSONS` (`d
 
 ### Section types
 
-| type | Renders |
-|---|---|
-| `intro` | Title + content + optional image + optional highlight box |
-| `main` | Standard content block with markdown + optional features (icon grid) + optional image |
-| `comparison` | Two-column left-vs-right comparison (`leftSide` / `rightSide`) |
-| `takeaways` | Bulleted "lo esencial" recap |
+| type         | Renders                                                                               |
+| ------------ | ------------------------------------------------------------------------------------- |
+| `intro`      | Title + content + optional image + optional highlight box                             |
+| `main`       | Standard content block with markdown + optional features (icon grid) + optional image |
+| `comparison` | Two-column left-vs-right comparison (`leftSide` / `rightSide`)                        |
+| `takeaways`  | Bulleted "lo esencial" recap                                                          |
 
 Optional on any section: `highlight` (callout box), `image` + `imageAlt` + `imageCaption` + `imageSummary` (the "Lo Esencial" box under the image), `terms` (inline glossary).
 
@@ -336,19 +337,19 @@ Optional on any section: `highlight` (callout box), `image` + `imageAlt` + `imag
 
 Full schema is in `supabase/payments-schema.sql`, `supabase/admin-setup.sql`, and `supabase/migrations/*.sql`. Quick map:
 
-| Table | Defined in | Purpose |
-|---|---|---|
-| `user_profiles` | `payments-schema.sql` | Premium status per user (`is_premium`, `premium_since`, `premium_expires_at`, `premium_tier`) |
-| `payments` | `payments-schema.sql` | Wompi transaction ledger, keyed by `wompi_reference` |
-| `profiles` | `admin-setup.sql` | Admin role flag (`is_admin`), auto-created on signup via trigger |
-| `user_progress` | (external / earlier migration) | Lesson completion + quiz scores per user |
-| `user_achievements` | `migrations/create_user_achievements.sql` | Unlocked achievement IDs with timestamp |
-| `newsletter_subscribers` | (external / earlier migration) | Email list with `is_active` flag |
-| `processed_webhook_events` | `migrations/add_processed_webhook_events.sql` | **Idempotency key store** for Wompi webhook retries |
-| `crypto_payments` | `migrations/add_subscription_tiers.sql` | Solana USDC transaction ledger (dormant — crypto deferred) |
-| `levels` / `modules` / `lessons` / `quizzes` / `quiz_questions` / `lesson_details` | course schema SQL | Content catalog + RAG corpus. Wiped and rebuilt by every seed run. |
-| `protected_lessons` | `migrations/2026-05-30_content_protection.sql` | Paid lesson bodies (JSON blob), served by `get-lesson-content`. Deny-all RLS. Wiped and rebuilt by every seed run. |
-| `referrals` | course schema SQL | **Unused** — app reads referrals from the lesson body. Kept empty by the seed; drop via migration when convenient. |
+| Table                                                                              | Defined in                                     | Purpose                                                                                                            |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `user_profiles`                                                                    | `payments-schema.sql`                          | Premium status per user (`is_premium`, `premium_since`, `premium_expires_at`, `premium_tier`)                      |
+| `payments`                                                                         | `payments-schema.sql`                          | Wompi transaction ledger, keyed by `wompi_reference`                                                               |
+| `profiles`                                                                         | `admin-setup.sql`                              | Admin role flag (`is_admin`), auto-created on signup via trigger                                                   |
+| `user_progress`                                                                    | (external / earlier migration)                 | Lesson completion + quiz scores per user                                                                           |
+| `user_achievements`                                                                | `migrations/create_user_achievements.sql`      | Unlocked achievement IDs with timestamp                                                                            |
+| `newsletter_subscribers`                                                           | (external / earlier migration)                 | Email list with `is_active` flag                                                                                   |
+| `processed_webhook_events`                                                         | `migrations/add_processed_webhook_events.sql`  | **Idempotency key store** for Wompi webhook retries                                                                |
+| `crypto_payments`                                                                  | `migrations/add_subscription_tiers.sql`        | Solana USDC transaction ledger (dormant — crypto deferred)                                                         |
+| `levels` / `modules` / `lessons` / `quizzes` / `quiz_questions` / `lesson_details` | course schema SQL                              | Content catalog + RAG corpus. Wiped and rebuilt by every seed run.                                                 |
+| `protected_lessons`                                                                | `migrations/2026-05-30_content_protection.sql` | Paid lesson bodies (JSON blob), served by `get-lesson-content`. Deny-all RLS. Wiped and rebuilt by every seed run. |
+| `referrals`                                                                        | course schema SQL                              | **Unused** — app reads referrals from the lesson body. Kept empty by the seed; drop via migration when convenient. |
 
 RLS is enabled on all of them. Service-role full-access policies for server writes; per-user read policies for client reads. `user_progress.user_id` cascades from `auth.users` (correct); there is **no** `lesson_id` FK on `user_progress`, so a reseed does NOT wipe user progress (verified June 10).
 
@@ -399,7 +400,7 @@ Quick reference:
 - **The repo is PUBLIC.** `audit/`, `REVIEW-*.md`, `INFOGRAPHIC-BRIEF.md`, `marketing/`, and DB dumps are gitignored on purpose — they contain security findings, strategy, or PII. Never commit internal review material here.
 - **The seed is destructive.** It wipes and reinserts all content tables; `protected_lessons` is empty for a few seconds mid-run (paid lessons 404). It exits non-zero on failure — treat any non-zero exit as "DB is half-seeded, re-run after fixing". Backup first, always.
 - **Landing first-load is ~207 kB gz JS** (post June 10 particles split; budget says 200). The free-lesson data chunk (~95 kB gz) is lazy and not on the landing path; `paidContent.ts` never ships to the client at all.
-- **Vercel's `npm run build` does *not* run lint.** Lint drift will not block a deploy. Run `npm run lint` locally or wire a CI step before relying on it. Edge Functions have no static gate either — run `deno check supabase/functions/*/index.ts` before deploying them.
+- **Vercel's `npm run build` does _not_ run lint.** Lint drift will not block a deploy. Run `npm run lint` locally or wire a CI step before relying on it. Edge Functions have no static gate either — run `deno check supabase/functions/*/index.ts` before deploying them.
 - **Edge Functions error opaquely on missing tables.** If `processed_webhook_events` isn't migrated, the webhook returns 500 on every event, Wompi retries indefinitely, and premium upgrades silently queue. Always apply migrations before deploying Edge Functions that reference new tables.
 - **Rate limiting is in-memory.** A cold start resets the counter. Acceptable early; plan to move to Supabase KV / Redis before marketing push.
 - **CSP still allows `unsafe-inline` and `unsafe-eval`.** Tech debt. Required by the Wompi widget + Vite inline styles; tighten incrementally.
@@ -415,11 +416,10 @@ Ordered by priority. None blocks launch. The conversion-focused punch list lives
 1. **Persistent rate limiting** for `grok-chat` and `create-payment`. Supabase KV or Redis. Do this before the marketing push.
 2. **Quiz a11y semantics** (radiogroup/radio/aria-checked in Quiz, CheckpointQuiz, DailyReviewCard) + skip link + `<main>` landmarks.
 3. **`tailwindcss-animate` classes are dead** — the plugin was never installed, so `animate-in`/`fade-in`/etc. in ~9 components do nothing. Install the plugin (Tailwind 4 uses `@plugin` in CSS) or strip the classes.
-4. **Certificate flow.** `components/ui/Certificate.tsx` is built but unrouted. Users completing Nivel Principiante expect a downloadable PDF or shareable image.
-5. **Enable `strictNullChecks`** in tsconfig and fix the fallout (CLAUDE.md used to claim strict mode; it was never on).
-6. **Tighten CSP** — drop `unsafe-eval` (needs Wompi widget cooperation) and move inline styles to CSS files or nonces.
-7. **Community / forum** — currently single-player except for the AI chat. The Cripto Experto tier sells Discord access — make sure that loop is real before scaling Experto sales.
-8. **Drop the unused `referrals` table** via migration.
+4. **Enable `strictNullChecks`** in tsconfig and fix the fallout (CLAUDE.md used to claim strict mode; it was never on).
+5. **Tighten CSP** — drop `unsafe-eval` (needs Wompi widget cooperation) and move inline styles to CSS files or nonces.
+6. **Community / forum** — currently single-player except for the AI chat. The Cripto Experto tier sells Discord access — make sure that loop is real before scaling Experto sales.
+7. **Drop the unused `referrals` table** via migration.
 
 See `marketing/strategy.md` for the growth angle these would enable.
 
@@ -429,7 +429,7 @@ See `marketing/strategy.md` for the growth angle these would enable.
 
 - **No emojis in source** unless the user explicitly asks for them in user-facing copy.
 - **No em-dashes or en-dashes in user-facing copy Sebastián owns** (landing, emails, payment UI, lesson voice). Use a comma, colon, or period instead. Plain hyphens in number ranges ("5-6%") are fine. Commit messages and code comments are exempt.
-- **Comments:** default to none. Add one only when the *why* isn't obvious (hidden constraint, subtle invariant, workaround for a specific bug). Don't narrate the *what*; names do that.
+- **Comments:** default to none. Add one only when the _why_ isn't obvious (hidden constraint, subtle invariant, workaround for a specific bug). Don't narrate the _what_; names do that.
 - **Commits:** lowercase-prefix style matching the existing log (`fix(scope): short detail`, `content(lessons): ...`, `chore: ...`). Include the current model's trailer, e.g. `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>`, when Claude drafted the commit.
 - **No backwards-compat shims** for unused code paths. Delete cleanly.
 - **Do not commit without explicit ask** from the user. Never force-push or reset without approval.

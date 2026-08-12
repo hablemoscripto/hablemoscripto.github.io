@@ -30,7 +30,9 @@ const Navbar: React.FC = () => {
     } else {
       document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isMobileMenuOpen]);
 
   // Close mobile menu on route change — idiomatic React pattern for resetting
@@ -46,7 +48,28 @@ const Navbar: React.FC = () => {
     if (!isMobileMenuOpen) return;
     const toggle = mobileToggleRef.current;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsMobileMenuOpen(false);
+      if (e.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab' || !mobileMenuRef.current) return;
+
+      const focusable = Array.from(
+        mobileMenuRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     requestAnimationFrame(() => mobileMenuRef.current?.focus());
@@ -56,27 +79,39 @@ const Navbar: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
-  const handleScrollToSection = useCallback((sectionId: string) => {
-    setIsMobileMenuOpen(false);
-    if (location.pathname !== '/') {
-      navigate('/');
-      // Use requestAnimationFrame to wait for DOM update after navigation
-      const waitForElement = (attempts = 0) => {
-        requestAnimationFrame(() => {
-          const element = document.getElementById(sectionId);
-          if (element) {
-            element.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-          } else if (attempts < 10) {
-            waitForElement(attempts + 1);
-          }
-        });
-      };
-      waitForElement();
-    } else {
-      const element = document.getElementById(sectionId);
-      if (element) element.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    }
-  }, [location.pathname, navigate]);
+  const handleScrollToSection = useCallback(
+    (sectionId: string) => {
+      setIsMobileMenuOpen(false);
+      if (location.pathname !== '/') {
+        navigate('/');
+        // Use requestAnimationFrame to wait for DOM update after navigation
+        const waitForElement = (attempts = 0) => {
+          requestAnimationFrame(() => {
+            const element = document.getElementById(sectionId);
+            if (element) {
+              element.scrollIntoView({
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                  ? 'auto'
+                  : 'smooth',
+              });
+            } else if (attempts < 10) {
+              waitForElement(attempts + 1);
+            }
+          });
+        };
+        waitForElement();
+      } else {
+        const element = document.getElementById(sectionId);
+        if (element)
+          element.scrollIntoView({
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+              ? 'auto'
+              : 'smooth',
+          });
+      }
+    },
+    [location.pathname, navigate]
+  );
 
   // Give OAuth a return target before opening the modal: signInWithGoogle does a
   // full-page redirect, so onLoginSuccess never fires on the way back — the
@@ -90,34 +125,35 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navLinks: { name: string; action: () => void }[] = [
-    { name: 'Inicio', action: () => handleScrollToSection('home') },
-    { name: 'Por Qué HC', action: () => handleScrollToSection('about') },
-    { name: 'Cursos', action: () => handleScrollToSection('courses') },
+    { name: 'La plataforma', action: () => handleScrollToSection('plataforma') },
+    { name: 'Plan de estudio', action: () => handleScrollToSection('courses') },
+    { name: 'Sobre CBas', action: () => handleScrollToSection('about') },
     { name: 'Precios', action: () => handleScrollToSection('pricing') },
-    { name: 'Recursos', action: () => handleScrollToSection('resources') },
+    { name: 'Análisis semanal', action: () => handleScrollToSection('resources') },
   ];
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled || isMobileMenuOpen
-          ? 'bg-navy-950/90 backdrop-blur-xl border-b border-white/5 shadow-glass py-3'
-          : 'bg-transparent py-6'
-          }`}
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+          isScrolled || isMobileMenuOpen
+            ? 'bg-navy-950/90 backdrop-blur-xl border-b border-white/5 shadow-glass py-3'
+            : 'bg-transparent py-6'
+        }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
           <Logo size="md" className="z-50" />
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-10">
-            <ul className="flex gap-8 xl:gap-10">
+          <div className="hidden xl:flex items-center gap-8">
+            <ul className="flex gap-7">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <button
                     type="button"
                     onClick={link.action}
-                    className="text-[13px] font-bold uppercase tracking-widest text-navy-300 hover:text-white transition-colors relative group"
+                    className="relative text-sm font-semibold text-navy-300 transition-colors hover:text-white group"
                   >
                     {link.name}
                     <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-1 bg-brand-500 transition-all group-hover:w-full opacity-0 group-hover:opacity-100 rounded-full" />
@@ -131,18 +167,20 @@ const Navbar: React.FC = () => {
             {/* Auth Button */}
             {user ? (
               <div className="flex items-center gap-4">
-                <div className="hidden lg:flex flex-col items-end leading-none">
-                   <span className="text-[10px] uppercase tracking-tighter text-navy-400 font-bold">Estudiante</span>
-                   <span className="text-sm text-navy-100 font-medium">
+                <div className="hidden xl:flex flex-col items-end leading-none">
+                  <span className="text-[10px] uppercase tracking-tighter text-navy-400 font-bold">
+                    Estudiante
+                  </span>
+                  <span className="text-sm text-navy-100 font-medium">
                     {user.email?.split('@')[0]}
                   </span>
                 </div>
                 <button
                   onClick={() => signOut()}
                   className="p-2.5 bg-navy-800 hover:bg-navy-700 text-white rounded-xl transition-all border border-white/5 hover:border-white/10"
-                  title="Cerrar Sesión"
+                  title="Cerrar sesión"
                 >
-                  <LogOut size={18} />
+                  <LogOut size={18} aria-hidden="true" />
                 </button>
               </div>
             ) : (
@@ -152,7 +190,7 @@ const Navbar: React.FC = () => {
               >
                 <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 <span className="relative z-10 flex items-center gap-2 transition-colors">
-                  <User size={16} />
+                  <User size={16} aria-hidden="true" />
                   Ingresar
                 </span>
               </button>
@@ -163,12 +201,16 @@ const Navbar: React.FC = () => {
           <button
             ref={mobileToggleRef}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-navy-300 hover:text-white z-50"
+            className="xl:hidden p-2 text-navy-300 hover:text-white z-50"
             aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? (
+              <X size={28} aria-hidden="true" />
+            ) : (
+              <Menu size={28} aria-hidden="true" />
+            )}
           </button>
         </div>
       </nav>
@@ -178,7 +220,7 @@ const Navbar: React.FC = () => {
         <>
           {/* Dark overlay background */}
           <div
-            className="fixed inset-0 bg-black z-[60] lg:hidden"
+            className="fixed inset-0 bg-black z-[60] xl:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
@@ -190,7 +232,7 @@ const Navbar: React.FC = () => {
             aria-modal="true"
             aria-label="Menú de navegación"
             tabIndex={-1}
-            className="fixed inset-0 z-[61] bg-navy-950 lg:hidden overflow-y-auto outline-none"
+            className="fixed inset-0 z-[61] bg-navy-950 xl:hidden overflow-y-auto outline-none"
           >
             {/* Header with logo and close */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-white/5">
@@ -198,8 +240,9 @@ const Navbar: React.FC = () => {
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-2.5 bg-navy-900 text-navy-400 hover:text-white rounded-xl border border-white/5"
+                aria-label="Cerrar menú"
               >
-                <X size={20} />
+                <X size={20} aria-hidden="true" />
               </button>
             </div>
 
@@ -211,7 +254,7 @@ const Navbar: React.FC = () => {
                     <button
                       type="button"
                       onClick={link.action}
-                      className="block w-full text-left py-4 px-6 text-sm font-bold uppercase tracking-[0.2em] text-navy-300 hover:text-white hover:bg-navy-900 rounded-2xl border border-transparent hover:border-white/5 transition-all"
+                      className="block w-full text-left py-4 px-6 text-base font-semibold text-navy-300 hover:text-white hover:bg-navy-900 rounded-2xl border border-transparent hover:border-white/5 transition-colors"
                     >
                       {link.name}
                     </button>
@@ -229,8 +272,8 @@ const Navbar: React.FC = () => {
                     }}
                     className="flex items-center justify-center gap-3 w-full bg-navy-900 hover:bg-red-500/10 text-white hover:text-red-500 font-bold py-4 px-6 rounded-2xl border border-white/5 transition-all"
                   >
-                    <LogOut size={18} />
-                    Cerrar Sesión ({user.email?.split('@')[0]})
+                    <LogOut size={18} aria-hidden="true" />
+                    Cerrar sesión ({user.email?.split('@')[0]})
                   </button>
                 ) : (
                   <button
@@ -240,7 +283,7 @@ const Navbar: React.FC = () => {
                     }}
                     className="flex items-center justify-center gap-3 w-full bg-brand-500 hover:bg-brand-400 text-navy-950 font-bold py-4 px-6 rounded-2xl transition-all shadow-glow-brand"
                   >
-                    <User size={18} />
+                    <User size={18} aria-hidden="true" />
                     Ingresar
                   </button>
                 )}

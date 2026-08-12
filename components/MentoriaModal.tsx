@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Modal } from './ui/Modal';
 
@@ -30,11 +31,24 @@ async function extractFunctionError(error: unknown): Promise<string> {
 }
 
 export default function MentoriaModal({ isOpen, onClose }: MentoriaModalProps) {
+  const { user } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    if (!isOpen || !user) return;
+
+    const frame = requestAnimationFrame(() => {
+      const profileName = user.user_metadata?.full_name || user.user_metadata?.name || '';
+      setName((current) => current || profileName);
+      setEmail((current) => current || user.email || '');
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [isOpen, user]);
 
   const resetAndClose = () => {
     setName('');
@@ -99,27 +113,38 @@ export default function MentoriaModal({ isOpen, onClose }: MentoriaModalProps) {
   const isSubmitting = status === 'submitting';
 
   return (
-    <Modal isOpen={isOpen} onClose={resetAndClose} ariaLabel="Mentoría Personalizada" maxWidth="max-w-xl">
+    <Modal
+      isOpen={isOpen}
+      onClose={resetAndClose}
+      ariaLabel="Mentoría personalizada"
+      maxWidth="max-w-xl"
+    >
       {status !== 'success' ? (
         <>
           <div className="mb-6 pr-8">
             <h2 className="text-3xl font-heading font-black text-white tracking-tight">
-              Mentoría Personalizada
+              Mentoría personalizada
             </h2>
             <p className="text-navy-300 mt-2">
-              Sesiones individuales limitadas. Completa el formulario para que pueda preparar la mejor conversación posible para ti.
+              Sesiones individuales limitadas. Completa el formulario para que pueda preparar la
+              mejor conversación posible para ti.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5" noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="mentoria-name" className="sr-only">Nombre completo</label>
+                <label
+                  htmlFor="mentoria-name"
+                  className="mb-2 block text-sm font-medium text-navy-300"
+                >
+                  Nombre completo
+                </label>
                 <input
                   id="mentoria-name"
                   name="name"
                   type="text"
-                  placeholder="Nombre completo"
+                  placeholder="Tu nombre"
                   autoComplete="name"
                   required
                   value={name}
@@ -129,12 +154,17 @@ export default function MentoriaModal({ isOpen, onClose }: MentoriaModalProps) {
                 />
               </div>
               <div>
-                <label htmlFor="mentoria-email" className="sr-only">Correo electrónico</label>
+                <label
+                  htmlFor="mentoria-email"
+                  className="mb-2 block text-sm font-medium text-navy-300"
+                >
+                  Correo electrónico
+                </label>
                 <input
                   id="mentoria-email"
                   name="email"
                   type="email"
-                  placeholder="Correo electrónico"
+                  placeholder="tu@email.com"
                   autoComplete="email"
                   required
                   value={email}
@@ -146,11 +176,16 @@ export default function MentoriaModal({ isOpen, onClose }: MentoriaModalProps) {
             </div>
 
             <div>
-              <label htmlFor="mentoria-message" className="sr-only">¿Cuál es tu mayor desafío o pregunta actual?</label>
+              <label
+                htmlFor="mentoria-message"
+                className="mb-2 block text-sm font-medium text-navy-300"
+              >
+                ¿Cuál es tu mayor desafío o pregunta actual?
+              </label>
               <textarea
                 id="mentoria-message"
                 name="message"
-                placeholder="¿Cuál es tu mayor desafío o pregunta actual?"
+                placeholder="Cuéntame qué quieres resolver o aprender"
                 required
                 rows={4}
                 value={message}
@@ -163,7 +198,10 @@ export default function MentoriaModal({ isOpen, onClose }: MentoriaModalProps) {
             </div>
 
             {status === 'error' && (
-              <div role="alert" className="bg-red-500/10 border border-red-500/40 rounded-xl px-4 py-3 text-sm text-red-300">
+              <div
+                role="alert"
+                className="bg-red-500/10 border border-red-500/40 rounded-xl px-4 py-3 text-sm text-red-300"
+              >
                 {errorMessage}
               </div>
             )}
@@ -195,7 +233,8 @@ export default function MentoriaModal({ isOpen, onClose }: MentoriaModalProps) {
         <div className="py-10 text-center" role="status" aria-live="polite">
           <h3 className="text-2xl font-bold text-white mb-2">Solicitud recibida</h3>
           <p className="text-navy-300">
-            Gracias{name ? `, ${name.split(' ')[0]}` : ''}. Revisaré tu información y te contactaré según mi disponibilidad actual.
+            Gracias{name ? `, ${name.split(' ')[0]}` : ''}. Revisaré tu información y te contactaré
+            según mi disponibilidad actual.
           </p>
         </div>
       )}

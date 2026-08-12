@@ -33,8 +33,8 @@ interface WelcomeEmailParams {
 
 // Subject line per tier — they can differ or be identical.
 const SUBJECT_BY_TIER: Record<'premium' | 'vip', string> = {
-  premium: '¡Bienvenido a Hablemos Cripto!',
-  vip: 'Bienvenido, miembro Fundador de Hablemos Cripto 👋',
+  premium: 'Bienvenido a Hablemos Cripto',
+  vip: 'Bienvenido a Cripto Experto',
 }
 
 // REPLACE BOTH BODIES BELOW WITH YOUR VOICE BEFORE DEPLOYING.
@@ -44,39 +44,21 @@ const BODY_HTML_BY_TIER: Record<'premium' | 'vip', string> = {
   premium: `
 <p>Hola {{name}},</p>
 
-<p><strong>¡Bienvenido a Hablemos Cripto!</strong></p>
+<p><strong>Bienvenido a Hablemos Cripto.</strong></p>
 
 <p>Acabas de asegurar tu <strong>acceso de por vida</strong> al plan
-{{planName}}: todo el contenido, sin renovaciones y sin sorpresas. Me alegra
-muchísimo que hayas tomado la decisión de invertir en una educación que durará
-para siempre.</p>
+{{planName}}: las 44 lecciones, todas las actualizaciones futuras y las
+herramientas de práctica, sin renovaciones.</p>
 
-<p>Llevo alrededor de 8 años en el mundo de las criptomonedas y, la verdad,
-hubiera soñado con tener acceso a una plataforma como esta cuando comencé:
-acceso a una persona creíble, con años de experiencia, que ha vivido todas las
-experiencias posibles en el juego. Desde soñar con volverme millonario en poco
-tiempo y fallar, hasta enamorarme de la libertad tan única que ofrecen las
-criptomonedas en todo sentido.</p>
+<p>Construí esta ruta con lo que me hubiera gustado tener cuando empecé: una
+secuencia clara, seguridad antes que especulación y contexto para tomar
+decisiones propias. Aquí no encontrarás promesas de rentabilidad ni señales
+mágicas. Encontrarás fundamentos, práctica y criterios para evaluar el riesgo.</p>
 
-<p>Hay muchas personas y grupos que prometen millones en poco tiempo y que,
-claro, causan emoción. Pero la mayoría o todos se quedan ahí: promesas de aire
-que nunca se convierten en realidad, que se aprovechan de las emociones y la
-necesidad de la gente. Por eso construí esto. Es un tema que me apasiona
-demasiado, me ha cambiado la vida y me encanta compartir lo que sé.</p>
+<p>Te recomiendo empezar por el principio, incluso si ya conoces algunos temas.
+Cada nivel prepara el siguiente y tu progreso queda guardado en la cuenta.</p>
 
-<p>Si estás aquí, es porque eres uno de esos interesados en conocer de verdad
-este mundo. Te felicito: invertir en educación nunca es una mala idea, y menos
-cuando se trata de una tecnología tan novedosa.</p>
-
-<p>Te llevaré de principiante a experto para que te sientas cómodo y seguro en
-el mundo de las criptomonedas. Aquí no te prometeré volverte millonario a corto
-plazo, pero sí la posibilidad de crear tu propio camino, lo más seguro posible.
-Hasta dónde llegues y cuánto éxito alcances dependerá de ti.</p>
-
-<p>Espero que disfrutes de todo el contenido de la plataforma. Me desvelé muchas
-noches asegurándome de que fuera de la mejor calidad posible. Empieza aquí:</p>
-
-<p>👉 <a href="https://www.hablemoscripto.io/education">https://www.hablemoscripto.io/education</a></p>
+<p><a href="https://www.hablemoscripto.io/education">Empezar el plan de estudio</a></p>
 
 <p>Nos vemos adentro,<br>
 CBas<br>
@@ -86,55 +68,28 @@ CBas<br>
   vip: `
 <p>Hola {{name}},</p>
 
-<p><strong>¡Bienvenido a Hablemos Cripto!</strong></p>
+<p><strong>Bienvenido a Cripto Experto.</strong></p>
 
 <p>Acabas de asegurar tu <strong>acceso de por vida</strong> al plan
-{{planName}}: todo el contenido de la plataforma, sin renovaciones y sin
-sorpresas. Pero elegiste el plan que, para mí, tiene lo más valioso de todo.</p>
+{{planName}}: todo el currículum, acceso inmediato a la comunidad privada y
+acompañamiento como miembro fundador.</p>
 
-<p>Como miembro Cripto Experto entras a la comunidad, donde tienes acceso
-directo a mí y a un grupo de personas que están en el mismo camino que tú. Te
-soy sincero: tener algo así cuando yo empecé me hubiera hecho una diferencia
-enorme. Aprender solo es lento y confuso; hacerlo rodeado de gente con la que
-puedes preguntar, debatir y compartir lo cambia todo.</p>
+<p>Quiero empezar conociendo tu contexto. Dentro de los próximos dos días hábiles
+te escribiré para coordinar una sesión privada de bienvenida. Allí revisaremos
+qué quieres aprender, tu experiencia actual y cómo aprovechar mejor la
+plataforma.</p>
 
-<p>Cada semana haré una transmisión en vivo dentro del Discord donde desgloso el
-newsletter de la semana y respondo tus preguntas en una sesión de Q&amp;A. Es el
-espacio para resolver tus dudas en tiempo real y entender lo que está pasando en
-el mercado conmigo.</p>
+<p>A medida que crezca la comunidad tendremos un encuentro grupal mensual para
+analizar el mercado, profundizar en el newsletter y responder preguntas. También
+tendrás prioridad si solicitas una mentoría uno a uno.</p>
 
-<p>Y si en algún momento te interesa una mentoría uno a uno, como miembro Cripto
-Experto tienes la prioridad: estás primero en la fila.</p>
+<p>Tu acceso a la comunidad ya está activo:</p>
 
-<p>Tu acceso a la comunidad está aquí. Únete al Discord y preséntate cuando
-quieras:</p>
+<p><a href="https://discord.gg/CQYyvzQb65">Entrar a la comunidad privada</a></p>
 
-<p>👉 <a href="https://discord.gg/CQYyvzQb65">https://discord.gg/CQYyvzQb65</a></p>
+<p>Puedes comenzar el currículum aquí:</p>
 
-<p>Llevo alrededor de 8 años en el mundo de las criptomonedas y he vivido todas
-las experiencias posibles en el juego: desde soñar con volverme millonario en
-poco tiempo y fallar, hasta enamorarme de la libertad tan única que ofrecen las
-criptomonedas en todo sentido.</p>
-
-<p>Hay muchas personas y grupos que prometen millones en poco tiempo y que,
-claro, causan emoción. Pero la mayoría o todos se quedan ahí: promesas de aire
-que nunca se convierten en realidad, que se aprovechan de las emociones y la
-necesidad de la gente. Por eso construí esto. Es un tema que me apasiona
-demasiado, me ha cambiado la vida y me encanta compartir lo que sé.</p>
-
-<p>Si estás aquí, es porque eres uno de esos interesados en conocer de verdad
-este mundo. Te felicito: invertir en educación nunca es una mala idea, y menos
-cuando se trata de una tecnología tan novedosa.</p>
-
-<p>Te llevaré de principiante a experto para que te sientas cómodo y seguro en
-el mundo de las criptomonedas. Aquí no te prometeré volverte millonario a corto
-plazo, pero sí la posibilidad de crear tu propio camino, lo más seguro posible.
-Hasta dónde llegues y cuánto éxito alcances dependerá de ti.</p>
-
-<p>Espero que disfrutes de todo el contenido de la plataforma. Me desvelé muchas
-noches asegurándome de que fuera de la mejor calidad posible. Empieza aquí:</p>
-
-<p>👉 <a href="https://www.hablemoscripto.io/education">https://www.hablemoscripto.io/education</a></p>
+<p><a href="https://www.hablemoscripto.io/education">Abrir Hablemos Cripto</a></p>
 
 <p>Nos vemos adentro,<br>
 CBas<br>
@@ -207,10 +162,9 @@ export async function sendFundadorWelcome(params: WelcomeEmailParams): Promise<v
       body: JSON.stringify({
         from: FROM_ADDRESS,
         to: [to],
+        reply_to: 'soporte@hablemoscripto.io',
         subject,
         html: fullHtml,
-        // Reply-to defaults to the From address; if you want replies to
-        // bounce to a separate inbox, add `reply_to` here.
       }),
     })
 

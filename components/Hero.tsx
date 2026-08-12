@@ -1,210 +1,63 @@
+import React from 'react';
+import { ArrowDown, BookOpen, ShieldCheck } from 'lucide-react';
+import { ADVANCED_LEVEL, BEGINNER_LEVEL, INTERMEDIATE_LEVEL } from '../data/levels';
+import { HERO_COPY } from '../data/landingCopy';
 
-import React, { Suspense, useEffect, useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
-import { Users, BookOpen, Award, Zap, CheckCircle } from 'lucide-react';
-import { getAllLessonsOrdered } from '../utils/courseUtils';
-
-// The particles engine is ~40 kB gzipped and purely decorative — keep it out of
-// the critical landing chunk and only mount it once the browser is idle.
-const ParticlesBackground = React.lazy(() => import('./ParticlesBackground'));
-
-// Derive the lesson count from the catalog so the headline stat can never drift.
-const LESSON_COUNT = getAllLessonsOrdered().length;
-
-// Constants moved outside component to prevent re-creation
-const WORDS = ["Bitcoin", "Solana", "Trading", "Web3"];
-const TYPING_SPEED = 100;
-const DELETING_SPEED = 50;
-const PAUSE_TIME = 2000;
-const FINAL_PAUSE_TIME = 3000;
-const MAX_CYCLES = 2; // Cycle the whole WORDS list twice, then settle on the last word
-// The word the animation settles on after the final cycle.
-const SETTLED_WORD = WORDS[(WORDS.length * MAX_CYCLES - 1) % WORDS.length];
+const LEVELS = [BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL];
+const LESSON_COUNT = LEVELS.reduce(
+  (total, level) => total + level.modules.reduce((sum, module) => sum + module.lessons.length, 0),
+  0
+);
 
 interface HeroProps {
   onStartLearning: () => void;
 }
 
 const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
-  const prefersReducedMotion = useReducedMotion();
-  const [textIndex, setTextIndex] = useState(0);
-  const [displayText, setDisplayText] = useState(prefersReducedMotion ? SETTLED_WORD : '');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [settled, setSettled] = useState(!!prefersReducedMotion);
-  const [showParticles, setShowParticles] = useState(false);
-
-  // Defer the decorative particles until the main thread is idle so they never
-  // compete with first paint on slow devices.
-  useEffect(() => {
-    const start = () => setShowParticles(true);
-    if (typeof window.requestIdleCallback === 'function') {
-      const id = window.requestIdleCallback(start, { timeout: 2500 });
-      return () => window.cancelIdleCallback(id);
-    }
-    const timer = window.setTimeout(start, 1200);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  // Typing Effect — cycles through WORDS twice, then settles on the last word.
-  // Keeps the hero visually alive on arrival without being a permanent distraction.
-  // Skipped entirely when the user prefers reduced motion: the final word is
-  // shown immediately and no setTimeout typing loop runs.
-  useEffect(() => {
-    if (prefersReducedMotion || settled) return;
-
-    const currentWord = WORDS[textIndex % WORDS.length];
-    const isLastWord = textIndex === WORDS.length * MAX_CYCLES - 1;
-
-    if (!isDeleting && displayText === currentWord) {
-      if (isLastWord) {
-        const finalTimer = setTimeout(() => setSettled(true), FINAL_PAUSE_TIME);
-        return () => clearTimeout(finalTimer);
-      }
-      const pauseTimer = setTimeout(() => setIsDeleting(true), PAUSE_TIME);
-      return () => clearTimeout(pauseTimer);
-    }
-
-    if (isDeleting && displayText === '') {
-      // Typewriter state transition — this effect IS the animation driver.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIsDeleting(false);
-       
-      setTextIndex((prev) => prev + 1);
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      if (isDeleting) {
-        setDisplayText(currentWord.substring(0, displayText.length - 1));
-      } else {
-        setDisplayText(currentWord.substring(0, displayText.length + 1));
-      }
-    }, isDeleting ? DELETING_SPEED : TYPING_SPEED);
-
-    return () => clearTimeout(timer);
-  }, [displayText, isDeleting, textIndex, settled, prefersReducedMotion]);
-
   return (
-    <section id="home" className="relative flex items-center justify-center overflow-hidden bg-navy-950 pt-28 pb-16 md:pt-32 md:pb-20 lg:pt-24 scroll-mt-28">
-
-      {/* Particles Background — deferred to idle, skipped on reduced motion / save-data */}
-      {showParticles && (
-        <Suspense fallback={null}>
-          <ParticlesBackground />
-        </Suspense>
-      )}
-
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
-        {/* Main Banner Background Image */}
-        <div className="absolute inset-0 z-0 opacity-[0.15] mix-blend-luminosity">
-            <picture>
-                <source
-                    srcSet="/images/banner-768w.webp 768w, /images/banner-1280w.webp 1280w, /images/banner-1920w.webp 1920w"
-                    sizes="100vw"
-                    type="image/webp"
-                />
-                <img
-                    src="/images/banner-1280w.webp"
-                    alt="Crypto Trading Background"
-                    width={1280}
-                    height={720}
-                    fetchPriority="high"
-                    className="w-full h-full object-cover object-center scale-110"
-                    style={{
-                        maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%)',
-                        WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%)'
-                    }}
-                />
-            </picture>
-        </div>
-
-        {/* Gradient Blobs */}
-        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-brand-500/10 rounded-full blur-[160px]"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] bg-accent-500/5 rounded-full blur-[140px]"></div>
-        
-      </div>
-
-      <div className="container max-w-7xl mx-auto px-6 relative z-10">
-        <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
-            
-            {/* Tagline */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy-900/70 border border-white/5 text-brand-400 text-xs font-bold uppercase tracking-[0.2em] mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-               <Zap size={14} />
-               La nueva era del aprendizaje cripto
+    <section
+      id="home"
+      className="relative overflow-hidden border-b border-white/5 bg-navy-950 pb-16 pt-32 scroll-mt-28 md:pb-24 md:pt-40"
+    >
+      <div className="container mx-auto max-w-7xl px-6">
+        <div className="grid items-end gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.65fr)] lg:gap-20">
+          <div>
+            <div className="mb-8 flex items-center gap-3 text-sm font-semibold text-brand-400">
+              <ShieldCheck size={18} aria-hidden="true" />
+              <span>Educación cripto para tomar decisiones con criterio</span>
             </div>
-
-            {/* Main Heading */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white leading-[1] tracking-tighter mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
-              De Cero a Experto en <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-brand-500 to-brand-600 drop-shadow-glow-brand-strong">
-                Cripto.
-              </span>
+            <h1 className="max-w-5xl font-heading text-5xl font-black leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
+              {HERO_COPY.title}
             </h1>
-
-            {/* Typing Subheading */}
-            <div className="h-12 md:h-16 flex items-center justify-center gap-4 text-2xl md:text-4xl font-normal text-navy-200 mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-                <span>Domina</span>
-                <div className="relative">
-                    <span className="font-bold text-white border-b-4 border-brand-500 pb-1">{displayText}</span>
-                    <span className={`absolute -right-4 top-1 h-[80%] w-1 bg-brand-500 transition-opacity duration-500 ${settled ? 'opacity-0' : 'animate-pulse'}`}></span>
-                </div>
-            </div>
-
-            {/* Description */}
-            <p className="text-lg md:text-xl text-navy-400 max-w-2xl leading-relaxed mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-               Olvida el ruido y las promesas falsas. Aprende con análisis claro, práctica guiada y una ruta para configurar tu wallet, identificar estafas y construir un plan de inversión realista.
+            <p className="mt-8 max-w-3xl text-lg leading-relaxed text-navy-300 md:text-xl">
+              {HERO_COPY.description}
             </p>
 
-            {/* Outcomes */}
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8 text-sm">
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Configura tu wallet</span>
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Identifica estafas</span>
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Entiende blockchain</span>
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Construye tu plan de inversión</span>
-            </div>
-
-            {/* Credibility above the fold (stats before CTAs on short viewports) */}
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-10 text-sm animate-in fade-in duration-700">
-              <span className="inline-flex items-center gap-2 text-navy-300">
-                <Award size={16} className="text-brand-500" aria-hidden="true" />
-                <span><span className="font-bold text-white">7+ años</span> en el mercado</span>
-              </span>
-              <span className="inline-flex items-center gap-2 text-navy-300">
-                <BookOpen size={16} className="text-brand-400" aria-hidden="true" />
-                <span><span className="font-bold text-white">{LESSON_COUNT}</span> lecciones estructuradas</span>
-              </span>
-            </div>
-
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400">
+            <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <button
                 type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onStartLearning();
-                }}
-                className="group relative w-full sm:w-auto px-10 py-5 bg-brand-500 text-navy-950 font-bold rounded-2xl shadow-glow-brand-strong hover:bg-brand-400 active:scale-[0.98] transition-all flex items-center justify-center gap-3 text-lg"
+                onClick={onStartLearning}
+                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-brand-500 px-7 py-3.5 font-bold text-navy-950 transition-colors hover:bg-brand-400 active:bg-brand-600 sm:w-auto"
               >
-                <BookOpen size={22} aria-hidden="true" />
-                <span>Empezar gratis</span>
+                <BookOpen size={20} aria-hidden="true" />
+                {HERO_COPY.primaryCta}
               </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                  document.getElementById('pricing')?.scrollIntoView({
-                    behavior: reduce ? 'auto' : 'smooth',
-                  });
-                }}
-                className="w-full sm:w-auto px-10 py-5 bg-navy-900 text-white font-bold rounded-2xl border border-white/10 hover:border-brand-500/30 hover:bg-navy-800 transition-all flex items-center justify-center gap-3 group text-lg"
+              <a
+                href="#plataforma"
+                className="inline-flex min-h-11 w-full items-center justify-center gap-2 px-4 py-3 font-semibold text-navy-200 underline decoration-navy-700 underline-offset-8 transition-colors hover:text-white hover:decoration-brand-500 sm:w-auto"
               >
-                <Users size={22} className="text-navy-400 group-hover:text-brand-500 transition-colors" aria-hidden="true" />
-                <span>Ver planes y precios</span>
-              </button>
+                {HERO_COPY.secondaryCta}
+                <ArrowDown size={18} aria-hidden="true" />
+              </a>
             </div>
+          </div>
 
+          <div className="border-l-2 border-brand-500 pl-6 lg:mb-2">
+            <p className="font-heading text-4xl font-bold text-white">{LESSON_COUNT} lecciones</p>
+            <p className="mt-2 leading-relaxed text-navy-400">
+              Tres niveles con una secuencia clara. El Nivel Principiante es gratuito.
+            </p>
+          </div>
         </div>
       </div>
     </section>

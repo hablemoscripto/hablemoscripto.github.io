@@ -12,14 +12,18 @@ import MentoriaModal from './MentoriaModal';
 import { useAuth } from '../contexts/AuthContext';
 import type { CourseTier } from '../services/paymentService';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ChevronDown, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+import PlatformPreview from './landing/PlatformPreview';
+import FaqSection from './landing/FaqSection';
+import MentoriaSection from './landing/MentoriaSection';
 
 const LandingPage: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isMentoriaModalOpen, setIsMentoriaModalOpen] = useState(false);
   const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [newsletterStatus, setNewsletterStatus] = useState<
+    'idle' | 'loading' | 'success' | 'error'
+  >('idle');
   const [newsletterMessage, setNewsletterMessage] = useState('');
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -100,15 +104,13 @@ const LandingPage: React.FC = () => {
 
     try {
       const { supabase } = await import('../lib/supabase');
-      const { error } = await supabase
-        .from('newsletter_subscribers')
-        .insert([{ email }]);
+      const { error } = await supabase.from('newsletter_subscribers').insert([{ email }]);
 
       if (error) {
         // Check if it's a duplicate email error
         if (error.code === '23505') {
-          setNewsletterStatus('error');
-          setNewsletterMessage('Este email ya está suscrito');
+          setNewsletterStatus('success');
+          setNewsletterMessage('Este email ya recibe el análisis semanal.');
         } else {
           throw error;
         }
@@ -125,166 +127,76 @@ const LandingPage: React.FC = () => {
       }
     } catch {
       setNewsletterStatus('error');
-      setNewsletterMessage('Error al suscribirse. Intenta de nuevo.');
+      setNewsletterMessage('No pudimos completar la suscripción. Intenta de nuevo.');
     }
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div>
       <Helmet>
-        <title>Hablemos Cripto: Aprende Bitcoin y Criptomonedas desde Cero</title>
-        <meta name="description" content="Plataforma educativa de criptomonedas en español para Latinoamérica. Aprende Bitcoin, blockchain, DeFi y trading con cursos estructurados, quizzes y asistente IA." />
-        <meta property="og:title" content="Hablemos Cripto: Aprende Bitcoin y Criptomonedas desde Cero" />
-        <meta property="og:description" content="Plataforma educativa de criptomonedas en español para Latinoamérica. Aprende Bitcoin, blockchain, DeFi y trading con cursos estructurados." />
+        <title>Hablemos Cripto: Aprende Cripto con Criterio desde Cero</title>
+        <meta
+          name="description"
+          content="Educación cripto en español para Latinoamérica. Aprende Bitcoin, wallets, seguridad, análisis de mercado y DeFi con una ruta estructurada."
+        />
+        <meta
+          property="og:title"
+          content="Hablemos Cripto: Aprende Cripto con Criterio desde Cero"
+        />
+        <meta
+          property="og:description"
+          content="Una ruta estructurada para entender Bitcoin, wallets, seguridad, análisis de mercado y DeFi antes de arriesgar tu dinero."
+        />
         <meta property="og:url" content="https://hablemoscripto.io" />
-        <meta name="twitter:title" content="Hablemos Cripto: Aprende Bitcoin y Criptomonedas desde Cero" />
-        <meta name="twitter:description" content="Plataforma educativa de criptomonedas en español para Latinoamérica." />
+        <meta
+          name="twitter:title"
+          content="Hablemos Cripto: Aprende Cripto con Criterio desde Cero"
+        />
+        <meta
+          name="twitter:description"
+          content="Educación cripto para LATAM, con seguridad y gestión de riesgo primero."
+        />
         <link rel="canonical" href="https://hablemoscripto.io" />
       </Helmet>
       <Navbar />
       <main id="contenido" tabIndex={-1} className="outline-none">
         <Hero onStartLearning={handleNavigateToEducation} />
+        <PlatformPreview />
         <ProblemSection />
-        <Features />
         <Courses />
-
-        {/* Mentoría / fundador community (honest: lives & Discord not live yet) */}
-        <section id="mentoria" className="py-16 md:py-20 bg-navy-900/60 border-y border-white/5 scroll-mt-28">
-          <div className="container max-w-5xl mx-auto px-6 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 mb-6">
-              <span className="text-brand-400 text-xs font-black uppercase tracking-[0.2em]">Acompañamiento</span>
-            </div>
-
-            <h2 className="text-4xl md:text-5xl font-heading font-black text-white tracking-tighter mb-4">
-              Mentoría y comunidad de fundadores
-            </h2>
-            <p className="text-xl text-navy-300 max-w-2xl mx-auto mb-10">
-              Todos reciben el mismo newsletter semanal. El plan{' '}
-              <span className="font-semibold text-white">Cripto Experto</span> suma acceso de fundador
-              a la comunidad y a las charlas en vivo cuando las abramos, más prioridad para mentoría
-              1 a 1. Hoy puedes pedir mentoría o empezar por el currículum completo con Inversor.
-            </p>
-
-            <div className="grid sm:grid-cols-3 gap-4 mb-10 text-left">
-              {[
-                {
-                  label: 'Análisis',
-                  title: 'Qué estoy mirando',
-                  body: 'Estructura de precio, niveles clave y la tesis con la que leo el mercado, sin señales mágicas.',
-                },
-                {
-                  label: 'Mentoría 1 a 1',
-                  title: 'Tu caso, en privado',
-                  body: 'Cuéntame tu situación. Prioridad de agenda para miembros Cripto Experto cuando abramos cupos.',
-                },
-                {
-                  label: 'Contexto LATAM',
-                  title: 'Cómo aterrizar en pesos',
-                  body: 'Implicaciones reales para Colombia y la región: rampa fiat, impuestos, riesgo cambiario.',
-                },
-              ].map((topic, i) => (
-                <div
-                  key={i}
-                  className="rounded-2xl bg-navy-950/60 border border-white/5 px-5 py-5"
-                >
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-400 mb-3">
-                    {topic.label}
-                  </p>
-                  <h3 className="text-base font-bold text-white mb-2 leading-tight">
-                    {topic.title}
-                  </h3>
-                  <p className="text-sm text-navy-300 leading-relaxed">
-                    {topic.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="#pricing"
-                className="px-8 py-4 bg-brand-500 text-navy-950 font-bold rounded-2xl hover:bg-brand-400 transition-colors"
-              >
-                Ver planes
-              </a>
-              <button
-                type="button"
-                onClick={() => setIsMentoriaModalOpen(true)}
-                className="px-8 py-4 border border-white/15 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-2xl transition-colors"
-              >
-                Solicitar mentoría
-              </button>
-            </div>
-
-            <p className="mt-6 text-sm text-navy-400">
-              Comunidad y charlas en vivo: se activan con los primeros fundadores Experto. Te avisamos
-              por correo cuando abran.
-            </p>
-          </div>
-        </section>
+        <Features />
+        <MentoriaSection onRequestMentoria={() => setIsMentoriaModalOpen(true)} />
 
         {/* Public Pricing Section */}
         <section id="pricing" className="py-16 md:py-24 bg-navy-950 relative scroll-mt-28">
-          <PricingSection
-            variant="public"
-            onPublicCta={handlePublicPlanCta}
-          />
+          <PricingSection variant="public" onPublicCta={handlePublicPlanCta} />
         </section>
 
-        {/* FAQ Section */}
-        <section id="faq" className="py-16 md:py-24 bg-navy-950 relative scroll-mt-28">
-            <div className="container max-w-4xl mx-auto px-6">
-                <div className="text-center mb-12 md:mb-16">
-                    <span className="text-brand-500 font-bold tracking-wider text-sm uppercase mb-2 block">Preguntas Frecuentes</span>
-                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-white">
-                        Todo lo que necesitas saber
-                    </h2>
-                </div>
-                <div className="space-y-4">
-                    {[
-                        { q: '¿Es gratis?', a: 'El Nivel Principiante (19 lecciones) es 100% gratuito, sin tarjeta. Los niveles Intermedio y Avanzado se desbloquean con los planes Inversor y Cripto Experto, con acceso de por vida y un solo pago.' },
-                        { q: '¿Necesito experiencia previa en criptomonedas?', a: 'No. Empezamos desde cero, explicando qué es el dinero y por qué importa. No asumimos ningún conocimiento previo.' },
-                        { q: '¿Qué diferencia hay con lo que ya está gratis en YouTube y Twitter?', a: 'El contenido gratuito te da fragmentos sin orden y muchas veces está pagado por quien quiere venderte algo después: señales, tokens, cursos caros. Aquí tienes un currículum estructurado de 44 lecciones y un modelo transparente: tú pagas la plataforma, no terceros que quieran comisión de tus decisiones.' },
-                        { q: '¿Cuánto tiempo toma completar un nivel?', a: 'El Nivel Principiante toma aproximadamente 8 horas de lectura. El Intermedio unas 6 horas y el Avanzado unas 7 horas (según la duración de cada lección). Puedes avanzar a tu propio ritmo.' },
-                        { q: '¿Es seguro invertir en criptomonedas?', a: 'Las criptomonedas son activos de alto riesgo. Por eso enseñamos seguridad primero: cómo proteger tu wallet, evitar estafas, y gestionar el riesgo antes de invertir un solo peso.' },
-                        { q: '¿Quién es CBas?', a: 'CBas tiene 7+ años navegando mercados de criptomonedas, incluyendo ciclos alcistas y bajistas completos. Creó Hablemos Cripto para dar a la comunidad LATAM las herramientas que él hubiera querido tener cuando empezó.' },
-                        { q: '¿Cómo pago y es seguro?', a: 'El pago se procesa con Wompi, una de las pasarelas de pago más usadas en Colombia. Pagas con tarjeta en pesos colombianos (COP). Es un pago único: no hay suscripciones ni cargos recurrentes.' },
-                        { q: '¿Hay garantía?', a: 'Sí. Tienes una garantía de 7 días. Si dentro de ese plazo sientes que el contenido no es para ti, escríbenos a hablemoscripto@gmail.com y te devolvemos el 100% de tu dinero, sin preguntas.' },
-                        { q: '¿Qué pasa justo después de pagar?', a: 'Tu acceso se activa de inmediato en tu cuenta y recibes un correo de bienvenida. Puedes empezar el nivel que desbloqueaste al instante.' },
-                        { q: '¿El precio sube después?', a: 'Estos son precios de lanzamiento (Precio Fundador). El precio subirá más adelante, pero avisaremos por correo con 30 días de anticipación. Si compras hoy, conservas tu acceso de por vida sin pagar la diferencia.' },
-                        { q: '¿Funciona en celular y computador?', a: 'Sí. Funciona en cualquier navegador, en celular, tablet o computador. Tu progreso se guarda en tu cuenta y se sincroniza entre dispositivos.' },
-                        { q: '¿Cuál plan elijo, Inversor o Cripto Experto?', a: 'Inversor es el plan principal: las 44 lecciones completas de por vida. Cripto Experto incluye todo eso más acceso de fundador a la comunidad y charlas en vivo cuando las abramos, y prioridad para mentoría 1 a 1. Si solo quieres el currículum, elige Inversor.' },
-                    ].map((item, i) => (
-                        <details key={i} className="group bg-navy-900 border border-white/5 hover:border-white/10 rounded-2xl overflow-hidden transition-colors">
-                            <summary className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer text-white font-bold hover:text-brand-500 transition-colors list-none">
-                                <span>{item.q}</span>
-                                <ChevronDown size={20} className="shrink-0 text-navy-400 group-open:rotate-180 group-open:text-brand-500 transition-transform" aria-hidden="true" />
-                            </summary>
-                            <div className="px-6 pb-5 pt-1 text-navy-300 leading-relaxed border-t border-white/5">
-                                <p className="pt-4">{item.a}</p>
-                            </div>
-                        </details>
-                    ))}
-                </div>
-            </div>
-        </section>
+        <FaqSection />
 
-        {/* Resources / Newsletter Section */}
-        <section id="resources" className="py-16 md:py-24 relative scroll-mt-28">
-          <div className="absolute inset-0 bg-brand-600/5"></div>
-          <div className="container max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 className="text-3xl font-bold text-white mb-4">Análisis semanal. Sin recomendaciones pagadas.</h2>
-            <p className="text-navy-400 mb-8">Lo que pasó esta semana en cripto, interpretado para LATAM. Mi tesis actual, las señales que estoy mirando y lo que estoy ignorando.</p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" onSubmit={handleNewsletterSubmit}>
+        <section
+          id="resources"
+          className="border-t border-white/5 bg-navy-900/50 py-16 scroll-mt-28 md:py-24"
+        >
+          <div className="container mx-auto max-w-4xl px-6 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-white">
+              Análisis semanal. Sin recomendaciones pagadas.
+            </h2>
+            <p className="mb-8 text-navy-400">
+              Lo que pasó esta semana en cripto, interpretado para LATAM. Mi lectura actual, los
+              datos que importan y los riesgos que no conviene ignorar.
+            </p>
+            <form
+              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+              onSubmit={handleNewsletterSubmit}
+            >
+              <label htmlFor="newsletter-email" className="sr-only">
+                Email para recibir el análisis semanal
+              </label>
               <input
+                id="newsletter-email"
                 type="email"
                 placeholder="tu@email.com"
-                aria-label="Email para newsletter"
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 disabled={newsletterStatus === 'loading'}
@@ -308,18 +220,33 @@ const LandingPage: React.FC = () => {
               </button>
             </form>
 
+            <p className="mt-5 text-sm text-navy-400">
+              ¿Quieres conocer mi trabajo primero?{' '}
+              <a
+                href="https://twitter.com/Crypto_CBas"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-brand-400 underline underline-offset-4 hover:text-brand-300"
+              >
+                Revisa mi historial público en X
+              </a>
+              .
+            </p>
+
             {/* Status Messages */}
             <div aria-live="polite" aria-atomic="true">
               {newsletterMessage && (
-                <p className={`text-sm mt-4 font-medium ${
-                  newsletterStatus === 'success' ? 'text-green-400' : 'text-red-400'
-                }`}>
+                <p
+                  className={`text-sm mt-4 font-medium ${
+                    newsletterStatus === 'success' ? 'text-green-400' : 'text-red-400'
+                  }`}
+                >
                   {newsletterMessage}
                 </p>
               )}
             </div>
 
-            <p className="text-xs text-navy-400 mt-4">Sin spam. Cancela cuando quieras.</p>
+            <p className="mt-4 text-xs text-navy-400">Sin spam. Cancela cuando quieras.</p>
           </div>
         </section>
       </main>
@@ -333,11 +260,8 @@ const LandingPage: React.FC = () => {
         initialView="signup"
       />
 
-      <MentoriaModal
-        isOpen={isMentoriaModalOpen}
-        onClose={() => setIsMentoriaModalOpen(false)}
-      />
-    </motion.div>
+      <MentoriaModal isOpen={isMentoriaModalOpen} onClose={() => setIsMentoriaModalOpen(false)} />
+    </div>
   );
 };
 

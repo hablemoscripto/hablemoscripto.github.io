@@ -55,7 +55,7 @@ function pendingPlan(): PendingPlan | null {
 // its original message so real validation errors still show.
 function humanizeAuthError(message: string): string {
   if (/failed to fetch|network|load failed|fetch/i.test(message)) {
-    return 'No pudimos conectar con el servidor. No es tu conexión, es un problema de nuestro lado. Intenta de nuevo en unos minutos o escríbenos a hablemoscripto@gmail.com';
+    return 'No pudimos conectar con el servidor. No es tu conexión, es un problema de nuestro lado. Intenta de nuevo en unos minutos o escríbenos a soporte@hablemoscripto.io';
   }
   if (/rate limit|too many requests/i.test(message)) {
     return 'Demasiados intentos. Espera un minuto e intenta de nuevo.';
@@ -63,13 +63,17 @@ function humanizeAuthError(message: string): string {
   return message;
 }
 
-export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView = 'login' }: AuthModalProps) {
+export default function AuthModal({
+  isOpen,
+  onClose,
+  onLoginSuccess,
+  initialView = 'login',
+}: AuthModalProps) {
   const [view, setView] = useState<ModalView>(initialView);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [fullName, setFullName] = useState('');
-  const [newsletter, setNewsletter] = useState(true);
+  const [newsletter, setNewsletter] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
@@ -83,8 +87,8 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
       setView(initialView);
       setEmail('');
       setPassword('');
-      setConfirmPassword('');
       setFullName('');
+      setNewsletter(false);
       setError('');
       setSuccess('');
       setLoading(false);
@@ -106,12 +110,6 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
     setError('');
     setSuccess('');
     setLoading(true);
-
-    if (view === 'signup' && password !== confirmPassword) {
-      setError('Las contraseñas no coinciden');
-      setLoading(false);
-      return;
-    }
 
     if ((view === 'login' || view === 'signup') && password.length < 6) {
       setError('La contraseña debe tener al menos 6 caracteres');
@@ -179,7 +177,9 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
       if (error) {
         setError(humanizeAuthError(error.message));
       } else {
-        setSuccess('Te enviamos un enlace para restablecer tu contraseña. Revisa tu email (y la carpeta de spam).');
+        setSuccess(
+          'Te enviamos un enlace para restablecer tu contraseña. Revisa tu email (y la carpeta de spam).'
+        );
       }
     } catch {
       setError('Ocurrió un error. Intenta de nuevo.');
@@ -209,7 +209,6 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
 
   const resetForm = () => {
     setPassword('');
-    setConfirmPassword('');
     setError('');
     setSuccess('');
   };
@@ -221,7 +220,8 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
 
   const errorId = 'auth-modal-error';
   const successId = 'auth-modal-success';
-  const describedBy = [error && errorId, success && successId].filter(Boolean).join(' ') || undefined;
+  const describedBy =
+    [error && errorId, success && successId].filter(Boolean).join(' ') || undefined;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} ariaLabel={VIEW_LABELS[view]}>
@@ -230,12 +230,13 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
         {view === 'verify-email' && (
           <>
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Mail size={32} className="text-white" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold text-white">Verifica tu email</h2>
               <p className="text-navy-400 mt-2">
-                Te enviamos un enlace de verificación a <span className="text-white font-medium">{email}</span>
+                Te enviamos un enlace de verificación a{' '}
+                <span className="text-white font-medium">{email}</span>
               </p>
             </div>
 
@@ -247,13 +248,21 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
               </div>
 
               {error && (
-                <div id={errorId} role="alert" className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm">
+                <div
+                  id={errorId}
+                  role="alert"
+                  className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm"
+                >
                   {error}
                 </div>
               )}
 
               {success && (
-                <div id={successId} role="status" className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm">
+                <div
+                  id={successId}
+                  role="status"
+                  className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm"
+                >
                   {success}
                 </div>
               )}
@@ -264,7 +273,11 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                 aria-busy={loading}
                 className="w-full bg-navy-800 hover:bg-navy-700 text-white font-semibold py-3 rounded-lg border border-navy-600 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
-                {loading ? <Loader2 size={20} className="animate-spin" aria-hidden="true" /> : <Mail size={20} aria-hidden="true" />}
+                {loading ? (
+                  <Loader2 size={20} className="animate-spin" aria-hidden="true" />
+                ) : (
+                  <Mail size={20} aria-hidden="true" />
+                )}
                 Reenviar email de verificación
               </button>
 
@@ -283,7 +296,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
         {view === 'forgot-password' && (
           <>
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-500 to-brand-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-brand-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Lock size={32} className="text-white" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold text-white">Restablecer contraseña</h2>
@@ -294,9 +307,18 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
 
             <form onSubmit={handleForgotPassword} className="space-y-4" noValidate>
               <div>
-                <label htmlFor="forgot-email" className="block text-sm font-medium text-navy-300 mb-2">Email</label>
+                <label
+                  htmlFor="forgot-email"
+                  className="block text-sm font-medium text-navy-300 mb-2"
+                >
+                  Email
+                </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
+                  <Mail
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400"
+                    size={20}
+                    aria-hidden="true"
+                  />
                   <input
                     id="forgot-email"
                     type="email"
@@ -313,13 +335,21 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
               </div>
 
               {error && (
-                <div id={errorId} role="alert" className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm">
+                <div
+                  id={errorId}
+                  role="alert"
+                  className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm"
+                >
                   {error}
                 </div>
               )}
 
               {success && (
-                <div id={successId} role="status" className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm">
+                <div
+                  id={successId}
+                  role="status"
+                  className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm"
+                >
                   {success}
                 </div>
               )}
@@ -328,10 +358,12 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                 type="submit"
                 disabled={loading}
                 aria-busy={loading}
-                className="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-glow-brand"
+                className="w-full bg-brand-500 hover:bg-brand-400 text-navy-950 font-semibold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
-                  <><Loader2 size={20} className="animate-spin" aria-hidden="true" /> Enviando...</>
+                  <>
+                    <Loader2 size={20} className="animate-spin" aria-hidden="true" /> Enviando...
+                  </>
                 ) : (
                   'Enviar enlace de restablecimiento'
                 )}
@@ -354,7 +386,7 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
         {(view === 'login' || view === 'signup') && (
           <>
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-brand-500 to-brand-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-brand-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <User size={32} className="text-white" aria-hidden="true" />
               </div>
               <h2 className="text-2xl font-bold text-white">
@@ -397,12 +429,53 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
               })()}
             </div>
 
+            <button
+              onClick={handleGoogleSignIn}
+              disabled={loading}
+              className="w-full bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 rounded-lg transition-colors flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#4285F4"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                />
+              </svg>
+              Continuar con Google
+            </button>
+
+            <div className="flex items-center gap-4 my-6">
+              <div className="flex-1 h-px bg-navy-700" aria-hidden="true"></div>
+              <span className="text-navy-400 text-sm">o continúa con email</span>
+              <div className="flex-1 h-px bg-navy-700" aria-hidden="true"></div>
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-4" noValidate>
               {view === 'signup' && (
                 <div>
-                  <label htmlFor="auth-name" className="block text-sm font-medium text-navy-300 mb-2">Nombre</label>
+                  <label
+                    htmlFor="auth-name"
+                    className="block text-sm font-medium text-navy-300 mb-2"
+                  >
+                    Nombre
+                  </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
+                    <User
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400"
+                      size={20}
+                      aria-hidden="true"
+                    />
                     <input
                       id="auth-name"
                       type="text"
@@ -420,9 +493,18 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
               )}
 
               <div>
-                <label htmlFor="auth-email" className="block text-sm font-medium text-navy-300 mb-2">Email</label>
+                <label
+                  htmlFor="auth-email"
+                  className="block text-sm font-medium text-navy-300 mb-2"
+                >
+                  Email
+                </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
+                  <Mail
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400"
+                    size={20}
+                    aria-hidden="true"
+                  />
                   <input
                     id="auth-email"
                     type="email"
@@ -439,9 +521,18 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
               </div>
 
               <div>
-                <label htmlFor="auth-password" className="block text-sm font-medium text-navy-300 mb-2">Contraseña</label>
+                <label
+                  htmlFor="auth-password"
+                  className="block text-sm font-medium text-navy-300 mb-2"
+                >
+                  Contraseña
+                </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
+                  <Lock
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400"
+                    size={20}
+                    aria-hidden="true"
+                  />
                   <input
                     id="auth-password"
                     type="password"
@@ -450,33 +541,16 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                     placeholder="••••••••"
                     autoComplete={view === 'login' ? 'current-password' : 'new-password'}
                     required
+                    minLength={6}
                     aria-invalid={error ? 'true' : undefined}
                     aria-describedby={describedBy}
                     className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-navy-900 focus:border-transparent transition-all"
                   />
                 </div>
+                {view === 'signup' && (
+                  <p className="mt-1.5 text-xs text-navy-400">Usa al menos 6 caracteres.</p>
+                )}
               </div>
-
-              {view === 'signup' && (
-                <div>
-                  <label htmlFor="auth-confirm-password" className="block text-sm font-medium text-navy-300 mb-2">Confirmar Contraseña</label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-400" size={20} aria-hidden="true" />
-                    <input
-                      id="auth-confirm-password"
-                      type="password"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder="••••••••"
-                      autoComplete="new-password"
-                      required
-                      aria-invalid={error ? 'true' : undefined}
-                      aria-describedby={describedBy}
-                      className="w-full bg-navy-800 border border-navy-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-navy-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-navy-900 focus:border-transparent transition-all"
-                    />
-                  </div>
-                </div>
-              )}
 
               {view === 'signup' && (
                 <label className="flex items-start gap-2.5 cursor-pointer select-none">
@@ -486,7 +560,9 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                     onChange={(e) => setNewsletter(e.target.checked)}
                     className="mt-0.5 h-4 w-4 shrink-0 accent-brand-500"
                   />
-                  <span className="text-sm text-navy-300">Quiero recibir el newsletter semanal con análisis de mercado.</span>
+                  <span className="text-sm text-navy-300">
+                    Sí, quiero recibir el análisis semanal por email. Puedo cancelar cuando quiera.
+                  </span>
                 </label>
               )}
 
@@ -503,13 +579,21 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
               )}
 
               {error && (
-                <div id={errorId} role="alert" className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm">
+                <div
+                  id={errorId}
+                  role="alert"
+                  className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm"
+                >
                   {error}
                 </div>
               )}
 
               {success && (
-                <div id={successId} role="status" className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm">
+                <div
+                  id={successId}
+                  role="status"
+                  className="bg-green-500/10 border border-green-500/50 rounded-lg p-3 text-green-400 text-sm"
+                >
                   {success}
                 </div>
               )}
@@ -518,48 +602,43 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess, initialView
                 type="submit"
                 disabled={loading}
                 aria-busy={loading}
-                className="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 font-bold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-glow-brand"
+                className="w-full bg-brand-500 hover:bg-brand-400 text-navy-950 font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
-                  <><Loader2 size={20} className="animate-spin" aria-hidden="true" /> Procesando...</>
+                  <>
+                    <Loader2 size={20} className="animate-spin" aria-hidden="true" /> Procesando...
+                  </>
+                ) : view === 'login' ? (
+                  'Iniciar sesión'
                 ) : (
-                  view === 'login' ? 'Iniciar sesión' : 'Crear Cuenta'
+                  'Crear cuenta'
                 )}
               </button>
 
               {view === 'signup' && (
                 <p className="text-xs text-navy-400 text-center">
                   Al crear tu cuenta aceptas los{' '}
-                  <a href="/terminos" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-400 transition-colors">
+                  <a
+                    href="/terminos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-brand-400 transition-colors"
+                  >
                     Términos de Uso
                   </a>{' '}
                   y la{' '}
-                  <a href="/privacidad" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-400 transition-colors">
+                  <a
+                    href="/privacidad"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-brand-400 transition-colors"
+                  >
                     Política de Privacidad
-                  </a>.
+                  </a>
+                  .
                 </p>
               )}
             </form>
-
-            <div className="flex items-center gap-4 my-6">
-              <div className="flex-1 h-px bg-navy-700" aria-hidden="true"></div>
-              <span className="text-navy-400 text-sm">o</span>
-              <div className="flex-1 h-px bg-navy-700" aria-hidden="true"></div>
-            </div>
-
-            <button
-              onClick={handleGoogleSignIn}
-              disabled={loading}
-              className="w-full bg-white hover:bg-gray-100 text-gray-800 font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-              </svg>
-              Continuar con Google
-            </button>
 
             <div className="mt-6 text-center">
               <p className="text-navy-400">
