@@ -32,7 +32,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "kind": "component",
       "key": "hyperinflation-cases"
     },
-    "¿Y Colombia? ¿Y México? ¿Y España?": {
+    "¿Y Colombia? ¿Y México? ¿Y el dólar?": {
       "kind": "statCards",
       "cards": [
         {
@@ -141,9 +141,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Escasez absoluta: 21 millones, verificable",
           "Divisible hasta 8 decimales (satoshis)",
-          "Almacenable gratis en tu frase semilla",
+          "Almacenable con frase semilla + respaldo físico seguro",
           "Enviable a cualquier país en minutos",
-          "Imposible de confiscar sin tu clave",
+          "Muy difícil de confiscar sin tu clave o sin coacción",
           "Verificación instantánea y gratuita"
         ],
         "tone": "green"
@@ -179,7 +179,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "highlight": true
         }
       ],
-      "intro": "Cada ~4 años el Bitcoin nuevo se reduce a la mitad. Deflación programada, no inflación."
+      "intro": "Cada ~4 años el Bitcoin nuevo se reduce a la mitad. Emisión decreciente programada, no inflación discrecional."
     },
     "Las 4 Innovaciones que Cambian Todo": {
       "kind": "iconGrid",
@@ -214,7 +214,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "−99.99%",
           "label": "Venezuela",
-          "sublabel": "Emigraron con 12 palabras en la cabeza",
+          "sublabel": "12 palabras en memoria + respaldo físico en destino",
           "tone": "green",
           "flag": "🇻🇪"
         },
@@ -233,9 +233,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "flag": "🇱🇧"
         },
         {
-          "value": "140%+",
-          "label": "Argentina",
-          "sublabel": "En la crisis de 2023 y 2024 convertían el sueldo el día de cobro",
+          "value": "~211%",
+          "label": "Argentina 2023",
+          "sublabel": "Pico ~289% abr 2024; convertían el sueldo el día de cobro",
           "tone": "amber",
           "flag": "🇦🇷"
         }
@@ -279,7 +279,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Seguridad respaldada por energía física real",
           "Más probado en el tiempo (15+ años)",
-          "Cualquiera puede minar",
+          "Permissionless (ASICs en la práctica)",
           "Alto consumo energético",
           "Bloques cada ~10 minutos",
           "Usado por: Bitcoin, Litecoin, Dogecoin"
@@ -375,7 +375,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "~40-45",
           "label": "Binance Smart Chain",
-          "sublabel": "validadores aprobados por Binance",
+          "sublabel": "~45 elegidos por stake de BNB; fuerte peso del ecosistema Binance",
           "tone": "red"
         },
         {
@@ -387,7 +387,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "~800",
           "label": "Solana",
-          "sublabel": "validadores activos (2026), 2,000-4,000 TPS, fees de centavos",
+          "sublabel": "validadores activos (2026), miles de TPS totales, fees de centavos",
           "tone": "amber"
         },
         {
@@ -422,7 +422,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "label": "China (continuo)",
-          "detail": "El social credit score limita el acceso financiero"
+          "detail": "Lista negra judicial de morosos: vuelos, trenes rápidos y crédito"
         },
         {
           "label": "PayPal (frecuente)",
@@ -744,7 +744,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         ],
         "tone": "red"
       },
-      "note": "Regla de oro: si haces un swap de $100 y pide acceso ilimitado a todos tus tokens, RECHAZA. Algo está mal."
+      "note": "Regla de oro: si la simulación muestra salidas de tokens que no esperabas, o en EVM pide acceso ilimitado a todos tus tokens, RECHAZA."
     },
     "Checklist Post-Instalación": {
       "kind": "checklist",
@@ -789,7 +789,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "right": {
         "title": "Solana (L1)",
         "points": [
-          "~2,000-4,000 TPS (producción real)",
+          "Miles de TPS totales (cientos a ~1-3k de usuarios según carga)",
           "Costo: ~0.000005 SOL por transacción, una fracción de centavo (~$0.001)",
           "Confirmación: ~400 milisegundos",
           "Todo en una sola capa, sin L2s",
@@ -837,9 +837,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "tone": "red"
         },
         {
-          "value": "3+ pasos",
-          "label": "Ethereum L2 (Arbitrum)",
-          "sublabel": "Bridge de ida y vuelta + swap: más barato, pero con esperas y pasos extra",
+          "value": "1–2 pasos",
+          "label": "Ethereum L2 (Arbitrum/Base)",
+          "sublabel": "Swap en L2: centavos. Bridge solo si tus fondos están en L1 (~$1-5)",
           "tone": "amber"
         },
         {
@@ -1115,7 +1115,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       },
       "note": "Las divergencias en timeframe diario o semanal son las más significativas."
     },
-    "Cruces de EMAs: Las Señales que Mueven Mercados": {
+    "Cruces de Medias (Golden / Death Cross)": {
       "kind": "iconGrid",
       "items": [
         {
@@ -1393,7 +1393,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "label": "3. Bull Market (Verano)",
-          "detail": "12-18 meses post-halving. Rompe el ATH. El múltiplo de BTC se reduce cada ciclo (de ~90× a ~8× desde el mínimo); las altcoins amplifican el movimiento."
+          "detail": "12-18 meses post-halving. Rompe el ATH. El múltiplo de BTC desde el precio del halving se reduce cada ciclo (~90× → ~30× → ~8× → ~2×); desde el mínimo del bear los números son otros. Las altcoins amplifican el movimiento."
         },
         {
           "label": "4. Distribución (Otoño)",
@@ -2367,7 +2367,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Conservador (Recomendado)",
         "points": [
           "LTV del 40-50%: pides menos de la mitad",
-          "Health Factor de 2.0+ en todo momento",
+          "Meta: Health Factor ≥ 2.0 (≈ 40% LTV; a 50% LTV HF ≈ 1.6)",
           "Colateral en blue chips: SOL, ETH",
           "Monitoreo semanal es suficiente",
           "Riesgo de liquidación: muy bajo",
@@ -2382,7 +2382,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Health Factor de 1.2-1.5: zona de peligro",
           "Looping: pides, compras más, repites",
           "Requiere monitoreo constante 24/7",
-          "Riesgo alto si el mercado cae 15-20%",
+          "Riesgo alto: con 75% LTV, ~6% de caída puede liquidarte",
           "Meta: apalancar para maximizar exposición"
         ],
         "tone": "red"
@@ -2398,7 +2398,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Pides prestado 800 USDC",
-          "detail": "Deuda contra ese colateral."
+          "detail": "Deuda moderada (~44% LTV sobre colateral a $180/SOL)."
         },
         {
           "title": "Compras más SOL",
@@ -2406,19 +2406,19 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Depositas y repites",
-          "detail": "Vuelves a pedir prestado. Tras 3-4 loops: 2.5-3x apalancamiento."
+          "detail": "Tras 3-4 loops moderados: ~1.8× apalancamiento (~17-18 SOL)."
         },
         {
-          "title": "SOL sube 20% → ganas ~50-60%",
-          "detail": "El looping amplifica las ganancias."
+          "title": "SOL sube 20% → ganas ~35%",
+          "detail": "Con LTV moderado el looping amplifica sin ir a 2-4× (eso es LTV agresivo)."
         },
         {
-          "title": "SOL cae 33% → liquidación total",
-          "detail": "Pierdes TODOS tus SOL. Kamino Multiply lo hace con un clic: trátalo como un perpetuo apalancado.",
+          "title": "Caída fuerte → liquidación",
+          "detail": "A LTV agresivo (cerca del máximo) una caída de ~6-15% puede liquidarte. Kamino Multiply lo hace con un clic: trátalo como un perpetuo apalancado.",
           "warning": true
         }
       ],
-      "intro": "Repites el ciclo 3-4 veces: 10 SOL pasan a controlar ~25-30 SOL (2.5-3x)."
+      "intro": "Con LTV moderado (~40-50% por vuelta), 10 SOL pasan a controlar ~17-18 SOL (~1.8×). A LTV agresivo el apalancamiento puede llegar a 2-4×."
     },
     "Ejemplo Práctico: Pedir Prestado Paso a Paso": {
       "kind": "steps",
@@ -2433,7 +2433,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Monitorea tu Health Factor",
-          "detail": "Debería estar en ~2.0. Si cae a 1.3, actúa: deposita más o repaga."
+          "detail": "Con 50% LTV y umbral 80%, HF ≈ 1.6. Meta profesional: HF ≥ 2.0 (implica ~40% LTV). Si cae a 1.3, actúa: deposita más o repaga."
         },
         {
           "title": "Repaga y recupera",
@@ -2784,7 +2784,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Network",
           "title": "Helium (HNT)",
-          "text": "Red descentralizada de IoT (LoRaWAN) y 5G/WiFi móvil. ~376,000 hotspots activos (2026, tras el pico de ~1M en 2022). Desde HIP-138 (enero 2025) todo se paga en HNT. Plan móvil de $15-30/mes en USA."
+          "text": "Red descentralizada de IoT (LoRaWAN) y 5G/celular móvil. ~376,000 hotspots activos (2026, tras el pico de ~1M en 2022). Desde HIP-138 (enero 2025) todo se paga en HNT. Plan móvil de $15-30/mes en USA."
         },
         {
           "icon": "Globe",
@@ -2832,7 +2832,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "left": {
         "title": "Solana (Monolítico)",
         "points": [
-          "Una sola cadena rápida: ~4,000 TPS, ~400ms",
+          "Una sola cadena rápida: miles de TPS, ~400ms",
           "Toda la liquidez en un solo lugar",
           "Componibilidad sincrónica: operaciones atómicas complejas",
           "Sin bridges ni fragmentación",
@@ -2937,7 +2937,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Lenguaje: Rust, seguridad de memoria por compilador",
           "En producción desde 2020, años probado en mainnet",
-          "TPS real: ~2,000-4,000 por segundo",
+          "TPS: miles totales (incl. votos); usuarios ~cientos a ~1-3k",
           "Equipo: Anza, expertos en blockchain",
           "Ventaja: estabilidad probada, herramientas maduras",
           "Limitación: techo de rendimiento por diseño original"
@@ -2948,7 +2948,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Firedancer (Jump - C)",
         "points": [
           "Lenguaje: C, control total de memoria y hardware",
-          "En mainnet desde finales de 2025, adopción gradual",
+          "Frankendancer en mainnet (~20-26% del stake a mediados de 2026); Firedancer completo (v1.0) alcanzó testnet en junio de 2026, mainnet aún en despliegue gradual",
           "TPS en laboratorio: 1,000,000+ (teórico máximo)",
           "Equipo: Jump Crypto, expertos en trading HFT",
           "Ventaja: rendimiento extremo y diversidad real de código",
@@ -3118,7 +3118,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "AlertTriangle",
           "title": "Aprobaciones Infinitas",
-          "text": "El \"unlimited approval\" deja al contrato gastar TODOS tus tokens en cualquier momento. Si es malicioso, te vacía sin avisar."
+          "text": "En Solana: lee la simulación (una firma puede vaciarte ya). En EVM: el unlimited approval deja gastar todos tus tokens después."
         },
         {
           "icon": "Eye",
@@ -3147,7 +3147,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Red correcta",
         "points": [
           "Solana (SOL) o \"Solana Network\"",
-          "La dirección de Phantom empieza con \"5xB7...\"",
+          "Dirección Solana (base58): verifica red + 6-8 chars inicio/fin (el prefijo no es una regla)",
           "Confirma y espera de 1 a 10 minutos",
           "Tus fondos llegan a tu Phantom"
         ],
@@ -3211,8 +3211,8 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "value": "Kraken",
-          "label": "Nunca hackeado en 10+ años",
-          "sublabel": "Mejor track record de seguridad",
+          "label": "Fuerte historial de seguridad",
+          "sublabel": "Sin pérdidas masivas de fondos de clientes en 10+ años (según su track record público)",
           "tone": "green"
         }
       ],
@@ -3235,9 +3235,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "tone": "neutral"
         },
         {
-          "value": "~$2-3",
+          "value": "0.001-0.01 SOL",
           "label": "Retiro (fee del exchange)",
-          "sublabel": "Binance ~0.01 SOL, fijo sin importar el monto",
+          "sublabel": "Binance suele cobrar ~0.001-0.01 SOL (~$0.15-$1.50). Revisa su página de fees antes de retirar",
           "tone": "amber"
         },
         {
@@ -3476,23 +3476,23 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "Conectas tu wallet",
-          "detail": "El sitio parece legítimo y te pide aprobar una transacción."
+          "detail": "El sitio parece legítimo y te pide firmar una transacción."
         },
         {
-          "title": "La firma esconde permisos ocultos",
-          "detail": "\"Approve unlimited access to all tokens\" transfiere TODO. Si lo ves, RECHAZA.",
+          "title": "En Solana, una sola firma puede vaciarte",
+          "detail": "No hace falta \"approve unlimited\": un contrato malicioso puede transferir SOL, tokens y NFTs en el mismo instante. En Ethereum/EVM el equivalente clásico es el allowance ilimitado.",
           "warning": true
         },
         {
           "title": "Lee la simulación de Phantom",
-          "detail": "Phantom muestra qué pasará. Si no esperabas eso, no firmes."
+          "detail": "Si muestra salidas de tokens/NFTs/SOL que no esperabas, RECHAZA. Si no entiendes la simulación, no firmes."
         },
         {
           "title": "Usa una burner wallet",
           "detail": "Prueba dApps nuevas con fondos mínimos. Tu wallet principal queda intacta."
         }
       ],
-      "intro": "Contratos maliciosos que vacían tu wallet cuando firmas. Así operan y cómo defenderte."
+      "intro": "Contratos maliciosos que vacían tu wallet cuando firmas. En Solana el momento crítico es la firma; lee siempre la simulación."
     },
     "Tu Privacidad en la Blockchain": {
       "kind": "steps",
@@ -3841,7 +3841,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "48 / 48",
           "label": "Ana (DCA disciplinado)",
-          "sublabel": "Compra el día 1 cada mes. Retorno histórico 150-400% (ventanas de 4+ años, hasta 2025; rendimientos pasados no garantizan futuros).",
+          "sublabel": "Compra el día 1 cada mes. Muchas ventanas de 4+ años hasta 2025 terminaron en positivo (a veces cientos de %); depende del inicio/fin. Pasado ≠ futuro.",
           "tone": "green"
         },
         {
@@ -3971,7 +3971,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "right": {
         "title": "Solana (SOL) · alta velocidad",
         "points": [
-          "Ultra-rápida (~4,000 TPS)",
+          "Rápida (miles de TPS totales)",
           "Fees de fracciones de centavo",
           "Ecosistema DeFi: Jupiter, Raydium, Marinade",
           "Ideal para experimentar: los errores cuestan centavos",

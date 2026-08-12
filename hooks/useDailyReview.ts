@@ -60,7 +60,10 @@ export function useDailyReview(): UseDailyReviewResult {
   const { streak, addXp, xp, refreshStreak, checkAchievements } = useGamification();
   const { user } = useAuth();
   const [reviewState, setReviewState] = useState<ReviewState>(() => loadReviewState());
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissed, setDismissed] = useState(() => {
+    const initial = loadReviewState();
+    return initial.dismissedDate === todayISO();
+  });
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   // True while the user is actively reviewing this visit — keeps the card in
@@ -70,8 +73,12 @@ export function useDailyReview(): UseDailyReviewResult {
   const completions = useMemo(
     () =>
       progress
-        .filter((p) => p.completed && p.completedAt)
-        .map((p) => ({ lessonId: p.lessonId, completedAt: p.completedAt! })),
+        .filter((p) => p.completed)
+        .map((p) => ({
+          lessonId: p.lessonId,
+          // Legacy rows may lack completed_at; fall back so they still enter the pool.
+          completedAt: p.completedAt || '1970-01-01T00:00:00.000Z',
+        })),
     [progress],
   );
 
@@ -126,21 +133,25 @@ export function useDailyReview(): UseDailyReviewResult {
         lastDate: today,
         lastQuestionId: question.questionId,
         countToday: reviewState.lastDate === today ? reviewState.countToday + 1 : 1,
+        dismissedDate: null,
       };
       setReviewState(nextState);
       saveReviewState(nextState);
       recordReviewAnswer(question.questionId, correct);
-      addXp(REVIEW_XP);
 
       if (user) {
-        // Persist the activity (streak qualification), then refresh the streak
-        // so the navbar chip updates now, not on the next page load, and check
-        // streak/XP achievements against the fresh values.
+        // Persist the activity first; only award XP after the server confirms
+        // so the navbar XP chip never lies about an unsynced review.
         void logReviewActivity(user.id, question.questionId, correct).then(async (logged) => {
           if (!logged) return;
+          addXp(REVIEW_XP);
           const freshStreak = await refreshStreak();
           const completedCount = completions.length;
           const totalLessons = getAllLessonsOrdered().length;
+          const activityDates = [
+            ...completions.map((c) => todayISO(new Date(c.completedAt))),
+            today,
+          ];
           checkAchievements({
             completedLessonIds: completions.map((c) => c.lessonId),
             completedCount,
@@ -149,8 +160,15 @@ export function useDailyReview(): UseDailyReviewResult {
               totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0,
             xp: xp + REVIEW_XP,
             streak: freshStreak,
+            completions: completions.map((c) => ({
+              lessonId: c.lessonId,
+              completedAt: c.completedAt,
+            })),
+            activityDates,
           });
         });
+      } else {
+        addXp(REVIEW_XP);
       }
     },
     [question, selectedIndex, today, reviewState, user, addXp, refreshStreak, checkAchievements, completions, xp],
@@ -172,6 +190,7 @@ export function useDailyReview(): UseDailyReviewResult {
       lastDate: today,
       lastQuestionId: reviewState.lastQuestionId,
       countToday: reviewState.lastDate === today ? reviewState.countToday : 0,
+      dismissedDate: today,
     };
     setReviewState(nextState);
     saveReviewState(nextState);

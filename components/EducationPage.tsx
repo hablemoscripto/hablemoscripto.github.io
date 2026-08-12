@@ -341,6 +341,18 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           </div>
 
           <div className="flex items-center gap-4 sm:gap-6">
+            {entitlements.courseTier !== 'free' && (
+              <div
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/30"
+                aria-label="Miembro Fundador"
+              >
+                <Award size={12} className="text-brand-400" aria-hidden="true" />
+                <span className="text-[10px] font-black uppercase tracking-[0.18em] text-brand-300">
+                  Fundador
+                </span>
+              </div>
+            )}
+
             {hasCommunityAccess(entitlements) && (
               <div
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/30"
@@ -605,7 +617,12 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                     </p>
                     {unlocked ? (
                       <div className="inline-block px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 text-[10px] font-bold">
-                        {new Date(unlocked.unlockedAt!).toLocaleDateString('es-CO', { day: 'numeric', month: 'short' })}
+                        {unlocked.unlockedAt
+                          ? new Date(unlocked.unlockedAt).toLocaleDateString('es-CO', {
+                              day: 'numeric',
+                              month: 'short',
+                            })
+                          : 'Desbloqueado'}
                       </div>
                     ) : (
                       <>

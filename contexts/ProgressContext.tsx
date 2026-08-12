@@ -1,4 +1,13 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+  ReactNode,
+} from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
 import { useGamification } from './GamificationContext';
@@ -26,11 +35,50 @@ interface ProgressContextType {
 
 const ProgressContext = createContext<ProgressContextType | undefined>(undefined);
 
+function buildActivityDates(completedItems: LessonProgress[]): string[] {
+  return completedItems
+    .filter((p) => p.completedAt)
+    .map((p) => new Date(p.completedAt as string).toLocaleDateString('en-CA'));
+}
+
+function buildAchievementSnapshot(
+  completedItems: LessonProgress[],
+  streak: number,
+  xpOverride?: number
+) {
+  const allLessons = getAllLessonsOrdered();
+  const completedCount = completedItems.length;
+  const totalLessons = allLessons.length;
+  return {
+    completedLessonIds: completedItems.map((p) => p.lessonId),
+    completedCount,
+    totalLessons,
+    progressPercentage: totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0,
+    xp: xpOverride ?? completedCount * 100,
+    streak,
+    completions: completedItems.map((p) => ({
+      lessonId: p.lessonId,
+      completedAt: p.completedAt,
+    })),
+    activityDates: buildActivityDates(completedItems),
+  };
+}
+
 export function ProgressProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState<LessonProgress[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
-  const { addXp, checkAchievements, refreshStreak, xp } = useGamification();
+  const {
+    addXp,
+    checkAchievements,
+    refreshStreak,
+    xp,
+    loading: gamificationLoading,
+  } = useGamification();
+  // Silent retroactive check + date repair runs once per user after both
+  // progress and existing achievements have loaded (avoids the race that
+  // stamped every logro with "now").
+  const silentCheckUserRef = useRef<string | null>(null);
 
   const loadProgress = useCallback(async () => {
     if (!user) return;
@@ -47,44 +95,30 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         return;
       }
 
-      const formattedProgress: LessonProgress[] = (data || []).map((item: { lesson_id: number; completed: boolean; quiz_score: number | null; completed_at: string | null }) => ({
-        lessonId: item.lesson_id,
-        completed: item.completed,
-        quizScore: item.quiz_score,
-        completedAt: item.completed_at,
-      }));
+      const formattedProgress: LessonProgress[] = (data || []).map(
+        (item: {
+          lesson_id: number;
+          completed: boolean;
+          quiz_score: number | null;
+          completed_at: string | null;
+        }) => ({
+          lessonId: item.lesson_id,
+          completed: item.completed,
+          quizScore: item.quiz_score,
+          completedAt: item.completed_at,
+        })
+      );
 
       setProgress(formattedProgress);
-
-      // Retroactive achievement check (silent — no toasts on page load).
-      // Use authoritative values rather than the context closures: XP is exactly
-      // 100 per completed lesson, and the streak is recomputed here. The closures
-      // (xp/streak) can still be 0 on first load because GamificationContext's
-      // fetchUserStats races this — which left streak achievements (streak_3/_7)
-      // never unlocking even with a qualifying streak.
-      const completedItems = formattedProgress.filter(p => p.completed);
-      const allLessons = getAllLessonsOrdered();
-      const completedCount = completedItems.length;
-      const totalLessons = allLessons.length;
-      const freshStreak = await refreshStreak();
-      checkAchievements({
-        completedLessonIds: completedItems.map(p => p.lessonId),
-        completedCount,
-        totalLessons,
-        progressPercentage: totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0,
-        xp: completedCount * 100,
-        streak: freshStreak,
-      }, true);
     } catch (error) {
       reportError(error, { component: 'ProgressContext', action: 'loadProgress' });
     } finally {
       setLoading(false);
     }
     // Keyed on user.id (not the object): auth events mint fresh user objects,
-    // and identity-keying refired this whole load (progress fetch + streak
-    // fetch + achievement check) several times per page view.
+    // and identity-keying refired this whole load several times per page view.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.id, checkAchievements, refreshStreak]);
+  }, [user?.id]);
 
   useEffect(() => {
     if (user) {
@@ -92,9 +126,36 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     } else {
       setProgress([]);
       setLoading(false);
+      silentCheckUserRef.current = null;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id, loadProgress]);
+
+  // After achievements are in memory and progress is loaded: grant any missing
+  // logros and rewrite unlocked_at earlier when lesson history proves it.
+  useEffect(() => {
+    if (!user || loading || gamificationLoading) return;
+    if (silentCheckUserRef.current === user.id) return;
+    silentCheckUserRef.current = user.id;
+
+    const completedItems = progress.filter((p) => p.completed);
+    void (async () => {
+      const freshStreak = await refreshStreak();
+      // Review days also count for streak logros; missing table degrades fine.
+      const { data: reviews, error: reviewsError } = await supabase
+        .from('daily_review_activity')
+        .select('review_date')
+        .eq('user_id', user.id);
+      const reviewDates =
+        reviewsError || !reviews
+          ? []
+          : reviews.filter((r) => r.review_date).map((r) => String(r.review_date));
+
+      const snapshot = buildAchievementSnapshot(completedItems, freshStreak);
+      snapshot.activityDates = [...new Set([...snapshot.activityDates, ...reviewDates])];
+      checkAchievements(snapshot, true);
+    })();
+  }, [user, loading, gamificationLoading, progress, refreshStreak, checkAchievements]);
 
   const isLessonCompleted = useCallback((lessonId: number): boolean => {
     return progress.some((p) => p.lessonId === lessonId && p.completed);
@@ -108,33 +169,50 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const markLessonComplete = useCallback(async (lessonId: number, quizScore?: number): Promise<boolean> => {
     if (!user) return false;
 
-    const wasAlreadyCompleted = progress.some(p => p.lessonId === lessonId && p.completed);
+    const existing = progress.find((p) => p.lessonId === lessonId);
+    const wasAlreadyCompleted = Boolean(existing?.completed);
+    const now = new Date().toISOString();
+    // Never clobber the original acquisition timestamp on quiz retakes — it
+    // is the source of truth for logro dates.
+    const completedAt = wasAlreadyCompleted && existing?.completedAt ? existing.completedAt : now;
 
     try {
-      const { error } = await supabase
-        .from('user_progress')
-        .upsert({
-          user_id: user.id,
-          lesson_id: lessonId,
-          completed: true,
-          quiz_score: quizScore ?? null,
-          completed_at: new Date().toISOString(),
-        }, {
-          onConflict: 'user_id,lesson_id'
-        });
+      const payload: {
+        user_id: string;
+        lesson_id: number;
+        completed: boolean;
+        quiz_score: number | null;
+        completed_at?: string;
+      } = {
+        user_id: user.id,
+        lesson_id: lessonId,
+        completed: true,
+        quiz_score: quizScore ?? null,
+      };
+      if (!wasAlreadyCompleted) {
+        payload.completed_at = completedAt;
+      }
+
+      const { error } = await supabase.from('user_progress').upsert(payload, {
+        onConflict: 'user_id,lesson_id',
+      });
 
       if (error) {
         reportError(error, { component: 'ProgressContext', action: 'markLessonComplete' });
         return false;
       }
 
-      // Update local state
       setProgress((prev) => {
-        const existing = prev.find((p) => p.lessonId === lessonId);
-        if (existing) {
+        const row = prev.find((p) => p.lessonId === lessonId);
+        if (row) {
           return prev.map((p) =>
             p.lessonId === lessonId
-              ? { ...p, completed: true, quizScore: quizScore ?? p.quizScore, completedAt: new Date().toISOString() }
+              ? {
+                  ...p,
+                  completed: true,
+                  quizScore: quizScore ?? p.quizScore,
+                  completedAt: p.completedAt ?? completedAt,
+                }
               : p
           );
         }
@@ -144,7 +222,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
             lessonId,
             completed: true,
             quizScore: quizScore ?? null,
-            completedAt: new Date().toISOString(),
+            completedAt,
           },
         ];
       });
@@ -163,19 +241,16 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       // the value frozen at login.
       const newStreak = await refreshStreak();
 
-      const allLessons = getAllLessonsOrdered();
-      const updatedCompleted = [...progress.filter(p => p.completed).map(p => p.lessonId), lessonId];
-      const completedCount = updatedCompleted.length;
-      const totalLessons = allLessons.length;
-      const newXp = xp + 100;
-      checkAchievements({
-        completedLessonIds: updatedCompleted,
-        completedCount,
-        totalLessons,
-        progressPercentage: totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0,
-        xp: newXp,
-        streak: newStreak,
-      });
+      const completedItems: LessonProgress[] = [
+        ...progress.filter((p) => p.completed && p.lessonId !== lessonId),
+        {
+          lessonId,
+          completed: true,
+          quizScore: quizScore ?? null,
+          completedAt,
+        },
+      ];
+      checkAchievements(buildAchievementSnapshot(completedItems, newStreak, xp + 100));
     }
 
     return true;

@@ -348,7 +348,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           { icon: Search, title: '1. Identifica las Zonas Clave', text: 'Abre el gráfico en timeframe diario o semanal. Busca los niveles donde el precio rebotó al menos 2-3 veces. Dibuja zonas (no líneas) en esos niveles. Estos son tus "campos de batalla".' },
           { icon: Crosshair, title: '2. Espera que el Precio Llegue a la Zona', text: 'No persigas el precio. Espera a que venga a TI, a una de tus zonas marcadas. La paciencia es lo que separa al trader del apostador.' },
           { icon: Eye, title: '3. Busca Confirmación', text: 'Cuando el precio toque tu zona, busca una vela de reversión (Hammer, Engulfing) con volumen alto. Sin confirmación, no entres.' },
-          { icon: Shield, title: '4. Coloca tu Stop Loss Fuera de la Zona', text: 'Si compras en soporte, tu stop va debajo del mínimo de la zona + un filtro de 1-2%. Si el precio llega ahí, tu tesis estaba equivocada y sales protegiendo capital.' }
+          { icon: Shield, title: '4. Coloca tu Stop Loss Fuera de la Zona', text: 'Un **stop loss** es la orden (o regla) que cierra tu posición si el precio se mueve en tu contra hasta un nivel donde tu tesis ya no vale. Si compras en soporte, tu stop va debajo del mínimo de la zona + un filtro de 1-2%. Si el precio llega ahí, tu tesis estaba equivocada y sales protegiendo capital. **Profundizamos tipos de stop, tamaño de posición (1-2%) y la realidad de los DEXs en la lección "El Arte del Stop Loss" de este nivel.**' }
         ],
         highlight: {
           title: 'Práctica en TradingView',
@@ -485,7 +485,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       },
       {
         type: 'main',
-        title: 'Cruces de EMAs: Las Señales que Mueven Mercados',
+        title: 'Cruces de Medias (Golden / Death Cross)',
         content: 'Cuando las medias móviles se cruzan entre sí, generan señales que los traders institucionales y algoritmos siguen de cerca. La forma canónica de estos cruces usa las SMA de 50 y 200 en gráfico diario; las versiones con EMAs son variantes más rápidas. Estos cruces no son instantáneos, se desarrollan durante días o semanas:',
         features: [
           { icon: TrendingUp, title: 'Golden Cross (Cruz Dorada)', text: 'Ocurre cuando la media rápida (50) cruza **por encima** de la media lenta (200) en diario. La definición canónica usa SMA 50/200. Es señal alcista de mediano plazo, pero retrasada: confirma tendencias ya en marcha. Varios Golden Cross de Bitcoin precedieron subidas importantes; otros llegaron cuando gran parte del movimiento ya había pasado.' },
@@ -1091,9 +1091,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: '¿Qué es el Halving y Por Qué Importa?',
         content: 'Cada ~210,000 bloques (aproximadamente 4 años), la cantidad de Bitcoin nuevo que se crea por bloque se reduce exactamente a la **mitad**. Esto está programado en el código de Bitcoin y NADIE puede cambiarlo, ni gobiernos, ni Elon Musk, ni el creador de Bitcoin.',
         features: [
-          { icon: Percent, title: 'La Matemática del Halving', text: '2009: se creaban **50 BTC** por bloque (cada 10 minutos). 2012 (1er halving): **25 BTC**. 2016: **12.5 BTC**. 2020: **6.25 BTC**. 2024: **3.125 BTC**. Cada halving la emisión nueva se corta a la mitad, mientras la demanda sigue creciendo. Oferta que decrece + demanda que crece = precio que sube.' },
+          { icon: Percent, title: 'La Matemática del Halving', text: '2009: se creaban **50 BTC** por bloque (cada 10 minutos). 2012 (1er halving): **25 BTC**. 2016: **12.5 BTC**. 2020: **6.25 BTC**. 2024: **3.125 BTC**. Cada halving la emisión nueva se corta a la mitad. Históricamente eso ha coincidido con presión alcista **si** la demanda se mantiene o crece; no es una ecuación garantizada (liquidez global, ciclos macro y posición en el ciclo también pesan).' },
           { icon: Lock, title: 'El Shock de Oferta', text: 'Imagina que todos los días se producen 900 BTC nuevos (pre-halving 2024). Los mineros venden la mayoría para pagar electricidad. De repente, la producción baja a 450 BTC diarios. Los compradores que antes absorbían 900 ahora compiten por solo 450. Misma demanda, mitad de oferta nueva: presión alcista. Eso sí, hoy la emisión nueva es menos del 1% del supply al año, así que el efecto directo es cada vez más pequeño; los ciclos también han coincidido con los ciclos de liquidez global.' },
-          { icon: Clock, title: '¿Cuándo es el Próximo?', text: 'El último halving fue en **abril 2024**. El próximo será aproximadamente en **2028**. Para 2140, se habrá minado el último Bitcoin. Después de eso, cero emisión nueva, Bitcoin será puramente deflacionario.' }
+          { icon: Clock, title: '¿Cuándo es el Próximo?', text: 'El último halving fue en **abril 2024**. El próximo será aproximadamente en **2028**. Para 2140, se habrá minado el último Bitcoin. Después de eso, emisión nueva = 0; el supply circulante solo puede estancarse o bajar por monedas perdidas (no es "deflación de precios" automática).' }
         ]
       },
       {
@@ -1103,7 +1103,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: TrendingDown, title: '1. Bear Market (Invierno Crypto)', text: 'Duración: 12-18 meses. El precio cae **-70% a -85%** desde el máximo. Los medios declaran "crypto muerto". Los novatos que compraron en la euforia venden en pánico con pérdidas masivas. Twitter crypto se vacía. Los exchanges despiden empleados. **Paradójicamente, este es el MEJOR momento para comprar.** Las fortunas de crypto se construyen en el bear market.' },
           { icon: Activity, title: '2. Acumulación (Primavera Silenciosa)', text: 'Duración: 6-12 meses. El precio se estabiliza y se mueve lateral. El volumen es bajo. Nadie habla de crypto. Los que quedaron empiezan a comprar silenciosamente. Las ballenas y fondos acumulan posiciones enormes. El halving generalmente ocurre en esta fase. **Si estás comprando aquí, estás con el dinero inteligente.**' },
-          { icon: Zap, title: '3. Bull Market (Verano Explosivo)', text: 'Duración: 12-18 meses post-halving. El precio rompe el ATH anterior. Los medios empiezan a hablar de crypto otra vez. Los primeros novatos entran. Bitcoin ha subido con fuerza desde el mínimo del bear, pero cada ciclo el múltiplo se reduce: aproximadamente 90×, 30×, 21× y 8× desde el mínimo del bear en los cuatro ciclos. Las altcoins han explotado más fuerte en ciclos pasados, aunque en 2024-25 la mayoría nunca se acercó a sus máximos de 2021. La euforia crece exponencialmente.' },
+          { icon: Zap, title: '3. Bull Market (Verano Explosivo)', text: 'Duración: 12-18 meses post-halving. El precio rompe el ATH anterior. Los medios empiezan a hablar de crypto otra vez. Los primeros novatos entran. Cada ciclo el múltiplo de Bitcoin **desde el precio del día del halving** se ha reducido: aproximadamente **~90×, ~30×, ~8× y ~2×** en los cuatro ciclos (halving → ATH). Desde el mínimo del bear anterior los números son otros (por ejemplo el ciclo 3: ~$3,200 → $69k ≈ 21×; el ciclo 4: ~$15,500 → $126k ≈ 8×). No mezcles las dos bases. Las altcoins han explotado más fuerte en ciclos pasados, aunque en 2024-25 la mayoría nunca se acercó a sus máximos de 2021. La euforia crece, pero el patrón no es una ley.' },
           { icon: AlertTriangle, title: '4. Distribución (Otoño de la Euforia)', text: 'Duración: 2-6 meses. El pico del ciclo. Tu tía te pregunta cómo comprar Dogecoin. Los taxistas hablan de crypto. "Esta vez es diferente" se repite en todos lados. Los insiders y ballenas que compraron en el bear están vendiendo silenciosamente a los novatos que compran con FOMO. **Cuando la euforia es máxima, el techo está cerca.**' }
         ]
       },
@@ -2341,14 +2341,14 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 25,
     title: 'Jupiter: El Rey de los DEXs',
     level: 'Avanzado',
-    number: '1 de 13',
+    number: '2 de 13',
     duration: '35 min',
     type: 'Tutorial Práctico',
     description: 'Olvida los exchanges centralizados. Jupiter es el agregador de liquidez más poderoso de Solana: mejor precio, DCA automático, órdenes límite, y perpetuos, todo descentralizado, sin custodia, y con la mejor ejecución del mercado.',
     referrals: [
       {
         title: 'Jupiter',
-        description: 'El agregador de DEXs líder de Solana: el mejor precio en tus swaps, DCA automático y órdenes límite, todo sin custodia.',
+        description: 'El agregador de DEXs líder de Solana: el mejor precio en tus swaps, DCA automático y órdenes límite, todo sin custodia. Enlace de referido: si operas desde aquí, Hablemos Cripto puede recibir una comisión; tú no pagas más por usarlo.',
         link: 'https://jup.ag/?ref=6kg0a2qpd813',
         buttonText: 'Abrir Jupiter'
       }
@@ -2369,7 +2369,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Cuando haces un swap en Jupiter, ocurre algo sofisticado detrás de escena que te beneficia enormemente como usuario:',
         features: [
           { icon: Search, title: 'Descubrimiento de Rutas', text: 'Jupiter analiza todos los pools de liquidez disponibles en Solana en milisegundos. Evalúa el precio, la profundidad de liquidez, y el slippage en cada uno. Si tienes una orden de $5,000, puede que el mejor precio sea dividirla: $3,000 por Raydium y $2,000 por Orca, Jupiter calcula esto automáticamente y ejecuta todo en una sola transacción atómica.' },
-          { icon: Zap, title: 'Mejor Precio Garantizado', text: 'El resultado es que casi siempre obtienes mejor precio que usando cualquier DEX individual directamente. Para órdenes pequeñas (<$1,000), la diferencia puede ser mínima. Pero para órdenes de $5,000+, la diferencia puede ser del 0.5-2%, que en trading activo se acumula rápidamente.' },
+          { icon: Zap, title: 'Mejor Precio Habitual', text: 'El resultado es que casi siempre obtienes mejor precio que usando cualquier DEX individual directamente. Para órdenes pequeñas (<$1,000), la diferencia puede ser mínima. Pero para órdenes de $5,000+, la diferencia puede ser del 0.5-2%, que en trading activo se acumula rápidamente. No es una garantía absoluta: en tokens ilíquidos o con fallos de ruta, revisa el price impact antes de firmar.' },
           { icon: Shield, title: 'Sin Custodia, Sin Permisos', text: 'A diferencia de Binance o cualquier CEX, Jupiter nunca toca tus fondos. Conectas tu wallet, firmas la transacción, y los tokens van directamente de tu wallet al pool y de vuelta. Si Jupiter desapareciera mañana, tus fondos están intactos en tu wallet. No hay riesgo de "FTX" con un DEX.' }
         ],
         highlight: {
@@ -2561,7 +2561,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 26,
     title: 'Liquidez y Yield Farming',
     level: 'Avanzado',
-    number: '3 de 13',
+    number: '4 de 13',
     duration: '42 min',
     type: 'Estrategias',
     description: 'Conviértete en el banco. Aprende a proveer liquidez en Raydium, Orca y Meteora para ganar comisiones por cada swap que otros hacen. Entiende la impermanent loss, los pools concentrados, y cuándo vale la pena (y cuándo no).',
@@ -2745,7 +2745,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 27,
     title: 'Lending & Borrowing',
     level: 'Avanzado',
-    number: '4 de 13',
+    number: '5 de 13',
     duration: '38 min',
     type: 'Tutorial Práctico',
     description: 'Accede a liquidez sin vender tus criptos. Deposita SOL como colateral, pide prestado USDC, y mantén tu exposición alcista. Pero cuidado: si no entiendes la liquidación, puedes perder todo.',
@@ -2767,7 +2767,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           { icon: Lock, title: 'Colateral', text: 'El activo que depositas como garantía. Si depositas 10 SOL a $180 cada uno, tu colateral vale $1,800. El protocolo lo "bloquea" hasta que devuelvas tu préstamo. Tu colateral sigue siendo tuyo, pero si no pagas o si pierde demasiado valor, el protocolo puede venderlo para cubrir la deuda.' },
           { icon: Percent, title: 'LTV (Loan-to-Value)', text: 'El porcentaje de tu colateral que puedes pedir prestado. Si el LTV máximo es 75%, con $1,800 de colateral puedes pedir hasta $1,350 prestados. Pero NUNCA uses el máximo, es jugar con fuego. Con LTV de 75% y un umbral de liquidación de 80%, una caída de apenas ~6% en tu colateral te liquida (1 − 0.75/0.80 = 6.25%). Con LTV de 50%, necesitas una caída de ~35-40%. La regla profesional: mantén tu LTV por debajo del 50-60%.' },
           { icon: AlertTriangle, title: 'Liquidación', text: 'Si el valor de tu colateral cae tanto que tu LTV supera el umbral de liquidación, el protocolo vende automáticamente (parte de) tu colateral para pagar la deuda. No hay advertencia humana, es un bot que ejecuta en milisegundos. Pierdes tu colateral vendido más una penalización de liquidación (típicamente 5-10%). La liquidación es **irreversible**.' },
-          { icon: Activity, title: 'Health Factor', text: 'Es el indicador clave que debes monitorear. Health Factor = Valor del Colateral × Factor de Liquidación / Deuda Total. Si baja de 1.0, te liquidan. A 1.5 estás en zona de peligro. A 2.0+ estás relativamente seguro. Los protocolos muestran esto claramente en su interface, no lo ignores.' }
+          { icon: Activity, title: 'Health Factor', text: 'Es el indicador clave que debes monitorear. Health Factor = Valor del Colateral × Factor de Liquidación / Deuda Total. Si baja de 1.0, te liquidan. Ejemplo: a 50% LTV con factor 80%, HF ≈ 1.6. A 1.5 estás en zona de precaución. Meta profesional: HF ≥ 2.0 (suele implicar ~40% LTV). Los protocolos muestran esto en su interface: no lo ignores.' }
         ]
       },
       {
@@ -2787,7 +2787,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: Wallet, title: 'Paso 1: Deposita Colateral', text: 'Conecta tu wallet a Kamino (app.kamino.finance). Selecciona "Lend" o "Supply". Deposita 10 SOL (valor: ~$1,800 si SOL = $180). Tu colateral aparece en el dashboard con su valor en USD actualizado en tiempo real.' },
           { icon: Banknote, title: 'Paso 2: Pide Prestado (Conservador)', text: 'Selecciona "Borrow" → USDC. Con $1,800 de colateral, el protocolo te permite pedir hasta ~$1,350 (75% LTV). Pero nosotros pedimos solo $900 (50% LTV). ¿Por qué? Porque SOL puede caer 30% en un día, y con 50% LTV tienes margen amplio antes de liquidación.' },
-          { icon: Activity, title: 'Paso 3: Monitorea tu Health Factor', text: 'Después de pedir prestado, tu Health Factor debería estar en ~2.0 o más. Configura alertas (algunos protocolos las tienen integradas, o usa herramientas como Step Finance). Si cae a 1.3, es momento de actuar: depositar más colateral o devolver parte del préstamo.' },
+          { icon: Activity, title: 'Paso 3: Monitorea tu Health Factor', text: 'Con 50% LTV y umbral de liquidación del 80%, tu Health Factor ronda **~1.6** (fórmula: colateral × 0.80 / deuda). Eso es aceptable si monitoreas, pero la meta profesional es **HF ≥ 2.0**, lo que implica bajar a ~40% LTV. Configura alertas (algunos protocolos las tienen integradas, o usa herramientas como Step Finance). Si cae a 1.3, actúa: deposita más colateral o devuelve parte del préstamo.' },
           { icon: RefreshCw, title: 'Paso 4: Repaga y Recupera', text: 'Cuando quieras cerrar la posición, devuelve los $900 USDC + los intereses acumulados. El protocolo libera tu colateral (10 SOL) de vuelta a tu wallet. Si SOL subió mientras tanto, felicidades: accediste a $900 sin vender tus SOL que ahora valen más.' }
         ]
       },
@@ -2798,7 +2798,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           title: 'Conservador (Recomendado)',
           points: [
             'LTV del 40-50% (pides menos de la mitad del valor)',
-            'Health Factor de 2.0+ en todo momento',
+            'Health Factor alto (meta ≥2.0 ≈ ~40% LTV; a 50% LTV con LT 80% ≈ 1.6)',
             'Colateral en activos estables o blue chips (SOL, ETH)',
             'Monitoreo semanal es suficiente',
             'Riesgo de liquidación: muy bajo',
@@ -2844,7 +2844,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           'Lending en DeFi = depositar colateral y pedir prestado contra él. Es como un préstamo bancario pero instantáneo, sin papeleo, y ejecutado por smart contracts. Kamino y MarginFi son los protocolos principales de Solana.',
           'El LTV (Loan-to-Value) determina cuánto puedes pedir prestado. NUNCA uses el máximo permitido. La regla profesional: mantén tu LTV en 40-50% para tener margen amplio contra caídas de mercado.',
           'La liquidación es automática e irreversible. Si tu Health Factor cae debajo de 1.0, un bot vende tu colateral instantáneamente. Monitorea tu Health Factor y configura alertas.',
-          'El looping (depositar → pedir prestado → comprar más → repetir) amplifica tu exposición 2-4×. Amplifica ganancias Y pérdidas. Solo para traders experimentados con capital que pueden perder.',
+          'El looping (depositar → pedir prestado → comprar más → repetir) con LTV moderado (~40-50% por vuelta) da ~1.5-2× de exposición; con LTV agresivo puede llegar a 2-4×. Amplifica ganancias Y pérdidas. Solo para traders experimentados con capital que pueden perder.',
           'Errores fatales: pedir prestado al máximo LTV, no monitorear en mercados volátiles, usar colateral ultra-volátil (memecoins). Cualquiera de estos puede liquidarte completamente.',
           'Caso de uso ideal para principiantes en lending: tienes SOL que no quieres vender, necesitas USDC temporal, pides prestado al 40-50% LTV, usas el USDC, devuelves cuando puedas, y recuperas tu SOL intacto.'
         ]
@@ -2881,12 +2881,12 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           question: '¿Qué es el "looping" en lending y por qué lo usan las ballenas?',
           options: [
             { id: 'a', text: 'Es pedir prestado y repagar constantemente sin propósito' },
-            { id: 'b', text: 'Depositar colateral → pedir prestado → comprar más colateral → depositar → repetir. Amplifica tu exposición 2-4× al activo. Si SOL sube 20%, ganas 40-80%. Pero si cae 20%, puedes perder todo' },
+            { id: 'b', text: 'Depositar colateral → pedir prestado → comprar más colateral → depositar → repetir. Con LTV moderado ~1.5-2× de exposición; con LTV agresivo 2-4×. Si SOL sube ganas más, pero si cae puedes liquidarte y perder el colateral' },
             { id: 'c', text: 'Es una forma de staking especial que combina rewards de varios validadores' },
             { id: 'd', text: 'Es ilegal en DeFi' }
           ],
           correctAnswer: 'b',
-          explanation: 'El looping es esencialmente apalancamiento construido con lending. Las ballenas lo usan para amplificar su exposición a SOL sin usar perpetuos. Kamino incluso tiene "Multiply" que lo automatiza. Pero amplifica TODO: ganancias Y pérdidas. Es solo para traders que entienden y aceptan el riesgo de liquidación total.'
+          explanation: 'El looping es esencialmente apalancamiento construido con lending. Con LTV moderado (~40-50% por vuelta) la exposición típica es ~1.5-2×; solo a LTV agresivo llegas a 2-4×. Las ballenas lo usan para amplificar SOL sin perpetuos. Kamino Multiply lo automatiza. Amplifica TODO: ganancias Y pérdidas. Solo para quien acepta el riesgo de liquidación total.'
         },
         {
           id: 'q4',
@@ -2941,7 +2941,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 28,
     title: 'Riesgos de DeFi: La Guía Completa',
     level: 'Avanzado',
-    number: '5 de 13',
+    number: '6 de 13',
     duration: '32 min',
     type: 'Seguridad',
     description: 'DeFi ofrece libertad financiera, pero la libertad viene con responsabilidad. Smart contract hacks, rug pulls, exploits de oráculos, y errores de usuario han costado más de $10 mil millones. Aprende a protegerte.',
@@ -2952,7 +2952,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'En DeFi, no hay banco que te reembolse si pierdes dinero. No hay "soporte al cliente" que revierta una transacción. No hay seguro de depósitos. **Tú eres responsable al 100% de tus fondos.** Esa es la belleza de la descentralización, y también su mayor riesgo. Desde 2020, más de $10 mil millones se han perdido en DeFi por hacks, exploits, rug pulls, y errores de usuario. Algunos de los protocolos más grandes y "seguros" del ecosistema han sido hackeados. Esto no significa que DeFi sea una estafa, significa que necesitas entender los riesgos para navegar este espacio de forma segura. En esta lección vas a aprender a identificar cada tipo de riesgo, cómo se manifiesta en la práctica, y qué puedes hacer para protegerte.',
         highlight: {
           title: 'La Estadística Que Importa',
-          text: 'Solo en 2024, más de $1.7 mil millones se perdieron en hackeos y exploits de DeFi. El hack más grande de la historia crypto fue el de Bybit en 2025: cerca de **$1,400 millones** robados mediante ingeniería social, y eso que era un exchange con seguridad profesional. Entre los puentes, el de Ronin (Axie Infinity) se llevó **$625 millones**. Entender estos riesgos no es opcional, es requisito de supervivencia.'
+          text: 'Solo en 2024, más de $1.7 mil millones se perdieron en hackeos y exploits de DeFi. Para calibrar la escala del riesgo en cripto en general (no solo DeFi on-chain), el incidente más grande de la historia reciente fue el de **Bybit en 2025**: cerca de **$1,400 millones** robados a un exchange centralizado (CEX) mediante ingeniería social, no un bug de un smart contract de DeFi. Entre los puentes on-chain, el de Ronin (Axie Infinity) se llevó **$625 millones**. Distinguir superficie de ataque (CEX vs protocolo vs bridge vs error de usuario) es parte de protegerte.'
         }
       },
       {
@@ -2991,7 +2991,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Irónicamente, la mayor causa de pérdida de fondos en DeFi no son los hackers, eres tú. Los errores de usuario son responsables de una porción enorme de fondos perdidos:',
         features: [
           { icon: Wallet, title: 'Enviar a Dirección Equivocada', text: 'Enviar SOL a una dirección de Ethereum, USDC a una wallet inexistente, o cualquier error de dirección. En blockchain, las transacciones son IRREVERSIBLES. No hay botón de "deshacer". Siempre envía una transacción de prueba pequeña primero (0.01 SOL) antes de enviar cantidades grandes.' },
-          { icon: Lock, title: 'Aprobar Contratos Maliciosos', text: 'Al conectar tu wallet a un sitio fraudulento y firmar una transacción, puedes dar permisos para que drenen tu wallet. NUNCA firmes transacciones en sitios que no reconoces. Lee lo que estás firmando en Phantom, si dice "Approve unlimited spending" para un sitio desconocido, rechaza inmediatamente.' },
+          { icon: Lock, title: 'Firmar Contratos Maliciosos', text: 'Al conectar tu wallet a un sitio fraudulento y firmar una transacción, puedes vaciar tu wallet en un instante. En **Solana** no hace falta un "approve unlimited": una sola firma maliciosa puede transferir tokens y NFTs. En **Ethereum/EVM** el patrón clásico es el allowance ilimitado ("Approve unlimited spending"). En ambos casos: NUNCA firmes en sitios que no reconoces. Lee la simulación de Phantom; si muestra salidas que no esperabas, rechaza.' },
           { icon: AlertTriangle, title: 'Perder la Frase Semilla', text: 'Si pierdes tu frase semilla y tu dispositivo falla, tus fondos se pierden PARA SIEMPRE. No hay soporte técnico, no hay "olvidé mi contraseña", no hay recuperación. Asegúrate de tener tu frase semilla respaldada en un medio físico seguro antes de depositar cantidades significativas en DeFi.' }
         ]
       },
@@ -3126,7 +3126,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 29,
     title: 'NFTs en Solana',
     level: 'Avanzado',
-    number: '7 de 13',
+    number: '8 de 13',
     duration: '30 min',
     type: 'Mercado',
     description: 'Los NFTs en Solana van mucho más allá de "JPEGs caros". Son acceso a comunidades exclusivas, herramientas de identidad digital, compresión que permite mintear millones por centavos, y un mercado profesional con Tensor y Magic Eden.',
@@ -3299,7 +3299,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 30,
     title: 'Airdrops y Points Farming',
     level: 'Avanzado',
-    number: '8 de 13',
+    number: '9 de 13',
     duration: '35 min',
     type: 'Estrategia',
     description: 'Los protocolos necesitan usuarios, y los recompensan con tokens de gobernanza. Solana ha tenido los airdrops más lucrativos de la historia: JTO, JUP, PYTH, W. Aprende a posicionarte como usuario temprano legítimamente.',
@@ -3478,7 +3478,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 31,
     title: 'DePIN: Infraestructura Física Descentralizada',
     level: 'Avanzado',
-    number: '9 de 13',
+    number: '10 de 13',
     duration: '28 min',
     type: 'Tendencias',
     description: 'Crypto sale del mundo digital al mundo físico. DePIN usa tokens para incentivar a millones de personas a construir infraestructura real: redes inalámbricas (Helium), mapas (Hivemapper), computación GPU (Render), y sensores ambientales. Solana es el epicentro.',
@@ -3546,7 +3546,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: Smartphone, title: 'Operar Hardware', text: 'Compras el dispositivo del proyecto (dashcam de Hivemapper ~$300, hotspot de Helium ~$200-500, o usas tu GPU existente para Render). Lo conectas y empiezas a ganar tokens. El ROI depende del proyecto, tu ubicación, y la demanda del servicio. Investiga el payback period (cuántos meses tarda en recuperar la inversión del hardware) antes de comprar.' },
           { icon: BarChart3, title: 'Invertir en Tokens', text: 'Si no quieres operar hardware, puedes comprar los tokens de los proyectos DePIN (HNT, HONEY, RENDER, IO). Es una apuesta en que la red va a crecer y generar más demanda del token. Los tokens DePIN tienden a estar más vinculados a métricas reales (número de dispositivos, revenue generado) que los memecoins, pero siguen siendo volátiles.' },
-          { icon: Search, title: 'Evaluar Proyectos DePIN', text: 'Antes de participar, evalúa: (1) ¿Hay demanda real por el servicio? (mapeo, WiFi, GPU sí tienen demanda). (2) ¿El modelo económico es sostenible? (¿los ingresos de clientes pagan las recompensas?). (3) ¿Cuántos dispositivos activos hay? (más dispositivos = red más valiosa). (4) ¿El payback period del hardware es razonable? (menos de 12-18 meses idealmente).' }
+          { icon: Search, title: 'Evaluar Proyectos DePIN', text: 'Antes de participar, evalúa: (1) ¿Hay demanda real por el servicio? (mapeo, conectividad IoT/celular, GPU sí tienen demanda). (2) ¿El modelo económico es sostenible? (¿los ingresos de clientes pagan las recompensas?). (3) ¿Cuántos dispositivos activos hay? (más dispositivos = red más valiosa). (4) ¿El payback period del hardware es razonable? (menos de 12-18 meses idealmente).' }
         ]
       },
       {
@@ -3641,7 +3641,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 32,
     title: 'Monolítico vs Modular: La Guerra de Arquitecturas',
     level: 'Avanzado',
-    number: '10 de 13',
+    number: '11 de 13',
     duration: '30 min',
     type: 'Técnico',
     description: 'El debate más importante de la industria: ¿es mejor una blockchain monolítica ultra-rápida (Solana) o un ecosistema modular de capas especializadas (Ethereum + L2s)? Entiende los trade-offs para tomar mejores decisiones de inversión.',
@@ -3660,7 +3660,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'El Enfoque Monolítico: La Tesis de Solana',
         content: 'Solana cree que la mejor blockchain es una sola cadena que hace todo extraordinariamente rápido. En lugar de dividir el trabajo en capas, optimiza una sola capa para manejar todo:',
         features: [
-          { icon: Zap, title: 'Velocidad Bruta', text: 'Solana procesa ~2,000-4,000 transacciones por segundo (TPS) en producción real, con una latencia de ~400 milisegundos. Un matiz honesto: esa cifra incluye los votos de consenso de los validadores; las transacciones de usuarios suelen rondar las ~800-1,500 TPS, aun así órdenes de magnitud más que Ethereum L1. El objetivo es llegar a cientos de miles de TPS con Firedancer. Todo esto en una sola capa, sin necesidad de L2s, rollups, ni bridges. La experiencia del usuario es instantánea: haces un swap en Jupiter y el resultado aparece en menos de un segundo.' },
+          { icon: Zap, title: 'Velocidad Bruta', text: 'Solana procesa miles de transacciones por segundo en producción (la cifra total incluye votos de consenso; las de usuarios suelen ir de cientos a ~1-3k según la carga), con latencia de ~400 milisegundos. Aun así, órdenes de magnitud más que Ethereum L1. El objetivo es llegar a cientos de miles de TPS con Firedancer. Todo esto en una sola capa, sin L2s ni bridges. Un swap en Jupiter se confirma en menos de un segundo.' },
           { icon: Layers, title: 'Componibilidad Sincrónica', text: 'Esta es quizás la ventaja más poderosa de Solana. En una sola transacción atómica, puedes: hacer un swap en Jupiter + depositar en Kamino + stakear el resultado en Jito. Las tres operaciones ocurren instantáneamente en el mismo bloque. Si alguna falla, TODAS se revierten. Esto permite construir operaciones DeFi complejas que son imposibles cuando las apps están en diferentes L2s.' },
           { icon: Server, title: 'La Apuesta en Hardware', text: 'La filosofía de Solana es que el hardware mejora constantemente (Ley de Moore). En lugar de diseñar software complejo para dividir la carga, Solana diseña software que aprovecha al máximo el hardware más potente disponible. A medida que los procesadores y la fibra óptica mejoran, Solana automáticamente se vuelve más rápida, sin necesidad de rediseños complejos.' },
           { icon: Activity, title: 'Mercados de Fees Localizados', text: 'Una crítica histórica a las cadenas monolíticas: si todo pasa en una sola cadena, un evento caliente (un mint masivo, un memecoin viral) congestiona a TODOS. Solana lo resolvió con mercados de fees localizados: los priority fees se calculan por cuenta, no globalmente. Si hay una guerra de fees por un token de moda, solo quienes compiten por ESE token pagan más; tu swap de SOL-USDC sigue costando fracciones de centavo. Es una ventaja arquitectónica que fortalece la tesis monolítica.' }
@@ -3815,10 +3815,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 33,
     title: 'Firedancer & El Futuro de Solana',
     level: 'Avanzado',
-    number: '11 de 13',
+    number: '12 de 13',
     duration: '25 min',
     type: 'Futuro',
-    description: 'Firedancer es la reescritura completa del software validador de Solana, construida por Jump Crypto, la firma de trading de alta frecuencia más sofisticada del mundo. Entiende por qué la diversidad de clientes es crucial para la seguridad, hasta dónde empuja Firedancer el rendimiento teórico (1M+ TPS en laboratorio, aunque en producción real rinde bastante menos; Frankendancer ya corre en mainnet y Firedancer completo alcanzó testnet a mediados de 2026), y qué significa esto para el futuro del ecosistema Solana junto con innovaciones como token extensions, compresión de estado y la expansión de la SVM.',
+    description: 'Firedancer es la reescritura completa del software validador de Solana, construida por Jump Crypto, la firma de trading de alta frecuencia más sofisticada del mundo. Entiende por qué la diversidad de clientes es crucial para la seguridad, hasta dónde empuja Firedancer el rendimiento teórico (1M+ TPS en laboratorio, aunque en producción real rinde bastante menos; Frankendancer ya corre en mainnet y Firedancer completo alcanzó testnet a mediados de 2026; cifras de stake verificadas a agosto 2026), y qué significa esto para el futuro del ecosistema Solana junto con innovaciones como token extensions, compresión de estado y la expansión de la SVM.',
     sections: [
       {
         type: 'intro',
@@ -3859,7 +3859,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           points: [
             'Lenguaje: Rust, seguridad de memoria garantizada por el compilador',
             'En producción desde 2020 con años de pruebas en mainnet',
-            'TPS real en producción: ~2,000-4,000 transacciones por segundo',
+            'Miles de TPS totales en producción (cientos a ~1-3k de usuarios según carga; la cifra total incluye votos)',
             'Equipo: Anza (ex-Solana Labs), expertos en blockchain',
             'Ventaja: estabilidad probada y ecosistema de herramientas maduro',
             'Limitación: optimizaciones de rendimiento tienen techo por diseño original'
@@ -4017,7 +4017,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 34,
     title: 'Seguridad Operacional Avanzada',
     level: 'Avanzado',
-    number: '12 de 13',
+    number: '1 de 13',
     duration: '30 min',
     type: 'Seguridad',
     description: 'La diferencia entre perder todo y dormir tranquilo es tu modelo de seguridad operacional. Aprende la arquitectura de wallets que usan los profesionales: cold storage para ahorros, hot wallets para operar, y burner wallets para experimentar. Domina la gestión de permisos, la simulación de transacciones, la protección contra phishing y social engineering, y las mejores prácticas de seed phrase que separan a los principiantes de los veteranos.',
@@ -4045,10 +4045,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Gestión de Permisos y Aprobaciones',
-        content: 'Cada vez que conectas tu wallet a una dApp y apruebas una transacción, potencialmente le das PERMISOS al smart contract. Algunos permisos son inofensivos. Otros pueden drenar tu wallet completa. Entender esto es la diferencia entre seguridad y catástrofe:',
+        content: 'Cada vez que conectas tu wallet a una dApp y firmas una transacción, estás autorizando un movimiento de valor. En **Solana** el riesgo principal es una firma maliciosa que mueve activos en el acto. En **Ethereum/EVM** el riesgo clásico es el allowance (permiso de gasto) que queda vivo después. Entender ambos es la diferencia entre seguridad y catástrofe:',
         features: [
-          { icon: AlertTriangle, title: 'Aprobaciones Infinitas: El Peligro Oculto', text: 'Muchas dApps solicitan "unlimited approval" (aprobación ilimitada) para que no tengas que aprobar cada transacción. Esto significa que el contrato puede gastar TODOS tus tokens de ese tipo en cualquier momento futuro. Si el contrato es hackeado o es malicioso, puede drenar tu balance completo sin que tú hagas nada más.' },
-          { icon: RefreshCw, title: 'Revocación de Permisos', text: 'En Ethereum, herramientas como revoke.cash te permiten ver y revocar permisos antiguos. En Solana, es diferente: el modelo de aprobaciones es más seguro por diseño (las aprobaciones "delegadas" son menos comunes). Aun así, debes auditar regularmente qué aplicaciones tienen acceso a tus cuentas.' },
+          { icon: AlertTriangle, title: 'Solana: La Firma Es el Momento Crítico', text: 'En Solana no hace falta un "unlimited approval" al estilo ERC-20: un contrato malicioso puede transferir SOL, tokens y NFTs en la misma transacción que firmas. La defensa es leer la **simulación** de Phantom (salidas inesperadas = rechaza) y usar burner wallets para dApps nuevas.' },
+          { icon: AlertTriangle, title: 'Ethereum/EVM: Aprobaciones Ilimitadas', text: 'En redes EVM (también dentro de Phantom), muchas dApps piden "unlimited approval" para no firmar cada swap. Eso deja al contrato gastar TODOS tus tokens de ese tipo en el futuro. Si el contrato es hackeado o malicioso, puede drenarte sin una nueva acción tuya. Usa revocación (revoke.cash) y prefer allowances limitados cuando puedas.' },
+          { icon: RefreshCw, title: 'Revocación y Auditoría', text: 'En Ethereum, revoke.cash (y similares) te permiten ver y revocar permisos antiguos. En Solana, las delegaciones de token son menos comunes; tu higiene principal es no firmar ciegamente y aislar fondos. Audita mensualmente qué apps usas y cierra cuentas de experimentación.' },
           { icon: Eye, title: 'Simulación de Transacciones', text: 'Antes de firmar cualquier transacción, Phantom y otras wallets te muestran una simulación de lo que hará. LEE ESTO. Si dice "Transfer all SOL to [dirección desconocida]", no firmes. La simulación de transacciones integrada de Phantom (que adquirió Blowfish, la empresa líder en esta tecnología, en 2024) detecta transacciones maliciosas automáticamente antes de que las firmes.' },
           { icon: Search, title: 'Verificación de Contratos', text: 'Antes de interactuar con un smart contract nuevo, verifica: ¿Está auditado? ¿Es open source? ¿Cuánto tiempo lleva en producción? ¿Cuánto TVL tiene? Un contrato con $50M en TVL y auditorías de Certik/Ottersec es muy diferente a uno sin auditar desplegado hace 2 horas.' }
         ]
@@ -4059,7 +4060,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         leftSide: {
           title: 'Señales de Phishing/Scam',
           points: [
-            'URLs con errores sutiles: "phantorn.app" en lugar de "phantom.app"',
+            'URLs con errores sutiles: "phantorn.com" o "phantomm.com" en lugar de "phantom.com"',
             'DMs en Discord/Telegram ofreciendo "airdrops exclusivos" o "soporte técnico"',
             'Pop-ups urgentes: "Verifica tu wallet en 24h o perderás tus fondos"',
             'Solicitan seed phrase bajo cualquier pretexto (NINGÚN servicio legítimo la pide)',
@@ -4107,7 +4108,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Lo Que Debes Recordar',
         items: [
           'Usa el modelo de 3 niveles: Cold Storage (80-90% en hardware wallet), Hot Wallet (5-15% para operaciones), Burner Wallets (mínimo para experimentar). La separación de fondos es tu defensa principal contra pérdidas catastróficas.',
-          'Las aprobaciones ilimitadas de smart contracts son un vector de ataque grave. Lee siempre la simulación antes de firmar, revoca permisos que no uses, y nunca apruebes transacciones que no entiendas completamente.',
+          'En Solana, lee siempre la simulación antes de firmar (una firma maliciosa puede vaciarte al instante). En EVM, las aprobaciones ilimitadas son un vector grave: revoca permisos que no uses. Nunca firmes lo que no entiendas.',
           'Tu seed phrase es sagrada: almacenamiento físico (nunca digital), múltiples copias en ubicaciones diferentes, y para grandes cantidades considera Shamir\'s Secret Sharing para dividirla en partes.',
           'La discreción es seguridad. No publiques tus holdings, no hables de cripto con extraños, y ten un plan de herencia para que tus fondos no se pierdan si te pasa algo.',
           'Desarrolla hábitos de seguridad: dispositivo dedicado para cripto, VPN en redes públicas, verificación manual de cada URL y cada dirección, y transacciones de prueba antes de enviar montos grandes.',
@@ -4131,7 +4132,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         },
         {
           id: 'q2',
-          question: 'Una dApp te pide "unlimited approval" para gastar tus USDC. ¿Qué significa esto?',
+          question: 'En una red EVM (o un dApp de Ethereum dentro de Phantom) te piden "unlimited approval" para gastar tus USDC. ¿Qué significa esto?',
           options: [
             { id: 'a', text: 'Solo puede usar los USDC que tú envíes manualmente a la dApp' },
             { id: 'b', text: 'El contrato puede gastar TODOS tus USDC de esa wallet en cualquier momento, sin pedir permiso adicional' },
@@ -4139,7 +4140,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Solo aprueba el gasto para esa transacción específica' }
           ],
           correctAnswer: 'b',
-          explanation: 'Una aprobación ilimitada (unlimited approval) le da al smart contract permiso para gastar todos tus tokens de ese tipo. Si el contrato es hackeado o resulta malicioso, puede drenar tu balance completo sin interacción adicional. Por eso es importante revocar permisos que ya no uses.'
+          explanation: 'En redes EVM, una aprobación ilimitada (unlimited approval) le da al smart contract permiso para gastar todos tus tokens de ese tipo. Si el contrato es hackeado o resulta malicioso, puede drenar tu balance sin interacción adicional. Revoca permisos que ya no uses. En Solana el riesgo principal es distinto: una sola firma maliciosa puede mover activos al instante; lee siempre la simulación.'
         },
         {
           id: 'q3',
@@ -4196,7 +4197,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 40,
     title: 'Staking SOL: Gana por Asegurar la Red',
     level: 'Avanzado',
-    number: '2 de 13',
+    number: '3 de 13',
     duration: '30 min',
     type: 'Tutorial + Concepto',
     description: 'El staking es la forma más simple de poner tu SOL a trabajar: delegas a un validador, ayudas a asegurar la red, y ganas recompensas pasivas (~5.5-6.5% APY a mediados de 2026). Aprende la mecánica de epochs, delegación y slashing, cómo elegir un validador óptimo, las diferencias entre staking nativo y liquid staking (mSOL, jitoSOL, bSOL), y sigue un tutorial paso a paso para empezar desde Phantom o Solflare.',
@@ -4218,7 +4219,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           { icon: RefreshCw, title: 'Epochs y Distribución', text: 'Cada epoch dura aproximadamente 2-3 días (~432,000 slots). Al final de cada epoch, la red calcula las recompensas de cada validador basándose en su rendimiento (uptime, votos correctos) y las distribuye proporcionalmente a todos los delegadores. No necesitas hacer nada, las recompensas se acumulan automáticamente en tu cuenta de stake.' },
           { icon: Shield, title: 'Slashing: El Castigo por Hacer Trampa', text: 'En teoría, si un validador actúa maliciosamente (ej: vota por dos bloques conflictivos), pierde parte de su stake y el de sus delegadores. Solana aún no tiene slashing activo en producción, pero está en el roadmap. Aun sin slashing, los validadores con mal comportamiento pierden delegadores y comisiones, hay incentivo económico para ser honesto.' },
           { icon: Award, title: 'Comisión del Validador', text: 'Los validadores cobran una comisión sobre las recompensas que generan (típicamente 0-10%). Si un validador cobra 5% de comisión y genera 100 SOL en recompensas para tu delegación, recibes 95 SOL y el validador se queda con 5 SOL. Busca validadores con comisiones razonables (<5%) pero recuerda que 0% comisión puede significar que el validador no es económicamente sostenible.' },
-          { icon: Percent, title: 'APY Real vs Nominal', text: 'El APY de staking nativo en Solana ronda el ~5.5-6.5% neto de comisión (a mediados de 2026), ~6-7% efectivo con validadores que comparten MEV (Jito), y varía por epoch y validador. La inflación del protocolo está en ~4.2% anual, bajando ~15% cada año hasta estabilizarse alrededor del 1.5% (ese calendario sigue vigente). Esto significa que tu rendimiento REAL (después de inflación) hoy es bajo, pero mejorará con el tiempo. Y lo más importante: NO hacer staking significa que tu SOL se diluye por la inflación del protocolo. Stakear es la defensa mínima contra la dilución.' }
+          { icon: Percent, title: 'APY Real vs Nominal', text: 'El APY de staking nativo en Solana ronda el ~5.5-6.5% neto de comisión (a mediados de 2026), ~6-7% efectivo con validadores que comparten MEV (Jito), y varía por epoch y validador. La inflación del protocolo ronda **~3.7-4.0% anual** a mediados de 2026, bajando ~15% cada año hasta estabilizarse alrededor del 1.5%. Tu rendimiento REAL (después de inflación) hoy es bajo, pero mejora a medida que cae la emisión. Y lo más importante: NO hacer staking significa que tu SOL se diluye por la inflación del protocolo. Stakear es la defensa mínima contra la dilución.' }
         ]
       },
       {
@@ -4285,7 +4286,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         items: [
           'Staking es la forma más simple de rendimiento en Solana: delegas tu SOL a un validador, ayudas a asegurar la red, y ganas ~5.5-6.5% APY (a mediados de 2026). Tu SOL nunca sale de tu wallet, solo le das peso de voto al validador.',
           'Elige validadores con cuidado: >98% uptime, comisión <5-7%, fuera del superminority, y al menos 6 meses de historial estable. Usa StakeWiz para comparar métricas antes de delegar.',
-          'No hacer staking es perder dinero: la inflación de SOL (~4.2% y decreciente) diluye tu holdings. Stakear es la defensa mínima contra la dilución, esencialmente mantener tu porcentaje de la red constante.',
+          'No hacer staking es perder dinero: la inflación de SOL (~3.7-4.0% a mediados de 2026, y decreciente) diluye tu holdings. Stakear es la defensa mínima contra la dilución, esencialmente mantener tu porcentaje de la red constante.',
           'Liquid staking (mSOL, jitoSOL, bSOL) te da flexibilidad para usar tu SOL stakeado en DeFi, pero añade capas de riesgo: smart contract del protocolo, posible depeg en estrés extremo, y complejidad adicional.',
           'Jito ofrece APY ligeramente superior gracias a la captura de MEV. Marinade prioriza descentralización distribuyendo entre cientos de validadores. BlazeStake incentiva validadores pequeños con tokens BLZE.',
           'Siempre deja 0.1-0.5 SOL sin stakear para pagar fees de transacciones futuras. Y recuerda: el staking es un compromiso de largo plazo, el retiro nativo tiene cooldown de ~2-3 días.'
@@ -4364,7 +4365,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Solo para poder votar en la gobernanza de Solana' }
           ],
           correctAnswer: 'b',
-          explanation: 'La inflación de SOL (~4.2% y decreciente) crea nuevos tokens constantemente. Si no stakeas, tu porcentaje de la red total se reduce, estás siendo diluido. Stakear es la defensa mínima: tus recompensas compensan la inflación, manteniendo tu proporción de SOL en la red aproximadamente constante.'
+          explanation: 'La inflación de SOL (~3.7-4.0% a mediados de 2026, y decreciente) crea nuevos tokens constantemente. Si no stakeas, tu porcentaje de la red total se reduce, estás siendo diluido. Stakear es la defensa mínima: tus recompensas compensan la inflación, manteniendo tu proporción de SOL en la red aproximadamente constante.'
         }
       ]
     },
@@ -4395,7 +4396,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 45,
     title: 'MEV: El Impuesto Invisible',
     level: 'Avanzado',
-    number: '6 de 13',
+    number: '7 de 13',
     duration: '28 min',
     type: 'DeFi Avanzado',
     description: 'Cada vez que haces un swap en un DEX, bots invisibles pueden extraer valor de tu transacción. Aprende qué es MEV, cómo te afecta, y las herramientas para protegerte.',

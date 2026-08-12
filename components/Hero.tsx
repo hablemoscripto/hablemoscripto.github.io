@@ -153,7 +153,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
 
             {/* Description */}
             <p className="text-lg md:text-xl text-navy-400 max-w-2xl leading-relaxed mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-               Olvida el ruido y las promesas falsas. Aprende con análisis profesional, estrategias probadas y una ruta de aprendizaje diseñada para resultados reales.
+               Olvida el ruido y las promesas falsas. Aprende con análisis claro, práctica guiada y una ruta para configurar tu wallet, identificar estafas y construir un plan de inversión realista.
             </p>
 
             {/* Outcomes */}

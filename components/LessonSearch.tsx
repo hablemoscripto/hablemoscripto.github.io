@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Search, Clock, ChevronRight, BookOpen } from 'lucide-react';
+import { Search, Clock, ChevronRight, BookOpen, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from './ui/Modal';
 import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from '../data/levels';
 import type { LevelData } from '../data/courseData';
 import { useProgress } from '../contexts/ProgressContext';
+import { useEntitlements } from '../contexts/EntitlementsContext';
+import { canAccessLevel } from '../services/paymentService';
 
 interface SearchResult {
   lessonId: number;
@@ -70,6 +72,7 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const resultListRef = useRef<HTMLDivElement>(null);
   const { isLessonCompleted } = useProgress();
+  const { entitlements } = useEntitlements();
 
   const allLessons = useMemo(() => {
     const index = buildSearchIndex([
@@ -229,6 +232,12 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
                   </span>
                   {result.completed && (
                     <span className="text-[10px] font-medium text-green-400">Completada</span>
+                  )}
+                  {!canAccessLevel(entitlements, result.levelId) && (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-medium text-brand-400">
+                      <Lock size={10} aria-hidden="true" />
+                      Premium
+                    </span>
                   )}
                 </div>
                 <p className="text-sm font-medium text-white truncate">{result.title}</p>

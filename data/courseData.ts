@@ -150,11 +150,11 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         leftSide: {
           title: 'Antes de 1971 (Patrón Oro)',
           points: [
-            'Cada dólar representaba oro real',
-            'Los gobiernos no podían imprimir dinero a voluntad',
+            'El dólar se anclaba al oro para gobiernos extranjeros (ciudadanos ya no podían canjearlo desde 1933)',
+            'La emisión estaba restringida por el ancla, no era libre',
             'Un salario mínimo mensual compraba ~8 onzas de oro',
             'Una familia vivía con un solo sueldo',
-            'Los precios eran estables por décadas'
+            'Los precios solían ser más estables durante décadas'
           ]
         },
         rightSide: {
@@ -164,7 +164,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             'Los gobiernos imprimen billones (millones de millones) cuando quieren',
             'Un salario mínimo mensual compra ~0.3-0.4 onzas de oro (a mediados de 2026), una caída de ~95%',
             'Ambos padres trabajan y apenas alcanzan',
-            'Los precios suben cada año sin excepción'
+            'Los precios suben casi siempre año a año (la deflación es rara en el régimen fiat moderno)'
           ]
         }
       },
@@ -207,9 +207,9 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         {
           id: 'q-tf',
           type: 'true-false',
-          question: 'Bitcoin tiene un límite máximo de 21 millones de monedas que nadie puede aumentar.',
+          question: 'El dinero fiat moderno ya no está respaldado por oro: su valor depende de la confianza en el emisor y de la política monetaria.',
           correctAnswer: true,
-          explanation: 'Correcto. El límite de 21 millones está escrito en el código y asegurado por la red. A diferencia del dinero fiat, nadie puede crear más, ni gobiernos ni mineros.'
+          explanation: 'Correcto. Desde 1971 el dólar (y la mayoría de monedas) ya no está anclado al oro. Eso permite expandir la oferta monetaria, y es el trasfondo de las lecciones sobre inflación que vienen a continuación.'
         },
         {
           id: 'q-ms',
@@ -357,7 +357,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: '4. La Ilusión del Aumento de Sueldo',
         image: '/images/lessons/lesson-2/lesson2-4.webp',
         imageAlt: 'La ilusión del aumento de sueldo vs la inflación real',
-        imageSummary: 'Te suben el sueldo 5% y te sientes bien. Pero si la inflación es 10%, tu poder de compra BAJÓ 5%. Es matemáticas, no opinión: aumento - inflación = cambio real. Esos $105,000 en tu cuenta solo compran lo que $94,500 compraban antes. Te hiciste más pobre con "más dinero".'
+        imageSummary: 'Te suben el sueldo 5% y te sientes bien. Pero si la inflación es 10%, tu poder de compra BAJÓ. Es matemáticas, no opinión: $105,000 / 1.10 ≈ $95,500 de poder de compra del año anterior. Te hiciste más pobre con "más dinero".'
       },
       {
         type: 'main',
@@ -389,7 +389,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       },
       {
         type: 'main',
-        title: '¿Y Colombia? ¿Y México? ¿Y España?',
+        title: '¿Y Colombia? ¿Y México? ¿Y el dólar?',
         content: 'Quizás pienses: "Eso pasa en países con gobiernos locos, aquí no pasará." Pero mira los datos:',
         features: [
           { icon: TrendingDown, title: 'Colombia', text: 'El peso colombiano ha perdido cerca de la mitad de su valor frente al dólar desde el año 2000: pasó de unos 2,000 por dólar a moverse entre 3,500 y 4,500 en los últimos años (con picos por encima de 5,000 en 2022). Y el dólar TAMBIÉN pierde valor. Estás perdiendo contra una moneda que está perdiendo.' },
@@ -585,7 +585,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Por Qué la Brecha de Riqueza Crece y Crece',
         content: 'Desde 1971 (fin del patrón oro), la desigualdad de riqueza ha explotado en TODO el mundo. ¿Coincidencia? Difícilmente. El Efecto Cantillon no es la única causa, pero sí es una de las causas estructurales menos discutidas, acumulándose década tras década:',
         features: [
-          { icon: TrendingUp, title: 'Los Activos Suben Más que los Salarios', text: 'Desde 1971, el S&P 500 ha subido 3,000%+. Los salarios reales han subido menos de 19%. Si tenías acciones, te hiciste rico. Si solo tenías tu sueldo, te quedaste atrás.' },
+          { icon: TrendingUp, title: 'Los Activos Suben Más que los Salarios', text: 'Desde 1971, el S&P 500 ha subido decenas de veces (miles de % según el recorte, sin reinvertir dividendos el orden de magnitud sigue siendo enorme). Los salarios reales de trabajadores típicos apenas se movieron durante décadas (series BLS/EPI: crecimientos de un dígito a ~20% según el recorte). Si tenías activos, multiplicaste tu riqueza. Si solo tenías tu sueldo, te quedaste atrás.' },
           { icon: Landmark, title: 'La Vivienda se Volvió Imposible', text: 'En 1970, una casa promedio costaba 2-3 años de salario mediano. Hoy cuesta 6-8 años. El dinero nuevo fluyó hacia bienes raíces, haciendo imposible comprar para las nuevas generaciones.' },
           { icon: Users, title: 'Los Ricos Tienen Asesores', text: 'Cuando se anuncia impresión de dinero, los ultra-ricos llaman a sus banqueros y mueven su capital a activos que se beneficiarán. Tú te enteras en las noticias semanas después.' }
         ],
@@ -599,7 +599,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'En LATAM, el Efecto Cantillon es aún más brutal porque nuestras monedas se devalúan contra el dólar, que a su vez se devalúa contra activos reales:',
         features: [
           { icon: AlertTriangle, title: 'Colombia', text: 'El peso se devalúa → los que tienen dólares o activos dolarizados preservan riqueza → los que tienen pesos pierden. ¿Quién tiene acceso a comprar dólares fácilmente? Los ricos, los bancos, las empresas grandes.' },
-          { icon: AlertTriangle, title: 'Argentina', text: 'Caso extremo: los que pueden comprar dólar blue (el dólar del mercado paralelo argentino) preservan algo. Los que dependen del peso oficial ven sus ahorros evaporarse. El acceso al dólar ES un privilegio de clase.' },
+          { icon: AlertTriangle, title: 'Argentina', text: 'Durante el cepo y la crisis 2023-24, los que podían comprar dólar blue (el dólar del mercado paralelo) preservaban algo; quienes dependían del peso oficial veían evaporarse sus ahorros. Tras la desregulación el mecanismo cambió, pero la lección se mantiene: el acceso desigual al activo de reserva es un privilegio de clase.' },
           { icon: AlertTriangle, title: 'Venezuela', text: 'Los conectados al gobierno recibieron dólares preferenciales y se enriquecieron obscenamente. La clase media y baja recibió bolívares que se volvieron papel higiénico.' }
         ]
       },
@@ -695,7 +695,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Los impuestos bajaron para los ricos' }
           ],
           correctAnswer: 'c',
-          explanation: 'El S&P 500 subió 3000%+ desde 1971. Los salarios reales subieron menos de 19%. Si tenías activos, multiplicaste tu riqueza. Si dependías de tu sueldo, te quedaste atrás. No es la única causa de la desigualdad, pero es el Efecto Cantillon acumulándose durante más de 50 años, una de las menos discutidas.'
+          explanation: 'El S&P 500 subió decenas de veces desde 1971. Los salarios reales de trabajadores típicos apenas se movieron durante décadas. Si tenías activos, multiplicaste tu riqueza. Si dependías de tu sueldo, te quedaste atrás. No es la única causa de la desigualdad, pero el Efecto Cantillon es una de las menos discutidas.'
         },
         {
           id: 'q7-review',
@@ -735,9 +735,9 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'No es Solo Tecnología: Es Una Revolución Monetaria',
         content: 'Muchos piensan que Bitcoin es "solo tecnología" o "una inversión". Es mucho más profundo que eso. Por primera vez en 5,000 años, alguien resolvió un problema que parecía imposible: crear dinero que nadie pudiera corromper. Para entender por qué esto importa, recuerda las lecciones anteriores:',
         features: [
-          { icon: AlertTriangle, title: 'El Problema del Dinero Fiat', text: 'Depende de promesas de políticos. TODOS los gobiernos eventualmente abusan del poder de imprimir. 100% de las monedas fiat en la historia han fracasado o se han devaluado masivamente.' },
+          { icon: AlertTriangle, title: 'El Problema del Dinero Fiat', text: 'Depende de promesas de políticos. Los gobiernos tienen incentivos fuertes para abusar del poder de imprimir. Ninguna moneda fiat ha preservado poder adquisitivo a muy largo plazo: la devaluación acumulada es la norma histórica.' },
           { icon: AlertTriangle, title: 'El Problema del Oro', text: 'Es difícil de transportar, dividir, verificar, y almacenar de forma segura. Los gobiernos lo han confiscado históricamente (USA en 1933). No funciona para la era digital.' },
-          { icon: Zap, title: 'La Solución Bitcoin', text: 'Escasez absoluta como el oro (o mejor), pero completamente digital. Transportable a cualquier lugar del mundo en minutos. Imposible de confiscar si guardas bien tus llaves.' }
+          { icon: Zap, title: 'La Solución Bitcoin', text: 'Escasez absoluta como el oro (o mejor), pero completamente digital. Transportable a cualquier lugar del mundo en minutos. Muy difícil de confiscar sin tu clave o sin coacción, si controlas tus llaves y las resguardas bien.' }
         ]
       },
       {
@@ -745,9 +745,9 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Las 4 Innovaciones que Cambian Todo',
         content: 'Bitcoin combina varias innovaciones que, juntas, crean algo que nunca antes existió:',
         features: [
-          { icon: Lock, title: '1. Escasez Digital Absoluta', text: 'Solo existirán **21 millones de Bitcoin**. NUNCA. JAMÁS. Esta cantidad está grabada en el código y nadie puede cambiarla, ni Satoshi, ni los mineros, ni ningún gobierno. Es la primera vez en la historia que existe algo verdaderamente escaso en el mundo digital. Antes de Bitcoin, todo lo digital podía copiarse infinitamente.' },
+          { icon: Lock, title: '1. Escasez Digital Absoluta', text: 'Solo existirán **21 millones de Bitcoin**. NUNCA. JAMÁS. Está grabado en el código. En la práctica, cambiarlo exigiría un consenso social casi unánime de la red económica y destruiría la promesa central del activo: por eso las reglas monetarias **nunca se han cambiado**. Es la primera vez en la historia que existe algo verdaderamente escaso y predecible en el mundo digital. Antes de Bitcoin, todo lo digital podía copiarse infinitamente.' },
           { icon: Network, title: '2. Descentralización Real', text: 'No hay CEO de Bitcoin. No hay servidor central. No hay empresa que demandar o presionar. Miles de computadoras en más de 100 países mantienen la red simultáneamente. Para "apagar" Bitcoin, tendrías que apagar todas estas computadoras al mismo tiempo en todo el mundo, y otras nuevas aparecerían.' },
-          { icon: Shield, title: '3. Inmutabilidad', text: 'Una vez que una transacción se confirma en la blockchain, es PERMANENTE. Nadie puede revertirla, censurarla, o modificarla. Ni Satoshi. Ni los mineros. Ni ningún gobierno. El historial de Bitcoin es matemáticamente inalterable.' },
+          { icon: Shield, title: '3. Inmutabilidad', text: 'Una vez que una transacción se confirma con suficientes bloques, revertirla es económicamente absurdo en la práctica. Nadie la "edita" a voluntad: ni Satoshi, ni un gobierno con un botón. Un ataque del 51% o un reorg profundo es posible en teoría, pero en Bitcoin ha sido prohibitivamente caro y destructivo para el atacante. El historial reciente se vuelve cada vez más costoso de reescribir.' },
           { icon: Globe, title: '4. Sin Fronteras ni Permisos', text: 'Puedes enviar $1 o $1,000 millones a cualquier país del mundo, 24/7, sin pedir permiso a nadie. No hay bancos que deban aprobar tu transacción. No hay límites arbitrarios. No hay "horario bancario". El dinero llega en minutos, no días.' }
         ]
       },
@@ -787,7 +787,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             'Divisible hasta 8 decimales (satoshis)',
             'Almacenable con una frase semilla (siempre con respaldo físico seguro)',
             'Enviable a cualquier lugar en minutos',
-            'Imposible de confiscar sin tu clave',
+            'Muy difícil de confiscar sin tu clave o sin coacción',
             'Verificación instantánea y gratuita',
             'Cabe en tu bolsillo (o tu cabeza)'
           ]
@@ -805,7 +805,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         ],
         highlight: {
           title: 'El Precedente de China',
-          text: 'China ha "prohibido" Bitcoin más de 10 veces desde 2013. Resultado: Bitcoin sigue funcionando perfectamente, ahora vale 100x más que en 2013, y millones de chinos siguen usándolo a través de VPNs. No puedes prohibir matemáticas.'
+          text: 'China ha "prohibido" Bitcoin más de 10 veces desde 2013. Resultado: Bitcoin sigue funcionando. En su máximo de 2025 superó ~100× el precio de finales de 2013; a mediados de 2026 sigue en decenas de veces ese nivel. Millones de chinos lo siguen usando a través de VPNs. No puedes prohibir matemáticas.'
         }
       },
       {
@@ -847,12 +847,12 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         type: 'takeaways',
         title: 'Por Qué Bitcoin Importa Para TU Vida',
         items: [
-          'Por primera vez en la historia, existe dinero que NINGÚN gobierno, banco o corporación puede devaluar, confiscar o censurar.',
-          'No necesitas permiso de nadie para guardar y mover TU dinero. Tu banco puede cerrar. Tu gobierno puede colapsar. Tu Bitcoin sigue siendo tuyo.',
-          'El halving reduce la emisión a la mitad cada 4 años. En abril 2024 fue el 4to halving. Cada vez hay menos Bitcoin nuevo, mientras la demanda crece.',
-          'No es "inversión especulativa", es protección contra un sistema monetario diseñado para empobrecerte lentamente a través de la inflación.',
-          'La pregunta no es "¿debería comprar Bitcoin?" sino "¿cuánto de mi trabajo quiero proteger del sistema fiat que ya demostró que me está robando?"',
-          'Empezar es más fácil de lo que crees. En las próximas lecciones aprenderás exactamente cómo hacerlo de forma segura.'
+          'Por primera vez en la historia, existe dinero cuya emisión no depende de un gobierno, banco o corporación: el límite está en el código y lo hace cumplir la red.',
+          'No necesitas permiso de nadie para guardar y mover valor en Bitcoin. Eso no elimina riesgos (volatilidad, errores de custodios, pérdida de llaves); elimina un tipo de censura y devaluación unilateral.',
+          'El halving reduce la emisión a la mitad cada 4 años. En abril 2024 fue el 4to halving. Cada ciclo hay menos Bitcoin nuevo; la demanda, en cambio, no está garantizada.',
+          'Para muchos es una tesis de protección frente a la inflación fiat. No es un consejo de compra: es un marco para entender por qué existe Bitcoin antes de decidir si te conviene.',
+          'La pregunta útil no es "¿debería comprar Bitcoin ya?", sino "¿entiendo los riesgos, mi horizonte y cuánto capital puedo destinar sin comprometer mi fondo de emergencia?"',
+          'Empezar con seguridad importa más que empezar rápido. En las próximas lecciones aprenderás custodios, wallets y cómo hacerlo con cuidado.'
         ]
       }
     ],
@@ -899,7 +899,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: 'China ha prohibido Bitcoin múltiples veces (2013, 2017, 2019, 2021). ¿Cuál fue el resultado?',
           options: [
             { id: 'a', text: 'Bitcoin desapareció en China y el precio colapsó' },
-            { id: 'b', text: 'Bitcoin siguió funcionando perfectamente, vale 100x más que en 2013, y millones de chinos lo siguen usando con VPNs' },
+            { id: 'b', text: 'Bitcoin siguió funcionando; en su máximo de 2025 superó ~100× el precio de finales de 2013, y millones de chinos lo siguen usando con VPNs' },
             { id: 'c', text: 'Los mineros entregaron sus máquinas al gobierno' },
             { id: 'd', text: 'Se creó una versión china de Bitcoin controlada por el gobierno' }
           ],
@@ -979,13 +979,13 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Imagina un libro de contabilidad con propiedades mágicas:',
         features: [
           { icon: Users, title: 'Miles de Copias Idénticas', text: 'Este libro no existe en un solo lugar. Existen miles de copias exactamente iguales, cada una en una computadora diferente en todo el mundo. Cuando escribes algo en una, automáticamente aparece en TODAS las demás.' },
-          { icon: Lock, title: 'Tinta Indeleble', text: 'Una vez que escribes algo en este libro, es IMPOSIBLE borrarlo o modificarlo. La tinta se vuelve permanente después de unos minutos. Ni siquiera el creador del libro puede cambiar lo escrito.' },
+          { icon: Lock, title: 'Tinta Indeleble', text: 'Una vez que escribes algo en este libro y pasan suficientes confirmaciones, reescribirlo es tan caro que en la práctica no ocurre. La tinta se "fija" en minutos. Ni el creador del libro puede cambiar lo escrito a voluntad; solo un ataque masivo al sistema de consenso podría reescribir historia reciente, y normalmente se destruye a sí mismo al hacerlo.' },
           { icon: Link, title: 'Páginas Encadenadas', text: 'Cada página está matemáticamente conectada a la anterior. Si alguien intenta cambiar algo en la página 50, todas las páginas siguientes (51, 52, 53...) quedarían "rotas" y todos notarían la manipulación inmediatamente.' },
           { icon: Globe, title: 'Público y Transparente', text: 'Cualquier persona en el mundo puede ver el libro completo, verificar cualquier entrada, y confirmar que todo está en orden. No hay secretos.' }
         ],
         highlight: {
           title: '¿Ves el Poder?',
-          text: 'Acabas de describir un sistema donde nadie puede mentir, nadie puede robar, y nadie puede censurar, porque TODOS tienen el mismo libro y TODOS pueden verificar. Eso es blockchain.'
+          text: 'Acabas de describir un sistema donde reescribir el historial compartido es extremadamente difícil y costoso, y donde cualquiera puede auditar las mismas reglas. Eso no significa que "nadie pueda robarte": si pierdes tus llaves, firmas un contrato malicioso o caen en un phishing, el daño es real. Blockchain protege el libro; tú tienes que proteger el acceso.'
         }
       },
       {
@@ -1034,7 +1034,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           points: [
             'Seguridad respaldada por energía física real',
             'Más probado en el tiempo (15+ años)',
-            'Cualquiera puede minar (descentralizado)',
+            'Permissionless: cualquiera puede intentar minar (en la práctica compiten ASICs y granjas)',
             'Alto consumo energético',
             'Bloques cada ~10 minutos',
             'Usado por: Bitcoin, Litecoin, Dogecoin'
@@ -1322,7 +1322,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'La descentralización no es binaria, es un espectro. Diferentes proyectos hacen diferentes trade-offs:\n\n**¿Por qué debería importarte la descentralización?** Porque significa que NADIE puede congelar tu cuenta, censurar tus transacciones, o devaluar tus ahorros. Es la diferencia entre pedir permiso y ser libre.',
         features: [
           { icon: Lock, title: 'Bitcoin: Máxima Descentralización', text: '~15,000 nodos. Cualquiera con $300 en hardware puede correr uno. Cambios de protocolo requieren años de debate y consenso casi unánime. Inmunidad casi total a censura y captura.' },
-          { icon: Zap, title: 'Solana: Descentralización Pragmática', text: '~800 validadores con voto a mediados de 2026 (en descenso desde ~2,500 en 2023). Requiere hardware más potente (~$5,000+). Más fácil de coordinar cambios. Trade-off consciente: menos descentralización a cambio de ~2,000-4,000 TPS reales en producción (con capacidad teórica mucho mayor) y fees de centavos.' },
+          { icon: Zap, title: 'Solana: Descentralización Pragmática', text: '~800 validadores con voto a mediados de 2026 (en descenso desde ~2,500 en 2023). Requiere hardware más potente (~$5,000+). Más fácil de coordinar cambios. Trade-off consciente: menos descentralización a cambio de miles de TPS totales (cientos a ~1-3k de usuarios según la carga; la cifra total incluye votos de consenso) y fees de centavos.' },
           { icon: Server, title: 'Ethereum: Término Medio', text: '~10,000 nodos. Hardware moderado. Transición a Proof of Stake completada. Balance entre descentralización y escalabilidad.' },
           { icon: AlertTriangle, title: 'BNB Smart Chain: Más Centralizada', text: '~40-45 validadores activos, elegidos por stake de BNB y con fuerte influencia del ecosistema Binance. Muy eficiente, pero un grupo tan pequeño y alineado puede coordinar cambios o censura con facilidad.' }
         ],
@@ -1434,7 +1434,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Porque Solana es nueva' }
           ],
           correctAnswer: 'c',
-          explanation: 'Solana prioriza escalabilidad (~2,000-4,000 TPS en producción, fees de centavos). Para lograrlo, requiere hardware potente que menos personas pueden costear. Es un trade-off explícito, no un defecto. Bitcoin hace el trade-off opuesto: cualquiera con $300 puede correr un nodo.'
+          explanation: 'Solana prioriza escalabilidad (miles de TPS totales, fees de centavos). Para lograrlo, requiere hardware potente que menos personas pueden costear. Es un trade-off explícito, no un defecto. Bitcoin hace el trade-off opuesto: cualquiera con $300 puede correr un nodo.'
         },
         {
           id: 'q4',
@@ -1850,7 +1850,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: '¿Por Qué Phantom es la Wallet Recomendada?',
-        content: 'En el mundo de las wallets de Solana, Phantom se ha ganado la corona. No es solo una interfaz bonita, es una herramienta diseñada pensando en la seguridad Y la usabilidad. Millones de usuarios la usan diariamente, tiene el mejor historial de seguridad del ecosistema, y su equipo responde rápidamente ante cualquier vulnerabilidad. Phantom nació en Solana y hoy es multichain: desde una sola app maneja Solana, Ethereum, Base, Polygon, Sui y Bitcoin, con UNA dirección distinta por cada red. En este curso la usamos como tu wallet de Solana. Si estás empezando en cripto, Phantom es tu mejor aliado.',
+        content: 'En el mundo de las wallets de Solana, Phantom se ha ganado la corona por adopción y usabilidad. No es solo una interfaz bonita: combina alertas de simulación (p. ej. Blowfish), una experiencia clara y un historial relativo sólido en el ecosistema Solana. No es infalible: ninguna wallet lo es. Phantom nació en Solana y hoy es multichain: desde una sola app maneja Solana, Ethereum, Base, Polygon, Sui y Bitcoin, con UNA dirección distinta por cada red. En este curso la usamos como tu wallet de Solana. Si estás empezando en cripto, es un punto de partida sólido.',
         features: [
           { icon: Shield, title: 'Alertas de Seguridad Integradas', text: 'Phantom analiza cada transacción ANTES de que la firmes. Si detecta un contrato malicioso conocido, te advierte. Si un sitio intenta drenar tu wallet, te alerta. Es como tener un guardaespaldas digital.' },
           { icon: Zap, title: 'Velocidad de Solana', text: 'Transacciones confirmadas en menos de 1 segundo. Fees de fracción de centavo. La experiencia es tan fluida que parece magia comparado con Ethereum.' },
@@ -1910,7 +1910,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: Link, title: 'Conectar Wallet', text: 'Cuando un sitio pide "Connect Wallet", solo le estás dando permiso para VER tu dirección pública y balance. Es como mostrar tu número de cuenta, pueden ver, pero NO pueden sacar dinero. Es relativamente seguro.' },
           { icon: AlertTriangle, title: 'Aprobar Transacción', text: 'Después de conectar, si el sitio quiere hacer algo con tus fondos (swap, mint, transfer), Phantom te pedirá APROBAR la transacción específica. AQUÍ es donde debes prestar atención. Lee qué estás firmando.' },
-          { icon: Shield, title: 'La Regla de Oro', text: 'Antes de aprobar, pregúntate: "¿Esto tiene sentido para lo que estoy intentando hacer?" Si estás haciendo un swap de $100 y la transacción dice "Aprobar acceso ilimitado a todos tus tokens", RECHAZA. Algo está mal.' }
+          { icon: Shield, title: 'La Regla de Oro', text: 'Antes de firmar, pregúntate: "¿Esto tiene sentido para lo que estoy intentando hacer?" En **Solana**, lee la simulación: si muestra salidas de SOL/tokens/NFTs que no esperabas, RECHAZA. En **Ethereum/EVM** (Phantom también maneja esas redes), un "Aprobar acceso ilimitado a todos tus tokens" en un sitio desconocido es una bandera roja clásica. Si no entiendes la simulación, no firmes.' }
         ]
       },
       {
@@ -2063,7 +2063,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         rightSide: {
           title: 'Solana (L1)',
           points: [
-            'Transacciones por segundo: ~2,000-4,000 TPS (producción real)',
+            'Transacciones por segundo: miles de TPS totales (cientos a ~1-3k de usuarios según carga)',
             'Costo por transacción: 0.000005 SOL de base (~$0.001)',
             'Tiempo de confirmación: ~400 milisegundos',
             'Todo ocurre en una sola capa (sin L2s necesarios)',
@@ -2282,7 +2282,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'El Error que Destruye Fondos: Red Incorrecta',
         content: 'Este es el error más común y más caro para principiantes. Cuando retiras, el exchange te pregunta a QUÉ RED enviar. Para SOL, SIEMPRE debes elegir la red **Solana (SOL)**. Si eliges otra red (como ERC20 o BEP20), tus fondos irán a una dirección de Ethereum o BNB Chain que NO existe en tu Phantom. El dinero se pierde para siempre.',
         features: [
-          { icon: CheckCircle, title: 'Red Correcta', text: 'Solana (SOL) o "Solana Network" o simplemente "SOL". La dirección de Phantom empieza con caracteres como "5xB7..." o similar.' },
+          { icon: CheckCircle, title: 'Red Correcta', text: 'Solana (SOL) o "Solana Network" o simplemente "SOL". Las direcciones Solana son base58 (~32-44 caracteres). Un ejemplo puede empezar con "5xB7...", pero no confíes en el prefijo: verifica la red y 6-8 caracteres del inicio y del final (y un bloque del medio).' },
           { icon: AlertTriangle, title: 'Redes Incorrectas', text: 'ERC20 (Ethereum), BEP20 (BNB Chain), TRC20 (Tron). Si ves estas opciones y las eliges, tus fondos van a una blockchain diferente donde Phantom NO puede accederlos.' },
           { icon: Shield, title: 'Verificación Triple', text: 'Antes de confirmar: 1) ¿La red dice "Solana"? 2) ¿La dirección es la de mi Phantom? 3) ¿Verifiqué 6-8 caracteres al INICIO y 6-8 al FINAL de la dirección? Si todo está bien, procede.' },
           { icon: AlertTriangle, title: 'Cuidado: Address Poisoning', text: 'Existe un ataque donde generan direcciones que imitan los primeros Y últimos caracteres de las tuyas y "ensucian" tu historial con transferencias mínimas, esperando que copies la del atacante por error. NUNCA copies tu dirección desde un historial de transacciones: cópiala directo de Phantom (o usa el código QR) y verifica 6-8 caracteres en ambos extremos. En la Lección 12 lo vemos a fondo.' }
@@ -3316,7 +3316,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: 'El Secreto Mejor Guardado de los Inversores Profesionales',
-        content: '¿Cuándo es el mejor momento para comprar Bitcoin? La respuesta honesta es: **nadie lo sabe**. Ni los analistas, ni los traders con 20 años de experiencia, ni los "gurús" de Twitter que aciertan una vez y te lo recuerdan por siempre (y olvidan las 50 veces que se equivocaron). Pero hay una estrategia que elimina el problema por completo: **Dollar Cost Averaging (DCA)**, o en español, inversión periódica. La idea es tan simple que parece tonta: compras una cantidad fija de cripto en intervalos regulares, sin importar el precio. $50 cada semana. $200 cada mes. Lo que puedas. Llueva o truene. Sin mirar gráficos. Sin intentar predecir nada. El resultado? Históricamente, DCA ha superado a la mayoría de inversores que intentan "comprar barato y vender caro". Porque el enemigo real no es el mercado, son tus emociones.',
+        content: '¿Cuándo es el mejor momento para comprar Bitcoin? La respuesta honesta es: **nadie lo sabe**. Ni los analistas, ni los traders con 20 años de experiencia, ni los "gurús" de Twitter que aciertan una vez y te lo recuerdan por siempre (y olvidan las 50 veces que se equivocaron). Hay una estrategia que **reduce** el problema del timing: **Dollar Cost Averaging (DCA)**, o en español, inversión periódica. La idea es tan simple que parece tonta: compras una cantidad fija de cripto en intervalos regulares, sin importar el precio. $50 cada semana. $200 cada mes. Lo que puedas. Llueva o truene. Sin mirar gráficos. Sin intentar predecir nada. Históricamente, DCA ha superado a la mayoría de inversores que intentan "comprar barato y vender caro", en muchas ventanas de varios años. No elimina el riesgo de mercado: reduce el de mal timing emocional. Porque el enemigo real no es solo el mercado, son tus emociones.',
         highlight: {
           title: 'El Dato Que Cambia Todo',
           text: 'Si hubieras invertido $50 semanales en Bitcoin desde 2019 (sin importar el precio), a mediados de 2026 habrías invertido ~$19,500 en unas 390 semanas y acumulado ~0.9 BTC. Con BTC en $60,000-65,000 tras la corrección de 2026, ese stack vale ~$55,000-57,000: casi 3 veces lo invertido, habiendo atravesado caídas de más del 50% en el camino. No necesitaste acertar el timing. Solo necesitaste no parar.'
@@ -3337,7 +3337,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'DCA vs Timing: ¿Qué Dice la Historia?',
         content: 'Imagina 3 personas que invierten $100 mensuales en Bitcoin durante 4 años:',
         features: [
-          { icon: Clock, title: 'Ana (DCA Disciplinado)', text: 'Compra $100 cada mes el día 1, sin importar el precio. No mira gráficos. No se estresa. En 4 años invirtió $4,800. Su retorno promedio histórico: entre 150-400% dependiendo del período (ventanas de 4+ años, hasta 2025).' },
+          { icon: Clock, title: 'Ana (DCA Disciplinado)', text: 'Compra $100 cada mes el día 1, sin importar el precio. No mira gráficos. No se estresa. En 4 años invirtió $4,800. En muchas ventanas de 4+ años hasta 2025 el DCA en BTC terminó en positivo, a veces con retornos de cientos de %; depende del inicio y del fin. No es un rango garantizado.' },
           { icon: AlertTriangle, title: 'Carlos (Intenta Hacer Timing)', text: 'Espera las caídas "perfectas" para comprar. Pero cuando cae, tiene miedo de que caiga más. Cuando sube, piensa que ya es muy tarde. En 4 años solo ejecutó 15 compras en lugar de 48. Invirtió menos y perdió las mejores oportunidades.' },
           { icon: TrendingDown, title: 'María (Compra Todo de Una Vez)', text: 'Invierte los $4,800 juntos. Si compró en un pico, puede pasar AÑOS en pérdida psicológica. Si compró en un suelo, ganó más que Ana. Pero ¿quién sabe cuándo es el suelo? Nadie. Y el estrés emocional de ver -50% en tus ahorros es devastador.' }
         ],
@@ -3495,7 +3495,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           { icon: Lock, title: 'Escasez Absoluta', text: '21 millones máximo. Nunca habrá más. Ninguna otra criptomoneda tiene esta garantía tan fuerte. La política monetaria de Bitcoin es inmutable, ni siquiera los desarrolladores pueden cambiarla.' },
           { icon: Shield, title: 'Máxima Descentralización', text: 'Miles de nodos en 100+ países. Ninguna persona, empresa o gobierno controla Bitcoin. Es la red más descentralizada y resistente a la censura del mundo. Uptime de ~99.98% desde 2009 (las únicas interrupciones fueron en 2010 y 2013).' },
           { icon: Clock, title: 'Track Record', text: 'Desde 2009, Bitcoin ha sobrevivido prohibiciones, hackeos de exchanges, crisis financieras, y declaraciones de "muerte" más de 450 veces. Sigue más fuerte que nunca. Ninguna otra cripto tiene este historial.' },
-          { icon: Landmark, title: 'Adopción Institucional', text: 'ETFs de Bitcoin aprobados, Strategy (antes MicroStrategy) acumulando más de 600,000 bitcoins en su tesorería, fondos de pensiones comprando. El Salvador fue pionero al adoptarlo como moneda legal en 2021, aunque revirtió ese estatus a uso voluntario en 2025. Las instituciones confían en Bitcoin de una forma que no confían en ninguna altcoin.' }
+          { icon: Landmark, title: 'Adopción Institucional', text: 'ETFs de Bitcoin aprobados, Strategy (antes MicroStrategy) con ~840,000+ BTC en tesorería a mediados de 2026, fondos de pensiones comprando. El Salvador fue pionero al adoptarlo como moneda legal en 2021, aunque revirtió ese estatus a uso voluntario en 2025. Las instituciones confían en Bitcoin de una forma que no confían en ninguna altcoin.' }
         ]
       },
       {
@@ -3504,7 +3504,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Si Bitcoin es oro digital, ETH y SOL son más como **sistemas operativos**: plataformas donde se construyen aplicaciones. No compiten directamente con Bitcoin, resuelven problemas diferentes.',
         features: [
           { icon: Layers, title: 'Ethereum (ETH)', text: 'La primera y más grande plataforma de contratos inteligentes. DeFi, NFTs, stablecoins, la mayoría nació aquí. Tiene el ecosistema más maduro y la mayor cantidad de desarrolladores. Pero su capa base es lenta (~15 TPS solo en L1) y sus fees en L1 rondan $0.10-0.50 en una transferencia o swap típico a mediados de 2026 (en sus L2s, centavos). Piénsalo como Windows: dominante, probado, pero pesado.' },
-          { icon: Zap, title: 'Solana (SOL)', text: 'Plataforma ultra-rápida (~4,000 TPS) con fees de fracciones de centavo. Ecosistema DeFi en crecimiento explosivo (Jupiter, Raydium, Marinade). Ideal para experimentar y aprender porque los errores cuestan centavos, no dólares. Más joven, más riesgos, más potencial de crecimiento.' },
+          { icon: Zap, title: 'Solana (SOL)', text: 'Plataforma rápida: miles de TPS totales (cientos a ~1-3k de usuarios según la carga) con fees de fracciones de centavo. Ecosistema DeFi en crecimiento (Jupiter, Raydium, Marinade). Ideal para experimentar y aprender porque los errores cuestan centavos, no dólares. Más joven, más riesgos, más potencial de crecimiento.' },
           { icon: Network, title: 'La Diferencia Clave con Bitcoin', text: 'ETH y SOL no tienen un límite fijo de 21 millones como Bitcoin. SOL emite nuevos tokens continuamente para pagar validadores; ETH, desde el Merge, tiene una emisión mínima (~0.5% anual) que por momentos llega a ser deflacionaria. Son inversiones en tecnología y ecosistemas, no en escasez pura. Eso los hace más volátiles y más arriesgados.' }
         ],
         highlight: {
@@ -3720,7 +3720,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Paso 4: Checklist de Seguridad',
         content: 'Antes de empezar a ejecutar tu plan, verifica que tu seguridad esté en orden. Un plan de inversión sin seguridad es como construir una casa sin cerraduras:',
         features: [
-          { icon: Shield, title: 'Frase Semilla', text: '¿Está escrita en papel (o metal) y guardada en un lugar seguro FUERA de tu casa? ¿Nunca la has digitado en ningún sitio web ni tomado foto? Si la respuesta a cualquiera es NO, resuelve esto ANTES de invertir más.' },
+          { icon: Shield, title: 'Frase Semilla', text: '¿Está escrita en papel (o metal), nunca digitada en un sitio web ni fotografiada, y con 2-3 copias en ubicaciones distintas (casa, familiar de confianza, y si puedes una caja de seguridad bancaria u otro sitio fuera de casa)? Si falta alguna pieza, resuélvelo ANTES de invertir más.' },
           { icon: Lock, title: 'Autenticación', text: '¿Tu exchange tiene 2FA activado (Google Authenticator, NO SMS)? ¿Tu email principal tiene 2FA? ¿Tu wallet tiene contraseña o biometría? Si falta algo, actívalo ahora.' },
           { icon: Wallet, title: 'Distribución de Custodia', text: '¿Tienes claro qué va en exchange (temporal), qué en hot wallet (operativo), y qué en cold wallet (ahorros)? Si todo tu cripto está en un exchange, mueve la mayoría a tu wallet esta semana.' },
           { icon: AlertTriangle, title: 'Conocimiento Anti-Estafa', text: '¿Puedes identificar un sitio de phishing? ¿Sabes que NUNCA debes compartir tu frase semilla con nadie? ¿Sabes que "soporte de Phantom" NUNCA te escribe por DM? Si dudas, repasa la Lección 14.' }

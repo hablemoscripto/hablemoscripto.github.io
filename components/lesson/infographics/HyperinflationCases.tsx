@@ -16,7 +16,7 @@ const HyperinflationCases: React.FC = () => (
         <TrendingDown size={16} className="text-red-400" aria-hidden="true" />
       </span>
       <span className="font-heading text-sm font-bold uppercase tracking-wide text-red-300">
-        No es teoría. Está pasando ahora mismo.
+        No es teoría. Ha pasado y puede volver.
       </span>
     </figcaption>
 

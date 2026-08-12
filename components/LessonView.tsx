@@ -8,7 +8,7 @@ import { useProgress } from '../contexts/ProgressContext';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Quiz from './education/Quiz';
-import { getPreviousLessonId, getLevelForLesson, getBeginnerLessonIds, getIntermediateLessonIds, getAdvancedLessonIds } from '../utils/courseUtils';
+import { getPreviousLessonId, getLevelForLesson, getBeginnerLessonIds, getIntermediateLessonIds, getAdvancedLessonIds, getAllLessonsOrdered } from '../utils/courseUtils';
 import { INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from '../data/levels';
 import { fetchLessonById, LessonData } from '../services/lessonService';
 import { useEntitlements } from '../contexts/EntitlementsContext';
@@ -18,6 +18,8 @@ import Certificate from './ui/Certificate';
 import { useAuth } from '../contexts/AuthContext';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { useLessonNavigation } from '../hooks/useLessonNavigation';
+import EducationNavbar from './EducationNavbar';
+import LessonSearch from './LessonSearch';
 
 // Cripto Experto Discord invite. Keep in sync with EducationNavbar + the
 // Experto welcome email (_shared/welcome-email.ts).
@@ -68,10 +70,17 @@ const LessonView: React.FC = () => {
     const [retryingSave, setRetryingSave] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
     const [showCert, setShowCert] = useState(false);
+    const [showSearch, setShowSearch] = useState(false);
 
     // Custom hooks
     const scrollProgress = useScrollProgress();
     const { prevLesson, nextLesson, canGoNext } = useLessonNavigation(id, isLessonCompleted(id), isLessonCompleted);
+
+    const allLessonsOrdered = getAllLessonsOrdered();
+    const globalCompleted = allLessonsOrdered.filter((l) => isLessonCompleted(l.id)).length;
+    const globalProgress = allLessonsOrdered.length
+        ? Math.round((globalCompleted / allLessonsOrdered.length) * 100)
+        : 0;
 
     // Image lightbox state
     const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
@@ -404,6 +413,14 @@ const LessonView: React.FC = () => {
                     onClose={() => setShowCert(false)}
                 />
             )}
+
+            <EducationNavbar
+                globalProgress={globalProgress}
+                onOpenProgress={() => navigate('/education')}
+                onOpenSearch={() => setShowSearch(true)}
+                currentView="lesson"
+            />
+            <LessonSearch isOpen={showSearch} onClose={() => setShowSearch(false)} />
 
             <main id="contenido" tabIndex={-1} className="min-h-screen bg-navy-950 pb-20 outline-none">
                 {/* Progress Bar Fixed Top */}

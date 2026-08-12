@@ -35,8 +35,11 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   // If not authenticated, redirect to home and trigger auth modal
   if (!user) {
-    // Store the attempted URL to redirect back after login
-    sessionStorage.setItem('redirectAfterLogin', location.pathname);
+    // Preserve query params (e.g. ?upgrade=inversor) so post-login deep links work
+    sessionStorage.setItem(
+      'redirectAfterLogin',
+      `${location.pathname}${location.search}`,
+    );
 
     if (showAuthPrompt) {
       return <Navigate to="/?showAuth=true" replace />;

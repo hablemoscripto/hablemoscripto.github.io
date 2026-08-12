@@ -25,6 +25,8 @@ export interface ReviewState {
   lastDate: string | null; // YYYY-MM-DD
   lastQuestionId: string | null;
   countToday: number; // questions answered on lastDate
+  /** When set to today's date, the card stays dismissed until local midnight. */
+  dismissedDate?: string | null;
 }
 
 export { REVIEW_XP, MAX_REVIEWS_PER_DAY } from './reviewConstants';
@@ -310,10 +312,12 @@ export async function logReviewActivity(
 const STORAGE_KEY = 'hc_daily_review_state_v1';
 
 export function loadReviewState(): ReviewState {
-  if (typeof window === 'undefined') return { lastDate: null, lastQuestionId: null, countToday: 0 };
+  if (typeof window === 'undefined') {
+    return { lastDate: null, lastQuestionId: null, countToday: 0, dismissedDate: null };
+  }
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { lastDate: null, lastQuestionId: null, countToday: 0 };
+    if (!raw) return { lastDate: null, lastQuestionId: null, countToday: 0, dismissedDate: null };
     const parsed = JSON.parse(raw);
     return {
       lastDate: typeof parsed.lastDate === 'string' ? parsed.lastDate : null,
@@ -321,9 +325,10 @@ export function loadReviewState(): ReviewState {
       // Pre-existing states (written before countToday existed) answered at
       // most one question that day.
       countToday: typeof parsed.countToday === 'number' ? parsed.countToday : (parsed.lastDate ? 1 : 0),
+      dismissedDate: typeof parsed.dismissedDate === 'string' ? parsed.dismissedDate : null,
     };
   } catch {
-    return { lastDate: null, lastQuestionId: null, countToday: 0 };
+    return { lastDate: null, lastQuestionId: null, countToday: 0, dismissedDate: null };
   }
 }
 

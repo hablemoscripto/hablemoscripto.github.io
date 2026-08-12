@@ -38,6 +38,11 @@ export interface AchievementDefinition {
   progress?: (data: ProgressSnapshot) => { current: number; target: number; suffix?: string };
 }
 
+export interface LessonCompletionStamp {
+  lessonId: number;
+  completedAt: string | null;
+}
+
 export interface ProgressSnapshot {
   completedLessonIds: number[];
   completedCount: number;
@@ -45,6 +50,120 @@ export interface ProgressSnapshot {
   progressPercentage: number;
   xp: number;
   streak: number;
+  /** Per-lesson completion times used to estimate real acquisition dates. */
+  completions?: LessonCompletionStamp[];
+  /** Qualifying activity calendar days (YYYY-MM-DD) for streak achievement dates. */
+  activityDates?: string[];
+}
+
+/** Completions ordered oldest → newest (timestamped only). */
+function sortedTimedCompletions(
+  data: ProgressSnapshot
+): { lessonId: number; completedAt: string }[] {
+  const source =
+    data.completions ??
+    data.completedLessonIds.map((lessonId) => ({ lessonId, completedAt: null as string | null }));
+  return source
+    .filter((c): c is { lessonId: number; completedAt: string } => Boolean(c.completedAt))
+    .sort((a, b) => a.completedAt.localeCompare(b.completedAt));
+}
+
+function nthCompletionAt(
+  sorted: { lessonId: number; completedAt: string }[],
+  n: number
+): string | null {
+  if (n < 1 || sorted.length < n) return null;
+  return sorted[n - 1].completedAt;
+}
+
+function latestAmongLessonIds(
+  sorted: { lessonId: number; completedAt: string }[],
+  lessonIds: number[]
+): string | null {
+  const want = new Set(lessonIds);
+  const dates = sorted.filter((c) => want.has(c.lessonId)).map((c) => c.completedAt);
+  if (dates.length === 0) return null;
+  return dates.sort().reverse()[0];
+}
+
+/** First calendar day on which a consecutive streak of `target` days was reached. */
+function firstDayStreakReached(activityDates: string[], target: number): string | null {
+  if (target < 1 || activityDates.length === 0) return null;
+  const days = [...new Set(activityDates)].sort();
+  let streak = 1;
+  if (target === 1) return `${days[0]}T12:00:00.000Z`;
+  for (let i = 1; i < days.length; i++) {
+    const curr = Date.parse(`${days[i]}T00:00:00Z`);
+    const prev = Date.parse(`${days[i - 1]}T00:00:00Z`);
+    if (curr - prev === 86400000) {
+      streak++;
+      if (streak >= target) return `${days[i]}T12:00:00.000Z`;
+    } else {
+      streak = 1;
+    }
+  }
+  return null;
+}
+
+/**
+ * Best-effort real acquisition time for a logro from progress history.
+ * Falls back to null when history cannot support an estimate (caller uses now).
+ */
+export function estimateAchievementUnlockedAt(
+  achievementId: string,
+  data: ProgressSnapshot
+): string | null {
+  const sorted = sortedTimedCompletions(data);
+
+  switch (achievementId) {
+    case 'first_lesson':
+      return nthCompletionAt(sorted, 1);
+    case 'five_lessons':
+      return nthCompletionAt(sorted, 5);
+    case 'ten_lessons':
+      return nthCompletionAt(sorted, 10);
+    case 'halfway': {
+      if (data.totalLessons <= 0) return null;
+      const need = Math.ceil(data.totalLessons * 0.5);
+      return nthCompletionAt(sorted, need);
+    }
+    case 'beginner_complete':
+      return latestAmongLessonIds(sorted, getBeginnerLessonIds());
+    case 'intermediate_complete':
+      return latestAmongLessonIds(sorted, getIntermediateLessonIds());
+    case 'advanced_complete':
+      return latestAmongLessonIds(sorted, getAdvancedLessonIds());
+    case 'all_complete':
+      return sorted.length > 0 ? sorted[sorted.length - 1].completedAt : null;
+    case 'xp_500':
+      // Lesson XP is 100 each; threshold dates use the Nth completion as a floor.
+      return nthCompletionAt(sorted, Math.ceil(500 / 100));
+    case 'xp_2000':
+      return nthCompletionAt(sorted, Math.ceil(2000 / 100));
+    case 'xp_5000':
+      // Definition target is 4000 XP (id kept stable); see ACHIEVEMENT_DEFINITIONS.
+      return nthCompletionAt(sorted, Math.ceil(4000 / 100));
+    case 'streak_3':
+      return firstDayStreakReached(data.activityDates ?? [], 3);
+    case 'streak_7':
+      return firstDayStreakReached(data.activityDates ?? [], 7);
+    default:
+      return null;
+  }
+}
+
+function resolveUnlockedAt(achievementId: string, data: ProgressSnapshot): string {
+  return estimateAchievementUnlockedAt(achievementId, data) ?? new Date().toISOString();
+}
+
+/** True when `candidate` is a meaningfully earlier acquisition than `current`. */
+function isEarlierUnlock(candidate: string, current: string | undefined): boolean {
+  if (!current) return true;
+  const c = Date.parse(candidate);
+  const u = Date.parse(current);
+  if (Number.isNaN(c) || Number.isNaN(u)) return !current;
+  // Ignore sub-second noise; only rewrite when history is clearly earlier.
+  return c < u - 1000;
 }
 
 const ACHIEVEMENT_DEFINITIONS: AchievementDefinition[] = [
@@ -209,6 +328,9 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
 
   // Track previously persisted achievement IDs to detect new unlocks
   const persistedIdsRef = useRef<Set<string>>(new Set());
+  // Last known unlocked_at per achievement — used to detect historical repairs
+  // (earlier estimate) without re-writing every render.
+  const lastUnlockedAtRef = useRef<Map<string, string>>(new Map());
 
   // Level calculation: Level = floor(sqrt(XP / 100)) + 1
   const level = Math.floor(Math.sqrt(xp / 100)) + 1;
@@ -222,6 +344,7 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
       setAchievements([]);
       setPendingToasts([]);
       persistedIdsRef.current = new Set();
+      lastUnlockedAtRef.current = new Map();
       setLoading(false);
     }
     // `fetchUserStats` is declared after this effect and is stable per-mount
@@ -232,35 +355,63 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id]);
 
-  // Persist newly unlocked achievements to Supabase
+  // Persist new unlocks (insert-only) and historical date repairs (update-only).
+  // Inserts use ignoreDuplicates so a load race can never overwrite unlocked_at
+  // with "now". Repairs only move unlocked_at earlier when progress history
+  // proves a real acquisition date.
   useEffect(() => {
     if (!user || achievements.length === 0) return;
 
     const newOnes = achievements.filter((a) => !persistedIdsRef.current.has(a.id));
-    if (newOnes.length === 0) return;
+    const repairs = achievements.filter((a) => {
+      if (!a.unlockedAt || !persistedIdsRef.current.has(a.id)) return false;
+      const prev = lastUnlockedAtRef.current.get(a.id);
+      return isEarlierUnlock(a.unlockedAt, prev);
+    });
 
-    // Mark as persisted immediately to avoid duplicate writes
-    for (const a of newOnes) {
-      persistedIdsRef.current.add(a.id);
+    if (newOnes.length === 0 && repairs.length === 0) {
+      // Still refresh local cache when the list itself is unchanged in id set
+      // but we may have just loaded.
+      try {
+        localStorage.setItem(`gamification_${user.id}`, JSON.stringify({ achievements }));
+      } catch {
+        // localStorage may be full or unavailable
+      }
+      return;
     }
 
-    // Write to Supabase (fire-and-forget)
-    Promise.all(
-      newOnes.map((a) =>
+    for (const a of newOnes) {
+      persistedIdsRef.current.add(a.id);
+      if (a.unlockedAt) lastUnlockedAtRef.current.set(a.id, a.unlockedAt);
+    }
+    for (const a of repairs) {
+      if (a.unlockedAt) lastUnlockedAtRef.current.set(a.id, a.unlockedAt);
+    }
+
+    const writes: PromiseLike<unknown>[] = [
+      ...newOnes.map((a) =>
         supabase.from('user_achievements').upsert(
           {
             user_id: user.id,
             achievement_id: a.id,
             unlocked_at: a.unlockedAt || new Date().toISOString(),
           },
-          { onConflict: 'user_id,achievement_id' }
+          { onConflict: 'user_id,achievement_id', ignoreDuplicates: true }
         )
-      )
-    ).catch((err) => {
+      ),
+      ...repairs.map((a) =>
+        supabase
+          .from('user_achievements')
+          .update({ unlocked_at: a.unlockedAt })
+          .eq('user_id', user.id)
+          .eq('achievement_id', a.id)
+      ),
+    ];
+
+    Promise.all(writes).catch((err) => {
       reportError(err, { component: 'GamificationContext', action: 'persistAchievements' });
     });
 
-    // Update localStorage cache
     try {
       localStorage.setItem(`gamification_${user.id}`, JSON.stringify({ achievements }));
     } catch {
@@ -384,6 +535,11 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
         });
         setAchievements(loaded);
         persistedIdsRef.current = new Set(loaded.map((a) => a.id));
+        lastUnlockedAtRef.current = new Map(
+          loaded
+            .filter((a) => a.unlockedAt)
+            .map((a) => [a.id, a.unlockedAt as string])
+        );
       } else {
         // Fall back to localStorage (migration path for existing users)
         try {
@@ -392,7 +548,13 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
             const stats = JSON.parse(localStats);
             const localAchievements: Achievement[] = stats.achievements || [];
             setAchievements(localAchievements);
-            persistedIdsRef.current = new Set(); // Will trigger the persist effect
+            // Empty persisted set so the insert path migrates them to Supabase.
+            persistedIdsRef.current = new Set();
+            lastUnlockedAtRef.current = new Map(
+              localAchievements
+                .filter((a) => a.unlockedAt)
+                .map((a) => [a.id, a.unlockedAt as string])
+            );
           }
         } catch {
           // Corrupted localStorage — start fresh
@@ -420,7 +582,24 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
 
   const checkAchievements = useCallback((progressData: ProgressSnapshot, silent?: boolean) => {
     setAchievements((prev) => {
-      const unlockedIds = new Set(prev.map((a) => a.id));
+      // Repair already-unlocked rows whose stored date is later than history
+      // (classic "all logros say today" from a silent backfill / load race).
+      let repaired = false;
+      const withRepairs = prev.map((a) => {
+        const estimated = estimateAchievementUnlockedAt(a.id, progressData);
+        if (estimated && isEarlierUnlock(estimated, a.unlockedAt)) {
+          repaired = true;
+          return { ...a, unlockedAt: estimated };
+        }
+        if (!a.unlockedAt) {
+          const fallback = resolveUnlockedAt(a.id, progressData);
+          repaired = true;
+          return { ...a, unlockedAt: fallback };
+        }
+        return a;
+      });
+
+      const unlockedIds = new Set(withRepairs.map((a) => a.id));
       const newlyUnlocked: Achievement[] = [];
 
       for (const def of ACHIEVEMENT_DEFINITIONS) {
@@ -431,19 +610,19 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
             title: def.title,
             description: def.description,
             icon: def.icon,
-            unlockedAt: new Date().toISOString(),
+            unlockedAt: resolveUnlockedAt(def.id, progressData),
           });
         }
       }
 
-      if (newlyUnlocked.length === 0) return prev;
+      if (newlyUnlocked.length === 0 && !repaired) return prev;
 
-      if (!silent) {
+      if (!silent && newlyUnlocked.length > 0) {
         setPendingToasts((t) => [...t, ...newlyUnlocked]);
         newlyUnlocked.forEach((a) => trackAchievementUnlock(a.id));
       }
 
-      return [...prev, ...newlyUnlocked];
+      return newlyUnlocked.length > 0 ? [...withRepairs, ...newlyUnlocked] : withRepairs;
     });
   }, []);
 

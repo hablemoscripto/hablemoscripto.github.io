@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sparkles, CheckCircle, AlertCircle, Trophy, ArrowRight, Flame, Zap, RotateCw } from 'lucide-react';
 import { useDailyReview } from '../../hooks/useDailyReview';
+import { moveRadioFocus } from '../../utils/quizKeyboard';
 
 /**
  * Daily review card — surfaces one question from a completed lesson to
@@ -114,6 +115,8 @@ const DailyReviewCard: React.FC = () => {
               const isSelected = selectedIndex === optIdx;
               const isCorrectOption = optIdx === question.correctIndex;
               const submitted = selectedIndex !== null;
+              const isTabStop =
+                selectedIndex === optIdx || (selectedIndex === null && optIdx === 0);
 
               let className = 'w-full p-3 rounded-lg text-left border transition-all flex items-center gap-3 text-sm ';
               if (submitted) {
@@ -133,6 +136,11 @@ const DailyReviewCard: React.FC = () => {
                   key={optIdx}
                   role="radio"
                   aria-checked={isSelected}
+                  tabIndex={submitted ? 0 : (isTabStop ? 0 : -1)}
+                  onKeyDown={(e) =>
+                    !submitted &&
+                    moveRadioFocus(e, optIdx, question.options.length, (i) => answer(i))
+                  }
                   onClick={() => answer(optIdx)}
                   disabled={submitted}
                   className={className}

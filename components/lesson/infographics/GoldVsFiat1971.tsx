@@ -3,11 +3,11 @@ import { Coins, Banknote } from 'lucide-react';
 
 // L1 · "Antes vs Después de 1971" — gold standard vs fiat, paired by theme.
 const ROWS: { theme: string; antes: string; despues: string; highlight?: boolean }[] = [
-  { theme: 'Respaldo', antes: 'Cada dólar representaba oro real', despues: 'Papel sin respaldo tangible' },
-  { theme: 'Emisión de dinero', antes: 'No se podía imprimir a voluntad', despues: 'Imprimen billones (millones de millones) cuando quieren' },
+  { theme: 'Respaldo', antes: 'Anclado al oro para gobiernos (ciudadanos desde 1933 no)', despues: 'Papel sin respaldo tangible' },
+  { theme: 'Emisión de dinero', antes: 'Emisión restringida por el ancla, no libre', despues: 'Imprimen billones (millones de millones) cuando quieren' },
   { theme: 'Poder de compra', antes: 'Un salario mínimo = ~7.9 onzas de oro al mes', despues: 'Un salario mínimo = ~0.3-0.4 onzas al mes (caída de ~95%)', highlight: true },
   { theme: 'La familia', antes: 'Vivía con un solo sueldo', despues: 'Dos sueldos apenas alcanzan' },
-  { theme: 'Los precios', antes: 'Estables por décadas', despues: 'Suben cada año sin excepción' },
+  { theme: 'Los precios', antes: 'Más estables por décadas', despues: 'Suben casi siempre año a año' },
 ];
 
 const GoldVsFiat1971: React.FC = () => (

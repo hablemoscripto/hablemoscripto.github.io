@@ -56,7 +56,8 @@ Apply in this exact order in the Supabase **SQL Editor**. **Order matters** — 
 **Security + content protection (apply last, in this order):**
 10. `supabase/migrations/2026-05-28_fix_payments_security_and_tiers.sql` — **critical.** Closes the RLS hole that let any logged-in user self-grant premium, makes `premium_tier` persist on purchase (changes `upgrade_user_to_premium` to `(uuid, tier)`), and merges the duplicate signup trigger. **Apply before deploying the updated `wompi-webhook`** — the new function calls the new RPC signature.
 11. `supabase/migrations/2026-05-30_content_protection.sql` — creates `protected_lessons` (references `lessons(id)`) and locks paid content tables to service-role-only. **Without this, the paid-lesson path 500s.**
-12. `supabase/migrations/2026-06-02_newsletter_autosubscribe.sql` — **MUST run last.** Both this and step 10 `CREATE OR REPLACE handle_new_user()`; if 10 runs after this, the newsletter signup opt-in is silently dropped.
+12. `supabase/migrations/2026-06-02_newsletter_autosubscribe.sql` — **Must run after step 10.** Both this and step 10 `CREATE OR REPLACE handle_new_user()`; if 10 runs after this, the newsletter signup opt-in is silently dropped.
+13. `supabase/migrations/2026-07-17_daily_review_activity.sql` — **required for spaced-repetition / daily review.** Creates `daily_review_activity` so review answers and streak-qualifying review activity persist server-side. Without it, the client degrades silently and reviews will not sync across devices.
 
 > **Not in the repo (gap):** the DDL for `user_progress` and `newsletter_subscribers` lives only in the live DB (an earlier external migration), not in `supabase/`. A fresh-environment rebuild needs both created **before** step 5 (which adds a policy to `newsletter_subscribers`) and before the seed. Capture their real DDL into `supabase/` so the schema is reproducible. `supabase/verify-order-column.sql` is a diagnostic, not a migration — do not apply it.
 

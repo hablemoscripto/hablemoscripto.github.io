@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CheckCircle, AlertCircle, Lightbulb, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
+import { moveRadioFocus } from '../../utils/quizKeyboard';
 
 /**
  * CheckpointQuiz - A lightweight inline quiz component for embedding within lesson content.
@@ -159,6 +160,9 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                     const isSelected = answers[currentQuestion.id] === optIdx;
                                     const isCorrectOption = optIdx === currentQuestion.correctAnswer;
                                     const showFeedback = showResult[currentQuestion.id];
+                                    const selectedIdx = answers[currentQuestion.id] ?? null;
+                                    const isTabStop =
+                                        selectedIdx === optIdx || (selectedIdx === null && optIdx === 0);
 
                                     let optionClass = "w-full p-3 rounded-lg text-left border transition-all flex items-center gap-3 text-sm ";
 
@@ -179,6 +183,16 @@ const CheckpointQuiz: React.FC<CheckpointQuizProps> = ({
                                             key={optIdx}
                                             role="radio"
                                             aria-checked={isSelected}
+                                            tabIndex={showFeedback ? 0 : (isTabStop ? 0 : -1)}
+                                            onKeyDown={(e) =>
+                                                !showFeedback &&
+                                                moveRadioFocus(
+                                                    e,
+                                                    optIdx,
+                                                    currentQuestion.options.length,
+                                                    (i) => handleAnswer(currentQuestion.id, i),
+                                                )
+                                            }
                                             onClick={() => handleAnswer(currentQuestion.id, optIdx)}
                                             disabled={showFeedback}
                                             className={optionClass}

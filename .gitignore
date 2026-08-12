@@ -32,6 +32,10 @@ audit/
 REVIEW-*.md
 INFOGRAPHIC-BRIEF.md
 
+# Video scripts / teleprompter drafts — local production notes, not public repo content
+docs/VIDEO-SCRIPTS*.md
+docs/VIDEO-SCRIPTS-*/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
