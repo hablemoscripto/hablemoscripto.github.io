@@ -28,7 +28,9 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
       };
       waitForElement();
     } else {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+      document
+        .getElementById(sectionId)
+        ?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
     }
   };
 
@@ -69,11 +71,11 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
             <ul className="space-y-1 text-sm text-navy-400">
               <li>
                 <a
-                  href="/#plataforma"
-                  onClick={(e) => handleAnchorClick(e, 'plataforma')}
+                  href="/#home"
+                  onClick={(e) => handleAnchorClick(e, 'home')}
                   className="inline-block py-2 hover:text-brand-500 transition-colors"
                 >
-                  La plataforma
+                  Inicio
                 </a>
               </li>
               <li>
@@ -82,7 +84,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                   onClick={(e) => handleAnchorClick(e, 'courses')}
                   className="inline-block py-2 hover:text-brand-500 transition-colors"
                 >
-                  Plan de estudio
+                  Cursos
                 </a>
               </li>
               <li>
@@ -118,7 +120,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
                   onClick={(e) => handleAnchorClick(e, 'resources')}
                   className="inline-block py-2 hover:text-brand-500 transition-colors"
                 >
-                  Análisis semanal
+                  Recursos gratuitos
                 </a>
               </li>
               {onNavigateEducation && (
@@ -139,10 +141,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
             <h3 className="text-white font-bold mb-6 text-base">Legal</h3>
             <ul className="space-y-1 text-sm text-navy-400">
               <li>
-                <Link
-                  to="/terminos"
-                  className="inline-block py-2 hover:text-brand-500 transition-colors"
-                >
+                <Link to="/terminos" className="inline-block py-2 hover:text-brand-500 transition-colors">
                   Términos de Uso
                 </Link>
               </li>
@@ -166,11 +165,15 @@ const Footer: React.FC<FooterProps> = ({ onNavigateEducation }) => {
           </div>
         </div>
 
-        <div className="border-t border-white/5 pt-8">
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-navy-400 text-center md:text-left">
             &copy; {new Date().getFullYear()} Hablemos Cripto. Todos los derechos reservados.
             <span className="block mt-1">Contenido educativo. No es asesoría financiera.</span>
           </p>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true" />
+            <span className="text-xs text-navy-400">Plataforma activa</span>
+          </div>
         </div>
       </div>
     </footer>
