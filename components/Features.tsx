@@ -1,80 +1,138 @@
+
 import React from 'react';
-import { ArrowUpRight, Twitter, Youtube } from 'lucide-react';
-import { TEACHING_PRINCIPLES } from '../data/landingCopy';
+import { Shield, Users, Compass, Zap, Twitter, Youtube, Clock } from 'lucide-react';
 
 const Features: React.FC = () => {
   return (
-    <section
-      id="about"
-      className="border-y border-white/5 bg-navy-900/50 py-16 scroll-mt-28 md:py-24"
-    >
-      <div className="container mx-auto max-w-6xl px-6">
-        <div className="grid items-center gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
-          <figure>
-            <picture>
-              <source
-                srcSet="/images/MadLad.webp 450w, /images/MadLad-2x.webp 900w"
-                sizes="(max-width: 1024px) 90vw, 400px"
-                type="image/webp"
-              />
-              <img
-                src="/images/MadLad.webp"
-                alt="Avatar MadLad de CBas, fundador de Hablemos Cripto"
-                width={450}
-                height={450}
-                loading="lazy"
-                className="aspect-square w-full max-w-[400px] rounded-2xl border border-white/10 object-cover"
-              />
-            </picture>
-            <figcaption className="mt-4 text-sm text-navy-400">
-              CBas, fundador de Hablemos Cripto
-            </figcaption>
-          </figure>
+    <section id="about" className="py-16 md:py-28 bg-navy-950 relative overflow-hidden scroll-mt-28">
+      {/* Background decoration */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-brand-500/10 rounded-full blur-[100px] pointer-events-none"></div>
 
-          <div>
-            <p className="mb-4 text-sm font-bold text-brand-400">Quién está detrás</p>
-            <h2 className="font-heading text-4xl font-bold leading-tight text-white md:text-5xl">
-              Experiencia pública, criterio primero
-            </h2>
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-navy-300">
-              Soy CBas. Publico sobre mercados cripto desde 2017 y he atravesado ciclos alcistas,
-              caídas y cambios de narrativa. Hablemos Cripto convierte esa experiencia en una ruta
-              educativa que prioriza criterio, seguridad y contexto para LATAM.
-            </p>
+      <div className="container max-w-7xl mx-auto px-6">
+        <div className="flex flex-col lg:flex-row items-center gap-20">
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="https://twitter.com/Crypto_CBas"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center gap-2 px-1 py-2 font-semibold text-navy-200 transition-colors hover:text-white"
-                aria-label="Ver el historial público de @Crypto_CBas en X, abre en una pestaña nueva"
+          {/* Founder credibility unit — avatar + bio + handles, stacked */}
+          <div className="lg:w-1/2 flex flex-col items-center lg:items-start gap-8">
+
+            <div className="relative group">
+              {/* Outer Glow */}
+              <div className="absolute -inset-4 bg-brand-500/20 rounded-5xl blur-2xl group-hover:bg-brand-500/30 transition-all duration-500"></div>
+
+              <div
+                style={{ clipPath: 'inset(0 round 2rem)' }}
+                className="relative border border-white/10 shadow-glass transform lg:-rotate-3 group-hover:rotate-0 transition-all duration-700 bg-navy-900 isolation-isolate z-0 will-change-transform"
               >
-                <Twitter size={18} className="text-brand-500" aria-hidden="true" />
-                Historial público en X
-                <ArrowUpRight size={16} aria-hidden="true" />
-              </a>
-              <a
-                href="https://www.youtube.com/@hablemoscripto"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center gap-2 px-1 py-2 font-semibold text-navy-200 transition-colors hover:text-white"
-                aria-label="Ver Hablemos Cripto en YouTube, abre en una pestaña nueva"
-              >
-                <Youtube size={18} className="text-brand-500" aria-hidden="true" />
-                Canal de YouTube
-                <ArrowUpRight size={16} aria-hidden="true" />
-              </a>
+                <picture>
+                  <source
+                    srcSet="/images/MadLad.webp 450w, /images/MadLad-2x.webp 900w"
+                    sizes="(max-width: 1024px) 90vw, 450px"
+                    type="image/webp"
+                  />
+                  <img
+                    src="/images/MadLad.webp"
+                    alt="Avatar de CBas, fundador y analista de Hablemos Cripto"
+                    width={450}
+                    height={450}
+                    loading="lazy"
+                    className="w-full max-w-[450px] h-auto block transition-transform duration-700 group-hover:scale-105"
+                  />
+                </picture>
+
+                {/* Floating Badge — identity tag */}
+                <div className="absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-navy-950/80 backdrop-blur-xl border border-white/10 shadow-glow-brand">
+                   <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-white font-black text-xl tracking-tighter">CBas</p>
+                        <p className="text-brand-500 text-xs font-bold uppercase tracking-widest">Fundador & Analista</p>
+                      </div>
+                      <div className="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-navy-950">
+                        <Zap size={20} fill="currentColor" aria-hidden="true" />
+                      </div>
+                   </div>
+                </div>
+              </div>
+
+              {/* Decorative Elements */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 border-t-2 border-r-2 border-brand-500/30 rounded-tr-3xl"></div>
+              <div className="absolute -bottom-6 -left-6 w-24 h-24 border-b-2 border-l-2 border-brand-500/30 rounded-bl-3xl"></div>
             </div>
 
-            <div className="mt-9 border-t border-white/10">
-              {TEACHING_PRINCIPLES.map((principle) => (
-                <div
-                  key={principle.title}
-                  className="grid gap-2 border-b border-white/10 py-5 sm:grid-cols-[12rem_1fr] sm:gap-6"
+            {/* Sobre CBas — credibility panel anchored to avatar */}
+            <div className="w-full max-w-[450px] p-6 rounded-2xl bg-navy-900/50 border border-white/5 shadow-glass">
+              <p className="text-brand-500 text-[10px] font-black uppercase tracking-[0.2em] mb-3">Sobre CBas</p>
+              <p className="text-navy-200 text-sm leading-relaxed font-medium">
+                He vivido ciclos alcistas y bajistas completos del mercado cripto, desde el crash de 2018 hasta el bull run de 2021 y todo lo que vino después. Aquí enseño a leer el mercado, no a especular con él. Sin agendas ocultas ni promesas de enriquecimiento rápido.
+              </p>
+
+              <div className="mt-5 pt-5 border-t border-white/5 space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20">
+                  <Clock size={12} className="text-brand-400" aria-hidden="true" />
+                  <span className="text-[11px] font-bold text-brand-300 uppercase tracking-wider">7+ años en el mercado</span>
+                </div>
+
+                <a
+                  href="https://twitter.com/Crypto_CBas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-navy-300 hover:text-white transition-colors text-sm font-medium group/link"
+                  aria-label="Twitter: @Crypto_CBas (abre en una pestaña nueva)"
                 >
-                  <h3 className="font-bold text-white">{principle.title}</h3>
-                  <p className="leading-relaxed text-navy-400">{principle.text}</p>
+                  <span className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center text-navy-400 group-hover/link:bg-brand-500 group-hover/link:text-navy-900 transition-all">
+                    <Twitter size={14} aria-hidden="true" />
+                  </span>
+                  <span className="flex flex-col leading-tight">
+                    <span>@Crypto_CBas</span>
+                    <span className="text-[11px] text-navy-400 group-hover/link:text-navy-300">3.2K+ seguidores en X</span>
+                  </span>
+                </a>
+
+                <a
+                  href="https://www.youtube.com/@hablemoscripto"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-navy-300 hover:text-white transition-colors text-sm font-medium group/link"
+                  aria-label="YouTube: @hablemoscripto (abre en una pestaña nueva)"
+                >
+                  <span className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center text-navy-400 group-hover/link:bg-red-600 group-hover/link:text-white transition-all">
+                    <Youtube size={14} aria-hidden="true" />
+                  </span>
+                  <span>@hablemoscripto</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Content Side */}
+          <div className="lg:w-1/2 space-y-10">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-navy-900 border border-white/5 text-brand-500 text-[10px] font-black uppercase tracking-[0.2em] mb-6">
+                 Experiencia Comprobada
+              </div>
+              <h2 className="text-4xl md:text-5xl font-heading font-black text-white leading-tight tracking-tighter mb-6">
+                ¿Por qué aprender con <br />
+                <span className="text-brand-500">Hablemos Cripto?</span>
+              </h2>
+              <p className="text-navy-300 text-lg leading-relaxed font-medium">
+                He creado el recurso que me hubiera gustado tener cuando comencé en 2017. 
+                La mayoría de la información ahí fuera es ruido o estafas. Aquí filtramos la señal para que tomes decisiones inteligentes.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-6">
+              {[
+                { icon: Shield, title: "Experiencia Real", text: "7+ años navegando ciclos alcistas y bajistas completos.", color: "text-brand-400" },
+                { icon: Users, title: "Comunidad de fundadores", text: "Acceso prioritario a la comunidad privada cuando la abramos con Cripto Experto.", color: "text-accent-500" },
+                { icon: Zap, title: "Claridad Total", text: "Conceptos complejos explicados de forma sencilla.", color: "text-brand-500" },
+                { icon: Compass, title: "Hoja de Ruta", text: "Pasos concretos aplicables desde la primera lección.", color: "text-brand-300" }
+              ].map((item, i) => (
+                <div key={i} className="group flex flex-col gap-4 p-6 rounded-2xl bg-navy-900/50 border border-white/5 hover:border-brand-500/30 hover:bg-navy-900 hover:scale-[1.02] transition-all duration-300 shadow-glass">
+                  <div className={`w-12 h-12 rounded-xl bg-navy-950 border border-white/5 flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform`}>
+                    <item.icon size={24} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-white uppercase tracking-tight mb-1">{item.title}</h3>
+                    <p className="text-sm text-navy-400 leading-relaxed font-medium">{item.text}</p>
+                  </div>
                 </div>
               ))}
             </div>

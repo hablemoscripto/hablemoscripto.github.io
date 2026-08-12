@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Menu, X, User, LogOut } from 'lucide-react';
+import { Menu, X, Users, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
 import Logo from './ui/Logo';
@@ -111,11 +111,11 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navLinks: { name: string; action: () => void }[] = [
-    { name: 'La ruta', action: () => handleScrollToSection('plataforma') },
-    { name: 'Sobre CBas', action: () => handleScrollToSection('about') },
+    { name: 'Inicio', action: () => handleScrollToSection('home') },
+    { name: 'Por Qué HC', action: () => handleScrollToSection('about') },
+    { name: 'Cursos', action: () => handleScrollToSection('courses') },
     { name: 'Precios', action: () => handleScrollToSection('pricing') },
-    { name: 'Análisis semanal', action: () => handleScrollToSection('resources') },
-    { name: 'FAQ', action: () => handleScrollToSection('faq') },
+    { name: 'Recursos', action: () => handleScrollToSection('resources') },
   ];
 
   return (
@@ -131,38 +131,36 @@ const Navbar: React.FC = () => {
           <Logo size="md" className="z-50" />
 
           {/* Desktop Menu */}
-          <div className="hidden xl:flex items-center gap-8">
-            <ul className="flex gap-7">
+          <div className="hidden lg:flex items-center gap-10">
+            <ul className="flex gap-8 xl:gap-10">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <button
                     type="button"
                     onClick={link.action}
-                    className="relative text-sm font-semibold text-navy-300 transition-colors hover:text-white group"
+                    className="text-[13px] font-bold uppercase tracking-widest text-navy-300 hover:text-white transition-colors relative group"
                   >
                     {link.name}
-                    <span className="absolute -bottom-2 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-brand-500 opacity-0 transition-all group-hover:w-full group-hover:opacity-100" />
+                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-1 bg-brand-500 transition-all group-hover:w-full opacity-0 group-hover:opacity-100 rounded-full" />
                   </button>
                 </li>
               ))}
             </ul>
 
-            <div className="mx-2 h-6 w-px bg-white/10" />
+            <div className="h-6 w-px bg-white/10 mx-2"></div>
 
             {/* Auth Button */}
             {user ? (
               <div className="flex items-center gap-4">
-                <div className="hidden xl:flex flex-col items-end leading-none">
-                  <span className="text-[10px] font-bold uppercase tracking-tighter text-navy-400">
-                    Estudiante
-                  </span>
-                  <span className="text-sm font-medium text-navy-100">
+                <div className="hidden lg:flex flex-col items-end leading-none">
+                   <span className="text-[10px] uppercase tracking-tighter text-navy-400 font-bold">Estudiante</span>
+                   <span className="text-sm text-navy-100 font-medium">
                     {user.email?.split('@')[0]}
                   </span>
                 </div>
                 <button
                   onClick={() => signOut()}
-                  className="rounded-xl border border-white/5 bg-navy-800 p-2.5 text-white transition-all hover:border-white/10 hover:bg-navy-700"
+                  className="p-2.5 bg-navy-800 hover:bg-navy-700 text-white rounded-xl transition-all border border-white/5 hover:border-white/10"
                   title="Cerrar Sesión"
                 >
                   <LogOut size={18} aria-hidden="true" />
@@ -171,10 +169,13 @@ const Navbar: React.FC = () => {
             ) : (
               <button
                 onClick={handleOpenAuth}
-                className="inline-flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-2.5 text-sm font-bold text-navy-950 transition-colors hover:bg-brand-400 active:bg-brand-600"
+                className="group relative px-6 py-2.5 bg-brand-500 text-navy-950 rounded-xl font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] overflow-hidden shadow-glow-brand"
               >
-                <User size={16} aria-hidden="true" />
-                Ingresar
+                <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <span className="relative z-10 flex items-center gap-2 transition-colors">
+                  <User size={16} aria-hidden="true" />
+                  Ingresar
+                </span>
               </button>
             )}
           </div>
@@ -183,7 +184,7 @@ const Navbar: React.FC = () => {
           <button
             ref={mobileToggleRef}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="z-50 p-2 text-navy-300 hover:text-white xl:hidden"
+            className="lg:hidden p-2 text-navy-300 hover:text-white z-50"
             aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -202,7 +203,7 @@ const Navbar: React.FC = () => {
         <>
           {/* Dark overlay background */}
           <div
-            className="fixed inset-0 z-[60] bg-black xl:hidden"
+            className="fixed inset-0 bg-black z-[60] lg:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
@@ -214,7 +215,7 @@ const Navbar: React.FC = () => {
             aria-modal="true"
             aria-label="Menú de navegación"
             tabIndex={-1}
-            className="fixed inset-0 z-[61] overflow-y-auto bg-navy-950 outline-none xl:hidden"
+            className="fixed inset-0 z-[61] bg-navy-950 lg:hidden overflow-y-auto outline-none"
           >
             {/* Header with logo and close */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-white/5">
@@ -236,7 +237,7 @@ const Navbar: React.FC = () => {
                     <button
                       type="button"
                       onClick={link.action}
-                      className="block w-full rounded-2xl border border-transparent px-6 py-4 text-left text-base font-semibold text-navy-300 transition-all hover:border-white/5 hover:bg-navy-900 hover:text-white"
+                      className="block w-full text-left py-4 px-6 text-sm font-bold uppercase tracking-[0.2em] text-navy-300 hover:text-white hover:bg-navy-900 rounded-2xl border border-transparent hover:border-white/5 transition-all"
                     >
                       {link.name}
                     </button>
@@ -252,7 +253,7 @@ const Navbar: React.FC = () => {
                       signOut();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex w-full items-center justify-center gap-3 rounded-2xl border border-white/5 bg-navy-900 px-6 py-4 font-bold text-white transition-all hover:bg-red-500/10 hover:text-red-500"
+                    className="flex items-center justify-center gap-3 w-full bg-navy-900 hover:bg-red-500/10 text-white hover:text-red-500 font-bold py-4 px-6 rounded-2xl border border-white/5 transition-all"
                   >
                     <LogOut size={18} aria-hidden="true" />
                     Cerrar Sesión ({user.email?.split('@')[0]})
@@ -263,7 +264,7 @@ const Navbar: React.FC = () => {
                       handleOpenAuth();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex w-full items-center justify-center gap-3 rounded-2xl bg-brand-500 px-6 py-4 font-bold text-navy-950 transition-colors hover:bg-brand-400"
+                    className="flex items-center justify-center gap-3 w-full bg-brand-500 hover:bg-brand-400 text-navy-950 font-bold py-4 px-6 rounded-2xl transition-all shadow-glow-brand"
                   >
                     <User size={18} aria-hidden="true" />
                     Ingresar
@@ -273,8 +274,9 @@ const Navbar: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => handleScrollToSection('pricing')}
-                  className="flex w-full items-center justify-center gap-3 rounded-2xl border border-white/10 bg-navy-900 px-6 py-4 font-bold text-white transition-all hover:border-brand-500/40 hover:bg-navy-800"
+                  className="flex items-center justify-center gap-3 w-full bg-navy-900 hover:bg-navy-800 border border-white/10 hover:border-brand-500/40 text-white font-bold py-4 px-6 rounded-2xl transition-all"
                 >
+                  <Users size={18} className="text-navy-400" aria-hidden="true" />
                   Ver planes y precios
                 </button>
               </div>

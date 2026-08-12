@@ -1,39 +1,91 @@
 import React from 'react';
-import { PROBLEMS } from '../data/landingCopy';
+import { motion } from 'framer-motion';
+import { AlertTriangle, TrendingDown, Globe } from 'lucide-react';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' as const },
+  },
+};
 
 const ProblemSection: React.FC = () => {
+  const problems = [
+    {
+      icon: AlertTriangle,
+      title: "El espejismo de la información \"gratis\"",
+      text: "La mayor parte del contenido en YouTube, Twitter y Telegram está pagado por quien quiere venderte algo después. Señales \"infalibles\", gurús con resultados falsos, cursos caros que entregan poco. Entras con ilusión, pierdes plata y te vas pensando que el cripto es una estafa.",
+    },
+    {
+      icon: TrendingDown,
+      title: "Entrar tarde, salir en pánico",
+      text: "El patrón se repite: ves un pump y entras en máximos por FOMO. Cuando todo cae, vendes en mínimos por pánico. Sin un plan claro de qué comprar, cuándo entrar y cuándo vender, terminas haciendo lo contrario de lo que sabes que deberías hacer.",
+    },
+    {
+      icon: Globe,
+      title: "El factor LATAM que lo empeora todo",
+      text: "En nuestra región la inflación y la devaluación generan una urgencia real por proteger lo que ganaste. Esa necesidad legítima choca con un océano de promesas irreales. Personas prudentes en otros ámbitos cometen errores que nunca cometerían en su profesión.",
+    },
+  ];
+
   return (
-    <section id="el-problema" className="bg-navy-950 py-16 scroll-mt-28 md:py-24">
-      <div className="container mx-auto max-w-6xl px-6">
-        <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
-          <div>
-            <p className="mb-4 text-sm font-bold text-brand-400">La realidad que nadie te cuenta</p>
-            <h2 className="font-heading text-4xl font-bold leading-tight text-white md:text-5xl">
-              Por qué la mayoría falla antes de empezar de verdad
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-navy-400">
-              No es falta de inteligencia ni de ganas. Es que el camino está lleno de ruido, estafas
-              bien empaquetadas y decisiones impulsivas que cuestan caro.
-            </p>
+    <section id="el-problema" className="py-16 md:py-24 bg-navy-950 relative scroll-mt-28">
+      <div className="container max-w-5xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 mb-6">
+            <span className="text-brand-400 text-xs font-black uppercase tracking-[0.2em]">La realidad que nadie te cuenta</span>
           </div>
 
-          <ol className="border-t border-white/10">
-            {PROBLEMS.map((problem, index) => (
-              <li
-                key={problem.title}
-                className="grid gap-3 border-b border-white/10 py-7 sm:grid-cols-[3rem_1fr]"
-              >
-                <span className="font-heading text-xl font-bold text-brand-500" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <div>
-                  <h3 className="text-lg font-bold text-white">{problem.title}</h3>
-                  <p className="mt-2 max-w-2xl leading-relaxed text-navy-400">{problem.text}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <h2 className="text-4xl md:text-5xl font-heading font-black text-white tracking-tighter mb-4">
+            Por qué la mayoría falla antes de empezar de verdad
+          </h2>
+          <p className="text-xl text-navy-300 max-w-3xl mx-auto">
+            No es falta de inteligencia ni de ganas. Es que el camino está lleno de ruido, estafas bien empaquetadas y decisiones impulsivas que cuestan caro.
+          </p>
         </div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid md:grid-cols-3 gap-6"
+        >
+          {problems.map((problem, index) => {
+            const Icon = problem.icon;
+            return (
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                className="group flex flex-col gap-5 px-6 py-7 rounded-2xl bg-navy-900/50 border border-white/5 hover:border-brand-500/30 hover:bg-navy-900/70 transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-navy-950 border border-white/5 flex items-center justify-center text-brand-400 group-hover:bg-brand-500/10 group-hover:border-brand-500/20 group-hover:text-brand-500 transition-all">
+                  <Icon size={24} aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="font-black text-white text-lg tracking-tight mb-4 leading-tight">
+                    {problem.title}
+                  </h3>
+                  <p className="text-sm text-navy-400 leading-relaxed font-medium">
+                    {problem.text}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
