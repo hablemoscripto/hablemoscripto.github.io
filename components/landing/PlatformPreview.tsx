@@ -5,15 +5,40 @@ import { LEARNING_TOOLS } from '../../data/landingCopy';
 
 const LEVELS = [BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL];
 const TOOL_ICONS = [ListChecks, Brain, Bot, TrendingUp];
+const ROUTE_STAGES = [
+  { number: '01', label: 'Fundamentos' },
+  { number: '02', label: 'Análisis y riesgo' },
+  { number: '03', label: 'DeFi y Solana' },
+];
 
 const PlatformPreview: React.FC = () => {
   return (
     <section
       id="plataforma"
       aria-labelledby="platform-heading"
-      className="border-b border-white/5 bg-navy-900/50 py-16 scroll-mt-28 md:py-24"
+      className="border-b border-white/5 bg-navy-900/50 scroll-mt-28"
     >
-      <div className="container mx-auto max-w-7xl px-6">
+      <div className="border-b border-white/10 bg-navy-900">
+        <ol className="container mx-auto grid max-w-7xl grid-cols-3 px-6">
+          {ROUTE_STAGES.map((stage, index) => (
+            <li
+              key={stage.number}
+              className={`flex min-h-16 items-center gap-3 py-3 ${
+                index > 0 ? 'border-l border-white/10 pl-4 sm:pl-6' : ''
+              }`}
+            >
+              <span className="font-heading text-xs font-bold text-brand-500 sm:text-sm">
+                {stage.number}
+              </span>
+              <span className="text-xs font-semibold leading-tight text-navy-200 sm:text-sm">
+                {stage.label}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div className="container mx-auto max-w-7xl px-6 py-14 md:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           <div>
             <p className="mb-4 text-sm font-bold text-brand-400">Así se ve la ruta</p>
