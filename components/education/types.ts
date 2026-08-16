@@ -76,6 +76,7 @@ export interface QuizProps {
   // Persists in-progress answers to sessionStorage under this key so a reload
   // or accidental back-swipe restores the attempt instead of wiping it.
   storageKey?: string;
+  reviewSection?: { id: string; title: string } | null;
 }
 
 export interface CheckpointQuestion {

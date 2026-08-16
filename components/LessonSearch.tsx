@@ -13,6 +13,7 @@ import {
   getLevelForLesson,
   isSequentiallyLocked,
 } from '../utils/courseUtils';
+import { lessonPath, readLessonPlace } from '../utils/lessonPlace';
 
 interface SearchResult {
   lessonId: number;
@@ -239,7 +240,10 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
             {continueTarget && (
               <button
                 type="button"
-                onClick={() => handleSelect(continueTarget.id)}
+                onClick={() => {
+                  onClose();
+                  navigate(lessonPath(continueTarget.id, readLessonPlace()));
+                }}
                 className="w-full text-left px-3 py-3 rounded-lg flex items-start gap-3 bg-navy-800 ring-1 ring-brand-500/30 hover:bg-navy-700/80 transition-colors"
               >
                 <div className="flex-1 min-w-0">

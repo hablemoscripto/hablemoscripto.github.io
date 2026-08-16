@@ -627,6 +627,7 @@ const Quiz: React.FC<QuizProps> = ({
   showProgressBar = true,
   allowNavigation = true,
   storageKey,
+  reviewSection,
 }) => {
   const questions = useMemo(() => rawQuestions.map(normalizeQuestion), [rawQuestions]);
 
@@ -887,6 +888,14 @@ const Quiz: React.FC<QuizProps> = ({
                   {questionCorrect ? '¡Correcto!' : 'Incorrecto'}
                 </p>
                 <p className="text-sm text-navy-300">{q.explanation}</p>
+                {!questionCorrect && reviewSection && (
+                  <a
+                    href={`#${reviewSection.id}`}
+                    className="inline-flex min-h-11 items-center mt-3 text-sm font-bold text-brand-400 hover:text-brand-300"
+                  >
+                    Repasa: {reviewSection.title}
+                  </a>
+                )}
               </div>
             </div>
           </div>

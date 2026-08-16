@@ -45,6 +45,7 @@ import {
   isSequentiallyLocked,
   type CourseLevelId,
 } from '../utils/courseUtils';
+import { lessonPath, readLessonPlace } from '../utils/lessonPlace';
 import {
   getUserEntitlements,
   hasCommunityAccess,
@@ -268,6 +269,17 @@ const EducationPage: React.FC<EducationPageProps> = () => {
     return getContinueTarget(lastLessonId, isLessonCompleted, canRead);
   }, [lastLessonId, isLessonCompleted, entitlements, entitlementsLoading]);
 
+  const sessionMeta = useMemo(() => {
+    if (!continueTarget) return { duration: '', sectionTitle: '' };
+    const catalog = getAllLessonsOrdered().find((l) => l.id === continueTarget.id);
+    const place = readLessonPlace();
+    return {
+      duration: catalog?.duration || '',
+      sectionTitle:
+        place?.lessonId === continueTarget.id && place.sectionTitle ? place.sectionTitle : '',
+    };
+  }, [continueTarget]);
+
   // Snapshot for rendering partial progress on locked achievement cards.
   // Mirrors the shape ProgressContext feeds checkAchievements.
   const achievementSnapshot = useMemo(() => {
@@ -449,7 +461,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             {(lastLessonId || totalCompletedLessons > 0) && continueTarget && (
               <div className="container mx-auto mb-6 mt-6 max-w-7xl px-6">
                 <button
-                  onClick={() => navigate(`/education/lesson/${continueTarget.id}`)}
+                  onClick={() => navigate(lessonPath(continueTarget.id, readLessonPlace()))}
                   className="group flex w-full items-center justify-between rounded-2xl border border-brand-500/25 bg-brand-500/10 p-4 transition-colors hover:bg-brand-500/15"
                 >
                   <div className="flex items-center gap-3">
@@ -461,6 +473,18 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                         {continueTarget.resuming ? 'Continuar aprendiendo' : 'Siguiente lección'}
                       </p>
                       <p className="text-sm font-medium text-white">{continueTarget.title}</p>
+                      {(sessionMeta.duration || sessionMeta.sectionTitle) && (
+                        <p className="mt-1 text-xs text-navy-400">
+                          {[
+                            sessionMeta.duration,
+                            sessionMeta.sectionTitle
+                              ? `Retomas en: ${sessionMeta.sectionTitle}`
+                              : '',
+                          ]
+                            .filter(Boolean)
+                            .join(' · ')}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <ArrowRight
@@ -501,7 +525,6 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             )}
             <div className="container mx-auto max-w-7xl px-6 pb-20 pt-14">
               <div className="mb-12 max-w-4xl">
-                <p className="mb-4 text-sm font-bold text-brand-400">Tu ruta de aprendizaje</p>
                 <h1 className="mb-4 font-heading text-4xl font-bold tracking-tight text-white md:text-5xl">
                   Tu ruta
                 </h1>

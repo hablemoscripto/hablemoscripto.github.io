@@ -95,6 +95,7 @@ interface SectionRendererProps {
   index: number;
   checkpoint?: CheckpointQuizData;
   onImageClick: (src: string, alt: string) => void;
+  onAskSection?: (title: string) => void;
 }
 
 export function sectionHeadingId(index: number): string {
@@ -106,6 +107,7 @@ export default function SectionRenderer({
   index,
   checkpoint,
   onImageClick,
+  onAskSection,
 }: SectionRendererProps) {
   const ig = section.infographic;
   let infographicNode: React.ReactNode = null;
@@ -127,6 +129,19 @@ export default function SectionRenderer({
             {section.title}
           </h2>
         )}
+        {onAskSection &&
+          section.title &&
+          (section.type === 'intro' ||
+            section.type === 'main' ||
+            section.type === 'comparison') && (
+            <button
+              type="button"
+              onClick={() => onAskSection(section.title as string)}
+              className="not-prose mb-4 inline-flex min-h-11 items-center text-sm font-medium text-brand-400 hover:text-brand-300"
+            >
+              No entendí esto
+            </button>
+          )}
 
         {/* Intro Content */}
         {section.type === 'intro' && section.content && (

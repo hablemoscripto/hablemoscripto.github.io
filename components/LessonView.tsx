@@ -45,6 +45,7 @@ import { useScrollProgress } from '../hooks/useScrollProgress';
 import { useLessonNavigation } from '../hooks/useLessonNavigation';
 import EducationNavbar from './EducationNavbar';
 import LessonSearch from './LessonSearch';
+import { readLessonPlace, writeLessonPlace } from '../utils/lessonPlace';
 
 // Cripto Experto Discord invite. Keep in sync with EducationNavbar + the
 // Experto welcome email (_shared/welcome-email.ts).
@@ -208,17 +209,54 @@ const LessonView: React.FC = () => {
     }
   }, [loading, entitlementsLoading, lessonLoading, lesson, isLocked, entitlements, id]);
 
-  // Scroll to top on lesson change — reset local UI state in response to a
-  // route parameter change (idiomatic React pattern).
   useEffect(() => {
-    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveSection(0);
-
     setShowQuiz(hasQuizDraft(Number.isNaN(id) ? undefined : `hc_quiz_draft_${id}`));
-
     setQuizPassed(false);
   }, [id]);
+
+  // Restore the last section after the body is in the DOM. Skip the hero
+  // reset when we have a hash or a saved place for this lesson.
+  useEffect(() => {
+    if (!lesson || isLocked || lessonLoading) return;
+    const hash = typeof window !== 'undefined' ? window.location.hash.replace(/^#/, '') : '';
+    const place = readLessonPlace();
+    const targetId = hash || (place?.lessonId === id ? place.sectionId : '');
+    if (!targetId) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    const frame = requestAnimationFrame(() => {
+      const el = document.getElementById(targetId);
+      if (el) el.scrollIntoView({ block: 'start' });
+      else window.scrollTo(0, 0);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [lesson, id, isLocked, lessonLoading]);
+
+  useEffect(() => {
+    if (!lesson || isLocked || lessonLoading || showQuiz) return;
+    const nodes = Array.from(document.querySelectorAll<HTMLElement>('h2[id^="seccion-"]'));
+    if (nodes.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        const top = visible[0]?.target;
+        if (!(top instanceof HTMLElement) || !top.id) return;
+        writeLessonPlace({
+          lessonId: id,
+          sectionId: top.id,
+          sectionTitle: (top.textContent || '').trim(),
+        });
+      },
+      { rootMargin: '-7rem 0px -45% 0px', threshold: 0.15 }
+    );
+    nodes.forEach((node) => io.observe(node));
+    return () => io.disconnect();
+  }, [lesson, id, isLocked, lessonLoading, showQuiz]);
 
   // Clean up body overflow on unmount (in case lightbox was open)
   useEffect(() => {
@@ -459,6 +497,14 @@ const LessonView: React.FC = () => {
   const outlineItems = lesson.sections
     .map((section, idx) => ({ id: sectionHeadingId(idx), title: section.title }))
     .filter((item): item is { id: string; title: string } => Boolean(item.title));
+  const quizReviewSection = (() => {
+    if (!showQuiz) return null;
+    const place = readLessonPlace();
+    if (place?.lessonId === id && place.sectionId) {
+      return { id: place.sectionId, title: place.sectionTitle };
+    }
+    return outlineItems[0] ?? null;
+  })();
 
   // Did finishing this lesson complete the whole level? (Sequential locking
   // guarantees the others are done.) Drives the in-flow certificate moment.
@@ -671,6 +717,19 @@ const LessonView: React.FC = () => {
                   index={idx}
                   checkpoint={lesson.checkpointQuizzes?.find((cp) => cp.sectionIndex === idx)}
                   onImageClick={openLightbox}
+                  onAskSection={
+                    isFocusMode
+                      ? undefined
+                      : (title) => {
+                          window.dispatchEvent(
+                            new CustomEvent('open-chat-with-prompt', {
+                              detail: {
+                                prompt: `En la lección "${lesson.title}", sección "${title}", explícamelo en palabras simples.`,
+                              },
+                            })
+                          );
+                        }
+                  }
                 />
               ))}
             </div>
@@ -739,6 +798,7 @@ const LessonView: React.FC = () => {
                     questions={lesson.quiz?.questions || []}
                     onComplete={handleQuizComplete}
                     storageKey={quizStorageKey}
+                    reviewSection={quizReviewSection}
                   />
 
                   {quizPassed && levelJustCompleted && (
