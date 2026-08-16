@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, BarChart3, LogOut, BookOpen, Zap, Trophy, Search } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import Logo from './ui/Logo';
 import { useGamification } from '../contexts/GamificationContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -159,6 +159,14 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({
               </a>
             )}
 
+            <Link
+              to="/"
+              className="text-sm font-medium text-navy-400 hover:text-white transition-colors"
+              aria-label="Ir al sitio público"
+            >
+              Sitio
+            </Link>
+
             <button
               onClick={handleLogout}
               className="flex items-center gap-2 text-sm font-medium text-navy-400 hover:text-white transition-colors"
@@ -268,6 +276,14 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({
                 Comunidad
               </a>
             )}
+            <Link
+              to="/"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="w-full flex items-center gap-2 p-3 rounded-lg bg-navy-800 text-left text-navy-300"
+              aria-label="Ir al sitio público"
+            >
+              Sitio
+            </Link>
             <button
               onClick={handleLogout}
               className="w-full flex items-center gap-2 p-3 text-navy-400"
