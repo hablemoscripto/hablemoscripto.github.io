@@ -14,7 +14,7 @@ import {
   Lock,
   Award,
   RefreshCw,
-  Loader2,
+  Focus,
 } from 'lucide-react';
 import VideoPlayer from './ui/VideoPlayer';
 import ImageLightbox from './lesson/ImageLightbox';
@@ -70,7 +70,7 @@ declare global {
 const LessonView: React.FC = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
   const navigate = useNavigate();
-  const { isLessonCompleted, markLessonComplete, loading } = useProgress();
+  const { isLessonCompleted, markLessonComplete, getQuizScore, loading } = useProgress();
   const { entitlements, loading: entitlementsLoading } = useEntitlements();
   const { user } = useAuth();
 
@@ -90,9 +90,6 @@ const LessonView: React.FC = () => {
   // reload; otherwise the restored answers hide behind "Comenzar Quiz".
   const [showQuiz, setShowQuiz] = useState(() => hasQuizDraft(quizStorageKey));
   const [quizPassed, setQuizPassed] = useState(false);
-  const [saveError, setSaveError] = useState(false);
-  const [lastScore, setLastScore] = useState<number | null>(null);
-  const [retryingSave, setRetryingSave] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
   const [showCert, setShowCert] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -115,8 +112,25 @@ const LessonView: React.FC = () => {
   // Image lightbox state
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
 
-  // Focus Mode
-  const [isFocusMode, setIsFocusMode] = useState(false);
+  const [isFocusMode, setIsFocusMode] = useState(() => {
+    try {
+      return localStorage.getItem('hc_focus_mode') === '1';
+    } catch {
+      return false;
+    }
+  });
+
+  const toggleFocusMode = () => {
+    setIsFocusMode((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('hc_focus_mode', next ? '1' : '0');
+      } catch {
+        /* */
+      }
+      return next;
+    });
+  };
 
   // Load lesson data. Free lessons resolve from the bundle instantly; paid
   // lessons are fetched from the gated Edge Function (async). The cancelled
@@ -204,9 +218,6 @@ const LessonView: React.FC = () => {
     setShowQuiz(hasQuizDraft(Number.isNaN(id) ? undefined : `hc_quiz_draft_${id}`));
 
     setQuizPassed(false);
-    setSaveError(false);
-    setLastScore(null);
-    setRetryingSave(false);
   }, [id]);
 
   // Clean up body overflow on unmount (in case lightbox was open)
@@ -413,25 +424,10 @@ const LessonView: React.FC = () => {
   const levelJustCompleted = quizPassed && isLevelComplete(lessonLevel, isLessonCompleted);
   const studentName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'Estudiante';
 
-  const handleQuizComplete = async (score: number) => {
-    // Only show the success/certificate state if the completion actually
-    // persisted — otherwise a silent save failure would falsely claim "+100 XP"
-    // and (on a level's last lesson) hide the certificate with no explanation.
-    setLastScore(score); // keep the passing score so the user can retry the save without redoing the quiz
+  const handleQuizComplete = async (score: number): Promise<boolean> => {
     const saved = await markLessonComplete(id, score);
-    if (saved) {
-      setSaveError(false);
-      setQuizPassed(true);
-    } else {
-      setSaveError(true);
-    }
-  };
-
-  const handleRetrySave = async () => {
-    if (lastScore === null || retryingSave) return;
-    setRetryingSave(true);
-    await handleQuizComplete(lastScore);
-    setRetryingSave(false);
+    if (saved) setQuizPassed(true);
+    return saved;
   };
 
   const handleNextLesson = () => {
@@ -489,7 +485,7 @@ const LessonView: React.FC = () => {
       <main id="contenido" tabIndex={-1} className="min-h-screen bg-navy-950 pb-20 outline-none">
         {/* Progress Bar Fixed Top */}
         <div
-          className="fixed top-16 left-0 w-full h-1 bg-navy-900 z-30"
+          className="fixed top-16 left-0 w-full h-0.5 bg-navy-900 z-30"
           role="progressbar"
           aria-label="Progreso de lectura"
           aria-valuenow={Math.round(scrollProgress * 100)}
@@ -518,67 +514,80 @@ const LessonView: React.FC = () => {
               <span className="text-sm">Volver</span>
             </button>
 
-            <span className="font-medium text-navy-200 truncate min-w-0 flex-1 text-center text-sm sm:text-base">
-              <span className="hidden sm:inline">{lesson.number?.split(' ')[0] || id}. </span>
-              {lesson.title}
-            </span>
-
-            {isCompleted ? (
-              <span className="flex items-center gap-1 shrink-0 text-green-500 text-sm font-medium">
-                <CheckCircle size={16} aria-hidden="true" />
-                <span className="hidden sm:inline">Completado</span>
-              </span>
+            {isFocusMode ? (
+              <h1 className="font-medium text-navy-200 truncate min-w-0 flex-1 text-center text-sm sm:text-base">
+                <span className="hidden sm:inline">{lesson.number?.split(' ')[0] || id}. </span>
+                {lesson.title}
+              </h1>
             ) : (
-              <div className="w-[4.5rem] sm:w-28 shrink-0" aria-hidden="true" />
+              <span className="font-medium text-navy-200 truncate min-w-0 flex-1 text-center text-sm sm:text-base">
+                <span className="hidden sm:inline">{lesson.number?.split(' ')[0] || id}. </span>
+                {lesson.title}
+              </span>
             )}
+
+            <div className="flex items-center gap-1 shrink-0">
+              <button
+                type="button"
+                onClick={toggleFocusMode}
+                aria-pressed={isFocusMode}
+                aria-label={isFocusMode ? 'Salir del modo enfoque' : 'Activar modo enfoque'}
+                className={`min-h-11 min-w-11 flex items-center justify-center rounded-lg transition-colors ${
+                  isFocusMode
+                    ? 'bg-brand-500/10 text-brand-400'
+                    : 'text-navy-400 hover:text-white hover:bg-navy-800'
+                }`}
+              >
+                <Focus size={18} aria-hidden="true" />
+              </button>
+              {isCompleted ? (
+                <span className="flex items-center gap-1 text-green-500 text-sm font-medium pr-1">
+                  <CheckCircle size={16} aria-hidden="true" />
+                  <span className="hidden sm:inline">Completado</span>
+                </span>
+              ) : (
+                <div className="w-2 sm:w-24" aria-hidden="true" />
+              )}
+            </div>
           </div>
         </nav>
 
-        {/* Header */}
-        <section className="bg-navy-900 border-b border-white/5 py-12">
-          <div className="container max-w-7xl mx-auto px-6">
-            <div className="flex items-center gap-2 text-sm text-brand-500 font-bold uppercase tracking-wider mb-4">
-              <span className="px-2 py-1 bg-brand-500/10 rounded border border-brand-500/20">
-                Lección {lesson.number?.split(' ')[0] || id}
-              </span>
-            </div>
-            <h1 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight">
-              {lesson.title}
-            </h1>
-            <p className="text-lg text-navy-400 max-w-3xl leading-relaxed mb-8">
-              {lesson.description}
-            </p>
+        {!isFocusMode && (
+          <section className="bg-navy-900 border-b border-white/5 py-5 md:py-12">
+            <div className="container max-w-7xl mx-auto px-6">
+              <div className="hidden md:flex items-center gap-2 text-sm text-brand-500 font-bold uppercase tracking-wider mb-4">
+                <span className="px-2 py-1 bg-brand-500/10 rounded border border-brand-500/20">
+                  Lección {lesson.number?.split(' ')[0] || id}
+                </span>
+              </div>
+              <h1 className="text-2xl md:text-5xl font-heading font-bold text-white mb-3 md:mb-6 leading-tight">
+                {lesson.title}
+              </h1>
+              <p className="text-sm md:text-lg text-navy-400 max-w-3xl leading-relaxed mb-4 md:mb-8 line-clamp-2 md:line-clamp-none">
+                {lesson.description}
+              </p>
 
-            <div className="flex flex-wrap gap-6 text-sm font-medium text-navy-400 border-t border-white/5 pt-6 items-center">
-              <div className="flex items-center gap-2">
-                <Clock size={16} className="text-brand-500" /> {lesson.duration}
+              <div className="flex flex-wrap gap-4 md:gap-6 text-sm font-medium text-navy-400 border-t border-white/5 pt-4 md:pt-6 items-center">
+                <div className="flex items-center gap-2">
+                  <Clock size={16} className="text-brand-500" aria-hidden="true" />{' '}
+                  {lesson.duration}
+                </div>
+                <div className="flex items-center gap-2">
+                  {lesson.videoId ? (
+                    <>
+                      <Video size={16} className="text-brand-500" aria-hidden="true" /> Video +
+                      Texto
+                    </>
+                  ) : (
+                    <>
+                      <BookOpen size={16} className="text-brand-500" aria-hidden="true" /> Lectura
+                    </>
+                  )}
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                {lesson.videoId ? (
-                  <>
-                    <Video size={16} className="text-brand-500" /> Video + Texto
-                  </>
-                ) : (
-                  <>
-                    <BookOpen size={16} className="text-brand-500" /> Lectura
-                  </>
-                )}
-              </div>
-              <div className="flex-1"></div>
-              <button
-                onClick={() => setIsFocusMode(!isFocusMode)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all border ${
-                  isFocusMode
-                    ? 'bg-brand-500/10 text-brand-400 border-brand-500/30 shadow-glow-brand/20'
-                    : 'bg-navy-800 text-navy-300 border-navy-700 hover:bg-navy-700'
-                }`}
-              >
-                <BookOpen size={16} />
-                {isFocusMode ? 'Modo Enfoque Activo' : 'Activar Modo Enfoque'}
-              </button>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <div
           className={`max-w-6xl xl:max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 transition-all duration-500`}
@@ -590,8 +599,23 @@ const LessonView: React.FC = () => {
             {/* Video Section — only when the lesson actually has a video */}
             {lesson.videoId && <VideoPlayer title={lesson.title} videoId={lesson.videoId} />}
 
-            {/* Referral Section */}
-            {lesson.referrals && lesson.referrals.length > 0 && (
+            {/* Content Sections with Checkpoint Quizzes.
+                            Measure capped to ~70ch and centered for comfortable
+                            study-length reading; bold rendered white so emphasized
+                            terms pop on the dark theme. */}
+            <div className="prose prose-invert prose-lg max-w-[70ch] mx-auto break-words prose-strong:text-white">
+              {lesson.sections.map((section, idx) => (
+                <SectionRenderer
+                  key={idx}
+                  section={section}
+                  index={idx}
+                  checkpoint={lesson.checkpointQuizzes?.find((cp) => cp.sectionIndex === idx)}
+                  onImageClick={openLightbox}
+                />
+              ))}
+            </div>
+
+            {!isFocusMode && lesson.referrals && lesson.referrals.length > 0 && (
               <div className="grid gap-4 my-8">
                 {lesson.referrals.map((ref, idx) => (
                   <div
@@ -630,22 +654,6 @@ const LessonView: React.FC = () => {
                 ))}
               </div>
             )}
-
-            {/* Content Sections with Checkpoint Quizzes.
-                            Measure capped to ~70ch and centered for comfortable
-                            study-length reading; bold rendered white so emphasized
-                            terms pop on the dark theme. */}
-            <div className="prose prose-invert prose-lg max-w-[70ch] mx-auto break-words prose-strong:text-white">
-              {lesson.sections.map((section, idx) => (
-                <SectionRenderer
-                  key={idx}
-                  section={section}
-                  index={idx}
-                  checkpoint={lesson.checkpointQuizzes?.find((cp) => cp.sectionIndex === idx)}
-                  onImageClick={openLightbox}
-                />
-              ))}
-            </div>
 
             {/* Quiz Section */}
             <div className="mt-12 pt-8 border-t border-white/10">
@@ -722,37 +730,6 @@ const LessonView: React.FC = () => {
                           className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-green-500/20 inline-flex items-center gap-2 hover:scale-105 active:scale-[0.98]"
                         >
                           Siguiente Lección <ArrowRight size={20} />
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                  {saveError && !quizPassed && (
-                    <div className="mt-8 text-center" role="alert" aria-live="assertive">
-                      <div className="inline-flex flex-col items-center gap-2 p-6 rounded-2xl bg-red-500/10 border border-red-500/20">
-                        <div className="flex items-center gap-2 text-red-400 text-sm font-bold">
-                          <AlertCircle size={18} aria-hidden="true" />
-                          No pudimos guardar tu progreso
-                        </div>
-                        <p className="text-navy-300 text-sm max-w-sm">
-                          Revisa tu conexión y reintenta. No tienes que repetir el quiz.
-                        </p>
-                        <button
-                          onClick={handleRetrySave}
-                          disabled={retryingSave || lastScore === null}
-                          aria-busy={retryingSave}
-                          className="mt-1 px-6 py-3 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-navy-950 font-bold rounded-xl transition-all inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          {retryingSave ? (
-                            <>
-                              <Loader2 size={18} className="animate-spin" aria-hidden="true" />{' '}
-                              Reintentando...
-                            </>
-                          ) : (
-                            <>
-                              <RefreshCw size={18} aria-hidden="true" /> Reintentar guardado
-                            </>
-                          )}
                         </button>
                       </div>
                     </div>
@@ -841,16 +818,25 @@ const LessonView: React.FC = () => {
             <div className="sticky top-24">
               {/* Progress Card */}
               <div className="bg-navy-900 rounded-2xl border border-navy-800 p-6 mb-6">
-                <h3 className="font-bold text-white mb-4">Tu Progreso</h3>
+                <h3 className="font-bold text-white mb-4">Tu progreso</h3>
                 <div className="w-full bg-navy-800 rounded-full h-2 mb-2">
                   <div
                     className="bg-brand-500 h-2 rounded-full transition-all duration-500"
-                    style={{ width: `${isCompleted ? 100 : 0}%` }}
+                    style={{
+                      width: `${isCompleted ? 100 : Math.round(scrollProgress * 100)}%`,
+                    }}
                   ></div>
                 </div>
                 <p className="text-sm text-navy-400">
-                  {isCompleted ? 'Lección completada' : 'En progreso'}
+                  {isCompleted
+                    ? 'Lección completada'
+                    : `${Math.round(scrollProgress * 100)}% leído`}
                 </p>
+                {isCompleted && getQuizScore(id) !== null && (
+                  <p className="text-xs text-navy-400 mt-2">
+                    Último quiz: {getQuizScore(id)} aciertos
+                  </p>
+                )}
               </div>
 
               {/* Resources */}

@@ -33,6 +33,7 @@ interface UseDailyReviewResult {
   streakAtRisk: boolean;
   streak: number;
   xpPerReview: number;
+  xpAward: 'pending' | 'awarded' | 'failed';
   answer: (index: number) => void;
   nextQuestion: () => void;
   dismissUntilTomorrow: () => void;
@@ -66,6 +67,7 @@ export function useDailyReview(): UseDailyReviewResult {
   });
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [xpAward, setXpAward] = useState<'pending' | 'awarded' | 'failed'>('pending');
   // True while the user is actively reviewing this visit — keeps the card in
   // question mode after the first answer flips "already done today" on.
   const [sessionActive, setSessionActive] = useState(false);
@@ -79,7 +81,7 @@ export function useDailyReview(): UseDailyReviewResult {
           // Legacy rows may lack completed_at; fall back so they still enter the pool.
           completedAt: p.completedAt || '1970-01-01T00:00:00.000Z',
         })),
-    [progress],
+    [progress]
   );
 
   const today = todayISO();
@@ -105,7 +107,6 @@ export function useDailyReview(): UseDailyReviewResult {
   const [picked, setPicked] = useState<ReviewQuestion | null>(null);
   useEffect(() => {
     if (eligible && !picked) {
-       
       setPicked(pickReviewQuestion(completions, reviewState));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -117,7 +118,7 @@ export function useDailyReview(): UseDailyReviewResult {
   // qualifying has happened yet today.
   const completedLessonToday = useMemo(
     () => completions.some((c) => todayISO(new Date(c.completedAt)) === today),
-    [completions, today],
+    [completions, today]
   );
   const streakAtRisk = streak >= 1 && !completedLessonToday && !alreadyDone;
 
@@ -127,6 +128,7 @@ export function useDailyReview(): UseDailyReviewResult {
       const correct = index === question.correctIndex;
       setSelectedIndex(index);
       setIsCorrect(correct);
+      setXpAward('pending');
       setSessionActive(true);
 
       const nextState: ReviewState = {
@@ -143,8 +145,12 @@ export function useDailyReview(): UseDailyReviewResult {
         // Persist the activity first; only award XP after the server confirms
         // so the navbar XP chip never lies about an unsynced review.
         void logReviewActivity(user.id, question.questionId, correct).then(async (logged) => {
-          if (!logged) return;
+          if (!logged) {
+            setXpAward('failed');
+            return;
+          }
           addXp(REVIEW_XP);
+          setXpAward('awarded');
           const freshStreak = await refreshStreak();
           const completedCount = completions.length;
           const totalLessons = getAllLessonsOrdered().length;
@@ -169,9 +175,21 @@ export function useDailyReview(): UseDailyReviewResult {
         });
       } else {
         addXp(REVIEW_XP);
+        setXpAward('awarded');
       }
     },
-    [question, selectedIndex, today, reviewState, user, addXp, refreshStreak, checkAchievements, completions, xp],
+    [
+      question,
+      selectedIndex,
+      today,
+      reviewState,
+      user,
+      addXp,
+      refreshStreak,
+      checkAchievements,
+      completions,
+      xp,
+    ]
   );
 
   // "Una más" — swap in a fresh question (the just-answered one is excluded
@@ -182,6 +200,7 @@ export function useDailyReview(): UseDailyReviewResult {
     if (!next) return;
     setSelectedIndex(null);
     setIsCorrect(null);
+    setXpAward('pending');
     setPicked(next);
   }, [remainingToday, completions, reviewState]);
 
@@ -220,6 +239,7 @@ export function useDailyReview(): UseDailyReviewResult {
     streakAtRisk,
     streak,
     xpPerReview: REVIEW_XP,
+    xpAward,
     answer,
     nextQuestion,
     dismissUntilTomorrow,

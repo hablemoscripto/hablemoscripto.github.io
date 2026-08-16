@@ -11,7 +11,7 @@ const STORAGE_KEY = 'chat_messages';
 const INITIAL_GREETING: ChatMessage = {
   role: 'model',
   text: '¡Hola! Soy CBas. Pregúntame sobre Bitcoin, cómo empezar en cripto o conceptos de trading. ¿En qué puedo ayudarte hoy?',
-  timestamp: new Date()
+  timestamp: new Date(),
 };
 
 function loadStoredMessages(): ChatMessage[] {
@@ -20,10 +20,11 @@ function loadStoredMessages(): ChatMessage[] {
     if (stored) {
       const parsed = JSON.parse(stored) as Array<{ role: string; text: string; timestamp: string }>;
       if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed.map(msg => ({
+        return parsed.map((msg) => ({
           ...msg,
           role: msg.role as 'user' | 'model',
-          timestamp: new Date(msg.timestamp)
+          timestamp: new Date(msg.timestamp),
+          isError: Boolean((msg as { isError?: boolean }).isError),
         }));
       }
     }
@@ -49,7 +50,10 @@ const WaitingIndicator: React.FC = () => {
   useEffect(() => {
     const t1 = setTimeout(() => setStage(1), 2500);
     const t2 = setTimeout(() => setStage(2), 9000);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, []);
   const labels = ['Pensando...', 'Buscando en las lecciones...', 'Preparando tu respuesta...'];
   return (
@@ -71,9 +75,12 @@ const ChatWidget: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const lastUserTextRef = useRef('');
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    messagesEndRef.current?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    });
   };
 
   useEffect(() => {
@@ -111,7 +118,8 @@ const ChatWidget: React.FC = () => {
     };
 
     window.addEventListener('open-chat-with-prompt', handleOpenChat as EventListener);
-    return () => window.removeEventListener('open-chat-with-prompt', handleOpenChat as EventListener);
+    return () =>
+      window.removeEventListener('open-chat-with-prompt', handleOpenChat as EventListener);
   }, []);
 
   // Hide the FAB when a quiz is active (Quiz emits 'quiz-active') or when any
@@ -163,56 +171,72 @@ const ChatWidget: React.FC = () => {
     await sendMessage(input);
   };
 
-  const sendMessage = async (raw: string) => {
+  const retryLast = async () => {
+    const prompt = lastUserTextRef.current;
+    if (!prompt || isLoading) return;
+    setMessages((prev) => {
+      const next = [...prev];
+      if (next[next.length - 1]?.isError) next.pop();
+      return next;
+    });
+    await sendMessage(prompt, { skipUserAppend: true });
+  };
+
+  const sendMessage = async (raw: string, opts?: { skipUserAppend?: boolean }) => {
     if (!raw.trim() || isLoading) return;
 
     const userMessage: ChatMessage = {
       role: 'user',
       text: raw.trim(),
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    lastUserTextRef.current = userMessage.text;
+    if (!opts?.skipUserAppend) {
+      setMessages((prev) => [...prev, userMessage]);
+    }
     setInput('');
     setIsLoading(true);
     trackChatMessage();
 
     try {
-      setMessages(prev => [...prev, {
-        role: 'model',
-        text: '',
-        timestamp: new Date()
-      }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'model',
+          text: '',
+          timestamp: new Date(),
+        },
+      ]);
 
-      const apiHistory = messages[0]?.role === 'model' && messages.length === 1
-        ? []
-        : messages;
+      const apiHistory = opts?.skipUserAppend
+        ? messages.filter((m) => !m.isError)
+        : messages[0]?.role === 'model' && messages.length === 1
+          ? []
+          : messages;
 
       const frameIdRef = { current: 0 };
-      await streamAIResponse(
-        apiHistory,
-        userMessage.text,
-        (chunk) => {
-          cancelAnimationFrame(frameIdRef.current);
-          frameIdRef.current = requestAnimationFrame(() => {
-            setMessages(prev => {
-              const updated = [...prev];
-              const last = updated[updated.length - 1];
-              if (last?.role === 'model') {
-                updated[updated.length - 1] = { ...last, text: chunk };
-              }
-              return updated;
-            });
+      await streamAIResponse(apiHistory, userMessage.text, (chunk) => {
+        cancelAnimationFrame(frameIdRef.current);
+        frameIdRef.current = requestAnimationFrame(() => {
+          setMessages((prev) => {
+            const updated = [...prev];
+            const last = updated[updated.length - 1];
+            if (last?.role === 'model') {
+              updated[updated.length - 1] = { ...last, text: chunk };
+            }
+            return updated;
           });
-        }
-      );
+        });
+      });
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Ocurrió un error. Intenta de nuevo.';
-      setMessages(prev => {
+      const errorMessage =
+        error instanceof Error ? error.message : 'No pude responder. Revisa tu conexión.';
+      setMessages((prev) => {
         const updated = [...prev];
         const last = updated[updated.length - 1];
         if (last?.role === 'model' && !last.text) {
-          updated[updated.length - 1] = { ...last, text: `⚠️ ${errorMessage}` };
+          updated[updated.length - 1] = { ...last, text: errorMessage, isError: true };
         }
         return updated;
       });
@@ -237,7 +261,11 @@ const ChatWidget: React.FC = () => {
         aria-label={isOpen ? 'Cerrar asistente IA' : 'Abrir asistente IA'}
         aria-expanded={isOpen}
       >
-        {isOpen ? <X className="size-6 sm:size-7" aria-hidden="true" /> : <MessageCircle className="size-6 sm:size-7" aria-hidden="true" />}
+        {isOpen ? (
+          <X className="size-6 sm:size-7" aria-hidden="true" />
+        ) : (
+          <MessageCircle className="size-6 sm:size-7" aria-hidden="true" />
+        )}
       </button>
 
       {/* Chat Window */}
@@ -247,16 +275,20 @@ const ChatWidget: React.FC = () => {
           role="region"
           aria-label="Chat con asistente de IA"
         >
-
           {/* Header */}
           <div className="bg-navy-800 p-4 border-b border-navy-700 flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center border border-brand-500/50">
               <Sparkles size={20} className="text-brand-500" aria-hidden="true" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-white text-sm" id="chat-title">CBas</h3>
+              <h3 className="font-bold text-white text-sm" id="chat-title">
+                CBas
+              </h3>
               <p className="text-xs text-navy-400 flex items-center gap-1">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" aria-hidden="true"></span>
+                <span
+                  className="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+                  aria-hidden="true"
+                ></span>
                 En línea
               </p>
             </div>
@@ -269,7 +301,10 @@ const ChatWidget: React.FC = () => {
               <Trash2 size={16} aria-hidden="true" />
             </button>
             <button
-              onClick={() => { setIsOpen(false); toggleRef.current?.focus(); }}
+              onClick={() => {
+                setIsOpen(false);
+                toggleRef.current?.focus();
+              }}
               className="sm:hidden p-2 min-h-11 min-w-11 flex items-center justify-center text-navy-400 hover:text-white hover:bg-navy-700/50 rounded-lg transition-colors"
               aria-label="Cerrar asistente IA"
             >
@@ -293,19 +328,34 @@ const ChatWidget: React.FC = () => {
                 <div
                   className={`max-w-[85%] rounded-2xl p-3 text-sm ${
                     msg.role === 'user'
-                      ? 'bg-brand-600 text-white rounded-br-none'
-                      : 'bg-navy-800 text-navy-200 rounded-bl-none border border-navy-700'
+                      ? 'bg-brand-500 text-navy-950 rounded-br-none'
+                      : msg.isError
+                        ? 'bg-red-500/10 text-red-200 rounded-bl-none border border-red-500/30'
+                        : 'bg-navy-800 text-navy-200 rounded-bl-none border border-navy-700'
                   }`}
                   aria-label={msg.role === 'user' ? 'Tu mensaje' : 'Respuesta del asistente'}
                 >
                   {msg.role === 'model' ? (
-                     <div className="prose prose-invert prose-sm max-w-none break-words">
-                        {msg.text ? (
-                          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>{msg.text}</ReactMarkdown>
-                        ) : (
-                          <WaitingIndicator />
-                        )}
-                     </div>
+                    <div className="prose prose-invert prose-sm max-w-none break-words">
+                      {msg.isError ? (
+                        <div className="space-y-2">
+                          <p className="!mb-0">{msg.text}</p>
+                          <button
+                            type="button"
+                            onClick={() => void retryLast()}
+                            className="min-h-11 px-3 rounded-lg bg-brand-500 text-navy-950 text-xs font-bold hover:bg-brand-400 transition-colors"
+                          >
+                            Reintentar
+                          </button>
+                        </div>
+                      ) : msg.text ? (
+                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
+                          {msg.text}
+                        </ReactMarkdown>
+                      ) : (
+                        <WaitingIndicator />
+                      )}
+                    </div>
                   ) : (
                     msg.text
                   )}
@@ -313,7 +363,10 @@ const ChatWidget: React.FC = () => {
               </div>
             ))}
             {messages.length === 1 && !isLoading && (
-              <div className="flex flex-col items-start gap-2 pt-1" aria-label="Preguntas sugeridas">
+              <div
+                className="flex flex-col items-start gap-2 pt-1"
+                aria-label="Preguntas sugeridas"
+              >
                 {STARTER_PROMPTS.map((prompt) => (
                   <button
                     key={prompt}
@@ -329,7 +382,10 @@ const ChatWidget: React.FC = () => {
           </div>
 
           {/* Input Area */}
-          <form onSubmit={handleSubmit} className="p-4 bg-navy-800 border-t border-navy-700 flex gap-2">
+          <form
+            onSubmit={handleSubmit}
+            className="p-4 bg-navy-800 border-t border-navy-700 flex gap-2"
+          >
             <input
               ref={inputRef}
               type="text"
@@ -345,15 +401,19 @@ const ChatWidget: React.FC = () => {
               type="submit"
               disabled={isLoading || !input.trim()}
               aria-label={isLoading ? 'Enviando mensaje' : 'Enviar mensaje'}
-              className="p-2 bg-brand-500 text-navy-900 rounded-xl hover:bg-brand-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="min-h-11 min-w-11 flex items-center justify-center bg-brand-500 text-navy-950 rounded-xl hover:bg-brand-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {isLoading ? <Loader2 size={20} className="animate-spin" aria-hidden="true" /> : <Send size={20} aria-hidden="true" />}
+              {isLoading ? (
+                <Loader2 size={20} className="animate-spin" aria-hidden="true" />
+              ) : (
+                <Send size={20} aria-hidden="true" />
+              )}
             </button>
           </form>
 
           {/* Powered By */}
           <div className="bg-navy-900 py-1 text-center">
-             <p className="text-[10px] text-navy-400">Con tecnología de Grok (xAI)</p>
+            <p className="text-[10px] text-navy-400">Con tecnología de Grok (xAI)</p>
           </div>
         </section>
       )}

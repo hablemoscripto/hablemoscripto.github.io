@@ -1,5 +1,14 @@
 import React from 'react';
-import { Sparkles, CheckCircle, AlertCircle, Trophy, ArrowRight, Flame, Zap, RotateCw } from 'lucide-react';
+import {
+  Sparkles,
+  CheckCircle,
+  AlertCircle,
+  Trophy,
+  ArrowRight,
+  Flame,
+  Zap,
+  RotateCw,
+} from 'lucide-react';
 import { useDailyReview } from '../../hooks/useDailyReview';
 import { moveRadioFocus } from '../../utils/quizKeyboard';
 
@@ -23,6 +32,7 @@ const DailyReviewCard: React.FC = () => {
     streakAtRisk,
     streak,
     xpPerReview,
+    xpAward,
     answer,
     nextQuestion,
     dismissUntilTomorrow,
@@ -63,9 +73,13 @@ const DailyReviewCard: React.FC = () => {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm text-white font-medium">
-              {streak >= 1 ? `Repaso listo: racha de ${streak} ${streak === 1 ? 'día' : 'días'} protegida` : 'Ya revisaste hoy'}
+              {streak >= 1
+                ? `Repaso listo: racha de ${streak} ${streak === 1 ? 'día' : 'días'} protegida`
+                : 'Ya revisaste hoy'}
             </p>
-            <p className="text-xs text-navy-400">Mañana vuelve otra pregunta para reforzar lo que sabes.</p>
+            <p className="text-xs text-navy-400">
+              Mañana vuelve otra pregunta para reforzar lo que sabes.
+            </p>
           </div>
         </div>
       </div>
@@ -84,9 +98,12 @@ const DailyReviewCard: React.FC = () => {
             <Sparkles size={18} className="text-brand-400" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs uppercase tracking-wider text-brand-400 font-bold">Repaso del día</p>
+            <p className="text-xs uppercase tracking-wider text-brand-400 font-bold">
+              Repaso del día
+            </p>
             <p className="text-xs text-navy-400 truncate">
-              Una pregunta rápida de <span className="text-navy-200 font-medium">{question.lessonTitle}</span>
+              Una pregunta rápida de{' '}
+              <span className="text-navy-200 font-medium">{question.lessonTitle}</span>
             </p>
           </div>
           <span className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-brand-500/15 text-brand-300 text-xs font-bold shrink-0">
@@ -99,8 +116,11 @@ const DailyReviewCard: React.FC = () => {
           <div className="px-5 py-2.5 bg-amber-500/10 border-b border-amber-500/20 flex items-center gap-2">
             <Flame size={14} className="text-amber-400 shrink-0" aria-hidden="true" />
             <p className="text-xs text-amber-300">
-              Tu racha de <span className="font-bold">{streak} {streak === 1 ? 'día' : 'días'}</span> se
-              pierde hoy si no repasas. Esta pregunta la mantiene viva.
+              Tu racha de{' '}
+              <span className="font-bold">
+                {streak} {streak === 1 ? 'día' : 'días'}
+              </span>{' '}
+              se pierde hoy si no repasas. Esta pregunta la mantiene viva.
             </p>
           </div>
         )}
@@ -118,7 +138,8 @@ const DailyReviewCard: React.FC = () => {
               const isTabStop =
                 selectedIndex === optIdx || (selectedIndex === null && optIdx === 0);
 
-              let className = 'w-full p-3 rounded-lg text-left border transition-all flex items-center gap-3 text-sm ';
+              let className =
+                'w-full p-3 rounded-lg text-left border transition-all flex items-center gap-3 text-sm ';
               if (submitted) {
                 if (isCorrectOption) {
                   className += 'bg-emerald-500/10 border-emerald-500/50 text-emerald-400';
@@ -128,7 +149,8 @@ const DailyReviewCard: React.FC = () => {
                   className += 'bg-navy-950 border-navy-800 text-navy-400 opacity-60';
                 }
               } else {
-                className += 'bg-navy-950 border-navy-800 text-navy-300 hover:border-brand-500/50 hover:bg-navy-900 cursor-pointer';
+                className +=
+                  'bg-navy-950 border-navy-800 text-navy-300 hover:border-brand-500/50 hover:bg-navy-900 cursor-pointer';
               }
 
               return (
@@ -136,7 +158,7 @@ const DailyReviewCard: React.FC = () => {
                   key={optIdx}
                   role="radio"
                   aria-checked={isSelected}
-                  tabIndex={submitted ? 0 : (isTabStop ? 0 : -1)}
+                  tabIndex={submitted ? 0 : isTabStop ? 0 : -1}
                   onKeyDown={(e) =>
                     !submitted &&
                     moveRadioFocus(e, optIdx, question.options.length, (i) => answer(i))
@@ -157,8 +179,12 @@ const DailyReviewCard: React.FC = () => {
                     {String.fromCharCode(65 + optIdx)}
                   </span>
                   <span className="flex-1">{opt}</span>
-                  {submitted && isCorrectOption && <CheckCircle size={16} className="text-emerald-500 shrink-0" />}
-                  {submitted && isSelected && !isCorrectOption && <AlertCircle size={16} className="text-red-500 shrink-0" />}
+                  {submitted && isCorrectOption && (
+                    <CheckCircle size={16} className="text-emerald-500 shrink-0" />
+                  )}
+                  {submitted && isSelected && !isCorrectOption && (
+                    <AlertCircle size={16} className="text-red-500 shrink-0" />
+                  )}
                 </button>
               );
             })}
@@ -182,17 +208,26 @@ const DailyReviewCard: React.FC = () => {
                   <AlertCircle size={16} className="shrink-0 mt-0.5" />
                 )}
                 <span className="leading-relaxed">
-                  {question.explanation || (isCorrect ? 'Correcto.' : 'Casi. Revisa la explicación en la lección.')}
+                  {question.explanation ||
+                    (isCorrect ? 'Correcto.' : 'Casi. Revisa la explicación en la lección.')}
                 </span>
               </div>
-              <p className="mt-2 flex items-center gap-1 text-xs font-bold text-brand-300">
-                <Zap size={12} aria-hidden="true" /> +{xpPerReview} XP
-                {streak >= 1 && (
-                  <span className="ml-2 inline-flex items-center gap-1 text-amber-300">
-                    <Flame size={12} aria-hidden="true" /> Racha protegida
-                  </span>
-                )}
-              </p>
+              {xpAward === 'awarded' ? (
+                <p className="mt-2 flex items-center gap-1 text-xs font-bold text-brand-300">
+                  <Zap size={12} aria-hidden="true" /> +{xpPerReview} XP
+                  {streak >= 1 && (
+                    <span className="ml-2 inline-flex items-center gap-1 text-amber-300">
+                      <Flame size={12} aria-hidden="true" /> Racha protegida
+                    </span>
+                  )}
+                </p>
+              ) : xpAward === 'failed' ? (
+                <p className="mt-2 text-xs text-navy-400">
+                  Repaso contado. El XP se suma al reconectar.
+                </p>
+              ) : (
+                <p className="mt-2 text-xs text-navy-400">Sincronizando XP...</p>
+              )}
             </div>
           )}
 

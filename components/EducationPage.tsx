@@ -759,17 +759,19 @@ const EducationPage: React.FC<EducationPageProps> = () => {
               </div>
             </div>
 
-            {/* Pricing Section — hidden for top-tier (experto) owners, who have
-              nothing left to buy and shouldn't be shown launch-pricing copy. */}
-            {entitlements.courseTier !== 'experto' && (
-              <PricingSection
-                entitlements={entitlements}
-                onSelectPlan={(planId) => {
-                  setSelectedPlan(planId);
-                  setShowPaymentModal(true);
-                }}
-              />
-            )}
+            {/* Pricing stays off the day-zero classroom. Free users see it after
+                they have started (3+ completions) or already hold a paid tier.
+                Unlock buttons on locked cards still open PaymentModal. */}
+            {entitlements.courseTier !== 'experto' &&
+              (entitlements.courseTier !== 'free' || totalCompletedLessons >= 3) && (
+                <PricingSection
+                  entitlements={entitlements}
+                  onSelectPlan={(planId) => {
+                    setSelectedPlan(planId);
+                    setShowPaymentModal(true);
+                  }}
+                />
+              )}
             <PaymentModal
               isOpen={showPaymentModal}
               onClose={() => setShowPaymentModal(false)}

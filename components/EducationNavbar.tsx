@@ -18,7 +18,12 @@ interface EducationNavbarProps {
   currentView?: 'dashboard' | 'level-beginner' | 'level-intermediate' | 'level-advanced' | 'lesson';
 }
 
-const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpenProgress, onOpenSearch, currentView }) => {
+const EducationNavbar: React.FC<EducationNavbarProps> = ({
+  globalProgress,
+  onOpenProgress,
+  onOpenSearch,
+  currentView,
+}) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -39,7 +44,9 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
     } else {
       document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isMobileMenuOpen]);
 
   // Escape to close + focus the menu when it opens; restore focus to the
@@ -58,7 +65,7 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
     };
   }, [isMobileMenuOpen]);
 
-  const { xp, level, streak } = useGamification();
+  const { xp, streak } = useGamification();
   const { signOut } = useAuth();
   const { entitlements } = useEntitlements();
   const showCommunity = hasCommunityAccess(entitlements);
@@ -72,7 +79,6 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
     <nav className="sticky top-0 z-40 bg-navy-950 border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-
           {/* Logo Area */}
           <div className="flex items-center gap-8">
             <Logo size="sm" wordmarkClassName="hidden sm:inline" />
@@ -93,10 +99,9 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
                 <Zap size={18} className="fill-amber-400" />
                 <span className="font-bold">{streak}</span>
               </div>
-              <div className="flex items-center gap-2 text-navy-100" title="Nivel">
+              <div className="flex items-center gap-2 text-navy-100" title="Experiencia">
                 <Trophy size={18} className="text-brand-500" />
-                <span className="font-bold">Nivel {level}</span>
-                <span className="text-xs text-navy-400">({xp} XP)</span>
+                <span className="font-bold">{xp} XP</span>
               </div>
             </div>
 
@@ -119,7 +124,9 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
               className="flex items-center gap-3 px-4 py-2 rounded-full bg-navy-900 border border-navy-800 hover:border-brand-500/30 transition-all group"
             >
               <div className="flex flex-col items-end leading-none">
-                <span className="text-[10px] text-navy-400 uppercase tracking-wider">Progreso General</span>
+                <span className="text-[10px] text-navy-400 uppercase tracking-wider">
+                  Progreso General
+                </span>
                 <span className="text-sm font-bold text-brand-500">{globalProgress}%</span>
               </div>
               <div className="w-8 h-8 rounded-full bg-navy-800 flex items-center justify-center group-hover:bg-brand-500/20 transition-colors">
@@ -155,7 +162,7 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
             <button
               onClick={onOpenProgress}
               className="flex items-center gap-3 min-h-11 px-3 rounded-full bg-navy-900 border border-navy-800 text-sm"
-              aria-label={`Racha de ${streak} días, nivel ${level}. Ver mi progreso`}
+              aria-label={`Racha de ${streak} días, ${xp} XP. Ver mi progreso`}
             >
               <span className="flex items-center gap-1 text-amber-400">
                 <Zap size={15} className="fill-amber-400" aria-hidden="true" />
@@ -163,7 +170,7 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
               </span>
               <span className="flex items-center gap-1 text-navy-100">
                 <Trophy size={15} className="text-brand-500" aria-hidden="true" />
-                <span className="font-bold">Nv {level}</span>
+                <span className="font-bold">{xp} XP</span>
               </span>
             </button>
 
@@ -182,13 +189,16 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
         </div>
       </div>
 
-      {/* Global Progress Line */}
-      <div className="h-0.5 bg-navy-900 w-full">
-        <div
-          className="h-full bg-gradient-to-r from-brand-500 to-brand-400 shadow-[0_0_10px_rgba(245,158,11,0.5)] transition-all duration-1000 ease-out"
-          style={{ width: `${globalProgress}%` }}
-        ></div>
-      </div>
+      {/* Course progress. Hidden on lesson pages so the reading bar is the
+          single hairline under this nav. */}
+      {currentView !== 'lesson' && (
+        <div className="h-0.5 bg-navy-900 w-full">
+          <div
+            className="h-full bg-gradient-to-r from-brand-500 to-brand-400 shadow-[0_0_10px_rgba(245,158,11,0.5)] transition-all duration-1000 ease-out"
+            style={{ width: `${globalProgress}%` }}
+          ></div>
+        </div>
+      )}
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
@@ -215,15 +225,24 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
               </div>
               <div className="flex items-center gap-2 text-navy-100">
                 <Trophy size={18} className="text-brand-500" />
-                <span className="font-bold">Nivel {level}</span>
+                <span className="font-bold">{xp} XP</span>
               </div>
             </div>
             {onOpenSearch && (
-              <button onClick={() => { setIsMobileMenuOpen(false); onOpenSearch(); }} className="w-full flex items-center gap-2 p-3 rounded-lg bg-navy-800 text-left text-navy-300">
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  onOpenSearch();
+                }}
+                className="w-full flex items-center gap-2 p-3 rounded-lg bg-navy-800 text-left text-navy-300"
+              >
                 <Search size={16} aria-hidden="true" /> Buscar Lecciones
               </button>
             )}
-            <button onClick={onOpenProgress} className="w-full flex items-center justify-between p-3 rounded-lg bg-navy-800 text-left">
+            <button
+              onClick={onOpenProgress}
+              className="w-full flex items-center justify-between p-3 rounded-lg bg-navy-800 text-left"
+            >
               <span className="text-navy-300">Mi Progreso</span>
               <span className="font-bold text-brand-500">{globalProgress}%</span>
             </button>
@@ -237,7 +256,10 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({ globalProgress, onOpe
                 Comunidad
               </a>
             )}
-            <button onClick={handleLogout} className="w-full flex items-center gap-2 p-3 text-navy-400">
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-2 p-3 text-navy-400"
+            >
               <LogOut size={16} /> Cerrar sesión
             </button>
           </div>
