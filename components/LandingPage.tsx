@@ -151,9 +151,15 @@ const LandingPage: React.FC = () => {
         <Hero onStartLearning={handleNavigateToEducation} />
         <ProblemSection />
         <Features />
-        <Courses />
+        <Courses onStartFree={handleNavigateToEducation} />
 
-        {/* Mentoría / comunidad para Cripto Experto */}
+        <section id="pricing" className="py-16 md:py-24 bg-navy-950 relative scroll-mt-28">
+          <PricingSection
+            variant="public"
+            onPublicCta={handlePublicPlanCta}
+          />
+        </section>
+
         <section id="mentoria" className="py-16 md:py-20 bg-navy-900/60 border-y border-white/5 scroll-mt-28">
           <div className="container max-w-5xl mx-auto px-6 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 mb-6">
@@ -206,19 +212,19 @@ const LandingPage: React.FC = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="#pricing"
-                className="px-8 py-4 bg-brand-500 text-navy-950 font-bold rounded-2xl hover:bg-brand-400 transition-colors"
-              >
-                Ver planes
-              </a>
               <button
                 type="button"
                 onClick={() => setIsMentoriaModalOpen(true)}
-                className="px-8 py-4 border border-white/15 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-2xl transition-colors"
+                className="px-8 py-4 bg-brand-500 text-navy-950 font-bold rounded-2xl hover:bg-brand-400 transition-colors"
               >
                 Solicitar mentoría
               </button>
+              <a
+                href="#pricing"
+                className="px-8 py-4 border border-white/15 bg-navy-900 hover:bg-navy-800 text-white font-bold rounded-2xl transition-colors"
+              >
+                Ver planes
+              </a>
             </div>
 
             <p className="mt-6 text-sm text-navy-400">
@@ -226,14 +232,6 @@ const LandingPage: React.FC = () => {
               coordinar tu bienvenida.
             </p>
           </div>
-        </section>
-
-        {/* Public Pricing Section */}
-        <section id="pricing" className="py-16 md:py-24 bg-navy-950 relative scroll-mt-28">
-          <PricingSection
-            variant="public"
-            onPublicCta={handlePublicPlanCta}
-          />
         </section>
 
         {/* FAQ Section */}

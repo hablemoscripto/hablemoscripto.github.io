@@ -1,7 +1,5 @@
 import React from 'react';
 import { Book, TrendingUp, Rocket, CheckCircle2 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
 
 type AccessKind = 'free' | 'paid';
 
@@ -91,18 +89,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
   );
 };
 
-const Courses: React.FC = () => {
-  const navigate = useNavigate();
-  const { user } = useAuth();
+interface CoursesProps {
+  onStartFree: () => void;
+}
 
-  const handleStartFree = () => {
-    if (user) {
-      navigate('/education');
-    } else {
-      navigate('/?showAuth=true');
-    }
-  };
-
+const Courses: React.FC<CoursesProps> = ({ onStartFree }) => {
   const handleViewPlans = () => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     document.getElementById('pricing')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
@@ -185,7 +176,7 @@ const Courses: React.FC = () => {
             <CourseCard
               key={course.level}
               {...course}
-              onCta={course.access === 'free' ? handleStartFree : handleViewPlans}
+              onCta={course.access === 'free' ? onStartFree : handleViewPlans}
             />
           ))}
         </div>

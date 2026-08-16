@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Menu, X, Users, User, LogOut } from 'lucide-react';
+import { Menu, X, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
 import Logo from './ui/Logo';
@@ -9,6 +9,7 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authView, setAuthView] = useState<'login' | 'signup'>('login');
   const { user, signOut } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -107,12 +108,23 @@ const Navbar: React.FC = () => {
     if (!sessionStorage.getItem('redirectAfterLogin')) {
       sessionStorage.setItem('redirectAfterLogin', '/education');
     }
+    setAuthView('login');
     setIsAuthModalOpen(true);
   }, []);
 
+  const handleStartFree = useCallback(() => {
+    if (user) {
+      navigate('/education');
+      return;
+    }
+    sessionStorage.setItem('redirectAfterLogin', '/education');
+    setAuthView('signup');
+    setIsAuthModalOpen(true);
+  }, [user, navigate]);
+
   const navLinks: { name: string; action: () => void }[] = [
     { name: 'Inicio', action: () => handleScrollToSection('home') },
-    { name: 'Por Qué HC', action: () => handleScrollToSection('about') },
+    { name: 'Sobre CBas', action: () => handleScrollToSection('about') },
     { name: 'Cursos', action: () => handleScrollToSection('courses') },
     { name: 'Precios', action: () => handleScrollToSection('pricing') },
     { name: 'Recursos', action: () => handleScrollToSection('resources') },
@@ -132,7 +144,7 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-10">
-            <ul className="flex gap-8 xl:gap-10">
+            <ul className="flex gap-6 xl:gap-8">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <button
@@ -151,32 +163,40 @@ const Navbar: React.FC = () => {
 
             {/* Auth Button */}
             {user ? (
-              <div className="flex items-center gap-4">
-                <div className="hidden lg:flex flex-col items-end leading-none">
-                   <span className="text-[10px] uppercase tracking-tighter text-navy-400 font-bold">Estudiante</span>
-                   <span className="text-sm text-navy-100 font-medium">
-                    {user.email?.split('@')[0]}
-                  </span>
-                </div>
+              <div className="flex items-center gap-3">
                 <button
+                  type="button"
+                  onClick={() => navigate('/education')}
+                  className="px-5 py-2.5 bg-brand-500 hover:bg-brand-400 text-navy-950 rounded-xl font-bold text-sm transition-colors"
+                >
+                  Ir a la plataforma
+                </button>
+                <button
+                  type="button"
                   onClick={() => signOut()}
                   className="p-2.5 bg-navy-800 hover:bg-navy-700 text-white rounded-xl transition-all border border-white/5 hover:border-white/10"
-                  title="Cerrar Sesión"
+                  aria-label="Cerrar sesión"
                 >
                   <LogOut size={18} aria-hidden="true" />
                 </button>
               </div>
             ) : (
-              <button
-                onClick={handleOpenAuth}
-                className="group relative px-6 py-2.5 bg-brand-500 text-navy-950 rounded-xl font-bold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] overflow-hidden shadow-glow-brand"
-              >
-                <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                <span className="relative z-10 flex items-center gap-2 transition-colors">
-                  <User size={16} aria-hidden="true" />
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={handleOpenAuth}
+                  className="px-4 py-2.5 text-sm font-bold text-navy-300 hover:text-white transition-colors"
+                >
                   Ingresar
-                </span>
-              </button>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleStartFree}
+                  className="px-5 py-2.5 bg-brand-500 hover:bg-brand-400 text-navy-950 rounded-xl font-bold text-sm transition-colors shadow-glow-brand"
+                >
+                  Empezar gratis
+                </button>
+              </div>
             )}
           </div>
 
@@ -246,39 +266,62 @@ const Navbar: React.FC = () => {
               </ul>
 
               {/* Action buttons */}
-              <div className="mt-12 space-y-4">
+              <div className="mt-12 space-y-3">
                 {user ? (
-                  <button
-                    onClick={() => {
-                      signOut();
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="flex items-center justify-center gap-3 w-full bg-navy-900 hover:bg-red-500/10 text-white hover:text-red-500 font-bold py-4 px-6 rounded-2xl border border-white/5 transition-all"
-                  >
-                    <LogOut size={18} aria-hidden="true" />
-                    Cerrar Sesión ({user.email?.split('@')[0]})
-                  </button>
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        navigate('/education');
+                      }}
+                      className="flex items-center justify-center w-full bg-brand-500 hover:bg-brand-400 text-navy-950 font-bold py-4 px-6 rounded-2xl transition-colors"
+                    >
+                      Ir a la plataforma
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        signOut();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="flex items-center justify-center gap-3 w-full bg-navy-900 hover:bg-red-500/10 text-white hover:text-red-500 font-bold py-4 px-6 rounded-2xl border border-white/5 transition-all"
+                    >
+                      <LogOut size={18} aria-hidden="true" />
+                      Cerrar sesión
+                    </button>
+                  </>
                 ) : (
-                  <button
-                    onClick={() => {
-                      handleOpenAuth();
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="flex items-center justify-center gap-3 w-full bg-brand-500 hover:bg-brand-400 text-navy-950 font-bold py-4 px-6 rounded-2xl transition-all shadow-glow-brand"
-                  >
-                    <User size={18} aria-hidden="true" />
-                    Ingresar
-                  </button>
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleStartFree();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="flex items-center justify-center w-full bg-brand-500 hover:bg-brand-400 text-navy-950 font-bold py-4 px-6 rounded-2xl transition-colors shadow-glow-brand"
+                    >
+                      Empezar gratis
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleScrollToSection('pricing')}
+                      className="flex items-center justify-center w-full bg-navy-900 hover:bg-navy-800 border border-white/10 hover:border-brand-500/40 text-white font-bold py-4 px-6 rounded-2xl transition-all"
+                    >
+                      Ver planes
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleOpenAuth();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="flex items-center justify-center w-full text-navy-300 hover:text-white font-bold py-3 px-6 transition-colors"
+                    >
+                      Ingresar
+                    </button>
+                  </>
                 )}
-
-                <button
-                  type="button"
-                  onClick={() => handleScrollToSection('pricing')}
-                  className="flex items-center justify-center gap-3 w-full bg-navy-900 hover:bg-navy-800 border border-white/10 hover:border-brand-500/40 text-white font-bold py-4 px-6 rounded-2xl transition-all"
-                >
-                  <Users size={18} className="text-navy-400" aria-hidden="true" />
-                  Ver planes y precios
-                </button>
               </div>
             </nav>
           </div>
@@ -289,8 +332,8 @@ const Navbar: React.FC = () => {
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
+        initialView={authView}
         onLoginSuccess={() => {
-          // Check if there's a redirect URL stored
           const redirectPath = sessionStorage.getItem('redirectAfterLogin');
           if (redirectPath) {
             sessionStorage.removeItem('redirectAfterLogin');

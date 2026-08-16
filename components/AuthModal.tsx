@@ -95,6 +95,17 @@ export default function AuthModal({
     }
   }, [isOpen, initialView]);
 
+  const handleDismiss = () => {
+    if (view !== 'verify-email') {
+      try {
+        sessionStorage.removeItem('redirectAfterLogin');
+      } catch {
+        // Private mode can throw; the modal should still close.
+      }
+    }
+    onClose();
+  };
+
   const handleGoogleSignIn = async () => {
     setError('');
     setLoading(true);
@@ -224,7 +235,7 @@ export default function AuthModal({
     [error && errorId, success && successId].filter(Boolean).join(' ') || undefined;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} ariaLabel={VIEW_LABELS[view]}>
+    <Modal isOpen={isOpen} onClose={handleDismiss} ariaLabel={VIEW_LABELS[view]}>
       <div className="px-2">
         {/* Verify Email View */}
         {view === 'verify-email' && (

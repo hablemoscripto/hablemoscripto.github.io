@@ -120,7 +120,7 @@ const ParticlesBackground: React.FC = memo(() => {
       <Particles
         id="tsparticles-hero"
         options={PARTICLES_OPTIONS}
-        className="absolute inset-0 z-0 pointer-events-auto"
+        className="absolute inset-0 z-0 pointer-events-none"
       />
     </ParticlesProvider>
   );

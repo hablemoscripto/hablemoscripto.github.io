@@ -1,7 +1,7 @@
 
 import React, { Suspense, useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { Users, BookOpen, Award, Zap, CheckCircle } from 'lucide-react';
+import { BookOpen, Award, Zap, CheckCircle } from 'lucide-react';
 import { getAllLessonsOrdered } from '../utils/courseUtils';
 
 // The particles engine is ~40 kB gzipped and purely decorative — keep it out of
@@ -106,10 +106,9 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
                 />
                 <img
                     src="/images/banner-1280w.webp"
-                    alt="Crypto Trading Background"
+                    alt=""
                     width={1280}
                     height={720}
-                    fetchPriority="high"
                     className="w-full h-full object-cover object-center scale-110"
                     style={{
                         maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%)',
@@ -128,22 +127,19 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
       <div className="container max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
             
-            {/* Tagline */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy-900/70 border border-white/5 text-brand-400 text-xs font-bold uppercase tracking-[0.2em] mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-               <Zap size={14} />
-               La nueva era del aprendizaje cripto
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy-900/70 border border-white/5 text-brand-400 text-xs font-bold uppercase tracking-[0.2em] mb-5 md:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+               <Zap size={14} aria-hidden="true" />
+               19 lecciones gratis, sin tarjeta
             </div>
 
-            {/* Main Heading */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white leading-[1] tracking-tighter mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white leading-[1.05] tracking-tighter mb-5 md:mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
               De Cero a Experto en <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-brand-500 to-brand-600 drop-shadow-glow-brand-strong">
                 Cripto.
               </span>
             </h1>
 
-            {/* Typing Subheading */}
-            <div className="h-12 md:h-16 flex items-center justify-center gap-4 text-2xl md:text-4xl font-normal text-navy-200 mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            <div className="hidden md:flex h-16 items-center justify-center gap-4 text-2xl md:text-4xl font-normal text-navy-200 mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
                 <span>Domina</span>
                 <div className="relative">
                     <span className="font-bold text-white border-b-4 border-brand-500 pb-1">{displayText}</span>
@@ -151,40 +147,18 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
                 </div>
             </div>
 
-            {/* Description */}
-            <p className="text-lg md:text-xl text-navy-400 max-w-2xl leading-relaxed mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
+            <p className="text-base md:text-xl text-navy-300 max-w-2xl leading-relaxed mb-7 md:mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
                Olvida el ruido y las promesas falsas. Aprende con análisis claro, práctica guiada y una ruta para configurar tu wallet, identificar estafas y construir un plan de inversión realista.
             </p>
 
-            {/* Outcomes */}
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8 text-sm">
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Configura tu wallet</span>
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Identifica estafas</span>
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Entiende blockchain</span>
-                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Construye tu plan de inversión</span>
-            </div>
-
-            {/* Credibility above the fold (stats before CTAs on short viewports) */}
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-10 text-sm animate-in fade-in duration-700">
-              <span className="inline-flex items-center gap-2 text-navy-300">
-                <Award size={16} className="text-brand-500" aria-hidden="true" />
-                <span><span className="font-bold text-white">7+ años</span> en el mercado</span>
-              </span>
-              <span className="inline-flex items-center gap-2 text-navy-300">
-                <BookOpen size={16} className="text-brand-400" aria-hidden="true" />
-                <span><span className="font-bold text-white">{LESSON_COUNT}</span> lecciones estructuradas</span>
-              </span>
-            </div>
-
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400">
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto mb-8 md:mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400">
               <button
                 type="button"
                 onClick={(e) => {
                   e.preventDefault();
                   onStartLearning();
                 }}
-                className="group relative w-full sm:w-auto px-10 py-5 bg-brand-500 text-navy-950 font-bold rounded-2xl shadow-glow-brand-strong hover:bg-brand-400 active:scale-[0.98] transition-all flex items-center justify-center gap-3 text-lg"
+                className="group relative w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-brand-500 text-navy-950 font-bold rounded-2xl shadow-glow-brand-strong hover:bg-brand-400 active:scale-[0.98] transition-all flex items-center justify-center gap-3 text-base sm:text-lg"
               >
                 <BookOpen size={22} aria-hidden="true" />
                 <span>Empezar gratis</span>
@@ -198,11 +172,28 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
                     behavior: reduce ? 'auto' : 'smooth',
                   });
                 }}
-                className="w-full sm:w-auto px-10 py-5 bg-navy-900 text-white font-bold rounded-2xl border border-white/10 hover:border-brand-500/30 hover:bg-navy-800 transition-all flex items-center justify-center gap-3 group text-lg"
+                className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-navy-900 text-white font-bold rounded-2xl border border-white/10 hover:border-brand-500/30 hover:bg-navy-800 transition-all flex items-center justify-center gap-3 text-base sm:text-lg"
               >
-                <Users size={22} className="text-navy-400 group-hover:text-brand-500 transition-colors" aria-hidden="true" />
-                <span>Ver planes y precios</span>
+                <span>Ver planes</span>
               </button>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-5 text-sm">
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Configura tu wallet</span>
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Identifica estafas</span>
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Entiende blockchain</span>
+                <span className="flex items-center gap-2 text-navy-300"><CheckCircle size={16} className="text-brand-500" aria-hidden="true" /> Construye tu plan de inversión</span>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm animate-in fade-in duration-700">
+              <span className="inline-flex items-center gap-2 text-navy-300">
+                <Award size={16} className="text-brand-500" aria-hidden="true" />
+                <span><span className="font-bold text-white">7+ años</span> en el mercado</span>
+              </span>
+              <span className="inline-flex items-center gap-2 text-navy-300">
+                <BookOpen size={16} className="text-brand-400" aria-hidden="true" />
+                <span><span className="font-bold text-white">{LESSON_COUNT}</span> lecciones estructuradas</span>
+              </span>
             </div>
 
         </div>

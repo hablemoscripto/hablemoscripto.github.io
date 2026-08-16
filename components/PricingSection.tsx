@@ -65,41 +65,16 @@ export default function PricingSection({
 
   return (
     <div className="container max-w-7xl mx-auto px-6">
-      <div className="text-center mb-10 md:mb-12">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-900 border border-white/10 text-brand-500 text-xs font-black uppercase tracking-[0.2em] mb-6">
+      <div className="text-center mb-8 md:mb-10">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-900 border border-white/10 text-brand-500 text-xs font-black uppercase tracking-[0.2em] mb-4">
           Planes y Precios
         </div>
 
-        <h2 className="text-4xl md:text-5xl font-heading font-black text-white tracking-tighter mb-4">
+        <h2 className="text-4xl md:text-5xl font-heading font-black text-white tracking-tighter mb-3">
           Elige tu nivel de profundidad
         </h2>
-        <p className="text-lg text-navy-300 max-w-2xl mx-auto">
-          Pago único. Acceso de por vida. Sin suscripciones.
-        </p>
-
-        <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/30 text-sm max-w-xl">
-          <span className="text-brand-400 font-medium">
-            Precio Fundador: precios de lanzamiento. Avisaremos con 30 días de anticipación antes de
-            cualquier aumento.
-          </span>
-        </div>
-      </div>
-
-      {/* Slim trust strip: no second founder portrait (Features already owns that). */}
-      <div className="mb-10 max-w-2xl mx-auto text-center">
-        <p className="text-sm text-navy-300 leading-relaxed">
-          <span className="text-white font-semibold">Miembro fundador.</span> Entras con los precios
-          de lanzamiento y conservas tu acceso de por vida si el precio sube después. Trayectoria
-          verificable en{' '}
-          <a
-            href="https://twitter.com/Crypto_CBas"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-400 hover:text-brand-300 underline decoration-brand-500/40 underline-offset-4"
-          >
-            @Crypto_CBas
-          </a>
-          .
+        <p className="text-base md:text-lg text-navy-300 max-w-2xl mx-auto">
+          Pago único. Acceso de por vida. Precio Fundador: avisamos con 30 días si sube.
         </p>
       </div>
 
@@ -134,7 +109,7 @@ export default function PricingSection({
                 <div className="absolute inset-0 rounded-3xl border border-brand-500/25 pointer-events-none" />
               )}
 
-              <div className="relative z-10 flex h-full flex-col p-8">
+              <div className="relative z-10 flex h-full flex-col p-6 md:p-8">
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <div
@@ -169,7 +144,7 @@ export default function PricingSection({
                   <p className="mt-2 text-sm text-navy-300 leading-snug">{plan.description}</p>
                 </div>
 
-                <div className="mt-8 mb-6">
+                <div className="mt-5 mb-5">
                   <div className="flex items-baseline gap-1">
                     <span className="text-5xl font-black text-white tracking-[-1.5px]">
                       {formatUSD(plan.priceUsd)}
