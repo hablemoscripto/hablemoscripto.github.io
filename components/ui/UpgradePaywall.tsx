@@ -30,7 +30,11 @@ const UpgradePaywall: React.FC<UpgradePaywallProps> = ({
   onUpgrade,
   onBack,
 }) => (
-  <div className="min-h-screen bg-navy-950 flex items-center justify-center px-4 py-24">
+  <main
+    id="contenido"
+    tabIndex={-1}
+    className="min-h-[calc(100svh-4rem)] bg-navy-950 flex items-center justify-center px-4 py-16 outline-none"
+  >
     <div className="max-w-xl w-full bg-navy-900/60 border border-white/10 rounded-3xl p-8 md:p-10 text-center backdrop-blur-sm">
       {completedContext ? (
         <>
@@ -100,7 +104,8 @@ const UpgradePaywall: React.FC<UpgradePaywallProps> = ({
           <ArrowRight size={16} aria-hidden="true" />
         </button>
         <p className="text-xs text-navy-400">
-          Desde {formatCop(PRICING_PLANS.inversor.priceCopCents)} COP, pago único (≈ ${PRICING_PLANS.inversor.priceUsd} USD)
+          Desde {formatCop(PRICING_PLANS.inversor.priceCopCents)} COP, pago único (≈ $
+          {PRICING_PLANS.inversor.priceUsd} USD)
         </p>
         {onBack && (
           <button
@@ -112,7 +117,7 @@ const UpgradePaywall: React.FC<UpgradePaywallProps> = ({
         )}
       </div>
     </div>
-  </div>
+  </main>
 );
 
 export default UpgradePaywall;

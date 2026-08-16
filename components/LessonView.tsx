@@ -19,7 +19,7 @@ import {
 import VideoPlayer from './ui/VideoPlayer';
 import ImageLightbox from './lesson/ImageLightbox';
 import SelectionTooltip from './lesson/SelectionTooltip';
-import SectionRenderer from './lesson/SectionRenderer';
+import SectionRenderer, { sectionHeadingId } from './lesson/SectionRenderer';
 import { useProgress } from '../contexts/ProgressContext';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -227,9 +227,31 @@ const LessonView: React.FC = () => {
     };
   }, []);
 
+  const classroomChrome = (body: React.ReactNode) => (
+    <>
+      <EducationNavbar
+        globalProgress={globalProgress}
+        onOpenProgress={() => setShowProgress(true)}
+        onOpenSearch={() => setShowSearch(true)}
+        currentView="lesson"
+      />
+      <LessonSearch isOpen={showSearch} onClose={() => setShowSearch(false)} />
+      <ProgressSheet
+        isOpen={showProgress}
+        onClose={() => setShowProgress(false)}
+        isLessonCompleted={isLessonCompleted}
+      />
+      {body}
+    </>
+  );
+
   if (!isValidId) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-white bg-navy-950">
+    return classroomChrome(
+      <main
+        id="contenido"
+        tabIndex={-1}
+        className="min-h-[calc(100svh-4rem)] flex items-center justify-center text-white bg-navy-950 outline-none"
+      >
         <div className="text-center">
           <AlertCircle size={48} className="mx-auto text-red-500 mb-4" />
           <h2 className="text-2xl font-bold mb-2">Lección no encontrada</h2>
@@ -237,7 +259,7 @@ const LessonView: React.FC = () => {
             Volver al inicio
           </button>
         </div>
-      </div>
+      </main>
     );
   }
 
@@ -264,7 +286,7 @@ const LessonView: React.FC = () => {
     const graduated =
       !loading && prevLevelIds.length > 0 && prevLevelIds.every((lid) => isLessonCompleted(lid));
     const targetLevel = lessonLevel === 'advanced' ? ADVANCED_LEVEL : INTERMEDIATE_LEVEL;
-    return (
+    return classroomChrome(
       <UpgradePaywall
         levelTitle={LEVEL_TITLES[lessonLevel] ?? 'Este nivel'}
         teaser={targetLevel.modules.map((m) => m.title)}
@@ -285,8 +307,12 @@ const LessonView: React.FC = () => {
   }
 
   if (lessonError) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-white bg-navy-950 p-4">
+    return classroomChrome(
+      <main
+        id="contenido"
+        tabIndex={-1}
+        className="min-h-[calc(100svh-4rem)] flex items-center justify-center text-white bg-navy-950 p-4 outline-none"
+      >
         <div className="text-center max-w-md bg-navy-900/50 p-8 rounded-2xl border border-white/10 backdrop-blur-sm">
           <AlertCircle size={48} className="mx-auto text-amber-500 mb-4" aria-hidden="true" />
           <h2 className="text-2xl font-bold mb-2">No pudimos cargar la lección</h2>
@@ -315,13 +341,17 @@ const LessonView: React.FC = () => {
             </button>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   if (lessonLoading) {
-    return (
-      <div className="min-h-screen bg-navy-950 pb-20 animate-pulse">
+    return classroomChrome(
+      <main
+        id="contenido"
+        tabIndex={-1}
+        className="min-h-screen bg-navy-950 pb-20 animate-pulse outline-none"
+      >
         {/* Header Skeleton */}
         <section className="bg-navy-900 border-b border-white/5 py-12">
           <div className="container max-w-7xl mx-auto px-6">
@@ -360,13 +390,17 @@ const LessonView: React.FC = () => {
             <div className="w-full h-40 bg-navy-900 rounded-2xl border border-white/5"></div>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   if (!lesson) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-white bg-navy-950">
+    return classroomChrome(
+      <main
+        id="contenido"
+        tabIndex={-1}
+        className="min-h-[calc(100svh-4rem)] flex items-center justify-center text-white bg-navy-950 outline-none"
+      >
         <div className="text-center">
           <AlertCircle size={48} className="mx-auto text-red-500 mb-4" />
           <h2 className="text-2xl font-bold mb-2">Lección no encontrada</h2>
@@ -374,14 +408,18 @@ const LessonView: React.FC = () => {
             Volver al inicio
           </button>
         </div>
-      </div>
+      </main>
     );
   }
 
   if (isLocked) {
     const blocker = getFirstIncompletePrerequisite(id, isLessonCompleted);
-    return (
-      <div className="min-h-screen flex items-center justify-center text-white bg-navy-950 p-4">
+    return classroomChrome(
+      <main
+        id="contenido"
+        tabIndex={-1}
+        className="min-h-[calc(100svh-4rem)] flex items-center justify-center text-white bg-navy-950 p-4 outline-none"
+      >
         <div className="text-center max-w-md bg-navy-900/50 p-8 rounded-2xl border border-white/10 backdrop-blur-sm">
           <div className="w-20 h-20 bg-navy-800 rounded-full flex items-center justify-center mx-auto mb-6">
             <Lock size={40} className="text-navy-400" />
@@ -413,11 +451,14 @@ const LessonView: React.FC = () => {
             </button>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   const isCompleted = isLessonCompleted(id);
+  const outlineItems = lesson.sections
+    .map((section, idx) => ({ id: sectionHeadingId(idx), title: section.title }))
+    .filter((item): item is { id: string; title: string } => Boolean(item.title));
 
   // Did finishing this lesson complete the whole level? (Sequential locking
   // guarantees the others are done.) Drives the in-flow certificate moment.
@@ -597,6 +638,25 @@ const LessonView: React.FC = () => {
             className={`transition-all duration-500 ${isFocusMode ? 'lg:col-span-10 lg:col-start-2' : 'lg:col-span-9'} space-y-8`}
           >
             {/* Video Section — only when the lesson actually has a video */}
+            {!isFocusMode && outlineItems.length > 1 && (
+              <details className="lg:hidden rounded-xl border border-navy-800 bg-navy-900/50 px-4 py-2">
+                <summary className="min-h-11 cursor-pointer list-none flex items-center justify-between text-sm font-bold text-white">
+                  En esta lección
+                </summary>
+                <nav aria-label="En esta lección" className="pb-3 pt-1 space-y-1">
+                  {outlineItems.map((item) => (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      className="block rounded-lg px-2 py-2 text-sm text-navy-300 hover:bg-navy-800 hover:text-white"
+                    >
+                      {item.title}
+                    </a>
+                  ))}
+                </nav>
+              </details>
+            )}
+
             {lesson.videoId && <VideoPlayer title={lesson.title} videoId={lesson.videoId} />}
 
             {/* Content Sections with Checkpoint Quizzes.
@@ -816,7 +876,26 @@ const LessonView: React.FC = () => {
             className={`lg:col-span-3 space-y-6 transition-all duration-500 ${isFocusMode ? 'hidden opacity-0' : 'block opacity-100'}`}
           >
             <div className="sticky top-24">
-              {/* Progress Card */}
+              {outlineItems.length > 1 && (
+                <nav
+                  aria-label="En esta lección"
+                  className="hidden lg:block bg-navy-900 rounded-2xl border border-navy-800 p-6 mb-6"
+                >
+                  <h3 className="font-bold text-white mb-3">En esta lección</h3>
+                  <ul className="space-y-1">
+                    {outlineItems.map((item) => (
+                      <li key={item.id}>
+                        <a
+                          href={`#${item.id}`}
+                          className="block rounded-lg px-2 py-1.5 text-sm text-navy-300 hover:bg-navy-800 hover:text-white"
+                        >
+                          {item.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
               <div className="bg-navy-900 rounded-2xl border border-navy-800 p-6 mb-6">
                 <h3 className="font-bold text-white mb-4">Tu progreso</h3>
                 <div className="w-full bg-navy-800 rounded-full h-2 mb-2">

@@ -2,196 +2,257 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { X, ZoomIn, ZoomOut, Move } from 'lucide-react';
 
 interface ImageLightboxProps {
-    image: { src: string; alt: string } | null;
-    onClose: () => void;
+  image: { src: string; alt: string } | null;
+  onClose: () => void;
 }
 
 // Coarse pointers (touch) get touch-friendly hint copy; fine pointers (mouse)
 // keep the scroll/drag wording.
 const isCoarsePointer = () =>
-    typeof window !== 'undefined' &&
-    typeof window.matchMedia === 'function' &&
-    window.matchMedia('(pointer: coarse)').matches;
+  typeof window !== 'undefined' &&
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia('(pointer: coarse)').matches;
 
 export default function ImageLightbox({ image, onClose }: ImageLightboxProps) {
-    const [zoomLevel, setZoomLevel] = useState(1);
-    const [panPosition, setPanPosition] = useState({ x: 0, y: 0 });
-    const [isDragging, setIsDragging] = useState(false);
-    const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-    const containerRef = useRef<HTMLDivElement>(null);
-    const touchStateRef = useRef<{ x: number; y: number } | null>(null);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [panPosition, setPanPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const touchStateRef = useRef<{ x: number; y: number } | null>(null);
+  const pinchRef = useRef<{ startDist: number; startZoom: number } | null>(null);
 
-    // Handlers are declared before effects that close over them so the
-    // keyboard/wheel effects capture the right references on first render.
-    const handleZoomIn = useCallback(() => setZoomLevel(prev => Math.min(prev + 0.5, 4)), []);
-    const handleZoomOut = useCallback(() => {
-        setZoomLevel(prev => {
-            const next = Math.max(prev - 0.5, 1);
-            if (next === 1) setPanPosition({ x: 0, y: 0 });
-            return next;
-        });
-    }, []);
+  // Handlers are declared before effects that close over them so the
+  // keyboard/wheel effects capture the right references on first render.
+  const handleZoomIn = useCallback(() => setZoomLevel((prev) => Math.min(prev + 0.5, 4)), []);
+  const handleZoomOut = useCallback(() => {
+    setZoomLevel((prev) => {
+      const next = Math.max(prev - 0.5, 1);
+      if (next === 1) setPanPosition({ x: 0, y: 0 });
+      return next;
+    });
+  }, []);
 
-    // Scroll-to-zoom
-    const handleWheel = useCallback((e: WheelEvent) => {
+  // Scroll-to-zoom
+  const handleWheel = useCallback((e: WheelEvent) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.2 : 0.2;
+    setZoomLevel((prev) => {
+      const next = Math.max(1, Math.min(4, prev + delta));
+      if (next === 1) setPanPosition({ x: 0, y: 0 });
+      return next;
+    });
+  }, []);
+
+  // Reset state when image changes
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setZoomLevel(1);
+
+    setPanPosition({ x: 0, y: 0 });
+  }, [image?.src]);
+
+  useEffect(() => {
+    if (!image) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => closeBtnRef.current?.focus());
+
+    const focusable = () =>
+      dialogRef.current
+        ? Array.from(dialogRef.current.querySelectorAll<HTMLElement>('button:not([disabled])'))
+        : [];
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key === '+' || e.key === '=') handleZoomIn();
+      else if (e.key === '-') handleZoomOut();
+      if (e.key !== 'Tab') return;
+      const nodes = focusable();
+      if (nodes.length === 0) return;
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
-        const delta = e.deltaY > 0 ? -0.2 : 0.2;
-        setZoomLevel(prev => {
-            const next = Math.max(1, Math.min(4, prev + delta));
-            if (next === 1) setPanPosition({ x: 0, y: 0 });
-            return next;
-        });
-    }, []);
-
-    // Reset state when image changes
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setZoomLevel(1);
-         
-        setPanPosition({ x: 0, y: 0 });
-    }, [image?.src]);
-
-    // Keyboard handler
-    useEffect(() => {
-        if (!image) return;
-        const handleKey = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') onClose();
-            else if (e.key === '+' || e.key === '=') handleZoomIn();
-            else if (e.key === '-') handleZoomOut();
-        };
-        document.addEventListener('keydown', handleKey);
-        return () => document.removeEventListener('keydown', handleKey);
-    }, [image, onClose, handleZoomIn, handleZoomOut]);
-
-    useEffect(() => {
-        const el = containerRef.current;
-        if (!image || !el) return;
-        el.addEventListener('wheel', handleWheel, { passive: false });
-        return () => el.removeEventListener('wheel', handleWheel);
-    }, [image, handleWheel]);
-
-    const handleMouseDown = (e: React.MouseEvent) => {
-        if (zoomLevel > 1) {
-            setIsDragging(true);
-            setDragStart({ x: e.clientX - panPosition.x, y: e.clientY - panPosition.y });
-        }
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (isDragging && zoomLevel > 1) {
-            setPanPosition({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
-        }
+    document.addEventListener('keydown', handleKey);
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = previousOverflow;
+      previous?.focus?.();
     };
+  }, [image, onClose, handleZoomIn, handleZoomOut]);
 
-    const handleMouseUp = () => setIsDragging(false);
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!image || !el) return;
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => el.removeEventListener('wheel', handleWheel);
+  }, [image, handleWheel]);
 
-    const handleTouchStart = (e: React.TouchEvent) => {
-        if (zoomLevel > 1 && e.touches.length === 1) {
-            const t = e.touches[0];
-            setIsDragging(true);
-            touchStateRef.current = { x: t.clientX - panPosition.x, y: t.clientY - panPosition.y };
-        }
-    };
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoomLevel > 1) {
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - panPosition.x, y: e.clientY - panPosition.y });
+    }
+  };
 
-    const handleTouchMove = (e: React.TouchEvent) => {
-        if (isDragging && zoomLevel > 1 && e.touches.length === 1 && touchStateRef.current) {
-            const t = e.touches[0];
-            // Prevent the page from scrolling underneath while panning the image.
-            if (e.cancelable) e.preventDefault();
-            setPanPosition({
-                x: t.clientX - touchStateRef.current.x,
-                y: t.clientY - touchStateRef.current.y,
-            });
-        }
-    };
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && zoomLevel > 1) {
+      setPanPosition({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
+    }
+  };
 
-    const handleTouchEnd = () => {
-        setIsDragging(false);
-        touchStateRef.current = null;
-    };
+  const handleMouseUp = () => setIsDragging(false);
 
-    if (!image) return null;
+  const pinchDistance = (touches: React.TouchList) => {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.hypot(dx, dy);
+  };
 
-    const coarse = isCoarsePointer();
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      pinchRef.current = { startDist: pinchDistance(e.touches), startZoom: zoomLevel };
+      setIsDragging(false);
+      return;
+    }
+    if (zoomLevel > 1 && e.touches.length === 1) {
+      const t = e.touches[0];
+      setIsDragging(true);
+      touchStateRef.current = { x: t.clientX - panPosition.x, y: t.clientY - panPosition.y };
+    }
+  };
 
-    return (
-        <div
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
-            onClick={onClose}
-            role="dialog"
-            aria-modal="true"
-            aria-label={image.alt || 'Imagen ampliada'}
-        >
-            {/* Controls */}
-            <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
-                <div className="bg-navy-800/80 backdrop-blur-sm rounded-lg px-3 py-1.5 text-sm text-navy-300 flex items-center gap-2">
-                    <Move size={14} />
-                    <span>{Math.round(zoomLevel * 100)}%</span>
-                </div>
-                <button
-                    onClick={(e) => { e.stopPropagation(); handleZoomOut(); }}
-                    disabled={zoomLevel <= 1}
-                    className="w-11 h-11 flex items-center justify-center bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-navy-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    aria-label="Alejar"
-                >
-                    <ZoomOut size={20} />
-                </button>
-                <button
-                    onClick={(e) => { e.stopPropagation(); handleZoomIn(); }}
-                    disabled={zoomLevel >= 4}
-                    className="w-11 h-11 flex items-center justify-center bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-navy-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    aria-label="Acercar"
-                >
-                    <ZoomIn size={20} />
-                </button>
-                <button
-                    onClick={onClose}
-                    className="w-11 h-11 flex items-center justify-center bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-red-500 transition-colors"
-                    aria-label="Cerrar"
-                >
-                    <X size={20} />
-                </button>
-            </div>
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2 && pinchRef.current) {
+      if (e.cancelable) e.preventDefault();
+      const scale = pinchDistance(e.touches) / pinchRef.current.startDist;
+      const next = Math.max(1, Math.min(4, pinchRef.current.startZoom * scale));
+      setZoomLevel(next);
+      if (next === 1) setPanPosition({ x: 0, y: 0 });
+      return;
+    }
+    if (isDragging && zoomLevel > 1 && e.touches.length === 1 && touchStateRef.current) {
+      const t = e.touches[0];
+      if (e.cancelable) e.preventDefault();
+      setPanPosition({
+        x: t.clientX - touchStateRef.current.x,
+        y: t.clientY - touchStateRef.current.y,
+      });
+    }
+  };
 
-            {/* Instructions */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-navy-800/80 backdrop-blur-sm rounded-lg px-4 py-2 text-sm text-navy-400 flex items-center gap-4">
-                {coarse ? (
-                    <>
-                        <span>Toca para acercar</span>
-                        <span>Desliza para mover</span>
-                    </>
-                ) : (
-                    <>
-                        <span>Scroll para zoom</span>
-                        <span>Arrastra para mover</span>
-                        <span>ESC para cerrar</span>
-                    </>
-                )}
-            </div>
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    touchStateRef.current = null;
+    pinchRef.current = null;
+  };
 
-            {/* Image Container */}
-            <div
-                ref={containerRef}
-                className={`overflow-hidden max-w-[90vw] max-h-[85vh] touch-none ${zoomLevel > 1 ? 'cursor-grab' : 'cursor-zoom-in'} ${isDragging ? 'cursor-grabbing' : ''}`}
-                onClick={(e) => { e.stopPropagation(); if (zoomLevel === 1) handleZoomIn(); }}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseUp}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
-            >
-                <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="max-w-full max-h-[85vh] object-contain select-none transition-transform duration-200 will-change-transform"
-                    style={{
-                        transform: `scale(${zoomLevel}) translate(${panPosition.x / zoomLevel}px, ${panPosition.y / zoomLevel}px)`,
-                    }}
-                    draggable={false}
-                />
-            </div>
+  if (!image) return null;
+
+  const coarse = isCoarsePointer();
+
+  return (
+    <div
+      ref={dialogRef}
+      className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={image.alt || 'Imagen ampliada'}
+    >
+      {/* Controls */}
+      <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
+        <div className="bg-navy-800/80 backdrop-blur-sm rounded-lg px-3 py-1.5 text-sm text-navy-300 flex items-center gap-2">
+          <Move size={14} />
+          <span>{Math.round(zoomLevel * 100)}%</span>
         </div>
-    );
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleZoomOut();
+          }}
+          disabled={zoomLevel <= 1}
+          className="w-11 h-11 flex items-center justify-center bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-navy-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label="Alejar"
+        >
+          <ZoomOut size={20} />
+        </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleZoomIn();
+          }}
+          disabled={zoomLevel >= 4}
+          className="w-11 h-11 flex items-center justify-center bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-navy-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label="Acercar"
+        >
+          <ZoomIn size={20} />
+        </button>
+        <button
+          ref={closeBtnRef}
+          onClick={onClose}
+          className="w-11 h-11 flex items-center justify-center bg-navy-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-red-500 transition-colors"
+          aria-label="Cerrar"
+        >
+          <X size={20} />
+        </button>
+      </div>
+
+      {/* Instructions */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-navy-800/80 backdrop-blur-sm rounded-lg px-4 py-2 text-sm text-navy-400 flex items-center gap-4">
+        {coarse ? (
+          <>
+            <span>Pellizca o toca para acercar</span>
+            <span>Desliza para mover</span>
+          </>
+        ) : (
+          <>
+            <span>Scroll para zoom</span>
+            <span>Arrastra para mover</span>
+            <span>ESC para cerrar</span>
+          </>
+        )}
+      </div>
+
+      {/* Image Container */}
+      <div
+        ref={containerRef}
+        className={`overflow-hidden max-w-[90vw] max-h-[85vh] touch-none ${zoomLevel > 1 ? 'cursor-grab' : 'cursor-zoom-in'} ${isDragging ? 'cursor-grabbing' : ''}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (zoomLevel === 1) handleZoomIn();
+        }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <img
+          src={image.src}
+          alt={image.alt}
+          className="max-w-full max-h-[85vh] object-contain select-none transition-transform duration-200 will-change-transform"
+          style={{
+            transform: `scale(${zoomLevel}) translate(${panPosition.x / zoomLevel}px, ${panPosition.y / zoomLevel}px)`,
+          }}
+          draggable={false}
+        />
+      </div>
+    </div>
+  );
 }

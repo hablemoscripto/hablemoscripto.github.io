@@ -639,6 +639,7 @@ const Quiz: React.FC<QuizProps> = ({
   const [viewMode, setViewMode] = useState<'single' | 'all'>('single');
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [persistStatus, setPersistStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [revealed, setRevealed] = useState<Record<string, boolean>>({});
 
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -672,9 +673,19 @@ const Quiz: React.FC<QuizProps> = ({
     return true;
   }).length;
 
-  const handleAnswer = (questionId: string, answer: QuizAnswer) => {
+  const handleAnswer = (questionId: string, answer: QuizAnswer, revealNow = false) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }));
+    if (revealNow) setRevealed((prev) => ({ ...prev, [questionId]: true }));
     if (submitError) setSubmitError(null);
+  };
+
+  const revealCurrentIfAnswered = () => {
+    const q = questions[currentQuestionIndex];
+    if (!q) return;
+    const answer = answers[q.id];
+    if (answer === undefined || answer === null || answer === '') return;
+    if (Array.isArray(answer) && answer.length === 0) return;
+    setRevealed((prev) => ({ ...prev, [q.id]: true }));
   };
 
   const toggleHint = (questionId: string) => {
@@ -768,11 +779,13 @@ const Quiz: React.FC<QuizProps> = ({
     setViewMode('single');
     setSubmitError(null);
     setPersistStatus('idle');
+    setRevealed({});
     clearQuizDraft(storageKey);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const navigateQuestion = (direction: 'prev' | 'next') => {
+    revealCurrentIfAnswered();
     if (direction === 'prev' && currentQuestionIndex > 0) {
       setCurrentQuestionIndex((prev) => prev - 1);
     } else if (direction === 'next' && currentQuestionIndex < questions.length - 1) {
@@ -781,7 +794,8 @@ const Quiz: React.FC<QuizProps> = ({
   };
 
   const renderQuestion = (q: Question, idx: number) => {
-    const questionCorrect = submitted ? isCorrect(q, answers[q.id]) : null;
+    const isRevealed = submitted || !!revealed[q.id];
+    const questionCorrect = isRevealed ? isCorrect(q, answers[q.id]) : null;
 
     const QuestionRenderer =
       {
@@ -798,7 +812,7 @@ const Quiz: React.FC<QuizProps> = ({
         <div className="flex items-start gap-3">
           <span
             className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${
-              submitted
+              isRevealed
                 ? questionCorrect
                   ? 'bg-emerald-500/20 text-emerald-400'
                   : 'bg-red-500/20 text-red-400'
@@ -809,15 +823,15 @@ const Quiz: React.FC<QuizProps> = ({
           </span>
           <div className="flex-1">
             <p className="font-medium text-white text-lg leading-relaxed">{q.question}</p>
-            {q.type === 'multiple-select' && !submitted && (
+            {q.type === 'multiple-select' && !isRevealed && (
               <p className="text-sm text-navy-400 mt-1">
                 (Selecciona todas las respuestas correctas)
               </p>
             )}
-            {q.type === 'ordering' && !submitted && (
+            {q.type === 'ordering' && !isRevealed && (
               <p className="text-sm text-navy-400 mt-1">(Ordena los elementos correctamente)</p>
             )}
-            {q.type === 'fill-blank' && !submitted && (
+            {q.type === 'fill-blank' && !isRevealed && (
               <p className="text-sm text-navy-400 mt-1">(No importa mayúsculas/minúsculas)</p>
             )}
             {q.difficulty && (
@@ -844,14 +858,15 @@ const Quiz: React.FC<QuizProps> = ({
         <QuestionRenderer
           question={q}
           answer={answers[q.id]}
-          onAnswer={(answer) => handleAnswer(q.id, answer)}
-          submitted={submitted}
+          onAnswer={(answer) =>
+            handleAnswer(q.id, answer, q.type === 'multiple-choice' || q.type === 'true-false')
+          }
+          submitted={isRevealed}
           showHint={showHints[q.id] || false}
           onToggleHint={() => toggleHint(q.id)}
         />
 
-        {/* Feedback - Always show explanation after submission */}
-        {submitted && (
+        {isRevealed && (
           <div
             className={`animate-in fade-in slide-in-from-top-2 rounded-xl p-4 ${
               questionCorrect
@@ -939,7 +954,11 @@ const Quiz: React.FC<QuizProps> = ({
               return (
                 <button
                   key={q.id}
-                  onClick={() => allowNavigation && setCurrentQuestionIndex(idx)}
+                  onClick={() => {
+                    if (!allowNavigation) return;
+                    revealCurrentIfAnswered();
+                    setCurrentQuestionIndex(idx);
+                  }}
                   className="w-9 h-9 flex items-center justify-center group"
                   aria-label={`Ir a la pregunta ${idx + 1}`}
                   title={`Pregunta ${idx + 1}`}

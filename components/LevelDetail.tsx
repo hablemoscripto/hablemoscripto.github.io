@@ -54,22 +54,38 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
     const graduated =
       prevLevelIds.length > 0 && prevLevelIds.every((lid) => isLessonCompleted(lid));
     return (
-      <UpgradePaywall
-        levelTitle={levelData.title}
-        teaser={levelData.modules.map((m) => m.title)}
-        completedContext={
-          graduated
-            ? {
-                completedLevelTitle:
-                  levelData.id === 'advanced' ? 'Nivel Intermedio' : 'Nivel Principiante',
-                lessonsCompleted: prevLevelIds.length,
-                xp: prevLevelIds.length * 100,
-              }
-            : undefined
-        }
-        onUpgrade={() => navigate('/education?upgrade=inversor')}
-        onBack={() => navigate('/education')}
-      />
+      <>
+        <EducationNavbar
+          globalProgress={0}
+          onOpenProgress={() => setShowProgress(true)}
+          onOpenSearch={() => setShowSearch(true)}
+          currentView={
+            `level-${levelData.id}` as 'level-beginner' | 'level-intermediate' | 'level-advanced'
+          }
+        />
+        <LessonSearch isOpen={showSearch} onClose={() => setShowSearch(false)} />
+        <ProgressSheet
+          isOpen={showProgress}
+          onClose={() => setShowProgress(false)}
+          isLessonCompleted={isLessonCompleted}
+        />
+        <UpgradePaywall
+          levelTitle={levelData.title}
+          teaser={levelData.modules.map((m) => m.title)}
+          completedContext={
+            graduated
+              ? {
+                  completedLevelTitle:
+                    levelData.id === 'advanced' ? 'Nivel Intermedio' : 'Nivel Principiante',
+                  lessonsCompleted: prevLevelIds.length,
+                  xp: prevLevelIds.length * 100,
+                }
+              : undefined
+          }
+          onUpgrade={() => navigate('/education?upgrade=inversor')}
+          onBack={() => navigate('/education')}
+        />
+      </>
     );
   }
 
@@ -200,12 +216,12 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                   className="animate-in fade-in slide-in-from-bottom-4"
                   style={{ animationDelay: `${moduleIdx * 100}ms` }}
                 >
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                  <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
                     <span className="w-8 h-8 rounded-lg bg-navy-800 flex items-center justify-center text-sm text-navy-400 border border-navy-700">
                       {moduleIdx + 1}
                     </span>
                     {module.title}
-                  </h3>
+                  </h2>
 
                   <div className="grid gap-4">
                     {module.lessons.map((lesson, lessonIdx) => {
@@ -229,7 +245,7 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                           disabled={isLocked}
                           className={`group flex items-center gap-4 p-4 bg-navy-900/50 border border-navy-800 rounded-xl transition-all text-left ${
                             isLocked
-                              ? 'opacity-50 cursor-not-allowed'
+                              ? 'cursor-not-allowed'
                               : 'hover:bg-navy-900 hover:border-brand-500/30'
                           }`}
                         >
@@ -278,11 +294,11 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
                                 <Clock size={12} /> {lesson.duration}
                               </span>
                               {isLocked && prevId ? (
-                                <span className="text-navy-400">
+                                <span className="text-navy-300">
                                   Completa &quot;{lessonTitleMap.get(prevId)}&quot; para desbloquear
                                 </span>
                               ) : isLocked ? (
-                                <span className="flex items-center gap-1 text-navy-400">
+                                <span className="flex items-center gap-1 text-navy-300">
                                   <Lock size={12} /> Bloqueada
                                 </span>
                               ) : null}

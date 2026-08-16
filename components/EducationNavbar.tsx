@@ -65,6 +65,18 @@ const EducationNavbar: React.FC<EducationNavbarProps> = ({
     };
   }, [isMobileMenuOpen]);
 
+  useEffect(() => {
+    if (!onOpenSearch) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        onOpenSearch();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onOpenSearch]);
+
   const { xp, streak } = useGamification();
   const { signOut } = useAuth();
   const { entitlements } = useEntitlements();

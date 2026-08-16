@@ -131,17 +131,6 @@ const EducationPage: React.FC<EducationPageProps> = () => {
     await refreshEntitlements();
   }, [refreshEntitlements, user]);
 
-  // Ctrl+K / Cmd+K keyboard shortcut for search
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        setShowSearch(true);
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
   const [activeCertificate, setActiveCertificate] = useState<{
     level: string;
     title: string;
@@ -419,7 +408,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             {hasCommunityAccess(entitlements) && (
               <button
                 onClick={() => setShowMentoriaModal(true)}
-                className="text-xs font-bold px-3 py-1.5 rounded-lg border border-brand-500/40 text-brand-400 hover:bg-brand-500/10 transition-colors"
+                className="min-h-11 text-xs font-bold px-3 py-2 rounded-lg border border-brand-500/40 text-brand-400 hover:bg-brand-500/10 transition-colors"
               >
                 Pedir Mentoría
               </button>
