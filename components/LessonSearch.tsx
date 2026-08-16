@@ -7,6 +7,12 @@ import type { LevelData } from '../data/courseData';
 import { useProgress } from '../contexts/ProgressContext';
 import { useEntitlements } from '../contexts/EntitlementsContext';
 import { canAccessLevel } from '../services/paymentService';
+import {
+  getContinueTarget,
+  getFirstIncompletePrerequisite,
+  getLevelForLesson,
+  isSequentiallyLocked,
+} from '../utils/courseUtils';
 
 interface SearchResult {
   lessonId: number;
@@ -84,7 +90,7 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
   }, []);
 
   const results = useMemo(() => {
-    if (!query.trim()) return allLessons;
+    if (!query.trim()) return [];
 
     const normalizedQuery = normalize(query);
     const terms = normalizedQuery.split(/\s+/).filter(Boolean);
@@ -101,7 +107,10 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
       .sort((a, b) => {
         if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
         // Preserve curriculum order for tied scores
-        return allLessons.findIndex(l => l.lessonId === a.lessonId) - allLessons.findIndex(l => l.lessonId === b.lessonId);
+        return (
+          allLessons.findIndex((l) => l.lessonId === a.lessonId) -
+          allLessons.findIndex((l) => l.lessonId === b.lessonId)
+        );
       });
   }, [query, allLessons]);
 
@@ -119,7 +128,7 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
     if (isOpen) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setQuery('');
-       
+
       setSelectedIndex(0);
       requestAnimationFrame(() => inputRef.current?.focus());
     }
@@ -136,11 +145,31 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
 
   const handleSelect = useCallback(
     (lessonId: number) => {
+      if (isSequentiallyLocked(lessonId, isLessonCompleted)) return;
       onClose();
       navigate(`/education/lesson/${lessonId}`);
     },
-    [navigate, onClose]
+    [navigate, onClose, isLessonCompleted]
   );
+
+  const continueTarget = useMemo(() => {
+    let lastLessonId: number | null = null;
+    try {
+      const stored = localStorage.getItem('last_lesson_id');
+      if (stored) {
+        const parsed = parseInt(stored, 10);
+        if (!Number.isNaN(parsed) && allLessons.some((l) => l.lessonId === parsed)) {
+          lastLessonId = parsed;
+        }
+      }
+    } catch {
+      /* */
+    }
+    const canRead = (lid: number) =>
+      !isSequentiallyLocked(lid, isLessonCompleted) &&
+      canAccessLevel(entitlements, getLevelForLesson(lid));
+    return getContinueTarget(lastLessonId, isLessonCompleted, canRead);
+  }, [allLessons, entitlements, isLessonCompleted]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
@@ -156,7 +185,13 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} ariaLabel="Buscar lecciones" maxWidth="max-w-lg" showCloseButton={false}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      ariaLabel="Buscar lecciones"
+      maxWidth="max-w-lg"
+      showCloseButton={false}
+    >
       {/* Search Input */}
       <div className="relative" onKeyDown={handleKeyDown}>
         <Search
@@ -199,67 +234,118 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
         aria-label="Resultados de búsqueda"
         className="mt-3 max-h-[50vh] overflow-y-auto -mx-2"
       >
-        {enrichedResults.length === 0 ? (
+        {!query.trim() ? (
+          <div className="px-2 py-4">
+            {continueTarget && (
+              <button
+                type="button"
+                onClick={() => handleSelect(continueTarget.id)}
+                className="w-full text-left px-3 py-3 rounded-lg flex items-start gap-3 bg-navy-800 ring-1 ring-brand-500/30 hover:bg-navy-700/80 transition-colors"
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] font-bold uppercase tracking-wide text-brand-400 mb-1">
+                    {continueTarget.resuming ? 'Continuar aprendiendo' : 'Siguiente lección'}
+                  </p>
+                  <p className="text-sm font-medium text-white truncate">{continueTarget.title}</p>
+                </div>
+                <ChevronRight
+                  size={14}
+                  className="text-brand-400 shrink-0 mt-1"
+                  aria-hidden="true"
+                />
+              </button>
+            )}
+            <div className="text-center py-6 text-navy-400">
+              <BookOpen size={28} className="mx-auto mb-2 opacity-50" aria-hidden="true" />
+              <p className="text-sm">Escribe para buscar por tema, nivel o módulo</p>
+            </div>
+          </div>
+        ) : enrichedResults.length === 0 ? (
           <div className="text-center py-8 text-navy-400">
             <BookOpen size={32} className="mx-auto mb-2 opacity-50" aria-hidden="true" />
             <p className="text-sm">No se encontraron lecciones</p>
             <p className="text-xs mt-1">Intenta con otro término de búsqueda</p>
           </div>
         ) : (
-          enrichedResults.map((result, idx) => (
-            <button
-              key={result.lessonId}
-              id={`search-result-${result.lessonId}`}
-              role="option"
-              aria-selected={idx === selectedIndex}
-              data-selected={idx === selectedIndex}
-              onClick={() => handleSelect(result.lessonId)}
-              onMouseEnter={() => setSelectedIndex(idx)}
-              className={`w-full text-left px-3 py-3 rounded-lg flex items-start gap-3 transition-colors ${
-                idx === selectedIndex
-                  ? 'bg-navy-800 ring-1 ring-brand-500/30'
-                  : 'hover:bg-navy-800/50'
-              }`}
-            >
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span
-                    className={`text-[10px] font-bold uppercase px-1.5 py-0.5 rounded border ${
-                      LEVEL_COLORS[result.levelId]
-                    }`}
-                  >
-                    {LEVEL_LABELS[result.levelId]}
-                  </span>
-                  {result.completed && (
-                    <span className="text-[10px] font-medium text-green-400">Completada</span>
-                  )}
-                  {!canAccessLevel(entitlements, result.levelId) && (
-                    <span className="inline-flex items-center gap-1 text-[10px] font-medium text-brand-400">
-                      <Lock size={10} aria-hidden="true" />
-                      Premium
+          enrichedResults.map((result, idx) => {
+            const sequentialLock = isSequentiallyLocked(result.lessonId, isLessonCompleted);
+            const blocker = sequentialLock
+              ? getFirstIncompletePrerequisite(result.lessonId, isLessonCompleted)
+              : null;
+            return (
+              <button
+                key={result.lessonId}
+                id={`search-result-${result.lessonId}`}
+                role="option"
+                aria-selected={idx === selectedIndex}
+                aria-disabled={sequentialLock}
+                data-selected={idx === selectedIndex}
+                onClick={() => handleSelect(result.lessonId)}
+                onMouseEnter={() => setSelectedIndex(idx)}
+                className={`w-full text-left px-3 py-3 rounded-lg flex items-start gap-3 transition-colors ${
+                  sequentialLock
+                    ? 'opacity-70 cursor-not-allowed'
+                    : idx === selectedIndex
+                      ? 'bg-navy-800 ring-1 ring-brand-500/30'
+                      : 'hover:bg-navy-800/50'
+                }`}
+              >
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span
+                      className={`text-[10px] font-bold uppercase px-1.5 py-0.5 rounded border ${
+                        LEVEL_COLORS[result.levelId]
+                      }`}
+                    >
+                      {LEVEL_LABELS[result.levelId]}
                     </span>
-                  )}
+                    {result.completed && (
+                      <span className="text-[10px] font-medium text-green-400">Completada</span>
+                    )}
+                    {sequentialLock && (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-medium text-navy-300">
+                        <Lock size={10} aria-hidden="true" />
+                        Bloqueada
+                      </span>
+                    )}
+                    {!canAccessLevel(entitlements, result.levelId) && (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-medium text-brand-400">
+                        <Lock size={10} aria-hidden="true" />
+                        Premium
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm font-medium text-white truncate">{result.title}</p>
+                  <p className="text-xs text-navy-400 truncate">
+                    {sequentialLock && blocker
+                      ? `Completa "${blocker.title}" para desbloquear`
+                      : result.moduleName}
+                  </p>
                 </div>
-                <p className="text-sm font-medium text-white truncate">{result.title}</p>
-                <p className="text-xs text-navy-400 truncate">{result.moduleName}</p>
-              </div>
-              <div className="flex items-center gap-1 text-navy-400 shrink-0 mt-1">
-                <Clock size={12} aria-hidden="true" />
-                <span className="text-xs">{result.duration}</span>
-                <ChevronRight size={14} aria-hidden="true" className="ml-1" />
-              </div>
-            </button>
-          ))
+                <div className="flex items-center gap-1 text-navy-400 shrink-0 mt-1">
+                  <Clock size={12} aria-hidden="true" />
+                  <span className="text-xs">{result.duration}</span>
+                  <ChevronRight size={14} aria-hidden="true" className="ml-1" />
+                </div>
+              </button>
+            );
+          })
         )}
       </div>
 
       {/* Footer hint */}
       {enrichedResults.length > 0 && (
         <div className="mt-2 pt-2 border-t border-navy-800 flex items-center justify-between text-[10px] text-navy-400 -mx-2 px-3">
-          <span>{enrichedResults.length} {enrichedResults.length === 1 ? 'lección' : 'lecciones'}</span>
+          <span>
+            {enrichedResults.length} {enrichedResults.length === 1 ? 'lección' : 'lecciones'}
+          </span>
           <div className="hidden sm:flex items-center gap-3">
-            <span><kbd className="px-1 py-0.5 bg-navy-700 rounded text-navy-400">↑↓</kbd> Navegar</span>
-            <span><kbd className="px-1 py-0.5 bg-navy-700 rounded text-navy-400">Enter</kbd> Ir</span>
+            <span>
+              <kbd className="px-1 py-0.5 bg-navy-700 rounded text-navy-400">↑↓</kbd> Navegar
+            </span>
+            <span>
+              <kbd className="px-1 py-0.5 bg-navy-700 rounded text-navy-400">Enter</kbd> Ir
+            </span>
           </div>
         </div>
       )}

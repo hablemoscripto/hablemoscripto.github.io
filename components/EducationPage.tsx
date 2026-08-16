@@ -7,7 +7,6 @@ import {
   Shield,
   TrendingUp,
   Star,
-  ChevronRight,
   LucideIcon,
   Award,
   Crown,
@@ -34,16 +33,24 @@ import PricingSection from './PricingSection';
 import PaymentModal from './PaymentModal';
 import MentoriaModal from './MentoriaModal';
 import DailyReviewCard from './education/DailyReviewCard';
-import { useNavigate, Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
+import { useNavigate, Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { useEntitlements } from '../contexts/EntitlementsContext';
-import { getAllLessonsOrdered, isLevelComplete, type CourseLevelId } from '../utils/courseUtils';
+import {
+  getAllLessonsOrdered,
+  getContinueTarget,
+  getLevelForLesson,
+  isLevelComplete,
+  isSequentiallyLocked,
+  type CourseLevelId,
+} from '../utils/courseUtils';
 import {
   getUserEntitlements,
   hasCommunityAccess,
   canAccessLevel,
 } from '../services/paymentService';
+import ProgressSheet from './ui/ProgressSheet';
 
 interface EducationPageProps {
   onNavigateHome?: () => void; // Optional for backward compat
@@ -87,7 +94,7 @@ const ACHIEVEMENT_ICONS: Record<string, LucideIcon> = {
 };
 
 const EducationPage: React.FC<EducationPageProps> = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showProgress, setShowProgress] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showMentoriaModal, setShowMentoriaModal] = useState(false);
   const [levels, setLevels] = useState<Level[]>([]);
@@ -266,18 +273,11 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   // unfinished; once it's completed, advance to the next uncompleted lesson in
   // course order instead of pointing back at finished work.
   const continueTarget = useMemo(() => {
-    const ordered = getAllLessonsOrdered();
-    const isDone = (lid: number) => supabaseProgress.some((p) => p.lessonId === lid && p.completed);
-    const anchorIdx = lastLessonId ? ordered.findIndex((l) => l.id === lastLessonId) : -1;
-    if (anchorIdx >= 0 && !isDone(ordered[anchorIdx].id)) {
-      return { ...ordered[anchorIdx], resuming: true };
-    }
-    for (let i = anchorIdx + 1; i < ordered.length; i++) {
-      if (!isDone(ordered[i].id)) return { ...ordered[i], resuming: false };
-    }
-    const firstPending = ordered.find((l) => !isDone(l.id));
-    return firstPending ? { ...firstPending, resuming: false } : null;
-  }, [supabaseProgress, lastLessonId]);
+    const canRead = (lid: number) =>
+      !isSequentiallyLocked(lid, isLessonCompleted) &&
+      (entitlementsLoading || canAccessLevel(entitlements, getLevelForLesson(lid)));
+    return getContinueTarget(lastLessonId, isLessonCompleted, canRead);
+  }, [lastLessonId, isLessonCompleted, entitlements, entitlementsLoading]);
 
   // Snapshot for rendering partial progress on locked achievement cards.
   // Mirrors the shape ProgressContext feeds checkAchievements.
@@ -370,30 +370,25 @@ const EducationPage: React.FC<EducationPageProps> = () => {
     advanced: 'gold',
   };
 
-  const levelBgColors: { [key: string]: string } = {
-    beginner: 'bg-brand-500',
-    intermediate: 'bg-emerald-500',
-    advanced: 'bg-brand-300',
-  };
-
   return (
     <div className="bg-navy-950 min-h-screen pb-20">
       <EducationNavbar
         globalProgress={globalPercentage}
-        onOpenProgress={() => setShowModal(true)}
+        onOpenProgress={() => setShowProgress(true)}
         onOpenSearch={() => setShowSearch(true)}
         currentView="dashboard"
       />
       <LessonSearch isOpen={showSearch} onClose={() => setShowSearch(false)} />
+      <ProgressSheet
+        isOpen={showProgress}
+        onClose={() => setShowProgress(false)}
+        isLessonCompleted={isLessonCompleted}
+      />
 
       <div className="bg-navy-900/50 border-b border-white/5 py-5 sticky top-16 z-30 backdrop-blur-xl">
         <div className="container max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center text-xs font-black uppercase tracking-widest text-navy-400">
-            <Link to="/" className="hover:text-brand-500 transition-colors">
-              Inicio
-            </Link>
-            <ChevronRight size={14} className="mx-2 text-navy-400" />
-            <span className="text-brand-500">Plataforma Educativa</span>
+            <span className="text-brand-500">Plataforma educativa</span>
           </div>
 
           <div className="flex items-center gap-4 sm:gap-6">
@@ -804,112 +799,8 @@ const EducationPage: React.FC<EducationPageProps> = () => {
           <Outlet />
         )}
       </main>
-
-      {showModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-navy-950/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-navy-900 border border-navy-700 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-6 border-b border-navy-800 flex justify-between items-center bg-navy-800/50">
-              <h3 className="font-heading font-bold text-white flex items-center gap-2">
-                <Trophy className="text-brand-500" size={20} />
-                Tu Progreso
-              </h3>
-              <button
-                onClick={() => setShowModal(false)}
-                className="text-navy-400 hover:text-white transition-colors"
-              >
-                Cerrar
-              </button>
-            </div>
-
-            <div className="p-6 space-y-6">
-              <div className="text-center p-6 bg-navy-950 rounded-xl border border-navy-800">
-                <div className="relative w-28 h-28 mx-auto mb-4">
-                  <svg
-                    className="w-full h-full -rotate-90"
-                    viewBox="0 0 100 100"
-                    aria-hidden="true"
-                  >
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="42"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="6"
-                      className="text-navy-800"
-                    />
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="42"
-                      fill="none"
-                      stroke="url(#progress-gradient)"
-                      strokeWidth="6"
-                      strokeLinecap="round"
-                      strokeDasharray={`${2 * Math.PI * 42}`}
-                      strokeDashoffset={`${2 * Math.PI * 42 * (1 - globalPercentage / 100)}`}
-                      className="transition-all duration-1000 ease-out"
-                    />
-                    <defs>
-                      <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#f59e0b" />
-                        <stop offset="100%" stopColor="#10b981" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-2xl font-bold text-white">{globalPercentage}%</span>
-                  </div>
-                </div>
-                <p className="text-navy-400 text-sm">
-                  {totalCompletedLessons} de {totalLessons} lecciones completadas
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                {levels.map((level) => (
-                  <ProgressRow
-                    key={level.id}
-                    label={level.title}
-                    current={progress[level.id]?.length || 0}
-                    total={level.lessons_count}
-                    color={levelBgColors[level.id]}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
-
-const ProgressRow = ({
-  label,
-  current,
-  total,
-  color,
-}: {
-  label: string;
-  current: number;
-  total: number;
-  color: string;
-}) => (
-  <div className="flex flex-col gap-1">
-    <div className="flex justify-between text-xs font-medium text-navy-300">
-      <span>{label}</span>
-      <span>
-        {current}/{total}
-      </span>
-    </div>
-    <div className="w-full h-2 bg-navy-800 rounded-full overflow-hidden">
-      <div
-        className={`h-full ${color} transition-all duration-500`}
-        style={{ width: `${total > 0 ? (current / total) * 100 : 0}%` }}
-      ></div>
-    </div>
-  </div>
-);
 
 export default EducationPage;

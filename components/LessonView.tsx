@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   ChevronLeft,
-  ChevronRight,
   CheckCircle,
   BookOpen,
   MessageSquare,
@@ -27,12 +26,14 @@ import { Helmet } from 'react-helmet-async';
 import Quiz from './education/Quiz';
 import {
   getPreviousLessonId,
+  getFirstIncompletePrerequisite,
   getLevelForLesson,
   getBeginnerLessonIds,
   getIntermediateLessonIds,
   getAllLessonsOrdered,
   isLevelComplete,
 } from '../utils/courseUtils';
+import ProgressSheet from './ui/ProgressSheet';
 import { INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from '../data/levels';
 import { fetchLessonById, LessonData } from '../services/lessonService';
 import { useEntitlements } from '../contexts/EntitlementsContext';
@@ -95,6 +96,7 @@ const LessonView: React.FC = () => {
   const [isLocked, setIsLocked] = useState(false);
   const [showCert, setShowCert] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [showProgress, setShowProgress] = useState(false);
 
   // Custom hooks
   const scrollProgress = useScrollProgress();
@@ -130,11 +132,6 @@ const LessonView: React.FC = () => {
         setLesson(lessonData);
         setLessonLoading(false);
         if (lessonData) {
-          try {
-            localStorage.setItem('last_lesson_id', String(lessonData.id));
-          } catch {
-            /* */
-          }
           window.__currentLesson = {
             title: lessonData.title,
             level: lessonData.level,
@@ -184,6 +181,18 @@ const LessonView: React.FC = () => {
 
     checkAccess();
   }, [id, loading, isLessonCompleted]);
+
+  // Only remember a lesson the learner can actually read. Stamping this on a
+  // lock/paywall fetch made "Continuar" reopen the same wall.
+  useEffect(() => {
+    if (loading || entitlementsLoading || lessonLoading || !lesson || isLocked) return;
+    if (!canAccessLevel(entitlements, getLevelForLesson(id))) return;
+    try {
+      localStorage.setItem('last_lesson_id', String(lesson.id));
+    } catch {
+      /* */
+    }
+  }, [loading, entitlementsLoading, lessonLoading, lesson, isLocked, entitlements, id]);
 
   // Scroll to top on lesson change — reset local UI state in response to a
   // route parameter change (idiomatic React pattern).
@@ -359,29 +368,37 @@ const LessonView: React.FC = () => {
   }
 
   if (isLocked) {
+    const blocker = getFirstIncompletePrerequisite(id, isLessonCompleted);
     return (
       <div className="min-h-screen flex items-center justify-center text-white bg-navy-950 p-4">
         <div className="text-center max-w-md bg-navy-900/50 p-8 rounded-2xl border border-white/10 backdrop-blur-sm">
           <div className="w-20 h-20 bg-navy-800 rounded-full flex items-center justify-center mx-auto mb-6">
             <Lock size={40} className="text-navy-400" />
           </div>
-          <h2 className="text-2xl font-bold mb-3">Lección Bloqueada</h2>
+          <h2 className="text-2xl font-bold mb-3">Lección bloqueada</h2>
           <p className="text-navy-400 mb-8 leading-relaxed">
-            Debes completar las lecciones anteriores para desbloquear este contenido. ¡Sigue
-            aprendiendo paso a paso!
+            {blocker
+              ? `Completa "${blocker.title}" para desbloquear este contenido.`
+              : 'Completa las lecciones anteriores para desbloquear este contenido.'}
           </p>
           <div className="flex flex-col gap-3">
+            {blocker && (
+              <button
+                onClick={() => navigate(`/education/lesson/${blocker.id}`)}
+                className="w-full py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-all"
+              >
+                Abrir esa lección
+              </button>
+            )}
             <button
               onClick={() => navigate('/education')}
-              className="w-full py-3 bg-brand-500 hover:bg-brand-400 text-navy-900 font-bold rounded-xl transition-all"
+              className={`w-full py-3 font-bold rounded-xl transition-all ${
+                blocker
+                  ? 'bg-navy-800 hover:bg-navy-700 text-white font-medium'
+                  : 'bg-brand-500 hover:bg-brand-400 text-navy-900'
+              }`}
             >
-              Ir al Panel de Educación
-            </button>
-            <button
-              onClick={() => navigate(-1)}
-              className="w-full py-3 bg-navy-800 hover:bg-navy-700 text-white font-medium rounded-xl transition-all"
-            >
-              Volver Atrás
+              Ir al panel
             </button>
           </div>
         </div>
@@ -458,11 +475,16 @@ const LessonView: React.FC = () => {
 
       <EducationNavbar
         globalProgress={globalProgress}
-        onOpenProgress={() => navigate('/education')}
+        onOpenProgress={() => setShowProgress(true)}
         onOpenSearch={() => setShowSearch(true)}
         currentView="lesson"
       />
       <LessonSearch isOpen={showSearch} onClose={() => setShowSearch(false)} />
+      <ProgressSheet
+        isOpen={showProgress}
+        onClose={() => setShowProgress(false)}
+        isLessonCompleted={isLessonCompleted}
+      />
 
       <main id="contenido" tabIndex={-1} className="min-h-screen bg-navy-950 pb-20 outline-none">
         {/* Progress Bar Fixed Top */}
@@ -487,74 +509,27 @@ const LessonView: React.FC = () => {
           aria-label="Navegación de la lección"
           className="static sm:sticky top-0 z-40 bg-navy-950/80 backdrop-blur-md border-b border-white/10"
         >
-          <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-            {/* Left: Back to level dashboard */}
+          <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
             <button
               onClick={() => navigate(`/education/${getLevelForLesson(id)}`)}
-              className="flex items-center justify-center gap-1 px-3 min-h-[44px] text-navy-400 hover:text-white hover:bg-navy-800 rounded-lg transition-colors"
+              className="flex items-center justify-center gap-1 px-3 min-h-[44px] shrink-0 text-navy-400 hover:text-white hover:bg-navy-800 rounded-lg transition-colors"
             >
-              <ChevronLeft size={18} />
-              <span className="hidden sm:inline text-sm">Volver</span>
+              <ChevronLeft size={18} aria-hidden="true" />
+              <span className="text-sm">Volver</span>
             </button>
 
-            {/* Center: Previous + Title + Next */}
-            <div className="flex items-center gap-2 sm:gap-4">
-              {/* Previous lesson arrow */}
-              {prevLesson ? (
-                <button
-                  onClick={() => navigate(`/education/lesson/${prevLesson.id}`)}
-                  className="min-h-[44px] min-w-[44px] flex items-center justify-center text-navy-400 hover:text-white hover:bg-navy-800 rounded-lg transition-colors"
-                  title={`Anterior: ${prevLesson.title}`}
-                  aria-label={`Lección anterior: ${prevLesson.title}`}
-                >
-                  <ChevronLeft size={20} />
-                </button>
-              ) : (
-                <div className="w-11"></div>
-              )}
+            <span className="font-medium text-navy-200 truncate min-w-0 flex-1 text-center text-sm sm:text-base">
+              <span className="hidden sm:inline">{lesson.number?.split(' ')[0] || id}. </span>
+              {lesson.title}
+            </span>
 
-              {/* Lesson title — drop the numeric prefix on mobile to give the title more room */}
-              <span className="font-medium text-navy-200 truncate max-w-[200px] sm:max-w-md text-sm sm:text-base">
-                <span className="hidden sm:inline">{lesson.number?.split(' ')[0] || id}. </span>
-                {lesson.title}
-              </span>
-
-              {/* Next lesson arrow */}
-              {nextLesson ? (
-                <button
-                  onClick={() => canGoNext && navigate(`/education/lesson/${nextLesson.id}`)}
-                  disabled={!canGoNext}
-                  className={`min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg transition-colors ${
-                    canGoNext
-                      ? 'text-navy-400 hover:text-white hover:bg-navy-800'
-                      : 'text-navy-400 cursor-not-allowed'
-                  }`}
-                  title={
-                    canGoNext
-                      ? `Siguiente: ${nextLesson.title}`
-                      : 'Completa esta lección para continuar'
-                  }
-                  aria-label={
-                    canGoNext
-                      ? `Siguiente lección: ${nextLesson.title}`
-                      : 'Completa esta lección para continuar'
-                  }
-                >
-                  {canGoNext ? <ChevronRight size={20} /> : <Lock size={16} />}
-                </button>
-              ) : (
-                <div className="w-11"></div>
-              )}
-            </div>
-
-            {/* Right: Completion status */}
             {isCompleted ? (
-              <span className="flex items-center gap-1 text-green-500 text-sm font-medium">
-                <CheckCircle size={16} />
+              <span className="flex items-center gap-1 shrink-0 text-green-500 text-sm font-medium">
+                <CheckCircle size={16} aria-hidden="true" />
                 <span className="hidden sm:inline">Completado</span>
               </span>
             ) : (
-              <div className="w-20 sm:w-28"></div>
+              <div className="w-[4.5rem] sm:w-28 shrink-0" aria-hidden="true" />
             )}
           </div>
         </nav>

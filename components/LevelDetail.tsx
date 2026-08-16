@@ -17,6 +17,7 @@ import UpgradePaywall from './ui/UpgradePaywall';
 import EducationNavbar from './EducationNavbar';
 import LessonSearch from './LessonSearch';
 import Certificate from './ui/Certificate';
+import ProgressSheet from './ui/ProgressSheet';
 import { useAuth } from '../contexts/AuthContext';
 
 interface LevelDetailProps {
@@ -35,6 +36,7 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
   const { user } = useAuth();
   const { entitlements, loading: entitlementsLoading } = useEntitlements();
   const [showSearch, setShowSearch] = useState(false);
+  const [showProgress, setShowProgress] = useState(false);
   const [showCertificate, setShowCertificate] = useState(false);
   const levelComplete = isLevelComplete(levelData.id as CourseLevelId, isLessonCompleted);
 
@@ -105,13 +107,18 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
     <>
       <EducationNavbar
         globalProgress={globalProgress}
-        onOpenProgress={() => navigate('/education')}
+        onOpenProgress={() => setShowProgress(true)}
         onOpenSearch={() => setShowSearch(true)}
         currentView={
           `level-${levelData.id}` as 'level-beginner' | 'level-intermediate' | 'level-advanced'
         }
       />
       <LessonSearch isOpen={showSearch} onClose={() => setShowSearch(false)} />
+      <ProgressSheet
+        isOpen={showProgress}
+        onClose={() => setShowProgress(false)}
+        isLessonCompleted={isLessonCompleted}
+      />
       {showCertificate && (
         <Certificate
           studentName={user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'Estudiante'}
@@ -130,13 +137,6 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
               aria-label="Ruta de navegación"
               className="flex items-center text-xs font-black uppercase tracking-widest text-navy-400 mb-8"
             >
-              <button
-                onClick={() => navigate('/')}
-                className="hover:text-brand-500 transition-colors"
-              >
-                Inicio
-              </button>
-              <ChevronLeft size={14} className="mx-2 rotate-180 text-navy-600" aria-hidden="true" />
               <button
                 onClick={() => navigate('/education')}
                 className="hover:text-brand-500 transition-colors"
