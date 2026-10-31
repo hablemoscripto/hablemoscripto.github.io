@@ -2233,7 +2233,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 35,
     title: 'Obteniendo tus Primeros SOL',
     level: 'Principiante',
-    number: '11 de 19',
+    number: '13 de 19',
     duration: '25 minutos',
     type: 'Tutorial',
     description: 'El puente entre el mundo tradicional y cripto. Cómo convertir pesos, dólares o tu moneda local a SOL y llevarlo a tu wallet.',
@@ -2285,7 +2285,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           { icon: CheckCircle, title: 'Red Correcta', text: 'Solana (SOL) o "Solana Network" o simplemente "SOL". Las direcciones Solana son base58 (~32-44 caracteres). Un ejemplo puede empezar con "5xB7...", pero no confíes en el prefijo: verifica la red y 6-8 caracteres del inicio y del final (y un bloque del medio).' },
           { icon: AlertTriangle, title: 'Redes Incorrectas', text: 'ERC20 (Ethereum), BEP20 (BNB Chain), TRC20 (Tron). Si ves estas opciones y las eliges, tus fondos van a una blockchain diferente donde Phantom NO puede accederlos.' },
           { icon: Shield, title: 'Verificación Triple', text: 'Antes de confirmar: 1) ¿La red dice "Solana"? 2) ¿La dirección es la de mi Phantom? 3) ¿Verifiqué 6-8 caracteres al INICIO y 6-8 al FINAL de la dirección? Si todo está bien, procede.' },
-          { icon: AlertTriangle, title: 'Cuidado: Address Poisoning', text: 'Existe un ataque donde generan direcciones que imitan los primeros Y últimos caracteres de las tuyas y "ensucian" tu historial con transferencias mínimas, esperando que copies la del atacante por error. NUNCA copies tu dirección desde un historial de transacciones: cópiala directo de Phantom (o usa el código QR) y verifica 6-8 caracteres en ambos extremos. En la Lección 12 lo vemos a fondo.' }
+          { icon: AlertTriangle, title: 'Cuidado: Address Poisoning', text: 'Existe un ataque donde generan direcciones que imitan los primeros Y últimos caracteres de las tuyas y "ensucian" tu historial con transferencias mínimas, esperando que copies la del atacante por error. NUNCA copies tu dirección desde un historial de transacciones: cópiala directo de Phantom (o usa el código QR) y verifica 6-8 caracteres en ambos extremos. En la Lección 14 lo vemos a fondo.' }
         ],
         highlight: {
           title: 'Historia Real',
@@ -2308,7 +2308,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Alternativa: Compra P2P (Peer-to-Peer)',
         content: 'Si tu banco no puede transferir a exchanges o prefieres pagar por Nequi o Daviplata, el P2P es una opción. Como comprador, estas son las reglas que te protegen:',
         features: [
-          { icon: Users, title: 'Cómo Funciona', text: 'Dentro del exchange (Binance P2P, por ejemplo), compras directamente a OTRO usuario. Tú le transfieres pesos por Nequi/Bancolombia/etc, y él te envía USDT (la stablecoin de Tether: un token que vale ~1 dólar, lo verás a fondo en la Lección 15) o SOL a tu cuenta del exchange. El exchange actúa como escrow: retiene el cripto del vendedor hasta que el pago se confirma.' },
+          { icon: Users, title: 'Cómo Funciona', text: 'Dentro del exchange (Binance P2P, por ejemplo), compras directamente a OTRO usuario. Tú le transfieres pesos por Nequi/Bancolombia/etc, y él te envía USDT (la stablecoin de Tether: un token que vale ~1 dólar, ya la viste a fondo en la Lección 12) o SOL a tu cuenta del exchange. El exchange actúa como escrow: retiene el cripto del vendedor hasta que el pago se confirma.' },
           { icon: CheckCircle, title: 'Reglas del Comprador', text: 'Paga SOLO desde una cuenta bancaria a TU nombre (el mismo de tu KYC en el exchange). Guarda el comprobante de la transferencia. NUNCA marques "Pagado" sin haber pagado realmente. NUNCA aceptes mover el trato a WhatsApp o fuera de la plataforma. Y NO escribas "Binance", "cripto" ni "USDT" en la referencia o descripción de la transferencia: algunos bancos bloquean cuentas por eso.' },
           { icon: AlertTriangle, title: 'Riesgos del Lado Fiat', text: 'Los estafadores también atacan la parte en pesos: comprobantes de pago falsos de Nequi/Bancolombia (contra vendedores), pagos que luego se reversan porque salieron de cuentas robadas, y el riesgo de "mula": si recibes dinero de origen ilícito, tu cuenta bancaria puede quedar congelada mientras investigan. Por eso: solo contrapartes con reputación y solo cuentas a tu propio nombre.' },
           { icon: Shield, title: 'Elige Bien la Contraparte', text: 'SOLO usa vendedores con 95%+ de calificación positiva y muchas órdenes completadas. Si algo se siente raro (presión, prisa, "mejor tasa por fuera"), cancela. Perder una buena tasa cuesta centavos; una estafa cuesta todo.' }
@@ -2419,7 +2419,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 36,
     title: 'Tu Primera Transacción',
     level: 'Principiante',
-    number: '12 de 19',
+    number: '14 de 19',
     duration: '20 minutos',
     type: 'Práctica',
     description: 'Envía valor a través del mundo en segundos, sin bancos ni intermediarios. Este momento cambiará tu perspectiva del dinero.',
@@ -2563,7 +2563,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 37,
     title: 'Exploradores de Bloques (Solscan)',
     level: 'Principiante',
-    number: '13 de 19',
+    number: '15 de 19',
     duration: '18 minutos',
     type: 'Herramienta',
     description: '"Don\'t Trust, Verify", La filosofía central de cripto. Aprende a usar la herramienta que te permite verificar cualquier cosa en la blockchain.',
@@ -2706,7 +2706,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 38,
     title: 'Evitar Estafas en Web3',
     level: 'Principiante',
-    number: '14 de 19',
+    number: '11 de 19',
     duration: '30 minutos',
     type: 'Seguridad Vital',
     description: 'La gran mayoría de los robos en cripto son evitables. Conoce las tácticas de los estafadores y protégete antes de perder el dinero que tanto te costó ganar.',
@@ -2759,7 +2759,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Estafa #4: Tokens Falsos',
         content: 'Cualquiera puede crear un token llamado "USDC" o "BONK". Así te engañan:',
         features: [
-          { icon: Zap, title: 'El Setup', text: 'Alguien te ofrece vender "USDC" en P2P o te muestra un token "BONK" con buen precio en un DEX desconocido. Y ojo: en P2P el riesgo no es solo el token, también el pago fiat (comprobantes falsos, pagos reversados). Las reglas de comprador están en la Lección 11 de este nivel.' },
+          { icon: Zap, title: 'El Setup', text: 'Alguien te ofrece vender "USDC" en P2P o te muestra un token "BONK" con buen precio en un DEX desconocido. Y ojo: en P2P el riesgo no es solo el token, también el pago fiat (comprobantes falsos, pagos reversados). Las reglas de comprador están en la Lección 13 de este nivel.' },
           { icon: AlertTriangle, title: 'El Engaño', text: 'El token tiene el mismo nombre y logo, pero es una copia falsa. No tiene valor real. O peor: al interactuar con él, drena tu wallet.' },
           { icon: Shield, title: 'La Verificación', text: 'SIEMPRE verifica el Contract Address (CA) del token. El CA es único e imposible de falsificar. Compara con CoinGecko, CoinMarketCap, o el sitio oficial del proyecto.' }
         ],
@@ -3126,7 +3126,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 41,
     title: 'Stablecoins: Tu Dólar Digital',
     level: 'Principiante',
-    number: '15 de 19',
+    number: '12 de 19',
     duration: '22 minutos',
     type: 'Concepto Clave',
     description: 'Las stablecoins son la herramienta cripto más usada en Latinoamérica, pero la mayoría no entiende qué las respalda, ni los riesgos que esconden. Esta lección puede ahorrarte un desastre financiero.',
@@ -3456,7 +3456,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'q-review',
-          question: 'Repaso de Seguridad Web3 (Lección 14 de este nivel): Alguien en Discord te dice: "¡Oportunidad única! Este token va a explotar en las próximas 2 horas, tengo información privilegiada. Solo quedan 50 cupos." ¿Qué haces?',
+          question: 'Repaso de Seguridad Web3 (Lección 11 de este nivel): Alguien en Discord te dice: "¡Oportunidad única! Este token va a explotar en las próximas 2 horas, tengo información privilegiada. Solo quedan 50 cupos." ¿Qué haces?',
           options: [
             { id: 'a', text: 'Compro rápido antes de que se acabe el cupo' },
             { id: 'b', text: 'Identifico 3 red flags: urgencia artificial, retornos garantizados, e "información privilegiada". Lo ignoro y lo reporto' },
@@ -3464,7 +3464,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Pregunto a otros miembros del Discord si la oportunidad es legítima' }
           ],
           correctAnswer: 'b',
-          explanation: 'Aprendiste en la Lección 14 de este nivel que las estafas Web3 siguen patrones predecibles: urgencia, promesas garantizadas, e información "privilegiada" son las tres más comunes. DCA (esta lección) es la defensa estructural contra estas tácticas, si tu estrategia es "invertir X semanalmente en activos que ya conoces", no hay espacio mental para "oportunidades únicas de 2 horas". La disciplina del DCA es inmune al FOMO.'
+          explanation: 'Aprendiste en la Lección 11 de este nivel que las estafas Web3 siguen patrones predecibles: urgencia, promesas garantizadas, e información "privilegiada" son las tres más comunes. DCA (esta lección) es la defensa estructural contra estas tácticas, si tu estrategia es "invertir X semanalmente en activos que ya conoces", no hay espacio mental para "oportunidades únicas de 2 horas". La disciplina del DCA es inmune al FOMO.'
         }
       ]
     }
@@ -3517,7 +3517,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'El Universo de las Altcoins: Categorías que Debes Conocer',
         content: 'Más allá de BTC, ETH y SOL, existen millones de tokens. Estas son las categorías principales que encontrarás:',
         features: [
-          { icon: Landmark, title: 'Stablecoins (USDC, USDT)', text: 'Ya las conoces de la Lección 15 de este nivel. Ancladas al dólar. No son inversión, son herramienta de ahorro y operación. Esenciales para tu estrategia.' },
+          { icon: Landmark, title: 'Stablecoins (USDC, USDT)', text: 'Ya las conoces de la Lección 12 de este nivel. Ancladas al dólar. No son inversión, son herramienta de ahorro y operación. Esenciales para tu estrategia.' },
           { icon: Gem, title: 'Tokens de Protocolo (JUP, RAY, RENDER)', text: 'Tokens que representan proyectos específicos con utilidad real: gobernanza, acceso a servicios, descuentos en fees. Su valor depende del éxito del proyecto. Alto riesgo, alto potencial.' },
           { icon: AlertTriangle, title: 'Meme Coins (DOGE, SHIB, BONK)', text: 'Tokens sin utilidad real, impulsados por comunidad y especulación pura. Algunos generan retornos absurdos (1000x), pero la inmensa mayoría va a cero. Son apuestas, no inversiones. Si participas, hazlo con dinero que estés dispuesto a perder al 100%.' },
           { icon: AlertTriangle, title: 'Tokens Dudosos (99% del mercado)', text: 'Proyectos sin equipo real, sin producto, sin auditoría. Tokens creados en 5 minutos para extraer dinero de incautos. Si no puedes explicar qué problema resuelve un token en una oración, probablemente no resuelve ninguno.' }
@@ -3657,7 +3657,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Solo funcionan en Ethereum' }
           ],
           correctAnswer: 'c',
-          explanation: 'Las stablecoins algorítmicas mantienen su paridad mediante mecanismos matemáticos, no respaldo real. Cuando estos mecanismos fallan (como el colapso de UST/LUNA en 2022), pueden perder todo su valor. USDC y USDT están respaldadas por activos reales. (Recuerda la Lección 15 de este nivel: Stablecoins)'
+          explanation: 'Las stablecoins algorítmicas mantienen su paridad mediante mecanismos matemáticos, no respaldo real. Cuando estos mecanismos fallan (como el colapso de UST/LUNA en 2022), pueden perder todo su valor. USDC y USDT están respaldadas por activos reales. (Recuerda la Lección 12 de este nivel: Stablecoins)'
         }
       ]
     }
@@ -3674,7 +3674,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: 'De Estudiante a Inversor: Tu Graduación',
-        content: 'Felicidades. Si llegaste hasta aquí, ya sabes más sobre dinero, inflación y criptomonedas que el 95% de las personas. Entiendes **por qué** el sistema monetario actual te empobrece (Lecciones 1-3). Conoces **la solución** que Bitcoin representa (Lección 4). Sabes **cómo funciona** la tecnología (Lecciones 5-6). Tienes tu wallet configurada, has hecho transacciones, y sabes identificar estafas (Lecciones 7-14). Entiendes stablecoins, DCA, y la diferencia entre BTC y altcoins (Lecciones 15-18). Ahora falta lo más importante: **convertir todo ese conocimiento en acción**. Un plan sin ejecución es un sueño. Esta lección es tu hoja de ruta.',
+        content: 'Felicidades. Si llegaste hasta aquí, ya sabes más sobre dinero, inflación y criptomonedas que el 95% de las personas. Entiendes **por qué** el sistema monetario actual te empobrece (Lecciones 1-3). Conoces **la solución** que Bitcoin representa (Lección 4). Sabes **cómo funciona** la tecnología (Lecciones 5-6). Tienes tu wallet configurada y sabes identificar estafas (Lecciones 7-11). Entiendes stablecoins, has hecho transacciones, y conoces el DCA y la diferencia entre BTC y altcoins (Lecciones 12-18). Ahora falta lo más importante: **convertir todo ese conocimiento en acción**. Un plan sin ejecución es un sueño. Esta lección es tu hoja de ruta.',
         highlight: {
           title: 'El Momento de la Verdad',
           text: 'El conocimiento sin acción no vale nada. Después de esta lección, deberías tener un plan escrito con montos, fechas, y reglas claras. No un "algún día voy a invertir", un PLAN concreto que ejecutas esta semana.'
@@ -3723,7 +3723,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           { icon: Shield, title: 'Frase Semilla', text: '¿Está escrita en papel (o metal), nunca digitada en un sitio web ni fotografiada, y con 2-3 copias en ubicaciones distintas (casa, familiar de confianza, y si puedes una caja de seguridad bancaria u otro sitio fuera de casa)? Si falta alguna pieza, resuélvelo ANTES de invertir más.' },
           { icon: Lock, title: 'Autenticación', text: '¿Tu exchange tiene 2FA activado (Google Authenticator, NO SMS)? ¿Tu email principal tiene 2FA? ¿Tu wallet tiene contraseña o biometría? Si falta algo, actívalo ahora.' },
           { icon: Wallet, title: 'Distribución de Custodia', text: '¿Tienes claro qué va en exchange (temporal), qué en hot wallet (operativo), y qué en cold wallet (ahorros)? Si todo tu cripto está en un exchange, mueve la mayoría a tu wallet esta semana.' },
-          { icon: AlertTriangle, title: 'Conocimiento Anti-Estafa', text: '¿Puedes identificar un sitio de phishing? ¿Sabes que NUNCA debes compartir tu frase semilla con nadie? ¿Sabes que "soporte de Phantom" NUNCA te escribe por DM? Si dudas, repasa la Lección 14.' }
+          { icon: AlertTriangle, title: 'Conocimiento Anti-Estafa', text: '¿Puedes identificar un sitio de phishing? ¿Sabes que NUNCA debes compartir tu frase semilla con nadie? ¿Sabes que "soporte de Phantom" NUNCA te escribe por DM? Si dudas, repasa la Lección 11.' }
         ]
       },
       {
