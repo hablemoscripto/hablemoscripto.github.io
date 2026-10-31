@@ -133,9 +133,9 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled || isMobileMenuOpen
-          ? 'bg-navy-950/90 backdrop-blur-xl border-b border-white/5 shadow-glass py-3'
-          : 'bg-transparent py-6'
+        className={`fixed top-0 left-0 w-full z-50 border-b transition-[background-color,padding,backdrop-filter,box-shadow] duration-500 ${isScrolled || isMobileMenuOpen
+          ? 'bg-navy-950/90 backdrop-blur-xl border-white/5 shadow-glass py-3'
+          : 'bg-transparent border-transparent py-6'
           }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
