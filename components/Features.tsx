@@ -67,7 +67,7 @@ const Features: React.FC = () => {
               <div className="mt-5 pt-5 border-t border-white/5 space-y-3">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20">
                   <Clock size={12} className="text-brand-400" aria-hidden="true" />
-                  <span className="text-[11px] font-bold text-brand-300 uppercase tracking-wider">7+ años en el mercado</span>
+                  <span className="text-[11px] font-bold text-brand-300 uppercase tracking-wider">9+ años en el mercado</span>
                 </div>
 
                 <a
@@ -120,7 +120,7 @@ const Features: React.FC = () => {
 
             <div className="grid sm:grid-cols-2 gap-6">
               {[
-                { icon: Shield, title: "Experiencia Real", text: "7+ años navegando ciclos alcistas y bajistas completos.", color: "text-brand-400" },
+                { icon: Shield, title: "Experiencia Real", text: "9+ años navegando ciclos alcistas y bajistas completos.", color: "text-brand-400" },
                 { icon: Users, title: "Comunidad de fundadores", text: "Acceso prioritario a la comunidad privada cuando la abramos con Cripto Experto.", color: "text-accent-500" },
                 { icon: Zap, title: "Claridad Total", text: "Conceptos complejos explicados de forma sencilla.", color: "text-brand-500" },
                 { icon: Compass, title: "Hoja de Ruta", text: "Pasos concretos aplicables desde la primera lección.", color: "text-brand-300" }

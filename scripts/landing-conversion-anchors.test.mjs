@@ -17,7 +17,7 @@ test('hero ships Empezar gratis + Ver planes, with CTAs before proof chips', () 
   assert.match(hero, />Ver planes</);
   assert.doesNotMatch(hero, /Ver planes y precios/);
   const ctaAt = hero.indexOf('>Empezar gratis<');
-  const statsAt = hero.indexOf('7+ años');
+  const statsAt = hero.indexOf('9+ años');
   assert.ok(ctaAt > 0 && statsAt > ctaAt);
 });
 

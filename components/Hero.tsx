@@ -188,7 +188,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm animate-in fade-in duration-700">
               <span className="inline-flex items-center gap-2 text-navy-300">
                 <Award size={16} className="text-brand-500" aria-hidden="true" />
-                <span><span className="font-bold text-white">7+ años</span> en el mercado</span>
+                <span><span className="font-bold text-white">9+ años</span> en el mercado</span>
               </span>
               <span className="inline-flex items-center gap-2 text-navy-300">
                 <BookOpen size={16} className="text-brand-400" aria-hidden="true" />
