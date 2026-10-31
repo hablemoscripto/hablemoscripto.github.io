@@ -14,6 +14,7 @@ import {
 import { useEntitlements } from '../contexts/EntitlementsContext';
 import { canAccessLevel } from '../services/paymentService';
 import UpgradePaywall from './ui/UpgradePaywall';
+import AccessUnconfirmed from './ui/AccessUnconfirmed';
 import EducationNavbar from './EducationNavbar';
 import LessonSearch from './LessonSearch';
 import Certificate from './ui/Certificate';
@@ -34,7 +35,12 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
   const navigate = useNavigate();
   const { isLessonCompleted } = useProgress();
   const { user } = useAuth();
-  const { entitlements, loading: entitlementsLoading } = useEntitlements();
+  const {
+    entitlements,
+    loading: entitlementsLoading,
+    status: entitlementsStatus,
+    refresh: refreshEntitlements,
+  } = useEntitlements();
   const [showSearch, setShowSearch] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
   const [showCertificate, setShowCertificate] = useState(false);
@@ -42,7 +48,33 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
 
   // Hard paywall: levels the user's tier doesn't include show an upgrade
   // screen instead of the lessons (distinct from the sequential progress lock).
-  if (!entitlementsLoading && !canAccessLevel(entitlements, levelData.id)) {
+  if (entitlementsStatus === 'unknown' && !canAccessLevel(entitlements, levelData.id)) {
+    return (
+      <>
+        <EducationNavbar
+          globalProgress={0}
+          onOpenProgress={() => setShowProgress(true)}
+          onOpenSearch={() => setShowSearch(true)}
+          currentView={
+            `level-${levelData.id}` as 'level-beginner' | 'level-intermediate' | 'level-advanced'
+          }
+        />
+        <LessonSearch isOpen={showSearch} onClose={() => setShowSearch(false)} />
+        <ProgressSheet
+          isOpen={showProgress}
+          onClose={() => setShowProgress(false)}
+          isLessonCompleted={isLessonCompleted}
+        />
+        <AccessUnconfirmed onRetry={() => void refreshEntitlements()} />
+      </>
+    );
+  }
+
+  if (
+    entitlementsStatus === 'ready' &&
+    !entitlementsLoading &&
+    !canAccessLevel(entitlements, levelData.id)
+  ) {
     // Graduation framing when every lesson of the previous level is done
     // (mirrors the LessonView paywall).
     const prevLevelIds =

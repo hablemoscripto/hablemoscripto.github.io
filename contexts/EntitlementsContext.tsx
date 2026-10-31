@@ -1,4 +1,12 @@
-import { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  ReactNode,
+} from 'react';
 import {
   ANONYMOUS_ENTITLEMENTS,
   getUserEntitlements,
@@ -6,10 +14,22 @@ import {
 } from '../services/paymentService';
 import { useAuth } from './AuthContext';
 
+export type EntitlementsStatus = 'loading' | 'ready' | 'unknown';
+
 interface EntitlementsContextType {
   entitlements: UserEntitlements;
   loading: boolean;
+  status: EntitlementsStatus;
   refresh: () => Promise<void>;
+}
+
+interface EntitlementsSnapshot {
+  userId: string | null;
+  entitlements: UserEntitlements;
+  status: EntitlementsStatus;
+  // Last user id whose read succeeded. A later failure for that same id keeps
+  // the previous tier. A failure before the first success is `unknown`.
+  confirmedUserId: string | null;
 }
 
 const EntitlementsContext = createContext<EntitlementsContextType | undefined>(undefined);
@@ -19,7 +39,7 @@ const EntitlementsContext = createContext<EntitlementsContextType | undefined>(u
 // profile row yet; it only throws on real errors, which is what we retry.
 async function fetchEntitlementsWithRetry(
   userId: string,
-  attempts = 3,
+  attempts = 3
 ): Promise<UserEntitlements | null> {
   for (let i = 0; i < attempts; i++) {
     try {
@@ -35,55 +55,87 @@ async function fetchEntitlementsWithRetry(
 
 export function EntitlementsProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
-  const userId = user?.id;
-  const [entitlements, setEntitlements] = useState<UserEntitlements>(ANONYMOUS_ENTITLEMENTS);
-  // Start true (mirroring Auth/Progress contexts) so consumer guards like
-  // `!entitlementsLoading && !canAccessLevel(...)` don't treat the default
-  // anonymous entitlements as authoritative on the first render — that flashed a
-  // "pay to unlock" paywall to paying users deep-linking/refreshing paid lessons.
-  const [loading, setLoading] = useState(true);
+  const userId = user?.id ?? null;
+  // Start loading so the first paint does not treat the anonymous default as
+  // a confirmed free account. `loading` stays a boolean for existing guards;
+  // `status` distinguishes "still fetching" from "fetch failed, do not sell".
+  const [snapshot, setSnapshot] = useState<EntitlementsSnapshot>({
+    userId,
+    entitlements: ANONYMOUS_ENTITLEMENTS,
+    status: userId ? 'loading' : 'ready',
+    confirmedUserId: null,
+  });
 
-  // Re-fetch on auth identity change (login / logout / account switch).
-  // Depending on `userId` rather than `user` avoids re-fetching on benign
-  // token-refresh events that emit a fresh user object with the same id.
+  // Reset before paint when the account changes, so the previous person's tier
+  // cannot flash. The fetch result applies only if this userId is still current.
+  if (snapshot.userId !== userId) {
+    const stillConfirmed = userId !== null && snapshot.confirmedUserId === userId;
+    setSnapshot({
+      userId,
+      entitlements: stillConfirmed ? snapshot.entitlements : ANONYMOUS_ENTITLEMENTS,
+      status: userId === null || stillConfirmed ? 'ready' : 'loading',
+      confirmedUserId: userId === null ? null : snapshot.confirmedUserId,
+    });
+  }
+
+  const commit = useCallback((requested: string, next: UserEntitlements | null) => {
+    setSnapshot((prev) => {
+      if (prev.userId !== requested) return prev;
+      if (next) {
+        return {
+          userId: requested,
+          entitlements: next,
+          status: 'ready',
+          confirmedUserId: requested,
+        };
+      }
+      if (prev.confirmedUserId === requested) {
+        return { ...prev, status: 'ready' };
+      }
+      return { ...prev, entitlements: ANONYMOUS_ENTITLEMENTS, status: 'unknown' };
+    });
+  }, []);
+
   const refresh = useCallback(async () => {
     if (!userId) {
-      setEntitlements(ANONYMOUS_ENTITLEMENTS);
-      setLoading(false);
+      setSnapshot({
+        userId: null,
+        entitlements: ANONYMOUS_ENTITLEMENTS,
+        status: 'ready',
+        confirmedUserId: null,
+      });
       return;
     }
-    setLoading(true);
-    try {
-      const next = await fetchEntitlementsWithRetry(userId);
-      // On total failure (next === null), deliberately KEEP the previous
-      // entitlements rather than asserting anonymous: the initial default is
-      // already anonymous (so a never-loaded user still can't see paid content),
-      // but a paying user must not be demoted to the upgrade paywall by a
-      // transient blip. The server re-checks is_premium before serving paid
-      // content regardless, so a stale client value can never grant access it
-      // shouldn't.
-      if (next) {
-        setEntitlements(next);
-      }
-    } finally {
-      setLoading(false);
-    }
-  }, [userId]);
+    const requested = userId;
+    setSnapshot((prev) => {
+      if (prev.userId !== requested) return prev;
+      if (prev.confirmedUserId === requested) return prev;
+      return { ...prev, entitlements: ANONYMOUS_ENTITLEMENTS, status: 'loading' };
+    });
+    commit(requested, await fetchEntitlementsWithRetry(requested));
+  }, [commit, userId]);
 
   useEffect(() => {
-    refresh();
-  }, [refresh]);
+    if (!userId) return;
+    let cancelled = false;
+    const requested = userId;
+    void fetchEntitlementsWithRetry(requested).then((next) => {
+      if (!cancelled) commit(requested, next);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [commit, userId]);
+
+  const { entitlements, status } = snapshot;
+  const loading = status === 'loading';
 
   const value = useMemo(
-    () => ({ entitlements, loading, refresh }),
-    [entitlements, loading, refresh],
+    () => ({ entitlements, loading, status, refresh }),
+    [entitlements, loading, status, refresh]
   );
 
-  return (
-    <EntitlementsContext.Provider value={value}>
-      {children}
-    </EntitlementsContext.Provider>
-  );
+  return <EntitlementsContext.Provider value={value}>{children}</EntitlementsContext.Provider>;
 }
 
 export function useEntitlements() {

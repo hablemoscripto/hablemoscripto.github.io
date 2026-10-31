@@ -39,6 +39,7 @@ import { fetchLessonById, LessonData } from '../services/lessonService';
 import { useEntitlements } from '../contexts/EntitlementsContext';
 import { canAccessLevel, hasCommunityAccess } from '../services/paymentService';
 import UpgradePaywall from './ui/UpgradePaywall';
+import AccessUnconfirmed from './ui/AccessUnconfirmed';
 import Certificate from './ui/Certificate';
 import { useAuth } from '../contexts/AuthContext';
 import { useScrollProgress } from '../hooks/useScrollProgress';
@@ -72,7 +73,12 @@ const LessonView: React.FC = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
   const navigate = useNavigate();
   const { isLessonCompleted, markLessonComplete, getQuizScore, loading } = useProgress();
-  const { entitlements, loading: entitlementsLoading } = useEntitlements();
+  const {
+    entitlements,
+    loading: entitlementsLoading,
+    status: entitlementsStatus,
+    refresh: refreshEntitlements,
+  } = useEntitlements();
   const { user } = useAuth();
 
   const id = lessonId ? parseInt(lessonId, 10) : NaN;
@@ -311,7 +317,15 @@ const LessonView: React.FC = () => {
     intermediate: 'Nivel Intermedio',
     advanced: 'Nivel Avanzado',
   };
-  if (!entitlementsLoading && !canAccessLevel(entitlements, lessonLevel)) {
+  if (entitlementsStatus === 'unknown' && !canAccessLevel(entitlements, lessonLevel)) {
+    return classroomChrome(<AccessUnconfirmed onRetry={() => void refreshEntitlements()} />);
+  }
+
+  if (
+    entitlementsStatus === 'ready' &&
+    !entitlementsLoading &&
+    !canAccessLevel(entitlements, lessonLevel)
+  ) {
     // Celebrate-then-offer: when the visitor just finished every lesson of
     // the previous level, this paywall is their graduation moment, not a
     // generic lock screen.

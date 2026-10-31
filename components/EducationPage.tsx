@@ -50,6 +50,7 @@ import {
   getUserEntitlements,
   hasCommunityAccess,
   canAccessLevel,
+  courseTierRank,
 } from '../services/paymentService';
 import ProgressSheet from './ui/ProgressSheet';
 
@@ -104,33 +105,46 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const {
     entitlements,
     loading: entitlementsLoading,
+    status: entitlementsStatus,
     refresh: refreshEntitlements,
   } = useEntitlements();
 
   // Pricing / payment state
   const [selectedPlan, setSelectedPlan] = useState<'inversor' | 'experto' | null>(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  // Set when a charge was approved in the widget but the target rank never
+  // landed. Keeps the reference on screen instead of going quiet.
+  const [upgradeHold, setUpgradeHold] = useState<{ reference: string; rank: number } | null>(null);
 
   // After a successful Wompi payment the webhook grants premium server-side and
-  // asynchronously, so the first entitlements read can still be stale. Poll the
-  // source of truth with backoff and sync the context once the tier upgrades.
-  const pollEntitlementsUntilUpgraded = useCallback(async () => {
-    if (!user?.id) return;
-    const delays = [1000, 2000, 3000, 5000, 5000, 8000];
-    for (const delay of delays) {
-      await new Promise((resolve) => setTimeout(resolve, delay));
-      try {
-        const fresh = await getUserEntitlements(user.id);
-        if (fresh.courseTier !== 'free') {
-          await refreshEntitlements();
-          return;
-        }
-      } catch {
-        // transient; keep polling
+  // asynchronously, so the first entitlements read can still be stale. Stop
+  // only when the profile rank covers the SKU that was just bought. Inversor
+  // buying Experto must not stop at the tier they already hold.
+  const pollEntitlementsUntilUpgraded = useCallback(
+    async (reference: string, targetRank: number) => {
+      if (!user?.id) {
+        setUpgradeHold({ reference, rank: targetRank });
+        return;
       }
-    }
-    await refreshEntitlements();
-  }, [refreshEntitlements, user]);
+      const delays = [1000, 2000, 3000, 5000, 5000, 8000];
+      for (const delay of delays) {
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        try {
+          const fresh = await getUserEntitlements(user.id);
+          if (courseTierRank(fresh.courseTier) >= targetRank) {
+            await refreshEntitlements();
+            setUpgradeHold(null);
+            return;
+          }
+        } catch {
+          // transient; keep polling
+        }
+      }
+      await refreshEntitlements();
+      setUpgradeHold({ reference, rank: targetRank });
+    },
+    [refreshEntitlements, user]
+  );
 
   const [activeCertificate, setActiveCertificate] = useState<{
     level: string;
@@ -142,18 +156,23 @@ const EducationPage: React.FC<EducationPageProps> = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Deep link from a paywall (e.g. /education?upgrade=inversor) opens the
-  // payment modal on the matching plan, then clears the param.
+  // payment modal on the matching plan, then clears the param. Wait until
+  // entitlements are known: unknown must not open checkout, and a rank the
+  // account already holds must not open it either.
   useEffect(() => {
     const upgrade = searchParams.get('upgrade');
-    if (upgrade === 'inversor' || upgrade === 'experto') {
-      /* eslint-disable react-hooks/set-state-in-effect */
-      setSelectedPlan(upgrade);
-      setShowPaymentModal(true);
-      /* eslint-enable react-hooks/set-state-in-effect */
-      searchParams.delete('upgrade');
-      setSearchParams(searchParams, { replace: true });
-    }
-  }, [searchParams, setSearchParams]);
+    if (upgrade !== 'inversor' && upgrade !== 'experto') return;
+    if (entitlementsStatus !== 'ready') return;
+    const needed = upgrade === 'experto' ? 2 : 1;
+    const next = new URLSearchParams(searchParams);
+    next.delete('upgrade');
+    setSearchParams(next, { replace: true });
+    if (courseTierRank(entitlements.courseTier) >= needed) return;
+    /* eslint-disable react-hooks/set-state-in-effect */
+    setSelectedPlan(upgrade);
+    setShowPaymentModal(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, [searchParams, setSearchParams, entitlementsStatus, entitlements.courseTier]);
 
   const { progress: supabaseProgress, isLessonCompleted } = useProgress();
   const { achievements, achievementDefinitions, xp, streak } = useGamification();
@@ -457,6 +476,49 @@ const EducationPage: React.FC<EducationPageProps> = () => {
       <main id="contenido" tabIndex={-1} className="outline-none">
         {isDashboard ? (
           <>
+            {entitlementsStatus === 'unknown' && (
+              <div className="container mx-auto mt-6 max-w-7xl px-6">
+                <div
+                  role="status"
+                  className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-white/10 bg-navy-900 p-5 sm:flex-row sm:items-center"
+                >
+                  <p className="text-sm text-navy-200">
+                    No pudimos confirmar tu acceso. Tus lecciones gratis siguen disponibles. El
+                    contenido de pago queda cerrado hasta confirmar.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => void refreshEntitlements()}
+                    className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand-500 px-5 py-2.5 text-sm font-bold text-navy-950 hover:bg-brand-400"
+                  >
+                    <RefreshCw size={16} aria-hidden="true" />
+                    Reintentar
+                  </button>
+                </div>
+              </div>
+            )}
+            {upgradeHold &&
+              entitlementsStatus === 'ready' &&
+              courseTierRank(entitlements.courseTier) < upgradeHold.rank && (
+                <div className="container mx-auto mt-6 max-w-7xl px-6">
+                  <div
+                    role="status"
+                    className="rounded-2xl border border-yellow-500/30 bg-yellow-500/10 p-5"
+                  >
+                    <p className="text-sm text-navy-100 leading-relaxed">
+                      El cobro puede haber quedado registrado, pero tu acceso todavía no aparece.
+                      Referencia: {upgradeHold.reference}. Escríbenos a{' '}
+                      <a
+                        href="mailto:soporte@hablemoscripto.io"
+                        className="text-brand-400 underline"
+                      >
+                        soporte@hablemoscripto.io
+                      </a>
+                      .
+                    </p>
+                  </div>
+                </div>
+              )}
             <DailyReviewCard />
             {(lastLessonId || totalCompletedLessons > 0) && continueTarget && (
               <div className="container mx-auto mb-6 mt-6 max-w-7xl px-6">
@@ -625,9 +687,15 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                     // Payment gate takes precedence over the progress gate: a free
                     // user can't reach paid levels regardless of progress. Treat as
                     // accessible while entitlements are still loading to avoid a flash.
+                    // Unknown is not a free account: paid levels stay closed and the
+                    // card does not offer another charge.
+                    const accessUnknown = entitlementsStatus === 'unknown';
+                    const paidAndUnconfirmed =
+                      accessUnknown && !canAccessLevel(entitlements, level.id);
                     const requiresUpgrade =
-                      !entitlementsLoading && !canAccessLevel(entitlements, level.id);
-                    const isProgressLocked = !requiresUpgrade && isLevelLocked(level.id);
+                      entitlementsStatus === 'ready' && !canAccessLevel(entitlements, level.id);
+                    const isProgressLocked =
+                      !requiresUpgrade && !paidAndUnconfirmed && isLevelLocked(level.id);
                     const prereqInfo = isProgressLocked ? getPrerequisiteInfo(level.id) : null;
                     return (
                       <div key={level.id} className="relative">
@@ -642,7 +710,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                           progress={getLevelProgress(level.id)}
                           color={levelColors[level.id]}
                           icon={ICONS[level.icon_name] || Shield}
-                          isLocked={isProgressLocked}
+                          isLocked={isProgressLocked || paidAndUnconfirmed}
                           requiresUpgrade={requiresUpgrade}
                           onUpgrade={() => {
                             setSelectedPlan('inversor');
@@ -774,7 +842,8 @@ const EducationPage: React.FC<EducationPageProps> = () => {
             {/* Pricing stays off the day-zero classroom. Free users see it after
                 they have started (3+ completions) or already hold a paid tier.
                 Unlock buttons on locked cards still open PaymentModal. */}
-            {entitlements.courseTier !== 'experto' &&
+            {entitlementsStatus === 'ready' &&
+              entitlements.courseTier !== 'experto' &&
               (entitlements.courseTier !== 'free' || totalCompletedLessons >= 3) && (
                 <PricingSection
                   entitlements={entitlements}
@@ -785,14 +854,16 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                 />
               )}
             <PaymentModal
-              isOpen={showPaymentModal}
+              isOpen={showPaymentModal && entitlementsStatus === 'ready'}
               onClose={() => setShowPaymentModal(false)}
               planId={selectedPlan || 'inversor'}
-              onSuccess={() => {
+              onSuccess={(reference) => {
+                const targetRank = selectedPlan === 'experto' ? 2 : 1;
                 setShowPaymentModal(false);
-                void pollEntitlementsUntilUpgraded();
+                void pollEntitlementsUntilUpgraded(reference, targetRank);
               }}
               onSwitchPlan={setSelectedPlan}
+              onOpenMentoria={() => setShowMentoriaModal(true)}
             />
 
             <MentoriaModal isOpen={showMentoriaModal} onClose={() => setShowMentoriaModal(false)} />

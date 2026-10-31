@@ -3,10 +3,12 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { sendFundadorWelcome } from '../_shared/welcome-email.ts'
 
 // Receives Wompi transaction.updated events, verifies the HMAC signature, and
-// on APPROVED upgrades the user via the upgrade_user_to_premium RPC with the
-// stored tier ('premium' = Inversor / inversor_lifetime, 'vip' = Cripto Experto
-// / vip_lifetime), then sends the Fundador welcome email (non-fatal).
-// Idempotent via the processed_webhook_events table.
+// on APPROVED calls upgrade_user_to_premium. The RPC returns TRUE when it
+// grants, FALSE when the account already holds that rank or higher (no write,
+// no second welcome email). A VOID-era deploy returns null; treat null like
+// TRUE so a webhook shipped before the migration still sends the email.
+// Unknown product types are acknowledged and not granted. Idempotent via
+// processed_webhook_events.
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -209,12 +211,22 @@ serve(async (req) => {
     }
 
     if (transaction.status === 'APPROVED' && payment.user_id) {
+      const productType = payment.product_type
+      // Do not default an unknown SKU to Inversor. Keep the marker and return
+      // 200 so Wompi stops retrying a product we will never grant.
+      if (productType !== 'inversor_lifetime' && productType !== 'vip_lifetime') {
+        console.error('Unknown product_type, skipping upgrade:', productType, transaction.reference)
+        return new Response(
+          JSON.stringify({ received: true, status: 'UNKNOWN_PRODUCT' }),
+          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
+      }
+
       // 'premium' (Inversor / inversor_lifetime) or 'vip' (Cripto Experto /
       // vip_lifetime). The RPC persists this as user_profiles.premium_tier.
-      const tier: 'premium' | 'vip' =
-        payment.product_type === 'vip_lifetime' ? 'vip' : 'premium'
+      const tier: 'premium' | 'vip' = productType === 'vip_lifetime' ? 'vip' : 'premium'
 
-      const { error: upgradeError } = await supabase.rpc('upgrade_user_to_premium', {
+      const { data: upgraded, error: upgradeError } = await supabase.rpc('upgrade_user_to_premium', {
         p_user_id: payment.user_id,
         p_tier: tier,
       })
@@ -228,21 +240,27 @@ serve(async (req) => {
         )
       }
 
-      console.log('User upgraded to premium:', payment.user_id)
+      // FALSE: the guard wrote nothing (already vip, or same tier again).
+      // TRUE, or null from the old VOID function: a grant happened.
+      if (upgraded === false) {
+        console.log('Upgrade was a no-op, skipping welcome email:', payment.user_id)
+      } else {
+        console.log('User upgraded to premium:', payment.user_id)
 
-      // Fundador welcome email — strictly non-fatal: the upgrade already
-      // succeeded, so an email failure must never make the webhook return a
-      // non-2xx (Wompi would retry against an already-processed dedupe row and
-      // hit "Already processed" without re-running the upgrade).
-      try {
-        await sendFundadorWelcome({
-          to: payment.customer_email ?? transaction.customer_email,
-          name: payment.customer_name ?? transaction.customer_data?.full_name,
-          tier,
-          resendApiKey: Deno.env.get('RESEND_API_KEY') ?? '',
-        })
-      } catch (emailError) {
-        console.error('Fundador welcome email failed (non-fatal):', emailError)
+        // Fundador welcome email — strictly non-fatal: the upgrade already
+        // succeeded, so an email failure must never make the webhook return a
+        // non-2xx (Wompi would retry against an already-processed dedupe row and
+        // hit "Already processed" without re-running the upgrade).
+        try {
+          await sendFundadorWelcome({
+            to: payment.customer_email ?? transaction.customer_email,
+            name: payment.customer_name ?? transaction.customer_data?.full_name,
+            tier,
+            resendApiKey: Deno.env.get('RESEND_API_KEY') ?? '',
+          })
+        } catch (emailError) {
+          console.error('Fundador welcome email failed (non-fatal):', emailError)
+        }
       }
     }
 

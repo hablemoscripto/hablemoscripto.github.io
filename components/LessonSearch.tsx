@@ -79,7 +79,7 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const resultListRef = useRef<HTMLDivElement>(null);
   const { isLessonCompleted } = useProgress();
-  const { entitlements } = useEntitlements();
+  const { entitlements, status: entitlementsStatus } = useEntitlements();
 
   const allLessons = useMemo(() => {
     const index = buildSearchIndex([
@@ -315,7 +315,7 @@ export default function LessonSearch({ isOpen, onClose }: LessonSearchProps) {
                     {!canAccessLevel(entitlements, result.levelId) && (
                       <span className="inline-flex items-center gap-1 text-[10px] font-medium text-brand-400">
                         <Lock size={10} aria-hidden="true" />
-                        Premium
+                        {entitlementsStatus === 'unknown' ? 'Sin confirmar' : 'Premium'}
                       </span>
                     )}
                   </div>

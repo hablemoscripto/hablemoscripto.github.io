@@ -214,7 +214,9 @@ export default function PricingSection({
                           : 'border border-brand-500/30 bg-navy-800 text-white hover:border-brand-500/50 hover:bg-navy-700'
                     }`}
                   >
-                    Actualizar a {plan.name}
+                    {courseTier === 'experto' && currentCourseTier === 'inversor'
+                      ? 'Pasar a Cripto Experto'
+                      : `Actualizar a ${plan.name}`}
                   </button>
                 )}
               </div>

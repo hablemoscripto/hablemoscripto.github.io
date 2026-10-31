@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Modal } from './ui/Modal';
 import { CreditCard, Loader2, AlertCircle, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { useEntitlements } from '../contexts/EntitlementsContext';
 import { createPaymentWithSignature, formatCop, PRICING_PLANS } from '../services/paymentService';
 import { reportError } from '../utils/errorReporting';
 
@@ -42,10 +43,13 @@ interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
   planId: 'inversor' | 'experto';
-  onSuccess: () => void;
+  onSuccess: (reference: string) => void;
   // When provided, the Inversor view offers a path to Cripto Experto so the
   // higher tier is reachable from the unlock flow, not only from the pricing grid.
   onSwitchPlan?: (planId: 'inversor' | 'experto') => void;
+  // Opens mentoría without closing checkout. The landing #mentoria anchor is
+  // not on the classroom page, so scrolling there did nothing.
+  onOpenMentoria?: () => void;
 }
 
 export default function PaymentModal({
@@ -54,17 +58,23 @@ export default function PaymentModal({
   planId,
   onSuccess,
   onSwitchPlan,
+  onOpenMentoria,
 }: PaymentModalProps) {
   const [loading, setLoading] = useState(false);
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const [widgetFailed, setWidgetFailed] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const { user } = useAuth();
+  const { entitlements, status: entitlementsStatus } = useEntitlements();
+  // Bumped when the modal closes so a late widget callback cannot reopen checkout.
+  const attemptRef = useRef(0);
 
   const plan = PRICING_PLANS[planId];
   const copPriceCents = plan.priceCopCents;
 
   const isHighTier = planId === 'experto';
+  const isUpgrade =
+    isHighTier && entitlementsStatus === 'ready' && entitlements.courseTier === 'inversor';
 
   const publicKey = import.meta.env.VITE_WOMPI_PUBLIC_KEY;
 
@@ -107,7 +117,10 @@ export default function PaymentModal({
     if (isOpen) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setErrorMessage('');
+      return;
     }
+    attemptRef.current += 1;
+    setLoading(false);
   }, [isOpen]);
 
   const handleCardPayment = async () => {
@@ -137,6 +150,7 @@ export default function PaymentModal({
       return;
     }
 
+    const attempt = ++attemptRef.current;
     setLoading(true);
     setErrorMessage('');
 
@@ -146,6 +160,8 @@ export default function PaymentModal({
         user.email || '',
         user.user_metadata?.full_name || user.user_metadata?.name
       );
+
+      if (attempt !== attemptRef.current) return;
 
       const checkout = new window.WidgetCheckout({
         currency: paymentData.currency,
@@ -161,11 +177,12 @@ export default function PaymentModal({
       });
 
       checkout.open((result: WompiResult) => {
+        if (attempt !== attemptRef.current) return;
         setLoading(false);
 
         if (result.transaction) {
           if (result.transaction.status === 'APPROVED') {
-            onSuccess();
+            onSuccess(paymentData.reference);
           } else if (result.transaction.status === 'DECLINED') {
             setErrorMessage('El pago fue rechazado. Intenta con otro método de pago.');
           } else if (result.transaction.status === 'VOIDED') {
@@ -174,9 +191,17 @@ export default function PaymentModal({
         }
       });
     } catch (error) {
+      if (attempt !== attemptRef.current) return;
       setLoading(false);
       reportError(error, { component: 'PaymentModal', action: 'processCardPayment' });
-      setErrorMessage('Error al procesar el pago. Intenta de nuevo.');
+      const message = error instanceof Error ? error.message : '';
+      const friendly =
+        message === 'No authenticated session'
+          ? 'Debes iniciar sesión para realizar el pago'
+          : message && message !== 'Failed to create payment'
+            ? message
+            : 'Error al procesar el pago. Intenta de nuevo.';
+      setErrorMessage(friendly);
     }
   };
 
@@ -184,7 +209,7 @@ export default function PaymentModal({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={`Obtener ${plan.name}`}
+      title={isUpgrade ? 'Pasar a Cripto Experto' : `Obtener ${plan.name}`}
       subtitle="Pago único · Acceso de por vida"
       maxWidth="max-w-lg"
     >
@@ -201,6 +226,11 @@ export default function PaymentModal({
             <span className="text-navy-400 text-xs">Pago único · acceso de por vida</span>
             <span className="text-navy-400 text-xs">≈ ${plan.priceUsd} USD</span>
           </div>
+          {isUpgrade && (
+            <p className="text-navy-200 text-sm mt-4 leading-relaxed">
+              Este cobro es de 900.000 COP. Los 350.000 COP que ya pagaste no se descuentan.
+            </p>
+          )}
         </div>
 
         {widgetFailed && (
@@ -253,6 +283,11 @@ export default function PaymentModal({
               <Loader2 size={18} aria-hidden="true" className="animate-spin" />
               Procesando...
             </>
+          ) : isUpgrade ? (
+            <>
+              <CreditCard size={18} aria-hidden="true" />
+              Pasar a Cripto Experto
+            </>
           ) : (
             <>
               <CreditCard size={18} aria-hidden="true" />
@@ -294,21 +329,14 @@ export default function PaymentModal({
           </div>
         )}
 
-        {isHighTier && (
+        {isHighTier && onOpenMentoria && (
           <div className="pt-4 border-t border-navy-700">
             <p className="text-xs text-navy-400 text-center mb-2">
               Tu plan incluye una sesión privada de bienvenida y prioridad para mentoría.
             </p>
             <button
-              onClick={() => {
-                onClose();
-                // Scroll to the mentoría section on the page
-                setTimeout(() => {
-                  document
-                    .getElementById('mentoria')
-                    ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 300);
-              }}
+              type="button"
+              onClick={onOpenMentoria}
               className="w-full text-sm py-2.5 rounded-xl border border-brand-500/40 text-brand-400 hover:bg-brand-500/5 font-medium transition-colors"
             >
               Conocer más sobre Mentoría Personalizada

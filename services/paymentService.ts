@@ -147,11 +147,22 @@ export const ANONYMOUS_ENTITLEMENTS: UserEntitlements = {
 // the future. Lazy-derived; a dated row may be effectively expired.
 // ---------------------------------------------------------------------------
 
-const COURSE_TIER_RANK: Record<CourseTier, number> = {
+export const COURSE_TIER_RANK: Record<CourseTier, number> = {
   free: 0,
   inversor: 1,
   experto: 2,
 };
+
+export function courseTierRank(tier: CourseTier): number {
+  return COURSE_TIER_RANK[tier];
+}
+
+// Rank of a checkout SKU. Unknown products are 0 so they never look granted.
+export function skuRank(productType: string): number {
+  if (productType === 'vip_lifetime') return 2;
+  if (productType === 'inversor_lifetime') return 1;
+  return 0;
+}
 
 // Both paid tiers grant the full course (all 44 lessons); they differ only in
 // community access. So every paid level requires just the entry paid tier.
@@ -217,7 +228,7 @@ export async function createPaymentWithSignature(
 export async function getPaymentByReference(reference: string) {
   const { data, error } = await supabase
     .from('payments')
-    .select('status, product_name, wompi_reference, amount_in_cents, currency')
+    .select('status, product_name, product_type, wompi_reference, amount_in_cents, currency')
     .eq('wompi_reference', reference)
     .single();
 

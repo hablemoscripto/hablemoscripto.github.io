@@ -63,6 +63,27 @@ function generateReference(): string {
   return `HC-${timestamp}-${random}`
 }
 
+// Rank already on the account. Mirrors courseTierRank in paymentService.ts:
+// an active is_premium row with a null or unknown tier counts as Inversor (1).
+// Expired rows count as free. A failed read must not fall through to a charge.
+function heldRank(profile: {
+  is_premium: boolean | null
+  premium_tier: string | null
+  premium_expires_at: string | null
+} | null): number {
+  if (!profile?.is_premium) return 0
+  if (profile.premium_expires_at) {
+    const expiresAt = Date.parse(profile.premium_expires_at)
+    if (!Number.isFinite(expiresAt) || expiresAt <= Date.now()) return 0
+  }
+  if (profile.premium_tier === 'vip') return 2
+  return 1
+}
+
+function skuRank(productType: string): number {
+  return productType === 'vip_lifetime' ? 2 : 1
+}
+
 serve(async (req) => {
   const corsHeaders = buildCorsHeaders(req.headers.get('Origin'))
 
@@ -109,7 +130,7 @@ serve(async (req) => {
     }
 
     const body: CreatePaymentRequest = await req.json()
-    const { productType, customerEmail, customerName } = body
+    const { productType, customerName } = body
 
     // Validate productType against the server-side catalog
     const product = PRODUCT_CATALOG[productType]
@@ -117,6 +138,38 @@ serve(async (req) => {
       return new Response(
         JSON.stringify({ error: 'Tipo de producto no válido' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    // Store the auth email, never the address the browser sent.
+    const customerEmail = user.email
+    if (!customerEmail) {
+      return new Response(
+        JSON.stringify({ error: 'La cuenta no tiene un correo. No hicimos un cobro.' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    // Refuse before signing. A profile read error must not become a charge:
+    // we cannot tell whether this account already holds the tier.
+    const { data: profile, error: profileError } = await supabaseClient
+      .from('user_profiles')
+      .select('is_premium, premium_tier, premium_expires_at')
+      .eq('id', user.id)
+      .maybeSingle()
+
+    if (profileError) {
+      console.error('Error reading profile before payment:', profileError)
+      return new Response(
+        JSON.stringify({ error: 'No pudimos confirmar tu acceso. Intenta de nuevo.' }),
+        { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    if (heldRank(profile) >= skuRank(productType)) {
+      return new Response(
+        JSON.stringify({ error: 'Ya tienes este acceso. No hicimos un cobro.' }),
+        { status: 409, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
 
