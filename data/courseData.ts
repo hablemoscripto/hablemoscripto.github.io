@@ -199,7 +199,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q1',
           question: 'Un pescador necesita sandalias. El zapatero no quiere pescado. ¿Cómo se llama este problema que el dinero resolvió?',
           options: [
-            { id: 'a', text: 'La falta de divisibilidad' },
+            { id: 'a', text: 'La poca divisibilidad del pescado' },
             { id: 'b', text: 'La doble coincidencia de deseos' },
             { id: 'c', text: 'La escasez de bienes en el mercado' },
             { id: 'd', text: 'El problema de la portabilidad' }
@@ -256,10 +256,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q2',
           question: '¿Por qué el oro se convirtió en dinero durante 5,000 años mientras las conchas de mar dejaron de funcionar?',
           options: [
-            { id: 'a', text: 'Porque los reyes de cada época decretaron que el oro sería el dinero oficial' },
-            { id: 'b', text: 'Porque el oro brilla y la gente lo prefería como adorno para mostrar estatus' },
-            { id: 'c', text: 'Porque el oro es escaso y costoso de producir; las conchas abundaban' },
-            { id: 'd', text: 'Porque el oro era el metal más fácil de encontrar y extraer en grandes cantidades' }
+            { id: 'a', text: 'Porque los reyes decretaron que el oro sería el dinero oficial' },
+            { id: 'b', text: 'Porque el oro brilla y la gente lo prefería como adorno' },
+            { id: 'c', text: 'Porque es escaso y costoso de producir; las conchas abundaban' },
+            { id: 'd', text: 'Porque era el metal más fácil de encontrar y de extraer' }
           ],
           correctAnswer: 'c',
           explanation: 'El oro cumple las 6 propiedades del buen dinero, sobre todo la escasez: producir más cuesta mucho trabajo. Las conchas fallaron cuando llegaron barcos llenos de ellas desde otras costas. Los reyes acuñaron monedas de oro, pero no lo inventaron como dinero, y su uso como adorno no explica por qué sirvió para guardar valor durante milenios.'
@@ -282,7 +282,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Divisibilidad: no se podía dividir' },
             { id: 'b', text: 'Portabilidad: no se podía llevar' },
-            { id: 'c', text: 'Escasez: se creó demasiado' },
+            { id: 'c', text: 'Escasez: se creó demasiado dinero' },
             { id: 'd', text: 'Verificabilidad: era falsificable' }
           ],
           correctAnswer: 'c',
@@ -420,7 +420,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'Conserva su valor, porque tu sueldo sube igual que los precios' },
             { id: 'b', text: 'Pierde exactamente la mitad: 5% por año durante 10 años' },
             { id: 'c', text: 'Compra cerca de 40% menos, aunque tu sueldo no haya perdido' },
-            { id: 'd', text: 'Crece 5% por año, igual que tu sueldo nominal' }
+            { id: 'd', text: 'Crece 5% por año, al mismo ritmo que tu sueldo nominal' }
           ],
           correctAnswer: 'c',
           explanation: 'Que tu sueldo siga a la inflación protege tu ingreso, no tus ahorros. Los $10 millones siguen siendo $10 millones mientras los precios suben 5% cada año. Después de 10 años compran lo que hoy compran 10 / 1.05^10 ≈ $6.1 millones: cerca de 39% menos. No es 50% exacto porque la inflación se compone sobre precios cada vez más altos.'
@@ -431,7 +431,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: '$110,000: los intereses te suman 10%' },
             { id: 'b', text: 'Unos $73,000: $110,000 divididos entre 1.5' },
-            { id: 'c', text: 'Unos $60,000: 10% menos 50% da -40%' },
+            { id: 'c', text: 'Unos $60,000, porque 10% menos 50% da -40%' },
             { id: 'd', text: '$100,000: interés e inflación se compensan' }
           ],
           correctAnswer: 'b',
@@ -647,8 +647,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Quienes ya tenían acciones o vivienda propia' },
             { id: 'b', text: 'Quienes guardaban sus ahorros en efectivo' },
-            { id: 'c', text: 'Quienes dependían solo de su sueldo' },
-            { id: 'd', text: 'Todos por igual, gracias a los cheques de estímulo' }
+            { id: 'c', text: 'Quienes dependían solo de su sueldo mensual' },
+            { id: 'd', text: 'Todos por igual, por los cheques de estímulo' }
           ],
           correctAnswer: 'a',
           explanation: 'Los dueños de activos vieron subir su riqueza con los precios. Quienes dependían de su sueldo o de efectivo perdieron poder de compra relativo. Según Oxfam, el 1% más rico se quedó con unos 26 de los 42 billones de dólares de riqueza nueva creada en esos dos años. Los cheques de estímulo ayudaron, pero no compensaron esa diferencia.'
@@ -882,8 +882,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: '"Hello World", la tradición de los programadores' },
             { id: 'b', text: 'Un titular sobre un nuevo rescate a los bancos' },
-            { id: 'c', text: 'Su nombre real y el país donde vivía' },
-            { id: 'd', text: 'Nada: el primer bloque no tenía mensaje' }
+            { id: 'c', text: 'Su nombre real y el país donde vivía entonces' },
+            { id: 'd', text: 'Nada: el primer bloque no tenía ningún mensaje' }
           ],
           correctAnswer: 'b',
           explanation: 'Satoshi grabó el titular de The Times del 3 de enero de 2009: "Chancellor on brink of second bailout for banks". Sirve como sello de fecha (prueba que el bloque no se creó antes) y casi siempre se lee como una crítica al sistema que rescataba bancos con dinero público.'
@@ -892,7 +892,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q2',
           question: '¿Por qué se dice que Bitcoin tiene "escasez digital"?',
           options: [
-            { id: 'a', text: 'Porque comprar Bitcoin es difícil y costoso' },
+            { id: 'a', text: 'Porque comprar Bitcoin es difícil y muy costoso' },
             { id: 'b', text: 'Porque cada nodo verifica el límite de 21 millones' },
             { id: 'c', text: 'Porque Satoshi puede ajustar el límite si hace falta' },
             { id: 'd', text: 'Porque los mineros votan cada año un nuevo límite' }
@@ -902,15 +902,15 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'q3',
-          question: '¿Qué es el "halving" de Bitcoin?',
+          question: 'Un amigo dice: "Con el halving de 2028, el precio de Bitcoin se va a duplicar seguro". ¿Qué hace realmente el halving?',
           options: [
-            { id: 'a', text: 'Cuando el precio cae 50% desde su máximo histórico' },
-            { id: 'b', text: 'Cada ~4 años, la emisión de BTC nuevo baja a la mitad' },
-            { id: 'c', text: 'Cuando los mineros reparten sus ganancias con los nodos' },
-            { id: 'd', text: 'Un error del código que aparece cada cuatro años' }
+            { id: 'a', text: 'Garantiza que el precio suba, porque hay menos oferta' },
+            { id: 'b', text: 'Baja a la mitad el BTC nuevo que se crea por bloque' },
+            { id: 'c', text: 'Baja el precio a la mitad para que más gente compre' },
+            { id: 'd', text: 'Reduce a la mitad el total de 21 millones de BTC' }
           ],
           correctAnswer: 'b',
-          explanation: 'El halving reduce a la mitad la recompensa por bloque. En 2009 eran 50 BTC cada 10 minutos; desde abril de 2024 son 3.125 BTC. Reduce la oferta nueva, pero no garantiza que el precio suba: eso depende de la demanda.'
+          explanation: 'El halving reduce a la mitad la recompensa por bloque: en 2009 eran 50 BTC cada 10 minutos; desde abril de 2024 son 3.125 BTC. Menos oferta nueva no garantiza que el precio suba, porque eso depende de la demanda. Tampoco cambia el límite total de 21 millones ni toca el precio de forma directa.'
         },
         {
           id: 'q4',
@@ -930,7 +930,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Dólares en efectivo escondidos en la ropa' },
             { id: 'b', text: 'Una transferencia bancaria internacional' },
-            { id: 'c', text: 'Bitcoin, con un respaldo de la frase en el destino' },
+            { id: 'c', text: 'Bitcoin, con la frase respaldada en el destino' },
             { id: 'd', text: 'Joyas de oro repartidas en varias maletas' }
           ],
           correctAnswer: 'c',
@@ -943,7 +943,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'Es una estafa que tarde o temprano va a colapsar' },
             { id: 'b', text: 'Con oferta fija, cada cambio de demanda mueve el precio' },
             { id: 'c', text: 'Satoshi y los mineros manipulan el precio todos los días' },
-            { id: 'd', text: 'Su oferta total cambia mucho de un mes a otro' }
+            { id: 'd', text: 'Su oferta total cambia mucho de un mes al siguiente' }
           ],
           correctAnswer: 'b',
           explanation: 'Como la oferta no puede crecer cuando sube la demanda, todo el ajuste ocurre en el precio. A eso se suman un mercado joven, mucha especulación y préstamos apalancados. La tendencia de largo plazo ha sido alcista, pero con caídas de 70-85% en el camino y sin garantía de que se repita.'
@@ -1242,15 +1242,15 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'q6',
-          question: '¿Qué describe el "trilema de la blockchain"?',
+          question: 'Un proyecto nuevo promete ser más rápido que Solana, más descentralizado que Bitcoin y más seguro que ambos, sin ceder nada. ¿Qué te dice el trilema de la blockchain?',
           options: [
-            { id: 'a', text: 'Que toda blockchain termina controlada por tres entidades' },
-            { id: 'b', text: 'Que cuesta maximizar seguridad, descentralización y escala' },
-            { id: 'c', text: 'Que cada bloque debe validarse tres veces antes de agregarse' },
+            { id: 'a', text: 'Que es posible: la tecnología nueva siempre supera a la vieja' },
+            { id: 'b', text: 'Que es difícil: mejorar una cosa suele costar en otra' },
+            { id: 'c', text: 'Que es creíble si el proyecto tiene una auditoría pública' },
             { id: 'd', text: 'Que solo pueden existir tres blockchains grandes a la vez' }
           ],
           correctAnswer: 'b',
-          explanation: 'Es muy difícil maximizar a la vez seguridad, descentralización y escalabilidad. Bitcoin prioriza seguridad y descentralización (unas 7 transacciones por segundo). Solana prioriza escalabilidad y seguridad, con validadores que necesitan equipos potentes. Es una regla práctica, no una ley: cada red busca mejorar sin sacrificar demasiado.'
+          explanation: 'El trilema dice que es muy difícil maximizar a la vez seguridad, descentralización y escalabilidad. Bitcoin prioriza seguridad y descentralización (unas 7 transacciones por segundo); Solana prioriza escalabilidad y seguridad, con validadores que necesitan equipos potentes. No es una ley física, pero una promesa de "lo mejor en todo, sin ceder nada" es motivo para investigar con escepticismo. Una auditoría revisa el código; no resuelve el trilema.'
         },
         {
           id: 'review_1',
@@ -1258,8 +1258,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Escasez: que no se pueda crear sin límite' },
             { id: 'b', text: 'Divisibilidad: que sirva para pagos pequeños' },
-            { id: 'c', text: 'Que un gobierno controle su emisión' },
-            { id: 'd', text: 'Portabilidad: que sea fácil de llevar' }
+            { id: 'c', text: 'Control: que un gobierno decida su emisión' },
+            { id: 'd', text: 'Portabilidad: que sea fácil de llevar encima' }
           ],
           correctAnswer: 'c',
           explanation: 'El buen dinero no necesita un gobierno que controle su emisión: el oro funcionó durante milenios sin uno, y Bitcoin cumple las propiedades del dinero sin una autoridad central. Escasez, divisibilidad y portabilidad sí están entre las seis propiedades que viste en la Lección 1.'
@@ -1446,7 +1446,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'Porque Bitcoin era ilegal en Canadá en ese momento' },
             { id: 'b', text: 'Porque no hay una entidad central que ejecute la orden' },
             { id: 'c', text: 'Porque los bancos canadienses no conocían Bitcoin' },
-            { id: 'd', text: 'Porque los mineros votaron en contra de congelar esos fondos' }
+            { id: 'd', text: 'Porque los mineros votaron en contra de congelarlos' }
           ],
           correctAnswer: 'b',
           explanation: 'Para congelar una cuenta bancaria basta una orden al banco. Con Bitcoin en una wallet propia no hay a quién dársela: las llaves las tiene el dueño y la red está repartida en miles de nodos de muchos países. El punto débil está en los bordes: un exchange sí puede bloquear esos fondos cuando alguien intenta cambiarlos por dinero tradicional.'
@@ -1458,7 +1458,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'En el exchange más grande del mundo' },
             { id: 'b', text: 'En un exchange regulado de tu país' },
             { id: 'c', text: 'En una hardware wallet con tus llaves' },
-            { id: 'd', text: 'Repartido en partes iguales entre tres exchanges' }
+            { id: 'd', text: 'Repartido entre tres exchanges distintos' }
           ],
           correctAnswer: 'c',
           explanation: '"Not your keys, not your coins". En cualquier exchange, grande, regulado o repartido entre varios, ELLOS tienen las llaves: pueden congelarte, quebrar o ser hackeados. Repartir entre exchanges reduce el riesgo de que uno falle, pero no te da el control. Con una hardware wallet, las llaves son tuyas, y también la responsabilidad de no perderlas.'
@@ -1482,8 +1482,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Porque validar exige equipos caros: un trade-off por velocidad' },
             { id: 'b', text: 'Porque la ley solo permite tener validadores en algunos países' },
-            { id: 'c', text: 'Porque la Fundación Solana elige quién puede validar' },
-            { id: 'd', text: 'Porque Solana es una red mucho más nueva que Bitcoin' }
+            { id: 'c', text: 'Porque la Fundación Solana elige quién puede ser validador' },
+            { id: 'd', text: 'Porque Solana es una red mucho más joven que la de Bitcoin' }
           ],
           correctAnswer: 'a',
           explanation: 'Validar en Solana exige servidores potentes y una conexión rápida, con costos de cientos o miles de dólares al mes. Es el precio de su velocidad. Cualquiera puede ser validador si paga esos costos: nadie lo autoriza. Bitcoin hace el trade-off opuesto: correr un nodo cuesta unos $300.'
@@ -1690,7 +1690,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'Sí: el dinero estaba guardado dentro de ese teléfono' },
             { id: 'b', text: 'Solo si no contacta pronto al soporte de Phantom' },
             { id: 'c', text: 'No, si guardó su frase semilla en un lugar seguro' },
-            { id: 'd', text: 'Depende de si tenía el Face ID activado' }
+            { id: 'd', text: 'Depende de si tenía el Face ID activado en la app' }
           ],
           correctAnswer: 'c',
           explanation: 'La app es solo una forma de acceder a la blockchain. Con la frase semilla puede restaurar la wallet en otro dispositivo y recuperar todo. Phantom no puede recuperarla por él, y el Face ID solo protege el teléfono. Si quien encontró el teléfono puede entrar, debe mover sus fondos a una wallet nueva cuanto antes.'
@@ -1700,9 +1700,9 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: '¿Cuál es la diferencia fundamental entre una hot wallet y una cold wallet?',
           options: [
             { id: 'a', text: 'La cold wallet guarda las llaves fuera de internet' },
-            { id: 'b', text: 'La cold wallet solo sirve para guardar Bitcoin y nada más' },
+            { id: 'b', text: 'La cold wallet solo sirve para guardar Bitcoin' },
             { id: 'c', text: 'La hot wallet guarda las monedas en el teléfono' },
-            { id: 'd', text: 'La hot wallet la controla siempre una empresa' }
+            { id: 'd', text: 'La hot wallet siempre la controla una empresa externa' }
           ],
           correctAnswer: 'a',
           explanation: 'Una hot wallet tiene las llaves en un dispositivo conectado a internet: es cómoda, pero más expuesta a malware y phishing. Una cold wallet guarda las llaves en un dispositivo que firma sin exponerlas a internet. Ambas pueden manejar muchas criptomonedas, las monedas siempre están en la blockchain, y en ambas las llaves son tuyas.'
@@ -1843,7 +1843,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Envío la frase rápido para proteger mis fondos' },
             { id: 'b', text: 'Envío solo las 6 primeras palabras, por si acaso' },
-            { id: 'c', text: 'Ignoro, bloqueo y reporto: es una estafa' },
+            { id: 'c', text: 'Lo ignoro, bloqueo y reporto: es una estafa' },
             { id: 'd', text: 'Pido que me llamen para confirmar que son reales' }
           ],
           correctAnswer: 'c',
@@ -1853,7 +1853,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q4',
           question: '¿Cuál es la forma MÁS segura de guardar la frase semilla de una wallet con ahorros importantes?',
           options: [
-            { id: 'a', text: 'Memorizarla sin escribirla en ningún lugar' },
+            { id: 'a', text: 'Memorizarla, sin escribirla en ningún lugar físico' },
             { id: 'b', text: 'Placa de metal y copias en 2 o 3 lugares seguros' },
             { id: 'c', text: 'Archivo cifrado en la nube con una contraseña fuerte' },
             { id: 'd', text: 'Un papel en la billetera que siempre llevas encima' }
@@ -1865,10 +1865,10 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q5',
           question: 'Alguien guardó su única copia de la frase en un papel en casa. Hubo un incendio y el papel se destruyó. ¿Qué pasa con sus fondos?',
           options: [
-            { id: 'a', text: 'El soporte de la wallet se los puede recuperar' },
-            { id: 'b', text: 'Puede entrar con reconocimiento facial en otro equipo' },
+            { id: 'a', text: 'El soporte de la wallet se los puede recuperar luego' },
+            { id: 'b', text: 'Puede entrar con reconocimiento facial desde otro equipo' },
             { id: 'c', text: 'Si no tiene otra copia ni la app, se pierden para siempre' },
-            { id: 'd', text: 'Un juez puede ordenar a la red que se los devuelva' }
+            { id: 'd', text: 'Un juez puede ordenar a la red que se los devuelva pronto' }
           ],
           correctAnswer: 'c',
           explanation: 'Si todavía tiene la app abierta en un teléfono, puede mover los fondos a una wallet nueva de inmediato. Si no, nadie puede ayudarle: no hay "olvidé mi contraseña" y ninguna autoridad puede revertir la blockchain. Los fondos seguirán ahí, inaccesibles para siempre. Por eso necesitas varias copias en lugares distintos.'
@@ -2000,7 +2000,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'Hago clic, porque Google lo muestra de primero' },
             { id: 'b', text: 'Ignoro el anuncio y escribo phantom.com yo mismo' },
-            { id: 'c', text: 'Descargo de ahí, porque el logo es el mismo' },
+            { id: 'c', text: 'Lo descargo de ahí, porque el logo es el mismo' },
             { id: 'd', text: 'Lo abro, pero solo para comparar los dos sitios web' }
           ],
           correctAnswer: 'b',
@@ -2256,7 +2256,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q2',
           question: '¿Qué significa que Solana sea "monolítica" y Ethereum "modular"?',
           options: [
-            { id: 'a', text: 'Solana es más lenta, porque usa una sola capa' },
+            { id: 'a', text: 'Solana es más lenta, porque lo hace todo en una capa' },
             { id: 'b', text: 'Solana hace todo en una capa; Ethereum usa L1 y L2s' },
             { id: 'c', text: 'Modular significa que Ethereum no tiene smart contracts' },
             { id: 'd', text: 'Es solo marketing: técnicamente funcionan igual' }
@@ -2280,15 +2280,15 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         },
         {
           id: 'q4',
-          question: '¿Qué es Jupiter en el ecosistema de Solana?',
+          question: 'Tienes USDC en Phantom y quieres cambiarlos por SOL al mejor precio disponible. ¿Para qué te sirve Jupiter en ese caso?',
           options: [
-            { id: 'a', text: 'Una wallet para Solana, muy parecida a Phantom' },
-            { id: 'b', text: 'Un agregador que busca el mejor precio entre DEXs' },
-            { id: 'c', text: 'El marketplace de NFTs más grande de la red Solana' },
-            { id: 'd', text: 'El token nativo con el que se pagan las comisiones' }
+            { id: 'a', text: 'Es la wallet a la que debes mover tus USDC primero' },
+            { id: 'b', text: 'Busca la mejor ruta de precio entre muchos DEXs' },
+            { id: 'c', text: 'Es el marketplace donde se venden NFTs de Solana' },
+            { id: 'd', text: 'Es el token que pagas como comisión en cada swap' }
           ],
           correctAnswer: 'b',
-          explanation: 'Jupiter es un agregador: consulta muchos exchanges descentralizados a la vez y arma la ruta con mejor precio para tu swap. También ofrece DCA (compra programada) y órdenes límite. Phantom es la wallet, Magic Eden y Tensor son marketplaces de NFTs, y el token nativo de Solana es SOL.'
+          explanation: 'Jupiter es un agregador: consulta muchos exchanges descentralizados a la vez y arma la ruta con mejor precio para tu swap, sin sacar los fondos de tu wallet. También ofrece compras recurrentes y órdenes límite. Phantom es la wallet, Magic Eden y Tensor son marketplaces de NFTs, y las comisiones de Solana se pagan en SOL.'
         },
         {
           id: 'q5',
@@ -2627,9 +2627,9 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           question: 'Copiaste una dirección de Solana y la pegaste en Phantom. Antes de enviar, ¿qué debes verificar?',
           options: [
             { id: 'a', text: 'Que el primer carácter coincida con el original' },
-            { id: 'b', text: 'Que la dirección tenga entre 32 y 44 caracteres en total' },
+            { id: 'b', text: 'Que la dirección tenga entre 32 y 44 caracteres' },
             { id: 'c', text: 'Que 6-8 caracteres al inicio y al final coincidan' },
-            { id: 'd', text: 'Nada: copiar y pegar nunca cambia el texto' }
+            { id: 'd', text: 'Nada: copiar y pegar nunca cambia el texto copiado' }
           ],
           correctAnswer: 'c',
           explanation: 'El malware de portapapeles puede reemplazar la dirección que copias, y el address poisoning siembra en tu historial direcciones parecidas a las tuyas. Una dirección falsa tiene el mismo formato y la misma longitud que la real, así que eso no prueba nada. Compara 6-8 caracteres en ambos extremos (o un bloque del medio).'
@@ -2641,7 +2641,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'Mi dirección pública de Solana, que es segura' },
             { id: 'b', text: 'Mi frase semilla, para que pueda enviarme directo' },
             { id: 'c', text: 'Mi contraseña de Phantom, para que la autorice' },
-            { id: 'd', text: 'Mi dirección de Ethereum, porque Phantom es multichain' }
+            { id: 'd', text: 'Mi dirección de Ethereum: Phantom es multichain' }
           ],
           correctAnswer: 'a',
           explanation: 'Tu dirección pública es como un número de cuenta: otros pueden enviarte fondos, pero no retirarlos. Para recibir SOL, comparte la dirección de Solana, no la de Ethereum (la que empieza por 0x). Tu frase semilla y tu contraseña no se comparten nunca, con nadie.'
@@ -2795,7 +2795,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q5',
           question: '¿Qué información NO puedes ver en Solscan sobre una wallet pública?',
           options: [
-            { id: 'a', text: 'Su balance de SOL y de cada uno de sus tokens' },
+            { id: 'a', text: 'Su balance de SOL y el de sus tokens' },
             { id: 'b', text: 'Su historial completo de transacciones' },
             { id: 'c', text: 'Los NFTs que tiene guardados en esa wallet' },
             { id: 'd', text: 'La frase semilla que protege esa wallet' }
@@ -3736,7 +3736,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'a', text: 'No hay diferencia real: las dos son criptomonedas' },
             { id: 'b', text: 'BTC busca ser reserva escasa; SOL, una plataforma' },
             { id: 'c', text: 'Solana es mejor en todo, porque es más rápida y barata' },
-            { id: 'd', text: 'Bitcoin es mejor en todo, porque fue la primera en existir' }
+            { id: 'd', text: 'Bitcoin es mejor en todo, porque fue la primera' }
           ],
           correctAnswer: 'b',
           explanation: 'Bitcoin optimiza para seguridad y escasez (busca ser oro digital). Solana optimiza para velocidad y aplicaciones, con emisión continua de nuevos SOL. Ninguna es "mejor en todo": tienen propósitos y riesgos distintos, y por eso un portafolio puede tener ambas.'
@@ -3970,8 +3970,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           id: 'q4',
           question: 'Llevas 6 meses haciendo DCA y tu portafolio está en -20%. Un amigo dice: "Vende todo antes de perder más". ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Vendo todo y recompro cuando haya bajado más' },
-            { id: 'b', text: 'Invierto el doble para promediar más rápido' },
+            { id: 'a', text: 'Vendo todo ahora y recompro cuando haya bajado más' },
+            { id: 'b', text: 'Invierto el doble este mes para promediar más rápido' },
             { id: 'c', text: 'Sigo mi plan: mis reglas dicen que no vendo en pánico' },
             { id: 'd', text: 'Paso todo a meme coins, que son las que están subiendo' }
           ],
