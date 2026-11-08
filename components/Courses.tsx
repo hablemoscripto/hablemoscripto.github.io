@@ -166,7 +166,7 @@ const Courses: React.FC<CoursesProps> = ({ onStartFree }) => {
             </span>
           </h2>
           <p className="text-navy-300 text-lg">
-            19 lecciones gratis para empezar con seguridad. Intermedio y Avanzado se desbloquean con un
+            20 lecciones gratis para empezar con seguridad. Intermedio y Avanzado se desbloquean con un
             solo pago de por vida.
           </p>
         </div>

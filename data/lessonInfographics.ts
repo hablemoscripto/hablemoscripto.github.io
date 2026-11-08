@@ -3260,7 +3260,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Guardar el registro",
-          "detail": "Fecha, pesos, SOL, precio y comisión. Lo necesitarás para tu declaración (Lección 19)."
+          "detail": "Fecha, pesos, SOL, precio y comisión. Lo necesitarás para tu declaración (Lección 20)."
         }
       ],
       "intro": "El flujo es muy parecido en todos los exchanges."
@@ -4180,6 +4180,42 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       ],
       "intro": "Las cripto no son invisibles para el fisco. Panorama general por país (noviembre de 2026). Consulta a un contador.",
       "columns": 3
+    }
+  },
+  47: {
+    "Tu Primera Hardware Wallet: Configuración Segura": {
+      "kind": "steps",
+      "steps": [
+        { "title": "Revisa la caja", "detail": "Sellada y sin señales de apertura. Si trae palabras ya escritas, no la uses." },
+        { "title": "Instala la app oficial", "detail": "Escribe tú mismo la web del fabricante y actualiza el firmware antes de crear tu frase." },
+        { "title": "Genera la frase en el dispositivo", "detail": "Anota las 12 o 24 palabras en papel o metal. Nunca en el computador ni en el celular." },
+        { "title": "No importes tu frase de Phantom", "detail": "Una frase que ya estuvo en un celular trae todos sus riesgos. Usa siempre una nueva.", "warning": true },
+        { "title": "Verifica la dirección en el dispositivo", "detail": "Compara inicio, medio y final con la de la app. Si no coinciden, no la uses." },
+        { "title": "Prueba antes de llenarla", "detail": "Envía un monto pequeño, confirma que llegó y solo entonces mueve el resto." }
+      ]
+    },
+    "Checklist Antes de Mover tu Bitcoin": {
+      "kind": "checklist",
+      "good": {
+        "title": "Antes de enviar, confirma",
+        "items": [
+          "La dirección empieza por bc1 (o 1 o 3) y la comparé con el original.",
+          "Elegí la red Bitcoin, no BEP20 ni otra red.",
+          "Hice primero un envío pequeño y lo vi confirmado.",
+          "Revisé la comisión de la red y la del exchange.",
+          "Sé si tengo BTC nativo o un token envuelto en Solana.",
+          "Mi frase está en papel o metal, fuera de internet."
+        ]
+      },
+      "bad": {
+        "title": "Detente si",
+        "items": [
+          "El exchange solo ofrece BEP20 u otra red para tu dirección bc1.",
+          "La dirección del dispositivo no coincide con la de la app.",
+          "Alguien te pide la frase para \"verificar\" o \"sincronizar\".",
+          "Te apuran con una oferta que vence en minutos."
+        ]
+      }
     }
   },
   45: {

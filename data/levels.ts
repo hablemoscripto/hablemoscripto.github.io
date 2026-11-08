@@ -25,8 +25,8 @@ export const BEGINNER_LEVEL: LevelData = {
   subtitle: 'Entiende el dinero y tu primera wallet',
   description: 'Olvida lo que sabes sobre el dinero. Aprende por qué la inflación erosiona tu poder adquisitivo, cómo Bitcoin propone una reserva de valor alternativa, y cómo Solana hace más accesibles las finanzas on-chain. Educación, no asesoría financiera.',
   stats: {
-    lessons: 19,
-    duration: '~5 h 30 min'
+    lessons: 20,
+    duration: '~6 h'
   },
   modules: [
     {
@@ -69,6 +69,7 @@ export const BEGINNER_LEVEL: LevelData = {
         { id: 39, title: 'Gasta tus Cripto', description: 'Usa tus ganancias en el mundo real con tarjetas cripto.', duration: '14 min', type: 'Herramientas' },
         { id: 42, title: 'DCA: Invierte Sin Estrés', description: 'La estrategia más simple y poderosa para construir riqueza a largo plazo.', duration: '16 min', type: 'Estrategia' },
         { id: 43, title: 'Bitcoin vs Altcoins: Qué Comprar Primero', description: 'Entiende el rol de BTC como reserva de valor vs SOL y ETH como plataformas.', duration: '15 min', type: 'Comparativa' },
+        { id: 47, title: 'Guarda tu Bitcoin: Autocustodia Paso a Paso', description: 'Elige tu wallet, retira por la red correcta y configura una hardware wallet sin errores.', duration: '21 min', type: 'Práctica' },
         { id: 44, title: 'Tu Plan de Inversión Personal', description: 'Junta todo lo aprendido: portafolio, DCA, seguridad y metas claras.', duration: '22 min', type: 'Práctica' },
       ]
     }

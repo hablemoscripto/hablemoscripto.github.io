@@ -47,7 +47,7 @@ const BODY_HTML_BY_TIER: Record<'premium' | 'vip', string> = {
 <p><strong>Bienvenido a Hablemos Cripto.</strong></p>
 
 <p>Acabas de asegurar tu <strong>acceso de por vida</strong> al plan
-{{planName}}: las 44 lecciones, todas las actualizaciones futuras y las
+{{planName}}: las 45 lecciones, todas las actualizaciones futuras y las
 herramientas de práctica, sin renovaciones.</p>
 
 <p>Construí esta ruta con lo que me hubiera gustado tener cuando empecé: una

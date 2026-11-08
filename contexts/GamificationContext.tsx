@@ -279,7 +279,7 @@ const ACHIEVEMENT_DEFINITIONS: AchievementDefinition[] = [
     title: 'Sabio Cripto',
     description: 'Acumula 4,000 XP',
     icon: 'Star',
-    // Max XP is 44 lessons x 100 = 4400, so the top tier must sit at or below
+    // Max XP is 45 lessons x 100 = 4500, so the top tier must sit at or below
     // that to be reachable. Keep the id stable to preserve persisted unlocks.
     condition: (d) => d.xp >= 4000,
     progress: (d) => ({ current: d.xp, target: 4000, suffix: ' XP' }),

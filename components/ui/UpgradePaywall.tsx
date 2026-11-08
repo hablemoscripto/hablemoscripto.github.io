@@ -18,7 +18,7 @@ interface UpgradePaywallProps {
 }
 
 const BENEFITS = [
-  'Acceso de por vida a las 44 lecciones',
+  'Acceso de por vida a las 45 lecciones',
   'Niveles Intermedio y Avanzado completos',
   'Pago único, sin suscripciones',
 ];

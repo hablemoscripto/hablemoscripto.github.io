@@ -300,7 +300,7 @@ Each lesson in `LESSONS_DATA` (`data/courseData.ts`, free) or `PAID_LESSONS` (`d
   id: number,
   title: string,
   level: 'Principiante' | 'Intermedio' | 'Avanzado',
-  number: string,       // e.g. "1 de 19"
+  number: string,       // e.g. "1 de 20"
   duration: string,     // e.g. "18 minutos"
   type: string,         // free-form descriptor
   description: string,

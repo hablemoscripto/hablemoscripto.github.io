@@ -129,7 +129,7 @@ const Hero: React.FC<HeroProps> = ({ onStartLearning }) => {
             
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy-900/70 border border-white/5 text-brand-400 text-xs font-bold uppercase tracking-[0.2em] mb-5 md:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                <Zap size={14} aria-hidden="true" />
-               19 lecciones gratis, sin tarjeta
+               20 lecciones gratis, sin tarjeta
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white leading-[1.05] tracking-tighter mb-5 md:mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">

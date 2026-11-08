@@ -5,7 +5,7 @@ import { reportError } from '../utils/errorReporting';
 // Pricing model — Launch 2026 (two paid lifetime tiers + free)
 //
 // - Principiante (free): Nivel Principiante only.
-// - Inversor ($99): full platform — all 44 lessons.
+// - Inversor ($99): full platform — all 45 lessons.
 // - Cripto Experto ($249): full platform + Comunidad (Discord + charlas en vivo).
 //
 // All plans are one-time lifetime purchases (no subscriptions at launch).
@@ -52,7 +52,7 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     priceUsd: 0,
     priceCopCents: 0,
     features: [
-      'Nivel Principiante completo (19 lecciones)',
+      'Nivel Principiante completo (20 lecciones)',
       'Quizzes y progreso guardado',
       'Acceso a recursos educativos gratuitos',
     ],
@@ -61,13 +61,13 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     id: 'inversor',
     productType: 'course',
     name: 'Inversor',
-    description: 'Las 44 lecciones completas de por vida. El plan principal.',
+    description: 'Las 45 lecciones completas de por vida. El plan principal.',
     priceUsd: 99,
     priceCopCents: 35000000, // 350,000 COP
     wompiSku: 'inversor_lifetime',
     grantsCourseTier: 'inversor',
     features: [
-      'Acceso completo a las 44 lecciones',
+      'Acceso completo a las 45 lecciones',
       'Infografías interactivas y quizzes en cada lección',
       'Todas las actualizaciones futuras del currículum',
       'Certificado al completar cada nivel',
@@ -164,7 +164,7 @@ export function skuRank(productType: string): number {
   return 0;
 }
 
-// Both paid tiers grant the full course (all 44 lessons); they differ only in
+// Both paid tiers grant the full course (all 45 lessons); they differ only in
 // community access. So every paid level requires just the entry paid tier.
 const LEVEL_REQUIREMENTS: Record<string, CourseTier> = {
   beginner: 'free',

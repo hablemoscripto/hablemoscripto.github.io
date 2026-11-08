@@ -100,7 +100,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 1,
     title: 'Breve Historia del Dinero',
     level: 'Principiante',
-    number: '1 de 19',
+    number: '1 de 20',
     duration: '18 minutos',
     type: 'Lectura + Historia',
     description: 'Para entender por qué existe Bitcoin, primero hay que entender qué es el dinero, por qué lo inventamos y qué cambió cuando dejó de estar anclado al oro. Aquí conocerás la historia, la tesis de este curso y lo que responden los economistas que no están de acuerdo.',
@@ -307,7 +307,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 2,
     title: 'La Trampa de la Inflación',
     level: 'Principiante',
-    number: '2 de 19',
+    number: '2 de 20',
     duration: '24 minutos',
     type: 'Lectura + Gráficos',
     description: 'Te han dicho que un poco de inflación es normal y hasta necesaria. Aquí verás cómo se crea el dinero, quién gana y quién pierde cuando los precios suben, y por qué este curso sostiene que la inflación es una decisión de política y no un fenómeno natural.',
@@ -516,7 +516,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 3,
     title: 'El Efecto Cantillon',
     level: 'Principiante',
-    number: '3 de 19',
+    number: '3 de 20',
     duration: '18 minutos',
     type: 'Concepto Clave',
     description: 'Cuando se crea dinero nuevo, no llega a todos al mismo tiempo. Quienes lo reciben primero pueden comprar antes de que suban los precios; quienes lo reciben al final pagan más caro. Aprende cómo funciona, qué dicen los economistas y dónde estás tú en esta cadena.',
@@ -727,7 +727,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 4,
     title: 'Bitcoin: La Salida',
     level: 'Principiante',
-    number: '4 de 19',
+    number: '4 de 20',
     duration: '22 minutos',
     type: 'Lectura',
     description: 'Ya viste cómo el dinero fiat pierde valor con el tiempo. Aquí conocerás la alternativa que propone este curso: Bitcoin, el primer dinero digital escaso que no depende de ningún gobierno ni empresa. Verás por qué existe, qué lo hace diferente, sus casos reales y también sus riesgos.',
@@ -870,7 +870,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           'Bitcoin tiene riesgos reales: volatilidad extrema, concentración de la minería, dudas sobre su seguridad a largo plazo y la posibilidad de perder tus llaves.',
           'Para muchos es una tesis de protección frente a la inflación fiat. No es un consejo de compra: es un marco para entender por qué existe Bitcoin antes de decidir si te conviene.',
           'La pregunta útil no es "¿debería comprar Bitcoin ya?", sino "¿entiendo los riesgos, mi horizonte y cuánto puedo destinar sin tocar mi fondo de emergencia?" Empezar con seguridad importa más que empezar rápido.',
-          'Si algún día decides invertir, el orden importa: primero pagas las deudas caras y armas tu fondo de emergencia. Una guía educativa común para principiantes es no poner más del 5-10% de tus ahorros invertibles en cripto (con 10 millones de pesos, de 500,000 a 1,000,000). Verás cómo armar ese plan en la Lección 19.'
+          'Si algún día decides invertir, el orden importa: primero pagas las deudas caras y armas tu fondo de emergencia. Una guía educativa común para principiantes es no poner más del 5-10% de tus ahorros invertibles en cripto (con 10 millones de pesos, de 500,000 a 1,000,000). Verás cómo armar ese plan en la Lección 20.'
         ]
       }
     ],
@@ -984,7 +984,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 5,
     title: '¿Qué es Blockchain?',
     level: 'Principiante',
-    number: '5 de 19',
+    number: '5 de 20',
     duration: '21 minutos',
     type: 'Lectura',
     description: 'La blockchain es la tecnología que hace posible Bitcoin, pero ¿cómo funciona realmente? Aprende cómo miles de computadoras mantienen un registro que nadie puede falsificar, sin necesidad de confiar en ninguna autoridad central.',
@@ -1271,7 +1271,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 6,
     title: 'Descentralización vs Centralización',
     level: 'Principiante',
-    number: '6 de 19',
+    number: '6 de 20',
     duration: '22 minutos',
     type: 'Lectura',
     description: '¿Por qué importa que nadie tenga el control? La descentralización no es solo una palabra de moda: define si tu acceso a tu dinero depende del permiso de alguien. Entiende sus beneficios, sus costos y cómo medirla.',
@@ -1543,7 +1543,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 7,
     title: 'Wallets: Tu Llave, Tu Dinero',
     level: 'Principiante',
-    number: '7 de 19',
+    number: '7 de 20',
     duration: '15 minutos',
     type: 'Lectura',
     description: 'Entiende la diferencia crítica entre tener cripto en un exchange y tenerlo en tu propia wallet. Este conocimiento puede ser la diferencia entre conservar tus ahorros o perderlos.',
@@ -1721,7 +1721,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 8,
     title: 'La Frase Semilla (Seed Phrase)',
     level: 'Principiante',
-    number: '8 de 19',
+    number: '8 de 20',
     duration: '16 minutos',
     type: 'Práctica Obligatoria',
     description: 'El secreto más importante de tu vida financiera digital. Estas 12 o 24 palabras valen exactamente lo mismo que todo lo que guardes en tu wallet. Aprende a protegerlas del robo, de la pérdida y de las estafas.',
@@ -1905,7 +1905,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 9,
     title: 'Instalando Phantom Wallet',
     level: 'Principiante',
-    number: '9 de 19',
+    number: '9 de 20',
     duration: '16 minutos',
     type: 'Tutorial Práctico',
     description: 'Tu puerta de entrada al ecosistema Solana. Instalación paso a paso de una de las wallets más usadas, con todas las precauciones de seguridad que necesitas saber.',
@@ -2110,7 +2110,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 10,
     title: 'Solana vs Ethereum: La Guerra de L1s',
     level: 'Principiante',
-    number: '10 de 19',
+    number: '10 de 20',
     duration: '18 min',
     type: 'Comparativa',
     description: 'Por qué enseñamos Solana primero: velocidad, costos y simplicidad, y también lo que Ethereum hace mejor. Dos diseños distintos para el mismo problema.',
@@ -2329,7 +2329,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 35,
     title: 'Obteniendo tus Primeros SOL',
     level: 'Principiante',
-    number: '13 de 19',
+    number: '13 de 20',
     duration: '17 minutos',
     type: 'Tutorial',
     description: 'El puente entre el mundo tradicional y cripto. Cómo convertir pesos, dólares o tu moneda local a SOL y llevarlo a tu wallet.',
@@ -2373,7 +2373,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           { icon: Landmark, title: 'Paso 2: Depositar Fiat', text: 'Una vez verificado, deposita dinero. Opciones: transferencia bancaria o PSE (la más barata; puede tardar desde minutos hasta un día hábil), tarjeta de crédito o débito (instantánea, pero con 2-4% de comisión) o P2P (compras a otros usuarios directamente).' },
           { icon: Activity, title: 'Paso 3: Comprar SOL', text: 'Con fondos en el exchange, ve a "Trading" o "Comprar Cripto". Busca el par SOL/USD o SOL/tu-moneda. Puedes usar "Market Order" (compra al precio actual) o "Limit Order" (defines el precio que quieres pagar).' },
           { icon: Wallet, title: 'Paso 4: Retirar a Phantom', text: 'Busca la opción de retirar en tu billetera del exchange y elige SOL. Pega tu dirección de Phantom (la que copiaste de la app). IMPORTANTE: Selecciona la red SOLANA. Confirma y espera de 1 a 10 minutos.' },
-          { icon: Search, title: 'Paso 5: Guarda el Registro', text: 'Desde tu primera compra, anota la fecha, el monto en pesos, la cantidad de SOL, el precio y la comisión (o descarga el historial del exchange cada año). En Colombia, los criptoactivos se declaran como parte de tu patrimonio y venderlos o intercambiarlos puede generar impuestos. Lo verás en la Lección 19.' }
+          { icon: Search, title: 'Paso 5: Guarda el Registro', text: 'Desde tu primera compra, anota la fecha, el monto en pesos, la cantidad de SOL, el precio y la comisión (o descarga el historial del exchange cada año). En Colombia, los criptoactivos se declaran como parte de tu patrimonio y venderlos o intercambiarlos puede generar impuestos. Lo verás en la Lección 20.' }
         ]
       },
       {
@@ -2533,7 +2533,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 36,
     title: 'Tu Primera Transacción',
     level: 'Principiante',
-    number: '14 de 19',
+    number: '14 de 20',
     duration: '12 minutos',
     type: 'Práctica',
     description: 'Envía valor a través del mundo en segundos, sin bancos ni intermediarios. Aprende a hacerlo con seguridad desde la primera vez.',
@@ -2672,7 +2672,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 37,
     title: 'Exploradores de Bloques (Solscan)',
     level: 'Principiante',
-    number: '15 de 19',
+    number: '15 de 20',
     duration: '12 minutos',
     type: 'Herramienta',
     description: '"Don\'t Trust, Verify", La filosofía central de cripto. Aprende a usar la herramienta que te permite verificar cualquier cosa en la blockchain.',
@@ -2810,7 +2810,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 38,
     title: 'Evitar Estafas en Web3',
     level: 'Principiante',
-    number: '11 de 19',
+    number: '11 de 20',
     duration: '20 minutos',
     type: 'Seguridad Vital',
     description: 'La gran mayoría de los robos en cripto son evitables. Conoce las tácticas de los estafadores y protégete antes de perder el dinero que tanto te costó ganar.',
@@ -3078,7 +3078,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 39,
     title: 'Gasta tus Cripto',
     level: 'Principiante',
-    number: '16 de 19',
+    number: '16 de 20',
     duration: '14 min',
     type: 'Herramientas',
     description: 'El círculo completo: de fiat a cripto, de cripto a gastos reales. Cómo usar tarjetas cripto, qué cuestan y qué riesgos tienen.',
@@ -3159,7 +3159,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Consideraciones Importantes',
         content: 'Antes de lanzarte a gastar, ten en cuenta estos puntos:',
         features: [
-          { icon: AlertTriangle, title: 'Impuestos', text: 'En Colombia, cada vez que vendes o cambias cripto (también al gastarla) puede haber una ganancia que declarar. Lleva el registro desde tu primera compra, como viste en la Lección 13. Verás los detalles en la Lección 19.' },
+          { icon: AlertTriangle, title: 'Impuestos', text: 'En Colombia, cada vez que vendes o cambias cripto (también al gastarla) puede haber una ganancia que declarar. Lleva el registro desde tu primera compra, como viste en la Lección 13. Verás los detalles en la Lección 20.' },
           { icon: Percent, title: 'Fees', text: 'Las tarjetas pueden cobrar emisión, envío, recarga, transacción o conversión de moneda. Compara opciones. Algunas ofrecen cashback o puntos, pero esos programas cambian o terminan con frecuencia: no elijas solo por eso.' },
           { icon: Shield, title: 'Límites', text: 'Cada tarjeta tiene límites diarios/mensuales de gasto y retiro en cajeros. Verifica que se ajusten a tu uso esperado antes de elegir.' },
           { icon: Globe, title: 'Disponibilidad Geográfica', text: 'No todas las tarjetas funcionan en todos los países. Verifica disponibilidad en tu país antes de aplicar.' }
@@ -3242,7 +3242,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 41,
     title: 'Stablecoins: Tu Dólar Digital',
     level: 'Principiante',
-    number: '12 de 19',
+    number: '12 de 20',
     duration: '19 minutos',
     type: 'Concepto Clave',
     description: 'Las stablecoins son la herramienta cripto más usada en Latinoamérica, pero la mayoría no entiende qué las respalda, ni los riesgos que esconden. Esta lección puede ahorrarte un desastre financiero.',
@@ -3434,7 +3434,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 42,
     title: 'DCA: Invierte Sin Estrés',
     level: 'Principiante',
-    number: '17 de 19',
+    number: '17 de 20',
     duration: '16 minutos',
     type: 'Estrategia',
     description: 'Una de las formas más simples de invertir con constancia sin intentar adivinar el mercado. Qué hace bien, qué no hace, y cómo empezar con pesos.',
@@ -3614,7 +3614,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     id: 43,
     title: 'Bitcoin vs Altcoins: Qué Comprar Primero',
     level: 'Principiante',
-    number: '18 de 19',
+    number: '18 de 20',
     duration: '15 minutos',
     type: 'Comparativa',
     description: 'Existen millones de tokens y casi ninguno vale la pena. Entiende por qué este curso propone BTC como base y cómo se diferencia de ETH, SOL y las demás.',
@@ -3723,7 +3723,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           'ETH y SOL no tienen límite fijo de emisión, son más volátiles, pero permiten DeFi, staking, y aplicaciones que Bitcoin no puede.',
           'La gran mayoría de las altcoins no sobrevivirá. Solo invierte en tokens cuyo problema puedas explicar en una oración.',
           'Meme coins son apuestas, no inversiones. Si participas, usa solo dinero que puedas perder completamente.',
-          'Decide primero cuánto de tus ahorros va a cripto (una guía común para principiantes: no más del 5-10%). Dentro de esa porción, empieza con 60-70% en BTC y agrega ETH y SOL a medida que aprendas.'
+          'Decide primero cuánto de tus ahorros va a cripto (una guía común para principiantes: no más del 5-10%). Dentro de esa porción, empieza con 60-70% en BTC y agrega ETH y SOL a medida que aprendas.',
+          'Si Bitcoin va a ser tu base, dónde lo guardas importa tanto como cuánto compras. Lo verás paso a paso en la próxima lección.'
         ]
       }
     ],
@@ -3806,11 +3807,291 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       ]
     }
   },
+  47: {
+    id: 47,
+    title: 'Guarda tu Bitcoin: Autocustodia Paso a Paso',
+    level: 'Principiante',
+    number: '19 de 20',
+    duration: '21 minutos',
+    type: 'Práctica',
+    description: 'Si Bitcoin es la base de tu porción cripto, dónde lo guardas importa. Aprende a elegir wallet, a retirar por la red correcta y a configurar una hardware wallet sin errores.',
+    sections: [
+      {
+        type: 'intro',
+        title: 'Tu Base Merece una Buena Caja Fuerte',
+        content: 'En la lección anterior viste por qué este curso propone Bitcoin como la base de tu porción cripto. Si va a ser la parte más grande, la pregunta siguiente es obvia: **¿dónde lo guardas?** En la Lección 7 aprendiste la regla "not your keys, not your coins": si tu BTC está en un exchange, tienes una promesa de pago, no Bitcoin. Esta lección es la parte práctica: qué tipo de wallet usar según el monto, cómo retirar de un exchange sin perder fondos por elegir la red equivocada, qué es el "Bitcoin envuelto" que verás en Solana y cómo configurar una hardware wallet de forma segura.',
+        highlight: {
+          title: 'Autocustodia es Responsabilidad',
+          text: 'Cuando guardas tu propio Bitcoin, nadie puede congelarlo ni gastarlo por ti. Pero tampoco hay soporte que lo recupere si pierdes la frase semilla o lo envías a una dirección equivocada. Por eso vas paso a paso: primero montos pequeños, después lo demás.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Tres Formas de Guardar tu Bitcoin',
+        content: 'No necesitas la opción más sofisticada desde el primer día. Lo razonable depende de cuánto tienes y de qué tan cómodo te sientes con la tecnología.',
+        features: [
+          { icon: Smartphone, title: 'Wallet Multichain (Phantom)', text: 'Ya la tienes desde la Lección 9. Phantom guarda Bitcoin nativo en la red de Bitcoin, con direcciones que empiezan por bc1q (la que usa por defecto) o bc1p (Taproot). Ventaja: una sola app y una sola frase para SOL y BTC. Desventaja: es una hot wallet en un dispositivo conectado a internet, y esa misma frase protege todo lo demás. Sirve para aprender y para montos pequeños.' },
+          { icon: Wallet, title: 'Wallet Especializada en Bitcoin', text: 'Apps hechas sobre todo para Bitcoin, como Sparrow (en el computador, solo Bitcoin) o la app de Blockstream (en el celular). Dan más control: eliges la comisión, ves cada pago recibido por separado y se conectan con hardware wallets. Si las llaves quedan en el celular o el computador, siguen siendo hot wallets.' },
+          { icon: Shield, title: 'Hardware Wallet (Cold)', text: 'Un dispositivo pequeño que guarda tus llaves fuera de internet y firma cada envío por dentro. Aunque tu computador tenga un virus, nadie puede mover tu BTC sin el dispositivo y su PIN. Las más conocidas cuestan desde unos 60 dólares en la tienda oficial, más envío e impuestos de importación. Es la opción para el dinero que te dolería perder.' }
+        ],
+        highlight: {
+          title: 'Una Regla Práctica',
+          text: 'Si perder lo que tienes en Bitcoin te dolería de verdad (por ejemplo, si ya equivale a más de un mes de tus ingresos), una hardware wallet suele valer lo que cuesta. Mientras aprendes con montos pequeños, Phantom es suficiente. Es una guía, no una ley: lo importante es que tu protección crezca con tu saldo.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Cómo Elegir una Hardware Wallet',
+        content: 'Más que la marca, importan estos criterios. Ejemplos conocidos (no son recomendaciones personalizadas y no hay enlaces de referido): **Trezor** (Safe 3, Safe 5, Safe 7), **BitBox02** (con edición solo Bitcoin), **Blockstream Jade** y **Ledger** (Nano S Plus, Nano X, Flex, Stax). Ledger es la marca más popular, pero parte de su software interno es cerrado, y en 2023 su servicio opcional Ledger Recover, que guarda copias cifradas de la frase con terceros, generó mucha polémica. Si la usas, no actives ese servicio sin entenderlo.',
+        asOf: 'noviembre de 2026',
+        features: [
+          { icon: Building2, title: 'Cómprala en la Tienda Oficial', text: 'Nunca en Mercado Libre, Amazon u otro marketplace, y nunca usada: se han vendido dispositivos manipulados para robar la frase. Si el fabricante no envía a Colombia, usa un distribuidor que aparezca en su propia web.' },
+          { icon: AlertTriangle, title: 'Llega Sin Frase: Tú la Creas', text: 'Si la caja trae una tarjeta con palabras ya escritas, o el vendedor te la entrega "ya configurada", es una estafa. La frase debe generarla el dispositivo frente a ti, la primera vez que lo enciendes.' },
+          { icon: Eye, title: 'Código Revisable y Buen Historial', text: 'Prefiere fabricantes cuyo software pueden revisar expertos independientes, que publiquen sus fallas de seguridad y que saquen actualizaciones con frecuencia.' },
+          { icon: CheckCircle, title: 'Una Pantalla Donde Leer la Dirección', text: 'La pantalla del dispositivo es la que puedes creer. Debe mostrarte la dirección completa y el monto antes de que apruebes un envío.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Caso Real 2026: Cuando el Error Fue del Fabricante',
+        content: 'En julio de 2026 se supo que un error en el firmware de **Coldcard**, una hardware wallet solo Bitcoin muy respetada, hacía que sus dispositivos generaran frases semilla con mucha menos aleatoriedad de la debida. El error venía desde marzo de 2021. Los dispositivos no fueron hackeados: los atacantes recalcularon esas frases débiles desde sus propios computadores y, desde el 30 de julio, vaciaron cerca de **1,816 BTC de más de 5,200 direcciones**. Actualizar el firmware protege las frases nuevas, pero no arregla las ya creadas: los afectados tenían que crear una frase nueva y mover sus fondos.',
+        highlight: {
+          title: 'Qué Te Enseña Este Caso',
+          text: 'Ningún fabricante es infalible. Mantén el firmware al día desde la app oficial y sigue los avisos de seguridad de tu marca. Cuando tus ahorros en Bitcoin sean grandes, existen protecciones extra que salvaron a muchos en este caso: una passphrase fuerte (la "palabra 25" de la Lección 8) o una wallet multifirma con dispositivos de marcas distintas. Son temas avanzados; por ahora basta con saber que existen.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Bitcoin Nativo vs Bitcoin "Envuelto" en Solana',
+        content: 'En Phantom y en los DEX de Solana verás tokens como cbBTC, WBTC o zBTC. **No son Bitcoin.** Son tokens en la red de Solana que dicen estar respaldados 1 a 1 por BTC que guarda alguien más. Sirven para usar Bitcoin dentro de apps de Solana (por ejemplo, como garantía en un préstamo), pero su valor depende de ese custodio o puente. Phantom los muestra como tokens de Solana, separados de tu saldo de Bitcoin nativo.',
+        asOf: 'noviembre de 2026',
+        features: [
+          { icon: Building2, title: 'cbBTC (Coinbase)', text: 'Es el más usado en Solana. El BTC de respaldo lo guarda Coinbase, y solo sus clientes pueden canjear cbBTC por BTC. Coinbase puede congelar estos tokens si se lo exige una autoridad.' },
+          { icon: Link, title: 'WBTC (BitGo y BiT Global)', text: 'El Bitcoin envuelto más antiguo (2019), sobre todo en Ethereum. Desde 2024 su custodia la comparten BitGo y BiT Global, una empresa de Hong Kong ligada a Justin Sun, y por eso varios protocolos redujeron su uso. En Solana gran parte llega a través del puente Wormhole, lo que suma otro punto de riesgo.' },
+          { icon: Network, title: 'zBTC (Zeus Network)', text: 'Usa un puente propio de Zeus Network en vez de un exchange como custodio. Es mucho más pequeño y más joven que los otros dos, así que su historial de seguridad es corto.' }
+        ],
+        highlight: {
+          title: 'La Pregunta Clave',
+          text: 'Con cualquier Bitcoin envuelto, pregúntate: ¿quién guarda el BTC real y qué pasa si falla, quiebra o congela? Si la respuesta es "dependo de una empresa o de un puente", eso no es autocustodia de Bitcoin, aunque el token esté en tu propia wallet.'
+        }
+      },
+      {
+        type: 'comparison',
+        title: 'BTC Nativo o Envuelto: Cuándo Usar Cada Uno',
+        leftSide: {
+          title: 'BTC Nativo (red Bitcoin)',
+          points: [
+            'Es Bitcoin de verdad, sin intermediarios',
+            'Nadie puede congelarlo si tú tienes las llaves',
+            'El lugar para tus ahorros de largo plazo',
+            'Dirección que empieza por bc1 (o 1 o 3)',
+            'Comisiones y tiempos de la red Bitcoin',
+            'No se usa directamente en apps de Solana'
+          ]
+        },
+        rightSide: {
+          title: 'BTC Envuelto (cbBTC, WBTC, zBTC)',
+          points: [
+            'Un token en Solana que representa BTC',
+            'Depende de un custodio o de un puente',
+            'Útil para DeFi en Solana, no para ahorrar',
+            'Usa tu dirección de Solana, no la de Bitcoin',
+            'Comisiones de Solana, de fracciones de centavo',
+            'Puede congelarse o perder su respaldo'
+          ]
+        }
+      },
+      {
+        type: 'main',
+        title: 'Mover tu Bitcoin Sin Errores: Direcciones, Redes y Comisiones',
+        content: 'Los errores más caros con Bitcoin casi nunca son hackeos: son envíos a la red o a la dirección equivocada. Esto es lo que debes revisar cada vez.',
+        asOf: 'noviembre de 2026',
+        features: [
+          { icon: Search, title: 'Reconoce una Dirección de Bitcoin', text: 'Las modernas empiezan por bc1q (Native SegWit, la más común) o bc1p (Taproot). Las antiguas empiezan por 1 o 3 y siguen siendo válidas para enviar. Una dirección de Solana no empieza así: si en un retiro de BTC te aparece una dirección que no reconoces, detente.' },
+          { icon: AlertTriangle, title: 'Elige la Red Bitcoin al Retirar', text: 'En un exchange como Binance, al retirar BTC verás varias redes: BTC (Bitcoin), BEP20 (BNB Smart Chain) y a veces ERC20 o Lightning. Para una dirección bc1, la red es Bitcoin. El "BTC" de BEP20 es otro token en otra red. Binance lo dice claro: no elijas la red más barata, elige la compatible. Una red equivocada puede hacerte perder los fondos.' },
+          { icon: CheckCircle, title: 'Primero, una Transacción de Prueba', text: 'Si vas a retirar, por ejemplo, 2,000,000 de pesos en BTC, envía primero un monto pequeño. Confirma que llegó en tu wallet y en un explorador como mempool.space, y después envía el resto. Pagas dos comisiones, pero compras tranquilidad.' },
+          { icon: Clock, title: 'Comisiones en sat/vB y Tiempos', text: 'En Bitcoin pagas por el espacio que ocupa tu transacción en el bloque, no por el monto. Se mide en sat/vB (satoshis por byte virtual; 1 BTC son 100 millones de sats). Hoy están en mínimos, casi siempre 1 o 2 sat/vB, entre 10 y 30 centavos de dólar por un envío normal. Con congestión suben mucho: en 2023 y 2024 hubo semanas de decenas de sat/vB. Sale un bloque cada 10 minutos en promedio, y algunos exchanges esperan varias confirmaciones. El exchange cobra además su propia comisión de retiro: revísala en pantalla.' }
+        ],
+        highlight: {
+          title: 'Si Pagas Poca Comisión',
+          text: 'Una comisión baja no hace que pierdas el dinero: la transacción solo tarda más en confirmarse, y muchas wallets permiten subir la comisión después si se queda atascada. Lo que sí es irreversible es enviar a la dirección o a la red equivocada.'
+        }
+      },
+      {
+        type: 'main',
+        title: 'Tu Primera Hardware Wallet: Configuración Segura',
+        content: 'La configuración toma unos 30 minutos. Hazla con calma, en casa y sin cámaras apuntando a la pantalla. Y un dato que tranquiliza: tu Bitcoin no vive en el aparato, vive en la blockchain. Si pierdes o se daña el dispositivo, lo recuperas con tu frase en uno nuevo, incluso de otra marca compatible. Lo que no puedes perder es la frase.',
+        features: [
+          { icon: Search, title: 'Paso 1: Revisa la Caja', text: 'Que esté sellada y sin señales de apertura. Si trae una tarjeta con palabras ya escritas, no la uses y contacta al fabricante.' },
+          { icon: Smartphone, title: 'Paso 2: Instala la App Oficial', text: 'Escribe tú mismo la dirección web del fabricante (recuerda los sitios falsos de la Lección 9). La app te pedirá actualizar el firmware: hazlo antes de crear tu frase.' },
+          { icon: Lock, title: 'Paso 3: Genera la Frase en el Dispositivo', text: 'Elige crear una wallet nueva. El dispositivo te mostrará 12 o 24 palabras: escríbelas en papel o metal, como viste en la Lección 8. Nunca las escribas en el computador ni en el celular.' },
+          { icon: AlertTriangle, title: 'Paso 4: No Importes tu Frase de Phantom', text: 'Una hardware wallet es tan segura como su frase. Si usas una frase que ya estuvo en un celular, hereda todos sus riesgos. Para el dispositivo, siempre una frase nueva.' },
+          { icon: Eye, title: 'Paso 5: Verifica la Dirección en el Dispositivo', text: 'Al recibir, compara la dirección de la app con la que muestra la pantalla del dispositivo: el inicio, el medio y el final. Si no coinciden, no la uses.' },
+          { icon: CheckCircle, title: 'Paso 6: Prueba Antes de Llenarla', text: 'Envía un monto pequeño, confirma que llegó y, si quieres, practica un envío de vuelta. Solo entonces mueve el resto.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Lightning en un Párrafo',
+        content: '**Lightning** es una red que funciona encima de Bitcoin para pagos pequeños y rápidos: llegan en segundos y cuestan muy poco. Sirve para pagar o enviar montos chicos, no para guardar ahorros. Hay wallets Lightning custodiales (una empresa guarda tus sats, como en un exchange) y no custodiales (tú tienes las llaves, a cambio de algo más de complejidad). Algunos exchanges permiten retirar BTC por Lightning; en ese caso no pegas una dirección bc1, sino una factura (invoice) Lightning que genera tu wallet. Phantom no usa Lightning, solo la red principal de Bitcoin. Para tu base de ahorro, la red principal es suficiente.'
+      },
+      {
+        type: 'counterpoint',
+        title: 'Otra Mirada: La Autocustodia También Tiene Riesgos',
+        content: 'No todos los expertos creen que cada principiante deba guardar su propio Bitcoin desde el inicio. Sus argumentos:\n\n- **Mucha gente pierde su BTC por errores propios.** Chainalysis estimó en 2020 que cerca de 3.7 millones de BTC (alrededor del 20% de lo minado hasta entonces) llevaban cinco años o más sin moverse y probablemente estaban perdidos. Una parte son de Satoshi, pero se cree que muchos corresponden a llaves o frases extraviadas.\n- **Sin un plan de herencia, tu familia puede no recuperarlo.** Si solo tú sabes dónde está la frase, tu Bitcoin puede perderse contigo.\n- **Para montos pequeños, un exchange regulado** y con buen historial puede ser un riesgo aceptable mientras aprendes.\n\nLa respuesta de quienes defienden la autocustodia: los errores propios se reducen con práctica y buenos respaldos, mientras que el riesgo de un exchange (FTX, Mt. Gox) no depende de ti. Un punto medio razonable: practica con poco y aumenta lo que guardas tú a medida que dominas el proceso.'
+      },
+      {
+        type: 'main',
+        title: 'Checklist Antes de Mover tu Bitcoin',
+        content: 'Repasa esta lista cada vez que muevas BTC, sobre todo las primeras veces.',
+        features: [
+          { icon: Search, title: 'Dirección', text: 'Empieza por bc1 (o 1 o 3) y la comparé con el original o en la pantalla del dispositivo.' },
+          { icon: Network, title: 'Red', text: 'Elegí la red Bitcoin, no BEP20 ni otra red.' },
+          { icon: CheckCircle, title: 'Prueba', text: 'Hice primero un envío pequeño y lo vi confirmado.' },
+          { icon: Percent, title: 'Comisiones', text: 'Revisé la comisión de la red y la comisión de retiro del exchange.' },
+          { icon: Layers, title: 'Nativo o Envuelto', text: 'Sé si lo que tengo es BTC nativo o un token envuelto en Solana.' },
+          { icon: Lock, title: 'Respaldo', text: 'Mi frase está en papel o metal, fuera de internet, y sé dónde está.' },
+          { icon: AlertTriangle, title: 'Detente Si...', text: 'El exchange solo ofrece BEP20 u otra red para tu dirección bc1, la dirección del dispositivo no coincide con la de la app, alguien te pide la frase para "verificar" o te apuran con una oferta que vence.' }
+        ]
+      },
+      {
+        type: 'takeaways',
+        title: 'Lo Que Debes Recordar',
+        items: [
+          'Guarda tu Bitcoin según el monto: Phantom para aprender y para montos pequeños, una hardware wallet para lo que te dolería perder.',
+          'Compra la hardware wallet en la tienda oficial, genera la frase en el dispositivo y nunca importes una frase que ya estuvo en un celular.',
+          'Verifica cada dirección de recibo en la pantalla del dispositivo: es la pantalla en la que puedes confiar.',
+          'Al retirar de un exchange, elige la red Bitcoin para una dirección bc1 y haz primero una transacción de prueba. La red más barata no siempre es la correcta.',
+          'cbBTC, WBTC y zBTC no son Bitcoin: son tokens en Solana que dependen de un custodio o un puente. Sirven para DeFi, no para tus ahorros de largo plazo.',
+          'Ningún fabricante es infalible (caso Coldcard, 2026): mantén el firmware al día, sigue los avisos de seguridad y deja que tu protección crezca con tu saldo.'
+        ]
+      }
+    ],
+    quiz: {
+      questions: [
+        {
+          id: 'q1',
+          question: 'Vas a retirar 0.002 BTC de Binance a tu dirección bc1q de Phantom. Binance te ofrece las redes BTC, BEP20 y ERC20, y BEP20 es la más barata. ¿Qué eliges?',
+          options: [
+            { id: 'a', text: 'BEP20, porque es más barata y llega a la misma dirección' },
+            { id: 'b', text: 'BTC, porque una dirección bc1q es de la red Bitcoin' },
+            { id: 'c', text: 'ERC20, porque Phantom también es wallet de Ethereum' },
+            { id: 'd', text: 'Cualquiera, porque el exchange ajusta la red solo' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Una dirección bc1q pertenece a la red Bitcoin, así que la red correcta es BTC. El "BTC" de BEP20 o ERC20 es otro token en otra red: elegirlo solo porque es más barato es justo el error que Binance advierte, y puede hacerte perder los fondos. El exchange no corrige la red por ti; esa decisión es tuya.'
+        },
+        {
+          id: 'q2',
+          question: 'Un amigo te dice: "Compré cbBTC en Phantom, así que ya tengo mi Bitcoin en autocustodia". ¿Qué le respondes?',
+          options: [
+            { id: 'a', text: 'Que tiene razón: cbBTC es BTC nativo, solo que más rápido' },
+            { id: 'b', text: 'Que tiene un token respaldado por BTC que guarda Coinbase' },
+            { id: 'c', text: 'Que tiene razón, porque lo guarda en Phantom y no en Binance' },
+            { id: 'd', text: 'Que se equivoca: cbBTC no tiene ningún respaldo en BTC' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Tu amigo controla la llave del token, pero el BTC real lo guarda Coinbase, que puede congelar cbBTC y es la única vía para canjearlo. Tenerlo en Phantom no cambia de quién depende el respaldo. Tampoco es cierto que no tenga respaldo: lo tiene, solo que en manos de un custodio. Para autocustodia de Bitcoin necesitas BTC nativo en una dirección bc1 cuyas llaves controlas.'
+        },
+        {
+          id: 'q3',
+          question: 'Te llega tu primera hardware wallet y quieres ahorrar tiempo usando las 12 palabras que ya tienes en Phantom. ¿Qué es lo más seguro?',
+          options: [
+            { id: 'a', text: 'Importar la frase de Phantom para tener todo junto' },
+            { id: 'b', text: 'Crear una frase nueva en el dispositivo y anotarla' },
+            { id: 'c', text: 'Crear una frase nueva y guardarla en una foto cifrada' },
+            { id: 'd', text: 'Usar la frase impresa en la tarjeta que trae la caja' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Una hardware wallet es tan segura como su frase. La de Phantom ya estuvo en un celular conectado, así que importarla trae todos sus riesgos al dispositivo. Una foto, aunque esté cifrada, vuelve digital la frase nueva. Y una frase que llega impresa en la caja es una estafa: la conoce quien la imprimió.'
+        },
+        {
+          id: 'q-tf',
+          type: 'true-false',
+          question: 'Si pierdes tu hardware wallet, pierdes tu Bitcoin para siempre, aunque tengas tu frase semilla bien guardada.',
+          correctAnswer: false,
+          explanation: 'Falso. Tu Bitcoin está en la blockchain, no dentro del aparato. El dispositivo solo guarda las llaves, y la frase semilla las genera de nuevo: con ella restauras tu wallet en un dispositivo nuevo, incluso de otra marca compatible. Por eso la frase importa más que el aparato.'
+        },
+        {
+          id: 'q4',
+          question: 'Vas a recibir BTC en tu hardware wallet y la app del computador te muestra la dirección. ¿Dónde confirmas que es la correcta?',
+          options: [
+            { id: 'a', text: 'En la pantalla del dispositivo, comparando caracteres' },
+            { id: 'b', text: 'En la app del computador, que se lee mejor y es grande' },
+            { id: 'c', text: 'En el correo de confirmación que envía el fabricante' },
+            { id: 'd', text: 'No hace falta: un virus no altera direcciones copiadas' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Como viste en la Lección 14, existe malware que cambia las direcciones que copias o que ves en el computador. La pantalla del dispositivo no depende de tu computador, por eso es la que puedes creer. Un correo puede ser phishing, y pensar que un virus no puede tocar una dirección copiada es justo el error que aprovecha ese malware.'
+        },
+        {
+          id: 'q-ms',
+          type: 'multiple-select',
+          question: '¿Cuáles son señales de que una hardware wallet puede estar manipulada o ser una estafa? Selecciona todas las correctas.',
+          options: [
+            { id: 'a', text: 'Trae una tarjeta con 24 palabras ya escritas' },
+            { id: 'b', text: 'La compraste usada y barata en un marketplace' },
+            { id: 'c', text: 'El vendedor te la entrega "ya configurada"' },
+            { id: 'd', text: 'La app oficial te pide actualizar el firmware' },
+            { id: 'e', text: 'Te pide anotar la frase que muestra su pantalla' }
+          ],
+          correctAnswers: [0, 1, 2],
+          explanation: 'Una frase ya escrita, un equipo usado de un marketplace o uno "ya configurado" significan que alguien más pudo conocer o controlar tu frase. En cambio, actualizar el firmware desde la app oficial y anotar la frase que genera el dispositivo son pasos normales y necesarios de una configuración segura.'
+        },
+        {
+          id: 'q5',
+          question: 'Quieres enviar 0.01 BTC, tu wallet te deja elegir la comisión y no tienes prisa. ¿Qué es lo correcto?',
+          options: [
+            { id: 'a', text: 'La comisión depende del tamaño y la demanda, no del monto' },
+            { id: 'b', text: 'La comisión es un porcentaje fijo del monto que tú envías' },
+            { id: 'c', text: 'Si pagas menos de lo sugerido, los fondos se pierden' },
+            { id: 'd', text: 'Bitcoin cobra lo mismo siempre, haya o no congestión' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'En Bitcoin pagas por el espacio que ocupa tu transacción (sat/vB) y el precio sube cuando hay más demanda, sin importar si envías 0.01 o 1 BTC. Una comisión baja no hace que pierdas los fondos: la transacción solo tarda más, y muchas wallets permiten subir la comisión después. Si no tienes prisa, una comisión baja es razonable.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de la Lección 8. Tu hardware wallet generó 24 palabras y tu hermano sugiere guardarlas en tu correo, que tiene una contraseña fuerte. ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Las guardo en el correo: con buena contraseña es seguro' },
+            { id: 'b', text: 'Las escribo en papel o metal y las guardo sin conexión' },
+            { id: 'c', text: 'Guardo la mitad en el correo y la otra mitad en el celular' },
+            { id: 'd', text: 'Les tomo una foto cifrada y la subo a mi nube privada' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La frase solo debe existir en papel o metal, nunca en formato digital. Un correo puede ser hackeado aunque la contraseña sea fuerte, y una foto cifrada sigue siendo digital. Dividirla tampoco ayuda: las dos mitades siguen en lugares conectados a internet, y si pierdes una ya no puedes recuperar tu wallet.'
+        }
+      ]
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 5,
+        title: 'Checkpoint: ¿BTC Nativo o Envuelto?',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'Quieres guardar Bitcoin a largo plazo sin depender de ninguna empresa. ¿Qué necesitas tener?',
+            options: [
+              'BTC nativo en una dirección bc1 cuyas llaves controlas',
+              'cbBTC en Phantom, porque Phantom es tu propia wallet',
+              'WBTC, porque es el Bitcoin envuelto con más historia',
+              'BTC en un exchange grande que nunca ha sido hackeado'
+            ],
+            correctAnswer: 0,
+            explanation: 'Solo el BTC nativo en una dirección cuyas llaves controlas no depende de nadie más. cbBTC y WBTC dependen de un custodio aunque estén en tu wallet, y un exchange sin hackeos sigue teniendo tus llaves: puede congelar retiros o quebrar.',
+            hint: 'Pregúntate quién guarda el BTC real en cada caso.'
+          }
+        ]
+      }
+    ]
+  },
   44: {
     id: 44,
     title: 'Tu Plan de Inversión Personal',
     level: 'Principiante',
-    number: '19 de 19',
+    number: '20 de 20',
     duration: '22 minutos',
     type: 'Práctica',
     description: 'La lección final del nivel principiante. Junta todo lo que aprendiste en un plan de acción concreto: tu portafolio, tu estrategia DCA, tu seguridad, y tus metas. Sales de aquí con un plan real.',
@@ -3818,7 +4099,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: 'De Estudiante a Inversor: Tu Graduación',
-        content: 'Felicidades. Si llegaste hasta aquí, ya sabes más sobre dinero, inflación y criptomonedas que la mayoría de las personas. Entiendes **por qué** la inflación erosiona tus ahorros (Lecciones 1-3). Conoces **la propuesta** de Bitcoin, con sus riesgos (Lección 4). Sabes **cómo funciona** la tecnología (Lecciones 5-6). Tienes tu wallet configurada y sabes identificar estafas (Lecciones 7-11). Entiendes stablecoins, has hecho transacciones, y conoces el DCA y la diferencia entre BTC y altcoins (Lecciones 12-18). Ahora falta lo más importante: **convertir todo ese conocimiento en acción**. Un plan sin ejecución es un sueño. Esta lección es tu hoja de ruta.',
+        content: 'Felicidades. Si llegaste hasta aquí, ya sabes más sobre dinero, inflación y criptomonedas que la mayoría de las personas. Entiendes **por qué** la inflación erosiona tus ahorros (Lecciones 1-3). Conoces **la propuesta** de Bitcoin, con sus riesgos (Lección 4). Sabes **cómo funciona** la tecnología (Lecciones 5-6). Tienes tu wallet configurada y sabes identificar estafas (Lecciones 7-11). Entiendes stablecoins, has hecho transacciones, y conoces el DCA y la diferencia entre BTC y altcoins (Lecciones 12-18), y sabes cómo guardar tu Bitcoin (Lección 19). Ahora falta lo más importante: **convertir todo ese conocimiento en acción**. Un plan sin ejecución es un sueño. Esta lección es tu hoja de ruta.',
         highlight: {
           title: 'El Momento de la Verdad',
           text: 'El conocimiento sin acción no vale nada. Después de esta lección, deberías tener un plan escrito con montos, fechas y reglas claras. No un "algún día voy a invertir", sino un PLAN concreto. Y si tus números muestran deudas caras o falta de ahorro, tu plan empieza por ahí: eso también es avanzar.'
@@ -3841,7 +4122,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         title: 'Paso 2: Arma tu Portafolio Base',
         content: 'Basándote en la lección anterior, primero decide cuánto de tus ahorros invertibles va a cripto: una guía educativa común para principiantes es no más del 5-10%. Con 10 millones invertibles, serían de 500,000 a 1,000,000 de pesos. Luego reparte esa porción cripto con este marco, que puedes ajustar según tu perfil:',
         features: [
-          { icon: Lock, title: 'La Base: Bitcoin (50-70%)', text: 'Tu ancla. La posición que NO tocas. DCA semanal o mensual. Cuando el monto ya sea importante para ti, considera una hardware wallet. Aquí va la mayor parte de tu porción cripto porque es lo más probado y resistente del ecosistema.' },
+          { icon: Lock, title: 'La Base: Bitcoin (50-70%)', text: 'Tu ancla. La posición que NO tocas. DCA semanal o mensual. Cuando el monto ya sea importante para ti, considera una hardware wallet (Lección 19). Aquí va la mayor parte de tu porción cripto porque es lo más probado y resistente del ecosistema.' },
           { icon: Zap, title: 'Crecimiento: SOL + ETH (20-30%)', text: 'Tu exposición a ecosistemas en desarrollo. SOL para DeFi y experimentación (fees baratos). ETH como segunda capa de seguridad y madurez. También en DCA, con menor proporción que BTC.' },
           { icon: Wallet, title: 'Operativo: Stablecoins (5-10%)', text: 'Tu reserva en dólares digitales. Sirve para tres cosas: 1) tener liquidez sin salir de cripto, 2) gastos con tarjeta cripto, 3) estabilidad en tu portafolio. Diversificada entre USDC y USDT.' },
           { icon: AlertTriangle, title: 'Opcional: Altcoins/Memes (0-5%)', text: 'SOLO si te sobra después de cubrir las tres categorías anteriores. Dinero que puedes perder al 100% sin que afecte tu vida. Nunca más del 5% de tu portafolio total. Si no entiendes el proyecto, no inviertas.' }
@@ -3868,7 +4149,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         features: [
           { icon: Shield, title: 'Frase Semilla', text: '¿Está escrita en papel (o metal), nunca digitada en un sitio web ni fotografiada, y con 2-3 copias en ubicaciones distintas (casa, familiar de confianza, y si puedes una caja de seguridad bancaria u otro sitio fuera de casa)? Si falta alguna pieza, resuélvelo ANTES de invertir más.' },
           { icon: Lock, title: 'Autenticación', text: '¿Tu exchange tiene 2FA activado (Google Authenticator, NO SMS)? ¿Tu email principal tiene 2FA? ¿Tu wallet tiene contraseña o biometría? Si falta algo, actívalo ahora.' },
-          { icon: Wallet, title: 'Distribución de Custodia', text: '¿Tienes claro qué va en exchange (temporal), qué en hot wallet (operativo), y qué en cold wallet (ahorros)? Si todo tu cripto está en un exchange, mueve la mayoría a tu wallet esta semana.' },
+          { icon: Wallet, title: 'Distribución de Custodia', text: '¿Tienes claro qué va en exchange (temporal), qué en hot wallet (operativo), y qué en cold wallet (ahorros)? Si todo tu cripto está en un exchange, mueve la mayoría a tu wallet esta semana, con una transacción de prueba primero (Lección 19).' },
           { icon: AlertTriangle, title: 'Conocimiento Anti-Estafa', text: '¿Puedes identificar un sitio de phishing? ¿Sabes que NUNCA debes compartir tu frase semilla con nadie? ¿Sabes que "soporte de Phantom" NUNCA te escribe por DM? Si dudas, repasa la Lección 11.' }
         ]
       },
