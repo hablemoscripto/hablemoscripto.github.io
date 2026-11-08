@@ -35,10 +35,10 @@ export const BEGINNER_LEVEL: LevelData = {
       description: 'La historia oculta de la banca, la inflación y la impresión de dinero',
       icon: Banknote,
       lessons: [
-        { id: 1, title: 'Breve Historia del Dinero', description: 'Del trueque al patrón oro y al dinero Fiat.', duration: '17 min', type: 'Lectura + Historia' },
-        { id: 2, title: 'La Trampa de la Inflación', description: 'Cómo se crea el dinero nuevo y por qué tu dinero compra menos cada año.', duration: '22 min', type: 'Lectura + Gráficos' },
-        { id: 3, title: 'El Efecto Cantillon', description: 'Quién gana y quién pierde cuando se crea dinero nuevo.', duration: '19 min', type: 'Concepto Clave' },
-        { id: 4, title: 'Bitcoin: La Salida', description: 'Por qué existe Bitcoin, qué lo hace diferente y cuáles son sus riesgos.', duration: '21 min', type: 'Lectura' },
+        { id: 1, title: 'Breve Historia del Dinero', description: 'Del trueque al patrón oro y al dinero Fiat.', duration: '18 min', type: 'Lectura + Historia' },
+        { id: 2, title: 'La Trampa de la Inflación', description: 'Cómo se crea el dinero nuevo y por qué tu dinero compra menos cada año.', duration: '24 min', type: 'Lectura + Gráficos' },
+        { id: 3, title: 'El Efecto Cantillon', description: 'Quién gana y quién pierde cuando se crea dinero nuevo.', duration: '18 min', type: 'Concepto Clave' },
+        { id: 4, title: 'Bitcoin: La Salida', description: 'Por qué existe Bitcoin, qué lo hace diferente y cuáles son sus riesgos.', duration: '22 min', type: 'Lectura' },
       ]
     },
     {

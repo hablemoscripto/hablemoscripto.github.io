@@ -5,6 +5,9 @@ import HyperinflationCases from './HyperinflationCases';
 import GovtLovesInflation from './GovtLovesInflation';
 import InflationCalculator from './InflationCalculator';
 import CandlestickAnatomy from './CandlestickAnatomy';
+import DepositMultiplier from './DepositMultiplier';
+import SalaryIllusion from './SalaryIllusion';
+import CantillonFlow from './CantillonFlow';
 
 // Code-native (vector/HTML) infographics, keyed by the string a lesson section
 // sets in `section.infographic`. Real text → crisp at any zoom, on-brand,
@@ -17,4 +20,7 @@ export const INFOGRAPHIC_MAP: Record<string, React.FC> = {
   'govt-loves-inflation': GovtLovesInflation,
   'inflation-calculator': InflationCalculator,
   'candlestick-anatomy': CandlestickAnatomy,
+  'deposit-multiplier': DepositMultiplier,
+  'salary-illusion': SalaryIllusion,
+  'cantillon-flow': CantillonFlow,
 };

@@ -101,7 +101,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     title: 'Breve Historia del Dinero',
     level: 'Principiante',
     number: '1 de 19',
-    duration: '17 minutos',
+    duration: '18 minutos',
     type: 'Lectura + Historia',
     description: 'Para entender por qué existe Bitcoin, primero hay que entender qué es el dinero, por qué lo inventamos y qué cambió cuando dejó de estar anclado al oro. Aquí conocerás la historia, la tesis de este curso y lo que responden los economistas que no están de acuerdo.',
     sections: [
@@ -122,10 +122,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'El Experimento de 5,000 Años: Del Trueque al Oro',
-        content: 'La humanidad probó de todo antes de encontrar el oro:',
-        image: '/images/lessons/lesson-1/lesson1-2.webp',
-        imageAlt: 'El experimento de 5,000 años: del trueque al oro - conchas, sal, ganado y oro',
-        imageSummary: 'Conchas, sal y ganado fallaron en alguna propiedad clave: las conchas dejaron de ser escasas cuando llegaron barcos llenos de ellas, la sal no era durable ni suficientemente escasa, y el ganado no se podía dividir ni transportar. El oro ganó porque las cumple todas y nadie puede imprimirlo. Los reyes acuñaron monedas con él, pero fue el uso de la gente, durante milenios, lo que lo convirtió en dinero.'
+        content: 'La humanidad probó de todo antes de llegar al oro. Cada forma de dinero falló en alguna propiedad clave, hasta que el oro y la plata las cumplieron casi todas. Muchos economistas explican su éxito por esas propiedades; otros subrayan el papel de los gobiernos que lo acuñaban y cobraban impuestos en él. Las dos cosas influyeron:',
       },
       {
         type: 'main',
@@ -311,7 +308,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     title: 'La Trampa de la Inflación',
     level: 'Principiante',
     number: '2 de 19',
-    duration: '22 minutos',
+    duration: '24 minutos',
     type: 'Lectura + Gráficos',
     description: 'Te han dicho que un poco de inflación es normal y hasta necesaria. Aquí verás cómo se crea el dinero, quién gana y quién pierde cuando los precios suben, y por qué este curso sostiene que la inflación es una decisión de política y no un fenómeno natural.',
     sections: [
@@ -343,23 +340,17 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: '2. Los Bancos Multiplican (Reserva Fraccionaria)',
-        image: '/images/lessons/lesson-2/lesson2-2.webp',
-        imageAlt: 'Sistema de reserva fraccionaria y multiplicación del dinero',
-        imageSummary: 'Depositas $100. El banco guarda $10 y presta $90. Ese préstamo se deposita en otro banco, que guarda $9 y presta $81. Y así sucesivamente. Tus $100 "seguros" se convierten en $900+ de deuda circulando. Es un modelo simplificado (la banca moderna crea el crédito primero y busca las reservas después), pero la conclusión no cambia: si todos fueran a retirar su dinero mañana, no existe. Por eso existen los seguros de depósitos: en Colombia, Fogafín cubre hasta 50 millones de pesos por persona en cada entidad si un banco quiebra.'
+        content: 'Depositas $100. Con una reserva del 10%, el banco guarda $10 y presta $90. Ese préstamo termina depositado en otro banco, que guarda $9 y presta $81, y así sucesivamente. En el modelo de libro de texto, tus $100 terminan sosteniendo hasta $1,000 en depósitos, de los cuales $900 son crédito nuevo. Es una simplificación (la banca moderna crea el crédito primero y busca las reservas después), pero la conclusión no cambia: si todos fueran a retirar su dinero a la vez, el banco no lo tendría. Por eso existen los seguros de depósitos: en Colombia, Fogafín cubre hasta 50 millones de pesos por persona en cada entidad si un banco quiebra.',
       },
       {
         type: 'main',
         title: '3. El Resultado Matemático',
-        image: '/images/lessons/lesson-2/lesson2-3.webp',
-        imageAlt: 'El resultado matemático de la creación de dinero',
-        imageSummary: 'La idea central es aritmética: si la cantidad de dinero crece más rápido que los bienes que se producen, los precios suben. No siempre es inmediato ni proporcional: entre 2008 y 2019 se creó mucho dinero y la inflación al consumidor se mantuvo baja, porque ese dinero se quedó sobre todo en activos financieros (justo el efecto que verás en la Lección 3). Los números de la imagen son ilustrativos.'
+        content: 'La idea central es aritmética: si la cantidad de dinero crece más rápido que los bienes que se producen, los precios tienden a subir. Pero no siempre es inmediato ni proporcional:',
       },
       {
         type: 'main',
         title: '4. La Ilusión del Aumento de Sueldo',
-        image: '/images/lessons/lesson-2/lesson2-4.webp',
-        imageAlt: 'La ilusión del aumento de sueldo vs la inflación real',
-        imageSummary: 'Te suben el sueldo 5% y te sientes bien. Pero si la inflación es 10%, tu poder de compra BAJÓ. La cuenta rápida de la imagen (5% menos 10%, unos -5%) es una aproximación. La exacta es $105,000 / 1.10 ≈ $95,455 en pesos del año anterior: perdiste cerca de 4.5% de poder de compra. Más pesos, menos cosas.'
+        content: 'Te suben el sueldo 5% y te sientes bien. Pero si los precios suben 10%, tu poder de compra BAJÓ: más pesos, menos cosas. Lo que importa no es el aumento, sino el aumento comparado con la inflación. Y funciona en las dos direcciones:',
       },
       {
         type: 'main',
@@ -526,7 +517,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     title: 'El Efecto Cantillon',
     level: 'Principiante',
     number: '3 de 19',
-    duration: '19 minutos',
+    duration: '18 minutos',
     type: 'Concepto Clave',
     description: 'Cuando se crea dinero nuevo, no llega a todos al mismo tiempo. Quienes lo reciben primero pueden comprar antes de que suban los precios; quienes lo reciben al final pagan más caro. Aprende cómo funciona, qué dicen los economistas y dónde estás tú en esta cadena.',
     sections: [
@@ -534,17 +525,11 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         type: 'intro',
         title: 'Una Idea de 300 Años que Ayuda a Explicar la Desigualdad',
         content: 'Hacia 1730, el economista irlandés-francés **Richard Cantillon** describió algo que hoy lleva su nombre: **el dinero nuevo no es neutral**. Cuando se crea dinero, no aparece en los bolsillos de todos al mismo tiempo. Alguien lo recibe PRIMERO, y tiene una ventaja: puede comprar a precios de ayer, antes de que suban. Para cuando el dinero llega a los demás (si llega), muchos precios ya subieron. No es una teoría marginal: los propios bancos centrales estudian los efectos distributivos de sus políticas. Lo que se debate es cuánto pesan.',
-        image: '/images/lessons/lesson-3/lesson3-1.webp',
-        imageAlt: 'La metáfora del río: el dinero nuevo fluye primero a bancos y corporaciones, y llega último a trabajadores y ahorradores',
-        imageSummary: 'Piensa en el dinero nuevo como un río. Quienes están cerca de la naciente (bancos, gobierno, grandes empresas) lo reciben primero y en abundancia. Río abajo (trabajadores, pensionados, ahorradores) llega después y con menos fuerza. La imagen exagera para que la idea se entienda: el orden importa.'
       },
       {
         type: 'main',
         title: 'Cómo Funciona: El Camino del Dinero Nuevo',
-        content: 'Sigamos, de forma simplificada, el camino que recorre el dinero cuando un banco central crea, por ejemplo, 1 billón de dólares (millones de millones) comprando bonos. Las cifras de la imagen son ilustrativas: lo importante es el orden en que llega el dinero, no los porcentajes exactos.',
-        image: '/images/lessons/lesson-3/lesson3-2.webp',
-        imageAlt: 'El camino del dinero nuevo en 5 pasos: banco central, bancos grandes, corporaciones, economía real y, por último, tú',
-        imageSummary: 'Paso 1: el banco central crea reservas y compra bonos. Paso 2: los grandes bancos que le venden esos bonos reciben el dinero primero. Paso 3: con crédito más barato, empresas y fondos compran activos, y esos precios suben. Paso 4: con el tiempo, el dinero llega a la economía real. Paso 5: tu sueldo se ajusta al final, cuando muchos precios ya subieron. Los porcentajes de la imagen son un ejemplo, no datos reales.'
+        content: 'Sigamos, de forma simplificada, el camino que recorre el dinero cuando un banco central crea, por ejemplo, 1 billón de dólares (millones de millones) comprando bonos. Lo importante es el orden en que llega el dinero:',
       },
       {
         type: 'comparison',
@@ -608,9 +593,6 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           { icon: Landmark, title: 'La Vivienda se Alejó', text: 'En 1970, una casa en EE. UU. costaba unas 2 a 2.5 veces el ingreso anual de un hogar mediano. Hoy cuesta más de 5 veces. Influyen el suelo escaso, las normas de construcción y las tasas de interés, pero también el dinero barato que fluye hacia los bienes raíces.' },
           { icon: Users, title: 'Los Grandes Capitales Tienen Asesores', text: 'Cuando cambia la política monetaria, los grandes patrimonios reciben análisis el mismo día y ajustan sus inversiones. La mayoría de personas se entera por las noticias, mucho después.' }
         ],
-        image: '/images/lessons/lesson-3/lesson3-3.webp',
-        imageAlt: 'Ilustración: quienes están cerca de la fuente del dinero nuevo lo reciben primero; quienes están lejos reciben poco y tarde',
-        imageSummary: 'La imagen resume nuestra tesis: quien está cerca de la fuente del dinero nuevo se beneficia primero, y quien está lejos recibe poco y tarde. No es que unos trabajen más duro que otros: su posición en el sistema los favorece. Es una ilustración, no una medición.'
       },
       {
         type: 'counterpoint',
@@ -746,7 +728,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
     title: 'Bitcoin: La Salida',
     level: 'Principiante',
     number: '4 de 19',
-    duration: '21 minutos',
+    duration: '22 minutos',
     type: 'Lectura',
     description: 'Ya viste cómo el dinero fiat pierde valor con el tiempo. Aquí conocerás la alternativa que propone este curso: Bitcoin, el primer dinero digital escaso que no depende de ningún gobierno ni empresa. Verás por qué existe, qué lo hace diferente, sus casos reales y también sus riesgos.',
     sections: [
@@ -887,7 +869,8 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
           'El halving reduce la emisión a la mitad cada 4 años; el cuarto fue en abril de 2024. Cada ciclo hay menos Bitcoin nuevo, pero la demanda no está garantizada.',
           'Bitcoin tiene riesgos reales: volatilidad extrema, concentración de la minería, dudas sobre su seguridad a largo plazo y la posibilidad de perder tus llaves.',
           'Para muchos es una tesis de protección frente a la inflación fiat. No es un consejo de compra: es un marco para entender por qué existe Bitcoin antes de decidir si te conviene.',
-          'La pregunta útil no es "¿debería comprar Bitcoin ya?", sino "¿entiendo los riesgos, mi horizonte y cuánto puedo destinar sin tocar mi fondo de emergencia?" Empezar con seguridad importa más que empezar rápido.'
+          'La pregunta útil no es "¿debería comprar Bitcoin ya?", sino "¿entiendo los riesgos, mi horizonte y cuánto puedo destinar sin tocar mi fondo de emergencia?" Empezar con seguridad importa más que empezar rápido.',
+          'Si algún día decides invertir, el orden importa: primero pagas las deudas caras y armas tu fondo de emergencia. Una guía educativa común para principiantes es no poner más del 5-10% de tus ahorros invertibles en cripto (con 10 millones de pesos, de 500,000 a 1,000,000). Verás cómo armar ese plan en la Lección 19.'
         ]
       }
     ],

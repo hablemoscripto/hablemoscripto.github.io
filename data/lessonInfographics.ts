@@ -5,6 +5,15 @@ import type { InfographicSpec } from '../components/lesson/infographics/spec';
 // time, so it works for free (bundled) and paid (DB) lessons with no re-seed.
 export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>> = {
   1: {
+    "El Experimento de 5,000 Años: Del Trueque al Oro": {
+      "kind": "steps",
+      "steps": [
+        { "title": "Conchas cowrie (África y Asia)", "detail": "Funcionaron por siglos, hasta que llegaron barcos llenos de conchas de otras costas. La oferta se multiplicó y perdieron valor. Falló la escasez.", "warning": true },
+        { "title": "Sal", "detail": "Útil y divisible, pero se daña con la humedad y es fácil de producir donde hay mar. Fallaron la durabilidad y la escasez.", "warning": true },
+        { "title": "Ganado", "detail": "Valioso, pero no se puede dividir para compras pequeñas ni llevar de un lado a otro. Fallaron la divisibilidad y la portabilidad.", "warning": true },
+        { "title": "Oro y plata", "detail": "Escasos, durables, divisibles y fáciles de reconocer. Todo el oro extraído en la historia cabría en un cubo de unos 22 metros de lado." }
+      ]
+    },
     "Antes vs Después de 1971": {
       "kind": "component",
       "key": "gold-vs-fiat-1971"
@@ -28,6 +37,36 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     }
   },
   2: {
+    "2. Los Bancos Multiplican (Reserva Fraccionaria)": {
+      "kind": "component",
+      "key": "deposit-multiplier"
+    },
+    "3. El Resultado Matemático": {
+      "kind": "comparison",
+      "left": {
+        "title": "Si el dinero crece más que los bienes",
+        "tone": "red",
+        "points": [
+          "Hay más dinero persiguiendo la misma cantidad de cosas",
+          "Los precios tienden a subir",
+          "Tu sueldo y tus ahorros compran menos si no suben al mismo ritmo"
+        ]
+      },
+      "right": {
+        "title": "Pero no es automático",
+        "tone": "neutral",
+        "points": [
+          "Entre 2008 y 2019 se creó mucho dinero y la inflación al consumidor se mantuvo baja",
+          "Gran parte se quedó en activos financieros: acciones, bonos e inmuebles (lo verás en la Lección 3)",
+          "También influyen la productividad, la demanda y las expectativas"
+        ]
+      },
+      "note": "La relación entre dinero y precios es más clara a largo plazo y cuando la inflación es alta."
+    },
+    "4. La Ilusión del Aumento de Sueldo": {
+      "kind": "component",
+      "key": "salary-illusion"
+    },
     "El Robo Silencioso que Nadie Te Explicó": {
       "kind": "statCards",
       "intro": "El salario mínimo de EE. UU., medido en oro y en precios al consumidor:",
@@ -96,6 +135,20 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     }
   },
   3: {
+    "Una Idea de 300 Años que Ayuda a Explicar la Desigualdad": {
+      "kind": "component",
+      "key": "cantillon-flow"
+    },
+    "Cómo Funciona: El Camino del Dinero Nuevo": {
+      "kind": "steps",
+      "steps": [
+        { "title": "El banco central crea reservas", "detail": "Compra bonos del gobierno o de los bancos y paga con dinero que crea en ese momento." },
+        { "title": "Los bancos grandes lo reciben primero", "detail": "Son quienes le venden esos bonos. Con más reservas y tasas bajas, prestan más y más barato." },
+        { "title": "Empresas y fondos compran activos", "detail": "Con crédito barato compran acciones, empresas e inmuebles. Esos precios suben primero." },
+        { "title": "El dinero llega a la economía real", "detail": "Meses o años después, en forma de más empleo o salarios algo mayores." },
+        { "title": "Tu sueldo se ajusta al final", "detail": "Cuando llega, muchos precios ya subieron. Por eso un aumento puede no alcanzar.", "warning": true }
+      ]
+    },
     "Los Ganadores vs Los Perdedores": {
       "kind": "comparison",
       "left": {
