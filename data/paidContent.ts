@@ -49,7 +49,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Velas Japonesas y Tendencias',
     level: 'Intermedio',
     number: '1 de 12',
-    duration: '25 min',
+    duration: '17 min',
     type: 'Lectura + Práctica',
     description: 'Aprende a leer el lenguaje visual del mercado. Cada vela cuenta una historia de batalla entre compradores y vendedores. Dominar este idioma es tu primera ventaja real.',
     sections: [
@@ -252,7 +252,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Soportes y Resistencias',
     level: 'Intermedio',
     number: '2 de 12',
-    duration: '30 min',
+    duration: '17 min',
     type: 'Lectura + Práctica',
     description: 'El precio tiene memoria. Aprende a identificar los pisos y techos del mercado donde el precio rebota una y otra vez, y úsalos para tomar decisiones inteligentes de compra y venta.',
     sections: [
@@ -450,7 +450,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Indicadores Clave (RSI, EMAs)',
     level: 'Intermedio',
     number: '3 de 12',
-    duration: '28 min',
+    duration: '17 min',
     type: 'Lectura + Práctica',
     description: 'Los indicadores técnicos son herramientas matemáticas que confirman (o niegan) lo que ves en el precio. Domina el RSI y las Medias Móviles Exponenciales para tomar decisiones con datos, no con emociones.',
     sections: [
@@ -634,7 +634,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Estructura de Mercado',
     level: 'Intermedio',
     number: '4 de 12',
-    duration: '22 min',
+    duration: '18 min',
     type: 'Lectura + Práctica',
     description: 'La habilidad más importante del análisis técnico: identificar objetivamente si el mercado está subiendo, bajando o lateral. Sin esto, cualquier otra herramienta pierde sentido.',
     sections: [
@@ -839,7 +839,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Tokenomics 101',
     level: 'Intermedio',
     number: '5 de 12',
-    duration: '35 min',
+    duration: '19 min',
     type: 'Concepto',
     description: 'No compres solo por el logo o el hype. La economía de un token, su supply, distribución, inflación y calendario de desbloqueos, determina si ganas o pierdes. Aprende a leer las matemáticas antes de invertir.',
     sections: [
@@ -1073,7 +1073,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Ciclos de Mercado (Halving)',
     level: 'Intermedio',
     number: '6 de 12',
-    duration: '30 min',
+    duration: '18 min',
     type: 'Análisis + Estrategia',
     description: 'Todo en crypto se mueve al ritmo de Bitcoin. El halving cada 4 años crea un shock de oferta predecible que ha generado bull markets consistentemente. Entiende el ciclo y posiciónate antes que la mayoría.',
     sections: [
@@ -1260,7 +1260,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Investigación On-Chain y DYOR',
     level: 'Intermedio',
     number: '7 de 12',
-    duration: '35 min',
+    duration: '18 min',
     type: 'Casos Prácticos + Herramientas',
     description: 'DYOR (Do Your Own Research) no es un meme, es una habilidad. Aprende a leer la blockchain como los profesionales, usar las herramientas que usan los fondos de inversión, y distinguir proyectos legítimos de estafas usando datos reales.',
     sections: [
@@ -1460,7 +1460,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Narrativas y Rotación',
     level: 'Intermedio',
     number: '8 de 12',
-    duration: '24 min',
+    duration: '16 min',
     type: 'Estrategia',
     description: 'En crypto, la atención mueve el dinero. Las narrativas (IA, DeFi, Memes, Gaming) definen qué sube y qué baja en cada ciclo. Aprende a identificar la narrativa dominante antes que las masas y a rotar tu capital inteligentemente.',
     sections: [
@@ -1638,7 +1638,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Diversificación Inteligente',
     level: 'Intermedio',
     number: '9 de 12',
-    duration: '32 min',
+    duration: '14 min',
     type: 'Estrategia',
     description: 'Construye un portafolio que sobreviva a cualquier crash y capture los mejores retornos del ciclo. La estrategia núcleo-satélite combina seguridad, oportunismo y liquidez para maximizar tu ventaja.',
     sections: [
@@ -1810,7 +1810,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'El Arte del Stop Loss',
     level: 'Intermedio',
     number: '10 de 12',
-    duration: '28 min',
+    duration: '15 min',
     type: 'Tutorial Práctico',
     description: 'Sobrevivir es más importante que ganar. El stop loss es tu seguro contra la ruina, tu herramienta para cortar pérdidas rápido y proteger tu capital para pelear otro día.',
     sections: [
@@ -1985,7 +1985,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Toma de Ganancias (Take Profit)',
     level: 'Intermedio',
     number: '11 de 12',
-    duration: '25 min',
+    duration: '14 min',
     type: 'Tutorial Práctico',
     description: 'Las ganancias en pantalla no son reales hasta que vendes. Aprende a tomar ganancias escalonadamente, a definir targets antes de entrar, y a maximizar tus retornos sin dejar que la codicia destruya lo que construiste.',
     sections: [
@@ -2158,7 +2158,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Mentalidad de Trader',
     level: 'Intermedio',
     number: '12 de 12',
-    duration: '28 min',
+    duration: '17 min',
     type: 'Psicología',
     description: 'La mayor parte del éxito en trading no es técnica, es psicología. Aprende a controlar el FOMO, la avaricia, el miedo y la venganza para proteger tu capital y tomar mejores decisiones.',
     sections: [
@@ -2342,13 +2342,13 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Jupiter: El Rey de los DEXs',
     level: 'Avanzado',
     number: '2 de 13',
-    duration: '35 min',
+    duration: '17 min',
     type: 'Tutorial Práctico',
     description: 'Olvida los exchanges centralizados. Jupiter es el agregador de liquidez más poderoso de Solana: mejor precio, DCA automático, órdenes límite, y perpetuos, todo descentralizado, sin custodia, y con la mejor ejecución del mercado.',
     referrals: [
       {
         title: 'Jupiter',
-        description: 'El agregador de DEXs líder de Solana: el mejor precio en tus swaps, DCA automático y órdenes límite, todo sin custodia. Enlace de referido: si operas desde aquí, Hablemos Cripto puede recibir una comisión; tú no pagas más por usarlo.',
+        description: 'Agregador de DEXs de Solana: compara precios entre muchos pools en cada swap, con DCA y órdenes límite, sin custodia.',
         link: 'https://jup.ag/?ref=6kg0a2qpd813',
         buttonText: 'Abrir Jupiter'
       }
@@ -2562,7 +2562,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Liquidez y Yield Farming',
     level: 'Avanzado',
     number: '4 de 13',
-    duration: '42 min',
+    duration: '16 min',
     type: 'Estrategias',
     description: 'Conviértete en el banco. Aprende a proveer liquidez en Raydium, Orca y Meteora para ganar comisiones por cada swap que otros hacen. Entiende la impermanent loss, los pools concentrados, y cuándo vale la pena (y cuándo no).',
     sections: [
@@ -2746,7 +2746,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Lending & Borrowing',
     level: 'Avanzado',
     number: '5 de 13',
-    duration: '38 min',
+    duration: '16 min',
     type: 'Tutorial Práctico',
     description: 'Accede a liquidez sin vender tus criptos. Deposita SOL como colateral, pide prestado USDC, y mantén tu exposición alcista. Pero cuidado: si no entiendes la liquidación, puedes perder todo.',
     sections: [
@@ -2942,7 +2942,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Riesgos de DeFi: La Guía Completa',
     level: 'Avanzado',
     number: '6 de 13',
-    duration: '32 min',
+    duration: '17 min',
     type: 'Seguridad',
     description: 'DeFi ofrece libertad financiera, pero la libertad viene con responsabilidad. Smart contract hacks, rug pulls, exploits de oráculos, y errores de usuario han costado más de $10 mil millones. Aprende a protegerte.',
     sections: [
@@ -3127,7 +3127,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'NFTs en Solana',
     level: 'Avanzado',
     number: '8 de 13',
-    duration: '30 min',
+    duration: '15 min',
     type: 'Mercado',
     description: 'Los NFTs en Solana van mucho más allá de "JPEGs caros". Son acceso a comunidades exclusivas, herramientas de identidad digital, compresión que permite mintear millones por centavos, y un mercado profesional con Tensor y Magic Eden.',
     sections: [
@@ -3300,7 +3300,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Airdrops y Points Farming',
     level: 'Avanzado',
     number: '9 de 13',
-    duration: '35 min',
+    duration: '16 min',
     type: 'Estrategia',
     description: 'Los protocolos necesitan usuarios, y los recompensan con tokens de gobernanza. Solana ha tenido los airdrops más lucrativos de la historia: JTO, JUP, PYTH, W. Aprende a posicionarte como usuario temprano legítimamente.',
     sections: [
@@ -3479,7 +3479,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'DePIN: Infraestructura Física Descentralizada',
     level: 'Avanzado',
     number: '10 de 13',
-    duration: '28 min',
+    duration: '15 min',
     type: 'Tendencias',
     description: 'Crypto sale del mundo digital al mundo físico. DePIN usa tokens para incentivar a millones de personas a construir infraestructura real: redes inalámbricas (Helium), mapas (Hivemapper), computación GPU (Render), y sensores ambientales. Solana es el epicentro.',
     sections: [
@@ -3642,7 +3642,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Monolítico vs Modular: La Guerra de Arquitecturas',
     level: 'Avanzado',
     number: '11 de 13',
-    duration: '30 min',
+    duration: '16 min',
     type: 'Técnico',
     description: 'El debate más importante de la industria: ¿es mejor una blockchain monolítica ultra-rápida (Solana) o un ecosistema modular de capas especializadas (Ethereum + L2s)? Entiende los trade-offs para tomar mejores decisiones de inversión.',
     sections: [
@@ -3816,7 +3816,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Firedancer & El Futuro de Solana',
     level: 'Avanzado',
     number: '12 de 13',
-    duration: '25 min',
+    duration: '19 min',
     type: 'Futuro',
     description: 'Firedancer es la reescritura completa del software validador de Solana, construida por Jump Crypto, la firma de trading de alta frecuencia más sofisticada del mundo. Entiende por qué la diversidad de clientes es crucial para la seguridad, hasta dónde empuja Firedancer el rendimiento teórico (1M+ TPS en laboratorio, aunque en producción real rinde bastante menos; Frankendancer ya corre en mainnet y Firedancer completo alcanzó testnet a mediados de 2026; cifras de stake verificadas a agosto 2026), y qué significa esto para el futuro del ecosistema Solana junto con innovaciones como token extensions, compresión de estado y la expansión de la SVM.',
     sections: [
@@ -4018,7 +4018,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Seguridad Operacional Avanzada',
     level: 'Avanzado',
     number: '1 de 13',
-    duration: '30 min',
+    duration: '17 min',
     type: 'Seguridad',
     description: 'La diferencia entre perder todo y dormir tranquilo es tu modelo de seguridad operacional. Aprende la arquitectura de wallets que usan los profesionales: cold storage para ahorros, hot wallets para operar, y burner wallets para experimentar. Domina la gestión de permisos, la simulación de transacciones, la protección contra phishing y social engineering, y las mejores prácticas de seed phrase que separan a los principiantes de los veteranos.',
     sections: [
@@ -4198,7 +4198,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Staking SOL: Gana por Asegurar la Red',
     level: 'Avanzado',
     number: '3 de 13',
-    duration: '30 min',
+    duration: '17 min',
     type: 'Tutorial + Concepto',
     description: 'El staking es la forma más simple de poner tu SOL a trabajar: delegas a un validador, ayudas a asegurar la red, y ganas recompensas pasivas (~5.5-6.5% APY a mediados de 2026). Aprende la mecánica de epochs, delegación y slashing, cómo elegir un validador óptimo, las diferencias entre staking nativo y liquid staking (mSOL, jitoSOL, bSOL), y sigue un tutorial paso a paso para empezar desde Phantom o Solflare.',
     sections: [
@@ -4397,7 +4397,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'MEV: El Impuesto Invisible',
     level: 'Avanzado',
     number: '7 de 13',
-    duration: '28 min',
+    duration: '18 min',
     type: 'DeFi Avanzado',
     description: 'Cada vez que haces un swap en un DEX, bots invisibles pueden extraer valor de tu transacción. Aprende qué es MEV, cómo te afecta, y las herramientas para protegerte.',
     sections: [
@@ -4538,7 +4538,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Gobernanza DAO: Tu Voto Importa',
     level: 'Avanzado',
     number: '13 de 13',
-    duration: '25 min',
+    duration: '22 min',
     type: 'Concepto + Práctica',
     description: 'Los tokens de gobernanza te dan poder de decisión sobre protocolos que manejan miles de millones de dólares. Aprende a votar, delegar, y protegerte de ataques de gobernanza.',
     sections: [

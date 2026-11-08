@@ -68,7 +68,7 @@ export const PRICING_PLANS: Record<PlanId, PricingPlan> = {
     grantsCourseTier: 'inversor',
     features: [
       'Acceso completo a las 44 lecciones',
-      'Videos dedicados en cada lección',
+      'Infografías interactivas y quizzes en cada lección',
       'Todas las actualizaciones futuras del currículum',
       'Certificado al completar cada nivel',
       'Sistema de logros y repaso espaciado',

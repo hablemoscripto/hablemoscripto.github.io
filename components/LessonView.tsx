@@ -52,6 +52,12 @@ import { readLessonPlace, writeLessonPlace } from '../utils/lessonPlace';
 // Experto welcome email (_shared/welcome-email.ts).
 const COMMUNITY_INVITE_URL = 'https://discord.gg/CQYyvzQb65';
 
+const REFERRAL_DISCLOSURE =
+  'Enlaces de referido: si te registras o usas el servicio desde aquí, Hablemos Cripto puede recibir un beneficio. No cambia lo que enseñamos y puedes usar cualquier alternativa.';
+
+const LESSON_DISCLAIMER =
+  'Contenido educativo, no asesoría financiera. Precios, rendimientos y productos cambian: verifica la información actual antes de usar dinero real.';
+
 // An in-progress quiz attempt saved by Quiz (sessionStorage). When one exists
 // the quiz opens directly so the restored answers are visible.
 function hasQuizDraft(key: string | undefined): boolean {
@@ -750,6 +756,7 @@ const LessonView: React.FC = () => {
 
             {!isFocusMode && lesson.referrals && lesson.referrals.length > 0 && (
               <div className="grid gap-4 my-8">
+                <p className="text-sm text-navy-400">{REFERRAL_DISCLOSURE}</p>
                 {lesson.referrals.map((ref, idx) => (
                   <div
                     key={idx}
@@ -761,7 +768,7 @@ const LessonView: React.FC = () => {
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="px-2 py-1 bg-brand-500/20 text-brand-400 text-xs font-bold rounded uppercase tracking-wider">
-                            Recomendado
+                            Enlace de referido
                           </span>
                           <h3 className="text-xl font-bold text-white">{ref.title}</h3>
                         </div>
@@ -787,6 +794,8 @@ const LessonView: React.FC = () => {
                 ))}
               </div>
             )}
+
+            {!isFocusMode && <p className="mt-8 text-xs text-navy-400">{LESSON_DISCLAIMER}</p>}
 
             {/* Quiz Section */}
             <div className="mt-12 pt-8 border-t border-white/10">

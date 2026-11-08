@@ -11,6 +11,7 @@ import AuthModal from './AuthModal';
 import MentoriaModal from './MentoriaModal';
 import { useAuth } from '../contexts/AuthContext';
 import type { CourseTier } from '../services/paymentService';
+import { BEGINNER_LEVEL, INTERMEDIATE_LEVEL, ADVANCED_LEVEL } from '../data/levels';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronDown, Loader2 } from 'lucide-react';
@@ -247,8 +248,8 @@ const LandingPage: React.FC = () => {
                     {[
                         { q: '¿Es gratis?', a: 'El Nivel Principiante (19 lecciones) es 100% gratuito, sin tarjeta. Los niveles Intermedio y Avanzado se desbloquean con los planes Inversor y Cripto Experto, con acceso de por vida y un solo pago.' },
                         { q: '¿Necesito experiencia previa en criptomonedas?', a: 'No. Empezamos desde cero, explicando qué es el dinero y por qué importa. No asumimos ningún conocimiento previo.' },
-                        { q: '¿Qué diferencia hay con lo que ya está gratis en YouTube y Twitter?', a: 'El contenido gratuito te da fragmentos sin orden y muchas veces está pagado por quien quiere venderte algo después: señales, tokens, cursos caros. Aquí tienes un currículum estructurado de 44 lecciones y un modelo transparente: tú pagas la plataforma, no terceros que quieran comisión de tus decisiones.' },
-                        { q: '¿Cuánto tiempo toma completar un nivel?', a: 'El Nivel Principiante toma aproximadamente 8 horas de lectura. El Intermedio unas 6 horas y el Avanzado unas 7 horas (según la duración de cada lección). Puedes avanzar a tu propio ritmo.' },
+                        { q: '¿Qué diferencia hay con lo que ya está gratis en YouTube y Twitter?', a: 'El contenido gratuito te da fragmentos sin orden y muchas veces está pagado por quien quiere venderte algo después: señales, tokens, cursos caros. Aquí tienes un currículum estructurado de 44 lecciones y un modelo transparente: tú pagas la plataforma. Algunas lecciones incluyen enlaces de referido, siempre marcados como tales. No cambian lo que enseñamos y siempre puedes usar cualquier alternativa.' },
+                        { q: '¿Cuánto tiempo toma completar un nivel?', a: `Contando lectura, infografías y quizzes: el Nivel Principiante toma ${BEGINNER_LEVEL.stats.duration}, el Intermedio ${INTERMEDIATE_LEVEL.stats.duration} y el Avanzado ${ADVANCED_LEVEL.stats.duration}. La práctica en tu propia wallet toma tiempo adicional. Puedes avanzar a tu propio ritmo.` },
                         { q: '¿Es seguro invertir en criptomonedas?', a: 'Las criptomonedas son activos de alto riesgo. Por eso enseñamos seguridad primero: cómo proteger tu wallet, evitar estafas, y gestionar el riesgo antes de invertir un solo peso.' },
                         { q: '¿Quién es CBas?', a: 'CBas tiene 9+ años navegando mercados de criptomonedas, incluyendo ciclos alcistas y bajistas completos. Creó Hablemos Cripto para dar a la comunidad LATAM las herramientas que él hubiera querido tener cuando empezó.' },
                         { q: '¿Cómo pago y es seguro?', a: 'El pago se procesa con Wompi, una de las pasarelas de pago más usadas en Colombia. Pagas con tarjeta en pesos colombianos (COP). Es un pago único: no hay suscripciones ni cargos recurrentes.' },
