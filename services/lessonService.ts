@@ -84,6 +84,9 @@ export interface LessonSection {
   // Inline glossary callout — defines terms at first occurrence so lessons
   // can use technical vocabulary without leaving novices behind.
   terms?: { term: string; definition: string; whyItMatters?: string }[];
+  // "<mes> de <año>" the section's figures were last verified; content:check
+  // fails once it is older than 180 days.
+  asOf?: string;
   // Infographic attached at read time from data/lessonInfographics.ts — renders
   // in this section's visual slot (replaces the default comparison/features/
   // highlight). A spec object (data-driven primitive) or {kind:'component'}.

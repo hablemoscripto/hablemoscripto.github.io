@@ -40,6 +40,7 @@ import {
   Anchor,
   MessageSquare,
   HelpCircle,
+  Scale,
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
@@ -124,10 +125,13 @@ export default function SectionRenderer({
   return (
     <div>
       <div className="mb-8">
-        {section.title && section.type !== 'takeaways' && (
+        {section.title && section.type !== 'takeaways' && section.type !== 'counterpoint' && (
           <h2 id={headingId} className="text-2xl font-bold text-white mb-4 scroll-mt-28">
             {section.title}
           </h2>
+        )}
+        {section.asOf && (
+          <p className="-mt-2 mb-4 text-xs text-navy-400">Datos a {section.asOf}</p>
         )}
         {onAskSection &&
           section.title &&
@@ -211,6 +215,23 @@ export default function SectionRenderer({
         {section.type === 'main' && section.content && (
           <div className="text-navy-300 leading-relaxed">
             <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{section.content}</ReactMarkdown>
+          </div>
+        )}
+
+        {section.type === 'counterpoint' && section.content && (
+          <div className="my-6 not-prose rounded-xl border border-sky-400/30 bg-sky-400/5 p-5">
+            <div className="mb-3 flex items-center gap-2">
+              <Scale size={18} className="text-sky-300" aria-hidden="true" />
+              <p className="text-xs font-bold uppercase tracking-wider text-sky-300">Otra mirada</p>
+            </div>
+            {section.title && (
+              <h2 id={headingId} className="mb-2 text-lg font-bold text-white scroll-mt-28">
+                {section.title}
+              </h2>
+            )}
+            <div className="space-y-3 text-sm leading-relaxed text-navy-300 [&_li]:mt-1.5 [&_strong]:text-white [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5">
+              <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{section.content}</ReactMarkdown>
+            </div>
           </div>
         )}
 
