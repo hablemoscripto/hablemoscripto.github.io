@@ -16,7 +16,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     "Las 6 Propiedades del Dinero Perfecto": {
       "kind": "iconGrid",
       "columns": 3,
-      "intro": "El buen dinero debe cumplir 6 propiedades. El oro las cumplió por milenios; el dinero fiat falla en la primera (escasez).",
+      "intro": "El buen dinero debe cumplir 6 propiedades. El oro las cumplió por milenios. El dinero fiat cumple casi todas, pero su oferta no tiene un límite fijo: depende de decisiones de política.",
       "items": [
         { "icon": "Gem", "title": "Escasez", "text": "Si no es escaso, pierde valor." },
         { "icon": "Scissors", "title": "Divisibilidad", "text": "Para compras pequeñas, no solo grandes." },
@@ -28,6 +28,16 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     }
   },
   2: {
+    "El Robo Silencioso que Nadie Te Explicó": {
+      "kind": "statCards",
+      "intro": "El salario mínimo de EE. UU., medido en oro y en precios al consumidor:",
+      "columns": 3,
+      "cards": [
+        { "value": "~7.9 oz", "label": "De oro al mes en 1971", "sublabel": "$1.60 la hora, con el oro a $35 la onza", "tone": "amber" },
+        { "value": "~0.31 oz", "label": "De oro al mes hoy", "sublabel": "$7.25 la hora, con el oro cerca de $4,070 la onza", "tone": "red" },
+        { "value": "−43%", "label": "Poder de compra real", "sublabel": "Frente a 1968, ajustado por inflación al consumidor (EPI)", "tone": "red" }
+      ]
+    },
     "Casos Reales: Cuando la Inflación Destruye Países": {
       "kind": "component",
       "key": "hyperinflation-cases"
@@ -43,7 +53,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "flag": "🇨🇴"
         },
         {
-          "value": "10 → 25",
+          "value": "De 10 a 25",
           "label": "Pesos por dólar en México",
           "sublabel": "De ~10 en 2008 a más de 20 en 2016-2017 y ~25 en la pandemia de 2020",
           "tone": "amber",
@@ -57,67 +67,97 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "flag": "🇺🇸"
         }
       ],
-      "intro": "No pasa solo en países con gobiernos locos. Mira los datos.",
+      "intro": "No pasa solo en países con hiperinflación. Mira los datos.",
       "columns": 3
     },
-    "Por Qué los Gobiernos AMAN la Inflación": {
+    "Por Qué a los Gobiernos les Conviene la Inflación": {
       "kind": "component",
       "key": "govt-loves-inflation"
+    },
+    "1. El Banco Central Imprime": {
+      "kind": "steps",
+      "intro": "Cómo entra el dinero nuevo a la economía (versión simplificada):",
+      "steps": [
+        { "title": "El banco central compra bonos", "detail": "Paga con reservas que crea en ese momento. Ese dinero no existía antes." },
+        { "title": "Los bancos reciben las reservas", "detail": "Con más reservas y tasas bajas, prestan más y más barato." },
+        { "title": "El crédito llega a empresas y fondos", "detail": "Compran acciones, inmuebles y otros activos. Sus precios suben primero." },
+        { "title": "Por último, los salarios", "detail": "Cuando el dinero llega a los sueldos, muchos precios ya subieron.", "warning": true }
+      ]
+    },
+    "Por Qué Tu Inflación No Coincide con la Oficial": {
+      "kind": "iconGrid",
+      "columns": 2,
+      "items": [
+        { "icon": "Repeat", "title": "Sustitución", "text": "Si la carne sube mucho, el índice asume que parte de la gente cambia a pollo." },
+        { "icon": "Cpu", "title": "Ajuste por calidad", "text": "Si un computador cuesta igual pero es mucho mejor, el índice registra una baja de precio." },
+        { "icon": "Scissors", "title": "Inflación núcleo", "text": "Excluye alimentos y energía por volátiles. El IPC total sí los incluye: fíjate cuál citan." },
+        { "icon": "Wallet", "title": "Tu canasta", "text": "Arriendo, comida y transporte pesan más en tu bolsillo que en el promedio nacional." }
+      ]
     }
   },
   3: {
     "Los Ganadores vs Los Perdedores": {
       "kind": "comparison",
       "left": {
-        "title": "Cerca de la impresora (ganan)",
+        "title": "Cerca del dinero nuevo (suelen ganar)",
         "points": [
-          "Bancos centrales y comerciales",
-          "Gobierno: gasta el dinero nuevo primero",
-          "Corporaciones con crédito barato",
+          "Bancos que tratan con el banco central",
+          "Gobiernos endeudados: su deuda pesa menos",
+          "Grandes empresas con crédito barato",
           "Fondos de inversión y hedge funds",
           "Dueños de activos: acciones, casas, Bitcoin",
-          "Endeudados grandes: la deuda se licúa"
+          "Deudas grandes a tasa fija"
         ],
         "tone": "green"
       },
       "right": {
-        "title": "Lejos de la impresora (pierden)",
+        "title": "Lejos del dinero nuevo (suelen perder)",
         "points": [
-          "Asalariados: tu sueldo se ajusta último",
-          "Pensionados y jubilados con ingreso fijo",
-          "Ahorradores en efectivo o cuenta bancaria",
+          "Asalariados: el sueldo se ajusta de último",
+          "Pensionados con ingreso fijo",
+          "Ahorradores en efectivo o con tasa baja",
           "Clase media sin activos significativos",
-          "Jóvenes que buscan su primera casa",
+          "Jóvenes que buscan su primera vivienda",
           "Pequeños negocios sin crédito barato"
         ],
         "tone": "red"
       },
-      "note": "El dinero nuevo no llega a todos igual: los primeros en la fila compran a precios viejos."
+      "note": "El dinero nuevo no llega a todos a la vez: los primeros compran a precios de ayer."
     },
     "Ejemplo Concreto: La Pandemia 2020-2022": {
       "kind": "timeline",
       "milestones": [
         {
           "label": "Marzo 2020",
-          "detail": "La Fed anuncia billones de dólares (millones de millones). Tras caer 30%, los mercados rebotan ese mismo día."
+          "detail": "Las bolsas caen más de 30%. El 23 de marzo la Fed anuncia compras de bonos sin límite y el S&P 500 toca fondo ese día."
         },
         {
           "label": "2020-2021",
-          "detail": "S&P 500 +100%, casas en USA +30-40%, Bitcoin de $5,000 a $69,000."
+          "detail": "El S&P 500 se duplica desde el piso, las casas en EE. UU. suben más de 30% y Bitcoin pasa de unos $5,000 a $69,000."
         },
         {
           "label": "Mientras tanto",
-          "detail": "Millones sin empleo. Los cheques de $1,200-$3,200 fueron a renta y comida, no a activos."
+          "detail": "Desempleo de 14.7% en abril de 2020. Los cheques (hasta $3,200 por adulto) ayudaron a sobrevivir, no a comprar activos antes de que subieran."
         },
         {
-          "label": "2022-2023",
-          "detail": "Inflación 9%+, salarios solo +3-5%. El estímulo ahora empobrece."
+          "label": "2022",
+          "detail": "Inflación de 9.1% en junio, la más alta en 40 años. Los salarios suben menos que los precios."
         },
         {
           "label": "Resultado",
-          "detail": "Los más ricos sumaron ~$5 billones (millones de millones); la clase media vio sus ahorros evaporarse.",
+          "detail": "Según Oxfam, el 1% más rico se quedó con unos 26 de los 42 billones de dólares de riqueza nueva de 2020-2021.",
           "highlight": true
         }
+      ]
+    },
+    "Bitcoin: Una Salida del Sistema Cantillon": {
+      "kind": "iconGrid",
+      "columns": 2,
+      "items": [
+        { "icon": "Clock", "title": "Emisión pública", "text": "El calendario de emisión se conoce desde 2009. No hay anuncios sorpresa." },
+        { "icon": "Scale", "title": "Sin emisor que elija", "text": "Nadie decide a quién llega primero el dinero nuevo. Los mineros pagan su costo completo." },
+        { "icon": "Globe", "title": "Acceso abierto", "text": "Cualquiera con internet puede usarlo, sin ser cliente preferencial de un banco." },
+        { "icon": "AlertTriangle", "title": "Lo que no resuelve", "text": "Los primeros en adoptarlo concentran mucho BTC. Reglas iguales no significan punto de partida igual." }
       ]
     }
   },
@@ -131,24 +171,24 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Difícil de dividir (no pagas café con pepitas)",
           "Costoso de almacenar y asegurar",
           "Imposible de enviar por internet",
-          "Confiscable (USA lo hizo en 1933)",
-          "Difícil de verificar su autenticidad"
+          "Confiscable (EE. UU. obligó a entregarlo en 1933)",
+          "Menos volátil y con milenios de historia"
         ],
         "tone": "amber"
       },
       "right": {
         "title": "Bitcoin (dinero del siglo XXI)",
         "points": [
-          "Escasez absoluta: 21 millones, verificable",
+          "Oferta fija de 21 millones, verificable",
           "Divisible hasta 8 decimales (satoshis)",
           "Almacenable con frase semilla + respaldo físico seguro",
           "Enviable a cualquier país en minutos",
           "Muy difícil de confiscar sin tu clave o sin coacción",
-          "Verificación instantánea y gratuita"
+          "Muy volátil y con solo 17 años de historia"
         ],
         "tone": "green"
       },
-      "note": "Y el dólar fiat se imprime sin límite: inflación garantizada que erosiona tus ahorros."
+      "note": "Y el dólar fiat no tiene un límite fijo de emisión: su poder de compra baja con el tiempo."
     },
     "Entendiendo la Escasez: ¿Por Qué Solo 21 Millones?": {
       "kind": "timeline",
@@ -187,17 +227,17 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Lock",
           "title": "Escasez digital absoluta",
-          "text": "Solo 21 millones, jamás más. Grabado en el código."
+          "text": "Solo 21 millones. Cambiarlo exigiría el acuerdo de casi toda la red."
         },
         {
           "icon": "Network",
           "title": "Descentralización real",
-          "text": "Miles de computadoras en 100+ países, sin CEO."
+          "text": "Decenas de miles de computadoras en todo el mundo, sin CEO."
         },
         {
           "icon": "Shield",
           "title": "Inmutabilidad",
-          "text": "Transacción confirmada = permanente. Nadie la revierte."
+          "text": "Con suficientes confirmaciones, revertir una transacción es prácticamente imposible."
         },
         {
           "icon": "Globe",
@@ -214,33 +254,33 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "−99.99%",
           "label": "Venezuela",
-          "sublabel": "12 palabras en memoria + respaldo físico en destino",
-          "tone": "green",
+          "sublabel": "El bolívar perdió casi todo su valor; algunos emigraron con su frase de 12 palabras y un respaldo en el destino",
+          "tone": "red",
           "flag": "🇻🇪"
         },
         {
           "value": "$100M+",
           "label": "Ucrania 2022",
-          "sublabel": "En donaciones en cripto en las primeras semanas, sin intermediarios",
+          "sublabel": "En donaciones en criptomonedas (no solo Bitcoin) en las primeras semanas",
           "tone": "green",
           "flag": "🇺🇦"
         },
         {
           "value": "Congelado",
           "label": "Líbano",
-          "sublabel": "Los de Bitcoin mantuvieron el control",
+          "sublabel": "Con los bancos cerrados, quien tenía Bitcoin en su propia wallet mantuvo el acceso",
           "tone": "amber",
           "flag": "🇱🇧"
         },
         {
           "value": "~211%",
           "label": "Argentina 2023",
-          "sublabel": "Pico ~289% abr 2024; convertían el sueldo el día de cobro",
+          "sublabel": "Pico de 289% en abril de 2024; muchos pasaban el sueldo a stablecoins o Bitcoin el día de cobro",
           "tone": "amber",
           "flag": "🇦🇷"
         }
       ],
-      "intro": "Bitcoin no es teoría: protege riqueza ahora mismo.",
+      "intro": "Casos en los que Bitcoin, y a veces otras criptomonedas, cumplieron una función real:",
       "columns": 4
     }
   },
@@ -258,7 +298,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Eso los une en una cadena",
-          "detail": "Bitcoin crea un bloque cada ~10 minutos; Solana, cada ~400 milisegundos."
+          "detail": "Bitcoin crea un bloque cada ~10 minutos; Solana, cada ~200 milisegundos."
         },
         {
           "title": "Si alteras el bloque 50, su hash cambia",
@@ -267,10 +307,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Tendrías que rehacer todos los bloques siguientes",
-          "detail": "Y más rápido que toda la red junta. Prácticamente imposible."
+          "detail": "Y más rápido que el resto de la red. En la práctica, imposible."
         }
       ],
-      "intro": "Cómo los bloques se encadenan y por qué eso los hace inmodificables."
+      "intro": "Cómo se encadenan los bloques y por qué eso los hace tan difíciles de modificar."
     },
     "Proof of Work vs Proof of Stake": {
       "kind": "comparison",
@@ -278,7 +318,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Proof of Work (Bitcoin)",
         "points": [
           "Seguridad respaldada por energía física real",
-          "Más probado en el tiempo (15+ años)",
+          "Más probado en el tiempo (17 años)",
           "Permissionless (ASICs en la práctica)",
           "Alto consumo energético",
           "Bloques cada ~10 minutos",
@@ -293,7 +333,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "99%+ menos energía",
           "Necesitas tokens para validar",
           "Mucho más rápido",
-          "Bloques cada ~400 milisegundos",
+          "Bloques cada ~200 milisegundos en Solana",
           "Usado por: Solana, Ethereum, Cardano"
         ],
         "tone": "green"
@@ -305,7 +345,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "good": {
         "title": "PUEDE",
         "items": [
-          "Probar propiedad digital: registro incorruptible",
+          "Probar propiedad digital: registro muy difícil de alterar",
           "Ejecutar reglas solas con smart contracts: si pasa X, ocurre Y"
         ]
       },
@@ -313,7 +353,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "NO PUEDE",
         "items": [
           "Garantizar la verdad del mundo real (garbage in, garbage out)",
-          "Ser rápida Y descentralizada a la vez: el trilema"
+          "Maximizar velocidad y descentralización a la vez: el trilema"
         ]
       }
     },
@@ -323,7 +363,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Shield",
           "title": "Seguridad",
-          "text": "¿Qué tan difícil es atacar la red? Bitcoin: sin un ataque exitoso desde 2010."
+          "text": "¿Qué tan difícil es atacar la red? Nadie ha atacado con éxito el consenso de Bitcoin."
         },
         {
           "icon": "Network",
@@ -336,7 +376,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "text": "¿Cuántas transacciones por segundo procesa y qué tan barato es?"
         }
       ],
-      "intro": "Ninguna blockchain maximiza las tres a la vez: solo puedes elegir 2 de 3.",
+      "intro": "Es muy difícil maximizar las tres a la vez. Cada red elige sus prioridades.",
       "columns": 3
     }
   },
@@ -359,41 +399,41 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Descentralizado (Bitcoin)",
         "points": [
           "Miles de participantes independientes",
-          "NADIE puede congelar tu wallet",
+          "Nadie puede congelar tu BTC en wallet propia",
           "Cambiar reglas requiere consenso casi imposible",
-          "Sin punto único: si un nodo cae, hay 14,999 más",
+          "Sin punto único: si un nodo cae, quedan miles",
           "No confías en nadie específico",
           "Tu propiedad es TUYA si controlas tus llaves"
         ],
         "tone": "green"
       },
-      "note": "El lado descentralizado puede ser más lento (pero está mejorando): ese es el trade-off honesto."
+      "note": "El lado descentralizado puede ser más lento y no tiene soporte al cliente: ese es el trade-off honesto."
     },
     "El Espectro de la Descentralización": {
       "kind": "statCards",
       "cards": [
         {
-          "value": "~40-45",
-          "label": "Binance Smart Chain",
-          "sublabel": "~45 elegidos por stake de BNB; fuerte peso del ecosistema Binance",
+          "value": "45",
+          "label": "BNB Smart Chain",
+          "sublabel": "validadores activos; solo 21 producen bloques en cada época",
           "tone": "red"
         },
         {
-          "value": "~10,000",
+          "value": "~8,700",
           "label": "Ethereum",
-          "sublabel": "nodos, Proof of Stake, término medio",
+          "sublabel": "nodos de ejecución, Proof of Stake, término medio",
           "tone": "amber"
         },
         {
-          "value": "~800",
+          "value": "~660",
           "label": "Solana",
-          "sublabel": "validadores activos (2026), miles de TPS totales, fees de centavos",
+          "sublabel": "validadores con stake (noviembre de 2026), ~2,000 TPS de usuarios",
           "tone": "amber"
         },
         {
-          "value": "~15,000",
+          "value": "~20,700",
           "label": "Bitcoin",
-          "sublabel": "nodos, ~$300 hardware, consenso casi unánime",
+          "sublabel": "nodos accesibles (noviembre de 2026), ~$300 de equipo",
           "tone": "green"
         }
       ],
@@ -413,11 +453,11 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "label": "Nigeria 2021",
-          "detail": "El banco central prohibió transacciones cripto por decreto"
+          "detail": "El banco central prohibió a los bancos procesar transacciones cripto"
         },
         {
           "label": "Canadá 2022",
-          "detail": "Congeló cuentas de donantes sin orden judicial",
+          "detail": "Los bancos congelaron unas 280 cuentas ligadas a protestas, sin orden judicial",
           "highlight": true
         },
         {
@@ -426,7 +466,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "label": "PayPal (frecuente)",
-          "detail": "Congela cuentas y retiene fondos durante meses"
+          "detail": "Congela cuentas y puede retener fondos hasta 180 días"
         }
       ],
       "intro": "No son hipótesis: una secuencia real y reciente de eventos documentados."
@@ -441,21 +481,21 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "tone": "red"
         },
         {
-          "value": "~7",
+          "value": "Pocos",
           "label": "BSC",
-          "sublabel": "de ~40-45 validadores, muchos ligados a Binance",
+          "sublabel": "solo 21 de 45 validadores producen bloques, con fuerte peso de Binance",
           "tone": "red"
         },
         {
-          "value": "~20",
+          "value": "18",
           "label": "Solana",
-          "sublabel": "validadores para frenar la red (33% del stake)",
+          "sublabel": "validadores reúnen un tercio del stake (noviembre de 2026)",
           "tone": "amber"
         },
         {
           "value": "~2-3",
           "label": "Bitcoin (pools)",
-          "sublabel": "los 2-3 pools más grandes suman ~50% del hashrate (Foundry + AntPool ~44-48%); los mineros pueden migrar de pool",
+          "sublabel": "los 2 pools más grandes producen ~46% de los bloques; los 3 más grandes, ~63%. Los mineros pueden cambiar de pool",
           "tone": "amber"
         }
       ],
@@ -483,12 +523,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Tu Cripto en Tu Wallet",
         "points": [
           "TÚ tienes las llaves, nadie más",
-          "Nadie puede congelar ni censurar tu cuenta",
+          "Nadie puede congelar tu BTC o tus SOL (stablecoins sí)",
           "Retiras cuando quieras, 24/7, sin permiso",
           "Si Phantom quiebra, tus fondos siguen intactos",
           "Nadie lo toca sin tu firma",
           "Tu seguridad depende de ti (responsabilidad)",
-          "Privacidad: solo tú sabes lo que tienes"
+          "Blockchain pública: quien conozca tu dirección ve tu saldo"
         ],
         "tone": "green"
       },
@@ -500,7 +540,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Landmark",
           "title": "Exchange (custodia de terceros)",
-          "text": "Binance, Coinbase, Kraken. Solo para comprar y vender, nunca para ahorros. Retira de inmediato."
+          "text": "Binance, Coinbase, Kraken. Para comprar, vender y operar. No es lugar para tus ahorros: retira a tu wallet."
         },
         {
           "icon": "Zap",
@@ -510,7 +550,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Lock",
           "title": "Cold Wallet (hardware/offline)",
-          "text": "Ledger, Trezor. Las llaves nunca tocan internet. Para ahorros: con más de $5,000-10,000, la necesitas ($70-150)."
+          "text": "Ledger, Trezor. Las llaves nunca tocan internet. Para ahorros de unos miles de dólares o más ($50-150, solo en tienda oficial)."
         }
       ],
       "intro": "Cada tipo balancea conveniencia y seguridad de forma distinta.",
@@ -538,7 +578,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "tone": "red"
         }
       ],
-      "intro": "Los profesionales no ponen todos los huevos en una canasta.",
+      "intro": "Una forma de organizar un portafolio cripto significativo. Si apenas empiezas, una hot wallet bien protegida basta.",
       "columns": 3
     },
     "¿Qué es Realmente una Wallet?": {
@@ -576,7 +616,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Search",
           "title": "El Sitio Falso",
-          "text": "phantom.com vs phantomm-wallet.com (con dos M). Idéntico, pero roba tu frase al \"importar\"."
+          "text": "phantom.com frente a imitadores como phantomm-wallet.com (con dos M). Idéntico, pero roba tu frase al \"importar\"."
         },
         {
           "icon": "Gem",
@@ -589,7 +629,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "text": "\"Giveaway privado, envíame tu seed phrase.\" Los influencers reales NUNCA hacen esto."
         }
       ],
-      "intro": "El 99% de los robos no son hackeos sofisticados: eres TÚ quien entrega la frase.",
+      "intro": "La mayoría de los robos no son hackeos sofisticados: es la víctima quien entrega la frase.",
       "columns": 2
     },
     "Las Reglas de Oro de la Seed Phrase": {
@@ -618,52 +658,32 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "Placa de metal",
-          "detail": "Cryptosteel o Billfodl: sobrevive incendios e inundaciones. $50-100, protege fortunas."
+          "detail": "Cryptosteel o Billfodl: resiste incendios e inundaciones. Cuesta $50-100."
         },
         {
           "title": "Copias en múltiples ubicaciones",
-          "detail": "2-3 copias en casa, familiar de confianza y banco. Elimina el punto único de fallo."
+          "detail": "2-3 copias en lugares distintos y discretos. Elimina el punto único de fallo."
         },
         {
           "title": "Passphrase adicional (palabra 25)",
-          "detail": "Tu frase + palabra secreta genera wallets distintas. Sin ella no pueden acceder."
+          "detail": "Tu frase más una palabra secreta genera otra wallet. Phantom no la ofrece; si la olvidas, pierdes el acceso."
         },
         {
           "title": "Shamir Secret Sharing",
           "detail": "Divides en 3 partes, necesitas 2 para recuperar. Ninguna ubicación basta sola."
         }
       ],
-      "intro": "Si tienes más de $5,000 en cripto, sube de nivel de seguridad."
+      "intro": "Cuando tus ahorros en cripto crecen, sube de nivel de seguridad."
     },
-    "Los Errores que Han Costado Millones": {
-      "kind": "statCards",
-      "cards": [
-        {
-          "value": "-$2.4M",
-          "label": "El archivo en Google Drive",
-          "sublabel": "El \"archivo encriptado\" fue descifrado",
-          "tone": "red"
-        },
-        {
-          "value": "-$300K",
-          "label": "La foto en iCloud",
-          "sublabel": "Las fotos se sincronizan solas a la nube",
-          "tone": "red"
-        },
-        {
-          "value": "-$180K",
-          "label": "El único papel + incendio",
-          "sublabel": "Los fondos siguen en la blockchain, pero nadie puede accederlos",
-          "tone": "red"
-        },
-        {
-          "value": "-$50K",
-          "label": "El mensaje por WhatsApp",
-          "sublabel": "WhatsApp Web abierto en un PC público",
-          "tone": "red"
-        }
+    "Los Errores que Más se Repiten": {
+      "kind": "iconGrid",
+      "items": [
+        { "icon": "Eye", "title": "La foto en la nube", "text": "Las fotos se sincronizan solas. Si hackean tu cuenta, encuentran la frase." },
+        { "icon": "Lock", "title": "El archivo \"cifrado\"", "text": "Una contraseña débil se rompe. El archivo nunca debió existir." },
+        { "icon": "Users", "title": "El mensaje a ti mismo", "text": "WhatsApp Web abierto en un equipo compartido basta para perderlo todo." },
+        { "icon": "Flame", "title": "El único papel", "text": "Un incendio o una inundación y los fondos quedan inaccesibles para siempre." }
       ],
-      "intro": "Errores reales que destruyeron fortunas. Aprende de las tragedias de otros.",
+      "intro": "Casos ilustrativos de patrones que se repiten en denuncias reales.",
       "columns": 2
     }
   },
@@ -671,23 +691,23 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     "Paso 1: Descarga SOLO desde Fuentes Oficiales": {
       "kind": "checklist",
       "good": {
-        "title": "El único sitio real",
+        "title": "El sitio oficial",
         "items": [
-          "phantom.com (antes phantom.app), sin guiones ni números",
+          "phantom.com, sin guiones ni números (phantom.app redirige allí)",
           "Escríbelo tú mismo en la barra de direcciones",
-          "Verifica el desarrollador: Phantom Technologies Incorporated",
+          "Instala la extensión desde phantom.com/download",
           "Móvil solo desde App Store o Google Play",
           "Guárdalo en favoritos tras verificarlo"
         ]
       },
       "bad": {
-        "title": "URLs falsas: TODAS son estafas",
+        "title": "Ejemplos de dominios imitadores",
         "items": [
           "phantom-app.com",
           "phantomwallet.io",
           "phantom-wallet.app",
-          "phantomm.app",
-          "phantom.finance"
+          "phantomm.com",
+          "Cualquier variación con guiones, letras dobles u otra terminación"
         ]
       }
     },
@@ -696,7 +716,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "Descarga desde fuente oficial",
-          "detail": "Solo phantom.com (antes phantom.app), App Store o Google Play. Verifica el desarrollador."
+          "detail": "Solo desde phantom.com/download, App Store o Google Play."
         },
         {
           "title": "Create a new wallet",
@@ -713,7 +733,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Verifica las palabras",
-          "detail": "Phantom te pide confirmar algunas. Si fallas, vuelve a empezar."
+          "detail": "Phantom te pide confirmar algunas. Si fallas, revisa tu papel y repite."
         },
         {
           "title": "Wallet lista",
@@ -730,7 +750,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Solo da permiso para VER tu dirección y balance",
           "Como mostrar tu número de cuenta",
           "Pueden ver, pero NO sacar dinero",
-          "Es relativamente seguro"
+          "Relativamente seguro, pero conéctate solo a sitios que conoces"
         ],
         "tone": "green"
       },
@@ -776,30 +796,30 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "left": {
         "title": "Ethereum (L1)",
         "points": [
-          "~15-30 TPS",
-          "Costo: transferencia ~$0.10-0.25 y swap ~$0.25-0.50 en L1 (2026), sube con la congestión",
-          "Confirmación: ~12-15 segundos",
-          "DeFi barato solo vía L2s (Arbitrum, Optimism)",
-          "Liquidez fragmentada entre L1 y L2s",
-          "Bridges entre capas: riesgo de hackeos",
-          "Experiencia confusa para nuevos usuarios"
+          "~15-30 TPS en la red principal (las L2 suman mucho más)",
+          "Costo: ~$0.002 por transferencia y ~$0.03 por swap, sube con la demanda",
+          "Bloques cada ~12 segundos",
+          "Gran parte del uso diario ocurre en L2s (Arbitrum, Base)",
+          "Liquidez repartida entre L1 y L2s",
+          "Bridges entre redes: un punto histórico de hackeos",
+          "Muchos más validadores y nodos independientes"
         ],
         "tone": "amber"
       },
       "right": {
         "title": "Solana (L1)",
         "points": [
-          "Miles de TPS totales (cientos a ~1-3k de usuarios según carga)",
-          "Costo: ~0.000005 SOL por transacción, una fracción de centavo (~$0.001)",
-          "Confirmación: ~400 milisegundos",
+          "~1,750-2,300 TPS de usuarios, con capacidad para más",
+          "Costo: 0.000005 SOL de base, menos de $0.001",
+          "Confirmación en menos de un segundo",
           "Todo en una sola capa, sin L2s",
           "Liquidez unificada en un solo lugar",
-          "Sin bridges entre capas: menos riesgo",
-          "Experiencia fluida, como una app normal"
+          "Sin bridges internos: menos piezas que fallen",
+          "Hardware caro: unos 660 validadores con stake"
         ],
         "tone": "green"
       },
-      "note": "Las tres cifras de impacto: velocidad, costo y confirmación."
+      "note": "Datos de noviembre de 2026. Las comisiones de Ethereum están en mínimos históricos y pueden volver a subir."
     },
     "¿Qué Significa \"Monolítico\" vs \"Modular\"?": {
       "kind": "comparison",
@@ -807,10 +827,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Ethereum: Modular",
         "points": [
           "Se divide en capas separadas",
-          "L1 = capa de seguridad (cara y lenta)",
-          "L2s = capas de ejecución (Arbitrum, Optimism)",
-          "Mover fondos entre capas exige bridges",
-          "Genera fricción, riesgo de hackeo y liquidez fragmentada"
+          "L1 = capa de seguridad, muy descentralizada",
+          "L2s = capas de ejecución baratas (Arbitrum, Base)",
+          "Tus fondos pueden quedar repartidos entre redes",
+          "A veces necesitas bridges para moverlos"
         ],
         "tone": "amber"
       },
@@ -818,38 +838,38 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Solana: Monolítico",
         "points": [
           "Todo en una sola capa",
-          "Ejecución + consenso + disponibilidad de datos juntos",
-          "Sin bridges, sin L2s, sin fragmentación",
-          "Componible e interoperable",
-          "Más simple, menos puntos de fallo"
+          "Ejecución, consenso y datos juntos",
+          "Sin L2s ni bridges internos",
+          "Las apps se combinan sin fricción",
+          "Toda la red depende de esa única capa"
         ],
         "tone": "green"
       },
-      "note": "El trade-off: modular = más descentralización teórica pero peor UX; monolítico = mejor UX pero requiere hardware más potente para validadores."
+      "note": "Ningún diseño gana en todo: el modular facilita validar con equipos modestos; el monolítico simplifica la experiencia a cambio de hardware caro."
     },
     "Caso Real: Hacer un Swap de $50": {
       "kind": "statCards",
       "cards": [
         {
-          "value": "~$0.25-0.50",
+          "value": "~$0.03",
           "label": "Ethereum L1 (Uniswap)",
-          "sublabel": "Mucho menos que en 2021 (2026, post-Dencun), pero variable y sube con la congestión",
-          "tone": "red"
-        },
-        {
-          "value": "1–2 pasos",
-          "label": "Ethereum L2 (Arbitrum/Base)",
-          "sublabel": "Swap en L2: centavos. Bridge solo si tus fondos están en L1 (~$1-5)",
+          "sublabel": "Mínimo histórico; con congestión ha llegado a varios dólares",
           "tone": "amber"
         },
         {
-          "value": "~$0.001",
+          "value": "<$0.01",
+          "label": "Ethereum L2 (Arbitrum o Base)",
+          "sublabel": "Barato, pero cada L2 es una red con saldos separados",
+          "tone": "amber"
+        },
+        {
+          "value": "<$0.001",
           "label": "Solana (Jupiter)",
-          "sublabel": "~0.000005 SOL de fee base: 1 swap, 1 segundo, listo",
+          "sublabel": "Comisión base fija, confirmación en menos de un segundo",
           "tone": "green"
         }
       ],
-      "intro": "El mismo swap de $50 USDC por tres rutas distintas: costo y pasos.",
+      "intro": "El mismo swap de $50 USDC por tres rutas distintas (noviembre de 2026).",
       "columns": 3
     },
     "El Ecosistema de Solana: Las Apps que Usarás": {
@@ -858,25 +878,25 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "RefreshCw",
           "title": "Jupiter",
-          "text": "El mejor agregador DEX: encuentra el mejor precio, con DCA, órdenes límite y perpetuos."
+          "text": "Agregador DEX: busca el mejor precio entre exchanges, con DCA y órdenes límite."
         },
         {
           "icon": "Wallet",
           "title": "Phantom",
-          "text": "La wallet más usada de Solana. Su UX deja a MetaMask sintiéndose de 2017."
+          "text": "Una de las wallets más usadas de Solana; MetaMask cumple ese papel en Ethereum."
         },
         {
           "icon": "Gem",
           "title": "Magic Eden / Tensor",
-          "text": "Marketplaces de NFTs con fees de centavos, frente a ~$1-5 de gas en OpenSea (Ethereum L1, 2026)."
+          "text": "Marketplaces de NFTs con comisiones de red de fracciones de centavo."
         },
         {
           "icon": "PiggyBank",
           "title": "Marinade / Jito",
-          "text": "Liquid staking: ~5.5-6.5% anual neto (~6-7% con validadores MEV de Jito) y tu SOL sigue líquido."
+          "text": "Liquid staking: ~4.8-5.1% anual (noviembre de 2026), en parte pagado con SOL nuevos."
         }
       ],
-      "intro": "El mapa de herramientas que realmente vas a usar en Solana.",
+      "intro": "Algunas de las herramientas que vas a usar en Solana.",
       "columns": 2
     }
   },
@@ -3147,9 +3167,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Red correcta",
         "points": [
           "Solana (SOL) o \"Solana Network\"",
-          "Dirección Solana (base58): verifica red + 6-8 chars inicio/fin (el prefijo no es una regla)",
+          "Dirección Solana (base58): verifica la red y 6-8 caracteres al inicio y al final",
           "Confirma y espera de 1 a 10 minutos",
-          "Tus fondos llegan a tu Phantom"
+          "Tus SOL llegan a tu Phantom"
         ],
         "tone": "green"
       },
@@ -3159,72 +3179,72 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "ERC20 (Ethereum)",
           "BEP20 (BNB Chain)",
           "TRC20 (Tron)",
-          "Van a otra blockchain: el dinero se pierde para siempre"
+          "Llegan como otro token o a una dirección que no controlas"
         ],
         "tone": "red"
       },
-      "note": "Caso real: un usuario envió $5,000 en SOL por la red ERC20. Llegaron a una dirección de Ethereum que nadie controla. 30 segundos de verificación lo habrían evitado."
+      "note": "En blockchain no hay reversiones. Treinta segundos de verificación evitan el problema."
     },
     "El Proceso Paso a Paso": {
       "kind": "steps",
       "steps": [
         {
           "title": "Crear cuenta y KYC",
-          "detail": "Registro con email + verificación de identidad (documento y selfie). Tarda de 10 minutos a 24 horas."
+          "detail": "Registro con email y verificación de identidad (documento y selfie). Tarda de 10 minutos a 24 horas."
         },
         {
-          "title": "Depositar fiat",
-          "detail": "Transferencia bancaria (más barata), tarjeta (instantánea, 2-4% de fee) o P2P."
+          "title": "Depositar pesos",
+          "detail": "Transferencia o PSE (lo más barato), tarjeta (instantánea, 2-4% de comisión) o P2P."
         },
         {
           "title": "Comprar SOL",
-          "detail": "Busca el par SOL/tu-moneda. Usa Market Order (precio actual) o Limit Order (precio que defines)."
+          "detail": "Busca el par SOL/COP o SOL/USDT. Usa una orden de mercado (precio actual) o límite (precio que defines)."
         },
         {
           "title": "Retirar a Phantom",
-          "detail": "Pega tu dirección de Phantom y selecciona la red SOLANA. Confirma y espera 1-10 minutos.",
+          "detail": "Pega tu dirección de Phantom y selecciona la red SOLANA. Confirma y espera de 1 a 10 minutos.",
           "warning": true
+        },
+        {
+          "title": "Guardar el registro",
+          "detail": "Fecha, pesos, SOL, precio y comisión. Lo necesitarás para tu declaración (Lección 19)."
         }
       ],
-      "intro": "Ejemplo con Binance, pero el flujo es igual en todos los exchanges."
+      "intro": "El flujo es muy parecido en todos los exchanges."
     },
     "Eligiendo tu Exchange: Opciones para Latinoamérica": {
-      "kind": "statCards",
-      "cards": [
+      "kind": "iconGrid",
+      "items": [
         {
-          "value": "Binance",
-          "label": "El más grande del mundo",
-          "sublabel": "Transferencias locales LATAM + P2P, fees bajos",
-          "tone": "amber"
+          "icon": "Building2",
+          "title": "Bitso, Buda y Wenia",
+          "text": "Exchanges locales con pesos. Permiten retirar SOL y USDC por la red Solana."
         },
         {
-          "value": "Backpack",
-          "label": "Especializado en Solana",
-          "sublabel": "Creado por el equipo de Mad Lads, regulado en Dubai",
-          "tone": "neutral"
+          "icon": "Landmark",
+          "title": "Binance",
+          "text": "El más grande del mundo. En Colombia, depósitos en COP por PSE y Bre-B, más P2P."
         },
         {
-          "value": "Coinbase",
-          "label": "El más regulado",
-          "sublabel": "Seguridad institucional, más caro pero confiable",
-          "tone": "neutral"
+          "icon": "Zap",
+          "title": "Backpack",
+          "text": "Especializado en Solana. No acepta pesos: úsalo para operar, no para entrar (enlace de referido)."
         },
         {
-          "value": "Kraken",
-          "label": "Fuerte historial de seguridad",
-          "sublabel": "Sin pérdidas masivas de fondos de clientes en 10+ años (según su track record público)",
-          "tone": "green"
+          "icon": "Shield",
+          "title": "Coinbase y Kraken",
+          "text": "Historial sólido de seguridad. Revisa qué métodos de pago ofrecen en tu país."
         }
       ],
-      "intro": "Las opciones más confiables para la región y para qué destaca cada una.",
-      "columns": 4
+      "intro": "Ninguna está supervisada por la Superintendencia Financiera: elige con criterio y no dejes fondos en ninguna (noviembre de 2026).",
+      "columns": 2
     },
     "Fees: Lo Que Realmente Pagas": {
       "kind": "statCards",
       "cards": [
         {
           "value": "Gratis",
-          "label": "Depósito por transferencia",
+          "label": "Depósito por transferencia o PSE (normalmente)",
           "sublabel": "Tarjeta: 2-4% (evítalo si puedes)",
           "tone": "green"
         },
@@ -3270,7 +3290,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Ingresa el monto",
-          "detail": "Para la prueba, envía $1-5. Deja ~0.01 SOL para fees futuros."
+          "detail": "Para la prueba, envía poco (al menos ~0.001 SOL si la dirección es nueva). Deja ~0.01 SOL para fees futuros."
         },
         {
           "title": "Confirma y observa",
@@ -3285,7 +3305,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Haz siempre esto",
         "items": [
           "Compara de 6 a 8 caracteres al inicio Y al final; nunca copies direcciones de tu historial de transacciones (address poisoning).",
-          "Si envías $1,000+, manda primero una prueba de $1-5 y espera a que llegue.",
+          "Si envías un monto importante, manda primero una prueba pequeña y espera a que llegue.",
           "Tómate 2 minutos de verificación: las transacciones legítimas pueden esperar."
         ]
       },
@@ -3293,7 +3313,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Señales de peligro",
         "items": [
           "Pegar la dirección sin revisarla: los clipboard hijackers la cambian.",
-          "Una sola letra distinta = fondos perdidos para siempre.",
+          "Una sola letra distinta puede significar perder tus fondos para siempre.",
           "Alguien que \"te urge\" a enviar rápido: presión artificial de estafadores."
         ]
       }
@@ -3304,8 +3324,8 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Banco tradicional",
         "points": [
           "Transferencia internacional",
-          "Tarda 3-5 días",
-          "Cuesta $25-50",
+          "Tarda de 1 a 5 días",
+          "Cuesta $20-50, más el tipo de cambio",
           "Pide permiso a intermediarios"
         ],
         "tone": "red"
@@ -3315,12 +3335,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Misma función",
           "Tarda menos de 1 segundo",
-          "Cuesta menos de $0.001",
+          "La red cobra menos de $0.001",
           "Sin pedir permiso a nadie"
         ],
         "tone": "green"
       },
-      "note": "Misma función, 1000x más eficiente."
+      "note": "La red cuesta una fracción de centavo. Comprar cripto y convertirla a pesos tiene costos aparte (alrededor de 1-3% en total)."
     }
   },
   37: {
@@ -3337,7 +3357,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Lee el resultado",
-          "detail": "Success = confirmada. Fail = falló, los fondos no se movieron."
+          "detail": "Success: confirmada. Fail: falló y los fondos no se movieron (solo se cobra la comisión)."
         },
         {
           "title": "Verifica el destino",
@@ -3362,7 +3382,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Token falso",
         "points": [
           "Mismo nombre USDC, mismo símbolo",
-          "Pero un CA distinto = estafa",
+          "Pero con un CA distinto: es una copia",
           "Suele llegarte por Discord o Telegram",
           "No coincide con la fuente oficial"
         ],
@@ -3373,19 +3393,19 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     "Caso Práctico: Investigar una Wallet": {
       "kind": "checklist",
       "good": {
-        "title": "Wallet confiable",
+        "title": "Lo que puedes comprobar",
         "items": [
-          "Balance de SOL y tokens visible",
-          "Historial de transacciones consistente",
-          "Actividad a lo largo del tiempo"
+          "Balance de SOL y de cada token",
+          "Ventas grandes o movimientos sospechosos en el historial",
+          "Qué porcentaje del token controla cada wallet"
         ]
       },
       "bad": {
-        "title": "Red flags",
+        "title": "Lo que Solscan no te dice",
         "items": [
-          "Balance en cero",
-          "Wallet creada hace 5 minutos",
-          "Sin historial: posible wallet desechable"
+          "Quién está realmente detrás de una wallet",
+          "Si alguien cumplirá lo que promete",
+          "Si un token es una buena inversión"
         ]
       }
     },
@@ -3437,16 +3457,16 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Green flags (probablemente legítimo)",
         "points": [
           "TÚ inicias el contacto con soporte oficial",
-          "URLs oficiales verificadas: phantom.com (antes phantom.app), jup.ag",
+          "URLs oficiales verificadas: phantom.com, jup.ag",
           "NUNCA te piden tu seed phrase",
           "No prometen retornos garantizados",
           "Tienen historial público y verificable",
-          "Código abierto y auditorías públicas",
-          "Transacciones simuladas muestran qué pasará"
+          "Código abierto y auditorías (ayudan, no garantizan)",
+          "La simulación coincide con lo que esperabas"
         ],
         "tone": "green"
       },
-      "note": "El 99% de las estafas siguen estos patrones. Conocerlos las vuelve fáciles de detectar."
+      "note": "La gran mayoría de las estafas siguen estos patrones. Conocerlos las vuelve mucho más fáciles de detectar."
     },
     "Las 10 Reglas de Oro Anti-Estafas": {
       "kind": "checklist",
@@ -3495,27 +3515,36 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "intro": "Contratos maliciosos que vacían tu wallet cuando firmas. En Solana el momento crítico es la firma; lee siempre la simulación."
     },
     "Tu Privacidad en la Blockchain": {
-      "kind": "steps",
-      "steps": [
+      "kind": "iconGrid",
+      "items": [
         {
-          "title": "Exchange KYC (Binance, Coinbase)",
-          "detail": "Vinculado a tu nombre real. Nunca envíes directo a tu wallet de ahorro.",
-          "warning": true
+          "icon": "Eye",
+          "title": "Todo es público",
+          "text": "Con tu dirección, cualquiera ve en Solscan tu saldo, tu historial y con quién interactúas."
         },
         {
-          "title": "Wallet operativa o intermedia",
-          "detail": "Para DeFi y experimentación. Úsala como puente desde el exchange."
+          "icon": "Users",
+          "title": "El KYC te identifica",
+          "text": "Las wallets que reciben desde tu exchange quedan vinculadas a tu nombre. Una wallet intermedia no rompe ese vínculo."
         },
         {
-          "title": "Wallet principal de ahorro",
-          "detail": "Mínima actividad, fondos a largo plazo. La que más proteges."
+          "icon": "Layers",
+          "title": "Separa por propósito",
+          "text": "Una wallet de ahorro, una operativa y una burner. Así, quien conoce una dirección no ve todo lo demás."
         },
         {
-          "title": "Wallet burner aparte",
-          "detail": "Solo para probar dApps nuevas o riesgosas. Si es estafa, pierdes poco."
+          "icon": "EyeOff",
+          "title": "No publiques tu dirección",
+          "text": "Ni capturas de tu saldo, ni dominios SNS o ENS con tu nombre real en wallets con fondos importantes."
+        },
+        {
+          "icon": "Lock",
+          "title": "Discreción física",
+          "text": "No cuentes cuánto tienes. Privacidad no es esconderte de la DIAN: es protegerte de los delincuentes."
         }
       ],
-      "intro": "Toda transacción es pública para siempre en Solscan. Separa tus wallets para no exponer toda tu vida financiera."
+      "intro": "La blockchain es transparente por diseño. La privacidad es tu responsabilidad.",
+      "columns": 2
     }
   },
   39: {
@@ -3528,11 +3557,11 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Carga tu tarjeta cripto",
-          "detail": "Envías USDC desde Phantom a la dirección de depósito de Kast/Avici. Aparece en minutos."
+          "detail": "Envías USDC desde Phantom a la dirección de depósito de tu tarjeta, por la red correcta. Aparece en minutos."
         },
         {
           "title": "Usa tu tarjeta",
-          "detail": "Pagas en cualquier comercio Visa/Mastercard. Conversión a moneda local automática e instantánea."
+          "detail": "Pagas en comercios que aceptan Visa o Mastercard. La conversión a moneda local es automática."
         },
         {
           "title": "Verifica tu balance",
@@ -3544,9 +3573,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     "¿Por Qué Gastar Stablecoins y NO Bitcoin/SOL?": {
       "kind": "comparison",
       "left": {
-        "title": "AHORRAR: BTC, SOL, ETH",
+        "title": "LARGO PLAZO: BTC, SOL, ETH",
         "points": [
-          "Tu inversión de largo plazo: HODL.",
+          "Activos volátiles: tu inversión de largo plazo.",
           "Si gastas 1 SOL ($150) en una cena...",
           "...y un mes después SOL vale $300...",
           "...pagaste $300 por una cena de $150.",
@@ -3557,33 +3586,33 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "right": {
         "title": "GASTAR: USDC y stablecoins",
         "points": [
-          "Siempre valen ~$1, sin volatilidad.",
-          "100 USDC hoy = $100, pase lo que pase.",
+          "Diseñadas para valer ~$1.",
+          "100 USDC hoy siguen siendo ~$100 mañana.",
           "Perfectos para gastos diarios.",
           "Conviertes a stablecoin solo lo que vas a gastar.",
           "Así nunca 'gastas' tu inversión."
         ],
         "tone": "amber"
       },
-      "note": "Regla de oro: BTC/SOL son para ahorrar, stablecoins para gastar. No los mezcles."
+      "note": "Regla de oro: BTC y SOL son para el largo plazo, las stablecoins para gastar. No los mezcles."
     },
     "Opciones de Tarjetas para Latinoamérica": {
       "kind": "statCards",
       "cards": [
         {
-          "value": "Kast",
-          "label": "Virtual y física",
-          "sublabel": "USDC y USDT, 0% de recarga con stablecoins; hasta 1.75% FX en moneda extranjera. Buena para comenzar.",
+          "value": "KAST",
+          "label": "Custodial, virtual y física",
+          "sublabel": "Plan Standard $0 al año, 0% al recargar con stablecoins, 0.5-1.75% en otras monedas. Acepta pesos desde abril de 2026.",
           "tone": "green"
         },
         {
           "value": "Avici",
-          "label": "Neobank autocustodial en Solana",
-          "sublabel": "Tarjeta Visa asegurada con USDC, $10 de emisión, 0% FX. Sirve Colombia y LATAM (avici.money).",
+          "label": "Smart wallet autocustodial",
+          "sublabel": "Visa de crédito asegurada con USDC. Virtual desde $15 (pago único), 0% de recargo de Avici. Colombia es elegible.",
           "tone": "neutral"
         }
       ],
-      "intro": "No todas las tarjetas cripto sirven en LATAM. Estas son las mejores opciones.",
+      "intro": "Dos opciones que operan en Colombia, con modelos de custodia distintos (noviembre de 2026). Ambas son enlaces de referido.",
       "columns": 2
     },
     "El Sueño: Vivir en Cripto": {
@@ -3607,14 +3636,14 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Tarjeta cripto",
-          "detail": "Cargas stablecoins. Aquí ya no pasas por el banco."
+          "detail": "Cargas stablecoins. El emisor de la tarjeta reemplaza a tu banco."
         },
         {
           "title": "Gastos reales",
-          "detail": "Amazon, Netflix, gasolina, supermercado. Sin pedir permiso."
+          "detail": "Amazon, Netflix, gasolina, supermercado. Con KYC y tus impuestos al día."
         }
       ],
-      "intro": "El ciclo completo: de fiat a gastos reales sin volver a tu banco."
+      "intro": "El ciclo completo: de fiat a gastos reales."
     }
   },
   40: {
@@ -3744,8 +3773,8 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "icon": "TrendingDown",
-          "title": "Algorítmicas (UST/Luna - COLAPSÓ)",
-          "text": "Sin respaldo real, solo código. En mayo 2022 perdió la paridad y cayó a $0. $40 mil millones se evaporaron."
+          "title": "Algorítmicas (UST/Luna, colapsó)",
+          "text": "Sin respaldo real, solo código. En mayo de 2022 perdió la paridad y cayó a centavos: unos $40 mil millones se evaporaron."
         }
       ],
       "intro": "De más segura a más peligrosa: el mecanismo que mantiene el precio define el riesgo.",
@@ -3760,7 +3789,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Reservas: bonos del Tesoro + efectivo",
           "Empresa regulada en USA",
           "Puede congelar direcciones por orden legal",
-          "Mejor para ahorros y confianza",
+          "Más transparente: suele preferirse para ahorrar",
           "Algo menos de liquidez que USDT"
         ],
         "tone": "green"
@@ -3777,7 +3806,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         ],
         "tone": "amber"
       },
-      "note": "Ambas dependen de una empresa centralizada: ese es el riesgo común."
+      "note": "Ambas dependen de una empresa centralizada y ambas pueden congelar tokens, incluso en tu propia wallet."
     },
     "La Catástrofe de UST/Luna: La Lección Más Cara de la Historia": {
       "kind": "steps",
@@ -3801,7 +3830,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "warning": true
         },
         {
-          "title": "$40 mil millones evaporados en 72 horas",
+          "title": "Unos $40 mil millones evaporados en una semana",
           "detail": "Personas perdieron los ahorros de toda su vida. La lección: si parece muy bueno para ser verdad, lo es.",
           "warning": true
         }
@@ -3812,25 +3841,25 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "kind": "statCards",
       "cards": [
         {
-          "value": "$15-30",
-          "label": "Lo que pierdes por cada $500 con remesadoras tradicionales",
-          "sublabel": "Típicamente 3-6% entre comisión y spread. El retiro en efectivo llega en minutos; las transferencias bancarias tardan días.",
+          "value": "~$28",
+          "label": "Costo promedio por cada $500",
+          "sublabel": "5.64% en Latinoamérica y el Caribe, entre comisión y tipo de cambio (Banco Mundial)",
           "tone": "red"
         },
         {
-          "value": "$0.001",
-          "label": "Fee de USDC por Solana",
-          "sublabel": "Llega en ~2 segundos",
+          "value": "$5-15",
+          "label": "Ruta con USDC por Solana",
+          "sublabel": "Red: menos de $0.01. El costo real: comprar USDC y convertir a pesos (1-3%)",
           "tone": "green"
         },
         {
-          "value": "$180-360",
-          "label": "Ahorro típico al año",
-          "sublabel": "Si recibes $500 en remesas cada mes",
+          "value": "$150-280",
+          "label": "Ahorro posible al año",
+          "sublabel": "Si recibes $500 al mes. Frente a las apps de remesas más baratas, la diferencia es menor",
           "tone": "green"
         }
       ],
-      "intro": "Enviar $500 de USA a LATAM: el método tradicional frente a stablecoins por Solana.",
+      "intro": "Enviar $500 de Estados Unidos a Latinoamérica: el costo promedio frente a stablecoins por Solana (noviembre de 2026).",
       "columns": 3
     }
   },
@@ -3841,23 +3870,23 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "48 / 48",
           "label": "Ana (DCA disciplinado)",
-          "sublabel": "Compra el día 1 cada mes. Muchas ventanas de 4+ años hasta 2025 terminaron en positivo (a veces cientos de %); depende del inicio/fin. Pasado ≠ futuro.",
+          "sublabel": "Compra $100 el día 1 de cada mes. La mayoría de ventanas de 4+ años terminaron en positivo; depende de las fechas. El pasado no garantiza el futuro.",
           "tone": "green"
         },
         {
           "value": "15 / 48",
           "label": "Carlos (intenta timing)",
-          "sublabel": "Espera la caída perfecta. Se perdió las mejores oportunidades.",
+          "sublabel": "Espera la caída perfecta. Invirtió menos y se perdió buenas oportunidades.",
           "tone": "amber"
         },
         {
           "value": "$4,800",
           "label": "María (todo de una vez)",
-          "sublabel": "Si compró en un pico: hasta -50% y años en pérdida.",
+          "sublabel": "Si el mercado sube, suele terminar con más. Si compró en un pico: hasta -50% y años en pérdida.",
           "tone": "red"
         }
       ],
-      "intro": "Tres personas invierten $100 al mes en Bitcoin durante 4 años.",
+      "intro": "Tres personas destinan $4,800 a Bitcoin a lo largo de 4 años.",
       "columns": 3
     },
     "¿Por Qué Funciona? La Matemática del Promedio": {
@@ -3866,17 +3895,17 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "TrendingDown",
           "title": "Cuando el precio baja",
-          "text": "Tus $50 compran MÁS cripto. La caída acumula más por menos."
+          "text": "Tu monto fijo compra MÁS cripto: el mismo dinero rinde más."
         },
         {
           "icon": "TrendingUp",
           "title": "Cuando el precio sube",
-          "text": "Tus $50 compran menos, pero lo que ya tienes vale más."
+          "text": "Tu monto fijo compra menos, pero lo que ya tienes vale más."
         },
         {
           "icon": "Scale",
-          "title": "El promedio gana",
-          "text": "Tu precio promedio queda bajo el del mercado: costo promedio ponderado."
+          "title": "El promedio juega a tu favor",
+          "text": "Tu costo promedio queda igual o por debajo del promedio de tus precios de compra. No garantiza ganancias."
         }
       ],
       "intro": "Compras la misma cantidad fija; tu precio promedio se suaviza solo.",
@@ -3887,16 +3916,16 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "Define el monto seguro",
-          "detail": "Invierte solo lo que no necesitas en 2+ años. Nunca el arriendo ni la comida.",
+          "detail": "Primero paga tus deudas caras y arma un fondo de emergencia. Invierte solo lo que no necesitas en 2+ años.",
           "warning": true
         },
         {
           "title": "Elige tu frecuencia",
-          "detail": "Una cantidad fija cada semana o cada mes. Ejemplo: $100-200 al mes."
+          "detail": "Una cantidad fija cada semana o cada mes. Ejemplo: 100,000-200,000 pesos al mes."
         },
         {
           "title": "Manual o automatizado",
-          "detail": "Manual en Binance P2P o Backpack, o automático en Jupiter (Solana) con USDC."
+          "detail": "Manual en un exchange con pesos (Bitso, Buda, Binance) o automático en Jupiter con USDC."
         }
       ],
       "intro": "Arrancar tu DCA es más fácil de lo que piensas."
@@ -3908,24 +3937,24 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "cards": [
         {
           "value": "60-70%",
-          "label": "Conservador",
-          "sublabel": "BTC base · 15-20% ETH · 10-15% SOL · 5-10% Stablecoins",
+          "label": "Base para empezar",
+          "sublabel": "BTC, más 20-30% entre ETH y SOL y 5-10% en stablecoins",
           "tone": "green"
         },
         {
-          "value": "40-50%",
+          "value": "45-55%",
           "label": "Moderado",
-          "sublabel": "BTC · 20-25% SOL · 15-20% ETH · 10-15% Stables · 5% Altcoins",
+          "sublabel": "BTC, más 30-40% entre ETH y SOL, 5-10% stablecoins y hasta 5% altcoins",
           "tone": "amber"
         },
         {
-          "value": "30%",
+          "value": "30-40%",
           "label": "Agresivo",
-          "sublabel": "BTC · 30% SOL · 15% ETH · 15% Altcoins · 10% Stablecoins",
+          "sublabel": "BTC, más 40-50% entre ETH y SOL, 5-10% stablecoins y hasta 10% altcoins. No es para principiantes",
           "tone": "red"
         }
       ],
-      "intro": "Tres marcos de referencia probados según tu tolerancia al riesgo.",
+      "intro": "Porcentajes dentro de tu porción cripto (para principiantes, una guía común es no más del 5-10% de tus ahorros invertibles).",
       "columns": 3
     },
     "El Universo de las Altcoins: Categorías que Debes Conocer": {
@@ -3948,7 +3977,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "icon": "AlertTriangle",
-          "title": "Tokens dudosos (99% del mercado)",
+          "title": "Tokens dudosos (la gran mayoría)",
           "text": "Sin equipo, sin producto, sin auditoría. Creados para extraer dinero de incautos."
         }
       ],
@@ -3958,28 +3987,28 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     "Ethereum y Solana: Las Plataformas de Utilidad": {
       "kind": "comparison",
       "left": {
-        "title": "Ethereum (ETH) · el \"Windows\"",
+        "title": "Ethereum (ETH) · la más establecida",
         "points": [
           "Primera y mayor plataforma de contratos inteligentes",
           "DeFi, NFTs y stablecoins nacieron aquí",
           "Ecosistema más maduro, más desarrolladores",
-          "L1 ~15 TPS con fees de centavos a pocos dólares (2026); las L2 cuestan centavos",
-          "Dominante y probado, pero pesado"
+          "L1 ~15 TPS; hoy fees de centavos o menos, que suben con la demanda",
+          "Dominante y probada, pero fragmentada entre capas"
         ],
         "tone": "amber"
       },
       "right": {
         "title": "Solana (SOL) · alta velocidad",
         "points": [
-          "Rápida (miles de TPS totales)",
+          "Rápida (~1,750-2,300 TPS de usuarios)",
           "Fees de fracciones de centavo",
           "Ecosistema DeFi: Jupiter, Raydium, Marinade",
           "Ideal para experimentar: los errores cuestan centavos",
-          "Más joven, más riesgo, más potencial"
+          "Más joven y con más riesgo"
         ],
         "tone": "amber"
       },
-      "note": "La diferencia clave con Bitcoin: ETH y SOL tienen inflación y no tienen el límite duro de 21M. Son apuestas a tecnología, no a escasez pura."
+      "note": "La diferencia clave con Bitcoin: ETH y SOL emiten tokens nuevos (cerca de 0.8% y 3.6% al año) y no tienen el límite fijo de 21M. Son apuestas a tecnología, no a escasez pura."
     }
   },
   44: {
@@ -3989,19 +4018,19 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "50-70%",
           "label": "Bitcoin: la base",
-          "sublabel": "Tu ancla. DCA y cold wallet si supera $5,000",
+          "sublabel": "Tu ancla. DCA y hardware wallet cuando el monto sea importante",
           "tone": "green"
         },
         {
-          "value": "20-35%",
+          "value": "20-30%",
           "label": "Crecimiento: SOL + ETH",
           "sublabel": "Ecosistemas en desarrollo, también en DCA",
           "tone": "amber"
         },
         {
-          "value": "5-15%",
+          "value": "5-10%",
           "label": "Operativo: Stablecoins",
-          "sublabel": "Comprar caídas, tarjeta cripto, estabilidad",
+          "sublabel": "Liquidez, tarjeta cripto, estabilidad",
           "tone": "neutral"
         },
         {
@@ -4011,23 +4040,23 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "tone": "red"
         }
       ],
-      "intro": "Un marco de distribución para principiantes que puedes ajustar a tu perfil.",
+      "intro": "Cómo repartir tu porción cripto (si empiezas, no más del 5-10% de tus ahorros invertibles).",
       "columns": 4
     },
     "Tu Plan de Acción: Escríbelo HOY, Ejecuta ESTA SEMANA": {
       "kind": "steps",
       "steps": [
         {
-          "title": "Verifica tu fondo de emergencia",
-          "detail": "3-6 meses de gastos. Si no lo tienes, prioriza eso antes que cripto."
+          "title": "Deudas y fondo de emergencia",
+          "detail": "Paga tus deudas caras y ten 3-6 meses de gastos ahorrados antes de invertir."
         },
         {
           "title": "Define tu portafolio base",
-          "detail": "% BTC + % SOL + % ETH + % Stablecoins. Escríbelo en papel."
+          "detail": "Tu porción cripto y su reparto: % BTC, % SOL, % ETH, % stablecoins. Escríbelo en papel."
         },
         {
           "title": "Configura tu DCA",
-          "detail": "Monto fijo + frecuencia + método. Empieza esta semana."
+          "detail": "Monto fijo, frecuencia y método. Empieza esta semana."
         },
         {
           "title": "Completa el checklist de seguridad",
@@ -4039,7 +4068,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Tu primera acción AHORA",
-          "detail": "Escribe los tres números, pon la alarma del lunes, ejecuta tu primer DCA."
+          "detail": "Escribe los cuatro números, pon la alarma del lunes y da tu primer paso."
         }
       ],
       "intro": "Tu plan completo en 6 pasos. Escríbelo hoy, ejecuta esta semana."
@@ -4077,26 +4106,26 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "Hasta 39%",
           "label": "Colombia",
-          "sublabel": "DIAN. Ganancia de capital en renta anual; monitoreo desde 2022",
+          "sublabel": "DIAN. 15% si las tuviste 2+ años; hasta 39% si menos. Los swaps cuentan. Exchanges reportan desde 2026",
           "tone": "amber",
           "flag": "🇨🇴"
         },
         {
           "value": "Hasta 35%",
           "label": "México",
-          "sublabel": "SAT. ISR sobre enajenación; Bitso reporta operaciones",
+          "sublabel": "SAT. ISR sobre enajenación (venta o intercambio)",
           "tone": "amber",
           "flag": "🇲🇽"
         },
         {
-          "value": "15%",
+          "value": "Ganancias",
           "label": "Argentina",
-          "sublabel": "ARCA (ex AFIP). Renta financiera + Bienes Personales sobre tenencias",
+          "sublabel": "ARCA (ex AFIP). Renta financiera y Bienes Personales sobre tenencias",
           "tone": "amber",
           "flag": "🇦🇷"
         }
       ],
-      "intro": "Las cripto no son invisibles para el fisco. Panorama general por país.",
+      "intro": "Las cripto no son invisibles para el fisco. Panorama general por país (noviembre de 2026). Consulta a un contador.",
       "columns": 3
     }
   },

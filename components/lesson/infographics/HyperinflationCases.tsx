@@ -3,10 +3,10 @@ import { TrendingDown } from 'lucide-react';
 
 // L2 · "Casos Reales" — four hyperinflation cases as scannable shock cards.
 const CASES: { flag: string; country: string; period: string; stat: string; statLabel: string; impact: string }[] = [
-  { flag: '🇻🇪', country: 'Venezuela', period: '2016 – 2020', stat: '1.000.000%', statLabel: 'inflación anual', impact: 'El salario mínimo no alcanzaba ni para un kilo de carne.' },
-  { flag: '🇦🇷', country: 'Argentina', period: '2023 – 2024', stat: '211%', statLabel: 'inflación anual en 2023, pico de 289% (abr 2024)', impact: 'Pensiones de toda una vida evaporadas en meses. Tras la desinflación, ~33% en 2026.' },
-  { flag: '🇹🇷', country: 'Turquía', period: '2021 – 2023', stat: '~−75%', statLabel: 'de la lira frente al dólar, de 2021 a 2023', impact: 'La clase media, de pronto sin poder pagar la renta.' },
-  { flag: '🇱🇧', country: 'Líbano', period: '2020 – 2023', stat: '−98%', statLabel: 'valor de la libra', impact: 'El banco no dejaba a la gente sacar su propio dinero.' },
+  { flag: '🇻🇪', country: 'Venezuela', period: '2016 a 2020', stat: '130,000%+', statLabel: 'inflación anual en 2018 (Banco Central de Venezuela)', impact: 'El salario mínimo no alcanzaba ni para un kilo de carne.' },
+  { flag: '🇦🇷', country: 'Argentina', period: '2023 a 2024', stat: '211%', statLabel: 'inflación anual en 2023, pico de 289% (abr 2024)', impact: 'Las pensiones perdieron buena parte de su valor en meses. En septiembre de 2026, 33% interanual.' },
+  { flag: '🇹🇷', country: 'Turquía', period: '2021 a 2023', stat: '~−75%', statLabel: 'de la lira frente al dólar, de 2021 a 2023', impact: 'La clase media, de pronto sin poder pagar la renta.' },
+  { flag: '🇱🇧', country: 'Líbano', period: '2020 a 2023', stat: '−98%', statLabel: 'valor de la libra', impact: 'El banco no dejaba a la gente sacar su propio dinero.' },
 ];
 
 const HyperinflationCases: React.FC = () => (
