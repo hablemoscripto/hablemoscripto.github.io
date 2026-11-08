@@ -8,6 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "db:seed": "npx vite-node scripts/seed.ts",
+    "content:check": "npx vite-node scripts/content-audit.ts --",
+    "content:durations": "npx vite-node scripts/lesson-durations.ts --",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

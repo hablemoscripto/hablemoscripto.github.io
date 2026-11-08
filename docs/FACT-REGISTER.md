@@ -1,0 +1,70 @@
+# Registro de datos (fact register)
+
+Every number, product detail or status claim in the lessons that can go out of date lives here.
+A lesson fact is done only when its row has a source, a verification date and the value the
+lesson now teaches.
+
+## How to use
+
+1. Before changing a perishable claim, find (or add) its row.
+2. Verify against a primary source (protocol docs, official blog, on-chain dashboard, regulator).
+   Record the URL in **Fuente** and the date in **Verificado**.
+3. Update every lesson listed in **Lecciones**, its infographic spec in
+   `data/lessonInfographics.ts`, and any quiz option or explanation that repeats it. Search with
+   `rg` for the old value before closing the row.
+4. Sections that show a perishable value carry `asOf: '<mes> de <año>'`. `npm run content:check`
+   fails once that date is older than 180 days.
+5. Cadence: **M** monthly, **T** quarterly, **A** yearly, **E** on event (upgrade, hack, law).
+
+Lesson IDs are internal ids (`data/levels.ts`), not the numbers learners see.
+
+## Estado
+
+| ID | Dato | Lecciones | Valor que enseña hoy | Estado | Fuente | Verificado | Cadencia |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| F-001 | Tiempo de slot y finalidad de Solana | 5, 10, 29, 32, 33, 36 | ~200 ms por bloque (SIMD-0525, 9 oct 2026); confirmación en menos de un segundo | Verificado en lecciones gratis; pendiente en 29, 32, 33 | [Reduced slot times](https://solana.com/upgrades/reduced-slot-times), [Alpenglow](https://solana.com/upgrades/alpenglow) | 2026-11-08 | E |
+| F-002 | Validadores de Solana con stake | 5, 6, 10, 36 | ~660 (pico ~2,560 en marzo de 2023) | Verificado | [BitBasic nov 2026](https://bitbasic.com/reports/solana/2026-11), [Cointelegraph](https://cointelegraph.com/news/solana-validator-count-drops-68-2023-peak) | 2026-11-08 | T |
+| F-003 | Coeficiente de Nakamoto de Solana | 6, 10 | 18 (31-34 en 2023); cuenta validadores, no entidades | Verificado | [Solana Compass](https://solanacompass.com/statistics/decentralization) | 2026-11-08 | T |
+| F-004 | Clientes de Solana: Firedancer y Agave | 10, 33 | Firedancer ~17% del stake, familia Agave ~83%; Frankendancer retirado | Verificado en L10; pendiente en 33. Confianza media en la fecha de lanzamiento | [uwuu.ai](https://uwuu.ai/blog/solana-firedancer), [Agave feature gates](https://github.com/anza-xyz/agave/wiki/Feature-Gate-Tracker-Schedule) | 2026-11-08 | E |
+| F-005 | Rendimiento de staking de SOL e inflación | 10, 40, 43 | LST 4.8-5.1% netos; inflación 3.57%/año (L43 dice ~3.6%) | Verificado en lecciones gratis; pendiente en 40 | [Solana Compass staking](https://solanacompass.com/staking), [LST tracker](https://sol.stake-manager.net/lst/) | 2026-11-08 | M |
+| F-006 | Duración de un epoch de Solana | 40 | ~1 día (432,000 slots de 200 ms) | Por actualizar en 40 (enseña ~2-3 días) | [SIMD-0525](https://github.com/solana-foundation/solana-improvement-documents/blob/main/proposals/0525-reduce-slot-times.md) | 2026-11-08 | E |
+| F-007 | Precio de BTC y máximo histórico | 18, 42, 43 | ~$75,860; máximo de $126,080 (6 oct 2025), ~40% abajo | Verificado en lecciones gratis; pendiente en 18 | [CoinGecko](https://api.coingecko.com/api/v3/coins/bitcoin) | 2026-11-08 | M |
+| F-008 | Resultado de DCA semanal en BTC desde 2019 | 42 | $50/semana, ene 2019 a nov 2026: 410 compras, $20,500 invertidos, ~1.036 BTC, ~$78,600 | Verificado (cálculo propio) | [Coinbase velas diarias](https://api.exchange.coinbase.com/products/BTC-USD/candles) | 2026-11-08 | T |
+| F-009 | BTC en tesorería de Strategy | 43 | 849,327 BTC (1 nov 2026); vendió algo en 2026 | Verificado | [SEC 8-K](https://www.sec.gov/Archives/edgar/data/1050446/0001193125-26-442707.txt) | 2026-11-08 | T |
+| F-010 | Salario mínimo de EE. UU. medido en oro | 1, 2 | ~7.9 onzas al mes en 1971; ~0.31 hoy (oro ~$4,070); la medida en IPC (43% menos que en 1968) es más honesta | Verificado | [GoldVetted / Banco Mundial](https://goldvetted.com/us/gold-price/history/), [EPI](https://www.epi.org/publication/wage-suppression-in-10-charts/) | 2026-11-08 | T |
+| F-011 | Inflación anual de Argentina | 2 | 33% interanual (septiembre 2026); pico 289.4% (abril 2024) | Verificado. Revisar el dato de octubre (INDEC, 12 nov 2026) | [INDEC sept 2026](https://www.indec.gob.ar/uploads/informesdeprensa/ipc_10_268C45A9444C.pdf) | 2026-11-08 | M |
+| F-012 | Concentración de pools de minería de BTC | 4, 6, 43 | Los 2 pools más grandes ~46% de los bloques | Verificado | [mempool.space 1 año](https://mempool.space/api/v1/mining/pools/1y) | 2026-11-08 | T |
+| F-013 | Nodos de Bitcoin y Ethereum | 6, 43 | BTC 20,725 alcanzables; ETH ~8,700 de ejecución (ambos subestiman) | Verificado | [Bitnodes](https://bitnodes.io/api/v1/snapshots/?limit=3), [ethernodes](https://ethernodes.org/) | 2026-11-08 | A |
+| F-014 | Validadores activos de BNB Smart Chain | 6 | 45 activos; 21 producen bloques por época | Verificado | [BNB staking](https://www.bnbchain.org/en/bnb-staking) | 2026-11-08 | A |
+| F-015 | Costo de transacción en Ethereum L1 y L2 | 10, 43 | L1: transferencia ~$0.002, swap ~$0.03 (mínimos históricos); L2 menos de 1 centavo | Verificado | [Etherscan gas](https://etherscan.io/gastracker), [growthepie vía TopOfBase](https://topofbase.com/stats/base-vs-arbitrum) | 2026-11-08 | T |
+| F-016 | Última caída total de Solana | 6, 10, 32 | 6 feb 2024 (~5 h); en ago 2026 una falla de hosting sacó ~29% del stake sin detener la red | Verificado en lecciones gratis; pendiente en 32 | [Reporte oficial](https://solana.com/news/02-06-24-solana-mainnet-beta-outage-report) | 2026-11-08 | E |
+| F-017 | Precio de BTC frente a finales de 2013 | 4 | ~100 veces el cierre de 2013 ($754), con caídas de 85% en el camino | Verificado | [CMC 31-12-2013](https://coinmarketcap.com/historical/20131231/) | 2026-11-08 | T |
+| F-018 | Precio de JUP | 30 | ~$0.24 (nov 2026) | Pendiente en 30 | [CoinGecko](https://api.coingecko.com/api/v3/simple/price?ids=jupiter-exchange-solana&vs_currencies=usd) | 2026-11-08 | M |
+| F-019 | Hotspots activos de Helium | 31 | ~376,000 | Por verificar |  |  | T |
+| F-020 | Hivemapper: nombre, recompensas y hardware | 31 | Hivemapper, recompensas en HONEY | Por verificar |  |  | E |
+| F-021 | Cuota de volumen NFT en Solana por marketplace | 29 | Tensor concentra la mayor parte | Por verificar |  |  | T |
+| F-022 | Costo de un validador de Solana | 10, 32 | $600-1,300 al mes en servidor dedicado (L10); L32 aún dice $5,000-20,000+ de hardware | Verificado en L10; pendiente en 32 | [Anza requisitos](https://docs.anza.xyz/operations/requirements), [Cherry Servers](https://www.cherryservers.com/solana-servers/solana-validator-node) | 2026-11-08 | A |
+| F-023 | TPS reales de Solana | 32, 33, 43 | ~1,750-2,300 TPS de usuario tras Alpenglow (votos fuera de los bloques) | Verificado en L43 (confianza media-baja); pendiente en 32, 33 | [Solana Observer](https://solana-observer.com/metrics/transactions-per-second-tps) | 2026-11-08 | E |
+| F-024 | Apalancamiento máximo en perpetuos de Jupiter | 25 | Hasta 100x | Por verificar |  |  | E |
+| F-025 | Jupiter: modos de swap, comisiones, slippage, MEV, órdenes recurrentes | 22, 25, 42, 44, 45 | Recurring cobra 0.1% por orden (L42, L44) | Por verificar |  |  | E |
+| F-026 | KAST: custodia, comisiones y Colombia | 39, 41 | Custodial (BitGo, Fireblocks); 0% al recargar con stablecoins; FX 0.5-1.75%; tarjeta física $40; COP desde abr 2026 | Verificado (elegibilidad en Colombia: confianza media) | [KAST fees](https://concierge.kast.xyz/hc/en-us/articles/9850062738703-What-Are-the-Fees-and-Conditions-for-KAST-Cards-and-Accounts), [COP](https://www.kast.xyz/en/newsroom/press-releases/kast-expands-in-latam-with-cop-pay-in-and-payouts) | 2026-11-08 | T |
+| F-027 | Avici: tarjeta, comisiones y disponibilidad | 39, 41 | Autocustodia (smart wallet); Platinum virtual $15 único; 0% FX de Avici (Visa 0.4-1%); Colombia elegible; colateral en contrato EVM vía puente | Verificado | [Avici fees](https://docs.avici.money/getting-started/secured-credit-cards/fees-and-limits), [Regiones](https://docs.avici.money/getting-started/secured-credit-cards/regions-and-prohibitions-for-avici-card) | 2026-11-08 | T |
+| F-028 | Backpack: licencias y Colombia | 35 | VARA (Dubái) y licencias UE no aplican a Colombia; colombianos usan la entidad global; sin COP | Verificado | [VARA](https://www.vara.ae/en/licenses-and-register/public-register/trek-labs-ltd-fze-backpack/), [Fiat](https://support.backpack.exchange/exchange/deposit-and-withdraw/fiat) | 2026-11-08 | A |
+| F-029 | Tasas de CDT en Colombia | 2, 40 | L2: "a veces pagan más que la inflación" (sin cifra); L40: 8-12% EA | Pendiente en 40 |  |  | T |
+| F-030 | Tributación de cripto en Colombia | 13, 39, 44 | Activo intangible en patrimonio; 2+ años: ganancia ocasional 15%; menos: renta ordinaria 0-39%; swaps gravados (permuta); staking es ingreso; airdrops ganancia ocasional | Verificado contra doctrina DIAN. Requiere revisión de contador antes del lanzamiento | [Concepto Unificado 2023](https://www.dian.gov.co/normatividad/Documents/100202208-1621-Concepto-Unificado-Criptoactivos-17102023.pdf) | 2026-11-08 | A |
+| F-031 | Token de MarginFi | 27 | MRGN "se lanzó" | Por verificar |  |  | E |
+| F-032 | Quema de JUP y votación de la DAO | 30, 46 | Ver lección 46 | Por verificar |  |  | E |
+| F-033 | Emisión anual neta de ETH | 43 | ~0.8% en el último año (+0.83%); solo deflacionaria en 2023 | Verificado | [cryptokeyhole](https://cryptokeyhole.com/learn/ethereum-supply/) | 2026-11-08 | A |
+| F-034 | Estadística de retención "28%" (aprender enseñando) | 4, 5, 7, 25 | Eliminada de lecciones gratis; no existe fuente | Eliminado en lecciones gratis; revisar 25 | [Nestojko et al. 2014](https://sites.williams.edu/nk2/files/2011/08/Nestojko.Bui_.Kornell.Bjork_.2014.pdf) | 2026-11-08 | A |
+| F-035 | Costo de remesas | 36, 41 | Global 6.36%, América Latina 5.64% (Q3 2025) | Verificado | [Banco Mundial RPW Q3 2025](https://remittanceprices.worldbank.org/sites/default/files/2026-04/RPW_main_report_and_annex_Q325.pdf) | 2026-11-08 | A |
+| F-036 | Umbral de liquidación de SOL en Kamino | 27 | Ver lección 27 | Por verificar |  |  | T |
+| F-037 | GENIUS Act (stablecoins en EE. UU.) | 41 | Ley desde el 18 jul 2025; vigente desde el 18 ene 2027; emisores deben poder congelar tokens | Verificado | [OCC boletín 2026-50](https://www.occ.gov/news-issuances/bulletins/2026/bulletin-2026-50.html) | 2026-11-08 | E |
+| F-038 | Congelamiento de USDC y USDT | 41 | Circle y Tether pueden congelar direcciones, incluso en autocustodia | Verificado | [Política de Circle](https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/Circle%20Stablecoin%20Access%20Denial%20Policy_pdf.pdf), [Tether](https://tether.io/news/tether-has-supported-nearly-550-million-in-iran-linked-usdt-freezes-as-u-s-expands-sanctions-campaign/) | 2026-11-08 | E |
+| F-039 | Reporte de exchanges a la DIAN (CARF y exógena) | 44 | Res. 000240 del 24 dic 2025: reporte desde el año gravable 2026, primero el último día hábil de mayo de 2027; Res. 227/2025: exógena | Verificado. Requiere revisión de contador | [Res. 000240 Anexo](https://www.dian.gov.co/normatividad/Normatividad/Anexo%201%20-%20Resoluci%C3%B3n%20000240%20de%202025.pdf) | 2026-11-08 | A |
+| F-040 | Supervisión de plataformas cripto por la SFC | 35, 41 | La SFC no supervisa ninguna plataforma cripto; el piloto terminó el 13 jun 2024 | Verificado | [SFC cierre del piloto](https://www.superfinanciera.gov.co/publicaciones/10115218/) | 2026-11-08 | E |
+| F-041 | Rampas COP a Solana | 35, 41 | Bitso, Buda (PSE, ACH, Bre-B) y Wenia (COPW; solo wallets propias) envían SOL/USDC en Solana; Binance recibe COP por PSE y Bre-B | Verificado | [Bitso redes](https://support.bitso.com/hc/es-co/articles/4419901801748), [Buda](https://soporte.buda.com/es/articles/2379051-como-retirar-criptomonedas-desde-buda-com), [Binance COP](https://www.binance.info/en/support/faq/detail/d2484f5a1ab7448d8f3fcca4effbfca3) | 2026-11-08 | T |
+| F-042 | Tasa de usura en Colombia | 42, 44 | 28.34% EA en noviembre de 2026 (~2.1% al mes) | Verificado. Cambia cada mes: revisar o redondear | [Superfinanciera](https://www.superfinanciera.gov.co/publicaciones/10116308/superfinanciera-certifica-el-interes-bancario-corriente/) | 2026-11-08 | M |
+| F-043 | Salario mínimo de Colombia 2026 | 2, 44 | 1,750,905 pesos (Decreto 1469/2025) | Verificado | [Decreto 1469](https://dapre.presidencia.gov.co/normativa/normativa/DECRETO%201469%20DEL%2029%20DE%20DICIEMBRE%20DE%202025.pdf) | 2026-11-08 | A |
+| F-044 | Lump sum frente a DCA (Vanguard) | 42 | Invertir todo de una vez ganó ~68% de las veces; aplica a sumas que ya tienes, no a aportes del salario | Verificado | [Vanguard 2023](https://corporate.vanguard.com/content/dam/corp/research/pdf/cost_averaging_invest_now_or_temporarily_hold_your_cash.pdf) | 2026-11-08 | A |
+| F-045 | Phantom: dominio, redes y login social | 9 | phantom.com/download; multichain (incluye BNB Chain; Sui y Monad retirados); login con Google/Apple ligado a esa cuenta | Verificado. Revisar capturas en un dispositivo | [Redes soportadas](https://help.phantom.com/articles/supported-networks-chains-in-phantom-41372840389651), [Sign in](https://help.phantom.com/articles/sign-in-to-your-phantom-wallet-15079894392851) | 2026-11-08 | E |
+| F-046 | Seguro de depósitos de Fogafín | 2 | Hasta 50 millones de pesos por persona por entidad | Verificado | [Fogafín preguntas frecuentes](https://www.fogafin.gov.co/preguntas-frecuentes) | 2026-11-08 | A |
