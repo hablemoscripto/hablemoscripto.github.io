@@ -1766,7 +1766,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
         content: 'Cuando tus ahorros en cripto crecen (digamos, más de unos miles de dólares), vale la pena subir de nivel:',
         features: [
           { icon: Shield, title: 'Placa de Metal', text: 'El papel se quema, se moja, se descompone. Productos como Cryptosteel o Billfodl te permiten grabar tu frase en acero inoxidable. Resiste incendios, inundaciones y décadas de tiempo. Cuesta entre $50 y $100.' },
-          { icon: Layers, title: 'Copias en Múltiples Ubicaciones', text: 'Una sola copia es un punto único de fallo. Guarda 2-3 copias en ubicaciones diferentes, por ejemplo tu casa y la de un familiar de máxima confianza. Si un lugar se destruye, tienes respaldo. Cada copia extra es también un lugar más donde la pueden encontrar: elige pocos lugares, bien protegidos.' },
+          { icon: Layers, title: 'Copias en Múltiples Ubicaciones', text: 'Una sola copia es un punto único de fallo. Guarda 2-3 copias en ubicaciones diferentes, por ejemplo tu casa y la de un familiar de máxima confianza. Si un lugar se destruye, tienes respaldo. Ojo: quien tenga una copia completa, incluido ese familiar, puede gastar tus fondos. Cada copia extra es un lugar más donde la pueden encontrar: elige pocos lugares, bien protegidos, y guárdala en un sobre sellado y firmado que delate si lo abrieron.' },
           { icon: Lock, title: 'Passphrase Adicional (Palabra 25)', text: 'Algunas wallets, sobre todo hardware wallets como Ledger o Trezor, permiten agregar una palabra extra personalizada (passphrase). Tu frase de 12 palabras más esa palabra genera wallets DIFERENTES: si roban tu frase, sin la passphrase no pueden acceder. Phantom no ofrece esta opción. Y si olvidas la passphrase, pierdes el acceso igual que si perdieras la frase: es solo para usuarios avanzados.' }
         ],
         highlight: {
@@ -2300,7 +2300,7 @@ export const LESSONS_DATA: Record<number, LessonEntry> = {
             { id: 'd', text: 'Es una L2 que procesa transacciones fuera de Solana' }
           ],
           correctAnswer: 'c',
-          explanation: 'Firedancer es un cliente de validador escrito desde cero por Jump Crypto. Corre en la red principal y maneja cerca del 17% del stake. Importa porque, si el software principal (Agave) tuviera un error grave, los validadores con Firedancer podrían seguir funcionando. No es un token, ni una wallet, ni una L2.'
+          explanation: 'Firedancer es un cliente de validador escrito desde cero por Jump Crypto. Corre en la red principal y maneja cerca del 17% del stake. Importa porque un error grave en un solo software ya no afecta a todos los validadores. Con el 17% todavía no basta para mantener la red andando si Agave falla (hacen falta dos tercios del stake), pero cada punto de stake que gana reduce ese riesgo. No es un token, ni una wallet, ni una L2.'
         },
         {
           id: 'q-tf',

@@ -2194,7 +2194,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "kind": "steps",
       "steps": [
         {
-          "title": "Entra una orden: $5,000 USDC → SOL",
+          "title": "Entra una orden: $5,000 USDC por SOL",
           "detail": "Sale de tu wallet (Phantom) sin entregar custodia a nadie."
         },
         {
@@ -2217,9 +2217,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "left": {
         "title": "Jupiter (DEX)",
         "points": [
-          "Sin custodia: tus fondos siempre en tu wallet",
+          "Swaps sin custodia (las órdenes programadas guardan fondos)",
           "Sin KYC ni verificación de identidad",
-          "Todos los tokens de Solana, incluso nuevos",
+          "Casi cualquier token, incluidas copias: verifica el mint",
           "DCA y Limit Orders sin intermediarios",
           "Riesgo: bugs de smart contract (mitigado por auditorías)",
           "Solo funciona con tokens en Solana"
@@ -2245,7 +2245,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "Conecta tu wallet",
-          "detail": "jup.ag → Connect Wallet. Nunca pide tu frase semilla, solo firmar."
+          "detail": "Escribe jup.ag y toca Connect Wallet. Nunca pide tu frase semilla, solo firmar."
         },
         {
           "title": "Selecciona tus tokens",
@@ -2253,11 +2253,11 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Revisa y confirma",
-          "detail": "Price Impact <0.5%, slippage 0.5%, firma en Phantom. Fee Jupiter: 0% en modo manual; el modo Ultra (por defecto) cobra 0-0.1% según el par."
+          "detail": "Price impact bajo y firma en Phantom. Fee: modo Ultra (por defecto) 0-0.5% según el par; modo Manual 0%, sin protección MEV."
         },
         {
           "title": "Configuración avanzada",
-          "detail": "Órdenes >$10,000: slippage 0.1-0.3%. Activa MEV Protect (Jito) contra bots MEV."
+          "detail": "Órdenes grandes: si el price impact supera ~1%, divide en el tiempo o usa una orden límite. Ultra envía privado contra MEV."
         }
       ],
       "intro": "Tres pasos en jup.ag y tu swap está listo en 1-2 segundos."
@@ -2293,12 +2293,6 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "kind": "statCards",
       "cards": [
         {
-          "value": "+25%",
-          "label": "Cambio de precio",
-          "sublabel": "IL ~0.6%",
-          "tone": "green"
-        },
-        {
           "value": "+50%",
           "label": "Cambio de precio",
           "sublabel": "IL ~2.0%",
@@ -2321,9 +2315,21 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "label": "El token hace 5×",
           "sublabel": "IL ~25.5%",
           "tone": "red"
+        },
+        {
+          "value": "-50%",
+          "label": "El token cae a la mitad",
+          "sublabel": "IL ~5.7%",
+          "tone": "amber"
+        },
+        {
+          "value": "-90%",
+          "label": "El token cae 90%",
+          "sublabel": "IL ~42.5%, más la caída del precio",
+          "tone": "red"
         }
       ],
-      "intro": "Cuanto más se mueve el precio, mayor es la pérdida frente a hacer HODL. La tabla que debes memorizar:",
+      "intro": "Cuanto más se mueve el precio, en cualquier dirección, mayor es la pérdida frente a hacer HODL:",
       "columns": 3
     },
     "Pool Estándar vs Pool Concentrado": {
@@ -2363,7 +2369,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Un trader hace swap contra el pool",
-          "detail": "Intercambia SOL↔USDC contra el pool, no contra otra persona, y paga 0.25-1% de comisión."
+          "detail": "Intercambia SOL↔USDC contra el pool, no contra otra persona, y paga una comisión (de 0.01% a 1% según el pool)."
         },
         {
           "title": "Los fees se reparten entre los LPs",
@@ -2375,7 +2381,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Cobras al retirar tu liquidez",
-          "detail": "Más volumen del pool = más fees. El APY es variable: SOL-USDC 10-30%, memecoin en hype 500-2,000% por horas."
+          "detail": "Más volumen del pool = más fees. El APY es variable y no incluye la impermanent loss."
         }
       ],
       "intro": "Tú te conviertes en la casa de cambio: depositas tokens y cobras una porción de cada swap."
@@ -2391,12 +2397,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "BarChart3",
           "title": "Meteora",
-          "text": "Especialista en DLMM concentrado. Rangos precisos y estrategias spot/curve/bid-ask. Rendimientos extraordinarios, pero requiere experiencia."
+          "text": "Especialista en DLMM concentrado. Rangos precisos y estrategias spot/curve/bid-ask. Para LPs con experiencia."
         },
         {
           "icon": "Layers",
           "title": "Orca",
-          "text": "Excelente UX con sus Whirlpools concentrados. Menos volumen que Raydium, familiar para quien viene de DeFi en otras chains."
+          "text": "Interfaz clara con Whirlpools concentrados; también permite rango completo."
         }
       ],
       "intro": "Cada DEX de Solana tiene su nicho. Elige según tu nivel y estrategia:",
@@ -2420,15 +2426,15 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "tone": "red"
         },
         {
-          "value": "40-60%",
-          "label": "LTV profesional",
-          "sublabel": "Aquí debes estar: con 50% LTV necesitas una caída de ~33-40% para ser liquidado",
+          "value": "35-40%",
+          "label": "LTV prudente",
+          "sublabel": "Para empezar: con 35-40% LTV necesitas una caída de 50-56% para ser liquidado",
           "tone": "green"
         },
         {
-          "value": "5-10%",
+          "value": "2-10%",
           "label": "Penalización al liquidar",
-          "sublabel": "El bot vende tu colateral. Irreversible.",
+          "sublabel": "Según protocolo y activo. Vendes en el peor momento. Irreversible.",
           "tone": "red"
         }
       ],
@@ -2440,11 +2446,11 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "left": {
         "title": "Conservador (Recomendado)",
         "points": [
-          "LTV del 40-50%: pides menos de la mitad",
-          "Meta: Health Factor ≥ 2.0 (≈ 40% LTV; a 50% LTV HF ≈ 1.6)",
+          "LTV de 35-40% o menos",
+          "Health Factor ≥ 2.0 (≈ 40% LTV o menos)",
           "Colateral en blue chips: SOL, ETH",
-          "Monitoreo semanal es suficiente",
-          "Riesgo de liquidación: muy bajo",
+          "Revisión diaria y alertas",
+          "Riesgo de liquidación: bajo, no cero",
           "Meta: liquidez sin vender tu posición"
         ],
         "tone": "green"
@@ -2483,11 +2489,11 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "detail": "Tras 3-4 loops moderados: ~1.8× apalancamiento (~17-18 SOL)."
         },
         {
-          "title": "SOL sube 20% → ganas ~35%",
+          "title": "SOL sube 20%: ganas ~35%",
           "detail": "Con LTV moderado el looping amplifica sin ir a 2-4× (eso es LTV agresivo)."
         },
         {
-          "title": "Caída fuerte → liquidación",
+          "title": "Caída fuerte: liquidación",
           "detail": "A LTV agresivo (cerca del máximo) una caída de ~6-15% puede liquidarte. Kamino Multiply lo hace con un clic: trátalo como un perpetuo apalancado.",
           "warning": true
         }
@@ -2503,15 +2509,15 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Pide prestado conservador",
-          "detail": "Solo $900 USDC = 50% LTV, no los $1,350 / 75% que permite el protocolo."
+          "detail": "Solo $630 USDC = 35% LTV, no los $1,350 / 75% que permite el protocolo."
         },
         {
           "title": "Monitorea tu Health Factor",
-          "detail": "Con 50% LTV y umbral 80%, HF ≈ 1.6. Meta profesional: HF ≥ 2.0 (implica ~40% LTV). Si cae a 1.3, actúa: deposita más o repaga."
+          "detail": "Con 35% LTV y umbral 80%, HF ≈ 2.3. Revisa a diario; si baja de 1.5, deposita más o repaga."
         },
         {
           "title": "Repaga y recupera",
-          "detail": "Devuelves $900 + intereses, liberas tus 10 SOL. Accediste a liquidez sin vender."
+          "detail": "Devuelves $630 + intereses y liberas tus 10 SOL. Si SOL bajó, igual debes lo mismo."
         }
       ],
       "intro": "Pedir prestado en Kamino de forma segura, con cifras reales."
@@ -2605,7 +2611,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Clock",
           "title": "Lindy Effect",
-          "text": "Mientras más tiempo lleva un protocolo sin ser hackeado, más confiable es. El tiempo es la mejor auditoría."
+          "text": "Más tiempo resistiendo con mucho TVL suele significar menos bugs obvios. No protege de llaves mal controladas."
         },
         {
           "icon": "Search",
@@ -2630,8 +2636,8 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Minteo regular: ~0.01+ SOL (~$1-3); los cNFTs cuestan fracciones de centavo",
           "cNFTs: millones de NFTs por centavos",
-          "Transacciones instantáneas (~400ms)",
-          "Marketplaces: Tensor, Magic Eden",
+          "Confirmación en menos de un segundo",
+          "Marketplaces: Magic Eden, Tensor (y OpenSea en algunas)",
           "Enfoque en utilidad y comunidades activas",
           "Mercado impulsado por utilidad y cNFTs (2026)"
         ],
@@ -2640,7 +2646,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "right": {
         "title": "Ethereum",
         "points": [
-          "Minteo: ~$1-5 por NFT en L1 (2026, post-Dencun)",
+          "Minteo en L1: de centavos a varios dólares según congestión",
           "Sin compresión nativa (caro a escala)",
           "Transacciones lentas (~12s) y caras",
           "Marketplaces: OpenSea, Blur",
@@ -2649,7 +2655,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         ],
         "tone": "amber"
       },
-      "note": "El golpe está en el costo a escala: los cNFTs de Solana cuestan fracciones de centavo frente a ~$1-5 por NFT en Ethereum."
+      "note": "El golpe está en el costo a escala: un millón de cNFTs en Solana cuesta unos pocos SOL en total."
     },
     "El Ecosistema de NFTs en Solana": {
       "kind": "iconGrid",
@@ -2692,10 +2698,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "bad": {
         "title": "Dónde operar",
         "items": [
-          "Tensor: profesional, lidera el volumen pro-trader (~60-70%)",
-          "Tensor es a los NFTs lo que Jupiter a los tokens",
-          "Magic Eden: accesible y amigable, enfocado 100% en Solana desde 2026",
-          "Magic Eden: ideal para tu primera compra"
+          "Magic Eden: líder en volumen, ideal para tu primera compra",
+          "Tensor: herramientas tipo exchange para traders",
+          "OpenSea: algunas colecciones de Solana desde 2026",
+          "Verifica la dirección de la colección oficial"
         ]
       }
     },
@@ -2841,16 +2847,16 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "detail": "Pagar el servicio requiere el token"
         },
         {
-          "label": "El token sube",
+          "label": "El token puede valorizarse",
           "detail": "Más valor para quienes participan"
         },
         {
           "label": "Vuelve a empezar con más participantes",
-          "detail": "Helium: creció a ~1M de hotspots en 2022; hoy ~376,000 activos (2026). El flywheel también puede girar al revés.",
+          "detail": "Helium: creció a ~1M de hotspots en 2022; hoy ~358,000 activos (nov. 2026). El flywheel también gira al revés.",
           "highlight": true
         }
       ],
-      "intro": "El flywheel de DePIN: un ciclo virtuoso que se retroalimenta y escala exponencialmente."
+      "intro": "El flywheel de DePIN: un ciclo que se retroalimenta, para bien o para mal."
     },
     "Los Proyectos DePIN Más Importantes de Solana": {
       "kind": "iconGrid",
@@ -2858,12 +2864,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Network",
           "title": "Helium (HNT)",
-          "text": "Red descentralizada de IoT (LoRaWAN) y 5G/celular móvil. ~376,000 hotspots activos (2026, tras el pico de ~1M en 2022). Desde HIP-138 (enero 2025) todo se paga en HNT. Plan móvil de $15-30/mes en USA."
+          "text": "Red descentralizada de IoT (LoRaWAN) y Wi-Fi. ~358,000 hotspots activos (nov. 2026, tras el pico de ~1M en 2022). Todo se paga en HNT. Planes móviles solo en EE. UU."
         },
         {
           "icon": "Globe",
-          "title": "Hivemapper (HONEY)",
-          "text": "Google Maps descentralizado. Ganas tokens por km mapeado con dashcam. Mapa global en tiempo real."
+          "title": "Bee Maps (antes Hivemapper)",
+          "text": "Mapa descentralizado. Te pagan en USDC por km mapeado con su cámara. Por ahora solo EE. UU. y Puerto Rico."
         },
         {
           "icon": "Cpu",
@@ -2906,10 +2912,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "left": {
         "title": "Solana (Monolítico)",
         "points": [
-          "Una sola cadena rápida: miles de TPS, ~400ms",
+          "Una sola cadena rápida: bloques cada ~200ms",
           "Toda la liquidez en un solo lugar",
           "Componibilidad sincrónica: operaciones atómicas complejas",
-          "Sin bridges ni fragmentación",
+          "Sin bridges dentro del ecosistema",
           "Requiere hardware potente para validadores",
           "Si L1 falla, todo el ecosistema se detiene"
         ],
@@ -2946,7 +2952,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Si una falla, TODAS se revierten",
-          "detail": "Es atómico: imposible cuando las apps viven en distintas L2s.",
+          "detail": "Es atómico. Entre L2s distintas, esa atomicidad se pierde.",
           "warning": true
         }
       ],
@@ -2958,7 +2964,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Ethereum + L2s: con fricción",
         "points": [
           "Tu USDC está en Arbitrum, el protocolo está en Base",
-          "Bridge obligatorio: tarda minutos u horas",
+          "Bridge obligatorio: de segundos a horas según el tipo",
           "Fees adicionales en cada salto",
           "Riesgo de hack: los bridges son los mayores targets",
           "Liquidez dividida entre 20+ L2s, cada pool con menos profundidad"
@@ -2971,7 +2977,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Todo en una sola cadena, sin elegir L2",
           "Conectas Phantom a Jupiter y ya",
           "Accedes a TODA la liquidez disponible",
-          "Sin bridges, sin esperas, sin fees extra",
+          "Sin bridges internos, sin esperas, sin fees extra",
           "Mejor ejecución y menor slippage"
         ],
         "tone": "green"
@@ -2984,7 +2990,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Debilidades de Solana",
         "points": [
           "Episodios de congestión y degradación de rendimiento",
-          "Hardware de validador de $5,000-20,000+ limita quién corre nodo",
+          "Validar cuesta ~$600-1,300 al mes más tarifas: pocos pueden",
           "Eso concentra los nodos y afecta la descentralización",
           "Sin 'escape': si L1 falla, todo el ecosistema cae a la vez"
         ],
@@ -3011,7 +3017,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Lenguaje: Rust, seguridad de memoria por compilador",
           "En producción desde 2020, años probado en mainnet",
-          "TPS: miles totales (incl. votos); usuarios ~cientos a ~1-3k",
+          "TPS de usuarios: de cientos a unos pocos miles, según carga",
           "Equipo: Anza, expertos en blockchain",
           "Ventaja: estabilidad probada, herramientas maduras",
           "Limitación: techo de rendimiento por diseño original"
@@ -3022,7 +3028,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Firedancer (Jump - C)",
         "points": [
           "Lenguaje: C, control total de memoria y hardware",
-          "Frankendancer en mainnet (~20-26% del stake a mediados de 2026); Firedancer completo (v1.0) alcanzó testnet en junio de 2026, mainnet aún en despliegue gradual",
+          "En mainnet desde diciembre de 2025, ~17% del stake (nov. 2026)",
           "TPS en laboratorio: 1,000,000+ (teórico máximo)",
           "Equipo: Jump Crypto, expertos en trading HFT",
           "Ventaja: rendimiento extremo y diversidad real de código",
@@ -3030,7 +3036,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         ],
         "tone": "amber"
       },
-      "note": "Dos clientes independientes: un bug en uno no puede tumbar toda la red."
+      "note": "Un bug en el cliente minoritario no detiene la red; uno en el mayoritario todavía podría."
     },
     "El Futuro de Solana: Más Allá de Firedancer": {
       "kind": "iconGrid",
@@ -3067,21 +3073,21 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Apagones en 2022 detenían la red por horas",
           "Picos de demanda: mints y airdrops la congestionaban",
           "Muchos \"transaction failed\" cuando más importaba",
-          "Hardware de validador caro: ~$5,000+ en equipo"
+          "Validar es caro: ~$600-1,300 al mes en servidor"
         ],
         "tone": "red"
       },
       "right": {
         "title": "Lo que cambia para ti",
         "points": [
-          "Dos clientes: un bug ya no tumba toda la red, DeFi confiable",
-          "Firedancer mejora la tolerancia a los picos de demanda",
+          "Dos clientes: menos riesgo de apagón total a medida que se reparte el stake",
+          "Firedancer está diseñado para tolerar mejor los picos",
           "Hardware más eficiente: validar más barato a futuro",
           "Sin acción requerida: la transición ocurre \"debajo\" de ti"
         ],
         "tone": "green"
       },
-      "note": "Más validadores asequibles = más descentralización = protege el valor de tu SOL a largo plazo."
+      "note": "Validar más barato puede traer más validadores, y con eso, más descentralización."
     },
     "¿Qué Es la Diversidad de Clientes?": {
       "kind": "iconGrid",
@@ -3099,12 +3105,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Shield",
           "title": "La Lección de Ethereum",
-          "text": "Geth, Nethermind, Besu, Erigon. Cuando Geth falló en 2023, los otros clientes salvaron la red."
+          "text": "Geth, Nethermind, Besu, Erigon, Reth. Cuando Nethermind falló en enero de 2024, la red siguió funcionando."
         },
         {
           "icon": "RefreshCw",
           "title": "Frankendancer: el puente",
-          "text": "Híbrido: networking de Firedancer con ejecución de Agave. Probar en mainnet sin riesgo."
+          "text": "Híbrido: networking de Firedancer con ejecución de Agave. Probó por partes en mainnet; ya se retiró."
         }
       ],
       "intro": "Múltiples implementaciones del mismo protocolo: si una falla, las otras mantienen la red.",
@@ -3118,12 +3124,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Lock",
           "title": "Nivel 1: Cold Storage (La Bóveda)",
-          "text": "Hardware wallet (Ledger, Trezor) con el 80-90% del patrimonio. Nunca se conecta a dApps ni firma smart contracts."
+          "text": "Hardware wallet (Ledger, Trezor) con la mayor parte de tus criptos (ej. 80-90%). Nunca se conecta a dApps ni firma smart contracts."
         },
         {
           "icon": "Wallet",
           "title": "Nivel 2: Hot Wallet Operativa",
-          "text": "Phantom o Solflare con 5-15% del portafolio. Para swaps, staking y compras rutinarias. Solo lo que puedas perder."
+          "text": "Phantom o Solflare con una parte pequeña (ej. 5-15%). Para swaps, staking y compras rutinarias. Solo lo que puedas perder."
         },
         {
           "icon": "Flame",
@@ -3708,7 +3714,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Delegas directo a un validador que tú eliges",
           "SOL bloqueado: no usable en DeFi mientras stakea",
-          "Retiro con cooldown de 1 epoch (~2-3 días)",
+          "Retiro al final del epoch (hoy ~1 día)",
           "Sin intermediarios ni riesgo de smart contract",
           "Solo pagas la comisión del validador",
           "Ideal para holders a largo plazo"
@@ -3734,7 +3740,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "Abre Phantom",
-          "detail": "Tu saldo de SOL → 'Start Earning SOL'."
+          "detail": "Toca tu saldo de SOL y luego 'Start Earning SOL'."
         },
         {
           "title": "Explora validadores",
@@ -3746,12 +3752,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Define la cantidad",
-          "detail": "Deja 0.1-0.5 SOL libres para fees futuros.",
+          "detail": "Mínimo 1 SOL. Deja ~0.02-0.05 SOL libres para fees.",
           "warning": true
         },
         {
           "title": "Confirma",
-          "detail": "Fee de ~0.000005 SOL por la transacción."
+          "detail": "Fee mínimo más un depósito de rent que recuperas al cerrar la cuenta."
         },
         {
           "title": "Listo",
@@ -3771,7 +3777,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Zap",
           "title": "Jito (jitoSOL)",
-          "text": "Captura MEV y lo reparte a stakers, dando un APY algo mayor. Extremadamente líquido."
+          "text": "Muy líquido y aceptado en casi todo DeFi. Hoy ya no rinde más que el staking nativo."
         },
         {
           "icon": "Network",
@@ -3792,7 +3798,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "good": {
         "title": "Busca esto",
         "items": [
-          "Uptime >98% y alto vote success rate",
+          "Uptime >98% y sin turnos de bloque perdidos",
           "Fuera del superminority (top ~20 = 33% del stake)",
           "Comisión <7% (pero 0% puede ser insostenible)",
           "Historial estable de al menos 6 meses",
@@ -4230,7 +4236,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "RELLENO: tu swap se ejecuta",
-          "detail": "100 USDC → SOL al precio ya inflado. Esperabas 0.67 SOL, recibes 0.65 SOL.",
+          "detail": "Con 3% de slippage, tus 100 USDC compran SOL al precio ya inflado: esperabas 0.67 SOL, recibes 0.65.",
           "warning": true
         },
         {
@@ -4252,12 +4258,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "RefreshCw",
           "title": "Back-Running",
-          "text": "Arbitra después: compra barato en Jupiter, vende caro en Orca. Menos dañino, equilibra precios."
+          "text": "Arbitra después: compra barato en un pool de Raydium, vende caro en Orca. Menos dañino, equilibra precios."
         },
         {
           "icon": "Scissors",
           "title": "Liquidation MEV",
-          "text": "Bots compiten por liquidar posiciones en Kamino o MarginFi por el bonus, a veces manipulando oráculos."
+          "text": "Bots compiten por liquidar posiciones en Kamino o Jupiter Lend para cobrar el bonus de liquidación."
         }
       ],
       "intro": "Tres formas de MEV según dónde actúa el bot respecto a la transacción objetivo.",
@@ -4278,22 +4284,22 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "right": {
         "title": "CON Jito Bundle",
         "points": [
-          "Bundle directo al validador líder, sin intermediarios que filtren tu orden",
-          "Invisible para bots: no pueden sandwichearte",
+          "No se publica: solo lo ven el block engine de Jito y el líder",
+          "Los bots públicos no lo ven antes de ejecutarse",
           "Orden de ejecución garantizado",
-          "MEV redistribuido a validadores y stakers"
+          "Parte del MEV vuelve a validadores y stakers"
         ],
         "tone": "green"
       },
-      "note": "Solana no tiene mempool público: Gulf Stream envía las transacciones directo al líder, y los sandwiches ocurren vía validadores y RPCs con clientes modificados (Jito cerró su mempool público en marzo de 2024). +90% de validadores usan el cliente Jito-Solana; stakers de jitoSOL ganan ~1-2% más APY por MEV."
+      "note": "Solana no tiene mempool público: los sandwiches ocurren vía validadores y RPCs que filtran transacciones (Jito cerró su mempool público en marzo de 2024). Privado no es invisible: confías en el block engine y el líder."
     },
     "Cómo Protegerte: Guía Práctica": {
       "kind": "iconGrid",
       "items": [
         {
           "icon": "Shield",
-          "title": "Activa MEV Protect en Jupiter",
-          "text": "Envía tu swap como bundle de Jito (tip de 0.001-0.005 SOL) directo al validador líder, sin exponer tu orden a clientes modificados."
+          "title": "Usa el modo Ultra de Jupiter",
+          "text": "Envía tus swaps de forma privada por defecto. El modo Manual no trae protección MEV."
         },
         {
           "icon": "Percent",
@@ -4307,8 +4313,8 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "icon": "Scissors",
-          "title": "Divide swaps grandes",
-          "text": "Un swap de $10,000 atrae bots. Divídelo en 3-5 partes de ~$2,000, menos atractivas."
+          "title": "Divide en el tiempo",
+          "text": "Si el price impact supera ~1%, compra por partes en días distintos (por ejemplo con DCA)."
         },
         {
           "icon": "Target",
@@ -4331,7 +4337,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "icon": "Scale",
-          "title": "Votación Cuadrática (costo exponencial)",
+          "title": "Votación Cuadrática (costo al cuadrado)",
           "text": "1 voto = 1 token, 2 votos = 4, 3 votos = 9. Frena a las ballenas, pero es vulnerable a ataques Sybil."
         },
         {
@@ -4428,10 +4434,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Reclama tus ASR",
-          "detail": "Al cierre del periodo, ve a 'Rewards' y reclama tus recompensas."
+          "detail": "Dentro del plazo de cada trimestre, ve a 'Rewards'. Retirar del staking toma 7 días."
         }
       ],
-      "intro": "Paso a paso para votar en Jupiter. Tiempo total: 10 minutos que te dan voz y recompensas."
+      "intro": "Paso a paso para votar en Jupiter. Desde 2026 se vota solo sobre tokenomics y tesorería."
     }
   },
 };

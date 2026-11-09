@@ -49,7 +49,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Velas Japonesas y Tendencias',
     level: 'Intermedio',
     number: '1 de 12',
-    duration: '19 min',
+    duration: '22 min',
     type: 'Lectura + Práctica',
     description: 'Aprende a leer el lenguaje visual del mercado. Cada vela cuenta una historia de batalla entre compradores y vendedores. Es la base de todo el análisis técnico, con sus usos y sus límites.',
     sections: [
@@ -197,63 +197,97 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Estás analizando SOL en gráfico diario. Ves una vela roja con cuerpo muy grande, mechas casi inexistentes, que aparece después de una subida de 3 semanas. ¿Qué te dice esta vela?',
+          question: 'En el gráfico diario de SOL ves una vela roja de cuerpo muy grande y casi sin mechas, justo después de tres semanas de subida. ¿Cómo la lees?',
           options: [
-            { id: 'a', text: 'Es una corrección normal dentro de la tendencia alcista, compra el dip' },
-            { id: 'b', text: 'Es un Marubozu bajista: los osos dominaron todo el día sin resistencia' },
-            { id: 'c', text: 'No significa nada, espera más velas' },
-            { id: 'd', text: 'Es acumulación silenciosa de ballenas' }
+            { id: 'a', text: 'Una corrección normal dentro de la tendencia alcista, que conviene comprar ya' },
+            { id: 'b', text: 'Una vela de indecisión, porque sin mechas no se sabe hacia dónde va el precio' },
+            { id: 'c', text: 'Un Marubozu bajista: los vendedores dominaron todo el día, posible señal de techo' },
+            { id: 'd', text: 'Acumulación de ballenas, porque las velas rojas grandes esconden compras muy fuertes' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Un Marubozu bajista (cuerpo grande sin mechas) después de una subida extendida indica que los vendedores tomaron el control total. No hubo pelea, los toros no aparecieron. Es una señal seria de posible techo.'
+          correctAnswer: 'c',
+          explanation: 'Un cuerpo grande sin mechas dice que los vendedores controlaron el precio de la apertura al cierre, sin que los compradores respondieran. Tras una subida larga, es una alerta de posible techo, no una certeza. Confundirla con indecisión es común: la indecisión se ve como un cuerpo pequeño (Doji), justo lo contrario.'
         },
         {
           id: 'q2',
-          question: 'Ves un patrón de 3 velas en Bitcoin diario: (1) vela verde grande, (2) vela pequeña con cuerpo diminuto, (3) vela roja grande que cierra dentro del cuerpo de la primera vela. ¿Qué patrón es y qué significa?',
+          question: 'En el diario de Bitcoin ves tres velas: una verde grande, una de cuerpo diminuto y una roja grande que cierra dentro del cuerpo de la primera. ¿Qué patrón es?',
           options: [
-            { id: 'a', text: 'Morning Star, señal de compra fuerte tras una caída extendida' },
-            { id: 'b', text: 'Evening Star: posible reversión bajista, los osos tomaron el control' },
-            { id: 'c', text: 'Three White Soldiers, tendencia alcista continúa' },
-            { id: 'd', text: 'Doji pattern, indecisión, no actuar' }
+            { id: 'a', text: 'Evening Star: un posible giro bajista que todavía necesita confirmación' },
+            { id: 'b', text: 'Morning Star: una señal de compra fuerte tras una caída prolongada' },
+            { id: 'c', text: 'Three White Soldiers: la tendencia alcista continúa con más fuerza' },
+            { id: 'd', text: 'Un triple Doji: indecisión total, así que el patrón no te dice nada útil' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Evening Star es un patrón clásico de posible reversión bajista: (1) última subida fuerte, (2) indecisión, (3) los osos aplastaron. Muestra al mercado cambiando de manos, aunque como cualquier patrón necesita confirmación y puede fallar.'
+          correctAnswer: 'a',
+          explanation: 'Subida fuerte, indecisión y luego una vela bajista que borra buena parte de la primera: es una Evening Star. La Morning Star es su espejo, al final de una caída. Como cualquier patrón, puede fallar, por eso se confirma con la vela siguiente, el volumen y la zona donde aparece.'
         },
         {
           id: 'q3',
-          question: 'Encuentras un Hammer perfecto en ETH, pero el volumen de esa vela es el más bajo de las últimas 20 velas. ¿Qué haces?',
+          question: 'Encuentras un Hammer bien formado en ETH, pero el volumen de esa vela es el más bajo de las últimas 20. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Compro inmediatamente, el patrón Hammer es señal suficiente por sí solo' },
-            { id: 'b', text: 'Ignoro la señal: un Hammer con volumen bajo carece de convicción real' },
-            { id: 'c', text: 'Vendo porque el volumen bajo es bajista' },
-            { id: 'd', text: 'El volumen no importa para patrones de velas' }
+            { id: 'a', text: 'Espero confirmación: un Hammer con tan poco volumen tiene poca convicción' },
+            { id: 'b', text: 'Compro ya, porque un Hammer bien formado es señal suficiente por sí solo' },
+            { id: 'c', text: 'Vendo ya, porque el volumen bajo convierte al Hammer en una señal bajista' },
+            { id: 'd', text: 'Lo opero igual, porque el volumen no influye en la lectura de las velas' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El volumen es el detector de mentiras del mercado. Un patrón sin volumen es como una promesa vacía. Necesitas ver participación real (volumen alto) para darle más peso a la señal.'
+          correctAnswer: 'a',
+          explanation: 'El volumen muestra cuánta gente respaldó el movimiento. Un Hammer con poco volumen sugiere que el rechazo de precios bajos no tuvo mucha participación. No lo vuelve bajista: lo vuelve débil. La respuesta prudente es esperar una vela de confirmación.'
         },
         {
           id: 'q4',
-          question: '¿Qué timeframes tienen más sentido para leer velas si eres swing trader (operaciones de días a semanas)?',
+          type: 'multiple-select',
+          question: '¿Qué datos resume cada vela japonesa? Selecciona todas las correctas.',
           options: [
-            { id: 'a', text: '1 minuto y 5 minutos, más datos, más oportunidades' },
-            { id: 'b', text: '15 minutos, el balance perfecto entre velocidad y fiabilidad' },
-            { id: 'c', text: '4 horas y diario: menos ruido y señales más limpias' },
-            { id: 'd', text: 'Todos los timeframes son igualmente fiables' }
+            { id: 'a', text: 'El precio de apertura' },
+            { id: 'b', text: 'El precio de cierre' },
+            { id: 'c', text: 'El precio máximo' },
+            { id: 'd', text: 'El precio mínimo' },
+            { id: 'e', text: 'El número de compradores' },
+            { id: 'f', text: 'La tendencia del mes' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Los timeframes bajos están llenos de ruido y señales falsas. En 4h y diario, cada vela resume horas de acción del mercado, lo que filtra buena parte del ruido. Menos ruido no significa certeza: solo señales algo más limpias.'
+          correctAnswers: [0, 1, 2, 3],
+          explanation: 'Cada vela resume cuatro precios del periodo: apertura, cierre, máximo y mínimo. El cuerpo va de la apertura al cierre y las mechas llegan al máximo y al mínimo. El número de participantes no aparece, y la tendencia se lee con muchas velas juntas, no con una.'
         },
         {
           id: 'q5',
-          question: 'Ves una vela con cuerpo prácticamente inexistente (apertura ≈ cierre) pero con mechas largas arriba y abajo, apareciendo en la parte alta de una subida de Bitcoin. ¿Qué es y qué significa?',
+          type: 'true-false',
+          question: 'Un patrón de velas bien formado en el gráfico de 5 minutos es tan fiable como el mismo patrón en el gráfico diario.',
+          correctAnswer: false,
+          explanation: 'Falso. En timeframes bajos hay mucho más ruido: una vela de 5 minutos puede moverse por una sola orden grande. Una vela diaria resume todo un día de operaciones, y por eso sus patrones suelen ser más limpios, aunque tampoco son una garantía.'
+        },
+        {
+          id: 'q6',
+          question: 'En la parte alta de una subida de Bitcoin aparece una vela con apertura casi igual al cierre y mechas largas arriba y abajo. ¿Qué es y qué indica?',
           options: [
-            { id: 'a', text: 'Marubozu, la tendencia continúa con fuerza' },
-            { id: 'b', text: 'Doji en resistencia: equilibrio total, posible agotamiento de la subida' },
-            { id: 'c', text: 'Hammer, señal de compra inmediata en cualquier contexto' },
-            { id: 'd', text: 'No es un patrón reconocible' }
+            { id: 'a', text: 'Un Marubozu alcista: los compradores siguen al mando y la subida sigue' },
+            { id: 'b', text: 'Un Hammer: señal de compra inmediata, sin importar dónde aparezca' },
+            { id: 'c', text: 'Un Doji en resistencia: señal segura de venta porque siempre anticipa caídas' },
+            { id: 'd', text: 'Un Doji en resistencia: equilibrio de fuerzas y alerta de agotamiento' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Un Doji en zona de resistencia después de una subida indica que los toros ya no dominan, los osos están peleando de vuelta. No es señal de venta automática, pero sí de alerta: podría ser el inicio de una reversión.'
+          correctAnswer: 'd',
+          explanation: 'Cuerpo casi nulo con mechas a ambos lados es un Doji: compradores y vendedores quedaron empatados. Después de una subida y en resistencia, indica que los compradores perdieron fuerza. Es una alerta, no una orden de venta: muchos Doji terminan en continuación.'
+        },
+        {
+          id: 'q7',
+          question: 'Un amigo asegura que con las velas puede predecir el precio de mañana. ¿Qué dice la evidencia que viste en esta lección?',
+          options: [
+            { id: 'a', text: 'Es sólida: los patrones clásicos aciertan en la gran mayoría de los casos' },
+            { id: 'b', text: 'Es nula: las velas no contienen información real sobre el precio del activo' },
+            { id: 'c', text: 'Es sólida en cripto, porque allí todos los traders siguen los mismos patrones' },
+            { id: 'd', text: 'Es mixta: sirven para planear entradas, salidas y riesgo, no para predecir' }
+          ],
+          correctAnswer: 'd',
+          explanation: 'Los estudios sobre análisis técnico muestran resultados mixtos: algunas reglas funcionaron en ciertos periodos y dejaron de hacerlo, y los costos se comen buena parte de la ventaja. Las velas sí resumen información real (los precios del periodo); lo que no hacen es garantizar el siguiente movimiento.'
+        },
+        {
+          id: 'q8',
+          question: 'Si decides operar con velas, ¿con qué dinero deberías hacerlo según tu plan de inversión?',
+          options: [
+            { id: 'a', text: 'Solo con tu capital de trading, una parte pequeña que puedes perder' },
+            { id: 'b', text: 'Con tus ahorros de largo plazo, que rinden más con buenas señales' },
+            { id: 'c', text: 'Con tu fondo de emergencia, que se repone rápido con las ganancias' },
+            { id: 'd', text: 'Con dinero prestado, porque el apalancamiento cubre las señales fallidas' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Tu capital de trading es una parte pequeña y separada de tu portafolio, que puedes perder sin afectar tus metas. Los ahorros de largo plazo y el fondo de emergencia tienen otro trabajo, y operar con deuda multiplica las pérdidas cuando una señal falla, que es algo que pasa a menudo.'
         }
       ]
     }
@@ -263,7 +297,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Soportes y Resistencias',
     level: 'Intermedio',
     number: '2 de 12',
-    duration: '18 min',
+    duration: '19 min',
     type: 'Lectura + Práctica',
     description: 'El precio tiene memoria. Aprende a identificar los pisos y techos del mercado donde el precio rebota una y otra vez, y úsalos para tomar decisiones inteligentes de compra y venta.',
     sections: [
@@ -388,75 +422,96 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Bitcoin rompe la resistencia de $100,000 con volumen 5× superior al promedio y cierra fuerte por encima. Dos semanas después, el precio retrocede a $100,000. ¿Qué esperas que pase?',
+          question: 'Bitcoin rompe la resistencia de $100,000 con un volumen 5 veces mayor al promedio y cierra con fuerza por encima. Dos semanas después vuelve a $100,000. ¿Qué esperas?',
           options: [
-            { id: 'a', text: 'La resistencia sigue intacta y el precio será rechazado de nuevo hacia abajo' },
-            { id: 'b', text: 'Puede actuar como soporte (role reversal), pero necesito confirmación' },
-            { id: 'c', text: 'El precio atravesará $100,000 sin problemas hacia abajo' },
-            { id: 'd', text: 'Los niveles de precio no tienen memoria' }
+            { id: 'a', text: 'Que lo rechace hacia abajo, porque una resistencia lo sigue siendo para siempre' },
+            { id: 'b', text: 'Que pueda actuar como soporte por el cambio de rol, aunque espero confirmación' },
+            { id: 'c', text: 'Que lo atraviese sin pausa, porque un nivel roto deja de importarle al mercado' },
+            { id: 'd', text: 'Que rebote con seguridad, porque toda resistencia rota se vuelve un soporte firme' }
           ],
           correctAnswer: 'b',
-          explanation: 'Una resistencia rota con volumen fuerte suele convertirse en soporte (flip): los que se perdieron la subida ven ahí una segunda oportunidad. Pero no es automático. En 2024, Bitcoin rompió $69,000 y luego pasó meses por debajo antes de confirmar el flip. Por eso esperas una vela de confirmación y tienes un stop.'
+          explanation: 'Una resistencia rota con volumen fuerte suele convertirse en soporte: quienes se perdieron la subida ven ahí una segunda oportunidad. Pero no es automático. En 2024, Bitcoin rompió $69,000 y pasó meses por debajo antes de confirmar el cambio. Por eso esperas una vela de confirmación y usas stop.'
         },
         {
           id: 'q2',
-          question: 'Compraste SOL en soporte a $140. ¿Dónde colocas tu stop loss?',
+          question: 'Compras SOL en una zona de soporte que va de $138 a $142. ¿Dónde colocas tu stop loss?',
           options: [
-            { id: 'a', text: 'Justo en $140, si toca el soporte exacto, salgo' },
-            { id: 'b', text: 'En $139, exactamente un dólar debajo del nivel de soporte' },
-            { id: 'c', text: 'Debajo del mínimo de la zona de soporte, con un filtro extra de 1-2%' },
-            { id: 'd', text: 'No uso stop loss en soporte porque siempre rebota' }
+            { id: 'a', text: 'Justo en $140, el centro de la zona, para salir apenas la toque' },
+            { id: 'b', text: 'En $141, un dólar debajo de tu entrada, para perder lo mínimo' },
+            { id: 'c', text: 'Sin stop: compraste en soporte, así que el precio va a rebotar ahí' },
+            { id: 'd', text: 'Debajo del mínimo de la zona, en $138, con un margen extra de 1-2%' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Justo debajo del soporte se acumulan muchos stops y una mecha rápida suele activarlos. Tu stop debe estar donde de verdad se invalida tu tesis: debajo del mínimo de la zona completa, con un filtro extra. Y nunca operes sin stop: ningún soporte rebota siempre.'
+          correctAnswer: 'd',
+          explanation: 'Justo debajo de los niveles obvios se acumulan muchos stops, y una mecha rápida los activa. Tu stop va donde tu idea queda invalidada: debajo de toda la zona, con un margen. Un stop muy ajustado te saca por ruido, y no tener stop supone que el soporte nunca falla, algo que ningún soporte cumple.'
         },
         {
           id: 'q3',
-          question: 'Un soporte en ETH ha sido tocado exactamente 5 veces en $3,200. El precio se acerca por sexta vez. ¿Qué es más probable?',
+          question: 'Un soporte de ETH en $3,200 ha sido tocado cinco veces y el precio se acerca por sexta vez. ¿Qué es más probable?',
           options: [
-            { id: 'a', text: 'El sexto toque rebotará como los cinco anteriores, es un soporte más que probado' },
-            { id: 'b', text: 'La zona está debilitada: cada toque gasta órdenes de compra y la ruptura se vuelve más probable' },
-            { id: 'c', text: 'El número de toques no afecta la fortaleza del soporte' },
-            { id: 'd', text: 'Siempre rompe exactamente en el cuarto toque' }
+            { id: 'a', text: 'Que rebote otra vez, porque cinco rebotes prueban que es muy sólida' },
+            { id: 'b', text: 'Que nada cambie: el número de toques no afecta a una zona de precio' },
+            { id: 'c', text: 'Que la zona esté más débil: cada toque consume órdenes de compra' },
+            { id: 'd', text: 'Que se rompa con seguridad, porque los soportes caen al sexto toque' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Según la lectura moderna de flujo de órdenes, cada toque de soporte "gasta" órdenes de compra en esa zona. Es como un muro que recibe pelotazos: cada golpe rompe ladrillos. Después de 4-5 toques, el muro está débil y la ruptura se vuelve más probable. No es una ley exacta, pero es la interpretación que usan los traders profesionales.'
+          correctAnswer: 'c',
+          explanation: 'Según la lectura de flujo de órdenes que viste en la lección, cada toque gasta parte de las órdenes que defienden la zona, y la ruptura se vuelve más probable. No es una ley con número fijo, es una tendencia. El error tentador es pensar que más rebotes siempre significan un soporte más fuerte.'
         },
         {
           id: 'q4',
-          question: 'El precio de BTC cae por debajo de un soporte en $90,000, toca $89,500, pero cierra la vela diaria de vuelta por encima de $90,000 con una mecha inferior larga. ¿Qué acaba de pasar?',
+          question: 'BTC cae por debajo de un soporte en $90,000, toca $89,500 y cierra el día de vuelta por encima de $90,000 con una mecha inferior larga. ¿Qué pasó?',
           options: [
-            { id: 'a', text: 'El soporte se rompió al tocar $89,500, es una señal clara de venta' },
-            { id: 'b', text: 'Es una fakeout: barrieron los stops debajo de $90K y el soporte sigue válido' },
-            { id: 'c', text: 'Es una señal sin importancia' },
-            { id: 'd', text: 'El precio va a caer más porque tocó $89,500' }
+            { id: 'a', text: 'Una ruptura confirmada, porque el precio llegó a tocar los $89,500' },
+            { id: 'b', text: 'Una fakeout: barrió los stops bajo $90K y el cierre volvió a la zona' },
+            { id: 'c', text: 'Un cambio de tendencia, porque la mecha larga indica fuerza vendedora' },
+            { id: 'd', text: 'Nada relevante, porque en una vela solo cuenta el cuerpo, no la mecha' }
           ],
           correctAnswer: 'b',
-          explanation: 'Señales clásicas de fakeout: (1) ruptura breve por debajo del soporte, (2) mecha larga que "pincha" la zona, (3) cierre fuerte de vuelta por encima. Pudo ser una caza de stops o simple ruido; lo que importa es que el cierre volvió dentro de la zona y el soporte sigue en pie por ahora.'
+          explanation: 'Ruptura breve, mecha larga y cierre de vuelta dentro de la zona: son las señales de una fakeout. Pudo ser una caza de stops o simple ruido. Lo que cuenta es el cierre. Leer la mecha como fuerza vendedora es el error común: una mecha inferior larga muestra que los compradores rechazaron esos precios.'
         },
         {
           id: 'q5',
-          question: '¿Por qué los números redondos como $50,000 o $100,000 funcionan como soporte/resistencia incluso sin toques previos?',
+          question: '¿Por qué números redondos como $50,000 o $100,000 suelen funcionar como soporte o resistencia, incluso sin toques previos?',
           options: [
-            { id: 'a', text: 'Por coincidencia estadística' },
-            { id: 'b', text: 'Porque miles de personas colocan órdenes en números redondos ("cuando llegue a 100K, vendo"), creando concentración masiva' },
-            { id: 'c', text: 'Los exchanges manipulan esos niveles para liquidar a los traders' },
-            { id: 'd', text: 'Los números redondos no tienen significado en trading' }
+            { id: 'a', text: 'Porque mucha gente pone órdenes en cifras redondas y ahí se concentran' },
+            { id: 'b', text: 'Porque los exchanges fijan esos niveles para liquidar a los apalancados' },
+            { id: 'c', text: 'Porque a los algoritmos se les prohíbe operar en números no redondos' },
+            { id: 'd', text: 'Por pura casualidad estadística, que la mente lee como un patrón real' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Los niveles psicológicos existen porque mucha gente piensa en números redondos. Esa acumulación de órdenes crea zonas de soporte/resistencia "naturales" antes de que el precio las visite.'
+          correctAnswer: 'a',
+          explanation: 'Las personas piensan en cifras redondas: "vendo cuando llegue a 100K". Esa acumulación de órdenes crea zonas antes de que el precio las visite. No hay una regla de los exchanges ni de los algoritmos detrás; es comportamiento humano agregado.'
+        },
+        {
+          id: 'q6',
+          type: 'true-false',
+          question: 'Un soporte es un precio exacto: si el precio lo cruza por un dólar, el soporte quedó roto.',
+          correctAnswer: false,
+          explanation: 'Falso. Soportes y resistencias son zonas, no líneas. El precio puede entrar en la zona e incluso perforarla con una mecha sin romperla. Por eso se dibujan rectángulos y se espera el cierre antes de decidir.'
+        },
+        {
+          id: 'q7',
+          type: 'ordering',
+          question: 'Ordena los pasos del framework para operar con soportes y resistencias.',
+          items: [
+            'Marcar las zonas importantes en el gráfico diario',
+            'Esperar a que el precio llegue a una de esas zonas',
+            'Buscar confirmación con una vela y con el volumen',
+            'Entrar con el stop loss fuera de la zona',
+            'Gestionar la salida según tu plan'
+          ],
+          correctOrder: [0, 1, 2, 3, 4],
+          explanation: 'Primero el mapa, luego la paciencia, después la confirmación y solo entonces la entrada con el stop ya definido. La salida también se decide antes de entrar: así las emociones no la deciden por ti.'
         },
         {
           id: 'review_1',
-          question: 'Repaso de Velas Japonesas: Una vela japonesa con cuerpo pequeño y mecha inferior muy larga en una zona de soporte indica:',
+          question: 'Repaso de Velas Japonesas y Tendencias: en una zona de soporte aparece una vela de cuerpo pequeño con una mecha inferior muy larga. ¿Qué indica?',
           options: [
-            { id: 'a', text: 'Los vendedores están ganando control total' },
-            { id: 'b', text: 'Los compradores rechazaron precios más bajos con fuerza, señal alcista' },
-            { id: 'c', text: 'El mercado está completamente indeciso, sin ninguna dirección' },
-            { id: 'd', text: 'Es momento de vender inmediatamente' }
+            { id: 'a', text: 'Los vendedores tomaron el control total y el precio va a seguir cayendo' },
+            { id: 'b', text: 'El mercado está indeciso por completo, así que la vela no aporta información' },
+            { id: 'c', text: 'Es la señal para vender ya, porque una mecha larga anticipa más caídas' },
+            { id: 'd', text: 'Los compradores rechazaron precios más bajos: posible rebote por confirmar' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Una mecha inferior larga significa que los compradores empujaron el precio de vuelta hacia arriba después de una caída. En una zona de soporte, esto es una señal de posible rebote alcista. (Lo viste en la lección Velas Japonesas y Tendencias.)'
+          correctAnswer: 'd',
+          explanation: 'Una mecha inferior larga muestra que el precio bajó y los compradores lo empujaron de vuelta. En una zona de soporte, es una posible señal de rebote, que se confirma con la vela siguiente y el volumen. (Lo viste en la lección Velas Japonesas y Tendencias.)'
         }
       ]
     }
@@ -466,7 +521,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Indicadores Clave (RSI, EMAs)',
     level: 'Intermedio',
     number: '3 de 12',
-    duration: '17 min',
+    duration: '19 min',
     type: 'Lectura + Práctica',
     description: 'Los indicadores técnicos son herramientas matemáticas que confirman (o niegan) lo que ves en el precio. Domina el RSI y las Medias Móviles Exponenciales para tomar decisiones con datos, no con emociones.',
     sections: [
@@ -589,63 +644,92 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Bitcoin marca un nuevo máximo de las últimas semanas en $82,000, pero el RSI 14 en diario marca 68, más bajo que los 82 que marcó en el máximo anterior ($79,000). ¿Qué está pasando?',
+          question: 'Bitcoin marca un nuevo máximo de varias semanas en $82,000, pero el RSI 14 diario llega a 68, por debajo de los 82 que marcó en el máximo anterior de $79,000. ¿Qué está pasando?',
           options: [
-            { id: 'a', text: 'Todo normal, el precio sigue subiendo y la tendencia se mantiene alcista' },
-            { id: 'b', text: 'Divergencia bajista: el precio subió más pero con menos momentum. Precaución' },
-            { id: 'c', text: 'El RSI está roto, ignóralo' },
-            { id: 'd', text: 'Es señal de compra porque el RSI no está en sobrecompra' }
+            { id: 'a', text: 'Todo normal: el precio sigue subiendo y eso confirma la tendencia alcista' },
+            { id: 'b', text: 'Señal de compra, porque el RSI todavía no llegó a la zona de sobrecompra' },
+            { id: 'c', text: 'Divergencia bajista: el precio sube con menos momentum, señal de precaución' },
+            { id: 'd', text: 'Divergencia bajista: señal de venta inmediata, porque el techo ya quedó formado' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Divergencia bajista clásica: precio hace Higher High pero RSI hace Lower High. Los toros empujan el precio arriba pero con menos fuerza cada vez. Es señal anticipada de agotamiento, no de venta inmediata, pero sí de precaución.'
+          correctAnswer: 'c',
+          explanation: 'El precio hace un máximo más alto, pero el RSI hace uno más bajo: es una divergencia bajista. Los compradores empujan con menos fuerza. Es una alerta temprana de agotamiento, no una orden de venta: muchas divergencias se resuelven con el precio subiendo un poco más antes de corregir, o sin corregir.'
         },
         {
           id: 'q2',
-          question: '¿Qué media móvil es la referencia más citada para decir si el mercado está en territorio bull o bear?',
+          question: '¿Qué media móvil es la referencia más citada para decir si un mercado está en territorio alcista o bajista?',
           options: [
-            { id: 'a', text: 'EMA 9 en gráfico de 15 minutos' },
-            { id: 'b', text: 'EMA 21 en gráfico de 4 horas' },
-            { id: 'c', text: 'La media de 200 en gráfico diario (SMA o su variante EMA), la frontera clásica entre bull y bear' },
-            { id: 'd', text: 'SMA 50 en gráfico semanal, la más usada por los fondos' }
+            { id: 'a', text: 'La EMA 9 en el gráfico de 15 minutos, la más rápida de todas' },
+            { id: 'b', text: 'La EMA 21 en el gráfico de 4 horas, la que siguen los fondos' },
+            { id: 'c', text: 'La media de 200 en el gráfico diario, sobre todo la SMA 200' },
+            { id: 'd', text: 'La SMA 50 en el gráfico semanal, la que usan los bancos centrales' }
           ],
           correctAnswer: 'c',
-          explanation: 'La media de 200 días es la referencia de largo plazo más citada del mercado, sobre todo la SMA 200 diaria; la EMA 200 es una variante más sensible que cuenta la misma historia. Es una convención útil, no una ley. Precio por encima = territorio bull, por debajo = territorio bear.'
+          explanation: 'La media de 200 días es la frontera de largo plazo más citada: precio por encima suele leerse como territorio alcista, y por debajo como bajista. La EMA 200 es una variante más sensible que cuenta la misma historia. Es una convención útil, no una ley.'
         },
         {
           id: 'q3',
-          question: 'SOL cruza de abajo hacia arriba la EMA 200 en diario con volumen 3× superior al promedio. ¿Qué tipo de señal es?',
+          question: 'SOL cruza al alza la EMA 200 en el gráfico diario con un volumen 3 veces mayor al promedio. ¿Qué tipo de señal es?',
           options: [
-            { id: 'a', text: 'Death Cross, señal bajista de mediano plazo confirmada' },
-            { id: 'b', text: 'Señal alcista importante: el precio recupera territorio bull. Considerar long con stop debajo de la media' },
-            { id: 'c', text: 'Señal sin importancia, las EMAs no sirven' },
-            { id: 'd', text: 'Señal de venta, el precio está sobrecomprado' }
+            { id: 'a', text: 'Un Death Cross: una señal bajista de mediano plazo que ya quedó confirmada' },
+            { id: 'b', text: 'Una señal de venta, porque el volumen tan alto revela sobrecompra extrema' },
+            { id: 'c', text: 'Una compra segura, porque los cruces de la EMA 200 con volumen no fallan' },
+            { id: 'd', text: 'Una señal alcista: recupera territorio bull, con stop debajo de la media' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Cruzar la EMA 200 al alza con volumen fuerte es una señal alcista muy seguida: el precio pasa de territorio "bear" a "bull", y el volumen alto indica que hubo participación real. Puede fallar, como cualquier señal: por eso el stop va debajo de la media.'
+          correctAnswer: 'd',
+          explanation: 'Cruzar la media de 200 al alza con volumen fuerte es una señal alcista muy seguida: hubo participación real en el movimiento. Puede fallar como cualquier señal, por eso el stop va debajo de la media. Un Death Cross es otra cosa: el cruce de la media de 50 por debajo de la de 200.'
         },
         {
           id: 'q4',
-          question: 'ETH tiene RSI en 25 (sobreventa) y el precio está tocando un soporte histórico en $2,800 que ya respetó 3 veces antes. ¿Cuál es la confluencia?',
+          question: 'ETH tiene RSI en 25 y el precio toca un soporte en $2,800 que ya respetó varias veces. ¿Cómo lees la situación?',
           options: [
-            { id: 'a', text: 'No hay confluencia: el RSI bajo significa que hay que vender de inmediato' },
-            { id: 'b', text: 'Confluencia alcista fuerte: RSI en sobreventa + soporte histórico probado, zona de posible suelo' },
-            { id: 'c', text: 'Solo el soporte importa, el RSI es irrelevante' },
-            { id: 'd', text: 'Es señal de que el soporte se romperá esta vez' }
+            { id: 'a', text: 'Ninguna confluencia: el RSI bajo indica que hay que vender cuanto antes' },
+            { id: 'b', text: 'Confluencia alcista: sobreventa y soporte probado, zona de posible suelo' },
+            { id: 'c', text: 'Solo cuenta el soporte, porque el RSI no aporta nada en esta situación' },
+            { id: 'd', text: 'Una compra garantizada, porque dos señales distintas coinciden al mismo tiempo' }
           ],
           correctAnswer: 'b',
-          explanation: 'Confluencia = múltiples señales apuntando a la misma dirección. RSI sobreventa + soporte fuerte = dos señales alcistas que se refuerzan mutuamente. Mejora tu lectura frente a una señal sola, pero no es garantía. El stop debajo del soporte protege tu capital si la tesis falla.'
+          explanation: 'Confluencia es que varias señales independientes apunten al mismo lado. Sobreventa más un soporte probado mejoran la lectura frente a una señal sola, pero no la vuelven segura. El stop debajo del soporte te protege si la idea falla.'
         },
         {
           id: 'q5',
-          question: 'Llevas 3 semanas siguiendo cruces de EMAs en Bitcoin, pero cada vez que compras o vendes basándote en el cruce, el precio revierte y pierdes. ¿Qué está pasando probablemente?',
+          question: 'Llevas 3 semanas operando cruces de EMAs en Bitcoin, y cada vez que entras, el precio se da vuelta y pierdes. ¿Qué es lo más probable?',
           options: [
-            { id: 'a', text: 'Las EMAs dejaron de funcionar en crypto' },
-            { id: 'b', text: 'El mercado está en rango: las EMAs se cruzan sin parar y generan señales falsas. Espera tendencia clara' },
-            { id: 'c', text: 'Necesitas agregar más indicadores a tu gráfico para filtrar el ruido' },
-            { id: 'd', text: 'Debes usar timeframes más bajos para más precisión' }
+            { id: 'a', text: 'Las EMAs dejaron de funcionar en cripto desde que entraron los grandes fondos' },
+            { id: 'b', text: 'Te faltan indicadores: con cinco o seis más filtrarías todo ese ruido extra' },
+            { id: 'c', text: 'Necesitas un timeframe más bajo, como el de 1 minuto, para ganar precisión' },
+            { id: 'd', text: 'El mercado está en rango: las EMAs se cruzan sin parar y dan señales falsas' }
+          ],
+          correctAnswer: 'd',
+          explanation: 'Los indicadores de tendencia funcionan mal cuando no hay tendencia. En un rango, las EMAs se enredan y cada cruce es una señal falsa. Agregar indicadores es la reacción tentadora, pero casi todos miden lo mismo con otra fórmula. La solución es reconocer el rango y esperar.'
+        },
+        {
+          id: 'q6',
+          type: 'true-false',
+          question: 'Un RSI por encima de 70 significa que el precio va a caer pronto.',
+          correctAnswer: false,
+          explanation: 'Falso. Sobre 70 el RSI indica sobrecompra, es decir, mucho momentum alcista reciente. En tendencias fuertes el RSI puede pasar semanas sobre 70 mientras el precio sigue subiendo. Es una señal de contexto, no un aviso de caída.'
+        },
+        {
+          id: 'q7',
+          type: 'fill-blank',
+          question: 'Completa la regla básica del RSI.',
+          textBefore: 'En el RSI, una lectura por debajo de',
+          textAfter: ' se considera zona de sobreventa.',
+          correctAnswer: '30',
+          acceptableAnswers: ['30', 'treinta', '30 puntos'],
+          explanation: 'Por convención, el RSI bajo 30 indica sobreventa y sobre 70 sobrecompra, con 50 como línea media. Son referencias, no gatillos: en tendencias bajistas fuertes el RSI puede quedarse bajo 30 mucho tiempo.'
+        },
+        {
+          id: 'q8',
+          question: 'Ves un Golden Cross en el diario de Bitcoin: la SMA 50 cruza por encima de la SMA 200. ¿Qué te dice?',
+          options: [
+            { id: 'a', text: 'Anticipa con precisión el inicio de una tendencia alcista' },
+            { id: 'b', text: 'Confirma con retraso una tendencia que ya estaba en marcha' },
+            { id: 'c', text: 'Indica que el precio se va a duplicar en los próximos meses' },
+            { id: 'd', text: 'Es una señal bajista, porque la media corta queda por encima' }
           ],
           correctAnswer: 'b',
-          explanation: 'Muchas pérdidas con indicadores de tendencia ocurren en mercados laterales. Sin tendencia, las EMAs se enredan y generan señales falsas. La solución NO es más indicadores, es reconocer que el mercado no tiene dirección y esperar a que se defina.'
+          explanation: 'Las medias se calculan con precios pasados, así que sus cruces llegan tarde: confirman tendencias que ya empezaron. Su historial en techos y suelos es mixto. Creer que anticipan el giro es el error común; por eso se usan como confirmación, no como gatillo.'
         }
       ]
     }
@@ -655,7 +739,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Estructura de Mercado',
     level: 'Intermedio',
     number: '4 de 12',
-    duration: '19 min',
+    duration: '21 min',
     type: 'Lectura + Práctica',
     description: 'La habilidad más importante del análisis técnico: identificar objetivamente si el mercado está subiendo, bajando o lateral. Sin esto, cualquier otra herramienta pierde sentido.',
     sections: [
@@ -799,63 +883,95 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'SOL viene haciendo la siguiente secuencia de precios: mínimo $120, máximo $155, mínimo $135, máximo $175, mínimo $150. ¿Qué estructura de mercado es esta?',
+          question: 'SOL hace esta secuencia: mínimo $120, máximo $155, mínimo $135, máximo $175, mínimo $150. ¿Qué estructura de mercado es?',
           options: [
-            { id: 'a', text: 'Bajista, el precio oscila demasiado entre niveles para ser confiable' },
-            { id: 'b', text: 'Alcista: cada mínimo y cada máximo es más alto que el anterior (HH + HL)' },
-            { id: 'c', text: 'Lateral, está en un rango' },
-            { id: 'd', text: 'No se puede determinar con esta información' }
+            { id: 'a', text: 'Bajista: el precio oscila demasiado entre niveles para confiar en él' },
+            { id: 'b', text: 'Lateral: el precio se mueve dentro de un rango sin dirección clara' },
+            { id: 'c', text: 'Alcista: cada mínimo y cada máximo superan al anterior (HH + HL)' },
+            { id: 'd', text: 'No se puede saber: hace falta ver el RSI para definir la estructura' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Mínimos: $120, $135 y $150 (Higher Lows). Máximos: $155 y $175 (Higher Highs). Una secuencia de HH + HL es la definición de tendencia alcista, aunque nada garantiza que continúe.'
+          correctAnswer: 'c',
+          explanation: 'Mínimos en $120, $135 y $150 (Higher Lows) y máximos en $155 y $175 (Higher Highs): es la definición de tendencia alcista. La estructura se lee con el precio, sin indicadores. Que se cumpla hoy no garantiza que siga mañana.'
         },
         {
           id: 'q2',
-          question: 'Bitcoin viene subiendo (HH + HL) durante 4 meses. De repente, el precio cae debajo del último Higher Low. ¿Qué acaba de ocurrir y qué haces?',
+          question: 'Bitcoin lleva 4 meses haciendo HH + HL, y de pronto cae por debajo del último Higher Low. ¿Qué ocurrió y qué haces?',
           options: [
-            { id: 'a', text: 'Nada, es una corrección normal dentro de la tendencia, HODL sin cambios' },
-            { id: 'b', text: 'Break of Structure (BOS): ajusto stops, reduzco posición y observo si se forma un CHOCH' },
-            { id: 'c', text: 'Vendo todo inmediatamente, el bear market empezó' },
-            { id: 'd', text: 'Compro más, es un dip en tendencia alcista' }
+            { id: 'a', text: 'Una corrección normal dentro de la tendencia, así que no cambio nada' },
+            { id: 'b', text: 'El inicio confirmado del bear market, así que vendo todo de inmediato' },
+            { id: 'c', text: 'Un BOS: ajusto stops, reduzco riesgo y observo si se forma un CHOCH' },
+            { id: 'd', text: 'Un dip dentro de la tendencia, así que compro más sin mover el stop' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Romper el último HL es un Break of Structure, primera señal de debilidad. No es confirmación de bear market (eso sería CHOCH), pero es alerta seria. Reduce riesgo y observa: si forma LH + LL, tendrás tu CHOCH. (Nota: buena parte del contenido SMC llama CHoCH a esta primera ruptura en contra de la tendencia y reserva BOS para rupturas a favor; aquí usamos BOS como primera alerta.)'
+          correctAnswer: 'c',
+          explanation: 'Perder el último Higher Low es un Break of Structure: la primera grieta, no la confirmación. Reducir riesgo y observar es la respuesta proporcional. Vender todo trata una alerta como una certeza. (Ojo: buena parte del contenido SMC llama CHoCH a esta primera ruptura en contra; aquí usamos BOS como primera alerta.)'
         },
         {
           id: 'q3',
-          question: 'Estás analizando ETH. En gráfico semanal la tendencia es alcista. En diario es alcista. En 4 horas el precio retrocedió a un soporte con RSI en sobreventa. ¿Cuál es la operación?',
+          question: 'En ETH, el semanal y el diario están en tendencia alcista. En 4 horas, el precio retrocede a un soporte con RSI en sobreventa. ¿Qué operación tiene más sentido?',
           options: [
-            { id: 'a', text: 'Vender, el retroceso en 4h significa debilidad' },
-            { id: 'b', text: 'Comprar el retroceso en 4h: semanal y diario alcistas, entrada con confluencia' },
+            { id: 'a', text: 'Vender, porque el retroceso en 4h muestra que la tendencia mayor ya se rompió' },
+            { id: 'b', text: 'Buscar compra en el soporte de 4h, con stop, a favor del semanal y el diario' },
             { id: 'c', text: 'Esperar a que cambie la tendencia semanal antes de tomar cualquier decisión' },
-            { id: 'd', text: 'Operar en gráfico de 1 minuto para más precisión' }
+            { id: 'd', text: 'Bajar al gráfico de 1 minuto, donde el giro se ve con mucha más precisión' }
           ],
           correctAnswer: 'b',
-          explanation: 'Análisis top-down: semanal y diario alcistas significan que el panorama general está a tu favor. Un retroceso en 4h a soporte con RSI en sobreventa es una entrada a favor de todos los timeframes. Sigue necesitando stop y tamaño pequeño: el contexto favorable no es garantía.'
+          explanation: 'Análisis de arriba hacia abajo: los timeframes mayores te dan la dirección y el menor te da la entrada. Un retroceso a soporte dentro de una tendencia alcista es una entrada a favor del contexto. Sigue necesitando stop y tamaño pequeño: el contexto mejora las probabilidades, no las garantiza.'
         },
         {
           id: 'q4',
-          question: '¿Cuál es la diferencia entre un Break of Structure (BOS) y un Change of Character (CHOCH)?',
+          question: 'Según la convención de esta lección, ¿cuál es la diferencia entre un Break of Structure (BOS) y un Change of Character (CHOCH)?',
           options: [
-            { id: 'a', text: 'Son exactamente lo mismo, solo dos nombres distintos para el mismo evento' },
-            { id: 'b', text: 'BOS es la primera ruptura (alerta); CHOCH es la inversión completa que confirma el cambio' },
-            { id: 'c', text: 'BOS es bajista y CHOCH es alcista' },
-            { id: 'd', text: 'BOS ocurre en timeframes bajos y CHOCH en timeframes altos' }
+            { id: 'a', text: 'Son lo mismo: dos nombres distintos para describir un mismo evento' },
+            { id: 'b', text: 'El BOS siempre es bajista y el CHOCH siempre es alcista, por definición' },
+            { id: 'c', text: 'El BOS ocurre en timeframes bajos y el CHOCH solo en los timeframes altos' },
+            { id: 'd', text: 'El BOS es la primera ruptura, una alerta; el CHOCH confirma la inversión' }
           ],
-          correctAnswer: 'b',
-          explanation: 'BOS = primera grieta en la estructura (alerta, no confirmación). CHOCH = la estructura se invierte por completo, de HH/HL a LH/LL o viceversa. Muchos traders actúan en el BOS cuando deberían esperar el CHOCH para mayor confirmación. Ojo al comparar con videos externos: la convención SMC más común usa BOS para rupturas A FAVOR de la tendencia y CHoCH para la primera ruptura EN CONTRA. Lo importante es el concepto, no la etiqueta.'
+          correctAnswer: 'd',
+          explanation: 'Aquí el BOS es la primera grieta y el CHOCH es la estructura invertida por completo (de HH/HL a LH/LL, o al revés). Si ves videos externos, la convención SMC más común usa BOS para rupturas a favor de la tendencia y CHoCH para la primera en contra. Lo importante es el concepto, no la etiqueta.'
         },
         {
           id: 'q5',
-          question: 'Llevas 2 semanas intentando operar un mercado donde el precio rebota entre $40K y $44K sin hacer Higher Highs ni Lower Lows. Todas tus operaciones pierden. ¿Qué tipo de mercado es y qué deberías hacer?',
+          question: 'Llevas 2 semanas operando un mercado que rebota entre $40K y $44K sin hacer nuevos máximos ni mínimos, y todas tus operaciones pierden. ¿Qué mercado es y qué haces?',
           options: [
-            { id: 'a', text: 'Es un bear market, deja de operar completamente' },
-            { id: 'b', text: 'Es un rango: opera los extremos (comprar $40K, vender $44K) o espera la ruptura' },
-            { id: 'c', text: 'Necesitas más indicadores en el gráfico para encontrar la tendencia oculta' },
-            { id: 'd', text: 'Baja al timeframe de 1 minuto para ver mejor' }
+            { id: 'a', text: 'Un bear market: dejo de operar por completo hasta el próximo ciclo' },
+            { id: 'b', text: 'Una tendencia oculta, que se ve si agrego más indicadores al gráfico' },
+            { id: 'c', text: 'Un mercado con ruido, que se lee mejor en el gráfico de 1 minuto' },
+            { id: 'd', text: 'Un rango: opero los extremos con stops cortos o espero la ruptura' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Sin HH ni LL = mercado lateral/rango. Las estrategias de tendencia fallan aquí. Tienes dos opciones: (1) operar los extremos del rango con stops ajustados, o (2) esperar pacientemente a que el precio rompa el rango con volumen para definir la nueva tendencia.'
+          correctAnswer: 'd',
+          explanation: 'Sin máximos ni mínimos nuevos, el mercado está en rango, y las estrategias de tendencia pierden. Hay dos caminos: operar los extremos con stops ajustados, o esperar a que el precio rompa el rango con volumen. Un rango no es un bear market: es ausencia de dirección.'
+        },
+        {
+          id: 'q6',
+          type: 'ordering',
+          question: 'Ordena un análisis de estructura de arriba hacia abajo.',
+          items: [
+            'Ver la tendencia en el gráfico semanal',
+            'Confirmar la estructura en el gráfico diario',
+            'Buscar la entrada en el gráfico de 4 horas',
+            'Poner el stop donde la estructura se invalida'
+          ],
+          correctOrder: [0, 1, 2, 3],
+          explanation: 'Del timeframe mayor al menor: el semanal da el contexto, el diario lo confirma y el de 4 horas afina la entrada. El stop se define al final, pero antes de entrar, en el punto donde tu lectura de la estructura deja de ser válida.'
+        },
+        {
+          id: 'q7',
+          type: 'true-false',
+          question: 'Un Break of Structure confirma por sí solo que comenzó una tendencia bajista.',
+          correctAnswer: false,
+          explanation: 'Falso. El BOS es una alerta: la estructura alcista se agrietó. La confirmación llega con el CHOCH, cuando el precio ya hace máximos y mínimos más bajos. Muchas tendencias alcistas tienen un BOS y luego continúan.'
+        },
+        {
+          id: 'q8',
+          question: 'En una tendencia alcista, compras después de un nuevo Higher Low en $150. ¿Dónde va tu stop según la estructura?',
+          options: [
+            { id: 'a', text: 'Un 1% debajo de tu entrada, sin mirar dónde quedó el último mínimo' },
+            { id: 'b', text: 'Encima del último Higher High, para proteger la ganancia anterior' },
+            { id: 'c', text: 'Sin stop, porque en una tendencia alcista los mínimos siempre suben' },
+            { id: 'd', text: 'Debajo de ese Higher Low de $150, donde la estructura se invalida' }
+          ],
+          correctAnswer: 'd',
+          explanation: 'Si el precio pierde ese Higher Low, la secuencia alcista se rompe y tu razón para comprar desaparece. Por eso el stop va ahí, un poco por debajo. Un porcentaje fijo ignora la estructura y te saca por ruido, o te deja demasiado expuesto.'
         }
       ]
     }
@@ -865,7 +981,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Tokenomics 101',
     level: 'Intermedio',
     number: '5 de 12',
-    duration: '20 min',
+    duration: '21 min',
     type: 'Concepto',
     description: 'No compres solo por el logo o el hype. La economía de un token, su supply, distribución, inflación y calendario de desbloqueos, determina si ganas o pierdes. Aprende a leer las matemáticas antes de invertir.',
     sections: [
@@ -1004,75 +1120,94 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Encuentras un token a $0.01. Supply circulante: 10M. Supply total: 10B. FDV: $100M. ¿Cuál es el market cap REAL y qué riesgo hay?',
+          question: 'Un token cuesta $0.01, con 10 millones de unidades en circulación y 10,000 millones en total. ¿Cuál es su market cap y qué riesgo ves?',
           options: [
-            { id: 'a', text: '$100M, ese es el valor real del proyecto según su FDV' },
-            { id: 'b', text: '$100K (10M × $0.01): el 99.9% del supply está esperando para entrar y diluirte' },
-            { id: 'c', text: 'No se puede calcular sin más datos' },
-            { id: 'd', text: '$10M, es el promedio entre market cap y FDV' }
+            { id: 'a', text: '$100M: ese es el valor real del proyecto, porque así lo dice su FDV' },
+            { id: 'b', text: '$10M: es el promedio entre el market cap y el FDV de ese token' },
+            { id: 'c', text: '$100K: el 99.9% del supply todavía no circula y puede diluirte' },
+            { id: 'd', text: 'No se puede saber sin el volumen de trading de las últimas 24h' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Market cap = supply circulante × precio = 10M × $0.01 = $100K. El FDV es $100M. La diferencia de 1000 veces significa que el 99.9% del supply está por desbloquearse. Cada unlock diluye tu posición.'
+          correctAnswer: 'c',
+          explanation: 'Market cap = supply circulante × precio = 10 millones × $0.01 = $100K. El FDV, con todo el supply, es $100M: mil veces más. Eso significa que casi todo el supply está por desbloquearse, y cada unlock diluye a quienes ya tienen el token. El FDV es tentador como "valor real", pero describe un futuro que todavía no circula.'
         },
         {
           id: 'q2',
-          question: 'Proyecto A: equipo 15%, 4 años vesting. Proyecto B: equipo 30%, 6 meses cliff. Tecnología similar. ¿Cuál tiene mejor alineación con holders?',
+          question: 'Proyecto A: el equipo tiene 15% con vesting de 4 años. Proyecto B: el equipo tiene 30% con un cliff de 6 meses. Tecnología similar. ¿Cuál está mejor alineado con los holders?',
           options: [
-            { id: 'a', text: 'B, el equipo tiene más "skin in the game" con 30%' },
-            { id: 'b', text: 'A: menos tokens para insiders y el vesting largo alinea al equipo con el éxito de largo plazo' },
-            { id: 'c', text: 'Son iguales, el porcentaje del equipo no importa en la práctica' },
-            { id: 'd', text: 'B, más tokens para el equipo significa más motivación para construir' }
+            { id: 'a', text: 'B: con 30% el equipo tiene más en juego, y eso lo alinea con los holders' },
+            { id: 'b', text: 'Son iguales: lo que importa es la tecnología, no cómo se reparte el token' },
+            { id: 'c', text: 'A: menos tokens para insiders y un vesting largo que los ata al proyecto' },
+            { id: 'd', text: 'B: un cliff corto deja que el equipo cobre pronto y siga motivado a construir' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Vesting largo (4 años) alinea incentivos: el equipo solo gana si el proyecto es exitoso a largo plazo. Con 6 meses de cliff, el equipo puede venderte encima en menos de un año. "Skin in the game" es quedarse comprometido, no tener muchos tokens que puedes vender pronto.'
+          correctAnswer: 'c',
+          explanation: 'Con vesting de 4 años, el equipo solo gana si el proyecto sigue valiendo dentro de 4 años. Con 30% y un cliff de 6 meses, puede empezar a vender en menos de un año. "Tener más en juego" no es tener muchos tokens, es tener que quedarse comprometido para cobrarlos.'
         },
         {
           id: 'q3',
-          question: 'Un protocolo emite 5% de nuevo supply anual pero quema 3% en fees. ¿Es inflacionario o deflacionario?',
-          options: [
-            { id: 'a', text: 'Deflacionario, porque quema tokens constantemente con cada transacción' },
-            { id: 'b', text: 'Inflacionario al 2% neto (5% emisión − 3% quema). Cada año tu posición se diluye un 2%' },
-            { id: 'c', text: 'Neutral, se cancelan mutuamente' },
-            { id: 'd', text: 'Depende del precio del token' }
-          ],
-          correctAnswer: 'b',
-          explanation: 'Lo que importa es la inflación NETA: 5% − 3% = 2% inflacionario. Se crean más tokens de los que se destruyen = el supply crece = presión bajista lenta pero constante. Para que el precio suba, la demanda debe crecer >2% al año.'
+          type: 'fill-blank',
+          question: 'Calcula la inflación neta de un token.',
+          textBefore: 'Un protocolo emite 5% de supply nuevo al año y quema 3% con las fees. Su inflación neta es de',
+          textAfter: '% al año.',
+          correctAnswer: '2',
+          acceptableAnswers: ['2', '2%', 'dos', '+2', '2 %'],
+          explanation: 'Inflación neta = emisión − quema = 5% − 3% = 2%. El supply crece, así que para que el precio se mantenga, la demanda tiene que crecer al menos 2% al año. Que el protocolo "queme tokens" no lo vuelve deflacionario si emite más de lo que quema.'
         },
         {
           id: 'q4',
-          question: 'Tokenomist muestra que en 2 semanas se desbloquea el 15% del supply total. El precio ha subido 40% este mes. ¿Qué está pasando?',
+          question: 'Tokenomist muestra que en 2 semanas se desbloquea el 15% del supply total, y el precio subió 40% este mes. ¿Cómo lo lees?',
           options: [
-            { id: 'a', text: 'El mercado anticipa buenas noticias del proyecto, es momento de comprar más' },
-            { id: 'b', text: 'Señal de peligro: una subida antes de un unlock grande suele terminar como liquidez de salida para los insiders' },
-            { id: 'c', text: 'Los unlocks no afectan al precio, es pura coincidencia' },
-            { id: 'd', text: 'El equipo está comprando más tokens antes del unlock' }
+            { id: 'a', text: 'El mercado anticipa buenas noticias del proyecto, así que conviene comprar más' },
+            { id: 'b', text: 'Nada: los unlocks no afectan el precio y la subida es una pura coincidencia' },
+            { id: 'c', text: 'Alerta: una subida antes de un unlock grande suele dar salida a los insiders' },
+            { id: 'd', text: 'El equipo recompra antes del unlock, así que no habrá ninguna presión de venta' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Los datos históricos muestran que el precio suele DEBILITARSE en las semanas previas a un unlock grande, porque el mercado se adelanta a la dilución. Cuando en cambio sube, como aquí, esa subida suele servir para que los insiders vendan sus tokens recién desbloqueados a mejor precio, con el retail como liquidez de salida. En ambos escenarios, comprar justo antes de un unlock del 15% del supply es mala idea.'
+          correctAnswer: 'c',
+          explanation: 'Históricamente, el precio tiende a debilitarse antes de un unlock grande, porque el mercado se adelanta a la dilución. Si sube con fuerza justo antes, esa subida suele servir para que quienes reciben los tokens desbloqueados vendan a mejor precio. No es una regla fija, pero es una señal para ir con cuidado.'
         },
         {
           id: 'q5',
-          question: 'Un protocolo hace un airdrop masivo: regala tokens al 20% de sus usuarios activos. ¿Qué pasa normalmente con el precio en las semanas siguientes?',
+          question: 'Un protocolo reparte un airdrop al 20% de sus usuarios activos. ¿Qué suele pasar con el precio en las semanas siguientes?',
           options: [
-            { id: 'a', text: 'Sube, más gente tiene el token y lo promueve' },
-            { id: 'b', text: 'Se mantiene estable, los airdrops son eventos neutrales para el precio' },
-            { id: 'c', text: 'Cae fuerte: los farmers venden de inmediato sus tokens gratis, creando presión de venta masiva' },
-            { id: 'd', text: 'Depende de la calidad del proyecto únicamente' }
+            { id: 'a', text: 'Suele subir: más personas tienen el token y lo promueven en sus redes' },
+            { id: 'b', text: 'Suele caer: muchos receptores venden pronto lo que recibieron gratis' },
+            { id: 'c', text: 'Se queda estable: un airdrop no cambia la oferta ni la demanda' },
+            { id: 'd', text: 'Sube si el proyecto es bueno, sin importar quién recibió el token' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Muchos receptores de airdrops venden pronto: recibieron algo gratis y quieren convertirlo en dinero. Eso crea presión de venta fuerte. No es una ley (algunos tokens subieron tras su airdrop), pero si te interesa el proyecto no hay prisa: esperar a que pase esa ola de venta suele ser mejor que comprar el primer día.'
+          correctAnswer: 'b',
+          explanation: 'Muchos receptores convierten pronto el airdrop en dinero, y eso crea presión de venta. No es una ley: algunos tokens subieron tras su airdrop. Pero si te interesa el proyecto, esperar a que pase esa ola de ventas suele ser mejor que comprar el primer día.'
+        },
+        {
+          id: 'q6',
+          type: 'multiple-select',
+          question: '¿Cuáles de estos datos de un proyecto son señales de alerta en sus tokenomics? Selecciona todas las correctas.',
+          options: [
+            { id: 'a', text: 'Equipo y VCs tienen más del 50% del supply' },
+            { id: 'b', text: 'Solo el 5% del supply total está en circulación' },
+            { id: 'c', text: 'Cinco wallets concentran el 60% del supply' },
+            { id: 'd', text: 'El equipo tiene vesting de 4 años' },
+            { id: 'e', text: 'La quema de fees supera a la emisión anual' }
+          ],
+          correctAnswers: [0, 1, 2],
+          explanation: 'Mucho supply en manos de insiders, poca circulación (mucha dilución por venir) y alta concentración en pocas wallets son las tres señales clásicas. Un vesting largo y una quema mayor que la emisión van en la dirección contraria: alinean al equipo y reducen el supply.'
+        },
+        {
+          id: 'q7',
+          type: 'true-false',
+          question: 'Un token que cuesta $0.001 por unidad está más barato que uno que cuesta $200 por unidad.',
+          correctAnswer: false,
+          explanation: 'Falso. El precio por unidad no dice nada sin el supply. Lo que compara proyectos es el market cap (precio × supply circulante) y el FDV (precio × supply total). Un token de $0.001 con billones de unidades puede valer mucho más que uno de $200.'
         },
         {
           id: 'review_1',
-          question: 'Repaso de Soportes y Resistencias: Cuando un precio rompe un nivel de soporte con alto volumen y luego vuelve a tocarlo desde abajo, ese nivel se convierte en:',
+          question: 'Repaso de Soportes y Resistencias: el precio rompe un soporte con volumen alto y luego vuelve a tocarlo desde abajo. ¿En qué suele convertirse ese nivel?',
           options: [
-            { id: 'a', text: 'Un nuevo soporte más fuerte' },
-            { id: 'b', text: 'Una señal de compra' },
-            { id: 'c', text: 'Una nueva resistencia' },
-            { id: 'd', text: 'Un indicador de baja volatilidad' }
+            { id: 'a', text: 'En un soporte más fuerte, porque ya resistió una ruptura antes' },
+            { id: 'b', text: 'En una señal de compra, porque el precio vuelve a un nivel conocido' },
+            { id: 'c', text: 'En un nivel sin valor: una vez roto, el mercado deja de mirarlo' },
+            { id: 'd', text: 'En una posible resistencia: el soporte roto puede cambiar de rol' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Cuando un soporte se rompe, se convierte en resistencia (y viceversa). Este "flip" de niveles es muy usado en análisis técnico, aunque no siempre se cumple. (Lo viste en la lección Soportes y Resistencias.)'
+          correctAnswer: 'd',
+          explanation: 'Un soporte roto suele convertirse en resistencia: quienes compraron ahí y quedaron perdiendo venden al recuperar su precio. Es un patrón muy usado, aunque no siempre se cumple. (Lo viste en la lección Soportes y Resistencias.)'
         }
       ]
     },
@@ -1084,16 +1219,16 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         questions: [
           {
             id: 'cp1-q1',
-            question: 'Token A cuesta $200 por unidad, con 1 millón circulante y 1 millón en total. Token B cuesta $0.001 por unidad, con 100,000 millones circulantes y 1 millón de millones en total. Un amigo dice "Token B está baratísimo". ¿Qué le respondes?',
+            question: 'Token A cuesta $200, con 1 millón de unidades en circulación y 1 millón en total. Token B cuesta $0.001, con 100,000 millones en circulación y 1 millón de millones en total. Un amigo dice: "B está baratísimo". ¿Qué le respondes?',
             options: [
-              'Tiene razón, $0.001 es muchísimo más barato que $200 por unidad',
-              'Token A vale $200M, ya todo en circulación. Token B tiene market cap de $100M pero FDV de $1,000M: totalmente diluido vale 5 veces más que A, y el 90% de su supply aún no circula',
-              'Los dos son equivalentes porque el precio no importa',
-              'Token B es mejor porque puedes comprar más unidades'
+              'Tiene razón: a $0.001 por unidad, B es muchísimo más barato que A',
+              'B tiene market cap de $100M y FDV de $1,000M: diluido vale 5 veces A',
+              'Son equivalentes: el precio por unidad no dice nada sobre su valor real',
+              'B es mejor, porque con el mismo dinero compras muchas más unidades'
             ],
             correctAnswer: 1,
-            explanation: 'El precio por unidad es irrelevante. Lo que importa es Market Cap (precio × supply circulante) y FDV (precio × supply total). Token B: $0.001 × 100,000 millones = $100M de market cap, y $0.001 × 1 millón de millones = $1,000M de FDV. Ratio 0.1: solo el 10% circula. Token A: $200 × 1 millón = $200M, ratio 1.0, sin dilución pendiente. "Barato por unidad" es una ilusión psicológica que se usa contra novatos.',
-            hint: 'Calcula el FDV de cada uno.'
+            explanation: 'A: $200 × 1 millón = $200M, todo en circulación. B: $0.001 × 100,000 millones = $100M de market cap, y $0.001 × 1 millón de millones = $1,000M de FDV. Solo circula el 10% de B, y totalmente diluido vale 5 veces más que A. Decir "son equivalentes" acierta en que el precio unitario no importa, pero ignora la diferencia de valor y de dilución.',
+            hint: 'Calcula el market cap y el FDV de cada uno.'
           }
         ]
       }
@@ -1104,7 +1239,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Ciclos de Mercado (Halving)',
     level: 'Intermedio',
     number: '6 de 12',
-    duration: '19 min',
+    duration: '21 min',
     type: 'Análisis + Estrategia',
     description: 'Todo en crypto se mueve al ritmo de Bitcoin. Cada ~4 años su emisión se reduce a la mitad, y hasta ahora cada recorte coincidió con un bull market. Entiende el patrón, sus límites, y cómo evitar que el ciclo maneje tus emociones.',
     sections: [
@@ -1231,63 +1366,95 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Imagina que es diciembre de 2025. El halving fue en abril 2024. Bitcoin ya superó su ATH anterior. ¿En qué fase del ciclo estarías probablemente?',
+          question: 'Imagina que es diciembre de 2025. El halving fue en abril de 2024 y Bitcoin ya superó su máximo anterior. Según el patrón histórico, ¿en qué fase del ciclo estarías?',
           options: [
-            { id: 'a', text: 'Acumulación, todavía es muy temprano en el ciclo para hablar de un pico' },
-            { id: 'b', text: 'Fase final del bull market o inicio de la corrección: a 20 meses post-halving, el pico histórico (12-18 meses) ya habría quedado atrás' },
-            { id: 'c', text: 'Bear market, el halving ya pasó hace tiempo' },
-            { id: 'd', text: 'No se puede determinar la fase actual' }
+            { id: 'a', text: 'Acumulación: aún es muy temprano en el ciclo para pensar en un techo' },
+            { id: 'b', text: 'Bear market profundo, porque el halving pasó hace más de un año' },
+            { id: 'c', text: 'Inicio del bull market, porque el precio acaba de superar su máximo' },
+            { id: 'd', text: 'Final del bull o inicio de la corrección, ~20 meses tras el halving' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Abril 2024 + 18 meses = octubre de 2025, justo cuando este ciclo marcó su máximo (hasta ahora, cerca de $126,000). Para diciembre de 2025 estarías en la fase final del bull o en el inicio de la corrección, que es lo que efectivamente siguió: para junio de 2026 BTC llegó a caer más de 50% desde ese máximo. Los ciclos hicieron pico 12-18 meses después del halving: no al inicio, sino cerca del final.'
+          correctAnswer: 'd',
+          explanation: 'Históricamente, los picos llegaron 12-18 meses después del halving: abril de 2024 + 18 meses = octubre de 2025, cuando este ciclo marcó su máximo cerca de $126,000. Para diciembre ya estarías en el final del bull o en la corrección, que es lo que siguió. Recuerda que el patrón tiene solo cuatro ejemplos.'
         },
         {
           id: 'q2',
-          question: 'Bitcoin Dominance está en 62%. Tu amigo te dice "las altcoins van a explotar, vende todo tu BTC por memecoins". ¿Qué le respondes?',
+          question: 'La dominancia de Bitcoin está en 62%. Un amigo te dice: "las altcoins van a explotar, vende todo tu BTC por memecoins". ¿Qué le respondes?',
           options: [
-            { id: 'a', text: '¡Tiene razón! Las altcoins siempre hacen más que BTC' },
-            { id: 'b', text: 'Con Dom en 62% el capital aún fluye a Bitcoin; la altseason históricamente empezó bajo ~55%. Es temprano para rotar fuerte' },
-            { id: 'c', text: 'Las altcoins nunca superan a Bitcoin en ninguna fase del ciclo' },
-            { id: 'd', text: 'BTC Dominance no tiene ninguna relación con el rendimiento de las altcoins' }
+            { id: 'a', text: 'Tiene razón: las altcoins siempre rinden más que BTC en esta fase del ciclo' },
+            { id: 'b', text: 'Las altcoins nunca superan a Bitcoin en ninguna fase del ciclo' },
+            { id: 'c', text: 'La dominancia no tiene relación con lo que hacen las altcoins' },
+            { id: 'd', text: 'Con 62% el capital aún va a Bitcoin; las altseasons llegaron bajo ~55%' }
           ],
-          correctAnswer: 'b',
-          explanation: 'BTC Dominance alta (>60%) = el capital sigue fluyendo a Bitcoin. Históricamente, altseason comienza cuando Dom cae bajo 55% y se acelera bajo 50%. Rotar antes de tiempo significa perder el rally de BTC sin capturar el de altcoins. Y ojo: en el ciclo 2024-25 la dominancia se mantuvo alta casi todo el tiempo y la altseason amplia nunca llegó; es una heurística histórica, no una garantía.'
+          correctAnswer: 'd',
+          explanation: 'Dominancia alta significa que el capital sigue prefiriendo Bitcoin. En ciclos anteriores, la altseason empezó con la dominancia bajo ~55%. Es una heurística, no una ley: en 2024-25 la dominancia se mantuvo alta y la altseason amplia no llegó. Rotar todo a memecoins por una frase de un amigo es justo lo que la lección te enseña a evitar.'
         },
         {
           id: 'q3',
-          question: 'Tu tía que nunca habló de inversiones te pregunta cómo comprar Dogecoin porque lo vio en TikTok. ¿Qué señal del ciclo es esta?',
+          question: 'Tu tía, que nunca habló de inversiones, te pregunta cómo comprar Dogecoin porque lo vio en TikTok. ¿Qué señal del ciclo es?',
           options: [
-            { id: 'a', text: 'Señal alcista: el retail está entrando y la subida se va a acelerar con fuerza' },
-            { id: 'b', text: 'Señal de techo cercano: cuando entra gente sin experiencia por FOMO, los informados suelen estar vendiendo' },
-            { id: 'c', text: 'No significa nada para el mercado' },
-            { id: 'd', text: 'Señal de suelo, tu tía siempre compra en el mejor momento' }
+            { id: 'a', text: 'Posible euforia: cuando entra gente sin experiencia, los informados venden' },
+            { id: 'b', text: 'Señal alcista: el retail apenas está entrando y la subida va a acelerarse más' },
+            { id: 'c', text: 'Señal de suelo, porque la gente nueva suele comprar en el mejor momento' },
+            { id: 'd', text: 'Nada: lo que hace la gente fuera del mercado no influye en el precio' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El "indicador del taxista/tía" es un clásico del mercado. Cuando personas sin conocimiento financiero quieren comprar crypto porque lo vieron en TikTok, suele ser señal de euforia. Es cuando los que compraron antes suelen venderle al que llega último. No marca el día exacto del techo, pero sí es momento de prudencia.'
+          correctAnswer: 'a',
+          explanation: 'Cuando personas sin experiencia quieren comprar por algo que vieron en redes, suele ser señal de euforia, y quienes compraron antes aprovechan para venderles. No marca el día exacto del techo, pero sí es momento de revisar tu plan de salida.'
         },
         {
           id: 'q4',
-          question: 'Bitcoin cae 35% en una semana durante un bull market confirmado (estructura alcista en semanal, post-halving). ¿Qué haces?',
+          question: 'En un bull market con estructura alcista en el semanal, Bitcoin cae 35% en una semana. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Vendo todo de inmediato: el bear market comenzó y hay que cortar pérdidas' },
-            { id: 'b', text: 'Corrección normal dentro de un bull market: evalúo comprar más si tengo liquidez, el contexto sigue alcista' },
-            { id: 'c', text: 'Espero a que recupere el ATH para comprar más' },
-            { id: 'd', text: 'Muevo todo a memecoins porque las altcoins rebotan más fuerte' }
+            { id: 'a', text: 'Vendo todo de inmediato, porque una caída así confirma que ya empezó el bear' },
+            { id: 'b', text: 'Pido prestado para comprar más, porque los bull markets siempre terminan rebotando' },
+            { id: 'c', text: 'Paso todo a memecoins, porque las altcoins rebotan más fuerte que BTC' },
+            { id: 'd', text: 'Reviso mi plan: puede ser una corrección normal; solo uso liquidez de reserva' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Correcciones del 30-40% han sido comunes en bull markets: el de 2017 tuvo varias. Si la estructura semanal sigue alcista y estamos post-halving, una corrección puede ser oportunidad. Pero a veces sí es el inicio del bear: por eso, si compras, usa solo liquidez de reserva, nunca apalancamiento ni dinero que necesites.'
+          correctAnswer: 'd',
+          explanation: 'Correcciones de 30-40% han sido comunes en bull markets: el de 2017 tuvo seis. Si la estructura semanal sigue alcista, puede ser una oportunidad, pero a veces sí es el inicio del bear. Por eso, si compras, que sea con liquidez de reserva, sin deuda ni dinero que necesites.'
         },
         {
           id: 'q5',
-          question: 'Compraste SOL a $20 en el bear market. Ahora está a $200 (10×) y Bitcoin está en nuevo ATH. ¿Qué opción es la más prudente?',
+          question: 'Compraste SOL a $20 en el bear market. Ahora está a $200 (10×) y Bitcoin marca un máximo histórico. ¿Qué opción es la más prudente?',
           options: [
-            { id: 'a', text: 'HODL forever, nunca vender, SOL va a llegar a $1,000 este mismo ciclo' },
-            { id: 'b', text: 'Tomar ganancias parciales por niveles y decidir de antemano a qué precio sales del resto' },
-            { id: 'c', text: 'Vender el 100% y esperar el bear market' },
-            { id: 'd', text: 'Meter más dinero, está subiendo, va a seguir subiendo' }
+            { id: 'a', text: 'Mantener todo sin vender, porque SOL va a llegar a $1,000 en este ciclo' },
+            { id: 'b', text: 'Comprar más, porque si está subiendo con fuerza va a seguir subiendo' },
+            { id: 'c', text: 'Recuperar la inversión y dejar el resto sin plan, porque ya es dinero gratis' },
+            { id: 'd', text: 'Tomar ganancias parciales por niveles y fijar desde ya la salida del resto' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Nadie quebró tomando ganancias. Recuperar tu inversión inicial es prudente, pero lo que queda NO es "dinero gratis": es tu dinero, vale lo que vale hoy y puede caer 80% en un bear. Por eso necesita su propio plan de salida, por ejemplo un stop bajo la estructura en $150, no en tu precio de compra de $20. Y cada venta puede generar impuestos.'
+          correctAnswer: 'd',
+          explanation: 'Tomar ganancias por niveles convierte parte de la subida en dinero real sin apostar todo a acertar el techo. La opción tentadora es recuperar la inversión y dejar el resto sin plan. Pero lo que queda no es dinero gratis: es tu dinero, vale lo que vale hoy y puede caer 80% en un bear. Necesita su propio plan de salida.'
+        },
+        {
+          id: 'q6',
+          type: 'true-false',
+          question: 'Como los cuatro halvings anteriores vinieron seguidos de un bull market, el próximo halving traerá otro con seguridad.',
+          correctAnswer: false,
+          explanation: 'Falso. Cuatro casos son un patrón, no una ley. El mercado cambia: ETFs, instituciones y condiciones macro pesan cada vez más, y la emisión que recorta cada halving es cada vez más pequeña frente al supply total. Úsalo como contexto, no como calendario.'
+        },
+        {
+          id: 'q7',
+          type: 'ordering',
+          question: 'Ordena las fases del ciclo de mercado, empezando por el bear market.',
+          items: [
+            'Bear market',
+            'Acumulación',
+            'Bull market',
+            'Distribución'
+          ],
+          correctOrder: [0, 1, 2, 3],
+          explanation: 'Tras el bear viene la acumulación (precios bajos y poco interés), luego el bull market, y en la cima la distribución, cuando quienes compraron temprano venden a los que llegan tarde. Las fases solo se ven con claridad después.'
+        },
+        {
+          id: 'q8',
+          question: '¿Qué cambia exactamente en un halving de Bitcoin?',
+          options: [
+            { id: 'a', text: 'La cantidad total de bitcoins que existirán baja a la mitad' },
+            { id: 'b', text: 'El precio de Bitcoin se ajusta a la mitad durante unas semanas' },
+            { id: 'c', text: 'La recompensa por bloque de los mineros se reduce a la mitad' },
+            { id: 'd', text: 'Las comisiones de las transacciones bajan a la mitad para todos' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Cada ~210,000 bloques (unos 4 años), la recompensa que reciben los mineros por bloque se corta a la mitad. El límite de 21 millones no cambia: lo que baja es la velocidad a la que se emiten los bitcoins nuevos.'
         }
       ]
     }
@@ -1297,7 +1464,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Investigación On-Chain y DYOR',
     level: 'Intermedio',
     number: '7 de 12',
-    duration: '19 min',
+    duration: '21 min',
     type: 'Casos Prácticos + Herramientas',
     description: 'DYOR (Do Your Own Research) no es un meme, es una habilidad. Aprende a leer la blockchain, usar las mismas herramientas que usan los fondos, y filtrar estafas con datos reales en vez de opiniones.',
     sections: [
@@ -1413,75 +1580,99 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Encontraste un token nuevo en DefiLlama. Genera $2M en fees mensuales con solo $50M de market cap. ¿Qué significa esto?',
+          question: 'En DefiLlama ves que un protocolo genera $2M en fees al mes y tiene un market cap de $50M. ¿Cómo lo lees?',
           options: [
-            { id: 'a', text: 'Está sobrevalorado porque los fees son demasiado altos para su tamaño' },
-            { id: 'b', text: 'Posiblemente infravalorado: $24M anuales en ingresos reales con valoración baja. Compara con competidores' },
-            { id: 'c', text: 'Los fees no importan para valorar proyectos crypto, solo importa la narrativa' },
-            { id: 'd', text: 'Es una estafa porque los fees reales no pueden ser tan altos' }
+            { id: 'a', text: 'Sobrevalorado, porque unos fees tan altos terminan ahuyentando a los usuarios' },
+            { id: 'b', text: 'Irrelevante: en crypto el valor depende solo de la narrativa del momento' },
+            { id: 'c', text: 'Infravalorado con seguridad, porque $24M al año no pueden ser casualidad' },
+            { id: 'd', text: 'Posiblemente infravalorado, si esos fees son orgánicos y no de incentivos' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Un protocolo que genera $24M anuales en fees con $50M de market cap tiene un ratio Price/Fees de ~2×, que parece muy barato. Para contexto, protocolos similares pueden cotizar a 10-50× sus fees anuales. Antes de concluir nada, revisa si esos fees vienen de incentivos o de un pico puntual, y compara con competidores directos del mismo sector.'
+          correctAnswer: 'd',
+          explanation: '$2M al mes son $24M al año: unas 2 veces sus fees, cuando protocolos similares pueden cotizar a 10-50 veces. Parece barato, pero antes de concluir revisa si los fees vienen de incentivos o de un pico puntual, y compáralo con competidores directos. Lo tentador es saltar de "parece barato" a "es seguro", y el dato solo no alcanza para eso.'
         },
         {
           id: 'q2',
-          question: 'En Arkham ves que 5 wallets de VCs conocidos movieron sus tokens a Binance ayer. El precio aún no ha caído. ¿Qué haces?',
+          question: 'En Arkham ves que 5 wallets de VCs conocidos movieron sus tokens a Binance ayer. El precio todavía no cayó. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Compro el dip antes de que suban, los VCs saben lo que hacen' },
-            { id: 'b', text: 'Alerta: mover tokens a exchanges suele preceder una venta. Reduzco exposición o ajusto mi stop' },
-            { id: 'c', text: 'Es información irrelevante, los VCs mueven sus tokens por muchísimas razones' },
-            { id: 'd', text: 'Espero a que caiga el precio y compro el dip' }
+            { id: 'a', text: 'Compro más, porque si los VCs mueven tokens es que saben algo positivo' },
+            { id: 'b', text: 'Lo tomo como alerta y reviso mi tamaño o mi stop antes de que vendan' },
+            { id: 'c', text: 'Lo ignoro: mover tokens a un exchange nunca tiene relación con vender' },
+            { id: 'd', text: 'Vendo todo ya, porque es seguro que esos VCs van a vender hoy mismo' }
           ],
           correctAnswer: 'b',
-          explanation: 'Mover tokens desde wallets privadas a exchanges suele preceder una venta, aunque hay excepciones (acuerdos de market making, cambios de custodia). Los VCs tienen información y relaciones con los equipos que tú no tienes. Cuando múltiples VCs hacen el mismo movimiento simultáneamente, la lectura de venta gana mucho peso. Actúa antes de que el precio refleje la venta.'
+          explanation: 'Mover tokens a un exchange suele preceder una venta, aunque hay excepciones como acuerdos de market making o cambios de custodia. Cuando varios VCs lo hacen a la vez, la lectura de venta gana peso. Por eso es una alerta para revisar tu posición, no una certeza para vender todo en pánico.'
         },
         {
           id: 'q3',
           question: 'Revisas un token nuevo en RugCheck y ves que la mint authority NO está revocada. ¿Qué significa para ti como holder?',
           options: [
-            { id: 'a', text: 'Que el token pasó una auditoría oficial de seguridad' },
-            { id: 'b', text: 'Que el creador todavía puede crear tokens nuevos y diluirte' },
-            { id: 'c', text: 'Que la liquidez del pool está bloqueada para siempre' },
-            { id: 'd', text: 'Nada importante, es un detalle técnico del contrato' }
+            { id: 'a', text: 'Que el token ya pasó una auditoría oficial de seguridad de su contrato' },
+            { id: 'b', text: 'Que la liquidez del pool quedó bloqueada para siempre dentro del contrato' },
+            { id: 'c', text: 'Que el creador puede congelar tu wallet y bloquear tus transferencias' },
+            { id: 'd', text: 'Que el creador todavía puede crear tokens nuevos y diluir a los holders' }
           ],
-          correctAnswer: 'b',
-          explanation: 'La mint authority es el permiso para crear tokens nuevos. Si sigue activa, quien la controla puede imprimir millones de tokens y venderlos encima de ti. En un proyecto serio suele estar revocada o en manos de una gobernanza transparente. No tiene nada que ver con auditorías ni con la liquidez: esas se revisan aparte.'
+          correctAnswer: 'd',
+          explanation: 'La mint authority es el permiso para crear tokens nuevos: quien la controla puede imprimir millones y venderlos encima de ti. Congelar cuentas es otro permiso distinto, la freeze authority, que RugCheck también revisa. Ninguno de los dos tiene que ver con auditorías ni con la liquidez bloqueada.'
         },
         {
           id: 'q4',
-          question: 'Un nuevo DEX en Solana tiene $500M en TVL, pero en Dune ves que solo 200 wallets generan el 95% del volumen de trading. ¿Qué está pasando?',
+          question: 'Un DEX nuevo en Solana tiene $500M de TVL, pero en Dune ves que solo 200 wallets generan el 95% del volumen. ¿Qué está pasando probablemente?',
           options: [
-            { id: 'a', text: 'Los usuarios están muy comprometidos con el protocolo' },
-            { id: 'b', text: 'Wash trading o farming de puntos: las métricas están artificialmente infladas' },
-            { id: 'c', text: 'Es normal en DeFi que unas pocas wallets generen la mayoría del volumen total' },
-            { id: 'd', text: 'El protocolo es exclusivo para ballenas, lo cual es buena señal' }
+            { id: 'a', text: 'Usuarios muy comprometidos, que operan más aquí que en otros DEX' },
+            { id: 'b', text: 'Es normal en DeFi y no cambia nada al evaluar la salud del protocolo' },
+            { id: 'c', text: 'Es un protocolo para ballenas, lo que indica capital serio y estable' },
+            { id: 'd', text: 'Wash trading o farming de puntos: las métricas están infladas' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Concentración extrema de actividad en pocas wallets es una señal clara de wash trading (volumen falso) o farming de puntos/incentivos por bots. Un protocolo saludable tiene miles de usuarios activos con una distribución más diversa. Cuando los incentivos terminen o se lance el token, esas 200 wallets desaparecen junto con el TVL y el volumen.'
+          correctAnswer: 'd',
+          explanation: 'Una concentración tan extrema suele ser volumen falso (wash trading) o bots que farmean puntos e incentivos. Es cierto que en DeFi pocas wallets grandes mueven mucho volumen, pero un protocolo sano tiene miles de usuarios con una distribución más amplia. Cuando terminen los incentivos, esas 200 wallets se irán con el TVL.'
         },
         {
           id: 'q5',
-          question: 'El precio de un token cae 30% en una semana, pero en DefiLlama ves que el TVL sube 20% en el mismo período. ¿Qué está pasando?',
+          question: 'El precio de un token cae 30% en una semana, pero en DefiLlama su TVL sube 20% en el mismo período. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'El proyecto está muriendo y los datos de TVL son claramente falsos' },
-            { id: 'b', text: 'Una divergencia que vale investigar: reviso quién deposita y si hay incentivos antes de concluir' },
-            { id: 'c', text: 'El TVL es irrelevante cuando el precio baja' },
-            { id: 'd', text: 'Es acumulación institucional segura, así que compro ya' }
+            { id: 'a', text: 'Compro ya, porque es una acumulación institucional segura antes de que suba' },
+            { id: 'b', text: 'Lo tomo como pista: reviso quién deposita, qué activos y si hay incentivos' },
+            { id: 'c', text: 'Asumo que el proyecto está muriendo y que los datos de TVL están mal' },
+            { id: 'd', text: 'Lo ignoro: cuando el precio baja, el TVL deja de ser un dato relevante' }
           ],
           correctAnswer: 'b',
-          explanation: 'Puede ser acumulación con convicción, pero hay explicaciones más aburridas: un programa de incentivos nuevo, una sola ballena depositando, o depósitos de stablecoins que no tienen nada que ver con el token. Abre DefiLlama y Dune: ¿cuántas wallets depositan? ¿Qué activos? ¿Hay recompensas nuevas? La divergencia es una pista, no una conclusión.'
+          explanation: 'Puede ser acumulación con convicción, pero hay explicaciones más aburridas: un programa de incentivos nuevo, una sola ballena depositando, o stablecoins que no tienen nada que ver con el token. La divergencia es una pista para investigar en DefiLlama y Dune, no una conclusión.'
         },
         {
           id: 'q6',
-          question: 'Un protocolo tiene $300M en TVL, pero descubres que el 80% de ese TVL llegó en el último mes gracias a un programa de liquidity mining que regala tokens. ¿Cómo evalúas esto?',
+          type: 'fill-blank',
+          question: 'Separa el TVL orgánico del incentivado.',
+          textBefore: 'Un protocolo tiene $300M de TVL, pero el 80% llegó el último mes por un programa de recompensas. Su TVL orgánico es de unos $',
+          textAfter: 'millones.',
+          correctAnswer: '60',
+          acceptableAnswers: ['60', '$60', '60m', '60 m', '60 millones', '$60m', '60mm', '60 mill'],
+          explanation: 'El 20% orgánico de $300M son $60M. El resto es capital mercenario: está ahí por las recompensas y suele irse cuando terminan. $60M de TVL orgánico que crece es más sano que $300M inflados por incentivos temporales.'
+        },
+        {
+          id: 'q7',
+          type: 'ordering',
+          question: 'Ordena los 5 pasos del framework DYOR de esta lección.',
+          items: [
+            '¿Tiene producto real?',
+            '¿Las métricas crecen?',
+            '¿Quién está detrás?',
+            '¿Cómo son los tokenomics?',
+            '¿Dónde están las red flags?'
+          ],
+          correctOrder: [0, 1, 2, 3, 4],
+          explanation: 'Primero confirmas que hay un producto que la gente usa; sin eso, el resto sobra. Luego verificas que las métricas crezcan, quién construye, cómo se reparte el token y, al final, buscas activamente las red flags. Seguir siempre el mismo orden evita que te enamores de un proyecto antes de revisar lo básico.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de Tokenomics 101: un token tiene un market cap de $50M y un FDV de $500M. ¿Qué te dice esa diferencia?',
           options: [
-            { id: 'a', text: 'Excelente, $300M en TVL demuestra que el protocolo es exitoso y confiable' },
-            { id: 'b', text: 'El TVL real es ~$60M (el 20% orgánico); el 80% incentivado se irá cuando terminen las recompensas' },
-            { id: 'c', text: 'Los incentivos son irrelevantes, el TVL es TVL' },
-            { id: 'd', text: 'Es bearish porque están regalando tokens' }
+            { id: 'a', text: 'Que el token está barato, porque vale diez veces menos que su FDV' },
+            { id: 'b', text: 'Que solo circula el 10% del supply; el resto puede entrar y diluirte' },
+            { id: 'c', text: 'Que el proyecto ya vale $500M, porque el FDV es su valor real hoy' },
+            { id: 'd', text: 'Nada útil: el FDV solo sirve para tokens que ya circulan por completo' }
           ],
           correctAnswer: 'b',
-          explanation: 'El TVL incentivado es "capital mercenario", está ahí solo por las recompensas y se irá cuando terminen. La métrica real es el TVL orgánico que queda sin incentivos. Un protocolo con $60M de TVL orgánico que crece es más sano que uno con $300M inflados por incentivos temporales. Mira qué pasó con el TVL de otros protocolos cuando recortaron sus recompensas: suele caer con fuerza.'
+          explanation: 'Si el FDV es 10 veces el market cap, solo circula el 10% del supply. El otro 90% entrará con los unlocks y diluirá a los holders actuales. Leerlo como "barato" es justo la trampa del token barato. (Lo viste en la lección Tokenomics 101.)'
         }
       ]
     },
@@ -1493,16 +1684,16 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         questions: [
           {
             id: 'cp1-q1',
-            question: 'Descubres un protocolo nuevo en Twitter y quieres evaluarlo seriamente. ¿Cuál es la PRIMERA herramienta que abres y por qué?',
+            question: 'Descubres un protocolo DeFi nuevo en X y quieres evaluarlo en serio. ¿Cuál es la primera herramienta que abres?',
             options: [
-              'Twitter/X, para ver qué dice la comunidad sobre el proyecto',
-              'DefiLlama: ahí veo si el protocolo tiene TVL real, fees reales y usuarios reales en tiempo real. Todo lo demás es opinión; esto son datos',
-              'El sitio web del protocolo, para leer el whitepaper',
-              'Dune, para buscar análisis on-chain sofisticados'
+              'X, para ver qué opina la comunidad del proyecto antes que cualquier dato',
+              'El sitio web del protocolo, porque el whitepaper explica cómo funciona',
+              'Dune, porque sus dashboards on-chain son los más completos y detallados',
+              'DefiLlama: muestra TVL, fees y uso reales antes que cualquier opinión'
             ],
-            correctAnswer: 1,
-            explanation: 'Para protocolos DeFi, siempre empiezas por DefiLlama. Si el protocolo no aparece ahí con TVL y fees, es mala señal: o no tiene producto real o todavía es muy pequeño para evaluarlo. Para proyectos que no son DeFi (infraestructura, gaming) necesitarás otras fuentes, pero el principio es el mismo: datos antes que opiniones. Dune y análisis on-chain son herramientas 2 y 3.',
-            hint: 'Piensa en qué fuente te da datos crudos antes que opiniones.'
+            correctAnswer: 3,
+            explanation: 'Para un protocolo DeFi, DefiLlama es el punto de partida: si no aparece con TVL y fees, o no tiene producto real o es demasiado pequeño para evaluarlo. Dune es muy útil, pero es para profundizar después, cuando ya sabes qué preguntar. Datos antes que opiniones.',
+            hint: 'Piensa en qué fuente te da datos básicos antes que opiniones.'
           }
         ]
       }
@@ -1513,7 +1704,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Narrativas y Rotación',
     level: 'Intermedio',
     number: '8 de 12',
-    duration: '17 min',
+    duration: '19 min',
     type: 'Estrategia',
     description: 'En crypto, la atención mueve el dinero. Las narrativas (IA, DeFi, Memes, Gaming) definen qué sube y qué baja en cada ciclo. Aprende a reconocerlas, a estimar en qué etapa podrían estar, y por qué la mayoría de quienes las persiguen terminan siendo la liquidez de salida.',
     sections: [
@@ -1630,63 +1821,95 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'La narrativa de IA + crypto es la más caliente en 2025. Encuentras un token de AI con $5M de market cap y producto funcionando. ¿Cómo evalúas la oportunidad?',
+          question: 'La narrativa de IA + crypto está caliente. Encuentras un token de IA con $5M de market cap y un producto que funciona. ¿Cómo lo evalúas?',
           options: [
-            { id: 'a', text: 'Compro todo lo que pueda: dice "AI" en el nombre y la narrativa está caliente, va a subir' },
-            { id: 'b', text: 'Aplico el filtro de 3 preguntas: ¿catalizador real? ¿espacio para crecer? ¿tiene recorrido? Si pasa, entro solo con tamaño especulativo' },
-            { id: 'c', text: 'AI es una moda, ignoro todo lo relacionado' },
-            { id: 'd', text: 'Espero a que suba 10× para confirmar antes de entrar' }
+            { id: 'a', text: 'Paso el filtro de 3 preguntas y, si lo supera, entro con tamaño especulativo' },
+            { id: 'b', text: 'Compro fuerte, porque la narrativa está caliente y el token ya tiene producto' },
+            { id: 'c', text: 'Lo ignoro: la IA en crypto es una moda sin proyectos que tengan producto real' },
+            { id: 'd', text: 'Espero a que suba 10× para confirmar la tendencia y entonces entro con todo' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Las narrativas calientes producen ganadores reales, pero también mucho vapor. El filtro de 3 preguntas separa oportunidades legítimas de trampas: catalizador real (sí, la IA es real), espacio para crecer (market cap bajo = sí), y durabilidad de la narrativa. Eso sí: un token de $5M de market cap tiene riesgo extremo de rug pull y de liquidez (LIBRA lo demostró). Si entras, hazlo con una fracción pequeña de tu capital de trading, como verás en Diversificación Inteligente, nunca más.'
+          correctAnswer: 'a',
+          explanation: 'El filtro (¿catalizador real?, ¿espacio para crecer?, ¿la narrativa tiene recorrido?) separa oportunidades de vapor. Aun si lo pasa, un token de $5M tiene riesgo extremo de rug pull y de liquidez, como mostró LIBRA. Por eso la posición es pequeña: que el token tenga producto no justifica un tamaño grande.'
         },
         {
           id: 'q2',
-          question: '¿En qué etapa de la narrativa suele estar el mejor balance entre riesgo y recompensa?',
+          question: '¿En qué etapa del ciclo de vida de una narrativa suele estar el mejor balance entre riesgo y recompensa?',
           options: [
-            { id: 'a', text: 'Mainstream, cuando todos hablan de ella es más seguro comprar sin miedo' },
-            { id: 'b', text: 'Crecimiento (etapa 2): Crypto Twitter ya la adoptó, hay validación, y aún no llegó al mainstream' },
-            { id: 'c', text: 'Nacimiento, siempre hay que ser el primero' },
-            { id: 'd', text: 'Agotamiento, los precios están bajos y pueden rebotar' }
+            { id: 'a', text: 'Mainstream: cuando todos hablan de ella, comprar es más seguro que nunca' },
+            { id: 'b', text: 'Nacimiento: entrar primero siempre da el mejor resultado de todo el ciclo' },
+            { id: 'c', text: 'Crecimiento: ya hay validación en CT, pero todavía no llegó al mainstream' },
+            { id: 'd', text: 'Agotamiento: los precios ya bajaron bastante y por eso tienen que rebotar' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El nacimiento tiene máximo upside pero riesgo extremo (puede no funcionar). El mainstream ya capturó la mayoría del movimiento. La etapa 2 (Crecimiento) suele ofrecer el mejor balance: algo de validación y todavía recorrido. Aun así, muchas narrativas mueren en esta etapa.'
+          correctAnswer: 'c',
+          explanation: 'En el nacimiento el potencial es máximo pero también el riesgo, porque la narrativa puede no despegar. En el mainstream la mayor parte del movimiento ya pasó. El crecimiento suele dar el mejor balance, aunque solo se reconoce con claridad después y muchas narrativas mueren en esa etapa.'
         },
         {
           id: 'q3',
           question: '¿Cuál fue una de las narrativas dominantes del ciclo 2024-2025, y cómo terminó?',
           options: [
-            { id: 'a', text: 'Metaverso: la gente quiere vivir en mundos virtuales y pagó por ello' },
-            { id: 'b', text: 'Memecoins + atención retail, sobre todo en Solana: dominaron hasta enero de 2025 y colapsaron tras el caso LIBRA' },
-            { id: 'c', text: 'ICOs, que volvieron con la misma fuerza que en 2017' },
-            { id: 'd', text: 'Mining: el minado de Bitcoin fue la narrativa más caliente del ciclo' }
+            { id: 'a', text: 'Metaverso: la gente pagó por vivir en mundos virtuales y la idea se asentó' },
+            { id: 'b', text: 'Memecoins en Solana: dominaron hasta enero de 2025 y colapsaron tras LIBRA' },
+            { id: 'c', text: 'ICOs, que volvieron con la misma fuerza que tuvieron en el ciclo de 2017' },
+            { id: 'd', text: 'Minería de Bitcoin, que fue la narrativa más caliente y rentable del ciclo' }
           ],
           correctAnswer: 'b',
-          explanation: 'Los memecoins (BONK, WIF, y miles más) capturaron la atención y el capital retail de forma masiva en 2024, con Solana como cadena preferida por su velocidad y bajo costo. La narrativa hizo pico en enero de 2025 con el token TRUMP y se desplomó tras el colapso de LIBRA en febrero de 2025. El metaverso y las ICOs quedaron en ciclos pasados.'
+          explanation: 'Los memecoins capturaron el capital retail en 2024, con Solana como cadena preferida por velocidad y costo. La narrativa hizo pico en enero de 2025 con el token TRUMP y se desplomó tras el colapso de LIBRA en febrero. El metaverso y las ICOs fueron narrativas de ciclos anteriores.'
         },
         {
           id: 'q4',
-          question: 'Tu portafolio está concentrado en tokens DeFi. El sector DeFi dejó de hacer nuevos máximos, el volumen baja, pero los tokens de AI están explotando con volumen creciente. ¿Qué haces?',
+          question: 'Tu portafolio está concentrado en DeFi. El sector dejó de hacer máximos y su volumen baja, mientras los tokens de IA marcan máximos con volumen creciente. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Me quedo 100% en DeFi, es mi sector favorito y confío en su regreso' },
-            { id: 'b', text: 'Roto gradualmente: vendo parte de DeFi que perdió momentum y construyo posiciones selectas en AI' },
-            { id: 'c', text: 'Vendo todo inmediatamente y compro 100% AI' },
-            { id: 'd', text: 'Compro más DeFi, está "barato" comparado con AI' }
+            { id: 'a', text: 'Roto de forma gradual hacia proyectos de IA que ya investigué a fondo' },
+            { id: 'b', text: 'Me quedo 100% en DeFi, porque es mi sector y confío en que va a volver' },
+            { id: 'c', text: 'Vendo todo DeFi hoy y paso el 100% del capital a cualquier token de IA' },
+            { id: 'd', text: 'Compro más DeFi, porque está barato si lo comparo con los tokens de IA' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Rotación inteligente: cuando tu sector pierde momentum (subidas menores, volumen cayendo) y otro gana momentum (nuevos máximos, volumen creciente), es momento de rotar. Hazlo gradualmente, no todo de golpe, solo a proyectos que hayas investigado, y recuerda que cada venta puede generar impuestos.'
+          correctAnswer: 'a',
+          explanation: 'Cuando tu sector pierde momentum y otro lo gana, rotar tiene sentido, pero de forma gradual y solo hacia proyectos investigados. Rotar todo de golpe cambia una apuesta concentrada por otra. Recuerda que cada venta puede generar impuestos.'
         },
         {
           id: 'q5',
-          question: '¿Cuál es la señal más temprana de que una nueva narrativa está naciendo?',
+          question: '¿Cuál suele ser la señal más temprana de que una narrativa nueva está naciendo?',
           options: [
-            { id: 'a', text: 'Aparece en CNBC y Bloomberg' },
-            { id: 'b', text: 'Tu amigo que no sabe de crypto te pregunta' },
-            { id: 'c', text: 'Varios traders respetados de CT hablan del mismo tema, con micro caps y métricas on-chain creciendo' },
-            { id: 'd', text: 'Un influencer grande de YouTube publica un video promocionando la narrativa' }
+            { id: 'a', text: 'Traders con historial en CT hablan del tema y las métricas on-chain crecen' },
+            { id: 'b', text: 'El tema aparece en CNBC y en Bloomberg con varios reportajes en la misma semana' },
+            { id: 'c', text: 'Un influencer grande de YouTube publica un video sobre esa narrativa' },
+            { id: 'd', text: 'Muchas cuentas promocionan el mismo token el mismo día con entusiasmo' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Las narrativas suelen nacer entre traders con historial verificable, y ganan peso cuando las métricas on-chain las respaldan. Los medios y los grandes influencers llegan tarde. Si muchas cuentas promocionan el mismo token el mismo día, sospecha de una campaña pagada, no de una narrativa naciendo.'
+        },
+        {
+          id: 'q6',
+          type: 'true-false',
+          question: 'Si una narrativa es real y tiene un catalizador sólido, la mayoría de sus tokens termina subiendo.',
+          correctAnswer: false,
+          explanation: 'Falso. Incluso en narrativas reales, la mayoría de los tokens termina muy por debajo de su máximo. La narrativa puede ser correcta y tu token, el equivocado. Por eso el tamaño pequeño y la selección importan más que acertar el tema.'
+        },
+        {
+          id: 'q7',
+          type: 'ordering',
+          question: 'Ordena las etapas del ciclo de vida de una narrativa.',
+          items: [
+            'Nacimiento',
+            'Crecimiento',
+            'Mainstream',
+            'Agotamiento'
+          ],
+          correctOrder: [0, 1, 2, 3],
+          explanation: 'Nace entre pocos, crece cuando CT la valida, llega al mainstream cuando la cubren los medios y se agota cuando ya no entra capital nuevo. Saber en qué etapa estás te ayuda sobre todo a no comprar en el pico.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de Ciclos de Mercado: la dominancia de Bitcoin está en 64% y subiendo. Según el patrón histórico, ¿qué suele indicar?',
+          options: [
+            { id: 'a', text: 'Que la altseason ya empezó y conviene pasar todo a altcoins pequeñas' },
+            { id: 'b', text: 'Que el ciclo terminó y viene un bear market largo para todo el mercado' },
+            { id: 'c', text: 'Que el capital aún prefiere BTC y la rotación a altcoins no empezó' },
+            { id: 'd', text: 'Nada: la dominancia solo mide cuántos bitcoins están en circulación' }
           ],
           correctAnswer: 'c',
-          explanation: 'Las narrativas suelen nacer en Crypto Twitter entre traders con historial verificable. Cuando 5+ cuentas serias e independientes mencionan el mismo tema y las métricas on-chain lo respaldan (TVL creciendo, wallets activas subiendo), es más probable que tenga sustancia. Si todas promocionan el mismo token el mismo día, sospecha de una campaña pagada. Los medios mainstream llegan semanas después.'
+          explanation: 'La dominancia mide qué parte del valor total del mercado está en Bitcoin. Alta y subiendo indica que el capital todavía prefiere BTC. Es una heurística: en 2024-25 la dominancia se mantuvo alta y la altseason amplia no llegó. (Lo viste en la lección Ciclos de Mercado (Halving).)'
         }
       ]
     }
@@ -1696,7 +1919,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Diversificación Inteligente',
     level: 'Intermedio',
     number: '9 de 12',
-    duration: '15 min',
+    duration: '17 min',
     type: 'Estrategia',
     description: 'Construye un portafolio que aguante los crashes sin sacarte del juego. La estrategia núcleo-satélite combina una base grande, apuestas pequeñas y liquidez.',
     sections: [
@@ -1807,63 +2030,96 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Tu porción cripto es de $10,000 USD y ya tienes experiencia. ¿Qué asignación sigue la estrategia núcleo-satélite de esta lección?',
+          question: 'Tu porción cripto es de $10,000 y ya tienes experiencia. ¿Qué asignación sigue la estrategia núcleo-satélite de esta lección?',
           options: [
-            { id: 'a', text: '100% en la memecoin del momento, puede hacer 100× si aciertas' },
-            { id: 'b', text: '85% BTC/ETH/SOL, 10% narrativas que entiendo, 5% USDC: base, apuestas pequeñas y liquidez' },
-            { id: 'c', text: '50% BTC, 50% USDC, lo más seguro posible' },
-            { id: 'd', text: '100% distribuido en 30 altcoins diferentes para "máxima diversificación"' }
+            { id: 'a', text: '100% en la memecoin del momento, porque puede hacer 100× si aciertas' },
+            { id: 'b', text: '85% en BTC/ETH/SOL, 10% en narrativas que entiendo y 5% en USDC' },
+            { id: 'c', text: 'Todo repartido en 30 altcoins distintas para la máxima diversificación' },
+            { id: 'd', text: '85% en altcoins pequeñas, 10% en BTC/ETH/SOL y 5% en USDC para crecer' }
           ],
           correctAnswer: 'b',
-          explanation: '85/10/5 es el reparto de este framework: el core es tu base (BTC/ETH/SOL tienen el historial más largo, aunque ninguno es inmune a caídas fuertes), los satélites son riesgo alto con un tamaño que puedes perder entero, y la liquidez en USDC te permite comprar cuando todos venden en pánico. La opción c no es un error grave: es más conservadora que este framework.'
+          explanation: 'El core grande va en los activos con más historial (BTC, ETH, SOL), aunque ninguno es inmune a caídas fuertes. Los satélites son riesgo alto con un tamaño que puedes perder entero, y la liquidez te deja comprar en los pánicos. Invertir las proporciones mantiene los números pero convierte la base en la apuesta.'
         },
         {
           id: 'q2',
-          question: 'Tienes 10 altcoins diferentes en tu portafolio. Bitcoin cae 20%. ¿Qué pasa probablemente con tus 10 altcoins?',
+          question: 'Tienes 10 altcoins distintas en tu portafolio y Bitcoin cae 20% en una semana. ¿Qué pasa probablemente con tus altcoins?',
           options: [
-            { id: 'a', text: 'Suben, porque están diversificadas y no correlacionadas con Bitcoin' },
-            { id: 'b', text: 'Se mantienen estables, al final son diez proyectos diferentes' },
-            { id: 'c', text: 'Caen 30-50%: las altcoins tienen correlación alta con Bitcoin y caen más fuerte' },
-            { id: 'd', text: 'Algunas suben y otras bajan, resultado neutro' }
+            { id: 'a', text: 'Suben, porque al ser diez proyectos distintos no dependen de Bitcoin' },
+            { id: 'b', text: 'Se mantienen estables, porque la diversificación compensa la caída' },
+            { id: 'c', text: 'Caen justo 20%, lo mismo que Bitcoin, porque copian su movimiento' },
+            { id: 'd', text: 'Caen más que BTC, porque su correlación con Bitcoin suele ser alta' }
           ],
-          correctAnswer: 'c',
-          explanation: 'En crypto, la correlación entre altcoins y Bitcoin es muy alta. Cuando BTC cae 20%, las altcoins suelen caer más, a menudo 30-50%. Tener 10 altcoins diferentes NO es diversificación real, es concentración en "altcoins" como clase de activo.'
+          correctAnswer: 'd',
+          explanation: 'Las altcoins se mueven muy correlacionadas con Bitcoin y, en las caídas, suelen caer más: 30-50% frente a un 20% de BTC no es raro. Por eso 10 altcoins no son diversificación real: es concentración en una sola clase de activo. Que "copien" a BTC es casi cierto en dirección, pero no en tamaño.'
         },
         {
           id: 'q3',
-          question: '¿Por qué mantener 5-10% de tu porción cripto en USDC es una estrategia y no cobardía?',
+          question: '¿Por qué mantener 5-10% de tu porción cripto en stablecoins es una estrategia y no cobardía?',
           options: [
-            { id: 'a', text: 'Porque USDC genera intereses' },
-            { id: 'b', text: 'Porque el mercado siempre baja' },
-            { id: 'c', text: 'Porque la liquidez te permite comprar en pánicos (crashes de 30-50%), cuando aparecen las mejores oportunidades' },
-            { id: 'd', text: 'No es inteligente: tener cash en un bull market es perder dinero seguro' }
+            { id: 'a', text: 'Te deja comprar en los pánicos, cuando suelen aparecer las mejores ofertas' },
+            { id: 'b', text: 'Porque una stablecoin es un activo sin riesgo que protege toda tu cartera cripto' },
+            { id: 'c', text: 'Porque genera intereses altos y garantizados en cualquier fase del ciclo' },
+            { id: 'd', text: 'Porque el mercado siempre termina bajando y así esperas fuera de él' }
           ],
-          correctAnswer: 'c',
-          explanation: 'El efectivo también es una posición. Las mejores oportunidades de compra aparecen durante crashes, cuando los precios caen 30-50% en días. Si estás 100% invertido, solo puedes ver esas oportunidades sin poder actuar. La liquidez te da opciones, aunque una stablecoin tampoco está libre de riesgo.'
+          correctAnswer: 'a',
+          explanation: 'Las mejores oportunidades suelen llegar en caídas de 30-50% en pocos días, y solo puedes aprovecharlas si tienes liquidez. Ojo con el mito del activo "sin riesgo": una stablecoin depende de su emisor y de sus reservas, y puede perder la paridad.'
         },
         {
           id: 'q4',
-          question: '¿Cuántas posiciones deberías tener como máximo en tu portafolio crypto?',
+          question: 'Revisas tu portafolio y tienes 35 posiciones, la mayoría de menos de $50 cada una. ¿Qué te recomienda la lección?',
           options: [
-            { id: 'a', text: '50+ posiciones para lograr la máxima diversificación posible' },
-            { id: 'b', text: '1-2 para máxima concentración y convicción total' },
-            { id: 'c', text: '6-10 máximo: suficientes para diversificar, pocas para investigar y seguir cada una' },
-            { id: 'd', text: 'No existe un número óptimo' }
+            { id: 'a', text: 'Sumar más posiciones, porque más tokens siempre reducen el riesgo total' },
+            { id: 'b', text: 'Concentrar todo en 1 o 2 tokens para tener una convicción total en ellos' },
+            { id: 'c', text: 'Consolidar en 6-10 posiciones que puedas investigar y seguir de verdad' },
+            { id: 'd', text: 'Mantenerlas todas, porque el número de posiciones no influye en el riesgo' }
           ],
           correctAnswer: 'c',
-          explanation: 'Con 50+ posiciones es imposible investigar, seguir noticias y gestionar cada una. Con 1-2 el riesgo de ruina es enorme. 6-10 es un rango razonable: diversificación suficiente para sobrevivir a sorpresas negativas, concentración suficiente para que las ganadoras impacten tu portafolio.'
+          explanation: 'Con 35 posiciones es imposible investigar y seguir cada una, y las ganadoras son tan pequeñas que no mueven tu resultado. Con 1 o 2 el riesgo de ruina es enorme. 6-10 es un rango razonable: diversificas lo suficiente y todavía puedes gestionar cada posición.'
         },
         {
           id: 'q5',
-          question: 'Una de tus posiciones satélite hizo 10×. ¿Cuál es la mejor acción?',
+          question: 'Una de tus posiciones satélite hizo 10× y ahora pesa el 30% de tu portafolio. ¿Cuál es la acción más prudente?',
           options: [
-            { id: 'a', text: 'HODL, va a seguir subiendo, no vendo nada' },
-            { id: 'b', text: 'Vendo el 100%, ya gané suficiente' },
-            { id: 'c', text: 'Tomo parciales: recupero mi inversión original y fijo un plan de salida para el resto' },
-            { id: 'd', text: 'Meto más dinero: si ya hizo 10×, con la misma fuerza puede hacer 100×' }
+            { id: 'a', text: 'Tomo parciales, recupero mi inversión y fijo un plan de salida para el resto' },
+            { id: 'b', text: 'Recupero mi inversión y dejo el resto sin plan, porque ya es dinero gratis' },
+            { id: 'c', text: 'Meto más dinero, porque si ya hizo 10× puede hacer 100× con la misma fuerza aún' },
+            { id: 'd', text: 'No vendo nada, porque vender un ganador antes de tiempo es el peor error' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Cuando una posición hace 5-10×, recuperar tu inversión original es prudente. Pero el resto no es "dinero gratis": es una ganancia tuya que vale lo que vale hoy, y si cae a cero la pierdes. Por eso necesita su propio plan (un precio de venta o un stop), igual que cualquier otra posición. Y cada venta puede generar impuestos.'
+          correctAnswer: 'a',
+          explanation: 'Un satélite que pesa 30% ya no es un satélite: rebalancear devuelve el riesgo al tamaño que elegiste. Recuperar la inversión está bien, pero lo que queda no es dinero gratis: es tuyo, vale lo que vale hoy y necesita su propio plan de salida. Y cada venta puede generar impuestos.'
+        },
+        {
+          id: 'q6',
+          type: 'multiple-select',
+          question: '¿Cuáles de estas afirmaciones sobre el framework 85/10/5 son correctas? Selecciona todas las que apliquen.',
+          options: [
+            { id: 'a', text: 'Aplica solo a tu porción cripto, no a todo tu patrimonio' },
+            { id: 'b', text: 'Diez altcoins de sectores distintos ya son diversificación real' },
+            { id: 'c', text: 'La liquidez en stablecoins sirve para comprar durante los pánicos' },
+            { id: 'd', text: 'Las stablecoins no tienen ningún riesgo y protegen todo tu capital' },
+            { id: 'e', text: 'Tu capital de trading cuenta dentro del 10% de los satélites' }
+          ],
+          correctAnswers: [0, 2, 4],
+          explanation: 'El framework reparte solo el dinero que destinas a cripto, que debe ser dinero que puedes permitirte perder. El capital de trading es riesgo alto, así que entra en los satélites. Las altcoins siguen muy correlacionadas aunque sean de sectores distintos, y las stablecoins tienen riesgo de emisor.'
+        },
+        {
+          id: 'q7',
+          type: 'true-false',
+          question: 'Rebalancear cuando un satélite hace 5× o más implica vender parte de lo que más subió para reforzar tu core.',
+          correctAnswer: true,
+          explanation: 'Verdadero. Rebalancear es vender parte de lo que creció por encima de su peso y llevarlo a la base. Se siente contraintuitivo, porque vendes al ganador, pero es lo que convierte una subida en ganancia protegida. Considera los impuestos de cada venta.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de Narrativas y Rotación: ¿en qué etapa de una narrativa suele comprar quien llega tarde y termina siendo la liquidez de salida de los primeros?',
+          options: [
+            { id: 'a', text: 'En el nacimiento, cuando solo unos pocos traders hablan del tema en CT' },
+            { id: 'b', text: 'En el mainstream, cuando los medios ya la cubren y todos hablan de ella' },
+            { id: 'c', text: 'En el crecimiento, cuando CT ya la valida y las métricas on-chain suben' },
+            { id: 'd', text: 'En el agotamiento, cuando ya casi nadie habla de ella y el volumen cae' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Cuando una narrativa llega a los medios, la mayor parte del movimiento ya pasó, y quienes entraron antes aprovechan esa demanda nueva para vender. (Lo viste en la lección Narrativas y Rotación.)'
         }
       ]
     }
@@ -1873,7 +2129,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'El Arte del Stop Loss',
     level: 'Intermedio',
     number: '10 de 12',
-    duration: '17 min',
+    duration: '20 min',
     type: 'Tutorial Práctico',
     description: 'Sobrevivir es más importante que ganar. El stop loss es tu seguro contra la ruina, tu herramienta para cortar pérdidas rápido y proteger tu capital para pelear otro día.',
     sections: [
@@ -1987,73 +2243,124 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Cuál es la regla de oro del stop loss que separa a los profesionales de los amateurs?',
+          question: '¿Cuál es la regla de oro del stop loss que separa a quien sobrevive en el trading de quien no?',
           options: [
-            { id: 'a', text: 'Ponerlo solo cuando ya perdiste 20% y el dolor es demasiado grande' },
-            { id: 'b', text: 'Definirlo ANTES de entrar a la operación y nunca moverlo hacia abajo' },
-            { id: 'c', text: 'Usar siempre un stop mental para mayor flexibilidad' },
-            { id: 'd', text: 'Solo poner stop loss en operaciones grandes' }
+            { id: 'a', text: 'Definirlo antes de entrar a la operación y nunca moverlo hacia abajo' },
+            { id: 'b', text: 'Ponerlo cuando ya perdiste 20% y el dolor empieza a ser demasiado' },
+            { id: 'c', text: 'Usar un stop mental, porque te da más flexibilidad que una orden real' },
+            { id: 'd', text: 'Definirlo antes de entrar y bajarlo si tu convicción sigue siendo alta' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El stop se define ANTES de entrar, es parte de tu plan de operación. Moverlo hacia abajo es rendirse a las emociones. Los profesionales pierden trades constantemente pero sus pérdidas están controladas. Los amateurs ganan mucho y luego pierden todo en un trade sin stop.'
+          correctAnswer: 'a',
+          explanation: 'El stop es parte del plan: se decide en frío, antes de entrar, donde tu tesis se invalida. La trampa es la versión casi correcta: definirlo bien y luego bajarlo "porque sigues convencido". La convicción no cambia lo que el precio ya te dijo.'
         },
         {
           id: 'q2',
-          question: 'Tu capital de trading es $2,000. Compras SOL a $180 con stop loss en $162 (10% debajo). Siguiendo la regla del 1-2%, ¿cuánto deberías arriesgar máximo y cuál sería tu posición?',
-          options: [
-            { id: 'a', text: 'Puedes arriesgar todo, SOL es seguro' },
-            { id: 'b', text: 'Máximo $20-40 de riesgo (1-2%). Con stop 10% abajo, tu posición máxima es $200-400' },
-            { id: 'c', text: '$200 de riesgo (10%), así la ganancia vale la pena' },
-            { id: 'd', text: 'No hay fórmula, depende de cómo te sientas' }
-          ],
-          correctAnswer: 'b',
-          explanation: 'Capital de trading × 2% de riesgo = $40 máximo de pérdida. Si tu stop está 10% debajo, posición = $40 / 0.10 = $400 máximo. Si SOL cae a tu stop, pierdes unos $40 (2% de tu capital de trading). Y si recalculas el 2% sobre el capital restante, 20 pérdidas seguidas te dejan ~67% del capital y hasta 50 te dejan ~36%: sigues operando.'
+          type: 'fill-blank',
+          question: 'Calcula el tamaño máximo de tu posición.',
+          textBefore: 'Tu capital de trading es $2,000 y arriesgas como máximo el 2% por operación. Compras SOL con el stop 10% debajo de tu entrada. Tu posición máxima es de $',
+          textAfter: '.',
+          correctAnswer: '400',
+          acceptableAnswers: ['400', '$400', '400 usd', '400 usdc', '400 dolares', '400 dólares', '400.00', '400,00'],
+          explanation: 'Riesgo máximo = $2,000 × 2% = $40. Posición = riesgo ÷ distancia al stop = $40 ÷ 10% = $400. Si el stop se ejecuta, pierdes unos $40, no $400. El error común es confundir el 2% de riesgo con el tamaño de la posición.'
         },
         {
           id: 'q3',
-          question: 'El precio toca tu stop loss y rebota fuerte: SOL cae a $162, activa tu stop, y luego sube a $200. Perdiste la operación. ¿Qué hiciste bien?',
+          question: 'SOL cae a tu stop en $162, la orden se ejecuta y luego el precio sube a $200. ¿Qué hiciste bien?',
           options: [
-            { id: 'a', text: 'Nada, perdí dinero y el precio subió sin mí: el stop me costó la operación' },
-            { id: 'b', text: 'Protegí mi capital con una pérdida controlada del 2%. Puedo volver a entrar cuando quiera' },
-            { id: 'c', text: 'Debería haber movido mi stop más abajo' },
-            { id: 'd', text: 'Los stops no sirven porque siempre te sacan antes del rebote' }
+            { id: 'a', text: 'Limité la pérdida al tamaño que planeé y puedo volver a entrar con un plan' },
+            { id: 'b', text: 'Nada: perdí dinero y el precio subió sin mí, así que el stop fue un error' },
+            { id: 'c', text: 'Nada: debí poner el stop mucho más abajo para que nunca me sacara del trade' },
+            { id: 'd', text: 'Aprendí que los stops sobran, porque el precio siempre termina rebotando' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Sobrevivir > tener razón. Sí, esta vez el precio rebotó. Pero las próximas 3 veces que toque tu stop, podría seguir cayendo -50%. El stop te protege de esas 3 veces a cambio de "perder" el rebote ocasional. Siempre puedes re-entrar.'
+          correctAnswer: 'a',
+          explanation: 'Esta vez el precio rebotó, pero otras veces seguirá cayendo 50%. El stop cambia esos desastres por pérdidas pequeñas a cambio de perder algún rebote. Juzgar un stop por una sola operación es el error: lo que importa es el resultado de muchas.'
         },
         {
           id: 'q4',
-          question: 'Pierdes 50% de tu capital (de $10,000 a $5,000). ¿Cuánto necesitas ganar para volver a $10,000?',
+          question: 'Tu capital baja 50%, de $10,000 a $5,000. ¿Cuánto necesitas ganar para volver a $10,000?',
           options: [
-            { id: 'a', text: '+50%, igual que lo que perdiste' },
-            { id: 'b', text: '+100%, necesitas DUPLICAR tu capital restante para volver al punto de partida' },
-            { id: 'c', text: '+25%, las pérdidas se recuperan fácilmente' },
-            { id: 'd', text: '+75%, un poco más de lo que perdiste' }
+            { id: 'a', text: '+50%: lo mismo que perdiste, porque los porcentajes son simétricos' },
+            { id: 'b', text: '+75%: algo más de lo que perdiste, por el efecto del interés compuesto' },
+            { id: 'c', text: '+100%: necesitas duplicar lo que te queda para volver a $10,000' },
+            { id: 'd', text: '+25%: las pérdidas se recuperan rápido cuando el mercado se da vuelta' }
           ],
-          correctAnswer: 'b',
-          explanation: 'La asimetría matemática: -50% requiere +100% para recuperar. -25% requiere +33%. -10% requiere +11%. Por eso los stops son críticos, una pérdida grande requiere ganancias desproporcionalmente mayores. Es mucho más fácil recuperar un -2% (necesitas +2.04%) que un -50%.'
+          correctAnswer: 'c',
+          explanation: 'El porcentaje se calcula sobre lo que queda: de $5,000 a $10,000 hay que ganar $5,000, es decir +100%. Un -25% pide +33% y un -10% pide +11%. Por eso los stops buscan pérdidas del 1-2%: se recuperan con +2%, no con +100%.'
         },
         {
           id: 'q5',
-          question: 'El precio se acerca a tu stop loss. Tu mente dice: "va a rebotar, mueve el stop más abajo para darle espacio". ¿Cuál es la respuesta correcta?',
+          question: 'El precio se acerca a tu stop y tu mente dice: "va a rebotar, bájalo un poco para darle espacio". ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Mover el stop es razonable si mantienes convicción fuerte en tu tesis original' },
-            { id: 'b', text: 'NUNCA moverlo hacia abajo: si se ejecuta, tu tesis estaba equivocada y el mercado tiene la razón' },
-            { id: 'c', text: 'Eliminar el stop completamente, el precio siempre vuelve' },
-            { id: 'd', text: 'Depende de cuánto ya perdiste' }
+            { id: 'a', text: 'Lo bajo un poco, porque es razonable si mi convicción en la tesis sigue' },
+            { id: 'b', text: 'No lo bajo: si se ejecuta, mi tesis falló y la pérdida queda acotada' },
+            { id: 'c', text: 'Quito el stop, porque el precio de un buen activo siempre termina volviendo' },
+            { id: 'd', text: 'Depende de cuánto ya perdí: si es poco, puedo darle más espacio al trade' }
           ],
           correctAnswer: 'b',
-          explanation: 'Mover el stop hacia abajo es ceder a las emociones. La primera vez mueves un poco. La segunda, más. La tercera, ya no tienes stop y estás -40%. Es una espiral destructiva. Los profesionales respetan sus stops religiosamente porque saben que una pérdida pequeña es infinitamente mejor que una ruina.'
+          explanation: 'Bajar el stop es la primera vuelta de una espiral: un poco ahora, más después, y al final no hay stop y estás -40%. La versión "razonable" (bajarlo solo un poco por convicción) es justo como empieza. Si el stop se ejecuta, el mercado invalidó tu tesis.'
+        },
+        {
+          id: 'q6',
+          question: 'Tu tesis es que SOL respeta su último higher low en $160. ¿Dónde colocas el stop?',
+          options: [
+            { id: 'a', text: 'Un poco debajo de $160, con un filtro de 1-3% contra las mechas' },
+            { id: 'b', text: 'Justo en $160, porque ese es el nivel exacto donde la tesis falla' },
+            { id: 'c', text: 'En un 10% fijo bajo la entrada, sin mirar la estructura del gráfico' },
+            { id: 'd', text: 'No pongo stop, porque un higher low confirma que la tendencia sigue' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'El stop va donde tu tesis se invalida, con un margen. Ponerlo justo en el nivel obvio es casi correcto, pero ahí se acumulan los stops y una mecha puede sacarte antes de seguir la tendencia. Un porcentaje fijo ignora la estructura, que es la que define si te equivocaste.'
+        },
+        {
+          id: 'q7',
+          type: 'true-false',
+          question: 'Si eres disciplinado, un stop mental funciona igual que una orden de stop real en el exchange.',
+          correctAnswer: false,
+          explanation: 'Falso. En el momento de la caída, las emociones gritan "va a rebotar" y el stop mental se negocia. Además, si estás dormido o sin conexión, no se ejecuta. Una orden real en el exchange actúa sin pedirte permiso.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de Diversificación Inteligente: ¿por qué 10 altcoins distintas no son una diversificación real?',
+          options: [
+            { id: 'a', text: 'Porque diez son pocas: hacen falta al menos cincuenta posiciones' },
+            { id: 'b', text: 'Porque suelen moverse con BTC, y en una caída bajan todas a la vez' },
+            { id: 'c', text: 'Porque las altcoins no tienen correlación entre sí ni con BTC' },
+            { id: 'd', text: 'Porque en cripto solo las stablecoins cuentan como diversificación' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'La correlación entre altcoins y Bitcoin es alta: cuando BTC cae, las altcoins suelen caer más y al mismo tiempo. Diversificar de verdad es combinar clases de activo distintas, no sumar tokens parecidos. (Lo viste en la lección Diversificación Inteligente.)'
         }
       ]
-    }
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 4,
+        title: 'Checkpoint: El Tamaño de la Posición',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'Tu capital de trading es $5,000 y arriesgas 1% por operación. Tu stop está 5% debajo de la entrada. ¿Cuál es tu posición máxima?',
+            options: [
+              '$50: es el 1% del capital, y eso es lo que puedes poner en la posición',
+              '$250: es el 5% del capital, igual a la distancia que hay hasta el stop',
+              '$1,000: son $50 de riesgo divididos por el 5% de distancia al stop',
+              '$5,000: el stop ya limita la pérdida, así que puedes usar todo el capital'
+            ],
+            correctAnswer: 2,
+            explanation: 'Riesgo = $5,000 × 1% = $50. Posición = $50 ÷ 5% = $1,000. Si el stop se ejecuta, pierdes $50, que es justo el 1% que elegiste. Poner $50 en la posición confunde el riesgo con el tamaño: arriesgarías solo $2.50.',
+            hint: 'Divide el dinero que aceptas perder entre la distancia al stop.'
+          }
+        ]
+      }
+    ]
   },
   23: {
     id: 23,
     title: 'Toma de Ganancias (Take Profit)',
     level: 'Intermedio',
     number: '11 de 12',
-    duration: '15 min',
+    duration: '18 min',
     type: 'Tutorial Práctico',
     description: 'Las ganancias en pantalla no son reales hasta que vendes. Aprende a tomar ganancias escalonadamente, a definir targets antes de entrar, y a proteger lo que ganaste sin dejar que la codicia lo destruya.',
     sections: [
@@ -2166,63 +2473,93 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Tu posición está +300% en 3 días. Tu cerebro dice "HODL hasta la luna". ¿Qué opción es la más prudente?',
+          question: 'Tu posición está +300% en 3 días y tu cerebro dice "HODL hasta la luna". ¿Qué opción es la más prudente?',
           options: [
-            { id: 'a', text: 'HODL todo: si hizo 300% en tres días, puede hacer 1000% en una semana' },
-            { id: 'b', text: 'Vendo 50-70% y muevo el stop a break-even: aseguro ganancias y dejo correr el resto' },
-            { id: 'c', text: 'Vendo 100%, 300% es suficiente' },
-            { id: 'd', text: 'Compro más, está subiendo fuerte' }
+            { id: 'a', text: 'No vendo nada, porque si hizo 300% en tres días puede hacer 1000% más' },
+            { id: 'b', text: 'Vendo una parte según mi plan y subo el stop a break-even para el resto' },
+            { id: 'c', text: 'Compro más, porque una subida tan fuerte muestra que la tendencia sigue' },
+            { id: 'd', text: 'Subo mis targets, porque el momentum es mayor de lo que había planeado' }
           ],
           correctAnswer: 'b',
-          explanation: 'Tomas ganancias reales (dinero en tu bolsillo) y dejas el resto correr con un stop. Si sube más, todavía tienes exposición. Si cae, ya aseguraste la mayoría de las ganancias. Ojo: lo que queda sigue siendo tu dinero en riesgo, y la venta puede generar impuestos.'
+          explanation: 'Vender una parte convierte ganancia en pantalla en dinero real, y el stop en break-even protege tu inversión en lo que queda. Subir los targets suena a ajuste profesional, pero es la codicia reescribiendo el plan en caliente. Recuerda que la venta puede generar impuestos.'
         },
         {
           id: 'q2',
           question: '¿Qué estrategia de salida propone esta lección para no depender de adivinar el techo?',
           options: [
-            { id: 'a', text: 'Vender todo cuando el precio llega a un target fijo' },
-            { id: 'b', text: 'Scaling out: 25% en +2×, 25% en +3-5×, 25% en +5-10×, 25% moonbag' },
-            { id: 'c', text: 'Nunca vender nada, HODL es siempre la mejor estrategia a largo plazo' },
-            { id: 'd', text: 'Vender cuando un influencer dice que vendas' }
+            { id: 'a', text: 'Vender todo de una vez cuando el precio llegue al techo exacto del ciclo' },
+            { id: 'b', text: 'No vender nunca, porque mantener siempre gana en el largo plazo en cripto' },
+            { id: 'c', text: 'Vender solo cuando un influencer con buen historial diga que es momento' },
+            { id: 'd', text: 'Vender por tramos en varios targets y dejar un moonbag pequeño al final' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Scaling out elimina la necesidad de adivinar el techo exacto. Capturas ganancias reales en cada nivel y mantienes exposición con el moonbag. No maximiza el resultado teórico perfecto, pero te asegura ganancias REALES en el camino.'
+          correctAnswer: 'd',
+          explanation: 'Scaling out reparte la salida en niveles (por ejemplo 25% en 2×, 25% en 3-5×, 25% en 5-10× y un moonbag), así no necesitas acertar el techo. No maximiza el resultado perfecto en teoría, pero asegura ganancias reales en el camino. Vender todo en el techo exacto exige saber dónde está, y nadie lo sabe.'
         },
         {
           id: 'q3',
-          question: 'Compraste 1000 tokens a $1 ($1,000 total). El precio llega a $5. Vendes 750 tokens a $5 ($3,750). ¿Cómo describes correctamente tu situación?',
-          options: [
-            { id: 'a', text: 'Perdiste, porque vendiste demasiado temprano y dejaste ganancias sobre la mesa' },
-            { id: 'b', text: 'Aseguraste $3,750 y tienes un moonbag de 250 tokens que vale $1,250 y sigue en riesgo' },
-            { id: 'c', text: 'Tienes 250 tokens gratis: como ya recuperaste tu inversión, no puedes perder nada' },
-            { id: 'd', text: 'Estás en pérdida porque todavía tienes tokens' }
-          ],
-          correctAnswer: 'b',
-          explanation: 'Buena situación: $3,750 reales asegurados y un moonbag de 250 tokens. Pero la opción c es la trampa del "dinero de la casa": esos 250 tokens valen $1,250 hoy, y si caen a cero pierdes $1,250 que eran tuyos. Trátalos como cualquier posición, con su propio plan de salida. Y recuerda que la venta de los 750 tokens puede generar impuestos.'
+          type: 'fill-blank',
+          question: 'Calcula cuánto vale lo que dejaste correr.',
+          textBefore: 'Compraste 1,000 tokens a $1 y vendiste 750 cuando llegaron a $5. Los 250 tokens que te quedan valen hoy $',
+          textAfter: 'y siguen en riesgo.',
+          correctAnswer: '1250',
+          acceptableAnswers: ['1250', '1,250', '1.250', '$1250', '$1,250', '$1.250', '1250 usd', '1250 dolares', '1250 dólares'],
+          explanation: '250 tokens × $5 = $1,250. Ya aseguraste $3,750, pero esos $1,250 no son "dinero de la casa": si el token cae a cero, pierdes $1,250 que eran tuyos. El moonbag necesita su propio plan de salida, como cualquier posición.'
         },
         {
           id: 'q4',
-          question: '¿Por qué es peligroso mover tu take profit hacia arriba después de entrar a una operación?',
+          question: '¿Por qué es peligroso subir tu take profit después de entrar a una operación que va ganando?',
           options: [
-            { id: 'a', text: 'No es peligroso, siempre hay que ajustar los targets según el momentum' },
-            { id: 'b', text: 'Porque la codicia está decidiendo, no la lógica: tu plan se definió con la mente fría y cambiarlo reduce tu disciplina' },
-            { id: 'c', text: 'Porque los targets siempre se cumplen' },
-            { id: 'd', text: 'Porque sube los fees de trading' }
+            { id: 'a', text: 'Porque los exchanges cobran más fees cuando modificas una orden abierta' },
+            { id: 'b', text: 'Porque los targets originales siempre se cumplen si tienes paciencia' },
+            { id: 'c', text: 'No lo es: ajustar al momentum es lo que hacen los traders profesionales' },
+            { id: 'd', text: 'Porque lo decide la codicia, no el plan que hiciste con la mente fría' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Tu plan de salida se define ANTES de entrar, con la mente fría y objetiva. Cuando estás en una posición ganadora, la codicia dice "¿y si llega a 10×?". Mover targets durante la operación = dejar que las emociones tomen el volante. Las emociones son malas consejeras.'
+          correctAnswer: 'd',
+          explanation: 'El plan se define antes de entrar, sin emociones en juego. Con una posición ganadora, la codicia pregunta "¿y si llega a 10×?", y subir el target es dejar que esa pregunta decida. El mito de que "los profesionales ajustan al momentum" suele ser la excusa para no vender nunca.'
         },
         {
           id: 'q5',
-          question: 'Estás tomando screenshots de tus ganancias, no puedes dormir por la emoción, y fantaseas con cuánto "vas a tener". ¿Qué indica esto?',
+          question: 'Estás tomando capturas de tus ganancias, no puedes dormir por la emoción y fantaseas con cuánto "vas a tener". ¿Qué indica esto?',
           options: [
-            { id: 'a', text: 'Estás en una gran operación, relájate y disfruta el momento sin tocar nada' },
-            { id: 'b', text: 'Euforia clara: es exactamente el momento de ejecutar tu plan y vender al menos una parte' },
-            { id: 'c', text: 'Deberías comprar más, la emoción confirma que va bien' },
-            { id: 'd', text: 'Es normal y no requiere acción' }
+            { id: 'a', text: 'Euforia: es el momento de ejecutar tu plan y vender al menos una parte' },
+            { id: 'b', text: 'Que vas bien: disfruta el momento y no toques nada hasta que se calme' },
+            { id: 'c', text: 'Que deberías comprar más, porque la emoción confirma que la tesis va bien' },
+            { id: 'd', text: 'Que es el techo seguro, así que vendes todo y no vuelves a ese token' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Tu propia euforia es una buena alarma: es cuando más cuesta seguir el plan y cuando más tienta cambiarlo. Esos momentos a menudo coinciden con techos locales, pero no siempre, así que no es una señal de techo seguro: es una señal para ejecutar el plan y vender al menos una parte.'
+        },
+        {
+          id: 'q6',
+          type: 'true-false',
+          question: 'Después de recuperar tu inversión inicial, el moonbag que te queda ya no puede hacerte perder dinero.',
+          correctAnswer: false,
+          explanation: 'Falso. El moonbag vale lo que vale hoy y es tu dinero. Si cae a cero, pierdes ese valor aunque ya hayas recuperado lo que pusiste al principio. Pensar que es "gratis" lleva a dejarlo sin plan.'
+        },
+        {
+          id: 'q7',
+          type: 'ordering',
+          question: 'Ordena los pasos de tu plan de salida, desde lo primero que defines hasta lo último que haces.',
+          items: [
+            'Defino la entrada y el stop loss',
+            'Defino los targets escalonados de take profit',
+            'Entro a la operación',
+            'Vendo por tramos en cada target y registro cada venta'
+          ],
+          correctOrder: [0, 1, 2, 3],
+          explanation: 'Todo el plan se escribe antes de entrar: dónde entras, dónde te equivocaste y dónde vendes. Solo después abres la operación. Registrar cada venta te sirve para el diario y para los impuestos.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de El Arte del Stop Loss: un trader pierde 25% de su cuenta. ¿Cuánto necesita ganar para volver al punto de partida?',
+          options: [
+            { id: 'a', text: '+25%, lo mismo que perdió, porque los porcentajes son simétricos' },
+            { id: 'b', text: '+33%, porque el porcentaje se calcula sobre lo que le queda' },
+            { id: 'c', text: '+50%, el doble de lo que perdió, por el efecto de las comisiones' },
+            { id: 'd', text: '+20%, porque con menos capital cada ganancia pesa más en la cuenta' }
           ],
           correctAnswer: 'b',
-          explanation: 'Tu euforia es una buena alarma: es justo cuando más cuesta seguir el plan. Cuando no puedes dormir, tomas screenshots y fantaseas, tu cerebro está en modo FOMO máximo. Esos momentos a menudo coinciden con techos locales, aunque no siempre. Ejecuta tu plan de take profit, nadie quebró por tomar ganancias.'
+          explanation: 'Si tenía $100 y le quedan $75, necesita ganar $25 sobre $75: un 33%. Cuanto mayor la pérdida, peor la asimetría: -50% pide +100%. (Lo viste en la lección El Arte del Stop Loss.)'
         }
       ]
     }
@@ -2232,7 +2569,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Mentalidad de Trader',
     level: 'Intermedio',
     number: '12 de 12',
-    duration: '19 min',
+    duration: '21 min',
     type: 'Psicología',
     description: 'Sin disciplina, ninguna estrategia sobrevive. Aprende a controlar el FOMO, la avaricia, el miedo y la venganza, a medir si tu estrategia tiene ventaja real, y a proteger tu capital.',
     sections: [
@@ -2354,75 +2691,100 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Llevas 5 trades seguidos perdedores respetando tu plan al pie de la letra. Tu stop loss se ejecutó correctamente en todos. ¿Qué haces?',
+          question: 'Llevas 5 trades perdedores seguidos respetando tu plan al pie de la letra, y tu stop se ejecutó bien en todos. Tu estrategia tiene 60% de win rate. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Aumento el tamaño del próximo trade para recuperar las pérdidas más rápido' },
-            { id: 'b', text: 'Sigo exactamente igual, con 60% win rate, una racha de 5 pérdidas es estadísticamente normal' },
-            { id: 'c', text: 'Cambio completamente de estrategia porque claramente no funciona' },
-            { id: 'd', text: 'Dejo de operar por un mes porque "el mercado está en mi contra"' }
+            { id: 'a', text: 'Subo el tamaño del próximo trade para recuperar las pérdidas más rápido' },
+            { id: 'b', text: 'Sigo igual: con 60% de win rate, 5 pérdidas seguidas son varianza normal' },
+            { id: 'c', text: 'Cambio de estrategia, porque 5 pérdidas seguidas prueban que no funciona' },
+            { id: 'd', text: 'Sigo igual, pero sin stops, porque fueron los stops los que me sacaron' }
           ],
           correctAnswer: 'b',
-          explanation: 'Con un 60% de win rate, la probabilidad de vivir una racha de 5 pérdidas seguidas en 100 trades es de ~46%: prácticamente una moneda al aire, y en 200 trades sube a ~71%. Es varianza normal, no una estrategia rota. Cambiar de estrategia o aumentar el tamaño por frustración es revenge trading disfrazado. La disciplina se demuestra exactamente en estos momentos.'
+          explanation: 'Con 60% de win rate, la probabilidad de una racha de 5 pérdidas en 100 trades es de ~46%, y en 200 trades sube a ~71%. Es varianza, no una estrategia rota. Subir el tamaño o cambiar de sistema por frustración es revenge trading disfrazado, y quitar los stops convierte una racha normal en una ruina.'
         },
         {
           id: 'q2',
-          question: 'Ves que un token acaba de subir 80% en las últimas 4 horas. Crypto Twitter está lleno de mensajes de "to the moon". Sientes una urgencia intensa de comprar. ¿Cuál es la mejor respuesta?',
+          question: 'Un token subió 80% en 4 horas, Crypto Twitter está lleno de "to the moon" y sientes una urgencia intensa de comprar. ¿Cuál es la mejor respuesta?',
           options: [
-            { id: 'a', text: 'Compro inmediatamente antes de que suba más, no quiero perderme esta oportunidad' },
-            { id: 'b', text: 'Aplico la regla de las 24 horas: si mañana aún cumple mis criterios de entrada, considero entrar' },
-            { id: 'c', text: 'No miro precios nunca para evitar el FOMO' },
-            { id: 'd', text: 'Compro la mitad ahora y la otra mitad mañana como "compromiso"' }
+            { id: 'a', text: 'Compro ya, antes de que siga subiendo, para no perderme esta oportunidad' },
+            { id: 'b', text: 'Aplico la regla de 24 horas y entro solo si mañana cumple mis criterios' },
+            { id: 'c', text: 'Compro la mitad ahora y la otra mitad mañana, como un punto intermedio' },
+            { id: 'd', text: 'Dejo de mirar precios para siempre, porque así el FOMO nunca aparece' }
           ],
           correctAnswer: 'b',
-          explanation: 'El FOMO te empuja a comprar en el peor momento (después de una subida masiva, cuando el riesgo es máximo). La regla de las 24 horas te protege: la mayoría de los impulsos desaparecen. Si después de 24 horas el trade cumple tus criterios escritos, es una entrada racional, no emocional.'
+          explanation: 'El FOMO empuja a comprar después de una subida enorme, cuando el riesgo es máximo. La regla de 24 horas deja pasar el impulso: si mañana el trade todavía cumple tus criterios escritos, es una entrada racional. Comprar "la mitad" parece un compromiso sensato, pero sigue siendo una decisión tomada por la urgencia.'
         },
         {
           id: 'q3',
-          question: 'Compraste SOL a $250. Ahora está a $160. Tu análisis original era correcto, pero cambió la tesis macro. Un amigo dice: "aguanta, va a volver a $250". ¿Qué sesgo cognitivo está influyendo aquí?',
+          question: 'Compraste SOL a $250 y ahora está a $160. La tesis macro que te hizo comprar cambió, pero piensas: "aguanto hasta que vuelva a $250". ¿Qué sesgo está actuando?',
           options: [
-            { id: 'a', text: 'Sesgo de manada, todos dicen que va a subir' },
-            { id: 'b', text: 'FOMO, tienes miedo de perderte la recuperación' },
-            { id: 'c', text: 'Sesgo de anclaje: tu precio de compra es irrelevante para el mercado, pero tu cerebro lo usa como referencia' },
-            { id: 'd', text: 'Sesgo de confirmación, solo escuchas las opiniones alcistas que te convienen' }
+            { id: 'a', text: 'Manada: decides solo porque otras personas te dicen que el precio va a subir' },
+            { id: 'b', text: 'FOMO: tienes miedo de perderte la recuperación si decides vender ahora' },
+            { id: 'c', text: 'Anclaje: tu precio de compra guía la decisión, aunque al mercado no le importa' },
+            { id: 'd', text: 'Confirmación: buscas solo las opiniones que coinciden con lo que ya crees tú' }
           ],
           correctAnswer: 'c',
-          explanation: 'El sesgo de anclaje hace que tu cerebro use tu precio de compra como referencia, aunque el mercado no sabe ni le importa cuánto pagaste. La pregunta correcta es: "Si no tuviera esta posición, ¿la abriría hoy a $160 con la tesis actual?". Si la respuesta es no, vende, independientemente de tu precio de entrada.'
+          explanation: 'Tu precio de compra es un dato solo para ti: el mercado no sabe cuánto pagaste. La pregunta útil es "si no tuviera esta posición, ¿la abriría hoy a $160 con la tesis actual?". Si la respuesta es no, el $250 no es una razón para quedarte.'
         },
         {
           id: 'q4',
-          question: 'Acabas de cerrar un trade con -15% de pérdida. Estás frustrado y ves otra "oportunidad" que parece cumplir tu plan. ¿Qué deberías hacer?',
+          question: 'Acabas de cerrar un trade con -15%. Estás frustrado y ves otra "oportunidad" que parece cumplir tu plan. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Entrar con el doble de tamaño para recuperar más rápido' },
-            { id: 'b', text: 'Entrar enseguida con tamaño normal: si el setup es bueno, la emoción no importa' },
-            { id: 'c', text: 'Alejarme de las pantallas 1-2 horas y solo volver a evaluar trades cuando esté calmado' },
-            { id: 'd', text: 'Llamar a un amigo trader con experiencia para que me diga qué hacer' }
+            { id: 'a', text: 'Entro con el doble de tamaño para recuperar la pérdida lo antes posible hoy' },
+            { id: 'b', text: 'Entro ya con tamaño normal: si el setup es bueno, la emoción no importa' },
+            { id: 'c', text: 'Le pido a un trader con más experiencia que decida el trade por mí' },
+            { id: 'd', text: 'Me alejo un par de horas y vuelvo a evaluar el setup cuando esté en calma' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Después de una pérdida significativa, tu estado emocional está comprometido. El revenge trading (buscar recuperar inmediatamente) es la forma más rápida de destruir una cuenta. Tu propio plan incluye una regla de estado mental: no operar enojado. Por eso, aunque el setup parezca bueno, primero te alejas 1-2 horas de las pantallas y lo vuelves a evaluar en calma. Si sigue siendo bueno, seguirá ahí.'
+          correctAnswer: 'd',
+          explanation: 'Después de una pérdida fuerte, tu estado emocional forma parte del riesgo. Entrar "con tamaño normal porque el setup es bueno" suena disciplinado, pero ignora que tu juicio está alterado. Si el setup es bueno de verdad, seguirá siéndolo en dos horas.'
         },
         {
           id: 'q5',
-          question: '¿Cuántos trades necesitas para evaluar con confianza si tu estrategia de trading funciona?',
+          question: '¿Cuántos trades necesitas, como mínimo, para evaluar con algo de confianza si tu estrategia funciona?',
           options: [
-            { id: 'a', text: '10-20 trades son suficientes para saber con certeza si funciona' },
-            { id: 'b', text: 'Con 1 trade ganador bien ejecutado ya sé que funciona' },
-            { id: 'c', text: 'Mínimo 100-200 trades, menos que eso es pura varianza (buena o mala suerte)' },
-            { id: 'd', text: '50 trades como máximo, después descarto y cambio' }
+            { id: 'a', text: 'Entre 10 y 20 trades bastan para saber con certeza si la estrategia funciona' },
+            { id: 'b', text: 'Uno solo, si es un trade ganador ejecutado exactamente según el plan' },
+            { id: 'c', text: 'Cincuenta como máximo; si no gana para entonces, la descarto y cambio' },
+            { id: 'd', text: 'Al menos 100-200, porque con menos el resultado se confunde con la suerte' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Con 10-20 trades, cualquier resultado es indistinguible de la suerte. La estadística necesita muestras suficientes para ser significativa. Con 100-200 trades ejecutados con disciplina, puedes evaluar win rate, expectativa, y drawdown real de tu sistema. Cambiar de estrategia cada 10 trades garantiza que nunca encontrarás una que funcione.'
+          correctAnswer: 'd',
+          explanation: 'Con 10-20 trades, cualquier resultado es indistinguible de la suerte. Con 100-200 ejecutados con disciplina puedes medir win rate, expectativa y drawdown real. Cambiar de estrategia cada pocos trades garantiza que nunca sabrás si alguna funcionaba.'
         },
         {
           id: 'q6',
+          type: 'fill-blank',
+          question: 'Calcula la expectativa de una estrategia en R.',
+          textBefore: 'Ganas el 70% de tus trades con +1R y pierdes el 30% con -3R. Tu expectativa por trade es de',
+          textAfter: 'R.',
+          correctAnswer: '-0.2',
+          acceptableAnswers: ['-0.2', '-0,2', '-0.20', '-0,20', '-.2', '- 0.2', '−0.2', '−0,2', '-0.2r', '-0,2r'],
+          explanation: 'Expectativa = 0.70 × 1R − 0.30 × 3R = 0.70 − 0.90 = −0.2R por trade. Ganas 7 de cada 10 veces y aun así pierdes dinero, porque las pérdidas son tres veces más grandes que las ganancias. Por eso el win rate solo no dice nada.'
+        },
+        {
+          id: 'q7',
+          type: 'multiple-select',
+          question: '¿Cuáles de estos son los 4 demonios del trading que describe esta lección? Selecciona todos los que apliquen.',
+          options: [
+            { id: 'a', text: 'FOMO' },
+            { id: 'b', text: 'Paciencia' },
+            { id: 'c', text: 'Avaricia' },
+            { id: 'd', text: 'Miedo' },
+            { id: 'e', text: 'Diversificación' },
+            { id: 'f', text: 'Revenge trading' }
+          ],
+          correctAnswers: [0, 2, 3, 5],
+          explanation: 'FOMO, avaricia, miedo y revenge trading son las cuatro emociones que más cuentas destruyen. La paciencia y la diversificación son justamente parte del antídoto.'
+        },
+        {
+          id: 'q8',
           question: '¿Cuál es la herramienta más poderosa para mejorar tu psicología de trading a largo plazo?',
           options: [
-            { id: 'a', text: 'Seguir a traders famosos en Twitter y copiar sus trades' },
-            { id: 'b', text: 'Un diario de trading: registra cada trade y tu estado emocional; tras 50-100 entradas los patrones son evidentes' },
-            { id: 'c', text: 'Usar bots automáticos para eliminar completamente las emociones del proceso' },
-            { id: 'd', text: 'Meditar 2 horas antes de cada trade' }
+            { id: 'a', text: 'Copiar los trades de traders famosos que publican sus entradas en X' },
+            { id: 'b', text: 'Un bot automático, porque elimina por completo las emociones del proceso' },
+            { id: 'c', text: 'Más indicadores en el gráfico, para que cada decisión sea más objetiva' },
+            { id: 'd', text: 'Un diario de trading con cada operación y tu estado emocional al operar' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El diario de trading convierte errores repetitivos en datos analizables. Después de 50-100 trades documentados, descubrirás patrones como "siempre pierdo cuando opero de noche" o "mis mejores trades son cuando sigo mi plan sin modificar". Esos insights valen más que cualquier indicador técnico.'
+          correctAnswer: 'd',
+          explanation: 'El diario convierte errores repetidos en datos. Tras 50-100 trades registrados aparecen patrones como "pierdo cuando opero de noche" o "gano cuando no toco el plan". Un bot no elimina las emociones: las traslada a cuándo lo enciendes, lo apagas o lo modificas.'
         }
       ]
     }
@@ -2432,9 +2794,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Jupiter: El Rey de los DEXs',
     level: 'Avanzado',
     number: '2 de 13',
-    duration: '17 min',
+    duration: '21 min',
     type: 'Tutorial Práctico',
-    description: 'Olvida los exchanges centralizados. Jupiter es el agregador de liquidez más poderoso de Solana: mejor precio, DCA automático, órdenes límite, y perpetuos, todo descentralizado, sin custodia, y con la mejor ejecución del mercado.',
+    description: 'Jupiter es el agregador de liquidez más usado de Solana: compara precios entre muchos pools y suma DCA, órdenes límite y perpetuos. Aprende a usarlo bien, a verificar tokens y a reconocer qué funciones guardan tus fondos y cuáles son riesgos, no ventajas.',
     referrals: [
       {
         title: 'Jupiter',
@@ -2447,10 +2809,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       {
         type: 'intro',
         title: 'Por Qué Jupiter Cambió las Reglas del Juego',
-        content: 'Imagina que quieres cambiar 1,000 USDC por SOL. En Binance, usas el orderbook de Binance y obtienes SU precio. En Jupiter, el protocolo busca **simultáneamente** en Raydium, Orca, Phoenix, Meteora, y docenas de otros pools de liquidez para encontrarte el mejor precio posible. Si dividir tu orden entre 3 pools diferentes te da un mejor precio, Jupiter lo hace automáticamente en una sola transacción. Esto se llama **agregación de liquidez**, y es la razón por la que Jupiter frecuentemente da mejor ejecución que exchanges centralizados para swaps de tamaño mediano. Pero Jupiter va mucho más allá de swaps simples. Es una plataforma completa de trading descentralizado con DCA automático, órdenes límite, perpetuos con apalancamiento, y un launchpad para nuevos tokens. Todo sin entregar la custodia de tus fondos a nadie.',
+        content: 'Imagina que quieres cambiar 1,000 USDC por SOL. En Binance, usas el orderbook de Binance y obtienes SU precio. En Jupiter, el protocolo busca **simultáneamente** en Raydium, Orca, Phoenix, Meteora, y docenas de otros pools de liquidez para encontrarte el mejor precio posible. Si dividir tu orden entre 3 pools diferentes te da un mejor precio, Jupiter lo hace automáticamente en una sola transacción. Esto se llama **agregación de liquidez**, y es la razón por la que Jupiter puede competir en precio con exchanges centralizados en swaps de tamaño mediano. Pero Jupiter va mucho más allá de swaps simples. Es una plataforma completa de trading descentralizado con DCA automático, órdenes límite, perpetuos con apalancamiento, y un launchpad para nuevos tokens. En un swap no entregas la custodia de tus fondos a nadie. Las órdenes programadas sí guardan tus fondos mientras esperan; lo verás abajo.',
         highlight: {
           title: 'El Dato que Importa',
-          text: 'Jupiter procesa más volumen de trading que muchos exchanges centralizados combinados. En Solana, una gran parte del volumen de swaps pasa por Jupiter. Es el hub central de liquidez del ecosistema, si existe un token en Solana, Jupiter lo tiene.'
+          text: 'En Solana, una gran parte del volumen de swaps pasa por Jupiter. Puede rutear casi cualquier token con liquidez, y eso incluye copias y estafas: que un token aparezca en Jupiter no lo valida. La insignia verde de verificado indica cuál es el token canónico para ese nombre, no que sea buena inversión. Para tokens nuevos, compara la dirección del mint (el identificador único del token) con la que publica el proyecto oficial.'
         }
       },
       {
@@ -2460,11 +2822,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: Search, title: 'Descubrimiento de Rutas', text: 'Jupiter analiza todos los pools de liquidez disponibles en Solana en milisegundos. Evalúa el precio, la profundidad de liquidez, y el slippage en cada uno. Si tienes una orden de $5,000, puede que el mejor precio sea dividirla: $3,000 por Raydium y $2,000 por Orca, Jupiter calcula esto automáticamente y ejecuta todo en una sola transacción atómica.' },
           { icon: Zap, title: 'Mejor Precio Habitual', text: 'El resultado es que casi siempre obtienes mejor precio que usando cualquier DEX individual directamente. Para órdenes pequeñas (<$1,000), la diferencia puede ser mínima. Pero para órdenes de $5,000+, la diferencia puede ser del 0.5-2%, que en trading activo se acumula rápidamente. No es una garantía absoluta: en tokens ilíquidos o con fallos de ruta, revisa el price impact antes de firmar.' },
-          { icon: Shield, title: 'Sin Custodia, Sin Permisos', text: 'A diferencia de Binance o cualquier CEX, Jupiter nunca toca tus fondos. Conectas tu wallet, firmas la transacción, y los tokens van directamente de tu wallet al pool y de vuelta. Si Jupiter desapareciera mañana, tus fondos están intactos en tu wallet. No hay riesgo de "FTX" con un DEX.' }
+          { icon: Shield, title: 'Sin Custodia, Sin Permisos', text: 'A diferencia de Binance o cualquier CEX, Jupiter nunca toca tus fondos. Conectas tu wallet, firmas la transacción, y los tokens van directamente de tu wallet al pool y de vuelta. Si Jupiter desapareciera mañana, tus fondos siguen en tu wallet. En un swap no hay riesgo tipo FTX, aunque sí riesgo de smart contract y de interfaz: un sitio falso o comprometido puede pedirte firmar otra cosa.' }
         ],
         highlight: {
           title: '¿Por Qué Importa?',
-          text: '¿Por qué usar un DEX en vez de Binance? Porque en un DEX, TÚ controlas tus fondos. No hay KYC, no hay congelamiento de cuentas, no hay "mantenimiento del sistema". Tu dinero, tus reglas.'
+          text: '¿Por qué usar un DEX en vez de Binance? Porque en un DEX, TÚ controlas tus fondos. Nadie puede congelar tu cuenta de Jupiter, aunque algunos tokens sí pueden congelarse: Circle (USDC) y Tether (USDT) pueden congelar saldos de sus tokens en Solana. Y no hay KYC, lo que también significa que nadie te protege de tus propios errores.'
         }
       },
       {
@@ -2473,7 +2835,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           {
             term: 'Slippage',
             definition: 'La diferencia entre el precio que esperabas y el precio al que realmente se ejecutó tu orden. Ejemplo: ves SOL a $180 y haces un swap de 1,000 USDC. Para cuando tu transacción se confirma (medio segundo después), el precio subió a $181. Recibes menos SOL del que esperabas, eso es slippage. Ocurre porque entre que firmas la transacción y se ejecuta, otros traders pueden haber movido el precio, o tu propia orden puede haber afectado la liquidez del pool.',
-            whyItMatters: '"Slippage tolerance" en Jupiter es el límite de slippage que aceptas antes de que la transacción falle. Demasiado bajo (0.1%) y órdenes fallan seguido. Demasiado alto (5%+) y los bots MEV pueden manipularte. Para tokens principales (SOL, USDC), 0.5% es razonable.'
+            whyItMatters: '"Slippage tolerance" en Jupiter es el límite de slippage que aceptas antes de que la transacción falle. Demasiado bajo (0.1%) y las órdenes fallan seguido. Demasiado alto (5%+) y le das margen a un bot para hacerte un sandwich (lo verás en la próxima lección, MEV: El Impuesto Invisible). En modo Ultra, Jupiter calcula el slippage automáticamente; en modo Manual, 0.5% es un punto de partida razonable para tokens principales (SOL, USDC).'
           }
         ]
       },
@@ -2482,30 +2844,30 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Tutorial: Tu Primer Swap en Jupiter',
         content: 'Hacer un swap en Jupiter es más simple de lo que parece. Una vez que lo haces una vez, se vuelve segunda naturaleza:',
         features: [
-          { icon: Globe, title: 'Paso 1: Conecta tu Wallet', text: 'Ve a jup.ag y haz clic en "Connect Wallet". Selecciona Phantom (o tu wallet preferida). Aprueba la conexión. Jupiter NO pide tu frase semilla ni permisos especiales, solo conexión básica para firmar transacciones.' },
-          { icon: Wallet, title: 'Paso 2: Selecciona tus Tokens', text: 'Arriba: el token que quieres vender (ejemplo: USDC). Abajo: el token que quieres comprar (ejemplo: SOL). Ingresa la cantidad. Jupiter muestra automáticamente el precio, la ruta óptima, el slippage estimado, y cuántos tokens recibirás.' },
-          { icon: Activity, title: 'Paso 3: Revisa y Confirma', text: 'Revisa el "Price Impact" (idealmente <0.5% para órdenes normales). Revisa el slippage tolerance (0.5% por defecto, adecuado para la mayoría de tokens). Haz clic en "Swap", firma la transacción en Phantom, y en 1-2 segundos los tokens aparecen en tu wallet. Sobre los fees: el modo Ultra (el que usa jup.ag por defecto) cobra un fee según el par, desde 0% en pares estables hasta 0.1% en la mayoría de tokens; el modo Manual (Lite) no cobra fee de Jupiter.' },
-          { icon: AlertTriangle, title: 'Configuración Avanzada', text: 'Para órdenes grandes ($10,000+): reduce el slippage tolerance a 0.1-0.3%. En el modo Ultra, la protección contra bots MEV viene activada por defecto. Si usas el modo Manual, activa "MEV Protect" (envía tu transacción por la infraestructura de Jito) para que nadie pueda ver tu orden y adelantarse. Para tokens con baja liquidez: aumenta el slippage a 1-5% o usa Limit Orders.' }
+          { icon: Globe, title: 'Paso 1: Conecta tu Wallet', text: 'Escribe jup.ag tú mismo (o usa un marcador guardado) y haz clic en "Connect Wallet". Selecciona Phantom (o tu wallet preferida). Aprueba la conexión. Jupiter NO pide tu frase semilla ni permisos especiales, solo conexión básica para firmar transacciones.' },
+          { icon: Wallet, title: 'Paso 2: Selecciona tus Tokens', text: 'Arriba: el token que quieres vender (ejemplo: USDC). Abajo: el token que quieres comprar (ejemplo: SOL). Ingresa la cantidad. Jupiter muestra automáticamente el precio, la ruta, el slippage estimado y cuántos tokens recibirás. Si buscas un token por nombre, revisa la insignia de verificado y, si es nuevo, que la dirección del mint coincida con la oficial: hay copias con el mismo nombre y logo.' },
+          { icon: Activity, title: 'Paso 3: Revisa y Confirma', text: 'Revisa el "Price Impact" (idealmente <0.5% para órdenes normales). Haz clic en "Swap", firma la transacción en Phantom, y en un par de segundos los tokens aparecen en tu wallet. Sobre los fees: el modo Ultra (el que usa jup.ag por defecto) cobra según el par, desde 0% en algunos pares estables, 0.1% en la mayoría de tokens y hasta 0.5% en tokens con menos de un día de vida. El modo Manual no cobra fee de Jupiter, pero tampoco trae protección contra MEV.' },
+          { icon: AlertTriangle, title: 'Configuración Avanzada', text: 'Para órdenes grandes, mira primero el price impact: si supera ~1%, la liquidez no alcanza para tu tamaño. Divide la compra en el tiempo (por ejemplo con una orden DCA) o usa una orden límite. El modo Ultra envía tus transacciones de forma privada para reducir el MEV; el modo Manual no ofrece esa protección, así que ahí mantén el slippage bajo. Para tokens con poca liquidez, no subas el slippage a 5%: es invitar a un bot. Reduce el monto o usa una orden límite.' }
         ]
       },
       {
         type: 'main',
         title: 'DCA Automático: Invierte Sin Emociones',
-        content: 'Jupiter tiene una de las implementaciones de DCA más elegantes del ecosistema crypto. No necesitas bots, no necesitas recordar comprar cada semana, y tus fondos nunca salen de un smart contract auditable:',
+        content: 'Jupiter ofrece órdenes DCA (en algún momento se llamaron Recurring): compras programadas que se ejecutan solas. No necesitas recordar comprar cada semana, pero sí entender dónde quedan tus fondos mientras tanto:',
         features: [
-          { icon: Clock, title: 'Cómo Funciona', text: 'Depositas USDC (o cualquier token) en el contrato DCA de Jupiter. Configuras: qué comprar (SOL, BTC, etc.), con qué frecuencia (cada minuto, hora, día, semana), y por cuánto tiempo. Jupiter ejecuta las compras automáticamente al mejor precio disponible en cada intervalo. Los tokens comprados van directamente a tu wallet.' },
-          { icon: PiggyBank, title: 'Ventajas vs DCA Manual', text: 'Cero intervención humana = cero emociones saboteando tu plan. No puedes pausar por pánico cuando el mercado cae. No puedes comprar de más por FOMO cuando sube. El protocolo ejecuta mecánicamente según tus instrucciones. El costo: Jupiter Recurring cobra 0.1% por cada orden ejecutada, más el fee de red de Solana (fracciones de centavo).' },
-          { icon: Lock, title: 'Seguridad', text: 'Tus fondos están en un smart contract auditable, no en una empresa. Puedes cancelar tu DCA en cualquier momento y recuperar los fondos restantes instantáneamente. Los tokens comprados van a tu wallet automáticamente, no se quedan en el contrato.' }
+          { icon: Clock, title: 'Cómo Funciona', text: 'Depositas USDC (o cualquier token) en una orden DCA de Jupiter. Configuras: qué comprar (SOL, BTC, etc.), con qué frecuencia (cada minuto, hora, día, semana), y por cuánto tiempo. Jupiter ejecuta las compras automáticamente al mejor precio disponible en cada intervalo. Los tokens comprados van directamente a tu wallet.' },
+          { icon: PiggyBank, title: 'Ventajas vs DCA Manual', text: 'Una vez configurada, no tienes que decidir cada semana, y eso reduce la tentación de pausar por pánico o comprar de más por FOMO. Puedes cancelar cuando quieras, así que la disciplina sigue siendo tuya. El costo: un fee por cada compra ejecutada (alrededor de 0.1%), más el fee de red de Solana.' },
+          { icon: Lock, title: 'Seguridad', text: 'Mientras la orden está activa, el saldo pendiente sale de tu wallet y espera en una cuenta gestionada por Jupiter hasta ejecutarse. Eso suma un riesgo que un swap normal no tiene. Puedes cancelar en cualquier momento y recuperar lo no usado. No dejes ahí más de lo que piensas comprar en las próximas semanas.' }
         ]
       },
       {
         type: 'main',
         title: 'Limit Orders: Compra a Tu Precio',
-        content: 'Las Limit Orders de Jupiter te permiten colocar órdenes que se ejecutan automáticamente cuando el precio llega a tu objetivo, exactamente como en un exchange centralizado, pero sin custodia:',
+        content: 'Las órdenes límite de Jupiter (parte de sus órdenes trigger, que también incluyen stop loss y take profit) se ejecutan automáticamente cuando el precio llega a tu objetivo, parecido a un exchange centralizado:',
         features: [
           { icon: Target, title: 'Cómo Usarlas', text: 'Ejemplo: SOL está a $180 y quieres comprar a $160. Creas una Limit Order: "Comprar SOL con 500 USDC cuando el precio sea $160 o menos". La orden se queda activa hasta que se ejecute o la canceles. Si SOL baja a $160, Jupiter ejecuta automáticamente tu compra al mejor precio disponible.' },
           { icon: Crosshair, title: 'Casos de Uso', text: '(1) Comprar dips automáticamente, configuras la orden y te olvidas. (2) Tomar ganancias, "Vender 10 SOL si llega a $250". (3) Entrar en tokens nuevos a buen precio sin tener que monitorear constantemente. Las Limit Orders son la herramienta favorita de traders que no quieren estar pegados a la pantalla.' },
-          { icon: AlertTriangle, title: 'Limitaciones', text: 'Las Limit Orders dependen de que haya liquidez al precio objetivo. Para tokens de muy baja liquidez, la orden puede ejecutarse parcialmente o con slippage. Para tokens principales (SOL, USDC, BTC) no hay problema. Además, hay un fee de ~0.1% en la ejecución de Limit Orders.' }
+          { icon: AlertTriangle, title: 'Limitaciones', text: 'Mientras la orden está abierta, tus tokens quedan en una bóveda custodiada, fuera de tu wallet. La orden depende de que haya liquidez al precio objetivo: en tokens poco líquidos puede ejecutarse parcialmente, con slippage o no ejecutarse. Y hay un fee pequeño en la ejecución.' }
         ]
       },
       {
@@ -2514,9 +2876,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         leftSide: {
           title: 'Jupiter (DEX)',
           points: [
-            'Sin custodia, tus fondos siempre en tu wallet',
+            'Swaps sin custodia (las órdenes programadas sí guardan tus fondos mientras esperan)',
             'Sin KYC ni verificación de identidad',
-            'Acceso a todos los tokens de Solana (incluso nuevos)',
+            'Acceso a casi cualquier token de Solana, incluidas copias y estafas: verifica el mint',
             'DCA y Limit Orders sin intermediarios',
             'Riesgo: smart contract bugs (mitigado por auditorías)',
             'Solo funciona con tokens en Solana'
@@ -2537,11 +2899,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Jupiter Perpetuals: Trading con Apalancamiento',
-        content: 'Para traders avanzados, Jupiter ofrece contratos perpetuos (perps) que permiten operar con apalancamiento hasta 100× en SOL, ETH y BTC. Esto es para usuarios experimentados, el riesgo es extremo:',
+        content: 'Jupiter también ofrece contratos perpetuos (perps) con apalancamiento de hasta 250× en SOL, ETH y BTC. Que la plataforma lo permita no lo hace razonable: con 250×, un movimiento de 0.4% en tu contra te liquida. Trátalo como un riesgo que debes entender, no como una función que debas usar:',
         features: [
           { icon: TrendingUp, title: 'Qué Son los Perpetuos', text: 'Un contrato perpetuo te permite apostar a que un activo sube (long) o baja (short) con capital prestado. Con 10× apalancamiento, $100 controlan $1,000. Si el precio sube 10%, ganas $100 (100% de tu capital). Si baja 10%, pierdes todo. Es una herramienta de doble filo que amplifica tanto ganancias como pérdidas.' },
           { icon: AlertTriangle, title: 'El Riesgo Real', text: 'La inmensa mayoría de traders que usan apalancamiento alto pierden dinero. Con 10×, un movimiento de 10% en tu contra te liquida completamente. El mercado crypto es volátil, movimientos de 10% ocurren regularmente. Si recién empiezas, NO uses perpetuos. Domina primero el spot trading sin apalancamiento.' },
-          { icon: BarChart3, title: 'Si Decides Usarlos', text: 'Máximo 2-3× apalancamiento para principiantes en perps. Siempre con stop loss definido ANTES de entrar. Nunca más del 5% de tu portafolio en una posición apalancada. Los perps son herramientas legítimas para hedging y trading direccional, pero solo para quienes entienden y aceptan el riesgo.' }
+          { icon: BarChart3, title: 'Si Decides Usarlos', text: 'Usa solo tu capital de trading (lo definiste en Velas Japonesas y Tendencias), nunca tu base de DCA. Apalancamiento bajo (2-3× como máximo mientras aprendes), stop loss definido ANTES de entrar, y arriesga 1-2% de ese capital por operación. Además del precio, pagas fees de apertura y cierre y un costo por hora mientras la posición sigue abierta.' }
         ]
       },
       {
@@ -2554,19 +2916,24 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         ],
         highlight: {
           title: 'Por Qué Funciona',
-          text: 'Estudios científicos demuestran que explicar un concepto en tus propias palabras mejora significativamente la retención comparado con solo leerlo. No memorices, comprende.'
+          text: 'Investigaciones en psicología del aprendizaje (por ejemplo, Nestojko y colegas, 2014) encontraron que preparar una explicación para otros mejora el recuerdo de las ideas principales. El efecto es moderado, pero real: explicar te obliga a ordenar lo que sabes y te muestra lo que todavía no entiendes.'
         }
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
       },
       {
         type: 'takeaways',
         title: 'Dominando Jupiter',
         items: [
           'Jupiter es el agregador central de Solana: busca el mejor precio entre todos los DEXs y ejecuta swaps óptimos automáticamente. Para la mayoría de swaps, ofrece mejor ejecución que exchanges centralizados.',
-          'DCA automático en Jupiter elimina las emociones de tu estrategia de inversión. Depositas USDC, configuras frecuencia, y el protocolo compra mecánicamente al mejor precio. Sin custodia, sin intermediarios.',
+          'Las órdenes DCA de Jupiter automatizan tus compras y reducen las decisiones emocionales. Mientras esperan, el saldo pendiente queda fuera de tu wallet: no dejes más de lo necesario.',
           'Limit Orders te permiten comprar dips y tomar ganancias automáticamente sin monitorear precios constantemente. Ideales para traders que no quieren estar pegados a la pantalla.',
-          'Jupiter es sin custodia: tus fondos nunca salen de tu wallet (excepto durante la transacción). No hay riesgo de quiebra del exchange ni congelamiento de fondos.',
-          'Los Perpetuos (perps) son para traders avanzados. El apalancamiento amplifica ganancias Y pérdidas. Si eres nuevo, domina el spot trading primero.',
-          'Configuración avanzada: el modo Ultra te protege de bots MEV por defecto (en modo Manual, activa MEV Protect), ajusta slippage según la liquidez del token, y siempre revisa el Price Impact antes de confirmar.'
+          'Los swaps de Jupiter son sin custodia: no hay riesgo de quiebra tipo FTX. Pero las órdenes DCA y trigger guardan tus fondos mientras esperan, y cualquier token puede aparecer en Jupiter: verifica la insignia y el mint.',
+          'Los perpetuos permiten hasta 250×, y eso es un riesgo, no una ventaja. Si los usas, solo con capital de trading, apalancamiento bajo y stop loss definido. Si eres nuevo, domina el spot primero.',
+          'Usa el modo Ultra para tener protección contra MEV y slippage automático (el modo Manual no la trae), revisa siempre el price impact, y si es alto, divide la compra en el tiempo en vez de subir el slippage.'
         ]
       }
     ],
@@ -2574,75 +2941,96 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Quieres cambiar 5,000 USDC por SOL con la mejor ejecución posible. ¿Qué hace Jupiter que un DEX individual (como Raydium solo) no puede?',
+          question: 'Vas a cambiar 5,000 USDC por SOL y Jupiter te muestra una ruta que pasa 60% por Raydium y 40% por Orca. ¿Por qué divide la orden?',
           options: [
-            { id: 'a', text: 'Nada, todos los DEXs dan el mismo precio' },
-            { id: 'b', text: 'Jupiter divide tu orden entre múltiples pools (Raydium, Orca, Phoenix) para encontrar la ruta con menor slippage y mejor precio total' },
-            { id: 'c', text: 'Jupiter siempre es más caro porque cobra comisión por agregar' },
-            { id: 'd', text: 'Jupiter envía tu orden a Binance para conseguir mejor ejecución en su orderbook centralizado' }
+            { id: 'a', text: 'Porque repartirla entre pools reduce el price impact total frente a usar uno solo' },
+            { id: 'b', text: 'Porque cada DEX limita el tamaño de un swap y Jupiter debe partirlo en dos' },
+            { id: 'c', text: 'Porque así cobra dos comisiones distintas, una por cada pool que usa la ruta' },
+            { id: 'd', text: 'Porque envía una parte a un exchange centralizado para conseguirte un mejor precio' }
           ],
-          correctAnswer: 'b',
-          explanation: 'La agregación de liquidez es el superpoder de Jupiter. Para una orden de $5,000, puede encontrar que dividirla 60/40 entre Raydium y Orca reduce el slippage significativamente. Esto se calcula y ejecuta automáticamente en una sola transacción. En el modo Manual el fee de Jupiter es 0%; el modo Ultra (por defecto) cobra entre 0% y 0.1% según el par, a cambio de mejor ejecución y protección MEV integrada.'
+          correctAnswer: 'a',
+          explanation: 'Cada pool mueve más el precio cuanto más le compras. Repartir la orden entre varios pools hace que ninguno se mueva demasiado, y el precio promedio queda mejor. Todo ocurre en una sola transacción. La idea de un "límite por DEX" es la confusión más común: los pools no tienen un tope fijo, solo se vuelven más caros a medida que les compras más.'
         },
         {
           id: 'q2',
-          question: 'Configuras un DCA en Jupiter: $100 de USDC → SOL cada semana durante 6 meses. ¿Qué pasa con tus fondos?',
+          question: 'Programas una orden DCA en Jupiter: $100 USDC por SOL cada semana durante 6 meses, y depositas $2,600. ¿Dónde está el USDC que todavía no se ha usado?',
           options: [
-            { id: 'a', text: 'Jupiter guarda todo el USDC en su cuenta bancaria' },
-            { id: 'b', text: 'El USDC se deposita en un smart contract auditable. Cada semana, el contrato ejecuta la compra al mejor precio y envía el SOL a tu wallet. Puedes cancelar y recuperar el USDC restante en cualquier momento' },
-            { id: 'c', text: 'Necesitas hacer las compras manualmente cada semana' },
-            { id: 'd', text: 'El USDC se convierte todo a SOL inmediatamente en una sola compra al precio del momento' }
+            { id: 'a', text: 'En la cuenta de la orden DCA, fuera de tu wallet, hasta que se use o canceles' },
+            { id: 'b', text: 'En tu wallet: Jupiter solo lo toma en el momento exacto de cada compra semanal' },
+            { id: 'c', text: 'En una cuenta de Jupiter dentro de un exchange centralizado que lo custodia' },
+            { id: 'd', text: 'Ya convertido en SOL, porque la orden compra todo el primer día y lo va liberando' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El DCA de Jupiter es verdaderamente automatizado y sin custodia. Tu USDC está en un smart contract (no en una empresa). Las compras se ejecutan mecánicamente. Los tokens comprados van a tu wallet directamente. Y puedes cancelar en cualquier momento, no hay lock-up ni penalidades.'
+          correctAnswer: 'a',
+          explanation: 'Al crear la orden, el USDC sale de tu wallet y queda en la cuenta de la orden. Cada semana se usa una parte y el SOL llega a tu wallet. Puedes cancelar y recuperar lo que falta. Creer que el dinero sigue en tu wallet es el error tentador: mientras la orden está abierta, ese saldo depende del programa de Jupiter, así que no dejes más de lo necesario.'
         },
         {
           id: 'q3',
-          question: 'SOL está a $180 y quieres comprar más si cae a $150. ¿Cuál es la mejor herramienta en Jupiter?',
-          options: [
-            { id: 'a', text: 'Hacer un swap normal a $180 y esperar' },
-            { id: 'b', text: 'Monitorear el precio manualmente y hacer el swap cuando llegue a $150' },
-            { id: 'c', text: 'Crear una Limit Order: "Comprar SOL con X USDC cuando el precio sea $150 o menos". La orden se ejecuta automáticamente si llega a ese precio' },
-            { id: 'd', text: 'No es posible en un DEX, solo los CEXs tienen órdenes límite' }
-          ],
-          correctAnswer: 'c',
-          explanation: 'Las Limit Orders de Jupiter funcionan exactamente como en un exchange centralizado pero sin custodia. Configuras tu precio objetivo, la orden queda activa, y se ejecuta automáticamente cuando el mercado llega ahí. No necesitas monitorear constantemente.'
+          type: 'true-false',
+          question: 'Una orden límite de compra en Jupiter garantiza que compres al precio que fijaste en cuanto el mercado toque ese precio.',
+          correctAnswer: false,
+          explanation: 'Falso. La orden se ejecuta si hay liquidez suficiente a ese precio cuando llega. En tokens poco líquidos o en movimientos bruscos puede no ejecutarse, o hacerlo solo en parte. Y mientras espera, tus fondos están en una bóveda de Jupiter, no en tu wallet.'
         },
         {
           id: 'q4',
-          question: '¿Cuál es la ventaja principal de usar Jupiter en lugar de Binance para swaps de tokens en Solana?',
+          question: 'Buscas JUP en Jupiter y aparecen dos tokens con el mismo nombre y el mismo logo. Uno tiene la insignia de verificado. ¿Qué haces antes de comprar?',
           options: [
-            { id: 'a', text: 'Jupiter es siempre más barato' },
-            { id: 'b', text: 'Sin custodia (tus fondos nunca salen de tu wallet), sin KYC, acceso inmediato a TODOS los tokens de Solana (incluso los nuevos), y sin riesgo de que la empresa quiebre o congele tus fondos' },
-            { id: 'c', text: 'Binance no tiene tokens de Solana' },
-            { id: 'd', text: 'Jupiter tiene mejor soporte al cliente y una app móvil más completa que la de Binance' }
+            { id: 'a', text: 'Elijo el verificado y confirmo que su mint coincide con el que publica el proyecto' },
+            { id: 'b', text: 'Elijo el de más volumen en 24 horas, porque las copias nunca tienen volumen real' },
+            { id: 'c', text: 'Elijo cualquiera: si Jupiter los lista, los dos pasaron antes una revisión de seguridad' },
+            { id: 'd', text: 'Elijo el más barato, porque la diferencia de precio entre ellos es solo arbitraje' }
           ],
-          correctAnswer: 'b',
-          explanation: 'La diferencia fundamental es la custodia. En Binance, tus fondos están en poder de la empresa (riesgo FTX). En Jupiter, tus tokens están en tu wallet hasta el momento exacto del swap. Además, cualquier token nuevo en Solana está disponible en Jupiter inmediatamente, mientras que Binance puede tardar meses en listar.'
+          correctAnswer: 'a',
+          explanation: 'La insignia indica cuál es el token canónico, y el mint (su dirección) es la prueba definitiva: compáralo con el que publica el proyecto en su web o su X oficial. Jupiter lista casi cualquier token, así que aparecer en la lista no es una revisión de seguridad. El volumen tampoco sirve de filtro: una copia puede inflarlo con operaciones entre sus propias wallets.'
         },
         {
           id: 'q5',
-          question: 'Vas a hacer un swap grande ($20,000 USDC → SOL). ¿Qué configuraciones avanzadas deberías usar en Jupiter?',
+          question: 'Vas a cambiar $20,000 USDC por un token mediano y Jupiter te muestra un price impact de 3%. ¿Qué es lo más sensato?',
           options: [
-            { id: 'a', text: 'Configuración por defecto, no necesito cambiar nada' },
-            { id: 'b', text: 'Reducir slippage tolerance a 0.1-0.3% y asegurarme de tener protección MEV activa (Ultra la trae por defecto; en modo Manual se llama MEV Protect) contra bots que podrían adelantarse a mi orden' },
-            { id: 'c', text: 'Aumentar slippage al máximo para que se ejecute más rápido' },
-            { id: 'd', text: 'Dividir la orden manualmente en 20 swaps de $1,000' }
+            { id: 'a', text: 'Subir el slippage al 10% en modo Manual para que la transacción no llegue a fallar' },
+            { id: 'b', text: 'Dividir la compra en varias órdenes a lo largo del tiempo o usar una orden límite' },
+            { id: 'c', text: 'Hacer el swap de una vez, porque el price impact se recupera cuando el precio se calma' },
+            { id: 'd', text: 'Pasar de Ultra a Manual, porque en Manual el price impact se calcula más bajo' }
           ],
           correctAnswer: 'b',
-          explanation: 'Para órdenes grandes, los bots MEV pueden detectar tu transacción (en Solana no hay mempool público, pero RPCs y clientes de validador modificados pueden filtrarla) y ejecutar antes que tú, empeorando tu precio. La protección MEV de Jupiter (activa por defecto en Ultra, toggle MEV Protect en Manual) envía tu transacción por canales privados vía Jito. Reducir el slippage te protege de aceptar un precio mucho peor que el cotizado. Jupiter hace la optimización de ruta automáticamente, no necesitas dividir manualmente.'
+          explanation: 'Un price impact de 3% significa que la liquidez disponible no alcanza para tu tamaño: tu propia compra sube el precio. Dividirla en el tiempo deja que la liquidez se recupere entre compras. Subir el slippage es la tentación más peligrosa: no reduce el impacto y deja espacio para que un bot te haga un sandwich, sobre todo en Manual, que no tiene protección MEV.'
         },
         {
           id: 'q6',
-          question: 'Un amigo quiere usar Jupiter Perpetuals con 50× de apalancamiento en SOL porque "va a subir seguro". ¿Qué le dices?',
+          question: '¿Cuál es la diferencia que más te importa entre el modo Ultra y el modo Manual de Jupiter?',
           options: [
-            { id: 'a', text: 'Buena idea, SOL siempre sube' },
-            { id: 'b', text: 'Con 50× de apalancamiento, un movimiento de apenas 2% en contra lo liquida completamente. SOL puede moverse 5-10% en horas. La gran mayoría de traders con apalancamiento alto pierden todo. Si quiere usar perps, máximo 2-3× y con stop loss' },
-            { id: 'c', text: 'Los perpetuos no tienen riesgo porque son descentralizados' },
-            { id: 'd', text: 'Debería usar 100× para maximizar ganancias, las liquidaciones solo ocurren en mercados bajistas' }
+            { id: 'a', text: 'Ultra usa más pools en la ruta; Manual solo usa el pool más grande de toda Solana' },
+            { id: 'b', text: 'Ultra envía tu swap en privado y ajusta el slippage; Manual no te protege del MEV' },
+            { id: 'c', text: 'Ultra es custodial y guarda tus fondos; Manual los deja en tu wallet todo el tiempo' },
+            { id: 'd', text: 'Ultra solo admite tokens verificados; Manual es el único que acepta tokens nuevos' }
           ],
           correctAnswer: 'b',
-          explanation: 'Con 50× de apalancamiento, tu margen de error es del 2% (100/50 = 2%). SOL se mueve 2% en minutos durante volatilidad normal. Es prácticamente una apuesta de casino. Los traders profesionales que usan perps raramente pasan de 3-5× porque entienden que el apalancamiento amplifica las pérdidas tanto como las ganancias.'
+          explanation: 'Ultra (el modo por defecto) envía la transacción por un canal privado y calcula el slippage por ti, a cambio de una comisión de 0% a 0.5% según el par. Manual no cobra comisión de Jupiter, pero tu swap queda expuesto a bots MEV. En ambos modos el swap es sin custodia: tus tokens no salen de tu wallet hasta el momento del intercambio.'
+        },
+        {
+          id: 'q7',
+          question: 'Abres un largo en SOL con 25× en Jupiter Perps. ¿Qué caída del precio basta, aproximadamente, para liquidarte?',
+          options: [
+            { id: 'a', text: 'Algo menos de 4%: 100 / 25 = 4, y las comisiones te restan margen' },
+            { id: 'b', text: 'Cerca de 25%, porque la pérdida tiene que igualar el apalancamiento' },
+            { id: 'c', text: 'Cerca de 50%, porque el protocolo liquida al perder medio colateral' },
+            { id: 'd', text: 'Ninguna: en un perp descentralizado solo cierras de forma voluntaria' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Con 25× cada 1% que se mueve SOL es un 25% de tu margen, así que una caída de 4% lo consume entero, y las comisiones y el costo por hora de la posición adelantan la liquidación. SOL puede moverse 4% en una tarde normal. Por eso, si usas perps, que sea con capital de trading, apalancamiento bajo y stop loss.'
+        },
+        {
+          id: 'q8',
+          type: 'ordering',
+          question: 'Ordena los pasos de un swap cuidadoso en Jupiter, del primero al último.',
+          items: [
+            'Entrar a jup.ag escribiendo la dirección y conectar tu wallet',
+            'Elegir el token verificado y comprobar que el mint sea el oficial',
+            'Revisar el price impact, la comisión y la ruta que propone Jupiter',
+            'Leer lo que muestra la wallet y firmar solo si coincide',
+            'Confirmar en el explorador que los tokens llegaron a tu wallet'
+          ],
+          correctOrder: [0, 1, 2, 3, 4],
+          explanation: 'Primero te aseguras de estar en el sitio real, luego de comprar el token correcto, después de que el precio tenga sentido, y solo entonces firmas. Verificar en el explorador cierra el ciclo: si algo salió mal, lo sabes enseguida.'
         }
       ]
     }
@@ -2651,18 +3039,18 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 26,
     title: 'Liquidez y Yield Farming',
     level: 'Avanzado',
-    number: '4 de 13',
-    duration: '16 min',
+    number: '5 de 13',
+    duration: '20 min',
     type: 'Estrategias',
     description: 'Conviértete en el banco. Aprende a proveer liquidez en Raydium, Orca y Meteora para ganar comisiones por cada swap que otros hacen. Entiende la impermanent loss, los pools concentrados, y cuándo vale la pena (y cuándo no).',
     sections: [
       {
         type: 'intro',
         title: 'Conviértete en el Banco',
-        content: 'En el mundo tradicional, cuando cambias pesos por dólares en una casa de cambio, la casa se queda con un spread (comisión). En DeFi, **tú puedes ser la casa de cambio**. Cuando alguien hace un swap de SOL por USDC en Raydium o Meteora, necesita que haya liquidez disponible, tokens depositados en un pool que faciliten esa transacción. Los que depositan esos tokens son los **Liquidity Providers (LPs)**, y a cambio reciben una porción de las comisiones que se cobran por cada swap. Es un negocio real: los pools más activos de Solana generan millones de dólares en fees al mes. Pero no es dinero gratis, hay riesgos reales que debes entender antes de depositar un solo dólar.',
+        content: 'En el mundo tradicional, cuando cambias pesos por dólares en una casa de cambio, la casa se queda con un spread (comisión). En DeFi, **tú puedes ser la casa de cambio**. Cuando alguien hace un swap de SOL por USDC en Raydium o Meteora, necesita que haya liquidez disponible, tokens depositados en un pool que faciliten esa transacción. Los que depositan esos tokens son los **Liquidity Providers (LPs)**, y a cambio reciben una porción de las comisiones que se cobran por cada swap. Es un negocio real: los pools más activos de Solana generan millones de dólares en fees al mes. Pero que un pool genere muchos fees no significa que sus LPs ganen: hay riesgos que debes entender antes de depositar un solo dólar.',
         highlight: {
           title: 'El Negocio de la Liquidez',
-          text: 'Los pools de Solana generan colectivamente **cientos de millones de dólares** en fees mensuales para los LPs. Es una de las formas más lucrativas de generar rendimiento en DeFi, pero también una de las más malentendidas. Esta lección te da las herramientas para participar inteligentemente.'
+          text: 'Proveer liquidez es una de las formas de rendimiento más malentendidas de DeFi. Un estudio de 2021 sobre pools concentrados de Uniswap v3 encontró que, en conjunto, la impermanent loss superó a los fees, y que cerca de la mitad de los LPs habría ganado más simplemente guardando sus tokens. Esta lección te da las herramientas para calcular antes de entrar.'
         }
       },
       {
@@ -2670,9 +3058,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: '¿Cómo Funcionan los Pools de Liquidez?',
         content: 'Un pool de liquidez es un smart contract que contiene dos tokens (por ejemplo, SOL y USDC). Los usuarios que quieren intercambiar uno por otro lo hacen contra el pool, no contra otra persona:',
         features: [
-          { icon: Layers, title: 'La Mecánica Básica', text: 'Depositas dos tokens en proporción igual (ejemplo: $500 de SOL + $500 de USDC = $1,000 en el pool SOL-USDC). Cada vez que alguien hace un swap SOL↔USDC usando ese pool, paga una comisión (típicamente 0.25-1%). Esa comisión se distribuye proporcionalmente entre todos los LPs del pool según su participación.' },
+          { icon: Layers, title: 'La Mecánica Básica', text: 'Depositas dos tokens en proporción igual (ejemplo: $500 de SOL + $500 de USDC = $1,000 en el pool SOL-USDC). Cada vez que alguien hace un swap SOL↔USDC usando ese pool, paga una comisión. En pools estándar suele ser 0.25%; en pools concentrados de pares principales como SOL-USDC puede ser tan baja como 0.01-0.05%, y en tokens volátiles llega al 1% o más. Esa comisión se distribuye proporcionalmente entre todos los LPs del pool según su participación.' },
           { icon: Zap, title: 'Los Fees se Acumulan', text: 'No recibes los fees en tu wallet, se acumulan automáticamente en tu posición del pool. Si depositaste $1,000 y se acumularon $50 en fees, tu posición ahora vale $1,050. Para cobrarlos, retiras tu liquidez del pool. Una excepción importante: en los pools concentrados (Orca Whirlpools, Meteora DLMM, Raydium CLMM) los fees se acumulan por separado y puedes reclamarlos sin retirar tu liquidez. Mientras más volumen de trading tenga el pool, más fees ganas.' },
-          { icon: BarChart3, title: 'APY Variable', text: 'Los rendimientos fluctúan enormemente. Un pool SOL-USDC estable puede generar 10-30% APY. Un pool de un memecoin en pleno hype puede generar 500-2,000% APY, pero por horas o días, no permanentemente. Los APYs que ves son estimaciones basadas en los fees recientes, no garantías de rendimiento futuro.' }
+          { icon: BarChart3, title: 'APY Variable', text: 'Los rendimientos fluctúan enormemente. Un pool SOL-USDC puede mostrar 10-30% APY en fees en épocas activas, antes de restar la impermanent loss. Un pool de un memecoin en pleno hype puede generar 500-2,000% APY, pero por horas o días, no permanentemente. Los APYs que ves son estimaciones basadas en los fees recientes, no garantías de rendimiento futuro.' }
         ]
       },
       {
@@ -2681,8 +3069,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Este es el concepto más importante y malentendido de la provisión de liquidez. **Impermanent Loss (IL)** es la diferencia entre lo que ganarías haciendo HODL vs lo que ganas como LP cuando los precios de los tokens cambian:',
         features: [
           { icon: TrendingDown, title: 'Cómo Ocurre', text: 'Depositas $500 SOL + $500 USDC ($1,000 total). SOL sube 100% (de $150 a $300). Si solo hubieras hecho HODL, tendrías $1,500 ($1,000 SOL + $500 USDC). Pero el pool rebalancea automáticamente, vende SOL caro y compra USDC. Tu posición en el pool vale ~$1,414 en lugar de $1,500. Esa diferencia de ~$86 es la impermanent loss (~5.7%).' },
-          { icon: BarChart3, title: 'La Tabla que Debes Memorizar', text: 'Cambio de precio +25% → IL ~0.6%. Cambio +50% → IL ~2.0%. Cambio +100% (2×) → IL ~5.7%. Cambio +200% (3×) → IL ~13.4%. Cambio +400% (5×) → IL ~25.5%. Si un token hace 5× mientras estás en el pool, pierdes ~25% comparado con simplemente haberlo guardado.' },
-          { icon: CheckCircle, title: '¿Cuándo Vale la Pena?', text: 'IL se llama "impermanent" porque si el precio vuelve al punto original, la pérdida desaparece. Además, los fees que ganas pueden superar la IL. Si ganas 50% APY en fees pero tu IL es del 5%, estás +45% en ganancia neta. El cálculo es: Ganancia neta = Fees ganados - Impermanent Loss. Solo participa cuando los fees justifican el riesgo.' }
+          { icon: BarChart3, title: 'La Tabla que Debes Memorizar', text: 'Si el precio sube: +50%, IL ~2.0%; +100% (2×), IL ~5.7%; +200% (3×), IL ~13.4%; +400% (5×), IL ~25.5%. Si baja: -50%, IL ~5.7%; -90%, IL ~42.5%. Ojo, la IL se mide contra hacer HODL, y no incluye la caída del precio en sí. Si el token cae 90%, tus $1,000 en el pool quedan en ~$316, mientras que con HODL tendrías ~$550: pierdes por la caída y, además, por la IL, porque el pool te fue dando más del token que caía.' },
+          { icon: CheckCircle, title: '¿Cuándo Vale la Pena?', text: 'IL se llama "impermanent" porque si el precio vuelve al punto original, la pérdida desaparece. Pero si retiras con el precio lejos de donde entraste, se vuelve permanente. Además, los fees que ganas pueden superar la IL. Si ganas 50% APY en fees pero tu IL es del 5%, estás +45% en ganancia neta. El cálculo es: Ganancia neta = Fees ganados - Impermanent Loss. Solo participa cuando los fees justifican el riesgo.' }
         ]
       },
       {
@@ -2690,8 +3078,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Pools Estándar vs Pools Concentrados (DLMM)',
         content: 'Hay dos tipos fundamentales de pools, y entender la diferencia es crucial para tu estrategia como LP:',
         features: [
-          { icon: Globe, title: 'Pools Estándar (Raydium AMM, Orca)', text: 'Tu liquidez se distribuye en TODO el rango de precios posible, de $0 a infinito. Ventaja: tu posición siempre está activa sin importar el precio. Desventaja: la mayoría de tu capital está "desperdiciado" en rangos de precio donde nunca se va a operar. Eficiencia de capital: baja. Rendimiento: moderado pero predecible.' },
-          { icon: Crosshair, title: 'Pools Concentrados (Meteora DLMM, Orca Whirlpools)', text: 'Tú defines el rango de precios donde quieres proveer liquidez. Ejemplo: "Solo quiero ser LP de SOL-USDC entre $150 y $200". Tu capital se concentra en ese rango estrecho, generando MUCHO más fees por dólar invertido (potencialmente 5-20× más que un pool estándar). Pero si el precio sale de tu rango, dejas de ganar fees completamente.' },
+          { icon: Globe, title: 'Pools Estándar (por ejemplo, los AMM de Raydium)', text: 'Tu liquidez se distribuye en TODO el rango de precios posible, de $0 a infinito. Ventaja: tu posición siempre está activa sin importar el precio. Desventaja: la mayoría de tu capital está "desperdiciado" en rangos de precio donde nunca se va a operar. Eficiencia de capital: baja. Rendimiento: moderado pero predecible.' },
+          { icon: Crosshair, title: 'Pools Concentrados (Meteora DLMM, Orca Whirlpools, Raydium CLMM)', text: 'Tú defines el rango de precios donde quieres proveer liquidez. Ejemplo: "Solo quiero ser LP de SOL-USDC entre $150 y $200". Tu capital se concentra en ese rango estrecho, generando MUCHO más fees por dólar invertido (potencialmente 5-20× más que un pool estándar). Pero si el precio sale de tu rango, dejas de ganar fees completamente.' },
           { icon: AlertTriangle, title: 'El Riesgo de Concentrar', text: 'Cuando el precio sale de tu rango en un pool concentrado, tu posición se convierte 100% al token que "perdió" valor relativo. Si SOL-USDC sube por encima de tu rango, te quedas con 100% USDC (vendiste todo tu SOL). Si baja debajo de tu rango, te quedas con 100% SOL (compraste SOL todo el camino hacia abajo). Necesitas monitorear activamente y rebalancear.' }
         ]
       },
@@ -2726,9 +3114,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Las Plataformas de Solana para Proveer Liquidez',
         content: 'Solana tiene un ecosistema rico de DEXs donde puedes proveer liquidez. Cada uno tiene sus ventajas:',
         features: [
-          { icon: Zap, title: 'Raydium', text: 'El DEX más establecido de Solana. Tiene pools estándar (AMM) y pools concentrados (CLMM). Los pools estándar son los más fáciles de usar para principiantes en LP. Mucho volumen en pares principales (SOL-USDC, SOL-USDT) y en memecoins nuevas. Interface directa y fees claros.' },
-          { icon: Crosshair, title: 'Meteora', text: 'Especializado en pools concentrados (DLMM). La interface más sofisticada para LPs avanzados. Permite configurar rangos con precisión extrema y diferentes estrategias de distribución (spot, curve, bid-ask). Los LPs de Meteora en pools de memecoins volátiles han generado rendimientos extraordinarios, pero requiere experiencia.' },
-          { icon: Globe, title: 'Orca', text: 'DEX con excelente interface de usuario. Sus "Whirlpools" son pools concentrados bien diseñados. Menos volumen que Raydium pero experiencia de usuario superior. Buena opción para quien viene de DeFi en otras chains y quiere una interface familiar.' }
+          { icon: Zap, title: 'Raydium', text: 'El DEX más establecido de Solana. Tiene pools estándar (AMM) y pools concentrados (CLMM). Los pools estándar son los más fáciles de usar para quien empieza como LP. Mucho volumen en pares principales (SOL-USDC, SOL-USDT) y en memecoins nuevas, que son también donde más rug pulls ocurren.' },
+          { icon: Crosshair, title: 'Meteora', text: 'Especializado en pools concentrados (DLMM). Una interfaz pensada para LPs avanzados. Permite configurar rangos con precisión y diferentes estrategias de distribución (spot, curve, bid-ask). También tiene pools DAMM v2, de rango completo. Ojo con el costo de abrir una posición DLMM: un depósito de unos 0.06 SOL que recuperas al cerrarla, y si tu rango usa una zona de precios que nadie ha abierto antes, unos 0.075 SOL adicionales que no se devuelven. Con $200 de capital, eso pesa. En pools de memecoins volátiles algunos LPs ganan mucho y muchos otros pierden: no es lugar para aprender.' },
+          { icon: Globe, title: 'Orca', text: 'DEX conocido por su interfaz clara. Sus "Whirlpools" son pools concentrados, y al crear una posición también puedes elegir rango completo, que se comporta como un pool estándar. Su pool SOL-USDC más usado cobra 0.04% por swap. Buena opción para quien viene de DeFi en otras chains.' }
         ]
       },
       {
@@ -2737,9 +3125,19 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Además de los fees por swaps, muchos protocolos ofrecen **recompensas adicionales** en forma de tokens para atraer liquidez. Esto se llama Yield Farming:',
         features: [
           { icon: Award, title: 'Cómo Funciona', text: 'Un protocolo nuevo necesita liquidez para funcionar. Para atraerla, regala sus propios tokens a los LPs. Ejemplo: depositas liquidez en un pool nuevo de Raydium y recibes fees del pool + tokens RAY adicionales como incentivo. El APY combinado puede ser muy atractivo, pero los tokens de reward frecuentemente pierden valor con el tiempo.' },
-          { icon: AlertTriangle, title: 'El Riesgo del Farming', text: 'Si el token de reward pierde 80% de su valor, tu APY real es mucho menor que el mostrado. Además, el TVL del pool crece rápidamente (todos quieren el yield), lo que diluye las recompensas por persona. El farming más rentable ocurre en las primeras horas/días, después la oportunidad se evapora.' },
-          { icon: Brain, title: 'Farming Inteligente', text: 'Busca farming donde el token de reward tenga utilidad real (governance de un protocolo exitoso, no un token sin propósito). Calcula el APY neto: fees del pool + rewards de farming - impermanent loss - depreciación del token de reward. Si el resultado sigue siendo positivo y significativo, adelante.' }
+          { icon: AlertTriangle, title: 'El Riesgo del Farming', text: 'Si el token de reward pierde 80% de su valor, tu APY real es mucho menor que el mostrado. Además, el TVL del pool crece rápidamente (todos quieren el yield), lo que diluye las recompensas por persona. Los rendimientos más altos aparecen al inicio, justo cuando el riesgo también es mayor: contrato nuevo, poca liquidez y un token de reward sin precio estable.' },
+          { icon: Brain, title: 'Farming Inteligente', text: 'Busca farming donde el token de reward tenga utilidad real (governance de un protocolo exitoso, no un token sin propósito). Calcula el APY neto: fees del pool + rewards de farming - impermanent loss - depreciación del token de reward. Si el resultado sigue siendo positivo y entiendes el riesgo del contrato, puede tener sentido con una parte pequeña de tu capital.' }
         ]
+      },
+      {
+        type: 'counterpoint',
+        title: 'Otra Mirada: ¿Los LPs Realmente Ganan?',
+        content: '- **Muchos LPs pierden contra HODL.** El estudio de Loesch y colegas (2021) sobre Uniswap v3 encontró que en los pools analizados la impermanent loss sumó más que los fees.\n\n- **El APY no incluye todos los riesgos.** Un bug en el contrato, un rug pull en un pool de memecoins o una stablecoin que pierde su paridad pueden borrar meses de fees.\n\n- **Los pools concentrados exigen tiempo.** Si no puedes revisar tu rango varias veces por semana, un pool estándar o simplemente guardar tus tokens puede ser mejor.\n\n- **Cada retiro y rebalanceo puede tener efectos tributarios.** Lleva registro de tus depósitos y retiros (lo viste en Tu Plan de Inversión Personal).'
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
       },
       {
         type: 'takeaways',
@@ -2747,7 +3145,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         items: [
           'Proveer liquidez = depositar tokens en un pool para facilitar swaps. A cambio, recibes comisiones proporcionales a tu participación por cada transacción que usa tu pool.',
           'Impermanent Loss es el costo de ser LP: cuando los precios cambian, ganas menos que si hubieras hecho HODL. Con un cambio de precio de 2× (100%), la IL es ~5.7%. Solo participa cuando los fees justifican este riesgo.',
-          'Pools estándar (Raydium AMM) son para LPs pasivos: menor rendimiento pero sin necesidad de monitoreo. Pools concentrados (Meteora DLMM) generan 5-20× más fees pero requieren gestión activa y rebalanceo.',
+          'Pools estándar (Raydium AMM) son para LPs pasivos: menor rendimiento pero sin necesidad de monitoreo. Pools concentrados (Meteora DLMM, Orca Whirlpools) pueden generar 5-20× más fees por dólar mientras el precio está en rango, pero requieren gestión activa y rebalanceo.',
           'Las plataformas principales de Solana: Raydium (volumen + memecoins), Meteora (DLMM concentrado), Orca (buena UX + Whirlpools). Cada una tiene su nicho.',
           'Yield Farming ofrece tokens adicionales como incentivo, pero el APY mostrado puede ser engañoso si el token de reward pierde valor. Calcula siempre el rendimiento neto real.',
           'Empieza con un pool estándar SOL-USDC en Raydium con una cantidad pequeña que puedas perder. Observa cómo se comporta durante 1-2 semanas antes de escalar. El LP es un oficio que se aprende con práctica.'
@@ -2758,92 +3156,135 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Depositas $5,000 en SOL + $5,000 en USDC en un pool estándar. SOL sube 100% (2×). Sin contar fees, ¿cuánto vale tu posición aproximadamente?',
+          question: 'Depositas $5,000 en SOL y $5,000 en USDC en un pool estándar. SOL sube 100% (2×). Sin contar fees, ¿cuánto vale tu posición aproximadamente?',
           options: [
-            { id: 'a', text: '$20,000, todo se duplicó' },
-            { id: 'b', text: '$14,142, la impermanent loss hace que ganes ~$4,142 en lugar de los $5,000 que habrías ganado solo haciendo HODL' },
-            { id: 'c', text: '$10,000, vuelves al punto de partida' },
-            { id: 'd', text: '$7,500, pierdes dinero' }
+            { id: 'a', text: '$20,000, porque todo lo que depositaste en el pool se duplicó de valor' },
+            { id: 'b', text: '$15,000, lo mismo que si hubieras mantenido los dos tokens en tu wallet' },
+            { id: 'c', text: '$10,000, porque el pool se rebalancea y siempre vuelve al valor inicial' },
+            { id: 'd', text: 'Unos $14,142: ganas, pero ~$858 menos que los $15,000 de solo mantener' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Con un cambio de precio de 2×, el valor de tu posición en el pool es: valor inicial × √(cambio de precio) = $10,000 × √2 ≈ $14,142. Haciendo HODL tendrías $15,000. El cociente pool/HODL es 2√r/(1+r) ≈ 0.943, es decir, una impermanent loss de ~5.7% (~$858). Si los fees generados superan esa pérdida, proveer liquidez fue la mejor decisión.'
+          correctAnswer: 'd',
+          explanation: 'En un pool estándar, el valor sigue la raíz del cambio de precio: $10,000 × √2 ≈ $14,142. Manteniendo los dos tokens tendrías $5,000 × 2 + $5,000 = $15,000. La diferencia (~5.7%, unos $858) es la impermanent loss. Pensar que el pool vale lo mismo que mantener es el error más común: el pool vende SOL mientras sube.'
         },
         {
           id: 'q2',
-          question: '¿En qué situación proveer liquidez es claramente mejor que hacer HODL?',
+          question: '¿En qué situación proveer liquidez termina siendo mejor que solo mantener los tokens?',
           options: [
-            { id: 'a', text: 'Siempre es mejor proveer liquidez' },
-            { id: 'b', text: 'Cuando los fees generados por el pool superan la impermanent loss. Esto ocurre típicamente en pools con alto volumen y baja volatilidad relativa (como stablecoin pools o pares principales con mucho trading)' },
-            { id: 'c', text: 'Solo cuando un token va a subir mucho' },
-            { id: 'd', text: 'Nunca vale la pena, la impermanent loss siempre termina siendo mayor que cualquier fee acumulado' }
+            { id: 'a', text: 'Cuando los fees acumulados superan la impermanent loss de la posición' },
+            { id: 'b', text: 'Siempre, porque los fees se suman y la impermanent loss nunca se realiza' },
+            { id: 'c', text: 'Solo cuando uno de los tokens del par va a subir con muchísima fuerza' },
+            { id: 'd', text: 'Nunca, porque la impermanent loss siempre supera a cualquier fee cobrado' }
           ],
-          correctAnswer: 'b',
-          explanation: 'La ecuación es simple: Ganancia neta = Fees acumulados - Impermanent Loss. Pools estables (USDC-USDT) tienen IL casi cero y fees constantes. Pools volátiles con mucho volumen (SOL-USDC en alta actividad) pueden generar fees que superan ampliamente la IL. La clave es calcular antes de entrar.'
+          correctAnswer: 'a',
+          explanation: 'Ganancia neta del LP = fees − impermanent loss. Suele salir a favor en pares con mucho volumen y poca divergencia de precio, como stablecoins o pares principales muy operados. La idea de que la IL "nunca se realiza" es tentadora, pero se vuelve real en cuanto retiras con los precios lejos de donde entraste.'
         },
         {
           id: 'q3',
-          question: 'Estás en un pool concentrado (Meteora DLMM) de SOL-USDC con rango $150-$200. El precio de SOL sube a $220. ¿Qué pasa con tu posición?',
+          question: 'Estás en un pool concentrado (Meteora DLMM) de SOL-USDC con rango $150-$200, y SOL sube a $220. ¿Qué pasa con tu posición?',
           options: [
-            { id: 'a', text: 'Pierdes todo tu dinero' },
-            { id: 'b', text: 'Tu posición se convierte a 100% USDC (vendiste todo tu SOL mientras subía) y dejas de ganar fees hasta que el precio vuelva a tu rango' },
-            { id: 'c', text: 'El protocolo te liquida automáticamente' },
-            { id: 'd', text: 'Sigues ganando fees normalmente' }
+            { id: 'a', text: 'Quedas en 100% SOL y sigues ganando fees aunque el precio esté fuera' },
+            { id: 'b', text: 'Quedas en 100% USDC y dejas de ganar fees hasta que vuelva al rango' },
+            { id: 'c', text: 'El protocolo liquida tu posición, como en un préstamo con colateral' },
+            { id: 'd', text: 'Sigues ganando fees normales, porque el rango es solo una referencia' }
           ],
           correctAnswer: 'b',
-          explanation: 'En un pool concentrado, cuando el precio sale de tu rango por arriba, el pool vendió todo tu SOL por USDC (a buenos precios dentro de tu rango). Te quedas con 100% USDC y cero fees. Necesitas rebalancear: retirar, crear una nueva posición con un rango actualizado. Esta gestión activa es el "costo" de los mayores rendimientos de los pools concentrados.'
+          explanation: 'Mientras SOL subía dentro de tu rango, el pool fue vendiendo tu SOL por USDC. Al salir por arriba, te quedas en 100% USDC y sin fees. Quedar en 100% SOL pasa cuando el precio sale por abajo. No hay liquidación: no hay deuda. Para volver a ganar, tienes que retirar y abrir un rango nuevo.'
         },
         {
           id: 'q4',
-          question: 'Ves un pool de un memecoin nuevo mostrando "1,500% APY". ¿Cómo interpretas este número?',
+          question: 'Un pool de una memecoin nueva muestra "1,500% APY". ¿Cómo interpretas ese número?',
           options: [
-            { id: 'a', text: 'Voy a ganar 1,500% en un año garantizado' },
-            { id: 'b', text: 'Es una proyección basada en los fees de las últimas horas o días. El APY real será mucho menor porque: el volumen bajará, más LPs entrarán (diluyendo fees), y el memecoin puede perder 90%+ de valor (impermanent loss masiva)' },
-            { id: 'c', text: 'Es un scam, los APYs de tres o cuatro cifras son siempre inventados por el protocolo' },
-            { id: 'd', text: 'Deposito todo mi capital para maximizar la ganancia' }
+            { id: 'a', text: 'Es un 1,500% garantizado si dejo el capital depositado un año entero' },
+            { id: 'b', text: 'Extrapola fees de pocos días: el volumen caerá y además tendrás IL' },
+            { id: 'c', text: 'Es siempre un scam: los APY de cuatro cifras los inventa el protocolo' },
+            { id: 'd', text: 'Es real, pero solo para quien deposite antes de que entren más LPs' }
           ],
           correctAnswer: 'b',
-          explanation: 'Los APYs mostrados se calculan extrapolando los fees recientes a un año completo. Un pool de memecoin puede generar fees enormes durante 2-3 días de hype, mostrando APYs astronómicos. Pero el volumen cae dramáticamente después, el APY baja a cifras normales, y la impermanent loss del memecoin cayendo puede superar todos los fees ganados. Los LPs profesionales entran en las primeras horas y salen rápido.'
+          explanation: 'El APY mostrado proyecta a un año los fees de unas horas o días de hype. El volumen baja, más LPs diluyen los fees y, si la memecoin cae 90%, pierdes por la caída y por la impermanent loss (~42%), porque el pool te deja con más del token que cae. El número no es inventado: es una foto de un momento que no dura.'
         },
         {
           id: 'q5',
           question: '¿Cuál es la diferencia principal entre un pool estándar (Raydium AMM) y un pool concentrado (Meteora DLMM)?',
           options: [
-            { id: 'a', text: 'No hay diferencia, ambos funcionan igual' },
-            { id: 'b', text: 'En un pool estándar, tu liquidez cubre todo el rango de precios (menos eficiente pero sin mantenimiento). En un pool concentrado, defines un rango específico (5-20× más eficiente en fees pero necesitas monitorear y rebalancear activamente)' },
-            { id: 'c', text: 'Los pools concentrados son siempre mejores' },
-            { id: 'd', text: 'Los pools estándar pagan más fees porque llevan más tiempo operando en el mercado' }
+            { id: 'a', text: 'El concentrado siempre rinde más, sin ningún costo ni trabajo adicional tuyo' },
+            { id: 'b', text: 'El estándar paga más fees, porque lleva más tiempo operando en el mercado' },
+            { id: 'c', text: 'El concentrado no tiene impermanent loss, porque fija el rango de precio' },
+            { id: 'd', text: 'El estándar cubre todos los precios; el concentrado, un rango que eliges tú' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Es un trade-off entre eficiencia y mantenimiento. Los pools estándar son "set and forget", ideales para quien no quiere monitorear. Los pools concentrados son como un oficio activo: requieren atención constante pero recompensan con rendimientos mucho mayores cuando se gestionan correctamente. Elige según tu disponibilidad de tiempo y experiencia.'
+          correctAnswer: 'd',
+          explanation: 'El pool estándar reparte tu liquidez en todos los precios: rinde menos por dólar, pero no necesita mantenimiento. El concentrado pone tu liquidez en un rango: puede generar 5-20× más fees mientras el precio está dentro, pero exige vigilar y rebalancear, y la IL dentro del rango es mayor, no menor.'
+        },
+        {
+          id: 'q6',
+          type: 'true-false',
+          question: 'Un pool de USDC-USDT tiene una impermanent loss casi nula mientras las dos stablecoins mantengan su paridad.',
+          correctAnswer: true,
+          explanation: 'Verdadero. La impermanent loss aparece cuando los precios del par se separan. Si ambas valen $1, casi no hay divergencia. El riesgo cambia de forma: si una pierde la paridad, el pool te deja con más de la que cae.'
+        },
+        {
+          id: 'q7',
+          type: 'multiple-select',
+          question: 'Un farm muestra 80% APY: 10% viene de fees y 70% se paga en su propio token de recompensa. ¿Qué riesgos tiene ese número? Selecciona todos los que apliquen.',
+          options: [
+            { id: 'a', text: 'Si el token de recompensa cae, el rendimiento real cae con él' },
+            { id: 'b', text: 'Si entran más LPs, los fees se reparten entre más personas' },
+            { id: 'c', text: 'El protocolo garantiza ese APY durante todo el año' },
+            { id: 'd', text: 'La impermanent loss puede comerse parte del rendimiento' },
+            { id: 'e', text: 'Los tokens de recompensa nunca se pueden vender' }
+          ],
+          correctAnswers: [0, 1, 3],
+          explanation: 'La mayor parte de ese 80% depende del precio del token de recompensa, que suele bajar a medida que los farmers lo venden. Además, más LPs diluyen los fees y la IL resta. Ningún protocolo garantiza un APY variable, y los tokens de recompensa sí se pueden vender, que es justamente lo que presiona su precio.'
         },
         {
           id: 'review_1',
-          question: '📝 Repaso: ¿Por qué Jupiter es un "agregador" de liquidez en vez de un DEX simple?',
+          question: 'Repaso de Jupiter: El Rey de los DEXs: ¿por qué Jupiter es un agregador y no un DEX simple?',
           options: [
-            { id: 'a', text: 'Porque solo funciona en Solana' },
-            { id: 'b', text: 'Porque busca el mejor precio entre múltiples DEXs y divide tu swap entre ellos' },
-            { id: 'c', text: 'Porque cobra fees más altos que otros exchanges' },
-            { id: 'd', text: 'Porque requiere KYC para operar' }
+            { id: 'a', text: 'Tiene su propia liquidez, más profunda que la de cualquier otro DEX de Solana' },
+            { id: 'b', text: 'Garantiza el precio de cada swap aunque el mercado se mueva al firmarlo' },
+            { id: 'c', text: 'Busca el mejor precio entre varios DEX y puede dividir tu swap entre ellos' },
+            { id: 'd', text: 'Opera en todas las blockchains a la vez y elige la más barata para ti' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Jupiter no tiene su propia liquidez, compara precios en Raydium, Orca, Meteora y otros DEXs, y rutea tu swap por la mejor combinación posible. Por eso casi siempre obtienes mejor precio que yendo directo a un DEX individual. (Recuerda la Lección 25: Jupiter)'
+          correctAnswer: 'c',
+          explanation: 'Jupiter no depende de un solo pool: compara precios en Raydium, Orca, Meteora y otros, y rutea tu swap por la mejor combinación. Por eso suele darte mejor precio que ir directo a un DEX. Lo que te protege de un movimiento durante el swap es tu slippage, no Jupiter. (Lo viste en la lección Jupiter: El Rey de los DEXs.)'
         }
       ]
-    }
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 2,
+        title: 'Checkpoint: La Impermanent Loss en una Caída',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'SOL vale $100. Depositas $1,000 en SOL y $1,000 en USDC en un pool estándar, y SOL cae a $25. Sin contar fees, ¿cómo se compara el pool con solo mantener?',
+            options: [
+              'El pool vale ~$1,000 y mantener ~$1,250: la IL también aparece al bajar',
+              'Los dos valen ~$1,250, porque la impermanent loss solo aparece al subir',
+              'El pool vale ~$2,000, porque los LPs están protegidos de las caídas',
+              'El pool vale ~$250, porque el AMM vende todo tu USDC para comprar SOL'
+            ],
+            correctAnswer: 0,
+            explanation: 'Manteniendo: $250 en SOL + $1,000 en USDC = $1,250. En el pool: $2,000 × √0.25 = $1,000, porque mientras SOL caía, el pool fue comprándolo con tu USDC. La impermanent loss es de 20% y aparece con cualquier divergencia de precio, hacia arriba o hacia abajo.',
+            hint: 'Calcula primero cuánto valdría mantener los dos tokens en tu wallet.'
+          }
+        ]
+      }
+    ]
   },
   27: {
     id: 27,
     title: 'Lending & Borrowing',
     level: 'Avanzado',
-    number: '5 de 13',
-    duration: '16 min',
+    number: '6 de 13',
+    duration: '22 min',
     type: 'Tutorial Práctico',
-    description: 'Accede a liquidez sin vender tus criptos. Deposita SOL como colateral, pide prestado USDC, y mantén tu exposición alcista. Pero cuidado: si no entiendes la liquidación, puedes perder todo.',
+    description: 'Accede a liquidez sin vender tus criptos, o presta tus dólares a cambio de interés. Entiende colateral, LTV y liquidación, y por qué pedir prestado contra un activo volátil exige márgenes amplios.',
     sections: [
       {
         type: 'intro',
         title: 'El Banco Descentralizado',
-        content: '¿Necesitas dinero pero crees que SOL va a subir y no quieres vender? En el mundo tradicional, pedirías un préstamo en el banco usando tu casa como garantía. En DeFi, haces exactamente lo mismo, pero sin banco, sin papeleo, sin aprobación de crédito, y en 30 segundos. Depositas tus SOL como **colateral** (garantía) en un protocolo como Kamino o MarginFi. A cambio, puedes pedir prestado USDC, USDT u otros tokens por un valor menor al de tu colateral. Mientras tu colateral valga significativamente más que tu deuda, todo funciona perfectamente. Si el precio de tu colateral cae demasiado... bueno, ahí es donde las cosas se ponen peligrosas.',
+        content: '¿Necesitas dinero pero crees que SOL va a subir y no quieres vender? En el mundo tradicional, pedirías un préstamo en el banco usando tu casa como garantía. En DeFi, haces exactamente lo mismo, pero sin banco, sin papeleo, sin aprobación de crédito, y en 30 segundos. Depositas tus SOL como **colateral** (garantía) en un protocolo como Kamino o Jupiter Lend. A cambio, puedes pedir prestado USDC, USDT u otros tokens por un valor menor al de tu colateral. Mientras tu colateral valga significativamente más que tu deuda, todo funciona perfectamente. Si el precio de tu colateral cae demasiado... bueno, ahí es donde las cosas se ponen peligrosas.',
         highlight: {
           title: 'La Doble Cara del Lending',
           text: 'Lending & Borrowing es una de las herramientas más poderosas de DeFi, y una de las más peligrosas. Usado correctamente, te da acceso a capital sin vender activos que crees que van a subir. Usado incorrectamente, pierdes todo tu colateral en una liquidación. Esta lección te enseña a usarlo de forma segura.'
@@ -2855,19 +3296,21 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'El lending en DeFi se basa en tres conceptos fundamentales que debes dominar antes de depositar un solo token:',
         features: [
           { icon: Lock, title: 'Colateral', text: 'El activo que depositas como garantía. Si depositas 10 SOL a $180 cada uno, tu colateral vale $1,800. El protocolo lo "bloquea" hasta que devuelvas tu préstamo. Tu colateral sigue siendo tuyo, pero si no pagas o si pierde demasiado valor, el protocolo puede venderlo para cubrir la deuda.' },
-          { icon: Percent, title: 'LTV (Loan-to-Value)', text: 'El porcentaje de tu colateral que puedes pedir prestado. Si el LTV máximo es 75%, con $1,800 de colateral puedes pedir hasta $1,350 prestados. Pero NUNCA uses el máximo, es jugar con fuego. Con LTV de 75% y un umbral de liquidación de 80%, una caída de apenas ~6% en tu colateral te liquida (1 − 0.75/0.80 = 6.25%). Con LTV de 50%, necesitas una caída de ~35-40%. La regla profesional: mantén tu LTV por debajo del 50-60%.' },
-          { icon: AlertTriangle, title: 'Liquidación', text: 'Si el valor de tu colateral cae tanto que tu LTV supera el umbral de liquidación, el protocolo vende automáticamente (parte de) tu colateral para pagar la deuda. No hay advertencia humana, es un bot que ejecuta en milisegundos. Pierdes tu colateral vendido más una penalización de liquidación (típicamente 5-10%). La liquidación es **irreversible**.' },
-          { icon: Activity, title: 'Health Factor', text: 'Es el indicador clave que debes monitorear. Health Factor = Valor del Colateral × Factor de Liquidación / Deuda Total. Si baja de 1.0, te liquidan. Ejemplo: a 50% LTV con factor 80%, HF ≈ 1.6. A 1.5 estás en zona de precaución. Meta profesional: HF ≥ 2.0 (suele implicar ~40% LTV). Los protocolos muestran esto en su interface: no lo ignores.' }
+          { icon: Percent, title: 'LTV (Loan-to-Value)', text: 'El porcentaje de tu colateral que puedes pedir prestado. Si el LTV máximo es 75%, con $1,800 de colateral puedes pedir hasta $1,350 prestados. Pero NUNCA uses el máximo, es jugar con fuego. Con LTV de 75% y un umbral de liquidación de 80%, una caída de apenas ~6% en tu colateral te liquida (1 − 0.75/0.80 = 6.25%). Con LTV de 50%, basta una caída de ~37%, y SOL ha caído más que eso varias veces. Con LTV de 35-40%, necesitas una caída de 50-56%. Si estás empezando: no pases de 35-40% y configura alertas diarias.' },
+          { icon: AlertTriangle, title: 'Liquidación', text: 'Si el valor de tu colateral cae tanto que tu LTV supera el umbral de liquidación, un bot liquidador paga parte de tu deuda y se lleva parte de tu colateral con descuento. No hay advertencia humana: ocurre en segundos. Esa porción de colateral se vende al precio del peor momento, más una penalización de liquidación (según el protocolo y el activo, suele estar entre 2% y 10%; en Kamino es dinámica y crece cuanto más se pasa tu posición del umbral). La liquidación es **irreversible**.' },
+          { icon: Activity, title: 'Health Factor', text: 'Es el indicador clave que debes monitorear. Health Factor = Valor del Colateral × Factor de Liquidación / Deuda Total. Si baja de 1.0, te liquidan. Ejemplo: a 50% LTV con factor 80%, HF ≈ 1.6. A 1.5 estás en zona de precaución. Meta prudente: HF ≥ 2.0 (con umbral de 80%, implica ~40% LTV o menos). Los protocolos muestran esto en su interfaz: no lo ignores.' }
         ]
       },
       {
         type: 'main',
         title: 'Los Protocolos de Lending en Solana',
-        content: 'Solana tiene varios protocolos de lending maduros y auditados. Cada uno tiene sus ventajas y diferencias:',
+        asOf: 'noviembre de 2026',
+        content: 'Solana tiene varios protocolos de lending con auditorías e historial. Auditado no significa a prueba de fallos: estos son ejemplos para que reconozcas los nombres, no recomendaciones:',
         features: [
-          { icon: Landmark, title: 'Kamino Finance', text: 'El protocolo de lending más grande de Solana por TVL. Interface limpia y fácil de usar. Soporta múltiples colaterales (SOL, jitoSOL, mSOL, BONK, etc). Tasas de interés competitivas. Tiene un sistema de "multiply" que automatiza el looping (amplificar tu posición). Es la opción más popular y la recomendada para empezar.' },
-          { icon: Shield, title: 'MarginFi', text: 'Protocolo con enfoque en seguridad y conservadurismo. Parámetros de riesgo más estrictos que Kamino (lo cual puede ser bueno para tu protección). Pionero en lending en Solana. Su token MRGN finalmente se lanzó en noviembre de 2025, honrando 1:1 los puntos acumulados por sus usuarios; hoy marginfi opera impulsado por Project 0.' },
-          { icon: Zap, title: 'Save (antes Solend)', text: 'Uno de los primeros protocolos de lending de Solana, rebautizado como Save (save.finance) en 2024. Más simple y directo. Buena opción si quieres una experiencia básica sin las funciones avanzadas de Kamino. Menos TVL que los anteriores pero con historial probado.' }
+          { icon: Landmark, title: 'Kamino Finance', text: 'De los protocolos de lending más grandes de Solana, con ~$1,200 millones en TVL a noviembre de 2026. Soporta múltiples colaterales (SOL, jitoSOL, mSOL y otros). En su documentación, el ejemplo para SOL usa un LTV máximo de 75% y un umbral de liquidación de 80%. Tiene una función "Multiply" que automatiza el looping (lo verás abajo).' },
+          { icon: Shield, title: 'Jupiter Lend', text: 'El protocolo de lending de Jupiter, construido con Fluid, lanzado en 2025. Superó los ~$900 millones en TVL a noviembre de 2026. Que venga de un equipo conocido no elimina el riesgo de contrato: evalúalo con los mismos criterios que cualquier otro.' },
+          { icon: AlertTriangle, title: 'marginfi y Project 0', text: 'marginfi, uno de los pioneros del lending en Solana, pasó a operar como Project 0 en 2025. A noviembre de 2026 no existe ningún token MRGN ni P0: cualquier sitio que te ofrezca "reclamar" uno es una estafa.' },
+          { icon: Zap, title: 'Save (antes Solend)', text: 'Uno de los primeros protocolos de lending de Solana, rebautizado como Save (save.finance) en 2024. Más simple y directo. Una opción más básica, con menos TVL que los anteriores. Su historia incluye episodios de gobernanza y de oráculos en 2022 que vale la pena conocer antes de depositar.' }
         ]
       },
       {
@@ -2876,9 +3319,19 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Vamos a recorrer un ejemplo real de cómo pedir prestado en Kamino de forma segura:',
         features: [
           { icon: Wallet, title: 'Paso 1: Deposita Colateral', text: 'Conecta tu wallet a Kamino (app.kamino.finance). Selecciona "Lend" o "Supply". Deposita 10 SOL (valor: ~$1,800 si SOL = $180). Tu colateral aparece en el dashboard con su valor en USD actualizado en tiempo real.' },
-          { icon: Banknote, title: 'Paso 2: Pide Prestado (Conservador)', text: 'Selecciona "Borrow" → USDC. Con $1,800 de colateral, el protocolo te permite pedir hasta ~$1,350 (75% LTV). Pero nosotros pedimos solo $900 (50% LTV). ¿Por qué? Porque SOL puede caer 30% en un día, y con 50% LTV tienes margen amplio antes de liquidación.' },
-          { icon: Activity, title: 'Paso 3: Monitorea tu Health Factor', text: 'Con 50% LTV y umbral de liquidación del 80%, tu Health Factor ronda **~1.6** (fórmula: colateral × 0.80 / deuda). Eso es aceptable si monitoreas, pero la meta profesional es **HF ≥ 2.0**, lo que implica bajar a ~40% LTV. Configura alertas (algunos protocolos las tienen integradas, o usa herramientas como Step Finance). Si cae a 1.3, actúa: deposita más colateral o devuelve parte del préstamo.' },
-          { icon: RefreshCw, title: 'Paso 4: Repaga y Recupera', text: 'Cuando quieras cerrar la posición, devuelve los $900 USDC + los intereses acumulados. El protocolo libera tu colateral (10 SOL) de vuelta a tu wallet. Si SOL subió mientras tanto, felicidades: accediste a $900 sin vender tus SOL que ahora valen más.' }
+          { icon: Banknote, title: 'Paso 2: Pide Prestado (Conservador)', text: 'Selecciona "Borrow" y luego USDC. Con $1,800 de colateral, el protocolo te permite pedir hasta ~$1,350 (75% LTV). Pero nosotros pedimos solo $630 (35% LTV). ¿Por qué? Porque SOL puede caer 30% en un día y más de 50% en un mal año: con 35% LTV, tendría que caer ~56% para liquidarte.' },
+          { icon: Activity, title: 'Paso 3: Monitorea tu Health Factor', text: 'Con 35% LTV y umbral de liquidación del 80%, tu Health Factor ronda **~2.3** (fórmula: colateral × 0.80 / deuda). Revísalo cada día y configura alertas (algunos protocolos las tienen integradas). Si baja de 1.5, actúa: deposita más colateral o devuelve parte del préstamo. Recuerda también que la tasa de interés es variable: tu deuda crece cada día que no pagas.' },
+          { icon: RefreshCw, title: 'Paso 4: Repaga y Recupera', text: 'Cuando quieras cerrar la posición, devuelve los $630 USDC + los intereses acumulados. El protocolo libera tu colateral (10 SOL) de vuelta a tu wallet. Si SOL subió, accediste a liquidez sin vender. Si bajó, igual debes los $630 más intereses: el préstamo no se ajusta al precio.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Qué Cuesta una Liquidación: Un Ejemplo',
+        content: 'Mucha gente cree que liquidar es "perder todo". En la mayoría de protocolos es parcial (en Kamino, por ejemplo, cada ronda liquida como máximo 20-25% de la deuda, salvo que la posición esté muy por encima del umbral), pero igual duele. Veamos un esquema típico con números redondos:',
+        features: [
+          { icon: Activity, title: 'El Punto de Partida', text: 'Tienes 10 SOL a $180 ($1,800) y pediste $900 (50% LTV). El umbral de liquidación es 80%. SOL cae a $110: tu colateral vale $1,100 y tu LTV sube a ~82%. Cruzaste la línea.' },
+          { icon: Zap, title: 'Lo Que Hace el Liquidador', text: 'Un bot paga $300 de tu deuda y a cambio se lleva $315 en SOL (unos 2.9 SOL a $110). Esos $15 extra son la penalización del 5% en este ejemplo. Te quedan ~7.1 SOL ($785) y $600 de deuda: tu LTV baja a ~76% y sigues cerca del umbral.' },
+          { icon: TrendingDown, title: 'El Costo Real', text: 'La multa de $15 es lo de menos. Lo caro es que vendiste casi 3 SOL a $110, en el peor momento, sin decidirlo tú. Si SOL vuelve a $180, esos 2.9 SOL valdrían ~$515. Y si el precio sigue cayendo, puede haber una segunda liquidación.' }
         ]
       },
       {
@@ -2887,11 +3340,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         leftSide: {
           title: 'Conservador (Recomendado)',
           points: [
-            'LTV del 40-50% (pides menos de la mitad del valor)',
-            'Health Factor alto (meta ≥2.0 ≈ ~40% LTV; a 50% LTV con LT 80% ≈ 1.6)',
+            'LTV de 35-40% o menos',
+            'Health Factor alto (≥2.0; con umbral de 80%, equivale a ~40% LTV o menos)',
             'Colateral en activos estables o blue chips (SOL, ETH)',
-            'Monitoreo semanal es suficiente',
-            'Riesgo de liquidación: muy bajo',
+            'Revisión diaria y alertas configuradas',
+            'Riesgo de liquidación: bajo, no cero (requiere caídas de más de 50%)',
             'Estrategia: acceder a liquidez sin vender posición de largo plazo'
           ]
         },
@@ -2900,7 +3353,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           points: [
             'LTV del 65-75% (cerca del máximo permitido)',
             'Health Factor de 1.2-1.5 (zona de peligro)',
-            'Looping: pedir prestado → comprar más colateral → depositar → repetir',
+            'Looping: pedir prestado, comprar más colateral, depositarlo y repetir',
             'Requiere monitoreo constante (alertas 24/7)',
             'Riesgo de liquidación: alto, con 75% LTV una caída de ~6% te liquida',
             'Estrategia: apalancar posición para maximizar exposición'
@@ -2910,11 +3363,22 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Looping: La Estrategia de las Ballenas',
-        content: 'El "looping" o "leverage looping" es la estrategia avanzada más usada por traders grandes en Solana. Es poderosa pero peligrosa:',
+        content: 'El "looping" o "leverage looping" es una estrategia avanzada popular en Solana. Es poderosa pero peligrosa:',
         features: [
-          { icon: RefreshCw, title: 'Cómo Funciona', text: 'Depositas 10 SOL → Pides prestado 800 USDC → Compras más SOL con esos USDC → Depositas ese SOL como colateral adicional → Pides prestado más USDC → Repites. Después de 3-4 loops con ese LTV moderado (~44% por vuelta), tus 10 SOL iniciales controlan una posición de ~17-18 SOL (~1.8× apalancamiento). Si SOL sube 20%, ganas ~35% en lugar de 20%. Con LTVs más agresivos por vuelta, el apalancamiento puede llegar a 2-4×.' },
+          { icon: RefreshCw, title: 'Cómo Funciona', text: 'Depositas 10 SOL, pides prestado 800 USDC, compras más SOL con esos USDC, depositas ese SOL como colateral adicional, pides prestado más USDC y repites. Después de 3-4 loops con ese LTV moderado (~44% por vuelta), tus 10 SOL iniciales controlan una posición de ~17-18 SOL (~1.8× apalancamiento). Si SOL sube 20%, ganas ~35% en lugar de 20%. Con LTVs más agresivos por vuelta, el apalancamiento puede llegar a 2-4×.' },
           { icon: AlertTriangle, title: 'El Riesgo Amplificado', text: 'Si SOL cae 20%, una posición apalancada 3× pierde ~60% de tu capital. Y cada loop acerca tu LTV al umbral de liquidación: caídas que una posición simple sobrevive sin problema pueden liquidar completamente una posición loopeada y costarte TODOS tus SOL originales. El looping amplifica todo: ganancias Y pérdidas. Es por eso que solo traders con experiencia y capital que pueden perder deben usarlo.' },
           { icon: Zap, title: 'Kamino Multiply', text: 'Kamino tiene una función llamada "Multiply" que automatiza el looping con un clic. Seleccionas el multiplicador (1.5×, 2×, 3×) y el protocolo hace todos los loops automáticamente. Es conveniente pero peligroso si no entiendes los riesgos. Trata el Multiply con el mismo respeto que un perpetuo con apalancamiento.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'El Otro Lado: Prestar Tus Dólares',
+        content: 'En un protocolo de lending también puedes ser quien presta: depositas USDC y cobras el interés que pagan los que piden prestado. Para alguien en Colombia que ahorra en dólares digitales, suena atractivo. Antes de compararlo con un CDT (que en noviembre de 2026 pagaba ~8.5-13% EA a un año, con tasa fija), entiende qué riesgos asumes:',
+        features: [
+          { icon: Percent, title: 'La Tasa Es Variable', text: 'El rendimiento depende de cuánta gente pide prestado. Puede ser 8% un mes y 3% el siguiente. Un CDT te fija la tasa; un pool de lending, no.' },
+          { icon: AlertTriangle, title: 'Riesgos que un CDT No Tiene', text: 'Un bug o hackeo del contrato, una stablecoin que pierde su paridad, o un oráculo que reporta mal un precio pueden costarte parte del depósito. No hay seguro de depósitos como el de Fogafín.' },
+          { icon: Lock, title: 'Retiros que se Pausan', text: 'Si casi todo el pool está prestado (utilización cerca del 100%), puede que no puedas retirar hasta que otros devuelvan o entren nuevos depósitos. Justo en una crisis, cuando más lo necesitas.' },
+          { icon: CheckCircle, title: 'Si Decides Probar', text: 'Usa protocolos con años de historial y auditorías, empieza con un monto pequeño, reparte entre más de uno y nunca deposites tu fondo de emergencia. Y lleva registro: los intereses pueden tener efectos tributarios.' }
         ]
       },
       {
@@ -2922,21 +3386,26 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Errores Fatales que Debes Evitar',
         content: 'Estos errores han costado millones de dólares a usuarios de lending en DeFi. No cometas ninguno:',
         features: [
-          { icon: AlertTriangle, title: 'Pedir Prestado al Máximo LTV', text: 'Si el protocolo te permite 75% LTV, NUNCA uses el 75%. Con un umbral de liquidación de 80%, una caída de apenas ~6% te liquida. Los profesionales se mantienen en 40-50% LTV. El espacio extra entre tu LTV y el umbral de liquidación es tu "seguro de vida" en mercados volátiles.' },
-          { icon: AlertTriangle, title: 'No Monitorear en Mercados Volátiles', text: 'SOL puede caer 20-30% en horas durante eventos de pánico. Si tu Health Factor ya estaba bajo, puedes ser liquidado mientras duermes. Configura alertas automáticas o usa LTVs lo suficientemente conservadores para sobrevivir caídas del 40%+.' },
-          { icon: AlertTriangle, title: 'Usar Colateral Volátil sin Margen', text: 'Usar SOL como colateral es razonable, es un activo blue chip con liquidez profunda. Usar un memecoin como colateral es suicida: puede perder 80% en un día. Algunos protocolos lo permiten, pero que puedas no significa que debas. Mantén tu colateral en activos que no van a desplomarse de la noche a la mañana.' }
+          { icon: AlertTriangle, title: 'Pedir Prestado al Máximo LTV', text: 'Si el protocolo te permite 75% LTV, NUNCA uses el 75%. Con un umbral de liquidación de 80%, una caída de apenas ~6% te liquida. Mantente en 35-40% LTV o menos. El espacio extra entre tu LTV y el umbral de liquidación es tu "seguro de vida" en mercados volátiles.' },
+          { icon: AlertTriangle, title: 'No Monitorear en Mercados Volátiles', text: 'SOL puede caer 20-30% en horas durante eventos de pánico. Si tu Health Factor ya estaba bajo, puedes ser liquidado mientras duermes. Configura alertas automáticas y usa LTVs lo suficientemente conservadores para sobrevivir caídas de 50%.' },
+          { icon: AlertTriangle, title: 'Usar Colateral Volátil sin Margen', text: 'Usar SOL como colateral es razonable, es un activo blue chip con liquidez profunda. Usar un memecoin como colateral es muy arriesgado: puede perder 80% en un día. Algunos protocolos lo permiten, pero que puedas no significa que debas. Mantén tu colateral en activos que no van a desplomarse de la noche a la mañana.' }
         ]
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
       },
       {
         type: 'takeaways',
         title: 'Lending Inteligente',
         items: [
-          'Lending en DeFi = depositar colateral y pedir prestado contra él. Es como un préstamo bancario pero instantáneo, sin papeleo, y ejecutado por smart contracts. Kamino y MarginFi son los protocolos principales de Solana.',
-          'El LTV (Loan-to-Value) determina cuánto puedes pedir prestado. NUNCA uses el máximo permitido. La regla profesional: mantén tu LTV en 40-50% para tener margen amplio contra caídas de mercado.',
+          'Lending en DeFi = depositar colateral y pedir prestado contra él. Es como un préstamo bancario pero instantáneo, sin papeleo, y ejecutado por smart contracts. Kamino y Jupiter Lend están entre los más grandes de Solana.',
+          'El LTV (Loan-to-Value) determina cuánto puedes pedir prestado. NUNCA uses el máximo permitido. Si estás empezando, mantén tu LTV en 35-40% o menos, con alertas diarias, para sobrevivir caídas de más de 50%.',
           'La liquidación es automática e irreversible. Si tu Health Factor cae debajo de 1.0, un bot vende tu colateral instantáneamente. Monitorea tu Health Factor y configura alertas.',
-          'El looping (depositar → pedir prestado → comprar más → repetir) con LTV moderado (~40-50% por vuelta) da ~1.5-2× de exposición; con LTV agresivo puede llegar a 2-4×. Amplifica ganancias Y pérdidas. Solo para traders experimentados con capital que pueden perder.',
+          'El looping (depositar, pedir prestado, comprar más y repetir) con LTV moderado (~40-50% por vuelta) da ~1.5-2× de exposición; con LTV agresivo puede llegar a 2-4×. Amplifica ganancias Y pérdidas. Solo para traders experimentados con capital que pueden perder.',
           'Errores fatales: pedir prestado al máximo LTV, no monitorear en mercados volátiles, usar colateral ultra-volátil (memecoins). Cualquiera de estos puede liquidarte completamente.',
-          'Caso de uso ideal para principiantes en lending: tienes SOL que no quieres vender, necesitas USDC temporal, pides prestado al 40-50% LTV, usas el USDC, devuelves cuando puedas, y recuperas tu SOL intacto.'
+          'Si pides prestado, que sea poco, por poco tiempo y con un plan para pagar: la deuda y sus intereses siguen ahí aunque SOL caiga. Y el otro lado del lending, prestar tus dólares, tiene sus propios riesgos: contrato, paridad de la stablecoin y retiros pausados cuando el pool está 100% prestado.'
         ]
       }
     ],
@@ -2944,63 +3413,96 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Depositas 10 SOL (valor: $1,800) como colateral en Kamino y pides prestado 900 USDC (50% LTV). SOL cae 40% a $108. ¿Qué pasa?',
+          question: 'Depositas 10 SOL ($1,800) en Kamino y pides prestados 900 USDC (50% LTV). El umbral de liquidación es 80%. SOL cae 40%, a $108. ¿Qué pasa?',
           options: [
-            { id: 'a', text: 'Nada, todo sigue normal' },
-            { id: 'b', text: 'Tu colateral ahora vale $1,080, tu deuda sigue siendo ~$900. Tu LTV subió a ~83%, superando el umbral de liquidación. El protocolo vende parte o todo tu SOL para cubrir la deuda' },
-            { id: 'c', text: 'El protocolo te perdona la deuda automáticamente' },
-            { id: 'd', text: 'Puedes ignorarlo tranquilamente porque el precio siempre termina recuperándose con el tiempo' }
+            { id: 'a', text: 'Tu LTV sube a ~83%, pasas el umbral y un bot liquida parte de tu SOL con un bono' },
+            { id: 'b', text: 'Nada todavía: solo te liquidan cuando el colateral vale menos que toda la deuda' },
+            { id: 'c', text: 'Kamino te da 24 horas para añadir colateral antes de vender cualquier parte de tu SOL' },
+            { id: 'd', text: 'Tu deuda baja en proporción a la caída, así que tu LTV se mantiene cerca del 50%' }
           ],
-          correctAnswer: 'b',
-          explanation: 'La liquidación es automática y no espera a que el precio se recupere. Con colateral de $1,080 y deuda de $900, tu LTV es ~83%, muy por encima del umbral de liquidación (típicamente 75-80%). Los bots de liquidación ejecutan en milisegundos. Por eso la regla es mantener LTV bajo (40-50%) para tener margen en caídas fuertes.'
+          correctAnswer: 'a',
+          explanation: 'Tu colateral ahora vale $1,080 y tu deuda sigue en ~$900: LTV = 900 / 1,080 ≈ 83%, por encima del 80%. Un bot paga parte de tu deuda y se lleva SOL con descuento, sin aviso previo. Pensar que solo liquidan cuando el colateral vale menos que la deuda es el error más caro: el umbral está mucho antes, justamente para que el protocolo nunca quede con deuda sin respaldo.'
         },
         {
           id: 'q2',
-          question: 'El protocolo muestra que puedes pedir prestado hasta $1,350 con tu colateral de $1,800 (75% LTV máximo). ¿Cuánto deberías pedir prestado?',
-          options: [
-            { id: 'a', text: '$1,350, el máximo disponible para aprovechar todo el capital' },
-            { id: 'b', text: '$720-900 (40-50% LTV) para mantener un margen de seguridad amplio. Con 50% LTV, SOL tendría que caer ~35-40% para activar la liquidación, dándote tiempo de reaccionar' },
-            { id: 'c', text: '$1,200, dejo un poquito de margen' },
-            { id: 'd', text: 'No pido prestado nada, es muy riesgoso' }
-          ],
-          correctAnswer: 'b',
-          explanation: 'Los traders profesionales se mantienen en 40-50% LTV por una razón: SOL puede caer 20-30% en horas durante eventos de pánico. Con 50% LTV y umbral de liquidación de 80%, necesitas una caída de ~35-40% para ser liquidado. Con 75% LTV, una caída de apenas ~6% te liquida. Ese margen extra es tu seguro de supervivencia.'
+          type: 'fill-blank',
+          question: 'Calcula cuánto pedir prestado para quedar en un LTV conservador.',
+          textBefore: 'Tienes $1,800 de colateral y quieres un LTV de 35%. Debes pedir prestado como máximo $',
+          textAfter: ' en USDC.',
+          correctAnswer: '630',
+          acceptableAnswers: ['630', '$630', '630 usdc', '630 usd', '630 dolares', '630 dólares', '630.00', '630,00'],
+          explanation: 'Préstamo = colateral × LTV = $1,800 × 0.35 = $630. Con 35% de LTV y un umbral de 80%, SOL tendría que caer cerca de 56% para liquidarte. Y recuerda que los intereses suben tu deuda con el tiempo, así que el LTV no se queda quieto aunque SOL no se mueva.',
+          hint: 'Multiplica el colateral por el LTV que quieres.'
         },
         {
           id: 'q3',
-          question: '¿Qué es el "looping" en lending y por qué lo usan las ballenas?',
+          question: 'Empiezas con un LTV de 40% y el umbral de liquidación es 80%. Sin contar intereses, ¿cuánto tendría que caer SOL para que te liquiden?',
           options: [
-            { id: 'a', text: 'Es pedir prestado y repagar constantemente sin propósito' },
-            { id: 'b', text: 'Depositar colateral → pedir prestado → comprar más colateral → depositar → repetir. Con LTV moderado ~1.5-2× de exposición; con LTV agresivo 2-4×. Si SOL sube ganas más, pero si cae puedes liquidarte y perder el colateral' },
-            { id: 'c', text: 'Es una forma de staking especial que combina rewards de varios validadores' },
-            { id: 'd', text: 'Es ilegal en DeFi' }
+            { id: 'a', text: 'Cerca de 40%: es la diferencia entre el umbral y el LTV con el que empiezas' },
+            { id: 'b', text: 'Cerca de 80%: el umbral te dice cuánto puede caer el colateral antes de vender' },
+            { id: 'c', text: 'Cerca de 50%: tu LTV se duplica cuando el colateral pasa a valer la mitad' },
+            { id: 'd', text: 'Cerca de 20%: el margen se reparte por igual entre la deuda y los intereses' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El looping es esencialmente apalancamiento construido con lending. Con LTV moderado (~40-50% por vuelta) la exposición típica es ~1.5-2×; solo a LTV agresivo llegas a 2-4×. Las ballenas lo usan para amplificar SOL sin perpetuos. Kamino Multiply lo automatiza. Amplifica TODO: ganancias Y pérdidas. Solo para quien acepta el riesgo de liquidación total.'
+          correctAnswer: 'c',
+          explanation: 'La caída que aguantas es 1 − (LTV inicial / umbral) = 1 − 40/80 = 50%. Restar puntos (80 − 40 = 40) es la trampa habitual: el LTV es una división, no una resta, y por eso se mueve más rápido de lo que parece cuando el colateral cae.',
+          hint: '¿Cuánto tiene que bajar el colateral para que la deuda pese el doble?'
         },
         {
           id: 'q4',
-          question: 'Quieres acceder a $500 USDC sin vender tus SOL porque crees que va a subir. ¿Cuál es el enfoque más seguro?',
+          question: 'En plena caída del mercado, tu Health Factor en Kamino baja a 1.2. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Depositar SOL suficiente para que $500 represente solo 40-50% LTV, pedir los $500, usar el USDC para lo que necesites, y devolver el préstamo cuando puedas para recuperar tu SOL' },
-            { id: 'b', text: 'Vender la mitad de tus SOL y quedarte con USDC' },
-            { id: 'c', text: 'Depositar la cantidad mínima de SOL y pedir $500 al máximo LTV' },
-            { id: 'd', text: 'Pedir prestado $2,000 y usar los $1,500 extra para comprar más SOL' }
+            { id: 'a', text: 'Pido más prestado para comprar el dip, así sube el valor total de mi colateral' },
+            { id: 'b', text: 'Espero, porque mientras el Health Factor esté sobre 1.0 nadie puede liquidarme' },
+            { id: 'c', text: 'Añado colateral o devuelvo parte de la deuda ya: otra caída de ~17% me liquida' },
+            { id: 'd', text: 'Cambio mi colateral a un token más volátil que pueda recuperarse más rápido' }
           ],
-          correctAnswer: 'a',
-          explanation: 'Este es el caso de uso más limpio y seguro del lending: acceder a liquidez temporal sin vender tu posición de largo plazo. Con 40-50% LTV, tienes margen amplio contra caídas. Cuando devuelves los $500 + intereses, recuperas todos tus SOL, que ojalá valgan más que cuando los depositaste.'
+          correctAnswer: 'c',
+          explanation: 'Con un Health Factor de 1.2, una caída adicional de 1 − 1/1.2 ≈ 17% te lleva a 1.0, y en cripto eso puede pasar en minutos. Las dos salidas reales son añadir colateral o reducir deuda. Pedir más para comprar el dip parece lógico, pero sube tu deuda tanto como tu colateral y te deja aún más cerca de la liquidación.'
         },
         {
           id: 'q5',
-          question: 'Tu Health Factor en Kamino bajó a 1.2 durante una caída del mercado. ¿Qué haces?',
+          question: 'Haces looping: depositas SOL, pides USDC al 50% de LTV, compras SOL y lo depositas, hasta sumar tres préstamos. ¿Con qué quedas?',
           options: [
-            { id: 'a', text: 'Nada, 1.2 está bien' },
-            { id: 'b', text: 'Actúo inmediatamente: deposito más colateral O devuelvo parte del préstamo para subir mi Health Factor a 2.0+. Un Health Factor de 1.2 significa que una caída adicional del 16-17% me liquida' },
-            { id: 'c', text: 'Pido prestado más para comprar en el dip y promediar mi posición a la baja' },
-            { id: 'd', text: 'Espero a que suba el precio' }
+            { id: 'a', text: '~1.9× de exposición a SOL y más riesgo de liquidación si SOL cae' },
+            { id: 'b', text: '~3× de exposición, porque cada vuelta suma otra vez tu depósito inicial' },
+            { id: 'c', text: '1× de exposición: el SOL comprado con deuda no cuenta como tuyo' },
+            { id: 'd', text: '~1.9× de exposición sin riesgo extra, porque todo el colateral es SOL' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Health Factor de 1.2 es zona de peligro serio. Estás a ~16-17% de una caída de la liquidación. En crypto, caídas de 15-20% ocurren regularmente en minutos durante eventos de pánico. Tienes dos opciones: agregar más colateral (depositar más SOL/otros activos) o devolver parte del préstamo. Ambas suben tu Health Factor. No esperes, los mercados no esperan.'
+          correctAnswer: 'a',
+          explanation: 'Cada vuelta compra la mitad de la anterior: 1 + 0.5 + 0.25 + 0.125 ≈ 1.9×. La exposición sube, pero también tu LTV total, así que una caída de SOL te golpea por los dos lados: baja el colateral y la deuda sigue igual. Que todo sea SOL no reduce el riesgo, lo concentra.'
+        },
+        {
+          id: 'q6',
+          type: 'true-false',
+          question: 'Si prestas USDC en Kamino, puedes retirarlo en cualquier momento, incluso cuando el pool está prestado al 100%.',
+          correctAnswer: false,
+          explanation: 'Falso. Si todo el USDC del pool está prestado, no hay liquidez para pagar retiros hasta que alguien devuelva un préstamo o entre más dinero. Las tasas suben para incentivar eso, pero mientras tanto tu retiro espera. Es uno de los riesgos de prestar que no aparece en el APY.'
+        },
+        {
+          id: 'q7',
+          question: 'Kamino paga 9% variable por prestar USDC y un CDT en pesos paga ~10% EA fijo. ¿Qué diferencia de riesgo pesa más al comparar?',
+          options: [
+            { id: 'a', text: 'El 9% es variable y sin Fogafín, con riesgo de contrato y de la paridad de la stablecoin' },
+            { id: 'b', text: 'Ninguna relevante, porque un regulador garantiza los dos rendimientos de la misma forma' },
+            { id: 'c', text: 'El CDT es más riesgoso porque el peso se devalúa y una stablecoin nunca pierde su paridad' },
+            { id: 'd', text: 'Kamino es más seguro, porque un smart contract no puede quebrar como sí puede un banco' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'El rendimiento de Kamino cambia cada día, no tiene seguro de depósitos y depende de que el contrato funcione y de que USDC mantenga su paridad (en 2023 llegó a ~$0.87). El CDT tiene tasa fija y Fogafín. La moneda también cuenta: uno está en dólares y el otro en pesos. Creer que un contrato "no quiebra" ignora que los hackeos y los fallos de oráculo son justamente cómo se pierde dinero en DeFi.'
+        },
+        {
+          id: 'q8',
+          type: 'multiple-select',
+          question: '¿Cuáles de estas decisiones aumentan de verdad tu riesgo de liquidación? Selecciona todas las correctas.',
+          options: [
+            { id: 'a', text: 'Pedir prestado hasta el LTV máximo que permite el protocolo' },
+            { id: 'b', text: 'Usar un memecoin muy volátil como colateral' },
+            { id: 'c', text: 'No configurar alertas de tu Health Factor' },
+            { id: 'd', text: 'Mantener tu LTV en 35% con alertas diarias' },
+            { id: 'e', text: 'Devolver parte del préstamo cuando SOL empieza a caer' }
+          ],
+          correctAnswers: [0, 1, 2],
+          explanation: 'Las tres primeras te acercan a la liquidación: no dejan margen, hacen que el colateral se mueva más, o te impiden reaccionar a tiempo. Un LTV de 35% con alertas y devolver deuda en una caída hacen lo contrario: te alejan del umbral.'
         }
       ]
     },
@@ -3012,15 +3514,15 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         questions: [
           {
             id: 'cp1-q1',
-            question: 'Depositaste 10 SOL ($1,800) y pediste prestado $1,200 USDC. SOL cae 25%. Ahora tu colateral vale $1,350. El umbral de liquidación del protocolo está en 80% LTV. ¿Qué pasa?',
+            question: 'Depositaste 10 SOL ($1,800) y pediste prestados $1,200 USDC. SOL cae 25% y tu colateral vale ahora $1,350. El umbral de liquidación es 80%. ¿Qué pasa?',
             options: [
-              'Te liquidan inmediatamente porque tu LTV subió',
-              'Tu LTV ahora es ~89% ($1,200/$1,350), superaste el umbral del 80%, te liquidan parcialmente y pagas penalización',
-              'No pasa nada porque tu colateral sigue valiendo más que tu deuda',
-              'El protocolo te da 24 horas para añadir colateral'
+              'No pasa nada: tu colateral todavía vale más que la deuda que tienes abierta',
+              'Tu LTV pasa a ~89%, superas el 80% y te liquidan una parte con penalización',
+              'El protocolo te da 24 horas para añadir colateral antes de hacer cualquier cosa',
+              'Te liquidan todo el colateral de una vez y tu deuda queda en cero automáticamente'
             ],
             correctAnswer: 1,
-            explanation: 'LTV = Deuda / Colateral = $1,200 / $1,350 = 89%. Cruzaste el umbral del 80%. La liquidación es automática, un bot vende parte de tu colateral en milisegundos. Pierdes la cantidad liquidada + penalización de 5-10%. Sin advertencias. Esta es la razón por la que los profesionales NUNCA empiezan cerca del máximo LTV. Con LTV inicial del 30-40%, SOL tendría que caer 50-60% antes de acercarse a liquidación.',
+            explanation: 'LTV = deuda / colateral = $1,200 / $1,350 ≈ 89%, por encima del 80%. Un bot repaga parte de tu deuda y se lleva SOL con un bono, sin advertencia. En Kamino suele ser una parte (20-25% por ronda), no todo de una vez, pero cada ronda te cuesta ese bono. Empezar en 35-40% de LTV te da margen para caídas de más de 50%.',
             hint: 'Calcula el nuevo LTV después de la caída.'
           }
         ]
@@ -3031,8 +3533,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 28,
     title: 'Riesgos de DeFi: La Guía Completa',
     level: 'Avanzado',
-    number: '6 de 13',
-    duration: '17 min',
+    number: '7 de 13',
+    duration: '20 min',
     type: 'Seguridad',
     description: 'DeFi ofrece libertad financiera, pero la libertad viene con responsabilidad. Smart contract hacks, rug pulls, exploits de oráculos, y errores de usuario han costado más de $10 mil millones. Aprende a protegerte.',
     sections: [
@@ -3041,8 +3543,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'La Libertad Tiene un Precio',
         content: 'En DeFi, no hay banco que te reembolse si pierdes dinero. No hay "soporte al cliente" que revierta una transacción. No hay seguro de depósitos. **Tú eres responsable al 100% de tus fondos.** Esa es la belleza de la descentralización, y también su mayor riesgo. Desde 2020, más de $10 mil millones se han perdido en DeFi por hacks, exploits, rug pulls, y errores de usuario. Algunos de los protocolos más grandes y "seguros" del ecosistema han sido hackeados. Esto no significa que DeFi sea una estafa, significa que necesitas entender los riesgos para navegar este espacio de forma segura. En esta lección vas a aprender a identificar cada tipo de riesgo, cómo se manifiesta en la práctica, y qué puedes hacer para protegerte.',
         highlight: {
-          title: 'La Estadística Que Importa',
-          text: 'Solo en 2024, más de $1.7 mil millones se perdieron en hackeos y exploits de DeFi. Para calibrar la escala del riesgo en cripto en general (no solo DeFi on-chain), el incidente más grande de la historia reciente fue el de **Bybit en 2025**: cerca de **$1,400 millones** robados a un exchange centralizado (CEX) mediante ingeniería social, no un bug de un smart contract de DeFi. Entre los puentes on-chain, el de Ronin (Axie Infinity) se llevó **$625 millones**. Distinguir superficie de ataque (CEX vs protocolo vs bridge vs error de usuario) es parte de protegerte.'
+          title: 'Las Cifras Que Importan',
+          text: 'En 2025 se robaron más de **$3,400 millones** en cripto, según Chainalysis, y cerca de $1,500 millones salieron de un solo incidente: **Bybit**, un exchange centralizado (CEX), atacado con ingeniería social, no con un bug de DeFi. En 2026 la cifra ya es mayor, empujada por un ataque a Binance en octubre que se reportó en unos $6,300 millones. Entre los puentes on-chain, el de Ronin (Axie Infinity) se llevó **$625 millones**. Distinguir superficie de ataque (CEX vs protocolo vs bridge vs error de usuario) es parte de protegerte.'
         }
       },
       {
@@ -3052,7 +3554,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: Cpu, title: 'Cómo Ocurre', text: 'Un programador comete un error lógico en el código del smart contract. Puede ser algo tan sutil como un error de redondeo, una verificación faltante, o una interacción inesperada entre dos funciones. Un hacker encuentra este error, escribe un script que lo explota, y drena el protocolo en minutos. Para cuando los desarrolladores reaccionan, los fondos ya están en el mixer.' },
           { icon: Shield, title: 'Cómo Protegerte', text: '(1) Solo usa protocolos con múltiples auditorías de firmas reputadas (Halborn, OtterSec, Neodyme para Solana). (2) Prefiere protocolos con tiempo en el mercado, si llevan 1+ año sin hacks con TVL alto, su código está battle-tested. (3) Nunca pongas más del 20-30% de tu portafolio en un solo protocolo. (4) Revisa si el protocolo tiene un programa de bug bounty (recompensa por reportar vulnerabilidades).' },
-          { icon: AlertTriangle, title: 'Caso Real: Wormhole ($320M)', text: 'En febrero 2022, un hacker encontró una vulnerabilidad en el bridge Wormhole que conectaba Solana con Ethereum. Explotó el bug y minteó 120,000 ETH falsos. Jump Crypto (inversor de Wormhole) reemplazó los fondos para salvar a los usuarios, pero no todos los protocolos tienen un "padrino" millonario.' }
+          { icon: AlertTriangle, title: 'Caso Real: Wormhole ($320M)', text: 'En febrero de 2022, un hacker encontró una falla en la verificación de firmas del lado de Solana del bridge Wormhole y emitió 120,000 wETH sin respaldo (~$320M). Jump Crypto (inversor de Wormhole) reemplazó los fondos para salvar a los usuarios, pero no todos los protocolos tienen un "padrino" millonario.' }
         ]
       },
       {
@@ -3060,7 +3562,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Riesgo #2: Rug Pulls y Estafas',
         content: 'Un rug pull ocurre cuando los creadores de un proyecto roban deliberadamente los fondos de los usuarios. Es diferente a un hack, aquí no hay vulnerabilidad técnica, sino intención criminal:',
         features: [
-          { icon: AlertTriangle, title: 'Cómo Funciona', text: 'El equipo crea un token/protocolo, genera hype, atrae depósitos de usuarios, y luego drena todos los fondos y desaparece. Puede ser tan simple como crear un pool de liquidez, esperar a que la gente compre el token, y retirar toda la liquidez (leaving holders con un token sin valor). O tan elaborado como construir un protocolo aparentemente legítimo durante meses y escapar con millones.' },
+          { icon: AlertTriangle, title: 'Cómo Funciona', text: 'El equipo crea un token/protocolo, genera hype, atrae depósitos de usuarios, y luego drena todos los fondos y desaparece. Puede ser tan simple como crear un pool de liquidez, esperar a que la gente compre el token, y retirar toda la liquidez (dejando a los holders con un token sin valor). O tan elaborado como construir un protocolo aparentemente legítimo durante meses y escapar con millones.' },
           { icon: Search, title: 'Red Flags de un Rug Pull', text: '(1) Equipo anónimo sin historial verificable. (2) Promesas de rendimientos absurdos (1,000%+ APY "garantizado"). (3) Smart contracts no verificados o sin auditoría. (4) Liquidez no bloqueada (el equipo puede retirar liquidez del pool en cualquier momento). (5) Presión para invertir rápido ("solo quedan 2 horas"). (6) La mayoría del supply en manos del equipo.' },
           { icon: Eye, title: 'Cómo Verificar', text: 'Usa herramientas como RugCheck.xyz para tokens de Solana. Verifica si la liquidez está bloqueada (locked LP). Revisa en el explorer (solscan.io) si pocas wallets controlan la mayoría del supply. Si el contrato no está verificado y el equipo es anónimo, no deposites tus ahorros, como máximo, una cantidad que puedas perder al 100%.' }
         ]
@@ -3070,19 +3572,30 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Riesgo #3: Exploits de Oráculos y Bridges',
         content: 'Estos son los vectores de ataque más sofisticados y los que han causado las pérdidas más grandes en la historia de DeFi:',
         features: [
-          { icon: Link, title: 'Oráculos Manipulados', text: 'Los protocolos DeFi necesitan saber el precio de los activos (para lending, liquidaciones, etc). Obtienen esta información de "oráculos" como Pyth o Switchboard. Si un hacker manipula el precio que reporta el oráculo (por ejemplo, hacer creer al protocolo que SOL vale $1,000 por un instante), puede pedir prestamos enormes contra colateral "inflado" y quedarse con los fondos. Los protocolos serios usan múltiples oráculos y tienen protecciones contra precio manipulation.' },
+          { icon: Link, title: 'Oráculos Manipulados', text: 'Los protocolos DeFi necesitan saber el precio de los activos (para lending, liquidaciones, etc). Obtienen esta información de "oráculos" como Pyth o Switchboard. Si un hacker manipula el precio que reporta el oráculo (por ejemplo, hacer creer al protocolo que SOL vale $1,000 por un instante), puede pedir préstamos enormes contra colateral "inflado" y quedarse con los fondos. Los protocolos serios combinan fuentes de precio, usan precios promediados en el tiempo y limitan cuánto se puede pedir contra activos poco líquidos.' },
           { icon: Network, title: 'Bridges Hackeados', text: 'Los bridges conectan diferentes blockchains (Solana ↔ Ethereum). Son los targets favoritos de hackers porque contienen enormes cantidades de fondos "bloqueados". Wormhole ($320M), Ronin ($625M), Nomad ($190M), los bridges son el eslabón más débil del ecosistema multi-chain. Cuando uses bridges, mueve lo mínimo necesario y no dejes fondos en ellos.' },
-          { icon: Shield, title: 'Cómo Minimizar el Riesgo', text: 'Quédate en una sola chain (Solana) tanto como sea posible para evitar bridges. Si necesitas bridge, usa Wormhole o deBridge (los más auditados de Solana). Para lending, prefiere protocolos que usan Pyth como oráculo (el principal de Solana, respaldado por Jump Crypto). Evita protocolos que usan un solo oráculo sin respaldo.' }
+          { icon: Shield, title: 'Cómo Minimizar el Riesgo', text: 'Quédate en una sola chain (Solana) tanto como sea posible para evitar bridges. Para mover USDC entre cadenas, prefiere CCTP de Circle, que quema el USDC en una cadena y lo emite nativo en la otra, sin dejarlo bloqueado en un puente. Para otros activos, usa puentes con historial largo y mueve solo lo necesario. Para lending, prefiere protocolos que usan oráculos establecidos (en Solana, sobre todo Pyth y Switchboard) y que no aceptan como colateral tokens con poca liquidez, que son los más fáciles de manipular.' }
         ]
       },
       {
         type: 'main',
         title: 'Riesgo #4: Errores de Usuario',
-        content: 'Irónicamente, la mayor causa de pérdida de fondos en DeFi no son los hackers, eres tú. Los errores de usuario son responsables de una porción enorme de fondos perdidos:',
+        content: 'No todas las pérdidas vienen de hackers sofisticados. Una parte enorme viene de errores propios y de engaños que te llevan a firmar o enviar lo que no debías:',
         features: [
-          { icon: Wallet, title: 'Enviar a Dirección Equivocada', text: 'Enviar SOL a una dirección de Ethereum, USDC a una wallet inexistente, o cualquier error de dirección. En blockchain, las transacciones son IRREVERSIBLES. No hay botón de "deshacer". Siempre envía una transacción de prueba pequeña primero (0.01 SOL) antes de enviar cantidades grandes.' },
+          { icon: Wallet, title: 'Enviar a Dirección Equivocada', text: 'Los errores reales más comunes: retirar de un exchange por la red equivocada (por ejemplo, elegir USDC en la red Ethereum cuando tu wallet espera Solana), olvidar el memo que exige un exchange para acreditar tu depósito, o pegar una dirección "envenenada" copiada del historial. En blockchain, las transacciones son IRREVERSIBLES. Siempre envía una transacción de prueba pequeña primero (0.01 SOL) antes de enviar cantidades grandes.' },
           { icon: Lock, title: 'Firmar Contratos Maliciosos', text: 'Al conectar tu wallet a un sitio fraudulento y firmar una transacción, puedes vaciar tu wallet en un instante. En **Solana** no hace falta un "approve unlimited": una sola firma maliciosa puede transferir tokens y NFTs. En **Ethereum/EVM** el patrón clásico es el allowance ilimitado ("Approve unlimited spending"). En ambos casos: NUNCA firmes en sitios que no reconoces. Lee la simulación de Phantom; si muestra salidas que no esperabas, rechaza.' },
           { icon: AlertTriangle, title: 'Perder la Frase Semilla', text: 'Si pierdes tu frase semilla y tu dispositivo falla, tus fondos se pierden PARA SIEMPRE. No hay soporte técnico, no hay "olvidé mi contraseña", no hay recuperación. Asegúrate de tener tu frase semilla respaldada en un medio físico seguro antes de depositar cantidades significativas en DeFi.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Casos que Debes Conocer',
+        content: 'Cada uno de estos casos enseña un tipo de riesgo distinto. Ninguno requirió que el usuario hiciera algo "mal":',
+        features: [
+          { icon: Users, title: 'Drift (abril de 2026): Llaves de Administrador', text: 'Unos $285M perdidos sin un bug en el código. Los atacantes engañaron a firmantes de una multisig de 2 de 5, sin timelock, para que firmaran por adelantado transacciones que les dieron el control. Lo viste en detalle en Seguridad Operacional Avanzada. Lección: revisa quién puede cambiar un protocolo y con cuántas firmas.' },
+          { icon: Link, title: 'Mango Markets (octubre de 2022): Oráculo Manipulado', text: 'Un trader infló el precio del token MNGO en mercados con poca liquidez, usó esa posición "inflada" como colateral y retiró unos $110M. Lo condenaron en 2024, pero en mayo de 2025 un juez anuló las condenas. Lección: un protocolo que acepta como colateral tokens fáciles de mover está expuesto, sea o no legal lo que haga el atacante.' },
+          { icon: TrendingDown, title: 'USDC (marzo de 2023): Una Stablecoin Pierde la Paridad', text: 'Circle tenía parte de sus reservas en Silicon Valley Bank cuando quebró, y durante un fin de semana USDC llegó a cotizar cerca de $0.87. Recuperó la paridad cuando se garantizaron los depósitos. Lección: "estable" no significa sin riesgo; si usas una stablecoin en pools o como colateral, su paridad es parte de tu riesgo.' },
+          { icon: AlertTriangle, title: 'LIBRA (febrero de 2025): La Promoción No Es Garantía', text: 'Un token promocionado por el presidente de Argentina colapsó más de 90% en horas, mientras wallets vinculadas al equipo retiraban liquidez. Lo viste en Narrativas y Rotación. Lección: ninguna figura pública reemplaza revisar liquidez, distribución y quién controla el token.' }
         ]
       },
       {
@@ -3117,8 +3630,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'No puedes eliminar el riesgo en DeFi, pero puedes gestionarlo inteligentemente con estas reglas:',
         features: [
           { icon: Shield, title: 'Regla del 20-30%', text: 'Nunca pongas más del 20-30% de tu portafolio crypto total en un solo protocolo DeFi. Si el protocolo es hackeado, pierdes una parte dolorosa pero no catastrófica. Los profesionales diversifican entre 3-5 protocolos diferentes para distribuir el riesgo de smart contract.' },
-          { icon: Clock, title: 'Regla del Lindy Effect', text: 'Cuanto más tiempo ha existido un protocolo sin ser hackeado, más probable es que sea seguro. Un protocolo con 2 años de historial y $500M en TVL que nunca ha sido explotado es enormemente más confiable que uno lanzado hace 2 semanas. El tiempo es la mejor auditoría.' },
-          { icon: Search, title: 'Due Diligence Mínima', text: 'Antes de depositar en cualquier protocolo: (1) ¿Tiene auditorías de firmas reputadas? (2) ¿Cuánto tiempo lleva operando? (3) ¿El código está verificado y es open source? (4) ¿Tiene bug bounty program? (5) ¿Quién es el equipo (doxxed o anónimo)? Si no puedes responder 3 de 5, no deposites cantidades significativas.' },
+          { icon: Clock, title: 'Regla del Lindy Effect', text: 'Cuanto más tiempo ha resistido un protocolo con mucho dinero dentro, más bugs obvios ya se habrían encontrado. Un protocolo con 2 años de historial y $500M en TVL que nunca ha sido explotado suele ser más confiable que uno lanzado hace 2 semanas. Pero el tiempo no protege de todo: Drift llevaba cinco años operando cuando perdió $285M en 2026, por la forma en que se controlaban sus llaves de administrador, no por un bug viejo.' },
+          { icon: Search, title: 'Due Diligence Mínima', text: 'Antes de depositar en cualquier protocolo: (1) ¿Tiene auditorías de firmas reputadas? (2) ¿Cuánto tiempo lleva operando? (3) ¿El código está verificado y es open source? (4) ¿Tiene bug bounty program? (5) ¿Quién es el equipo (identificado públicamente o anónimo)? (6) ¿Quién puede cambiar el contrato (la upgrade authority) o mover los fondos del protocolo? ¿Es una multisig, hay un timelock que da tiempo de reaccionar? Si no puedes responder la mayoría, no deposites cantidades significativas.' },
           { icon: Wallet, title: 'Separación de Wallets', text: 'Usa wallets diferentes para diferentes niveles de riesgo: (1) Cold wallet (Ledger) para ahorros que no tocas. (2) Hot wallet principal (Phantom) para DeFi en protocolos establecidos. (3) Burner wallet para experimentar con protocolos nuevos o desconocidos. Si tu burner es hackeada, solo pierdes lo que tenía, no tu patrimonio.' }
         ]
       },
@@ -3127,11 +3640,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Sobrevivir y Prosperar en DeFi',
         items: [
           'Los 4 riesgos principales de DeFi: smart contract bugs (errores de código), rug pulls (estafas deliberadas), exploits de oráculos/bridges (ataques sofisticados), y errores de usuario (enviar a dirección equivocada, firmar transacciones maliciosas).',
-          'Más de $10 mil millones se han perdido en DeFi. Los bridges (Wormhole, Ronin) han sido los targets más grandes. Quédate en una sola chain (Solana) cuando sea posible para minimizar este riesgo.',
+          'Más de $10 mil millones se han perdido en DeFi. Los bridges (Wormhole, Ronin) han sido de los targets más grandes; para USDC prefiere CCTP. Y casos como Drift muestran que el control de las llaves de administrador importa tanto como el código.',
           'Antes de depositar en cualquier protocolo: verifica auditorías, tiempo en el mercado, código verificado, y bug bounty. Si un protocolo es nuevo, sin auditoría, y con equipo anónimo, es una apuesta, no una inversión.',
           'Regla del 20-30%: nunca más de un tercio de tu portafolio en un solo protocolo. Si es hackeado, pierdes una parte, no todo. Diversifica entre 3-5 protocolos establecidos.',
           'Separa tus wallets por nivel de riesgo: cold wallet para ahorros, hot wallet para DeFi establecido, burner wallet para experimentar. La compartimentalización es tu mejor defensa.',
-          'Los errores de usuario causan más pérdidas que los hackers. Envía transacciones de prueba, lee lo que firmas, y NUNCA compartas tu frase semilla. En DeFi, tú eres tu propia seguridad.'
+          'Muchas pérdidas vienen de errores y engaños, no de hackers sofisticados. Envía transacciones de prueba, lee lo que firmas, y NUNCA compartas tu frase semilla. En DeFi, tú eres tu propia seguridad.'
         ]
       }
     ],
@@ -3139,75 +3652,97 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Un protocolo DeFi nuevo en Solana ofrece 500% APY, fue lanzado hace 3 días, no tiene auditoría, y el equipo es anónimo. ¿Cómo evalúas el riesgo?',
+          question: 'Un protocolo DeFi nuevo en Solana ofrece 500% APY. Lleva 3 días, no tiene auditoría y su equipo es anónimo. ¿Cómo lo evalúas?',
           options: [
-            { id: 'a', text: 'Si el APY es real, vale la pena el riesgo' },
-            { id: 'b', text: 'Múltiples red flags: sin auditoría (riesgo de smart contract bugs), equipo anónimo (riesgo de rug pull), muy nuevo (sin track record), y APY extremo (insostenible). Como máximo, deposita una cantidad mínima con una burner wallet' },
-            { id: 'c', text: 'Los protocolos nuevos siempre son seguros porque el código es fresco' },
-            { id: 'd', text: 'La falta de auditoría no importa si mucha gente lo usa' }
+            { id: 'a', text: 'Vale la pena si el APY es real, porque compensa con creces cualquier riesgo' },
+            { id: 'b', text: 'Es seguro si mucha gente ya lo usa, aunque no tenga ninguna auditoría' },
+            { id: 'c', text: 'Es seguro porque el código nuevo todavía no tuvo tiempo de ser atacado' },
+            { id: 'd', text: 'Es una apuesta: como mucho, una cantidad mínima desde una burner wallet' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Cada red flag por separado es preocupante. Todas juntas son una receta para perder dinero. Sin auditoría = nadie verificó el código. Equipo anónimo = pueden desaparecer. 3 días = sin track record. 500% APY = insostenible y probablemente inflado para atraer depósitos. Si quieres participar, usa solo una burner wallet con dinero que puedas perder al 100%.'
+          correctAnswer: 'd',
+          explanation: 'Sin auditoría nadie revisó el código, un equipo anónimo puede desaparecer, 3 días no son historial y un 500% APY no es sostenible. Juntas, esas señales hacen que perderlo todo sea un resultado probable. Que "mucha gente lo use" no reemplaza una auditoría: solo significa que hay más dinero para robar.'
         },
         {
           id: 'q2',
-          question: '¿Por qué los bridges (Wormhole, Ronin) han sido los targets más hackeados de DeFi?',
+          question: '¿Por qué los bridges como Wormhole o Ronin han estado entre los protocolos más hackeados de DeFi?',
           options: [
-            { id: 'a', text: 'Porque son más nuevos que otros protocolos' },
-            { id: 'b', text: 'Porque contienen enormes cantidades de fondos "bloqueados" de múltiples usuarios, haciendo que un solo exploit sea extremadamente lucrativo. Además, conectar dos blockchains diferentes multiplica la superficie de ataque' },
-            { id: 'c', text: 'Porque no tienen auditorías' },
-            { id: 'd', text: 'Los bridges no han sido hackeados, es un mito' }
+            { id: 'a', text: 'Porque son más nuevos que casi todos los demás protocolos de DeFi' },
+            { id: 'b', text: 'Porque ninguno de los bridges grandes tuvo nunca una auditoría seria' },
+            { id: 'c', text: 'Guardan muchos fondos en un solo lugar y conectan dos cadenas distintas' },
+            { id: 'd', text: 'Porque solo existen en cadenas pequeñas, con pocos nodos y poca seguridad' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Los bridges son "honeypots" masivos: contienen cientos de millones en fondos bloqueados, y conectar dos blockchains diferentes crea complejidad adicional (más código = más posibilidades de bugs). Ronin ($625M), Wormhole ($320M), Nomad ($190M): tres de los mayores hacks de la historia de DeFi fueron bridges (Poly Network con $611M y BNB Bridge con $566M también están entre los más grandes). La mejor defensa: minimiza el uso de bridges y quédate en una sola chain cuando sea posible.'
+          correctAnswer: 'c',
+          explanation: 'Un bridge concentra cientos de millones bloqueados, así que un solo exploit paga muchísimo. Y conectar dos blockchains suma complejidad y código, es decir, más lugares donde fallar. Ronin ($625M), Wormhole ($320M) y Nomad ($190M) están entre los mayores hacks de la historia. Varios de esos bridges sí tenían auditorías: no bastaron.'
         },
         {
           id: 'q3',
-          question: 'Conectas tu wallet a un sitio que dice ser "Jupiter" pero la URL es jup-airdrop.com. Aparece un popup pidiendo que firmes una transacción. ¿Qué haces?',
+          question: 'Conectas tu wallet a un sitio que dice ser "Jupiter", pero la URL es jup-airdrop.com, y aparece un pedido para firmar una transacción. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Firmo, dice Jupiter y parece legítimo' },
-            { id: 'b', text: 'Rechazo inmediatamente. La URL real de Jupiter es jup.ag. Esto es phishing, firmar esa transacción podría dar permisos para drenar toda mi wallet. Desconecto, cierro la pestaña, y revoco cualquier permiso que haya dado' },
-            { id: 'c', text: 'Firmo pero con una cantidad pequeña para probar' },
-            { id: 'd', text: 'Pregunto en el chat de soporte del sitio si es legítimo antes de firmar nada' }
+            { id: 'a', text: 'Firmo, porque la página dice Jupiter y se ve igual a la versión real' },
+            { id: 'b', text: 'Firmo con una cantidad pequeña primero, para probar si es legítimo' },
+            { id: 'c', text: 'Rechazo, cierro la pestaña y reviso qué permisos pude haber dado' },
+            { id: 'd', text: 'Pregunto en el chat de soporte del sitio antes de firmar cualquier cosa' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Los sitios de phishing son la forma más común de robo en crypto. Replican interfaces conocidas con URLs similares. Al firmar, puedes aprobar permisos que permiten drenar TODOS los tokens de tu wallet, no solo los que ves en pantalla. Siempre verifica la URL exacta. Marca los sitios reales en tus favoritos. Si tienes dudas, no firmes nada.'
+          correctAnswer: 'c',
+          explanation: 'La URL real de Jupiter es jup.ag. Esto es phishing: firmar puede dar permisos para vaciar todos los tokens de tu wallet, no solo una cantidad pequeña, así que "probar con poco" no limita nada. El chat de soporte de un sitio falso también es parte del engaño. Guarda los sitios reales en favoritos.'
         },
         {
           id: 'q4',
-          question: 'Tienes $50,000 en DeFi en Solana. ¿Cómo deberías distribuir tus fondos para gestionar el riesgo de smart contract?',
+          question: 'Tienes $50,000 en DeFi en Solana. ¿Cómo los distribuyes para gestionar el riesgo de smart contract?',
           options: [
-            { id: 'a', text: 'Todo en un solo protocolo para simplificar' },
-            { id: 'b', text: 'Distribuir entre 3-5 protocolos establecidos (máximo 20-30% en cada uno). Si un protocolo es hackeado, pierdes una porción, no todo. Usar protocolos con auditorías, historial probado, y TVL alto' },
-            { id: 'c', text: 'Distribuir en 20 protocolos diferentes para máxima diversificación' },
-            { id: 'd', text: 'Dejarlo todo en stablecoins en mi wallet' }
+            { id: 'a', text: 'Todo en el protocolo más grande, porque su tamaño lo hace imposible de hackear' },
+            { id: 'b', text: 'En 20 protocolos distintos, para que ningún hack me afecte de forma notable' },
+            { id: 'c', text: 'Entre 3 y 5 protocolos establecidos, con un 20-30% como máximo en cada uno' },
+            { id: 'd', text: 'Entre los protocolos que hoy ofrecen el APY más alto del mercado de Solana' }
           ],
-          correctAnswer: 'b',
-          explanation: 'La diversificación entre protocolos es la defensa principal contra smart contract risk. 3-5 protocolos es el balance ideal: suficiente diversificación sin la complejidad de gestionar 20 posiciones. Cada protocolo debe ser establecido (1+ año), auditado, y con TVL significativo. Si uno es hackeado, pierdes 20-30%, doloroso pero recuperable.'
+          correctAnswer: 'c',
+          explanation: 'Con 3-5 protocolos establecidos (auditados, con historial y TVL alto), un hack te cuesta una parte, no todo. Con 20 posiciones no puedes vigilar ninguna bien, y el tamaño de un protocolo no lo hace inmune: algunos de los mayores hacks fueron a protocolos grandes.'
         },
         {
           id: 'q5',
-          question: '¿Qué es un "rug pull" y cómo puedes identificarlo antes de que ocurra?',
-          options: [
-            { id: 'a', text: 'Es cuando el precio de un token baja naturalmente' },
-            { id: 'b', text: 'Es cuando los creadores de un proyecto drenan deliberadamente los fondos de los usuarios y desaparecen. Red flags: equipo anónimo, sin auditoría, liquidez no bloqueada, promesas de rendimientos absurdos, presión para invertir rápido' },
-            { id: 'c', text: 'Solo pasa en Ethereum, no en Solana' },
-            { id: 'd', text: 'Es imposible de predecir, ni siquiera con herramientas de análisis on-chain' }
-          ],
-          correctAnswer: 'b',
-          explanation: 'Los rug pulls son estafas deliberadas, no accidentes. Las señales están ahí si sabes buscarlas: equipo anónimo (pueden desaparecer sin consecuencias), sin auditoría (nadie revisó si hay backdoors), liquidez no bloqueada (pueden retirar la liquidez del pool en cualquier momento). Herramientas como RugCheck.xyz te ayudan a verificar tokens de Solana automáticamente.'
+          type: 'true-false',
+          question: 'Si un protocolo tiene una auditoría de una firma reconocida, ya no puede ser hackeado.',
+          correctAnswer: false,
+          explanation: 'Falso. Una auditoría reduce el riesgo, pero no lo elimina: revisa el código en un momento dado, puede pasar por alto errores y no cubre los cambios posteriores ni el control de las llaves de administrador. Varios protocolos auditados fueron hackeados.'
         },
         {
           id: 'q6',
-          question: 'El protocolo más seguro de DeFi es:',
+          type: 'multiple-select',
+          question: '¿Cuáles de estas son señales de alerta de un posible rug pull? Selecciona todas las que apliquen.',
           options: [
-            { id: 'a', text: 'El que tiene el APY más alto' },
-            { id: 'b', text: 'El más nuevo con tecnología de punta' },
-            { id: 'c', text: 'El que tiene múltiples auditorías, 2+ años de historial sin hacks, código open source, TVL alto sostenido, y un programa de bug bounty activo' },
-            { id: 'd', text: 'No existe tal cosa como un protocolo seguro en DeFi' }
+            { id: 'a', text: 'Equipo anónimo sin historial verificable' },
+            { id: 'b', text: 'Varias auditorías publicadas y verificables' },
+            { id: 'c', text: 'Liquidez del pool sin bloquear' },
+            { id: 'd', text: 'Promesas de rendimientos absurdos' },
+            { id: 'e', text: 'Años operando sin ningún incidente' },
+            { id: 'f', text: 'Presión para invertir rápido' }
           ],
-          correctAnswer: 'c',
-          explanation: 'El "Lindy Effect" aplica perfectamente a DeFi: cuanto más tiempo ha existido un protocolo con TVL alto sin ser hackeado, más confiable es. Las auditorías reducen (pero no eliminan) el riesgo de bugs. El código open source permite que la comunidad revise. El bug bounty incentiva a hackers éticos a reportar vulnerabilidades antes de que sean explotadas. Ningún protocolo es 100% seguro, pero estos factores reducen el riesgo enormemente.'
+          correctAnswers: [0, 2, 3, 5],
+          explanation: 'Un rug pull es una estafa deliberada, y las señales suelen estar a la vista: equipo anónimo que puede desaparecer, liquidez que pueden retirar cuando quieran, rendimientos imposibles y urgencia para que no investigues. RugCheck ayuda a revisar tokens de Solana. Las auditorías y el historial limpio apuntan en la dirección contraria.'
+        },
+        {
+          id: 'q7',
+          question: '¿Cuál de estos protocolos tiene, en general, menos riesgo?',
+          options: [
+            { id: 'a', text: 'Varias auditorías, años sin hacks, TVL alto sostenido y bug bounty' },
+            { id: 'b', text: 'El que ofrece el APY más alto, porque así atrae más capital y seguridad' },
+            { id: 'c', text: 'El más nuevo, porque usa la tecnología más reciente y mejor diseñada' },
+            { id: 'd', text: 'El que promete reembolsar a sus usuarios cualquier pérdida por hackeo' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Cuanto más tiempo resiste un protocolo con mucho dinero dentro sin ser hackeado, menos probable es que tenga errores obvios. Las auditorías reducen el riesgo y el bug bounty paga a hackers éticos por avisar antes. Una promesa de reembolso vale lo que vale quien la hace, y suele ser una táctica de marketing. Ningún protocolo es 100% seguro.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de Lending & Borrowing: tu health factor baja de 1.5 a 1.05 tras una caída del mercado. ¿Qué significa?',
+          options: [
+            { id: 'a', text: 'Que tu préstamo está más seguro, porque un número más bajo es mejor' },
+            { id: 'b', text: 'Estás muy cerca de la liquidación: reduce la deuda o suma colateral ya' },
+            { id: 'c', text: 'Nada urgente: la liquidación solo empieza cuando el colateral vale cero' },
+            { id: 'd', text: 'Que el protocolo te cobrará más interés, pero el riesgo sigue igual' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Con un health factor de 1 empieza la liquidación. En 1.05, una caída pequeña más del colateral basta para que te liquiden y pierdas parte de él con penalización. Repagar deuda o sumar colateral sube el número. (Lo viste en la lección Lending & Borrowing.)'
         }
       ]
     }
@@ -3217,17 +3752,17 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'NFTs en Solana',
     level: 'Avanzado',
     number: '8 de 13',
-    duration: '15 min',
+    duration: '18 min',
     type: 'Mercado',
     description: 'Los NFTs en Solana van mucho más allá de "JPEGs caros". Son acceso a comunidades exclusivas, herramientas de identidad digital, compresión que permite mintear millones por centavos, y un mercado profesional con Tensor y Magic Eden.',
     sections: [
       {
         type: 'intro',
         title: 'Más Allá de los JPEGs',
-        content: 'Si tu imagen de los NFTs se quedó en "monos caros en Ethereum" (Bored Apes) del 2021, necesitas actualizarte. Los NFTs en Solana han evolucionado en algo fundamentalmente diferente. Sí, existe el componente de arte y coleccionismo, pero lo más interesante es cómo los NFTs se han convertido en **herramientas de acceso, identidad y utilidad**. Un NFT de Mad Lads no es solo una imagen, es tu entrada a una de las comunidades más activas del ecosistema Solana, con acceso exclusivo a eventos, airdrops, y networking. Un NFT de Tensorians te da descuentos en fees del marketplace. Los cNFTs (NFTs comprimidos) permiten crear un millón de tokens por unos pocos SOL (varios cientos de dólares), abriendo casos de uso que en Ethereum son económicamente imposibles: tickets de eventos, certificados educativos, items de videojuegos, y más.',
+        content: 'Si tu imagen de los NFTs se quedó en "monos caros en Ethereum" (Bored Apes) del 2021, necesitas actualizarte. Los NFTs en Solana han evolucionado en algo fundamentalmente diferente. Sí, existe el componente de arte y coleccionismo, pero lo más interesante es cómo los NFTs se han convertido en **herramientas de acceso, identidad y utilidad**. Un NFT de Mad Lads no es solo una imagen, es tu entrada a una de las comunidades más activas del ecosistema Solana, con acceso exclusivo a eventos, airdrops, y networking. Otros NFTs dan beneficios dentro de una app o un protocolo. Los cNFTs (NFTs comprimidos) permiten crear un millón de tokens por unos pocos SOL, abriendo casos de uso que en Ethereum son económicamente imposibles: tickets de eventos, certificados educativos, items de videojuegos, y más.',
         highlight: {
           title: 'La Ventaja de Solana',
-          text: 'Mintear un NFT en Ethereum L1 cuesta hoy ~$1-5 en gas (llegó a costar $30-100+ en 2021). Un mint regular en Solana cuesta ~0.01 SOL más rent (unos $1-3). La verdadera diferencia son los cNFTs (comprimidos): cuestan fracciones de centavo cada uno, y un árbol para **1 millón de NFTs cuesta ~5-7 SOL** (varios cientos de dólares). Esa diferencia habilita categorías enteras de uso que de otra forma serían imposibles.'
+          text: 'Mintear un NFT en Ethereum L1 cuesta desde centavos hasta varios dólares en gas, según la congestión (en 2021 llegó a $30-100+). En Solana, un NFT con el estándar clásico cuesta alrededor de 0.01-0.02 SOL, casi todo en rent, un depósito que recuperas si quemas el NFT; con **Metaplex Core**, el estándar más nuevo, unos 0.002-0.003 SOL. La verdadera diferencia son los cNFTs (comprimidos): cuestan fracciones de centavo cada uno, y un árbol para **1 millón de NFTs cuesta entre ~2 y 9 SOL** según cómo se configure. Esa diferencia habilita categorías enteras de uso que de otra forma serían imposibles.'
         }
       },
       {
@@ -3246,19 +3781,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Solana tiene un ecosistema de NFTs rico y diverso. Estas son las categorías principales que encontrarás:',
         features: [
           { icon: Users, title: 'Colecciones PFP (Profile Picture)', text: 'Mad Lads, Claynosaurz, Tensorians, son colecciones de imágenes únicas que la gente usa como foto de perfil en redes sociales. Pero son mucho más que imágenes: representan membresía en una comunidad exclusiva. Los holders de Mad Lads, por ejemplo, tuvieron acceso anticipado a múltiples airdrops y eventos. El valor no está en la imagen, está en la comunidad y los beneficios asociados.' },
-          { icon: Cpu, title: 'cNFTs (Compressed NFTs)', text: 'La innovación más importante de Solana para NFTs. Usando "state compression", puedes crear millones de NFTs por una fracción del costo normal. DRiP.haus distribuyó millones de NFTs artísticos gratis usando esta tecnología. Los proyectos de gaming pueden crear items in-game como NFTs comprimidos. Las empresas pueden emitir tickets, certificados y collectibles a escala masiva.' },
-          { icon: Award, title: 'NFTs de Utilidad', text: 'NFTs que dan acceso o beneficios concretos: descuentos en fees (Tensorians en Tensor), acceso a contenido premium, pases VIP para eventos, governance en DAOs, o bonificaciones en protocolos DeFi. El valor de estos NFTs está directamente vinculado a la utilidad que ofrecen, no a la especulación.' },
+          { icon: Cpu, title: 'cNFTs (Compressed NFTs)', text: 'La innovación más importante de Solana para NFTs. Usando "state compression", puedes crear millones de NFTs por una fracción del costo normal. DRiP.haus distribuyó millones de NFTs artísticos gratis usando esta tecnología. Los proyectos de gaming pueden crear items in-game como NFTs comprimidos. Las empresas pueden emitir tickets, certificados y collectibles a escala masiva. El lado oscuro: como son casi gratis, los cNFTs también son el canal favorito para enviar spam y enlaces a drainers.' },
+          { icon: Award, title: 'NFTs de Utilidad', text: 'NFTs que dan acceso o beneficios concretos: descuentos en fees de una plataforma, acceso a contenido premium, pases VIP para eventos, governance en DAOs, o bonificaciones en protocolos DeFi. El valor de estos NFTs está directamente vinculado a la utilidad que ofrecen, no a la especulación.' },
           { icon: Gem, title: 'Arte Generativo y 1/1', text: 'Artistas digitales usan Solana para crear y vender arte en formato NFT. Las colecciones generativas crean piezas únicas usando algoritmos. Los artistas 1/1 venden piezas individuales como obras de arte digital. Exchange Art es la plataforma curada de referencia para arte 1/1 en Solana y facilita la venta directa de artista a coleccionista (Formfunction, otra plataforma de arte que competía en el mismo nicho, cerró en marzo de 2023).' }
-        ]
-      },
-      {
-        type: 'glossary',
-        terms: [
-          {
-            term: 'DAO (Organización Autónoma Descentralizada)',
-            definition: 'Una "empresa" o comunidad que se gobierna por código y votos, no por jefes ni juntas directivas. Los miembros tienen tokens de gobernanza que les dan poder de voto. Cuando alguien propone un cambio (ej: "subir los fees del protocolo del 0.1% al 0.2%"), los miembros votan con sus tokens. Si pasa, el smart contract ejecuta la decisión automáticamente. No hay CEO que pueda anularlo. Ejemplos: Uniswap (decisiones sobre el DEX), MakerDAO (estabilidad del stablecoin DAI), Jupiter (decisiones sobre el agregador).',
-            whyItMatters: 'Si tienes tokens de gobernanza (JUP, UNI, AAVE, etc.), tienes poder real sobre protocolos que manejan miles de millones. La mayoría nunca vota, por eso tu voto importa más de lo que crees. En la Lección 46 profundizamos en cómo participar.'
-          }
         ]
       },
       {
@@ -3266,9 +3791,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Los Marketplaces: Dónde Comprar y Vender',
         content: 'Para operar con NFTs en Solana, necesitas conocer los marketplaces principales:',
         features: [
-          { icon: BarChart3, title: 'Tensor', text: 'El marketplace más profesional de Solana. Interface tipo exchange con orderbooks, gráficos de floor price, y herramientas analíticas avanzadas. Ideal para traders que quieren analizar datos antes de comprar. Permite hacer ofertas (bids) en colecciones enteras y tiene fees competitivos. A mediados de 2026 concentra la mayor parte del volumen de traders profesionales (~60-70% del volumen diario). Tensor es a los NFTs lo que Jupiter es a los tokens.' },
-          { icon: Globe, title: 'Magic Eden', text: 'El marketplace más conocido y accesible. Interface amigable para principiantes. Lidera el volumen retail, y en febrero de 2026 anunció que se reenfoca 100% en Solana (cerró sus brazos de Bitcoin y EVM). Tiene launchpad para nuevas colecciones. Si es tu primera vez comprando un NFT, Magic Eden tiene la experiencia más suave.' },
-          { icon: Search, title: 'Cómo Evaluar Antes de Comprar', text: 'Antes de comprar cualquier NFT, revisa: (1) Floor price (precio mínimo) y su tendencia, ¿sube o baja? (2) Volumen de trading, ¿hay actividad real o está muerto? (3) Holders únicos, ¿cuántas personas diferentes tienen NFTs de la colección? (4) Comunidad, ¿el Discord/Twitter está activo? (5) Utilidad, ¿qué beneficios concretos da tener el NFT? Y una regla de seguridad: antes de conectar tu wallet a un mint o marketplace nuevo, usa una burner wallet como enseña la lección de Seguridad Operacional Avanzada de este nivel.' }
+          { icon: BarChart3, title: 'Tensor', text: 'El marketplace más orientado a traders. Interfaz tipo exchange con orderbooks, gráficos de floor price, y herramientas analíticas avanzadas. Permite hacer ofertas (bids) en colecciones enteras y tiene fees competitivos. Es la segunda plataforma por volumen, detrás de Magic Eden, aunque la proporción exacta cambia mucho según el tracker que consultes.' },
+          { icon: Globe, title: 'Magic Eden', text: 'El marketplace más conocido y accesible, y el que más volumen mueve en Solana según la mayoría de trackers. Interfaz amigable para principiantes, y en febrero de 2026 anunció que se reenfoca 100% en Solana (cerró sus brazos de Bitcoin y EVM). Tiene launchpad para nuevas colecciones. OpenSea también lista NFTs de Solana desde septiembre de 2026, por ahora solo algunas colecciones.' },
+          { icon: Search, title: 'Cómo Evaluar Antes de Comprar', text: 'Antes de comprar cualquier NFT, revisa: (1) Floor price (precio mínimo) y su tendencia, ¿sube o baja? (2) Volumen de trading, ¿hay actividad real o está muerto? (3) Holders únicos, ¿cuántas personas diferentes tienen NFTs de la colección? (4) Comunidad, ¿el Discord/Twitter está activo? (5) Utilidad, ¿qué beneficios concretos da tener el NFT? (6) Que sea la colección oficial: hay copias con el mismo nombre y la misma imagen, así que verifica la dirección de la colección en la web o el X oficial del proyecto. Y una regla de seguridad: antes de conectar tu wallet a un mint o marketplace nuevo, usa una burner wallet como enseña la lección de Seguridad Operacional Avanzada de este nivel.' }
         ]
       },
       {
@@ -3277,10 +3802,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         leftSide: {
           title: 'Solana',
           points: [
-            'Costo de minteo regular: ~0.01 SOL más rent (~$1-3)',
+            'Minteo: ~0.01-0.02 SOL (estándar clásico) o ~0.002-0.003 SOL (Metaplex Core), casi todo en rent recuperable',
             'cNFTs: fracciones de centavo por NFT a escala masiva',
-            'Transacciones instantáneas (~400ms)',
-            'Marketplaces: Tensor, Magic Eden',
+            'Confirmación en menos de un segundo',
+            'Marketplaces: Magic Eden, Tensor (y OpenSea en algunas colecciones)',
             'Enfoque en utilidad y comunidades activas',
             'Mercado más pequeño, enfocado en utilidad y cNFTs'
           ]
@@ -3288,7 +3813,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         rightSide: {
           title: 'Ethereum',
           points: [
-            'Costo de minteo: ~$1-5 en gas L1 (post-Dencun)',
+            'Costo de minteo en L1: desde centavos hasta varios dólares según la congestión',
             'Sin compresión nativa (costoso a escala)',
             'Transacciones L1 lentas (~12s)',
             'Marketplaces: OpenSea, Blur',
@@ -3304,6 +3829,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: TrendingDown, title: 'La Realidad del Mercado', text: 'El mercado NFT en su conjunto está más de 90% abajo de su pico de 2021-2022; la historia hoy es utilidad y cNFTs, no especulación con PFPs. Y el 90%+ de las colecciones de NFTs eventualmente llegan a floor price cercano a cero. Las colecciones que mantienen valor a largo plazo son la excepción, no la regla. Nunca trates un NFT como una "inversión segura", trata cualquier compra especulativa como dinero que puedes perder al 100%.' },
           { icon: AlertTriangle, title: 'Wash Trading', text: 'El volumen de trading de NFTs puede ser inflado artificialmente. Una persona puede comprar y vender el mismo NFT a sí misma repetidamente para simular actividad. Herramientas como Tensor muestran métricas de "organic volume" que intentan filtrar esto, pero no es perfecto. No te dejes impresionar solo por volumen alto.' },
+          { icon: Lock, title: 'NFTs que No Pediste', text: 'Si aparece en tu wallet un NFT que no compraste, sobre todo uno que promete un premio o un airdrop, no lo abras ni visites el enlace que trae. Es la táctica más común para llevarte a un drainer: un sitio que te pide firmar una transacción que vacía tu wallet. Phantom oculta muchos como spam; tú solo ignóralos (o quémalos desde la wallet, que no requiere visitar ningún sitio).' },
           { icon: Shield, title: 'Criterios de Compra Inteligente', text: 'Compra NFTs por razones concretas: (1) Quieres ser parte de la comunidad y participar activamente. (2) La utilidad justifica el precio (descuentos, acceso, beneficios). (3) Te gusta genuinamente el arte y lo compras como coleccionista. (4) Entiendes que es especulación pura y usas dinero que puedes perder. NUNCA compres un NFT "porque está subiendo" sin entender qué estás comprando.' }
         ]
       },
@@ -3312,8 +3838,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'NFTs: Lo Que Realmente Importa',
         items: [
           'Los NFTs son certificados de propiedad digital únicos en la blockchain. En Solana van más allá de "JPEGs": son acceso a comunidades, herramientas de identidad, items de gaming, y certificados verificables.',
-          'cNFTs (NFTs comprimidos) son la gran innovación de Solana: un millón de NFTs por unos 5-7 SOL, fracciones de centavo por unidad. Esto habilita casos de uso masivos que en Ethereum son económicamente imposibles.',
-          'Los marketplaces principales son Tensor (profesional, domina el volumen de traders) y Magic Eden (accesible, líder retail, 100% enfocado en Solana desde 2026). Usa Tensor si quieres analizar datos antes de comprar.',
+          'cNFTs (NFTs comprimidos) son la gran innovación de Solana: un millón de NFTs por unos pocos SOL, fracciones de centavo por unidad. Habilitan casos de uso masivos, y también mucho spam: no abras NFTs que no pediste.',
+          'Los marketplaces principales son Magic Eden (accesible, líder en volumen, 100% enfocado en Solana desde 2026) y Tensor (herramientas para traders). OpenSea volvió a Solana en 2026 con algunas colecciones. Sin importar dónde compres, verifica que la colección sea la oficial.',
           'El 90%+ de las colecciones de NFTs pierden su valor con el tiempo. Las que sobreviven tienen comunidad activa, utilidad real, y un equipo comprometido. Nunca trates NFTs como inversión segura.',
           'Antes de comprar: revisa floor price trend, volumen orgánico, holders únicos, comunidad activa, y utilidad concreta. Si no puedes justificar la compra más allá de "está subiendo", no compres.',
           'Los NFTs con mayor valor sostenido son los que otorgan beneficios concretos: acceso exclusivo, airdrops, descuentos en fees, o membresía en comunidades productivas. El valor está en la utilidad, no en la imagen.'
@@ -3324,63 +3850,96 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Qué son los cNFTs (Compressed NFTs) y por qué son importantes para Solana?',
+          question: '¿Qué son los cNFTs (NFTs comprimidos) y por qué importan en Solana?',
           options: [
-            { id: 'a', text: 'Son NFTs con imágenes de baja resolución para ahorrar espacio' },
-            { id: 'b', text: 'Usan "state compression" para crear millones de NFTs por centavos. Esto habilita casos de uso masivos (tickets, gaming, certificados) que en Ethereum costarían millones de dólares' },
-            { id: 'c', text: 'Son NFTs que se destruyen después de un tiempo' },
-            { id: 'd', text: 'No hay diferencia con los NFTs normales, es solo marketing' }
+            { id: 'a', text: 'Son NFTs con imágenes de baja resolución, para ahorrar espacio dentro de la red' },
+            { id: 'b', text: 'Son NFTs temporales, que se destruyen solos después de un tiempo fijo' },
+            { id: 'c', text: 'Usan compresión de estado para crear millones de NFTs por muy poco dinero' },
+            { id: 'd', text: 'Son NFTs normales con otro nombre: la diferencia es solo de marketing' }
           ],
-          correctAnswer: 'b',
-          explanation: 'La compresión de estado de Solana reduce el costo de almacenar datos on-chain dramáticamente. DRiP.haus distribuyó millones de NFTs artísticos gratis usando cNFTs. Los juegos pueden crear items como NFTs por fracciones de centavo. Es una ventaja tecnológica única de Solana que abre categorías enteras de uso.'
+          correctAnswer: 'c',
+          explanation: 'La compresión de estado guarda los datos de muchos NFTs de forma mucho más barata: un millón cuesta unos pocos SOL. Eso habilita tickets, items de juegos y certificados a gran escala. La imagen no tiene nada que ver: lo que se comprime es el registro on-chain. La otra cara es el spam, porque enviar NFTs a miles de wallets casi no cuesta nada.'
         },
         {
           id: 'q2',
-          question: 'Quieres comprar tu primer NFT en Solana. ¿Cuál marketplace usarías y qué deberías verificar antes de comprar?',
+          question: 'Vas a comprar tu primer NFT en Solana. ¿Qué deberías verificar antes?',
           options: [
-            { id: 'a', text: 'OpenSea, que es el más famoso. Compro el más barato que encuentre' },
-            { id: 'b', text: 'Tensor o Magic Eden. Antes de comprar, verifico: floor price trend, volumen de trading orgánico, número de holders únicos, actividad de la comunidad en Discord/Twitter, y la utilidad concreta del NFT' },
-            { id: 'c', text: 'Amazon, que es donde compro todo' },
-            { id: 'd', text: 'Cualquier marketplace, todos son iguales y no necesito investigar' }
+            { id: 'a', text: 'Que sea el NFT más barato de la colección, porque así arriesgo mucho menos' },
+            { id: 'b', text: 'Que el floor haya subido 30% hoy, porque eso confirma que hay demanda' },
+            { id: 'c', text: 'Nada: si está en un marketplace grande, el marketplace ya lo verificó' },
+            { id: 'd', text: 'Que la colección sea la oficial, y su floor, holders y volumen orgánico' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Tensor es el marketplace más profesional de Solana (con herramientas analíticas), y Magic Eden es el más accesible para principiantes. Investigar antes de comprar es CRUCIAL: un floor price descendente, volumen falso (wash trading), o una comunidad muerta son señales de que la colección no tiene futuro. Siempre haz tu investigación.'
+          correctAnswer: 'd',
+          explanation: 'El marketplace importa menos que lo que verificas: que sea la colección oficial (hay copias), cómo evoluciona el floor, cuántos holders únicos tiene y si el volumen es real. Un marketplace grande lista muchas colecciones, incluidas copias, así que estar listado no es una verificación.'
         },
         {
           id: 'q3',
-          question: 'Un amigo dice: "Los NFTs son una estafa, son solo JPEGs caros." ¿Cuál es la respuesta más precisa?',
+          question: 'Un amigo dice: "Los NFTs son una estafa, son solo JPEGs caros". ¿Cuál es la respuesta más precisa?',
           options: [
-            { id: 'a', text: 'Tiene razón, todos los NFTs son una estafa diseñada para quitarle el dinero a los ingenuos' },
-            { id: 'b', text: 'La mayoría de colecciones especulativas sí pierden valor, pero los NFTs como tecnología son mucho más que imágenes: representan propiedad digital verificable, acceso a comunidades, utilidad en protocolos, y habilitación de nuevos modelos de negocio' },
-            { id: 'c', text: 'Todos los NFTs van a subir, solo necesita paciencia' },
-            { id: 'd', text: 'Los NFTs reemplazan todo el sistema financiero' }
+            { id: 'a', text: 'Casi todas las colecciones especulativas pierden valor, pero la tecnología sirve' },
+            { id: 'b', text: 'Tiene razón: todos los NFTs son estafas pensadas para quitar dinero a ingenuos' },
+            { id: 'c', text: 'Se equivoca: todos los NFTs suben con el tiempo si tienes la suficiente paciencia' },
+            { id: 'd', text: 'Se equivoca: los NFTs van a reemplazar pronto todo el sistema financiero actual' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Es una respuesta matizada: sí, el 90%+ de colecciones especulativas pierden valor, eso es real. Pero la tecnología NFT (propiedad digital verificable) tiene aplicaciones genuinas: tickets, credenciales, gaming items, acceso a comunidades, y más. Los cNFTs de Solana especialmente habilitan casos de uso a escala masiva que antes eran imposibles.'
+          correctAnswer: 'a',
+          explanation: 'Tu amigo acierta en algo: más del 90% de las colecciones especulativas pierde su valor. Pero la tecnología, una propiedad digital verificable, tiene usos reales como tickets, credenciales, items de juegos y acceso a comunidades. Separar la tecnología de la especulación es la respuesta matizada.'
         },
         {
           id: 'q4',
-          question: 'Ves una colección de NFTs en Tensor con mucho volumen de trading pero solo 150 holders únicos de 10,000 NFTs. ¿Qué indica esto?',
+          question: 'Una colección de 10,000 NFTs en Tensor tiene mucho volumen de trading, pero solo 150 holders únicos. ¿Qué indica?',
           options: [
-            { id: 'a', text: 'Los holders son muy comprometidos' },
-            { id: 'b', text: 'Probable wash trading: pocas personas están comprando y vendiendo entre sí para inflar el volumen artificialmente y atraer compradores reales' },
-            { id: 'c', text: 'Es normal, las colecciones exitosas tienen pocos holders' },
-            { id: 'd', text: 'Es una colección exclusiva para ballenas que acumulan posiciones grandes a propósito' }
+            { id: 'a', text: 'Holders muy comprometidos, que operan mucho porque creen en el proyecto' },
+            { id: 'b', text: 'Probable wash trading: pocas wallets se compran y venden entre ellas' },
+            { id: 'c', text: 'Es normal: las colecciones exitosas siempre tienen muy pocos holders' },
+            { id: 'd', text: 'Que el precio va a subir pronto, porque hay mucho volumen de compra' }
           ],
           correctAnswer: 'b',
-          explanation: 'La combinación de alto volumen + pocos holders es una señal clásica de wash trading. Si 10,000 NFTs están concentrados en 150 wallets, es probable que pocas personas estén manipulando el mercado. Una colección saludable tiene miles de holders únicos con distribución diversa. Siempre revisa el ratio holders/supply antes de comprar.'
+          explanation: 'Mucho volumen con pocos holders es una señal clásica de wash trading: unas pocas personas operan entre sí para inflar el volumen y atraer compradores reales. Una colección sana tiene miles de holders. Revisa siempre la relación entre holders y supply antes de comprar.'
         },
         {
           id: 'q5',
-          question: '¿Por qué mintear NFTs en Solana cuesta una fracción de lo que cuesta en Ethereum?',
+          question: '¿Por qué mintear un NFT en Solana cuesta una fracción de lo que cuesta en Ethereum L1?',
           options: [
-            { id: 'a', text: 'Porque los NFTs de Solana son de menor calidad' },
-            { id: 'b', text: 'Porque los fees de Solana son de centavos y los cNFTs bajan el costo a fracciones de centavo, mientras en Ethereum L1 el gas de un mint suele costar $1-5 y puede dispararse con congestión. Es resultado de la arquitectura, no de menor calidad' },
-            { id: 'c', text: 'Porque Solana subsidia el minteo con su fundación' },
-            { id: 'd', text: 'Los costos son iguales en ambas redes' }
+            { id: 'a', text: 'Por la arquitectura: fees de centavos y compresión que los baja aún más' },
+            { id: 'b', text: 'Porque los NFTs de Solana son de menor calidad que los NFTs de Ethereum L1' },
+            { id: 'c', text: 'Porque la Fundación Solana subsidia cada minteo con su propio tesoro' },
+            { id: 'd', text: 'Porque Solana guarda las imágenes completas dentro de cada bloque' }
           ],
-          correctAnswer: 'b',
-          explanation: 'La diferencia de costos es técnica: Solana procesa miles de transacciones por segundo con fees de fracciones de centavo, mientras Ethereum L1 procesa ~15 TPS con fees variables. Post-Dencun un mint en L1 suele costar $1-5 (en 2021 llegaba a $30-100+). Y la compresión de estado (cNFTs) lleva el costo en Solana a fracciones de centavo, lo que permite la experimentación a escala masiva que define el ecosistema NFT de Solana.'
+          correctAnswer: 'a',
+          explanation: 'Solana procesa muchas transacciones por segundo con fees de fracciones de centavo, y los cNFTs bajan aún más el costo. En Ethereum L1 el gas de un mint va de centavos a varios dólares y se dispara con la congestión. Ninguna red guarda las imágenes dentro de los bloques: el NFT apunta a un archivo guardado fuera de la cadena.'
+        },
+        {
+          id: 'q6',
+          type: 'true-false',
+          question: 'Más del 90% de las colecciones de NFTs termina perdiendo su valor con el tiempo.',
+          correctAnswer: true,
+          explanation: 'Verdadero. Las que sobreviven suelen tener una comunidad activa, utilidad concreta y un equipo que sigue construyendo. Por eso un NFT nunca es una inversión segura: compra solo lo que puedas justificar más allá de "está subiendo".'
+        },
+        {
+          id: 'q7',
+          type: 'multiple-select',
+          question: '¿Cuáles de estos beneficios suelen sostener el valor de un NFT con el tiempo? Selecciona todos los que apliquen.',
+          options: [
+            { id: 'a', text: 'Acceso exclusivo a una comunidad productiva' },
+            { id: 'b', text: 'Que su imagen sea rara dentro de la colección' },
+            { id: 'c', text: 'Descuentos en las fees de un protocolo' },
+            { id: 'd', text: 'Que un influencer famoso lo haya comprado' },
+            { id: 'e', text: 'Airdrops para quienes lo tienen' }
+          ],
+          correctAnswers: [0, 2, 4],
+          explanation: 'El valor sostenido viene de beneficios concretos: acceso, descuentos, airdrops o membresía. La rareza de la imagen y la compra de un famoso mueven el precio un tiempo, pero no generan valor por sí mismas: el valor está en la utilidad, no en la imagen.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de Riesgos de DeFi: La Guía Completa: ¿por qué conviene separar tus wallets por nivel de riesgo?',
+          options: [
+            { id: 'a', text: 'Porque cada wallet nueva recibe más airdrops que una wallet antigua' },
+            { id: 'b', text: 'Porque así pagas menos fees en cada transacción que firmas en DeFi' },
+            { id: 'c', text: 'Porque una sola wallet no puede guardar más de cierta cantidad de tokens' },
+            { id: 'd', text: 'Si una wallet de pruebas se compromete, tus ahorros siguen a salvo' }
+          ],
+          correctAnswer: 'd',
+          explanation: 'Una cold wallet para ahorros, una hot wallet para DeFi establecido y una burner para experimentar (como mintear o abrir cosas nuevas) limitan el daño de un error o de una firma maliciosa. (Lo viste en la lección Riesgos de DeFi: La Guía Completa.)'
         }
       ]
     }
@@ -3390,14 +3949,14 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Airdrops y Points Farming',
     level: 'Avanzado',
     number: '9 de 13',
-    duration: '16 min',
+    duration: '19 min',
     type: 'Estrategia',
-    description: 'Los protocolos necesitan usuarios, y los recompensan con tokens de gobernanza. Solana ha tenido los airdrops más lucrativos de la historia: JTO, JUP, PYTH, W. Aprende a posicionarte como usuario temprano legítimamente.',
+    description: 'Los protocolos necesitan usuarios, y los recompensan con tokens de gobernanza. Solana tuvo algunos de los airdrops más comentados de 2023 y 2024: JTO, JUP, PYTH, W. Aprende a posicionarte como usuario temprano legítimamente.',
     sections: [
       {
         type: 'intro',
         title: 'Recompensas por Ser Temprano',
-        content: 'En el mundo tradicional, los primeros clientes de una empresa no reciben nada especial. En crypto, los protocolos frecuentemente **regalan tokens de gobernanza** a sus primeros usuarios como recompensa por haber confiado en ellos cuando nadie más lo hacía. Estos "airdrops" han generado retornos extraordinarios. El airdrop de Jito (JTO) en diciembre de 2023 fue tan generoso que su asignación mínima elegible (~4,900 JTO) valía alrededor de $10,000 al momento del listado, solo por haber hecho staking de SOL a través de Jito. Jupiter (JUP) regaló tokens a quienes habían usado el DEX. Wormhole (W) recompensó a usuarios que habían hecho bridges. ¿La clave? No eran "inversores", eran **usuarios genuinos** que usaban estos protocolos como parte de su actividad normal en Solana. Los airdrops recompensan comportamiento orgánico, no especulación. Una advertencia honesta antes de empezar: la era dorada de los airdrops fue 2023-2024, los grandes protocolos de Solana ya lanzaron sus tokens, y las oportunidades de hoy son más competitivas y más modestas. Las estrategias de esta lección siguen aplicando, pero ajusta tus expectativas.',
+        content: 'En el mundo tradicional, los primeros clientes de una empresa no reciben nada especial. En crypto, los protocolos frecuentemente **regalan tokens de gobernanza** a sus primeros usuarios como recompensa por haber confiado en ellos cuando nadie más lo hacía. Algunos de estos "airdrops" entregaron montos grandes, aunque la mayoría de usuarios recibió poco. El airdrop de Jito (JTO) en diciembre de 2023 fue tan generoso que su asignación mínima elegible (~4,900 JTO) valía alrededor de $10,000 al momento del listado, solo por haber hecho staking de SOL a través de Jito. Jupiter (JUP) regaló tokens a quienes habían usado el DEX. Wormhole (W) recompensó a usuarios que habían hecho bridges. ¿La clave? No eran "inversores", eran **usuarios genuinos** que usaban estos protocolos como parte de su actividad normal en Solana. Los airdrops recompensan comportamiento orgánico, no especulación. Una advertencia honesta antes de empezar: la era dorada de los airdrops fue 2023-2024, los grandes protocolos de Solana ya lanzaron sus tokens, y las oportunidades de hoy son más competitivas y más modestas. Las estrategias de esta lección siguen aplicando, pero ajusta tus expectativas.',
         highlight: {
           title: 'Números Reales',
           text: 'El "Jupuary" de enero de 2024 distribuyó 1,000 millones de JUP, el 10% del supply de 10,000 millones (el 40% era el total multi-ronda reservado para la comunidad). El tier mínimo recibió ~200 JUP (~$130 al lanzamiento) y la mayoría de usuarios recibió bastante menos de 3,000 JUP, aunque los usuarios más activos sí recibieron miles de dólares. Solo por haber usado Jupiter como su DEX principal. Ese es el poder de ser temprano y genuino.'
@@ -3421,11 +3980,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           { icon: AlertTriangle, title: 'Páginas de Claim Falsas', text: 'Cuando Jupiter lanzó JUP, apareció una ola de sitios de phishing imitando la página oficial de claim: dominios casi idénticos, interfaces clonadas, anuncios pagados en Google, y links en comentarios de X. Firmabas la "transacción de claim" y te drenaban la wallet completa. Este patrón se repite con CADA airdrop grande. La página de claim falsa es hoy una de las formas más comunes de robo en Solana.' },
           { icon: Search, title: 'Solo el Dominio Oficial', text: 'Reclama ÚNICAMENTE desde el dominio oficial del protocolo, verificado en su cuenta oficial de X o su Discord oficial (no en DMs, no en links de terceros, no en resultados de búsqueda pagados). Escribe la URL tú mismo o usa un favorito guardado. Si un supuesto airdrop te llega por DM o por un anuncio, asume que es una estafa.' },
           { icon: Shield, title: '"Paga una Fee para Desbloquear" = Estafa', text: 'Ningún airdrop legítimo te pide enviar tokens primero para "desbloquear", "verificar", o "activar" tu asignación. Si una página te pide pagar algo antes de recibir, es una estafa, siempre, sin excepciones. El único costo de un claim real es el fee de red de fracciones de centavo que pagas al firmar.' },
-          { icon: Wallet, title: 'Usa una Burner Wallet', text: 'Reclama airdrops con una wallet separada de tus ahorros, y conecta solo esa wallet a páginas de claim. Si la página resulta maliciosa, pierdes lo que había en la burner, no tu portafolio. Aplica la arquitectura de wallets de la lección de Seguridad Operacional Avanzada de este nivel: cold storage para ahorros, hot wallet para operar, burner para claims y experimentos.' }
+          { icon: Wallet, title: 'Farmea Desde una Wallet de Actividad', text: 'El airdrop llega a la wallet que usó el protocolo, así que normalmente tendrás que reclamar desde esa misma wallet. Por eso conviene hacer toda tu actividad de farming desde una wallet operativa separada de tus ahorros y con poco saldo, nunca desde tu cold storage. Al reclamar, verifica el dominio dos veces y, apenas recibas los tokens, mueve lo que quieras conservar a una wallet más segura. Es la arquitectura de la lección Seguridad Operacional Avanzada: cold storage para ahorros, hot wallet para operar y farmear, burner para experimentos.' }
         ],
         highlight: {
           title: 'La Regla de Oro del Claim',
-          text: 'Dominio oficial verificado + burner wallet + nunca pagar por recibir. Si cumples estas tres reglas, los drainers de airdrops no pueden tocarte.'
+          text: 'Dominio oficial verificado + wallet de actividad con poco saldo + nunca pagar por recibir. Si cumples estas tres reglas, reduces muchísimo el riesgo, aunque ninguna regla lo elimina del todo: lee siempre la simulación antes de firmar.'
         }
       },
       {
@@ -3435,7 +3994,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: Target, title: 'Cómo Funcionan los Puntos', text: 'El protocolo anuncia públicamente: "Estamos dando puntos por usar nuestro producto". Cada acción (swap, depositar liquidez, hacer staking) acumula puntos. Cuando el protocolo lance su token, los puntos se convertirán en una asignación proporcional del airdrop. Más puntos = más tokens. Ejemplo: Kamino daba puntos por depositar en lending/borrowing antes de lanzar KMNO.' },
           { icon: BarChart3, title: 'La Economía de los Puntos', text: 'Los puntos crean un "mercado de expectativas". Si un protocolo tiene $500M en TVL acumulando puntos, y se espera que el token tenga un FDV (Fully Diluted Valuation) de $1B con un airdrop del 10% ($100M), entonces cada punto tiene un "valor estimado". Los farmers sofisticados calculan el ratio puntos/dólar para determinar si vale la pena.' },
-          { icon: AlertTriangle, title: 'El Riesgo de los Puntos', text: 'No hay garantía de que los puntos se conviertan en tokens. El protocolo puede cambiar los criterios, reducir el porcentaje del airdrop, o añadir dilución con más temporadas de puntos. Además, si todos están farmeando el mismo protocolo, la asignación per cápita se diluye. No trates los puntos como dinero seguro, son una apuesta educada.' }
+          { icon: AlertTriangle, title: 'El Riesgo de los Puntos', text: 'No hay garantía de que los puntos se conviertan en tokens. El protocolo puede cambiar los criterios, reducir el porcentaje del airdrop, o añadir dilución con más temporadas de puntos. Además, si todos están farmeando el mismo protocolo, la asignación per cápita se diluye. No trates los puntos como dinero seguro, son una apuesta educada.' },
+          { icon: Shield, title: 'Lo Que Arriesgas Mientras Farmeas', text: 'Para ganar puntos, depositas capital en protocolos jóvenes. Eso suma riesgos reales: un bug o hackeo del contrato, impermanent loss si das liquidez, liquidación si pides prestado, una stablecoin que pierde su paridad, y el costo de oportunidad de tener ese dinero quieto. Un airdrop de $300 no compensa perder $3,000 depositados.' },
+          { icon: Globe, title: 'Lee los Términos', text: 'Muchos protocolos excluyen ciertos países en sus términos de uso o al momento del claim. Usar una VPN para saltarte esa restricción puede anular tu asignación. Y en Colombia, la DIAN trata los airdrops como ganancia ocasional (Concepto 18075 de 2023): lleva registro del valor al recibirlos y consúltalo con un contador (lo viste en Tu Plan de Inversión Personal).' }
         ]
       },
       {
@@ -3443,9 +4004,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Cómo Posicionarte para Airdrops en Solana',
         content: 'La estrategia más efectiva no es "farmear" artificialmente, es ser un usuario genuino y activo del ecosistema:',
         features: [
-          { icon: Zap, title: 'La Realidad de 2026: Los Grandes Ya Lanzaron', text: 'Jupiter, Jito, Kamino, Marinade, Drift, Tensor, Meteora y marginfi ya emitieron sus tokens: el primer airdrop grande de cada uno ya pasó. Pero usarlos sigue pagando, existen rondas secundarias y estacionales (el Jupuary de Jupiter continuó año tras año, aunque la DAO votó en abril de 2026 aplazarlo a mayo y recortarlo de 700M a 200M JUP), programas de puntos con temporadas nuevas, y protocolos jóvenes sin token que aparecen constantemente.' },
-          { icon: Clock, title: 'Sé Consistente, No Puntual', text: 'Los criterios de airdrop favorecen la consistencia. Un usuario que hace 10 transacciones al mes durante 12 meses es más valioso que uno que hace 100 transacciones en un solo día. Los protocolos buscan usuarios genuinos, no bots que hacen bulk transactions para inflar actividad.' },
-          { icon: Layers, title: 'Diversifica tus Actividades', text: 'No te limites a swaps. Haz staking, provee liquidez, usa lending, prueba nuevas funcionalidades. Los airdrops suelen dar bonificaciones por "breadth of usage" (diversidad de funciones usadas). Un usuario que usa 5 funciones diferentes es más valioso que uno que solo hace swaps repetitivos.' },
+          { icon: Zap, title: 'La Realidad de 2026: Los Grandes Ya Lanzaron', text: 'Jupiter, Jito, Kamino, Marinade, Drift, Tensor y Meteora ya emitieron sus tokens: el primer airdrop grande de cada uno ya pasó. Las rondas siguientes tampoco están garantizadas: Jupiter pagó su Jupuary en 2024 y 2025, pero en febrero de 2026 la DAO lo aplazó sin fecha y devolvió los 700 millones de JUP a una multisig comunitaria. Siguen existiendo programas de puntos con temporadas nuevas y protocolos jóvenes sin token, pero ajusta tus expectativas. (Y desconfía de quien te ofrezca reclamar un token que no existe: marginfi, hoy Project 0, no tiene token.)' },
+          { icon: Clock, title: 'Sé Consistente, No Puntual', text: 'Los criterios de airdrop favorecen la consistencia. Un usuario que hace 10 transacciones al mes durante 12 meses es más valioso que uno que hace 100 transacciones en un solo día. Los protocolos buscan usuarios genuinos, no bots que hacen transacciones en masa para inflar actividad.' },
+          { icon: Layers, title: 'Diversifica tus Actividades', text: 'No te limites a swaps. Haz staking, provee liquidez, usa lending, prueba nuevas funcionalidades. Los airdrops suelen dar bonificaciones por diversidad de uso (usar varias funciones del protocolo). Un usuario que usa 5 funciones diferentes es más valioso que uno que solo hace swaps repetitivos.' },
           { icon: Search, title: 'Identifica Protocolos Pre-Token', text: 'Los airdrops más lucrativos vienen de protocolos que TODAVÍA NO tienen token. Busca en DefiLlama protocolos de Solana con TVL alto y creciente pero sin token propio. Esos son los candidatos principales para un TGE futuro con airdrop. Cuanto antes empieces a usarlos, mayor será tu asignación. Eso sí: con el meta enfriado desde 2024, espera asignaciones más modestas que las de la era dorada.' }
         ]
       },
@@ -3480,7 +4041,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: '¿Vender o Holdear el Airdrop?',
         content: 'Recibes tu airdrop. Ahora la pregunta del millón: ¿vendes inmediatamente o holdeas esperando que suba? No hay respuesta universal, pero hay datos:',
         features: [
-          { icon: TrendingDown, title: 'La Estadística Incómoda', text: 'Históricamente, la mayoría de tokens de airdrop pierden valor en las semanas/meses posteriores al lanzamiento. ¿Por qué? Porque millones de personas reciben tokens gratis y muchos los venden inmediatamente, creando presión de venta masiva. JTO cayó 50% desde su máximo post-airdrop. W (Wormhole) cayó significativamente. Incluso JUP cotiza a mediados de 2026 alrededor de $0.25, ~60% por debajo de su precio de lanzamiento (~$0.65). La tendencia estadística es claramente bajista.' },
+          { icon: TrendingDown, title: 'La Estadística Incómoda', text: 'Históricamente, la mayoría de tokens de airdrop pierden valor en las semanas/meses posteriores al lanzamiento. ¿Por qué? Porque millones de personas reciben tokens gratis y muchos los venden inmediatamente, creando presión de venta masiva. JTO cayó 50% desde su máximo post-airdrop. W (Wormhole) cayó significativamente. Incluso JUP cotizaba en noviembre de 2026 alrededor de $0.24, unos 64% por debajo de su precio de lanzamiento (~$0.65). La tendencia estadística es claramente bajista.' },
           { icon: Brain, title: 'La Estrategia Híbrida', text: 'Muchos traders experimentados usan una estrategia de 3 partes: (1) Vender 30-50% inmediatamente para "asegurar" ganancias reales. (2) Mantener 30-40% si crees en el protocolo a largo plazo. (3) Definir un stop loss mental para el resto ("si cae 50% desde aquí, vendo lo restante"). Esto te protege de la codicia ("puede subir más") y del arrepentimiento ("vendí todo y subió").' },
           { icon: CheckCircle, title: 'Factores a Considerar', text: '¿El token tiene utilidad real (governance, staking, descuentos)? ¿El protocolo tiene fundamentales sólidos (TVL creciente, fees altos, usuarios activos)? ¿La tokenomics es favorable (bajo supply circulante con vesting largo)? Si las respuestas son positivas, holdear una porción tiene sentido. Si el token es puro especulación sin utilidad, vender rápido suele ser la mejor estrategia.' }
         ]
@@ -3489,10 +4050,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         type: 'takeaways',
         title: 'Tu Estrategia de Airdrops',
         items: [
-          'Los airdrops recompensan a usuarios genuinos y tempranos con tokens de gobernanza. Los más lucrativos de Solana (JTO, JUP, PYTH, W) regalaron miles de dólares a usuarios activos. Esa era dorada fue 2023-2024: hoy las oportunidades son más modestas, pero el principio sigue vigente.',
+          'Los airdrops recompensan a usuarios genuinos y tempranos con tokens de gobernanza. Los más grandes de Solana (JUP, que está entre los mayores airdrops de la historia, y JTO, PYTH, W) dieron miles de dólares a algunos usuarios activos, aunque la mayoría recibió mucho menos. Esa era dorada fue 2023-2024: hoy las oportunidades son más modestas, pero el principio sigue vigente.',
           'El sistema de puntos es la nueva norma: los protocolos anuncian puntos por usar su producto, que luego se convierten en tokens. Es más transparente pero no garantizado, los criterios pueden cambiar.',
           'La mejor estrategia es ser un usuario genuino y diverso. Los protocolos grandes ya tienen token, así que apunta a programas de puntos, rondas estacionales, y protocolos nuevos sin token. Sé consistente durante meses.',
-          'Seguridad primero: reclama airdrops SOLO desde el dominio oficial del protocolo (verificado en su X o Discord oficial), nunca pagues una "fee de desbloqueo", y usa una burner wallet para cada claim.',
+          'Seguridad primero: reclama airdrops SOLO desde el dominio oficial del protocolo (verificado en su X o Discord oficial), nunca pagues una "fee de desbloqueo", y farmea desde una wallet de actividad con poco saldo, separada de tus ahorros.',
           'Identifica protocolos sin token con TVL alto y creciente, son los candidatos principales para futuros airdrops. Cuanto antes empieces a usarlos, mayor será tu asignación potencial.',
           'El Sybil farming (crear múltiples wallets falsas) es detectado y penalizado por la mayoría de protocolos. No vale la pena el riesgo ni el esfuerzo. El uso orgánico es más lucrativo y más seguro.',
           'Cuando recibas un airdrop, considera vender 30-50% inmediatamente para asegurar ganancias. La mayoría de tokens de airdrop pierden valor en las semanas posteriores al lanzamiento. Solo holdea si crees genuinamente en los fundamentales del protocolo.'
@@ -3503,63 +4064,92 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Cuál es la forma más efectiva de posicionarte para airdrops en Solana?',
+          question: '¿Cuál es la forma más efectiva de posicionarte para futuros airdrops en Solana?',
           options: [
-            { id: 'a', text: 'Crear 100 wallets y hacer una transacción en cada una' },
-            { id: 'b', text: 'Ser un usuario genuino, consistente y diverso del ecosistema: usar Jupiter, Kamino, Jito, Meteora regularmente como parte de tu actividad DeFi normal durante meses' },
-            { id: 'c', text: 'Enviar DMs a los developers pidiendo tokens' },
-            { id: 'd', text: 'Esperar a que anuncien el airdrop y empezar a usar el protocolo ese día' }
+            { id: 'a', text: 'Crear 100 wallets y hacer al menos una transacción desde cada una' },
+            { id: 'b', text: 'Empezar a usar el protocolo el mismo día en que anuncian el airdrop' },
+            { id: 'c', text: 'Usar varios protocolos de forma real y constante durante meses' },
+            { id: 'd', text: 'Mover mucho volumen en un solo día, justo antes de la fecha del snapshot' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Los criterios de airdrop favorecen: antigüedad (cuánto tiempo has sido usuario), consistencia (uso regular durante meses), volumen orgánico, y diversidad de funciones usadas. Un usuario genuino que lleva meses usando el protocolo recibe mucho más que alguien que aparece el día del snapshot con actividad artificial.'
+          correctAnswer: 'c',
+          explanation: 'Los criterios suelen premiar antigüedad, constancia, volumen orgánico y variedad de funciones usadas. Quien aparece el día del snapshot con un pico de actividad se parece más a un farmer que a un usuario, y los protocolos lo saben. Y hoy las oportunidades son más modestas que en 2023-2024.'
         },
         {
           id: 'q2',
-          question: '¿Qué es el "Sybil farming" y por qué deberías evitarlo?',
+          question: '¿Qué es el "Sybil farming" y por qué conviene evitarlo?',
           options: [
-            { id: 'a', text: 'Es una técnica de agricultura tradicional' },
-            { id: 'b', text: 'Crear múltiples wallets falsas para simular muchos usuarios y multiplicar tu airdrop. Los protocolos usan análisis on-chain sofisticado para detectar y EXCLUIR wallets sybil, perdiendo tanto el airdrop como el tiempo invertido' },
-            { id: 'c', text: 'Es la mejor estrategia para maximizar airdrops' },
-            { id: 'd', text: 'Es un tipo de staking avanzado' }
+            { id: 'a', text: 'Una estrategia legítima, porque cada wallet nueva cuenta como un usuario' },
+            { id: 'b', text: 'Usar muchas wallets falsas; los protocolos las detectan y las excluyen' },
+            { id: 'c', text: 'Un tipo de staking avanzado que multiplica los puntos de cada wallet' },
+            { id: 'd', text: 'Usar varias wallets propias, algo que los protocolos no pueden rastrear' }
           ],
           correctAnswer: 'b',
-          explanation: 'Los equipos de protocolos como Jupiter y Jito invierten recursos significativos en detección de sybils. Usan clustering de wallets (wallets que interactúan entre sí), patrones de tiempo idénticos, y análisis de flujo de fondos. Las wallets sybil son excluidas del airdrop o reciben cantidades mínimas. El riesgo/recompensa simplemente no vale la pena comparado con ser un usuario genuino.'
+          explanation: 'Simular muchos usuarios con wallets propias es justo lo que los protocolos buscan filtrar: agrupan wallets que se envían fondos entre sí, que actúan con los mismos tiempos o que se financian desde el mismo origen. Las excluyen o les dan cantidades mínimas, y pierdes el tiempo invertido.'
         },
         {
           id: 'q3',
-          question: 'Recibes un airdrop de 5,000 tokens de un protocolo nuevo, valorados en $4,000 al momento del claim. ¿Cuál es la estrategia más prudente?',
+          question: 'Recibes un airdrop valorado en $4,000 al momento del claim. ¿Cuál es la estrategia más prudente?',
           options: [
-            { id: 'a', text: 'Holdeo todo, "to the moon"' },
-            { id: 'b', text: 'Vendo todo inmediatamente sin pensar' },
-            { id: 'c', text: 'Estrategia híbrida: vendo 30-50% inmediatamente para asegurar $1,200-2,000 en ganancias reales, holdeo el resto si creo en los fundamentales del protocolo, y defino un stop loss mental para proteger lo restante' },
-            { id: 'd', text: 'Lo deposito todo en un pool de liquidez del mismo token para ganar fees adicionales' }
+            { id: 'a', text: 'Mantengo todo, porque los tokens de airdrop suelen subir tras el lanzamiento' },
+            { id: 'b', text: 'Lo pongo todo en un pool de liquidez del mismo token para cobrar más fees' },
+            { id: 'c', text: 'Lo uso como colateral para pedir prestado y comprar más del mismo token' },
+            { id: 'd', text: 'Vendo 30-50% pronto y le doy al resto un plan, si creo en el protocolo' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Históricamente, la mayoría de tokens de airdrop pierden valor post-lanzamiento porque millones de personas venden simultáneamente. Vender una porción asegura ganancias reales (dinero en tu wallet, no "en papel"). Holdear el resto te da exposición al upside si el protocolo crece. Es balance entre seguridad y oportunidad.'
+          correctAnswer: 'd',
+          explanation: 'Históricamente, la mayoría de los tokens de airdrop pierde valor tras el lanzamiento, porque muchos receptores venden a la vez. Vender una parte asegura dinero real. Lo que mantienes necesita su propio plan, con órdenes reales y no un stop mental. Y la venta puede generar impuestos.'
         },
         {
           id: 'q4',
-          question: 'Un protocolo de Solana con $300M en TVL anuncia un sistema de puntos. ¿Cómo evalúas si vale la pena farmear?',
-          options: [
-            { id: 'a', text: 'Si tiene puntos, siempre vale la pena' },
-            { id: 'b', text: 'Calculo: ¿cuánto TVL tiene? ¿Cuántos usuarios farmean? ¿Cuál es la estimación del FDV del token? ¿Qué porcentaje se destinará al airdrop? Si el ratio puntos/dólar es favorable y uso el protocolo de todas formas, tiene sentido' },
-            { id: 'c', text: 'Los sistemas de puntos siempre son estafas' },
-            { id: 'd', text: 'Deposito todo mi dinero para maximizar puntos' }
-          ],
-          correctAnswer: 'b',
-          explanation: 'El farming inteligente requiere cálculos: si un protocolo tiene $300M TVL y se espera un token con $500M FDV y 10% al airdrop ($50M), tu asignación depende de tu participación relativa en el TVL total. Si ya usarías el protocolo de todas formas (Kamino para lending, por ejemplo), los puntos son un bonus. Si depositas capital que estaría mejor en otro lugar solo por los puntos, calcula si vale la pena.'
+          type: 'fill-blank',
+          question: 'Estima cuánto podría valer tu asignación.',
+          textBefore: 'Un protocolo con $300M de TVL podría lanzar un token de $500M de FDV y dar el 10% al airdrop. Si tu depósito es el 0.01% del TVL y el reparto fuera proporcional, recibirías unos $',
+          textAfter: '.',
+          correctAnswer: '5000',
+          acceptableAnswers: ['5000', '5,000', '5.000', '$5000', '$5,000', '$5.000', '5k', '5000 usd', '5000 dolares', '5000 dólares'],
+          explanation: 'Airdrop total = $500M × 10% = $50M. Tu parte = $50M × 0.01% = $5,000. Es una estimación optimista: el FDV, el porcentaje y los criterios pueden cambiar, y el precio suele caer tras el lanzamiento. Si depositas capital que estaría mejor en otro lugar solo por los puntos, compara con ese costo.'
         },
         {
           id: 'q5',
-          question: '¿Cómo identificas protocolos de Solana que probablemente tendrán un airdrop futuro?',
+          question: '¿Qué protocolos de Solana son los mejores candidatos para un airdrop futuro?',
           options: [
-            { id: 'a', text: 'Los que tienen los APYs más altos' },
-            { id: 'b', text: 'Busca en DefiLlama protocolos con TVL alto y creciente, equipo activo, producto funcionando, inversión de VCs reputados, pero SIN token propio todavía. Esos son los candidatos principales para un TGE con airdrop' },
-            { id: 'c', text: 'Los más nuevos siempre tienen airdrop' },
-            { id: 'd', text: 'Es imposible saber cuáles tendrán airdrop, los protocolos nunca dan señales anticipadas' }
+            { id: 'a', text: 'Los que ofrecen el APY más alto, porque reparten más a sus usuarios' },
+            { id: 'b', text: 'Los más nuevos, porque todos los protocolos nuevos hacen algún airdrop' },
+            { id: 'c', text: 'Los que tienen producto, TVL creciente y VCs, pero todavía sin token' },
+            { id: 'd', text: 'Los que ya tienen token, porque pueden repartir más del mismo token' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Los mejores candidatos para airdrop son protocolos que: (1) tienen producto funcionando con usuarios reales, (2) tienen TVL significativo y creciente, (3) están respaldados por VCs que esperan un token para su retorno de inversión, (4) pero todavía NO tienen token propio. Cuanto antes empieces a usar un protocolo pre-token, mayor será tu antigüedad y potencial asignación en el airdrop.'
+          correctAnswer: 'c',
+          explanation: 'Un protocolo con producto real, TVL creciente y VCs que esperan un token para recuperar su inversión, pero sin token propio todavía, es el candidato clásico. Que sea nuevo no basta: muchos protocolos nuevos nunca lanzan token. DefiLlama te ayuda a filtrar.'
+        },
+        {
+          id: 'q6',
+          question: 'Te llega un DM: "Tu airdrop de JUP está listo. Paga 0.1 SOL de fee de desbloqueo en este enlace". ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Pago, porque 0.1 SOL es muy poco comparado con lo que voy a recibir' },
+            { id: 'b', text: 'Pago desde una wallet vacía, y así solo arriesgo la fee de desbloqueo' },
+            { id: 'c', text: 'Respondo al DM para confirmar que es oficial antes de pagar la fee' },
+            { id: 'd', text: 'Lo ignoro: un airdrop real nunca te pide pagar para poder reclamarlo' }
+          ],
+          correctAnswer: 'd',
+          explanation: 'Una "fee de desbloqueo" es la firma clásica de una estafa. Y el riesgo no es solo el 0.1 SOL: el enlace suele pedir una firma que puede vaciar la wallet que conectes. Reclama solo desde el dominio oficial del protocolo, verificado en su X o Discord oficial.'
+        },
+        {
+          id: 'q7',
+          type: 'true-false',
+          question: 'Los puntos de un protocolo garantizan una cantidad fija de tokens cuando lance su airdrop.',
+          correctAnswer: false,
+          explanation: 'Falso. Los puntos son más transparentes que los airdrops sorpresa, pero no son una promesa: el protocolo puede cambiar los criterios, la conversión o incluso no lanzar token. Trátalos como un posible bonus, no como un pago.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de NFTs en Solana: aparece en tu wallet un NFT que no pediste, con un enlace para "reclamar un premio". ¿Qué haces?',
+          options: [
+            { id: 'a', text: 'Abro el enlace para ver si es un airdrop valioso que pueda vender' },
+            { id: 'b', text: 'Lo vendo enseguida en un marketplace antes de que pierda su valor' },
+            { id: 'c', text: 'No lo abro ni interactúo: suele ser spam o un intento de phishing' },
+            { id: 'd', text: 'Lo envío a otra wallet mía para que no quede registrado en esta' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Como los cNFTs cuestan casi nada, los estafadores los envían en masa con enlaces a sitios falsos. Interactuar con ellos, incluso para venderlos, puede pedirte firmas peligrosas. Déjalo ahí u ocúltalo. (Lo viste en la lección NFTs en Solana.)'
         }
       ]
     }
@@ -3569,17 +4159,17 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'DePIN: Infraestructura Física Descentralizada',
     level: 'Avanzado',
     number: '10 de 13',
-    duration: '15 min',
+    duration: '18 min',
     type: 'Tendencias',
-    description: 'Crypto sale del mundo digital al mundo físico. DePIN usa tokens para incentivar a millones de personas a construir infraestructura real: redes inalámbricas (Helium), mapas (Hivemapper), computación GPU (Render), y sensores ambientales. Solana es el epicentro.',
+    description: 'Crypto sale del mundo digital al mundo físico. DePIN usa tokens para incentivar a millones de personas a construir infraestructura real: redes inalámbricas (Helium), mapas (Bee Maps, antes Hivemapper), computación GPU (Render), y sensores ambientales. Solana es uno de sus centros principales.',
     sections: [
       {
         type: 'intro',
         title: 'Cuando Crypto Construye el Mundo Real',
-        content: 'Hasta ahora, todo lo que hemos visto en crypto ocurre en el mundo digital: tokens, DeFi, NFTs, staking. Pero hay una categoría que está llevando blockchain al **mundo físico**, y Solana es su epicentro. **DePIN** (Decentralized Physical Infrastructure Networks) usa incentivos en tokens para motivar a personas comunes a construir infraestructura que normalmente solo construyen corporaciones gigantes. ¿Quieres un competidor de Google Maps? En lugar de que Google pague millones a flotas de autos con cámaras, Hivemapper paga tokens a cualquiera que instale una dashcam y conduzca. ¿Quieres una red inalámbrica global? En lugar de que AT&T invierta miles de millones, Helium paga tokens a personas que instalan hotspots de IoT (LoRaWAN) y radios 5G en sus casas. ¿Necesitas renderizado de video e IA? En lugar de depender solo de AWS, Render Network paga tokens a personas que comparten su GPU. El resultado: infraestructura construida por la gente, para la gente, incentivada por tokens. Es quizás la narrativa con mayor potencial de impacto real en el mundo.',
+        content: 'Hasta ahora, todo lo que hemos visto en crypto ocurre en el mundo digital: tokens, DeFi, NFTs, staking. Pero hay una categoría que está llevando blockchain al **mundo físico**, y Solana es uno de sus centros principales. **DePIN** (Decentralized Physical Infrastructure Networks) usa incentivos en tokens para motivar a personas comunes a construir infraestructura que normalmente solo construyen corporaciones gigantes. ¿Quieres un competidor de Google Maps? En lugar de que Google pague millones a flotas de autos con cámaras, Bee Maps (antes Hivemapper) paga a quien instale su cámara en el auto y conduzca. ¿Quieres una red inalámbrica global? En lugar de que AT&T invierta miles de millones, Helium paga tokens a personas que instalan en sus casas hotspots de IoT (LoRaWAN) y de Wi-Fi. ¿Necesitas renderizado de video e IA? En lugar de depender solo de AWS, Render Network paga tokens a personas que comparten su GPU. El resultado: infraestructura construida por la gente, para la gente, incentivada por tokens. Es una de las narrativas con más impacto potencial en el mundo físico, aunque la mayoría de proyectos todavía no demuestra que sus ingresos cubran sus recompensas.',
         highlight: {
           title: 'Por Qué DePIN en Solana',
-          text: 'DePIN necesita procesar millones de micro-transacciones de sensores y dispositivos. Ethereum L1 a $1-5 por transacción (y mucho más en congestión) es imposible. Solana a $0.001 es perfecto. Por eso Helium migró de su propia chain a Solana, y la mayoría de proyectos DePIN nuevos eligen Solana desde el inicio.'
+          text: 'DePIN necesita procesar millones de micro-transacciones de sensores y dispositivos. En Ethereum L1, con fees que suben con la congestión, eso sale caro; en Solana cuesta fracciones de centavo. Por eso Helium migró de su propia chain a Solana en 2023, y varios de los proyectos más grandes (Helium, Bee Maps, Render) operan allí. No es la única opción: Filecoin, Akash o Bittensor funcionan en sus propias redes, y el sector completo vale unos $10,000 millones según Messari.'
         }
       },
       {
@@ -3589,16 +4179,17 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: Globe, title: 'El Modelo Tradicional', text: 'Una corporación invierte miles de millones de dólares en infraestructura (torres de celular, centros de datos, flotas de mapeo). Cobra a los usuarios por el servicio. La empresa captura todo el valor. Los usuarios son clientes, no participantes. El problema: es lento, costoso, y concentrado en pocas empresas.' },
           { icon: Users, title: 'El Modelo DePIN', text: 'Un protocolo crea un token e incentiva a personas comunes a proveer la infraestructura. Cada participante invierte poco (una dashcam de $300, un hotspot de $400, su GPU existente). A cambio, recibe tokens por el servicio que provee. Millones de pequeños participantes construyen una red más grande y distribuida que cualquier corporación. Los costos son menores, la cobertura es mayor, y el valor se distribuye entre todos los participantes.' },
-          { icon: Network, title: 'El Flywheel (Ciclo Virtuoso)', text: 'Más participantes → mejor servicio → más usuarios/clientes → más demanda del token → el token sube → más personas quieren participar → más participantes. Este ciclo virtuoso es lo que hace que DePIN escale exponencialmente una vez que alcanza masa crítica. Helium pasó de 0 a casi 1 millón de hotspots registrados en su pico de 2022 usando este modelo. Ojo: el flywheel también gira en reversa, cuando las recompensas caen, los operadores apagan sus equipos (a mediados de 2026 Helium tiene ~376,000 hotspots activos).' }
+          { icon: Network, title: 'El Flywheel (Ciclo Virtuoso)', text: 'Más participantes dan mejor servicio, el mejor servicio atrae más clientes, más clientes pagan más por la red y eso puede atraer más participantes. Este ciclo virtuoso es lo que permite que una red DePIN crezca rápido una vez que alcanza masa crítica. Helium pasó de 0 a casi 1 millón de hotspots registrados en su pico de 2022 usando este modelo. Ojo: el flywheel también gira en reversa, cuando las recompensas caen, los operadores apagan sus equipos (en noviembre de 2026, helium.com reporta unos 358,000 hotspots activos).' }
         ]
       },
       {
         type: 'main',
         title: 'Los Proyectos DePIN Más Importantes de Solana',
-        content: 'Solana alberga los proyectos DePIN más grandes y maduros del ecosistema crypto:',
+        content: 'Solana alberga varios de los proyectos DePIN más grandes y maduros del ecosistema crypto:',
+        asOf: 'noviembre de 2026',
         features: [
-          { icon: Smartphone, title: 'Helium (HNT)', text: 'La red inalámbrica descentralizada más grande del mundo. Personas instalan hotspots en sus casas/oficinas y ganan HNT por proveer cobertura IoT (LoRaWAN) y celular 5G. A mediados de 2026 tiene ~376,000 hotspots activos (llegó a registrar casi 1 millón en su pico de 2022). Desde HIP-138 (enero de 2025), las recompensas de IOT y MOBILE volvieron a pagarse en HNT: el experimento de tres tokens terminó. Helium Mobile vende planes celulares en USA ($15/mes por 10GB, $30/mes ilimitado) que combinan la red descentralizada con roaming. Es DePIN funcionando en la vida real, puedes llamar y navegar con una red construida por la gente.' },
-          { icon: Eye, title: 'Hivemapper (HONEY)', text: 'Google Maps descentralizado. Instalas una dashcam especial en tu auto y ganas tokens HONEY por cada kilómetro que mapeas. Los datos de las cámaras crean un mapa global actualizado en tiempo real, algo que Google actualiza cada meses/años. Empresas de logística, navegación, y urbanismo pagan por acceder a estos datos frescos. Ya mapearon millones de kilómetros en todo el mundo.' },
+          { icon: Smartphone, title: 'Helium (HNT)', text: 'La red inalámbrica descentralizada más grande del mundo. Personas instalan hotspots en casas y oficinas y ganan HNT por dar cobertura IoT (LoRaWAN) o por llevar tráfico móvil por Wi-Fi. Tiene unos 358,000 hotspots activos (llegó a registrar casi 1 millón en 2022). Desde HIP-138 (enero de 2025) todo se paga en HNT, y en marzo de 2025 dejó de usar las radios 5G (CBRS) para concentrarse en Wi-Fi. Helium Mobile vende planes celulares solo en EE. UU., y en México Movistar ya descarga tráfico de sus clientes en hotspots de Helium. Si quieres un hotspot IoT en Colombia, debe ser de la banda AU915.' },
+          { icon: Eye, title: 'Bee Maps (antes Hivemapper, token HONEY)', text: 'Un mapa descentralizado. Instalas su cámara en el auto y te pagan por los kilómetros que mapeas: desde agosto de 2026, en USDC. Los datos crean un mapa que se actualiza mucho más seguido que los mapas tradicionales, y empresas de logística, navegación y urbanismo pagan por acceder a él. Ya mapearon millones de kilómetros. Ojo: la cámara se consigue con un plan de unos $19 al mes por 24 meses, y por ahora solo en EE. UU. y Puerto Rico.' },
           { icon: Cpu, title: 'Render Network (RENDER)', text: 'Computación GPU descentralizada. Si tienes una tarjeta gráfica potente (NVIDIA), puedes "alquilar" tu GPU para renderizar videos, entrenar modelos de IA, o procesar gráficos 3D. Los creadores de contenido, estudios de VFX, y desarrolladores de IA pagan RENDER tokens por el poder de cómputo. Es una alternativa descentralizada a AWS/Google Cloud para tareas de GPU.' },
           { icon: Server, title: 'io.net', text: 'Red de computación GPU enfocada en IA. Agrega GPUs de centros de datos, mineros de crypto, y usuarios individuales para crear un "supercomputador descentralizado". Las empresas de IA que necesitan entrenar modelos pueden acceder a GPUs más baratas y abundantes que en servicios centralizados. Solana procesa los micropagos y la coordinación de la red.' }
         ]
@@ -3634,8 +4225,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Cómo Participar en DePIN',
         content: 'Hay varias formas de participar en el ecosistema DePIN, desde comprar tokens hasta operar hardware:',
         features: [
-          { icon: Smartphone, title: 'Operar Hardware', text: 'Compras el dispositivo del proyecto (dashcam de Hivemapper ~$300, hotspot de Helium ~$200-500, o usas tu GPU existente para Render). Lo conectas y empiezas a ganar tokens. El ROI depende del proyecto, tu ubicación, y la demanda del servicio. Investiga el payback period (cuántos meses tarda en recuperar la inversión del hardware) antes de comprar.' },
-          { icon: BarChart3, title: 'Invertir en Tokens', text: 'Si no quieres operar hardware, puedes comprar los tokens de los proyectos DePIN (HNT, HONEY, RENDER, IO). Es una apuesta en que la red va a crecer y generar más demanda del token. Los tokens DePIN tienden a estar más vinculados a métricas reales (número de dispositivos, revenue generado) que los memecoins, pero siguen siendo volátiles.' },
+          { icon: Smartphone, title: 'Operar Hardware', text: 'Consigues el dispositivo del proyecto (un hotspot de Helium cuesta unos cientos de dólares, la cámara de Bee Maps va por suscripción, y para Render usas tu GPU). Verifica primero que el proyecto opere en tu país. Lo conectas y empiezas a ganar tokens. El ROI depende del proyecto, tu ubicación, y la demanda del servicio. Investiga el payback period (cuántos meses tarda en recuperar la inversión del hardware) antes de comprar.' },
+          { icon: BarChart3, title: 'Invertir en Tokens', text: 'Si no quieres operar hardware, puedes comprar los tokens de los proyectos DePIN (HNT, HONEY, RENDER, IO). Es una apuesta a que la red va a crecer y a que ese crecimiento se traduzca en demanda por el token, que no siempre ocurre. Los tokens DePIN tienden a estar más vinculados a métricas reales (número de dispositivos, revenue generado) que los memecoins, pero siguen siendo volátiles.' },
           { icon: Search, title: 'Evaluar Proyectos DePIN', text: 'Antes de participar, evalúa: (1) ¿Hay demanda real por el servicio? (mapeo, conectividad IoT/celular, GPU sí tienen demanda). (2) ¿El modelo económico es sostenible? (¿los ingresos de clientes pagan las recompensas?). (3) ¿Cuántos dispositivos activos hay? (más dispositivos = red más valiosa). (4) ¿El payback period del hardware es razonable? (menos de 12-18 meses idealmente).' }
         ]
       },
@@ -3646,18 +4237,18 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: AlertTriangle, title: 'Sostenibilidad de las Recompensas', text: 'Muchos proyectos DePIN empiezan con recompensas generosas en tokens para atraer participantes. Pero si la demanda real del servicio no crece lo suficiente, las recompensas disminuyen y los operadores de hardware dejan de participar. Busca proyectos donde los ingresos de clientes reales (no solo emisión de tokens) financien las recompensas.' },
           { icon: TrendingDown, title: 'Riesgo de Hardware', text: 'Compras un hotspot de $500 esperando recuperar la inversión en 6 meses. Pero el token cae 70%, o la red cambia sus criterios de recompensa, y ahora tu ROI es de 3 años. El hardware es un costo hundido, no puedes "vender" un hotspot de Helium por lo que pagaste si el proyecto no funciona.' },
-          { icon: Brain, title: 'Regulación', text: 'DePIN opera en áreas que a veces están reguladas (telecomunicaciones, mapeo, almacenamiento de datos). Un cambio regulatorio puede afectar significativamente la viabilidad de ciertos proyectos en ciertos países. Helium Mobile, por ejemplo, necesita permisos de telecomunicaciones que varían por jurisdicción.' }
+          { icon: Brain, title: 'Regulación', text: 'DePIN opera en áreas que a veces están reguladas (telecomunicaciones, mapeo, almacenamiento de datos). Un cambio regulatorio puede afectar significativamente la viabilidad de ciertos proyectos en ciertos países. Helium Mobile, por ejemplo, solo vende planes en EE. UU.: ofrecer telefonía requiere permisos que varían por país.' }
         ]
       },
       {
         type: 'takeaways',
         title: 'DePIN: El Puente entre Crypto y el Mundo Real',
         items: [
-          'DePIN usa tokens para incentivar a personas a construir infraestructura física: redes inalámbricas (Helium), mapas (Hivemapper), computación GPU (Render), y más. Es crypto resolviendo problemas reales del mundo físico.',
-          'Solana es el hogar de DePIN porque puede procesar millones de micro-transacciones de dispositivos IoT a costo casi cero. Helium migró a Solana específicamente por esta capacidad.',
-          'Los proyectos principales: Helium (~376,000 hotspots activos a mediados de 2026, tras un pico de casi 1 millón en 2022), Hivemapper (mapeo con dashcams), Render Network (GPU para rendering/IA), io.net (computación GPU para IA).',
+          'DePIN usa tokens para incentivar a personas a construir infraestructura física: redes inalámbricas (Helium), mapas (Bee Maps), computación GPU (Render), y más. Es crypto resolviendo problemas reales del mundo físico.',
+          'Solana es uno de los hogares principales de DePIN porque procesa millones de micro-transacciones a costo casi cero. Helium migró a Solana por esa capacidad, aunque hay DePIN grandes en otras redes.',
+          'Los proyectos principales: Helium (~358,000 hotspots activos en noviembre de 2026, tras un pico de casi 1 millón en 2022), Bee Maps (mapeo con cámaras en autos), Render Network (GPU para rendering/IA), io.net (computación GPU para IA).',
           'Puedes participar operando hardware (comprar y operar dispositivos) o invirtiendo en tokens. Antes de comprar hardware, calcula el payback period y verifica que la demanda real del servicio justifique la inversión.',
-          'El modelo DePIN crea un flywheel: más participantes → mejor servicio → más clientes → más demanda del token → más participantes. Pero el flywheel también funciona en reversa: si el token cae y las recompensas bajan, los operadores apagan sus equipos, como le pasó a Helium después de su pico de 2022.',
+          'El modelo DePIN busca un flywheel: más participantes, mejor servicio, más clientes y, con eso, más participantes. Pero el flywheel también funciona en reversa: si el token cae y las recompensas bajan, los operadores apagan sus equipos, como le pasó a Helium después de su pico de 2022.',
           'Riesgos principales: recompensas en tokens pueden disminuir si la demanda real no crece, el hardware es un costo hundido difícil de recuperar, y la regulación puede afectar ciertos proyectos. Evalúa la sostenibilidad de los ingresos reales antes de comprometerte.'
         ]
       }
@@ -3666,63 +4257,92 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Qué es DePIN y por qué es diferente a los proyectos crypto típicos?',
+          question: '¿Qué es DePIN y en qué se diferencia de la mayoría de los proyectos crypto?',
           options: [
-            { id: 'a', text: 'Es un tipo de memecoin de moda' },
-            { id: 'b', text: 'Son redes que usan incentivos en tokens para que personas comunes construyan infraestructura física real (redes inalámbricas, mapas, computación). A diferencia de DeFi o NFTs, DePIN crea valor en el mundo físico, no solo digital' },
-            { id: 'c', text: 'Es un exchange descentralizado' },
-            { id: 'd', text: 'Es solo un concepto teórico, no hay proyectos reales' }
+            { id: 'a', text: 'Un tipo de exchange descentralizado que opera con activos del mundo físico' },
+            { id: 'b', text: 'Un concepto teórico que todavía no tiene ningún proyecto funcionando hoy' },
+            { id: 'c', text: 'Redes de servidores que solo existen dentro de la nube de grandes empresas' },
+            { id: 'd', text: 'Redes que pagan en tokens a personas que construyen infraestructura física' }
           ],
-          correctAnswer: 'b',
-          explanation: 'DePIN es quizás la aplicación más concreta de blockchain en el mundo real. Helium tiene cientos de miles de hotspots activos dando cobertura IoT (LoRaWAN) y 5G. Hivemapper tiene millones de kilómetros mapeados. Render procesa trabajos de GPU reales para creadores y empresas de IA. Es infraestructura tangible construida por la gente, incentivada por tokens.'
+          correctAnswer: 'd',
+          explanation: 'DePIN usa incentivos en tokens para que personas comunes instalen y operen infraestructura: hotspots inalámbricos (Helium), cámaras de mapeo (Bee Maps) o GPUs (Render, io.net). A diferencia de DeFi o los NFTs, el resultado existe en el mundo físico. Y hay proyectos funcionando hoy con cientos de miles de dispositivos.'
         },
         {
           id: 'q2',
-          question: '¿Por qué Solana es la blockchain preferida para proyectos DePIN?',
+          question: '¿Por qué varios proyectos DePIN grandes eligieron Solana?',
           options: [
-            { id: 'a', text: 'Porque tiene el logo más bonito' },
-            { id: 'b', text: 'Porque puede procesar millones de micro-transacciones de sensores y dispositivos IoT a costo casi cero ($0.001). Ethereum L1, con fees de $1-5 o más, haría imposible la coordinación de redes con millones de dispositivos' },
-            { id: 'c', text: 'Porque es la única blockchain que existe' },
-            { id: 'd', text: 'Porque DePIN no necesita blockchain realmente' }
+            { id: 'a', text: 'Procesa muchas microtransacciones de recompensas a un costo casi nulo' },
+            { id: 'b', text: 'Porque Solana garantiza que los tokens de DePIN suban de precio con el uso' },
+            { id: 'c', text: 'Porque en Solana los dispositivos pueden operar sin conexión a internet' },
+            { id: 'd', text: 'Porque es la única blockchain capaz de registrar datos del mundo físico' }
           ],
-          correctAnswer: 'b',
-          explanation: 'DePIN genera volúmenes enormes de micro-transacciones (cada dispositivo reporta datos, recibe recompensas, coordina con la red). A $0.001 por transacción en Solana, esto es viable. A $1+ por transacción en Ethereum L1, sería económicamente imposible. Helium migró de su propia chain a Solana específicamente por esta ventaja de costos y velocidad.'
+          correctAnswer: 'a',
+          explanation: 'Una red DePIN genera un volumen enorme de pequeñas transacciones: cada dispositivo reporta, recibe recompensas y se coordina con la red. A fracciones de centavo por transacción, eso es viable en Solana. Helium migró a Solana por esa razón. No es la única opción: hay DePIN grandes en otras redes.'
         },
         {
           id: 'q3',
-          question: 'Quieres participar en Hivemapper. Compras una dashcam por $300. ¿Qué deberías calcular antes?',
+          question: 'Quieres comprar un hotspot de Helium de $300 para tu apartamento en Medellín. ¿Qué deberías revisar antes?',
           options: [
-            { id: 'a', text: 'Nada, es una inversión segura' },
-            { id: 'b', text: 'El payback period: ¿cuántos tokens HONEY gano por kilómetro? ¿Cuánto vale HONEY actualmente? ¿Cuántos kilómetros conduzco al mes? ¿En cuántos meses recupero los $300 de la dashcam? Si el payback es mayor a 12-18 meses, quizás no vale la pena' },
-            { id: 'c', text: 'Solo el precio del token HONEY' },
-            { id: 'd', text: 'La cámara se paga sola en una semana' }
+            { id: 'a', text: 'El payback según lo que ganan los hotspots cercanos, y que use la banda AU915' },
+            { id: 'b', text: 'Solo el precio actual de HNT, porque es lo único que define cuánto vas a ganar' },
+            { id: 'c', text: 'Nada: un hotspot es un ingreso pasivo que se paga solo en pocas semanas' },
+            { id: 'd', text: 'Cuántos hotspots hay en el mundo, porque más red significa más pagos para ti' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El hardware es un costo hundido, no puedes devolverlo si el proyecto no funciona. Calcular el payback period te dice si la inversión tiene sentido económico. Si conduces poco, vives en una zona ya mapeada, o HONEY baja de precio, tu ROI puede ser mucho peor de lo esperado. Haz los números antes de comprar.'
+          correctAnswer: 'a',
+          explanation: 'Lo que importa es lo que ganan hoy los hotspots de tu zona (revísalo en un explorador) y cuánto tardas en recuperar los $300. Colombia usa la banda AU915, así que un equipo de otra banda no sirve. El precio de HNT es solo una parte: si en tu zona ya hay muchos hotspots, cada uno gana menos.'
         },
         {
           id: 'q4',
-          question: '¿Cuál es el mayor riesgo de participar en proyectos DePIN como operador de hardware?',
-          options: [
-            { id: 'a', text: 'Que el hardware se rompa' },
-            { id: 'b', text: 'Que el token de recompensa pierda valor significativo, haciendo que tu payback period se extienda de meses a años. El hardware es un costo hundido que no puedes recuperar fácilmente' },
-            { id: 'c', text: 'No hay riesgos, es ingreso pasivo garantizado' },
-            { id: 'd', text: 'Que te roben el dispositivo' }
-          ],
-          correctAnswer: 'b',
-          explanation: 'Si compras un hotspot de $500 y el token cae 80%, tu ROI pasa de "6 meses" a "3+ años". A diferencia de una inversión en tokens (que puedes vender), el hardware especializado de DePIN tiene valor de reventa limitado. Por eso es crucial evaluar la sostenibilidad del proyecto y sus ingresos reales (no solo las recompensas en tokens) antes de invertir en hardware.'
+          type: 'fill-blank',
+          question: 'Calcula el payback de un hotspot.',
+          textBefore: 'Un hotspot cuesta $300 y los de tu zona ganan hoy unos $15 al mes. A ese ritmo, recuperas la inversión en',
+          textAfter: 'meses.',
+          correctAnswer: '20',
+          acceptableAnswers: ['20', 'veinte', '20 meses', '~20'],
+          explanation: '$300 ÷ $15 al mes = 20 meses. Es más que el rango de 12-18 meses que la lección sugiere como límite razonable, y supone que el precio del token y las recompensas se mantienen. Si el token cae, el payback se alarga todavía más.'
         },
         {
           id: 'q5',
+          question: '¿Cuál es el mayor riesgo de participar en DePIN como operador de hardware?',
+          options: [
+            { id: 'a', text: 'Que el equipo se rompa, porque no tiene garantía ni piezas de repuesto' },
+            { id: 'b', text: 'Ninguno: el protocolo garantiza un ingreso pasivo a cada operador' },
+            { id: 'c', text: 'Que la red te cobre una fee mensual cada vez más alta por conectarte' },
+            { id: 'd', text: 'Que el token de recompensa caiga y el payback pase de meses a años' }
+          ],
+          correctAnswer: 'd',
+          explanation: 'Si compras un equipo de $500 y el token cae 80%, un payback de 6 meses puede convertirse en 3 años o más. Y a diferencia de un token, que puedes vender en segundos, el hardware especializado tiene poco valor de reventa: es un costo hundido. Ningún protocolo garantiza ingresos.'
+        },
+        {
+          id: 'q6',
           question: '¿Qué diferencia a un proyecto DePIN sostenible de uno que probablemente fracasará?',
           options: [
-            { id: 'a', text: 'El que tenga el token con más hype' },
-            { id: 'b', text: 'Un proyecto sostenible genera ingresos de clientes reales que pagan por el servicio, no solo de emisión de nuevos tokens. Si las recompensas vienen solo de inflación del token (sin ingresos reales), la economía colapsará eventualmente' },
-            { id: 'c', text: 'El que tenga más dispositivos, sin importar los ingresos' },
-            { id: 'd', text: 'Todos los proyectos DePIN son sostenibles por definición' }
+            { id: 'a', text: 'El token con más hype, porque atrae operadores a la red más rápido' },
+            { id: 'b', text: 'Clientes reales que pagan por el servicio, no solo emisión de tokens' },
+            { id: 'c', text: 'El mayor número de dispositivos, sin importar los ingresos que generen' },
+            { id: 'd', text: 'Recompensas altas, porque garantizan que nadie apague su equipo nunca' }
           ],
           correctAnswer: 'b',
-          explanation: 'La sostenibilidad de DePIN depende de que haya demanda real por el servicio. Helium tiene empresas pagando por cobertura. Render tiene creadores y empresas de IA pagando por GPU. Hivemapper tiene clientes de logística pagando por datos de mapeo. Si las recompensas solo vienen de imprimir más tokens (sin clientes reales), es un esquema insostenible que colapsará cuando la emisión se agote.'
+          explanation: 'Si las recompensas vienen solo de imprimir tokens, la economía depende de que entre dinero nuevo. Un proyecto sostenible tiene clientes que pagan por cobertura, datos o cómputo. Muchos dispositivos sin demanda real solo reparten las mismas recompensas entre más gente, como le pasó a Helium tras su pico de 2022.'
+        },
+        {
+          id: 'q7',
+          type: 'true-false',
+          question: 'El flywheel de DePIN también puede funcionar en reversa: si el token cae y las recompensas bajan, los operadores apagan sus equipos y el servicio empeora.',
+          correctAnswer: true,
+          explanation: 'Verdadero. Helium pasó de casi 1 millón de hotspots en 2022 a unos 358,000 activos en noviembre de 2026. El mismo mecanismo que hace crecer la red puede encogerla cuando las recompensas dejan de cubrir los costos.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de Airdrops y Points Farming: ¿por qué conviene farmear desde una wallet de actividad, separada y con poco saldo?',
+          options: [
+            { id: 'a', text: 'Si firmas algo malicioso por error, el daño queda limitado a esa wallet' },
+            { id: 'b', text: 'Porque los protocolos dan más puntos a las wallets que tienen poco saldo' },
+            { id: 'c', text: 'Porque así puedes crear muchas wallets y multiplicar tu asignación' },
+            { id: 'd', text: 'Porque las wallets con mucho saldo quedan excluidas de los airdrops' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Farmear implica conectarte a protocolos nuevos y firmar muchas transacciones. Si una resulta maliciosa, solo pierdes lo que hay en esa wallet, no tus ahorros. Usarla para crear muchas wallets sería Sybil farming, que los protocolos penalizan. (Lo viste en la lección Airdrops y Points Farming.)'
         }
       ]
     }
@@ -3732,14 +4352,14 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Monolítico vs Modular: La Guerra de Arquitecturas',
     level: 'Avanzado',
     number: '11 de 13',
-    duration: '16 min',
+    duration: '20 min',
     type: 'Técnico',
     description: 'El debate más importante de la industria: ¿es mejor una blockchain monolítica ultra-rápida (Solana) o un ecosistema modular de capas especializadas (Ethereum + L2s)? Entiende los trade-offs para tomar mejores decisiones de inversión.',
     sections: [
       {
         type: 'intro',
         title: 'El Gran Debate de la Escalabilidad',
-        content: 'Imagina que necesitas transportar a millones de personas por una ciudad. Hay dos filosofías: construir un **tren bala gigante** que lleva a todos en una sola línea ultra-rápida (Solana), o construir **muchas líneas de metro separadas** que se conectan entre sí con estaciones de transferencia (Ethereum + L2s). Cada enfoque tiene ventajas y desventajas fundamentales. Entender este debate no es solo académico, tiene implicaciones directas en tus decisiones de inversión y en qué ecosistema usas para DeFi. Solana apuesta por la arquitectura **monolítica**: una sola blockchain que hace todo (ejecución, consenso, almacenamiento) de forma ultra-rápida. Ethereum apuesta por la arquitectura **modular**: separar las funciones en capas especializadas (L2s para ejecución, L1 para seguridad). Ningún enfoque es "mejor" en absoluto, cada uno sacrifica algo para ganar algo diferente.',
+        content: 'Imagina que necesitas transportar a millones de personas por una ciudad. Hay dos filosofías: construir un **tren bala gigante** que lleva a todos en una sola línea ultra-rápida (Solana), o construir **muchas líneas de metro separadas** que se conectan entre sí con estaciones de transferencia (Ethereum + L2s). Cada enfoque tiene ventajas y desventajas fundamentales. Entender este debate no es solo académico, tiene implicaciones directas en tus decisiones de inversión y en qué ecosistema usas para DeFi. Para entender el debate, primero hay que saber que toda blockchain hace cuatro trabajos: **ejecución** (correr las transacciones), **liquidación** o settlement (donde un resultado se considera final y se resuelven disputas), **consenso** (acordar el orden) y **disponibilidad de datos** (publicar los datos para que cualquiera pueda verificar). Solana apuesta por la arquitectura **monolítica**: hacer los cuatro en una sola capa, lo más rápido posible. Ethereum apuesta por la arquitectura **modular**: las L2 ejecutan, y Ethereum L1 se encarga del consenso, la liquidación y la disponibilidad de datos. Ningún enfoque es "mejor" en absoluto, cada uno sacrifica algo para ganar algo diferente.',
         highlight: {
           title: 'Por Qué Importa para Ti',
           text: 'Como usuario de DeFi, la arquitectura afecta directamente tu experiencia: costos de transacción, velocidad, liquidez disponible, facilidad de uso, y riesgo de bridges. Como inversor, afecta qué ecosistema captura más valor a largo plazo. No es un debate teórico, es práctico.'
@@ -3750,10 +4370,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'El Enfoque Monolítico: La Tesis de Solana',
         content: 'Solana cree que la mejor blockchain es una sola cadena que hace todo extraordinariamente rápido. En lugar de dividir el trabajo en capas, optimiza una sola capa para manejar todo:',
         features: [
-          { icon: Zap, title: 'Velocidad Bruta', text: 'Solana procesa miles de transacciones por segundo en producción (la cifra total incluye votos de consenso; las de usuarios suelen ir de cientos a ~1-3k según la carga), con latencia de ~400 milisegundos. Aun así, órdenes de magnitud más que Ethereum L1. El objetivo es llegar a cientos de miles de TPS con Firedancer. Todo esto en una sola capa, sin L2s ni bridges. Un swap en Jupiter se confirma en menos de un segundo.' },
+          { icon: Zap, title: 'Velocidad Bruta', text: 'Solana procesa en producción de cientos a unos pocos miles de transacciones de usuarios por segundo, según la carga, y desde octubre de 2026 produce un bloque cada ~200 milisegundos (antes ~400). Ojo al leer exploradores: con la actualización Alpenglow, los votos de los validadores dejaron de contarse como transacciones, así que el TPS reportado bajó sin que la red se hiciera más lenta. Aun así, es mucho más que Ethereum L1. Firedancer apunta a bastante más capacidad, aunque las cifras de un millón de TPS vienen de pruebas, no de producción. Todo esto en una sola capa, sin L2s ni bridges. Un swap en Jupiter se confirma en menos de un segundo.' },
           { icon: Layers, title: 'Componibilidad Sincrónica', text: 'Esta es quizás la ventaja más poderosa de Solana. En una sola transacción atómica, puedes: hacer un swap en Jupiter + depositar en Kamino + stakear el resultado en Jito. Las tres operaciones ocurren instantáneamente en el mismo bloque. Si alguna falla, TODAS se revierten. Esto permite construir operaciones DeFi complejas que son imposibles cuando las apps están en diferentes L2s.' },
-          { icon: Server, title: 'La Apuesta en Hardware', text: 'La filosofía de Solana es que el hardware mejora constantemente (Ley de Moore). En lugar de diseñar software complejo para dividir la carga, Solana diseña software que aprovecha al máximo el hardware más potente disponible. A medida que los procesadores y la fibra óptica mejoran, Solana automáticamente se vuelve más rápida, sin necesidad de rediseños complejos.' },
-          { icon: Activity, title: 'Mercados de Fees Localizados', text: 'Una crítica histórica a las cadenas monolíticas: si todo pasa en una sola cadena, un evento caliente (un mint masivo, un memecoin viral) congestiona a TODOS. Solana lo resolvió con mercados de fees localizados: los priority fees se calculan por cuenta, no globalmente. Si hay una guerra de fees por un token de moda, solo quienes compiten por ESE token pagan más; tu swap de SOL-USDC sigue costando fracciones de centavo. Es una ventaja arquitectónica que fortalece la tesis monolítica.' }
+          { icon: Server, title: 'La Apuesta en Hardware', text: 'La filosofía de Solana es que el hardware mejora constantemente (Ley de Moore). En lugar de diseñar software complejo para dividir la carga, Solana diseña software que aprovecha al máximo el hardware más potente disponible. A medida que los procesadores y la fibra óptica mejoran, Solana puede volverse más rápida sin rediseños de fondo. El costo: cada salto exige que los validadores actualicen su hardware.' },
+          { icon: Activity, title: 'Mercados de Fees Localizados', text: 'Una crítica histórica a las cadenas monolíticas: si todo pasa en una sola cadena, un evento caliente (un mint masivo, un memecoin viral) congestiona a TODOS. Solana lo mitiga con mercados de fees localizados: la competencia por prioridad se da sobre las cuentas que cada transacción toca, no sobre toda la red. Si hay una guerra de fees por un token de moda, quienes compiten por ESE token pagan más, y tu swap de SOL-USDC normalmente sigue costando fracciones de centavo. Funciona en buena medida, pero no es perfecto: si la demanda satura la red entera, o si tu transacción toca una cuenta muy disputada, también lo sientes.' }
         ]
       },
       {
@@ -3761,9 +4381,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'El Enfoque Modular: La Tesis de Ethereum',
         content: 'Ethereum cree que una sola blockchain no puede escalar lo suficiente sin sacrificar descentralización. Su solución: separar las funciones en capas especializadas:',
         features: [
-          { icon: Network, title: 'L1 + L2s: División del Trabajo', text: 'Ethereum L1 se especializa en seguridad y consenso. Las L2s (Arbitrum, Optimism, Base, zkSync) se especializan en ejecutar transacciones rápidamente y a bajo costo. Las L2s "publican" un resumen de sus transacciones en Ethereum L1, heredando su seguridad. Es como si cada L2 fuera una sucursal bancaria, y Ethereum L1 fuera la bóveda central.' },
-          { icon: Shield, title: 'Máxima Descentralización en L1', text: 'Al mantener Ethereum L1 "lento" pero accesible (puedes correr un nodo en un laptop), maximizan la descentralización de la capa base. Cualquiera puede verificar la cadena. Los validadores de Solana necesitan hardware de $5,000-20,000+, lo que concentra la operación de nodos en manos de quienes pueden costear ese hardware.' },
-          { icon: Layers, title: 'Rollups: El Mecanismo', text: 'Las L2s ejecutan miles de transacciones off-chain y luego comprimen un "proof" (prueba) que se publica en Ethereum L1. Hay dos tipos: Optimistic Rollups (Arbitrum, Base) que asumen que las transacciones son válidas a menos que alguien las dispute, y ZK Rollups (zkSync, StarkNet) que generan pruebas matemáticas de validez. Ambos reducen costos dramáticamente.' },
+          { icon: Network, title: 'L1 + L2s: División del Trabajo', text: 'Ethereum L1 se especializa en seguridad y consenso. Las L2s (Arbitrum, Optimism, Base, zkSync) se especializan en ejecutar transacciones rápidamente y a bajo costo. Las L2s publican los datos de sus transacciones en Ethereum L1, y de ahí heredan buena parte de su seguridad. Es como si cada L2 fuera una sucursal bancaria, y Ethereum L1 fuera la bóveda central.' },
+          { icon: Shield, title: 'Máxima Descentralización en L1', text: 'Al mantener Ethereum L1 "lento" pero accesible (puedes correr un nodo en un laptop), maximizan la descentralización de la capa base. Cualquiera puede verificar la cadena. Operar un validador de Solana cuesta unos $600-1,300 al mes en un servidor dedicado, más unos 0.8 SOL por epoch en tarifas de votación, lo que concentra la operación de nodos en manos de quienes pueden costear ese hardware.' },
+          { icon: Layers, title: 'Rollups: El Mecanismo', text: 'Las L2s ejecutan miles de transacciones fuera de L1 y publican en Ethereum los datos comprimidos de esas transacciones. Hay dos tipos. Los **Optimistic Rollups** (Arbitrum, Base) publican los datos y el nuevo estado, sin prueba: se asume válido salvo que alguien demuestre un fraude dentro de una ventana de disputa, y por eso retirar a L1 por el puente oficial tarda unos 7 días. Los **ZK Rollups** (zkSync, Starknet) publican además una prueba matemática de validez. Ambos reducen costos dramáticamente.' },
           { icon: Zap, title: 'Blobs (EIP-4844): Por Qué las L2 Cuestan Centavos', text: 'En marzo de 2024, la actualización Dencun introdujo los "blobs": un espacio de datos barato y temporal donde las L2s publican sus transacciones sin competir por el espacio permanente de Ethereum L1. El resultado fue dramático: los fees de las L2s cayeron de dólares a centavos. Un swap en Base o Arbitrum hoy cuesta centavos, no los $10-50 de 2021. Cualquier comparación honesta con Ethereum debe partir de esta realidad post-Dencun.' }
         ]
       },
@@ -3773,10 +4393,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         leftSide: {
           title: 'Solana (Monolítico)',
           points: [
-            'Una sola cadena rápida (miles de TPS, ~400ms)',
+            'Una sola cadena rápida (bloques cada ~200 ms)',
             'Toda la liquidez en un solo lugar',
             'Componibilidad sincrónica (operaciones atómicas complejas)',
-            'Sin bridges ni fragmentación',
+            'Sin bridges dentro del ecosistema (para traer activos de otras cadenas, sí)',
             'Requiere hardware potente para validadores',
             'Riesgo: si L1 tiene problemas, todo el ecosistema se detiene'
           ]
@@ -3798,9 +4418,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'El Problema de la Fragmentación',
         content: 'La mayor debilidad del enfoque modular se llama **fragmentación de liquidez**, y afecta directamente a los usuarios:',
         features: [
-          { icon: AlertTriangle, title: 'Liquidez Dividida', text: 'Si tienes USDC en Arbitrum pero quieres usar un protocolo en Base, necesitas un bridge. Ese bridge puede tardar minutos o horas, cuesta fees adicionales, y tiene riesgo de hack (recordemos: los bridges han sido los mayores targets de hackeos). La liquidez de Ethereum está dividida entre 20+ L2s, lo que significa que cada pool individual tiene menos profundidad que si todo estuviera junto.' },
+          { icon: AlertTriangle, title: 'Liquidez Dividida', text: 'Si tienes USDC en Arbitrum pero quieres usar un protocolo en Base, necesitas un bridge. Un bridge tradicional puede tardar minutos u horas, cuesta fees adicionales y tiene riesgo de hack (los bridges han sido de los mayores targets de hackeos). Los bridges basados en intents (como Across o Relay) cruzan en segundos porque un intermediario te entrega los fondos en destino y luego se cobra, pero sumas un intermediario y un costo. La liquidez de Ethereum está dividida entre 20+ L2s, lo que significa que cada pool individual tiene menos profundidad que si todo estuviera junto.' },
           { icon: Users, title: 'UX Complicada', text: 'Un usuario nuevo de Ethereum necesita decidir: ¿cuál L2 uso? ¿Arbitrum? ¿Base? ¿Optimism? Luego necesita hacer bridge de sus fondos. Luego descubre que el protocolo que quiere usar está en otra L2. Es una experiencia fragmentada y confusa. En Solana, todo está en un solo lugar: conectas Phantom a Jupiter y ya.' },
-          { icon: Zap, title: 'La Ventaja de Solana Aquí', text: 'En Solana, toda la liquidez de DeFi está en una sola cadena. Cuando haces un swap en Jupiter, accedes a TODA la liquidez disponible. No hay que preocuparse por cuál L2 tiene más liquidez para tu par de tokens. Esta es una ventaja competitiva real que se traduce en mejor ejecución y menor slippage para los usuarios.' }
+          { icon: Zap, title: 'La Ventaja de Solana Aquí', text: 'En Solana, la liquidez de DeFi está en una sola cadena. Cuando haces un swap en Jupiter, accedes a toda la liquidez de la red. Eso no elimina los bridges por completo: para traer activos de otras cadenas se usan, y el de Wormhole fue hackeado en 2022 del lado de Solana por $320M. No hay que preocuparse por cuál L2 tiene más liquidez para tu par de tokens. Esta es una ventaja competitiva real que se traduce en mejor ejecución y menor slippage para los usuarios.' }
         ]
       },
       {
@@ -3808,8 +4428,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Las Debilidades de Cada Enfoque',
         content: 'Ningún enfoque es perfecto. Ser honesto sobre las debilidades te hace un mejor inversor y usuario:',
         features: [
-          { icon: AlertTriangle, title: 'Debilidades de Solana', text: 'Ha tenido episodios de congestión y degradación de rendimiento (aunque las caídas completas son cosa del pasado). Los requisitos de hardware para validadores limitan quién puede operar un nodo, lo que afecta la descentralización. Si Solana L1 tiene un problema, no hay "escape" a otra capa, todo el ecosistema se ve afectado simultáneamente.' },
-          { icon: AlertTriangle, title: 'Debilidades de Ethereum + L2s', text: 'La fragmentación de liquidez empeora con cada nueva L2 que se lanza. Los bridges son puntos de fallo costosos (miles de millones de dólares perdidos en hacks, ~$2,500-3,000 millones acumulados). La experiencia de usuario es confusa para novatos. Y muchas L2s tienen centralization concerns: el "sequencer" que ordena transacciones a menudo es controlado por una sola empresa.' },
+          { icon: AlertTriangle, title: 'Debilidades de Solana', text: 'Ha tenido episodios de congestión y degradación de rendimiento. La última caída completa fue en febrero de 2024 (casi cinco horas), y en agosto de 2026 hubo una degradación parcial que no detuvo la cadena. Los requisitos de hardware para validadores limitan quién puede operar un nodo, lo que afecta la descentralización. Si Solana L1 tiene un problema, no hay "escape" a otra capa, todo el ecosistema se ve afectado simultáneamente.' },
+          { icon: AlertTriangle, title: 'Debilidades de Ethereum + L2s', text: 'La fragmentación de liquidez empeora con cada nueva L2 que se lanza. Los bridges son puntos de fallo costosos (miles de millones de dólares perdidos en hacks, ~$2,500-3,000 millones acumulados). La experiencia de usuario es confusa para novatos. Y muchas L2s tienen riesgos de centralización: el "sequencer" que ordena transacciones a menudo es controlado por una sola empresa.' },
           { icon: Brain, title: 'La Realidad', text: 'Ambos enfoques están evolucionando. Solana trabaja en mejorar la resiliencia y descentralización. Ethereum trabaja en soluciones de interoperabilidad entre L2s (como "based rollups" y "chain abstraction"). El "ganador" no está decidido, y es posible que ambos coexistan sirviendo diferentes necesidades.' }
         ]
       },
@@ -3818,8 +4438,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Implicaciones para tu Estrategia',
         content: 'Entender estas arquitecturas tiene implicaciones prácticas directas:',
         features: [
-          { icon: Wallet, title: 'Como Usuario de DeFi', text: 'Para la mayoría de usuarios, Solana ofrece la mejor experiencia HOY: todo en un solo lugar, fees de centavos, transacciones instantáneas, sin bridges. Si tu actividad principal es DeFi (swaps, LP, lending, staking), Solana elimina la complejidad. Ethereum + L2s tiene sentido si necesitas acceso a protocolos que solo existen allí (Aave, Uniswap v3 original, etc).' },
-          { icon: BarChart3, title: 'Como Inversor', text: 'Si crees que la componibilidad y la liquidez unificada son las ventajas más importantes → Solana. Si crees que la descentralización máxima de la capa base y la diversidad de L2s son más importantes → Ethereum. La tesis de inversión depende de qué propiedad crees que captura más valor a largo plazo. Muchos inversores sofisticados tienen exposición a ambos.' },
+          { icon: Wallet, title: 'Como Usuario de DeFi', text: 'Según la tesis de este curso, para la mayoría de usuarios Solana ofrece hoy una experiencia más simple: todo en un solo lugar, fees de centavos, transacciones instantáneas, sin bridges. Si tu actividad principal es DeFi (swaps, LP, lending, staking), Solana elimina la complejidad. Ethereum + L2s tiene sentido si necesitas acceso a protocolos que solo existen allí (Aave, Uniswap v3 original, etc).' },
+          { icon: BarChart3, title: 'Como Inversor', text: 'Si crees que la componibilidad y la liquidez unificada son las ventajas más importantes, te inclinarás por Solana. Si crees que la descentralización máxima de la capa base y la diversidad de L2s son más importantes, por Ethereum. La tesis de inversión depende de qué propiedad crees que captura más valor a largo plazo. Muchos inversores sofisticados tienen exposición a ambos.' },
           { icon: Globe, title: 'La Tercera Vía', text: 'Vale mencionar que otras blockchains exploran enfoques diferentes: Sui y Aptos (Move-based, parallelized), Cosmos (app-chains interconectadas), Polkadot (parachains). Pero en términos de ecosistema DeFi maduro y TVL, el debate principal sigue siendo Solana vs Ethereum.' }
         ]
       },
@@ -3831,7 +4451,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           'Ethereum es modular: L1 para seguridad + L2s para ejecución rápida. Ventaja: máxima descentralización en la capa base, diversidad de L2s. Debilidad: fragmentación de liquidez, bridges riesgosos, UX compleja.',
           'La componibilidad sincrónica de Solana permite operaciones DeFi complejas en una sola transacción atómica (swap + deposit + stake). Esto es imposible cuando las apps están en diferentes L2s.',
           'La fragmentación de liquidez es el mayor problema práctico del enfoque modular. Los usuarios deben elegir entre 20+ L2s y usar bridges para mover fondos, cada bridge es un punto de riesgo.',
-          'Para DeFi activo, Solana ofrece la mejor experiencia de usuario hoy: todo en un solo lugar, sin complejidad de L2s. Ethereum + L2s tiene sentido para acceso a protocolos específicos que no existen en Solana.',
+          'Según la tesis de este curso, para DeFi activo Solana ofrece hoy una experiencia más simple: todo en un solo lugar, sin complejidad de L2s. Ethereum + L2s tiene sentido para acceso a protocolos específicos que no existen en Solana.',
           'No hay "ganador" definitivo, ambos enfoques están evolucionando. Como inversor, tener exposición a ambos ecosistemas es una estrategia válida. Lo importante es entender los trade-offs de cada uno.'
         ]
       }
@@ -3840,63 +4460,96 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Qué es la "componibilidad sincrónica" y por qué es la mayor ventaja de Solana?',
+          question: '¿Qué es la "componibilidad sincrónica" y por qué se considera la mayor ventaja de Solana?',
           options: [
-            { id: 'a', text: 'Es la capacidad de Solana de ser compatible con Ethereum' },
-            { id: 'b', text: 'La capacidad de ejecutar múltiples operaciones DeFi (swap + deposit + stake) en una sola transacción atómica instantánea. Si alguna falla, todas se revierten. Es imposible cuando las apps están en diferentes L2s' },
-            { id: 'c', text: 'Es un tipo de consenso especial de Solana' },
-            { id: 'd', text: 'Significa que Solana es compatible con todos los tokens' }
+            { id: 'a', text: 'Que Solana es compatible con Ethereum y puede ejecutar sus mismos contratos' },
+            { id: 'b', text: 'Varias operaciones en una transacción atómica: si una falla, ninguna ocurre' },
+            { id: 'c', text: 'Un tipo de consenso especial que solo usan los validadores de Solana' },
+            { id: 'd', text: 'Que todas las apps de Solana se actualizan a la vez en una misma fecha' }
           ],
           correctAnswer: 'b',
-          explanation: 'La componibilidad sincrónica permite construir operaciones DeFi complejas que serían imposibles en un ecosistema fragmentado. En una sola transacción de Solana, Jupiter puede encontrar la mejor ruta, ejecutar el swap, y depositar el resultado en Kamino. Si algún paso falla, todo se revierte limpiamente. En Ethereum + L2s, estas operaciones requerirían bridges y múltiples transacciones separadas.'
+          explanation: 'En una sola transacción de Solana, Jupiter puede encontrar la ruta, ejecutar el swap y depositar el resultado en Kamino. Si un paso falla, todo se revierte. Eso es posible porque todas las apps viven en el mismo estado; cuando están en L2s distintas, hacen falta bridges y transacciones separadas.'
         },
         {
           id: 'q2',
           question: '¿Cuál es el mayor problema práctico del enfoque modular de Ethereum (L1 + L2s)?',
           options: [
-            { id: 'a', text: 'Las transacciones son más lentas' },
-            { id: 'b', text: 'La fragmentación de liquidez: los fondos y protocolos están repartidos entre 20+ L2s. Necesitas bridges (riesgosos y costosos) para mover fondos, y cada pool tiene menos liquidez que si todo estuviera junto' },
-            { id: 'c', text: 'Ethereum es más caro que Solana en todas sus capas, incluidas las L2s' },
-            { id: 'd', text: 'No tiene ningún problema, el enfoque modular es perfecto' }
+            { id: 'a', text: 'Transacciones más lentas en todas sus capas que en cualquier otra red' },
+            { id: 'b', text: 'Fees más altos que Solana en todas sus capas, incluidas todas las L2s' },
+            { id: 'c', text: 'Ninguno: el enfoque modular ya resolvió todos sus problemas prácticos' },
+            { id: 'd', text: 'Liquidez fragmentada entre muchas L2s, unidas por bridges con riesgo' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Con 20+ L2s, la liquidez de Ethereum está dividida. Si un pool SOL-USDC tiene $100M de liquidez en Solana vs $20M repartidos entre Arbitrum ($8M), Base ($7M) y Optimism ($5M), los usuarios de Solana obtienen mejor ejecución. Además, mover fondos entre L2s requiere bridges, que son lentos, costosos, y el vector de ataque más explotado en crypto (Wormhole $320M, Ronin $625M).'
+          correctAnswer: 'd',
+          explanation: 'Con más de 20 L2s, la liquidez y los usuarios se reparten, y cada pool queda más pequeño que si todo estuviera junto. Mover fondos entre L2s exige bridges, uno de los objetivos más atacados de crypto. Las L2s en sí son rápidas y muchas son baratas: el problema es la división, no la velocidad.'
         },
         {
           id: 'q3',
-          question: 'Quieres hacer un swap de SOL por USDC y luego depositar el USDC en lending. ¿Cómo se compara la experiencia en Solana vs Ethereum + L2?',
+          question: 'Quieres cambiar SOL por USDC y luego depositar el USDC en lending. ¿Cómo se compara Ethereum + L2s con Solana para esto?',
           options: [
-            { id: 'a', text: 'Es igual en ambos' },
-            { id: 'b', text: 'En Solana: una sola transacción atómica, <1 segundo, <$0.01. En Ethereum L2: necesitas verificar que ambos protocolos estén en la misma L2, si no, hacer bridge primero (minutos/horas + fees + riesgo), y luego dos transacciones separadas' },
-            { id: 'c', text: 'Ethereum es más rápido porque tiene L2s' },
-            { id: 'd', text: 'No se puede hacer en Solana' }
+            { id: 'a', text: 'Es igual en todos los casos, porque las L2s comparten estado en tiempo real' },
+            { id: 'b', text: 'Ethereum siempre es más rápido, porque sus L2s procesan más que Solana' },
+            { id: 'c', text: 'En una misma L2 también es atómico; entre L2s distintas necesitas un bridge' },
+            { id: 'd', text: 'Solana necesita dos transacciones, porque cada app vive en su propia cadena' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Esta es la ventaja práctica de la componibilidad sincrónica. En Solana, Jupiter + Kamino pueden ejecutar ambas operaciones en una sola transacción. En el ecosistema Ethereum modular, primero debes asegurarte de que ambos protocolos estén en la misma L2. Si no, necesitas bridge (riesgo + tiempo + fees). Incluso si están en la misma L2, son dos transacciones separadas que no son atómicas.'
+          correctAnswer: 'c',
+          explanation: 'En Solana, swap y depósito caben en una transacción atómica de menos de un segundo. En Ethereum, si ambos protocolos están en la misma L2, también puedes combinarlos. Si están en L2s distintas, primero necesitas un bridge, con su riesgo y su espera, y la operación deja de ser atómica.'
         },
         {
           id: 'q4',
           question: '¿Cuál es la principal debilidad del enfoque monolítico de Solana?',
           options: [
-            { id: 'a', text: 'Es mucho más lenta que Ethereum L1 procesando transacciones' },
-            { id: 'b', text: 'Los validadores necesitan hardware potente ($5,000-20,000+), lo que limita quién puede operar nodos y afecta la descentralización. Además, si L1 tiene un problema, todo el ecosistema se ve afectado simultáneamente' },
-            { id: 'c', text: 'No tiene ninguna debilidad' },
-            { id: 'd', text: 'Los fees son demasiado altos' }
+            { id: 'a', text: 'Es mucho más lenta que Ethereum L1 al procesar las transacciones normales' },
+            { id: 'b', text: 'Sus fees son demasiado altos para hacer operaciones DeFi pequeñas cada día' },
+            { id: 'c', text: 'No puede ejecutar contratos inteligentes tan complejos como los de Ethereum' },
+            { id: 'd', text: 'Hardware caro para validar y un solo punto de falla para todo el ecosistema' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Es un trade-off real: Solana prioriza velocidad y componibilidad sobre descentralización máxima. Los requisitos de hardware significan que hay alrededor de 800 validadores activos (frente a ~14,000 nodos físicos de Ethereum, que a su vez operan cientos de miles de llaves de validador), una cifra que de hecho ha bajado en los últimos años. Y al ser una sola cadena, si hay congestión o un problema técnico, todo DeFi de Solana se ve afectado al mismo tiempo. Ethereum mitiga esto con múltiples L2s independientes.'
+          correctAnswer: 'd',
+          explanation: 'Operar un validador exige servidores potentes y costos fijos altos, lo que limita quién puede hacerlo: hay unos 660 validadores activos en noviembre de 2026, una cifra que bajó en los últimos años. Y al ser una sola cadena, un problema en la L1 afecta a todo el ecosistema a la vez. Velocidad y fees son, al contrario, sus puntos fuertes.'
         },
         {
           id: 'q5',
-          question: 'Como inversor, ¿cómo afecta el debate monolítico vs modular a tu estrategia?',
+          question: 'Como inversor, ¿cómo puede afectar el debate monolítico vs modular a tu estrategia?',
           options: [
-            { id: 'a', text: 'Solo debo invertir en Solana porque es mejor' },
-            { id: 'b', text: 'Solo debo invertir en Ethereum porque tiene más historia' },
-            { id: 'c', text: 'Si creo que la componibilidad y liquidez unificada capturan más valor, inclino hacia SOL. Si creo que la descentralización máxima y diversidad de L2s capturan más valor, inclino hacia ETH. Tener exposición a ambos es una estrategia válida' },
-            { id: 'd', text: 'La arquitectura no afecta el precio de los tokens' }
+            { id: 'a', text: 'Invertir solo en Solana, porque su arquitectura ya ganó el debate' },
+            { id: 'b', text: 'Inclinar la exposición según la tesis que crees, o tener algo de ambas' },
+            { id: 'c', text: 'Invertir solo en Ethereum, porque tener más historia garantiza ganar' },
+            { id: 'd', text: 'Ignorarlo: la arquitectura de una red no influye en el valor de su token' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Ambas tesis de inversión son legítimas. Solana apuesta a que la experiencia de usuario superior y la liquidez unificada atraerán más usuarios y actividad económica. Ethereum apuesta a que la descentralización máxima y la flexibilidad de L2s ganarán a largo plazo. Muchos inversores sofisticados mantienen exposición a ambos, porque no hay certeza de cuál enfoque "ganará", y es posible que ambos coexistan.'
+          correctAnswer: 'b',
+          explanation: 'Las dos tesis son legítimas: Solana apuesta a que la experiencia simple y la liquidez unificada atraen más actividad, y Ethereum, a que la descentralización máxima y la flexibilidad de las L2s ganan a largo plazo. Nadie sabe cuál capturará más valor, y pueden convivir. Por eso tener exposición a ambas es una estrategia válida.'
+        },
+        {
+          id: 'q6',
+          type: 'multiple-select',
+          question: '¿Cuáles de estas características corresponden al enfoque monolítico de Solana? Selecciona todas las que apliquen.',
+          options: [
+            { id: 'a', text: 'Liquidez unificada en una sola cadena' },
+            { id: 'b', text: 'Componibilidad sincrónica entre apps' },
+            { id: 'c', text: 'Ejecución repartida entre muchas L2s' },
+            { id: 'd', text: 'Requisitos de hardware altos para validar' },
+            { id: 'e', text: 'Bridges para mover fondos entre apps' }
+          ],
+          correctAnswers: [0, 1, 3],
+          explanation: 'Todo en una cadena significa liquidez unida y apps que se combinan en una transacción, a cambio de hardware exigente para los validadores. Repartir la ejecución en L2s y necesitar bridges entre ellas es lo propio del enfoque modular.'
+        },
+        {
+          id: 'q7',
+          type: 'true-false',
+          question: 'Según esta lección, uno de los dos enfoques ya ganó de forma definitiva el debate de la escalabilidad.',
+          correctAnswer: false,
+          explanation: 'Falso. Los dos enfoques siguen evolucionando: Solana trabaja en más clientes de validador y en reducir su punto único de falla, y Ethereum en unir mejor sus L2s. Lo útil es entender los trade-offs, no elegir un equipo.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de DePIN: Infraestructura Física Descentralizada: ¿por qué Helium migró su red a Solana?',
+          options: [
+            { id: 'a', text: 'Porque la Fundación Solana le pagó a Helium para que trasladara su red' },
+            { id: 'b', text: 'Por el costo casi nulo de las microtransacciones de millones de reportes' },
+            { id: 'c', text: 'Porque su propia cadena fue hackeada y perdió todos los fondos de sus usuarios' },
+            { id: 'd', text: 'Porque en Solana los hotspots pueden funcionar sin conexión a internet' }
+          ],
+          correctAnswer: 'b',
+          explanation: 'Una red de cientos de miles de dispositivos genera un volumen enorme de pequeñas transacciones. Mantener su propia cadena era caro y complejo, y Solana podía procesarlas a fracciones de centavo. (Lo viste en la lección DePIN: Infraestructura Física Descentralizada.)'
         }
       ]
     }
@@ -3906,17 +4559,17 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Firedancer & El Futuro de Solana',
     level: 'Avanzado',
     number: '12 de 13',
-    duration: '19 min',
+    duration: '22 min',
     type: 'Futuro',
-    description: 'Firedancer es la reescritura completa del software validador de Solana, construida por Jump Crypto, la firma de trading de alta frecuencia más sofisticada del mundo. Entiende por qué la diversidad de clientes es crucial para la seguridad, hasta dónde empuja Firedancer el rendimiento teórico (1M+ TPS en laboratorio, aunque en producción real rinde bastante menos; Frankendancer ya corre en mainnet y Firedancer completo alcanzó testnet a mediados de 2026; cifras de stake verificadas a agosto 2026), y qué significa esto para el futuro del ecosistema Solana junto con innovaciones como token extensions, compresión de estado y la expansión de la SVM.',
+    description: 'Firedancer es un segundo software validador para Solana, escrito desde cero por Jump Crypto. Entiende por qué la diversidad de clientes es crucial para la seguridad, qué cambió con Firedancer en mainnet (desde diciembre de 2025) y con el nuevo consenso Alpenglow (octubre de 2026), y qué significa para el futuro del ecosistema junto con token extensions, compresión de estado y la expansión de la SVM.',
     sections: [
       {
         type: 'intro',
         title: 'La Evolución Más Importante de Solana',
-        content: 'Bitcoin tiene mineros. Ethereum tiene clientes diversos. Y Solana, durante sus primeros años, tuvo **un solo cliente de software**: el código original escrito por Solana Labs (ahora mantenido por Anza como "Agave"). Esto significaba que un solo bug podía tumbar toda la red, y de hecho ocurrió varias veces en 2022. La solución no era parchar el código existente, sino construir uno completamente nuevo desde cero. Ahí entra **Firedancer**: un segundo cliente validador escrito en C por Jump Crypto, una de las firmas de trading de alta frecuencia más grandes del mundo. No es una mejora incremental, es una reimaginación completa de cómo debería funcionar un validador de blockchain.',
+        content: 'Bitcoin tiene mineros. Ethereum tiene clientes diversos. Y Solana, durante sus primeros años, tuvo **un solo cliente de software**: el código original escrito por Solana Labs (ahora mantenido por Anza como "Agave"). Esto significaba que un solo bug podía tumbar toda la red, y de hecho ocurrió varias veces en 2022. La solución no era parchar el código existente, sino construir uno completamente nuevo desde cero. Ahí entra **Firedancer**: un segundo cliente validador escrito en C por Jump Crypto, una firma de trading de alta frecuencia. No es una mejora incremental, es una reimaginación completa de cómo debería funcionar un validador de blockchain.',
         highlight: {
           title: 'Por Qué Importa',
-          text: 'Firedancer no solo hace a Solana más rápida, la hace más segura. Dos clientes independientes significan que un bug en uno no puede tumbar la red entera. Es la diferencia entre tener un motor de respaldo y volar sin paracaídas.'
+          text: 'Firedancer no solo apunta a hacer a Solana más rápida, también más resistente. Con dos clientes independientes, un bug en uno ya no tiene por qué tumbar la red entera, siempre que ningún cliente concentre demasiado stake. Hoy no es el caso: Firedancer tiene ~17% del stake, y la red necesita dos tercios del stake activo para seguir avanzando, así que un bug grave en la familia Agave todavía podría detenerla. La diversidad está en camino, no completa.'
         }
       },
       {
@@ -3924,10 +4577,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: '¿Qué Es la Diversidad de Clientes?',
         content: 'Un "cliente" en blockchain es el software que los validadores ejecutan para procesar transacciones y mantener el consenso. Si todos corren el mismo software y ese software tiene un bug, TODA la red se cae. La diversidad de clientes es tener múltiples implementaciones independientes del mismo protocolo:',
         features: [
-          { icon: Server, title: 'Agave (antes Solana Labs)', text: 'El cliente original de Solana, escrito en Rust, ahora mantenido por Anza. Es el que ha corrido la red desde el inicio. Robusto y probado en producción durante años, pero como único cliente, sus bugs eran bugs de toda la red. Cada caída histórica de Solana fue un bug de este cliente. Un matiz: la mayoría del stake de la red corre Jito-Solana, un fork de Agave con soporte MEV, así que la diversidad real hoy es principalmente familia Agave más Frankendancer.' },
-          { icon: Zap, title: 'Firedancer (Jump Crypto)', text: 'Reescritura completa en C, construida por ingenieros de trading de alta frecuencia que procesan millones de órdenes por segundo en mercados tradicionales. No comparte ni una línea de código con Agave, lo que significa que es virtualmente imposible que ambos tengan el mismo bug. Esto es diversidad real.' },
+          { icon: Server, title: 'Agave (antes Solana Labs)', text: 'El cliente original de Solana, escrito en Rust, ahora mantenido por Anza. Es el que ha corrido la red desde el inicio. Robusto y probado en producción durante años, pero como único cliente, sus bugs eran bugs de toda la red. Las caídas históricas de Solana ocurrieron cuando era el único software de la red. Un matiz: la mayoría del stake corre Jito-Solana o sus variantes, forks de Agave con soporte MEV, así que la familia Agave sigue teniendo más del 80% del stake.' },
+          { icon: Zap, title: 'Firedancer (Jump Crypto)', text: 'Reescritura completa en C, construida por ingenieros de trading de alta frecuencia que procesan millones de órdenes por segundo en mercados tradicionales. No comparte código con Agave, así que es muy improbable que ambos tengan el mismo bug. Corre completo en mainnet desde diciembre de 2025, con ~17% del stake a noviembre de 2026.' },
           { icon: Shield, title: 'La Lección de Ethereum', text: 'Ethereum tiene 5+ clientes (Geth, Nethermind, Besu, Erigon, Reth). En enero de 2024, un bug en Nethermind tumbó ~8% de los nodos de Ethereum, y la red siguió funcionando porque los demás clientes no compartían el error. Sin diversidad de clientes, habría sido un apagón total. Solana está aprendiendo esta lección.' },
-          { icon: Network, title: 'Frankendancer: El Paso Intermedio', text: 'Antes de lanzar Firedancer completo, Jump desplegó "Frankendancer", una versión híbrida que usa el networking de Firedancer con la ejecución de Agave. Esto permitió probar componentes gradualmente en mainnet sin riesgo. Es como cambiar las ruedas de un auto en movimiento, una a la vez. A mediados de 2026, Frankendancer corre en mainnet con ~20-26% del stake.' }
+          { icon: Network, title: 'Frankendancer: El Paso Intermedio', text: 'Antes de lanzar Firedancer completo, Jump desplegó "Frankendancer", una versión híbrida que usa el networking de Firedancer con la ejecución de Agave. Esto permitió probar componentes por partes en mainnet, con menos riesgo. Es como cambiar las ruedas de un auto en movimiento, una a la vez. Cumplió su función: con Firedancer completo en mainnet, Frankendancer quedó retirado.' }
         ]
       },
       {
@@ -3949,7 +4602,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           points: [
             'Lenguaje: Rust, seguridad de memoria garantizada por el compilador',
             'En producción desde 2020 con años de pruebas en mainnet',
-            'Miles de TPS totales en producción (cientos a ~1-3k de usuarios según carga; la cifra total incluye votos)',
+            'En producción: de cientos a unos pocos miles de TPS de usuarios, según la carga',
             'Equipo: Anza (ex-Solana Labs), expertos en blockchain',
             'Ventaja: estabilidad probada y ecosistema de herramientas maduro',
             'Limitación: optimizaciones de rendimiento tienen techo por diseño original'
@@ -3959,13 +4612,25 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           title: 'Firedancer (Jump - C)',
           points: [
             'Lenguaje: C, control total de memoria y hardware, máximo rendimiento',
-            'Frankendancer (híbrido) corre en mainnet con ~20-26% del stake; Firedancer completo (v1.0) alcanzó testnet en junio de 2026, mainnet sigue pendiente',
+            'En mainnet completo desde diciembre de 2025, con ~17% del stake (noviembre de 2026); el híbrido Frankendancer ya se retiró',
             'TPS en laboratorio: 1,000,000+ (rendimiento teórico máximo)',
             'Equipo: Jump Crypto, expertos en trading de alta frecuencia',
             'Ventaja: rendimiento extremo y diversidad real de código',
             'Limitación: C requiere gestión manual de memoria (más riesgo de bugs de seguridad)'
           ]
         }
+      },
+      {
+        type: 'main',
+        title: 'Alpenglow: Un Consenso Nuevo',
+        content: 'Firedancer cambia el software. Alpenglow cambia las reglas: es un rediseño de cómo los validadores se ponen de acuerdo, y llegó por partes en 2026:',
+        asOf: 'noviembre de 2026',
+        features: [
+          { icon: Clock, title: 'Bloques Cada ~200 ms', text: 'Desde el 9 de octubre de 2026, Solana produce un bloque (un "slot") cada ~200 milisegundos, la mitad que antes. Una consecuencia práctica: un epoch, el periodo que usa el staking, ahora dura alrededor de un día en lugar de dos.' },
+          { icon: CheckCircle, title: 'Votor: Votos Fuera de la Cadena', text: 'Desde el 21 de octubre de 2026, los validadores votan con Votor, que reemplazó al sistema anterior. Sus votos ya no se registran como transacciones on-chain, y a cambio cada validador paga una tarifa de unos 0.8 SOL por epoch. El objetivo es llevar la finalidad de varios segundos a fracciones de segundo.' },
+          { icon: Activity, title: 'El TPS "Bajó" (Sin Que la Red Fuera Más Lenta)', text: 'Antes, la mayoría de las transacciones de Solana eran votos de validadores. Al sacarlos de la cadena, el TPS que muestran los exploradores bajó de golpe. No es que la red procese menos: ahora cuentas sobre todo transacciones de usuarios. Si alguien compara TPS de antes y después sin decir esto, desconfía.' },
+          { icon: Network, title: 'Lo Que Falta: Rotor', text: 'La otra mitad de Alpenglow, Rotor, cambia cómo se reparten los bloques entre validadores. A noviembre de 2026 no tiene fecha. Es un buen recordatorio de que los roadmaps llegan por partes, y tarde.' }
+        ]
       },
       {
         type: 'main',
@@ -3993,8 +4658,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Riesgos y Desafíos Pendientes',
         content: 'Ser optimista sobre el futuro de Solana no significa ignorar los desafíos reales que enfrenta. Un inversor avanzado debe entender ambos lados:',
         features: [
-          { icon: AlertTriangle, title: 'Centralización de Validadores', text: 'Aunque hay alrededor de 800 validadores activos (una cifra que ha venido bajando), una porción significativa del stake está concentrada en pocos operadores grandes. Fundaciones y exchanges controlan un porcentaje desproporcionado. La descentralización real requiere que miles de validadores independientes tengan stake significativo, y eso toma tiempo.' },
-          { icon: Clock, title: 'Ejecución del Roadmap', text: 'Firedancer tardó años en construirse: Frankendancer corre en mainnet, pero la versión completa (v1.0) apenas alcanzó testnet en junio de 2026 y su llegada a mainnet sigue pendiente. Token Extensions están disponibles pero la adopción es gradual. Cada innovación prometida necesita no solo construirse, sino también adoptarse masivamente. La historia de cripto está llena de roadmaps ambiciosos que nunca se completaron.' },
+          { icon: AlertTriangle, title: 'Centralización de Validadores', text: 'Aunque hay alrededor de 660 validadores activos (noviembre de 2026, una cifra que ha venido bajando), una porción significativa del stake está concentrada en pocos operadores grandes. Fundaciones y exchanges controlan un porcentaje desproporcionado. La descentralización real requiere que miles de validadores independientes tengan stake significativo, y eso toma tiempo.' },
+          { icon: Clock, title: 'Ejecución del Roadmap', text: 'Firedancer tardó más de tres años en llegar completo a mainnet (diciembre de 2025), y todavía tiene una minoría del stake. Alpenglow llegó por partes: Votor en octubre de 2026, y Rotor sigue sin fecha. Token Extensions están disponibles pero la adopción es gradual. Cada innovación prometida necesita no solo construirse, sino también adoptarse masivamente. La historia de cripto está llena de roadmaps ambiciosos que nunca se completaron.' },
           { icon: TrendingDown, title: 'Competencia Creciente', text: 'Solana no es la única blockchain de alto rendimiento. Aptos y Sui (basadas en Move), Monad (EVM paralela), y los Layer 2 de Ethereum compiten por los mismos usuarios y desarrolladores. La ventaja de Solana (ecosistema + liquidez) es fuerte pero no permanente.' }
         ]
       },
@@ -4003,23 +4668,24 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: '¿Qué Significa Firedancer Para Ti?',
         content: 'Has leído sobre clientes, consensos, C vs Rust, SIMDs. Todo muy técnico. Pero si eres usuario de Solana (no validador ni desarrollador), la pregunta honesta es: **¿qué cambia en mi día a día?** Aquí está la traducción directa:',
         features: [
-          { icon: Shield, title: 'Transacciones Más Confiables', text: 'Los apagones de 2022 donde la red se detenía por horas eran un defecto crítico para los usuarios, si Solana se cae mientras tienes una posición abierta en un protocolo de lending, no puedes liquidar ni ajustar. Con dos clientes independientes (Agave + Firedancer), un bug en uno no tumba toda la red. La probabilidad de un apagón total cae dramáticamente. Esto no es teórico, es la diferencia entre un DeFi que puedes confiar y uno que no.' },
-          { icon: Zap, title: 'Mejor UX en Picos de Demanda', text: 'Cuando hay un mint masivo de NFTs o un evento de airdrop muy esperado, la red se congestiona: transacciones fallan, los fees suben temporalmente, las confirmaciones tardan más. Firedancer mejora la tolerancia a esos picos. Para ti como usuario: menos "transaction failed" en momentos críticos cuando más importa.' },
-          { icon: Users, title: 'Más Validadores = Más Descentralización', text: 'Los requisitos de hardware para Agave son caros (~$5,000+ en equipo). Firedancer está diseñado para usar el hardware más eficientemente, lo que podría bajar el costo de operar un validador con el tiempo. Más validadores asequibles = más descentralización de la red = más resistencia a censura. Tú no ves esto directamente, pero protege el valor de largo plazo de tu SOL.' },
+          { icon: Shield, title: 'Transacciones Más Confiables', text: 'Los apagones de 2022 donde la red se detenía por horas eran un defecto crítico para los usuarios, si Solana se cae mientras tienes una posición abierta en un protocolo de lending, no puedes liquidar ni ajustar. Con dos clientes independientes (Agave + Firedancer), el riesgo de un apagón total baja a medida que el stake se reparte mejor entre ellos. La última caída completa fue en febrero de 2024; desde entonces ha habido degradaciones, pero no paradas totales.' },
+          { icon: Zap, title: 'Mejor UX en Picos de Demanda', text: 'Cuando hay un mint masivo de NFTs o un evento de airdrop muy esperado, la red se congestiona: transacciones fallan, los fees suben temporalmente, las confirmaciones tardan más. Firedancer está diseñado para tolerar mejor esos picos. Para ti como usuario: menos "transaction failed" en momentos críticos cuando más importa.' },
+          { icon: Users, title: 'Más Validadores = Más Descentralización', text: 'Operar un validador es caro: unos $600-1,300 al mes en servidor, más las tarifas de votación. Firedancer está diseñado para usar el hardware más eficientemente, lo que podría bajar el costo de operar un validador con el tiempo. Más validadores asequibles = más descentralización de la red = más resistencia a censura. Tú no ves esto directamente, pero protege el valor de largo plazo de tu SOL.' },
           { icon: CheckCircle, title: 'Sin Acción Requerida', text: 'Firedancer es un upgrade a nivel de validador. Los usuarios regulares no necesitan hacer NADA, no actualices tu wallet, no migres tokens, no cambies apps. La transición ocurre "debajo" de ti. Un día notarás que Solana se siente más estable y más rápida, sin entender exactamente por qué. Ese es el buen diseño de infraestructura: invisible cuando funciona.' }
         ],
         highlight: {
           title: 'La Inversión en Infraestructura',
-          text: 'Si tienes SOL o usas DeFi en Solana, Firedancer es parte de la tesis de inversión aunque no lo hayas pensado así. Cada mejora de confiabilidad y escalabilidad hace a Solana más atractiva para usuarios e instituciones. Más demanda = más valor del token. No hagas staking de SOL basado SOLO en Firedancer, pero entenderlo te da una razón adicional para la convicción de largo plazo.'
+          text: 'Según la tesis de este curso, cada mejora de confiabilidad y escalabilidad hace a Solana más atractiva para usuarios e instituciones. Eso no se traduce automáticamente en precio: el valor de SOL depende también de la demanda real, la emisión y la competencia. Entender la infraestructura te ayuda a evaluar mejor, no a predecir.'
         }
       },
       {
         type: 'takeaways',
         title: 'Lo Que Debes Recordar',
         items: [
-          'Firedancer es una reescritura completa del validador de Solana en C por Jump Crypto, no una mejora incremental. Alcanzó 1M+ TPS en laboratorio y representa la mayor actualización de infraestructura en la historia de Solana.',
-          'La diversidad de clientes (Agave + Firedancer) es crítica para la seguridad. Dos implementaciones independientes significan que un bug en una no puede tumbar toda la red. Ethereum demostró que esto funciona.',
-          'Frankendancer fue el paso intermedio inteligente: componentes de Firedancer integrados gradualmente con Agave para probar en producción sin riesgo catastrófico.',
+          'Firedancer es un validador nuevo, escrito desde cero en C por Jump Crypto. Corre completo en mainnet desde diciembre de 2025 (~17% del stake a noviembre de 2026). Su cifra de 1M+ TPS es de laboratorio, no de producción.',
+          'La diversidad de clientes (Agave + Firedancer) es crítica para la seguridad: un bug en un cliente minoritario no detiene la red. Pero mientras la familia Agave tenga más de dos tercios del stake, un bug grave en ella todavía puede hacerlo.',
+          'Frankendancer fue el paso intermedio: componentes de Firedancer integrados con Agave para probar en producción con menos riesgo. Ya se retiró.',
+          'Alpenglow cambió el consenso en 2026: bloques cada ~200 ms y votos fuera de la cadena (por eso el TPS reportado bajó). Rotor, su otra mitad, sigue pendiente.',
           'El futuro de Solana va más allá de velocidad: Token Extensions para instituciones, compresión de estado para reducir costos 1000x, la SVM expandiéndose a otras cadenas, y Blinks llevando transacciones a cualquier URL.',
           'La gobernanza a través de SIMDs da a validadores y la comunidad poder real sobre la evolución del protocolo. Tu staking es indirectamente un voto sobre el futuro de la red.',
           'Mantén perspectiva: los desafíos de centralización de validadores, la ejecución del roadmap, y la competencia creciente son reales. Optimismo informado, no ciego.'
@@ -4032,73 +4698,92 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           id: 'q1',
           question: '¿Qué es Firedancer y quién lo construye?',
           options: [
-            { id: 'a', text: 'Una actualización del cliente Agave construida por Anza' },
-            { id: 'b', text: 'Una reescritura completa del validador de Solana en C, construida por Jump Crypto' },
-            { id: 'c', text: 'Un nuevo token de gobernanza para Solana' },
-            { id: 'd', text: 'Un Layer 2 de Solana construido por la Solana Foundation' }
+            { id: 'a', text: 'Una actualización del cliente Agave, construida por Anza' },
+            { id: 'b', text: 'Una Layer 2 de Solana, construida por la Solana Foundation en 2025' },
+            { id: 'c', text: 'Un nuevo token de gobernanza para votar los cambios del protocolo' },
+            { id: 'd', text: 'Un validador nuevo, escrito desde cero en C por Jump Crypto' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Firedancer es un cliente validador completamente nuevo escrito en C por Jump Crypto (expertos en trading de alta frecuencia). No comparte código con el cliente original Agave y fue diseñado desde cero para rendimiento extremo.'
+          correctAnswer: 'd',
+          explanation: 'Firedancer es un cliente validador independiente, escrito en C por Jump Crypto, sin código compartido con Agave. Corre completo en mainnet desde diciembre de 2025 (~17% del stake a noviembre de 2026). Su cifra de más de 1 millón de TPS es de laboratorio, no de producción.'
         },
         {
           id: 'q2',
-          question: '¿Por qué es crucial tener dos clientes independientes (Agave y Firedancer)?',
+          question: '¿Por qué importa tener dos clientes validadores independientes, como Agave y Firedancer?',
           options: [
-            { id: 'a', text: 'Para que los validadores puedan elegir el más barato' },
-            { id: 'b', text: 'Porque la Solana Foundation lo requiere legalmente' },
-            { id: 'c', text: 'Diversidad de clientes: si un software tiene un bug, la red sigue funcionando con el otro' },
-            { id: 'd', text: 'Para duplicar la velocidad de la red automáticamente' }
+            { id: 'a', text: 'Para que los validadores elijan el software más barato de operar' },
+            { id: 'b', text: 'Para duplicar la velocidad de la red sumando la de los dos clientes' },
+            { id: 'c', text: 'Si un cliente tiene un bug grave, la red puede seguir con el otro' },
+            { id: 'd', text: 'Porque la Solana Foundation lo exige legalmente a cada validador' }
           ],
           correctAnswer: 'c',
-          explanation: 'La diversidad de clientes protege contra fallas sistémicas. Si todos corren el mismo software y tiene un bug, toda la red se cae. Con dos clientes independientes, un bug en uno no afecta al otro. Ethereum demostró este principio en enero de 2024: un bug en Nethermind tumbó ~8% de los nodos, pero la red siguió funcionando gracias a los demás clientes.'
+          explanation: 'Con un solo software, un bug grave detiene toda la red. Con dos, un fallo en el minoritario no la para. Ethereum lo vivió en enero de 2024: un bug en Nethermind tumbó ~8% de los nodos y la red siguió. Dos clientes no suman velocidad: cada validador corre uno.'
         },
         {
           id: 'q3',
-          question: '¿Qué fue "Frankendancer"?',
-          options: [
-            { id: 'a', text: 'El nombre original de Firedancer antes de su lanzamiento' },
-            { id: 'b', text: 'Una versión híbrida que combinaba el networking de Firedancer con la ejecución de Agave para probar componentes gradualmente' },
-            { id: 'c', text: 'Un fork no autorizado de Firedancer por la comunidad' },
-            { id: 'd', text: 'Un testnet separado para pruebas de Firedancer' }
-          ],
-          correctAnswer: 'b',
-          explanation: 'Frankendancer fue la estrategia de migración gradual: integrar componentes de Firedancer uno a uno en el cliente existente para probarlos en producción real sin riesgo catastrófico. Es como cambiar las ruedas de un auto en movimiento, una a la vez.'
+          type: 'true-false',
+          question: 'Mientras la familia Agave tenga más de dos tercios del stake, un bug grave en Agave todavía puede detener Solana.',
+          correctAnswer: true,
+          explanation: 'Verdadero. La red necesita más de dos tercios del stake de acuerdo para avanzar. Si un cliente concentra más de eso y falla, el resto no alcanza para seguir. La diversidad protege de verdad cuando ningún cliente supera ese umbral.'
         },
         {
           id: 'q4',
           question: '¿Qué son las Token Extensions de Solana?',
           options: [
-            { id: 'a', text: 'Tokens que solo funcionan en Firedancer' },
-            { id: 'b', text: 'Funcionalidad nativa añadida a tokens SPL: transferencias confidenciales, fees automáticos, metadatos on-chain y hooks programables' },
-            { id: 'c', text: 'NFTs mejorados con animaciones' },
-            { id: 'd', text: 'Un sistema de préstamos para tokens' }
+            { id: 'a', text: 'Tokens que solo funcionan en validadores que ejecutan el cliente Firedancer' },
+            { id: 'b', text: 'Funciones nativas para tokens SPL, como transferencias confidenciales o fees' },
+            { id: 'c', text: 'NFTs mejorados, con animaciones y sonido guardados dentro de la blockchain' },
+            { id: 'd', text: 'Un sistema de préstamos para pedir tokens SPL prestados sin dar ningún colateral' }
           ],
           correctAnswer: 'b',
-          explanation: 'Token Extensions amplían los tokens SPL con capacidades nativas como transferencias confidenciales (montos ocultos), fees de transferencia automáticos, y metadatos on-chain. Esto permite a instituciones crear productos financieros regulados directamente en Solana.'
+          explanation: 'Token Extensions suman capacidades nativas a los tokens: montos ocultos en transferencias confidenciales, fees de transferencia automáticos, metadatos on-chain y hooks programables. Por eso interesan a instituciones que necesitan cumplir reglas sin construir todo desde cero.'
         },
         {
           id: 'q5',
-          question: '¿Cómo se gobiernan los cambios al protocolo de Solana?',
+          question: '¿Cómo se deciden los cambios al protocolo de Solana?',
           options: [
-            { id: 'a', text: 'La Solana Foundation decide todos los cambios unilateralmente' },
-            { id: 'b', text: 'Se vota con tokens SOL en una dApp de gobernanza' },
-            { id: 'c', text: 'A través de SIMDs: propuestas públicas que requieren consenso de los validadores para implementarse' },
-            { id: 'd', text: 'Los holders de NFTs de Solana Monkey Business votan' }
+            { id: 'a', text: 'Con SIMDs públicas, que se aplican cuando suficientes validadores actualizan' },
+            { id: 'b', text: 'La Solana Foundation decide todos los cambios del protocolo por su cuenta' },
+            { id: 'c', text: 'Cada holder de SOL vota cada cambio directamente desde su propia wallet' },
+            { id: 'd', text: 'Los equipos de Jupiter y Phantom votan los cambios en nombre de sus usuarios' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Los SIMDs (Solana Improvement Documents) son propuestas públicas discutidas en GitHub. Los cambios de protocolo requieren que un porcentaje suficiente de validadores actualice su software. Esto da a los validadores, y por extensión a sus delegadores, poder real sobre la evolución de la red.'
+          correctAnswer: 'a',
+          explanation: 'Los SIMDs se discuten en público en GitHub, y un cambio llega a la red cuando suficientes validadores actualizan su software. Algunos cambios grandes, como SIMD-0228 en 2025 o SGP-0002 en 2026, tuvieron además votos ponderados por stake, pero votan los validadores, no cada holder. Tu staking es un voto indirecto.'
         },
         {
           id: 'q6',
-          question: '¿Cuál de estos es un desafío REAL que Solana aún enfrenta?',
+          question: '¿Cuál de estos es un desafío real que Solana todavía enfrenta?',
           options: [
-            { id: 'a', text: 'No tiene ningún desarrollador activo' },
-            { id: 'b', text: 'Concentración significativa del stake en pocos validadores grandes y ejecución gradual de un roadmap ambicioso' },
-            { id: 'c', text: 'No puede procesar más de 10 transacciones por segundo' },
-            { id: 'd', text: 'Firedancer fue cancelado' }
+            { id: 'a', text: 'Que no tiene desarrolladores activos construyendo en el ecosistema hoy' },
+            { id: 'b', text: 'Que no puede procesar más de unas decenas de transacciones por segundo' },
+            { id: 'c', text: 'Que el desarrollo de Firedancer se canceló antes de llegar a mainnet' },
+            { id: 'd', text: 'La concentración del stake y ejecutar a tiempo un roadmap ambicioso' }
           ],
-          correctAnswer: 'b',
-          explanation: 'A pesar del progreso enorme, Solana enfrenta desafíos reales: concentración del stake en pocos operadores, un roadmap ambicioso que requiere años de ejecución, y competencia creciente de Aptos, Sui, Monad y Layer 2s de Ethereum. Un inversor avanzado reconoce tanto las fortalezas como los desafíos.'
+          correctAnswer: 'd',
+          explanation: 'Los desafíos reales son la concentración del stake en pocos operadores, un roadmap que exige años de ejecución y la competencia de otras redes. Las otras opciones son falsas y fáciles de verificar. Optimismo informado es reconocer las fortalezas y los desafíos.'
+        },
+        {
+          id: 'q7',
+          question: 'Un amigo te muestra que desde finales de octubre de 2026 el TPS de Solana en los exploradores cayó mucho, y te dice: "La red se está muriendo". ¿Qué le respondes?',
+          options: [
+            { id: 'a', text: 'Tiene razón: si el TPS reportado cae, la red está perdiendo usuarios reales' },
+            { id: 'b', text: 'Es porque Firedancer reemplazó a Agave y procesa menos transacciones' },
+            { id: 'c', text: 'Es porque Alpenglow hizo los bloques más lentos, de unos 2 segundos' },
+            { id: 'd', text: 'Con Alpenglow los votos salieron de la cadena, y el TPS dejó de contarlos' }
+          ],
+          correctAnswer: 'd',
+          explanation: 'Antes de Alpenglow, la mayoría de las transacciones de Solana eran votos de consenso. Con Votor, esos votos ya no van on-chain, así que el TPS total bajó de golpe sin que cambiara la actividad de los usuarios. Para medir uso real, mira transacciones de usuarios, direcciones activas o fees. Y los bloques salen cada ~200 ms, más rápido que antes.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de Monolítico vs Modular: La Guerra de Arquitecturas: ¿qué significa que una operación DeFi sea atómica?',
+          options: [
+            { id: 'a', text: 'Que se ejecuta en menos de un segundo, sin importar cuántos pasos tenga' },
+            { id: 'b', text: 'Que no paga fees, porque todos sus pasos se combinan en un solo bloque' },
+            { id: 'c', text: 'Que todos sus pasos ocurren juntos, o no ocurre ninguno de ellos' },
+            { id: 'd', text: 'Que solo puede tener un paso, porque cada operación va por separado' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Atómica quiere decir todo o nada: si un paso falla, la transacción entera se revierte y no quedas a medias, por ejemplo con el swap hecho pero sin el depósito. Es una propiedad de cómo se ejecuta, no de su velocidad ni de sus fees. (Lo viste en la lección Monolítico vs Modular: La Guerra de Arquitecturas.)'
         }
       ]
     }
@@ -4108,17 +4793,17 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Seguridad Operacional Avanzada',
     level: 'Avanzado',
     number: '1 de 13',
-    duration: '17 min',
+    duration: '21 min',
     type: 'Seguridad',
     description: 'La diferencia entre perder todo y dormir tranquilo es tu modelo de seguridad operacional. Aprende la arquitectura de wallets que usan los profesionales: cold storage para ahorros, hot wallets para operar, y burner wallets para experimentar. Domina la gestión de permisos, la simulación de transacciones, la protección contra phishing y social engineering, y las mejores prácticas de seed phrase que separan a los principiantes de los veteranos.',
     sections: [
       {
         type: 'intro',
         title: 'La Verdad Incómoda de la Custodia Propia',
-        content: 'En finanzas tradicionales, si hackean tu banco, el banco responde. Si te roban la tarjeta, el banco cancela los cargos. Hay una red de seguridad institucional. En cripto, **tú eres tu propio banco**, y eso incluye ser tu propio departamento de seguridad. La custodia propia es libertad, pero esa libertad viene con responsabilidad total. No hay número 1-800 para llamar si pierdes tus fondos. No hay botón de "revertir transacción". Cada año se pierden miles de millones de dólares en hacks, phishing, y errores humanos. La buena noticia: con un modelo de seguridad adecuado, puedes protegerte contra la gran mayoría de las amenazas. La mala noticia: la mayoría de la gente no implementa casi ninguna de las medidas necesarias.',
+        content: 'En finanzas tradicionales, si hackean tu banco, el banco responde. Si te roban la tarjeta, el banco cancela los cargos. Hay una red de seguridad institucional. En cripto, **tú eres tu propio banco**, y eso incluye ser tu propio departamento de seguridad. La custodia propia es libertad, pero esa libertad viene con responsabilidad total. No hay línea de atención que te devuelva los fondos si los pierdes. No hay botón de "revertir transacción". Cada año se pierden miles de millones de dólares en hacks, phishing, y errores humanos. La buena noticia: con un modelo de seguridad adecuado, puedes protegerte contra la gran mayoría de las amenazas. La mala noticia: la mayoría de la gente no implementa casi ninguna de las medidas necesarias.',
         highlight: {
           title: 'La Regla de Oro',
-          text: 'La seguridad no es un producto, es un proceso. No se trata de comprar un hardware wallet y olvidarte. Se trata de hábitos diarios, arquitectura de wallets, y paranoia sana. Los millonarios cripto que sobreviven a cada ciclo no son los más inteligentes, son los más paranoicos con su seguridad.'
+          text: 'La seguridad no es un producto, es un proceso. No se trata de comprar un hardware wallet y olvidarte. Se trata de hábitos diarios, arquitectura de wallets, y paranoia sana. Quienes sobreviven a cada ciclo no son los más inteligentes, sino los más disciplinados con su seguridad.'
         }
       },
       {
@@ -4126,8 +4811,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Arquitectura de Wallets: El Modelo de 3 Niveles',
         content: 'Los profesionales no usan UNA wallet para todo. Usan un sistema de niveles donde cada wallet tiene un propósito específico y un nivel de riesgo diferente. Piensa en esto como una fortaleza medieval con murallas concéntricas:',
         features: [
-          { icon: Lock, title: 'Nivel 1: Cold Storage (La Bóveda)', text: 'Hardware wallet (Ledger, Trezor) que almacena el 80-90% de tu patrimonio. NUNCA se conecta a dApps. NUNCA firma transacciones de smart contracts. Solo recibe y envía a direcciones verificadas. Es como una caja fuerte bancaria, la abres solo cuando es absolutamente necesario.' },
-          { icon: Wallet, title: 'Nivel 2: Hot Wallet Operativa', text: 'Phantom, Solflare, o similar en tu celular/computador con 5-15% de tu portafolio. La usas para operaciones rutinarias: swaps en Jupiter, staking, compras regulares. Si es comprometida, duele pero no es catastrófico. Trata de mantener solo lo que puedas permitirte perder.' },
+          { icon: Lock, title: 'Nivel 1: Cold Storage (La Bóveda)', text: 'Hardware wallet (Ledger, Trezor) que guarda la mayor parte de tus criptos, por ejemplo el 80-90%. NUNCA se conecta a dApps. NUNCA firma transacciones de smart contracts. Solo recibe y envía a direcciones verificadas. Es como una caja fuerte bancaria, la abres solo cuando es absolutamente necesario.' },
+          { icon: Wallet, title: 'Nivel 2: Hot Wallet Operativa', text: 'Phantom, Solflare, o similar en tu celular/computador con una parte pequeña de tus criptos, por ejemplo el 5-15%. La usas para operaciones rutinarias: swaps en Jupiter, staking, compras regulares. Si es comprometida, duele pero no es catastrófico. Trata de mantener solo lo que puedas permitirte perder.' },
           { icon: Zap, title: 'Nivel 3: Burner Wallets (Desechables)', text: 'Wallets temporales creadas para interactuar con dApps nuevas, mints de NFTs, airdrops sospechosos, o cualquier protocolo no verificado. Creas una, transfieres lo mínimo necesario, interactúas, y si todo sale bien, mueves los tokens a tu hot wallet. Si la burner es comprometida, pierdes centavos.' },
           { icon: Shield, title: 'La Separación es Clave', text: 'El error más común es usar la misma wallet para todo. Si tu wallet "de ahorro" aprueba un contrato malicioso en un mint de NFTs, pierdes TODOS tus ahorros. Con separación de niveles, cada interacción riesgosa solo expone una fracción de tu patrimonio. Es el principio del "compartimento estanco" de los submarinos.' }
         ]
@@ -4175,11 +4860,27 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Protección de Seed Phrase: Nivel Avanzado',
         content: 'Tu seed phrase (12 o 24 palabras) es literalmente la llave maestra a todos tus fondos. Su protección debe ser proporcional a lo que guardas. Aquí las mejores prácticas que van más allá de lo básico:',
         features: [
-          { icon: Lock, title: 'Almacenamiento Físico', text: 'NUNCA digitalmente (no fotos, no notas del celular, no email, no cloud). Escríbela en papel y guárdala en un lugar seguro. Para cantidades significativas, usa placas de metal grabadas (resisten fuego e inundaciones). Haz 2-3 copias en ubicaciones físicas diferentes, una en tu casa, otra con un familiar de confianza.' },
-          { icon: Shield, title: 'División de la Seed (Shamir\'s Secret)', text: 'Para grandes cantidades, puedes dividir tu seed en partes usando Shamir\'s Secret Sharing. Por ejemplo: 3 partes donde necesitas 2 para reconstruir. Guardas una parte en tu casa, otra en una caja de seguridad bancaria, y otra con un familiar. Ninguna parte por sí sola revela la seed completa.' },
+          { icon: Lock, title: 'Almacenamiento Físico', text: 'NUNCA digitalmente (no fotos, no notas del celular, no email, no cloud). Escríbela en papel y guárdala en un lugar seguro. Para cantidades significativas, usa placas de metal grabadas (resisten fuego e inundaciones). Haz 2-3 copias en ubicaciones físicas diferentes. Si dejas una copia completa con un familiar, recuerda que esa persona (o quien la encuentre) puede gastar tus fondos: guárdala en un sobre sellado y firmado que delate si lo abrieron, o usa un esquema de división como el de abajo.' },
+          { icon: Shield, title: 'División de la Seed (Shamir\'s Secret)', text: 'Para grandes cantidades, algunas hardware wallets (como varios modelos de Trezor) generan el respaldo con Shamir de forma nativa, usando el estándar SLIP-39: en vez de una frase, obtienes varias, por ejemplo 3, y necesitas 2 para recuperar. Guardas una en tu casa, otra con un familiar y otra en un lugar seguro fuera de casa (las cajas de seguridad bancarias son escasas en Colombia). Ninguna parte por sí sola revela nada útil. Ojo: cortar tu frase de 24 palabras en pedazos por tu cuenta NO es Shamir; cada pedazo filtra parte del secreto y perder uno puede costarte todo.' },
+          { icon: Lock, title: 'Passphrase: Una Capa Extra', text: 'Ledger y Trezor permiten sumar una passphrase (a veces llamada palabra 25) a tu frase. Con ella se generan wallets distintas: quien encuentre solo las 24 palabras no ve tus fondos. El costo: si olvidas la passphrase, pierdes el acceso. Guárdala separada de la frase, nunca en digital, y prueba la recuperación con un monto pequeño antes de confiarle ahorros.' },
           { icon: AlertTriangle, title: 'Social Engineering', text: 'El vector de ataque más subestimado. No publiques en redes sociales cuánto cripto tienes. No hables de tus holdings en público. El "ataque de llave de $5" (alguien te amenaza físicamente para que entregues tu seed) es real. La discreción es tu mejor defensa. Si nadie sabe que tienes cripto, nadie puede amenazarte por ello.' },
-          { icon: Brain, title: 'Plan de Herencia', text: 'Si te pasa algo, ¿tu familia puede acceder a tus fondos? Sin un plan, tu cripto se pierde para siempre. Opciones: instrucciones selladas con un abogado, un familiar de confianza con una de las partes Shamir, o servicios como Casa que ofrecen planes de herencia para cripto. Es incómodo de pensar, pero es responsabilidad.' }
+          { icon: Brain, title: 'Plan de Herencia', text: 'Si te pasa algo, ¿tu familia puede acceder a tus fondos? Sin un plan, tu cripto se pierde para siempre. Opciones: instrucciones selladas con un abogado o notario, un familiar de confianza con una de las partes Shamir, o una multisig (en Solana, por ejemplo Squads) donde un familiar tenga una de las llaves. Es incómodo de pensar, pero es responsabilidad.' }
         ]
+      },
+      {
+        type: 'main',
+        title: 'Caso Real: Drift y las Firmas por Adelantado',
+        content: 'El 1 de abril de 2026, Drift, uno de los exchanges de perpetuos más grandes de Solana, perdió unos **$285 millones** sin que hubiera un bug en su código. El ataque apuntó a las personas que controlaban el protocolo. Entenderlo te sirve tanto para tu propia seguridad como para evaluar cualquier protocolo antes de depositar:',
+        features: [
+          { icon: AlertTriangle, title: 'Qué Pasó', text: 'Durante semanas, los atacantes se ganaron la confianza del equipo. Luego lograron que 2 de los 5 firmantes del consejo de seguridad firmaran sin revisar dos transacciones que parecían rutinarias. Días antes, Drift había bajado su multisig a 2 de 5 y sin timelock. Las transacciones entregaron el control de administrador al atacante, que listó un token falso como colateral y retiró activos reales. Mandiant atribuyó el ataque a Corea del Norte.' },
+          { icon: Clock, title: 'Durable Nonces: Firmar Hoy, Ejecutar Después', text: 'Una transacción normal de Solana incluye un blockhash reciente y vence en alrededor de un minuto. Con un durable nonce, la transacción no vence hasta que se use: puedes firmarla hoy y alguien puede ejecutarla semanas después. Es útil para custodios y multisigs, pero significa que una firma descuidada puede quedar "cargada" hasta que el atacante decida dispararla.' },
+          { icon: Users, title: 'Lo Que Revisar en un Protocolo', text: 'Quién tiene la upgrade authority (el permiso para cambiar el programa) y la autoridad de administrador. Si es una multisig, cuántas firmas exige (2 de 5 es poco) y si hay un timelock que retrase los cambios para que los usuarios puedan reaccionar. Drift usaba Squads, la multisig estándar de Solana: la herramienta no falló, fallaron los firmantes.' },
+          { icon: Shield, title: 'Lo Que Aplica a Ti', text: 'Nunca firmes algo que no entiendes, aunque venga de alguien de confianza o parezca urgente. Lee la simulación. Si usas una multisig propia (por ejemplo Squads con una Ledger), revisa cada propuesta en el dispositivo. Y desconfía de cualquiera que, tras semanas de relación, te pida firmar "solo una formalidad".' }
+        ],
+        highlight: {
+          title: 'Después del Ataque',
+          text: 'Drift relanzó su exchange con otro nombre y abrió reclamos en octubre de 2026, con pagos iniciales de apenas ~1% de las pérdidas. Si depositas en un protocolo, asume que una parte de ese riesgo es tuya y que la recuperación puede tardar años o no llegar.'
+        }
       },
       {
         type: 'main',
@@ -4187,7 +4888,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'La seguridad no es un evento único, es un hábito. Estos son los chequeos y prácticas que debes incorporar a tu rutina cripto:',
         features: [
           { icon: Smartphone, title: 'Dispositivo Dedicado', text: 'Idealmente, usa un dispositivo separado (tablet vieja, computador secundario) exclusivamente para cripto. Sin redes sociales, sin descargas aleatorias, sin extensiones innecesarias del navegador. Si no es posible, al menos usa un perfil de navegador separado exclusivo para cripto con solo las extensiones de wallet necesarias.' },
-          { icon: Globe, title: 'VPN y DNS', text: 'Usa una VPN confiable cuando operas desde redes públicas (cafeterías, aeropuertos). Considera un DNS privado. Nunca operes cripto desde WiFi público sin VPN. Un atacante en la misma red puede interceptar tu tráfico y redirigirte a sitios de phishing.' },
+          { icon: Globe, title: 'VPN y DNS', text: 'Usa una VPN confiable cuando operas desde redes públicas (cafeterías, aeropuertos), o mejor, los datos de tu celular. En una red que no controlas, alguien puede intentar manipular tu conexión o el DNS para mandarte a un sitio falso. Considera un DNS privado.' },
           { icon: CheckCircle, title: 'Verificación Pre-Transacción', text: 'Antes de CADA transacción significativa: (1) Verifica la URL manualmente, (2) Lee la simulación en tu wallet, (3) Confirma la dirección de destino carácter por carácter, (4) Empieza con una transacción pequeña de prueba. Sí, es tedioso. También lo es perder $50,000 por un typo.' },
           { icon: AlertTriangle, title: 'Address Poisoning: No Copies del Historial', text: 'Un ataque en crecimiento: el atacante genera una dirección casi idéntica a una que usas (mismos primeros y últimos caracteres) y te envía polvo (transacciones diminutas) para que aparezca en tu historial. Cuando copias "tu" dirección desde el historial, copias la del atacante. Defensa: nunca copies direcciones del historial de transacciones, verifica ambos extremos Y un fragmento del medio, y usa la libreta de direcciones de tu wallet para destinos frecuentes.' },
           { icon: RefreshCw, title: 'Auditoría Periódica', text: 'Una vez al mes: revisa qué dApps tienen permisos sobre tus wallets, verifica que tu hardware wallet tiene firmware actualizado, confirma que tus backups de seed phrases están intactos y accesibles, y revisa si algún protocolo que usas ha sido comprometido recientemente.' }
@@ -4197,12 +4898,13 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         type: 'takeaways',
         title: 'Lo Que Debes Recordar',
         items: [
-          'Usa el modelo de 3 niveles: Cold Storage (80-90% en hardware wallet), Hot Wallet (5-15% para operaciones), Burner Wallets (mínimo para experimentar). La separación de fondos es tu defensa principal contra pérdidas catastróficas.',
+          'Usa el modelo de 3 niveles: Cold Storage (la mayor parte, por ejemplo 80-90%, en hardware wallet), Hot Wallet (por ejemplo 5-15% para operaciones), Burner Wallets (mínimo para experimentar). La separación de fondos es tu defensa principal contra pérdidas catastróficas.',
           'En Solana, lee siempre la simulación antes de firmar (una firma maliciosa puede vaciarte al instante). En EVM, las aprobaciones ilimitadas son un vector grave: revoca permisos que no uses. Nunca firmes lo que no entiendas.',
-          'Tu seed phrase es sagrada: almacenamiento físico (nunca digital), múltiples copias en ubicaciones diferentes, y para grandes cantidades considera Shamir\'s Secret Sharing para dividirla en partes.',
+          'Tu seed phrase es sagrada: almacenamiento físico (nunca digital), múltiples copias en ubicaciones diferentes, y para grandes cantidades considera Shamir (SLIP-39) en una hardware wallet que lo soporte, nunca cortando la frase a mano.',
+          'Antes de depositar en un protocolo, revisa quién puede cambiarlo (upgrade authority), cuántas firmas exige su multisig y si hay timelock. El caso Drift (abril de 2026, ~$285M) no fue un bug: fueron firmas obtenidas con engaño.',
           'La discreción es seguridad. No publiques tus holdings, no hables de cripto con extraños, y ten un plan de herencia para que tus fondos no se pierdan si te pasa algo.',
           'Desarrolla hábitos de seguridad: dispositivo dedicado para cripto, VPN en redes públicas, verificación manual de cada URL y cada dirección, y transacciones de prueba antes de enviar montos grandes.',
-          'El phishing es la amenaza #1 para el usuario promedio. Nadie legítimo te pedirá tu seed phrase. Ningún airdrop real requiere que "conectes tu wallet" a un link de DM. Si suena demasiado bueno para ser verdad, es una estafa.'
+          'El phishing es una de las amenazas más comunes para el usuario promedio. Nadie legítimo te pedirá tu seed phrase. Ningún airdrop real requiere que "conectes tu wallet" a un link de DM. Si suena demasiado bueno para ser verdad, es una estafa.'
         ]
       }
     ],
@@ -4210,75 +4912,96 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Tienes $80,000 en cripto. ¿Cuál es la mejor arquitectura de wallets?',
+          question: 'Tienes $80,000 en cripto. ¿Qué arquitectura de wallets sigue el modelo de 3 niveles?',
           options: [
-            { id: 'a', text: 'Todo en Phantom en tu celular para acceso rápido' },
-            { id: 'b', text: 'Cold storage (Ledger) para 80-90%, hot wallet para operaciones, burner wallets para dApps nuevas' },
-            { id: 'c', text: 'Todo en tu cuenta de Binance porque tiene seguro' },
-            { id: 'd', text: 'Dividido en partes iguales entre 20 wallets diferentes' }
+            { id: 'a', text: 'Todo en Phantom en el celular, porque así tienes acceso rápido cuando quieras' },
+            { id: 'b', text: 'Todo en un exchange grande, porque su seguro cubre cualquier pérdida tuya' },
+            { id: 'c', text: '80-90% en hardware wallet, una hot wallet para operar y burners para probar' },
+            { id: 'd', text: 'Repartido en partes iguales entre 20 wallets, para que ningún hack te afecte' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El modelo de 3 niveles separa tu patrimonio por nivel de riesgo. La mayoría va a cold storage (hardware wallet desconectada de internet), una parte operativa en hot wallet, y wallets desechables para experimentar. Si hackean tu burner wallet, solo pierdes centavos.'
+          correctAnswer: 'c',
+          explanation: 'Separar por nivel de riesgo hace que un error tenga un techo: si te vacían la burner, pierdes centavos; si te vacían la hot wallet, pierdes una parte pequeña. Veinte wallets iguales reparten el dinero pero no el riesgo, porque todas suelen vivir en el mismo dispositivo. Y el seguro de un exchange no cubre cualquier pérdida.'
         },
         {
           id: 'q2',
-          question: 'En una red EVM (o un dApp de Ethereum dentro de Phantom) te piden "unlimited approval" para gastar tus USDC. ¿Qué significa esto?',
+          question: 'En una red EVM, una dApp te pide una "unlimited approval" para gastar tus USDC. ¿Qué significa?',
           options: [
-            { id: 'a', text: 'Solo puede usar los USDC que tú envíes manualmente a la dApp' },
-            { id: 'b', text: 'El contrato puede gastar TODOS tus USDC de esa wallet en cualquier momento, sin pedir permiso adicional' },
-            { id: 'c', text: 'Es un requisito técnico sin riesgo real' },
-            { id: 'd', text: 'Solo aprueba el gasto para esa transacción específica' }
+            { id: 'a', text: 'Solo puede usar los USDC que tú envíes de forma manual a esa dApp cada vez' },
+            { id: 'b', text: 'Solo aprueba el gasto para esta transacción, y el permiso vence al terminar' },
+            { id: 'c', text: 'Es un requisito técnico sin riesgo real, porque el contrato ya está auditado' },
+            { id: 'd', text: 'El contrato puede gastar todos tus USDC de esa wallet sin volver a preguntar' }
           ],
-          correctAnswer: 'b',
-          explanation: 'En redes EVM, una aprobación ilimitada (unlimited approval) le da al smart contract permiso para gastar todos tus tokens de ese tipo. Si el contrato es hackeado o resulta malicioso, puede drenar tu balance sin interacción adicional. Revoca permisos que ya no uses. En Solana el riesgo principal es distinto: una sola firma maliciosa puede mover activos al instante; lee siempre la simulación.'
+          correctAnswer: 'd',
+          explanation: 'Una aprobación ilimitada deja que el contrato mueva todos tus tokens de ese tipo cuando quiera. Si el contrato es hackeado o malicioso, puede vaciar tu saldo sin que firmes nada más. Revoca los permisos que no uses. En Solana el riesgo principal es otro: una sola firma maliciosa puede mover activos al instante.'
         },
         {
           id: 'q3',
-          question: 'Recibes un DM en Discord: "Eres elegible para un airdrop exclusivo. Conecta tu wallet aquí: [link]". ¿Qué haces?',
+          question: 'Recibes un DM en Discord: "Eres elegible para un airdrop exclusivo. Conecta tu wallet aquí". ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Conectas tu wallet principal para no perder el airdrop' },
-            { id: 'b', text: 'Conectas tu burner wallet por si acaso es real' },
-            { id: 'c', text: 'Ignoras completamente, los airdrops legítimos nunca se distribuyen por DM ni requieren conectar wallet a links aleatorios' },
-            { id: 'd', text: 'Le pides más información al remitente para verificar' }
+            { id: 'a', text: 'Conecto mi wallet principal para no perder el airdrop exclusivo que ofrecen' },
+            { id: 'b', text: 'Lo ignoro: un airdrop real no llega por DM ni pide conectar la wallet ahí' },
+            { id: 'c', text: 'Conecto una burner wallet, porque así no arriesgo nada si resulta ser falso' },
+            { id: 'd', text: 'Le pido más información al remitente para verificar si el airdrop es real' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Los DMs con "airdrops exclusivos" son una de las formas más comunes de phishing en cripto. Ningún proyecto legítimo distribuye airdrops por DM. Los airdrops reales se reclaman en el sitio oficial del proyecto. Incluso conectar una burner wallet a un sitio de phishing puede exponer información o crear hábitos peligrosos.'
+          correctAnswer: 'b',
+          explanation: 'Los "airdrops exclusivos" por DM son una de las formas más comunes de phishing. Los airdrops reales se reclaman en el sitio oficial del proyecto. Usar una burner suena prudente, pero igual entrenas el hábito de firmar en sitios desconocidos, y el remitente siempre va a decir que es real.'
         },
         {
           id: 'q4',
-          question: '¿Cuál es la forma más segura de almacenar tu seed phrase?',
+          question: '¿Cuál es la forma más segura de guardar tu frase semilla?',
           options: [
-            { id: 'a', text: 'Screenshot guardado en Google Photos para tener backup en la nube' },
-            { id: 'b', text: 'En un documento encriptado en tu computador' },
-            { id: 'c', text: 'Escrita en papel o grabada en placa de metal, con 2-3 copias en ubicaciones físicas diferentes' },
-            { id: 'd', text: 'Memorizada sin ningún respaldo físico, la mente es el lugar más seguro' }
+            { id: 'a', text: 'En una captura guardada en Google Photos, para tener respaldo en la nube' },
+            { id: 'b', text: 'En papel o placa de metal, con 2-3 copias en lugares físicos distintos' },
+            { id: 'c', text: 'En un documento cifrado en tu computador, protegido con una contraseña' },
+            { id: 'd', text: 'Solo memorizada, sin ningún respaldo físico, para que nadie pueda robarla' }
           ],
-          correctAnswer: 'c',
-          explanation: 'La seed phrase debe almacenarse exclusivamente de forma física (nunca digital). El papel funciona, pero placas de metal resisten fuego e inundaciones. Múltiples copias en ubicaciones separadas protegen contra desastres locales. Las opciones digitales (fotos, cloud, documentos) son vulnerables a hackeos.'
+          correctAnswer: 'b',
+          explanation: 'La frase semilla se guarda de forma física, nunca digital. El metal resiste fuego e inundaciones, y varias copias en lugares distintos protegen de un desastre local. Un documento cifrado parece seguro, pero el computador puede tener malware. Y la memoria falla: si la olvidas, nadie puede recuperar tus fondos.'
         },
         {
           id: 'q5',
-          question: '¿Qué es Shamir\'s Secret Sharing y cuándo usarlo?',
+          question: '¿Qué es Shamir (SLIP-39) y cuándo conviene usarlo?',
           options: [
-            { id: 'a', text: 'Un protocolo DeFi para compartir rendimientos entre wallets' },
-            { id: 'b', text: 'Un método para dividir la seed phrase en N partes donde necesitas M partes para reconstruirla, útil para proteger grandes cantidades' },
-            { id: 'c', text: 'Una forma de compartir tu seed phrase con tu familia por email de forma segura' },
-            { id: 'd', text: 'Un servicio de custodia centralizado para cripto' }
+            { id: 'a', text: 'Cortar tu frase semilla a mano en tres partes y guardar cada una aparte' },
+            { id: 'b', text: 'Un protocolo DeFi para compartir rendimientos entre varias wallets tuyas' },
+            { id: 'c', text: 'Un servicio de custodia que guarda tu frase semilla en su servidor' },
+            { id: 'd', text: 'Dividir el respaldo en N partes, de las que M bastan para recuperarlo' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Shamir\'s Secret Sharing divide tu seed en N partes donde necesitas M para reconstruirla (ej: 3 partes, necesitas 2). Ninguna parte sola revela la seed. Es ideal para grandes cantidades: guardas partes en diferentes ubicaciones/personas. Si pierdes una parte, las otras dos aún pueden restaurar tus fondos.'
+          correctAnswer: 'd',
+          explanation: 'Shamir divide el respaldo en, por ejemplo, 3 partes de las que bastan 2. Ninguna parte sola revela nada, y perder una no te deja sin fondos. Conviene para montos grandes y se hace con una hardware wallet compatible. Cortar la frase a mano es la versión peligrosa: cada pedazo revela palabras y perder uno puede dejarte sin acceso.'
         },
         {
           id: 'q6',
-          question: 'Antes de firmar una transacción significativa, ¿cuál es el procedimiento correcto?',
+          type: 'ordering',
+          question: 'Ordena los pasos antes de enviar un monto grande desde tu wallet.',
+          items: [
+            'Verifico la URL a mano',
+            'Leo la simulación de la wallet',
+            'Confirmo la dirección de destino carácter por carácter',
+            'Envío una transacción de prueba pequeña',
+            'Envío el monto completo'
+          ],
+          correctOrder: [0, 1, 2, 3, 4],
+          explanation: 'Primero confirmas que estás en el sitio correcto, luego qué hará la transacción y a quién va. Verificar carácter por carácter importa porque el address poisoning siembra direcciones parecidas en tu historial. La prueba pequeña confirma todo antes de arriesgar el monto completo.'
+        },
+        {
+          id: 'q7',
+          question: 'Según el caso Drift, ¿qué deberías revisar en un protocolo antes de depositar, además de sus auditorías?',
           options: [
-            { id: 'a', text: 'Firmar rápido para que no expire la transacción ni cambie el precio cotizado' },
-            { id: 'b', text: 'Solo verificar que el monto sea correcto' },
-            { id: 'c', text: 'Verificar la URL manualmente, leer la simulación, confirmar dirección carácter por carácter, y enviar una transacción de prueba pequeña primero' },
-            { id: 'd', text: 'Preguntar en Twitter si el protocolo es seguro' }
+            { id: 'a', text: 'Nada más: una auditoría reciente ya cubre todos los riesgos del protocolo' },
+            { id: 'b', text: 'Que su APY sea estable, porque los hacks siempre empiezan con APY altos' },
+            { id: 'c', text: 'Quién puede cambiarlo, cuántas firmas exige su multisig y si hay timelock' },
+            { id: 'd', text: 'Que tenga muchos seguidores en X, porque eso prueba que es de confianza' }
           ],
           correctAnswer: 'c',
-          explanation: 'La verificación pre-transacción incluye múltiples pasos: URL correcta (no phishing), simulación de la wallet (qué hará la transacción), dirección de destino verificada carácter por carácter (existen ataques de "clipboard poisoning"), y una transacción de prueba pequeña antes de enviar montos grandes.'
+          explanation: 'En Drift (abril de 2026, ~$285M) no hubo un bug en el código: se obtuvieron firmas de administrador con engaño. Por eso importa quién controla la upgrade authority, cuántas firmas exige el multisig y si un timelock da tiempo para reaccionar. Una auditoría revisa el código, no quién tiene las llaves.'
+        },
+        {
+          id: 'q8',
+          type: 'true-false',
+          question: 'En Solana, firmar una sola transacción maliciosa puede vaciar tu wallet al instante.',
+          correctAnswer: true,
+          explanation: 'Verdadero. A diferencia de las aprobaciones de EVM, que dejan un permiso abierto para después, en Solana una transacción puede transferir todos tus activos en el momento en que la firmas. Lee siempre la simulación y no firmes lo que no entiendes.'
         }
       ]
     }
@@ -4287,29 +5010,31 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 40,
     title: 'Staking SOL: Gana por Asegurar la Red',
     level: 'Avanzado',
-    number: '3 de 13',
-    duration: '17 min',
+    number: '4 de 13',
+    duration: '20 min',
     type: 'Tutorial + Concepto',
-    description: 'El staking es la forma más simple de poner tu SOL a trabajar: delegas a un validador, ayudas a asegurar la red, y ganas recompensas pasivas (~5.5-6.5% APY a mediados de 2026). Aprende la mecánica de epochs, delegación y slashing, cómo elegir un validador óptimo, las diferencias entre staking nativo y liquid staking (mSOL, jitoSOL, bSOL), y sigue un tutorial paso a paso para empezar desde Phantom o Solflare.',
+    description: 'El staking es la forma más simple de poner tu SOL a trabajar: delegas a un validador, ayudas a asegurar la red, y ganas recompensas en SOL (alrededor de 5% anual a noviembre de 2026). Aprende la mecánica de epochs, cuentas de stake y delegación, cómo elegir un validador óptimo, las diferencias entre staking nativo y liquid staking (mSOL, jitoSOL, bSOL), y sigue un tutorial paso a paso para empezar desde Phantom o Solflare.',
     sections: [
       {
         type: 'intro',
         title: '¿Por Qué Te Pagan por Hacer Staking?',
-        content: 'Bitcoin tiene mineros que gastan electricidad para asegurar la red. Solana tiene **validadores** que ponen SOL como garantía. Si hacen trampa, pierden su dinero. **Proof of Stake** reemplaza energía por capital en riesgo. Cuando haces staking, estás diciendo: "Confío en este validador para que sea honesto". A cambio, recibes parte de las recompensas que la red paga por procesar transacciones. Es la forma más básica de rendimiento pasivo en cripto, no necesitas entender DeFi, pools de liquidez, ni estrategias complejas. Solo delegas y ganas.',
+        content: 'Bitcoin tiene mineros que gastan electricidad para asegurar la red. Solana tiene **validadores** que ponen SOL como garantía. Si hacen trampa, pierden su dinero. **Proof of Stake** reemplaza energía por capital en riesgo. Cuando haces staking, estás diciendo: "Confío en este validador para que sea honesto". A cambio, recibes parte de las recompensas que la red paga por procesar transacciones. Es la forma más básica de rendimiento en cripto: no necesitas DeFi, pools de liquidez ni estrategias complejas. Pero ese rendimiento es en SOL, y el precio de SOL puede caer mucho más de lo que ganas.',
         highlight: {
           title: 'La Magia del Staking',
-          text: 'Tu SOL en staking genera ~5.5-6.5% APY nativo (y ~6-7% efectivo con validadores que comparten MEV como Jito, a mediados de 2026). Una comparación honesta: un CDT en Colombia ha pagado ~8-12% EA en años recientes, pero ese rendimiento es en pesos; el staking rinde en SOL, y la volatilidad del precio de SOL domina el resultado final en tu moneda. Y lo mejor: nunca pierdes la custodia de tus tokens. Tu SOL sigue siendo tuyo, solo está "comprometido" con un validador que tú eliges.'
+          text: 'A noviembre de 2026, el staking nativo de SOL rinde alrededor de 5.0-5.4% anual según la comisión del validador. Una comparación honesta: un CDT a un año en Colombia pagaba ~8.5-13% EA en noviembre de 2026, en pesos y con tasa fija; el staking rinde en SOL, y la volatilidad del precio de SOL domina el resultado final en tu moneda. A cambio, en el staking nativo nunca pierdes la custodia de tus tokens. Tu SOL sigue siendo tuyo, solo está "comprometido" con un validador que tú eliges.'
         }
       },
       {
         type: 'main',
         title: 'Cómo Funciona: Epochs, Delegación y Recompensas',
-        content: 'Solana divide el tiempo en **epochs** (~2-3 días). Al final de cada epoch, se distribuyen las recompensas proporcionalmente al stake delegado. **Delegar** significa asignar tu SOL a un validador sin enviárselo. Tu SOL nunca sale de tu wallet, solo le das "peso de voto" al validador para que participe en el consenso.',
+        asOf: 'noviembre de 2026',
+        content: 'Solana divide el tiempo en **epochs** (hoy, alrededor de un día). Al final de cada epoch, se distribuyen las recompensas proporcionalmente al stake delegado. **Delegar** significa asignar tu SOL a un validador sin enviárselo. Tu SOL pasa a una **cuenta de stake** que controla tu wallet, no el validador: solo le das "peso de voto" para que participe en el consenso.',
         features: [
-          { icon: RefreshCw, title: 'Epochs y Distribución', text: 'Cada epoch dura aproximadamente 2-3 días (~432,000 slots). Al final de cada epoch, la red calcula las recompensas de cada validador basándose en su rendimiento (uptime, votos correctos) y las distribuye proporcionalmente a todos los delegadores. No necesitas hacer nada, las recompensas se acumulan automáticamente en tu cuenta de stake.' },
-          { icon: Shield, title: 'Slashing: El Castigo por Hacer Trampa', text: 'En teoría, si un validador actúa maliciosamente (ej: vota por dos bloques conflictivos), pierde parte de su stake y el de sus delegadores. Solana aún no tiene slashing activo en producción, pero está en el roadmap. Aun sin slashing, los validadores con mal comportamiento pierden delegadores y comisiones, hay incentivo económico para ser honesto.' },
+          { icon: RefreshCw, title: 'Epochs y Distribución', text: 'Cada epoch tiene 432,000 slots. Desde octubre de 2026 cada slot dura 200 milisegundos, así que un epoch dura alrededor de un día (antes eran 2-3 días). Al final de cada epoch, la red calcula las recompensas de cada validador según su participación y rendimiento, y las distribuye proporcionalmente a sus delegadores. Las recompensas se acumulan automáticamente en tu cuenta de stake.' },
+          { icon: Lock, title: 'Tu Cuenta de Stake', text: 'Al delegar, tu wallet crea una cuenta de stake aparte. Tiene dos permisos: la autoridad de stake (quien puede delegar o desactivar) y la autoridad de retiro (quien puede sacar el SOL). Ambas son tu wallet. Crear la cuenta exige un depósito de rent pequeño (~0.0017 SOL a noviembre de 2026) que recuperas al cerrarla, y para delegar se necesita al menos 1 SOL.' },
+          { icon: Shield, title: 'Slashing: El Castigo por Hacer Trampa', text: 'En teoría, si un validador actúa maliciosamente (ej: vota por dos bloques conflictivos), pierde parte de su stake y el de sus delegadores. A noviembre de 2026, Solana no aplica slashing automático en producción, aunque está en discusión. Aun sin slashing, los validadores con mal comportamiento pierden delegadores y comisiones, hay incentivo económico para ser honesto.' },
           { icon: Award, title: 'Comisión del Validador', text: 'Los validadores cobran una comisión sobre las recompensas que generan (típicamente 0-10%). Si un validador cobra 5% de comisión y genera 100 SOL en recompensas para tu delegación, recibes 95 SOL y el validador se queda con 5 SOL. Busca validadores con comisiones razonables (<5%) pero recuerda que 0% comisión puede significar que el validador no es económicamente sostenible.' },
-          { icon: Percent, title: 'APY Real vs Nominal', text: 'El APY de staking nativo en Solana ronda el ~5.5-6.5% neto de comisión (a mediados de 2026), ~6-7% efectivo con validadores que comparten MEV (Jito), y varía por epoch y validador. La inflación del protocolo ronda **~3.7-4.0% anual** a mediados de 2026, bajando ~15% cada año hasta estabilizarse alrededor del 1.5%. Tu rendimiento REAL (después de inflación) hoy es bajo, pero mejora a medida que cae la emisión. Y lo más importante: NO hacer staking significa que tu SOL se diluye por la inflación del protocolo. Stakear es la defensa mínima contra la dilución.' }
+          { icon: Percent, title: 'APY Real vs Nominal', text: 'El rendimiento del staking nativo ronda 5.0-5.4% anual, incluidos los tips de MEV que hoy también llegan a los stakers nativos, y varía por epoch y validador. La inflación del protocolo ronda **~3.6% anual**, y baja 15% cada año hasta estabilizarse en 1.5%. En agosto de 2026 los validadores aprobaron duplicar ese ritmo de reducción (SGP-0002), pero el cambio todavía no está activo. Tu rendimiento REAL (después de inflación) hoy es bajo, pero mejora a medida que cae la emisión. Y lo más importante: NO hacer staking significa que tu SOL se diluye por la inflación del protocolo. Stakear es la defensa mínima contra la dilución.' }
         ]
       },
       {
@@ -4317,8 +5042,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Cómo Elegir un Buen Validador',
         content: 'No todos los validadores son iguales. La diferencia entre un buen y un mal validador puede ser 1-2% de APY anual, además de los riesgos de centralización. Usa herramientas como **StakeWiz**, **Solana Beach**, o **validators.app** para analizar validadores:',
         features: [
-          { icon: Zap, title: 'Uptime y Rendimiento', text: 'Busca validadores con >98% uptime y alto porcentaje de votos exitosos ("vote success rate"). Si el validador está offline, no produce bloques ni vota, y tus recompensas se reducen. Un validador con 95% uptime te genera significativamente menos que uno con 99.5%. StakeWiz muestra el APY estimado de cada validador, compara.' },
-          { icon: Users, title: 'Stake y Descentralización', text: 'Delegar a validadores pequeños y medianos ayuda a descentralizar la red. Los "superminority" (top ~20 validadores que controlan 33% del stake) ya tienen demasiado poder. Delegar a un validador fuera del top 100 con buen rendimiento es bueno para ti (menos competencia por rewards) Y bueno para la red (más descentralización).' },
+          { icon: Zap, title: 'Uptime y Rendimiento', text: 'Busca validadores con >98% uptime que no se salten sus turnos de producir bloques. Si el validador está offline, no participa en el consenso y tus recompensas se reducen. Un validador con 95% uptime te genera significativamente menos que uno con 99.5%. Ojo: desde Alpenglow (octubre de 2026), los votos ya no son transacciones, así que algunas métricas antiguas como "vote success rate" cambiaron; usa el APY estimado que muestran las herramientas.' },
+          { icon: Users, title: 'Stake y Descentralización', text: 'Delegar a validadores pequeños y medianos ayuda a descentralizar la red. Los "superminority" (top ~20 validadores que controlan 33% del stake) ya tienen demasiado poder. Delegar a un validador fuera de ese grupo, con buen rendimiento, te paga prácticamente lo mismo y es bueno para la red (más descentralización). Las recompensas no dependen de cuántos delegadores tenga el validador.' },
           { icon: PiggyBank, title: 'Comisión vs Calidad', text: 'No elijas solo por comisión más baja. Un validador con 2% comisión y 99.8% uptime te genera MÁS que uno con 0% comisión y 96% uptime. La comisión es solo un factor. Prioriza: (1) uptime >98%, (2) fuera de superminority, (3) comisión <7%, (4) historial estable de al menos 6 meses.' },
           { icon: Search, title: 'Herramientas de Análisis', text: 'StakeWiz (stakewiz.com) es la herramienta más completa: muestra APY estimado, uptime, comisión, ubicación geográfica, y concentración de stake. Solana Beach y validators.app son alternativas. También puedes filtrar validadores directamente en Phantom y Solflare, ambas wallets muestran métricas básicas.' }
         ]
@@ -4331,7 +5056,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           points: [
             'Delegas directamente a un validador específico que tú eliges',
             'Tu SOL está "bloqueado": no puedes usarlo en DeFi mientras está stakeado',
-            'Retiro toma 1 epoch completo (~2-3 días de cooldown)',
+            'Para retirar, desactivas y esperas al final del epoch (hoy ~1 día)',
             'Control total, sin intermediarios ni riesgo de smart contract',
             'Ideal para holders a largo plazo que no necesitan liquidez inmediata',
             'Cero comisión de protocolo, solo la comisión del validador'
@@ -4354,8 +5079,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Liquid Staking en Detalle: mSOL, jitoSOL y bSOL',
         content: 'El liquid staking ha crecido enormemente en Solana. Cada protocolo tiene características únicas que debes entender antes de elegir:',
         features: [
-          { icon: Layers, title: 'Marinade (mSOL)', text: 'El protocolo de liquid staking más antiguo y probado de Solana. Distribuye tu stake entre cientos de validadores automáticamente (favoreciendo la descentralización). mSOL sube de precio vs SOL a medida que acumula recompensas, no necesitas "reclamar" nada. Ampliamente aceptado como colateral en DeFi (Kamino, MarginFi, etc.).' },
-          { icon: Zap, title: 'Jito (jitoSOL)', text: 'Además de las recompensas normales de staking, Jito captura valor de MEV (Maximal Extractable Value) y lo redistribuye a los stakers. Esto genera un APY ligeramente superior al staking nativo. jitoSOL es extremadamente líquido y aceptado en casi todos los protocolos DeFi de Solana.' },
+          { icon: Layers, title: 'Marinade (mSOL)', text: 'El protocolo de liquid staking más antiguo y probado de Solana. Distribuye tu stake entre cientos de validadores automáticamente (favoreciendo la descentralización). mSOL sube de precio vs SOL a medida que acumula recompensas, no necesitas "reclamar" nada. Ampliamente aceptado como colateral en DeFi (Kamino y otros).' },
+          { icon: Zap, title: 'Jito (jitoSOL)', text: 'Jito nació capturando valor de MEV para sus stakers, y por años eso le dio un APY algo mayor. Hoy los tips de MEV también llegan al staking nativo, y a noviembre de 2026 jitoSOL rendía ~4.8-5.0%, algo menos que el staking directo. Su ventaja es la liquidez: jitoSOL es muy líquido y aceptado en casi todos los protocolos DeFi de Solana.' },
           { icon: Globe, title: 'BlazeStake (bSOL)', text: 'Enfocado en descentralización: distribuye stake a validadores más pequeños. También ofrece su propio sistema de incentivos con tokens BLZE. Buena opción si priorizas la salud de la red además del rendimiento.' },
           { icon: AlertTriangle, title: 'Riesgos del Liquid Staking', text: 'Dependes del smart contract del protocolo, si tiene un bug, tus fondos están en riesgo. En escenarios de estrés extremo, el token liquid (mSOL, jitoSOL) puede perder su peg temporalmente. Y al usar el token en DeFi, acumulas capas de riesgo: riesgo de staking + riesgo del protocolo de liquid staking + riesgo del protocolo DeFi donde lo depositas.' }
         ]
@@ -4365,21 +5090,26 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Tutorial: Hacer Staking Paso a Paso',
         content: 'Tanto Phantom como Solflare hacen el proceso muy sencillo. Aquí el procedimiento completo para ambas opciones:',
         features: [
-          { icon: Wallet, title: 'Staking Nativo en Phantom', text: '1. Abre Phantom → Tu saldo de SOL → "Start Earning SOL". 2. Explora la lista de validadores (revisa comisión y uptime). 3. Selecciona un validador fuera del superminority con <5% comisión y >98% uptime. 4. Elige la cantidad de SOL (deja 0.1-0.5 SOL para fees futuros). 5. Confirma la transacción (~0.000005 SOL de fee). 6. Tus recompensas empiezan a acumularse automáticamente cada epoch.' },
-          { icon: Smartphone, title: 'Liquid Staking en Jupiter/Marinade', text: '1. Ve a jup.ag (Jupiter) o marinade.finance. 2. Conecta tu wallet. 3. Selecciona SOL → mSOL (o jitoSOL/bSOL). 4. Ingresa la cantidad. 5. Confirma el swap. 6. Recibes mSOL en tu wallet. 7. Tus recompensas se acumulan automáticamente en el precio de mSOL (sube vs SOL con el tiempo).' },
-          { icon: Clock, title: 'Tiempos y Expectativas', text: 'Staking nativo: tus recompensas empiezan a acumularse desde el siguiente epoch (~2-3 días). Si retiras, hay un cooldown de 1 epoch. Liquid staking: instantáneo en ambas direcciones (depósito y retiro vía swap). Las recompensas se reflejan en el precio del token continuamente.' }
+          { icon: Wallet, title: 'Staking Nativo en Phantom', text: '1. Abre Phantom, toca tu saldo de SOL y luego "Start Earning SOL". 2. Explora la lista de validadores (revisa comisión y uptime). 3. Selecciona un validador fuera del superminority con <5% comisión y >98% uptime. 4. Elige la cantidad (mínimo 1 SOL) y deja una reserva pequeña para fees, por ejemplo 0.02-0.05 SOL. 5. Confirma: pagas un fee mínimo más el depósito de rent de la cuenta de stake, que recuperas al cerrarla. 6. Tus recompensas empiezan a acumularse desde el siguiente epoch. Si tu SOL está en una Ledger, puedes hacer staking nativo desde Solflare o la extensión de Phantom (la app móvil de Phantom no lo permite).' },
+          { icon: Smartphone, title: 'Liquid Staking en Jupiter/Marinade', text: '1. Ve a jup.ag (Jupiter) o marinade.finance. 2. Conecta tu wallet. 3. Elige cambiar SOL por mSOL (o jitoSOL/bSOL). 4. Ingresa la cantidad. 5. Confirma el swap. 6. Recibes mSOL en tu wallet. 7. Tus recompensas se acumulan automáticamente en el precio de mSOL (sube vs SOL con el tiempo).' },
+          { icon: Clock, title: 'Tiempos y Expectativas', text: 'Staking nativo: tus recompensas empiezan a acumularse desde el siguiente epoch (hoy ~1 día). Si retiras, desactivas y esperas al final del epoch. Liquid staking: instantáneo en ambas direcciones (depósito y retiro vía swap). Las recompensas se reflejan en el precio del token continuamente.' }
         ]
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
       },
       {
         type: 'takeaways',
         title: 'Lo Que Debes Recordar',
         items: [
-          'Staking es la forma más simple de rendimiento en Solana: delegas tu SOL a un validador, ayudas a asegurar la red, y ganas ~5.5-6.5% APY (a mediados de 2026). Tu SOL nunca sale de tu wallet, solo le das peso de voto al validador.',
+          'Staking es la forma más simple de rendimiento en Solana: delegas tu SOL a un validador, ayudas a asegurar la red, y ganas alrededor de 5% anual en SOL (noviembre de 2026). Tu SOL queda en una cuenta de stake que controla tu wallet, no el validador.',
           'Elige validadores con cuidado: >98% uptime, comisión <5-7%, fuera del superminority, y al menos 6 meses de historial estable. Usa StakeWiz para comparar métricas antes de delegar.',
-          'No hacer staking es perder dinero: la inflación de SOL (~3.7-4.0% a mediados de 2026, y decreciente) diluye tu holdings. Stakear es la defensa mínima contra la dilución, esencialmente mantener tu porcentaje de la red constante.',
+          'No hacer staking te diluye: la inflación de SOL (~3.6% a noviembre de 2026, y decreciente) reduce tu porcentaje de la red. Stakear es la defensa mínima contra la dilución, esencialmente mantener tu porcentaje de la red constante.',
           'Liquid staking (mSOL, jitoSOL, bSOL) te da flexibilidad para usar tu SOL stakeado en DeFi, pero añade capas de riesgo: smart contract del protocolo, posible depeg en estrés extremo, y complejidad adicional.',
-          'Jito ofrece APY ligeramente superior gracias a la captura de MEV. Marinade prioriza descentralización distribuyendo entre cientos de validadores. BlazeStake incentiva validadores pequeños con tokens BLZE.',
-          'Siempre deja 0.1-0.5 SOL sin stakear para pagar fees de transacciones futuras. Y recuerda: el staking es un compromiso de largo plazo, el retiro nativo tiene cooldown de ~2-3 días.'
+          'jitoSOL destaca por su liquidez (hoy ya no rinde más que el staking nativo). Marinade prioriza descentralización distribuyendo entre cientos de validadores. BlazeStake incentiva validadores pequeños con tokens BLZE.',
+          'Deja una reserva pequeña sin stakear (por ejemplo 0.02-0.05 SOL) para fees. El staking nativo exige mínimo 1 SOL, y retirar toma hasta el final del epoch (hoy ~1 día).'
         ]
       }
     ],
@@ -4387,75 +5117,96 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Por qué Solana te paga por hacer staking?',
+          question: '¿De dónde sale principalmente la recompensa de ~5% anual que recibes por stakear SOL?',
           options: [
-            { id: 'a', text: 'Es un regalo de la Solana Foundation para incentivar la adopción' },
-            { id: 'b', text: 'Porque estás ayudando a asegurar la red con tu capital como garantía en Proof of Stake' },
-            { id: 'c', text: 'Porque tu computador está minando bloques en segundo plano' },
-            { id: 'd', text: 'Es un esquema Ponzi donde los nuevos stakers pagan a los anteriores' }
+            { id: 'a', text: 'De los intereses que pagan quienes piden SOL prestado en los protocolos de lending' },
+            { id: 'b', text: 'De un fondo de la Solana Foundation que subsidia a todos los que deciden stakear su SOL' },
+            { id: 'c', text: 'De la emisión nueva de SOL, más parte de las comisiones y el MEV que gana el validador' },
+            { id: 'd', text: 'De las multas que pagan los validadores que se desconectan o fallan en sus votos' }
           ],
-          correctAnswer: 'b',
-          explanation: 'En Proof of Stake, los validadores (y sus delegadores) ponen capital en riesgo para asegurar la red. Las recompensas de staking provienen de la inflación programada de SOL y de las fees de transacciones, compensan el servicio de procesar y validar transacciones honestamente.'
+          correctAnswer: 'c',
+          explanation: 'La mayor parte viene de la inflación programada de SOL (~3.6% al año a noviembre de 2026), y el resto de comisiones de prioridad y MEV que el validador comparte. Confundirlo con intereses de un préstamo es común: en staking nativo nadie pide prestado tu SOL, solo ayuda a votar.'
         },
         {
           id: 'q2',
-          question: '¿Qué pasa con tu SOL cuando lo delegas a un validador?',
-          options: [
-            { id: 'a', text: 'Se lo envías al validador y confías en que te lo devuelva' },
-            { id: 'b', text: 'Nunca sale de tu wallet, solo le das peso de voto al validador y puedes retirarlo cuando quieras' },
-            { id: 'c', text: 'La red lo quema temporalmente y te lo devuelve con intereses' },
-            { id: 'd', text: 'Se convierte automáticamente en mSOL' }
-          ],
-          correctAnswer: 'b',
-          explanation: 'Delegación no es envío. Tu SOL sigue siendo tuyo, solo está "comprometido" con ese validador. Puedes retirar en cualquier momento (después del cooldown de ~2-3 días). El validador nunca tiene acceso directo a tus fondos.'
+          type: 'true-false',
+          question: 'Cuando delegas SOL en staking nativo, el validador que elegiste puede mover ese SOL a otra wallet.',
+          correctAnswer: false,
+          explanation: 'Falso. Tu SOL queda en una cuenta de stake cuyas autoridades controla tu wallet. El validador solo recibe el peso de voto. Por eso el riesgo principal del staking nativo no es que el validador se quede con tu SOL, sino que rinda poco o que tú pierdas el control de tu wallet.'
         },
         {
           id: 'q3',
-          question: 'Validador A: 2% comisión, 99.5% uptime. Validador B: 0% comisión, 95% uptime. ¿Cuál genera más recompensas?',
+          question: 'Un validador del top 10 por stake ofrece 0% de comisión y casi 100% de rendimiento de votos. ¿Por qué podría no ser tu mejor opción?',
           options: [
-            { id: 'a', text: 'Validador B porque 0% comisión significa que te quedas con todo' },
-            { id: 'b', text: 'Validador A porque su mayor uptime genera más rewards totales, incluso con 2% de comisión' },
-            { id: 'c', text: 'Generan lo mismo porque la comisión y el uptime se cancelan' },
-            { id: 'd', text: 'No se puede saber sin ver el APY en StakeWiz' }
+            { id: 'a', text: 'Porque sumar stake al superminority concentra la red en menos validadores' },
+            { id: 'b', text: 'Porque los validadores grandes pagan menos recompensas por cada SOL delegado' },
+            { id: 'c', text: 'Porque con 0% de comisión la red bloquea el pago de recompensas al delegador' },
+            { id: 'd', text: 'Porque un validador grande puede retener tu SOL más tiempo cuando lo retiras' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El uptime tiene un impacto mayor que la comisión. Un validador con 99.5% uptime genera significativamente más recompensas brutas que uno con 95%. Incluso después de pagar 2% de comisión, recibes más. La comisión es solo un factor, prioriza uptime y rendimiento.'
+          correctAnswer: 'a',
+          explanation: 'El superminority es el grupo de validadores que juntos tienen un tercio del stake: si se coordinan o fallan a la vez, pueden detener la red. Delegar a validadores fuera de ese grupo ayuda a repartir el poder. Lo tentador es pensar que el tamaño reduce tus recompensas; no es así, por eso la decisión depende de ti y no del APY.'
         },
         {
           id: 'q4',
-          question: 'Tienes 100 SOL y quieres usar DeFi mientras haces staking. ¿Cuál es la mejor opción?',
+          question: 'Tienes 100 SOL y quieres usarlos como colateral en Kamino sin dejar de ganar staking. ¿Qué opción encaja y qué riesgo agrega?',
           options: [
-            { id: 'a', text: 'Staking nativo en Phantom y esperar al cooldown cada vez que necesites usar DeFi' },
-            { id: 'b', text: 'Liquid staking (mSOL, jitoSOL) para recibir un token que puedes usar en DeFi mientras ganas staking rewards' },
-            { id: 'c', text: 'No es posible hacer staking y DeFi al mismo tiempo' },
-            { id: 'd', text: 'Dividir 50/50 entre staking nativo y SOL líquido para DeFi' }
+            { id: 'a', text: 'Un LST como jitoSOL o mSOL; no agrega riesgo, porque por dentro sigue siendo SOL' },
+            { id: 'b', text: 'Staking nativo, porque la cuenta de stake se puede depositar en cualquier protocolo DeFi' },
+            { id: 'c', text: 'Un LST como jitoSOL o mSOL; agrega riesgo de contrato y de perder la paridad con SOL' },
+            { id: 'd', text: 'Ninguna: no es posible ganar staking y usar ese mismo capital en DeFi a la vez' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El liquid staking te da un token derivado (mSOL, jitoSOL, bSOL) que representa tu SOL stakeado. Puedes depositar ese token como colateral en préstamos, en pools de liquidez, o en otras estrategias DeFi, mientras sigues ganando staking rewards. Es la composabilidad de DeFi en acción.'
+          correctAnswer: 'c',
+          explanation: 'Un token de liquid staking representa tu SOL stakeado y se puede usar en DeFi. Pero suma capas: el contrato del protocolo de staking, el del protocolo donde lo depositas y el precio del LST frente a SOL, que en momentos de estrés puede alejarse. "Sigue siendo SOL" es solo media verdad: lo que tienes es un derecho sobre ese SOL.'
         },
         {
           id: 'q5',
-          question: '¿Qué es un "epoch" en Solana y por qué importa para staking?',
+          question: 'Desactivas hoy tu stake nativo para usar ese SOL. ¿Cuándo puedes moverlo?',
           options: [
-            { id: 'a', text: 'Un periodo de ~2-3 días al final del cual se calculan y distribuyen las recompensas de staking' },
-            { id: 'b', text: 'El nombre del token de gobernanza de Solana' },
-            { id: 'c', text: 'Una actualización de software que los validadores deben instalar' },
-            { id: 'd', text: 'El tiempo que toma confirmar una transacción individual' }
+            { id: 'a', text: 'De inmediato, porque ese SOL nunca salió del control de tu wallet' },
+            { id: 'b', text: 'Al terminar el epoch en curso, que hoy dura alrededor de un día' },
+            { id: 'c', text: 'Después de 21 días, como en otras redes con Proof of Stake' },
+            { id: 'd', text: 'Cuando el validador apruebe tu solicitud de retiro de fondos' }
           ],
-          correctAnswer: 'a',
-          explanation: 'Solana divide el tiempo en epochs (~432,000 slots, ~2-3 días). Al final de cada epoch, la red calcula el rendimiento de cada validador y distribuye recompensas proporcionalmente al stake delegado. Tus recompensas se acumulan automáticamente epoch tras epoch.'
+          correctAnswer: 'b',
+          explanation: 'El stake se desactiva al cierre del epoch, que con bloques de ~200 ms dura cerca de un día. Que tu wallet controle la cuenta de stake es cierto, y por eso la opción "de inmediato" tienta, pero el SOL está bloqueado hasta que termine la desactivación. El validador no aprueba nada: es una regla de la red.'
         },
         {
           id: 'q6',
-          question: '¿Por qué es importante hacer staking incluso si el APY real (descontando inflación) es bajo?',
+          question: 'La inflación de SOL es ~3.6% al año y el staking rinde ~5%. Si pasas el año entero sin stakear, ¿qué le pasa a tu porción de la red?',
           options: [
-            { id: 'a', text: 'No es importante, si el APY real es bajo, mejor no stakear' },
-            { id: 'b', text: 'Porque sin staking, la inflación de SOL diluye tu holdings. Stakear mantiene tu porcentaje de la red constante' },
-            { id: 'c', text: 'Porque la Solana Foundation te penaliza si no stakeas' },
-            { id: 'd', text: 'Solo para poder votar en la gobernanza de Solana' }
+            { id: 'a', text: 'Se mantiene igual, porque la cantidad de SOL en tu wallet no cambia nada' },
+            { id: 'b', text: 'Baja, porque se crea SOL nuevo y lo reciben sobre todo quienes stakean' },
+            { id: 'c', text: 'Sube, porque quienes stakean bloquean su SOL y queda menos en circulación' },
+            { id: 'd', text: 'Baja a la mitad, porque la inflación se cobra de las wallets sin staking' }
           ],
           correctAnswer: 'b',
-          explanation: 'La inflación de SOL (~3.7-4.0% a mediados de 2026, y decreciente) crea nuevos tokens constantemente. Si no stakeas, tu porcentaje de la red total se reduce, estás siendo diluido. Stakear es la defensa mínima: tus recompensas compensan la inflación, manteniendo tu proporción de SOL en la red aproximadamente constante.'
+          explanation: 'Tu número de SOL no cambia, pero el total sí crece, y el SOL nuevo va a los que stakean. Tu porcentaje de la red baja. Esa es la dilución. Nadie te quita SOL de la wallet: lo que pierdes es participación relativa.'
+        },
+        {
+          id: 'q7',
+          question: '¿Qué esperas hoy del rendimiento de jitoSOL frente al staking nativo?',
+          options: [
+            { id: 'a', text: 'Bastante mayor, porque suma todas las propinas MEV sobre el stake' },
+            { id: 'b', text: 'Exactamente igual siempre, porque jitoSOL es solo SOL renombrado' },
+            { id: 'c', text: 'Cero, porque los LST dan liquidez pero no generan recompensas' },
+            { id: 'd', text: 'Similar o algo menor, a cambio de liquidez para usarlo en DeFi' }
+          ],
+          correctAnswer: 'd',
+          explanation: 'A noviembre de 2026, jitoSOL rinde ~4.8-5.0% y el staking nativo ~5.0-5.4%: el MEV ya se reparte también entre stakers nativos. Lo que pagas con un LST es la comisión del protocolo, y lo que ganas es liquidez. La idea de que jitoSOL "rinde más" viene de años anteriores.'
+        },
+        {
+          id: 'q8',
+          type: 'ordering',
+          question: 'Ordena los pasos para hacer staking nativo desde Phantom.',
+          items: [
+            'Tener al menos 1 SOL, más una reserva pequeña para fees',
+            'Elegir un validador revisando comisión, rendimiento y superminority',
+            'Confirmar la delegación en tu wallet',
+            'Esperar a que el stake se active al cambiar el epoch',
+            'Revisar tus recompensas al final de cada epoch'
+          ],
+          correctOrder: [0, 1, 2, 3, 4],
+          explanation: 'Primero el saldo (mínimo 1 SOL y algo para fees), luego la elección del validador, la firma, y la espera de activación. Las recompensas llegan epoch a epoch, así que revisarlas al final de cada uno te dice si el validador rinde lo que esperabas.'
         }
       ]
     },
@@ -4467,15 +5218,15 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         questions: [
           {
             id: 'cp1-q1',
-            question: 'Validador A: 0% comisión, 95% uptime. Validador B: 3% comisión, 99.5% uptime. Asumiendo que ambos hacen buen staking, ¿cuál genera más rendimiento para ti?',
+            question: 'Validador A: 0% de comisión y 95% de rendimiento de votos. Validador B: 3% de comisión y 99.5%. Ambos fuera del superminority. ¿Cuál te rinde más?',
             options: [
-              'A, no paga comisión, así recibes todos los rewards',
-              'B, el 4.5% extra de uptime más que compensa la comisión de 3%',
-              'Son iguales matemáticamente',
-              'A si haces staking corto plazo, B si es largo plazo'
+              'B: 99.5% × 97% ≈ 96.5% del máximo, más que el 95% de A',
+              'A: sin comisión recibes todo, y eso pesa más que el uptime',
+              'Son iguales: lo que B cobra en comisión, A lo pierde en votos',
+              'Depende del plazo: A rinde más al inicio y B a largo plazo'
             ],
-            correctAnswer: 1,
-            explanation: 'Uptime se traduce directamente en rendimiento. Validador A pierde el 5% del tiempo potencial de rewards. Validador B pierde solo 0.5% pero cobra 3% comisión. Rendimiento neto A ≈ 95% × 100% = 95% del máximo teórico. Rendimiento neto B ≈ 99.5% × 97% = 96.5%. B gana por ~1.5 puntos, además de ser más confiable. Comisiones bajas pueden ser una trampa si el validador es inconsistente.',
+            correctAnswer: 0,
+            explanation: 'Rendimiento relativo ≈ uptime × (1 − comisión). A: 95% × 100% = 95%. B: 99.5% × 97% ≈ 96.5%. B gana por ~1.5 puntos y además es más confiable. Una comisión de 0% atrae, pero si el validador falla votos, pierdes más de lo que ahorras.',
             hint: 'Uptime × (1 − comisión) = rendimiento neto relativo.'
           }
         ]
@@ -4486,18 +5237,18 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     id: 45,
     title: 'MEV: El Impuesto Invisible',
     level: 'Avanzado',
-    number: '7 de 13',
-    duration: '18 min',
+    number: '3 de 13',
+    duration: '21 min',
     type: 'DeFi Avanzado',
     description: 'Cada vez que haces un swap en un DEX, bots invisibles pueden extraer valor de tu transacción. Aprende qué es MEV, cómo te afecta, y las herramientas para protegerte.',
     sections: [
       {
         type: 'intro',
         title: '¿Qué es MEV y Por Qué Te Importa?',
-        content: 'Imagina que estás en una casa de cambio con un billete de $100 esperando tu turno. El cajero le susurra a un amigo lo que vas a hacer. El amigo compra dólares antes que tú (subiendo el precio) y luego te vende más caro. Eso es esencialmente lo que ocurre con **MEV (Maximal Extractable Value)**, el valor máximo que puede extraerse al reordenar, insertar, o censurar transacciones dentro de un bloque. Aquí hay un matiz crucial que la mayoría de cursos explica mal: a diferencia de Ethereum, **Solana no tiene un mempool público**. Gulf Stream envía tus transacciones directamente al validador líder de turno, no a un área de espera visible para todos. Entonces, ¿cómo te ven los bots? Por las goteras del sistema: operadores de RPC y validadores que corren clientes modificados y filtran las transacciones que pasan por sus manos, y líderes que colaboran con bots a cambio de una tajada. De hecho, Jito operó un pseudo-mempool público y lo cerró en marzo de 2024 precisamente porque facilitaba ataques sandwich. El resultado para ti es el mismo: bots extraen valor de usuarios regulares todos los días en Solana. Es un impuesto invisible que pagas cada vez que interactúas con DeFi sin protección, y la mayoría de usuarios ni siquiera sabe que existe.',
+        content: 'Imagina que estás en una casa de cambio con un billete de $100 esperando tu turno. El cajero le susurra a un amigo lo que vas a hacer. El amigo compra dólares antes que tú (subiendo el precio) y luego te vende más caro. Eso es esencialmente lo que ocurre con **MEV (Maximal Extractable Value)**, el valor máximo que puede extraerse al reordenar, insertar, o censurar transacciones dentro de un bloque. Aquí hay un matiz crucial que la mayoría de cursos explica mal: a diferencia de Ethereum, **Solana no tiene un mempool público**. Gulf Stream envía tus transacciones directamente al validador líder de turno, no a un área de espera visible para todos. Entonces, ¿cómo te ven los bots? Por las goteras del sistema: operadores de RPC y validadores que corren clientes modificados y filtran las transacciones que pasan por sus manos, y líderes que colaboran con bots a cambio de una tajada. De hecho, Jito operó un pseudo-mempool público y lo cerró en marzo de 2024 precisamente porque facilitaba ataques sandwich. Desde 2025 también crecen las vías privadas de envío y las subastas de order flow, que cambian quién ve tu transacción, pero no eliminan el problema. El resultado para ti es el mismo: bots extraen valor de usuarios regulares todos los días en Solana. Es un impuesto invisible que pagas cada vez que interactúas con DeFi sin protección, y la mayoría de usuarios ni siquiera sabe que existe.',
         highlight: {
           title: 'La Magnitud del Problema',
-          text: 'En 2024, se estima que bots de MEV extrajeron más de **$1.5 mil millones** en valor de usuarios de DeFi a nivel global. En Solana, los tips que traders y bots pagan al block engine de Jito suman típicamente cientos de miles de dólares POR DÍA (con un récord de ~$14.7 millones en un solo día, en noviembre de 2024), evidencia directa de la escala de la actividad MEV en la red.'
+          text: 'Las estimaciones varían mucho según el método. Un rastreador especializado (sandwiched.me) estimó entre **$370 y $500 millones** extraídos con ataques sandwich en Solana en los 16 meses hasta mayo de 2025. Y en el pico de actividad, el 17 de noviembre de 2024, los tips pagados al block engine de Jito llegaron a ~$14.7 millones en un solo día. Ninguna cifra es exacta, pero todas apuntan a lo mismo: es mucho dinero, y sale de usuarios como tú.'
         }
       },
       {
@@ -4506,7 +5257,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'El ataque sandwich es la forma más común y dañina de MEV que afecta a usuarios regulares. Funciona en tres pasos perfectamente sincronizados que ocurren en milisegundos:',
         features: [
           { icon: AlertTriangle, title: 'El Ataque Paso a Paso', text: '(1) Tú envías un swap: "Cambiar 100 USDC por SOL". Tu transacción pasa por un RPC con goteras o llega a un validador que corre un cliente modificado, y un bot la ve antes de que se ejecute. (2) El bot MEV envía una compra de SOL ANTES que la tuya (front-run), subiendo el precio. (3) Tu swap se ejecuta al precio ya inflado, recibes menos SOL del esperado. (4) El bot vende inmediatamente después de ti (back-run), capturando la diferencia como ganancia. Todo ocurre en el mismo bloque, en milisegundos.' },
-          { icon: Eye, title: 'Cómo se Ve en la Práctica', text: 'Ejemplo concreto: Quieres cambiar 100 USDC por SOL. Sin MEV, al precio actual recibirías 0.67 SOL. Pero un bot sandwich interviene: compra SOL antes que tú (precio sube), tu swap se ejecuta y recibes solo 0.65 SOL, el bot vende y gana la diferencia (~0.02 SOL, unos $3). Parece poco, pero multiplica eso por miles de transacciones por hora. Para el bot, es una máquina de imprimir dinero.' },
+          { icon: Eye, title: 'Cómo se Ve en la Práctica', text: 'Ejemplo concreto: quieres cambiar 100 USDC por SOL y configuraste 3% de slippage. Sin MEV recibirías 0.67 SOL. Un bot sandwich ve ese margen y empuja el precio casi hasta tu límite: tu swap se ejecuta y recibes 0.65 SOL, y el bot vende y se queda con la diferencia (~0.02 SOL, unos $3). Con slippage de 0.5%, lo máximo que podría quitarte es ~0.003 SOL, y muchas veces ya no le conviene atacar. Parece poco, pero multiplica eso por miles de transacciones por hora.' },
           { icon: Target, title: 'Quién es Víctima', text: 'TODOS los usuarios que hacen swaps con slippage alto o transacciones grandes sin protección MEV son víctimas potenciales. Los más afectados: (1) Usuarios que configuran slippage alto (5-10%) para que su transacción "pase seguro". (2) Swaps grandes ($1,000+) donde la ganancia del bot justifica el costo del ataque. (3) Tokens con poca liquidez donde es fácil mover el precio. Si usas DEX sin protección, estás pagando este impuesto invisible.' },
           { icon: Shield, title: 'Por Qué Existe', text: 'MEV existe porque en blockchain, el orden de las transacciones dentro de un bloque lo decide quien lo produce: en Solana, el validador líder de turno. Quien controla el orden, controla quién gana y quién pierde. Los bots pagan tips (vía el block engine de Jito) para garantizar que sus transacciones se ejecuten en el orden exacto que necesitan. Es un problema estructural del diseño de blockchain, no un bug, es una característica del sistema que actores sofisticados explotan.' }
         ]
@@ -4517,20 +5268,21 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Más allá del ataque sandwich, hay otras formas de MEV que operan en DeFi constantemente:',
         features: [
           { icon: Zap, title: 'Front-Running', text: 'Un bot ve una orden de compra grande pendiente (por ejemplo, alguien va a comprar $50,000 de un token). El bot compra ese token ANTES de que la orden grande se ejecute, sabiendo que la compra grande subirá el precio. Después, vende a precio más alto. Es como tener información privilegiada sobre la siguiente transacción del mercado, excepto que aquí la "información privilegiada" viene de infraestructura con goteras: RPCs que filtran transacciones o validadores que las comparten con bots.' },
-          { icon: Activity, title: 'Back-Running', text: 'El bot ejecuta una transacción inmediatamente DESPUÉS de una transacción grande para capturar una oportunidad de arbitraje. Ejemplo: un swap grande mueve el precio de SOL en Jupiter por debajo del precio en Orca. Un bot de back-running compra en Jupiter (barato) y vende en Orca (caro) en el mismo bloque, capturando la diferencia. Este tipo de MEV es menos dañino, en realidad ayuda a equilibrar precios entre DEXs.' },
-          { icon: AlertTriangle, title: 'Liquidation MEV', text: 'En protocolos de lending como Kamino o MarginFi, cuando una posición cae por debajo del colateral mínimo, cualquiera puede liquidarla y recibir un bonus. Es una carrera de latencia por liquidaciones legítimas: los bots compiten en microsegundos, conectándose directamente a validadores, por ser los primeros en ejecutar liquidaciones que el protocolo ya autorizó. (Nota: manipular oráculos para forzar liquidaciones que no deberían ocurrir es una clase de exploit distinta, la cubrimos en la lección de Riesgos de DeFi.)' },
-          { icon: Brain, title: 'El Costo Real para Ti', text: 'Aunque no veas una línea que diga "fee de MEV" en tu transacción, lo pagas en peor ejecución de precio. Si todos tus swaps se ejecutan un 0.5-2% peor de lo esperado, estás perdiendo dinero silenciosamente. Un usuario activo que hace 10 swaps por semana puede perder cientos de dólares al mes sin darse cuenta. Es el impuesto más eficiente del mundo: la víctima ni siquiera sabe que está pagándolo.' }
+          { icon: Activity, title: 'Back-Running', text: 'El bot ejecuta una transacción inmediatamente DESPUÉS de una transacción grande para capturar una oportunidad de arbitraje. Ejemplo: un swap grande deja el precio de SOL en un pool de Raydium por debajo del precio en Orca. Un bot de back-running compra en Raydium (barato) y vende en Orca (caro) en el mismo bloque, capturando la diferencia. Este tipo de MEV es menos dañino, en realidad ayuda a equilibrar precios entre DEXs.' },
+          { icon: AlertTriangle, title: 'Liquidation MEV', text: 'En protocolos de lending como Kamino o Jupiter Lend, cuando una posición cae por debajo del colateral mínimo, cualquiera puede liquidarla y recibir un bonus. Es una carrera de latencia por liquidaciones legítimas: los bots compiten en microsegundos, conectándose directamente a validadores, por ser los primeros en ejecutar liquidaciones que el protocolo ya autorizó. (Nota: manipular oráculos para forzar liquidaciones que no deberían ocurrir es una clase de exploit distinta, la verás en la lección Riesgos de DeFi: La Guía Completa.)' },
+          { icon: Brain, title: 'El Costo Real para Ti', text: 'Aunque no veas una línea que diga "fee de MEV" en tu transacción, lo pagas en peor ejecución de precio. Si tus swaps sin protección se ejecutan un 1% peor de lo esperado y mueves $2,000 al mes, pierdes ~$20 al mes, unos $240 al año, sin verlo en ningún recibo. La víctima ni siquiera sabe que está pagando.' }
         ]
       },
       {
         type: 'main',
         title: 'Jito y la Solución de Solana',
+        asOf: 'noviembre de 2026',
         content: 'Solana tiene un enfoque único para manejar MEV, centrado en Jito, el protocolo que ha transformado cómo se procesan transacciones en la red:',
         features: [
-          { icon: Layers, title: 'Jito Bundles: La Clave', text: 'Jito permite agrupar transacciones en "bundles" (paquetes) que viajan por un canal privado hasta el validador líder, sin pasar por RPCs o relays donde podrían filtrarse. ¿Por qué importa? Si los bots nunca ven tu transacción antes de ejecutarse, no pueden atacarla. Los bundles además son atómicos: se ejecutan en el orden exacto que especificas y nadie puede insertar transacciones entre las tuyas. Dato clave: Jito llegó a operar un pseudo-mempool público donde los bots podían ver transacciones pendientes, y lo cerró en marzo de 2024 precisamente porque facilitaba ataques sandwich.' },
-          { icon: Zap, title: 'Tips de Jito vs Priority Fees', text: 'No confundas dos mecanismos distintos. Los "priority fees" son el mercado de fees nativo de Solana: pagas más por unidad de cómputo para que el líder priorice tu transacción. Los "tips de Jito" son propinas que se pagan al block engine de Jito para entrar en un bundle protegido. Jupiter usa ambos: los priority fees aceleran tu transacción, y la protección MEV (vía Jito) la blinda contra sandwiches. Son palancas separadas con propósitos diferentes.' },
-          { icon: RefreshCw, title: 'Redistribución de MEV', text: 'Jito redirige las ganancias de MEV de bots anónimos hacia validadores y sus stakers. Los validadores que usan el cliente Jito-Solana (más del 90% del stake de la red) reciben tips de MEV y los comparten con sus delegadores. Esto significa que si haces staking con un validador Jito (como jitoSOL liquid staking), parte de las ganancias de MEV te llegan como mayor APY: típicamente entre 0.5 y 1 punto porcentual más que el staking base.' },
-          { icon: Network, title: 'El Ecosistema Jito en Números', text: 'Más del 90% de los validadores de Solana ejecutan el cliente Jito-Solana. jitoSOL es uno de los mayores tokens de liquid staking con miles de millones en TVL. Los tips de Jito representan una porción significativa de las recompensas de los validadores. El sistema no elimina MEV completamente, lo hace más transparente y redistribuye las ganancias hacia los participantes de la red en vez de solo los bots.' }
+          { icon: Layers, title: 'Jito Bundles: La Clave', text: 'Jito permite agrupar transacciones en "bundles" (paquetes) que no se publican: solo los ven el block engine de Jito y el validador líder de turno. ¿Por qué importa? Si los bots públicos no ven tu transacción antes de ejecutarse, no pueden atacarla. Pero "privado" no significa invisible: confías en que el block engine y el líder no abusen de lo que ven. Los bundles además son atómicos: se ejecutan en el orden exacto que especificas y nadie puede insertar transacciones entre las tuyas. Dato clave: Jito llegó a operar un pseudo-mempool público donde los bots podían ver transacciones pendientes, y lo cerró en marzo de 2024 precisamente porque facilitaba ataques sandwich.' },
+          { icon: Zap, title: 'Tips de Jito vs Priority Fees', text: 'No confundas dos mecanismos distintos. Los "priority fees" son el mercado de fees nativo de Solana: pagas más por unidad de cómputo para que el líder priorice tu transacción. Los "tips de Jito" son propinas que se pagan al block engine de Jito para entrar en un bundle protegido. El modo Ultra de Jupiter combina ambos y envía tus transacciones de forma privada. Son palancas separadas con propósitos diferentes.' },
+          { icon: RefreshCw, title: 'Redistribución de MEV', text: 'Jito redirige parte de las ganancias de MEV hacia validadores y sus stakers. Casi todo el stake de Solana recibe bloques del block engine de Jito, y los tips se reparten con los delegadores. Hoy eso le llega también al staking nativo, así que jitoSOL ya no rinde más por MEV: a noviembre de 2026, jitoSOL rendía ~4.8-5.0% y el staking nativo ~5.0-5.4%. Lo verás en Staking SOL: Gana por Asegurar la Red.' },
+          { icon: Network, title: 'El Ecosistema Jito en Números', text: 'Los clientes de la familia Jito corren más de la mitad del stake de Solana, y ~98% del stake usa su block engine. Desde 2025, Jito despliega BAM (Block Assembly Marketplace), que arma los bloques en entornos aislados y ya cubre más de un tercio del stake. Al mismo tiempo crecen las vías privadas de envío y las subastas de order flow (Jupiter Ultra, Titan y otras). Nada de esto elimina el MEV: decide quién lo ve y quién se queda con él.' }
         ]
       },
       {
@@ -4538,10 +5290,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Cómo Protegerte: Guía Práctica',
         content: 'No puedes eliminar MEV completamente, pero puedes reducir drásticamente cuánto valor te extraen con estas estrategias:',
         features: [
-          { icon: Shield, title: 'Protección MEV en Jupiter', text: 'El modo Ultra de Jupiter (el que usa jup.ag por defecto) incluye protección MEV siempre activa: tus transacciones se enrutan por canales privados sin exponerse a los bots. Si usas el modo Manual, activa el toggle "MEV Protect", que envía tu transacción por la infraestructura de Jito. En ambos casos, tu swap deja de ser visible para los atacantes antes de ejecutarse.' },
+          { icon: Shield, title: 'Protección MEV en Jupiter', text: 'El modo Ultra de Jupiter (el que usa jup.ag por defecto) envía tus transacciones de forma privada, sin publicarlas donde los bots las vean. El modo Manual no ofrece esa protección: si lo usas, mantén el slippage bajo. La protección reduce mucho el riesgo, pero no lo elimina: siempre hay alguien en la cadena de envío que ve tu orden.' },
           { icon: Target, title: 'Configura el Slippage Correctamente', text: 'El slippage es el margen de variación de precio que aceptas. Si pones slippage de 10%, le estás diciendo a los bots: "acepto recibir hasta un 10% menos". Eso es una invitación abierta a un sandwich attack. Para tokens líquidos (SOL, USDC), usa 0.5-1% de slippage. Solo sube a 2-3% para tokens de baja liquidez. Nunca uses más de 5% excepto en emergencias.' },
-          { icon: Lock, title: 'Transacciones Protegidas', text: 'Algunos wallets y DEXs ofrecen "transacciones privadas" o "protección MEV" que envían tu transacción por canales privados directamente al validador líder, sin exponerla a RPCs o relays con goteras. En Solana, esto se logra a través de los bundles de Jito. Verifica que tu wallet o DEX tenga esta opción habilitada por defecto.' },
-          { icon: Scissors, title: 'Divide Swaps Grandes', text: 'Si necesitas cambiar $10,000 o más, no lo hagas en una sola transacción. Divídelo en 3-5 swaps más pequeños. Un swap de $2,000 es menos atractivo para bots que uno de $10,000 porque la ganancia potencial es menor y puede no justificar el costo del ataque. Además, el impacto de precio de cada swap individual es menor.' },
+          { icon: Lock, title: 'Transacciones Protegidas', text: 'Algunos wallets y DEXs ofrecen "transacciones privadas" o "protección MEV" que envían tu transacción por canales privados directamente al validador líder, sin exponerla a RPCs o relays con goteras. En Solana, esto se logra a través de los bundles de Jito. Verifica que tu wallet o DEX tenga esta opción habilitada por defecto, y recuerda que siempre confías en quien recibe tu transacción.' },
+          { icon: Scissors, title: 'Divide Swaps Grandes', text: 'Jupiter ya divide tu orden entre pools dentro de una misma transacción. Si aun así el price impact supera ~1%, divide la compra en el tiempo (por ejemplo con una orden DCA): cada parte mueve menos el precio y deja menos margen a un bot. Partir un swap en varios seguidos, sin protección y con slippage alto, no te protege: cada parte puede ser atacada.' },
           { icon: Clock, title: 'Usa Limit Orders', text: 'En vez de hacer un market swap (que se ejecuta al precio actual y es vulnerable a MEV), usa órdenes límite en Jupiter. Con una limit order, especificas el precio exacto al que quieres comprar o vender. La orden se ejecuta solo cuando el precio llega a tu objetivo, y como no hay una transacción tuya "en vuelo" que los bots puedan anticipar, es mucho más difícil de sandwichear.' }
         ]
       },
@@ -4549,12 +5301,12 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         type: 'takeaways',
         title: 'Protegiendo tu Valor en DeFi',
         items: [
-          'MEV (Maximal Extractable Value) es el valor que bots extraen al reordenar transacciones en un bloque. En Solana NO hay mempool público (Gulf Stream envía tus transacciones directo al líder): los bots te ven a través de RPCs y clientes de validador modificados que filtran transacciones. El resultado es un impuesto invisible que pagas cada vez que haces un swap sin protección.',
+          'MEV (Maximal Extractable Value) es el valor que se extrae al reordenar transacciones en un bloque. En Solana NO hay mempool público: los bots te ven a través de RPCs y validadores que filtran transacciones. El resultado es un impuesto invisible que pagas cada vez que haces un swap sin protección.',
           'El ataque sandwich es la forma más común: un bot compra antes de tu swap (subiendo el precio), tu swap se ejecuta a peor precio, y el bot vende después capturando la diferencia. Afecta especialmente a swaps con slippage alto y transacciones grandes.',
-          'Jito es la pieza central del MEV en Solana: bundles privados y atómicos que viajan directo al líder, sin pasar por la infraestructura con goteras donde los bots ven transacciones. Jito incluso cerró su pseudo-mempool público en marzo de 2024 porque facilitaba sandwiches.',
-          'Los stakers de Jito (jitoSOL) se benefician del MEV: las ganancias se redistribuyen como mayor APY en vez de quedarse en manos de bots anónimos. Más del 90% del stake de Solana corre el cliente Jito-Solana.',
-          'Para protegerte en la práctica: usa el modo Ultra de Jupiter (protección MEV por defecto) o activa MEV Protect en modo Manual, usa slippage de 0.5-1% (nunca más de 5%), divide swaps grandes en partes, y prefiere limit orders sobre market swaps cuando sea posible.',
-          'MEV no se puede eliminar completamente, es una propiedad estructural de las blockchains. Pero con las herramientas correctas (protección MEV vía Jito, slippage bajo, limit orders), puedes reducir tu exposición drásticamente y dejar de pagar el impuesto invisible.'
+          'Jito es la pieza central del MEV en Solana: bundles atómicos que no se publican, aunque el block engine y el líder sí los ven. Jito cerró su pseudo-mempool público en marzo de 2024 porque facilitaba sandwiches, y hoy despliega BAM.',
+          'Parte del MEV vuelve a validadores y stakers como tips. Hoy le llega también al staking nativo, así que jitoSOL ya no rinde más que el staking directo por ese motivo.',
+          'Para protegerte en la práctica: usa el modo Ultra de Jupiter (envío privado por defecto; el modo Manual no lo trae), slippage de 0.5-1% en tokens líquidos (nunca más de 5%), divide en el tiempo las compras con price impact alto, y usa órdenes límite cuando no tengas prisa.',
+          'MEV no se puede eliminar completamente, es una propiedad estructural de las blockchains. Pero con las herramientas correctas (envío privado, slippage bajo, órdenes límite), puedes reducir tu exposición drásticamente.'
         ]
       }
     ],
@@ -4562,73 +5314,128 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: '¿Qué es un ataque sandwich en DeFi?',
+          question: 'Cambias $5,000 USDC por SOL en modo Manual y recibes 2% menos de lo esperado. En el explorador ves que, en el mismo bloque, una wallet compró SOL justo antes que tú y vendió justo después. ¿Qué ocurrió?',
           options: [
-            { id: 'a', text: 'Cuando un hacker roba fondos de un smart contract explotando un bug' },
-            { id: 'b', text: 'Un bot detecta tu swap pendiente, compra antes que tú (subiendo el precio), tu swap se ejecuta a peor precio, y el bot vende después capturando la diferencia' },
-            { id: 'c', text: 'Cuando dos personas intentan comprar el mismo token al mismo tiempo' },
-            { id: 'd', text: 'Un tipo de phishing donde un sitio falso roba tus claves privadas' }
+            { id: 'a', text: 'Una comisión oculta de Jupiter, que se cobra en una transacción por separado' },
+            { id: 'b', text: 'Un sandwich: el bot subió el precio antes de tu swap y vendió justo después' },
+            { id: 'c', text: 'Una subida natural de SOL justo en el segundo en que se ejecutó tu swap' },
+            { id: 'd', text: 'Un arbitraje normal entre DEXs que no tuvo ningún efecto en tu precio' }
           ],
           correctAnswer: 'b',
-          explanation: 'El ataque sandwich tiene tres pasos: (1) el bot front-runs tu transacción comprando antes, (2) tu swap se ejecuta al precio ya inflado, (3) el bot back-runs vendiendo lo que compró. Todo sucede en el mismo bloque. La víctima recibe menos tokens de los esperados sin saber por qué.'
+          explanation: 'Compra antes, venta después, misma wallet, mismo bloque: es la firma de un sandwich. El bot se quedó con ~$100. Un arbitraje normal (back-run) solo opera después de tu swap; aquí la compra previa es la que empeoró tu precio. La protección: modo Ultra, slippage bajo y dividir compras grandes.'
         },
         {
           id: 'q2',
-          question: 'Pones tu slippage en 10% para un swap en Jupiter. ¿Por qué esto te hace más vulnerable a MEV?',
+          question: 'Subes el slippage a 10% en modo Manual para que tu swap "no falle". ¿Qué cambia para un bot que vea tu transacción?',
           options: [
-            { id: 'a', text: 'Porque el 10% se paga como comisión a Jupiter' },
-            { id: 'b', text: 'Porque le estás diciendo a los bots que aceptas recibir hasta un 10% menos del precio esperado, dándoles un margen enorme para extraer valor con un sandwich attack' },
-            { id: 'c', text: 'Slippage alto no tiene relación con MEV' },
-            { id: 'd', text: 'Porque las transacciones con slippage alto son más lentas' }
+            { id: 'a', text: 'Nada: el slippage solo decide la comisión que Jupiter cobra por la ruta' },
+            { id: 'b', text: 'Le cuesta más atacarte, porque tu swap entra con más prioridad al bloque' },
+            { id: 'c', text: 'Nada: Solana no tiene mempool público, así que nadie ve tu transacción' },
+            { id: 'd', text: 'Puede mover el precio casi 10% en tu contra y tu swap se ejecuta igual' }
           ],
-          correctAnswer: 'b',
-          explanation: 'El slippage define cuánta variación de precio aceptas. Al poner 10%, le dices al protocolo "ejecuta mi swap aunque reciba hasta un 10% menos". Los bots leen esto y saben que pueden moverte el precio hasta un 10% sin que tu transacción falle. Es como poner un cartel que dice "acepto pagar de más". Usa 0.5-1% para tokens líquidos.'
+          correctAnswer: 'd',
+          explanation: 'El slippage es el máximo empeoramiento de precio que aceptas. Con 10%, un bot sabe que puede empujarte casi hasta ahí sin que tu swap falle. Lo de "no hay mempool" es la confusión peligrosa: no hay uno público, pero RPCs y validadores que filtran transacciones sí dejan que los bots vean la tuya.'
         },
         {
           id: 'q3',
-          question: '¿Cómo protegen los bundles de Jito contra ataques MEV?',
-          options: [
-            { id: 'a', text: 'Encriptan la transacción de punta a punta para que nadie en la red pueda leerla' },
-            { id: 'b', text: 'Viajan por un canal privado directo al validador líder (sin pasar por RPCs o relays con goteras) y son atómicos: nadie puede ver tu transacción antes de ejecutarse ni insertar nada entre las tuyas' },
-            { id: 'c', text: 'Bloquean automáticamente a todos los bots de la red' },
-            { id: 'd', text: 'Hacen que tu transacción sea gratuita para que los bots no puedan competir' }
-          ],
-          correctAnswer: 'b',
-          explanation: 'Los bots sandwich necesitan VER tu transacción pendiente para atacarla. En Solana no hay mempool público; los bots la ven por las goteras de RPCs y validadores con clientes modificados. Los bundles de Jito evitan esa infraestructura y llegan por canal privado directo al líder, además de garantizar el orden interno del paquete. Si el bot no puede ver tu swap, no puede construir un sandwich alrededor de él. Es la defensa más efectiva contra MEV en Solana.'
+          type: 'true-false',
+          question: 'Como Solana no tiene un mempool público, los ataques sandwich no son posibles en la red.',
+          correctAnswer: false,
+          explanation: 'Falso. Sin mempool público los bots ven menos, pero siguen viendo transacciones a través de RPCs y validadores que las filtran o las venden. Por eso los sandwiches existen en Solana, y por eso el envío privado y el slippage bajo importan.'
         },
         {
           id: 'q4',
-          question: 'Haces un swap de $5,000 USDC a SOL y recibes 2% menos SOL del precio que viste al confirmar. ¿Qué probablemente ocurrió?',
+          question: '¿Qué protege realmente un bundle de Jito, y qué no?',
           options: [
-            { id: 'a', text: 'Jupiter te cobró una comisión oculta del 2%' },
-            { id: 'b', text: 'El precio de SOL subió naturalmente un 2% en el segundo exacto de tu swap' },
-            { id: 'c', text: 'Un bot sandwich detectó tu transacción grande (vía un RPC o validador que filtra transacciones), compró SOL antes que tú (subiendo el precio ~2%), y vendió después de tu swap, extrayendo ~$100 de tu transacción' },
-            { id: 'd', text: 'Es un error de la blockchain que se corregirá automáticamente' }
+            { id: 'a', text: 'Va cifrado de punta a punta, así que ni el líder del bloque puede leer su contenido' },
+            { id: 'b', text: 'No se publica y se ejecuta completo o nada, pero el block engine y el líder lo ven' },
+            { id: 'c', text: 'Bloquea a todos los bots de la red durante el slot en que se incluye tu transacción' },
+            { id: 'd', text: 'Hace gratis tu transacción, así que los bots no tienen cómo competir por el orden' }
           ],
-          correctAnswer: 'c',
-          explanation: 'Un swap de $5,000 sin protección MEV es un objetivo atractivo para bots. La pérdida del 2% (~$100) es consistente con un ataque sandwich: el bot infló el precio antes de tu swap y lo vendió después. Para evitarlo: usa el modo Ultra o MEV Protect, configura slippage bajo (0.5-1%), y considera dividir swaps grandes en partes más pequeñas.'
+          correctAnswer: 'b',
+          explanation: 'Un bundle no pasa por canales públicos y es atómico: nadie puede meter una transacción entre las tuyas. Pero no es invisible: el block engine de Jito y el validador líder lo ven, así que reduce el riesgo a cambio de confiar en ellos. La idea del cifrado total es el malentendido más común.'
         },
         {
           id: 'q5',
-          question: '¿Cuál es el método MÁS efectivo para proteger tus swaps cotidianos en Jupiter contra MEV?',
+          question: 'Tu swap deja SOL más barato en Raydium que en Orca, y un bot hace arbitraje entre los dos justo después. ¿Te perjudicó?',
           options: [
-            { id: 'a', text: 'Hacer swaps solo a las 3am cuando hay menos bots activos' },
-            { id: 'b', text: 'Usar el modo Ultra de Jupiter (protección MEV siempre activa) o el toggle MEV Protect en modo Manual, combinado con slippage de 0.5-1%' },
-            { id: 'c', text: 'Usar siempre slippage de 0% para que los bots no puedan moverte el precio' },
-            { id: 'd', text: 'Hacer todos los swaps por cantidades menores a $1 para que no valga la pena atacarte' }
+            { id: 'a', text: 'Sí: se quedó con la diferencia de precio que te tocaba por haber movido el pool' },
+            { id: 'b', text: 'No directamente: opera después de tu swap y no cambia el precio que obtuviste' },
+            { id: 'c', text: 'Sí: todo MEV es un sandwich, aunque el bot solo opere después de tu transacción' },
+            { id: 'd', text: 'Sí: el arbitraje revierte tu swap y te devuelve menos tokens de los esperados' }
           ],
           correctAnswer: 'b',
-          explanation: 'La combinación de protección MEV + slippage bajo es la más práctica y efectiva. El modo Ultra de Jupiter la trae activada por defecto, y en modo Manual el toggle MEV Protect envía tu transacción por la infraestructura de Jito, sin exponerla a los bots. El slippage bajo limita cuánto pueden moverte el precio. Slippage de 0% causaría que muchas transacciones fallen, y esperar horarios específicos no te protege (los bots operan 24/7).'
+          explanation: 'Un back-run de arbitraje no toca tu ejecución: tu precio ya quedó fijado. Lo que hace es alinear los precios entre pools, algo que incluso ayuda al mercado. El daño viene cuando un bot actúa antes de ti. No todo MEV es un ataque, y distinguirlos te ahorra preocupaciones falsas.'
+        },
+        {
+          id: 'q6',
+          question: 'Vas a cambiar 2 SOL por USDC en modo Manual, un par muy líquido. ¿Qué slippage usas?',
+          options: [
+            { id: 'a', text: 'Entre 0.5% y 1%: alcanza para que pase y deja poco margen a un bot' },
+            { id: 'b', text: '0%: así ningún bot puede mover el precio ni un centavo en tu contra' },
+            { id: 'c', text: '5% o más: los pares líquidos se mueven rápido y no quiero que falle' },
+            { id: 'd', text: 'Da igual el número, porque en un par líquido nunca hay bots atentos' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'En pares líquidos, 0.5-1% suele bastar. Con 0% la mayoría de swaps fallaría por movimientos normales del precio, y con 5% o más le das a un bot un margen amplio. Los bots buscan cualquier swap rentable, también en pares líquidos. (En modo Ultra, Jupiter calcula el slippage por ti.)'
+        },
+        {
+          id: 'q7',
+          type: 'multiple-select',
+          question: '¿Cuáles de estas prácticas reducen de verdad tu exposición al MEV? Selecciona todas las correctas.',
+          options: [
+            { id: 'a', text: 'Usar el modo Ultra de Jupiter, que envía tu swap en privado' },
+            { id: 'b', text: 'Usar slippage de 0.5-1% en tokens líquidos' },
+            { id: 'c', text: 'Dividir en el tiempo una compra con price impact alto' },
+            { id: 'd', text: 'Hacer tus swaps de madrugada, cuando hay menos bots' },
+            { id: 'e', text: 'Usar slippage de 10% para que la transacción no falle' }
+          ],
+          correctAnswers: [0, 1, 2],
+          explanation: 'Envío privado, slippage bajo y compras divididas reducen lo que un bot puede ver o extraer. Los bots operan las 24 horas, así que el horario no protege, y un slippage alto hace exactamente lo contrario: amplía el margen del atacante.'
+        },
+        {
+          id: 'q8',
+          question: 'Parte del MEV vuelve a la red como propinas a los validadores. ¿A quién le llega hoy esa parte?',
+          options: [
+            { id: 'a', text: 'Solo a quienes tienen jitoSOL, porque Jito reparte las propinas en su token' },
+            { id: 'b', text: 'A las víctimas de sandwiches, que Jito identifica y compensa en cada epoch' },
+            { id: 'c', text: 'A validadores y sus stakers, incluso en staking nativo, no solo en jitoSOL' },
+            { id: 'd', text: 'A la Solana Foundation, que las usa para financiar la seguridad de la red' }
+          ],
+          correctAnswer: 'c',
+          explanation: 'Las propinas van al validador líder, que comparte una parte con quienes le delegan, tengan jitoSOL o stake nativo. Por eso jitoSOL ya no rinde más que el staking nativo (~4.8-5.0% frente a ~5.0-5.4% en noviembre de 2026). Nadie compensa a las víctimas: el MEV que te extraen se pierde.'
         }
       ]
-    }
+    },
+    checkpointQuizzes: [
+      {
+        id: 1,
+        sectionIndex: 1,
+        title: 'Checkpoint: El Margen del Sandwich',
+        questions: [
+          {
+            id: 'cp1-q1',
+            question: 'Cambias 10 SOL por un token con slippage de 3%, en modo Manual. Un bot te hace un sandwich. ¿Cuánto puede quitarte como máximo, aproximadamente?',
+            options: [
+              'Cerca de 3% del swap, unos 0.3 SOL: tu slippage es su margen',
+              'Nada, porque el slippage solo cubre cambios naturales de precio',
+              'Todo el swap, porque el bot puede quedarse con tu transacción',
+              'Unos 0.03 SOL, porque cada ataque está limitado a 0.3% del total'
+            ],
+            correctAnswer: 0,
+            explanation: 'El bot puede empeorar tu precio hasta el límite que aceptaste. Con 3% sobre 10 SOL, eso es ~0.3 SOL. Con 0.5%, el máximo bajaría a ~0.05 SOL. El slippage no distingue entre un movimiento natural y uno provocado: por eso mantenerlo bajo es tu primera defensa.',
+            hint: 'El slippage es el peor precio que aceptas.'
+          }
+        ]
+      }
+    ]
   },
   46: {
     id: 46,
     title: 'Gobernanza DAO: Tu Voto Importa',
     level: 'Avanzado',
     number: '13 de 13',
-    duration: '22 min',
+    duration: '24 min',
     type: 'Concepto + Práctica',
     description: 'Los tokens de gobernanza te dan poder de decisión sobre protocolos que manejan miles de millones de dólares. Aprende a votar, delegar, y protegerte de ataques de gobernanza.',
     sections: [
@@ -4642,12 +5449,22 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         }
       },
       {
+        type: 'glossary',
+        terms: [
+          {
+            term: 'DAO (Organización Autónoma Descentralizada)',
+            definition: 'Una "empresa" o comunidad que se gobierna por código y votos, no por jefes ni juntas directivas. Los miembros tienen tokens de gobernanza que les dan poder de voto. Cuando alguien propone un cambio (ej: "subir los fees del protocolo del 0.1% al 0.2%"), los miembros votan con sus tokens. Si pasa, se ejecuta según las reglas de la DAO: a veces el smart contract lo hace automáticamente, y otras veces depende de un equipo o una multisig que la ejecute. Ejemplos: Uniswap (decisiones sobre el DEX), MakerDAO (estabilidad del stablecoin DAI), Jupiter (decisiones sobre el agregador).',
+            whyItMatters: 'Si tienes tokens de gobernanza (JUP, UNI, AAVE, etc.), tienes poder real sobre protocolos que manejan miles de millones. La mayoría nunca vota, por eso tu voto importa más de lo que crees. En esta lección ves cómo participar.'
+          }
+        ]
+      },
+      {
         type: 'main',
         title: 'Mecanismos de Votación',
         content: 'No todas las DAOs votan igual. El mecanismo de votación determina quién tiene poder real y cómo se toman las decisiones. Cada sistema tiene trade-offs entre eficiencia, equidad, y resistencia a la manipulación:',
         features: [
           { icon: Banknote, title: 'Token-Weighted (1 Token = 1 Voto)', text: 'El mecanismo más común y simple. Quien tiene más tokens tiene más poder de voto. Es transparente y fácil de implementar, pero tiene un problema fundamental: las ballenas (holders con millones de tokens) dominan las votaciones. Una sola wallet con el 5% del supply puede superar a miles de usuarios pequeños. Es democracia del capital, no de las personas. Jupiter y la mayoría de DAOs de Solana usan este modelo.' },
-          { icon: Users, title: 'Votación Cuadrática (Costo Exponencial)', text: 'El costo de votos adicionales crece exponencialmente: 1 voto cuesta 1 token, 2 votos cuestan 4 tokens, 3 votos cuestan 9 tokens, y así sucesivamente. Esto reduce drásticamente el poder de las ballenas porque comprar influencia marginal se vuelve prohibitivamente caro. Es mucho más equitativo, pero vulnerable a ataques Sybil (crear múltiples wallets para dividir tu poder y votar "barato" desde cada una).' },
+          { icon: Users, title: 'Votación Cuadrática (Costo al Cuadrado)', text: 'El costo de votos adicionales crece al cuadrado: 1 voto cuesta 1 token, 2 votos cuestan 4 tokens, 3 votos cuestan 9 tokens, y así sucesivamente. Esto reduce drásticamente el poder de las ballenas porque comprar influencia marginal se vuelve prohibitivamente caro. Es mucho más equitativo, pero vulnerable a ataques Sybil (crear múltiples wallets para dividir tu poder y votar "barato" desde cada una).' },
           { icon: Clock, title: 'Conviction Voting (Tiempo = Poder)', text: 'Cuanto más tiempo mantienes tu voto en una propuesta, más peso acumula. Es como un "staking de votos": demuestras compromiso real con tu decisión dejando tu capital bloqueado. Favorece a los que realmente creen en una propuesta sobre los que buscan ganancias rápidas. Usado por algunos protocolos en otras cadenas y en experimentación en Solana.' },
           { icon: Shield, title: 'Vote Escrow (veTokens)', text: 'Bloqueas tus tokens por un periodo (semanas, meses, años) y recibes mayor poder de voto cuanto más largo sea el bloqueo. Alinea los incentivos: los que más arriesgan (bloqueando capital) tienen más influencia. Modelo popularizado por Curve (veCRV) y adoptado por varios protocolos. Desincentiva la especulación de corto plazo con tokens de gobernanza.' }
         ]
@@ -4659,7 +5476,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: Users, title: '¿Qué es un Delegado?', text: 'Un delegado es un miembro activo de la comunidad que se compromete a estudiar cada propuesta, publicar su razonamiento, y votar consistentemente. Pueden ser desarrolladores, investigadores, o usuarios activos que entienden profundamente el protocolo. Piénsalo como elegir un representante que defiende tus intereses, pero con la transparencia total que permite la blockchain.' },
           { icon: AlertTriangle, title: 'El Problema de la Apatía', text: 'Si solo el 5% de los holders votan, un grupo pequeño y coordinado puede controlar decisiones que afectan a todos. Propuestas que benefician a pocos a costa de muchos pueden pasar desapercibidas. La delegación combate esto: aunque no votes directamente, tu poder de voto cuenta a través de tu delegado.' },
-          { icon: Award, title: 'Jupiter ASR: Gobernanza con Recompensas', text: 'Jupiter innovó con su programa de Active Staking Rewards (ASR). Los holders de JUP que stakean sus tokens y votan (o delegan) reciben recompensas al final de cada periodo de gobernanza. Esto crea un incentivo directo: participar en la gobernanza no solo es un deber cívico, sino que es financieramente rentable. Es uno de los modelos más exitosos para combatir la baja participación, y siguió activo (50M JUP por trimestre) incluso durante la pausa de gobernanza de 2025.' },
+          { icon: Award, title: 'Jupiter ASR: Gobernanza con Recompensas', text: 'Jupiter creó el programa Active Staking Rewards (ASR) para premiar la participación. Al principio exigía votar; hoy reparte 50M JUP por trimestre según cuánto JUP tienes stakeado y por cuánto tiempo, sin exigir votos. Es un buen ejemplo de cómo cambian los incentivos: pagar por votar sube la participación, pero también puede atraer votos sin estudio. Si stakeas, recuerda que retirar toma 7 días.' },
           { icon: Target, title: 'Cómo Elegir un Buen Delegado', text: 'Busca delegados con historial de participación consistente (votan en todas las propuestas), que publiquen su razonamiento antes de votar, que no tengan conflictos de interés obvios, y que estén alineados con tu visión del protocolo. En plataformas de gobernanza on-chain como Realms puedes revisar el historial de votación de un delegado antes de confiarle tu peso de voto.' }
         ]
       },
@@ -4674,7 +5491,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           { icon: Eye, title: 'Cómo Identificar Propuestas Maliciosas', text: 'Red flags: propuestas que aparecen con poco tiempo de discusión y votación acelerada. Wallets desconocidas que acumulan tokens justo antes de una votación. Propuestas con lenguaje vago que ocultan transferencias de fondos. Proponentes sin historial en la comunidad. Cambios en parámetros técnicos que pocos entienden (cambiar oracle, modificar ratios de colateral, etc.).' }
         ],
         highlight: {
-          title: 'Tu Defensa como Voter',
+          title: 'Tu Defensa como votante',
           text: 'Lee CADA propuesta antes de votar. Revisa quién la propone y su historial. Analiza el impacto financiero real. Si algo no cuadra, vota en contra y alerta a la comunidad. La gobernanza descentralizada solo funciona si los participantes están informados y vigilantes.'
         }
       },
@@ -4698,7 +5515,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             'La comunidad de holders decide colectivamente',
             'Proceso más lento pero 100% transparente, todo es público y on-chain',
             'Cada holder puede proponer, votar, y delegar su poder',
-            'Los incentivos se alinean: los voters son los usuarios del protocolo',
+            'Los incentivos se alinean: los votantes son los usuarios del protocolo',
             'Más democrático pero vulnerable a baja participación y ataques de gobernanza',
             'Si la gobernanza falla, puedes votar para cambiarla'
           ]
@@ -4710,25 +5527,25 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'El ecosistema Solana tiene un sistema de gobernanza vibrante que va desde la evolución del propio protocolo hasta las decisiones de cada DApp. Aquí están las principales formas de participar y las herramientas que necesitas:',
         features: [
           { icon: Cpu, title: 'SIMDs: La Evolución de Solana', text: 'Los **Solana Improvement Documents (SIMDs)** son propuestas para cambiar el protocolo base de Solana. Son el equivalente de los BIPs de Bitcoin o los EIPs de Ethereum. Cualquiera puede escribir un SIMD, pero su implementación requiere consenso entre validadores. Se discuten públicamente en GitHub y en los foros de la comunidad. Seguir los SIMDs te da visibilidad sobre el futuro de la red donde inviertes.' },
-          { icon: Zap, title: 'Jupiter Governance y ASR', text: 'Jupiter es el ejemplo más activo de gobernanza en Solana. Para participar: 1) Compra JUP en Jupiter. 2) Ve a vote.jup.ag y conecta tu wallet. 3) Stakea tus JUP en el panel de gobernanza. 4) Vota en las propuestas activas (o delega a un delegado de confianza). 5) Al final de cada periodo de gobernanza, reclama tus ASR rewards. Votar te da voz en el futuro de Jupiter Y te genera recompensas financieras.' },
+          { icon: Zap, title: 'Jupiter Governance y ASR', text: 'Jupiter es uno de los ejemplos más visibles de gobernanza en Solana. Si tienes JUP: 1) Ve a vote.jup.ag y conecta tu wallet. 2) Stakea tus JUP en el panel de gobernanza (retirar toma 7 días). 3) Cuando haya votaciones, vota o delega. 4) Reclama tus ASR dentro del plazo de cada trimestre. Desde 2026, las votaciones se limitan a temas de tokenomics y tesorería, así que puede haber meses sin propuestas.' },
           { icon: Layers, title: 'Marinade Governance', text: 'Marinade (el protocolo de liquid staking de SOL) tiene su propio sistema de gobernanza donde los holders de MNDE votan sobre la dirección de stake, los parámetros del protocolo, y la distribución de incentivos. Accede a través de marinade.finance/governance. Como usuario de mSOL, las decisiones de gobernanza de Marinade te afectan directamente, participar es proteger tu inversión.' },
           { icon: Globe, title: 'Realms: El Hub de DAOs de Solana', text: 'Realms (realms.today) es la plataforma principal para gobernanza on-chain en Solana. Desde ahí puedes explorar cientos de DAOs activas, ver propuestas en votación, y participar directamente. Es el equivalente de Snapshot para Ethereum, pero todo se ejecuta on-chain. Conecta tu wallet, explora las DAOs de los protocolos que usas, y empieza a votar.' },
-          { icon: Award, title: 'Paso a Paso: Votar en Jupiter', text: '1) Asegúrate de tener JUP en tu wallet Phantom. 2) Ve a vote.jup.ag y conecta tu wallet. 3) Haz clic en "Stake" e ingresa la cantidad de JUP. 4) Confirma la transacción en Phantom. 5) Revisa las propuestas activas en la pestaña "Vote". 6) Lee cada propuesta completa, incluyendo discusiones en el foro. 7) Vota "For", "Against", o "Abstain". 8) Al cierre del periodo, ve a "Rewards" para reclamar tu ASR. Tiempo total: 10 minutos que te dan voz y recompensas.' }
+          { icon: Award, title: 'Paso a Paso: Votar en Jupiter', text: '1) Asegúrate de tener JUP en tu wallet Phantom. 2) Ve a vote.jup.ag y conecta tu wallet. 3) Haz clic en "Stake" e ingresa la cantidad de JUP. 4) Confirma la transacción en Phantom. 5) Revisa las propuestas activas en la pestaña "Vote". 6) Lee cada propuesta completa, incluyendo discusiones en el foro. 7) Vota "For", "Against", o "Abstain". 8) Dentro del plazo de cada trimestre, ve a "Rewards" para reclamar tu ASR. Recuerda que para retirar tus JUP del staking hay una espera de 7 días.' }
         ]
       },
       {
         type: 'main',
         title: 'Caso de Estudio: La Batalla por la Tokenomics de Jupiter',
-        content: 'Toda la teoría que acabas de leer se prueba en eventos reales con consecuencias reales. El ejemplo más instructivo del ecosistema Solana: la saga de gobernanza de Jupiter entre 2024 y 2026. Incluye un airdrop masivo, una quema de 3,000 millones de tokens, una DAO que se pausó a sí misma, y un regreso con votaciones de alto impacto. Es la lección de gobernanza más completa que existe en Solana.',
+        content: 'Toda la teoría que acabas de leer se prueba en eventos reales con consecuencias reales. Un ejemplo instructivo del ecosistema Solana: la saga de gobernanza de Jupiter entre 2024 y 2026. Incluye un airdrop masivo, una quema de 3,000 millones de tokens, una DAO que se pausó a sí misma, y un regreso con votaciones de alto impacto, además de un rumor que conviene saber desmentir.',
         features: [
-          { icon: BookOpen, title: 'El Contexto (2024-2025)', text: 'Tras el airdrop inicial de enero de 2024 (el "Jupuary"), Jupiter tenía miles de millones de JUP reservados en tesorería para futuros airdrops, equipo, y reservas comunitarias. La pregunta crítica para holders: ¿cuándo y cómo debería circular ese supply? En enero de 2025, en la conferencia Catstanbul, meow (cofundador de Jupiter) ANUNCIÓ una quema de 3,000 millones de JUP que recortó el supply de 10,000 a 7,000 millones. Detalle importante: eso fue un anuncio del equipo, no una decisión votada por la DAO, y esa diferencia es parte de la lección.' },
-          { icon: Users, title: 'La Crisis (junio 2025)', text: 'En junio de 2025, Jupiter hizo algo inédito: PAUSÓ su propia gobernanza citando una "ruptura de confianza" entre equipo y comunidad. Las votaciones se detuvieron mientras se rediseñaba el sistema. Ojo al detalle: el staking con ASR continuó (50M JUP por trimestre), pero no hubo propuestas que votar durante meses. Una DAO que se suspende a sí misma para reestructurarse es, en sí misma, una lección de gobernanza: los sistemas de votación no son sagrados, son herramientas que se pueden rediseñar.' },
-          { icon: Target, title: 'El Regreso (2026)', text: 'A comienzos de 2026 la gobernanza volvió a vote.jup.ag con votaciones de peso real. El 17 de febrero de 2026 pasó "Zero Net-New Emissions" con el 73.9% del peso de voto: el compromiso de no emitir supply neto nuevo. Y el 11 de abril de 2026, la DAO votó aplazar el Jupuary a mayo de 2026 y recortarlo de 700M a 200M JUP. La comunidad decidió, con votos on-chain verificables, sobre miles de millones de dólares en tokens.' },
-          { icon: CheckCircle, title: 'Las Lecciones', text: '**1) Anuncio del equipo ≠ voto de la DAO**: la quema de 3B la anunció el equipo; el recorte del Jupuary sí lo votó la comunidad. Aprende a distinguirlos. **2) Las DAOs pueden suspenderse y rediseñarse**: la pausa de 2025 no mató a Jupiter, la reestructuró. **3) La participación importa**: el regreso funcionó porque los holders volvieron a votar. **4) Todo es verificable on-chain**: cada uno de estos eventos lo puedes auditar tú mismo. Este caso es por qué JUP vale estudiar aunque no lo tengas.' }
+          { icon: BookOpen, title: 'El Contexto (2024-2025)', text: 'Tras el airdrop inicial de enero de 2024 (el "Jupuary", 1,000 millones de JUP), Jupiter tenía miles de millones de JUP reservados para futuros airdrops, equipo y reservas. La pregunta crítica para holders: ¿cuándo y cómo debería circular ese supply? El equipo propuso quemar 3,000 millones de JUP, y el 4 de agosto de 2024 la DAO lo aprobó con el 94.9% de los votos. La quema se ejecutó en enero de 2025, en la conferencia Catstanbul, y recortó el supply de 10,000 a 7,000 millones. Ese mismo enero, la DAO aprobó un segundo Jupuary de 700 millones.' },
+          { icon: Users, title: 'La Crisis (junio 2025)', text: 'En junio de 2025, Jupiter hizo algo inédito: PAUSÓ su propia gobernanza citando una "ruptura de confianza" entre equipo y comunidad. Las votaciones generales se detuvieron mientras se rediseñaba el sistema, aunque el staking con ASR continuó (50M JUP por trimestre). En noviembre de 2025, la DAO votó quemar unos 130 millones de JUP recomprados con ingresos del protocolo. Una DAO que se suspende a sí misma para reestructurarse es, en sí misma, una lección de gobernanza: los sistemas de votación no son sagrados, son herramientas que se pueden rediseñar.' },
+          { icon: Target, title: 'El Regreso (2026)', text: 'En 2026 la gobernanza volvió, con un alcance más acotado (tokenomics y tesorería). En febrero de 2026, con ~75% de los votos, la DAO aprobó "Net-Zero Emissions": aplazar el Jupuary de 2026 sin fecha, devolver sus 700 millones de JUP a una multisig comunitaria y pausar las emisiones al equipo. En abril circularon en redes mensajes que aseguraban que la DAO había movido el airdrop a mayo con 200 millones de JUP. No hubo tal votación: a noviembre de 2026, el Jupuary sigue sin fecha.' },
+          { icon: CheckCircle, title: 'Las Lecciones', text: '**1) Propuesta del equipo y voto de la DAO son cosas distintas**: la quema de 3B la propuso el equipo y la aprobó la DAO. Lee siempre quién propone y qué se votó. **2) Verifica en la fuente**: el supuesto aplazamiento a mayo de 2026 nunca se votó; solo vote.jup.ag y el foro oficial lo confirman. **3) Las DAOs pueden suspenderse y rediseñarse**: la pausa de 2025 no mató a Jupiter, la reestructuró. **4) Todo es verificable on-chain**: cada uno de estos eventos lo puedes auditar tú mismo. Este caso es por qué JUP vale estudiar aunque no lo tengas.' }
         ],
         highlight: {
-          title: 'Lo Que Ganan los Voters Informados',
-          text: 'Los holders que siguieron la saga de JUP no solo votaron, aprendieron a leer propuestas de tokenomics, a distinguir anuncios del equipo de decisiones de la DAO, y a evaluar trade-offs estratégicos. Esta educación se transfiere a CUALQUIER DAO que analices en el futuro. Votar una vez bien te hace mejor voter para siempre.'
+          title: 'Lo Que Ganan los votantes Informados',
+          text: 'Los holders que siguieron la saga de JUP no solo votaron, aprendieron a leer propuestas de tokenomics, a distinguir anuncios del equipo de decisiones de la DAO, y a evaluar trade-offs estratégicos. Esta educación se transfiere a CUALQUIER DAO que analices en el futuro. Votar una vez bien te hace mejor votante para siempre.'
         }
       },
       {
@@ -4736,11 +5553,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Tu Voz en el Futuro de DeFi',
         items: [
           'Los tokens de gobernanza te dan poder de decisión real sobre protocolos que manejan miles de millones de dólares. No son "meme tokens", son tu voz y voto en el futuro de las finanzas descentralizadas.',
-          'Los mecanismos de votación varían: token-weighted (1 token = 1 voto), cuadrática (costo exponencial), conviction (tiempo = poder), y vote escrow (bloqueo = influencia). Cada uno tiene trade-offs entre eficiencia y equidad.',
+          'Los mecanismos de votación varían: token-weighted (1 token = 1 voto), cuadrática (el costo crece al cuadrado), conviction (tiempo = poder), y vote escrow (bloqueo = influencia). Cada uno tiene trade-offs entre eficiencia y equidad.',
           'La delegación es la herramienta más poderosa contra la baja participación. Si no tienes tiempo para investigar cada propuesta, delega tu voto a alguien que sí lo haga, pero elige bien y revisa periódicamente.',
           'Los ataques de gobernanza son reales: flash loans (Beanstalk perdió $182M en 2022), votos con tokens robados (Mango, 2022), propuestas de drenaje, y ataques Sybil. Lee cada propuesta, verifica quién propone, y vota en contra de lo sospechoso.',
-          'Jupiter ASR es el mejor ejemplo de gobernanza con incentivos: votar te da recompensas financieras directas, creando un ciclo virtuoso de participación (y el programa sobrevivió incluso a la pausa de gobernanza de 2025).',
-          'La saga de Jupiter 2024-2026 (airdrop, quema anunciada por el equipo, pausa de gobernanza, regreso con votos de alto impacto) demuestra que las DAOs son sistemas vivos: pueden fallar, suspenderse, y rediseñarse. Estudiar casos reales te hace mejor voter en cualquier protocolo.',
+          'Jupiter ASR muestra cómo cambian los incentivos: empezó pagando por votar y hoy paga por stakear en el tiempo. Pagar por participar sube la participación, pero no garantiza votos informados.',
+          'La saga de Jupiter 2024-2026 (airdrop, quema propuesta por el equipo y aprobada por la DAO, pausa de gobernanza, Jupuary aplazado y rumores desmentidos) demuestra que las DAOs son sistemas vivos: pueden fallar, suspenderse, y rediseñarse. Estudiar casos reales te hace mejor votante en cualquier protocolo.',
           'Empieza hoy: stakea tus JUP en vote.jup.ag, explora DAOs en realms.today, y sigue los SIMDs para entender hacia dónde va Solana. Tu voto importa más de lo que crees.'
         ]
       }
@@ -4751,85 +5568,94 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           id: 'q1',
           question: '¿Cuál es el riesgo principal de la votación token-weighted (1 token = 1 voto)?',
           options: [
-            { id: 'a', text: 'Es demasiado lenta porque hay muchos votos que contar' },
-            { id: 'b', text: 'Las ballenas con grandes cantidades de tokens pueden dominar las decisiones, dejando sin voz efectiva a miles de holders pequeños' },
-            { id: 'c', text: 'Los tokens pierden valor cuando se usan para votar' },
-            { id: 'd', text: 'Solo funciona en Ethereum, no en Solana' }
+            { id: 'a', text: 'Es demasiado lenta, porque hay que contar millones de votos uno por uno' },
+            { id: 'b', text: 'Los tokens pierden valor cada vez que alguien los usa para votar en la DAO' },
+            { id: 'c', text: 'Las ballenas pueden dominar las decisiones y dejar sin peso a los pequeños' },
+            { id: 'd', text: 'Cualquiera puede crear muchas wallets y votar varias veces con un token' }
           ],
-          correctAnswer: 'b',
-          explanation: 'En votación token-weighted, quien más tokens tiene, más poder tiene. Una sola wallet con el 5% del supply puede superar a miles de usuarios. Es democracia del capital, no de las personas. Por eso existen alternativas como votación cuadrática y conviction voting.'
+          correctAnswer: 'c',
+          explanation: 'Quien tiene más tokens tiene más poder: una sola wallet con el 5% del supply puede superar a miles de holders. Crear muchas wallets no sirve aquí, porque el poder viene de los tokens, no de las wallets; eso sí es un problema en sistemas como la votación cuadrática. Por eso existen alternativas como conviction voting.'
         },
         {
           id: 'q2',
-          question: 'Un protocolo DeFi anuncia una votación urgente para "transferir 10M USDC de la tesorería a un fondo de crecimiento". La propuesta apareció hace 2 horas y la votación cierra en 6 horas. ¿Qué tipo de ataque podría ser esto?',
+          question: 'Un protocolo anuncia una votación urgente para "transferir 10M USDC de la tesorería a un fondo de crecimiento". La propuesta apareció hace 2 horas y cierra en 6. ¿Qué podría ser?',
           options: [
-            { id: 'a', text: 'Un ataque Sybil normal, no hay de qué preocuparse' },
-            { id: 'b', text: 'Una propuesta de drenaje de tesorería, la urgencia artificial, el lenguaje vago, y el corto periodo de votación son red flags clásicas de una propuesta maliciosa' },
-            { id: 'c', text: 'Es seguramente legítimo porque la comunidad lo propuso' },
-            { id: 'd', text: 'Un flash loan attack' }
+            { id: 'a', text: 'Un posible drenaje de tesorería: urgencia, lenguaje vago y poco tiempo' },
+            { id: 'b', text: 'Un ataque Sybil común, que no afecta en nada a la tesorería del protocolo' },
+            { id: 'c', text: 'Una propuesta legítima, porque la propuso alguien de la misma comunidad' },
+            { id: 'd', text: 'Un flash loan, porque el monto es grande y la votación es muy corta' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Las propuestas maliciosas de drenaje suelen disfrazarse con lenguaje positivo ("crecimiento", "comunidad") y usan urgencia artificial para que los voters no tengan tiempo de analizarla. Red flags: poco tiempo de discusión, montos grandes, wallets destino desconocidas, y proponentes sin historial.'
+          correctAnswer: 'a',
+          explanation: 'Las propuestas de drenaje se disfrazan con palabras positivas ("crecimiento", "comunidad") y usan la urgencia para que nadie alcance a analizarlas. Señales: poco tiempo de discusión, montos grandes, wallets de destino desconocidas y proponentes sin historial. Un flash loan es una forma de conseguir votos, no un tipo de propuesta.'
         },
         {
           id: 'q3',
-          question: '¿Por qué la delegación es importante en gobernanza DAO, y cómo funciona en la práctica?',
+          question: '¿Qué pasa cuando delegas tu voto en una DAO?',
           options: [
-            { id: 'a', text: 'No es importante, cada persona debería votar por sí misma' },
-            { id: 'b', text: 'Porque la mayoría de holders nunca votan (1-15% de participación), lo que permite que minorías coordinen las decisiones. La delegación permite que tu poder de voto cuente a través de un experto sin perder tus tokens' },
-            { id: 'c', text: 'Delegación significa regalar tus tokens a otra persona permanentemente' },
-            { id: 'd', text: 'Solo los validadores pueden delegar votos' }
+            { id: 'a', text: 'Tu peso de voto cuenta a través de otra persona, sin entregar tus tokens' },
+            { id: 'b', text: 'Le regalas tus tokens a otra persona de forma permanente para que vote' },
+            { id: 'c', text: 'Solo los validadores de la red pueden recibir votos delegados de holders' },
+            { id: 'd', text: 'Tus tokens quedan bloqueados y ya no puedes revocar la delegación nunca' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Con tasas de participación del 1-15%, la baja participación es el mayor riesgo de las DAOs. La delegación permite que tu poder de voto cuente sin que investigues cada propuesta. No pierdes tus tokens, solo prestas tu peso de voto, y puedes revocarlo cuando quieras.'
+          correctAnswer: 'a',
+          explanation: 'Delegar presta tu peso de voto, no tus tokens: siguen en tu wallet y puedes revocar la delegación cuando quieras. Con participaciones del 1-15%, delegar en alguien que sí investiga evita que unas pocas wallets coordinadas decidan solas. Elige bien y revisa cómo vota tu delegado.'
         },
         {
           id: 'q4',
-          question: '¿Cuál es la diferencia fundamental entre gobernanza centralizada (empresa tradicional) y descentralizada (DAO)?',
-          options: [
-            { id: 'a', text: 'No hay diferencia real, ambas son controladas por unos pocos' },
-            { id: 'b', text: 'En la centralizada, un CEO decide sin transparencia y los usuarios no participan. En la descentralizada, los holders votan públicamente en decisiones que afectan el protocolo, con total transparencia on-chain' },
-            { id: 'c', text: 'La gobernanza descentralizada es siempre mejor porque es más rápida' },
-            { id: 'd', text: 'La gobernanza centralizada usa blockchain y la descentralizada no' }
-          ],
-          correctAnswer: 'b',
-          explanation: 'La gobernanza descentralizada no es perfecta (es más lenta y vulnerable a baja participación), pero ofrece transparencia total y participación de todos los stakeholders. En la centralizada, las decisiones son opacas y los usuarios solo pueden aceptar o irse. En una DAO, puedes votar para cambiar lo que no te gusta.'
+          type: 'true-false',
+          question: 'En muchas DAOs vota solo una minoría de los holders, a menudo entre el 1% y el 15%.',
+          correctAnswer: true,
+          explanation: 'Verdadero. La baja participación es uno de los mayores riesgos de una DAO: con pocos votantes, un grupo pequeño y coordinado puede aprobar lo que quiera. Por eso existen la delegación y los incentivos para participar.'
         },
         {
           id: 'q5',
-          question: 'Tienes 500 JUP y quieres participar en la gobernanza de Jupiter. ¿Cuáles son los pasos correctos?',
-          options: [
-            { id: 'a', text: 'Enviar mis JUP a la Solana Foundation para que voten por mí' },
-            { id: 'b', text: 'Ir a vote.jup.ag, conectar mi wallet, stakear mis JUP, votar en las propuestas activas (o delegar a un delegado), y reclamar ASR rewards al final del periodo' },
-            { id: 'c', text: 'Crear un NFT con mis JUP para tener derecho a voto' },
-            { id: 'd', text: 'Publicar mi voto en Twitter y esperar a que lo cuenten' }
+          type: 'ordering',
+          question: 'Tienes 500 JUP y quieres participar en la gobernanza de Jupiter. Ordena los pasos.',
+          items: [
+            'Entro a vote.jup.ag escribiendo la URL',
+            'Conecto mi wallet',
+            'Stakeo mis JUP, sabiendo que retirar toma 7 días',
+            'Voto o delego cuando hay propuestas',
+            'Reclamo el ASR dentro del plazo'
           ],
-          correctAnswer: 'b',
-          explanation: 'Jupiter tiene uno de los sistemas de gobernanza más accesibles: stakea JUP en vote.jup.ag, vota en propuestas o delega, y recibe ASR rewards. Todo el proceso toma ~10 minutos y te da voz real en el futuro del mayor DEX de Solana mientras ganas recompensas por participar.'
+          correctOrder: [0, 1, 2, 3, 4],
+          explanation: 'Escribir la URL evita sitios falsos. Antes de stakear, recuerda que retirar toma 7 días y que el precio de JUP puede moverse mientras tanto. El ASR se reclama por periodo, así que revisa los plazos para no perderlo.'
         },
         {
           id: 'q6',
-          question: 'Un protocolo que usas lanza una propuesta: "Aumentar el multiplicador de rewards del token nativo al depositar en el pool X". Ves que la propuesta fue creada hace 18 horas, la votación cierra en 6 horas, y el proponente es una wallet que apareció hace 3 semanas con volumen alto de voto acumulado recientemente. Aplicando el framework de red flags, ¿qué haces?',
+          question: 'Una propuesta quiere "aumentar el multiplicador de rewards del pool X". Se creó hace 18 horas, cierra en 6, y la propone una wallet de 3 semanas que acumuló mucho poder de voto hace poco. ¿Qué haces?',
           options: [
-            { id: 'a', text: 'Voto a favor, más rewards son buenos' },
-            { id: 'b', text: 'Al menos cuatro red flags: (1) periodo de discusión muy corto (<24h), (2) votación acelerada (6h), (3) proponente sin historial (wallet reciente), (4) acumulación sospechosa de poder de voto antes de proponer. Voto en contra, alerto a la comunidad en el foro del protocolo, y investigo si hay lazos entre la wallet proponente y el pool X' },
-            { id: 'c', text: 'Voto abstención para no meterme en problemas y dejo que decidan otros con más experiencia' },
-            { id: 'd', text: 'Delego mi voto al delegado más popular sin leer la propuesta' }
+            { id: 'a', text: 'Voto en contra, alerto en el foro e investigo quién está detrás de la wallet' },
+            { id: 'b', text: 'Voto a favor, porque más rewards para el pool siempre benefician a todos' },
+            { id: 'c', text: 'Me abstengo y dejo que decidan otros con más experiencia que yo en este tema' },
+            { id: 'd', text: 'Delego mi voto al delegado más popular sin leer la propuesta completa' }
           ],
-          correctAnswer: 'b',
-          explanation: 'Este escenario tiene el patrón clásico de un ataque de gobernanza dirigido. La acumulación reciente de poder de voto + propuesta acelerada + proponente sin historial + cambio de parámetros específicos a favor de un pool particular = probable extracción dirigida. La defensa pasiva (abstención) no ayuda, las propuestas se aprueban con los que votan. Los voters responsables activamente votan en contra Y alertan a la comunidad. La gobernanza descentralizada solo funciona con participantes vigilantes.'
+          correctAnswer: 'a',
+          explanation: 'Discusión corta, votación acelerada, proponente sin historial y acumulación reciente de votos: es el patrón de una extracción dirigida hacia el pool X. Abstenerse parece prudente, pero las propuestas se aprueban con los votos de quienes sí votan. Votar en contra y avisar a la comunidad es la defensa.'
         },
         {
           id: 'q7',
-          question: 'Estás comparando dos sistemas de votación para una nueva DAO: Sistema A (conviction voting) requiere que tu voto acumule fuerza con el tiempo, mientras más tiempo lo mantienes, más pesa. Sistema B (vote escrow) requiere bloquear tus tokens por un período fijo (ej: 4 años) y recibes más poder de voto cuanto más largo es el bloqueo. ¿Cuál es la diferencia fundamental?',
+          question: 'Una DAO nueva compara conviction voting (tu voto gana fuerza cuanto más tiempo lo mantienes) con vote escrow (bloqueas tokens y ganas más poder cuanto más largo es el bloqueo). ¿Cuál es la diferencia de fondo?',
           options: [
-            { id: 'a', text: 'Son lo mismo con diferente nombre' },
-            { id: 'b', text: 'Conviction voting penaliza cambiar de opinión (tu voto pierde peso si lo mueves), mientras vote escrow penaliza salir del protocolo (no puedes vender tus tokens durante el bloqueo). Ambos alinean incentivos con compromiso de largo plazo, pero conviction es más flexible; vote escrow es más brutal pero más difícil de manipular' },
-            { id: 'c', text: 'Vote escrow es solo para Ethereum, conviction solo para Solana' },
-            { id: 'd', text: 'Ambos son vulnerables a flash loan attacks por igual' }
+            { id: 'a', text: 'Conviction premia mantener tu voto; vote escrow, bloquear tus tokens' },
+            { id: 'b', text: 'Son el mismo mecanismo con otro nombre según el protocolo que lo use' },
+            { id: 'c', text: 'Vote escrow solo existe en Ethereum y conviction solo existe en Solana' },
+            { id: 'd', text: 'Conviction premia bloquear tus tokens; vote escrow, mantener tu voto' }
+          ],
+          correctAnswer: 'a',
+          explanation: 'Los dos alinean el poder de voto con el compromiso, por caminos distintos. Conviction penaliza cambiar de opinión: si mueves tu voto, pierde fuerza. Vote escrow penaliza salir: no puedes vender durante el bloqueo, lo que lo hace más rígido pero más difícil de manipular. Es fácil cruzar las dos definiciones.'
+        },
+        {
+          id: 'review_1',
+          question: 'Repaso de Firedancer & El Futuro de Solana: en cambios grandes como SIMD-0228, ¿quién votó?',
+          options: [
+            { id: 'a', text: 'Cada holder de SOL, directamente desde su propia wallet y sin intermediarios' },
+            { id: 'b', text: 'Los validadores, con votos ponderados por el stake que tienen delegado' },
+            { id: 'c', text: 'La Solana Foundation, que decidió sola y luego publicó el resultado' },
+            { id: 'd', text: 'Los holders de JUP, porque Jupiter es la DAO más grande de Solana' }
           ],
           correctAnswer: 'b',
-          explanation: 'Conviction voting y vote escrow resuelven el mismo problema (alinear poder de voto con compromiso real) pero por mecanismos distintos. Conviction = "demuestra compromiso manteniendo tu decisión". Vote escrow = "demuestra compromiso bloqueando capital". Para DAOs con decisiones largas y complejas, conviction puede funcionar mejor. Para protocolos donde el voto específico importa menos que tener "skin in the game", vote escrow es más robusto. Un DAO maduro a veces combina ambos.'
+          explanation: 'En Solana votan los validadores, con un peso según su stake. Si haces staking, tu voto es indirecto: llega a través del validador que elegiste. Por eso elegir validador también es una decisión de gobernanza. (Lo viste en la lección Firedancer & El Futuro de Solana.)'
         }
       ]
     }
