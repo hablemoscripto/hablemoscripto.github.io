@@ -101,10 +101,20 @@ function logToConsole(payload: ErrorPayload): void {
   }
 }
 
+// A render loop can throw the same error hundreds of times per second.
+const MAX_REPORTS_PER_PAGE = 20;
+const reportedKeys = new Set<string>();
+
 function sendToEndpoint(payload: ErrorPayload): void {
   if (!REPORTING_URL) {
     return;
   }
+
+  const key = `${payload.level}|${payload.context.component ?? ''}|${payload.context.action ?? ''}|${payload.message}`;
+  if (reportedKeys.has(key) || reportedKeys.size >= MAX_REPORTS_PER_PAGE) {
+    return;
+  }
+  reportedKeys.add(key);
 
   try {
     // Use sendBeacon for reliability (works during page unload).

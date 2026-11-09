@@ -13,7 +13,7 @@ Set these in **Vercel → Project → Settings → Environment Variables** for t
 | `VITE_WOMPI_PUBLIC_KEY`     | ✅       | **Must start with `pub_prod_`** — `pub_test_` keys will silently use sandbox                                                                                                                                                                    |
 | `VITE_GA4_MEASUREMENT_ID`   | Optional | `G-XXXXXXXXXX`. Analytics no-op if unset. Only fires in prod build. Fires `page_view`, `sign_up`, `login`, `purchase`.                                                                                                                          |
 | `VITE_META_PIXEL_ID`        | Optional | Meta (Facebook) Pixel ID. No-op if unset. Only fires in prod build. Fires `PageView`, `Lead` (sign-up), `Purchase` (premium upgrade) from the same call sites as GA4. Required for the marketing plan's Meta retargeting + lookalike audiences. |
-| `VITE_ERROR_REPORTING_URL`  | Optional | Endpoint for client error reports. No-op if unset.                                                                                                                                                                                              |
+| `VITE_ERROR_REPORTING_URL`  | Launch   | `https://<project>.supabase.co/functions/v1/log-client-error`. Without it production errors only reach the user's console. Set for **Production** only: the function rejects origins other than hablemoscripto.io.                              |
 | `VITE_USDC_PAYMENT_ADDRESS` | Optional | Solana address that receives USDC. Leave empty to disable crypto tab.                                                                                                                                                                           |
 
 `SUPABASE_SERVICE_KEY` is only needed for the seed script (`npm run db:seed`) — it must **not** be set on Vercel (the seed never runs in the production build).
@@ -48,7 +48,7 @@ Apply in this exact order in the Supabase **SQL Editor**. **Order matters** — 
 
 **User / payments / admin schema:** 4. `supabase/payments-schema.sql` — `user_profiles`, `payments`, `upgrade_user_to_premium` RPC, signup trigger v1 5. `supabase/admin-setup.sql` — `profiles` table with `is_admin`, trigger, RLS policies _(creates a policy on `newsletter_subscribers` — that table must already exist; see note below)_ 6. `supabase/migrations/create_user_achievements.sql` — gamification achievements table 7. `supabase/migrations/add_subscription_tiers.sql` — premium tier tracking + `crypto_payments` 8. `supabase/migrations/add_processed_webhook_events.sql` — idempotency table for Wompi retries 9. `supabase/migrations/2026-05-26_fix_user_profiles_and_achievements_rls.sql` — adds `premium_tier` column, fixes achievements upsert RLS
 
-**Security + content protection (apply last, in this order):** 10. `supabase/migrations/2026-05-28_fix_payments_security_and_tiers.sql` — **critical.** Closes the RLS hole that let any logged-in user self-grant premium, makes `premium_tier` persist on purchase (changes `upgrade_user_to_premium` to `(uuid, tier)`), and merges the duplicate signup trigger. **Apply before deploying the updated `wompi-webhook`** — the new function calls the new RPC signature. 11. `supabase/migrations/2026-05-30_content_protection.sql` — creates `protected_lessons` (references `lessons(id)`) and locks paid content tables to service-role-only. **Without this, the paid-lesson path 500s.** 12. `supabase/migrations/2026-06-02_newsletter_autosubscribe.sql` — **Must run after step 10.** Both this and step 10 `CREATE OR REPLACE handle_new_user()`; if 10 runs after this, the newsletter signup opt-in is silently dropped. 13. `supabase/migrations/2026-07-17_daily_review_activity.sql` — **required for spaced-repetition / daily review.** Creates `daily_review_activity` so review answers and streak-qualifying review activity persist server-side. Without it, the client degrades silently and reviews will not sync across devices.
+**Security + content protection (apply last, in this order):** 10. `supabase/migrations/2026-05-28_fix_payments_security_and_tiers.sql` — **critical.** Closes the RLS hole that let any logged-in user self-grant premium, makes `premium_tier` persist on purchase (changes `upgrade_user_to_premium` to `(uuid, tier)`), and merges the duplicate signup trigger. **Apply before deploying the updated `wompi-webhook`** — the new function calls the new RPC signature. 11. `supabase/migrations/2026-05-30_content_protection.sql` — creates `protected_lessons` (references `lessons(id)`) and locks paid content tables to service-role-only. **Without this, the paid-lesson path 500s.** 12. `supabase/migrations/2026-06-02_newsletter_autosubscribe.sql` — **Must run after step 10.** Both this and step 10 `CREATE OR REPLACE handle_new_user()`; if 10 runs after this, the newsletter signup opt-in is silently dropped. 13. `supabase/migrations/2026-07-17_daily_review_activity.sql` — **required for spaced-repetition / daily review.** Creates `daily_review_activity` so review answers and streak-qualifying review activity persist server-side. Without it, the client degrades silently and reviews will not sync across devices. 14. `supabase/migrations/2026-07-03_rag_section_search.sql` then `2026-07-04_rag_matched_sections.sql` — section-level search for the AI tutor's RAG. 15. `supabase/migrations/2026-10-31_no_downgrade_on_upgrade.sql` — `upgrade_user_to_premium` refuses to demote or repeat a tier and returns BOOLEAN. **Apply before deploying the matching `wompi-webhook`.** Do not re-run `payments-schema.sql` after it. 16. `supabase/migrations/2026-11-09_refund_payment.sql` — `refund_payment` RPC plus `payments.refunded_at` / `refund_note` (see §9). 17. `supabase/migrations/2026-11-09_error_logs.sql` — `error_logs` table. **Apply before deploying `log-client-error`.**
 
 > **Not in the repo (gap):** the DDL for `user_progress` and `newsletter_subscribers` lives only in the live DB (an earlier external migration), not in `supabase/`. A fresh-environment rebuild needs both created **before** step 5 (which adds a policy to `newsletter_subscribers`) and before the seed. Capture their real DDL into `supabase/` so the schema is reproducible. `supabase/verify-order-column.sql` is a diagnostic, not a migration — do not apply it.
 
@@ -82,12 +82,13 @@ supabase functions deploy get-lesson-content
 supabase functions deploy unsubscribe --no-verify-jwt
 supabase functions deploy send-newsletter --no-verify-jwt
 supabase functions deploy mentoria-request --no-verify-jwt
+supabase functions deploy log-client-error --no-verify-jwt
 ```
 
 **`--no-verify-jwt` matters.** Deploy each function as its own command (the CLI takes one name, not a comma list). The platform checks the JWT _before_ your function runs, so any caller that doesn't send a Supabase JWT must be deployed with `--no-verify-jwt`, or it's rejected with 401 before the code executes:
 
 - `wompi-webhook` — called by Wompi (no JWT). **Without the flag, every payment event is rejected and no user gets premium.** The in-function HMAC signature check is the real gate.
-- `unsubscribe`, `mentoria-request` — public endpoints. `send-newsletter` does its own admin check inside the function.
+- `unsubscribe`, `mentoria-request`, `log-client-error` — public endpoints (`log-client-error` receives `sendBeacon` posts, which cannot carry a JWT). `send-newsletter` does its own admin check inside the function.
 - `create-payment`, `get-lesson-content`, `grok-chat` are called by the logged-in frontend (which sends a JWT) — deploy these **without** the flag so JWT verification stays on.
 
 There is no `supabase/config.toml`, so `verify_jwt` is set per deploy by the flag (CLI default is `true`). Redeploying without the flag silently re-enables JWT verification — always include it for the public functions above.
@@ -143,7 +144,14 @@ In the Supabase dashboard → **Authentication**:
 - [ ] Open Supabase **Logs → Edge Functions** — verify no 5xx on `wompi-webhook`, `grok-chat`, `send-newsletter`. **Check daily during launch week** — a "paid but no premium" failure surfaces here first.
 - [ ] If `VITE_GA4_MEASUREMENT_ID` is set, open GA4 real-time report and confirm events (`page_view`, `sign_up`, `purchase`) are firing — including the **landing-page** `page_view` (the first one, which ad attribution depends on). `sign_up` fires on email and Google signup; `purchase` fires on the APPROVED `/pago-completado` screen with the real COP value.
 - [ ] If `VITE_META_PIXEL_ID` is set, open Meta Events Manager → Test Events and confirm `PageView`, `Lead`, and `Purchase` fire. The pixel and GA4 share call sites, so if one fires and the other does not, the missing one's env var is unset or its CSP host is blocked (check the browser console for a CSP violation on `connect.facebook.net`).
-- [ ] Client errors currently `console.error` in the browser unless `VITE_ERROR_REPORTING_URL` points somewhere. Set it (even to a tiny Edge Function that inserts into an `error_logs` table) so production errors are captured, not lost.
+- [ ] Apply `2026-11-09_error_logs.sql`, deploy `log-client-error --no-verify-jwt`, set `VITE_ERROR_REPORTING_URL` on Vercel Production and redeploy. Verify: on hablemoscripto.io run `window.dispatchEvent(new ErrorEvent('error', { message: 'smoke test' }))` in the console, then check for the row. **Check daily during launch week:**
+  ```sql
+  SELECT created_at, level, component, action, message, url
+  FROM error_logs
+  WHERE created_at > NOW() - INTERVAL '1 day'
+  ORDER BY created_at DESC;
+  ```
+  Each page load reports at most 20 distinct errors. Rows older than 30 days are pruned by the function.
 
 ## 7. Known post-launch work (not blocking)
 
@@ -165,3 +173,28 @@ In the Supabase dashboard → **Authentication**:
   WHERE conrelid = 'user_progress'::regclass AND contype = 'f';
   ```
   A CASCADE referencing `auth.users` is fine. The danger would be a CASCADE referencing a **reseeded content table** (`lessons`) — none exists today.
+
+## 9. Refunds
+
+The landing FAQ and `/terminos` §4.3 promise a full refund within 7 days of purchase. Nothing automatic revokes access: the webhook only acts on `APPROVED`. A refund is two steps, money first, then access.
+
+1. **Find the payment** from the email on the request:
+   ```sql
+   SELECT p.wompi_reference, p.wompi_transaction_id, p.product_type, p.status,
+          p.amount_in_cents / 100 AS cop, p.created_at,
+          NOW() - p.created_at AS age, up.premium_tier
+   FROM payments p
+   LEFT JOIN user_profiles up ON up.id = p.user_id
+   WHERE p.customer_email = 'buyer@example.com'
+   ORDER BY p.created_at DESC;
+   ```
+   Within 7 days: refund without questions, as promised. Later: your call, but the terms say no.
+2. **Return the money** in the Wompi dashboard: open the transaction by its id and issue the void or refund. Card refunds can take several business days to reach the cardholder.
+3. **Revoke access** in the SQL editor:
+   ```sql
+   SELECT refund_payment('<wompi_reference>', 'Solicitud por email 2026-11-09');
+   ```
+   It returns the tier the user keeps: `free` after a single purchase, `premium` when an Experto upgrade is refunded but the earlier Inversor charge stands, unchanged when the refunded charge was the lower one. Calling it twice is harmless.
+4. **Reply to the buyer** from `soporte@` confirming the refund and the card timeline.
+
+Refund the money before revoking, never the reverse: a revoked account with no refund is a support fire; a refunded account that still has access for a few minutes is not.
