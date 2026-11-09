@@ -55,7 +55,7 @@ The landing FAQ and `/terminos` §4.3 promise a full refund within 7 days. The w
 
 ### Client error log (Nov 2026)
 
-`utils/errorReporting.ts` posts to `VITE_ERROR_REPORTING_URL` via `sendBeacon` in production builds (at most 20 distinct reports per page load). The receiver is the public `log-client-error` Edge Function, which writes to `error_logs` (`2026-11-09_error_logs.sql`, RLS on, no policies). It only accepts the hablemoscripto.io origins, so preview deploys don't log. Rows older than 30 days are pruned by the function itself. Query `error_logs` daily during launch week.
+`utils/errorReporting.ts` posts to `VITE_ERROR_REPORTING_URL` via `sendBeacon` in production builds (at most 20 distinct reports per page load). The receiver is the public `site-health` Edge Function, which writes to `error_logs` (`2026-11-09_error_logs.sql`, RLS on, no policies). It only accepts the hablemoscripto.io origins, so preview deploys don't log. Rows older than 30 days are pruned by the function itself. Query `error_logs` daily during launch week.
 
 ### Content quality tooling (Nov 2026)
 
@@ -182,7 +182,7 @@ supabase functions deploy get-lesson-content
 supabase functions deploy unsubscribe --no-verify-jwt
 supabase functions deploy send-newsletter --no-verify-jwt
 supabase functions deploy mentoria-request --no-verify-jwt
-supabase functions deploy log-client-error --no-verify-jwt
+supabase functions deploy site-health --no-verify-jwt
 # verify-crypto-payment: do NOT deploy (payer-binding hole — see launch state)
 ```
 
@@ -294,7 +294,7 @@ All non-public routes are gated by `ProtectedRoute`. All Helmet-driven routes se
 | `mentoria-request`      | Receives mentoría inquiries from `MentoriaModal`, emails via Resend                                        | No JWT           | Deploy with `--no-verify-jwt`                                                                                                                                                                                                                                                                     |
 | `send-newsletter`       | Sends via Resend; sanitizes HTML; per-recipient HMAC unsubscribe token                                     | Admin JWT        | Checks `profiles.is_admin` server-side                                                                                                                                                                                                                                                            |
 | `unsubscribe`           | Public endpoint to set `newsletter_subscribers.is_active = false`                                          | No (HMAC token)  | Deploy with `--no-verify-jwt`                                                                                                                                                                                                                                                                     |
-| `log-client-error`      | Stores browser error reports from `utils/errorReporting.ts` in `error_logs`                                | No JWT           | Deploy with `--no-verify-jwt` (`sendBeacon` can't send a JWT). hablemoscripto.io origins only, 16 KB body cap, 30 reports / 10 min per IP in-memory, prunes rows older than 30 days.                                                                                                              |
+| `site-health`           | Stores browser error reports from `utils/errorReporting.ts` in `error_logs`                                | No JWT           | Deploy with `--no-verify-jwt` (`sendBeacon` can't send a JWT). hablemoscripto.io origins only, 16 KB body cap, 30 reports / 10 min per IP in-memory, prunes rows older than 30 days.                                                                                                              |
 | `verify-crypto-payment` | Confirms a Solana USDC transfer, upgrades user, sends Fundador welcome email                               | JWT              | **NOT DEPLOYED — do not deploy.** Never binds the on-chain payer to the user (anyone can claim someone else's transfer). Crypto launch deferred; fix payer binding first.                                                                                                                         |
 
 Secrets are Supabase dashboard → Project Settings → Edge Functions → Secrets. `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` are auto-injected — do not set them manually.
@@ -367,7 +367,7 @@ Full schema is in `supabase/payments-schema.sql`, `supabase/admin-setup.sql`, an
 | ---------------------------------------------------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `user_profiles`                                                                    | `payments-schema.sql`                          | Premium status per user (`is_premium`, `premium_since`, `premium_expires_at`, `premium_tier`)                      |
 | `payments`                                                                         | `payments-schema.sql`                          | Wompi transaction ledger, keyed by `wompi_reference`. `refunded_at` / `refund_note` set by `refund_payment`        |
-| `error_logs`                                                                       | `migrations/2026-11-09_error_logs.sql`         | Browser error reports via `log-client-error`. RLS on, no policies; 30-day retention                                |
+| `error_logs`                                                                       | `migrations/2026-11-09_error_logs.sql`         | Browser error reports via `site-health`. RLS on, no policies; 30-day retention                                     |
 | `profiles`                                                                         | `admin-setup.sql`                              | Admin role flag (`is_admin`), auto-created on signup via trigger                                                   |
 | `user_progress`                                                                    | (external / earlier migration)                 | Lesson completion + quiz scores per user                                                                           |
 | `user_achievements`                                                                | `migrations/create_user_achievements.sql`      | Unlocked achievement IDs with timestamp                                                                            |
@@ -406,7 +406,7 @@ Full table + production setup in `PRODUCTION-CHECKLIST.md`. Local dev uses `.env
 
 Quick reference:
 
-- **Frontend (Vite, must start with `VITE_`):** `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_WOMPI_PUBLIC_KEY` (`pub_prod_*` in prod), `VITE_GA4_MEASUREMENT_ID` (optional), `VITE_META_PIXEL_ID` (optional), `VITE_ERROR_REPORTING_URL` (set in Production to the `log-client-error` URL; leave empty locally), `VITE_USDC_PAYMENT_ADDRESS` (optional).
+- **Frontend (Vite, must start with `VITE_`):** `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_WOMPI_PUBLIC_KEY` (`pub_prod_*` in prod), `VITE_GA4_MEASUREMENT_ID` (optional), `VITE_META_PIXEL_ID` (optional), `VITE_ERROR_REPORTING_URL` (set in Production to the `site-health` URL; leave empty locally), `VITE_USDC_PAYMENT_ADDRESS` (optional).
 - **Seed script only (not exposed to client):** `SUPABASE_SERVICE_KEY`.
 - **Supabase Edge Function secrets:** `XAI_API_KEY`, `RESEND_API_KEY`, `WOMPI_INTEGRITY_SECRET`, `WOMPI_EVENTS_SECRET`, `SOLANA_RPC_URL`, `USDC_PAYMENT_ADDRESS`. (Optional: `XAI_MAIN_MODEL`, `XAI_RERANKER_MODEL` — default to `grok-3-fast`.) The old `GEMINI_API_KEY` secret is no longer used and can be removed.
 

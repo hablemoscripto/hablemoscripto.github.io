@@ -3,11 +3,15 @@
 // cannot attach a JWT. Origin allowlist, body cap, per-IP limit and field
 // truncation keep it from becoming a free write endpoint.
 //
+// The name is deliberately bland. Ad blockers (common in this audience) drop
+// requests whose URL contains words like log, error, track or analytics;
+// the first name, log-client-error, was blocked by uBlock-style filters.
+//
 // Point VITE_ERROR_REPORTING_URL (Vercel) at
-//   https://<project>.supabase.co/functions/v1/log-client-error
+//   https://<project>.supabase.co/functions/v1/site-health
 //
 // Deploy with:
-//   supabase functions deploy log-client-error --no-verify-jwt
+//   supabase functions deploy site-health --no-verify-jwt
 
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
@@ -131,7 +135,7 @@ serve(async (req) => {
   })
 
   if (error) {
-    console.error('log-client-error: insert failed', error)
+    console.error('site-health: insert failed', error)
     return new Response(null, { status: 500, headers: corsHeaders })
   }
 
@@ -139,7 +143,7 @@ serve(async (req) => {
   if (Math.random() < 0.01) {
     const cutoff = new Date(Date.now() - RETENTION_DAYS * 86_400_000).toISOString()
     const { error: pruneError } = await supabase.from('error_logs').delete().lt('created_at', cutoff)
-    if (pruneError) console.error('log-client-error: prune failed', pruneError)
+    if (pruneError) console.error('site-health: prune failed', pruneError)
   }
 
   return new Response(null, { status: 204, headers: corsHeaders })

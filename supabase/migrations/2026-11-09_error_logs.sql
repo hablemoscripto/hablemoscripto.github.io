@@ -1,6 +1,6 @@
 -- Client error log (2026-11-09)
 --
--- Run in the Supabase SQL editor BEFORE deploying the log-client-error Edge
+-- Run in the Supabase SQL editor BEFORE deploying the site-health Edge
 -- Function, which inserts here with the service role. RLS is on with no
 -- policies, so the browser cannot read or write this table directly.
 --
