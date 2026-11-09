@@ -2797,14 +2797,6 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     duration: '21 min',
     type: 'Tutorial Práctico',
     description: 'Jupiter es el agregador de liquidez más usado de Solana: compara precios entre muchos pools y suma DCA, órdenes límite y perpetuos. Aprende a usarlo bien, a verificar tokens y a reconocer qué funciones guardan tus fondos y cuáles son riesgos, no ventajas.',
-    referrals: [
-      {
-        title: 'Jupiter',
-        description: 'Agregador de DEXs de Solana: compara precios entre muchos pools en cada swap, con DCA y órdenes límite, sin custodia.',
-        link: 'https://jup.ag/?ref=6kg0a2qpd813',
-        buttonText: 'Abrir Jupiter'
-      }
-    ],
     sections: [
       {
         type: 'intro',
