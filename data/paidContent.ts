@@ -49,9 +49,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Velas Japonesas y Tendencias',
     level: 'Intermedio',
     number: '1 de 12',
-    duration: '17 min',
+    duration: '19 min',
     type: 'Lectura + Práctica',
-    description: 'Aprende a leer el lenguaje visual del mercado. Cada vela cuenta una historia de batalla entre compradores y vendedores. Dominar este idioma es tu primera ventaja real.',
+    description: 'Aprende a leer el lenguaje visual del mercado. Cada vela cuenta una historia de batalla entre compradores y vendedores. Es la base de todo el análisis técnico, con sus usos y sus límites.',
     sections: [
       {
         type: 'intro',
@@ -59,7 +59,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'En el siglo XVIII, un comerciante de arroz japonés llamado Munehisa Homma descubrió algo que los traders modernos seguimos usando 300 años después: **el precio cuenta una historia visual**. Mientras todos miraban números, Homma dibujaba velas. Cada vela le mostraba la batalla entre compradores (toros) y vendedores (osos) en un período de tiempo. ¿Quién abrió? ¿Quién cerró? ¿Hasta dónde lucharon? Con esta información, según cuenta la leyenda, Homma acumuló una fortuna en el mercado de arroz de Osaka. Hoy, las velas japonesas son la herramienta más usada en el mundo del trading. No importa si operas Bitcoin, acciones de Apple o futuros de petróleo, todos usan el mismo lenguaje. Y tú estás a punto de aprenderlo.',
         highlight: {
           title: 'La Ventaja Visual',
-          text: 'Un gráfico de líneas te dice "el precio subió". Una vela te dice "el precio abrió aquí, los osos lo tiraron hasta acá, los toros pelearon y lo cerraron aquí arriba". Esa historia es la que te da ventaja.'
+          text: 'Un gráfico de líneas te dice "el precio subió". Una vela te dice "el precio abrió aquí, los osos lo tiraron hasta acá, los toros pelearon y lo cerraron aquí arriba". Esa historia es la que vas a aprender a leer.'
         }
       },
       {
@@ -68,7 +68,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Si vienes del nivel Principiante, cerraste con un plan de inversión escrito: portafolio base, DCA automático, reglas claras. Ahora este nivel te habla de velas, tendencias y trading, y es normal preguntarse: ¿no habíamos quedado en que el trading diario era un error? La respuesta corta: **tu plan sigue intacto, y este nivel no lo reemplaza**. Aquí aprendes una capa nueva de habilidades encima de esa base. Aclaremos las reglas del juego antes de la primera vela:',
         features: [
           { icon: PiggyBank, title: 'Tu Plan DCA Sigue Siendo la Base', text: 'Nada de lo que aprendas en este nivel cambia tu portafolio base ni tu DCA. Eso sigue corriendo en automático, sin importar lo que hagas aquí. Lo que construyes ahora es capacidad de análisis: entender POR QUÉ el mercado hace lo que hace mientras tu plan se ejecuta solo.' },
-          { icon: Shield, title: 'Si Decides Operar, Hazlo con Poco', text: 'El trading activo es opcional y tiene reglas propias: usa máximo el 5-10% de tu portafolio, con dinero que NO es tu DCA ni tu fondo de emergencia. Entre el 70% y el 90% de los traders retail pierde dinero. Ese dato no es para asustarte: es para que operes con un tamaño donde equivocarte sea aprendizaje, no tragedia.' },
+          { icon: Shield, title: 'Si Decides Operar, Hazlo con Poco', text: 'El trading activo es opcional y tiene reglas propias. Si decides operar, hazlo solo con tu **capital de trading**: como máximo el 5-10% de tu porción cripto, separado de tu base de DCA y de tu fondo de emergencia. Por ejemplo, si tu porción cripto es de 4 millones de pesos, tu capital de trading es de 200,000 a 400,000. Es la regla de todo este nivel: cada ejemplo de tamaño de posición se calcula sobre ese capital, no sobre todo tu portafolio. Donde el dato se publica, como en los CFDs en Europa, entre el 74% y el 89% de las cuentas retail pierde dinero (lo verás en Mentalidad de Trader). No es para asustarte: es para que operes con un tamaño donde equivocarte sea aprendizaje, no tragedia.' },
           { icon: TrendingUp, title: 'Estas Habilidades Sirven Aunque Nunca Operes', text: 'Leer gráficos te ayuda a entender las caídas sin entrar en pánico. El análisis fundamental te enseña a evaluar proyectos antes de invertir. La gestión de riesgo y la psicología de mercado te protegen de tus propios impulsos. Todo eso te hace mejor inversor, hagas trading o no.' }
         ],
         highlight: {
@@ -84,28 +84,28 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           { icon: BarChart3, title: 'El Cuerpo (Body)', text: 'El rectángulo central muestra la distancia entre el precio de apertura y el precio de cierre. **Cuerpo verde/blanco** = cerró más arriba de donde abrió (los toros ganaron). **Cuerpo rojo/negro** = cerró más abajo (los osos ganaron). Un cuerpo grande indica convicción. Un cuerpo pequeño indica indecisión.' },
           { icon: Activity, title: 'Las Mechas (Wicks/Shadows)', text: 'Las líneas que salen del cuerpo muestran los extremos del período. La **mecha superior** marca el precio máximo alcanzado, hasta donde los toros empujaron antes de perder fuerza. La **mecha inferior** marca el mínimo, hasta donde los osos tiraron antes de que los toros respondieran.' },
           { icon: TrendingUp, title: 'Apertura y Cierre', text: 'En una vela alcista (verde), la apertura está abajo y el cierre arriba. En una bajista (roja), es al revés. La relación entre apertura y cierre te dice **quién ganó la batalla** en ese período.' },
-          { icon: Clock, title: 'El Timeframe', text: 'Cada vela representa un período de tiempo fijo: 1 minuto, 15 minutos, 1 hora, 4 horas, 1 día. Una vela diaria comprime toda la acción de 24 horas en una sola figura. A mayor timeframe, más significativa la información.' }
+          { icon: Clock, title: 'El Timeframe', text: 'Cada vela representa un período de tiempo fijo: 1 minuto, 15 minutos, 1 hora, 4 horas, 1 día. Una vela diaria comprime toda la acción de 24 horas en una sola figura. A mayor timeframe, menos ruido.' }
         ]
       },
       {
         type: 'main',
         title: 'Los 4 Patrones de Vela Individual que Debes Conocer',
-        content: 'Una sola vela puede contarte una historia poderosa. Estos son los 4 patrones de vela individual que aparecen una y otra vez en los gráficos de crypto:',
+        content: 'Antes, dos palabras que vas a ver mucho. Un **soporte** es una zona de precio donde antes aparecieron compradores y el precio dejó de caer. Una **resistencia** es una zona donde antes aparecieron vendedores y el precio dejó de subir. Los verás a fondo en la lección Soportes y Resistencias. Ahora sí, estos son los 4 patrones de vela individual que aparecen una y otra vez en los gráficos de crypto:',
         features: [
           { icon: Activity, title: 'Doji (Indecisión)', text: 'Cuerpo prácticamente inexistente, abrió y cerró al mismo precio. Las mechas pueden ser largas o cortas. Significa **equilibrio total** entre toros y osos. En zona de soporte o resistencia, un Doji puede ser señal de reversión. Solo no indica dirección.' },
-          { icon: TrendingUp, title: 'Hammer (Martillo), Señal Alcista', text: 'Cuerpo pequeño en la parte superior, mecha inferior MUY larga (al menos 2× el cuerpo), poca o ninguna mecha superior. Significa: los osos tiraron el precio fuerte, pero los toros lo rescataron antes del cierre. **Solo es válido en zona de soporte tras una caída.** Es la mano fuerte diciendo "hasta aquí".' },
-          { icon: TrendingDown, title: 'Shooting Star (Estrella Fugaz), Señal Bajista', text: 'Lo opuesto al Hammer: cuerpo pequeño abajo, mecha superior MUY larga. Los toros empujaron arriba pero fueron aplastados antes del cierre. **Solo es válido en zona de resistencia tras una subida.** Es el mercado diciendo "no pasarás".' },
+          { icon: TrendingUp, title: 'Hammer (Martillo), Señal Alcista', text: 'Cuerpo pequeño en la parte superior, mecha inferior MUY larga (al menos 2× el cuerpo), poca o ninguna mecha superior. Significa: los osos tiraron el precio fuerte, pero los toros lo rescataron antes del cierre. **Solo tiene sentido en zona de soporte tras una caída.** Es el mercado diciendo "hasta aquí", al menos por ahora.' },
+          { icon: TrendingDown, title: 'Shooting Star (Estrella Fugaz), Señal Bajista', text: 'Lo opuesto al Hammer: cuerpo pequeño abajo, mecha superior MUY larga. Los toros empujaron arriba pero fueron aplastados antes del cierre. **Solo tiene sentido en zona de resistencia tras una subida.** Es el mercado diciendo "no pasarás".' },
           { icon: Zap, title: 'Marubozu (Convicción Total)', text: 'Cuerpo grande SIN mechas (o casi sin ellas). Marubozu verde = los toros dominaron desde el inicio hasta el final, sin dar espacio a los osos. Marubozu rojo = los osos aplastaron sin piedad. Indica **momentum fuerte** en la dirección de la vela.' }
         ]
       },
       {
         type: 'main',
-        title: 'Patrones de Múltiples Velas: Las Combinaciones Ganadoras',
-        content: 'Si una sola vela cuenta una historia, dos o tres velas cuentan una película. Estos patrones de múltiples velas son los más fiables porque muestran un **cambio de control** entre toros y osos:',
+        title: 'Patrones de Múltiples Velas: Cambios de Control',
+        content: 'Si una sola vela cuenta una historia, dos o tres velas cuentan una película. Estos patrones de múltiples velas suelen considerarse más informativos que una vela sola porque muestran un **cambio de control** entre toros y osos:',
         features: [
-          { icon: TrendingUp, title: 'Engulfing Alcista (Envolvente)', text: 'Una vela roja pequeña seguida por una vela verde que "envuelve" completamente el cuerpo de la roja. Significa que los toros absorbieron toda la presión vendedora y tomaron el control. **Más poderoso cuando aparece en soporte con volumen creciente.**' },
+          { icon: TrendingUp, title: 'Engulfing Alcista (Envolvente)', text: 'Una vela roja pequeña seguida por una vela verde que "envuelve" completamente el cuerpo de la roja. Significa que los toros absorbieron toda la presión vendedora y tomaron el control. **Tiene más peso cuando aparece en soporte con volumen creciente.**' },
           { icon: TrendingDown, title: 'Engulfing Bajista', text: 'Lo opuesto: vela verde pequeña seguida de una roja masiva que envuelve la anterior. Los osos aplastaron la última resistencia de los toros. **Señal de distribución cuando aparece en resistencia o después de una subida extendida.**' },
-          { icon: AlertTriangle, title: 'Evening Star (Estrella Vespertina)', text: 'Patrón de 3 velas: (1) vela verde grande, (2) vela pequeña de cualquier color (cuerpo chico, indecisión), (3) vela roja grande que cierra dentro del cuerpo de la primera. Es una de las señales de reversión bajista más fiables en crypto.' },
+          { icon: AlertTriangle, title: 'Evening Star (Estrella Vespertina)', text: 'Patrón de 3 velas: (1) vela verde grande, (2) vela pequeña de cualquier color (cuerpo chico, indecisión), (3) vela roja grande que cierra dentro del cuerpo de la primera. Es una señal clásica de posible reversión bajista, que necesita confirmación.' },
           { icon: CheckCircle, title: 'Morning Star (Estrella Matutina)', text: 'El espejo de la Evening Star: (1) vela roja grande, (2) vela pequeña (indecisión en el suelo), (3) vela verde grande que cierra dentro del cuerpo de la primera. Señal clásica de reversión alcista tras una caída.' }
         ]
       },
@@ -136,10 +136,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         rightSide: {
           title: 'Timeframes Altos (4h - Diario - Semanal)',
           points: [
-            'Señales más limpias y fiables',
+            'Menos ruido, señales más limpias',
             'Puedes revisar 1-2 veces al día',
             'Ideal para swing trading (días-semanas)',
-            'Los patrones de velas son mucho más fiables (aunque nunca infalibles)',
+            'Los patrones tienen algo más de sentido (aunque nunca son infalibles)',
             'Menos estrés, mejores decisiones',
             'Fees mínimos por menos operaciones'
           ]
@@ -150,7 +150,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'El Volumen: El Detector de Mentiras',
         content: 'Imagina que ves un Hammer perfecto en soporte. ¿Es real o es una trampa? El volumen te da la respuesta. El **volumen** mide cuántos activos se negociaron en ese período. Es el "detector de mentiras" del mercado:',
         features: [
-          { icon: CheckCircle, title: 'Patrón + Volumen Alto = Señal Fuerte', text: 'Si un Hammer aparece con volumen 3-5× superior al promedio, significa que **muchos compradores** están defendiendo ese nivel. La señal es legítima. Los grandes jugadores están poniendo dinero real sobre la mesa.' },
+          { icon: CheckCircle, title: 'Patrón + Volumen Alto = Señal Fuerte', text: 'Si un Hammer aparece con volumen 3-5× superior al promedio, significa que **muchos compradores** están defendiendo ese nivel. La señal tiene más peso: hay participación real defendiendo el nivel. Aun así, puede fallar.' },
           { icon: AlertTriangle, title: 'Patrón + Volumen Bajo = Señal Débil', text: 'Si el mismo Hammer aparece con volumen bajo, podría ser solo ruido. Pocos participantes, poca convicción. No apuestes tu capital en señales sin volumen que las respalde.' }
         ]
       },
@@ -160,7 +160,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'La mayoría de los traders que aprenden velas comete los mismos errores. Evítalos y ya estarás por delante:',
         features: [
           { icon: AlertTriangle, title: '1. Operar Cada Patrón que Ven', text: 'No todos los Hammers son señales de compra. El contexto (tendencia, soporte/resistencia, volumen) es más importante que el patrón en sí. Un Hammer en medio de una caída libre probablemente fallará.' },
-          { icon: AlertTriangle, title: '2. Ignorar el Timeframe', text: 'Un Doji en vela de 1 minuto no significa nada. El mismo Doji en vela diaria después de una tendencia extendida es una señal poderosa. Siempre mira timeframes altos primero.' },
+          { icon: AlertTriangle, title: '2. Ignorar el Timeframe', text: 'Un Doji en vela de 1 minuto no significa nada. El mismo Doji en vela diaria después de una tendencia extendida merece atención. Siempre mira timeframes altos primero.' },
           { icon: AlertTriangle, title: '3. No Esperar Confirmación', text: 'Ves una Evening Star y vendes inmediatamente. Error. Espera a que la siguiente vela confirme la dirección. La paciencia de una vela extra puede salvarte de muchas trampas.' },
           { icon: AlertTriangle, title: '4. Memorizar sin Entender', text: 'Aprender 50 patrones de memoria no sirve si no entiendes la psicología detrás. Cada patrón refleja una batalla entre compradores y vendedores. Entiende la historia, no solo la forma.' }
         ],
@@ -170,15 +170,26 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         }
       },
       {
+        type: 'counterpoint',
+        title: 'Otra Mirada: ¿Funciona el Análisis Técnico?',
+        content: 'El análisis técnico es muy popular, pero la evidencia sobre su poder para predecir precios es mixta. Conviene que la conozcas antes de operar:\n\n- **Algunas reglas simples funcionaron en el pasado.** Un estudio clásico (Brock, Lakonishok y LeBaron, 1992) encontró que reglas de medias móviles tuvieron cierto poder predictivo en el índice Dow Jones durante casi un siglo.\n- **Pero esa ventaja suele desaparecer al probarla bien.** Cuando se corrige el sesgo de probar cientos de reglas hasta que una funcione, y se aplican a datos nuevos, las mejores reglas dejan de ganarle al mercado (Sullivan, Timmermann y White, 1999). Después de comisiones, la ventaja casi siempre se reduce o desaparece.\n- **Los patrones de velas tienen todavía menos respaldo.** Los estudios que los prueban de forma sistemática encuentran poco o ningún poder predictivo después de costos.\n- **En crypto pasa lo mismo.** Hay reglas que ganan en datos históricos, pero al probarlas con datos nuevos, comisiones y corrección por exceso de pruebas, rara vez sostienen una ventaja (Hudson y Urquhart, 2021).\n\nEntonces, ¿para qué aprenderlo? Para **planificar**: decidir dónde entrar, dónde poner el stop y dónde tomar ganancias, y definir tu riesgo antes de operar. También te ayuda a entender lo que miran millones de traders. Úsalo como mapa, no como bola de cristal. Y recuerda por qué pierde la mayoría de los traders retail: no solo por malos análisis, sino por comisiones, apalancamiento y emociones.'
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
+      },
+      {
         type: 'takeaways',
         title: 'Tu Nueva Forma de Leer el Mercado',
         items: [
           'Las velas japonesas no son predicciones mágicas, son un **lenguaje visual** que comprime la batalla entre compradores y vendedores en cada período de tiempo.',
-          'Domina los patrones esenciales: Doji, Hammer, Shooting Star, Engulfing y Morning/Evening Star. Estos 5-6 patrones cubren el 80% de las señales útiles.',
-          'El contexto lo es todo: un patrón solo funciona cuando aparece en el **lugar correcto** (soporte/resistencia) y en la **dirección correcta** (con la tendencia o en reversión clara).',
+          'Domina los patrones esenciales: Doji, Hammer, Shooting Star, Engulfing y Morning/Evening Star. Con estos 5-6 patrones tienes lo esencial; no necesitas memorizar 50.',
+          'El contexto lo es todo: un patrón solo tiene sentido cuando aparece en el **lugar correcto** (soporte/resistencia) y en la **dirección correcta** (con la tendencia o en reversión clara).',
           'Usa timeframes de 4 horas o diarios como mínimo. Los timeframes bajos (1-15 minutos) generan más ruido que señales reales.',
           'El volumen es tu detector de mentiras. Un patrón sin volumen que lo confirme es como una promesa sin firma, puede ser falsa.',
-          'No operes cada patrón que veas. La paciencia y la selectividad son las armas más poderosas del trader. Mejor 3 operaciones buenas al mes que 30 mediocres.'
+          'No operes cada patrón que veas. La paciencia y la selectividad son las armas más poderosas del trader. Mejor 3 operaciones buenas al mes que 30 mediocres.',
+          'La evidencia sobre el análisis técnico es mixta: úsalo para planificar entradas, salidas y riesgo, no como bola de cristal. Y si operas, solo con tu capital de trading.'
         ]
       }
     ],
@@ -206,7 +217,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Doji pattern, indecisión, no actuar' }
           ],
           correctAnswer: 'b',
-          explanation: 'Evening Star es uno de los patrones de reversión bajista más fiables: (1) última subida fuerte, (2) indecisión/duda, (3) los osos aplastaron. Es el mercado cambiando de manos.'
+          explanation: 'Evening Star es un patrón clásico de posible reversión bajista: (1) última subida fuerte, (2) indecisión, (3) los osos aplastaron. Muestra al mercado cambiando de manos, aunque como cualquier patrón necesita confirmación y puede fallar.'
         },
         {
           id: 'q3',
@@ -218,19 +229,19 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'El volumen no importa para patrones de velas' }
           ],
           correctAnswer: 'b',
-          explanation: 'El volumen es el detector de mentiras del mercado. Un patrón sin volumen es como una promesa vacía. Necesitas ver participación real (volumen alto) para confiar en la señal.'
+          explanation: 'El volumen es el detector de mentiras del mercado. Un patrón sin volumen es como una promesa vacía. Necesitas ver participación real (volumen alto) para darle más peso a la señal.'
         },
         {
           id: 'q4',
-          question: '¿En qué timeframe son más fiables los patrones de velas para un swing trader (operaciones de días a semanas)?',
+          question: '¿Qué timeframes tienen más sentido para leer velas si eres swing trader (operaciones de días a semanas)?',
           options: [
             { id: 'a', text: '1 minuto y 5 minutos, más datos, más oportunidades' },
             { id: 'b', text: '15 minutos, el balance perfecto entre velocidad y fiabilidad' },
-            { id: 'c', text: '4 horas y diario, menos ruido, señales más limpias y fiables' },
+            { id: 'c', text: '4 horas y diario: menos ruido y señales más limpias' },
             { id: 'd', text: 'Todos los timeframes son igualmente fiables' }
           ],
           correctAnswer: 'c',
-          explanation: 'Los timeframes bajos están llenos de ruido y señales falsas. En 4h y diario, cada vela representa horas de acción real del mercado, filtrando el ruido y mostrando la intención verdadera de los grandes jugadores.'
+          explanation: 'Los timeframes bajos están llenos de ruido y señales falsas. En 4h y diario, cada vela resume horas de acción del mercado, lo que filtra buena parte del ruido. Menos ruido no significa certeza: solo señales algo más limpias.'
         },
         {
           id: 'q5',
@@ -252,32 +263,32 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Soportes y Resistencias',
     level: 'Intermedio',
     number: '2 de 12',
-    duration: '17 min',
+    duration: '18 min',
     type: 'Lectura + Práctica',
     description: 'El precio tiene memoria. Aprende a identificar los pisos y techos del mercado donde el precio rebota una y otra vez, y úsalos para tomar decisiones inteligentes de compra y venta.',
     sections: [
       {
         type: 'intro',
         title: 'La Memoria del Precio',
-        content: '¿Te has preguntado por qué Bitcoin siempre parece rebotar en ciertos precios? ¿Por qué $60,000 fue un muro durante meses? ¿Por qué cuando lo rompió, se disparó? No es magia ni coincidencia. Es **psicología humana cristalizada en el gráfico**. Cuando miles de personas compraron a $60,000, ese precio se grabó en la memoria del mercado. Cada vez que el precio vuelve ahí, esas mismas personas toman decisiones: algunos venden para "salir en tablas", otros compran porque recuerdan que ahí rebotó antes. Estas zonas de memoria colectiva se llaman **soportes** y **resistencias**, y son la herramienta más poderosa del análisis técnico. La gran mayoría de los traders profesionales las tiene en cuenta al tomar decisiones.',
+        content: '¿Te has preguntado por qué Bitcoin siempre parece rebotar en ciertos precios? ¿Por qué $60,000 fue un muro durante meses? ¿Por qué cuando lo rompió, se disparó? No es magia ni coincidencia. Es **psicología humana cristalizada en el gráfico**. Cuando miles de personas compraron a $60,000, ese precio se grabó en la memoria del mercado. Cada vez que el precio vuelve ahí, esas mismas personas toman decisiones: algunos venden para "salir en tablas", otros compran porque recuerdan que ahí rebotó antes. Estas zonas de memoria colectiva se llaman **soportes** y **resistencias**, y son una de las herramientas más usadas del análisis técnico. No predicen el futuro: te marcan dónde conviene prestar atención y dónde planear una entrada, una salida o un stop.',
         highlight: {
           title: 'El Concepto Clave',
-          text: 'Soporte y resistencia no son líneas mágicas en un gráfico, son zonas donde **la concentración de órdenes de compra o venta** es tan alta que el precio rebota. Son el campo de batalla donde toros y osos se encuentran.'
+          text: 'Soporte y resistencia no son líneas mágicas en un gráfico, son zonas donde suelen **concentrarse órdenes de compra o venta**, y por eso el precio a menudo reacciona ahí. A veces rebota, a veces las atraviesa: son el campo de batalla, no el resultado.'
         }
       },
       {
         type: 'main',
-        title: '¿Qué es un Soporte?, El Piso del Precio',
+        title: '¿Qué es un Soporte? El Piso del Precio',
         content: 'Un **soporte** es una zona de precio donde la demanda de compra es tan fuerte que detiene una caída. Imagina el suelo de tu casa: puedes lanzar una pelota hacia abajo, pero el suelo la hará rebotar. El soporte funciona igual, es el "piso" donde los compradores aparecen en masa.',
         features: [
           { icon: TrendingUp, title: 'Por Qué Existe', text: 'Cuando el precio cae a una zona donde antes rebotó, tres tipos de compradores aparecen: (1) los que compraron ahí antes y quieren más, (2) los que se perdieron la subida anterior y ahora tienen su oportunidad, (3) los traders que reconocen la zona como soporte técnico.' },
           { icon: Search, title: 'Cómo Identificarlo', text: 'Busca zonas donde el precio tocó un nivel y rebotó hacia arriba **al menos 2-3 veces**. No busques un precio exacto, busca una **zona**. Si el precio rebotó en $58,500, $59,100 y $58,800, tu soporte está en la zona de $58,500-$59,100.' },
-          { icon: BarChart3, title: 'Soporte en la Práctica', text: 'En Solana, la zona de $120-$130 funcionó como soporte fuerte durante meses en 2024. Cada vez que el precio caía ahí, los compradores aparecían. Los traders que compraron en esa zona capturaron rebotes de +30% repetidamente.' }
+          { icon: BarChart3, title: 'Soporte en la Práctica', text: 'En Solana, la zona de $120-$130 funcionó como soporte fuerte durante meses en 2024. Cada vez que el precio caía ahí, aparecían compradores y hubo varios rebotes fuertes. Pero ningún soporte dura para siempre: las zonas que funcionan por meses terminan rompiéndose, y quien compra ahí sin stop lo descubre tarde.' }
         ]
       },
       {
         type: 'main',
-        title: '¿Qué es una Resistencia?, El Techo del Precio',
+        title: '¿Qué es una Resistencia? El Techo del Precio',
         content: 'Una **resistencia** es el espejo del soporte: una zona donde la presión de venta es tan fuerte que detiene una subida. Es el "techo de cristal" que el precio no logra romper. Cada vez que el precio llega ahí, los vendedores lo empujan hacia abajo.',
         features: [
           { icon: TrendingDown, title: 'Por Qué Existe', text: 'Tres tipos de vendedores crean resistencia: (1) los que compraron a ese precio y llevan semanas perdiendo, quieren salir en "break-even", (2) los traders que vieron que el precio fue rechazado ahí antes, (3) instituciones que colocan órdenes de venta grandes en números redondos.' },
@@ -287,7 +298,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       },
       {
         type: 'main',
-        title: 'Zonas, No Líneas, El Error Más Común',
+        title: 'Zonas, No Líneas: El Error Más Común',
         content: 'El error #1 de los principiantes es dibujar una línea exacta y esperar que el precio la respete al centavo. Eso no pasa en la realidad. El soporte y la resistencia son **ZONAS**, no líneas precisas. Piénsalo así: si miles de personas quieren comprar "alrededor de $60,000", algunas pondrán órdenes a $59,800, otras a $60,200, otras a $60,500. La "zona de compra" es un rango, no un punto.',
         features: [
           { icon: Layers, title: 'Cómo Dibujar Zonas Correctamente', text: 'En lugar de una línea, dibuja un **rectángulo** que cubra las mechas de los rebotes anteriores. Si el precio rebotó en $58,500, $59,100 y $58,800, tu zona es el rectángulo entre $58,500 y $59,100. Todo lo que toque esa zona es "soporte".' },
@@ -300,7 +311,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Este es uno de los conceptos más elegantes y útiles del análisis técnico: cuando un soporte se rompe, **se convierte en resistencia**. Y cuando una resistencia se rompe, **se convierte en soporte**. Este fenómeno se llama **"role reversal"** o "flip", y tiene una explicación psicológica perfecta.',
         features: [
           { icon: RefreshCw, title: 'La Psicología del Flip', text: 'Imagina que compraste SOL a $150 (soporte). El precio cae a $120, rompiendo tu soporte. Ahora estás perdiendo. Cuando el precio vuelve a $150, ¿qué haces? **Vendes para salir sin pérdida.** Tú y miles como tú convierten el antiguo soporte ($150) en resistencia.' },
-          { icon: CheckCircle, title: 'Cómo Operarlo', text: 'Cuando un soporte se rompe con volumen, espera un "retest", el precio suele volver a la zona rota desde abajo. Si la zona ahora actúa como resistencia (el precio es rechazado), tienes confirmación del flip. Es una de las entradas más fiables en trading.' },
+          { icon: CheckCircle, title: 'Cómo Operarlo', text: 'Cuando un soporte se rompe con volumen, espera un "retest", el precio suele volver a la zona rota desde abajo. Si la zona ahora actúa como resistencia (el precio es rechazado), tienes una señal de que el flip se está dando. Muchos traders la usan porque define con claridad dónde estás equivocado: si el precio vuelve a meterse en la zona, la tesis falló.' },
           { icon: Zap, title: 'Ejemplo Real en Crypto', text: 'Bitcoin $69,000 fue resistencia (ATH de 2021) durante más de 2 años. En marzo de 2024 lo rompió y llegó a ~$73,700, pero el flip no fue limpio: de abril a octubre de 2024 el precio vivió POR DEBAJO de $69,000, con mínimos cerca de $50,000-53,000. La ruptura definitiva llegó en noviembre de 2024, y de ahí sí voló a $100,000+. La lección: los retests pueden ser profundos y durar meses. El flip se confirma con el tiempo, no con la primera ruptura.' }
         ]
       },
@@ -333,17 +344,17 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Fakeouts: Las Trampas del Mercado',
-        content: 'Si el soporte y la resistencia fueran perfectos, todos ganaríamos dinero. La realidad es que el mercado está lleno de **fakeouts** (rupturas falsas), movimientos que parecen romper un nivel pero inmediatamente revierten. Las fakeouts existen porque los grandes jugadores (instituciones, ballenas) necesitan tu liquidez para ejecutar sus órdenes.',
+        content: 'Si el soporte y la resistencia fueran perfectos, todos ganaríamos dinero. La realidad es que el mercado está lleno de **fakeouts** (rupturas falsas), movimientos que parecen romper un nivel pero inmediatamente revierten. Muchas son simple ruido: pocas órdenes en un momento de poco volumen. Otra explicación popular es la **caza de stops**: un jugador grande podría empujar el precio a la zona donde hay muchos stops para comprar más barato. Puede pasar, pero rara vez se puede demostrar en un caso concreto.',
         features: [
-          { icon: AlertTriangle, title: 'Cómo Funciona la Trampa', text: 'Imagina un soporte en $150. Miles de traders tienen su stop loss en $148. Una ballena vende agresivamente y empuja el precio a $147, activando todos esos stops (ventas forzadas). Luego, la ballena compra toda esa liquidez barata. El precio vuelve a $155. Los stops fueron "barridos" y los traders perdieron sus posiciones.' },
-          { icon: Shield, title: 'Cómo Protegerte', text: 'Nunca pongas tu stop loss justo debajo del soporte, eso es exactamente donde las ballenas cazan. Pon tu stop un poco más abajo, fuera de la zona "obvia". Y la regla de oro: **no compres el primer toque de soporte. Espera una vela de confirmación** (un cierre fuerte por encima de la zona).' },
-          { icon: Eye, title: 'Señales de que es un Fakeout', text: 'La ruptura ocurre con volumen bajo (los grandes no participaron), la vela cierra de vuelta dentro de la zona rápidamente, o ves una mecha larga que "pincha" debajo del soporte pero cierra arriba. Estas son huellas de una trampa.' }
+          { icon: AlertTriangle, title: 'Cómo Puede Funcionar la Trampa', text: 'Imagina un soporte en $150. Miles de traders tienen su stop loss en $148. Si alguien vende fuerte y empuja el precio a $147, esos stops se activan como ventas forzadas, y quien compró en $147 consigue precio barato. El precio vuelve a $155 y los que salieron por sus stops quedaron fuera. Sea por una ballena o por puro ruido, el efecto para ti es el mismo.' },
+          { icon: Shield, title: 'Cómo Protegerte', text: 'Evita poner tu stop justo debajo del soporte: ahí se acumulan muchos stops y una mecha rápida suele activarlos. Ponlo un poco más abajo, fuera de la zona "obvia", y ajusta el tamaño de tu posición para que esa distancia no te haga arriesgar de más. Y la regla de oro: **no compres el primer toque de soporte. Espera una vela de confirmación** (un cierre fuerte por encima de la zona).' },
+          { icon: Eye, title: 'Señales de que es un Fakeout', text: 'La ruptura ocurre con volumen bajo (poca participación real), la vela cierra de vuelta dentro de la zona rápidamente, o ves una mecha larga que "pincha" debajo del soporte pero cierra arriba. Estas son huellas de una trampa.' }
         ]
       },
       {
         type: 'main',
         title: 'Tu Framework Práctico: Cómo Usar S/R Para Operar',
-        content: 'Ahora que entiendes la teoría, aquí tienes un framework paso a paso para aplicar soportes y resistencias en tus operaciones diarias:',
+        content: 'Ahora que entiendes la teoría, aquí tienes un framework paso a paso. Ninguna zona garantiza un rebote: estas reglas sirven para decidir de antemano dónde entras, dónde sales y cuánto arriesgas, no para adivinar el futuro.',
         features: [
           { icon: Search, title: '1. Identifica las Zonas Clave', text: 'Abre el gráfico en timeframe diario o semanal. Busca los niveles donde el precio rebotó al menos 2-3 veces. Dibuja zonas (no líneas) en esos niveles. Estos son tus "campos de batalla".' },
           { icon: Crosshair, title: '2. Espera que el Precio Llegue a la Zona', text: 'No persigas el precio. Espera a que venga a TI, a una de tus zonas marcadas. La paciencia es lo que separa al trader del apostador.' },
@@ -356,15 +367,20 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         }
       },
       {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
+      },
+      {
         type: 'takeaways',
         title: 'Dominando los Pisos y Techos del Mercado',
         items: [
           'Soporte y resistencia son **zonas de alta concentración de órdenes**, no líneas exactas. Dibuja rectángulos, no líneas.',
           'Existen por psicología humana: miles de personas toman decisiones en los mismos niveles de precio, creando "memoria del mercado".',
-          'Cuando un soporte se rompe se convierte en resistencia, y viceversa (role reversal). Este concepto es una de las herramientas más fiables del trading.',
+          'Cuando un soporte se rompe se convierte en resistencia, y viceversa (role reversal). Es un concepto muy usado, pero los retests pueden ser profundos y durar meses.',
           'Cuantos más toques tiene una zona, más "famosa" es, pero también más débil se vuelve. Cada toque gasta las órdenes que la defienden.',
-          'Las fakeouts son trampas donde los grandes jugadores barren stops para obtener liquidez. Siempre espera confirmación antes de actuar.',
-          'Tu framework: identifica zonas → espera que el precio llegue → busca confirmación con velas + volumen → coloca stop loss fuera de la zona. Disciplina > intuición.'
+          'Las fakeouts son rupturas falsas: unas son ruido y otras, posibles cazas de stops. Por eso conviene esperar confirmación antes de actuar.',
+          'Tu framework: identifica zonas, espera que el precio llegue, busca confirmación con velas y volumen, y coloca el stop loss fuera de la zona. La disciplina vale más que la intuición.'
         ]
       }
     ],
@@ -375,12 +391,12 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           question: 'Bitcoin rompe la resistencia de $100,000 con volumen 5× superior al promedio y cierra fuerte por encima. Dos semanas después, el precio retrocede a $100,000. ¿Qué esperas que pase?',
           options: [
             { id: 'a', text: 'La resistencia sigue intacta y el precio será rechazado de nuevo hacia abajo' },
-            { id: 'b', text: 'El nivel de $100,000 ahora actúa como soporte (role reversal) y debería rebotar' },
+            { id: 'b', text: 'Puede actuar como soporte (role reversal), pero necesito confirmación' },
             { id: 'c', text: 'El precio atravesará $100,000 sin problemas hacia abajo' },
             { id: 'd', text: 'Los niveles de precio no tienen memoria' }
           ],
           correctAnswer: 'b',
-          explanation: 'Cuando una resistencia se rompe con volumen fuerte, se convierte en soporte (flip/role reversal). Los que vendieron a $100K ahora quieren recomprar ahí, y los que se perdieron la subida ven una segunda oportunidad.'
+          explanation: 'Una resistencia rota con volumen fuerte suele convertirse en soporte (flip): los que se perdieron la subida ven ahí una segunda oportunidad. Pero no es automático. En 2024, Bitcoin rompió $69,000 y luego pasó meses por debajo antes de confirmar el flip. Por eso esperas una vela de confirmación y tienes un stop.'
         },
         {
           id: 'q2',
@@ -392,7 +408,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'No uso stop loss en soporte porque siempre rebota' }
           ],
           correctAnswer: 'c',
-          explanation: 'Las ballenas barren stops que están justo debajo del soporte. Tu stop debe estar donde REALMENTE se invalida tu tesis, debajo del mínimo de la zona completa con un filtro extra para evitar que te barran.'
+          explanation: 'Justo debajo del soporte se acumulan muchos stops y una mecha rápida suele activarlos. Tu stop debe estar donde de verdad se invalida tu tesis: debajo del mínimo de la zona completa, con un filtro extra. Y nunca operes sin stop: ningún soporte rebota siempre.'
         },
         {
           id: 'q3',
@@ -416,7 +432,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'El precio va a caer más porque tocó $89,500' }
           ],
           correctAnswer: 'b',
-          explanation: 'Señales clásicas de fakeout: (1) ruptura breve por debajo del soporte, (2) mecha larga que "pincha" la zona, (3) cierre fuerte de vuelta por encima. Las ballenas barrieron stops para comprar barato.'
+          explanation: 'Señales clásicas de fakeout: (1) ruptura breve por debajo del soporte, (2) mecha larga que "pincha" la zona, (3) cierre fuerte de vuelta por encima. Pudo ser una caza de stops o simple ruido; lo que importa es que el cierre volvió dentro de la zona y el soporte sigue en pie por ahora.'
         },
         {
           id: 'q5',
@@ -428,11 +444,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Los números redondos no tienen significado en trading' }
           ],
           correctAnswer: 'b',
-          explanation: 'Los niveles psicológicos son reales porque la psicología humana es predecible. Todos pensamos en números redondos. Esa acumulación de órdenes crea zonas de soporte/resistencia "naturales" antes de que el precio las visite.'
+          explanation: 'Los niveles psicológicos existen porque mucha gente piensa en números redondos. Esa acumulación de órdenes crea zonas de soporte/resistencia "naturales" antes de que el precio las visite.'
         },
         {
           id: 'review_1',
-          question: '📝 Repaso: Una vela japonesa con cuerpo pequeño y mecha inferior muy larga en una zona de soporte indica:',
+          question: 'Repaso de Velas Japonesas: Una vela japonesa con cuerpo pequeño y mecha inferior muy larga en una zona de soporte indica:',
           options: [
             { id: 'a', text: 'Los vendedores están ganando control total' },
             { id: 'b', text: 'Los compradores rechazaron precios más bajos con fuerza, señal alcista' },
@@ -440,7 +456,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Es momento de vender inmediatamente' }
           ],
           correctAnswer: 'b',
-          explanation: 'Una mecha inferior larga significa que los compradores empujaron el precio de vuelta hacia arriba después de una caída. En una zona de soporte, esto es una señal de posible rebote alcista. (Recuerda la Lección 13: Velas Japonesas)'
+          explanation: 'Una mecha inferior larga significa que los compradores empujaron el precio de vuelta hacia arriba después de una caída. En una zona de soporte, esto es una señal de posible rebote alcista. (Lo viste en la lección Velas Japonesas y Tendencias.)'
         }
       ]
     }
@@ -460,7 +476,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Hasta ahora aprendiste a leer velas y a identificar soportes y resistencias. Esas herramientas se basan en lo que **ves**. Los indicadores técnicos agregan una capa de **matemáticas** que te ayuda a confirmar lo que ves, o a detectar lo que tus ojos no perciben. Una analogía: las velas son como mirar por la ventana para ver si llueve. Los indicadores son el pronóstico del clima. Ambos son útiles, pero juntos te dan un panorama mucho más completo. **Regla fundamental**: Los indicadores NO predicen el futuro. Son espejos retrovisores mejorados, te muestran lo que el precio HIZO con mayor claridad para que tomes mejores decisiones sobre lo que PODRÍA hacer.',
         highlight: {
           title: 'La Regla de Oro',
-          text: 'Nunca operes SOLO por indicadores. Úsalos para **confirmar** lo que ya ves en el precio y en las zonas de soporte/resistencia. El indicador apoya tu análisis, no lo reemplaza.'
+          text: 'Nunca operes SOLO por indicadores. Úsalos para **confirmar** lo que ya ves en el precio y en las zonas de soporte/resistencia. Y recuerda lo que viste en Velas Japonesas sobre la evidencia: ningún indicador da ventaja por sí solo después de comisiones. Sirven para ordenar tu plan, no para adivinar.'
         }
       },
       {
@@ -468,8 +484,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'RSI: El Termómetro del Mercado',
         content: 'El **RSI (Relative Strength Index)** mide la velocidad y magnitud de los movimientos recientes del precio en una escala del 0 al 100. Es como un termómetro: te dice si el mercado está "con fiebre" (sobrecomprado) o "con hipotermia" (sobrevendido). La configuración estándar es RSI de 14 períodos.',
         features: [
-          { icon: TrendingUp, title: 'RSI > 70: Sobrecompra', text: 'Cuando el RSI supera 70, el mercado ha subido mucho y rápido. **No significa que debas vender inmediatamente**, en tendencias alcistas fuertes, el RSI puede quedarse en sobrecompra semanas. Pero sí indica que el momentum alcista es extremo y una corrección es cada vez más probable.' },
-          { icon: TrendingDown, title: 'RSI < 30: Sobreventa', text: 'Cuando el RSI cae debajo de 30, el mercado ha caído fuerte y rápido. Es zona de "posible suelo". Combinado con un soporte fuerte, es una de las señales de compra más fiables. Pero en tendencias bajistas, el RSI puede quedarse en sobreventa mucho tiempo, no compres solo porque está bajo.' },
+          { icon: TrendingUp, title: 'RSI > 70: Sobrecompra', text: 'Cuando el RSI supera 70, el mercado ha subido mucho y rápido. **No significa que debas vender inmediatamente**, en tendencias alcistas fuertes, el RSI puede quedarse en sobrecompra semanas. Pero sí indica que el momentum alcista es extremo y que una pausa o corrección es posible.' },
+          { icon: TrendingDown, title: 'RSI < 30: Sobreventa', text: 'Cuando el RSI cae debajo de 30, el mercado ha caído fuerte y rápido. Es zona de "posible suelo". Combinado con un soporte fuerte, mucha gente lo usa como zona para buscar entradas. Pero en tendencias bajistas, el RSI puede quedarse en sobreventa mucho tiempo, no compres solo porque está bajo.' },
           { icon: Activity, title: 'RSI 50: La Línea de Tendencia', text: 'RSI por encima de 50 = momentum alcista. RSI por debajo de 50 = momentum bajista. En un bull market sano, el RSI tiende a rebotar en 40-50 (rara vez llega a 30). En un bear market, tiende a ser rechazado en 50-60 (rara vez llega a 70). Observar dónde rebota el RSI te dice quién domina.' }
         ]
       },
@@ -480,25 +496,25 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: Zap, title: 'EMA 21, El Pulso del Momentum', text: 'La EMA de 21 períodos es la más rápida de las tres esenciales. En una tendencia alcista sana, el precio tiende a respetar la EMA 21 como soporte dinámico. Cuando el precio cae a la EMA 21 y rebota, es señal de que el momentum sigue vivo. Ideal para swing traders.' },
           { icon: Activity, title: 'EMA 55, La Línea de Equilibrio', text: 'La EMA de 55 períodos marca la tendencia de mediano plazo. Cuando el precio está por encima de la EMA 55, la tendencia intermedia es alcista. Cuando cae por debajo, hay señal de debilidad. Es la "tierra de nadie", las batallas más importantes ocurren aquí.' },
-          { icon: Landmark, title: 'EMA 200, La Frontera Bull/Bear', text: 'La media de 200 períodos en gráfico diario es **la referencia de largo plazo más seguida del mercado**. Las instituciones miran sobre todo la SMA 200 diaria (la versión simple); la EMA 200 es su variante más sensible y ambas cuentan la misma historia. Precio por encima = territorio bull. Precio por debajo = territorio bear. Cuando Bitcoin cruza la media de 200 diaria, es noticia mundial.' }
+          { icon: Landmark, title: 'EMA 200, La Frontera Bull/Bear', text: 'La media de 200 períodos en gráfico diario es **la referencia de largo plazo más seguida del mercado**. La versión más citada es la SMA 200 diaria (la media simple); la EMA 200 es su variante más sensible y ambas cuentan la misma historia. Precio por encima = territorio bull. Precio por debajo = territorio bear. Cuando Bitcoin cruza la media de 200 diaria, es noticia mundial.' }
         ]
       },
       {
         type: 'main',
         title: 'Cruces de Medias (Golden / Death Cross)',
-        content: 'Cuando las medias móviles se cruzan entre sí, generan señales que los traders institucionales y algoritmos siguen de cerca. La forma canónica de estos cruces usa las SMA de 50 y 200 en gráfico diario; las versiones con EMAs son variantes más rápidas. Estos cruces no son instantáneos, se desarrollan durante días o semanas:',
+        content: 'Cuando las medias móviles se cruzan entre sí, generan señales muy citadas en medios y redes. La forma canónica de estos cruces usa las SMA de 50 y 200 en gráfico diario; las versiones con EMAs son variantes más rápidas. Estos cruces no son instantáneos, se desarrollan durante días o semanas:',
         features: [
           { icon: TrendingUp, title: 'Golden Cross (Cruz Dorada)', text: 'Ocurre cuando la media rápida (50) cruza **por encima** de la media lenta (200) en diario. La definición canónica usa SMA 50/200. Es señal alcista de mediano plazo, pero retrasada: confirma tendencias ya en marcha. Varios Golden Cross de Bitcoin precedieron subidas importantes; otros llegaron cuando gran parte del movimiento ya había pasado.' },
-          { icon: TrendingDown, title: 'Death Cross (Cruz de la Muerte)', text: 'Lo opuesto: la media rápida (50) cruza **por debajo** de la lenta (200). Suena aterrador, pero el historial real es mixto: por ser una señal retrasada, varios Death Cross de Bitcoin (marzo 2020, septiembre 2024) se imprimieron cerca del suelo, justo antes de rebotes fuertes. Úsalo como aviso para revisar tu riesgo y tus stops, no como orden automática de venta.' },
-          { icon: AlertTriangle, title: 'Cuidado con las Señales Falsas', text: 'En mercados laterales (sin tendencia clara), las EMAs se cruzan constantemente generando señales falsas. No sigas cruces de EMAs ciegamente en un rango. Solo son fiables cuando el mercado tiene tendencia. Si las EMAs están enredadas como espagueti, el mercado está indeciso, espera.' }
+          { icon: TrendingDown, title: 'Death Cross (Cruz de la Muerte)', text: 'Lo opuesto: la media rápida (50) cruza **por debajo** de la lenta (200). Suena aterrador, pero el historial real es mixto: por ser una señal retrasada, varios Death Cross de Bitcoin (marzo de 2020, agosto de 2024) se imprimieron cerca del suelo, justo antes de rebotes fuertes. Otros, como el de noviembre de 2025, sí precedieron caídas mayores. Úsalo como aviso para revisar tu riesgo y tus stops, no como orden automática de venta.' },
+          { icon: AlertTriangle, title: 'Cuidado con las Señales Falsas', text: 'En mercados laterales (sin tendencia clara), las EMAs se cruzan constantemente generando señales falsas. No sigas cruces de EMAs ciegamente en un rango. Solo tienen sentido cuando el mercado tiene tendencia. Si las EMAs están enredadas como espagueti, el mercado está indeciso, espera.' }
         ]
       },
       {
         type: 'main',
-        title: 'Divergencias: La Señal Más Poderosa del Análisis Técnico',
+        title: 'Divergencias: Cuando el Precio y el RSI No Coinciden',
         content: 'Una **divergencia** ocurre cuando el precio dice una cosa y el indicador dice otra. Es como si el precio y el RSI se contradijeran. Las divergencias son de las señales más respetadas del análisis técnico porque detectan debilidad ANTES de que el precio la muestre. Pero no son infalibles: en tendencias fuertes, una divergencia puede persistir durante semanas mientras el precio sigue avanzando. Trátala como una alerta que exige confirmación, no como un gatillo automático.',
         features: [
-          { icon: AlertTriangle, title: 'Divergencia Bajista', text: 'El precio hace un nuevo máximo (Higher High), pero el RSI hace un máximo más bajo (Lower High). ¿Qué significa? El precio subió, pero con **menos fuerza** que la vez anterior. Los toros se están agotando aunque el precio aún suba. Es como un corredor que sigue avanzando pero cada vez más lento, pronto se detendrá.' },
+          { icon: AlertTriangle, title: 'Divergencia Bajista', text: 'El precio hace un nuevo máximo (Higher High), pero el RSI hace un máximo más bajo (Lower High). ¿Qué significa? El precio subió, pero con **menos fuerza** que la vez anterior. Los toros se están agotando aunque el precio aún suba. Es como un corredor que sigue avanzando pero cada vez más lento: puede estar por detenerse, o puede recuperar el aire.' },
           { icon: TrendingUp, title: 'Divergencia Alcista', text: 'El precio hace un nuevo mínimo (Lower Low), pero el RSI hace un mínimo más alto (Higher Low). El precio cayó más, pero los osos perdieron fuerza. Los vendedores se están agotando. Es una de las señales de suelo más respetadas en crypto, especialmente cuando coincide con una zona de soporte.' },
           { icon: Eye, title: 'Cómo Detectarlas en la Práctica', text: 'Abre tu gráfico con RSI. Busca los dos últimos máximos o mínimos del precio. Luego mira los mismos puntos en el RSI. ¿Se mueven en la misma dirección? Si no, tienes una divergencia. Las divergencias en timeframe diario o semanal son las más significativas.' }
         ]
@@ -522,7 +538,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           points: [
             'Mejor para identificar la dirección general del mercado',
             'Excelente como soporte/resistencia dinámicos',
-            'Solo fiables en timeframes altos (diario+)',
+            'Más fiables en timeframes altos (4 horas o más)',
             'Solo funcionan en mercados con tendencia, NO en rangos',
             'Te dicen la posición del precio respecto a la tendencia',
             'Ideal para confirmar que estás operando a favor de la tendencia'
@@ -543,13 +559,18 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Tu Setup de Indicadores Recomendado',
         content: 'Menos es más. Los traders que ponen 10 indicadores en su gráfico terminan paralizados por señales contradictorias. Aquí tienes el setup mínimo y efectivo:',
         features: [
-          { icon: BarChart3, title: 'El Setup del 80/20', text: '**En tu gráfico pon solo esto**: (1) EMA 21, EMA 55 y EMA 200 en el gráfico de precios, (2) RSI 14 en panel separado debajo, (3) Volumen en barras. Nada más. Estos tres elementos te dan el 80% de la información útil con el 20% de la complejidad.' },
-          { icon: CheckCircle, title: 'La Confluencia es la Clave', text: 'La señal más poderosa es cuando **múltiples factores apuntan a la misma dirección**: precio en soporte + RSI en sobreventa + rebote en EMA 200 + vela de reversión + volumen alto. Eso es **confluencia**, y es donde debes poner tu capital.' }
+          { icon: BarChart3, title: 'El Setup Mínimo', text: '**En tu gráfico pon solo esto**: (1) EMA 21, EMA 55 y EMA 200 en el gráfico de precios, (2) RSI 14 en panel separado debajo, (3) Volumen en barras. Nada más. Con esto tienes lo esencial sin llenarte de señales que se contradicen.' },
+          { icon: CheckCircle, title: 'La Confluencia es la Clave', text: 'La señal más poderosa es cuando **múltiples factores apuntan a la misma dirección**: precio en soporte + RSI en sobreventa + rebote en EMA 200 + vela de reversión + volumen alto. Eso es **confluencia**, y es donde muchos traders concentran sus operaciones. Aun así puede fallar: por eso siempre hay stop y un tamaño de posición pequeño.' }
         ],
         highlight: {
           title: 'Práctica en TradingView',
           text: 'Abre ETH/USDT en 4 horas y agrega RSI 14 y las EMAs 21, 55 y 200. 1) Encuentra las 2 últimas veces que el RSI cruzó 30 o 70 y anota qué hizo el precio después. 2) Busca una divergencia entre precio y RSI en los últimos 3 meses. 3) Verifica si el precio respetó la EMA 200 como soporte o resistencia dinámica.'
         }
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
       },
       {
         type: 'takeaways',
@@ -559,7 +580,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           'RSI mide momentum: >70 sobrecompra, <30 sobreventa, 50 es la línea de tendencia. Las divergencias entre precio y RSI son señales anticipadas de cambio de tendencia.',
           'Las tres EMAs esenciales: 21 (momentum corto), 55 (tendencia media), 200 (frontera bull/bear). Las instituciones siguen sobre todo la SMA 200 diaria, que cuenta la misma historia: precio por encima = territorio bull.',
           'Golden Cross y Death Cross (canónicamente SMA 50/200 en diario) son señales retrasadas: confirman tendencias ya en marcha y tienen un historial mixto en techos y suelos. Solo tienen valor en mercados con tendencia.',
-          'NUNCA operes indicadores en mercados laterales. Si las EMAs están enredadas y el RSI oscila sin dirección, espera a que se defina la tendencia.',
+          'Evita operar señales de tendencia en mercados laterales. Si las EMAs están enredadas y el RSI oscila sin dirección, espera a que se defina la tendencia.',
           'Busca **confluencia**: la señal más potente ocurre cuando precio + soporte/resistencia + RSI + EMAs + volumen + velas apuntan todos a la misma dirección.'
         ]
       }
@@ -568,7 +589,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Bitcoin hace un nuevo máximo histórico ($110K), pero el RSI 14 en diario marca 68, más bajo que los 82 que marcó en el máximo anterior ($105K). ¿Qué está pasando?',
+          question: 'Bitcoin marca un nuevo máximo de las últimas semanas en $82,000, pero el RSI 14 en diario marca 68, más bajo que los 82 que marcó en el máximo anterior ($79,000). ¿Qué está pasando?',
           options: [
             { id: 'a', text: 'Todo normal, el precio sigue subiendo y la tendencia se mantiene alcista' },
             { id: 'b', text: 'Divergencia bajista: el precio subió más pero con menos momentum. Precaución' },
@@ -580,7 +601,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         },
         {
           id: 'q2',
-          question: '¿Qué media móvil usan como referencia las instituciones para determinar si estamos en bull o bear market?',
+          question: '¿Qué media móvil es la referencia más citada para decir si el mercado está en territorio bull o bear?',
           options: [
             { id: 'a', text: 'EMA 9 en gráfico de 15 minutos' },
             { id: 'b', text: 'EMA 21 en gráfico de 4 horas' },
@@ -588,7 +609,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'SMA 50 en gráfico semanal, la más usada por los fondos' }
           ],
           correctAnswer: 'c',
-          explanation: 'La media de 200 días es la referencia de largo plazo más seguida del mercado. Las instituciones miran sobre todo la SMA 200 diaria; la EMA 200 es una variante más sensible que cuenta la misma historia. Precio por encima = territorio bull, por debajo = territorio bear.'
+          explanation: 'La media de 200 días es la referencia de largo plazo más citada del mercado, sobre todo la SMA 200 diaria; la EMA 200 es una variante más sensible que cuenta la misma historia. Es una convención útil, no una ley. Precio por encima = territorio bull, por debajo = territorio bear.'
         },
         {
           id: 'q3',
@@ -600,7 +621,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Señal de venta, el precio está sobrecomprado' }
           ],
           correctAnswer: 'b',
-          explanation: 'Cruzar la EMA 200 al alza con volumen fuerte es una de las señales alcistas más importantes. El precio pasa de territorio "bear" a "bull". El volumen alto confirma que el movimiento tiene participación institucional real.'
+          explanation: 'Cruzar la EMA 200 al alza con volumen fuerte es una señal alcista muy seguida: el precio pasa de territorio "bear" a "bull", y el volumen alto indica que hubo participación real. Puede fallar, como cualquier señal: por eso el stop va debajo de la media.'
         },
         {
           id: 'q4',
@@ -612,7 +633,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Es señal de que el soporte se romperá esta vez' }
           ],
           correctAnswer: 'b',
-          explanation: 'Confluencia = múltiples señales apuntando a la misma dirección. RSI sobreventa + soporte fuerte = dos señales alcistas que se refuerzan mutuamente. No es garantía, pero es de alta probabilidad. El stop debajo del soporte protege tu capital si la tesis falla.'
+          explanation: 'Confluencia = múltiples señales apuntando a la misma dirección. RSI sobreventa + soporte fuerte = dos señales alcistas que se refuerzan mutuamente. Mejora tu lectura frente a una señal sola, pero no es garantía. El stop debajo del soporte protege tu capital si la tesis falla.'
         },
         {
           id: 'q5',
@@ -624,7 +645,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Debes usar timeframes más bajos para más precisión' }
           ],
           correctAnswer: 'b',
-          explanation: 'La mayoría de las pérdidas por indicadores ocurre en mercados laterales. Sin tendencia, las EMAs se enredan y generan señales falsas. La solución NO es más indicadores, es reconocer que el mercado no tiene dirección y esperar a que se defina.'
+          explanation: 'Muchas pérdidas con indicadores de tendencia ocurren en mercados laterales. Sin tendencia, las EMAs se enredan y generan señales falsas. La solución NO es más indicadores, es reconocer que el mercado no tiene dirección y esperar a que se defina.'
         }
       ]
     }
@@ -634,14 +655,14 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Estructura de Mercado',
     level: 'Intermedio',
     number: '4 de 12',
-    duration: '18 min',
+    duration: '19 min',
     type: 'Lectura + Práctica',
     description: 'La habilidad más importante del análisis técnico: identificar objetivamente si el mercado está subiendo, bajando o lateral. Sin esto, cualquier otra herramienta pierde sentido.',
     sections: [
       {
         type: 'intro',
         title: 'El Mapa del Campo de Batalla',
-        content: 'Imagina que estás en medio de una guerra y no tienes mapa. No sabes si tu ejército avanza o retrocede, si estás ganando o perdiendo. Así opera la mayoría de la gente en crypto: compran y venden sin saber si el mercado va a su favor o en su contra. La **estructura de mercado** es tu mapa. Es la herramienta que te dice objetivamente, sin opiniones, sin emociones, quién tiene el control: los toros o los osos. Todo lo que aprendiste hasta ahora (velas, S/R, indicadores) funciona 10× mejor cuando sabes en qué tipo de mercado estás. Una vela Hammer en soporte dentro de un uptrend es oro. La misma vela en un downtrend puede ser una trampa mortal.',
+        content: 'Imagina que estás en medio de una guerra y no tienes mapa. No sabes si tu ejército avanza o retrocede, si estás ganando o perdiendo. Así opera la mayoría de la gente en crypto: compran y venden sin saber si el mercado va a su favor o en su contra. La **estructura de mercado** es tu mapa. Es la herramienta que te dice objetivamente, sin opiniones, sin emociones, quién tiene el control: los toros o los osos. Todo lo que aprendiste hasta ahora (velas, S/R, indicadores) tiene mucho más sentido cuando sabes en qué tipo de mercado estás. Una vela Hammer en soporte dentro de un uptrend es una señal a favor de la corriente. La misma vela en un downtrend puede ser una trampa.',
         highlight: {
           title: 'Antes de Cualquier Trade',
           text: 'Antes de buscar entradas, antes de mirar indicadores, antes de todo: **identifica la estructura**. ¿Estamos subiendo, bajando o laterales? Esta es la pregunta más importante y la que la mayoría de los traders ignora.'
@@ -672,8 +693,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Break of Structure (BOS): La Primera Señal de Alerta',
         content: 'Un **Break of Structure** ocurre cuando la secuencia de HH/HL o LH/LL se rompe por primera vez. Es como el primer crujido en un edificio antes de colapsar, todavía no cayó, pero algo cambió. En un uptrend, el BOS ocurre cuando **el precio rompe el último Higher Low**. En un downtrend, cuando **el precio supera el último Lower High**.',
         features: [
-          { icon: AlertTriangle, title: 'BOS en Uptrend (Señal de Debilidad)', text: 'SOL venía haciendo HH + HL: $155 → $180 → $170 → $210 → $190. Si ahora el precio cae debajo de $190 (último HL), es BOS. La escalera dejó de subir. No significa que el bear market empezó, pero la tendencia alcista se debilitó.' },
-          { icon: Shield, title: 'BOS en Downtrend (Señal de Esperanza)', text: 'BTC venía haciendo LH + LL: $55K → $48K → $52K → $45K → $50K. Si ahora el precio supera $50K (último LH), es BOS. La presión bajista se debilitó. Los toros mostraron la primera señal de vida.' },
+          { icon: AlertTriangle, title: 'BOS en Uptrend (Señal de Debilidad)', text: 'SOL venía haciendo HH + HL: $155, $180, $170, $210 y $190. Si ahora el precio cae debajo de $190 (último HL), es BOS. La escalera dejó de subir. No significa que el bear market empezó, pero la tendencia alcista se debilitó.' },
+          { icon: Shield, title: 'BOS en Downtrend (Señal de Esperanza)', text: 'BTC venía haciendo LH + LL: $55K, $48K, $52K, $45K y $50K. Si ahora el precio supera $50K (último LH), es BOS. La presión bajista se debilitó. Los toros mostraron la primera señal de vida.' },
           { icon: Crosshair, title: 'Tu Acción en un BOS', text: 'BOS alcista roto: **no vendas todo en pánico**, pero ajusta tus stops y reduce tamaño de posiciones. BOS bajista roto: **no compres todo de golpe**, pero empieza a construir una posición pequeña con stop definido. El BOS es alerta, no confirmación.' }
         ],
         highlight: {
@@ -687,7 +708,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Si el BOS es la primera alerta, el **CHOCH (Change of Character)** es la confirmación. Un CHOCH ocurre cuando la estructura **no solo se rompe, sino que se invierte**: de HH + HL a LH + LL (o viceversa). Es el momento donde el control del mercado cambia de manos, de toros a osos o de osos a toros.',
         features: [
           { icon: RefreshCw, title: 'CHOCH Bajista (De Bull a Bear)', text: 'El uptrend se rompe (BOS), y luego el precio confirma haciendo un Lower High seguido de un Lower Low. La escalera ya no sube, empezó a bajar. Esto confirma que no fue una corrección temporal, sino un cambio real de tendencia.' },
-          { icon: RefreshCw, title: 'CHOCH Alcista (De Bear a Bull)', text: 'El downtrend se rompe (BOS), y luego el precio confirma haciendo un Higher Low seguido de un Higher High. La escalera dejó de bajar y empezó a subir. Este es el momento donde los inversores inteligentes empiezan a comprar agresivamente.' },
+          { icon: RefreshCw, title: 'CHOCH Alcista (De Bear a Bull)', text: 'El downtrend se rompe (BOS), y luego el precio confirma haciendo un Higher Low seguido de un Higher High. La escalera dejó de bajar y empezó a subir. Aun así, puede fallar: si decides operarlo, entra con tamaño pequeño y stop debajo del nuevo Higher Low.' },
           { icon: Clock, title: 'Paciencia: BOS ≠ CHOCH', text: 'Muchos traders confunden BOS con CHOCH y actúan demasiado rápido. Un BOS puede ser solo una corrección dentro de una tendencia. Necesitas que la estructura se invierta completamente (nueva secuencia de HH/HL o LH/LL) para confirmar CHOCH.' }
         ]
       },
@@ -699,10 +720,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           points: [
             'Clara secuencia de HH + HL (alcista) o LH + LL (bajista)',
             'Las EMAs están separadas y ordenadas',
-            'Las estrategias de "seguir la tendencia" funcionan muy bien',
+            'Las estrategias de "seguir la tendencia" tienen más sentido',
             'Los breakouts de soporte/resistencia tienden a continuar',
-            'Los indicadores dan señales más fiables',
-            'Es donde se gana la mayor parte del dinero'
+            'Las señales de los indicadores de tendencia son más útiles',
+            'Aun así, las tendencias terminan sin aviso'
           ]
         },
         rightSide: {
@@ -710,7 +731,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           points: [
             'No hay HH ni LL claros, rebota entre soporte y resistencia',
             'Las EMAs están enredadas y sin dirección',
-            'Comprar soporte y vender resistencia funciona (trading de rango)',
+            'Se puede operar comprando soporte y vendiendo resistencia (trading de rango)',
             'Los breakouts falsos son comunes (fakeouts)',
             'Los indicadores generan muchas señales falsas',
             'Es donde la mayoría pierde dinero por sobreoperar'
@@ -723,13 +744,13 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Un error común es analizar la estructura en un solo timeframe. El mercado puede estar alcista en diario pero bajista en 4 horas. La solución es el **análisis multi-timeframe**: empiezas por el panorama general y luego bajas a los detalles.',
         features: [
           { icon: Layers, title: 'Top-Down Analysis (De Arriba Hacia Abajo)', text: '**Paso 1**: Mira el gráfico semanal, ¿cuál es la tendencia macro? **Paso 2**: Baja al diario, ¿la tendencia de mediano plazo está alineada? **Paso 3**: Baja a 4h, busca tu entrada táctica. Si semanal y diario son alcistas, en 4h solo busca compras. Nunca pelees la tendencia del timeframe superior.' },
-          { icon: Target, title: 'Alineación = Probabilidad Alta', text: 'La operación de mayor probabilidad es cuando semanal, diario y 4h están TODOS alcistas (o todos bajistas). Cuando hay conflicto entre timeframes, la mejor acción es NO operar. Espera a que se alineen.' }
+          { icon: Target, title: 'Alineación = Mejor Contexto', text: 'El contexto más favorable es cuando semanal, diario y 4h están TODOS alcistas (o todos bajistas). Mejora tus probabilidades, pero no las garantiza. Cuando hay conflicto entre timeframes, la mejor acción es NO operar. Espera a que se alineen.' }
         ]
       },
       {
         type: 'main',
         title: 'Poniendo Todo Junto: Tu Framework de Estructura',
-        content: 'Aquí tienes el proceso paso a paso que deberías seguir ANTES de cada operación. Esto toma 5 minutos y te ahorra semanas de pérdidas:',
+        content: 'Aquí tienes el proceso paso a paso que deberías seguir ANTES de cada operación. Toma unos 5 minutos y te ahorra muchas decisiones impulsivas:',
         features: [
           { icon: Search, title: '1. ¿Cuál es la Estructura?', text: '¿El precio hace HH + HL (alcista), LH + LL (bajista), o rebota sin dirección (rango)? Si no puedes identificar la estructura en 30 segundos, probablemente estés en rango, y eso significa operar con precaución máxima.' },
           { icon: Eye, title: '2. ¿Hay BOS o CHOCH Reciente?', text: '¿La estructura se rompió recientemente? Si hay BOS, estás en alerta. Si hay CHOCH, la tendencia probablemente cambió. Ajusta tu sesgo alcista/bajista según esta información.' },
@@ -744,17 +765,22 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Ejemplo Completo: De Análisis a Ejecución',
-        content: 'Vamos a poner en práctica TODO lo que aprendiste en este módulo con un ejemplo completo. Imagina que estás analizando SOL/USDC y quieres decidir si comprar, vender, o no hacer nada. Este es el proceso profesional paso a paso:',
+        content: 'Vamos a poner en práctica TODO lo que aprendiste en este módulo con un ejemplo completo. Imagina que estás analizando SOL/USDC y quieres decidir si comprar, vender, o no hacer nada. Este es el proceso paso a paso:',
         features: [
-          { icon: BarChart3, title: '1. Lee el Gráfico (Estructura + Contexto)', text: 'Abres el gráfico semanal: SOL viene haciendo HH + HL desde hace 3 meses. Tendencia macro alcista confirmada. Bajas al diario: también alcista, pero el precio retrocedió al último soporte en $160 (zona de demanda que antes fue resistencia). Bajas a 4H: el RSI está en 32 (sobreventa) y el precio tocó la EMA de 200 periodos. Los tres timeframes dicen lo mismo: el contexto favorece una compra en este nivel.' },
-          { icon: Activity, title: '2. Aplica tus Indicadores de Confirmación', text: 'RSI en 4H en sobreventa (32), señal de que la presión vendedora se agotó. El precio está en la EMA 200 diaria, históricamente actúa como soporte dinámico en tendencias alcistas. Volumen: la vela de retroceso tiene volumen decreciente (los vendedores están perdiendo fuerza). Buscas una vela de reversión: aparece un Hammer en 4H en la zona de $160. Todas las señales están alineadas.' },
+          { icon: BarChart3, title: '1. Lee el Gráfico (Estructura + Contexto)', text: 'Abres el gráfico semanal: SOL viene haciendo HH + HL desde hace 3 meses. Tendencia macro alcista confirmada. Bajas al diario: también alcista, pero el precio retrocedió al último soporte en $160 (zona de demanda que antes fue resistencia). Bajas a 4H: el RSI está en 32 (sobreventa) y el precio tocó la EMA 200 de 4 horas. Los tres timeframes dicen lo mismo: el contexto favorece una compra en este nivel.' },
+          { icon: Activity, title: '2. Aplica tus Indicadores de Confirmación', text: 'RSI en 4H en sobreventa (32), señal de que la presión vendedora podría estar agotándose. El precio está en la EMA 200 de 4 horas, que a menudo actúa como soporte dinámico en tendencias alcistas. Volumen: la vela de retroceso tiene volumen decreciente (los vendedores están perdiendo fuerza). Buscas una vela de reversión: aparece un Hammer en 4H en la zona de $160. Las señales están alineadas, lo que no garantiza que funcione.' },
           { icon: Crosshair, title: '3. Define tu Entrada, Stop Loss y Take Profit', text: 'Entrada: $162 (ligeramente por encima del cierre del Hammer para confirmar fuerza compradora). Stop Loss: $153 (debajo del último Higher Low y de la mecha del Hammer, si el precio llega ahí, la estructura alcista se rompe y tu tesis se invalida). Take Profit 1: $185 (resistencia reciente, relación riesgo/recompensa de 1:2.5). Take Profit 2: $200 (siguiente zona de resistencia para la mitad restante). Riesgo por acción: $162 - $153 = $9 de riesgo por SOL.' },
-          { icon: Target, title: '4. Calcula tu Tamaño de Posición', text: 'Regla: nunca arriesgas más del 1-2% de tu capital total en una sola operación. Si tu portafolio es $5,000, tu riesgo máximo es $50-100 por trade. Con $9 de riesgo por SOL y $75 de riesgo máximo: puedes comprar ~8 SOL ($1,296 de posición). No todo tu portafolio, solo la cantidad donde si pierdes $75, duermes tranquilo. Esta es la diferencia entre un trader y un apostador: el apostador pone todo, el trader calcula su riesgo ANTES de entrar.' }
+          { icon: Target, title: '4. Calcula tu Tamaño de Posición', text: 'Primero, de dónde sale el dinero: tu **capital de trading**, como máximo el 5-10% de tu porción cripto y separado de tu base de DCA. Si tu porción cripto es $10,000, tu capital de trading es de $500 a $1,000. Regla: no arriesgas más del 1-2% de ese capital en una sola operación. Con $1,000, tu riesgo máximo es $10-20 por trade. Con $9 de riesgo por SOL y $15 de riesgo máximo: compras unos 1.6 SOL (unos $260 de posición). Si el stop salta, pierdes $15 y tu plan de largo plazo ni se entera. Esa es la diferencia entre un trader y un apostador: el apostador pone todo, el trader calcula su riesgo ANTES de entrar.' }
         ],
         highlight: {
           title: 'El Framework Completo',
-          text: 'Estructura (macro) → Soporte/Resistencia (nivel) → Indicadores (confirmación) → Vela de entrada (timing) → Stop en estructura (riesgo) → Posición por % de capital (gestión). Sigue este proceso en cada operación y eliminarás la mayoría de las decisiones emocionales que destruyen cuentas.'
+          text: 'Estructura (macro), luego soporte o resistencia (nivel), indicadores (confirmación), vela de entrada (timing), stop en la estructura (riesgo) y posición por % de tu capital de trading (gestión). Sigue este proceso en cada operación y reducirás las decisiones emocionales que destruyen cuentas.'
         }
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
       },
       {
         type: 'takeaways',
@@ -763,7 +789,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           'La estructura de mercado te dice **quién tiene el control**: toros (HH + HL), osos (LH + LL), o nadie (rango lateral).',
           'Break of Structure (BOS) es la primera señal de que algo cambió. No es confirmación, es alerta, ajusta tu riesgo pero no entres en pánico.',
           'Change of Character (CHOCH) es la confirmación de un cambio de tendencia. Cuando la estructura se invierte completamente (de HH/HL a LH/LL o viceversa), el control cambió de manos.',
-          'Analiza siempre de arriba hacia abajo: semanal → diario → 4h. La operación ideal es cuando todos los timeframes están alineados.',
+          'Analiza siempre de arriba hacia abajo: semanal, diario y luego 4h. El contexto más favorable es cuando todos los timeframes están alineados.',
           'En mercados laterales, la mayoría de las señales son falsas. Si no puedes identificar la estructura en 30 segundos, probablemente no haya tendencia, y lo mejor es esperar.',
           'Tu stop loss debe estar donde la estructura se invalida. Esto elimina la emoción de la ecuación y te protege objetivamente.'
         ]
@@ -781,7 +807,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'No se puede determinar con esta información' }
           ],
           correctAnswer: 'b',
-          explanation: 'Mínimos: $120 → $135 → $150 (Higher Lows). Máximos: $155 → $175 (Higher Highs). Secuencia perfecta de HH + HL = tendencia alcista confirmada.'
+          explanation: 'Mínimos: $120, $135 y $150 (Higher Lows). Máximos: $155 y $175 (Higher Highs). Una secuencia de HH + HL es la definición de tendencia alcista, aunque nada garantiza que continúe.'
         },
         {
           id: 'q2',
@@ -805,7 +831,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Operar en gráfico de 1 minuto para más precisión' }
           ],
           correctAnswer: 'b',
-          explanation: 'Análisis top-down perfecto: semanal y diario alcistas = el panorama general está a tu favor. Un retroceso en 4h a soporte + RSI sobreventa es una entrada de alta probabilidad a favor de TODOS los timeframes.'
+          explanation: 'Análisis top-down: semanal y diario alcistas significan que el panorama general está a tu favor. Un retroceso en 4h a soporte con RSI en sobreventa es una entrada a favor de todos los timeframes. Sigue necesitando stop y tamaño pequeño: el contexto favorable no es garantía.'
         },
         {
           id: 'q4',
@@ -839,17 +865,17 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Tokenomics 101',
     level: 'Intermedio',
     number: '5 de 12',
-    duration: '19 min',
+    duration: '20 min',
     type: 'Concepto',
     description: 'No compres solo por el logo o el hype. La economía de un token, su supply, distribución, inflación y calendario de desbloqueos, determina si ganas o pierdes. Aprende a leer las matemáticas antes de invertir.',
     sections: [
       {
         type: 'intro',
         title: 'No Compres un Logo, Compra Matemáticas',
-        content: 'La gran mayoría de los inversores en crypto compra tokens basándose en: el logo es bonito, alguien en Twitter lo recomendó, o "suena a que va a subir". Luego ven cómo su inversión cae -80% y no entienden por qué. La respuesta casi siempre está en los **tokenomics**, la economía del token. ¿Cuántos tokens existen? ¿Cuántos más se van a crear? ¿Quién los tiene? ¿Cuándo van a poder vender? Estas preguntas simples determinan si un token tiene presión de compra o presión de venta. Es pura oferta y demanda, pero con mecanismos que la mayoría no se molesta en entender. Los que sí los entienden, VCs, fondos, traders profesionales, son los que consistentemente ganan dinero a costa de los que no.',
+        content: 'La gran mayoría de los inversores en crypto compra tokens basándose en: el logo es bonito, alguien en Twitter lo recomendó, o "suena a que va a subir". Luego ven cómo su inversión cae -80% y no entienden por qué. La respuesta casi siempre está en los **tokenomics**, la economía del token. ¿Cuántos tokens existen? ¿Cuántos más se van a crear? ¿Quién los tiene? ¿Cuándo van a poder vender? Estas preguntas simples determinan si un token tiene presión de compra o presión de venta. Es pura oferta y demanda, pero con mecanismos que la mayoría no se molesta en entender. Los que sí los entienden, como VCs y fondos, juegan con ventaja frente a los que no.',
         highlight: {
           title: 'La Regla de Oro de los Tokenomics',
-          text: 'Si no entiendes los tokenomics de un proyecto, eres la liquidez de salida de alguien más. Alguien que SÍ los leyó te está vendiendo sus tokens sabiendo que el supply se va a multiplicar 10×.'
+          text: 'Si no entiendes los tokenomics de un proyecto, puedes terminar siendo la liquidez de salida de alguien más: quien SÍ leyó el calendario de desbloqueos sabe cuándo viene la dilución, y te vende antes.'
         }
       },
       {
@@ -868,8 +894,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: '"¡Está a $0.001, es baratísimo!" Esto es una **trampa mortal** que atrapa a miles de novatos. El precio unitario de un token no significa NADA sin contexto. Lo que importa es la capitalización de mercado y, más importante aún, el **Fully Diluted Valuation (FDV)**.',
         features: [
           { icon: BarChart3, title: 'Market Cap = Precio × Supply Circulante', text: 'Si un token cuesta $0.001 pero hay 100,000 millones en circulación, el market cap es $100M. No es "barato", es un proyecto de $100M. Compara: otro token a $100 con 1 millón de supply circulante también tiene market cap de $100M. El precio por unidad es irrelevante.' },
-          { icon: AlertTriangle, title: 'FDV = Precio × Supply Total', text: 'Aquí está la trampa real. Si ese token de $0.001 tiene 10 billones (millones de millones) de tokens de supply total, el FDV es $10,000 millones. ¿De verdad crees que un proyecto random vale lo mismo que las empresas más grandes del mundo? El FDV te dice: "para que este token mantenga su precio, necesitaría una valoración de $10B cuando todo el supply se desbloquee". Casi nunca pasa.' },
-          { icon: Eye, title: 'La Ratio Market Cap/FDV', text: 'Divide el market cap entre el FDV. Si la ratio es menor a 0.10 (solo el 10% del supply circula), hay un 90% de tokens esperando para diluirte. Ratio baja = altísimo riesgo de dilución. Ratio alta (>0.70) = la mayoría del supply ya circula y hay poco riesgo de dilución adicional.' }
+          { icon: AlertTriangle, title: 'FDV = Precio × Supply Total', text: 'Aquí está la trampa real. Si ese token de $0.001 tiene 10 billones (millones de millones) de tokens de supply total, el FDV es $10,000 millones. ¿De verdad crees que un proyecto desconocido vale lo mismo que una empresa grande que cotiza en bolsa? El FDV te dice: "para que este token mantenga su precio, necesitaría una valoración de $10B cuando todo el supply se desbloquee". Casi nunca pasa.' },
+          { icon: Eye, title: 'El Ratio Market Cap/FDV', text: 'Divide el market cap entre el FDV. Si el ratio es menor a 0.10 (solo el 10% del supply circula), hay un 90% de tokens esperando para diluirte. Ratio bajo = altísimo riesgo de dilución. Ratio alto (>0.70) = la mayoría del supply ya circula y hay poco riesgo de dilución adicional.' }
         ]
       },
       {
@@ -877,9 +903,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Distribución: ¿Quién Tiene los Tokens?',
         content: 'No solo importa cuántos tokens hay, importa **QUIÉN los tiene**. Un proyecto donde el 50% de los tokens están en manos del equipo fundador es fundamentalmente diferente a uno donde el 80% fue distribuido a la comunidad. La distribución te dice quién tiene el poder y quién tiene la motivación de vender.',
         features: [
-          { icon: Users, title: 'Team / Founders (Equipo)', text: 'Tokens asignados a los creadores del proyecto. Idealmente 10-20%. Más de 25% es red flag, el equipo podría vender masivamente. Menos de 5% es sospechoso también, ¿por qué el equipo no quiere tokens de su propio proyecto?' },
+          { icon: Users, title: 'Team / Founders (Equipo)', text: 'Tokens asignados a los creadores del proyecto. Como regla práctica, 10-20%. Más de 25% es red flag, el equipo podría vender masivamente. Menos de 5% es sospechoso también, ¿por qué el equipo no quiere tokens de su propio proyecto?' },
           { icon: Landmark, title: 'Inversores / VCs (Capital de Riesgo)', text: 'Tokens vendidos a inversores privados antes del lanzamiento público, usualmente con descuento del 50-90%. Los VCs compraron a precios que tú NUNCA verás. Cuando sus tokens se desbloquean, tienen +500% o +1000% de ganancia y motivación enorme de vender. Más del 20% para VCs es señal de precaución.' },
-          { icon: Globe, title: 'Comunidad / Airdrop / Público', text: 'Tokens distribuidos a usuarios reales del protocolo. A mayor porcentaje para la comunidad, más descentralizado y sano. Proyectos como Uniswap (60% comunidad) son el estándar dorado. Proyectos donde comunidad recibe <30% favorecen a insiders.' },
+          { icon: Globe, title: 'Comunidad / Airdrop / Público', text: 'Tokens distribuidos a usuarios reales del protocolo. A mayor porcentaje para la comunidad, más descentralizado y sano. Uniswap (60% para la comunidad) es un referente. Proyectos donde comunidad recibe <30% favorecen a insiders.' },
           { icon: PiggyBank, title: 'Tesorería / Ecosistema', text: 'Tokens reservados para financiar desarrollo futuro, grants, incentivos. Es un fondo de guerra controlado usualmente por gobernanza. 10-20% es razonable. Si es >30%, pregúntate quién realmente controla esa tesorería y cuáles son las reglas para gastarla.' }
         ]
       },
@@ -888,18 +914,18 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Vesting y Unlocks: El Calendario de la Presión de Venta',
         content: 'Los tokens del equipo, VCs e inversores no están disponibles inmediatamente. Tienen un calendario de **vesting** (consolidación) que define cuándo pueden venderlos. Este calendario es CRÍTICO porque cada unlock crea una ola potencial de presión de venta.',
         features: [
-          { icon: Clock, title: 'Cliff Period (Período de Espera)', text: 'Tiempo que debe pasar antes de que se desbloquee el PRIMER token. Cliff de 1 año = el equipo no puede vender nada durante 12 meses. **Cliff corto (3-6 meses) = red flag.** Cliff largo (12-24 meses) = el equipo está comprometido a largo plazo.' },
+          { icon: Clock, title: 'Cliff Period (Período de Espera)', text: 'Tiempo que debe pasar antes de que se desbloquee el PRIMER token. Cliff de 1 año = el equipo no puede vender nada durante 12 meses. **Cliff corto (3-6 meses) = red flag.** Cliff largo (12-24 meses) = buena señal de compromiso a largo plazo.' },
           { icon: Activity, title: 'Vesting Schedule (Calendario)', text: 'Después del cliff, los tokens se desbloquean gradualmente. "4 años de vesting lineal" = cada mes se desbloquea 1/48 del total. Mejor que "todo se desbloquea de golpe" (cliff seguido de dump masivo).' },
-          { icon: AlertTriangle, title: 'Token Unlocks Masivos', text: 'Usa **Tokenomist** (antes TokenUnlocks), en tokenomist.ai, para ver el calendario de CADA proyecto. Si en 2 semanas se desbloquea el 15% del supply total, prepárate para presión de venta MASIVA. Los insiders que llevan meses esperando finalmente podrán vender. Esto aplasta precios consistentemente.' },
-          { icon: Target, title: 'Qué Pasa con el Precio Antes de un Unlock', text: 'La investigación muestra que el precio suele DEBILITARSE en las semanas previas a un unlock grande: el mercado se adelanta a la dilución y vende antes. Los pumps pre-unlock existen (marketing que se intensifica, noticias convenientes), pero son la excepción, no la regla, y cuando ocurren suelen dar liquidez de salida a los insiders. La conclusión práctica es la misma: no compres con un unlock masivo encima.' }
+          { icon: AlertTriangle, title: 'Token Unlocks Masivos', text: 'Usa **Tokenomist** (antes TokenUnlocks), en tokenomist.ai, para ver el calendario de CADA proyecto. Si en 2 semanas se desbloquea el 15% del supply total, prepárate para presión de venta fuerte. Los insiders que llevan meses esperando finalmente podrán vender. Con frecuencia eso empuja el precio a la baja.' },
+          { icon: Target, title: 'Qué Pasa con el Precio Antes de un Unlock', text: 'Los análisis de miles de unlocks (por ejemplo, el de Keyrock en 2024) muestran que el precio suele DEBILITARSE en las semanas previas a un unlock grande: el mercado se adelanta a la dilución y vende antes. Los pumps pre-unlock existen (marketing que se intensifica, noticias convenientes), pero son la excepción, no la regla, y cuando ocurren suelen dar liquidez de salida a los insiders. La conclusión práctica es la misma: no compres con un unlock masivo encima.' }
         ]
       },
       {
         type: 'main',
         title: 'Inflación vs Deflación de Tokens',
-        content: 'Así como los gobiernos imprimen dinero (inflación), los protocolos pueden crear nuevos tokens (emisión). Y así como Bitcoin quema fees, algunos protocolos destruyen tokens (deflación). La batalla entre emisión y destrucción determina si tu inversión se diluye o se concentra.',
+        content: 'Así como los gobiernos imprimen dinero (inflación), los protocolos pueden crear nuevos tokens (emisión). Y así como Ethereum quema parte de cada fee desde 2021, algunos protocolos destruyen tokens (deflación). La batalla entre emisión y destrucción determina si tu inversión se diluye o se concentra.',
         features: [
-          { icon: TrendingDown, title: 'Inflación (Presión Bajista)', text: 'Nuevos tokens entran al mercado constantemente: emisiones para staking, recompensas de minería, unlocks de tesorería. Si un protocolo emite 10% de nuevo supply al año, tu posición se diluye 10% anual. Para mantener el mismo precio, la demanda debe crecer al mismo ritmo, raro.' },
+          { icon: TrendingDown, title: 'Inflación (Presión Bajista)', text: 'Nuevos tokens entran al mercado constantemente: emisiones para staking, recompensas de minería, unlocks de tesorería. Si un protocolo emite 10% de nuevo supply al año, tu posición se diluye 10% anual. Para mantener el mismo precio, la demanda debe crecer al mismo ritmo, y eso es raro.' },
           { icon: TrendingUp, title: 'Deflación / Quema (Presión Alcista)', text: 'Algunos protocolos "queman" (destruyen permanentemente) tokens cuando se pagan fees. Ethereum quema ETH en cada transacción. Si la quema supera la emisión, el supply DECRECE con el tiempo = más escasez = presión alcista natural. ETH puede ser deflacionario en picos de actividad, aunque desde 2024, con fees más bajas, su tendencia general ha sido levemente inflacionaria (~0.2-0.8% anual).' },
           { icon: Percent, title: 'Inflación Neta = Emisión − Quema', text: 'Lo que importa es el número neto. 5% emisión − 3% quema = 2% inflación neta. Es mejor que 5% puro, pero sigue siendo inflación. El escenario ideal: emisión < quema = deflación neta. Proyectos como BNB hacen quemas trimestrales masivas para reducir supply.' }
         ]
@@ -937,15 +963,15 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Casos Reales: Tokenomics en Acción',
         content: 'La teoría cobra vida cuando miras proyectos reales. Estos ejemplos muestran cómo los tokenomics determinan el destino de un token:',
         features: [
-          { icon: CheckCircle, title: 'Bitcoin (BTC), El Estándar Dorado', text: 'Max supply: 21 millones. Emisión decreciente (halving cada 4 años). Circulating/total: ~93%. Sin equipo con tokens bloqueados. Sin VCs. 100% distribución orgánica. Resultado: el activo más exitoso de la historia moderna.' },
-          { icon: CheckCircle, title: 'Solana (SOL), Tokenomics Sólidos', text: 'Emisión inflacionaria que decrece ~15% por año. Staking rewards incentivan HODL (reduce supply circulante efectivo). Fees se queman parcialmente. Comunidad activa y descentralizada. Resultado: top 5 por capitalización.' },
-          { icon: AlertTriangle, title: 'FTT (FTX Token), La Ilusión', text: 'El token de FTX parecía tener buenos tokenomics: quemas regulares, supply limitado. Pero Alameda Research (la empresa hermana) tenía miles de millones en FTT como "colateral". Cuando se descubrió, FTT colapsó -97% en días. Lección: los tokenomics en papel no sirven si hay concentración oculta.' },
+          { icon: CheckCircle, title: 'Bitcoin (BTC), El Estándar Dorado', text: 'Max supply: 21 millones. Emisión decreciente (halving cada 4 años). Más del 95% del máximo ya fue minado. Sin equipo con tokens bloqueados, sin preventa, sin VCs: todo se distribuyó por minería. Resultado: la criptomoneda más grande por capitalización.' },
+          { icon: CheckCircle, title: 'Solana (SOL), Sólidos pero con Matices', text: 'Emisión inflacionaria que decrece ~15% por año. Las recompensas de staking incentivan a mantener (reduce el supply circulante efectivo). Parte de las fees se quema. El contrapunto: más del 40% del supply inicial fue a equipo, fundadores e inversores privados. Resultado: está entre las más grandes por capitalización, pese a una distribución inicial concentrada. Buenos tokenomics no tienen que ser perfectos.' },
+          { icon: AlertTriangle, title: 'FTT (FTX Token), La Ilusión', text: 'El token de FTX parecía tener buenos tokenomics: quemas regulares, supply limitado. Pero Alameda Research (la empresa hermana) tenía miles de millones en FTT como "colateral". Cuando se descubrió, FTT cayó más de 90% en días. Lección: los tokenomics en papel no sirven si hay concentración oculta.' },
           { icon: AlertTriangle, title: 'LUNA/UST, La Espiral de la Muerte', text: 'LUNA tenía un mecanismo "elegante": quemar LUNA para crear UST (stablecoin). Funcionó mientras había demanda. Cuando UST perdió el peg, el supply de LUNA pasó de ~350 millones a ~6.5 billones de tokens en cuestión de días, inflación infinita instantánea. De $80 a $0.00001. Los tokenomics pueden matar un proyecto de $40B en una semana.' }
         ]
       },
       {
         type: 'main',
-        title: '\u{1F9E0} Explícalo Tú: El Test de Feynman',
+        title: 'Explícalo Tú: El Test de Feynman',
         content: 'Richard Feynman, premio Nobel de Física, decía: "Si no puedes explicar algo de forma simple, no lo entiendes realmente." Pon a prueba tu comprensión:',
         features: [
           { icon: Brain, title: 'El Reto', text: 'Explícale a CBas por qué un token a $0.001 puede ser más caro que uno a $100. Usa los conceptos de supply y FDV.' },
@@ -957,13 +983,18 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         }
       },
       {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
+      },
+      {
         type: 'takeaways',
         title: 'Tu Checklist de Tokenomics',
         items: [
           'NUNCA inviertas sin verificar el supply: circulante, total y máximo. Si la ratio circulante/total es baja (<10%), hay una montaña de tokens esperando para diluirte.',
           'El precio unitario es irrelevante, $0.001 puede ser "caro" y $200 puede ser "barato". Lo que importa es el Market Cap y el FDV (Fully Diluted Valuation).',
           'Verifica la distribución: ¿quién tiene los tokens? Si equipo + VCs > 50%, eres minoría en un juego controlado por insiders.',
-          'Revisa el calendario de unlocks en Tokenomist (tokenomist.ai, antes TokenUnlocks) ANTES de comprar. Un unlock masivo próximo casi siempre genera presión de venta.',
+          'Revisa el calendario de unlocks en Tokenomist (tokenomist.ai, antes TokenUnlocks) ANTES de comprar. Un unlock masivo próximo suele generar presión de venta.',
           'Calcula la inflación neta: emisión anual − quema anual. Si es positiva, tu posición se diluye cada año. Compara con el crecimiento esperado de la demanda.',
           'Los tokenomics en papel no son suficientes, verifica la concentración real de wallets (en Arkham o Dune). Si 5 wallets tienen el 60% del supply, una sola venta puede destruir el precio.'
         ]
@@ -981,7 +1012,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: '$10M, es el promedio entre market cap y FDV' }
           ],
           correctAnswer: 'b',
-          explanation: 'Market cap = supply circulante × precio = 10M × $0.01 = $100K. El FDV es $100M. La diferencia 1000× significa que el 99.9% del supply está por desbloquearse. Cada unlock diluye tu posición exponencialmente.'
+          explanation: 'Market cap = supply circulante × precio = 10M × $0.01 = $100K. El FDV es $100M. La diferencia de 1000 veces significa que el 99.9% del supply está por desbloquearse. Cada unlock diluye tu posición.'
         },
         {
           id: 'q2',
@@ -993,7 +1024,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'B, más tokens para el equipo significa más motivación para construir' }
           ],
           correctAnswer: 'b',
-          explanation: 'Vesting largo (4 años) alinea incentivos: el equipo solo gana si el proyecto es exitoso a largo plazo. 6 meses cliff = el equipo puede dumpearte todo en menos de un año. "Skin in the game" es quedarse comprometido, no tener muchos tokens que puedes vender pronto.'
+          explanation: 'Vesting largo (4 años) alinea incentivos: el equipo solo gana si el proyecto es exitoso a largo plazo. Con 6 meses de cliff, el equipo puede venderte encima en menos de un año. "Skin in the game" es quedarse comprometido, no tener muchos tokens que puedes vender pronto.'
         },
         {
           id: 'q3',
@@ -1029,11 +1060,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Depende de la calidad del proyecto únicamente' }
           ],
           correctAnswer: 'c',
-          explanation: 'La mayoría de receptores de airdrops venden inmediatamente, recibieron algo gratis y quieren convertirlo en dinero. Esto crea presión de venta enorme. La estrategia inteligente: espera el dump post-airdrop y compra después de la capitulación, no antes.'
+          explanation: 'Muchos receptores de airdrops venden pronto: recibieron algo gratis y quieren convertirlo en dinero. Eso crea presión de venta fuerte. No es una ley (algunos tokens subieron tras su airdrop), pero si te interesa el proyecto no hay prisa: esperar a que pase esa ola de venta suele ser mejor que comprar el primer día.'
         },
         {
           id: 'review_1',
-          question: '📝 Repaso: Cuando un precio rompe un nivel de soporte con alto volumen y luego vuelve a tocarlo desde abajo, ese nivel se convierte en:',
+          question: 'Repaso de Soportes y Resistencias: Cuando un precio rompe un nivel de soporte con alto volumen y luego vuelve a tocarlo desde abajo, ese nivel se convierte en:',
           options: [
             { id: 'a', text: 'Un nuevo soporte más fuerte' },
             { id: 'b', text: 'Una señal de compra' },
@@ -1041,7 +1072,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Un indicador de baja volatilidad' }
           ],
           correctAnswer: 'c',
-          explanation: 'Cuando un soporte se rompe, se convierte en resistencia (y viceversa). Este concepto de "flip" de niveles es fundamental en análisis técnico. (Recuerda la Lección 14: Soportes y Resistencias)'
+          explanation: 'Cuando un soporte se rompe, se convierte en resistencia (y viceversa). Este "flip" de niveles es muy usado en análisis técnico, aunque no siempre se cumple. (Lo viste en la lección Soportes y Resistencias.)'
         }
       ]
     },
@@ -1053,15 +1084,15 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         questions: [
           {
             id: 'cp1-q1',
-            question: 'Token A cuesta $200 por unidad con 1M circulantes y 1M total. Token B cuesta $0.001 por unidad con 10B circulantes y 100B total. Un amigo dice "Token B está baratísimo". ¿Qué le respondes?',
+            question: 'Token A cuesta $200 por unidad, con 1 millón circulante y 1 millón en total. Token B cuesta $0.001 por unidad, con 100,000 millones circulantes y 1 millón de millones en total. Un amigo dice "Token B está baratísimo". ¿Qué le respondes?',
             options: [
               'Tiene razón, $0.001 es muchísimo más barato que $200 por unidad',
-              'Token A tiene market cap de $200M; Token B tiene market cap de $10M pero FDV de $100M: el 90% del supply está por desbloquearse y la dilución va a aplastar el precio',
+              'Token A vale $200M, ya todo en circulación. Token B tiene market cap de $100M pero FDV de $1,000M: totalmente diluido vale 5 veces más que A, y el 90% de su supply aún no circula',
               'Los dos son equivalentes porque el precio no importa',
               'Token B es mejor porque puedes comprar más unidades'
             ],
             correctAnswer: 1,
-            explanation: 'El precio por unidad es irrelevante. Lo que importa es Market Cap (precio × supply circulante) y FDV (precio × supply total). Token B tiene ratio Market Cap / FDV de 0.1, solo 10% circula, 90% está esperando para diluirte. Token A tiene ratio 1.0, todo ya circula, sin riesgo de dilución. "Barato por unidad" es una ilusión psicológica que los insiders usan contra novatos.',
+            explanation: 'El precio por unidad es irrelevante. Lo que importa es Market Cap (precio × supply circulante) y FDV (precio × supply total). Token B: $0.001 × 100,000 millones = $100M de market cap, y $0.001 × 1 millón de millones = $1,000M de FDV. Ratio 0.1: solo el 10% circula. Token A: $200 × 1 millón = $200M, ratio 1.0, sin dilución pendiente. "Barato por unidad" es una ilusión psicológica que se usa contra novatos.',
             hint: 'Calcula el FDV de cada uno.'
           }
         ]
@@ -1073,23 +1104,23 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Ciclos de Mercado (Halving)',
     level: 'Intermedio',
     number: '6 de 12',
-    duration: '18 min',
+    duration: '19 min',
     type: 'Análisis + Estrategia',
-    description: 'Todo en crypto se mueve al ritmo de Bitcoin. El halving cada 4 años crea un shock de oferta predecible que ha generado bull markets consistentemente. Entiende el ciclo y posiciónate antes que la mayoría.',
+    description: 'Todo en crypto se mueve al ritmo de Bitcoin. Cada ~4 años su emisión se reduce a la mitad, y hasta ahora cada recorte coincidió con un bull market. Entiende el patrón, sus límites, y cómo evitar que el ciclo maneje tus emociones.',
     sections: [
       {
         type: 'intro',
         title: 'El Director de Orquesta',
-        content: 'Hay un patrón histórico en crypto que se ha repetido desde 2012: cada ~4 años, Bitcoin reduce su emisión a la mitad (halving), y 12-18 meses después ha llegado un bull market explosivo. La explicación clásica es la oferta y la demanda, aunque cada ciclo también coincidió con ciclos de liquidez global, y cuatro casos son un patrón, no una ley. Bitcoin dirige TODO el mercado crypto. El guion clásico dice que cuando BTC sube, el capital fluye en cascada: **BTC → ETH → Large Caps → Mid Caps → Small Caps → Memecoins** (aunque el ciclo 2024-25 rompió parte de ese guion). Cuando BTC cae, todo cae con él (las altcoins caen más fuerte). Entender en qué fase del ciclo estamos es probablemente la ventaja más grande que puedes tener. Los que compran en el bear y venden en la euforia acumulan riqueza generacional. Los que compran en la euforia y venden en el pánico pierden todo.',
+        content: 'Hay un patrón histórico en crypto que se ha repetido desde 2012: cada ~4 años, Bitcoin reduce su emisión a la mitad (halving), y 12-18 meses después ha llegado un bull market explosivo. La explicación clásica es la oferta y la demanda, aunque cada ciclo también coincidió con ciclos de liquidez global, y cuatro casos son un patrón, no una ley. Bitcoin dirige TODO el mercado crypto. El guion clásico dice que cuando BTC sube, el capital fluye en cascada: **de BTC a ETH, luego a large caps, mid caps, small caps y memecoins** (aunque el ciclo 2024-25 rompió parte de ese guion). Cuando BTC cae, todo cae con él (las altcoins caen más fuerte). Entender en qué fase del ciclo podríamos estar te ayuda a no comprar en plena euforia ni vender en pleno pánico. Los que compran en la euforia y venden en el pánico suelen perder mucho; los que mantienen un plan aburrido suelen llegar más lejos.',
         highlight: {
           title: 'El Patrón Que Se Repite',
-          text: 'Desde 2012, cada halving ha sido seguido por un bull market 12-18 meses después: 2012 → 2013 bull, 2016 → 2017 bull, 2020 → 2021 bull, 2024 → 2025 bull. Cuatro de cuatro hasta ahora. Pero cuatro casos no hacen una ley: trátalo como brújula histórica, no como garantía.'
+          text: 'Desde 2012, cada halving ha sido seguido por un bull market 12-18 meses después: halving en 2012 y bull en 2013, 2016 y 2017, 2020 y 2021, 2024 y 2025. Cuatro de cuatro hasta ahora. Pero cuatro casos no hacen una ley: trátalo como brújula histórica, no como garantía.'
         }
       },
       {
         type: 'main',
         title: '¿Qué es el Halving y Por Qué Importa?',
-        content: 'Cada ~210,000 bloques (aproximadamente 4 años), la cantidad de Bitcoin nuevo que se crea por bloque se reduce exactamente a la **mitad**. Esto está programado en el código de Bitcoin y NADIE puede cambiarlo, ni gobiernos, ni Elon Musk, ni el creador de Bitcoin.',
+        content: 'Cada ~210,000 bloques (aproximadamente 4 años), la cantidad de Bitcoin nuevo que se crea por bloque se reduce exactamente a la **mitad**. Esto está programado en el código de Bitcoin. Cambiarlo exigiría que casi toda la red aceptara nuevas reglas, algo que ningún gobierno, empresa ni persona puede imponer por su cuenta.',
         features: [
           { icon: Percent, title: 'La Matemática del Halving', text: '2009: se creaban **50 BTC** por bloque (cada 10 minutos). 2012 (1er halving): **25 BTC**. 2016: **12.5 BTC**. 2020: **6.25 BTC**. 2024: **3.125 BTC**. Cada halving la emisión nueva se corta a la mitad. Históricamente eso ha coincidido con presión alcista **si** la demanda se mantiene o crece; no es una ecuación garantizada (liquidez global, ciclos macro y posición en el ciclo también pesan).' },
           { icon: Lock, title: 'El Shock de Oferta', text: 'Imagina que todos los días se producen 900 BTC nuevos (pre-halving 2024). Los mineros venden la mayoría para pagar electricidad. De repente, la producción baja a 450 BTC diarios. Los compradores que antes absorbían 900 ahora compiten por solo 450. Misma demanda, mitad de oferta nueva: presión alcista. Eso sí, hoy la emisión nueva es menos del 1% del supply al año, así que el efecto directo es cada vez más pequeño; los ciclos también han coincidido con los ciclos de liquidez global.' },
@@ -1099,41 +1130,42 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Las 4 Fases del Ciclo de Mercado',
-        content: 'El mercado crypto se ha movido históricamente en un ciclo de 4 fases alrededor de cada halving. Reconocer en qué fase estamos te da una ventaja enorme sobre la mayoría del mercado que opera por emoción:',
+        content: 'El mercado crypto se ha movido históricamente en un ciclo de 4 fases alrededor de cada halving. Reconocer en qué fase podríamos estar te ayuda a no operar por emoción. Ojo: las fases solo se ven con claridad en retrospectiva; en tiempo real casi nadie acierta.',
         features: [
-          { icon: TrendingDown, title: '1. Bear Market (Invierno Crypto)', text: 'Duración: 12-18 meses. El precio cae **-70% a -85%** desde el máximo. Los medios declaran "crypto muerto". Los novatos que compraron en la euforia venden en pánico con pérdidas masivas. Twitter crypto se vacía. Los exchanges despiden empleados. **Paradójicamente, este es el MEJOR momento para comprar.** Las fortunas de crypto se construyen en el bear market.' },
-          { icon: Activity, title: '2. Acumulación (Primavera Silenciosa)', text: 'Duración: 6-12 meses. El precio se estabiliza y se mueve lateral. El volumen es bajo. Nadie habla de crypto. Los que quedaron empiezan a comprar silenciosamente. Las ballenas y fondos acumulan posiciones enormes. El halving generalmente ocurre en esta fase. **Si estás comprando aquí, estás con el dinero inteligente.**' },
-          { icon: Zap, title: '3. Bull Market (Verano Explosivo)', text: 'Duración: 12-18 meses post-halving. El precio rompe el ATH anterior. Los medios empiezan a hablar de crypto otra vez. Los primeros novatos entran. Cada ciclo el múltiplo de Bitcoin **desde el precio del día del halving** se ha reducido: aproximadamente **~90×, ~30×, ~8× y ~2×** en los cuatro ciclos (halving → ATH). Desde el mínimo del bear anterior los números son otros (por ejemplo el ciclo 3: ~$3,200 → $69k ≈ 21×; el ciclo 4: ~$15,500 → $126k ≈ 8×). No mezcles las dos bases. Las altcoins han explotado más fuerte en ciclos pasados, aunque en 2024-25 la mayoría nunca se acercó a sus máximos de 2021. La euforia crece, pero el patrón no es una ley.' },
-          { icon: AlertTriangle, title: '4. Distribución (Otoño de la Euforia)', text: 'Duración: 2-6 meses. El pico del ciclo. Tu tía te pregunta cómo comprar Dogecoin. Los taxistas hablan de crypto. "Esta vez es diferente" se repite en todos lados. Los insiders y ballenas que compraron en el bear están vendiendo silenciosamente a los novatos que compran con FOMO. **Cuando la euforia es máxima, el techo está cerca.**' }
+          { icon: TrendingDown, title: '1. Bear Market (Invierno Crypto)', text: 'Duración: 12-18 meses. El precio cae **-70% a -85%** desde el máximo. Los medios declaran "crypto muerto". Los novatos que compraron en la euforia venden en pánico con pérdidas masivas. Twitter crypto se vacía. Los exchanges despiden empleados. **Históricamente, comprar con DCA en esta fase dio los mejores resultados a largo plazo**, pero solo para quien aguantó: en tiempo real nadie sabe cuánto más puede caer ni cuánto durará.' },
+          { icon: Activity, title: '2. Acumulación (Primavera Silenciosa)', text: 'Duración: 6-12 meses. El precio se estabiliza y se mueve lateral. El volumen es bajo. Nadie habla de crypto. Los que quedaron siguen comprando en silencio. El halving generalmente ocurre en esta fase. **Comprar aquí con DCA históricamente rindió bien**, aunque solo lo sabrás después.' },
+          { icon: Zap, title: '3. Bull Market (Verano Explosivo)', text: 'Duración: 12-18 meses post-halving. El precio rompe el ATH anterior. Los medios empiezan a hablar de crypto otra vez. Los primeros novatos entran. Cada ciclo el múltiplo de Bitcoin **desde el precio del día del halving** se ha reducido: aproximadamente **~95×, ~30×, ~8× y ~2×** en los cuatro ciclos (del halving al máximo). Desde el mínimo del bear anterior los números son otros (por ejemplo el ciclo 3: de ~$3,200 a $69k, unas 21 veces; el ciclo 4: de ~$15,500 a $126k, unas 8 veces). No mezcles las dos bases. Las altcoins han explotado más fuerte en ciclos pasados, aunque en 2024-25 la mayoría nunca se acercó a sus máximos de 2021. La euforia crece, pero el patrón no es una ley.' },
+          { icon: AlertTriangle, title: '4. Distribución (Otoño de la Euforia)', text: 'Duración: 2-6 meses. El pico del ciclo. Tu tía te pregunta cómo comprar Dogecoin. Los taxistas hablan de crypto. "Esta vez es diferente" se repite en todos lados. Muchos de los que compraron en el bear venden a quienes llegan con FOMO. **Cuando la euforia es máxima, el techo suele estar cerca.**' }
         ]
       },
       {
         type: 'main',
         title: 'La Historia: 4 Halvings, 4 Bull Runs',
+        asOf: 'noviembre de 2026',
         content: 'No te pedimos que creas en predicciones. Te pedimos que mires los datos. Cuatro ciclos, cuatro resultados similares:',
         features: [
-          { icon: BarChart3, title: 'Ciclo 1: Halving Nov 2012', text: 'BTC pasó de ~$12 en el halving a **$1,100** en diciembre 2013 (90× en 13 meses). Luego cayó -85% hasta $170 en enero 2015. Primer ciclo completo: de la nada a más de mil dólares, y de vuelta a casi nada para los que no vendieron.' },
+          { icon: BarChart3, title: 'Ciclo 1: Halving Nov 2012', text: 'BTC pasó de ~$12 en el halving a **~$1,150** a fines de noviembre de 2013 (unas 95 veces en 12 meses). Luego cayó -85% hasta $170 en enero 2015. Primer ciclo completo: de $12 a más de mil dólares, y una caída de 85% para los que no vendieron.' },
           { icon: BarChart3, title: 'Ciclo 2: Halving Jul 2016', text: 'BTC pasó de ~$650 en el halving a **$19,700** en diciembre 2017 (30× en 17 meses). Luego cayó -84% hasta $3,200 en diciembre 2018. La era de las ICOs, la locura de las altcoins, y el crash que "mató" crypto (de nuevo).' },
           { icon: BarChart3, title: 'Ciclo 3: Halving May 2020', text: 'BTC pasó de ~$8,700 en el halving a **$69,000** en noviembre 2021 (8× en 18 meses). DeFi Summer, NFT mania, SOL pasó de $1 a $260. Luego el bear de 2022: Luna crash, FTX crash, BTC cayó -77% hasta $15,500.' },
-          { icon: BarChart3, title: 'Ciclo 4: Halving Abr 2024', text: 'BTC en el halving: ~$64,000. Para finales de 2024 ya superó los $100K. ETFs de Bitcoin aprobados, adopción institucional masiva. Hasta ahora, el máximo de este ciclo fue en octubre de 2025: cerca de $126,000, unos 18 meses después del halving, dentro de la ventana histórica. Después vino la corrección: a mediados de 2026, BTC opera en la zona de $60,000-65,000, y solo el tiempo confirmará si ese fue el techo definitivo del ciclo.' }
+          { icon: BarChart3, title: 'Ciclo 4: Halving Abr 2024', text: 'BTC en el halving: ~$64,000. Para finales de 2024 ya superó los $100K. ETFs de Bitcoin aprobados y fuerte entrada institucional. Hasta ahora, el máximo de este ciclo fue en octubre de 2025: cerca de $126,000, unos 18 meses después del halving, dentro de la ventana histórica. Después vino la corrección: a fines de junio de 2026 BTC llegó a cerrar cerca de $58,500 (unos -53%), y en noviembre de 2026 opera cerca de $75,000, unos 40% por debajo del máximo. Solo el tiempo confirmará si ese fue el techo definitivo del ciclo.' }
         ]
       },
       {
         type: 'main',
         title: 'Bitcoin Dominance y la Altseason',
-        content: 'Uno de los indicadores más seguidos del ciclo es la **Bitcoin Dominance**, el porcentaje del mercado total de crypto que corresponde a Bitcoin. Cuando BTC Dominance sube, Bitcoin se lleva el capital. Cuando baja, las altcoins tienden a brillar. Este es el guion clásico de la rotación, pero una advertencia importante: el ciclo 2024-25 lo rompió en gran parte (la dominancia se mantuvo por encima de 55-60% y la altseason amplia nunca llegó). Úsalo como mapa histórico, no como guion garantizado:',
+        content: 'Uno de los indicadores más seguidos del ciclo es la **Bitcoin Dominance**, el porcentaje del mercado total de crypto que corresponde a Bitcoin. Cuando BTC Dominance sube, Bitcoin se lleva el capital. Cuando baja, las altcoins tienden a brillar. Este es el guion clásico de la rotación, pero una advertencia importante: el ciclo 2024-25 lo rompió en gran parte (la dominancia se mantuvo por encima de 55-60% y la altseason amplia nunca llegó). Úsalo como mapa histórico, no como guion garantizado. Y si decides rotar, hazlo solo con tu capital de trading: tu base de DCA no se toca.',
         features: [
-          { icon: BarChart3, title: 'Fase 1: BTC Dominance Sube (60%+)', text: 'Al inicio del bull market, el capital entra primero a Bitcoin (el más seguro). BTC Dominance sube a 60-65%. En esta fase, las altcoins rinden menos que BTC. **Estrategia: mantén la mayoría en BTC.**' },
-          { icon: Zap, title: 'Fase 2: BTC Dominance Empieza a Caer (55-60%)', text: 'Bitcoin consolidó sus ganancias. El capital empieza a fluir a ETH y large caps (SOL, AVAX). BTC Dominance cae lentamente. **Estrategia: empieza a rotar gradualmente a altcoins de alta capitalización.**' },
-          { icon: Activity, title: 'Fase 3: Altseason (BTC Dom <50%)', text: 'Bitcoin se estanca, el capital fluye masivamente a altcoins. Las mid caps y small caps hacen 10-50×. Los memecoins explotan. BTC Dominance cae por debajo del 50%. **Esta fase dura poco, semanas, no meses.** Es donde se hacen (y se pierden) fortunas.' },
-          { icon: AlertTriangle, title: 'Fase 4: Capital Vuelve a BTC (Señal de Fin)', text: 'Las altcoins empiezan a caer mientras BTC se mantiene. BTC Dominance vuelve a subir. El capital "vuela a la seguridad". **Si ya estás en altcoins y BTC Dominance empieza a subir fuerte, es hora de rotar de vuelta a BTC o stablecoins.**' }
+          { icon: BarChart3, title: 'Fase 1: BTC Dominance Sube (60%+)', text: 'Al inicio del bull market, el capital entra primero a Bitcoin (el más seguro). BTC Dominance sube a 60-65%. En esta fase, las altcoins rinden menos que BTC. **Guion clásico: mantener la mayoría en BTC.**' },
+          { icon: Zap, title: 'Fase 2: BTC Dominance Empieza a Caer (55-60%)', text: 'Bitcoin consolidó sus ganancias. El capital empieza a fluir a ETH y large caps (SOL, AVAX). BTC Dominance cae lentamente. **Guion clásico: rotar gradualmente a altcoins de alta capitalización.**' },
+          { icon: Activity, title: 'Fase 3: Altseason (BTC Dom <50%)', text: 'Bitcoin se estanca, el capital fluye masivamente a altcoins. Algunas mid caps y small caps han hecho 10-50× (y muchas otras desaparecieron). Los memecoins explotan. BTC Dominance cae por debajo del 50%. **Esta fase dura poco, semanas, no meses.** Es donde más gente compra tarde y pierde.' },
+          { icon: AlertTriangle, title: 'Fase 4: Capital Vuelve a BTC (Señal de Fin)', text: 'Las altcoins empiezan a caer mientras BTC se mantiene. BTC Dominance vuelve a subir. El capital "vuela a la seguridad". **Guion clásico: si estás en altcoins y BTC Dominance sube fuerte, rotar de vuelta a BTC o stablecoins.**' }
         ]
       },
       {
         type: 'comparison',
         title: 'Señales de Techo vs Señales de Suelo',
         leftSide: {
-          title: 'Señales de Techo (Hora de Vender)',
+          title: 'Señales de Techo (Históricamente)',
           points: [
             'Tu tía/taxista/peluquero pregunta cómo comprar crypto',
             'Todos en redes sociales muestran sus ganancias',
@@ -1145,11 +1177,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           ]
         },
         rightSide: {
-          title: 'Señales de Suelo (Hora de Comprar)',
+          title: 'Señales de Suelo (Históricamente)',
           points: [
             'Los medios declaran "crypto ha muerto"',
             'Twitter crypto está desierto o depresivo',
-            'Los exchanges despiden 30-50% del personal',
+            'Los exchanges despiden personal en masa',
             'Los mineros apagan máquinas por falta de rentabilidad',
             'Los volúmenes de trading están en mínimos de años',
             'Solo los convencidos de largo plazo siguen comprando',
@@ -1159,13 +1191,13 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       },
       {
         type: 'main',
-        title: 'Cómo Posicionarte en Cada Fase',
-        content: 'Saber en qué fase estamos es poder. Pero el poder sin acción es inútil. Aquí tienes la estrategia óptima para cada fase del ciclo:',
+        title: 'Cómo Posicionarte en Cada Fase (Opcional)',
+        content: 'Esta sección es **opcional** y no reemplaza tu plan base. Tu DCA en BTC sigue igual en todas las fases: es lo que te protege de equivocarte sobre en qué fase estamos (y casi todos se equivocan en tiempo real). Lo que sigue es una guía para tu **capital de trading**, como máximo el 5-10% de tu porción cripto:',
         features: [
-          { icon: PiggyBank, title: 'Bear Market: ACUMULA', text: 'DCA (Dollar Cost Average) en BTC y, por ejemplo, alguna altcoin mayor como SOL (ojo: ninguna altcoin individual tiene garantizada la supervivencia de un ciclo al siguiente). No intentes encontrar el mínimo exacto, compra gradualmente cada semana/mes. Construye posiciones en proyectos con fundamentales fuertes que sobrevivirán al invierno. Mantén 30-40% en stablecoins para aprovechar oportunidades extremas.' },
-          { icon: Clock, title: 'Acumulación: POSICIÓNATE', text: 'Aumenta tamaño de posiciones. Los precios están bajos y estables, es el mejor risk/reward del ciclo. Investiga proyectos para el próximo bull. Empieza a construir posiciones en altcoins selectas. Mantén 20% en stablecoins.' },
-          { icon: Zap, title: 'Bull Market: CABALGA Y TOMA GANANCIAS', text: 'Deja correr tus posiciones pero EMPIEZA a tomar ganancias parciales en cada subida. Usa scaling out: vende 20-30% en cada nuevo máximo. Rota gradualmente de BTC a altcoins cuando BTC Dom empiece a caer. Nunca inviertas todo, mantén reservas.' },
-          { icon: Shield, title: 'Distribución: PROTEGE Y SAL', text: 'Cuando veas señales de euforia extrema, toma ganancias agresivamente. Rota a stablecoins 50-70% del portafolio. No intentes encontrar el techo exacto, es mejor salir un mes antes que un día después. El 90% de las ganancias de altcoins se evaporan en el bear.' }
+          { icon: PiggyBank, title: 'Bear Market: ACUMULA', text: 'DCA (Dollar Cost Average) en BTC y, por ejemplo, alguna altcoin mayor como SOL (ojo: ninguna altcoin individual tiene garantizada la supervivencia de un ciclo al siguiente). No intentes encontrar el mínimo exacto, compra gradualmente cada semana o mes. Construye posiciones en proyectos con fundamentales fuertes que tengan buenas probabilidades de sobrevivir al invierno. Mantén parte de tu capital de trading en stablecoins para aprovechar oportunidades.' },
+          { icon: Clock, title: 'Acumulación: POSICIÓNATE', text: 'Aumenta tamaño de posiciones. Los precios están bajos y estables; históricamente ha sido una de las mejores relaciones riesgo/recompensa del ciclo. Investiga proyectos para el próximo bull y, si quieres, construye posiciones pequeñas en altcoins selectas.' },
+          { icon: Zap, title: 'Bull Market: CABALGA Y TOMA GANANCIAS', text: 'Deja correr tus posiciones pero EMPIEZA a tomar ganancias parciales en cada subida. Usa scaling out: vende una parte (por ejemplo 20-30% de la posición) en cada nuevo máximo. Si rotas a altcoins cuando BTC Dom empiece a caer, hazlo con tamaño pequeño. Cada venta puede generar impuestos: revisa la lección Tu Plan de Inversión Personal.' },
+          { icon: Shield, title: 'Distribución: PROTEGE Y SAL', text: 'Cuando veas señales de euforia extrema, toma ganancias agresivamente. Rota a stablecoins buena parte de tu capital de trading (por ejemplo 50-70%). No intentes encontrar el techo exacto, es mejor salir un mes antes que un día después. En bears pasados, muchas altcoins perdieron 80-95% desde su máximo.' }
         ]
       },
       {
@@ -1174,19 +1206,24 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'La pregunta del millón. Cada ciclo, alguien dice "esta vez será diferente". Hay argumentos válidos para ambos lados:',
         features: [
           { icon: CheckCircle, title: 'A Favor de que el Ciclo Continúa', text: 'El halving es matemático e inmutable, siempre cortará la oferta. La naturaleza humana (euforia y pánico) no cambia. Los ciclos de deuda y liquidez global también son cíclicos. Mientras exista el halving y la naturaleza humana, habrá ciclos.' },
-          { icon: AlertTriangle, title: 'A Favor de que Podría Cambiar', text: 'La adopción institucional (ETFs) podría suavizar la volatilidad. Los halvings reducen su impacto cada vez (de 50→25 es -50%, de 3.125→1.5625 es igual -50% pero en números más pequeños). El ciclo 2024-25 ya mostró señales de cambio: dominancia de BTC persistentemente alta, altseason amplia ausente y múltiplos cada vez menores. Los ciclos podrían volverse menos extremos, pero probablemente no desaparecerán.' }
+          { icon: AlertTriangle, title: 'A Favor de que Podría Cambiar', text: 'La adopción institucional (ETFs) podría suavizar la volatilidad. Los halvings pesan cada vez menos: el recorte siempre es del 50%, pero sobre una emisión que ya es menos del 1% del supply al año. El ciclo 2024-25 ya mostró señales de cambio: dominancia de BTC persistentemente alta, altseason amplia ausente y múltiplos cada vez menores. Los ciclos podrían volverse menos extremos, pero probablemente no desaparecerán.' }
         ]
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
       },
       {
         type: 'takeaways',
         title: 'Tu Brújula de Ciclos',
         items: [
           'El halving reduce la emisión de Bitcoin a la mitad cada ~4 años. Es un shock de oferta programado que históricamente ha coincidido con bull markets 12-18 meses después, aunque cuatro casos son un patrón, no una ley.',
-          'Las 4 fases del ciclo se repiten: Bear Market → Acumulación → Bull Market → Distribución. Las fortunas se construyen comprando en bear y vendiendo en distribución.',
+          'Las 4 fases del ciclo se han repetido: bear market, acumulación, bull market y distribución. Comprar con DCA en el miedo y tomar ganancias en la euforia ha funcionado históricamente, aunque las fases solo se ven claras después.',
           'Bitcoin Dominance es la brújula clásica de la rotación: alta (>60%) = mantén BTC; cayendo = rota gradualmente; bajo 50% = altseason. Pero el ciclo 2024-25 rompió ese guion (la dominancia se mantuvo alta y la altseason amplia no llegó): es una heurística histórica, no una garantía.',
-          'Las señales de techo son sociales: cuando gente sin conocimiento financiero quiere comprar crypto, los informados están vendiendo. Cuando nadie quiere crypto, los informados compran.',
-          'Correcciones del 30-40% son NORMALES en bull markets. No confundas una corrección saludable con un cambio de tendencia. El ciclo 2017 tuvo 6 correcciones de +30%.',
-          'La estrategia ganadora es simple pero difícil emocionalmente: compra en el aburrimiento/miedo, vende en la euforia/excitación. Haz lo opuesto a lo que sientes.'
+          'Las señales de techo son sociales: cuando gente sin conocimiento financiero quiere comprar crypto, los informados suelen estar vendiendo. Cuando nadie quiere crypto, suelen estar comprando.',
+          'Correcciones del 30-40% han sido comunes en bull markets. No confundas una corrección saludable con un cambio de tendencia. El ciclo 2017 tuvo 6 correcciones de +30%.',
+          'El principio es simple pero difícil emocionalmente: compra en el aburrimiento/miedo, vende en la euforia/excitación. Haz lo opuesto a lo que sientes.'
         ]
       }
     ],
@@ -1202,7 +1239,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'No se puede determinar la fase actual' }
           ],
           correctAnswer: 'b',
-          explanation: 'Abril 2024 + 18 meses = octubre de 2025, justo cuando este ciclo marcó su máximo (hasta ahora, cerca de $126,000). Para diciembre de 2025 estarías en la fase final del bull o en el inicio de la corrección, que es lo que efectivamente siguió: a mediados de 2026 BTC opera muy por debajo de ese máximo. Los ciclos hicieron pico 12-18 meses después del halving: no al inicio, sino cerca del final.'
+          explanation: 'Abril 2024 + 18 meses = octubre de 2025, justo cuando este ciclo marcó su máximo (hasta ahora, cerca de $126,000). Para diciembre de 2025 estarías en la fase final del bull o en el inicio de la corrección, que es lo que efectivamente siguió: para junio de 2026 BTC llegó a caer más de 50% desde ese máximo. Los ciclos hicieron pico 12-18 meses después del halving: no al inicio, sino cerca del final.'
         },
         {
           id: 'q2',
@@ -1226,7 +1263,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Señal de suelo, tu tía siempre compra en el mejor momento' }
           ],
           correctAnswer: 'b',
-          explanation: 'El "indicador del taxista/tía" es un clásico del mercado. Cuando personas sin conocimiento financiero quieren comprar crypto porque lo vieron en TikTok, estamos en fase de euforia máxima. Es cuando el dinero inteligente distribuye sus posiciones al retail.'
+          explanation: 'El "indicador del taxista/tía" es un clásico del mercado. Cuando personas sin conocimiento financiero quieren comprar crypto porque lo vieron en TikTok, suele ser señal de euforia. Es cuando los que compraron antes suelen venderle al que llega último. No marca el día exacto del techo, pero sí es momento de prudencia.'
         },
         {
           id: 'q4',
@@ -1238,19 +1275,19 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Muevo todo a memecoins porque las altcoins rebotan más fuerte' }
           ],
           correctAnswer: 'b',
-          explanation: 'Correcciones del 30-40% son NORMALES en bull markets. El ciclo 2017 tuvo 6 correcciones de +30%, el 2021 también. Si la estructura semanal sigue alcista y estamos post-halving, una corrección es oportunidad, no fin del mundo. Pero usa tu liquidez de reserva, no apalancamiento.'
+          explanation: 'Correcciones del 30-40% han sido comunes en bull markets: el de 2017 tuvo varias. Si la estructura semanal sigue alcista y estamos post-halving, una corrección puede ser oportunidad. Pero a veces sí es el inicio del bear: por eso, si compras, usa solo liquidez de reserva, nunca apalancamiento ni dinero que necesites.'
         },
         {
           id: 'q5',
-          question: 'Compraste SOL a $20 en el bear market. Ahora está a $200 (10×) y Bitcoin está en nuevo ATH. ¿Cuál es la estrategia óptima?',
+          question: 'Compraste SOL a $20 en el bear market. Ahora está a $200 (10×) y Bitcoin está en nuevo ATH. ¿Qué opción es la más prudente?',
           options: [
             { id: 'a', text: 'HODL forever, nunca vender, SOL va a llegar a $1,000 este mismo ciclo' },
-            { id: 'b', text: 'Tomar ganancias parciales: sacar la inversión inicial + algo de profit, y dejar el resto con stop en break-even' },
+            { id: 'b', text: 'Tomar ganancias parciales por niveles y decidir de antemano a qué precio sales del resto' },
             { id: 'c', text: 'Vender el 100% y esperar el bear market' },
             { id: 'd', text: 'Meter más dinero, está subiendo, va a seguir subiendo' }
           ],
           correctAnswer: 'b',
-          explanation: 'Nadie quebró tomando ganancias. Sacar tu inversión inicial + profit te deja jugando con "dinero gratis", cero riesgo de perder capital propio. El resto corre con stop en break-even. Si sube más, perfecto. Si cae, ya protegiste lo tuyo.'
+          explanation: 'Nadie quebró tomando ganancias. Recuperar tu inversión inicial es prudente, pero lo que queda NO es "dinero gratis": es tu dinero, vale lo que vale hoy y puede caer 80% en un bear. Por eso necesita su propio plan de salida, por ejemplo un stop bajo la estructura en $150, no en tu precio de compra de $20. Y cada venta puede generar impuestos.'
         }
       ]
     }
@@ -1260,14 +1297,14 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Investigación On-Chain y DYOR',
     level: 'Intermedio',
     number: '7 de 12',
-    duration: '18 min',
+    duration: '19 min',
     type: 'Casos Prácticos + Herramientas',
-    description: 'DYOR (Do Your Own Research) no es un meme, es una habilidad. Aprende a leer la blockchain como los profesionales, usar las herramientas que usan los fondos de inversión, y distinguir proyectos legítimos de estafas usando datos reales.',
+    description: 'DYOR (Do Your Own Research) no es un meme, es una habilidad. Aprende a leer la blockchain, usar las mismas herramientas que usan los fondos, y filtrar estafas con datos reales en vez de opiniones.',
     sections: [
       {
         type: 'intro',
         title: 'El Superpoder de las Blockchains Públicas',
-        content: 'Imagina que pudieras ver exactamente qué están comprando y vendiendo los fondos de inversión de Wall Street. En los mercados tradicionales, eso es imposible, los grandes jugadores operan en la oscuridad con meses de retraso en reportes. Pero en crypto, **todo queda registrado en la blockchain en tiempo real**. Cada transacción, cada movimiento de capital, cada interacción con un protocolo es pública y verificable. Puedes ver exactamente qué hacen las ballenas, cuánto dinero entra a un protocolo, cuántos usuarios reales tiene, y dónde está la liquidez. Los que dominan el análisis on-chain tienen una ventaja brutal sobre los que solo miran gráficos o siguen influencers en Twitter. Es como jugar póker sabiendo las cartas de todos los demás.',
+        content: 'Imagina que pudieras ver exactamente qué están comprando y vendiendo los fondos de inversión de Wall Street. En los mercados tradicionales, eso es imposible, los grandes jugadores operan en la oscuridad con meses de retraso en reportes. Pero en crypto, **todo queda registrado en la blockchain en tiempo real**. Cada transacción, cada movimiento de capital, cada interacción con un protocolo es pública y verificable. Puedes ver mucho de lo que hacen las ballenas, cuánto dinero entra a un protocolo, cuántas wallets lo usan, y dónde está la liquidez. Eso no te dice el futuro, y no siempre sabes quién está detrás de cada wallet, pero te da algo que los que solo miran gráficos o siguen influencers no tienen: datos verificables.',
         highlight: {
           title: 'La Verdad en los Datos',
           text: 'El precio puede mentir (manipulación de mercado). Twitter puede mentir (marketing pagado). Los influencers pueden mentir (promueven lo que les pagan). La blockchain **no borra ni edita**: cada transacción queda registrada para siempre. Pero ojo: las métricas construidas sobre ella (TVL, usuarios activos, volumen) sí pueden inflarse. Por eso en esta lección aprenderás a filtrar.'
@@ -1276,33 +1313,33 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Arsenal de Herramientas On-Chain',
-        content: 'Estas son las herramientas que usan los traders profesionales y fondos de inversión para tomar decisiones basadas en datos reales, no en opiniones de Twitter. Dominar aunque sea 2-3 de estas te pone por encima de la gran mayoría de los participantes del mercado:',
+        content: 'Estas son las herramientas que usan los traders profesionales y fondos de inversión para tomar decisiones basadas en datos reales, no en opiniones de Twitter. Con que domines 2-3 de estas ya tienes una base sólida:',
         features: [
-          { icon: Search, title: 'DefiLlama', text: 'La herramienta número uno para datos DeFi. Muestra TVL (Total Value Locked), fees, revenue, y métricas de cada protocolo en cada blockchain. Gratis y sin necesidad de cuenta. Si un protocolo genera fees crecientes, tiene demanda real de usuarios, no solo hype. Usa los filtros por cadena (Solana, Ethereum) y por categoría (DEXs, Lending, Staking) para encontrar los protocolos con mejores fundamentales.' },
+          { icon: Search, title: 'DefiLlama', text: 'Una de las herramientas más usadas para datos DeFi. Muestra TVL (Total Value Locked), fees, revenue, y métricas de cada protocolo en cada blockchain. Gratis y sin necesidad de cuenta. Si un protocolo genera fees crecientes, tiene demanda real de usuarios, no solo hype. Usa los filtros por cadena (Solana, Ethereum) y por categoría (DEXs, Lending, Staking) para encontrar los protocolos con mejores fundamentales.' },
           { icon: Activity, title: 'Dune Analytics', text: 'Plataforma de dashboards con datos on-chain que cualquiera puede crear y compartir. Busca dashboards de proyectos específicos creados por analistas de la comunidad. Por ejemplo: dashboards de Solana DeFi que muestran usuarios activos diarios, volumen real, distribución de holders. La data es tan granular que puedes ver tendencias que ningún gráfico de precios te muestra.' },
-          { icon: Users, title: 'Arkham Intelligence', text: 'Rastrea wallets de VCs (venture capital), fondos de inversión, ballenas, y figuras conocidas del ecosistema. Puedes ver exactamente qué están comprando los que manejan millones. Cuando 5 fondos de inversión acumulan el mismo token en silencio, es una señal poderosa. Cuando mueven tokens a exchanges, es señal de que van a vender.' },
-          { icon: Clock, title: 'Tokenomist (tokenomist.ai)', text: 'Calendario de desbloqueos de tokens (antes conocido como TokenUnlocks). Los proyectos crypto distribuyen sus tokens gradualmente, cuando un bloque grande se desbloquea (por ejemplo, 15% del supply total), esos tokens entran al mercado y crean presión de venta. Saber cuándo vienen los unlocks grandes te permite anticipar movimientos de precio que la mayoría no ve venir.' }
+          { icon: Users, title: 'Arkham Intelligence', text: 'Rastrea wallets de VCs (venture capital), fondos de inversión, ballenas, y figuras conocidas del ecosistema. Puedes ver qué compran y venden wallets que manejan millones. Si varios fondos acumulan el mismo token, vale la pena investigar por qué; si mueven tokens a exchanges, puede ser señal de venta. Ojo: las etiquetas de Arkham son estimaciones y a veces fallan.' },
+          { icon: Clock, title: 'Tokenomist (tokenomist.ai)', text: 'Calendario de desbloqueos de tokens (antes conocido como TokenUnlocks). Los proyectos crypto distribuyen sus tokens gradualmente, cuando un bloque grande se desbloquea (por ejemplo, 15% del supply total), esos tokens entran al mercado y crean presión de venta. Saber cuándo vienen los unlocks grandes te ayuda a no comprar justo antes de una ola de venta.' }
         ]
       },
       {
         type: 'main',
         title: 'Métricas On-Chain que Importan',
-        content: 'Con tantos datos disponibles, es fácil ahogarse en números. El secreto de los buenos analistas on-chain no es mirar todo, es saber qué mirar. Estas son las 4 métricas más importantes que resumen la salud real de un protocolo:',
+        content: 'Con tantos datos disponibles, es fácil ahogarse en números. El secreto de los buenos analistas on-chain no es mirar todo, es saber qué mirar. Estas son 4 métricas básicas para empezar a medir la salud de un protocolo:',
         features: [
           { icon: Landmark, title: 'TVL (Total Value Locked)', text: 'El dinero total depositado por usuarios en el protocolo. Es la métrica más básica pero más reveladora. TVL subiendo consistentemente = los usuarios confían lo suficiente para depositar capital. TVL cayendo = los usuarios están retirando (pierden confianza o encontraron mejor oportunidad). **Importante**: mide TVL en USD y en la moneda nativa. Si el TVL sube en USD pero baja en tokens depositados, solo está subiendo porque el precio del token subió, no porque haya más usuarios.' },
           { icon: Zap, title: 'Fees / Revenue', text: 'Los fees son dinero REAL que los usuarios pagan por usar el protocolo. Revenue es la parte de esos fees que va al protocolo o a los holders del token. Un protocolo con $10M en fees mensuales tiene demanda real probada, alguien está pagando para usarlo. Compara el ratio Fees/Market Cap entre competidores: un protocolo con menor market cap pero mayores fees está potencialmente infravalorado.' },
           { icon: Users, title: 'Active Wallets (Usuarios Activos)', text: 'El número de wallets únicas interactuando con el protocolo. Más usuarios activos = más actividad orgánica y adopción real. Pero cuidado: esta métrica puede inflarse con bots y Sybil attacks (una persona con muchas wallets). Busca tendencias de crecimiento sostenido, no picos repentinos que huelen a farming.' },
-          { icon: TrendingDown, title: 'Exchange Flows (Flujo a Exchanges)', text: 'Cuando grandes cantidades de tokens salen de exchanges hacia wallets privadas (outflow), significa que los holders están acumulando para largo plazo, señal bullish. Cuando grandes cantidades entran a exchanges (inflow), suele significar que se preparan para vender, señal bearish (con excepciones: market making, cambios de custodia). Este indicador ha anticipado correctamente muchas correcciones grandes del mercado.' }
+          { icon: TrendingDown, title: 'Exchange Flows (Flujo a Exchanges)', text: 'Cuando grandes cantidades de tokens salen de exchanges hacia wallets privadas (outflow), suele leerse como acumulación para largo plazo, señal bullish. Cuando grandes cantidades entran a exchanges (inflow), suele significar que se preparan para vender, señal bearish (con excepciones: market making, cambios de custodia). A veces se adelanta a correcciones grandes, pero también da muchas señales falsas: úsalo como pista, no como gatillo.' }
         ]
       },
       {
         type: 'main',
         title: 'El Framework DYOR: 5 Pasos para Evaluar Cualquier Proyecto',
-        content: 'Cuando encuentres un proyecto nuevo que te llame la atención, sigue estos 5 pasos antes de invertir un solo peso. Este framework te protege de la gran mayoría de las estafas y proyectos basura:',
+        content: 'Cuando encuentres un proyecto nuevo que te llame la atención, sigue estos 5 pasos antes de invertir un solo peso. Este framework te ayuda a filtrar muchas estafas y proyectos basura (ninguna lista te protege de todo):',
         features: [
-          { icon: Search, title: 'Paso 1: ¿Tiene Producto Real?', text: '¿El protocolo funciona hoy o es solo un whitepaper con promesas? Si es un protocolo DeFi, ve a DefiLlama y busca si tiene TVL, fees, y usuarios. Un proyecto con producto funcionando y usuarios pagando es fundamentalmente diferente de uno que solo tiene un token y un roadmap bonito. La mayoría de los proyectos que pierden el 99% de valor nunca tuvieron un producto real.' },
+          { icon: Search, title: 'Paso 1: ¿Tiene Producto Real?', text: '¿El protocolo funciona hoy o es solo un whitepaper con promesas? Si es un protocolo DeFi, ve a DefiLlama y busca si tiene TVL, fees, y usuarios. Un proyecto con producto funcionando y usuarios pagando es fundamentalmente diferente de uno que solo tiene un token y un roadmap bonito. Muchos de los proyectos que pierden casi todo su valor nunca tuvieron un producto real.' },
           { icon: BarChart3, title: 'Paso 2: ¿Las Métricas Crecen?', text: '¿El TVL, los fees, y los usuarios activos están en tendencia alcista o bajista? Un proyecto puede tener producto pero estar muriendo lentamente. Busca growth rate mes a mes. Un protocolo con TVL creciendo 20% mensual y fees creciendo 30% mensual está ganando tracción real. Uno con métricas planas o cayendo está perdiendo relevancia.' },
-          { icon: Eye, title: 'Paso 3: ¿Quién Está Detrás?', text: 'Usa Arkham para ver qué wallets institucionales interactúan con el protocolo. ¿Los fundadores tienen historial? ¿Los VCs que invirtieron son reputados (a16z, Multicoin, Polychain) o desconocidos? Un equipo anónimo no es necesariamente malo (Bitcoin fue anónimo), pero combinado con tokenomics agresivos y promesas exageradas, es una red flag enorme.' },
+          { icon: Eye, title: 'Paso 3: ¿Quién Está Detrás?', text: 'Usa Arkham para ver qué wallets institucionales interactúan con el protocolo. ¿Los fundadores tienen historial? ¿Los VCs que invirtieron son reputados (a16z, Multicoin, Polychain) o desconocidos? Pero el respaldo de VCs no es garantía: Sequoia, Temasek y otros fondos de primer nivel invirtieron en FTX y lo perdieron todo cuando colapsó en 2022 (Sequoia marcó a cero más de $200 millones). Un equipo anónimo no es necesariamente malo (Bitcoin fue anónimo), pero combinado con tokenomics agresivos y promesas exageradas, es una red flag enorme.' },
           { icon: Clock, title: 'Paso 4: ¿Cómo es el Tokenomics?', text: 'Revisa en Tokenomist: ¿qué porcentaje del supply ya está en circulación? ¿Cuándo se desbloquean los tokens de inversores y equipo? Un token con solo 10% del supply circulando y un cliff unlock del 30% en 3 meses es una bomba de tiempo. Idealmente quieres >50% circulando y un schedule de vesting gradual a 2-4 años.' },
           { icon: AlertTriangle, title: 'Paso 5: ¿Dónde Están las Red Flags?', text: 'Busca activamente razones para NO invertir: ¿el TVL está concentrado en pocas wallets? ¿Los fundadores venden tokens regularmente? ¿Los fees se generan por actividad orgánica o por programas de incentivos que pueden terminar? ¿La auditoría del código es de una firma reputada? Si no puedes encontrar problemas, probablemente no estás buscando lo suficiente.' }
         ]
@@ -1313,10 +1350,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         leftSide: {
           title: 'Bullish (Acumulación)',
           points: [
-            'TVL creciendo mientras el precio baja (acumulación silenciosa)',
+            'TVL creciendo mientras el precio baja (posible acumulación: verifica quién deposita)',
             'Ballenas comprando post-caída en Arkham',
             'Fees creciendo mes a mes (demanda orgánica real)',
-            'Exchange outflows masivos (sacan tokens = HODL)',
+            'Exchange outflows masivos (suele leerse como HODL)',
             'Usuarios activos en tendencia alcista sostenida',
             'Fundadores/equipo no están vendiendo tokens'
           ]
@@ -1324,10 +1361,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         rightSide: {
           title: 'Bearish (Distribución)',
           points: [
-            'TVL cayendo mientras el precio sube (distribución disfrazada)',
+            'TVL cayendo mientras el precio sube (posible distribución)',
             'Insiders y VCs moviendo tokens a exchanges (preparan venta)',
             'Unlock grande próximo con mucha presión de venta pendiente',
-            'Exchange inflows masivos (acumulan para vender)',
+            'Exchange inflows masivos (posible venta)',
             'Usuarios activos cayendo o inflados por bots/incentivos',
             'Equipo/fundadores vendiendo tokens regularmente'
           ]
@@ -1339,20 +1376,36 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Incluso con las mejores herramientas, es fácil caer en trampas si no sabes qué buscar. Estos son los errores más comunes que cometen los investigadores principiantes:',
         features: [
           { icon: AlertTriangle, title: 'Confundir TVL Incentivado con Orgánico', text: 'Muchos protocolos inflan su TVL regalando tokens a los que depositan (liquidity mining). El TVL puede ser de $500M pero el 90% está ahí solo por las recompensas. Cuando los incentivos terminan, el TVL desaparece. Busca protocolos donde el TVL se mantiene DESPUÉS de que los incentivos se reducen, eso es demanda orgánica real.' },
-          { icon: AlertTriangle, title: 'Ignorar el Contexto del Mercado', text: 'En un bull market, TODAS las métricas se ven bien. TVL sube, usuarios suben, fees suben, porque todo el mercado está en euforia. La verdadera prueba de un protocolo es cómo se comporta en un bear market. ¿Mantiene usuarios cuando el mercado cae 50%? ¿Sigue generando fees? Los protocolos que sobreviven el bear son los que dominan el siguiente bull.' },
+          { icon: AlertTriangle, title: 'Ignorar el Contexto del Mercado', text: 'En un bull market, TODAS las métricas se ven bien. TVL sube, usuarios suben, fees suben, porque todo el mercado está en euforia. La verdadera prueba de un protocolo es cómo se comporta en un bear market. ¿Mantiene usuarios cuando el mercado cae 50%? ¿Sigue generando fees? Los protocolos que sobreviven el bear suelen quedar mejor posicionados para el siguiente bull.' },
           { icon: AlertTriangle, title: 'Confiar Solo en una Métrica', text: 'TVL alto pero sin fees = capital mercenario buscando yield. Fees altos pero TVL bajo = producto útil pero pequeño. Usuarios altos pero fees bajos = bots o actividad no monetizable. Necesitas el CONJUNTO de métricas pintando una imagen coherente. Si solo una métrica se ve bien y las demás no, probablemente hay algo que no estás viendo.' }
         ]
+      },
+      {
+        type: 'main',
+        title: 'Caso Práctico: Revisa un Token en 10 Minutos',
+        content: 'Antes de comprar cualquier token pequeño en Solana, haz esta revisión. Copia la dirección del token (mint address) desde el sitio oficial o desde CoinGecko, nunca desde un mensaje o un comentario: los estafadores crean copias con el mismo nombre.',
+        features: [
+          { icon: Search, title: '1. Solscan: ¿Quién Tiene el Token?', text: 'En **solscan.io** pega la dirección y abre la pestaña Holders. Descarta las wallets del pool de liquidez y de exchanges conocidos. Si aun así 10 wallets tienen más de la mitad del supply, unas pocas personas pueden hundir el precio cuando quieran.' },
+          { icon: Shield, title: '2. RugCheck: ¿Qué Puede Hacer el Creador?', text: 'En **rugcheck.xyz** revisa dos permisos. Si la *mint authority* no está revocada, el creador puede imprimir tokens nuevos y diluirte. Si la *freeze authority* no está revocada, puede congelar tu saldo. Revisa también si la liquidez está bloqueada o quemada. Es una herramienta automática: un buen puntaje no garantiza nada, pero uno malo es motivo suficiente para pasar.' },
+          { icon: Eye, title: '3. Bubblemaps: ¿Los Holders Son Personas Distintas?', text: 'En **bubblemaps.io** verás las principales wallets como burbujas conectadas. Si muchos holders "distintos" recibieron fondos de la misma wallet, probablemente son una sola persona fingiendo una comunidad.' },
+          { icon: CheckCircle, title: '4. Decide por Escrito', text: 'Anota lo que encontraste: concentración, permisos, liquidez y conexiones. Si hay dos o más red flags, pasa. Hay miles de tokens; no necesitas este.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
       },
       {
         type: 'takeaways',
         title: 'Tu Checklist de Investigación On-Chain',
         items: [
-          'La blockchain es pública y transparente. A diferencia de los mercados tradicionales, puedes ver exactamente qué hacen las ballenas, los fondos, y los insiders. Dominar el análisis on-chain te da una ventaja real sobre la gran mayoría del mercado que solo mira gráficos.',
-          'Las 4 métricas fundamentales: TVL (capital depositado), Fees/Revenue (demanda real), Active Wallets (usuarios orgánicos), y Exchange Flows (dirección del capital). Si entiendes estas 4, puedes evaluar cualquier protocolo.',
-          'El framework DYOR de 5 pasos: (1) ¿Tiene producto real? (2) ¿Las métricas crecen? (3) ¿Quién está detrás? (4) ¿Cómo es el tokenomics? (5) ¿Dónde están las red flags? Seguirlo te protege de la gran mayoría de las estafas.',
-          'Divergencia entre precio y datos on-chain = oportunidad o peligro. Precio baja + TVL sube = acumulación (bullish). Precio sube + TVL baja = distribución (bearish). Los datos on-chain anticipan lo que el precio mostrará después.',
+          'La blockchain es pública y transparente. A diferencia de los mercados tradicionales, puedes ver mucho de lo que hacen las ballenas, los fondos y los insiders. No predice el futuro, pero te da datos verificables en vez de opiniones.',
+          'Las 4 métricas fundamentales: TVL (capital depositado), Fees/Revenue (demanda real), Active Wallets (usuarios orgánicos), y Exchange Flows (dirección del capital). Son un buen punto de partida para evaluar cualquier protocolo.',
+          'El framework DYOR de 5 pasos: (1) ¿Tiene producto real? (2) ¿Las métricas crecen? (3) ¿Quién está detrás? (4) ¿Cómo es el tokenomics? (5) ¿Dónde están las red flags? Seguirlo te ayuda a filtrar muchas estafas.',
+          'Una divergencia entre precio y datos on-chain es una pista para investigar. Precio baja y TVL sube puede ser acumulación; precio sube y TVL baja puede ser distribución. Pero muchas veces la explicación es aburrida: incentivos nuevos, una sola ballena o un cambio de custodia.',
           'Cuidado con las métricas infladas: TVL incentivado desaparece cuando terminan las recompensas, usuarios activos pueden ser bots, y en bull markets todo se ve bien artificialmente. Busca demanda orgánica que sobreviva al bear market.',
-          'Herramientas esenciales: DefiLlama (métricas DeFi), Dune Analytics (dashboards on-chain), Arkham Intelligence (rastreo de wallets), Tokenomist (calendario de desbloqueos, antes TokenUnlocks). Dominar 2-3 de estas te pone por encima de la mayoría.'
+          'Herramientas esenciales: DefiLlama (métricas DeFi), Dune Analytics (dashboards on-chain), Arkham Intelligence (rastreo de wallets), Tokenomist (calendario de desbloqueos, antes TokenUnlocks). Con 2-3 de estas, más Solscan y RugCheck para tokens pequeños, ya tienes una base sólida.'
         ]
       }
     ],
@@ -1368,31 +1421,31 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Es una estafa porque los fees reales no pueden ser tan altos' }
           ],
           correctAnswer: 'b',
-          explanation: 'Un protocolo que genera $24M anuales en fees con $50M de market cap tiene un ratio Price/Fees de ~2×, que es muy atractivo. Para contexto, protocolos similares pueden cotizar a 10-50× sus fees anuales. Siempre compara con competidores directos del mismo sector para validar si realmente está barato.'
+          explanation: 'Un protocolo que genera $24M anuales en fees con $50M de market cap tiene un ratio Price/Fees de ~2×, que parece muy barato. Para contexto, protocolos similares pueden cotizar a 10-50× sus fees anuales. Antes de concluir nada, revisa si esos fees vienen de incentivos o de un pico puntual, y compara con competidores directos del mismo sector.'
         },
         {
           id: 'q2',
           question: 'En Arkham ves que 5 wallets de VCs conocidos movieron sus tokens a Binance ayer. El precio aún no ha caído. ¿Qué haces?',
           options: [
             { id: 'a', text: 'Compro el dip antes de que suban, los VCs saben lo que hacen' },
-            { id: 'b', text: 'Alerta: mover tokens a exchanges casi siempre precede una venta. Reduzco exposición o ajusto mi stop' },
+            { id: 'b', text: 'Alerta: mover tokens a exchanges suele preceder una venta. Reduzco exposición o ajusto mi stop' },
             { id: 'c', text: 'Es información irrelevante, los VCs mueven sus tokens por muchísimas razones' },
             { id: 'd', text: 'Espero a que caiga el precio y compro el dip' }
           ],
           correctAnswer: 'b',
-          explanation: 'Mover tokens desde wallets privadas a exchanges casi siempre precede una venta, aunque hay excepciones (acuerdos de market making, cambios de custodia). Los VCs tienen acceso a información privilegiada y relaciones con los equipos. Cuando múltiples VCs hacen el mismo movimiento simultáneamente, la lectura de venta gana mucho peso. Actúa antes de que el precio refleje la venta.'
+          explanation: 'Mover tokens desde wallets privadas a exchanges suele preceder una venta, aunque hay excepciones (acuerdos de market making, cambios de custodia). Los VCs tienen información y relaciones con los equipos que tú no tienes. Cuando múltiples VCs hacen el mismo movimiento simultáneamente, la lectura de venta gana mucho peso. Actúa antes de que el precio refleje la venta.'
         },
         {
           id: 'q3',
-          question: 'Tokenomist muestra que en 2 semanas se desbloquea el 15% del supply total de un token. El precio ha subido 40% este mes. ¿Cómo interpretas esto?',
+          question: 'Revisas un token nuevo en RugCheck y ves que la mint authority NO está revocada. ¿Qué significa para ti como holder?',
           options: [
-            { id: 'a', text: 'Perfecto timing para comprar más, el momentum es claramente alcista' },
-            { id: 'b', text: 'Señal de peligro: una subida antes de un unlock grande suele terminar como liquidez de salida. Post-unlock suele corregir' },
-            { id: 'c', text: 'Los unlocks no afectan el precio del token' },
-            { id: 'd', text: 'El precio subirá más porque los nuevos tokens crean más demanda' }
+            { id: 'a', text: 'Que el token pasó una auditoría oficial de seguridad' },
+            { id: 'b', text: 'Que el creador todavía puede crear tokens nuevos y diluirte' },
+            { id: 'c', text: 'Que la liquidez del pool está bloqueada para siempre' },
+            { id: 'd', text: 'Nada importante, es un detalle técnico del contrato' }
           ],
           correctAnswer: 'b',
-          explanation: 'Los estudios muestran que el precio suele DEBILITARSE en la antesala de unlocks grandes, porque el mercado se adelanta a la dilución. Cuando en cambio sube, la subida suele servir para que los insiders (equipo, VCs) vendan sus tokens recién desbloqueados a mejor precio, con el retail como liquidez de salida. En ambos escenarios, comprar justo antes de un unlock del 15% del supply es mala idea.'
+          explanation: 'La mint authority es el permiso para crear tokens nuevos. Si sigue activa, quien la controla puede imprimir millones de tokens y venderlos encima de ti. En un proyecto serio suele estar revocada o en manos de una gobernanza transparente. No tiene nada que ver con auditorías ni con la liquidez: esas se revisan aparte.'
         },
         {
           id: 'q4',
@@ -1411,12 +1464,12 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           question: 'El precio de un token cae 30% en una semana, pero en DefiLlama ves que el TVL sube 20% en el mismo período. ¿Qué está pasando?',
           options: [
             { id: 'a', text: 'El proyecto está muriendo y los datos de TVL son claramente falsos' },
-            { id: 'b', text: 'Divergencia bullish: alguien con convicción está acumulando mientras el retail vende' },
+            { id: 'b', text: 'Una divergencia que vale investigar: reviso quién deposita y si hay incentivos antes de concluir' },
             { id: 'c', text: 'El TVL es irrelevante cuando el precio baja' },
-            { id: 'd', text: 'Es una coincidencia sin significado' }
+            { id: 'd', text: 'Es acumulación institucional segura, así que compro ya' }
           ],
           correctAnswer: 'b',
-          explanation: 'Cuando el precio cae pero el capital depositado en el protocolo sube, significa que alguien con mucho capital y convicción está aprovechando los precios bajos para acumular. Es una señal clásica de acumulación institucional. La divergencia entre precio (bajando) y TVL (subiendo) ha precedido históricamente rallies importantes en muchos protocolos.'
+          explanation: 'Puede ser acumulación con convicción, pero hay explicaciones más aburridas: un programa de incentivos nuevo, una sola ballena depositando, o depósitos de stablecoins que no tienen nada que ver con el token. Abre DefiLlama y Dune: ¿cuántas wallets depositan? ¿Qué activos? ¿Hay recompensas nuevas? La divergencia es una pista, no una conclusión.'
         },
         {
           id: 'q6',
@@ -1428,7 +1481,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Es bearish porque están regalando tokens' }
           ],
           correctAnswer: 'b',
-          explanation: 'El TVL incentivado es "capital mercenario", está ahí solo por las recompensas y se irá cuando terminen. La métrica real es el TVL orgánico que queda sin incentivos. Un protocolo con $60M de TVL orgánico que crece es más valioso que uno con $300M inflados por incentivos temporales. Históricamente, el 60-90% del TVL incentivado desaparece cuando terminan los programas de rewards.'
+          explanation: 'El TVL incentivado es "capital mercenario", está ahí solo por las recompensas y se irá cuando terminen. La métrica real es el TVL orgánico que queda sin incentivos. Un protocolo con $60M de TVL orgánico que crece es más sano que uno con $300M inflados por incentivos temporales. Mira qué pasó con el TVL de otros protocolos cuando recortaron sus recompensas: suele caer con fuerza.'
         }
       ]
     },
@@ -1448,7 +1501,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
               'Dune, para buscar análisis on-chain sofisticados'
             ],
             correctAnswer: 1,
-            explanation: 'Para protocolos DeFi, siempre empiezas por DefiLlama. Si el protocolo no aparece ahí con TVL y fees, es porque no tiene producto real, es solo un token y un roadmap bonito. La gran mayoría de los proyectos que pierden todo nunca pasó esta prueba. Para proyectos que no son DeFi (infraestructura, gaming) necesitarás otras fuentes, pero el principio es el mismo: datos antes que opiniones. Dune y análisis on-chain son herramientas 2 y 3.',
+            explanation: 'Para protocolos DeFi, siempre empiezas por DefiLlama. Si el protocolo no aparece ahí con TVL y fees, es mala señal: o no tiene producto real o todavía es muy pequeño para evaluarlo. Para proyectos que no son DeFi (infraestructura, gaming) necesitarás otras fuentes, pero el principio es el mismo: datos antes que opiniones. Dune y análisis on-chain son herramientas 2 y 3.',
             hint: 'Piensa en qué fuente te da datos crudos antes que opiniones.'
           }
         ]
@@ -1460,14 +1513,14 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Narrativas y Rotación',
     level: 'Intermedio',
     number: '8 de 12',
-    duration: '16 min',
+    duration: '17 min',
     type: 'Estrategia',
-    description: 'En crypto, la atención mueve el dinero. Las narrativas (IA, DeFi, Memes, Gaming) definen qué sube y qué baja en cada ciclo. Aprende a identificar la narrativa dominante antes que las masas y a rotar tu capital inteligentemente.',
+    description: 'En crypto, la atención mueve el dinero. Las narrativas (IA, DeFi, Memes, Gaming) definen qué sube y qué baja en cada ciclo. Aprende a reconocerlas, a estimar en qué etapa podrían estar, y por qué la mayoría de quienes las persiguen terminan siendo la liquidez de salida.',
     sections: [
       {
         type: 'intro',
         title: 'La Economía de la Atención',
-        content: 'En los mercados tradicionales, el valor se mide en ingresos, clientes y flujo de caja. En crypto, hay una fuerza adicional que mueve billones de dólares: **la atención**. Cuando millones de personas empiezan a hablar de inteligencia artificial y crypto, los tokens de AI suben 500%. Cuando los NFTs son el tema del momento, todo lo relacionado explota. Cuando los memecoins capturan la imaginación de los traders, hacen 100× en días. No es irracional, es cómo funciona un mercado donde gran parte de los participantes son traders de corto plazo buscando la próxima gran oportunidad. La atención colectiva crea flujo de capital. El flujo de capital mueve precios. Los precios atraen más atención. Es un ciclo que se retroalimenta hasta que se agota. Tu trabajo como trader intermedio es **identificar estas narrativas temprano, surfearlas, y salir antes de que la música pare**.',
+        content: 'En los mercados tradicionales, el valor se mide en ingresos, clientes y flujo de caja. En crypto, hay una fuerza adicional que mueve miles de millones de dólares: **la atención**. Cuando millones de personas empiezan a hablar de inteligencia artificial y crypto, los tokens de IA pueden multiplicar su precio en semanas. Cuando los NFTs son el tema del momento, todo lo relacionado explota. Cuando los memecoins capturan la imaginación de los traders, algunos hacen 100× en días, y la gran mayoría termina en cero. No es irracional, es cómo funciona un mercado donde gran parte de los participantes son traders de corto plazo buscando la próxima gran oportunidad. La atención colectiva crea flujo de capital. El flujo de capital mueve precios. Los precios atraen más atención. Es un ciclo que se retroalimenta hasta que se agota. Si decides operar narrativas, hazlo solo con tu **capital de trading** (como máximo el 5-10% de tu porción cripto), con posiciones pequeñas y sabiendo que la mayoría de esas apuestas no va a funcionar. Tu objetivo no es atrapar el 100×: es no terminar siendo la liquidez de salida.',
         highlight: {
           title: 'La Regla de las Narrativas',
           text: 'Si estás leyendo sobre una narrativa en los medios mainstream (CNBC, periódicos), ya llegas tarde. Las narrativas se gestan en Crypto Twitter semanas o meses antes. Cuando llegan al mainstream, los que entraron temprano ya están vendiendo.'
@@ -1479,34 +1532,34 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Una narrativa es un **tema o historia** que captura la imaginación y el capital del mercado. No es solo un sector (como "DeFi" o "Gaming"), es la HISTORIA que el mercado se cuenta a sí mismo sobre por qué algo va a subir:',
         features: [
           { icon: Zap, title: 'Narrativa vs Sector', text: '"DeFi" es un sector. "DeFi va a reemplazar los bancos y democratizar las finanzas" es una narrativa. La narrativa tiene emoción, urgencia, y una visión del futuro. Las personas no compran tokens, compran historias. Y las historias que más dinero mueven son las que prometen un futuro transformador.' },
-          { icon: Activity, title: 'El Motor de la Narrativa', text: 'Toda narrativa se alimenta de: (1) un evento catalizador (ChatGPT lanza → tokens AI explotan), (2) adopción temprana por traders influyentes, (3) resultados que validan la historia (tokens suben = "ves, tenía razón"), (4) FOMO masivo que amplifica todo.' },
+          { icon: Activity, title: 'El Motor de la Narrativa', text: 'Toda narrativa se alimenta de: (1) un evento catalizador (ChatGPT se lanza y los tokens de IA se disparan), (2) adopción temprana por traders influyentes, (3) resultados que validan la historia (tokens suben = "ves, tenía razón"), (4) FOMO masivo que amplifica todo.' },
           { icon: Clock, title: 'Las Narrativas son Temporales', text: 'Ninguna narrativa dura para siempre. Los ICOs dominaron 2017. DeFi Summer fue 2020. Los NFTs explotaron 2021. Memecoins y AI dominaron 2024-2025 (los memecoins hicieron pico en enero de 2025 y se desplomaron tras el caso LIBRA). Cada narrativa tiene su momento, y después muere o se transforma. Casarte con una narrativa pasada es la receta para perder dinero.' }
         ]
       },
       {
         type: 'main',
         title: 'Las Narrativas que Definieron Cada Ciclo',
-        content: 'Mirar hacia atrás revela un patrón claro: cada ciclo tiene sus narrativas dominantes, y los tokens que más suben son los que mejor capturan esa narrativa. Los que compraron ICOs en 2016, DeFi en 2020 o SOL en el bear de 2022 hicieron fortunas:',
+        content: 'Mirar hacia atrás revela un patrón: cada ciclo tiene sus narrativas dominantes, y los tokens que más suben son los que mejor capturan esa narrativa. En retrospectiva parece fácil; en su momento, por cada ganador hubo decenas de proyectos que terminaron en cero:',
         features: [
-          { icon: BarChart3, title: '2017: ICOs (Initial Coin Offerings)', text: 'La narrativa: "Cualquiera puede crear un token y levantar millones sin bancos ni reguladores". Ethereum fue la plataforma. Miles de proyectos (casi todos basura) levantaron millones con un whitepaper. Los que filtraron el puñado bueno hicieron fortunas. Los que compraron el hype perdieron todo.' },
-          { icon: BarChart3, title: '2020: DeFi Summer', text: 'La narrativa: "Puedes ser tu propio banco. Préstamos, swaps, yield farming sin intermediarios". Uniswap, Aave, Compound explotaron. Los que entendieron DeFi temprano multiplicaron 50-100×. TVL pasó de $1B a $100B en meses.' },
+          { icon: BarChart3, title: '2017: ICOs (Initial Coin Offerings)', text: 'La narrativa: "Cualquiera puede crear un token y levantar millones sin bancos ni reguladores". Ethereum fue la plataforma. Miles de proyectos (casi todos basura) levantaron millones con un whitepaper. Un puñado sobrevivió; la mayoría de quienes compraron el hype perdió casi todo.' },
+          { icon: BarChart3, title: '2020: DeFi Summer', text: 'La narrativa: "Puedes ser tu propio banco. Préstamos, swaps, yield farming sin intermediarios". Uniswap, Aave, Compound explotaron. El TVL de DeFi pasó de unos $1,000 millones a principios de 2020 a más de $100,000 millones a mediados de 2021. Y en el bear de 2022 esos mismos tokens cayeron más de 80% desde su máximo.' },
           { icon: BarChart3, title: '2021: NFTs y Metaverso', text: 'La narrativa: "La propiedad digital es el futuro. Arte, gaming, identidad, todo será NFT". Bored Apes, CryptoPunks, Axie Infinity. Algunos JPEGs se vendieron por millones. Cuando la narrativa se agotó, la gran mayoría de los NFTs perdió casi todo su valor.' },
-          { icon: BarChart3, title: '2024-2025: AI + Memecoins + Solana', text: 'Narrativas múltiples: "La IA va a transformar crypto" (agentes autónomos, AI tokens). "Los memecoins son la nueva forma de expresión cultural" (BONK, WIF, PEPE). "Solana es la cadena ganadora" (velocidad, bajo costo, DeFi). La fiesta memecoin hizo pico en enero de 2025 con el token TRUMP y colapsó tras el caso LIBRA en febrero de 2025; a mediados de 2026 sigue muy por debajo de ese pico. Los que entraron temprano Y salieron a tiempo capturaron retornos masivos; los que llegaron tarde fueron la liquidez de salida.' }
+          { icon: BarChart3, title: '2024-2025: AI + Memecoins + Solana', text: 'Narrativas múltiples: "La IA va a transformar crypto" (agentes autónomos, AI tokens). "Los memecoins son la nueva forma de expresión cultural" (BONK, WIF, PEPE). "Solana es la cadena ganadora" (velocidad, bajo costo, DeFi). La fiesta memecoin hizo pico en enero de 2025 con el token TRUMP y colapsó tras el caso LIBRA en febrero de 2025. Unos pocos entraron temprano y salieron a tiempo; la mayoría llegó tarde y fue la liquidez de salida.' }
         ]
       },
       {
         type: 'main',
         title: 'El Ciclo de Vida de una Narrativa',
-        content: 'Toda narrativa sigue las mismas 4 etapas. Reconocer en qué etapa estás determina si ganas o pierdes:',
+        content: 'Muchas narrativas pasan por 4 etapas parecidas. El problema: casi siempre sabes en qué etapa estabas cuando ya pasó.',
         features: [
-          { icon: Search, title: '1. Nacimiento (Insiders)', text: 'Solo los más conectados hablan de ella. Crypto Twitter (CT) empieza a mencionar un tema nuevo. Los tokens relacionados son micro-caps con baja liquidez. **Si entras aquí, el riesgo es alto pero el reward es 50-100×.** La mayoría no entrará aquí porque "nadie habla de eso".' },
-          { icon: TrendingUp, title: '2. Crecimiento (Early Adopters)', text: 'CT adopta la narrativa. Los threads y hilos se multiplican. Los tokens líderes hacen 5-10×. Influencers empiezan a crear contenido. **Esta es la zona de oro: suficiente validación para reducir riesgo, pero todavía temprano para capturar 10-20×.**' },
-          { icon: Globe, title: '3. Mainstream (Las Masas)', text: 'Los medios cubren la narrativa. YouTube, TikTok, Instagram. Tu amigo que no sabe de crypto te pregunta. Los tokens líderes ya hicieron 20-50×. **Si entras aquí, capturas las migajas. El riesgo/reward se invierte: poco upside, mucho downside.**' },
+          { icon: Search, title: '1. Nacimiento (Insiders)', text: 'Solo los más conectados hablan de ella. Crypto Twitter (CT) empieza a mencionar un tema nuevo. Los tokens relacionados son micro-caps con baja liquidez. **Si entras aquí, el riesgo es extremo: la mayoría de estas apuestas va a cero y unas pocas multiplican mucho.** Casi nadie entra aquí porque "nadie habla de eso".' },
+          { icon: TrendingUp, title: '2. Crecimiento (Early Adopters)', text: 'CT adopta la narrativa. Los threads y hilos se multiplican. Los tokens líderes suben con fuerza. Influencers empiezan a crear contenido. **Suele ser la etapa con mejor balance: algo de validación y todavía recorrido. Pero muchas narrativas mueren aquí sin llegar nunca al mainstream.**' },
+          { icon: Globe, title: '3. Mainstream (Las Masas)', text: 'Los medios cubren la narrativa. YouTube, TikTok, Instagram. Tu amigo que no sabe de crypto te pregunta. Los tokens líderes ya subieron muchísimo. **Si entras aquí, el riesgo/recompensa suele invertirse: poco recorrido, mucha caída posible.**' },
           { icon: TrendingDown, title: '4. Agotamiento (El Fin)', text: 'Todos ya saben de la narrativa. No hay nuevos compradores. Los early adopters venden a los latecomers. El precio empieza a caer lentamente y luego se desploma. **Si todavía estás aquí, eres la liquidez de salida.**' }
         ],
         highlight: {
           title: 'El Caso LIBRA: Cuando la Narrativa es la Trampa',
-          text: 'Febrero de 2025: el presidente de Argentina, Javier Milei, publicó un tuit promocionando LIBRA, un token que prometía financiar pymes argentinas. El precio se disparó en minutos y colapsó más de 90% en horas: los insiders retiraron la liquidez y las pérdidas superaron los $250 millones, muchas en LATAM. La lección quedó grabada: ni el aval de un presidente valida un token. Verifica liquidez, distribución y unlocks antes que cualquier historia.'
+          text: 'Febrero de 2025: el presidente de Argentina, Javier Milei, publicó un tuit promocionando LIBRA, un token que prometía financiar pymes argentinas. El precio se disparó en minutos y colapsó más de 90% en horas. Según análisis on-chain, wallets vinculadas al equipo retiraron más de $100 millones y el 86% de los traders perdió dinero, más de $250 millones en total, muchos en LATAM. En octubre de 2026 un juez argentino sobreseyó a los acusados, y la fiscalía apeló. La lección quedó grabada: ni el aval de un presidente valida un token. Verifica liquidez, distribución y unlocks antes que cualquier historia.'
         }
       },
       {
@@ -1514,8 +1567,8 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Cómo Identificar la Próxima Narrativa Antes que Todos',
         content: 'No necesitas bola de cristal. Necesitas las fuentes correctas y un framework de evaluación:',
         features: [
-          { icon: Search, title: 'Fuentes de Información', text: '**Crypto Twitter (X)**: Sigue a 20-30 cuentas de traders/analistas respetados. Cuando 5+ de ellos empiezan a hablar del mismo tema, presta atención. **Dune Analytics**: Busca dashboards de nuevos sectores con métricas crecientes. **DefiLlama**: Filtrar por sectores con TVL creciente que nadie cubre todavía.' },
-          { icon: Eye, title: 'Las 3 Preguntas Filtro', text: '(1) ¿Hay un catalizador real? (evento tecnológico, regulatorio, o cultural que impulse la narrativa). (2) ¿Los tokens del sector tienen room to grow? (market caps bajos vs el potencial). (3) ¿La narrativa tiene "legs"? (¿puede durar meses, o es un meme de un día?).' },
+          { icon: Search, title: 'Fuentes de Información', text: '**Crypto Twitter (X)**: Sigue a 20-30 cuentas de traders y analistas que publiquen tesis con datos, reconozcan sus errores y digan cuándo tienen posición. Ojo: muchas cuentas cobran por promocionar tokens sin decirlo, y quien solo muestra ganancias te está vendiendo algo. Cuando 5+ cuentas serias e independientes empiezan a hablar del mismo tema, presta atención. **Dune Analytics**: Busca dashboards de nuevos sectores con métricas crecientes. **DefiLlama**: Filtrar por sectores con TVL creciente que nadie cubre todavía.' },
+          { icon: Eye, title: 'Las 3 Preguntas Filtro', text: '(1) ¿Hay un catalizador real? (evento tecnológico, regulatorio, o cultural que impulse la narrativa). (2) ¿Los tokens del sector tienen espacio para crecer? (market caps bajos frente al potencial). (3) ¿La narrativa tiene recorrido? (¿puede durar meses, o es un meme de un día?).' },
           { icon: AlertTriangle, title: 'Red Flags de Narrativas Falsas', text: 'Narrativa creada artificialmente por insiders (grupos de Telegram que coordinan pumps). Sin catalizador real, solo hype en redes. Los tokens suben 1000% en horas sin volumen orgánico. Si suena demasiado bueno y aparece demasiado rápido, probablemente sea una trampa.' }
         ]
       },
@@ -1548,23 +1601,28 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       {
         type: 'main',
         title: 'Rotación: El Arte de Mover tu Capital',
-        content: 'La rotación es el proceso de mover capital de un sector/narrativa a otro en el momento óptimo. Es lo que separa a los traders que hacen 10× de los que hacen 2× con el mismo capital:',
+        content: 'La rotación es mover capital de un sector o narrativa a otro cuando cambia el momentum. Bien hecha, te evita quedarte atrapado en una narrativa que murió; mal hecha, te hace pagar comisiones e impuestos para llegar tarde a todo. Y siempre dentro de tu capital de trading:',
         features: [
-          { icon: RefreshCw, title: 'El Flujo de Rotación', text: 'El guion clásico de los ciclos pasados: **Stablecoins → BTC → ETH → Large Cap Alts → Mid Cap Alts → Small Caps → Memecoins → (crash) → Stablecoins**. Pero trátalo como heurística histórica, no como ley: el ciclo 2024-25 lo rompió en gran parte (la dominancia de BTC se mantuvo alta y la altseason amplia nunca llegó). Úsalo como mapa de referencia sabiendo que puede fallar.' },
+          { icon: RefreshCw, title: 'El Flujo de Rotación', text: 'El guion clásico de los ciclos pasados: **de stablecoins a BTC, luego ETH, large caps, mid caps, small caps y memecoins, y tras el crash, de vuelta a stablecoins**. Pero trátalo como heurística histórica, no como ley: el ciclo 2024-25 lo rompió en gran parte (la dominancia de BTC se mantuvo alta y la altseason amplia nunca llegó). Úsalo como mapa de referencia sabiendo que puede fallar.' },
           { icon: Target, title: 'Cuándo Rotar', text: 'Rota cuando tu sector actual **pierde momentum** (las subidas son más pequeñas, el volumen cae) y otro sector **gana momentum** (volumen creciente, nuevos máximos). No esperes a que tu sector muera, rota cuando todavía está bien pero otro está mejor.' },
-          { icon: AlertTriangle, title: 'El Error de la Sobrerotación', text: 'Rotar demasiado seguido = pagar fees, generar eventos impositivos, y llegar tarde a cada movimiento. La rotación ideal ocurre 2-4 veces por ciclo (no por semana). Cada rotación debe ser una decisión deliberada basada en datos, no en FOMO por el token del día.' }
+          { icon: AlertTriangle, title: 'El Error de la Sobrerotación', text: 'Rotar demasiado seguido = pagar fees, generar eventos impositivos (cada venta puede pagar impuestos: revisa la lección Tu Plan de Inversión Personal), y llegar tarde a cada movimiento. La rotación ideal ocurre 2-4 veces por ciclo (no por semana). Cada rotación debe ser una decisión deliberada basada en datos, no en FOMO por el token del día.' }
         ]
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
       },
       {
         type: 'takeaways',
         title: 'Surfeando la Ola de la Atención',
         items: [
-          'En crypto, la atención colectiva mueve capital. Las narrativas (IA, DeFi, Memes) definen qué sube en cada fase del ciclo. Ignorarlas es dejar dinero sobre la mesa.',
-          'Toda narrativa tiene 4 etapas: Nacimiento → Crecimiento → Mainstream → Agotamiento. La zona de oro es la etapa 2 (Crecimiento), donde hay validación suficiente y todavía hay upside masivo.',
+          'En crypto, la atención colectiva mueve capital. Las narrativas (IA, DeFi, Memes) definen qué sube en cada fase del ciclo. Entenderlas te ayuda, sobre todo, a no comprar en el pico de la euforia.',
+          'Muchas narrativas pasan por 4 etapas: nacimiento, crecimiento, mainstream y agotamiento. La etapa 2 suele tener el mejor balance, pero solo se reconoce con claridad después, y la mayoría de los tokens de cada narrativa termina muy por debajo de su máximo.',
           'Las mejores narrativas tienen catalizador real, proyectos con producto, métricas on-chain crecientes y adopción por traders reputados. Las peores son puro hype sin sustancia.',
-          'Crypto Twitter (X) ve las narrativas semanas o meses antes que los medios mainstream. Cuando lees sobre una narrativa en las noticias, ya llegaste tarde.',
-          'La rotación de capital ha seguido históricamente un patrón: Stablecoins → BTC → ETH → Large Caps → Mid/Small Caps → Memecoins. El ciclo 2024-25 rompió parte de ese guion: úsalo como referencia, no como garantía.',
-          'No te cases con ninguna narrativa ni token. Los mejores traders son flexibles: surfean la ola actual y rotan cuando pierden momentum. La lealtad en trading es costosa.'
+          'Crypto Twitter (X) ve las narrativas semanas o meses antes que los medios mainstream. Cuando lees sobre una narrativa en las noticias, ya llegaste tarde. Y muchas cuentas de CT cobran por promocionar sin decirlo.',
+          'La rotación de capital ha seguido históricamente un patrón: de stablecoins a BTC, luego ETH, large caps, mid y small caps, y memecoins. El ciclo 2024-25 rompió parte de ese guion: úsalo como referencia, no como garantía.',
+          'No te cases con ninguna narrativa ni token. Los mejores traders son flexibles: siguen la ola actual con tamaño pequeño y rotan cuando pierde momentum. La lealtad en trading es costosa.'
         ]
       }
     ],
@@ -1575,16 +1633,16 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           question: 'La narrativa de IA + crypto es la más caliente en 2025. Encuentras un token de AI con $5M de market cap y producto funcionando. ¿Cómo evalúas la oportunidad?',
           options: [
             { id: 'a', text: 'Compro todo lo que pueda: dice "AI" en el nombre y la narrativa está caliente, va a subir' },
-            { id: 'b', text: 'Aplico el filtro de 3 preguntas: ¿catalizador real? ¿room to grow? ¿tiene legs? Si pasa, entro solo con tamaño especulativo' },
+            { id: 'b', text: 'Aplico el filtro de 3 preguntas: ¿catalizador real? ¿espacio para crecer? ¿tiene recorrido? Si pasa, entro solo con tamaño especulativo' },
             { id: 'c', text: 'AI es una moda, ignoro todo lo relacionado' },
             { id: 'd', text: 'Espero a que suba 10× para confirmar antes de entrar' }
           ],
           correctAnswer: 'b',
-          explanation: 'Las narrativas calientes producen ganadores reales, pero también mucho vapor. El filtro de 3 preguntas separa oportunidades legítimas de trampas: catalizador real (sí, AI es real), room to grow (market cap bajo = sí), y durabilidad de la narrativa. Eso sí: un token de $5M de market cap tiene riesgo extremo de rug pull y de liquidez (LIBRA lo demostró). Si entras, hazlo con tamaño especulativo, 0.5-1% del portafolio como verás en la próxima lección, nunca más.'
+          explanation: 'Las narrativas calientes producen ganadores reales, pero también mucho vapor. El filtro de 3 preguntas separa oportunidades legítimas de trampas: catalizador real (sí, la IA es real), espacio para crecer (market cap bajo = sí), y durabilidad de la narrativa. Eso sí: un token de $5M de market cap tiene riesgo extremo de rug pull y de liquidez (LIBRA lo demostró). Si entras, hazlo con una fracción pequeña de tu capital de trading, como verás en Diversificación Inteligente, nunca más.'
         },
         {
           id: 'q2',
-          question: '¿En qué etapa de la narrativa obtienes el mejor risk/reward?',
+          question: '¿En qué etapa de la narrativa suele estar el mejor balance entre riesgo y recompensa?',
           options: [
             { id: 'a', text: 'Mainstream, cuando todos hablan de ella es más seguro comprar sin miedo' },
             { id: 'b', text: 'Crecimiento (etapa 2): Crypto Twitter ya la adoptó, hay validación, y aún no llegó al mainstream' },
@@ -1592,7 +1650,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Agotamiento, los precios están bajos y pueden rebotar' }
           ],
           correctAnswer: 'b',
-          explanation: 'El nacimiento tiene máximo upside pero riesgo extremo (puede no funcionar). El mainstream ya capturó la mayoría del movimiento. La etapa 2 (Crecimiento) ofrece el mejor balance: suficiente validación + upside masivo todavía disponible.'
+          explanation: 'El nacimiento tiene máximo upside pero riesgo extremo (puede no funcionar). El mainstream ya capturó la mayoría del movimiento. La etapa 2 (Crecimiento) suele ofrecer el mejor balance: algo de validación y todavía recorrido. Aun así, muchas narrativas mueren en esta etapa.'
         },
         {
           id: 'q3',
@@ -1604,7 +1662,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Mining: el minado de Bitcoin fue la narrativa más caliente del ciclo' }
           ],
           correctAnswer: 'b',
-          explanation: 'Los memecoins (BONK, WIF, y miles más) capturaron la atención y el capital retail de forma masiva en 2024, con Solana como cadena preferida por su velocidad y bajo costo. La narrativa hizo pico en enero de 2025 con el token TRUMP y se desplomó tras el colapso de LIBRA en febrero de 2025; a mediados de 2026 sigue lejos de ese pico. El metaverso y las ICOs quedaron en ciclos pasados.'
+          explanation: 'Los memecoins (BONK, WIF, y miles más) capturaron la atención y el capital retail de forma masiva en 2024, con Solana como cadena preferida por su velocidad y bajo costo. La narrativa hizo pico en enero de 2025 con el token TRUMP y se desplomó tras el colapso de LIBRA en febrero de 2025. El metaverso y las ICOs quedaron en ciclos pasados.'
         },
         {
           id: 'q4',
@@ -1616,7 +1674,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Compro más DeFi, está "barato" comparado con AI' }
           ],
           correctAnswer: 'b',
-          explanation: 'Rotación inteligente: cuando tu sector pierde momentum (subidas menores, volumen cayendo) y otro gana momentum (nuevos máximos, volumen creciente), es momento de rotar. Hazlo gradualmente, no todo de golpe, y solo a proyectos que hayas investigado.'
+          explanation: 'Rotación inteligente: cuando tu sector pierde momentum (subidas menores, volumen cayendo) y otro gana momentum (nuevos máximos, volumen creciente), es momento de rotar. Hazlo gradualmente, no todo de golpe, solo a proyectos que hayas investigado, y recuerda que cada venta puede generar impuestos.'
         },
         {
           id: 'q5',
@@ -1628,7 +1686,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Un influencer grande de YouTube publica un video promocionando la narrativa' }
           ],
           correctAnswer: 'c',
-          explanation: 'Las narrativas nacen en Crypto Twitter entre traders con track record. Cuando 5+ cuentas respetadas mencionan el mismo tema y las métricas on-chain validan (TVL creciendo, wallets activas subiendo), la narrativa tiene sustancia. Los medios mainstream llegan semanas después.'
+          explanation: 'Las narrativas suelen nacer en Crypto Twitter entre traders con historial verificable. Cuando 5+ cuentas serias e independientes mencionan el mismo tema y las métricas on-chain lo respaldan (TVL creciendo, wallets activas subiendo), es más probable que tenga sustancia. Si todas promocionan el mismo token el mismo día, sospecha de una campaña pagada. Los medios mainstream llegan semanas después.'
         }
       ]
     }
@@ -1638,14 +1696,14 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Diversificación Inteligente',
     level: 'Intermedio',
     number: '9 de 12',
-    duration: '14 min',
+    duration: '15 min',
     type: 'Estrategia',
-    description: 'Construye un portafolio que sobreviva a cualquier crash y capture los mejores retornos del ciclo. La estrategia núcleo-satélite combina seguridad, oportunismo y liquidez para maximizar tu ventaja.',
+    description: 'Construye un portafolio que aguante los crashes sin sacarte del juego. La estrategia núcleo-satélite combina una base grande, apuestas pequeñas y liquidez.',
     sections: [
       {
         type: 'intro',
         title: 'El Seguro Contra tu Propia Ignorancia',
-        content: 'Warren Buffett dijo: "La diversificación es protección contra la ignorancia. Tiene poco sentido para quien sabe lo que hace". La segunda mitad casi nunca se cita, pero en crypto refuerza la primera: aquí nadie sabe todo lo que necesitaría saber. En un mercado donde TODO puede pasar, un hack, un colapso regulatorio, un CEO que resulta ser un fraude, esa protección es 10× más relevante. El trader que pone el 100% de su capital en un solo token está jugando a la ruleta rusa con su patrimonio. No importa cuánta investigación hagas, siempre hay cosas que NO puedes saber. Luna era un "blue chip" con $40B de market cap antes de ir a cero en una semana. FTX era el exchange "más seguro" hasta que colapsó. La diversificación no es para personas inseguras, es para personas inteligentes que entienden que **no pueden predecir todo**. La pregunta no es SI habrá una sorpresa negativa, sino CUÁNDO. Y cuando llegue, la diversificación es la diferencia entre una mala semana y la ruina total.',
+        content: 'Warren Buffett dijo: "La diversificación es protección contra la ignorancia. Tiene poco sentido para quien sabe lo que hace". La segunda mitad casi nunca se cita, pero en crypto refuerza la primera: aquí nadie sabe todo lo que necesitaría saber. En un mercado donde TODO puede pasar, un hack, un colapso regulatorio, un CEO que resulta ser un fraude, esa protección es todavía más relevante. El trader que pone el 100% de su capital en un solo token está jugando a la ruleta rusa con su patrimonio. No importa cuánta investigación hagas, siempre hay cosas que NO puedes saber. Luna era un "blue chip" con $40B de market cap antes de ir a cero en una semana. FTX era el exchange "más seguro" hasta que colapsó. La diversificación no es para personas inseguras, es para personas inteligentes que entienden que **no pueden predecir todo**. La pregunta no es SI habrá una sorpresa negativa, sino CUÁNDO. Y cuando llegue, la diversificación es la diferencia entre una mala semana y la ruina total.',
         highlight: {
           title: 'La Regla Fundamental',
           text: 'Nunca pongas en una sola posición más de lo que puedes perder sin que afecte tu sueño. Si perder esa inversión te quita el sueño, tu posición es demasiado grande.'
@@ -1653,55 +1711,55 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       },
       {
         type: 'main',
-        title: 'La Barbell Strategy Crypto: El Framework del 60/30/10',
-        content: 'Este framework es, en esencia, la clásica estrategia núcleo-satélite: una base sólida, apuestas asimétricas pequeñas y liquidez. En redes la llaman "Barbell", aunque la barbell original de Nassim Taleb es más extrema (activos ultraseguros más apuestas salvajes, nada intermedio). Importante: estos porcentajes son la distribución DENTRO de tu asignación cripto, que a su vez debería ser solo dinero que puedes permitirte perder. En crypto, se traduce en tres bloques:',
+        title: 'Núcleo-Satélite: El Framework del 85/10/5',
+        content: 'Este framework es, en esencia, la clásica estrategia núcleo-satélite: una base sólida, apuestas asimétricas pequeñas y liquidez. En redes la llaman "Barbell", aunque la barbell original de Nassim Taleb es más extrema (activos ultraseguros más apuestas salvajes, nada intermedio). Importante: estos porcentajes son la distribución DENTRO de tu porción cripto, que a su vez debería ser solo dinero que puedes permitirte perder. Y encajan con los perfiles de la lección Bitcoin vs Altcoins: el core es tu reparto entre BTC, ETH y SOL, y los satélites son el "hasta 10% en altcoins" del perfil más agresivo. En crypto, se traduce en tres bloques:',
         features: [
-          { icon: Shield, title: '60%, Core (Base Segura)', text: 'BTC, ETH, SOL, los activos que sobreviven a cualquier bear market. Estos no van a hacer 100× pero tampoco van a cero. En el bull hacen 3-8×, en el bear caen pero se recuperan. **Este bloque protege tu capital.** Si todo lo demás falla, tu core te mantiene en el juego.' },
-          { icon: Zap, title: '30%, Satélites (Apuestas Asimétricas)', text: 'Tokens de narrativas fuertes, mid caps con potencial alto y riesgo alto. Aquí es donde buscas los retornos extraordinarios. Divídelo en 5-8 posiciones para no depender de una sola. **Si alguna multiplica varias veces, compensa las que fallen.**' },
-          { icon: PiggyBank, title: '10%, Liquidez (USDC/Stablecoins)', text: 'Cash es una posición. Tener 10-20% en stablecoins te da el poder de comprar cuando el mercado está en pánico. Las mejores oportunidades aparecen cuando todos venden. Sin liquidez, solo puedes ver cómo otros compran barato mientras tú ya estás 100% invertido.' }
+          { icon: Shield, title: '80-90%, Core (Tu Base)', text: 'BTC, ETH y SOL, los activos con más historial de sobrevivir bear markets. No son inmunes: ningún activo lo es, y SOL cayó más de 95% en 2022. Pero han sido los más resistentes del ecosistema. **Este bloque es tu base**, repartido según tu perfil, con BTC como la parte más grande si estás empezando. Si todo lo demás falla, tu core te mantiene en el juego.' },
+          { icon: Zap, title: 'Hasta 10%, Satélites (Apuestas Asimétricas)', text: 'Tokens de narrativas fuertes, mid caps con potencial alto y riesgo alto. Si haces trading activo, tu capital de trading sale de este mismo bloque: entre los dos, no más del 10% de tu porción cripto. Divídelo en 3-5 posiciones para no depender de una sola. **Asume que puedes perder este bloque entero.** Si no tienes experiencia, 0-5% está perfecto.' },
+          { icon: PiggyBank, title: '5-10%, Liquidez (USDC/Stablecoins)', text: 'El efectivo también es una posición. Tener 5-10% en stablecoins te da el poder de comprar cuando el mercado está en pánico. Las mejores oportunidades aparecen cuando todos venden. Sin liquidez, solo puedes ver cómo otros compran barato mientras tú ya estás 100% invertido.' }
         ]
       },
       {
         type: 'main',
         title: 'Tu Core: La Base Inquebrantable',
-        content: 'El bloque core (60%) debería estar en activos que cumplan UNA condición: que **muy probablemente existan y valgan más en el próximo ciclo**. Esto limita tu universo a un puñado de proyectos:',
+        content: 'El bloque core (80-90%) debería estar en activos que cumplan UNA condición: que tengan **las mejores probabilidades de seguir existiendo y siendo relevantes en el próximo ciclo**. Esto limita tu universo a un puñado de proyectos:',
         features: [
-          { icon: Lock, title: 'Bitcoin (BTC)', text: 'El rey. Más de 16 años de historia. Máxima descentralización. Efecto Lindy (cuanto más tiempo sobrevive, más probable que siga). ETFs institucionales. Es el "oro digital" y la base de cualquier portafolio crypto serio. **25-40% de tu portafolio total debería ser BTC.**' },
-          { icon: Network, title: 'Ethereum (ETH)', text: 'La plataforma de smart contracts más grande. El ecosistema DeFi y NFT más maduro. EIP-1559 quema parte de las fees: desde 2024, con fees bajas post-Dencun, ETH ha sido levemente inflacionario (~0.2-0.8% anual) y puede ser deflacionario en picos de actividad. Transición a PoS completada. **10-20% del portafolio total.**' },
-          { icon: Zap, title: 'Solana (SOL)', text: 'La cadena de mayor crecimiento en adopción real: transacciones por segundo, DeFi TVL, volumen de DEX. Ecosistema vibrante (Jupiter, Raydium, Marinade). **10-20% del portafolio total.** Mayor riesgo que BTC/ETH pero mayor potencial de crecimiento.' }
+          { icon: Lock, title: 'Bitcoin (BTC)', text: 'El rey. Más de 17 años de historia. Máxima descentralización. Efecto Lindy (cuanto más tiempo sobrevive, más probable que siga). ETFs institucionales. Es el "oro digital" y la base de cualquier portafolio crypto serio. **Dentro de tu porción cripto, BTC es la parte más grande del core**: de 30% a 70% según tu perfil, como viste en Bitcoin vs Altcoins.' },
+          { icon: Network, title: 'Ethereum (ETH)', text: 'La plataforma de smart contracts más grande. El ecosistema DeFi y NFT más maduro. EIP-1559 quema parte de las fees: desde 2024, con fees bajas post-Dencun, ETH ha sido levemente inflacionario (~0.2-0.8% anual) y puede ser deflacionario en picos de actividad. Transición a PoS completada. **Junto con SOL, de 20% a 50% de tu porción cripto según tu perfil.**' },
+          { icon: Zap, title: 'Solana (SOL)', text: 'Una de las cadenas con más actividad real: transacciones, DeFi TVL, volumen de DEX. Ecosistema vibrante (Jupiter, Raydium, Marinade). Mayor potencial de crecimiento que BTC, pero con un historial de caídas más profundas: más de 95% en 2022.' }
         ]
       },
       {
         type: 'main',
-        title: 'Tus Apuestas Asimétricas: Donde se Hacen las Fortunas',
-        content: 'El bloque satélite (30%) es donde buscas retornos extraordinarios. La clave es que no necesitas que TODAS funcionen, **con que una o dos hagan 10-20×, cubren todas las demás que fallen**:',
+        title: 'Tus Apuestas Asimétricas: Pequeñas a Propósito',
+        content: 'El bloque satélite (máximo 10%) es donde tomas riesgo alto a propósito, con dinero que aceptas perder. La realidad: la mayoría de las altcoins termina muy por debajo de su máximo y muchas desaparecen. Que una o dos multipliquen y compensen al resto es una esperanza, no un plan. Por eso este bloque es pequeño:',
         features: [
-          { icon: Search, title: 'Cómo Seleccionar', text: 'Busca tokens que: (1) estén en la narrativa dominante del momento, (2) tengan producto funcionando con usuarios reales, (3) tengan market cap bajo relativo a su sector, (4) tengan tokenomics sólidos. **No más de 5-8 posiciones** en este bloque.' },
-          { icon: Percent, title: 'Sizing: No Todas Iguales', text: 'No pongas el mismo monto en cada apuesta. Tu convicción alta (3-5% del portafolio cada una). Tu convicción media (1-2% cada una). Apuestas especulativas (0.5-1% cada una). Así, tus mejores ideas tienen más capital sin arriesgar la ruina.' },
-          { icon: AlertTriangle, title: 'La Regla del Moonbag', text: 'Si una posición satélite hace 5-10×, saca tu inversión original + algo de ganancia y deja el resto como "moonbag" (dinero gratis). Así eliminaste el riesgo y mantienes exposición al upside ilimitado.' }
+          { icon: Search, title: 'Cómo Seleccionar', text: 'Busca tokens que: (1) estén en la narrativa dominante del momento, (2) tengan producto funcionando con usuarios reales, (3) tengan market cap bajo relativo a su sector, (4) tengan tokenomics sólidos. **No más de 3-5 posiciones** en este bloque.' },
+          { icon: Percent, title: 'Sizing: No Todas Iguales', text: 'No pongas el mismo monto en cada apuesta. Convicción alta: 2-3% de tu porción cripto cada una. Convicción media: 1-2%. Especulativas: 0.5% o menos. Así, tus mejores ideas tienen más capital y ninguna puede arruinarte.' },
+          { icon: AlertTriangle, title: 'La Regla del Moonbag', text: 'Si una posición satélite hace 5-10×, recuperar tu inversión original (y algo de ganancia) es prudente, y lo que dejas correr se llama "moonbag". Pero no es "dinero gratis": es tu dinero, vale lo que vale hoy, y si cae a cero pierdes esa ganancia. Decide de antemano a qué precio vendes el resto, y recuerda que cada venta puede generar impuestos.' }
         ]
       },
       {
         type: 'main',
         title: 'Correlación: El Enemigo Invisible',
-        content: 'Aquí está el error que la mayoría comete: creer que tener 10 altcoins diferentes es "diversificación". **No lo es.** En crypto, cuando Bitcoin cae, el 95% de las altcoins caen igual o más fuerte. Esto se llama **correlación alta**, y destruye la ilusión de diversificación.',
+        content: 'Aquí está el error que la mayoría comete: creer que tener 10 altcoins diferentes es "diversificación". **No lo es.** En crypto, cuando Bitcoin cae, casi todas las altcoins caen igual o más fuerte. Esto se llama **correlación alta**, y destruye la ilusión de diversificación.',
         features: [
           { icon: AlertTriangle, title: '10 Altcoins ≠ Diversificación', text: 'Si tienes SOL, AVAX, POL, ARB, OP, JUP, RENDER, INJ, TIA, y PYTH, tienes 10 tokens que se mueven en la MISMA dirección. Cuando BTC cae 20%, todas caen 30-50%. No estás diversificado, estás concentrado en "altcoins" como clase de activo.' },
-          { icon: CheckCircle, title: 'Diversificación Real', text: 'Diversificación real en crypto incluye: BTC (diferente perfil de riesgo que altcoins), stablecoins (no correlacionadas con el mercado), y opcionalmente activos fuera de crypto (acciones, bonos). Dentro de altcoins, diversifica por sector: DeFi + AI + Gaming, no 5 tokens DeFi.' },
-          { icon: Shield, title: 'Stablecoins como Hedge', text: 'Tener 10-20% en USDC es la forma más simple de "hedge" en crypto. Cuando todo cae, tus stablecoins mantienen su valor Y te dan poder de compra en el pánico. Es la anti-correlación más efectiva disponible.' }
+          { icon: CheckCircle, title: 'Diversificación Real', text: 'Diversificación real en crypto incluye: BTC (diferente perfil de riesgo que altcoins), stablecoins (no siguen al mercado, aunque tienen sus propios riesgos: emisor, reservas y pérdida de paridad), y opcionalmente activos fuera de crypto (acciones, bonos). Dentro de altcoins, diversifica por sector: DeFi + AI + Gaming, no 5 tokens DeFi.' },
+          { icon: Shield, title: 'Stablecoins como Hedge', text: 'Tener 5-10% en USDC es la forma más simple de "hedge" en crypto. Cuando todo cae, tus stablecoins normalmente mantienen su valor y te dan poder de compra en el pánico. No están libres de riesgo: en marzo de 2023, USDC perdió su paridad por unos días (llegó a ~$0.88) cuando quebró Silicon Valley Bank, donde Circle tenía parte de sus reservas.' }
         ]
       },
       {
         type: 'comparison',
         title: 'Portafolio Diversificado vs Concentrado',
         leftSide: {
-          title: 'Portafolio Diversificado (60/30/10)',
+          title: 'Portafolio Diversificado (85/10/5)',
           points: [
-            'Sobrevive a crashes del -50% sin destruirse',
-            'Una posición en cero = pérdida limitada al 3-5%',
+            'Un crash de -50% duele, pero no te saca del juego',
+            'Un satélite en cero = pérdida de 2-3% como mucho',
             'Liquidez disponible para oportunidades en pánico',
-            'Retornos realistas del ciclo: 2-5× desde mínimos del bear, menos si entras a mitad de ciclo',
-            'Puedes dormir tranquilo sin revisar el precio',
+            'Sin promesas de retorno: tu resultado depende sobre todo de BTC',
+            'Duermes mejor sin revisar el precio',
             'Base psicológica sólida para tomar buenas decisiones'
           ]
         },
@@ -1722,21 +1780,26 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Rebalanceo: Cuándo y Cómo Ajustar',
         content: 'Tu portafolio no es estático. A medida que los precios cambian, tu asignación original se distorsiona. Si SOL hace 5× y BTC hace 2×, de repente SOL es un porcentaje mucho mayor de tu portafolio. El **rebalanceo** restaura tu asignación objetivo:',
         features: [
-          { icon: RefreshCw, title: 'Rebalanceo por Tiempo', text: 'Cada mes o cada trimestre, revisa tu portafolio. Si algún bloque se desvió más de 10% de tu objetivo (el core pasó de 60% a 45% porque las alts explotaron), vende parcialmente las ganadoras y refuerza las rezagadas.' },
-          { icon: Target, title: 'Rebalanceo por Evento', text: 'Rebalancea cuando: (1) una posición hace más de 5× (toma ganancias parciales), (2) el ciclo cambia de fase (de bull a distribución = aumenta stablecoins), (3) una narrativa se agota (rota capital a la nueva narrativa). No rebalancees por ruido diario.' },
-          { icon: AlertTriangle, title: 'No Sobrerebalancees', text: 'Cada trade tiene fees e implicaciones fiscales. Rebalancear cada semana es contraproductivo. Hazlo con disciplina pero no con obsesión. Si tu portafolio está dentro del ±10% de tu objetivo, déjalo en paz.' }
+          { icon: RefreshCw, title: 'Rebalanceo por Tiempo', text: 'Cada mes o cada trimestre, revisa tu portafolio. Si algún bloque se desvió más de 10 puntos de tu objetivo (el core pasó de 85% a 72% porque los satélites explotaron), vende parcialmente las ganadoras y refuerza las rezagadas.' },
+          { icon: Target, title: 'Rebalanceo por Evento', text: 'Rebalancea cuando: (1) una posición hace más de 5× (toma ganancias parciales), (2) el ciclo cambia de fase (de bull a distribución = aumenta stablecoins), (3) una narrativa se agota (rota capital a la nueva, dentro del bloque satélite). No rebalancees por ruido diario.' },
+          { icon: AlertTriangle, title: 'No Sobrerebalancees', text: 'Cada trade tiene fees y puede generar impuestos (revisa la lección Tu Plan de Inversión Personal). Rebalancear cada semana es contraproductivo. Hazlo con disciplina pero no con obsesión. Si cada bloque está a menos de 10 puntos de su objetivo, déjalo en paz.' }
         ]
       },
       {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
+      },
+      {
         type: 'takeaways',
-        title: 'Construyendo un Portafolio Anti-Frágil',
+        title: 'Construyendo un Portafolio que Aguante',
         items: [
-          'La estrategia núcleo-satélite 60/30/10 combina seguridad (core BTC/ETH/SOL), oportunismo (apuestas asimétricas en narrativas) y liquidez (stablecoins para oportunidades de pánico). Y aplica solo al dinero que puedes permitirte perder.',
-          'Tu core (60%) protege tu capital. Tus satélites (30%) buscan retornos extraordinarios. Tu liquidez (10%) te da poder cuando todos venden.',
+          'La estrategia núcleo-satélite 85/10/5 combina una base grande (core BTC/ETH/SOL), apuestas pequeñas (satélites en narrativas) y liquidez (stablecoins para oportunidades de pánico). Y aplica solo a tu porción cripto, que debe ser dinero que puedes permitirte perder.',
+          'Tu core (80-90%) es tu base. Tus satélites (máximo 10%, incluido tu capital de trading) son riesgo alto a propósito. Tu liquidez (5-10%) te da margen cuando todos venden.',
           'Correlación es el enemigo invisible: 10 altcoins diferentes NO son diversificación real. Diversifica por clase de activo (BTC + alts + stables) y por sector dentro de altcoins.',
-          'No más de 8-12 posiciones totales. Más = imposible seguir, investigar y gestionar efectivamente. Menos = concentración excesiva.',
-          'Tener stablecoins NO es cobardía, es estrategia. Las mejores oportunidades de compra aparecen durante crashes, y solo puedes aprovecharlas si tienes liquidez disponible.',
-          'Rebalancea mensual o trimestralmente, o cuando una posición haga 5×+. Toma ganancias parciales de las ganadoras y refuerza tu core. La disciplina de rebalanceo es lo que protege tus ganancias a largo plazo.'
+          'No más de 6-10 posiciones totales. Más = imposible seguir, investigar y gestionar efectivamente. Menos = concentración excesiva.',
+          'Tener stablecoins NO es cobardía, es estrategia (aunque tampoco están libres de riesgo). Las mejores oportunidades de compra aparecen durante crashes, y solo puedes aprovecharlas si tienes liquidez disponible.',
+          'Rebalancea mensual o trimestralmente, o cuando una posición haga 5×+. Toma ganancias parciales de las ganadoras y refuerza tu core, teniendo en cuenta los impuestos. La disciplina de rebalanceo es lo que protege tus ganancias a largo plazo.'
         ]
       }
     ],
@@ -1744,15 +1807,15 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Tienes $10,000 USD para invertir en crypto. ¿Cuál es la asignación más inteligente según la estrategia núcleo-satélite?',
+          question: 'Tu porción cripto es de $10,000 USD y ya tienes experiencia. ¿Qué asignación sigue la estrategia núcleo-satélite de esta lección?',
           options: [
             { id: 'a', text: '100% en la memecoin del momento, puede hacer 100× si aciertas' },
-            { id: 'b', text: '60% BTC/ETH/SOL, 30% narrativas fuertes, 10% USDC: base + apuestas + liquidez' },
+            { id: 'b', text: '85% BTC/ETH/SOL, 10% narrativas que entiendo, 5% USDC: base, apuestas pequeñas y liquidez' },
             { id: 'c', text: '50% BTC, 50% USDC, lo más seguro posible' },
             { id: 'd', text: '100% distribuido en 30 altcoins diferentes para "máxima diversificación"' }
           ],
           correctAnswer: 'b',
-          explanation: '60/30/10 es el balance óptimo: el core protege tu capital (BTC/ETH/SOL no van a cero), los satélites buscan retornos extraordinarios sabiendo que varios fallarán, y la liquidez en USDC te permite comprar cuando todos venden en pánico.'
+          explanation: '85/10/5 es el reparto de este framework: el core es tu base (BTC/ETH/SOL tienen el historial más largo, aunque ninguno es inmune a caídas fuertes), los satélites son riesgo alto con un tamaño que puedes perder entero, y la liquidez en USDC te permite comprar cuando todos venden en pánico. La opción c no es un error grave: es más conservadora que este framework.'
         },
         {
           id: 'q2',
@@ -1764,11 +1827,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Algunas suben y otras bajan, resultado neutro' }
           ],
           correctAnswer: 'c',
-          explanation: 'En crypto, la correlación entre altcoins y Bitcoin es altísima. Cuando BTC cae 20%, las altcoins típicamente caen 30-50%. Tener 10 altcoins diferentes NO es diversificación real, es concentración en "altcoins" como clase de activo.'
+          explanation: 'En crypto, la correlación entre altcoins y Bitcoin es muy alta. Cuando BTC cae 20%, las altcoins suelen caer más, a menudo 30-50%. Tener 10 altcoins diferentes NO es diversificación real, es concentración en "altcoins" como clase de activo.'
         },
         {
           id: 'q3',
-          question: '¿Por qué mantener 10-20% de tu portafolio en USDC es una estrategia inteligente y no cobardía?',
+          question: '¿Por qué mantener 5-10% de tu porción cripto en USDC es una estrategia y no cobardía?',
           options: [
             { id: 'a', text: 'Porque USDC genera intereses' },
             { id: 'b', text: 'Porque el mercado siempre baja' },
@@ -1776,7 +1839,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'No es inteligente: tener cash en un bull market es perder dinero seguro' }
           ],
           correctAnswer: 'c',
-          explanation: 'Cash is a position. Las mejores oportunidades de compra aparecen durante crashes, cuando los precios caen 30-50% en días. Si estás 100% invertido, solo puedes ver esas oportunidades sin poder actuar. La liquidez es opcionalidad pura.'
+          explanation: 'El efectivo también es una posición. Las mejores oportunidades de compra aparecen durante crashes, cuando los precios caen 30-50% en días. Si estás 100% invertido, solo puedes ver esas oportunidades sin poder actuar. La liquidez te da opciones, aunque una stablecoin tampoco está libre de riesgo.'
         },
         {
           id: 'q4',
@@ -1784,11 +1847,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: '50+ posiciones para lograr la máxima diversificación posible' },
             { id: 'b', text: '1-2 para máxima concentración y convicción total' },
-            { id: 'c', text: '8-12 máximo: suficientes para diversificar, pocas para investigar y seguir cada una' },
+            { id: 'c', text: '6-10 máximo: suficientes para diversificar, pocas para investigar y seguir cada una' },
             { id: 'd', text: 'No existe un número óptimo' }
           ],
           correctAnswer: 'c',
-          explanation: 'Con 50+ posiciones es imposible investigar, seguir noticias y gestionar cada una. Con 1-2 el riesgo de ruina es enorme. 8-12 es el sweet spot: diversificación suficiente para sobrevivir a sorpresas negativas, concentración suficiente para que las ganadoras impacten tu portafolio.'
+          explanation: 'Con 50+ posiciones es imposible investigar, seguir noticias y gestionar cada una. Con 1-2 el riesgo de ruina es enorme. 6-10 es un rango razonable: diversificación suficiente para sobrevivir a sorpresas negativas, concentración suficiente para que las ganadoras impacten tu portafolio.'
         },
         {
           id: 'q5',
@@ -1796,11 +1859,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
           options: [
             { id: 'a', text: 'HODL, va a seguir subiendo, no vendo nada' },
             { id: 'b', text: 'Vendo el 100%, ya gané suficiente' },
-            { id: 'c', text: 'Tomo parciales: saco mi inversión original más algo de profit y dejo el resto como moonbag' },
+            { id: 'c', text: 'Tomo parciales: recupero mi inversión original y fijo un plan de salida para el resto' },
             { id: 'd', text: 'Meto más dinero: si ya hizo 10×, con la misma fuerza puede hacer 100×' }
           ],
           correctAnswer: 'c',
-          explanation: 'La regla del moonbag: cuando una posición hace 5-10×, saca tu inversión original + ganancias parciales. El resto es "dinero gratis" que puede correr sin presión emocional. Si sube más, perfecto. Si cae a cero, no perdiste capital propio.'
+          explanation: 'Cuando una posición hace 5-10×, recuperar tu inversión original es prudente. Pero el resto no es "dinero gratis": es una ganancia tuya que vale lo que vale hoy, y si cae a cero la pierdes. Por eso necesita su propio plan (un precio de venta o un stop), igual que cualquier otra posición. Y cada venta puede generar impuestos.'
         }
       ]
     }
@@ -1810,14 +1873,14 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'El Arte del Stop Loss',
     level: 'Intermedio',
     number: '10 de 12',
-    duration: '15 min',
+    duration: '17 min',
     type: 'Tutorial Práctico',
     description: 'Sobrevivir es más importante que ganar. El stop loss es tu seguro contra la ruina, tu herramienta para cortar pérdidas rápido y proteger tu capital para pelear otro día.',
     sections: [
       {
         type: 'intro',
         title: 'Tu Seguro de Vida Financiero',
-        content: 'Imagina un trader que en 2022 invirtió $50,000 (los ahorros de toda su vida) en LUNA a $80. "Es un blue chip, no necesito stop loss", se dijo. Una semana después, LUNA estaba a $0.0001. Perdió el 99.999% de su capital. Ese dinero ya no existe. ¿Cuánto le habría costado un stop loss? Si hubiera puesto un stop en $60 (-25%), habría perdido $12,500. Doloroso, pero recuperable. Sin stop, perdió TODO. Un **stop loss** no es una pérdida, es el **costo de hacer negocios**. Es tu seguro de vida financiero. Los profesionales pierden operaciones constantemente, pero sobreviven porque sus pérdidas son pequeñas y controladas. Los amateurs ganan muchas operaciones pequeñas y luego pierden todo en UNA sola sin stop.',
+        content: 'Imagina un trader que en 2022 invirtió $50,000 (los ahorros de toda su vida) en LUNA a $80. "Es un blue chip, no necesito stop loss", se dijo. Una semana después, LUNA estaba a $0.0001. Perdió el 99.999% de su capital. Ese dinero ya no existe. ¿Cuánto le habría costado un stop loss? Si hubiera puesto un stop en $60 (-25%), habría perdido unos $12,500 (algo más con el slippage de ese pánico). Doloroso, pero recuperable. Sin stop, perdió TODO. Un **stop loss** no es una pérdida, es el **costo de hacer negocios**. Es tu seguro de vida financiero. Los profesionales pierden operaciones constantemente, pero sobreviven porque sus pérdidas son pequeñas y controladas. Los amateurs ganan muchas operaciones pequeñas y luego pierden todo en UNA sola sin stop. Ojo: esto aplica a tus operaciones de trading. Tu base de DCA a largo plazo se protege con el tamaño (solo dinero que puedes aguantar ver caer), no con stops.',
         highlight: {
           title: 'La Regla Inquebrantable',
           text: 'Define tu stop loss ANTES de entrar a cualquier posición. Es no-negociable. Si no sabes dónde está tu stop, no deberías estar en esa operación. Mover el stop hacia abajo para "darle más espacio" es la forma más segura de arruinarte.'
@@ -1828,10 +1891,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'La Matemática de la Ruina: Por Qué las Pérdidas Duelen Más',
         content: 'Existe una asimetría matemática cruel que la mayoría de traders ignoran: **las pérdidas requieren ganancias desproporcionadas para recuperarse.** Esto no es opinión, es matemáticas:',
         features: [
-          { icon: Percent, title: '-10% → Necesitas +11% para Recuperar', text: 'Pierdes 10% de $10,000 = te quedan $9,000. Para volver a $10,000 necesitas ganar +11.1%. Todavía manejable.' },
-          { icon: Percent, title: '-25% → Necesitas +33%', text: 'Pierdes 25% = te quedan $7,500. Para volver a $10,000 necesitas +33%. Ya es difícil. Un solo trade mal gestionado te pone en desventaja seria.' },
-          { icon: Percent, title: '-50% → Necesitas +100%', text: 'Pierdes la mitad de tu capital. Para volver necesitas DUPLICAR tu dinero. ¿Cuántas veces has duplicado tu dinero? Exacto. Una pérdida del 50% puede tardar años en recuperarse.' },
-          { icon: AlertTriangle, title: '-90% → Necesitas +900%', text: 'La ruina. Si pierdes el 90%, necesitas hacer un 9× solo para volver a donde empezaste. En la práctica, este capital está muerto. El stop loss existe para que NUNCA llegues aquí.' }
+          { icon: Percent, title: '-10%: Necesitas +11% para Recuperar', text: 'Pierdes 10% de $10,000 = te quedan $9,000. Para volver a $10,000 necesitas ganar +11.1%. Todavía manejable.' },
+          { icon: Percent, title: '-25%: Necesitas +33%', text: 'Pierdes 25% = te quedan $7,500. Para volver a $10,000 necesitas +33%. Ya es difícil. Un solo trade mal gestionado te pone en desventaja seria.' },
+          { icon: Percent, title: '-50%: Necesitas +100%', text: 'Pierdes la mitad de tu capital. Para volver necesitas DUPLICAR tu dinero. ¿Cuántas veces has duplicado tu dinero? Exacto. Una pérdida del 50% puede tardar años en recuperarse.' },
+          { icon: AlertTriangle, title: '-90%: Necesitas +900%', text: 'La ruina. Si pierdes el 90%, necesitas hacer un 9× solo para volver a donde empezaste. En la práctica, este capital está muerto. El stop loss existe para que NUNCA llegues aquí.' }
         ]
       },
       {
@@ -1840,10 +1903,10 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'No todos los stops son iguales. El tipo de stop que uses depende de tu estrategia, el activo y el contexto del mercado:',
         features: [
           { icon: Shield, title: 'Stop Técnico (Recomendado)', text: 'Colocado basado en la estructura del gráfico: debajo de un soporte clave, debajo del último Higher Low, o debajo de una zona de demanda. **El más profesional.** Tu stop está donde la tesis de tu operación se invalida. Si el soporte se rompe, tu razón para estar largo ya no existe.' },
-          { icon: Percent, title: 'Stop Porcentual', text: 'Distancia fija del precio de entrada: -5%, -8%, -10%. Más simple pero menos preciso, no considera la estructura del gráfico. Útil como respaldo si no dominas el análisis técnico. **Nunca uses más de -10% como stop en una posición individual.**' },
+          { icon: Percent, title: 'Stop Porcentual', text: 'Distancia fija del precio de entrada: -5%, -8%, -10%. Más simple pero menos preciso, no considera la estructura del gráfico. Útil como respaldo si no dominas el análisis técnico. **Como regla práctica, no más de -10%**; si la estructura pide un stop más lejano, reduce el tamaño de la posición (lo verás en Position Sizing).' },
           { icon: Activity, title: 'Trailing Stop (Stop Dinámico)', text: 'Se mueve con el precio a tu favor. Si pones un trailing de 10% y el precio sube de $100 a $150, tu stop sube automáticamente a $135. Si el precio cae 10% desde cualquier máximo, se ejecuta. **Excelente para capturar tendencias largas sin salir demasiado temprano.**' },
           { icon: Brain, title: 'Stop Mental (Peligroso)', text: '"Vendo si baja a $X." Sin orden puesta en el exchange. El problema: cuando el precio llega a tu "stop mental", las emociones gritan "va a rebotar" y no vendes. Luego cae más. Y más. **Los stops mentales NO funcionan.** Usa órdenes reales.' },
-          { icon: AlertTriangle, title: 'Stop-Market vs Stop-Limit: La Letra Pequeña', text: 'Un **stop-market** vende al mejor precio disponible cuando se activa: garantiza salir, no el precio (en mechas rápidas habrá slippage). Un **stop-limit** solo ejecuta a tu precio límite o mejor: en un crash tipo LUNA puede no ejecutarse nunca y dejarte atrapado. Y una realidad clave: los DEXs spot como Jupiter (la próxima lección) no tienen stop loss nativo; los exchanges centralizados sí. Si tu posición vive en un DEX, tu plan de salida es manual o con órdenes límite.' }
+          { icon: AlertTriangle, title: 'Stop-Market vs Stop-Limit: La Letra Pequeña', text: 'Un **stop-market** vende al mejor precio disponible cuando se activa: garantiza salir, no el precio (en mechas rápidas habrá slippage). Un **stop-limit** solo ejecuta a tu precio límite o mejor: en un crash tipo LUNA puede no ejecutarse nunca y dejarte atrapado. Y una diferencia clave con los DEXs: agregadores como Jupiter ya ofrecen órdenes trigger (límite y, en versiones recientes, stop loss y take profit), pero no funcionan como en un exchange centralizado. Un servicio vigila el precio y lanza un swap cuando se cumple la condición. Mientras la orden está abierta, tus tokens quedan en una bóveda custodiada, fuera de tu wallet. Y la propia Jupiter advierte que un stop puede no ejecutarse si el precio salta o la liquidez es baja, algo común en memecoins. Lo verás en detalle en la lección Jupiter: El Rey de los DEXs, del nivel avanzado.' }
         ]
       },
       {
@@ -1851,18 +1914,18 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Dónde Colocar tu Stop Loss',
         content: 'El stop perfecto está en el punto donde tu tesis se invalida, pero lo suficientemente lejos para no ser activado por el ruido normal del mercado:',
         features: [
-          { icon: Crosshair, title: 'Debajo del Soporte + Filtro', text: 'Si compras en soporte en $150, tu stop NO va en $150 ni en $149. Los stops apilados en niveles obvios actúan como imanes de liquidez y el precio suele buscarlos. Tu stop va en $145-146 (debajo del mínimo de la zona de soporte con un 1-2% de filtro extra). Si el precio llega ahí, el soporte realmente se rompió.' },
-          { icon: Crosshair, title: 'Debajo del Último Higher Low', text: 'En un uptrend, tu stop va debajo del HL más reciente. Si la estructura alcista es $120 → $155 → $135 → $175 y estás largo, tu stop está debajo de $135 (el último HL). Si ese HL se rompe, la estructura alcista se invalida.' },
-          { icon: AlertTriangle, title: 'NUNCA Debajo de Niveles "Obvios"', text: 'Si hay un soporte claro en $100 y todos los traders de Twitter lo marcan, hay MILES de stops en $99-100. Esos stops acumulados son liquidez esperando ser ejecutada, y el precio suele buscarla antes de rebotar: no hace falta un villano coordinándolo. Tu stop debería estar 2-3% debajo de la zona "obvia".' }
+          { icon: Crosshair, title: 'Debajo del Soporte + Filtro', text: 'Si compras en soporte en $150, tu stop NO va en $150 ni en $149. Muchos stops se apilan en los niveles obvios, y a veces una mecha pasa por ahí antes de rebotar. Tu stop va en $145-146 (debajo del mínimo de la zona de soporte con un 1-3% de filtro extra). Si el precio llega ahí, el soporte realmente se rompió.' },
+          { icon: Crosshair, title: 'Debajo del Último Higher Low', text: 'En un uptrend, tu stop va debajo del HL más reciente. Si la estructura alcista es $120, $155, $135 y $175, y estás largo, tu stop está debajo de $135 (el último HL). Si ese HL se rompe, la estructura alcista se invalida.' },
+          { icon: AlertTriangle, title: 'NUNCA Debajo de Niveles "Obvios"', text: 'Si hay un soporte claro en $100 y todos los traders de Twitter lo marcan, hay MILES de stops en $99-100. Esos stops acumulados son órdenes esperando ejecutarse, y a veces una mecha los activa antes de que el precio rebote. No hace falta un villano coordinándolo: es donde se juntan las órdenes. Tu stop debería estar 1-3% debajo de la zona "obvia".' }
         ]
       },
       {
         type: 'main',
         title: 'Position Sizing: La Fórmula del 1-2%',
-        content: 'El stop loss define DÓNDE sales. El position sizing define CUÁNTO compras. Juntos, controlan tu riesgo por operación. La regla profesional: **nunca arriesgues más del 1-2% de tu capital total en una sola operación.**',
+        content: 'El stop loss define DÓNDE sales. El position sizing define CUÁNTO compras. Juntos, controlan tu riesgo por operación. La regla profesional: **nunca arriesgues más del 1-2% de tu capital de trading en una sola operación.** Recuerda: tu capital de trading es como máximo el 5-10% de tu porción cripto.',
         features: [
-          { icon: Percent, title: 'La Fórmula', text: '**Tamaño de posición = (Capital × % riesgo) / Distancia al stop**. Ejemplo: Capital $10,000, riesgo 2% = $200 máximo de pérdida. Si tu stop está 10% debajo de tu entrada, tu posición máxima es $200 / 10% = $2,000. Esto limita tu pérdida a $200 (2% de $10K) sin importar qué pase. Nota la consecuencia: a stop más lejano, posición más pequeña. Un stop al 20% permite la mitad de posición que uno al 10% con el mismo riesgo en dólares.' },
-          { icon: CheckCircle, title: 'Por Qué 1-2% Funciona', text: 'Con riesgo del 2% compuesto (recalculado sobre el capital restante), **20 pérdidas seguidas te dejan ~67% del capital, y hasta 50 pérdidas seguidas te dejan ~36%**: golpeado, pero sigues en el juego. Las rachas perdedoras de 5-10 trades son NORMALES incluso para traders rentables. El 1-2% garantiza que sobrevivas a la varianza.' },
+          { icon: Percent, title: 'La Fórmula', text: '**Tamaño de posición = (Capital × % riesgo) / Distancia al stop**. Ejemplo: capital de trading $2,000, riesgo 2% = $40 máximo de pérdida. Si tu stop está 10% debajo de tu entrada, tu posición máxima es $40 / 10% = $400. Esto limita tu pérdida a unos $40 (2% de tu capital de trading), salvo que el precio salte tu stop con slippage. Nota la consecuencia: a stop más lejano, posición más pequeña. Un stop al doble de distancia permite la mitad de posición con el mismo riesgo en dólares.' },
+          { icon: CheckCircle, title: 'Por Qué 1-2% Funciona', text: 'Con riesgo del 2% compuesto (recalculado sobre el capital restante), **20 pérdidas seguidas te dejan ~67% del capital, y hasta 50 pérdidas seguidas te dejan ~36%**: golpeado, pero sigues en el juego. Las rachas perdedoras de 5-10 trades son NORMALES incluso para traders rentables. El 1-2% te da mucho margen para sobrevivir a la varianza.' },
           { icon: AlertTriangle, title: 'El Error del "All-In"', text: 'Arriesgar 10-20% en un solo trade significa que 5 pérdidas seguidas borran la mitad de tu capital. 10 pérdidas (que pasan más seguido de lo que crees) te dejan con casi nada. Los "all-in" que ves en redes sociales tienen sesgo de superviviente, solo muestran los que ganaron.' }
         ]
       },
@@ -1903,13 +1966,18 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         ]
       },
       {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
+      },
+      {
         type: 'takeaways',
         title: 'El Stop Loss Como Estilo de Vida',
         items: [
           'El stop loss no es una pérdida, es el costo de hacer negocios. Sin stop, una sola operación mala puede destruir meses o años de ganancias.',
           'La matemática es cruel: perder 50% requiere ganar 100% para recuperar. El stop loss existe para que tus pérdidas sean del 1-2%, no del 50%.',
-          'Define tu stop ANTES de entrar. Colócalo debajo de donde tu tesis se invalida (soporte, último HL). No en niveles "obvios" donde las ballenas barren.',
-          'Position sizing: nunca arriesgues más del 1-2% de tu capital por operación. Con 2% compuesto, incluso 20 pérdidas seguidas te dejan ~67% del capital (y 50 te dejan ~36%): sigues en el juego.',
+          'Define tu stop ANTES de entrar. Colócalo debajo de donde tu tesis se invalida (soporte, último HL), con un filtro de 1-3%. No justo en los niveles "obvios", donde las mechas suelen activar stops.',
+          'Position sizing: nunca arriesgues más del 1-2% de tu capital de trading por operación. Con 2% compuesto, incluso 20 pérdidas seguidas te dejan ~67% del capital (y 50 te dejan ~36%): sigues en el juego.',
           'Los stops mentales NO funcionan. Usa órdenes reales en el exchange. Cuando las emociones gritan "va a rebotar", tu orden ya se ejecutó y tu capital está protegido.',
           'Mover el stop hacia abajo es la droga más destructiva del trading. Si defines un stop, RESPÉTALO. Es mejor perder un 2% 10 veces que perder un 50% una vez.'
         ]
@@ -1931,19 +1999,19 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         },
         {
           id: 'q2',
-          question: 'Tu capital es $10,000. Compras SOL a $180 con stop loss en $162 (10% debajo). Siguiendo la regla del 1-2%, ¿cuánto deberías arriesgar máximo y cuál sería tu posición?',
+          question: 'Tu capital de trading es $2,000. Compras SOL a $180 con stop loss en $162 (10% debajo). Siguiendo la regla del 1-2%, ¿cuánto deberías arriesgar máximo y cuál sería tu posición?',
           options: [
             { id: 'a', text: 'Puedes arriesgar todo, SOL es seguro' },
-            { id: 'b', text: 'Máximo $100-200 de riesgo (1-2%). Con stop 10% abajo, tu posición máxima es $1,000-2,000' },
-            { id: 'c', text: '$1,000 de riesgo (10%), así la ganancia vale la pena' },
+            { id: 'b', text: 'Máximo $20-40 de riesgo (1-2%). Con stop 10% abajo, tu posición máxima es $200-400' },
+            { id: 'c', text: '$200 de riesgo (10%), así la ganancia vale la pena' },
             { id: 'd', text: 'No hay fórmula, depende de cómo te sientas' }
           ],
           correctAnswer: 'b',
-          explanation: 'Capital × 2% riesgo = $200 máximo de pérdida. Si tu stop está 10% debajo, posición = $200 / 0.10 = $2,000 máximo. Si SOL cae a tu stop, pierdes $200 (2% de tu capital). Y si recalculas el 2% sobre el capital restante, 20 pérdidas seguidas te dejan ~67% del capital y hasta 50 te dejan ~36%: sigues operando.'
+          explanation: 'Capital de trading × 2% de riesgo = $40 máximo de pérdida. Si tu stop está 10% debajo, posición = $40 / 0.10 = $400 máximo. Si SOL cae a tu stop, pierdes unos $40 (2% de tu capital de trading). Y si recalculas el 2% sobre el capital restante, 20 pérdidas seguidas te dejan ~67% del capital y hasta 50 te dejan ~36%: sigues operando.'
         },
         {
           id: 'q3',
-          question: 'El precio toca tu stop loss y rebotas fuerte: SOL cae a $162, activa tu stop, y luego sube a $200. Perdiste la operación. ¿Qué hiciste bien?',
+          question: 'El precio toca tu stop loss y rebota fuerte: SOL cae a $162, activa tu stop, y luego sube a $200. Perdiste la operación. ¿Qué hiciste bien?',
           options: [
             { id: 'a', text: 'Nada, perdí dinero y el precio subió sin mí: el stop me costó la operación' },
             { id: 'b', text: 'Protegí mi capital con una pérdida controlada del 2%. Puedo volver a entrar cuando quiera' },
@@ -1955,7 +2023,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         },
         {
           id: 'q4',
-          question: 'Pierdes 50% de tu capital ($10,000 → $5,000). ¿Cuánto necesitas ganar para volver a $10,000?',
+          question: 'Pierdes 50% de tu capital (de $10,000 a $5,000). ¿Cuánto necesitas ganar para volver a $10,000?',
           options: [
             { id: 'a', text: '+50%, igual que lo que perdiste' },
             { id: 'b', text: '+100%, necesitas DUPLICAR tu capital restante para volver al punto de partida' },
@@ -1985,9 +2053,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Toma de Ganancias (Take Profit)',
     level: 'Intermedio',
     number: '11 de 12',
-    duration: '14 min',
+    duration: '15 min',
     type: 'Tutorial Práctico',
-    description: 'Las ganancias en pantalla no son reales hasta que vendes. Aprende a tomar ganancias escalonadamente, a definir targets antes de entrar, y a maximizar tus retornos sin dejar que la codicia destruya lo que construiste.',
+    description: 'Las ganancias en pantalla no son reales hasta que vendes. Aprende a tomar ganancias escalonadamente, a definir targets antes de entrar, y a proteger lo que ganaste sin dejar que la codicia lo destruya.',
     sections: [
       {
         type: 'intro',
@@ -1995,17 +2063,17 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Imagina un trader que compró SOL a $3 a inicios de 2021. Para noviembre de 2021, el precio superaba los $250, un retorno de 80×. En pantalla era millonario. No vendió ni un solo token. "Va a llegar a $1,000", se dijo. Para 2022, SOL cayó a $8. Su ganancia de 80× se convirtió en un modesto 2.6×. Todavía ganó algo, pero perdió el **97% de sus ganancias** por no tomar nada. Esta historia se repite en CADA ciclo con MILES de personas. Ganan fortunas en papel y terminan con migajas porque nunca aprendieron la habilidad más difícil del trading: **vender**. Comprar es fácil, ves algo que sube y quieres entrar. Vender es doloroso, "¿y si sigue subiendo?" "¿y si pierdo el próximo 10×?". Por eso necesitas un PLAN de salida definido ANTES de entrar.',
         highlight: {
           title: 'Cuando Tomas el Screenshot',
-          text: 'Cuando te encuentres tomando capturas de pantalla de tus ganancias para presumir en redes sociales, es una señal clara de euforia. Ese es exactamente el momento en que deberías estar vendiendo, no celebrando.'
+          text: 'Cuando te encuentres tomando capturas de pantalla de tus ganancias para presumir en redes sociales, es una señal clara de euforia. Suele ser el momento de ejecutar tu plan de venta, no de celebrar.'
         }
       },
       {
         type: 'main',
         title: 'Scaling Out: La Estrategia de los Profesionales',
-        content: 'La pregunta no es "¿vendo o no vendo?" Es "¿cuánto vendo y a qué precio?" Los profesionales nunca venden todo de golpe. Usan **scaling out** (venta escalonada): van vendiendo porciones de su posición a medida que el precio sube.',
+        content: 'La pregunta no es "¿vendo o no vendo?" Es "¿cuánto vendo y a qué precio?" Muchos traders experimentados evitan vender todo de golpe. Usan **scaling out** (venta escalonada): van vendiendo porciones de su posición a medida que el precio sube.',
         features: [
           { icon: Target, title: 'El Framework de Scaling', text: 'Un plan clásico: **25% en +2×** (sacas la mitad de tu inversión original), **25% en +3-5×** (aseguras ganancias reales), **25% en +5-10×** (capitalizas la explosión), **25% moonbag** (dejas correr sin límite). Ajusta los porcentajes según tu convicción y el contexto del mercado.' },
           { icon: CheckCircle, title: 'Por Qué Funciona', text: 'Scaling out elimina el problema de timing perfecto. No necesitas adivinar el techo exacto. Capturas ganancias en cada nivel. Si el precio hace 20× y vendiste parcialmente, capturaste una porción enorme. Si cae después de 3×, ya aseguraste ganancia real.' },
-          { icon: Shield, title: 'Break-Even Stop', text: 'Después de tu primera venta parcial (que debería cubrir al menos tu inversión original), mueve tu stop loss al precio de entrada (break-even). Ahora estás jugando con "dinero gratis", cero riesgo de perder capital propio.' }
+          { icon: Shield, title: 'Break-Even Stop', text: 'Después de tu primera venta parcial, puedes mover tu stop loss al precio de entrada (break-even). Así limitas la pérdida de tu inversión original (salvo slippage). Pero la ganancia acumulada sigue en riesgo, y es tan tuya como el capital inicial: no es "dinero gratis".' }
         ]
       },
       {
@@ -2013,18 +2081,18 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'Targets Basados en Análisis Técnico',
         content: 'Tus niveles de take profit no deberían ser arbitrarios. Deberían basarse en la estructura del mercado:',
         features: [
-          { icon: BarChart3, title: 'Resistencias como Targets', text: 'Las zonas de resistencia que identificaste en la Lección 14 son targets naturales. Si compraste en soporte en $150 y la próxima resistencia fuerte está en $200, tu primer TP está ahí. La siguiente en $250. Vende donde el mercado es más probable que frene.' },
-          { icon: Percent, title: 'Extensiones de Fibonacci', text: 'Las extensiones de Fibonacci (1.618, 2.618, 4.236) son niveles donde el precio tiende a pausar o revertir después de una ruptura. No necesitas dominarlas, pero saber que existen y consultarlas te da niveles de TP más precisos.' },
-          { icon: Landmark, title: 'Números Redondos Psicológicos', text: 'BTC a $100K, SOL a $200, ETH a $5K. Los números redondos acumulan órdenes de venta masivas. Si tu posición se acerca a un número redondo importante, es un buen lugar para tomar parciales.' }
+          { icon: BarChart3, title: 'Resistencias como Targets', text: 'Las zonas de resistencia que identificaste en la lección Soportes y Resistencias son targets naturales. Si compraste en soporte en $150 y la próxima resistencia fuerte está en $200, tu primer TP está ahí. La siguiente en $250. Vende donde es más probable que el mercado frene.' },
+          { icon: Percent, title: 'Extensiones de Fibonacci', text: 'Las extensiones de Fibonacci (1.618, 2.618, 4.236) son niveles que muchos traders vigilan, así que a veces el precio pausa ahí. La evidencia de que funcionen por sí solas es débil: úsalas como referencia adicional, no como la razón principal de tu target.' },
+          { icon: Landmark, title: 'Números Redondos Psicológicos', text: 'BTC a $100K, SOL a $200, ETH a $5K. Los números redondos suelen acumular muchas órdenes de venta. Si tu posición se acerca a un número redondo importante, es un buen lugar para tomar parciales.' }
         ]
       },
       {
         type: 'main',
         title: 'El Concepto del Moonbag',
-        content: 'El **moonbag** es la porción de tu posición (10-25%) que dejas correr indefinidamente después de tomar ganancias en el resto. Es "dinero gratis", capital que ya recuperaste y más.',
+        content: 'El **moonbag** es la porción de tu posición (10-25%) que dejas correr después de tomar ganancias en el resto. Mucha gente lo trata como si fuera gratis. No lo es: es una ganancia que ya es tuya, que vale lo que vale hoy, y que puedes perder.',
         features: [
-          { icon: Zap, title: 'Cómo Funciona', text: 'Compraste 1000 tokens a $1 ($1,000). El precio llega a $5. Vendes 600 tokens a $5 = $3,000 (3× tu inversión original). Te quedan 400 tokens que "no te costaron nada". Si suben a $50, tienes $20,000 extra. Si caen a cero, no perdiste capital.' },
-          { icon: Shield, title: 'Sin Presión Emocional', text: 'El moonbag libera tu mente. No te importa si el precio cae porque ya ganaste. No sientes FOMO si sigue subiendo porque todavía tienes exposición. Es la posición perfecta emocionalmente: riesgo cero, upside ilimitado.' },
+          { icon: Zap, title: 'Cómo Funciona', text: 'Compraste 1000 tokens a $1 ($1,000). El precio llega a $5. Vendes 750 tokens a $5 = $3,750: recuperas tu inversión y más. Te quedan 250 tokens (25%), que hoy valen $1,250. Si suben a $50, valdrían $12,500. Si caen a cero, pierdes $1,250 que eran tuyos. Y la venta probablemente generó impuestos sobre la ganancia: revisa la lección Tu Plan de Inversión Personal.' },
+          { icon: Shield, title: 'Sin Presión Emocional', text: 'El moonbag reduce la presión: ya aseguraste la mayor parte, y no sientes tanto FOMO si sigue subiendo porque todavía tienes exposición. Pero no es riesgo cero. Dale su propio plan (un trailing stop o un precio de venta), igual que a cualquier otra posición.' },
           { icon: AlertTriangle, title: 'Error Común', text: 'El error es tratar TODO el portafolio como moonbag. "No vendo nada, todo puede hacer 100×." Eso no es moonbag, es codicia. El moonbag es el 10-25% DESPUÉS de tomar ganancias significativas en el otro 75-90%.' }
         ]
       },
@@ -2059,9 +2127,9 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         title: 'La Trampa del "Podría Subir Más"',
         content: 'La codicia es el enemigo #1 de la toma de ganancias. Cuando tu posición está +300%, tu cerebro no quiere vender porque "podría llegar a +500%". Y si llega a +500%, "podría llegar a +1000%". Es un ciclo infinito que termina cuando el precio se desploma y tus ganancias se evaporan.',
         features: [
-          { icon: Brain, title: 'El Sesgo de la Codicia', text: 'Los estudios de Kahneman y Tversky sobre aversión a la pérdida sugieren que perder duele aproximadamente el doble de lo que agrada ganar lo mismo. En trading, "perder" una ganancia potencial (vender y ver que sigue subiendo) activa ese mismo dolor, y te hace aferrarte a posiciones más tiempo del que deberías.' },
+          { icon: Brain, title: 'Dos Sesgos Opuestos', text: 'La evidencia dice algo incómodo. El *efecto disposición* (Shefrin y Statman, 1985; Odean, 1998) muestra que la mayoría de los inversores vende sus ganadoras demasiado pronto y aguanta sus perdedoras demasiado tiempo, para no aceptar la pérdida. En crypto, con subidas extremas, también se ve el error contrario: aferrarse a una ganadora por codicia. Las dos fallas tienen la misma cura: un plan escrito antes de entrar.' },
           { icon: AlertTriangle, title: 'Las Señales de que Deberías Vender', text: 'Estás eufórico y tomando screenshots de ganancias. Tu posición hizo 3×+ en pocos días. Estás fantaseando con cuánto "vas a tener" si sigue subiendo. No puedes dormir porque estás mirando el precio. Si sientes alguna de estas cosas, VENDE AL MENOS UNA PARTE.' },
-          { icon: CheckCircle, title: 'La Frase que Salva Portafolios', text: '**"Nadie quebró por tomar ganancias."** Puede que te pierdas el próximo 2× después de vender. Pero nunca perderás lo que ya aseguraste. Y ese capital asegurado puede financiar tu próxima gran operación con capital real, no con fantasías.' }
+          { icon: CheckCircle, title: 'La Frase que Salva Portafolios', text: '**"Nadie quebró por tomar ganancias."** Puede que te pierdas el próximo 2× después de vender. Pero nunca perderás lo que ya aseguraste. Y ese capital asegurado vuelve a tu plan: a tu base de largo plazo, a tu fondo de emergencia o a tu capital de trading.' }
         ]
       },
       {
@@ -2070,21 +2138,27 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         content: 'Antes de CADA operación, define tu plan de salida por escrito. Aquí tienes el template que deberías completar:',
         features: [
           { icon: Target, title: '1. Entry Price y Razón', text: '¿A qué precio entras y POR QUÉ? "Compro SOL a $160 porque está en soporte semanal con RSI en sobreventa y la estructura sigue alcista."' },
-          { icon: Shield, title: '2. Stop Loss y Tamaño', text: '¿Dónde sale si estás equivocado? "Stop en $144 (-10%). Con 2% de riesgo y $10K de capital, mi posición es $2,000."' },
+          { icon: Shield, title: '2. Stop Loss y Tamaño', text: '¿Dónde sales si estás equivocado? "Stop en $144 (-10%). Con 2% de riesgo sobre $2,000 de capital de trading ($40), mi posición es $400."' },
           { icon: Zap, title: '3. Targets de Take Profit', text: '"TP1: vendo 25% en $200 (resistencia). TP2: vendo 25% en $250 (número redondo). TP3: vendo 25% en $300 (extensión Fib). Moonbag: 25% corre con trailing stop de 20%."' },
-          { icon: Lock, title: '4. La Regla de Hierro', text: '**NO cambiar el plan después de entrar.** El plan se define con la mente fría, ANTES de que las emociones entren en juego. Si cambias targets durante la operación, las emociones ganaron.' }
+          { icon: Lock, title: '4. La Regla de Hierro', text: '**NO cambiar el plan después de entrar.** El plan se define con la mente fría, ANTES de que las emociones entren en juego. Si cambias targets durante la operación, las emociones ganaron.' },
+          { icon: CheckCircle, title: '5. Registra Cada Venta', text: 'Anota fecha, cantidad, precio de compra y precio de venta. Cada toma de ganancias puede generar impuestos, y sin registro no podrás calcularlos. Lo viste en la lección Tu Plan de Inversión Personal.' }
         ]
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
       },
       {
         type: 'takeaways',
         title: 'Vendiendo con Estrategia, No con Emoción',
         items: [
-          'Las ganancias en pantalla NO son reales hasta que vendes. La gran mayoría de las personas que "fueron millonarias en crypto" terminó con una fracción porque nunca vendió.',
-          'Scaling out (venta escalonada) es superior a vender todo de golpe. Capturas ganancias en cada nivel, mantienes exposición con el moonbag, y minimizas el arrepentimiento.',
-          'Después de tu primera venta parcial, mueve tu stop a break-even. Ahora juegas con dinero gratis, cero riesgo de perder capital propio.',
-          'El moonbag (10-25% que dejas correr) es la posición perfecta: riesgo cero, upside ilimitado. Pero solo funciona DESPUÉS de tomar ganancias significativas en el otro 75-90%.',
-          'Define tu plan de salida ANTES de entrar: entry, stop loss, targets de TP escalonados. No lo cambies durante la operación, las emociones no son consejeras de confianza.',
-          'Cuando te encuentres tomando screenshots de ganancias, fantaseando sobre precios futuros, o sin poder dormir, VENDE al menos una parte. La euforia es la señal de salida más fiable.'
+          'Las ganancias en pantalla NO son reales hasta que vendes. Muchas personas que "fueron millonarias en crypto" en papel terminaron con una fracción porque nunca vendieron.',
+          'Scaling out (venta escalonada) suele ser mejor que vender todo de golpe. Capturas ganancias en cada nivel, mantienes exposición con el moonbag, y minimizas el arrepentimiento.',
+          'Después de tu primera venta parcial, puedes mover tu stop a break-even para proteger tu inversión original. La ganancia que queda sigue siendo tuya y sigue en riesgo: no es dinero gratis.',
+          'El moonbag (10-25% que dejas correr) te deja exposición sin tanta presión emocional, pero no está libre de riesgo: dale su propio plan. Y solo tiene sentido DESPUÉS de tomar ganancias significativas en el otro 75-90%.',
+          'Define tu plan de salida ANTES de entrar: entry, stop loss, targets de TP escalonados. No lo cambies durante la operación, y registra cada venta: puede generar impuestos.',
+          'Cuando te encuentres tomando screenshots de ganancias, fantaseando sobre precios futuros, o sin poder dormir, VENDE al menos una parte. Tu propia euforia es una de las mejores alarmas para ejecutar tu plan.'
         ]
       }
     ],
@@ -2092,7 +2166,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       questions: [
         {
           id: 'q1',
-          question: 'Tu posición está +300% en 3 días. Tu cerebro dice "HODL hasta la luna". ¿Cuál es la jugada profesional?',
+          question: 'Tu posición está +300% en 3 días. Tu cerebro dice "HODL hasta la luna". ¿Qué opción es la más prudente?',
           options: [
             { id: 'a', text: 'HODL todo: si hizo 300% en tres días, puede hacer 1000% en una semana' },
             { id: 'b', text: 'Vendo 50-70% y muevo el stop a break-even: aseguro ganancias y dejo correr el resto' },
@@ -2100,11 +2174,11 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Compro más, está subiendo fuerte' }
           ],
           correctAnswer: 'b',
-          explanation: 'Tomas ganancias reales (dinero en tu bolsillo) y dejas el resto correr con stop en break-even. Si sube más, perfecto, todavía capturas upside. Si cae, ya aseguraste la mayoría de las ganancias. Best of both worlds.'
+          explanation: 'Tomas ganancias reales (dinero en tu bolsillo) y dejas el resto correr con un stop. Si sube más, todavía tienes exposición. Si cae, ya aseguraste la mayoría de las ganancias. Ojo: lo que queda sigue siendo tu dinero en riesgo, y la venta puede generar impuestos.'
         },
         {
           id: 'q2',
-          question: '¿Cuál es la estrategia de salida más usada por traders consistentemente rentables?',
+          question: '¿Qué estrategia de salida propone esta lección para no depender de adivinar el techo?',
           options: [
             { id: 'a', text: 'Vender todo cuando el precio llega a un target fijo' },
             { id: 'b', text: 'Scaling out: 25% en +2×, 25% en +3-5×, 25% en +5-10×, 25% moonbag' },
@@ -2112,19 +2186,19 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Vender cuando un influencer dice que vendas' }
           ],
           correctAnswer: 'b',
-          explanation: 'Scaling out elimina la necesidad de adivinar el techo exacto. Capturas ganancias reales en cada nivel y mantienes exposición con el moonbag. No maximiza el resultado teórico perfecto, pero maximiza las ganancias REALES consistentemente.'
+          explanation: 'Scaling out elimina la necesidad de adivinar el techo exacto. Capturas ganancias reales en cada nivel y mantienes exposición con el moonbag. No maximiza el resultado teórico perfecto, pero te asegura ganancias REALES en el camino.'
         },
         {
           id: 'q3',
-          question: 'Compraste 1000 tokens a $1 ($1,000 total). El precio llega a $5. Vendes 600 tokens a $5 ($3,000). ¿Cuál es tu situación actual?',
+          question: 'Compraste 1000 tokens a $1 ($1,000 total). El precio llega a $5. Vendes 750 tokens a $5 ($3,750). ¿Cómo describes correctamente tu situación?',
           options: [
             { id: 'a', text: 'Perdiste, porque vendiste demasiado temprano y dejaste ganancias sobre la mesa' },
-            { id: 'b', text: 'Recuperaste 3× tu inversión y tienes 400 tokens gratis como moonbag: riesgo cero, upside abierto' },
-            { id: 'c', text: 'Ganaste pero deberías haber vendido todo' },
+            { id: 'b', text: 'Aseguraste $3,750 y tienes un moonbag de 250 tokens que vale $1,250 y sigue en riesgo' },
+            { id: 'c', text: 'Tienes 250 tokens gratis: como ya recuperaste tu inversión, no puedes perder nada' },
             { id: 'd', text: 'Estás en pérdida porque todavía tienes tokens' }
           ],
           correctAnswer: 'b',
-          explanation: 'Situación perfecta: $3,000 reales en tu cuenta (3× tu inversión) + 400 tokens que "no te costaron nada". Esos 400 tokens son tu moonbag. Sin presión emocional. Riesgo cero. Upside ilimitado. Esta es la posición que buscan los profesionales.'
+          explanation: 'Buena situación: $3,750 reales asegurados y un moonbag de 250 tokens. Pero la opción c es la trampa del "dinero de la casa": esos 250 tokens valen $1,250 hoy, y si caen a cero pierdes $1,250 que eran tuyos. Trátalos como cualquier posición, con su propio plan de salida. Y recuerda que la venta de los 750 tokens puede generar impuestos.'
         },
         {
           id: 'q4',
@@ -2136,7 +2210,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Porque sube los fees de trading' }
           ],
           correctAnswer: 'b',
-          explanation: 'Tu plan de salida se define ANTES de entrar, con la mente fría y objetiva. Cuando estás en una posición ganadora, la codicia dice "¿y si llega a 10×?". Mover targets mid-trade = dejar que las emociones tomen el volante. Las emociones son malas consejeras.'
+          explanation: 'Tu plan de salida se define ANTES de entrar, con la mente fría y objetiva. Cuando estás en una posición ganadora, la codicia dice "¿y si llega a 10×?". Mover targets durante la operación = dejar que las emociones tomen el volante. Las emociones son malas consejeras.'
         },
         {
           id: 'q5',
@@ -2148,7 +2222,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             { id: 'd', text: 'Es normal y no requiere acción' }
           ],
           correctAnswer: 'b',
-          explanation: 'La euforia es la señal de salida más fiable. Cuando no puedes dormir, tomas screenshots, y fantaseas = tu cerebro está en modo FOMO máximo. Históricamente, estos son los momentos que preceden correcciones. Ejecuta tu plan de take profit, nadie quebró por tomar ganancias.'
+          explanation: 'Tu euforia es una buena alarma: es justo cuando más cuesta seguir el plan. Cuando no puedes dormir, tomas screenshots y fantaseas, tu cerebro está en modo FOMO máximo. Esos momentos a menudo coinciden con techos locales, aunque no siempre. Ejecuta tu plan de take profit, nadie quebró por tomar ganancias.'
         }
       ]
     }
@@ -2158,17 +2232,17 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
     title: 'Mentalidad de Trader',
     level: 'Intermedio',
     number: '12 de 12',
-    duration: '17 min',
+    duration: '19 min',
     type: 'Psicología',
-    description: 'La mayor parte del éxito en trading no es técnica, es psicología. Aprende a controlar el FOMO, la avaricia, el miedo y la venganza para proteger tu capital y tomar mejores decisiones.',
+    description: 'Sin disciplina, ninguna estrategia sobrevive. Aprende a controlar el FOMO, la avaricia, el miedo y la venganza, a medir si tu estrategia tiene ventaja real, y a proteger tu capital.',
     sections: [
       {
         type: 'intro',
         title: 'Tu Mayor Enemigo Eres Tú',
-        content: '¿Sabías que la mayoría de los traders que pierden dinero **tienen estrategias que funcionan**? El problema no es su sistema, es que no pueden seguirlo. Mueven el stop loss cuando no deberían. Entran por FOMO cuando su plan dice "espera". Cierran una posición ganadora demasiado pronto por miedo a perder las ganancias. Después de una pérdida, doblan el tamaño buscando recuperar rápido. Estos no son errores técnicos. Son errores **emocionales**. Y son exactamente los mismos errores que comete la gran mayoría de los participantes del mercado. En esta lección vas a aprender a identificar los sesgos psicológicos que te sabotean, a construir un sistema que te proteja de ti mismo, y a desarrollar la disciplina que separa a los traders consistentes de los que pierden todo.',
+        content: 'Muchos traders saben lo que deberían hacer y aun así no lo hacen. Mueven el stop loss cuando no deberían. Entran por FOMO cuando su plan dice "espera". Cierran una posición ganadora demasiado pronto por miedo a perder las ganancias. Después de una pérdida, doblan el tamaño buscando recuperar rápido. Estos no son errores técnicos. Son errores **emocionales**. Y son exactamente los mismos errores que comete la gran mayoría de los participantes del mercado. En esta lección vas a aprender a identificar los sesgos psicológicos que te sabotean, a construir un sistema que te proteja de ti mismo, y a desarrollar la disciplina que separa a los traders consistentes de los que pierden todo. Una advertencia honesta: la disciplina es necesaria, pero no suficiente. Aunque domines tus emociones, la mayoría de quienes hacen trading activo pierde dinero.',
         highlight: {
           title: 'El Dato que Nadie Quiere Escuchar',
-          text: 'Según estudios de brokers regulados, entre el **70% y el 90% de los traders retail pierden dinero**. No porque el mercado sea impredecible, sino porque las emociones humanas están diseñadas para tomar las peores decisiones posibles en los mercados financieros.'
+          text: 'Los datos más sólidos vienen de mercados regulados. En Europa, en 2018 la autoridad de mercados (ESMA) analizó los brokers de CFDs, productos apalancados, y encontró que **entre 74% y 89% de las cuentas retail pierde dinero**; desde entonces cada broker debe publicar su porcentaje. En Brasil, un estudio sobre day traders de futuros (Chague, De-Losso y Giovannetti) encontró que **el 97% de quienes persistieron más de 300 días perdió dinero**. En Taiwán, menos del 1% de los day traders fue rentable de forma predecible después de comisiones (Barber, Lee, Liu y Odean). Las causas se suman: costos y comisiones, apalancamiento, competir contra profesionales con mejor información y tecnología, y emociones. Para crypto no hay estadísticas tan buenas, pero no hay razón para pensar que sea más fácil.'
         }
       },
       {
@@ -2189,7 +2263,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         features: [
           { icon: Brain, title: 'Sesgo de Confirmación', text: 'Buscas información que confirme lo que ya crees e ignoras la que lo contradice. Si estás bullish en SOL, solo lees threads positivos y descartas cualquier argumento bajista como "FUD". Esto te impide ver señales de peligro evidentes. **Antídoto**: Antes de entrar a un trade, dedica 10 minutos a buscar activamente la tesis contraria. Si no puedes encontrar argumentos en contra, no entiendes suficiente el activo.' },
           { icon: Anchor, title: 'Sesgo de Anclaje', text: '"Compré SOL a $250, no voy a vender a $150". Tu precio de compra es irrelevante para el mercado, pero tu cerebro lo usa como ancla. Te aferras a posiciones perdedoras esperando "recuperar tu precio". El mercado no sabe ni le importa a cuánto compraste. **Antídoto**: Pregúntate: "Si no tuviera esta posición, ¿la abriría hoy a este precio?". Si la respuesta es no, vende.' },
-          { icon: Users, title: 'Sesgo de Manada', text: '"Todos están comprando X, no puede estar mal". La presión social te lleva a seguir a la multitud. Pero en trading, cuando "todos" están de un lado, es señal de peligro: ¿quién queda para comprar? Los movimientos más rentables ocurren cuando vas contra el consenso, y eso se siente terrible emocionalmente. **Antídoto**: Cuando sientas una convicción abrumadora compartida por todos, pregúntate quién está en el otro lado del trade.' }
+          { icon: Users, title: 'Sesgo de Manada', text: '"Todos están comprando X, no puede estar mal". La presión social te lleva a seguir a la multitud. Pero en trading, cuando "todos" están de un lado, es señal de peligro: ¿quién queda para comprar? Muchas de las mejores oportunidades aparecen cuando vas contra el consenso, y eso se siente terrible emocionalmente (aunque ir contra la multitud tampoco garantiza nada). **Antídoto**: Cuando sientas una convicción abrumadora compartida por todos, pregúntate quién está en el otro lado del trade.' }
         ]
       },
       {
@@ -2214,47 +2288,63 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
             'Acepta pérdidas como costo del negocio y pasa al siguiente trade',
             'Tiene un plan escrito con reglas claras para cada situación',
             'Revisa gráficos en horarios definidos, el resto del tiempo vive su vida',
-            'Gana consistentemente porque sobrevive para capturar los grandes movimientos'
+            'Tiene más probabilidades de sobrevivir, que es el requisito para todo lo demás'
           ]
         }
       },
       {
         type: 'main',
         title: 'El Plan de Trading: Tu Escudo Anti-Emociones',
-        content: 'Un plan de trading no es una sugerencia, es un **contrato contigo mismo**. Lo escribes cuando estás calmado y racional, y lo sigues cuando estás emocional y tentado. Sin un plan escrito, cada decisión se toma en caliente, y las decisiones en caliente en trading siempre pierden dinero a largo plazo.',
+        content: 'Un plan de trading no es una sugerencia, es un **contrato contigo mismo**. Lo escribes cuando estás calmado y racional, y lo sigues cuando estás emocional y tentado. Sin un plan escrito, cada decisión se toma en caliente, y las decisiones en caliente en trading suelen perder dinero a largo plazo.',
         features: [
-          { icon: Target, title: 'Qué Debe Incluir tu Plan', text: '(1) **Criterios de entrada**: ¿Qué señales necesitas para abrir un trade? (patrón técnico, señal on-chain, narrativa). (2) **Tamaño de posición**: ¿Qué % de tu portafolio arriesgas? (nunca más de 1-2% por trade, la regla que ya conoces del stop loss). (3) **Stop loss**: ¿A qué precio sales si te equivocas? (definido ANTES de entrar). (4) **Take profit**: ¿A qué niveles tomas ganancias? (parciales: 1/3, 1/3, 1/3). (5) **Reglas de estado mental**: "No opero si estoy enojado, cansado o ebrio".' },
-          { icon: BookOpen, title: 'El Diario de Trading', text: 'Después de cada trade, anota: qué compraste, por qué, a qué precio, stop loss, take profit, y cómo te sentías emocionalmente. Después de 50-100 trades, revisa tu diario. Vas a descubrir patrones: "siempre pierdo los viernes por la noche", "mis mejores trades son cuando estoy calmado", "el revenge trading me costó un 30% del portafolio". El diario convierte errores emocionales en datos accionables.' }
+          { icon: Target, title: 'Qué Debe Incluir tu Plan', text: '(1) **Criterios de entrada**: ¿Qué señales necesitas para abrir un trade? (patrón técnico, señal on-chain, narrativa). (2) **Tamaño de posición**: ¿Qué % de tu capital de trading arriesgas? (nunca más de 1-2% por trade, la regla que ya conoces del stop loss). (3) **Stop loss**: ¿A qué precio sales si te equivocas? (definido ANTES de entrar). (4) **Take profit**: ¿A qué niveles tomas ganancias? (ventas parciales por tramos, como el plan de 25% en 25% de la lección Toma de Ganancias). (5) **Reglas de estado mental**: "No opero si estoy enojado, cansado o ebrio".' },
+          { icon: BookOpen, title: 'El Diario de Trading', text: 'Después de cada trade, anota: qué compraste, por qué, a qué precio, stop loss, take profit, y cómo te sentías emocionalmente. Después de 50-100 trades, revisa tu diario. Anota también cuántos R ganaste o perdiste. Vas a descubrir patrones: "siempre pierdo los viernes por la noche", "mis mejores trades son cuando estoy calmado", "el revenge trading me costó un 30% de mi capital de trading". El diario convierte errores emocionales en datos accionables.' }
         ]
       },
       {
         type: 'main',
         title: 'Técnicas Prácticas de Control Emocional',
-        content: 'La disciplina no es un rasgo de personalidad, es un sistema. Estas técnicas probadas por traders profesionales te ayudan a mantener el control cuando las emociones gritan:',
+        content: 'La disciplina no es un rasgo de personalidad, es un sistema. Estas técnicas, que usan muchos traders, te ayudan a mantener el control cuando las emociones gritan:',
         features: [
           { icon: Clock, title: 'La Regla de las 24 Horas', text: 'Nunca actúes por impulso. Cuando sientas FOMO o urgencia, espera 24 horas. Si después de 24 horas el trade todavía tiene sentido según tu plan, ejecútalo. La mayoría de los impulsos desaparecen. Esta simple regla te salva de los peores errores.' },
-          { icon: Lock, title: 'El Presupuesto de Riesgo Diario', text: 'Define un máximo de pérdida diaria (ejemplo: -3% del portafolio). Si llegas a ese límite, cierras todo y no operas más ese día. Sin excepciones. Los casinos ponen límites a los jugadores, tú debes ponerte límites a ti mismo.' },
-          { icon: RefreshCw, title: 'La Desconexión Programada', text: 'Después de un trade grande (ganes o pierdas), aléjate de las pantallas mínimo 1-2 horas. Sal a caminar, haz ejercicio, llama a alguien. Los peores trades de tu vida se harán inmediatamente después de un trade emocional. Rompe el ciclo con distancia física.' },
+          { icon: Lock, title: 'El Presupuesto de Riesgo Diario', text: 'Define un máximo de pérdida diaria (ejemplo: -3% de tu capital de trading). Si llegas a ese límite, cierras todo y no operas más ese día. Sin excepciones. Los casinos ponen límites a los jugadores, tú debes ponerte límites a ti mismo.' },
+          { icon: RefreshCw, title: 'La Desconexión Programada', text: 'Después de un trade grande (ganes o pierdas), aléjate de las pantallas mínimo 1-2 horas. Sal a caminar, haz ejercicio, llama a alguien. Muchos de los peores trades se hacen justo después de un trade emocional. Rompe el ciclo con distancia física.' },
           { icon: CheckCircle, title: 'El Checklist Pre-Trade', text: 'Antes de cada trade, responde estas preguntas en voz alta o escríbelas: "¿Esto está en mi plan?", "¿Cuánto pierdo si me equivoco?", "¿Estoy entrando por análisis o por emoción?", "¿Puedo dormir tranquilo con esta posición?". Si alguna respuesta te incomoda, no entres.' }
         ]
       },
       {
         type: 'main',
-        title: 'La Varianza: Tu Amiga Incomprendida',
-        content: 'Este es quizás el concepto más importante y menos entendido del trading. Un trader con un **60% de win rate** (gana 6 de cada 10 trades) va a tener rachas de 5, 7, incluso 10 pérdidas seguidas. Esto no significa que su estrategia esté rota, es **matemáticamente inevitable**. Se llama varianza, y entenderla cambia todo.',
+        title: 'Expectativa: El Win Rate No Lo Es Todo',
+        content: 'Un win rate alto no te dice si una estrategia gana dinero. Lo que importa es la **expectativa**: cuánto ganas o pierdes en promedio por trade, contando comisiones. Mídela en "R", la cantidad que arriesgas en cada operación (si tu stop te hace perder $40, 1R = $40).',
         features: [
-          { icon: BarChart3, title: 'Los Números No Mienten', text: 'Con un 60% de win rate (que es excelente), la probabilidad de sufrir una racha de 5 pérdidas seguidas en 100 trades es de ~46%: prácticamente una moneda al aire. En 200 trades sube a ~71%. Incluso una racha de 7 pérdidas aparece en ~18% de los casos con 200 trades (y de 8, en ~7%). Es decir: te va a pasar, y no significa que tu estrategia esté rota. Si cambias tu estrategia cada vez que pierdes 3 seguidos, nunca sabrás si funciona. Necesitas mínimo 100-200 trades para evaluar un sistema.' },
+          { icon: Percent, title: 'La Fórmula', text: '**Expectativa = (% de aciertos × ganancia promedio) − (% de fallos × pérdida promedio) − costos.** Si es positiva después de muchos trades, la estrategia tiene ventaja. Si es negativa, ninguna disciplina la salva.' },
+          { icon: BarChart3, title: 'Tres Traders, Tres Resultados', text: 'Trader A: 70% de aciertos, gana 0.5R y pierde 1.5R: 0.35 − 0.45 = **−0.1R por trade**. Pierde dinero ganando casi siempre. Trader B: 40% de aciertos, gana 2.5R y pierde 1R: 1.0 − 0.6 = **+0.4R**. Gana perdiendo la mayoría de las veces. Trader C: 60% de aciertos, gana 1R y pierde 1R, pero paga 0.15R en comisiones y slippage por trade: 0.6 − 0.4 − 0.15 = **+0.05R**. Casi todo su margen se lo comen los costos.' },
+          { icon: AlertTriangle, title: 'Por Qué Importa', text: 'La mayoría de las estrategias retail tiene expectativa cercana a cero antes de costos, y negativa después. Por eso el diario de trading debe registrar R ganados y perdidos, no solo si acertaste. Sin 100-200 trades registrados, no sabes cuál es tu expectativa real.' }
+        ]
+      },
+      {
+        type: 'main',
+        title: 'La Varianza: Tu Amiga Incomprendida',
+        content: 'Este es quizás el concepto más importante y menos entendido del trading. Un trader con un **60% de win rate** (gana 6 de cada 10 trades) va a tener rachas de 5, 7 y a veces 8 pérdidas seguidas. Esto no significa que su estrategia esté rota, es **matemáticamente inevitable**. Se llama varianza, y entenderla cambia todo.',
+        features: [
+          { icon: BarChart3, title: 'Los Números No Mienten', text: 'Con un 60% de win rate, la probabilidad de sufrir una racha de 5 pérdidas seguidas en 100 trades es de ~46%: prácticamente una moneda al aire. En 200 trades sube a ~71%. Incluso una racha de 7 pérdidas aparece en ~18% de los casos con 200 trades (y de 8, en ~7%). Es decir: te va a pasar, y no significa que tu estrategia esté rota. Si cambias tu estrategia cada vez que pierdes 3 seguidos, nunca sabrás si funciona. Necesitas mínimo 100-200 trades para evaluar un sistema.' },
           { icon: PiggyBank, title: 'Gestión de Capital + Varianza', text: 'Si arriesgas el 2% por trade, 5 pérdidas seguidas = -10%. Recuperable. Si arriesgas el 10% por trade, 5 pérdidas seguidas = -50%. Casi imposible de recuperar (necesitas +100% solo para volver a 0). La gestión de riesgo no es opcional, es lo que te permite sobrevivir la varianza inevitable.' }
         ]
+      },
+      {
+        type: 'main',
+        title: 'Educación, No Asesoría',
+        content: 'Todo lo que ves en este nivel es educación financiera general, no asesoría personalizada ni una recomendación de compra o venta. El trading activo tiene alto riesgo y la mayoría de quienes lo practican pierde dinero. Si decides operar, usa solo tu capital de trading (máximo 5-10% de tu porción cripto) y nunca tu base de DCA, tu fondo de emergencia ni dinero que necesites.'
       },
       {
         type: 'takeaways',
         title: 'Tu Armadura Psicológica',
         items: [
-          'La mayoría de las pérdidas en trading viene de errores emocionales, no técnicos. FOMO, avaricia, miedo y revenge trading son los 4 demonios que debes controlar para ser rentable.',
+          'Muchas pérdidas en trading vienen de errores emocionales, y el resto de costos y apalancamiento. FOMO, avaricia, miedo y revenge trading son los 4 demonios que debes controlar para tener siquiera una oportunidad.',
           'Los sesgos cognitivos (confirmación, anclaje, manada) distorsionan tu percepción sin que te des cuenta. El antídoto es buscar activamente la tesis contraria antes de cada trade.',
           'Un plan de trading escrito es tu escudo anti-emociones. Lo creas en frío (racional) y lo sigues en caliente (emocional). Sin plan escrito, cada decisión es una apuesta.',
           'Técnicas prácticas: regla de 24 horas contra el FOMO, presupuesto de riesgo diario (-3% máximo), desconexión programada después de trades emocionales, y checklist pre-trade para validar cada entrada.',
+          'Lo que importa es la expectativa, no el win rate: puedes ganar 70% de las veces y perder dinero. Mídela en R, con costos incluidos.',
           'La varianza es matemáticamente inevitable: con 60% win rate, tendrás rachas de 5-8 pérdidas seguidas. Por eso necesitas gestión de riesgo (1-2% por trade) y mínimo 100-200 trades para evaluar cualquier estrategia.',
           'El diario de trading es tu herramienta más poderosa. Convierte errores emocionales repetitivos en datos que puedes analizar y corregir. Después de 50-100 trades, los patrones son evidentes.'
         ]
@@ -2276,7 +2366,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         },
         {
           id: 'q2',
-          question: 'Ves que un token acaba de subir 80% en las últimas 4 horas. Crypto Twitter está lleno de mensajes de "🚀🚀🚀 to the moon". Sientes una urgencia intensa de comprar. ¿Cuál es la mejor respuesta?',
+          question: 'Ves que un token acaba de subir 80% en las últimas 4 horas. Crypto Twitter está lleno de mensajes de "to the moon". Sientes una urgencia intensa de comprar. ¿Cuál es la mejor respuesta?',
           options: [
             { id: 'a', text: 'Compro inmediatamente antes de que suba más, no quiero perderme esta oportunidad' },
             { id: 'b', text: 'Aplico la regla de las 24 horas: si mañana aún cumple mis criterios de entrada, considero entrar' },
@@ -2300,15 +2390,15 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
         },
         {
           id: 'q4',
-          question: 'Acabas de cerrar un trade con -15% de pérdida. Estás frustrado y ves otra "oportunidad" para recuperar lo perdido. ¿Qué deberías hacer?',
+          question: 'Acabas de cerrar un trade con -15% de pérdida. Estás frustrado y ves otra "oportunidad" que parece cumplir tu plan. ¿Qué deberías hacer?',
           options: [
             { id: 'a', text: 'Entrar con el doble de tamaño para recuperar más rápido' },
-            { id: 'b', text: 'Entrar solo si cumple todos los criterios de mi plan escrito' },
+            { id: 'b', text: 'Entrar enseguida con tamaño normal: si el setup es bueno, la emoción no importa' },
             { id: 'c', text: 'Alejarme de las pantallas 1-2 horas y solo volver a evaluar trades cuando esté calmado' },
             { id: 'd', text: 'Llamar a un amigo trader con experiencia para que me diga qué hacer' }
           ],
           correctAnswer: 'c',
-          explanation: 'Después de una pérdida significativa, tu estado emocional está comprometido. El revenge trading (buscar recuperar inmediatamente) es la forma más rápida de destruir una cuenta. La desconexión programada (1-2 horas lejos de pantallas) rompe el ciclo emocional. Ningún trade que tomes enojado o frustrado será bueno.'
+          explanation: 'Después de una pérdida significativa, tu estado emocional está comprometido. El revenge trading (buscar recuperar inmediatamente) es la forma más rápida de destruir una cuenta. Tu propio plan incluye una regla de estado mental: no operar enojado. Por eso, aunque el setup parezca bueno, primero te alejas 1-2 horas de las pantallas y lo vuelves a evaluar en calma. Si sigue siendo bueno, seguirá ahí.'
         },
         {
           id: 'q5',
@@ -2456,7 +2546,7 @@ export const PAID_LESSONS: Record<number, LessonEntry> = {
       },
       {
         type: 'main',
-        title: '\u{1F9E0} Explícalo Tú: El Test de Feynman',
+        title: 'Explícalo Tú: El Test de Feynman',
         content: 'Richard Feynman, premio Nobel de Física, decía: "Si no puedes explicar algo de forma simple, no lo entiendes realmente." Pon a prueba tu comprensión:',
         features: [
           { icon: Brain, title: 'El Reto', text: 'Explícale a CBas cómo funciona un swap en Jupiter, desde que haces clic hasta que los tokens llegan a tu wallet.' },

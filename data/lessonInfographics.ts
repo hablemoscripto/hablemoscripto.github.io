@@ -963,29 +963,29 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "items": [
         {
           "icon": "Scale",
-          "title": "Doji — Indecisión",
+          "title": "Doji: Indecisión",
           "text": "Abrió y cerró casi al mismo precio: equilibrio total entre toros y osos. En soporte o resistencia puede anticipar reversión."
         },
         {
           "icon": "TrendingUp",
-          "title": "Hammer (Martillo) — Alcista",
-          "text": "Cuerpo chico arriba, mecha inferior larga (≥2× el cuerpo). Los osos tiraron, los toros rescataron. Solo válido en soporte tras una caída."
+          "title": "Hammer (Martillo): Alcista",
+          "text": "Cuerpo chico arriba, mecha inferior larga (≥2× el cuerpo). Los osos tiraron, los toros rescataron. Solo tiene sentido en soporte tras una caída."
         },
         {
           "icon": "TrendingDown",
-          "title": "Shooting Star — Bajista",
-          "text": "Lo opuesto al Hammer: cuerpo chico abajo, mecha superior larga. Solo válido en resistencia tras una subida."
+          "title": "Shooting Star: Bajista",
+          "text": "Lo opuesto al Hammer: cuerpo chico abajo, mecha superior larga. Solo tiene sentido en resistencia tras una subida."
         },
         {
           "icon": "Flame",
-          "title": "Marubozu — Convicción Total",
+          "title": "Marubozu: Convicción Total",
           "text": "Cuerpo grande sin mechas. Verde: los toros dominaron todo el período; rojo: los osos aplastaron. Momentum fuerte."
         }
       ],
       "intro": "Una sola vela puede contarte una historia poderosa. Estos cuatro aparecen una y otra vez.",
       "columns": 2
     },
-    "Patrones de Múltiples Velas: Las Combinaciones Ganadoras": {
+    "Patrones de Múltiples Velas: Cambios de Control": {
       "kind": "comparison",
       "left": {
         "title": "Reversión Alcista",
@@ -994,7 +994,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Los toros absorben la presión vendedora y toman el control.",
           "Morning Star: roja grande, vela chica de indecisión, verde grande.",
           "La 3ª vela cierra dentro del cuerpo de la primera.",
-          "Más poderoso en soporte y con volumen creciente."
+          "Tiene más peso en soporte y con volumen creciente."
         ],
         "tone": "green"
       },
@@ -1028,10 +1028,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "right": {
         "title": "Timeframes Altos (4h - Diario - Semanal)",
         "points": [
-          "Señales más limpias y fiables",
+          "Menos ruido, señales más limpias",
           "Puedes revisar 1-2 veces al día",
           "Ideal para swing trading (días-semanas)",
-          "Patrones de velas de alta fiabilidad",
+          "Patrones con algo más de sentido, nunca infalibles",
           "Menos estrés, mejores decisiones",
           "Fees mínimos por menos operaciones"
         ],
@@ -1059,7 +1059,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Retest: confirmación del flip",
-          "detail": "Si la zona rechaza el precio desde abajo, tienes una de las entradas más fiables."
+          "detail": "Si la zona rechaza el precio desde abajo, el flip se está dando. Tu stop va al otro lado de la zona."
         }
       ],
       "intro": "El 'role reversal': la misma zona cambia de rol cuando se rompe."
@@ -1072,13 +1072,13 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "detail": "Miles de traders colocan su stop loss justo debajo de la zona obvia."
         },
         {
-          "title": "La ballena vende agresivamente",
-          "detail": "Empuja el precio a $147 y activa todos esos stops como ventas forzadas.",
+          "title": "Alguien vende fuerte",
+          "detail": "Una ballena o simple ruido empuja el precio a $147 y activa esos stops como ventas forzadas.",
           "warning": true
         },
         {
           "title": "Barrido de liquidez",
-          "detail": "La ballena compra toda esa liquidez barata que tus stops liberaron.",
+          "detail": "Quien compra en $147 aprovecha las ventas forzadas que liberaron esos stops.",
           "warning": true
         },
         {
@@ -1086,7 +1086,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "detail": "Una mecha larga inferior queda como huella del fakeout. Tú quedaste fuera."
         }
       ],
-      "intro": "La cacería de stops: cómo las ballenas barren tu liquidez."
+      "intro": "Una posible explicación de las rupturas falsas: la cacería de stops. Puede pasar, pero rara vez se demuestra."
     },
     "Soporte/Resistencia Fuerte vs Débil": {
       "kind": "comparison",
@@ -1124,7 +1124,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Espera que el precio llegue a la zona",
-          "detail": "No persigas el precio: que venga a ti. Paciencia, no apuestas."
+          "detail": "No persigas el precio: que venga a ti. Ninguna zona garantiza un rebote."
         },
         {
           "title": "Busca confirmación",
@@ -1145,7 +1145,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "value": "> 70",
           "label": "Sobrecompra",
-          "sublabel": "Fiebre: momentum extremo, corrección probable",
+          "sublabel": "Fiebre: momentum extremo, posible corrección",
           "tone": "red"
         },
         {
@@ -1164,7 +1164,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "intro": "El RSI mide el momentum en una escala de 0 a 100. Configuración estándar: 14 períodos.",
       "columns": 3
     },
-    "Divergencias: La Señal Más Poderosa del Análisis Técnico": {
+    "Divergencias: Cuando el Precio y el RSI No Coinciden": {
       "kind": "comparison",
       "left": {
         "title": "Divergencia Bajista",
@@ -1199,15 +1199,15 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "TrendingDown",
           "title": "Death Cross",
-          "text": "La media rápida (50) cruza por debajo de la lenta (200). Señal bajista rezagada: unas veces precedió caídas y otras marcó el suelo (marzo 2020, septiembre 2024)."
+          "text": "La media rápida (50) cruza por debajo de la lenta (200). Señal bajista rezagada: unas veces precedió caídas y otras marcó el suelo (marzo 2020, agosto 2024)."
         },
         {
           "icon": "AlertTriangle",
           "title": "Señales falsas",
-          "text": "En rangos laterales las EMAs se enredan como espagueti. Solo fiables con tendencia clara: espera."
+          "text": "En rangos laterales las EMAs se enredan como espagueti. Solo tienen sentido con tendencia clara: espera."
         }
       ],
-      "intro": "Los cruces se desarrollan durante días o semanas, lo que los hace más fiables que las señales de corto plazo.",
+      "intro": "Los cruces se desarrollan durante días o semanas, por eso llegan tarde: confirman tendencias, no las anticipan.",
       "columns": 3
     },
     "Cuándo Usar Cada Indicador": {
@@ -1218,7 +1218,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Detecta extremos de sobrecompra/sobreventa",
           "Excelente para divergencias y cambios de tendencia",
           "Útil en cualquier timeframe (mejor en 4h+)",
-          "Funciona con tendencia Y en rangos",
+          "En rangos, solo anclado a los extremos",
           "Te dice cuánta fuerza queda en el movimiento",
           "Ideal para timing de entradas y salidas"
         ],
@@ -1229,14 +1229,14 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Identifica la dirección general del mercado",
           "Excelentes como soporte/resistencia dinámicos",
-          "Solo fiables en timeframes altos (diario+)",
+          "Más fiables en 4 horas o más",
           "Solo funcionan con tendencia, NO en rangos",
           "Te dicen la posición del precio en la tendencia",
           "Ideal para operar a favor de la tendencia"
         ],
         "tone": "amber"
       },
-      "note": "En rangos laterales el RSI sigue útil; las EMAs no. Ahí ocurre el 90% de las pérdidas por indicadores."
+      "note": "En rangos laterales el RSI sirve solo en los extremos; las señales de cruce de EMAs, casi nunca."
     }
   },
   16: {
@@ -1248,19 +1248,19 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "detail": "Punto de partida del recorrido alcista"
         },
         {
-          "label": "$180 — HH",
+          "label": "$180: HH",
           "detail": "Máximo más alto: los compradores empujan más arriba"
         },
         {
-          "label": "$170 — HL",
+          "label": "$170: HL",
           "detail": "Mínimo más alto: la demanda aparece antes"
         },
         {
-          "label": "$210 — HH",
+          "label": "$210: HH",
           "detail": "Nuevo máximo: los toros siguen dominando"
         },
         {
-          "label": "$190 — HL",
+          "label": "$190: HL",
           "detail": "Retroceso superficial: compra los retrocesos, no la pelees",
           "highlight": true
         }
@@ -1272,7 +1272,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "left": {
         "title": "BOS en Uptrend (debilidad)",
         "points": [
-          "Secuencia previa: $155 → $180 → $170 → $210 → $190",
+          "Secuencia previa: $155, $180, $170, $210 y $190",
           "El precio cae debajo de $190 (último Higher Low)",
           "La escalera dejó de subir",
           "No es bear market, pero la tendencia se debilitó",
@@ -1283,7 +1283,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "right": {
         "title": "BOS en Downtrend (esperanza)",
         "points": [
-          "Secuencia previa: $55K → $48K → $52K → $45K → $50K",
+          "Secuencia previa: $55K, $48K, $52K, $45K y $50K",
           "El precio supera $50K (último Lower High)",
           "La presión bajista se debilitó",
           "Primera señal de vida de los toros",
@@ -1300,10 +1300,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Secuencia clara de HH + HL o LH + LL",
           "Las EMAs están separadas y ordenadas",
-          "Seguir la tendencia funciona muy bien",
+          "Seguir la tendencia tiene más sentido",
           "Los breakouts tienden a continuar",
-          "Indicadores dan señales más fiables",
-          "Aquí se gana la mayor parte del dinero"
+          "Los indicadores de tendencia son más útiles",
+          "Aun así, las tendencias terminan sin aviso"
         ],
         "tone": "green"
       },
@@ -1325,7 +1325,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "Lee el gráfico (estructura + contexto)",
-          "detail": "Semanal y diario alcistas (HH + HL). El precio retrocedió al soporte de $160; en 4H, RSI en 32 y tocando la EMA 200."
+          "detail": "Semanal y diario alcistas (HH + HL). El precio retrocedió al soporte de $160; en 4H, RSI en 32 y tocando la EMA 200 de 4 horas."
         },
         {
           "title": "Confirma con indicadores",
@@ -1337,10 +1337,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Calcula el tamaño de posición",
-          "detail": "Arriesga máximo 1-2% del capital. Con $5,000, riesgo de $75 y $9 por SOL: ~8 SOL ($1,296). El trader calcula su riesgo antes de entrar."
+          "detail": "Arriesga máximo 1-2% de tu capital de trading (5-10% de tu porción cripto). Con $1,000, riesgo de $15 y $9 por SOL: unos 1.6 SOL (unos $260)."
         }
       ],
-      "intro": "Un trade profesional de SOL/USDC, paso a paso, antes de apretar un solo botón."
+      "intro": "Un trade de ejemplo con SOL/USDC, paso a paso, antes de apretar un solo botón."
     }
   },
   17: {
@@ -1352,7 +1352,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Precio unitario: $0.001 (parece regalado)",
           "100,000M en circulación = Market Cap $100M",
           "Supply total: 10 BILLONES (millones de millones)",
-          "FDV $10,000M: vale como las mayores empresas",
+          "FDV $10,000M: como una empresa grande en bolsa",
           "Ratio MC/FDV < 0.10: 90% esperando para diluirte"
         ],
         "tone": "red"
@@ -1391,11 +1391,11 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "label": "Unlock masivo (>10% del supply)",
-          "detail": "Dump tras el desbloqueo. No seas la liquidez de salida.",
+          "detail": "Presión de venta tras el desbloqueo. No seas la liquidez de salida.",
           "highlight": true
         }
       ],
-      "intro": "Cada unlock libera una ola de tokens. El calendario predice la presión de venta."
+      "intro": "Cada unlock libera una ola de tokens. El calendario te avisa de dónde puede venir la presión de venta."
     },
     "Distribución: ¿Quién Tiene los Tokens?": {
       "kind": "iconGrid",
@@ -1403,12 +1403,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Users",
           "title": "Comunidad / Airdrop",
-          "text": "Ideal ≥40%. Uniswap (60%) es el estándar dorado. <30% favorece a insiders."
+          "text": "Regla práctica: ≥40%. Uniswap (60%) es un referente. <30% favorece a insiders."
         },
         {
           "icon": "Cpu",
           "title": "Equipo / Founders",
-          "text": "Ideal 10-20%. >25% es red flag. <5% también es sospechoso."
+          "text": "Regla práctica: 10-20%. >25% es red flag. <5% también es sospechoso."
         },
         {
           "icon": "Landmark",
@@ -1458,54 +1458,54 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "milestones": [
         {
           "label": "1. Bear Market (Invierno)",
-          "detail": "12-18 meses. Precio cae -70% a -85%. Medios dicen \"crypto muerto\". El MEJOR momento para comprar."
+          "detail": "12-18 meses. Precio cae -70% a -85%. Medios dicen \"crypto muerto\". Históricamente, el mejor momento para DCA paciente."
         },
         {
           "label": "2. Acumulación (Primavera)",
-          "detail": "6-12 meses. Lateral, volumen bajo. El halving ocurre aquí. El dinero inteligente acumula."
+          "detail": "6-12 meses. Lateral, volumen bajo. El halving suele ocurrir aquí. Los pacientes siguen comprando."
         },
         {
           "label": "3. Bull Market (Verano)",
-          "detail": "12-18 meses post-halving. Rompe el ATH. El múltiplo de BTC desde el precio del halving se reduce cada ciclo (~90× → ~30× → ~8× → ~2×); desde el mínimo del bear los números son otros. Las altcoins amplifican el movimiento."
+          "detail": "12-18 meses post-halving. Rompe el ATH. El múltiplo de BTC desde el precio del halving se reduce cada ciclo (~95×, ~30×, ~8× y ~2×); desde el mínimo del bear los números son otros. Las altcoins amplifican el movimiento."
         },
         {
           "label": "4. Distribución (Otoño)",
-          "detail": "2-6 meses. El pico. Tu tía pregunta por Dogecoin. Las ballenas venden a los novatos.",
+          "detail": "2-6 meses. El pico. Tu tía pregunta por Dogecoin. Los que compraron antes venden a los que llegan tarde.",
           "highlight": true
         }
       ],
-      "intro": "El mercado crypto repite el mismo ciclo de 4 fases con cada halving."
+      "intro": "Hasta ahora, el mercado crypto ha repetido un ciclo de 4 fases alrededor de cada halving. Solo se ve claro en retrospectiva."
     },
     "¿Qué es el Halving y Por Qué Importa?": {
       "kind": "timeline",
       "milestones": [
         {
-          "label": "2009 — 50 BTC",
+          "label": "2009: 50 BTC",
           "detail": "Recompensa inicial por bloque."
         },
         {
-          "label": "2012 — 25 BTC",
+          "label": "2012: 25 BTC",
           "detail": "Primer halving."
         },
         {
-          "label": "2016 — 12.5 BTC",
+          "label": "2016: 12.5 BTC",
           "detail": "Segundo halving."
         },
         {
-          "label": "2020 — 6.25 BTC",
+          "label": "2020: 6.25 BTC",
           "detail": "Tercer halving."
         },
         {
-          "label": "2024 — 3.125 BTC",
+          "label": "2024: 3.125 BTC",
           "detail": "Último halving (abril 2024)."
         },
         {
-          "label": "2028 — 1.5625 BTC",
+          "label": "2028: 1.5625 BTC",
           "detail": "Próximo halving aproximado."
         },
         {
-          "label": "2140 — 0 BTC",
-          "detail": "Último Bitcoin minado. Emisión cero, deflacionario puro.",
+          "label": "2140: 0 BTC",
+          "detail": "Último Bitcoin minado. Emisión nueva cero.",
           "highlight": true
         }
       ],
@@ -1515,27 +1515,27 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "kind": "statCards",
       "cards": [
         {
-          "value": "90x",
-          "label": "Ciclo 1 — Halving Nov 2012",
-          "sublabel": "~$12 → $1,100 en 13 meses. Luego -85%.",
+          "value": "95x",
+          "label": "Ciclo 1: Halving Nov 2012",
+          "sublabel": "De ~$12 a ~$1,150 en 12 meses. Luego -85%.",
           "tone": "green"
         },
         {
           "value": "30x",
-          "label": "Ciclo 2 — Halving Jul 2016",
-          "sublabel": "~$650 → $19,700 en 17 meses. ICOs. Luego -84%.",
+          "label": "Ciclo 2: Halving Jul 2016",
+          "sublabel": "De ~$650 a $19,700 en 17 meses. ICOs. Luego -84%.",
           "tone": "green"
         },
         {
           "value": "8x",
-          "label": "Ciclo 3 — Halving May 2020",
-          "sublabel": "~$8,700 → $69,000 en 18 meses. DeFi + NFTs. Luego -77%.",
+          "label": "Ciclo 3: Halving May 2020",
+          "sublabel": "De ~$8,700 a $69,000 en 18 meses. DeFi + NFTs. Luego -77%.",
           "tone": "green"
         },
         {
           "value": "$126K",
-          "label": "Ciclo 4 — Halving Abr 2024",
-          "sublabel": "~$64,000 → pico de ~$126K en octubre 2025, ~18 meses después del halving. Hasta ahora, el máximo de este ciclo (a mediados de 2026).",
+          "label": "Ciclo 4: Halving Abr 2024",
+          "sublabel": "De ~$64,000 a ~$126K en octubre de 2025, ~18 meses después del halving. Luego -53% hasta junio de 2026.",
           "tone": "amber"
         }
       ],
@@ -1547,23 +1547,23 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "BTC Dominance sube (60%+)",
-          "detail": "El capital entra primero a Bitcoin. Las altcoins rinden menos. Mantén la mayoría en BTC."
+          "detail": "El capital entra primero a Bitcoin. Las altcoins rinden menos. Guion clásico: mayoría en BTC."
         },
         {
           "title": "Dominance cae (55-60%)",
-          "detail": "El capital fluye a ETH y large caps (SOL, AVAX). Rota gradualmente a altcoins de alta cap."
+          "detail": "El capital fluye a ETH y large caps (SOL, AVAX). Guion clásico: rotar gradualmente a altcoins grandes."
         },
         {
           "title": "Altseason (BTC Dom <50%)",
-          "detail": "Mid y small caps hacen 10-50x, los memecoins explotan. Dura semanas, no meses.",
+          "detail": "Algunas mid y small caps han hecho 10-50x, muchas otras desaparecieron. Dura semanas, no meses.",
           "warning": true
         },
         {
           "title": "Capital vuelve a BTC",
-          "detail": "Las altcoins caen y la dominance sube: señal de fin. Rota de vuelta a BTC o stablecoins."
+          "detail": "Las altcoins caen y la dominance sube: señal de fin. Guion clásico: volver a BTC o stablecoins."
         }
       ],
-      "intro": "El capital rota por fases según cae la Bitcoin Dominance. Sigue el flujo."
+      "intro": "El guion clásico de la rotación según la Bitcoin Dominance. El ciclo 2024-25 no lo siguió: úsalo como mapa, no como promesa."
     }
   },
   19: {
@@ -1580,7 +1580,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "¿Quién está detrás?",
-          "detail": "Arkham: ¿fundadores con historial? VCs reputados (a16z, Multicoin) vs desconocidos."
+          "detail": "Arkham: ¿fundadores con historial? VCs reputados (a16z, Multicoin) vs desconocidos. Ojo: FTX también tenía VCs de primer nivel."
         },
         {
           "title": "¿Cómo es el tokenomics?",
@@ -1600,10 +1600,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "left": {
         "title": "Bullish (Acumulación)",
         "points": [
-          "TVL sube mientras el precio baja",
+          "TVL sube mientras el precio baja (posible acumulación)",
           "Ballenas comprando post-caída en Arkham",
           "Fees creciendo mes a mes (demanda real)",
-          "Exchange outflows masivos (sacan tokens = HODL)",
+          "Exchange outflows masivos (suele leerse como HODL)",
           "Usuarios activos en tendencia alcista sostenida",
           "Fundadores y equipo no venden tokens"
         ],
@@ -1612,16 +1612,16 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "right": {
         "title": "Bearish (Distribución)",
         "points": [
-          "TVL cae mientras el precio sube",
+          "TVL cae mientras el precio sube (posible distribución)",
           "Insiders y VCs moviendo tokens a exchanges",
           "Unlock grande próximo con presión de venta",
-          "Exchange inflows masivos (acumulan para vender)",
+          "Exchange inflows masivos (posible venta)",
           "Usuarios cayendo o inflados por bots/incentivos",
           "Equipo y fundadores vendiendo regularmente"
         ],
         "tone": "red"
       },
-      "note": "Los datos on-chain anticipan lo que el precio mostrará después."
+      "note": "Son pistas para investigar, no garantías: cada dato puede tener una explicación aburrida."
     },
     "Métricas On-Chain que Importan": {
       "kind": "iconGrid",
@@ -1644,10 +1644,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "RefreshCw",
           "title": "Exchange Flows",
-          "text": "Outflow = acumulación (bullish). Inflow = preparan venta (bearish)."
+          "text": "Outflow suele leerse como acumulación; inflow, como posible venta. Hay excepciones."
         }
       ],
-      "intro": "Domina estas 4 y puedes evaluar cualquier protocolo.",
+      "intro": "4 métricas básicas para empezar a evaluar un protocolo.",
       "columns": 2
     },
     "Arsenal de Herramientas On-Chain": {
@@ -1666,7 +1666,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Search",
           "title": "Arkham Intelligence",
-          "text": "Rastrea wallets de VCs, fondos y ballenas. Ve qué compran los que manejan millones."
+          "text": "Rastrea wallets de VCs, fondos y ballenas. Sus etiquetas son estimaciones: verifica."
         },
         {
           "icon": "Clock",
@@ -1674,7 +1674,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "text": "Calendario de desbloqueos. Anticipa la presión de venta cuando se libera supply."
         }
       ],
-      "intro": "Dominar 2-3 te pone por encima del 90% del mercado.",
+      "intro": "Con 2-3 bien usadas ya tienes una base sólida.",
       "columns": 2
     }
   },
@@ -1684,23 +1684,23 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "milestones": [
         {
           "label": "1. Nacimiento (Insiders)",
-          "detail": "Solo los más conectados hablan. Micro-caps, baja liquidez. Riesgo alto, reward 50-100x."
+          "detail": "Solo los más conectados hablan. Micro-caps, baja liquidez. Riesgo extremo: la mayoría va a cero."
         },
         {
           "label": "2. Crecimiento (Early Adopters)",
-          "detail": "Zona de oro: ya hay validacion, pero todavia 10-20x de upside.",
+          "detail": "Suele tener mejor balance: algo de validación y todavía recorrido. Muchas mueren aquí.",
           "highlight": true
         },
         {
           "label": "3. Mainstream (Las Masas)",
-          "detail": "Medios y amigos preguntan. Lideres ya hicieron 20-50x. Capturas migajas."
+          "detail": "Medios y amigos preguntan. Los líderes ya subieron muchísimo. Poco recorrido, mucha caída posible."
         },
         {
           "label": "4. Agotamiento (El Fin)",
-          "detail": "No hay nuevos compradores. Si sigues aqui, eres la liquidez de salida."
+          "detail": "No hay nuevos compradores. Si sigues aquí, eres la liquidez de salida."
         }
       ],
-      "intro": "Toda narrativa recorre 4 etapas. Saber en cuál estás define si ganas o pierdes."
+      "intro": "Muchas narrativas recorren 4 etapas parecidas. Casi siempre las reconoces cuando ya pasaron."
     },
     "Rotación: El Arte de Mover tu Capital": {
       "kind": "steps",
@@ -1711,7 +1711,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "BTC",
-          "detail": "El dinero entra primero al activo mas seguro."
+          "detail": "El dinero entra primero al activo considerado más seguro."
         },
         {
           "title": "ETH",
@@ -1719,7 +1719,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Large Cap Alts",
-          "detail": "El capital busca mas riesgo y retorno."
+          "detail": "El capital busca más riesgo y retorno."
         },
         {
           "title": "Mid Cap Alts",
@@ -1727,19 +1727,19 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Small Caps",
-          "detail": "Maximo riesgo y reward conforme avanza el ciclo."
+          "detail": "Máximo riesgo conforme avanza el ciclo."
         },
         {
           "title": "Memecoins",
-          "detail": "Euforia final: el capital mas especulativo."
+          "detail": "Euforia final: el capital más especulativo."
         },
         {
-          "title": "Crash → Stablecoins",
+          "title": "Crash y vuelta a stablecoins",
           "detail": "El ciclo colapsa y el capital vuelve a refugio.",
           "warning": true
         }
       ],
-      "intro": "El capital fluye en una secuencia predecible. Posiciónate un paso adelante del flujo."
+      "intro": "El guion clásico del flujo de capital. El ciclo 2024-25 no lo siguió: es un mapa, no una predicción."
     },
     "Narrativas con Sustancia vs Puro Vapor": {
       "kind": "comparison",
@@ -1748,10 +1748,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Catalizador real: ChatGPT, ETFs, nuevo protocolo",
           "Proyectos con producto funcionando y usuarios reales",
-          "Metricas on-chain crecientes: TVL, wallets, fees",
+          "Métricas on-chain crecientes: TVL, wallets, fees",
           "Adoptada por traders reputados, no solo influencers",
           "Crecimiento sostenido de semanas a meses",
-          "Los lideres tienen tokenomics solidos"
+          "Los líderes tienen tokenomics sólidos"
         ],
         "tone": "green"
       },
@@ -1760,9 +1760,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "points": [
           "Sin catalizador: solo \"alguien lo dijo en Twitter\"",
           "Solo whitepapers y promesas, sin producto real",
-          "Sin metricas on-chain que respalden el hype",
+          "Sin métricas on-chain que respalden el hype",
           "Promovida por influencers pagados y grupos de Telegram",
-          "Colapsa en horas o dias",
+          "Colapsa en horas o días",
           "Tokens sin utilidad real"
         ],
         "tone": "red"
@@ -1774,19 +1774,19 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "milestones": [
         {
           "label": "2017: ICOs",
-          "detail": "\"Cualquiera puede crear un token sin bancos\". Ethereum como plataforma; 99% basura."
+          "detail": "\"Cualquiera puede crear un token sin bancos\". Ethereum como plataforma; la mayoría, basura."
         },
         {
           "label": "2020: DeFi Summer",
-          "detail": "\"Se tu propio banco\". Uniswap, Aave, Compound. TVL de $1B a $100B, 50-100x."
+          "detail": "\"Sé tu propio banco\". Uniswap, Aave, Compound. TVL de ~$1B (2020) a más de $100B (2021)."
         },
         {
           "label": "2021: NFTs y Metaverso",
-          "detail": "Bored Apes, CryptoPunks, Axie. Luego el 95% perdio el 99% de su valor."
+          "detail": "Bored Apes, CryptoPunks, Axie. Luego la gran mayoría perdió casi todo su valor."
         },
         {
           "label": "2024-2025: AI + Memecoins + Solana",
-          "detail": "Agentes AI, BONK/WIF/PEPE, Solana como cadena ganadora.",
+          "detail": "Agentes de IA, BONK/WIF/PEPE, Solana como cadena favorita. Pico en enero de 2025 y colapso tras LIBRA.",
           "highlight": true
         }
       ],
@@ -1794,41 +1794,41 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
     }
   },
   21: {
-    "La Barbell Strategy Crypto: El Framework del 60/30/10": {
+    "Núcleo-Satélite: El Framework del 85/10/5": {
       "kind": "statCards",
       "cards": [
         {
-          "value": "60%",
-          "label": "Core (Base Segura)",
-          "sublabel": "BTC, ETH, SOL: 2-5× desde mínimos del bear, protegen tu capital",
+          "value": "85%",
+          "label": "Core (Tu Base)",
+          "sublabel": "BTC, ETH y SOL, repartidos según tu perfil. Ninguno es inmune a caídas fuertes",
           "tone": "green"
         },
         {
-          "value": "30%",
-          "label": "Satélites (Apuestas Asimétricas)",
-          "sublabel": "5-8 posiciones, potencial 10-50×; una que pegue cubre las que fallen",
+          "value": "10%",
+          "label": "Satélites (Máximo)",
+          "sublabel": "3-5 posiciones, incluido tu capital de trading. Asume que puedes perderlo entero",
           "tone": "amber"
         },
         {
-          "value": "10%",
+          "value": "5%",
           "label": "Liquidez (Stablecoins)",
-          "sublabel": "USDC — poder de compra cuando todos venden en pánico",
+          "sublabel": "USDC: poder de compra cuando todos venden en pánico. No está libre de riesgo",
           "tone": "neutral"
         }
       ],
-      "intro": "Combina seguridad extrema con apuestas asimétricas, repartido en tres bloques.",
+      "intro": "Una base grande, apuestas pequeñas y liquidez, dentro de tu porción cripto.",
       "columns": 3
     },
     "Portafolio Diversificado vs Concentrado": {
       "kind": "comparison",
       "left": {
-        "title": "Diversificado (60/30/10)",
+        "title": "Diversificado (85/10/5)",
         "points": [
-          "Sobrevive a crashes del -50% sin destruirse",
-          "Una posición en cero = pérdida limitada al 3-5%",
+          "Un crash de -50% duele, pero no te saca del juego",
+          "Un satélite en cero = pérdida de 2-3% como mucho",
           "Liquidez disponible para comprar en el pánico",
-          "Retorno de ciclo: 2-5× desde mínimos del bear (realista para un core BTC/ETH/SOL)",
-          "Duermes tranquilo sin revisar el precio",
+          "Sin promesas: tu resultado depende sobre todo de BTC",
+          "Duermes mejor sin revisar el precio",
           "Decisiones racionales con base psicológica sólida"
         ],
         "tone": "green"
@@ -1863,10 +1863,10 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Shield",
           "title": "Stablecoins como hedge",
-          "text": "10-20% en USDC mantiene su valor cuando todo cae. La anti-correlación más efectiva."
+          "text": "5-10% en USDC suele mantener su valor cuando todo cae. No está libre de riesgo: USDC perdió la paridad en marzo de 2023."
         }
       ],
-      "intro": "10 altcoins distintas NO son diversificación: en crypto el 95% cae junto cuando BTC cae.",
+      "intro": "10 altcoins distintas NO son diversificación: en crypto casi todo cae junto cuando BTC cae.",
       "columns": 3
     }
   },
@@ -1913,7 +1913,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         {
           "icon": "Percent",
           "title": "Stop Porcentual (Respaldo)",
-          "text": "Distancia fija: −5%, −8%, −10%. Simple pero ignora la estructura. Nunca uses más de −10%."
+          "text": "Distancia fija: −5%, −8%, −10%. Simple pero ignora la estructura. Regla práctica: no más de −10%."
         },
         {
           "icon": "TrendingUp",
@@ -1934,11 +1934,11 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "steps": [
         {
           "title": "Define tu capital",
-          "detail": "Capital total disponible para operar: $10,000."
+          "detail": "Tu capital de trading (como máximo el 5-10% de tu porción cripto): $2,000."
         },
         {
           "title": "Fija tu riesgo: 1-2%",
-          "detail": "Con riesgo del 2% → pérdida máxima de $200 en este trade."
+          "detail": "Con riesgo del 2%, la pérdida máxima en este trade es $40."
         },
         {
           "title": "Mide la distancia al stop",
@@ -1946,22 +1946,22 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Calcula la posición máxima",
-          "detail": "$200 / 10% = $2,000. Esa es la posición más grande que puedes tomar."
+          "detail": "$40 / 10% = $400. Esa es la posición más grande que puedes tomar."
         },
         {
-          "title": "Tu pérdida queda en $200, pase lo que pase",
-          "detail": "Solo el 2% del capital. Con 2% compuesto por trade, 20 pérdidas seguidas te dejan ~67% del capital; hasta 50 te dejan ~36%. Sobrevives para recuperarte."
+          "title": "Tu pérdida queda cerca de $40",
+          "detail": "Solo el 2% de tu capital de trading (algo más si hay slippage). Con 2% compuesto por trade, 20 pérdidas seguidas te dejan ~67% del capital; hasta 50 te dejan ~36%. Sobrevives para recuperarte."
         }
       ],
-      "intro": "Tamaño de posición = (Capital × % riesgo) / Distancia al stop. Nunca arriesgues más del 1-2% por operación."
+      "intro": "Tamaño de posición = (Capital de trading × % riesgo) / Distancia al stop. Nunca arriesgues más del 1-2% por operación."
     },
     "Dónde Colocar tu Stop Loss": {
       "kind": "checklist",
       "good": {
         "title": "Dónde SÍ colocarlo",
         "items": [
-          "2-3% debajo de la zona de soporte, con filtro extra",
-          "Compras en $150 → stop en $145-146, no en $149",
+          "1-3% debajo de la zona de soporte, como filtro",
+          "Compras en $150: stop en $145-146, no en $149",
           "Debajo del último Higher Low de la estructura alcista",
           "Donde tu razón para estar largo deja de existir"
         ]
@@ -1971,7 +1971,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "items": [
           "Justo en el soporte 'obvio' que todos marcan en Twitter",
           "En $99-100 donde hay miles de stops apilados",
-          "Las ballenas barren esas zonas antes de rebotar",
+          "A veces una mecha pasa por ahí antes de rebotar",
           "Pegado a la entrada, sin filtro contra el ruido"
         ]
       }
@@ -1987,7 +1987,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Mueve tu stop a break-even",
-          "detail": "Stop al precio de entrada: ahora juegas con dinero gratis, cero riesgo."
+          "detail": "Stop al precio de entrada: proteges tu inversión original. La ganancia sigue en riesgo."
         },
         {
           "title": "Vende 25% en +3-5×",
@@ -2002,26 +2002,26 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "detail": "Sin límite. No necesitas adivinar el techo exacto."
         }
       ],
-      "intro": "Los profesionales nunca venden todo de golpe. Venden por tramos a medida que el precio sube."
+      "intro": "Muchos traders experimentados no venden todo de golpe: venden por tramos a medida que el precio sube."
     },
     "El Concepto del Moonbag": {
       "kind": "steps",
       "steps": [
         {
           "title": "El precio llega a $5",
-          "detail": "Vendes 600 tokens = $3,000. Recuperas 3× tu inversión original."
+          "detail": "Vendes 750 tokens = $3,750. Recuperas tu inversión y más."
         },
         {
-          "title": "Te quedan 400 tokens",
-          "detail": "Tu moonbag: ya no te costaron nada."
+          "title": "Te quedan 250 tokens (25%)",
+          "detail": "Tu moonbag: hoy valen $1,250, y siguen siendo tuyos."
         },
         {
           "title": "Si suben a $50",
-          "detail": "Tienes $20,000 extra."
+          "detail": "Valdrían $12,500."
         },
         {
           "title": "Si caen a cero",
-          "detail": "No perdiste capital."
+          "detail": "Pierdes $1,250 que eran tuyos. No es dinero gratis."
         }
       ],
       "intro": "Compraste 1000 tokens a $1 = $1,000 invertido. Así funciona el moonbag."
@@ -2060,11 +2060,12 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Define ANTES de entrar",
         "items": [
           "Entry y razón: SOL a $160, soporte semanal, RSI en sobreventa",
-          "Stop y tamaño: stop en $144 (-10%), 2% de riesgo sobre $10K = $2,000",
+          "Stop y tamaño: stop en $144 (-10%), 2% de riesgo sobre $2,000 de capital de trading = $400",
           "TP1: 25% en $200 (resistencia)",
           "TP2: 25% en $250 (número redondo)",
           "TP3: 25% en $300 (extensión Fib)",
-          "Moonbag: 25% con trailing stop de 20%"
+          "Moonbag: 25% con trailing stop de 20%",
+          "Registra cada venta: puede generar impuestos"
         ]
       },
       "bad": {
@@ -2100,11 +2101,11 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "Acepta la pérdida como costo del negocio y sigue",
           "Tiene un plan escrito con reglas claras",
           "Revisa en horarios definidos y vive su vida",
-          "Gana consistente porque sobrevive a los grandes movimientos"
+          "Sobrevive, que es el requisito para todo lo demás"
         ],
         "tone": "green"
       },
-      "note": "Misma situación, dos respuestas. La diferencia no es el sistema: es la disciplina."
+      "note": "Misma situación, dos respuestas. Con el mismo sistema, la disciplina cambia el resultado."
     },
     "Los 4 Demonios del Trading": {
       "kind": "iconGrid",
@@ -2138,7 +2139,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
       "cards": [
         {
           "value": "60%",
-          "label": "Win rate excelente",
+          "label": "Win rate de 60%",
           "sublabel": "Aun así habrá rachas de 5-8 pérdidas seguidas",
           "tone": "green"
         },
@@ -2170,9 +2171,9 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         "title": "Los 5 elementos de tu plan",
         "items": [
           "Criterios de entrada: qué señal abre el trade (técnica, on-chain, narrativa)",
-          "Tamaño de posición: nunca arriesgues más del 1-2% del portafolio por trade",
+          "Tamaño de posición: nunca arriesgues más del 1-2% de tu capital de trading por trade",
           "Stop loss: precio de salida si te equivocas, definido ANTES de entrar",
-          "Take profit: toma ganancias parciales 1/3, 1/3, 1/3",
+          "Take profit: ventas parciales por tramos (por ejemplo, de 25% en 25%)",
           "Estado mental: no opero si estoy enojado, cansado o ebrio"
         ]
       },
@@ -2183,7 +2184,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
           "El stop loss se mueve según el miedo del momento",
           "El tamaño lo decide el ego, no las reglas",
           "Las ganancias se evaporan esperando \"un poco más\"",
-          "A largo plazo, siempre pierde dinero"
+          "A largo plazo, casi siempre pierde dinero"
         ]
       }
     }

@@ -83,7 +83,7 @@ export const INTERMEDIATE_LEVEL: LevelData = {
   description: 'Deja de apostar y empieza a invertir. Domina el análisis técnico, entiende los ciclos de mercado y aprende a gestionar tu riesgo emocional.',
   stats: {
     lessons: 12,
-    duration: '~3 h 15 min'
+    duration: '~3 h 30 min'
   },
   modules: [
     {
@@ -92,10 +92,10 @@ export const INTERMEDIATE_LEVEL: LevelData = {
       description: 'Domina las herramientas para analizar el precio',
       icon: BarChart3,
       lessons: [
-        { id: 13, title: 'Velas Japonesas y Tendencias', description: 'El lenguaje visual del mercado.', duration: '17 min', type: 'Lectura + Práctica' },
-        { id: 14, title: 'Soportes y Resistencias', description: 'Dónde comprar y dónde vender.', duration: '17 min', type: 'Lectura + Práctica' },
+        { id: 13, title: 'Velas Japonesas y Tendencias', description: 'El lenguaje visual del mercado.', duration: '19 min', type: 'Lectura + Práctica' },
+        { id: 14, title: 'Soportes y Resistencias', description: 'Dónde comprar y dónde vender.', duration: '18 min', type: 'Lectura + Práctica' },
         { id: 15, title: 'Indicadores Clave (RSI, EMAs)', description: 'Herramientas matemáticas para confirmar trades.', duration: '17 min', type: 'Lectura + Práctica' },
-        { id: 16, title: 'Estructura de Mercado', description: 'Higher Highs, Lower Lows y cambios de tendencia.', duration: '18 min', type: 'Lectura + Práctica' },
+        { id: 16, title: 'Estructura de Mercado', description: 'Higher Highs, Lower Lows y cambios de tendencia.', duration: '19 min', type: 'Lectura + Práctica' },
       ]
     },
     {
@@ -104,10 +104,10 @@ export const INTERMEDIATE_LEVEL: LevelData = {
       description: 'Evalúa el valor real de los proyectos (DYOR)',
       icon: Search,
       lessons: [
-        { id: 17, title: 'Tokenomics 101', description: 'Inflación, Supply y Vesting. Evita ser la liquidez de salida.', duration: '19 min', type: 'Concepto' },
-        { id: 18, title: 'Ciclos de Mercado (Halving)', description: 'El ritmo de 4 años de Bitcoin y cómo afecta a las Altcoins.', duration: '18 min', type: 'Análisis + Estrategia' },
-        { id: 19, title: 'Investigación On-Chain y DYOR', description: 'Cómo analizar Whitepapers, Equipos y Githubs.', duration: '18 min', type: 'Casos Prácticos + Herramientas' },
-        { id: 20, title: 'Narrativas y Rotación', description: 'IA, Gaming, Meme Coins. Dónde fluye el dinero.', duration: '16 min', type: 'Estrategia' },
+        { id: 17, title: 'Tokenomics 101', description: 'Inflación, Supply y Vesting. Evita ser la liquidez de salida.', duration: '20 min', type: 'Concepto' },
+        { id: 18, title: 'Ciclos de Mercado (Halving)', description: 'El ritmo de 4 años de Bitcoin y cómo afecta a las Altcoins.', duration: '19 min', type: 'Análisis + Estrategia' },
+        { id: 19, title: 'Investigación On-Chain y DYOR', description: 'Cómo analizar Whitepapers, Equipos y Githubs.', duration: '19 min', type: 'Casos Prácticos + Herramientas' },
+        { id: 20, title: 'Narrativas y Rotación', description: 'IA, Gaming, Meme Coins. Dónde fluye el dinero.', duration: '17 min', type: 'Estrategia' },
       ]
     },
     {
@@ -116,10 +116,10 @@ export const INTERMEDIATE_LEVEL: LevelData = {
       description: 'La habilidad que separa a los profesionales de los apostadores',
       icon: Briefcase,
       lessons: [
-        { id: 21, title: 'Diversificación Inteligente', description: 'No pongas todos los huevos en la misma canasta.', duration: '14 min', type: 'Estrategia' },
-        { id: 22, title: 'El Arte del Stop Loss', description: 'Protege tu capital antes de buscar ganancias.', duration: '15 min', type: 'Tutorial Práctico' },
-        { id: 23, title: 'Toma de Ganancias (Take Profit)', description: 'Nadie quebró por tomar ganancias. Estrategias de salida.', duration: '14 min', type: 'Tutorial Práctico' },
-        { id: 24, title: 'Mentalidad de Trader', description: 'Control emocional, FOMO y disciplina.', duration: '17 min', type: 'Psicología' },
+        { id: 21, title: 'Diversificación Inteligente', description: 'No pongas todos los huevos en la misma canasta.', duration: '15 min', type: 'Estrategia' },
+        { id: 22, title: 'El Arte del Stop Loss', description: 'Protege tu capital antes de buscar ganancias.', duration: '17 min', type: 'Tutorial Práctico' },
+        { id: 23, title: 'Toma de Ganancias (Take Profit)', description: 'Nadie quebró por tomar ganancias. Estrategias de salida.', duration: '15 min', type: 'Tutorial Práctico' },
+        { id: 24, title: 'Mentalidad de Trader', description: 'Control emocional, FOMO y disciplina.', duration: '19 min', type: 'Psicología' },
       ]
     }
   ]
