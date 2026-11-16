@@ -687,9 +687,10 @@ const LessonView: React.FC = () => {
       />
 
       <main id="contenido" tabIndex={-1} className="min-h-screen bg-navy-950 pb-20 outline-none">
-        {/* Progress Bar Fixed Top */}
+        {/* Reading progress, pinned to the viewport edge so it stays
+            attached to the window instead of floating under the navbar. */}
         <div
-          className="fixed top-16 left-0 w-full h-0.5 bg-navy-900 z-30"
+          className="pointer-events-none fixed inset-x-0 top-[env(safe-area-inset-top,0px)] z-[60] h-0.5 bg-white/15"
           role="progressbar"
           aria-label="Progreso de lectura"
           aria-valuenow={Math.round(scrollProgress * 100)}
