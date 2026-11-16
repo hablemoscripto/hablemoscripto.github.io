@@ -7,7 +7,12 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signUp: (email: string, password: string, fullName?: string, newsletter?: boolean) => Promise<{ error: Error | null }>;
+  signUp: (
+    email: string,
+    password: string,
+    fullName?: string,
+    newsletter?: boolean,
+  ) => Promise<{ error: Error | null; alreadyRegistered: boolean }>;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   signInWithGoogle: () => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
@@ -75,12 +80,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const data: Record<string, unknown> = {};
     if (trimmedName) data.full_name = trimmedName;
     if (newsletter) data.newsletter = true;
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: Object.keys(data).length ? { data } : undefined,
     });
-    return { error: error as Error | null };
+    // With email confirmation on, an existing address comes back as a success
+    // and an empty identities list. A real new account has one identity.
+    const alreadyRegistered =
+      !error && data.user != null && (data.user.identities?.length ?? 0) === 0;
+    return { error: error as Error | null, alreadyRegistered };
   }, []);
 
   const signIn = useCallback(async (email: string, password: string) => {

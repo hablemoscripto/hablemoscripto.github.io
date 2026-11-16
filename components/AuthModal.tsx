@@ -152,13 +152,17 @@ export default function AuthModal({
           setLoading(false);
           return;
         }
-        const { error } = await signUp(email, password, fullName, newsletter);
-        if (error) {
-          if (error.message.includes('already registered')) {
-            setError('Este email ya está registrado');
-          } else {
-            setError(humanizeAuthError(error.message));
-          }
+        const { error, alreadyRegistered } = await signUp(email, password, fullName, newsletter);
+        const taken =
+          alreadyRegistered ||
+          /already registered|already exists|user_already_exists/i.test(error?.message ?? '');
+        if (taken) {
+          switchTo('login');
+          setError(
+            'Este email ya está registrado. Inicia sesión con tu contraseña o con Google.',
+          );
+        } else if (error) {
+          setError(humanizeAuthError(error.message));
         } else {
           trackSignUp('email');
           setView('verify-email');
