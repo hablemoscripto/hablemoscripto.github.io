@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ChevronLeft,
   CheckCircle,
@@ -46,7 +46,12 @@ import { useScrollProgress } from '../hooks/useScrollProgress';
 import { useLessonNavigation } from '../hooks/useLessonNavigation';
 import EducationNavbar from './EducationNavbar';
 import LessonSearch from './LessonSearch';
-import { readLessonPlace, writeLessonPlace } from '../utils/lessonPlace';
+import {
+  currentSectionIndex,
+  readingLineFromInsets,
+  readLessonPlace,
+  writeLessonPlace,
+} from '../utils/lessonPlace';
 
 // Cripto Experto Discord invite. Keep in sync with EducationNavbar + the
 // Experto welcome email (_shared/welcome-email.ts).
@@ -114,6 +119,7 @@ const LessonView: React.FC = () => {
   const [showCert, setShowCert] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
+  const recordedSectionId = useRef<string | null>(null);
 
   // Custom hooks
   const scrollProgress = useScrollProgress();
@@ -275,25 +281,62 @@ const LessonView: React.FC = () => {
 
   useEffect(() => {
     if (!lesson || isLocked || lessonLoading || showQuiz) return;
-    const nodes = Array.from(document.querySelectorAll<HTMLElement>('h2[id^="seccion-"]'));
-    if (nodes.length === 0) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        const top = visible[0]?.target;
-        if (!(top instanceof HTMLElement) || !top.id) return;
+    recordedSectionId.current = null;
+    let frame = 0;
+
+    const record = () => {
+      frame = 0;
+      // Section memory is optional. A measurement failure must not blank the lesson.
+      try {
+        const nodes = Array.from(document.querySelectorAll<HTMLElement>('h2[id^="seccion-"]'));
+        if (nodes.length === 0) return;
+        const bottoms: number[] = [];
+        for (const el of document.querySelectorAll<HTMLElement>('nav, [role="progressbar"]')) {
+          const position = getComputedStyle(el).position;
+          if (position !== 'sticky' && position !== 'fixed') continue;
+          const rect = el.getBoundingClientRect();
+          if (rect.bottom <= 0 || rect.top > 1) continue;
+          bottoms.push(rect.bottom);
+        }
+        const index = currentSectionIndex(
+          nodes.map((node) => node.getBoundingClientRect().top),
+          readingLineFromInsets(bottoms, window.innerHeight)
+        );
+        const node = index >= 0 ? nodes[index] : null;
+        if (!node?.id || recordedSectionId.current === node.id) return;
+        recordedSectionId.current = node.id;
         writeLessonPlace({
           lessonId: id,
-          sectionId: top.id,
-          sectionTitle: (top.textContent || '').trim(),
+          sectionId: node.id,
+          sectionTitle: (node.textContent || '').trim(),
         });
-      },
-      { rootMargin: '-7rem 0px -45% 0px', threshold: 0.15 }
-    );
-    nodes.forEach((node) => io.observe(node));
-    return () => io.disconnect();
+      } catch {
+        /* leave the last saved place in place */
+      }
+    };
+
+    const schedule = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(record);
+    };
+
+    schedule();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    // Images and late layout shifts move headings without a scroll event.
+    let resizeObserver: ResizeObserver | null = null;
+    try {
+      resizeObserver = new ResizeObserver(schedule);
+      resizeObserver.observe(document.documentElement);
+    } catch {
+      /* scroll and window resize still update the reading position */
+    }
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      resizeObserver?.disconnect();
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+    };
   }, [lesson, id, isLocked, lessonLoading, showQuiz]);
 
   // Clean up body overflow on unmount (in case lightbox was open)

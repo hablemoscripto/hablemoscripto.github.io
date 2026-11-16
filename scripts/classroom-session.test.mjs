@@ -22,6 +22,9 @@ test('lesson view restores and records section place', () => {
   assert.match(view, /writeLessonPlace/);
   assert.match(view, /readLessonPlace/);
   assert.match(view, /h2\[id\^="seccion-"\]/);
+  assert.match(view, /currentSectionIndex/);
+  assert.doesNotMatch(view, /IntersectionObserver/);
+  assert.doesNotMatch(view, /rootMargin/);
   assert.match(view, /reviewSection=\{quizReviewSection\}/);
   assert.match(view, /onAskSection/);
 });
