@@ -16,6 +16,112 @@ export const getAllLessonsOrdered = (): Lesson[] => {
   return allLessons;
 };
 
+const LEVEL_SEQUENCE: { id: CourseLevelId; data: typeof BEGINNER_LEVEL }[] = [
+  { id: 'beginner', data: BEGINNER_LEVEL },
+  { id: 'intermediate', data: INTERMEDIATE_LEVEL },
+  { id: 'advanced', data: ADVANCED_LEVEL },
+];
+
+interface PlacedLesson {
+  id: number;
+  levelId: CourseLevelId;
+  moduleIndex: number;
+  lessonIndex: number;
+  optional: boolean;
+}
+
+const PLACED: PlacedLesson[] = LEVEL_SEQUENCE.flatMap(({ id: levelId, data }) =>
+  data.modules.flatMap((module, moduleIndex) =>
+    module.lessons.map((lesson, lessonIndex) => ({
+      id: lesson.id,
+      levelId,
+      moduleIndex,
+      lessonIndex,
+      optional: Boolean(module.optional),
+    }))
+  )
+);
+
+const PLACED_BY_ID = new Map(PLACED.map((lesson) => [lesson.id, lesson]));
+
+function lastCoreLessonOfLevel(levelId: CourseLevelId): number | null {
+  const core = PLACED.filter((lesson) => lesson.levelId === levelId && !lesson.optional);
+  return core.length ? core[core.length - 1].id : null;
+}
+
+export const getCoreLessonIdsForLevel = (levelId: CourseLevelId): number[] =>
+  PLACED.filter((lesson) => lesson.levelId === levelId && !lesson.optional).map(
+    (lesson) => lesson.id
+  );
+
+/**
+ * Required-path predecessor. Optional modules do not sit on this chain:
+ * the first lesson of an optional module depends on the previous level's
+ * last core lesson, and the lesson after a core module skips optional ones.
+ */
+export function getSequentialPredecessor(lessonId: number): number | null {
+  const placed = PLACED_BY_ID.get(lessonId);
+  if (!placed) return null;
+
+  if (placed.lessonIndex > 0) {
+    const previous = PLACED.find(
+      (lesson) =>
+        lesson.levelId === placed.levelId &&
+        lesson.moduleIndex === placed.moduleIndex &&
+        lesson.lessonIndex === placed.lessonIndex - 1
+    );
+    return previous ? previous.id : null;
+  }
+
+  if (placed.optional) {
+    const levelIndex = LEVEL_SEQUENCE.findIndex((level) => level.id === placed.levelId);
+    if (levelIndex <= 0) return null;
+    return lastCoreLessonOfLevel(LEVEL_SEQUENCE[levelIndex - 1].id);
+  }
+
+  const earlierCore = PLACED.filter(
+    (lesson) =>
+      lesson.levelId === placed.levelId &&
+      !lesson.optional &&
+      lesson.moduleIndex < placed.moduleIndex
+  );
+  if (earlierCore.length) return earlierCore[earlierCore.length - 1].id;
+
+  const levelIndex = LEVEL_SEQUENCE.findIndex((level) => level.id === placed.levelId);
+  if (levelIndex <= 0) return null;
+  return lastCoreLessonOfLevel(LEVEL_SEQUENCE[levelIndex - 1].id);
+}
+
+/** Mirror of getSequentialPredecessor. An optional module ends at its last lesson. */
+export function getSequentialSuccessor(lessonId: number): number | null {
+  const placed = PLACED_BY_ID.get(lessonId);
+  if (!placed) return null;
+
+  const moduleLessons = PLACED.filter(
+    (lesson) => lesson.levelId === placed.levelId && lesson.moduleIndex === placed.moduleIndex
+  );
+  if (placed.lessonIndex < moduleLessons.length - 1) {
+    return moduleLessons[placed.lessonIndex + 1].id;
+  }
+
+  if (placed.optional) return null;
+
+  const laterCore = PLACED.filter(
+    (lesson) =>
+      lesson.levelId === placed.levelId &&
+      !lesson.optional &&
+      lesson.moduleIndex > placed.moduleIndex
+  );
+  if (laterCore.length) return laterCore[0].id;
+
+  const levelIndex = LEVEL_SEQUENCE.findIndex((level) => level.id === placed.levelId);
+  if (levelIndex < 0 || levelIndex === LEVEL_SEQUENCE.length - 1) return null;
+  const nextCore = PLACED.filter(
+    (lesson) => lesson.levelId === LEVEL_SEQUENCE[levelIndex + 1].id && !lesson.optional
+  );
+  return nextCore.length ? nextCore[0].id : null;
+}
+
 export const getPreviousLessonId = (currentLessonId: number): number | null => {
   const allLessons = getAllLessonsOrdered();
   const currentIndex = allLessons.findIndex((l) => l.id === currentLessonId);
@@ -77,7 +183,7 @@ export const isLevelComplete = (
   levelId: CourseLevelId,
   isLessonCompleted: (lessonId: number) => boolean
 ): boolean => {
-  const lessonIds = getLessonIdsForLevel(levelId);
+  const lessonIds = getCoreLessonIdsForLevel(levelId);
   return lessonIds.length > 0 && lessonIds.every(isLessonCompleted);
 };
 
@@ -86,18 +192,20 @@ export interface LessonRef {
   title: string;
 }
 
-/** Earliest incomplete lesson before `lessonId`, or null if none. */
+/** Earliest incomplete lesson on the required path before `lessonId`, or null. */
 export function getFirstIncompletePrerequisite(
   lessonId: number,
   isLessonCompleted: (id: number) => boolean
 ): LessonRef | null {
   const all = getAllLessonsOrdered();
   const byId = new Map(all.map((l) => [l.id, l]));
-  let cursor = getPreviousLessonId(lessonId);
+  let cursor = getSequentialPredecessor(lessonId);
   let earliest: number | null = null;
-  while (cursor !== null) {
+  const seen = new Set<number>();
+  while (cursor !== null && !seen.has(cursor)) {
+    seen.add(cursor);
     if (!isLessonCompleted(cursor)) earliest = cursor;
-    cursor = getPreviousLessonId(cursor);
+    cursor = getSequentialPredecessor(cursor);
   }
   if (earliest === null) return null;
   const lesson = byId.get(earliest);
@@ -118,18 +226,23 @@ export function getContinueTarget(
   canReadLesson: (id: number) => boolean
 ): (LessonRef & { resuming: boolean }) | null {
   const ordered = getAllLessonsOrdered();
+  const byId = new Map(ordered.map((lesson) => [lesson.id, lesson]));
   const readableIncomplete = (lesson: Lesson) =>
     !isLessonCompleted(lesson.id) && canReadLesson(lesson.id);
 
-  const anchorIdx = lastLessonId ? ordered.findIndex((l) => l.id === lastLessonId) : -1;
-  if (anchorIdx >= 0 && readableIncomplete(ordered[anchorIdx])) {
-    return { id: ordered[anchorIdx].id, title: ordered[anchorIdx].title, resuming: true };
-  }
-  for (let i = anchorIdx + 1; i < ordered.length; i++) {
-    if (readableIncomplete(ordered[i])) {
-      return { id: ordered[i].id, title: ordered[i].title, resuming: false };
+  if (lastLessonId) {
+    const anchor = byId.get(lastLessonId);
+    if (anchor && readableIncomplete(anchor)) {
+      return { id: anchor.id, title: anchor.title, resuming: true };
     }
   }
-  const first = ordered.find(readableIncomplete);
-  return first ? { id: first.id, title: first.title, resuming: false } : null;
+
+  for (const placed of PLACED) {
+    if (placed.optional) continue;
+    const lesson = byId.get(placed.id);
+    if (lesson && readableIncomplete(lesson)) {
+      return { id: lesson.id, title: lesson.title, resuming: false };
+    }
+  }
+  return null;
 }

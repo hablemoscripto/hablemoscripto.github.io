@@ -25,7 +25,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Quiz from './education/Quiz';
 import {
-  getPreviousLessonId,
+  getSequentialPredecessor,
   getFirstIncompletePrerequisite,
   getLevelForLesson,
   getBeginnerLessonIds,
@@ -78,7 +78,14 @@ declare global {
 const LessonView: React.FC = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
   const navigate = useNavigate();
-  const { isLessonCompleted, markLessonComplete, getQuizScore, loading } = useProgress();
+  const {
+    isLessonCompleted,
+    markLessonComplete,
+    getQuizScore,
+    loading,
+    status: progressStatus,
+    reload: reloadProgress,
+  } = useProgress();
   const {
     entitlements,
     loading: entitlementsLoading,
@@ -184,10 +191,12 @@ const LessonView: React.FC = () => {
 
   // Access Control Logic
   useEffect(() => {
-    if (loading) return;
+    // An unconfirmed progress read is not an empty history. Leave the lock
+    // alone and show the retry panel instead of "Lección bloqueada".
+    if (loading || progressStatus === 'error') return;
 
     const checkAccess = () => {
-      const previousLessonId = getPreviousLessonId(id);
+      const previousLessonId = getSequentialPredecessor(id);
 
       // If it's the first lesson, it's always unlocked
       if (previousLessonId === null) {
@@ -207,19 +216,36 @@ const LessonView: React.FC = () => {
     };
 
     checkAccess();
-  }, [id, loading, isLessonCompleted]);
+  }, [id, loading, progressStatus, isLessonCompleted]);
 
   // Only remember a lesson the learner can actually read. Stamping this on a
   // lock/paywall fetch made "Continuar" reopen the same wall.
   useEffect(() => {
-    if (loading || entitlementsLoading || lessonLoading || !lesson || isLocked) return;
+    if (
+      loading ||
+      progressStatus === 'error' ||
+      entitlementsLoading ||
+      lessonLoading ||
+      !lesson ||
+      isLocked
+    )
+      return;
     if (!canAccessLevel(entitlements, getLevelForLesson(id))) return;
     try {
       localStorage.setItem('last_lesson_id', String(lesson.id));
     } catch {
       /* */
     }
-  }, [loading, entitlementsLoading, lessonLoading, lesson, isLocked, entitlements, id]);
+  }, [
+    loading,
+    progressStatus,
+    entitlementsLoading,
+    lessonLoading,
+    lesson,
+    isLocked,
+    entitlements,
+    id,
+  ]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -361,6 +387,34 @@ const LessonView: React.FC = () => {
         onUpgrade={() => navigate('/education?upgrade=inversor')}
         onBack={() => navigate('/education')}
       />
+    );
+  }
+
+  if (progressStatus === 'error') {
+    return classroomChrome(
+      <main
+        id="contenido"
+        tabIndex={-1}
+        className="min-h-[calc(100svh-4rem)] bg-navy-950 flex items-center justify-center px-4 outline-none"
+      >
+        <div
+          role="status"
+          className="max-w-md w-full text-center bg-navy-900 border border-white/10 rounded-2xl p-8"
+        >
+          <h2 className="text-xl font-bold text-white mb-3">No pudimos cargar tu progreso.</h2>
+          <p className="text-navy-300 text-sm mb-6 leading-relaxed">
+            Tus lecciones siguen en tu cuenta.
+          </p>
+          <button
+            type="button"
+            onClick={() => void reloadProgress()}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-6 py-3 text-sm font-bold text-navy-950 hover:bg-brand-400"
+          >
+            <RefreshCw size={16} aria-hidden="true" />
+            Reintentar
+          </button>
+        </div>
+      </main>
     );
   }
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { ChevronLeft, Lock, CheckCircle, PlayCircle, Clock, Award } from 'lucide-react';
+import { ChevronLeft, Lock, CheckCircle, PlayCircle, Clock, Award, RefreshCw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../contexts/ProgressContext';
 import { LevelData } from '../data/courseData';
 import {
-  getPreviousLessonId,
+  getSequentialPredecessor,
   getAllLessonsOrdered,
   getBeginnerLessonIds,
   getIntermediateLessonIds,
@@ -33,7 +33,7 @@ const LEVEL_LABELS: Record<string, string> = {
 
 const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
   const navigate = useNavigate();
-  const { isLessonCompleted } = useProgress();
+  const { isLessonCompleted, status: progressStatus, reload: reloadProgress } = useProgress();
   const { user } = useAuth();
   const {
     entitlements,
@@ -237,6 +237,24 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
 
         {/* Modules List */}
         <div className="container max-w-5xl mx-auto px-6 py-12">
+          {progressStatus === 'error' && (
+            <div
+              role="status"
+              className="mb-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-white/10 bg-navy-900 p-5 sm:flex-row sm:items-center"
+            >
+              <p className="text-sm text-navy-200">
+                No pudimos cargar tu progreso. Tus lecciones siguen en tu cuenta.
+              </p>
+              <button
+                type="button"
+                onClick={() => void reloadProgress()}
+                className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand-500 px-5 py-2.5 text-sm font-bold text-navy-950 hover:bg-brand-400"
+              >
+                <RefreshCw size={16} aria-hidden="true" />
+                Reintentar
+              </button>
+            </div>
+          )}
           <div className="space-y-8">
             {levelData.modules.map((module, moduleIdx) => {
               let firstAvailableFound = false;
@@ -261,10 +279,15 @@ const LevelDetail: React.FC<LevelDetailProps> = ({ levelData }) => {
 
                       const isCompleted = isLessonCompleted(lesson.id);
 
-                      // Check if previous lesson is completed (sequential locking)
-                      const prevId = getPreviousLessonId(lesson.id);
+                      // Check if previous lesson is completed (sequential locking).
+                      // A failed progress read is not an empty history, so don't
+                      // pin the student to lesson 1 while the retry is on screen.
+                      const prevId = getSequentialPredecessor(lesson.id);
                       const isPreviousCompleted = prevId === null || isLessonCompleted(prevId);
-                      const isLocked = !isPreviousCompleted && !isLessonCompleted(lesson.id);
+                      const isLocked =
+                        progressStatus !== 'error' &&
+                        !isPreviousCompleted &&
+                        !isLessonCompleted(lesson.id);
 
                       // Determine if this is the first available (not locked, not completed) lesson in the module
                       const isFirstAvailable = !isLocked && !isCompleted && !firstAvailableFound;

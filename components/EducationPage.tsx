@@ -34,12 +34,14 @@ import PaymentModal from './PaymentModal';
 import MentoriaModal from './MentoriaModal';
 import DailyReviewCard from './education/DailyReviewCard';
 import { useNavigate, Outlet, useLocation, useSearchParams } from 'react-router-dom';
+import { ADVANCED_LEVEL, BEGINNER_LEVEL, INTERMEDIATE_LEVEL } from '../data/levels';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { useEntitlements } from '../contexts/EntitlementsContext';
 import {
   getAllLessonsOrdered,
   getContinueTarget,
+  getCoreLessonIdsForLevel,
   getLevelForLesson,
   isLevelComplete,
   isSequentiallyLocked,
@@ -71,6 +73,14 @@ interface Level {
   icon_name: string;
   color: string;
 }
+
+// Card copy comes from the catalog so a reorder ships with the frontend.
+// lessons_count stays on the Supabase row: the ring still counts every lesson.
+const LOCAL_LEVEL_COPY: Record<string, { subtitle: string; description: string }> = {
+  beginner: BEGINNER_LEVEL,
+  intermediate: INTERMEDIATE_LEVEL,
+  advanced: ADVANCED_LEVEL,
+};
 
 const ICONS: Record<string, LucideIcon> = {
   Shield,
@@ -174,7 +184,12 @@ const EducationPage: React.FC<EducationPageProps> = () => {
     /* eslint-enable react-hooks/set-state-in-effect */
   }, [searchParams, setSearchParams, entitlementsStatus, entitlements.courseTier]);
 
-  const { progress: supabaseProgress, isLessonCompleted } = useProgress();
+  const {
+    progress: supabaseProgress,
+    isLessonCompleted,
+    status: progressStatus,
+    reload: reloadProgress,
+  } = useProgress();
   const { achievements, achievementDefinitions, xp, streak } = useGamification();
   const [progress, setProgress] = useState<ProgressData>({});
   // Resume learning: read last visited lesson from localStorage once on mount.
@@ -216,6 +231,9 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
   useEffect(() => {
     const fetchProgressByLevel = async () => {
+      // A failed fetch leaves progress [] until the first success. Do not
+      // treat that as an empty account or wipe the guest cache.
+      if (progressStatus !== 'ready') return;
       if (levels.length === 0) return;
 
       const newProgress: ProgressData = {};
@@ -276,17 +294,18 @@ const EducationPage: React.FC<EducationPageProps> = () => {
     };
 
     fetchProgressByLevel();
-  }, [supabaseProgress, levels, user]);
+  }, [supabaseProgress, levels, user, progressStatus]);
 
   // "Continuar aprendiendo" target: resume the last visited lesson while it's
   // unfinished; once it's completed, advance to the next uncompleted lesson in
   // course order instead of pointing back at finished work.
   const continueTarget = useMemo(() => {
+    if (progressStatus !== 'ready') return null;
     const canRead = (lid: number) =>
       !isSequentiallyLocked(lid, isLessonCompleted) &&
       (entitlementsLoading || canAccessLevel(entitlements, getLevelForLesson(lid)));
     return getContinueTarget(lastLessonId, isLessonCompleted, canRead);
-  }, [lastLessonId, isLessonCompleted, entitlements, entitlementsLoading]);
+  }, [progressStatus, lastLessonId, isLessonCompleted, entitlements, entitlementsLoading]);
 
   const sessionMeta = useMemo(() => {
     if (!continueTarget) return { duration: '', sectionTitle: '' };
@@ -329,16 +348,18 @@ const EducationPage: React.FC<EducationPageProps> = () => {
 
   const isLevelLocked = useCallback(
     (levelId: string) => {
-      if (levelId === 'intermediate') return getLevelProgress('beginner') < 100;
-      if (levelId === 'advanced') return getLevelProgress('intermediate') < 100;
+      if (progressStatus !== 'ready') return levelId !== 'beginner';
+      if (levelId === 'intermediate') return !isLevelComplete('beginner', isLessonCompleted);
+      if (levelId === 'advanced') return !isLevelComplete('intermediate', isLessonCompleted);
       return false;
     },
-    [getLevelProgress]
+    [progressStatus, isLessonCompleted]
   );
 
   const getPrerequisiteInfo = useCallback(
     (levelId: string) => {
-      const prerequisiteMap: Record<string, string> = {
+      if (progressStatus !== 'ready') return null;
+      const prerequisiteMap: Record<string, CourseLevelId> = {
         intermediate: 'beginner',
         advanced: 'intermediate',
       };
@@ -349,9 +370,11 @@ const EducationPage: React.FC<EducationPageProps> = () => {
       const prereqLevel = levels.find((l) => l.id === prereqId);
       if (!prereqLevel) return null;
 
-      const completedCount = progress[prereqId]?.length || 0;
-      const totalLessons = prereqLevel.lessons_count;
-      const prereqProgress = getLevelProgress(prereqId);
+      const coreIds = getCoreLessonIdsForLevel(prereqId);
+      const completedCount = coreIds.filter((lessonId) => isLessonCompleted(lessonId)).length;
+      const totalLessons = coreIds.length;
+      const prereqProgress =
+        totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0;
       const lessonsRemaining = totalLessons - completedCount;
 
       return {
@@ -360,7 +383,7 @@ const EducationPage: React.FC<EducationPageProps> = () => {
         lessonsRemaining,
       };
     },
-    [progress, levels, getLevelProgress]
+    [progressStatus, levels, isLessonCompleted]
   );
 
   const totalCompletedLessons = Object.values(progress).reduce((acc, val) => acc + val.length, 0);
@@ -520,44 +543,66 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                 </div>
               )}
             <DailyReviewCard />
-            {(lastLessonId || totalCompletedLessons > 0) && continueTarget && (
+            {progressStatus === 'error' && (
               <div className="container mx-auto mb-6 mt-6 max-w-7xl px-6">
-                <button
-                  onClick={() => navigate(lessonPath(continueTarget.id, readLessonPlace()))}
-                  className="group flex w-full items-center justify-between rounded-2xl border border-brand-500/25 bg-brand-500/10 p-4 transition-colors hover:bg-brand-500/15"
+                <div
+                  role="status"
+                  className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-white/10 bg-navy-900 p-5 sm:flex-row sm:items-center"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500/20">
-                      <PlayCircle size={20} className="text-brand-400" aria-hidden="true" />
-                    </div>
-                    <div className="text-left">
-                      <p className="text-xs font-bold uppercase tracking-wide text-brand-400">
-                        {continueTarget.resuming ? 'Continuar aprendiendo' : 'Siguiente lección'}
-                      </p>
-                      <p className="text-sm font-medium text-white">{continueTarget.title}</p>
-                      {(sessionMeta.duration || sessionMeta.sectionTitle) && (
-                        <p className="mt-1 text-xs text-navy-400">
-                          {[
-                            sessionMeta.duration,
-                            sessionMeta.sectionTitle
-                              ? `Retomas en: ${sessionMeta.sectionTitle}`
-                              : '',
-                          ]
-                            .filter(Boolean)
-                            .join(' · ')}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <ArrowRight
-                    size={20}
-                    className="text-brand-400 transition-transform group-hover:translate-x-1"
-                    aria-hidden="true"
-                  />
-                </button>
+                  <p className="text-sm text-navy-200">
+                    No pudimos cargar tu progreso. Tus lecciones siguen en tu cuenta.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => void reloadProgress()}
+                    className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-brand-500 px-5 py-2.5 text-sm font-bold text-navy-950 hover:bg-brand-400"
+                  >
+                    <RefreshCw size={16} aria-hidden="true" />
+                    Reintentar
+                  </button>
+                </div>
               </div>
             )}
-            {!lastLessonId && totalCompletedLessons === 0 && (
+            {progressStatus === 'ready' &&
+              (lastLessonId || totalCompletedLessons > 0) &&
+              continueTarget && (
+                <div className="container mx-auto mb-6 mt-6 max-w-7xl px-6">
+                  <button
+                    onClick={() => navigate(lessonPath(continueTarget.id, readLessonPlace()))}
+                    className="group flex w-full items-center justify-between rounded-2xl border border-brand-500/25 bg-brand-500/10 p-4 transition-colors hover:bg-brand-500/15"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500/20">
+                        <PlayCircle size={20} className="text-brand-400" aria-hidden="true" />
+                      </div>
+                      <div className="text-left">
+                        <p className="text-xs font-bold uppercase tracking-wide text-brand-400">
+                          {continueTarget.resuming ? 'Continuar aprendiendo' : 'Siguiente lección'}
+                        </p>
+                        <p className="text-sm font-medium text-white">{continueTarget.title}</p>
+                        {(sessionMeta.duration || sessionMeta.sectionTitle) && (
+                          <p className="mt-1 text-xs text-navy-400">
+                            {[
+                              sessionMeta.duration,
+                              sessionMeta.sectionTitle
+                                ? `Retomas en: ${sessionMeta.sectionTitle}`
+                                : '',
+                            ]
+                              .filter(Boolean)
+                              .join(' · ')}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <ArrowRight
+                      size={20}
+                      className="text-brand-400 transition-transform group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </div>
+              )}
+            {progressStatus === 'ready' && !lastLessonId && totalCompletedLessons === 0 && (
               <div className="container mx-auto mb-2 mt-6 max-w-7xl px-6">
                 <div className="flex flex-col items-start justify-between gap-5 rounded-2xl border border-brand-500/30 bg-brand-500/10 p-6 sm:flex-row sm:items-center">
                   <div className="flex items-start gap-4">
@@ -702,8 +747,8 @@ const EducationPage: React.FC<EducationPageProps> = () => {
                         <LevelCard
                           levelNumber={`0${index + 1}`}
                           title={level.title}
-                          subtitle={level.subtitle}
-                          description={level.description}
+                          subtitle={LOCAL_LEVEL_COPY[level.id]?.subtitle ?? level.subtitle}
+                          description={LOCAL_LEVEL_COPY[level.id]?.description ?? level.description}
                           tags={[]} // Tags can be added to the database later
                           lessonCount={level.lessons_count}
                           completedCount={progress[level.id]?.length || 0}

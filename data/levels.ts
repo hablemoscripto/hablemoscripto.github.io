@@ -79,8 +79,8 @@ export const BEGINNER_LEVEL: LevelData = {
 export const INTERMEDIATE_LEVEL: LevelData = {
   id: 'intermediate',
   title: 'Nivel Intermedio',
-  subtitle: 'Análisis y Psicología de Mercado',
-  description: 'Deja de apostar y empieza a invertir. Domina el análisis técnico, entiende los ciclos de mercado y aprende a gestionar tu riesgo emocional.',
+  subtitle: 'Criterio para invertir',
+  description: 'Evalúa proyectos, arma un plan de riesgo y entiende los ciclos. Los gráficos, las narrativas y el DeFi activo quedan en módulos opcionales.',
   stats: {
     lessons: 12,
     duration: '~4 h'
@@ -88,9 +88,33 @@ export const INTERMEDIATE_LEVEL: LevelData = {
   modules: [
     {
       id: 1,
-      title: 'Lectura de Gráficos',
+      title: 'Análisis fundamental',
+      description: 'Evalúa el valor real de los proyectos (DYOR)',
+      icon: Search,
+      lessons: [
+        { id: 17, title: 'Tokenomics 101', description: 'Inflación, Supply y Vesting. Evita ser la liquidez de salida.', duration: '21 min', type: 'Concepto' },
+        { id: 18, title: 'Ciclos de Mercado (Halving)', description: 'El ritmo de 4 años de Bitcoin y cómo afecta a las Altcoins.', duration: '21 min', type: 'Análisis + Estrategia' },
+        { id: 19, title: 'Investigación On-Chain y DYOR', description: 'Cómo analizar Whitepapers, Equipos y Githubs.', duration: '21 min', type: 'Casos Prácticos + Herramientas' },
+      ]
+    },
+    {
+      id: 2,
+      title: 'Gestión de riesgo',
+      description: 'La habilidad que separa a los profesionales de los apostadores',
+      icon: Briefcase,
+      lessons: [
+        { id: 21, title: 'Diversificación Inteligente', description: 'No pongas todos los huevos en la misma canasta.', duration: '17 min', type: 'Estrategia' },
+        { id: 22, title: 'El Arte del Stop Loss', description: 'Protege tu capital antes de buscar ganancias.', duration: '20 min', type: 'Tutorial Práctico' },
+        { id: 23, title: 'Toma de Ganancias (Take Profit)', description: 'Nadie quebró por tomar ganancias. Estrategias de salida.', duration: '18 min', type: 'Tutorial Práctico' },
+        { id: 24, title: 'Mentalidad de Trader', description: 'Control emocional, FOMO y disciplina.', duration: '21 min', type: 'Psicología' },
+      ]
+    },
+    {
+      id: 3,
+      title: 'Gráficos (opcional)',
       description: 'Domina las herramientas para analizar el precio',
       icon: BarChart3,
+      optional: true,
       lessons: [
         { id: 13, title: 'Velas Japonesas y Tendencias', description: 'El lenguaje visual del mercado.', duration: '22 min', type: 'Lectura + Práctica' },
         { id: 14, title: 'Soportes y Resistencias', description: 'Dónde comprar y dónde vender.', duration: '19 min', type: 'Lectura + Práctica' },
@@ -99,27 +123,13 @@ export const INTERMEDIATE_LEVEL: LevelData = {
       ]
     },
     {
-      id: 2,
-      title: 'Análisis Fundamental',
-      description: 'Evalúa el valor real de los proyectos (DYOR)',
+      id: 4,
+      title: 'Narrativas (opcional)',
+      description: 'IA, Gaming, Meme Coins. Dónde fluye el dinero.',
       icon: Search,
+      optional: true,
       lessons: [
-        { id: 17, title: 'Tokenomics 101', description: 'Inflación, Supply y Vesting. Evita ser la liquidez de salida.', duration: '21 min', type: 'Concepto' },
-        { id: 18, title: 'Ciclos de Mercado (Halving)', description: 'El ritmo de 4 años de Bitcoin y cómo afecta a las Altcoins.', duration: '21 min', type: 'Análisis + Estrategia' },
-        { id: 19, title: 'Investigación On-Chain y DYOR', description: 'Cómo analizar Whitepapers, Equipos y Githubs.', duration: '21 min', type: 'Casos Prácticos + Herramientas' },
         { id: 20, title: 'Narrativas y Rotación', description: 'IA, Gaming, Meme Coins. Dónde fluye el dinero.', duration: '19 min', type: 'Estrategia' },
-      ]
-    },
-    {
-      id: 3,
-      title: 'Gestión de Riesgo',
-      description: 'La habilidad que separa a los profesionales de los apostadores',
-      icon: Briefcase,
-      lessons: [
-        { id: 21, title: 'Diversificación Inteligente', description: 'No pongas todos los huevos en la misma canasta.', duration: '17 min', type: 'Estrategia' },
-        { id: 22, title: 'El Arte del Stop Loss', description: 'Protege tu capital antes de buscar ganancias.', duration: '20 min', type: 'Tutorial Práctico' },
-        { id: 23, title: 'Toma de Ganancias (Take Profit)', description: 'Nadie quebró por tomar ganancias. Estrategias de salida.', duration: '18 min', type: 'Tutorial Práctico' },
-        { id: 24, title: 'Mentalidad de Trader', description: 'Control emocional, FOMO y disciplina.', duration: '21 min', type: 'Psicología' },
       ]
     }
   ]
@@ -137,39 +147,40 @@ export const ADVANCED_LEVEL: LevelData = {
   modules: [
     {
       id: 1,
-      title: 'Solana DeFi Mastery',
-      description: 'Primero seguridad operacional, luego finanzas sin bancos: swaps, liquidez y yield',
+      title: 'Seguridad y riesgo',
+      description: 'Custodia operacional y los riesgos reales de DeFi.',
       icon: Zap,
       lessons: [
         { id: 34, title: 'Seguridad Operacional Avanzada', description: 'Burner wallets, Ledger y gestión de permisos / simulación de txs. Completa esto antes de tocar DeFi.', duration: '21 min', type: 'Seguridad' },
-        { id: 25, title: 'Jupiter: El Rey de los DEXs', description: 'Swaps, Limit Orders y DCA en el mejor agregador del mundo.', duration: '21 min', type: 'Tutorial Práctico' },
-        { id: 45, title: 'MEV: El Impuesto Invisible', description: 'Cómo los bots extraen valor de cada swap que haces y cómo protegerte.', duration: '21 min', type: 'DeFi Avanzado' },
-        { id: 40, title: 'Staking SOL: Gana por Asegurar la Red', description: 'Entiende validadores, epochs y cuentas de stake, y qué rinde de verdad delegar tu SOL.', duration: '20 min', type: 'Tutorial + Concepto' },
-        { id: 26, title: 'Liquidez y Yield Farming', description: 'Raydium, Orca y Meteora. Gana fees con tus activos.', duration: '20 min', type: 'Estrategias' },
-        { id: 27, title: 'Lending & Borrowing', description: 'Kamino y Jupiter Lend. Pide prestado o presta, y entiende la liquidación.', duration: '22 min', type: 'Tutorial Práctico' },
         { id: 28, title: 'Riesgos de DeFi: La Guía Completa', description: 'Smart contract hacks, rug pulls, oráculos y errores de usuario. Aprende a protegerte.', duration: '20 min', type: 'Seguridad' },
       ]
     },
     {
       id: 2,
-      title: 'NFTs & Web3 Social',
-      description: 'Propiedad digital, comunidades y airdrops',
+      title: 'Herramientas y ecosistema',
+      description: 'MEV, staking, NFTs, airdrops y hacia dónde va la red.',
       icon: Gem,
       lessons: [
+        { id: 45, title: 'MEV: El Impuesto Invisible', description: 'Cómo los bots extraen valor de cada swap que haces y cómo protegerte.', duration: '21 min', type: 'DeFi Avanzado' },
+        { id: 40, title: 'Staking SOL: Gana por Asegurar la Red', description: 'Entiende validadores, epochs y cuentas de stake, y qué rinde de verdad delegar tu SOL.', duration: '20 min', type: 'Tutorial + Concepto' },
         { id: 29, title: 'NFTs en Solana', description: 'Magic Eden, Tensor y por qué los NFTs de Solana son diferentes.', duration: '18 min', type: 'Mercado' },
         { id: 30, title: 'Airdrops y Points Farming', description: 'Cómo posicionarte para recompensas retroactivas legítimas.', duration: '19 min', type: 'Estrategia' },
         { id: 31, title: 'DePIN: Infraestructura Física Descentralizada', description: 'Helium, Bee Maps, Render. El mundo real en la blockchain.', duration: '18 min', type: 'Tendencias' },
+        { id: 32, title: 'Monolítico vs Modular: La Guerra de Arquitecturas', description: 'Por qué Solana escala en L1 vs el enfoque de L2s de Ethereum.', duration: '20 min', type: 'Técnico' },
+        { id: 33, title: 'Firedancer & El Futuro de Solana', description: 'Cliente validador independiente de Jump Crypto. Por qué la diversidad de clientes aumenta la resiliencia de Solana.', duration: '22 min', type: 'Futuro' },
+        { id: 46, title: 'Gobernanza DAO: Tu Voto Importa', description: 'Tokens de gobernanza, mecanismos de votación y cómo participar en decisiones que afectan tus inversiones.', duration: '24 min', type: 'Concepto + Práctica' },
       ]
     },
     {
       id: 3,
-      title: 'Escalabilidad y Futuro',
-      description: 'Hacia dónde va la tecnología',
+      title: 'DeFi activo (opcional)',
+      description: 'Swaps, liquidez y préstamos. No hace falta para seguir el plan.',
       icon: Cpu,
+      optional: true,
       lessons: [
-        { id: 32, title: 'Monolítico vs Modular: La Guerra de Arquitecturas', description: 'Por qué Solana escala en L1 vs el enfoque de L2s de Ethereum.', duration: '20 min', type: 'Técnico' },
-        { id: 33, title: 'Firedancer & El Futuro de Solana', description: 'Cliente validador independiente de Jump Crypto. Por qué la diversidad de clientes aumenta la resiliencia de Solana.', duration: '22 min', type: 'Futuro' },
-        { id: 46, title: 'Gobernanza DAO: Tu Voto Importa', description: 'Tokens de gobernanza, mecanismos de votación y cómo participar en decisiones que afectan tus inversiones.', duration: '24 min', type: 'Concepto + Práctica' },
+        { id: 25, title: 'Jupiter: El Rey de los DEXs', description: 'Swaps, Limit Orders y DCA en el mejor agregador del mundo.', duration: '21 min', type: 'Tutorial Práctico' },
+        { id: 26, title: 'Liquidez y Yield Farming', description: 'Raydium, Orca y Meteora. Gana fees con tus activos.', duration: '20 min', type: 'Estrategias' },
+        { id: 27, title: 'Lending & Borrowing', description: 'Kamino y Jupiter Lend. Pide prestado o presta, y entiende la liquidación.', duration: '22 min', type: 'Tutorial Práctico' },
       ]
     }
   ]

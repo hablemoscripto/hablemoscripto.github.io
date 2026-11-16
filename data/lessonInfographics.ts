@@ -723,7 +723,7 @@ export const LESSON_INFOGRAPHICS: Record<number, Record<string, InfographicSpec>
         },
         {
           "title": "Shamir Secret Sharing",
-          "detail": "Divides en 3 partes, necesitas 2 para recuperar. Ninguna ubicación basta sola."
+          "detail": "Divides en 3 partes, necesitas 2 para recuperar. Ninguna ubicación basta sola. Cortar las 12 palabras a mano NO es Shamir: cada pedazo filtra información, y perder un pedazo puede costarte todo. Usa una herramienta de hardware wallet hecha para eso."
         }
       ],
       "intro": "Cuando tus ahorros en cripto crecen, sube de nivel de seguridad."

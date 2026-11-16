@@ -56,6 +56,8 @@ export interface Module {
   description: string;
   icon: LucideIcon;
   lessons: Lesson[];
+  /** Skipped by the required path. Still sequential inside the module. */
+  optional?: boolean;
 }
 
 export interface LevelData {

@@ -167,20 +167,44 @@ function extractKeywords(query: string): string[] {
   ).slice(0, 6)
 }
 
+// lesson_details.level for the free track. Both paid tiers unlock every lesson.
+const FREE_RAG_LEVEL = 'Principiante'
+
+// Same entitlement as get-lesson-content. null means the full corpus.
+// A profile read error fails closed: the chat still answers, without paid prose.
+async function ragLevelForUser(supabase: any, userId: string): Promise<string | null> {
+  const { data: profile, error } = await supabase
+    .from('user_profiles')
+    .select('is_premium, premium_expires_at')
+    .eq('id', userId)
+    .maybeSingle()
+
+  if (error) {
+    console.error('user_profiles read failed, restricting RAG to free lessons:', error)
+    return FREE_RAG_LEVEL
+  }
+
+  const isPremium =
+    !!profile?.is_premium &&
+    (!profile.premium_expires_at || new Date(profile.premium_expires_at).getTime() > Date.now())
+
+  return isPremium ? null : FREE_RAG_LEVEL
+}
+
 async function getKeywordCandidates(
   supabase: any,
-  query: string
+  query: string,
+  levelName: string | null
 ): Promise<LessonCandidate[]> {
   const keywords = extractKeywords(query)
   if (keywords.length === 0) {
     return []
   }
 
-  // Section-aware search (2026-07-03 migration): matches title, description,
-  // AND the flattened text of lesson_details.sections, so topics that only
-  // appear inside a section are retrievable.
+  // Section-aware search. level_name is applied inside the SQL, before LIMIT 8.
   const { data: rpcData, error: rpcError } = await supabase.rpc('search_lessons_rag', {
     keywords,
+    level_name: levelName,
   })
 
   if (!rpcError) {
@@ -190,18 +214,36 @@ async function getKeywordCandidates(
   // Fallback while the SQL function is not applied yet, so deploy order
   // cannot break chat: OR each meaningful keyword across title + description.
   // The keywords are already sanitized to letters/numbers, so they're safe
-  // inside the .or() DSL.
+  // inside the .or() DSL. The level cut uses lesson_details and is applied
+  // before the limit, so paid rows cannot fill the window.
   console.error('search_lessons_rag unavailable, falling back to title/description search:', rpcError)
 
   const orFilter = keywords
     .flatMap((k) => [`title.ilike.%${k}%`, `description.ilike.%${k}%`])
     .join(',')
 
-  const { data, error } = await supabase
+  let lessonQuery = supabase
     .from('lessons')
     .select('id, title, description')
     .or(orFilter)
-    .limit(MAX_KEYWORD_RESULTS)
+
+  if (levelName) {
+    const { data: allowed, error: allowedError } = await supabase
+      .from('lesson_details')
+      .select('lesson_id')
+      .eq('level', levelName)
+
+    if (allowedError || !allowed) {
+      console.error('lesson level lookup failed, skipping unfiltered fallback:', allowedError)
+      return []
+    }
+
+    const allowedIds = allowed.map((row: { lesson_id: number }) => row.lesson_id)
+    if (allowedIds.length === 0) return []
+    lessonQuery = lessonQuery.in('id', allowedIds)
+  }
+
+  const { data, error } = await lessonQuery.limit(MAX_KEYWORD_RESULTS)
 
   if (error) {
     console.error('Keyword search error:', error)
@@ -219,16 +261,23 @@ const MAX_CHARS_PER_LESSON = 3000
 async function fetchLessonContent(
   supabase: any,
   candidates: LessonCandidate[],
-  lessonIds: number[]
+  lessonIds: number[],
+  levelName: string | null
 ): Promise<string> {
   if (lessonIds.length === 0) return ''
 
   const titleById = new Map(candidates.map((c) => [c.id, c.title]))
 
-  const { data, error } = await supabase
+  let detailsQuery = supabase
     .from('lesson_details')
     .select('lesson_id, sections')
     .in('lesson_id', lessonIds)
+
+  if (levelName) {
+    detailsQuery = detailsQuery.eq('level', levelName)
+  }
+
+  const { data, error } = await detailsQuery
 
   if (error || !data) {
     console.error('lesson_details fetch error:', error)
@@ -443,7 +492,8 @@ serve(async (req) => {
     let relevantContext = ''
 
     try {
-      const candidates = await getKeywordCandidates(ragClient, message)
+      const levelName = await ragLevelForUser(ragClient, user.id)
+      const candidates = await getKeywordCandidates(ragClient, message, levelName)
 
       if (candidates.length > 0) {
         let selectedIds: number[]
@@ -459,7 +509,7 @@ serve(async (req) => {
             selectedIds = candidates.slice(0, MAX_CONTEXT_LESSONS).map((c) => c.id)
           }
         }
-        relevantContext = await fetchLessonContent(ragClient, candidates, selectedIds)
+        relevantContext = await fetchLessonContent(ragClient, candidates, selectedIds, levelName)
       }
     } catch (ragError) {
       console.error('RAG pipeline error (non-fatal):', ragError)

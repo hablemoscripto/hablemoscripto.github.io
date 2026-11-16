@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { getPreviousLessonId, getNextLessonId, getAllLessonsOrdered } from '../utils/courseUtils';
+import { getSequentialPredecessor, getSequentialSuccessor, getAllLessonsOrdered } from '../utils/courseUtils';
 
 interface LessonNavInfo {
     id: number;
@@ -21,8 +21,8 @@ export function useLessonNavigation(
     // useMemo instead of mirroring into state via an effect.
     const { prevLesson, nextLesson } = useMemo(() => {
         const allLessons = getAllLessonsOrdered();
-        const prevId = getPreviousLessonId(lessonId);
-        const nextId = getNextLessonId(lessonId);
+        const prevId = getSequentialPredecessor(lessonId);
+        const nextId = getSequentialSuccessor(lessonId);
 
         const prev = prevId !== null ? allLessons.find(l => l.id === prevId) : undefined;
         const next = nextId !== null ? allLessons.find(l => l.id === nextId) : undefined;

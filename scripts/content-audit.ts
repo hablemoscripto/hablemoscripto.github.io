@@ -81,6 +81,15 @@ const BANNED: [RegExp, string, boolean][] = [
   [/mediados de 2026/i, 'sello de fecha "mediados de 2026" (usa asOf con mes y año)', false],
 ];
 
+// Phrases that live in highlight/features, which SectionRenderer drops when an
+// infographic matches the section title. The spec must carry the same phrase.
+const HIDDEN_WARNING_PHRASES: { label: string; pattern: RegExp }[] = [
+  {
+    label: 'Shamir: no cortes las 12 palabras',
+    pattern: /no es shamir|cortar (tu|la) frase|cortar las 12 palabras/i,
+  },
+];
+
 const JOKE_DISTRACTORS = [
   /logo m[aá]s bonito/i,
   /color (m[aá]s )?bonito/i,
@@ -132,8 +141,29 @@ for (const [key, lesson] of Object.entries(ALL)) {
   }
 
   const titles = new Set((lesson.sections ?? []).map((s: any) => s.title));
-  for (const specTitle of Object.keys(LESSON_INFOGRAPHICS[id] ?? {}))
+  const specs = LESSON_INFOGRAPHICS[id] ?? {};
+  for (const specTitle of Object.keys(specs))
     if (!titles.has(specTitle)) add(id, 'infographic-orphan', 'error', `infografía sin sección: "${specTitle}"`);
+
+  for (const s of lesson.sections ?? []) {
+    const specFor = specs[s.title as string];
+    if (!specFor) continue;
+    const hiddenParts: string[] = [];
+    if (s.highlight?.title) hiddenParts.push(s.highlight.title);
+    if (s.highlight?.text) hiddenParts.push(s.highlight.text);
+    for (const f of s.features ?? []) {
+      if (f?.title) hiddenParts.push(f.title);
+      if (f?.text) hiddenParts.push(f.text);
+    }
+    const hidden = hiddenParts.join('\n');
+    if (!hidden) continue;
+    const specText = [...strings(specFor)].map(([, text]) => text).join('\n');
+    for (const phrase of HIDDEN_WARNING_PHRASES) {
+      if (phrase.pattern.test(hidden) && !phrase.pattern.test(specText)) {
+        add(id, 'infographic-hides-warning', 'error', `"${s.title}": la infografía reemplaza el aviso "${phrase.label}"`);
+      }
+    }
+  }
 
   const quizQs: any[] = lesson.quiz?.questions ?? [];
   const checkpointQs: any[] = (lesson.checkpointQuizzes ?? []).flatMap((c: any) => c.questions ?? []);

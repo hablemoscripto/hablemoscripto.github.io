@@ -22,9 +22,13 @@ interface LessonProgress {
   completedAt: string | null;
 }
 
+type ProgressStatus = 'loading' | 'ready' | 'error';
+
 interface ProgressContextType {
   progress: LessonProgress[];
   loading: boolean;
+  status: ProgressStatus;
+  reload: () => Promise<void>;
   isLessonCompleted: (lessonId: number) => boolean;
   getQuizScore: (lessonId: number) => number | null;
   markLessonComplete: (lessonId: number, quizScore?: number) => Promise<boolean>;
@@ -66,7 +70,8 @@ function buildAchievementSnapshot(
 
 export function ProgressProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState<LessonProgress[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState<ProgressStatus>('loading');
+  const loading = status === 'loading';
   const { user } = useAuth();
   const {
     addXp,
@@ -79,19 +84,29 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   // progress and existing achievements have loaded (avoids the race that
   // stamped every logro with "now").
   const silentCheckUserRef = useRef<string | null>(null);
+  // Set only after a successful read for that user. A later failed refresh
+  // keeps the last good list instead of looking like a brand-new account.
+  const confirmedUserIdRef = useRef<string | null>(null);
+  const requestSeq = useRef(0);
 
   const loadProgress = useCallback(async () => {
-    if (!user) return;
+    const requested = user?.id;
+    if (!requested) return;
+
+    const seq = ++requestSeq.current;
+    setStatus('loading');
 
     try {
-      setLoading(true);
       const { data, error } = await supabase
         .from('user_progress')
         .select('lesson_id, completed, quiz_score, completed_at')
-        .eq('user_id', user.id);
+        .eq('user_id', requested);
+
+      if (seq !== requestSeq.current) return;
 
       if (error) {
         reportError(error, { component: 'ProgressContext', action: 'loadProgress' });
+        setStatus(confirmedUserIdRef.current === requested ? 'ready' : 'error');
         return;
       }
 
@@ -110,22 +125,25 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       );
 
       setProgress(formattedProgress);
+      confirmedUserIdRef.current = requested;
+      setStatus('ready');
     } catch (error) {
+      if (seq !== requestSeq.current) return;
       reportError(error, { component: 'ProgressContext', action: 'loadProgress' });
-    } finally {
-      setLoading(false);
+      setStatus(confirmedUserIdRef.current === requested ? 'ready' : 'error');
     }
     // Keyed on user.id (not the object): auth events mint fresh user objects,
     // and identity-keying refired this whole load several times per page view.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id]);
 
   useEffect(() => {
     if (user) {
       loadProgress();
     } else {
+      requestSeq.current += 1;
+      confirmedUserIdRef.current = null;
       setProgress([]);
-      setLoading(false);
+      setStatus('ready');
       silentCheckUserRef.current = null;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -133,8 +151,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
   // After achievements are in memory and progress is loaded: grant any missing
   // logros and rewrite unlocked_at earlier when lesson history proves it.
+  // status === 'ready' keeps a failed first fetch from granting against [].
   useEffect(() => {
-    if (!user || loading || gamificationLoading) return;
+    if (!user || status !== 'ready' || gamificationLoading) return;
     if (silentCheckUserRef.current === user.id) return;
     silentCheckUserRef.current = user.id;
 
@@ -155,69 +174,101 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       snapshot.activityDates = [...new Set([...snapshot.activityDates, ...reviewDates])];
       checkAchievements(snapshot, true);
     })();
-  }, [user, loading, gamificationLoading, progress, refreshStreak, checkAchievements]);
+  }, [user, status, gamificationLoading, progress, refreshStreak, checkAchievements]);
 
-  const isLessonCompleted = useCallback((lessonId: number): boolean => {
-    return progress.some((p) => p.lessonId === lessonId && p.completed);
-  }, [progress]);
+  const isLessonCompleted = useCallback(
+    (lessonId: number): boolean => {
+      return progress.some((p) => p.lessonId === lessonId && p.completed);
+    },
+    [progress]
+  );
 
-  const getQuizScore = useCallback((lessonId: number): number | null => {
-    const lesson = progress.find((p) => p.lessonId === lessonId);
-    return lesson?.quizScore ?? null;
-  }, [progress]);
+  const getQuizScore = useCallback(
+    (lessonId: number): number | null => {
+      const lesson = progress.find((p) => p.lessonId === lessonId);
+      return lesson?.quizScore ?? null;
+    },
+    [progress]
+  );
 
-  const markLessonComplete = useCallback(async (lessonId: number, quizScore?: number): Promise<boolean> => {
-    if (!user) return false;
+  const markLessonComplete = useCallback(
+    async (lessonId: number, quizScore?: number): Promise<boolean> => {
+      if (!user) return false;
 
-    const existing = progress.find((p) => p.lessonId === lessonId);
-    const wasAlreadyCompleted = Boolean(existing?.completed);
-    const now = new Date().toISOString();
-    // Never clobber the original acquisition timestamp on quiz retakes — it
-    // is the source of truth for logro dates.
-    const completedAt = wasAlreadyCompleted && existing?.completedAt ? existing.completedAt : now;
+      const existing = progress.find((p) => p.lessonId === lessonId);
+      const wasAlreadyCompleted = Boolean(existing?.completed);
+      const now = new Date().toISOString();
+      // Never clobber the original acquisition timestamp on quiz retakes — it
+      // is the source of truth for logro dates.
+      const completedAt = wasAlreadyCompleted && existing?.completedAt ? existing.completedAt : now;
 
-    try {
-      const payload: {
-        user_id: string;
-        lesson_id: number;
-        completed: boolean;
-        quiz_score: number | null;
-        completed_at?: string;
-      } = {
-        user_id: user.id,
-        lesson_id: lessonId,
-        completed: true,
-        quiz_score: quizScore ?? null,
-      };
-      if (!wasAlreadyCompleted) {
-        payload.completed_at = completedAt;
-      }
+      try {
+        const payload: {
+          user_id: string;
+          lesson_id: number;
+          completed: boolean;
+          quiz_score: number | null;
+          completed_at?: string;
+        } = {
+          user_id: user.id,
+          lesson_id: lessonId,
+          completed: true,
+          quiz_score: quizScore ?? null,
+        };
+        if (!wasAlreadyCompleted) {
+          payload.completed_at = completedAt;
+        }
 
-      const { error } = await supabase.from('user_progress').upsert(payload, {
-        onConflict: 'user_id,lesson_id',
-      });
+        const { error } = await supabase.from('user_progress').upsert(payload, {
+          onConflict: 'user_id,lesson_id',
+        });
 
-      if (error) {
+        if (error) {
+          reportError(error, { component: 'ProgressContext', action: 'markLessonComplete' });
+          return false;
+        }
+
+        setProgress((prev) => {
+          const row = prev.find((p) => p.lessonId === lessonId);
+          if (row) {
+            return prev.map((p) =>
+              p.lessonId === lessonId
+                ? {
+                    ...p,
+                    completed: true,
+                    quizScore: quizScore ?? p.quizScore,
+                    completedAt: p.completedAt ?? completedAt,
+                  }
+                : p
+            );
+          }
+          return [
+            ...prev,
+            {
+              lessonId,
+              completed: true,
+              quizScore: quizScore ?? null,
+              completedAt,
+            },
+          ];
+        });
+      } catch (error) {
         reportError(error, { component: 'ProgressContext', action: 'markLessonComplete' });
         return false;
       }
 
-      setProgress((prev) => {
-        const row = prev.find((p) => p.lessonId === lessonId);
-        if (row) {
-          return prev.map((p) =>
-            p.lessonId === lessonId
-              ? {
-                  ...p,
-                  completed: true,
-                  quizScore: quizScore ?? p.quizScore,
-                  completedAt: p.completedAt ?? completedAt,
-                }
-              : p
-          );
-        }
-        return [
-          ...prev,
+      // Award XP and check achievements for new completions only
+      if (!wasAlreadyCompleted) {
+        addXp(100);
+        trackLessonComplete(lessonId, quizScore);
+
+        // Recompute the streak now so the navbar updates immediately and the
+        // streak achievements are evaluated against today's activity rather than
+        // the value frozen at login.
+        const newStreak = await refreshStreak();
+
+        const completedItems: LessonProgress[] = [
+          ...progress.filter((p) => p.completed && p.lessonId !== lessonId),
           {
             lessonId,
             completed: true,
@@ -225,36 +276,13 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
             completedAt,
           },
         ];
-      });
-    } catch (error) {
-      reportError(error, { component: 'ProgressContext', action: 'markLessonComplete' });
-      return false;
-    }
+        checkAchievements(buildAchievementSnapshot(completedItems, newStreak, xp + 100));
+      }
 
-    // Award XP and check achievements for new completions only
-    if (!wasAlreadyCompleted) {
-      addXp(100);
-      trackLessonComplete(lessonId, quizScore);
-
-      // Recompute the streak now so the navbar updates immediately and the
-      // streak achievements are evaluated against today's activity rather than
-      // the value frozen at login.
-      const newStreak = await refreshStreak();
-
-      const completedItems: LessonProgress[] = [
-        ...progress.filter((p) => p.completed && p.lessonId !== lessonId),
-        {
-          lessonId,
-          completed: true,
-          quizScore: quizScore ?? null,
-          completedAt,
-        },
-      ];
-      checkAchievements(buildAchievementSnapshot(completedItems, newStreak, xp + 100));
-    }
-
-    return true;
-  }, [user, progress, xp, addXp, checkAchievements, refreshStreak]);
+      return true;
+    },
+    [user, progress, xp, addXp, checkAchievements, refreshStreak]
+  );
 
   const getCompletedCount = useCallback((): number => {
     return progress.filter((p) => p.completed).length;
@@ -270,16 +298,32 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     return Math.round((getCompletedCount() / total) * 100);
   }, [getCompletedCount, getTotalLessons]);
 
-  const value = useMemo(() => ({
-    progress,
-    loading,
-    isLessonCompleted,
-    getQuizScore,
-    markLessonComplete,
-    getCompletedCount,
-    getTotalLessons,
-    getProgressPercentage,
-  }), [progress, loading, isLessonCompleted, getQuizScore, markLessonComplete, getCompletedCount, getTotalLessons, getProgressPercentage]);
+  const value = useMemo(
+    () => ({
+      progress,
+      loading,
+      status,
+      reload: loadProgress,
+      isLessonCompleted,
+      getQuizScore,
+      markLessonComplete,
+      getCompletedCount,
+      getTotalLessons,
+      getProgressPercentage,
+    }),
+    [
+      progress,
+      loading,
+      status,
+      loadProgress,
+      isLessonCompleted,
+      getQuizScore,
+      markLessonComplete,
+      getCompletedCount,
+      getTotalLessons,
+      getProgressPercentage,
+    ]
+  );
 
   return <ProgressContext.Provider value={value}>{children}</ProgressContext.Provider>;
 }

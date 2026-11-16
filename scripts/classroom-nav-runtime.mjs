@@ -5,8 +5,13 @@
 import assert from 'node:assert/strict';
 import {
   getAllLessonsOrdered,
+  getBeginnerLessonIds,
   getContinueTarget,
+  getCoreLessonIdsForLevel,
   getFirstIncompletePrerequisite,
+  getSequentialPredecessor,
+  getSequentialSuccessor,
+  isLevelComplete,
   isSequentiallyLocked,
 } from '../utils/courseUtils.ts';
 
@@ -44,5 +49,41 @@ assert.equal(resumeSecond.resuming, true);
 
 const paidBlocked = getContinueTarget(fifth.id, onlyFirst, () => false);
 assert.equal(paidBlocked, null);
+
+const beginnerIds = getBeginnerLessonIds();
+const lastBeginner = beginnerIds[beginnerIds.length - 1];
+const beginnerDone = (id) => beginnerIds.includes(id);
+
+assert.equal(isSequentiallyLocked(17, beginnerDone), false);
+assert.equal(getFirstIncompletePrerequisite(17, beginnerDone), null);
+assert.notEqual(getSequentialPredecessor(17), 13);
+
+const afterBeginner = getContinueTarget(lastBeginner, beginnerDone, () => true);
+assert.ok(afterBeginner);
+assert.equal(afterBeginner.id, 17);
+assert.equal(afterBeginner.resuming, false);
+
+assert.equal(isSequentiallyLocked(14, beginnerDone), true);
+assert.equal(isSequentiallyLocked(20, beginnerDone), false);
+assert.equal(getSequentialPredecessor(13), lastBeginner);
+assert.equal(getSequentialPredecessor(20), lastBeginner);
+assert.equal(getSequentialSuccessor(16), null);
+
+const intermediateCore = getCoreLessonIdsForLevel('intermediate');
+assert.equal(intermediateCore[intermediateCore.length - 1], 24);
+assert.equal(getSequentialSuccessor(24), 34);
+assert.equal(getSequentialPredecessor(25), 24);
+
+const through34 = (id) => beginnerDone(id) || intermediateCore.includes(id) || id === 34;
+assert.equal(isSequentiallyLocked(28, through34), false);
+assert.equal(
+  isSequentiallyLocked(25, (id) => beginnerDone(id) || intermediateCore.includes(id)),
+  false
+);
+assert.equal(
+  isLevelComplete('intermediate', (id) => beginnerDone(id) || intermediateCore.includes(id)),
+  true
+);
+assert.equal(isLevelComplete('advanced', through34), false);
 
 console.log('HELPERS_OK');

@@ -20,6 +20,28 @@ test('getFirstIncompletePrerequisite and getContinueTarget on live catalog', () 
   assert.match(result.stdout, /HELPERS_OK/);
 });
 
+test('locks follow the sequential predecessor, not the flat catalog', () => {
+  const view = read('components/LessonView.tsx');
+  const level = read('components/LevelDetail.tsx');
+  const nav = read('hooks/useLessonNavigation.ts');
+  assert.match(view, /getSequentialPredecessor/);
+  assert.match(level, /getSequentialPredecessor/);
+  assert.match(nav, /getSequentialPredecessor/);
+  assert.match(nav, /getSequentialSuccessor/);
+  const effectStart = view.indexOf('Access Control Logic');
+  const effectEnd = view.indexOf('Only remember a lesson', effectStart);
+  const effect = view.slice(effectStart, effectEnd);
+  assert.doesNotMatch(effect, /getPreviousLessonId/);
+  assert.doesNotMatch(nav, /getPreviousLessonId/);
+  assert.doesNotMatch(nav, /getNextLessonId/);
+  const dash = read('components/EducationPage.tsx');
+  assert.match(dash, /isLevelComplete\('intermediate', isLessonCompleted\)/);
+  assert.doesNotMatch(
+    dash.slice(dash.indexOf('const isLevelLocked'), dash.indexOf('const getPrerequisiteInfo')),
+    /lessons_count/
+  );
+});
+
 test('lesson bar has a single back control, not dual chevrons', () => {
   const view = read('components/LessonView.tsx');
   assert.match(view, />Volver</);
@@ -33,7 +55,10 @@ test('lesson bar has a single back control, not dual chevrons', () => {
 
 test('last_lesson_id is not stamped in the fetch-then path', () => {
   const view = read('components/LessonView.tsx');
-  const fetchBlock = view.slice(view.indexOf('fetchLessonById'), view.indexOf('Access Control Logic'));
+  const fetchBlock = view.slice(
+    view.indexOf('fetchLessonById'),
+    view.indexOf('Access Control Logic')
+  );
   assert.doesNotMatch(fetchBlock, /last_lesson_id/);
 });
 
